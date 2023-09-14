@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * TinyMCE custom steps definitions.
@@ -163,10 +163,10 @@ class behat_editor_tiny extends behat_base implements \core_behat\settable_edito
     /**
      * Get the Mink NodeElement of the <textarea> for the specified locator.
      *
-     * Moodle mostly referes to the textarea, rather than the editor itself and interactions are translated to the
+     * PowerEduc mostly referes to the textarea, rather than the editor itself and interactions are translated to the
      * Editor using the TinyMCE API.
      *
-     * @param string $locator A Moodle field locator
+     * @param string $locator A PowerEduc field locator
      * @return NodeElement The element found by the find_field function
      */
     protected function get_textarea_for_locator(string $locator): NodeElement {
@@ -178,7 +178,7 @@ class behat_editor_tiny extends behat_base implements \core_behat\settable_edito
      *
      * This is the top-most HTML element for the editor found by TinyMCE.getContainer().
      *
-     * @param string $locator A Moodle field locator
+     * @param string $locator A PowerEduc field locator
      * @return NodeElement The Mink NodeElement representing the container.
      */
     protected function get_editor_container_for_locator(string $locator): NodeElement {

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 
 namespace core_courseformat;
 
-use moodle_exception;
+use powereduc_exception;
 use stdClass;
 
 /**
@@ -24,7 +24,7 @@ use stdClass;
  *
  * @package    core_courseformat
  * @category   test
- * @copyright  2021 Sara Arjona (sara@moodle.com)
+ * @copyright  2021 Sara Arjona (sara@powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @coversDefaultClass \core_courseformat\stateactions
  */
@@ -224,7 +224,7 @@ class stateactions_test extends \advanced_testcase {
         $references["cm3"] = $this->create_activity($course->id, 'page', 2, false);
 
         if ($expectedexception) {
-            $this->expectException(moodle_exception::class);
+            $this->expectException(powereduc_exception::class);
         }
 
         // Initialise stateupdates.
@@ -634,7 +634,7 @@ class stateactions_test extends \advanced_testcase {
         $references["cm3"] = $this->create_activity($course->id, 'page', 2, false);
 
         if ($expectedexception) {
-            $this->expectException(moodle_exception::class);
+            $this->expectException(powereduc_exception::class);
         }
 
         // Initialise stateupdates.

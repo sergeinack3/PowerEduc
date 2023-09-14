@@ -3,8 +3,8 @@
 // This file defines settingpages and externalpages under the "appearance" category
 
 $capabilities = array(
-    'moodle/my:configsyspages',
-    'moodle/tag:manage'
+    'powereduc/my:configsyspages',
+    'powereduc/tag:manage'
 );
 
 if ($hassiteconfig or has_any_capability($capabilities, $systemcontext)) { // speedup for non-admins, add all caps used on this page
@@ -37,10 +37,10 @@ if ($hassiteconfig or has_any_capability($capabilities, $systemcontext)) { // sp
         'customusermenuitems',
         new lang_string('customusermenuitems', 'admin'),
         new lang_string('configcustomusermenuitems', 'admin'),
-        'profile,moodle|/user/profile.php
+        'profile,powereduc|/user/profile.php
 grades,grades|/grade/report/mygrades.php
 calendar,core_calendar|/calendar/view.php?view=month
-privatefiles,moodle|/user/files.php
+privatefiles,powereduc|/user/files.php
 reports,core_reportbuilder|/reportbuilder/index.php',
         PARAM_RAW,
         '50',
@@ -176,7 +176,7 @@ reports,core_reportbuilder|/reportbuilder/index.php',
     $ADMIN->add('appearance', $temp);
 
     // blog
-    $temp = new admin_settingpage('blog', new lang_string('blog','blog'), 'moodle/site:config', empty($CFG->enableblogs));
+    $temp = new admin_settingpage('blog', new lang_string('blog','blog'), 'powereduc/site:config', empty($CFG->enableblogs));
     $temp->add(new admin_setting_configcheckbox('useblogassociations', new lang_string('useblogassociations', 'blog'), new lang_string('configuseblogassociations','blog'), 1));
     $temp->add(new admin_setting_bloglevel('bloglevel', new lang_string('bloglevel', 'admin'), new lang_string('configbloglevel', 'admin'), 4, array(BLOG_GLOBAL_LEVEL => new lang_string('worldblogs','blog'),
                                                                                                                                            BLOG_SITE_LEVEL => new lang_string('siteblogs','blog'),
@@ -203,7 +203,7 @@ reports,core_reportbuilder|/reportbuilder/index.php',
 
     $choices = [HOMEPAGE_SITE => new lang_string('home')];
     if (!empty($CFG->enabledashboard)) {
-        $choices[HOMEPAGE_MY] = new lang_string('mymoodle', 'admin');
+        $choices[HOMEPAGE_MY] = new lang_string('mypowereduc', 'admin');
     }
     $choices[HOMEPAGE_MYCOURSES] = new lang_string('mycourses', 'admin');
     $choices[HOMEPAGE_USER] = new lang_string('userpreference', 'admin');
@@ -211,9 +211,9 @@ reports,core_reportbuilder|/reportbuilder/index.php',
             new lang_string('configdefaulthomepage', 'admin'), get_default_home_page(), $choices));
     if (!empty($CFG->enabledashboard)) {
         $temp->add(new admin_setting_configcheckbox(
-            'allowguestmymoodle',
-            new lang_string('allowguestmymoodle', 'admin'),
-            new lang_string('configallowguestmymoodle', 'admin'),
+            'allowguestmypowereduc',
+            new lang_string('allowguestmypowereduc', 'admin'),
+            new lang_string('configallowguestmypowereduc', 'admin'),
             1
         ));
     }
@@ -248,11 +248,11 @@ reports,core_reportbuilder|/reportbuilder/index.php',
     $temp->add(new admin_setting_emoticons());
     $ADMIN->add('appearance', $temp);
     $ADMIN->add('appearance', new admin_externalpage('resetemoticons', new lang_string('emoticonsreset', 'admin'),
-        new moodle_url('/admin/resetemoticons.php'), 'moodle/site:config', true));
+        new powereduc_url('/admin/resetemoticons.php'), 'powereduc/site:config', true));
 
     // "documentation" settingpage
-    $temp = new admin_settingpage('documentation', new lang_string('moodledocs'));
-    $temp->add(new admin_setting_configtext('docroot', new lang_string('docroot', 'admin'), new lang_string('configdocroot', 'admin'), 'https://docs.moodle.org', PARAM_URL));
+    $temp = new admin_settingpage('documentation', new lang_string('powereducdocs'));
+    $temp->add(new admin_setting_configtext('docroot', new lang_string('docroot', 'admin'), new lang_string('configdocroot', 'admin'), 'https://docs.powereduc.org', PARAM_URL));
     $ltemp = array('' => get_string('forceno'));
     $ltemp += get_string_manager()->get_list_of_translations(true);
     $temp->add(new admin_setting_configselect('doclang', get_string('doclang', 'admin'), get_string('configdoclang', 'admin'), '', $ltemp));
@@ -261,12 +261,12 @@ reports,core_reportbuilder|/reportbuilder/index.php',
 
     if (!empty($CFG->enabledashboard)) {
         $temp = new admin_externalpage('mypage', new lang_string('mypage', 'admin'), $CFG->wwwroot . '/my/indexsys.php',
-                'moodle/my:configsyspages');
+                'powereduc/my:configsyspages');
         $ADMIN->add('appearance', $temp);
     }
 
     $temp = new admin_externalpage('profilepage', new lang_string('myprofile', 'admin'), $CFG->wwwroot . '/user/profilesys.php',
-            'moodle/my:configsyspages');
+            'powereduc/my:configsyspages');
     $ADMIN->add('appearance', $temp);
 
     // coursecontact is the person responsible for course - usually manages enrolments, receives notification, etc.
@@ -302,9 +302,9 @@ reports,core_reportbuilder|/reportbuilder/index.php',
     $ADMIN->add('appearance', $temp);
 
     // Link to tag management interface.
-    $url = new moodle_url('/tag/manage.php');
+    $url = new powereduc_url('/tag/manage.php');
     $hidden = empty($CFG->usetags);
-    $page = new admin_externalpage('managetags', new lang_string('managetags', 'tag'), $url, 'moodle/tag:manage', $hidden);
+    $page = new admin_externalpage('managetags', new lang_string('managetags', 'tag'), $url, 'powereduc/tag:manage', $hidden);
     $ADMIN->add('appearance', $page);
 
     $temp = new admin_settingpage('additionalhtml', new lang_string('additionalhtml', 'admin'));

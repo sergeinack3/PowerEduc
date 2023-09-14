@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,8 +27,8 @@
     $row[] = new tabobject('graderreport',
                            $CFG->wwwroot.'/grade/report/grader/index.php?id='.$courseid,
                            get_string('pluginname', 'gradereport_grader'));
-    if (has_capability('moodle/grade:manage',$tabcontext ) ||
-        has_capability('moodle/grade:edit', $tabcontext) ||
+    if (has_capability('powereduc/grade:manage',$tabcontext ) ||
+        has_capability('powereduc/grade:edit', $tabcontext) ||
         has_capability('gradereport/grader:view', $tabcontext)) {
         $row[] = new tabobject('preferences',
                                $CFG->wwwroot.'/grade/report/grader/preferences.php?id='.$courseid,

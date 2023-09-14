@@ -1,5 +1,5 @@
 @tool @tool_customlang @_file_upload
-Feature: Within a moodle instance, an administrator should be able to import modified langstrings.
+Feature: Within a powereduc instance, an administrator should be able to import modified langstrings.
   In order to import modified langstrings in the adminsettings from one to another instance,
   As an admin
   I need to be able to import the zips and php files of the language customisation of a language.

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@
                            $CFG->wwwroot.'/grade/edit/outcome/course.php?id='.$courseid,
                            get_string('outcomescourse', 'grades'));
 
-    if (has_capability('moodle/grade:manage', $context)) {
+    if (has_capability('powereduc/grade:manage', $context)) {
         $row[] = new tabobject('outcomes',
                                $CFG->wwwroot.'/grade/edit/outcome/index.php?id='.$courseid,
                                get_string('editoutcomes', 'grades'));

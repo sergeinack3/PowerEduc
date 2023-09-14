@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@
  * API (plugin-wise) to launch a rebuild of the calendar events.
  *
  * @package core
- * @copyright 2021 onwards Simey Lameze <simey@moodle.com>
+ * @copyright 2021 onwards Simey Lameze <simey@powereduc.com>
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -71,7 +71,7 @@ Fix orphaned calendar events.
   leaving custom events in 3rd part plugins mostly unmodified
   because there isn't any consistent way to regenerate them.
 
-  For more details:  https://tracker.moodle.org/browse/MDL-71156
+  For more details:  https://tracker.powereduc.org/browse/MDL-71156
 
 Options:
   -h, --help    Print out this help.
@@ -97,7 +97,7 @@ if (!$admin) {
     cli_error('Error: No admin account was found.');
 }
 
-if (moodle_needs_upgrading()) {
+if (powereduc_needs_upgrading()) {
     cli_error('Moodle upgrade pending, script execution suspended.');
 }
 

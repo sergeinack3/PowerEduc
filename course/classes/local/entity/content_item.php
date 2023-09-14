@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ class content_item {
     /** @var title $title the title. */
     private $title;
 
-    /** @var \moodle_url $link the url for the content item's setup page (usually mod/edit.php). */
+    /** @var \powereduc_url $link the url for the content item's setup page (usually mod/edit.php). */
     private $link;
 
     /** @var string $icon an html string containing the icon for this item. */
@@ -66,14 +66,14 @@ class content_item {
      * @param int $id Id number.
      * @param string $name Name of the item, not human readable.
      * @param title $title Human readable title for the item.
-     * @param \moodle_url $link The URL to the creation page, with any item specific params
+     * @param \powereduc_url $link The URL to the creation page, with any item specific params
      * @param string $icon HTML containing the icon for the item
      * @param string $help The description of the item.
-     * @param int $archetype the archetype for the content item (see MOD_ARCHETYPE_X definitions in lib/moodlelib.php).
+     * @param int $archetype the archetype for the content item (see MOD_ARCHETYPE_X definitions in lib/powereduclib.php).
      * @param string $componentname the name of the component/plugin with which this content item is associated.
      * @param string $purpose the purpose type of this component.
      */
-    public function __construct(int $id, string $name, title $title, \moodle_url $link, string $icon, string $help,
+    public function __construct(int $id, string $name, title $title, \powereduc_url $link, string $icon, string $help,
             int $archetype, string $componentname, string $purpose) {
         $this->id = $id;
         $this->name = $name;
@@ -142,9 +142,9 @@ class content_item {
     /**
      * Get the link to the creation page of this item.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
-    public function get_link(): \moodle_url {
+    public function get_link(): \powereduc_url {
         return $this->link;
     }
 

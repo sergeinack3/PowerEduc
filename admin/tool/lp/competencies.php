@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -46,16 +46,16 @@ $framework = \core_competency\api::read_framework($id);
 $context = $framework->get_context();
 
 if (!\core_competency\competency_framework::can_read_context($context)) {
-    throw new required_capability_exception($context, 'moodle/competency:competencyview', 'nopermissions', '');
+    throw new required_capability_exception($context, 'powereduc/competency:competencyview', 'nopermissions', '');
 }
 
 $title = get_string('competencies', 'core_competency');
 $pagetitle = get_string('competenciesforframework', 'tool_lp', $framework->get('shortname'));
 
 // Set up the page.
-$url = new moodle_url("/admin/tool/lp/competencies.php", array('competencyframeworkid' => $framework->get('id'),
+$url = new powereduc_url("/admin/tool/lp/competencies.php", array('competencyframeworkid' => $framework->get('id'),
     'pagecontextid' => $pagecontextid));
-$frameworksurl = new moodle_url('/admin/tool/lp/competencyframeworks.php', array('pagecontextid' => $pagecontextid));
+$frameworksurl = new powereduc_url('/admin/tool/lp/competencyframeworks.php', array('pagecontextid' => $pagecontextid));
 
 $PAGE->set_context($pagecontext);
 $PAGE->navigation->override_active_url($frameworksurl);

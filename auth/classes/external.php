@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core_auth
  * @category   external
- * @copyright  2016 Juan Leyva <juan@moodle.com>
+ * @copyright  2016 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.2
  */
@@ -34,7 +34,7 @@ require_once($CFG->libdir . '/authlib.php');
  *
  * @package    core_auth
  * @category   external
- * @copyright  2016 Juan Leyva <juan@moodle.com>
+ * @copyright  2016 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.2
  */
@@ -62,7 +62,7 @@ class core_auth_external extends external_api {
      * @param  string $secret   confirmation secret (random string) used for validating the confirm request
      * @return array warnings and success status (true if the user was confirmed, false if he was already confirmed)
      * @since Moodle 3.2
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function confirm_user($username, $secret) {
         global $PAGE;
@@ -80,7 +80,7 @@ class core_auth_external extends external_api {
         $PAGE->set_context($context);
 
         if (!$authplugin = signup_get_user_confirmation_authplugin()) {
-            throw new moodle_exception('confirmationnotenabled');
+            throw new powereduc_exception('confirmationnotenabled');
         }
 
         $confirmed = $authplugin->user_confirm($username, $secret);
@@ -96,7 +96,7 @@ class core_auth_external extends external_api {
         } else if ($confirmed == AUTH_CONFIRM_OK) {
             $success = true;
         } else {
-            throw new moodle_exception('invalidconfirmdata');
+            throw new powereduc_exception('invalidconfirmdata');
         }
 
         $result = array(
@@ -144,7 +144,7 @@ class core_auth_external extends external_api {
      * @param  string $email    user email
      * @return array warnings and success status (including notices and errors while processing)
      * @since Moodle 3.4
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function request_password_reset($username = '', $email = '') {
         global $CFG, $PAGE;
@@ -164,7 +164,7 @@ class core_auth_external extends external_api {
 
         // Check if an alternate forgotten password method is set.
         if (!empty($CFG->forgottenpasswordurl)) {
-            throw new moodle_exception('cannotmailconfirm');
+            throw new powereduc_exception('cannotmailconfirm');
         }
 
         $errors = core_login_validate_forgot_password_data($params);
@@ -238,7 +238,7 @@ class core_auth_external extends external_api {
      * @param  string $country Country of residence
      * @return array status (true if the user is a minor, false otherwise)
      * @since Moodle 3.4
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function is_minor($age, $country) {
         global $CFG, $PAGE;
@@ -262,7 +262,7 @@ class core_auth_external extends external_api {
 
         // Check if verification of age and location (minor check) is enabled.
         if (!\core_auth\digital_consent::is_age_digital_consent_verification_enabled()) {
-            throw new moodle_exception('nopermissions', 'error', '',
+            throw new powereduc_exception('nopermissions', 'error', '',
                 get_string('agelocationverificationdisabled', 'error'));
         }
 
@@ -303,7 +303,7 @@ class core_auth_external extends external_api {
      *
      * @return array status (true if digital consent verification is enabled, false otherwise.)
      * @since Moodle 3.3
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function is_age_digital_consent_verification_enabled() {
         global $PAGE;
@@ -362,7 +362,7 @@ class core_auth_external extends external_api {
      * @param  string $redirect redirect the user to this site url after confirmation
      * @return array warnings and success status
      * @since Moodle 3.6
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function resend_confirmation_email($username, $password, $redirect = '') {
         global $PAGE;
@@ -383,26 +383,26 @@ class core_auth_external extends external_api {
         $password = $params['password'];
 
         if (is_restored_user($username)) {
-            throw new moodle_exception('restoredaccountresetpassword', 'webservice');
+            throw new powereduc_exception('restoredaccountresetpassword', 'webservice');
         }
 
         $user = authenticate_user_login($username, $password);
 
         if (empty($user)) {
-            throw new moodle_exception('invalidlogin');
+            throw new powereduc_exception('invalidlogin');
         }
 
         if ($user->confirmed) {
-            throw new moodle_exception('alreadyconfirmed');
+            throw new powereduc_exception('alreadyconfirmed');
         }
 
         // Check if we should redirect the user once the user is confirmed.
         $confirmationurl = null;
         if (!empty($params['redirect'])) {
-            // Pass via moodle_url to fix thinks like admin links.
-            $redirect = new moodle_url($params['redirect']);
+            // Pass via powereduc_url to fix thinks like admin links.
+            $redirect = new powereduc_url($params['redirect']);
 
-            $confirmationurl = new moodle_url('/login/confirm.php', array('redirect' => $redirect->out()));
+            $confirmationurl = new powereduc_url('/login/confirm.php', array('redirect' => $redirect->out()));
         }
         $status = send_confirmation_email($user, $confirmationurl);
 

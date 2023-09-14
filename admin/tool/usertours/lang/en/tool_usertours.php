@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -90,7 +90,7 @@ $string['importtour'] = 'Import tour';
 $string['invalid_lang_id'] = 'Invalid language string ID';
 $string['left'] = 'Left';
 $string['modifyshippedtourwarning'] = 'This is a user tour that has shipped with Moodle. Any modifications you make may be overridden during your next site upgrade.';
-$string['moodle_language_identifier'] = 'Language string ID';
+$string['powereduc_language_identifier'] = 'Language string ID';
 $string['movestepdown'] = 'Move step down';
 $string['movestepup'] = 'Move step up';
 $string['movetourdown'] = 'Move tour down';

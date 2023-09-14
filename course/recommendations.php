@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ require_once("../config.php");
 $search = optional_param('search', '', PARAM_TEXT);
 
 $context = context_system::instance();
-$url = new moodle_url('/course/recommendations.php');
+$url = new powereduc_url('/course/recommendations.php');
 
 $pageheading = format_string($SITE->fullname, true, ['context' => $context]);
 
@@ -39,7 +39,7 @@ $PAGE->set_title(get_string('activitychooserrecommendations', 'course'));
 $PAGE->set_heading($pageheading);
 
 require_login();
-require_capability('moodle/course:recommendactivity', $context);
+require_capability('powereduc/course:recommendactivity', $context);
 
 $renderer = $PAGE->get_renderer('core_course', 'recommendations');
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -55,7 +55,7 @@ class block_calendar_upcoming extends block_base {
         $renderer = $this->page->get_renderer('core_calendar');
         $this->content->text .= $renderer->render_from_template($template, $data);
 
-        $url = new \moodle_url('/calendar/view.php', ['view' => 'upcoming']);
+        $url = new \powereduc_url('/calendar/view.php', ['view' => 'upcoming']);
         if ($courseid != SITEID) {
             $url->param('course', $this->page->course->id);
         } else if (!empty($categoryid)) {
@@ -74,7 +74,7 @@ class block_calendar_upcoming extends block_base {
      * Get the upcoming event block content.
      *
      * @param array $events list of events
-     * @param \moodle_url|string $linkhref link to event referer
+     * @param \powereduc_url|string $linkhref link to event referer
      * @param boolean $showcourselink whether links to courses should be shown
      * @return string|null $content html block content
      * @deprecated since 3.4
@@ -104,7 +104,7 @@ class block_calendar_upcoming extends block_base {
                 $content .= $events[$i]->referer;
             } else {
                 if (!empty($linkhref)) {
-                    $href = calendar_get_link_href(new \moodle_url(CALENDAR_URL . $linkhref), 0, 0, 0,
+                    $href = calendar_get_link_href(new \powereduc_url(CALENDAR_URL . $linkhref), 0, 0, 0,
                         $events[$i]->timestart);
                     $href->set_anchor('event_' . $events[$i]->id);
                     $content .= \html_writer::link($href, $events[$i]->name);

@@ -1,5 +1,5 @@
 {{!
-    This file is part of Moodle - http://moodle.org/
+    This file is part of Moodle - http://powereduc.org/
 
     Moodle is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,24 +15,24 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template tool_moodlenet/select_page
+    @template tool_powereducnet/select_page
 
     This template renders the course selection page for the MoodleNet tool.
 
     Example context (json):
     {
         "name": "A cat picture",
-        "cancellink": "https://moodlesite/my"
+        "cancellink": "https://powereducsite/my"
     }
 }}
-<div data-region="moodle-net-select">
+<div data-region="powereduc-net-select">
     <div class="alert alert-primary" role="alert">
-        {{#str}} notification, tool_moodlenet, {"name": {{#quote}}{{name}}{{/quote}}, "cancellink": {{#quote}}{{cancellink}}{{/quote}}, "type": {{#quote}}{{type}}{{/quote}}  } {{/str}}
+        {{#str}} notification, tool_powereducnet, {"name": {{#quote}}{{name}}{{/quote}}, "cancellink": {{#quote}}{{cancellink}}{{/quote}}, "type": {{#quote}}{{type}}{{/quote}}  } {{/str}}
     </div>
     <h3>{{#str}} selectacourse {{/str}}</h3>
     <div class="searchbar input-group w-50" role="search">
         <label for="searchinput">
-            <span class="sr-only">{{#str}} searchcourses, tool_moodlenet {{/str}}</span>
+            <span class="sr-only">{{#str}} searchcourses, tool_powereducnet {{/str}}</span>
         </label>
         <input type="text"
                data-region="search-input"
@@ -49,7 +49,7 @@
             <div class="clear d-none">
                 <button class="btn p-0" data-region="clear-icon">
                     <span class="d-flex" aria-hidden="true">{{#pix}} e/cancel, core {{/pix}}</span>
-                    <span class="sr-only">{{#str}} clearsearch, tool_moodlenet {{/str}}</span>
+                    <span class="sr-only">{{#str}} clearsearch, tool_powereducnet {{/str}}</span>
                 </button>
             </div>
         </div>

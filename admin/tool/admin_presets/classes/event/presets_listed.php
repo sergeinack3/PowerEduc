@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -36,8 +36,8 @@ class presets_listed extends base {
         return "User {$this->userid} listed the system presets.";
     }
 
-    public function get_url(): \moodle_url {
-        return new \moodle_url('/admin/tool/admin_presets/index.php');
+    public function get_url(): \powereduc_url {
+        return new \powereduc_url('/admin/tool/admin_presets/index.php');
     }
 
     public function get_legacy_logdata(): array {

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,13 +22,13 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// TODO: Move all the DB stuff to profiling_db_xxxx() function in xhprof_moodle.php
+// TODO: Move all the DB stuff to profiling_db_xxxx() function in xhprof_powereduc.php
 
 // TODO: it is wrong when core lib references ANY plugin lang strings, maybe more login could be moved here (skodak)
 
 require_once(__DIR__ . '/../../../config.php');
 require_once($CFG->libdir.'/adminlib.php');
-require_once($CFG->libdir . '/xhprof/xhprof_moodle.php');
+require_once($CFG->libdir . '/xhprof/xhprof_powereduc.php');
 
 define('PROFILING_RUNSPERPAGE', 50);
 
@@ -47,7 +47,7 @@ admin_externalpage_setup('toolprofiling');
 
 // Always add listurl if available
 if ($listurl) {
-    $listurlnav = new moodle_url('/admin/tool/profiling/index.php', array('listurl' => $listurl));
+    $listurlnav = new powereduc_url('/admin/tool/profiling/index.php', array('listurl' => $listurl));
     $PAGE->navbar->add($listurl, $listurlnav);
 }
 

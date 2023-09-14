@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Contains user badge class for displaying a badge issued to a user.
  *
  * @package   core_badges
- * @copyright 2018 Dani Palou <dani@moodle.com>
+ * @copyright 2018 Dani Palou <dani@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,7 +28,7 @@ defined('POWEREDUC_INTERNAL') || die();
 
 use core\external\exporter;
 use renderer_base;
-use moodle_url;
+use powereduc_url;
 use core_badges\external\endorsement_exporter;
 use core_badges\external\alignment_exporter;
 use core_badges\external\related_info_exporter;
@@ -37,7 +37,7 @@ use core_badges\external\related_info_exporter;
  * Class for displaying a badge issued to a user.
  *
  * @package   core_badges
- * @copyright 2018 Dani Palou <dani@moodle.com>
+ * @copyright 2018 Dani Palou <dani@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class user_badge_exporter extends exporter {
@@ -281,7 +281,7 @@ class user_badge_exporter extends exporter {
         $relatedbadges = $this->related['relatedbadges'];
 
         $values = array(
-            'badgeurl' => moodle_url::make_webservice_pluginfile_url($context->id, 'badges', 'badgeimage', $this->data->id, '/',
+            'badgeurl' => powereduc_url::make_webservice_pluginfile_url($context->id, 'badges', 'badgeimage', $this->data->id, '/',
                 'f3')->out(false),
             'alignment' => array(),
             'relatedbadges' => array(),

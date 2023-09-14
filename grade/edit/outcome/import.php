@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Import outcomes from a file
  *
  * @package   core_grades
- * @copyright 2008 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2008 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,14 +32,14 @@ $courseid = optional_param('courseid', 0, PARAM_INT);
 $action   = optional_param('action', '', PARAM_ALPHA);
 $scope    = optional_param('scope', 'custom', PARAM_ALPHA);
 
-$url = new moodle_url('/grade/edit/outcome/import.php', array('courseid' => $courseid));
+$url = new powereduc_url('/grade/edit/outcome/import.php', array('courseid' => $courseid));
 $PAGE->set_url($url);
 $PAGE->set_pagelayout('admin');
 
 /// Make sure they can even access this course
 if ($courseid) {
     if (!$course = $DB->get_record('course', array('id' => $courseid))) {
-        throw new \moodle_exception('invalidcourseid');
+        throw new \powereduc_exception('invalidcourseid');
     }
     require_login($course);
     $context = context_course::instance($course->id);
@@ -47,11 +47,11 @@ if ($courseid) {
     if (empty($CFG->enableoutcomes)) {
         redirect('../../index.php?id='.$courseid);
     }
-    navigation_node::override_active_url(new moodle_url('/grade/edit/outcome/course.php', ['id' => $courseid]));
+    navigation_node::override_active_url(new powereduc_url('/grade/edit/outcome/course.php', ['id' => $courseid]));
     $PAGE->navbar->add(get_string('manageoutcomes', 'grades'),
-        new moodle_url('/grade/edit/outcome/index.php', ['id' => $courseid]));
+        new powereduc_url('/grade/edit/outcome/index.php', ['id' => $courseid]));
     $PAGE->navbar->add(get_string('importoutcomes', 'grades'),
-        new moodle_url('/grade/edit/outcome/import.php', ['courseid' => $courseid]));
+        new powereduc_url('/grade/edit/outcome/import.php', ['courseid' => $courseid]));
 
 } else {
     require_once $CFG->libdir.'/adminlib.php';
@@ -59,12 +59,12 @@ if ($courseid) {
     $context = context_system::instance();
 }
 
-require_capability('moodle/grade:manageoutcomes', $context);
+require_capability('powereduc/grade:manageoutcomes', $context);
 
 $upload_form = new import_outcomes_form();
 
 if ($upload_form->is_cancelled()) {
-    redirect(new moodle_url('/grade/edit/outcome/index.php', ['id' => $courseid]));
+    redirect(new powereduc_url('/grade/edit/outcome/index.php', ['id' => $courseid]));
     die;
 }
 
@@ -89,7 +89,7 @@ if (!$upload_form->save_file('userfile', $imported_file, true)) {
 if (isset($courseid) && ($scope  == 'custom')) {
     // custom scale
     $local_scope = true;
-} elseif (($scope == 'global') && has_capability('moodle/grade:manage', context_system::instance())) {
+} elseif (($scope == 'global') && has_capability('powereduc/grade:manage', context_system::instance())) {
     // global scale
     $local_scope = false;
 } else {
@@ -196,7 +196,7 @@ if ($handle = fopen($imported_file, 'r')) {
             // already exists in the right scope: use it.
             $scale_id = key($scale);
         } else {
-            if (!has_capability('moodle/course:managescales', $context)) {
+            if (!has_capability('powereduc/course:managescales', $context)) {
                 echo $OUTPUT->notification(get_string('importskippedoutcome', 'grades',
                     $csv_data[$imported_headers['outcome_shortname']]), 'warning', false);
                 continue;
@@ -241,10 +241,10 @@ if ($handle = fopen($imported_file, 'r')) {
 
     if ($fatal_error) {
         echo $OUTPUT->notification($errormessage, 'error', false);
-        echo $OUTPUT->single_button(new moodle_url('/grade/edit/outcome/import.php', ['courseid' => $courseid]),
+        echo $OUTPUT->single_button(new powereduc_url('/grade/edit/outcome/import.php', ['courseid' => $courseid]),
             get_string('back'), 'get');
     } else {
-        echo $OUTPUT->single_button(new moodle_url('/grade/edit/outcome/index.php', ['id' => $courseid]),
+        echo $OUTPUT->single_button(new powereduc_url('/grade/edit/outcome/index.php', ['id' => $courseid]),
             get_string('continue'), 'get');
     }
 } else {

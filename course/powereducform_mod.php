@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ use core_grades\component_gradeitems;
  * @package   core_course
  * @copyright Andrew Nicols <andrew@nicols.co.uk>
  */
-abstract class moodleform_mod extends moodleform {
+abstract class powereducform_mod extends powereducform {
     /** Current data */
     protected $current;
     /**
@@ -123,7 +123,7 @@ abstract class moodleform_mod extends moodleform {
             $matches = array();
             if (!preg_match('/^mod_([^_]+)_mod_form$/', get_class($this), $matches)) {
                 debugging('Rename form to mod_xx_mod_form, where xx is name of your module');
-                throw new \moodle_exception('unknownmodulename');
+                throw new \powereduc_exception('unknownmodulename');
             }
             $this->_modname = $matches[1];
         }
@@ -136,7 +136,7 @@ abstract class moodleform_mod extends moodleform {
      *
      * @deprecated since Moodle 3.1
      */
-    public function moodleform_mod($current, $section, $cm, $course) {
+    public function powereducform_mod($current, $section, $cm, $course) {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
         self::__construct($current, $section, $cm, $course);
     }
@@ -221,7 +221,7 @@ abstract class moodleform_mod extends moodleform {
      * Allows module to modify data returned by get_moduleinfo_data() or prepare_new_moduleinfo_data() before calling set_data()
      * This method is also called in the bulk activity completion form.
      *
-     * Only available on moodleform_mod.
+     * Only available on powereducform_mod.
      *
      * @param array $default_values passed by reference
      */
@@ -628,7 +628,7 @@ abstract class moodleform_mod extends moodleform {
         $mform->addElement('modvisible', 'visible', get_string($modvisiblelabel), null,
                 array('allowstealth' => $allowstealth, 'sectionvisible' => $section->visible, 'cm' => $this->_cm));
         $mform->addHelpButton('visible', $modvisiblelabel);
-        if (!empty($this->_cm) && !has_capability('moodle/course:activityvisibility', $this->get_context())) {
+        if (!empty($this->_cm) && !has_capability('powereduc/course:activityvisibility', $this->get_context())) {
             $mform->hardFreeze('visible');
         }
 
@@ -638,7 +638,7 @@ abstract class moodleform_mod extends moodleform {
             $mform->addHelpButton('cmidnumber', 'idnumbermod');
         }
 
-        if (has_capability('moodle/course:setforcedlanguage', $this->get_context())) {
+        if (has_capability('powereduc/course:setforcedlanguage', $this->get_context())) {
             $languages = ['' => get_string('forceno')];
             $languages += get_string_manager()->get_list_of_translations();
 
@@ -653,7 +653,7 @@ abstract class moodleform_mod extends moodleform {
                 $mform->addElement('select', 'downloadcontent', get_string('downloadcontent', 'course'), $choices);
                 $downloadcontentdefault = $this->_cm->downloadcontent ?? DOWNLOAD_COURSE_CONTENT_ENABLED;
                 $mform->addHelpButton('downloadcontent', 'downloadcontent', 'course');
-                if (has_capability('moodle/course:configuredownloadcontent', $this->get_context())) {
+                if (has_capability('powereduc/course:configuredownloadcontent', $this->get_context())) {
                     $mform->setDefault('downloadcontent', $downloadcontentdefault);
                 } else {
                     $mform->hardFreeze('downloadcontent');
@@ -881,7 +881,7 @@ abstract class moodleform_mod extends moodleform {
     /**
      * Add rating settings.
      *
-     * @param moodleform_mod $mform
+     * @param powereducform_mod $mform
      * @param int $itemnumber
      */
     protected function add_rating_settings($mform, int $itemnumber) {
@@ -907,7 +907,7 @@ abstract class moodleform_mod extends moodleform {
 
         $rolenamestring = null;
         if ($isupdate) {
-            $capabilities = ['moodle/rating:rate', "mod/{$this->_cm->modname}:rate"];
+            $capabilities = ['powereduc/rating:rate', "mod/{$this->_cm->modname}:rate"];
             $rolenames = get_role_names_with_caps_in_context($this->get_context(), $capabilities);
             $rolenamestring = implode(', ', $rolenames);
         } else {
@@ -1158,13 +1158,13 @@ abstract class moodleform_mod extends moodleform {
 
     /**
      * Add an editor for an activity's introduction field.
-     * @deprecated since MDL-49101 - use moodleform_mod::standard_intro_elements() instead.
+     * @deprecated since MDL-49101 - use powereducform_mod::standard_intro_elements() instead.
      * @param null $required Override system default for requiremodintro
      * @param null $customlabel Override default label for editor
      * @throws coding_exception
      */
     protected function add_intro_editor($required=null, $customlabel=null) {
-        $str = "Function moodleform_mod::add_intro_editor() is deprecated, use moodleform_mod::standard_intro_elements() instead.";
+        $str = "Function powereducform_mod::add_intro_editor() is deprecated, use powereducform_mod::standard_intro_elements() instead.";
         debugging($str, DEBUG_DEVELOPER);
 
         $this->standard_intro_elements($customlabel);
@@ -1345,7 +1345,7 @@ abstract class moodleform_mod extends moodleform {
      * Allows modules to modify the data returned by form get_data().
      * This method is also called in the bulk activity completion form.
      *
-     * Only available on moodleform_mod.
+     * Only available on powereducform_mod.
      *
      * @param stdClass $data passed by reference
      */

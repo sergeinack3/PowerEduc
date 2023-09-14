@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_bigbluebuttonbn;
 
@@ -87,7 +87,7 @@ class settings {
     public function add_all_settings(): void {
         // Renders settings for welcome messages.
         $this->add_defaultmessages_settings();
-        // Evaluates if recordings are enabled for the Moodle site.
+        // Evaluates if recordings are enabled for the PowerEduc site.
         // Renders settings for record feature.
         $this->add_record_settings();
         // Renders settings for import recordings.
@@ -627,7 +627,7 @@ class settings {
         );
 
         if ($this->admin->fulltree) {
-            // This feature only works if curl is installed (but it is as now required by Moodle). The checks have been removed.
+            // This feature only works if curl is installed (but it is as now required by PowerEduc). The checks have been removed.
             $item = new admin_setting_heading(
                 'bigbluebuttonbn_config_preuploadpresentation',
                 '',
@@ -646,7 +646,7 @@ class settings {
                 $item,
                 $preuploadsettings
             );
-            // Note: checks on curl library have been removed as it is a requirement from Moodle.
+            // Note: checks on curl library have been removed as it is a requirement from PowerEduc.
             $filemanageroptions = [];
             $filemanageroptions['accepted_types'] = '*';
             $filemanageroptions['maxbytes'] = 0;

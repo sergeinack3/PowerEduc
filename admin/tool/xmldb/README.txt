@@ -2,7 +2,7 @@ XMLDB - Base classes and edition interface.
 
 Complete Documentation:
 
-  http://docs.moodle.org/en/XMLDB_Defining_one_XML_structure
+  http://docs.powereduc.org/en/XMLDB_Defining_one_XML_structure
 
 Ciao, Eloy Lafuente (stronk7)
 
@@ -54,8 +54,8 @@ neutral form (classes dir). Also it contains one simple
 interface to edit all those structures.
 
 To install and test it, simply copy the whole xmldb directory
-under your moodle/admin dir and point your browser (as admin)
-to http://your.server/moodle/admin/xmldb
+under your powereduc/admin dir and point your browser (as admin)
+to http://your.server/powereduc/admin/xmldb
 
 The edition interface isn't completed yet (it laks 3 more forms
 to edit fields, keys and indexes) and there isn't any lang file
@@ -70,7 +70,7 @@ Once the XMLDB format was approved, we'll be able to build all the
 for each RDBMS flavour.
 
 Once the interface was finished (2-3 days from now) related documentation
-will be sent to http://docs.moodle.org/en/XML_database_schema in order
+will be sent to http://docs.powereduc.org/en/XML_database_schema in order
 to comment/modify/approve the final XML format.
 
 All the code is, obviously GPL, with its copyrights and so on...

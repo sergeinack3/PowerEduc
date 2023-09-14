@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core_contentbank
  * @since      Moodle 3.9
- * @copyright  2020 Sara Arjona <sara@moodle.com>
+ * @copyright  2020 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -41,7 +41,7 @@ use external_warnings;
 /**
  * This is the external method for deleting a content.
  *
- * @copyright  2020 Sara Arjona <sara@moodle.com>
+ * @copyright  2020 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class delete_content extends external_api {
@@ -97,7 +97,7 @@ class delete_content extends external_api {
                         'message' => get_string('nopermissiontodelete', 'core_contentbank')
                     ];
                 }
-            } catch (\moodle_exception $e) {
+            } catch (\powereduc_exception $e) {
                 // The content or the context don't exist.
                 $warnings[] = [
                     'item' => $contentid,

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ use external_single_structure;
 use external_value;
 use external_warnings;
 use stdClass;
-use moodle_exception;
+use powereduc_exception;
 require_once($CFG->dirroot.'/grade/grading/form/rubric/lib.php');
 
 /**
@@ -120,7 +120,7 @@ class fetch extends external_api {
         $gradeitem = gradeitem::instance($component, $context, $itemname);
 
         if (RUBRIC !== $gradeitem->get_advanced_grading_method()) {
-            throw new moodle_exception(
+            throw new powereduc_exception(
                 "The {$itemname} item in {$component}/{$contextid} is not configured for advanced grading with a rubric"
             );
         }
@@ -150,7 +150,7 @@ class fetch extends external_api {
         $grade = $gradeitem->get_formatted_grade_for_user($gradeduser, $USER);
         $instance = $gradeitem->get_advanced_grading_instance($USER, $grade);
         if (!$instance) {
-            throw new moodle_exception('error:gradingunavailable', 'grading');
+            throw new powereduc_exception('error:gradingunavailable', 'grading');
         }
 
         $controller = $instance->get_controller();

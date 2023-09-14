@@ -41,11 +41,11 @@ errorsinenvironment,install
 installation,install
 invalidmd5,error
 langdownloaderror,install
-language,moodle
+language,powereduc
 memorylimithelp,install
 missingrequiredfield,error
-moodlelogo,moodle
-next,moodle
+powereduclogo,powereduc
+next,powereduc
 parentlanguage,langconfig
 pathserrcreatedataroot,install
 pathshead,install
@@ -61,8 +61,8 @@ pathswrongadmindir,install
 phpextension,install
 phpversionhelp,install
 phpversion,install
-previous,moodle
-reload,moodle
+previous,powereduc
+reload,powereduc
 remotedownloaderror,error
 thisdirection,langconfig
 thislanguage,langconfig

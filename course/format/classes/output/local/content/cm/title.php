@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  * This class is usually rendered inside the cmname inplace editable.
  *
  * @package   core_courseformat
- * @copyright 2020 Ferran Recio <ferran@moodle.com>
+ * @copyright 2020 Ferran Recio <ferran@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -42,7 +42,7 @@ use context_module;
  * Base class to render a course module title inside a course format.
  *
  * @package   core_courseformat
- * @copyright 2020 Ferran Recio <ferran@moodle.com>
+ * @copyright 2020 Ferran Recio <ferran@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class title extends inplace_editable implements named_templatable, renderable {
@@ -220,7 +220,7 @@ class title extends inplace_editable implements named_templatable, renderable {
         $context = context_module::instance($itemid);
         // Check access.
         external_api::validate_context($context);
-        require_capability('moodle/course:manageactivities', $context);
+        require_capability('powereduc/course:manageactivities', $context);
 
         // Trim module name and Update value.
         set_coursemodule_name($itemid, trim($newvalue));

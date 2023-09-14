@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - https://moodle.org/
+// This file is part of Moodle - https://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ namespace tool_langimport\task;
  *
  * @package     tool_langimport
  * @category    task
- * @copyright   2021 David Mudrák <david@moodle.com>
+ * @copyright   2021 David Mudrák <david@powereduc.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class install_langpacks extends \core\task\adhoc_task {
@@ -64,12 +64,12 @@ class install_langpacks extends \core\task\adhoc_task {
 
         $message = new \core\message\message();
 
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = 'notices';
         $message->userfrom = \core_user::get_noreply_user();
         $message->userto = $this->get_userid();
         $message->notification = 1;
-        $message->contexturl = (new \moodle_url('/admin/tool/langimport/index.php'))->out(false);
+        $message->contexturl = (new \powereduc_url('/admin/tool/langimport/index.php'))->out(false);
         $message->contexturlname = get_string('pluginname', 'tool_langimport');
 
         $message->subject = get_string('installfinished', 'tool_langimport');
@@ -90,12 +90,12 @@ class install_langpacks extends \core\task\adhoc_task {
 
         $message = new \core\message\message();
 
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = 'notices';
         $message->userfrom = \core_user::get_noreply_user();
         $message->userto = $this->get_userid();
         $message->notification = 1;
-        $message->contexturl = (new \moodle_url('/admin/tool/langimport/index.php'))->out(false);
+        $message->contexturl = (new \powereduc_url('/admin/tool/langimport/index.php'))->out(false);
         $message->contexturlname = get_string('pluginname', 'tool_langimport');
 
         $message->subject = get_string('installfailed', 'tool_langimport');

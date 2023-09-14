@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ $heading = $site->fullname;
 if ($categoryid) {
     $category = core_course_category::get($categoryid); // This will validate access.
     $PAGE->set_category_by_id($categoryid);
-    $PAGE->set_url(new moodle_url('/course/index.php', array('categoryid' => $categoryid)));
+    $PAGE->set_url(new powereduc_url('/course/index.php', array('categoryid' => $categoryid)));
     $PAGE->set_pagetype('course-index-category');
     $heading = $category->get_formatted_name();
 } else if ($category = core_course_category::user_top()) {
@@ -48,7 +48,7 @@ if ($categoryid) {
         $PAGE->set_category_by_id($categoryid);
         $PAGE->set_context($category->get_context());
         if (!core_course_category::is_simple_site()) {
-            $PAGE->set_url(new moodle_url('/course/index.php', array('categoryid' => $categoryid)));
+            $PAGE->set_url(new powereduc_url('/course/index.php', array('categoryid' => $categoryid)));
             $heading = $category->get_formatted_name();
         }
     } else {
@@ -56,7 +56,7 @@ if ($categoryid) {
     }
     $PAGE->set_pagetype('course-index-category');
 } else {
-    throw new moodle_exception('cannotviewcategory');
+    throw new powereduc_exception('cannotviewcategory');
 }
 
 $PAGE->set_pagelayout('coursecategory');

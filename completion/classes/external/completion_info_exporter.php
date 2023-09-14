@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ use renderer_base;
  */
 class completion_info_exporter extends \core\external\exporter {
     /**
-     * @var object $course moodle course object
+     * @var object $course powereduc course object
      */
     private $course;
     /**

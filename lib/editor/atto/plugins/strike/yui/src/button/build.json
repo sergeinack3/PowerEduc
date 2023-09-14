@@ -1,7 +1,7 @@
 {
-  "name": "moodle-atto_strike-button",
+  "name": "powereduc-atto_strike-button",
   "builds": {
-    "moodle-atto_strike-button": {
+    "powereduc-atto_strike-button": {
       "jsfiles": [
         "button.js"
       ]

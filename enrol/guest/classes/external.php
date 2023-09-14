@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    enrol_guest
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.1
  */
@@ -34,7 +34,7 @@ require_once($CFG->libdir . '/enrollib.php');
  *
  * @package    enrol_guest
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.1
  */
@@ -68,7 +68,7 @@ class enrol_guest_external extends external_api {
         // Retrieve guest enrolment plugin.
         $enrolplugin = enrol_get_plugin('guest');
         if (empty($enrolplugin)) {
-            throw new moodle_exception('invaliddata', 'error');
+            throw new powereduc_exception('invaliddata', 'error');
         }
 
         self::validate_context(context_system::instance());
@@ -76,7 +76,7 @@ class enrol_guest_external extends external_api {
 
         $course = $DB->get_record('course', array('id' => $enrolinstance->courseid), '*', MUST_EXIST);
         if (!core_course_category::can_view_course_info($course) && !can_access_course($course)) {
-            throw new moodle_exception('coursehidden');
+            throw new powereduc_exception('coursehidden');
         }
 
         $instanceinfo = $enrolplugin->get_enrol_info($enrolinstance);

@@ -56,7 +56,7 @@ if (!empty($generateurl)) {
     $params['authtoken'] = $authtoken;
     $params['generateurl'] = true;
 
-    $link = new moodle_url('/calendar/export.php', $params);
+    $link = new powereduc_url('/calendar/export.php', $params);
     redirect($link->out());
     die;
 }
@@ -207,7 +207,7 @@ foreach($events as $event) {
     $hostaddress = str_replace('http://', '', $CFG->wwwroot);
     $hostaddress = str_replace('https://', '', $hostaddress);
 
-    $me = new calendar_event($event); // To use moodle calendar event services.
+    $me = new calendar_event($event); // To use powereduc calendar event services.
     $ev = new iCalendar_event; // To export in ical format.
     $ev->add_property('uid', $event->id.'@'.$hostaddress);
 

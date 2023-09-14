@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -38,14 +38,14 @@ $course = $DB->get_record('course', array('id' => $courseid));
 $context = context_course::instance($courseid);
 $currentgroup = groups_get_course_group($course, true);
 if (empty($userid)) {
-    $gradable = get_enrolled_users($context, 'moodle/competency:coursecompetencygradable', $currentgroup, 'u.id', null, 0, 1);
+    $gradable = get_enrolled_users($context, 'powereduc/competency:coursecompetencygradable', $currentgroup, 'u.id', null, 0, 1);
     if (empty($gradable)) {
         $userid = 0;
     } else {
         $userid = array_pop($gradable)->id;
     }
 } else {
-    $gradable = get_enrolled_users($context, 'moodle/competency:coursecompetencygradable', $currentgroup, 'u.id');
+    $gradable = get_enrolled_users($context, 'powereduc/competency:coursecompetencygradable', $currentgroup, 'u.id');
     if (count($gradable) == 0) {
         $userid = 0;
     } else if (!in_array($userid, array_keys($gradable))) {
@@ -54,7 +54,7 @@ if (empty($userid)) {
 }
 
 $params = array('userid' => $userid, 'competencyid' => $competencyid, 'courseid' => $courseid);
-$url = new moodle_url('/admin/tool/lp/user_competency_in_course.php', $params);
+$url = new powereduc_url('/admin/tool/lp/user_competency_in_course.php', $params);
 
 if ($userid > 0) {
     $usercontext = context_user::instance($userid);
@@ -83,7 +83,7 @@ if ($userid > 0) {
     echo $OUTPUT->context_header($userheading, 3);
 }
 
-$baseurl = new moodle_url('/admin/tool/lp/user_competency_in_course.php');
+$baseurl = new powereduc_url('/admin/tool/lp/user_competency_in_course.php');
 $nav = new \tool_lp\output\user_competency_course_navigation($userid, $competencyid, $courseid, $baseurl);
 echo $output->render($nav);
 if ($userid > 0) {

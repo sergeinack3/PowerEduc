@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -95,7 +95,7 @@ class courserequest_test extends \advanced_testcase {
         // Create a user and allow course requests for him.
         $requester = $this->getDataGenerator()->create_user();
         $roleid = create_role('Course requestor role', 'courserequestor', '');
-        assign_capability('moodle/course:request', CAP_ALLOW, $roleid,
+        assign_capability('powereduc/course:request', CAP_ALLOW, $roleid,
             \context_system::instance()->id);
         role_assign($roleid, $requester->id, \context_system::instance()->id);
         accesslib_clear_all_caches_for_unit_testing();
@@ -152,7 +152,7 @@ class courserequest_test extends \advanced_testcase {
         // Create a user and allow course requests for him.
         $requester = $this->getDataGenerator()->create_user();
         $roleid = create_role('Course requestor role', 'courserequestor', '');
-        assign_capability('moodle/course:request', CAP_ALLOW, $roleid,
+        assign_capability('powereduc/course:request', CAP_ALLOW, $roleid,
             \context_system::instance()->id);
         role_assign($roleid, $requester->id, \context_system::instance()->id);
         accesslib_clear_all_caches_for_unit_testing();

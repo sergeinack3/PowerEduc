@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Privacy provider tests.
  *
  * @package    block_comments
- * @copyright  2018 Shamim Rezaie <shamim@moodle.com>
+ * @copyright  2018 Shamim Rezaie <shamim@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace block_comments\privacy;
@@ -32,7 +32,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Privacy provider test for block_comments.
  *
- * @copyright  2018 Shamim Rezaie <shamim@moodle.com>
+ * @copyright  2018 Shamim Rezaie <shamim@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider_test extends \core_privacy\tests\provider_testcase {
@@ -112,7 +112,7 @@ class provider_test extends \core_privacy\tests\provider_testcase {
 
         $course = null;
 
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context($context);
 
         switch ($context->contextlevel) {
@@ -147,7 +147,7 @@ class provider_test extends \core_privacy\tests\provider_testcase {
         $page->blocks->add_block_at_end_of_default_region('comments');
 
         // We need to use another page object as load_blocks() only loads the blocks once.
-        $page2 = new \moodle_page();
+        $page2 = new \powereduc_page();
         $page2->set_context($page->context);
         $page2->set_pagelayout($page->pagelayout);
         $page2->set_pagetype($page->pagetype);

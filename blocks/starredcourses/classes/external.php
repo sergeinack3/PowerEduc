@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  *
  * @package    block_starredcourses
  * @category   external
- * @copyright  2018 Simey Lameze <simey@moodle.com>
+ * @copyright  2018 Simey Lameze <simey@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('POWEREDUC_INTERNAL') || die;
@@ -33,7 +33,7 @@ use \core_course\external\course_summary_exporter;
 /**
  * Starred courses block external functions.
  *
- * @copyright  2018 Simey Lameze <simey@moodle.com>
+ * @copyright  2018 Simey Lameze <simey@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_starredcourses_external extends core_course_external {
@@ -92,7 +92,7 @@ class block_starredcourses_external extends core_course_external {
         foreach ($favourites as $favourite) {
             $course = get_course($favourite->itemid);
             $context = \context_course::instance($favourite->itemid);
-            $canviewhiddencourses = has_capability('moodle/course:viewhiddencourses', $context);
+            $canviewhiddencourses = has_capability('powereduc/course:viewhiddencourses', $context);
 
             if ($course->visible || $canviewhiddencourses) {
                 $exporter = new course_summary_exporter($course, ['context' => $context, 'isfavourite' => true]);

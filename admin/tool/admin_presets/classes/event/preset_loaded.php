@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -36,8 +36,8 @@ class preset_loaded extends base {
         return "User {$this->userid} has loaded the preset with id {$this->objectid}.";
     }
 
-    public function get_url(): \moodle_url {
-        return new \moodle_url('/admin/tool/admin_presets/index.php',
+    public function get_url(): \powereduc_url {
+        return new \powereduc_url('/admin/tool/admin_presets/index.php',
             ['action' => 'load', 'mode' => 'preview', 'id' => $this->objectid]);
     }
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -58,8 +58,8 @@ $ltimessagehint = optional_param('lti_message_hint', null, PARAM_RAW);
 // https://purl.imsglobal.org/spec/lti/claim/target_link_uri claim instead of the target_link_uri value provided here.
 // See here: http://www.imsglobal.org/spec/lti/v1p3/#target-link-uri.
 $validuris = [
-    (new moodle_url('/enrol/lti/launch.php'))->out(false), // Resource link launches.
-    (new moodle_url('/enrol/lti/launch_deeplink.php'))->out(false) // Deep linking launches.
+    (new powereduc_url('/enrol/lti/launch.php'))->out(false), // Resource link launches.
+    (new powereduc_url('/enrol/lti/launch_deeplink.php'))->out(false) // Deep linking launches.
 ];
 
 // This code verifies the target_link_uri. Only two values are permitted (see endpoints listed above).

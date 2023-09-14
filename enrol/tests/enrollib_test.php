@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -1019,13 +1019,13 @@ class enrollib_test extends advanced_testcase {
         $courses = enrol_get_my_courses();
         $this->assertCount(0, $courses);
 
-        // But with all accessible, they have 4 because they have moodle/course:view everywhere.
+        // But with all accessible, they have 4 because they have powereduc/course:view everywhere.
         $courses = enrol_get_my_courses(null, 'id', 0, [], true);
         $this->assertEquals([$course1->id, $course2->id, $course3->id, $course4->id],
                 array_keys($courses));
 
         // If we prohibit manager from course:view on course 1 though...
-        assign_capability('moodle/course:view', CAP_PROHIBIT, $managerroleid,
+        assign_capability('powereduc/course:view', CAP_PROHIBIT, $managerroleid,
                 \context_course::instance($course1->id));
         $courses = enrol_get_my_courses(null, 'id', 0, [], true);
         $this->assertEquals([$course2->id, $course3->id, $course4->id], array_keys($courses));
@@ -1475,13 +1475,13 @@ class enrollib_test extends advanced_testcase {
                 'expectedcount' => 1,
             ],
             'no prohibits with capability' => [
-                'capability' => 'moodle/course:manageactivities',
+                'capability' => 'powereduc/course:manageactivities',
                 'useprohibit' => false,
                 'expectedmatch' => 0,
                 'expectedcount' => 1,
             ],
             'prohibits with capability' => [
-                'capability' => 'moodle/course:manageactivities',
+                'capability' => 'powereduc/course:manageactivities',
                 'useprohibit' => true,
                 'expectedmatch' => 1,
                 'expectedcount' => 0,

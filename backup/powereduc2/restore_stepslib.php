@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * Defines various restore steps that will be used by common tasks in restore
  *
  * @package     core_backup
- * @subpackage  moodle2
+ * @subpackage  powereduc2
  * @category    backup
  * @copyright   2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -122,7 +122,7 @@ class restore_gradebook_structure_step extends restore_structure_step {
         // Identify the backup we're dealing with.
         $backuprelease = $this->get_task()->get_info()->backup_release; // The major version: 2.9, 3.0, 3.10...
         $backupbuild = 0;
-        preg_match('/(\d{8})/', $this->get_task()->get_info()->moodle_release, $matches);
+        preg_match('/(\d{8})/', $this->get_task()->get_info()->powereduc_release, $matches);
         if (!empty($matches[1])) {
             $backupbuild = (int) $matches[1]; // The date of Moodle build at the time of the backup.
         }
@@ -505,7 +505,7 @@ class restore_gradebook_structure_step extends restore_structure_step {
     protected function gradebook_calculation_freeze() {
         global $CFG;
         $gradebookcalculationsfreeze = get_config('core', 'gradebook_calculations_freeze_' . $this->get_courseid());
-        preg_match('/(\d{8})/', $this->get_task()->get_info()->moodle_release, $matches);
+        preg_match('/(\d{8})/', $this->get_task()->get_info()->powereduc_release, $matches);
         $backupbuild = (int)$matches[1];
         $backuprelease = $this->get_task()->get_info()->backup_release; // The major version: 2.9, 3.0, 3.10...
 
@@ -555,7 +555,7 @@ class restore_gradebook_structure_step extends restore_structure_step {
                 ($target != backup::TARGET_CURRENT_ADDING && $target != backup::TARGET_EXISTING_ADDING)) {
             // The setting was not found because this setting did not exist at the time the backup was made.
             // And we are not restoring as merge, in which case we leave the course as it was.
-            $version = $this->get_task()->get_info()->moodle_version;
+            $version = $this->get_task()->get_info()->powereduc_version;
 
             if ($version < $version28start) {
                 // We need to set it to use grade_item, but only if the site-wide setting is different. No need to notice them.
@@ -1177,7 +1177,7 @@ class restore_groups_structure_step extends restore_structure_step {
         // Only allow the idnumber to be set if the user has permission and the idnumber is not already in use by
         // another a group in the same course
         $context = context_course::instance($data->courseid);
-        if (isset($data->idnumber) and has_capability('moodle/course:changeidnumber', $context, $this->task->get_userid())) {
+        if (isset($data->idnumber) and has_capability('powereduc/course:changeidnumber', $context, $this->task->get_userid())) {
             if (groups_get_group_by_idnumber($data->courseid, $data->idnumber)) {
                 unset($data->idnumber);
             }
@@ -1236,7 +1236,7 @@ class restore_groups_structure_step extends restore_structure_step {
         // Only allow the idnumber to be set if the user has permission and the idnumber is not already in use by
         // another a grouping in the same course
         $context = context_course::instance($data->courseid);
-        if (isset($data->idnumber) and has_capability('moodle/course:changeidnumber', $context, $this->task->get_userid())) {
+        if (isset($data->idnumber) and has_capability('powereduc/course:changeidnumber', $context, $this->task->get_userid())) {
             if (groups_get_grouping_by_idnumber($data->courseid, $data->idnumber)) {
                 unset($data->idnumber);
             }
@@ -1412,7 +1412,7 @@ class restore_scales_structure_step extends restore_structure_step {
             // If global scale (course=0), check the user has perms to create it
             // falling to course scale if not
             $systemctx = context_system::instance();
-            if ($data->courseid == 0 && !has_capability('moodle/course:managescales', $systemctx , $this->task->get_userid())) {
+            if ($data->courseid == 0 && !has_capability('powereduc/course:managescales', $systemctx , $this->task->get_userid())) {
                 $data->courseid = $this->get_courseid();
             }
             // scale doesn't exist, create
@@ -1474,7 +1474,7 @@ class restore_outcomes_structure_step extends restore_structure_step {
             // If global outcome (course=null), check the user has perms to create it
             // falling to course outcome if not
             $systemctx = context_system::instance();
-            if (is_null($data->courseid) && !has_capability('moodle/grade:manageoutcomes', $systemctx , $this->task->get_userid())) {
+            if (is_null($data->courseid) && !has_capability('powereduc/grade:manageoutcomes', $systemctx , $this->task->get_userid())) {
                 $data->courseid = $this->get_courseid();
             }
             // outcome doesn't exist, create
@@ -1836,7 +1836,7 @@ class restore_course_structure_step extends restore_structure_step {
     /**
      * Processing functions go here
      *
-     * @global moodledatabase $DB
+     * @global powereducdatabase $DB
      * @param stdClass $data
      */
     public function process_course($data) {
@@ -1847,9 +1847,9 @@ class restore_course_structure_step extends restore_structure_step {
         $isnewcourse = $target == backup::TARGET_NEW_COURSE;
 
         // When restoring to a new course we can set all the things except for the ID number.
-        $canchangeidnumber = $isnewcourse || has_capability('moodle/course:changeidnumber', $context, $userid);
-        $canchangesummary = $isnewcourse || has_capability('moodle/course:changesummary', $context, $userid);
-        $canforcelanguage = has_capability('moodle/course:setforcedlanguage', $context, $userid);
+        $canchangeidnumber = $isnewcourse || has_capability('powereduc/course:changeidnumber', $context, $userid);
+        $canchangesummary = $isnewcourse || has_capability('powereduc/course:changesummary', $context, $userid);
+        $canforcelanguage = has_capability('powereduc/course:setforcedlanguage', $context, $userid);
 
         $data = (object)$data;
         $data->id = $this->get_courseid();
@@ -1917,7 +1917,7 @@ class restore_course_structure_step extends restore_structure_step {
             $data->defaultgroupingid = $this->get_mappingid('grouping', $data->defaultgroupingid);
         }
 
-        $courseconfig = get_config('moodlecourse');
+        $courseconfig = get_config('powereduccourse');
 
         if (empty($CFG->enablecompletion)) {
             // Completion is disabled globally.
@@ -2020,8 +2020,8 @@ class restore_course_structure_step extends restore_structure_step {
         if ($this->legacyrestrictmodules) {
             $context = context_course::instance($this->get_courseid());
 
-            list($roleids) = get_roles_with_cap_in_context($context, 'moodle/course:manageactivities');
-            list($managerroleids) = get_roles_with_cap_in_context($context, 'moodle/site:config');
+            list($roleids) = get_roles_with_cap_in_context($context, 'powereduc/course:manageactivities');
+            list($managerroleids) = get_roles_with_cap_in_context($context, 'powereduc/site:config');
             foreach ($managerroleids as $roleid) {
                 unset($roleids[$roleid]);
             }
@@ -2180,8 +2180,8 @@ class restore_ras_and_caps_structure_step extends restore_structure_step {
                 // Check if the new role is an overrideable role AND if the user performing the restore has the
                 // capability to assign the capability.
                 if (in_array($newrole->info['shortname'], $overrideableroles) &&
-                    (has_capability('moodle/role:override', $context, $userid) ||
-                            ($safecapability && has_capability('moodle/role:safeoverride', $context, $userid)))
+                    (has_capability('powereduc/role:override', $context, $userid) ||
+                            ($safecapability && has_capability('powereduc/role:safeoverride', $context, $userid)))
                 ) {
                     assign_capability($data->capability, $data->permission, $newroleid, $this->task->get_contextid());
                 } else {
@@ -2426,15 +2426,15 @@ class restore_fix_restorer_access_step extends restore_execution_step {
         $courseid = $this->get_courseid();
         $context = context_course::instance($courseid);
 
-        if (is_enrolled($context, $userid, 'moodle/course:update', true) or is_viewing($context, $userid, 'moodle/course:update')) {
+        if (is_enrolled($context, $userid, 'powereduc/course:update', true) or is_viewing($context, $userid, 'powereduc/course:update')) {
             // Current user may access the course (admin, category manager or restored teacher enrolment usually)
             return;
         }
 
-        // Try to add role only - we do not need enrolment if user has moodle/course:view or is already enrolled
+        // Try to add role only - we do not need enrolment if user has powereduc/course:view or is already enrolled
         role_assign($CFG->restorernewroleid, $userid, $context);
 
-        if (is_enrolled($context, $userid, 'moodle/course:update', true) or is_viewing($context, $userid, 'moodle/course:update')) {
+        if (is_enrolled($context, $userid, 'powereduc/course:update', true) or is_viewing($context, $userid, 'powereduc/course:update')) {
             // Extra role is enough, yay!
             return;
         }
@@ -3069,7 +3069,7 @@ class restore_course_completion_structure_step extends restore_structure_step {
     /**
      * Process course completion criteria
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @param stdClass $data
      */
     public function process_course_completion_criteria($data) {
@@ -3157,7 +3157,7 @@ class restore_course_completion_structure_step extends restore_structure_step {
     /**
      * Processes course compltion criteria complete records
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @param stdClass $data
      */
     public function process_course_completion_crit_compl($data) {
@@ -3191,7 +3191,7 @@ class restore_course_completion_structure_step extends restore_structure_step {
     /**
      * Process course completions
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @param stdClass $data
      */
     public function process_course_completions($data) {
@@ -3232,7 +3232,7 @@ class restore_course_completion_structure_step extends restore_structure_step {
     /**
      * Process course completion aggregate methods
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @param stdClass $data
      */
     public function process_course_completion_aggr_methd($data) {
@@ -4499,7 +4499,7 @@ class restore_module_structure_step extends restore_structure_step {
             $data->availability = upgrade_group_members_only($data->groupingid, $data->availability);
         }
 
-        if (!has_capability('moodle/course:setforcedlanguage', context_course::instance($data->course))) {
+        if (!has_capability('powereduc/course:setforcedlanguage', context_course::instance($data->course))) {
             unset($data->lang);
         }
 
@@ -4800,7 +4800,7 @@ class restore_create_categories_and_questions extends restore_structure_step {
 
         // Check if the backup is a pre 4.0 one.
         $backuprelease = $this->get_task()->get_info()->backup_release; // The major version: 2.9, 3.0, 3.10...
-        preg_match('/(\d{8})/', $this->get_task()->get_info()->moodle_release, $matches);
+        preg_match('/(\d{8})/', $this->get_task()->get_info()->powereduc_release, $matches);
         $backupbuild = (int)$matches[1];
         $before40 = false;
         if (version_compare($backuprelease, '4.0', '<') || $backupbuild < 20220202) {
@@ -4888,7 +4888,7 @@ class restore_create_categories_and_questions extends restore_structure_step {
         // Before 3.5, question categories could be created at top level.
         // From 3.5 onwards, all question categories should be a child of a special category called the "top" category.
         $backuprelease = $this->get_task()->get_info()->backup_release; // The major version: 2.9, 3.0, 3.10...
-        preg_match('/(\d{8})/', $this->get_task()->get_info()->moodle_release, $matches);
+        preg_match('/(\d{8})/', $this->get_task()->get_info()->powereduc_release, $matches);
         $backupbuild = (int)$matches[1];
         $before35 = false;
         if (version_compare($backuprelease, '3.5', '<') || $backupbuild < 20180205) {
@@ -5042,7 +5042,7 @@ class restore_create_categories_and_questions extends restore_structure_step {
 
         // Check if the backup is a pre 4.0 one.
         $backuprelease = $this->get_task()->get_info()->backup_release; // The major version: 2.9, 3.0, 3.10...
-        preg_match('/(\d{8})/', $this->get_task()->get_info()->moodle_release, $matches);
+        preg_match('/(\d{8})/', $this->get_task()->get_info()->powereduc_release, $matches);
         $backupbuild = (int)$matches[1];
         $before40 = false;
         if (version_compare($backuprelease, '4.0', '<') || $backupbuild < 20220202) {
@@ -5274,7 +5274,7 @@ class restore_move_module_questions_categories extends restore_execution_step {
         global $DB;
 
         $backuprelease = $this->task->get_info()->backup_release; // The major version: 2.9, 3.0, 3.10...
-        preg_match('/(\d{8})/', $this->task->get_info()->moodle_release, $matches);
+        preg_match('/(\d{8})/', $this->task->get_info()->powereduc_release, $matches);
         $backupbuild = (int)$matches[1];
         $after35 = false;
         if (version_compare($backuprelease, '3.5', '>=') && $backupbuild > 20180205) {
@@ -5447,7 +5447,7 @@ class restore_create_question_files extends restore_execution_step {
  * and user Private files here at the moment. This could be eventually replaced with a set of
  * callbacks in the future if needed.
  *
- * @copyright 2012 David Mudrak <david@moodle.com>
+ * @copyright 2012 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class restore_process_file_aliases_queue extends restore_execution_step {
@@ -5534,7 +5534,7 @@ class restore_process_file_aliases_queue extends restore_execution_step {
                     continue;
 
                 } else {
-                    // This is a reference to some moodle file that was not contained in the backup
+                    // This is a reference to some powereduc file that was not contained in the backup
                     // file. If we are restoring to the same site, keep the reference untouched
                     // and restore the alias as is if the referenced file exists.
                     if ($this->task->is_samesite()) {

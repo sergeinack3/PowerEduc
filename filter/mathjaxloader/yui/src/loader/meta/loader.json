@@ -1,7 +1,7 @@
 {
-    "moodle-filter_mathjaxloader-loader": {
+    "powereduc-filter_mathjaxloader-loader": {
         "requires": [
-            "moodle-core-event"
+            "powereduc-core-event"
         ]
     }
 }

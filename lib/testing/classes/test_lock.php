@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Tests lock
@@ -41,7 +41,7 @@ class test_lock {
     protected static $lockhandles = array();
 
     /**
-     * Prevent parallel test execution - this can not work in Moodle because we modify database and dataroot.
+     * Prevent parallel test execution - this can not work in PowerEduc because we modify database and dataroot.
      *
      * Note: do not call manually!
      *
@@ -61,7 +61,7 @@ class test_lock {
             return;
         }
         if (!file_exists($lockfile)) {
-            file_put_contents($lockfile, 'This file prevents concurrent execution of Moodle ' . $framework . ' tests');
+            file_put_contents($lockfile, 'This file prevents concurrent execution of PowerEduc ' . $framework . ' tests');
             testing_fix_file_permissions($lockfile);
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * This class looks for email addresses in Moodle text and
  * hides them using the Moodle obfuscate_text function.
  */
-class filter_emailprotect extends moodle_text_filter {
+class filter_emailprotect extends powereduc_text_filter {
     function filter($text, array $options = array()) {
     /// Do a quick check using stripos to avoid unnecessary work
         if (strpos($text, '@') === false) {

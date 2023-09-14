@@ -17,11 +17,11 @@ Y.extend(DRAGRESOURCE, M.core.dragdrop, {
 
         this.samenodelabel = {
             identifier: 'afterresource',
-            component: 'moodle'
+            component: 'powereduc'
         };
         this.parentnodelabel = {
             identifier: 'totopofsection',
-            component: 'moodle'
+            component: 'powereduc'
         };
 
         // Go through all sections
@@ -107,7 +107,7 @@ Y.extend(DRAGRESOURCE, M.core.dragdrop, {
             var move = resourcesnode.one('a.' + CSS.EDITINGMOVE);
             if (move) {
                 var sr = move.getData('sectionreturn');
-                move.replace(this.get_drag_handle(M.util.get_string('movecoursemodule', 'moodle'),
+                move.replace(this.get_drag_handle(M.util.get_string('movecoursemodule', 'powereduc'),
                              CSS.EDITINGMOVE, CSS.ICONCLASS, true).setAttribute('data-sectionreturn', sr));
             }
         }, this);

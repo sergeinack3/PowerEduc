@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -382,9 +382,9 @@ class tool_uploadcourse_processor {
      */
     protected function validate() {
         if (empty($this->columns)) {
-            throw new moodle_exception('cannotreadtmpfile', 'error');
+            throw new powereduc_exception('cannotreadtmpfile', 'error');
         } else if (count($this->columns) < 2) {
-            throw new moodle_exception('csvfewcolumns', 'error');
+            throw new powereduc_exception('csvfewcolumns', 'error');
         }
     }
 }

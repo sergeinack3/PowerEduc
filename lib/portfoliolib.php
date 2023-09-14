@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains all global functions to do with manipulating portfolios.
@@ -148,7 +148,7 @@ class portfolio_add_button {
      *      back to the callback functions (passed by reference)
      *      these MUST be primatives to be added as hidden form fields.
      *      and the values get cleaned to PARAM_ALPHAEXT or PARAM_FLOAT or PARAM_PATH
-     * @param string $component This is the name of the component in Moodle, eg 'mod_forum'
+     * @param string $component This is the name of the component in PowerEduc, eg 'mod_forum'
      */
     public function set_callback_options($class, array $argarray, $component) {
         global $CFG;
@@ -1262,7 +1262,7 @@ function portfolio_rewrite_pluginfile_url_callback($contextid, $component, $file
  * Function to require any potential callback files, throwing exceptions
  * if an issue occurs.
  *
- * @param string $component This is the name of the component in Moodle, eg 'mod_forum'
+ * @param string $component This is the name of the component in PowerEduc, eg 'mod_forum'
  * @param string $class Name of the class containing the callback functions
  *     activity components should ALWAYS use their name_portfolio_caller
  *     other locations must use something unique

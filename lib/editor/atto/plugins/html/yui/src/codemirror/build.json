@@ -1,7 +1,7 @@
 {
-    "name": "moodle-atto_html-codemirror",
+    "name": "powereduc-atto_html-codemirror",
     "builds": {
-        "moodle-atto_html-codemirror": {
+        "powereduc-atto_html-codemirror": {
             "jsfiles": [
                 "wrapper.js",
                 "codemirror.js",

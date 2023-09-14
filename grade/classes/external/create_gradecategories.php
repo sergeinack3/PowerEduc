@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -98,7 +98,7 @@ class create_gradecategories extends external_api {
         // Check that the context and permissions are OK.
         $context = \context_course::instance($courseid);
         self::validate_context($context);
-        require_capability('moodle/grade:manage', $context);
+        require_capability('powereduc/grade:manage', $context);
 
         return self::create_gradecategories_from_data($courseid, $categories);
     }

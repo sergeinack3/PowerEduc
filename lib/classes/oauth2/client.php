@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Configurable oauth2 client class.
@@ -28,8 +28,8 @@ defined('POWEREDUC_INTERNAL') || die();
 require_once($CFG->libdir . '/oauthlib.php');
 require_once($CFG->libdir . '/filelib.php');
 
-use moodle_url;
-use moodle_exception;
+use powereduc_url;
+use powereduc_exception;
 use stdClass;
 
 /**
@@ -56,7 +56,7 @@ class client extends \oauth2_client {
      * Constructor.
      *
      * @param issuer $issuer
-     * @param moodle_url|null $returnurl
+     * @param powereduc_url|null $returnurl
      * @param string $scopesrequired
      * @param boolean $system
      * @param boolean $autorefresh whether refresh_token grants are used to allow continued access across sessions.
@@ -76,7 +76,7 @@ class client extends \oauth2_client {
             }
         }
         if (empty($returnurl)) {
-            $returnurl = new moodle_url('/');
+            $returnurl = new powereduc_url('/');
         }
         $this->basicauth = $issuer->get('basicauth');
         parent::__construct($issuer->get('clientid'), $issuer->get('clientsecret'), $returnurl, $scopes);
@@ -248,7 +248,7 @@ class client extends \oauth2_client {
      *
      * @param string $code the authorisation code
      * @return bool true if the token could be upgraded
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function upgrade_token($code) {
         $upgraded = parent::upgrade_token($code);
@@ -301,7 +301,7 @@ class client extends \oauth2_client {
                     $this->store_user_refresh_token($tokensreceived['refresh_token']);
                 }
                 return true;
-            } catch (\moodle_exception $e) {
+            } catch (\powereduc_exception $e) {
                 // The refresh attempt failed either due to an error or a bad request. A bad request could be received
                 // for a number of reasons including expired refresh token (lifetime is not specified in OAuth 2 spec),
                 // scope change or if app access has been revoked manually by the user (tokens revoked).
@@ -383,7 +383,7 @@ class client extends \oauth2_client {
      *
      * @param string $refreshtoken the refresh token to exchange.
      * @return null|array array containing access token and refresh token if provided, null if the exchange was denied.
-     * @throws moodle_exception if an invalid response is received or if the response contains errors.
+     * @throws powereduc_exception if an invalid response is received or if the response contains errors.
      */
     protected function exchange_refresh_token(string $refreshtoken): ?array {
         $params = array('refresh_token' => $refreshtoken,
@@ -407,13 +407,13 @@ class client extends \oauth2_client {
 
         if ($this->info['http_code'] !== 200) {
             $debuginfo = !empty($this->error) ? $this->error : $response;
-            throw new moodle_exception('oauth2refreshtokenerror', 'core_error', '', $this->info['http_code'], $debuginfo);
+            throw new powereduc_exception('oauth2refreshtokenerror', 'core_error', '', $this->info['http_code'], $debuginfo);
         }
 
         $r = json_decode($response);
 
         if (!empty($r->error)) {
-            throw new moodle_exception($r->error . ' ' . $r->error_description);
+            throw new powereduc_exception($r->error . ' ' . $r->error_description);
         }
 
         if (!isset($r->access_token)) {
@@ -488,8 +488,8 @@ class client extends \oauth2_client {
     /**
      * Fetch the user info from the user info endpoint.
      *
-     * @return stdClass|false Moodle user fields for the logged in user (or false if request failed)
-     * @throws moodle_exception if the response is empty after decoding it.
+     * @return stdClass|false PowerEduc user fields for the logged in user (or false if request failed)
+     * @throws powereduc_exception if the response is empty after decoding it.
      */
     public function get_raw_userinfo() {
         if (!empty($this->rawuserinfo)) {
@@ -513,7 +513,7 @@ class client extends \oauth2_client {
 
         if (is_null($userinfo)) {
             // Throw an exception displaying the original response, because, at this point, $userinfo shouldn't be empty.
-            throw new moodle_exception($response);
+            throw new powereduc_exception($response);
         }
         $this->rawuserinfo = $userinfo;
         return $userinfo;
@@ -521,10 +521,10 @@ class client extends \oauth2_client {
 
     /**
      * Fetch the user info from the user info endpoint and map all
-     * the fields back into moodle fields.
+     * the fields back into powereduc fields.
      *
-     * @return stdClass|false Moodle user fields for the logged in user (or false if request failed)
-     * @throws moodle_exception if the response is empty after decoding it.
+     * @return stdClass|false PowerEduc user fields for the logged in user (or false if request failed)
+     * @throws powereduc_exception if the response is empty after decoding it.
      */
     public function get_userinfo() {
         $userinfo = $this->get_raw_userinfo();
@@ -545,7 +545,7 @@ class client extends \oauth2_client {
         $map = $this->get_userinfo_mapping();
 
         $user = new stdClass();
-        foreach ($map as $openidproperty => $moodleproperty) {
+        foreach ($map as $openidproperty => $powereducproperty) {
             // We support nested objects via a-b-c syntax.
             $getfunc = function($obj, $prop) use (&$getfunc) {
                 $proplist = explode('-', $prop, 2);
@@ -577,7 +577,7 @@ class client extends \oauth2_client {
 
             $resolved = $getfunc($userinfo, $openidproperty);
             if (!empty($resolved)) {
-                $user->$moodleproperty = $resolved;
+                $user->$powereducproperty = $resolved;
             }
         }
 

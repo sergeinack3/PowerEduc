@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Chat external API
@@ -21,7 +21,7 @@
  * @category   external
  * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.0
+ * @since      PowerEduc 3.0
  */
 
 defined('POWEREDUC_INTERNAL') || die;
@@ -39,7 +39,7 @@ use mod_chat\external\chat_message_exporter;
  * @category   external
  * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.0
+ * @since      PowerEduc 3.0
  */
 class mod_chat_external extends external_api {
 
@@ -47,7 +47,7 @@ class mod_chat_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function login_user_parameters() {
         return new external_function_parameters(
@@ -65,7 +65,7 @@ class mod_chat_external extends external_api {
      * @param int $chatid the chat instance id
      * @param int $groupid the user group id
      * @return array of warnings and the chat unique session id
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      * @throws powereduc_exception
      */
     public static function login_user($chatid, $groupid = 0) {
@@ -122,7 +122,7 @@ class mod_chat_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function login_user_returns() {
         return new external_single_structure(
@@ -137,7 +137,7 @@ class mod_chat_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_chat_users_parameters() {
         return new external_function_parameters(
@@ -152,7 +152,7 @@ class mod_chat_external extends external_api {
      *
      * @param int $chatsid the chat session id
      * @return array of warnings and the user lists
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      * @throws powereduc_exception
      */
     public static function get_chat_users($chatsid) {
@@ -205,7 +205,7 @@ class mod_chat_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_chat_users_returns() {
         return new external_single_structure(
@@ -229,7 +229,7 @@ class mod_chat_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function send_chat_message_parameters() {
         return new external_function_parameters(
@@ -249,7 +249,7 @@ class mod_chat_external extends external_api {
      * @param string $messagetext the message text
      * @param string $beepid the beep message id
      * @return array of warnings and the new message id (0 if the message was empty)
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      * @throws powereduc_exception
      */
     public static function send_chat_message($chatsid, $messagetext, $beepid = '') {
@@ -301,7 +301,7 @@ class mod_chat_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function send_chat_message_returns() {
         return new external_single_structure(
@@ -316,7 +316,7 @@ class mod_chat_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_chat_latest_messages_parameters() {
         return new external_function_parameters(
@@ -333,7 +333,7 @@ class mod_chat_external extends external_api {
      * @param int $chatsid the chat session id
      * @param int $chatlasttime last time messages were retrieved (epoch time)
      * @return array of warnings and the new message id (0 if the message was empty)
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      * @throws powereduc_exception
      */
     public static function get_chat_latest_messages($chatsid, $chatlasttime = 0) {
@@ -406,7 +406,7 @@ class mod_chat_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_chat_latest_messages_returns() {
         return new external_single_structure(
@@ -433,7 +433,7 @@ class mod_chat_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function view_chat_parameters() {
         return new external_function_parameters(
@@ -448,7 +448,7 @@ class mod_chat_external extends external_api {
      *
      * @param int $chatid the chat instance id
      * @return array of warnings and status result
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      * @throws powereduc_exception
      */
     public static function view_chat($chatid) {
@@ -482,7 +482,7 @@ class mod_chat_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function view_chat_returns() {
         return new external_single_structure(
@@ -498,7 +498,7 @@ class mod_chat_external extends external_api {
      * Describes the parameters for get_chats_by_courses.
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_chats_by_courses_parameters() {
         return new external_function_parameters (
@@ -516,7 +516,7 @@ class mod_chat_external extends external_api {
      *
      * @param array $courseids the course ids
      * @return array of chats details
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_chats_by_courses($courseids = array()) {
         global $CFG;
@@ -569,7 +569,7 @@ class mod_chat_external extends external_api {
      * Describes the get_chats_by_courses return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_chats_by_courses_returns() {
         return new external_single_structure(
@@ -597,7 +597,7 @@ class mod_chat_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_sessions_parameters() {
         return new external_function_parameters(
@@ -617,7 +617,7 @@ class mod_chat_external extends external_api {
      * @param int $groupid filter messages by this group. 0 to determine the group.
      * @param bool $showall whether to include incomplete sessions or not
      * @return array of warnings and the sessions
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      * @throws powereduc_exception
      */
     public static function get_sessions($chatid, $groupid = 0, $showall = false) {
@@ -688,7 +688,7 @@ class mod_chat_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_sessions_returns() {
         return new external_single_structure(
@@ -720,7 +720,7 @@ class mod_chat_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_session_messages_parameters() {
         return new external_function_parameters(
@@ -742,7 +742,7 @@ class mod_chat_external extends external_api {
      * @param int $sessionend the session end time (timestamp)
      * @param int $groupid filter messages by this group. 0 to determine the group.
      * @return array of warnings and the messages
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      * @throws powereduc_exception
      */
     public static function get_session_messages($chatid, $sessionstart, $sessionend, $groupid = 0) {
@@ -807,7 +807,7 @@ class mod_chat_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_session_messages_returns() {
         return new external_single_structure(

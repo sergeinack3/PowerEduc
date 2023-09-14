@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Moodle-specific selectors.
+ * PowerEduc-specific selectors.
  *
  * @package    core
  * @category   test
@@ -24,7 +24,7 @@
  */
 
 /**
- * Moodle selectors manager.
+ * PowerEduc selectors manager.
  *
  * @package    core
  * @category   test
@@ -44,7 +44,7 @@ class behat_partial_named_selector extends \Behat\Mink\Selector\PartialNamedSele
             $this->registerNamedXpath($alias, implode(' | ', $selectors));
         }
 
-        foreach (static::$moodleselectors as $name => $xpath) {
+        foreach (static::$powereducselectors as $name => $xpath) {
             $this->registerNamedXpath($name, $xpath);
         }
 
@@ -132,11 +132,11 @@ class behat_partial_named_selector extends \Behat\Mink\Selector\PartialNamedSele
      * Behat by default comes with XPath, CSS and named selectors,
      * named selectors are a mapping between names (like button) and
      * xpaths that represents that names and includes a placeholder that
-     * will be replaced by the locator. These are Moodle's own xpaths.
+     * will be replaced by the locator. These are PowerEduc's own xpaths.
      *
-     * @var array XPaths for moodle elements.
+     * @var array XPaths for powereduc elements.
      */
-    protected static $moodleselectors = array(
+    protected static $powereducselectors = array(
         'activity' => <<<XPATH
 .//li[contains(concat(' ', normalize-space(@class), ' '), ' activity ')][descendant::*[contains(normalize-space(.), %locator%)]]
 XPATH
@@ -160,10 +160,10 @@ XPATH
      @aria-label = %locator%]
 XPATH
         , 'dialogue' => <<<XPATH
-.//div[contains(concat(' ', normalize-space(@class), ' '), ' moodle-dialogue ') and
-    not(contains(concat(' ', normalize-space(@class), ' '), ' moodle-dialogue-hidden ')) and
+.//div[contains(concat(' ', normalize-space(@class), ' '), ' powereduc-dialogue ') and
+    not(contains(concat(' ', normalize-space(@class), ' '), ' powereduc-dialogue-hidden ')) and
     normalize-space(descendant::div[
-        contains(concat(' ', normalize-space(@class), ' '), ' moodle-dialogue-hd ')
+        contains(concat(' ', normalize-space(@class), ' '), ' powereduc-dialogue-hd ')
         ]) = %locator%] |
 .//div[contains(concat(' ', normalize-space(@class), ' '), ' yui-dialog ') and
     normalize-space(descendant::div[@class='hd']) = %locator%]
@@ -303,7 +303,7 @@ XPATH
      * Mink comes with a number of named replacements.
      * Sometimes we want to add our own.
      *
-     * @var array XPaths for moodle elements.
+     * @var array XPaths for powereduc elements.
      */
     protected static $customreplacements = [
         '%buttonMatch%' => [
@@ -311,13 +311,13 @@ XPATH
             'aria' => '%ariaLabelMatch%',
         ],
         '%ariaLabelMatch%' => [
-            'moodle' => 'contains(./@aria-label, %locator%)',
+            'powereduc' => 'contains(./@aria-label, %locator%)',
         ],
         '%exactTagTextMatch%' => [
             // This is based upon the upstream tagTextMatch but performs an exact match rather than a loose match using
             // contains().
             // If possible we should only use exact matches for any new form fields that we add.
-            'moodle' => 'normalize-space(text())=%locator%',
+            'powereduc' => 'normalize-space(text())=%locator%',
         ],
     ];
 

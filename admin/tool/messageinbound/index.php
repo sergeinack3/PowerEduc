@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ admin_externalpage_setup('messageinbound_handlers');
 
 $classname = optional_param('classname', '', PARAM_RAW);
 
-$pageurl = new moodle_url('/admin/tool/messageinbound/index.php');
+$pageurl = new powereduc_url('/admin/tool/messageinbound/index.php');
 
 $PAGE->set_primary_active_tab('siteadminnode');
 
@@ -55,7 +55,7 @@ if (empty($classname)) {
     $handler = \core\message\inbound\manager::get_handler($classname);
     $record = \core\message\inbound\manager::record_from_handler($handler);
 
-    $formurl = new moodle_url($PAGE->url, array('classname' => $classname));
+    $formurl = new powereduc_url($PAGE->url, array('classname' => $classname));
     $mform = new tool_messageinbound_edit_handler_form($formurl, array(
             'handler' => $handler,
     ));

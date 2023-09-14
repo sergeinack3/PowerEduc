@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -45,14 +45,14 @@ $strmultilangupgrade = get_String('multilangupgradeinfo', 'tool_multilangupgrade
 
 if (!$go or !data_submitted() or !confirm_sesskey()) {   /// Print a form
     $optionsyes = array('go'=>1, 'sesskey'=>sesskey());
-    echo $OUTPUT->confirm($strmultilangupgrade, new moodle_url('/admin/tool/multilangupgrade/index.php', $optionsyes), new moodle_url('/admin/'));
+    echo $OUTPUT->confirm($strmultilangupgrade, new powereduc_url('/admin/tool/multilangupgrade/index.php', $optionsyes), new powereduc_url('/admin/'));
     echo $OUTPUT->footer();
     die;
 }
 
 
 if (!$tables = $DB->get_tables() ) {    // No tables yet at all.
-    throw new \moodle_exception('notables', 'debug');
+    throw new \powereduc_exception('notables', 'debug');
 }
 
 echo $OUTPUT->box_start();
@@ -75,7 +75,7 @@ foreach ($tables as $table) {
     $fulltable = $DB->get_prefix().$table;
     if ($columns = $DB->get_columns($table)) {
         if (!array_key_exists('id', $columns)) {
-            continue; // moodle tables have id
+            continue; // powereduc tables have id
         }
         foreach ($columns as $column => $data) {
             if (in_array($data->type, array('text','mediumtext','longtext','varchar'))) {  // Text stuff only
@@ -124,7 +124,7 @@ echo $OUTPUT->notification('Rebuilding course cache...', 'notifysuccess');
 rebuild_course_cache(0, true);
 echo $OUTPUT->notification('...finished', 'notifysuccess');
 
-echo $OUTPUT->continue_button(new moodle_url('/admin/'));
+echo $OUTPUT->continue_button(new powereduc_url('/admin/'));
 
 echo $OUTPUT->footer();
 die;

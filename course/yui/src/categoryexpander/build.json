@@ -1,7 +1,7 @@
 {
-  "name": "moodle-course-categoryexpander",
+  "name": "powereduc-course-categoryexpander",
   "builds": {
-    "moodle-course-categoryexpander": {
+    "powereduc-course-categoryexpander": {
       "jsfiles": [
         "categoryexpander.js"
       ]

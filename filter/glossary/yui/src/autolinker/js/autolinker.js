@@ -87,13 +87,13 @@ Y.extend(AUTOLINKER, Y.Base, {
                 for (key in data.entries) {
                     definition = data.entries[key].definition + data.entries[key].attachments;
                     alertpanel = new M.core.alert({title: data.entries[key].concept, draggable: true,
-                        message: definition, modal: false, yesLabel: M.util.get_string('ok', 'moodle')});
+                        message: definition, modal: false, yesLabel: M.util.get_string('ok', 'powereduc')});
                     // Notify the filters about the modified nodes.
                     event.notifyFilterContentUpdated(alertpanel.get('boundingBox').getDOMNode());
                     Y.Node.one('#id_yuialertconfirm-' + alertpanel.get('COUNT')).focus();
 
                     // Register alertpanel for stacking.
-                    alertpanelid = '#moodle-dialogue-' + alertpanel.get('COUNT');
+                    alertpanelid = '#powereduc-dialogue-' + alertpanel.get('COUNT');
                     alertpanel.on('complete', this._deletealertpanel, this, alertpanelid);
 
                     // We already have some windows opened, so set the right position...

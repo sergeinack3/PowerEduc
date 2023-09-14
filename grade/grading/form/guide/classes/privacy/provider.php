@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Privacy class for requesting user data.
  *
  * @package    gradingform_guide
- * @copyright  2018 Sara Arjona <sara@moodle.com>
+ * @copyright  2018 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,7 +33,7 @@ use \core_privacy\local\request\writer;
 /**
  * Privacy class for requesting user data.
  *
- * @copyright  2018 Sara Arjona <sara@moodle.com>
+ * @copyright  2018 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements

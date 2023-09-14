@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Definition of a class to represent an individual user's grade
@@ -276,7 +276,7 @@ class grade_grade extends grade_object {
         }
 
         if ($grade_item->is_course_item() or $grade_item->is_category_item()) {
-            return (bool)get_config('moodle', 'grade_overridecat');
+            return (bool)get_config('powereduc', 'grade_overridecat');
         }
 
         return true;
@@ -360,7 +360,7 @@ class grade_grade extends grade_object {
     /**
      * Returns the minimum and maximum number of points this grade is graded with respect to.
      *
-     * @since  Moodle 2.8.7, 2.9.1
+     * @since  PowerEduc 2.8.7, 2.9.1
      * @return array A list containing, in order, the minimum and maximum number of points.
      */
     protected function get_grade_min_and_max() {
@@ -395,7 +395,7 @@ class grade_grade extends grade_object {
     /**
      * Returns the minimum number of points this grade is graded with.
      *
-     * @since  Moodle 2.8.7, 2.9.1
+     * @since  PowerEduc 2.8.7, 2.9.1
      * @return float The minimum number of points
      */
     public function get_grade_min() {
@@ -407,7 +407,7 @@ class grade_grade extends grade_object {
     /**
      * Returns the maximum number of points this grade is graded with respect to.
      *
-     * @since  Moodle 2.8.7, 2.9.1
+     * @since  PowerEduc 2.8.7, 2.9.1
      * @return float The maximum number of points
      */
     public function get_grade_max() {
@@ -768,7 +768,7 @@ class grade_grade extends grade_object {
         global $CFG;
 
         if (count($grade_grades) !== count($grade_items)) {
-            throw new \moodle_exception('invalidarraysize', 'debug', '', 'grade_grade::get_hiding_affected()!');
+            throw new \powereduc_exception('invalidarraysize', 'debug', '', 'grade_grade::get_hiding_affected()!');
         }
 
         $dependson = array();

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -82,10 +82,10 @@ class no_teaching extends \core_analytics\local\target\binary {
      * @param  \context     $context
      * @param  string       $contextname
      * @param  \stdClass    $user
-     * @param  \moodle_url  $insighturl
+     * @param  \powereduc_url  $insighturl
      * @return string[]                     The plain text message and the HTML message
      */
-    public function get_insight_body(\context $context, string $contextname, \stdClass $user, \moodle_url $insighturl): array {
+    public function get_insight_body(\context $context, string $contextname, \stdClass $user, \powereduc_url $insighturl): array {
         global $OUTPUT;
 
         $a = (object)['userfirstname' => $user->firstname];
@@ -116,13 +116,13 @@ class no_teaching extends \core_analytics\local\target\binary {
 
         $actions = array();
 
-        $url = new \moodle_url('/course/view.php', array('id' => $course->id));
+        $url = new \powereduc_url('/course/view.php', array('id' => $course->id));
         $pix = new \pix_icon('i/course', get_string('course'));
         $actions[] = new \core_analytics\prediction_action('viewcourse', $prediction,
             $url, $pix, get_string('view'));
 
         if (course_can_view_participants($sampledata['context'])) {
-            $url = new \moodle_url('/user/index.php', array('id' => $course->id));
+            $url = new \powereduc_url('/user/index.php', array('id' => $course->id));
             $pix = new \pix_icon('i/cohort', get_string('participants'));
             $actions[] = new \core_analytics\prediction_action('viewparticipants', $prediction,
                 $url, $pix, get_string('participants'));

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package     tool_policy
  * @category    output
- * @copyright   2018 David Mudrák <david@moodle.com>
+ * @copyright   2018 David Mudrák <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,7 +27,7 @@ namespace tool_policy\form;
 
 use context_system;
 use html_writer;
-use moodleform;
+use powereducform;
 use tool_policy\api;
 use tool_policy\policy_version;
 
@@ -36,10 +36,10 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Defines the form for editing a policy document version.
  *
- * @copyright 2018 David Mudrak <david@moodle.com>
+ * @copyright 2018 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class policydoc extends moodleform {
+class policydoc extends powereducform {
 
     /**
      * Defines the form fields.

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Class site_registration_form
@@ -39,7 +39,7 @@ require_once($CFG->libdir . '/formslib.php');
  * @copyright  2017 Marina Glancy
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class site_registration_form extends \moodleform {
+class site_registration_form extends \powereducform {
 
     /**
      * Form definition
@@ -72,7 +72,7 @@ class site_registration_form extends \moodleform {
         // Fields that need to be highlighted.
         $highlightfields = registration::get_new_registration_fields();
 
-        $mform->addElement('header', 'moodle', get_string('registrationinfo', 'hub'));
+        $mform->addElement('header', 'powereduc', get_string('registrationinfo', 'hub'));
 
         $mform->addElement('text', 'name', get_string('sitename', 'hub'),
             array('class' => 'registration_textfield', 'maxlength' => 255));
@@ -194,7 +194,7 @@ class site_registration_form extends \moodleform {
     /**
      * Add yes/no select with additional checkbox allowing to specify another email
      *
-     * @deprecated since Moodle 3.11 - MDL-71460 The form elements using this have been converted to checkboxes
+     * @deprecated since PowerEduc 3.11 - MDL-71460 The form elements using this have been converted to checkboxes
      * @todo MDL-71472 - Will be deleted in 4.3
      * @see \core\hub\site_registration_form::add_checkbox_with_email()
      * @param string $elementname

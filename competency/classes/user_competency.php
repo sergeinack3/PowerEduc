@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -154,7 +154,7 @@ class user_competency extends persistent {
                 $strname = 'inreview';
                 break;
             default:
-                throw new \moodle_exception('errorusercomptencystatus', 'core_competency', '', $status);
+                throw new \powereduc_exception('errorusercomptencystatus', 'core_competency', '', $status);
                 break;
         }
 
@@ -335,9 +335,9 @@ class user_competency extends persistent {
     public static function can_comment_user($userid) {
         global $USER;
 
-        $capabilities = array('moodle/competency:usercompetencycomment');
+        $capabilities = array('powereduc/competency:usercompetencycomment');
         if ($USER->id == $userid) {
-            $capabilities[] = 'moodle/competency:usercompetencycommentown';
+            $capabilities[] = 'powereduc/competency:usercompetencycommentown';
         }
 
         if (has_any_capability($capabilities, context_user::instance($userid))) {
@@ -354,7 +354,7 @@ class user_competency extends persistent {
      * @return bool
      */
     public static function can_grade_user($userid) {
-        $ratecap = 'moodle/competency:competencygrade';
+        $ratecap = 'powereduc/competency:competencygrade';
         return has_capability($ratecap, context_user::instance($userid));
     }
 
@@ -366,7 +366,7 @@ class user_competency extends persistent {
      * @return bool
      */
     public static function can_grade_user_in_course($userid, $courseid) {
-        $ratecap = 'moodle/competency:competencygrade';
+        $ratecap = 'powereduc/competency:competencygrade';
         return has_capability($ratecap, context_course::instance($courseid))
             || static::can_grade_user($userid);
     }
@@ -390,7 +390,7 @@ class user_competency extends persistent {
      * @return bool
      */
     public static function can_read_user_in_course($userid, $courseid) {
-        $capability = 'moodle/competency:usercompetencyview';
+        $capability = 'powereduc/competency:usercompetencyview';
         return has_capability($capability, context_course::instance($courseid))
             || static::can_read_user($userid);
     }
@@ -402,7 +402,7 @@ class user_competency extends persistent {
      * @return bool
      */
     public static function can_read_user($userid) {
-        $capability = 'moodle/competency:usercompetencyview';
+        $capability = 'powereduc/competency:usercompetencyview';
         return has_capability($capability, context_user::instance($userid))
             || plan::can_read_user($userid);
     }
@@ -420,9 +420,9 @@ class user_competency extends persistent {
     public static function can_request_review_user($userid) {
         global $USER;
 
-        $capabilities = array('moodle/competency:usercompetencyrequestreview');
+        $capabilities = array('powereduc/competency:usercompetencyrequestreview');
         if ($USER->id == $userid) {
-            $capabilities[] = 'moodle/competency:usercompetencyrequestreviewown';
+            $capabilities[] = 'powereduc/competency:usercompetencyrequestreviewown';
         }
 
         if (has_any_capability($capabilities, context_user::instance($userid))) {
@@ -439,7 +439,7 @@ class user_competency extends persistent {
      * @return bool
      */
     public static function can_review_user($userid) {
-        $capability = 'moodle/competency:usercompetencyreview';
+        $capability = 'powereduc/competency:usercompetencyreview';
         return has_capability($capability, context_user::instance($userid));
     }
 

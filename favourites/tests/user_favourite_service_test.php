@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -67,7 +67,7 @@ class user_favourite_service_test extends \advanced_testcase {
                 // Check the objects for the unique key.
                 foreach ($mockstore as $item) {
                     if ($item->uniquekey == $key) {
-                        throw new \moodle_exception('Favourite already exists');
+                        throw new \powereduc_exception('Favourite already exists');
                     }
                 }
                 $index = count($mockstore);     // Integer index.
@@ -203,7 +203,7 @@ class user_favourite_service_test extends \advanced_testcase {
         $this->assertObjectHasAttribute('id', $favourite1);
 
         // Try to favourite the same course again.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $user1service->create_favourite('core_course', 'course', $course1context->instanceid, $course1context);
     }
 
@@ -218,7 +218,7 @@ class user_favourite_service_test extends \advanced_testcase {
         $user1service = new \core_favourites\local\service\user_favourite_service($user1context, $repo);
 
         // Try to favourite something in a non-existent component.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $user1service->create_favourite('core_cccourse', 'my_area', $course1context->instanceid, $course1context);
     }
 
@@ -322,7 +322,7 @@ class user_favourite_service_test extends \advanced_testcase {
         $service = new \core_favourites\local\service\user_favourite_service($user1context, $repo);
 
         // Verify we get an exception if we try to search for favourites in an invalid component.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $service->find_favourites_by_type('cccore_notreal', 'something');
     }
 
@@ -378,7 +378,7 @@ class user_favourite_service_test extends \advanced_testcase {
         $this->assertFalse($repo->exists($fav1->id));
 
         // Try to delete a favourite which we know doesn't exist.
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $service->delete_favourite('core_course', 'course', $course1context->instanceid, $course1context);
     }
 

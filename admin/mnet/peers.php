@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ $updra = optional_param('updateregisterall', 0, PARAM_INT);
 // first process the register all hosts setting if required
 if (!empty($updra)) {
     set_config('mnet_register_allhosts', optional_param('registerallhosts', 0, PARAM_INT));
-    redirect(new moodle_url('/admin/mnet/peers.php'), get_string('changessaved'));
+    redirect(new powereduc_url('/admin/mnet/peers.php'), get_string('changessaved'));
 }
 
 $adminsection = 'mnetpeers';
@@ -52,11 +52,11 @@ $PAGE->set_url('/admin/mnet/peers.php');
 admin_externalpage_setup($adminsection);
 
 if (!extension_loaded('openssl')) {
-    throw new \moodle_exception('requiresopenssl', 'mnet');
+    throw new \powereduc_exception('requiresopenssl', 'mnet');
 }
 
 if (!function_exists('curl_init') ) {
-    throw new \moodle_exception('nocurl', 'mnet');
+    throw new \powereduc_exception('nocurl', 'mnet');
 }
 
 if (!isset($CFG->mnet_dispatcher_mode)) {
@@ -167,9 +167,9 @@ if ($formdata = $reviewform->get_data()) {
     $mnet_peer->sslverification     = $formdata->sslverification;
 
     if ($mnet_peer->commit()) {
-        redirect(new moodle_url('/admin/mnet/peers.php', array('hostid' => $mnet_peer->id)), get_string('changessaved'));
+        redirect(new powereduc_url('/admin/mnet/peers.php', array('hostid' => $mnet_peer->id)), get_string('changessaved'));
     } else {
-        throw new \moodle_exception('invalidaction', 'error', 'index.php');
+        throw new \powereduc_exception('invalidaction', 'error', 'index.php');
     }
 } else if ($reviewform->is_submitted()) { // submitted, but errors
     echo $OUTPUT->header();
@@ -191,7 +191,7 @@ $table->head = array(get_string('registerallhosts', 'mnet'));
 
 $registerrow = '';
 $registerstr = '';
-$registerurl = new moodle_url('/admin/mnet/peers.php', array('updateregisterall' => 1));
+$registerurl = new powereduc_url('/admin/mnet/peers.php', array('updateregisterall' => 1));
 if (!empty($CFG->mnet_register_allhosts)) {
     $registerrow = get_string('registerhostson', 'mnet');
     $registerurl->param('registerallhosts', 0);
@@ -223,10 +223,10 @@ $table->head = array(
     '',
 );
 $table->wrap = array('nowrap', 'nowrap', 'nowrap', 'nowrap');
-$baseurl = new moodle_url('/admin/mnet/peers.php');
+$baseurl = new powereduc_url('/admin/mnet/peers.php');
 $deleted = array();
 foreach($hosts as $host) {
-    $hosturl = new moodle_url($baseurl, array('hostid' => $host->id));
+    $hosturl = new powereduc_url($baseurl, array('hostid' => $host->id));
     if (trim($host->name) === '') {
         // should not happen but...
         $host->name = '???';
@@ -252,7 +252,7 @@ foreach($hosts as $host) {
         html_writer::link($hosturl, $host->name),
         html_writer::link($host->wwwroot, $host->wwwroot),
         $last_connect,
-        $OUTPUT->single_button(new moodle_url('/admin/mnet/delete.php', array('hostid' => $host->id)), get_string('delete'))
+        $OUTPUT->single_button(new powereduc_url('/admin/mnet/delete.php', array('hostid' => $host->id)), get_string('delete'))
     );
 }
 echo html_writer::table($table);

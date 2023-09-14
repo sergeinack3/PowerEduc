@@ -91,7 +91,7 @@ Feature: Importing of groups and groupings
     Given I log in as "admin"
     And I am on the "Course 1" "permissions" page
     And I override the system permissions of "Teacher" role with:
-      | moodle/course:changeidnumber | Prevent |
+      | powereduc/course:changeidnumber | Prevent |
     And I log out
     And I log in as "teacher1"
     And I am on the "Course 1" "groups" page

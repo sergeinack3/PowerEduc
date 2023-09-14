@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -109,7 +109,7 @@ class core_enrol_renderer extends plugin_renderer_base {
      * @param int $userid
      * @param array $roles
      * @param array $assignableroles
-     * @param moodle_url $pageurl
+     * @param powereduc_url $pageurl
      * @return string
      */
     public function user_roles_and_actions($userid, $roles, $assignableroles, $canassign, $pageurl) {
@@ -120,7 +120,7 @@ class core_enrol_renderer extends plugin_renderer_base {
             if ($canassign and (is_siteadmin() or isset($assignableroles[$roleid])) and !$role['unchangeable']) {
                 $strunassign = get_string('unassignarole', 'role', $role['text']);
                 $icon = $this->output->pix_icon('t/delete', $strunassign);
-                $url = new moodle_url($pageurl, array('action'=>'unassign', 'roleid'=>$roleid, 'user'=>$userid));
+                $url = new powereduc_url($pageurl, array('action'=>'unassign', 'roleid'=>$roleid, 'user'=>$userid));
                 $rolesoutput .= html_writer::tag('div', $role['text'] . html_writer::link($url, $icon, array('class'=>'unassignrolelink', 'rel'=>$roleid, 'title'=>$strunassign)), array('class'=>'role role_'.$roleid));
             } else {
                 $rolesoutput .= html_writer::tag('div', $role['text'], array('class'=>'role unchangeable', 'rel'=>$roleid));
@@ -137,7 +137,7 @@ class core_enrol_renderer extends plugin_renderer_base {
                 }
             }
             if (!$hasallroles) {
-                $url = new moodle_url($pageurl, array('action' => 'assign', 'user' => $userid));
+                $url = new powereduc_url($pageurl, array('action' => 'assign', 'user' => $userid));
                 $roleicon = $this->output->pix_icon('i/assignroles', get_string('assignroles', 'role'));
                 $link = html_writer::link($url, $roleicon, array('class' => 'assignrolelink'));
                 $output = html_writer::tag('div', $link, array('class'=>'addrole'));
@@ -154,7 +154,7 @@ class core_enrol_renderer extends plugin_renderer_base {
      * @param array $groups
      * @param array $allgroups
      * @param bool $canmanagegroups
-     * @param moodle_url $pageurl
+     * @param powereduc_url $pageurl
      * @return string
      */
     public function user_groups_and_actions($userid, $groups, $allgroups, $canmanagegroups, $pageurl) {
@@ -164,7 +164,7 @@ class core_enrol_renderer extends plugin_renderer_base {
         foreach($groups as $groupid=>$name) {
             if ($canmanagegroups and groups_remove_member_allowed($groupid, $userid)) {
                 $icon = $this->output->pix_icon('t/delete', get_string('removefromgroup', 'group', $name));
-                $url = new moodle_url($pageurl, array('action'=>'removemember', 'group'=>$groupid, 'user'=>$userid));
+                $url = new powereduc_url($pageurl, array('action'=>'removemember', 'group'=>$groupid, 'user'=>$userid));
                 $groupoutput .= html_writer::tag('div', $name . html_writer::link($url, $icon), array('class'=>'group', 'rel'=>$groupid));
             } else {
                 $groupoutput .= html_writer::tag('div', $name, array('class'=>'group', 'rel'=>$groupid));
@@ -172,7 +172,7 @@ class core_enrol_renderer extends plugin_renderer_base {
         }
         $output = '';
         if ($canmanagegroups && (count($groups) < count($allgroups))) {
-            $url = new moodle_url($pageurl, array('action'=>'addmember', 'user'=>$userid));
+            $url = new powereduc_url($pageurl, array('action'=>'addmember', 'user'=>$userid));
             $output .= html_writer::tag('div', html_writer::link($url, $groupicon), array('class'=>'addgroup'));
         }
         $output = $output.html_writer::tag('div', $groupoutput, array('class'=>'groups'));
@@ -184,7 +184,7 @@ class core_enrol_renderer extends plugin_renderer_base {
      *
      * @param int $userid
      * @param array $enrolments
-     * @param moodle_url $pageurl
+     * @param powereduc_url $pageurl
      * @return string
      */
     public function user_enrolments_and_actions($enrolments) {
@@ -419,7 +419,7 @@ class course_enrolment_table extends html_table implements renderable {
         $this->head = array();
         $this->colclasses = array();
         $this->align = array();
-        $url = $this->manager->get_moodlepage()->url;
+        $url = $this->manager->get_powereducpage()->url;
 
         if (!empty($this->bulkoperations)) {
             // If there are bulk operations add a column for checkboxes.
@@ -438,7 +438,7 @@ class course_enrolment_table extends html_table implements renderable {
                     if (!in_array($n, self::$sortablefields)) {
                         $bits[] = $l;
                     } else {
-                        $sorturl = new moodle_url($url, array(self::SORTVAR => $n, self::SORTDIRECTIONVAR => $this->get_field_sort_direction($n)));
+                        $sorturl = new powereduc_url($url, array(self::SORTVAR => $n, self::SORTDIRECTIONVAR => $this->get_field_sort_direction($n)));
                         $link = html_writer::link($sorturl, $fields[$name][$n]);
                         if ($this->sort == $n) {
                             $link .= $this->get_direction_icon($output, $n);
@@ -452,7 +452,7 @@ class course_enrolment_table extends html_table implements renderable {
                 if (!in_array($name, self::$sortablefields)) {
                     $newlabel = $label;
                 } else {
-                    $sorturl = new moodle_url($url, array(self::SORTVAR => $name, self::SORTDIRECTIONVAR => $this->get_field_sort_direction($name)));
+                    $sorturl = new powereduc_url($url, array(self::SORTVAR => $name, self::SORTDIRECTIONVAR => $this->get_field_sort_direction($name)));
                     $newlabel  = html_writer::link($sorturl, $fields[$name]);
                     if ($this->sort == $name) {
                         $newlabel .= $this->get_direction_icon($output, $name);
@@ -519,22 +519,22 @@ class course_enrolment_table extends html_table implements renderable {
     }
 
     public function initialise_javascript() {
-        if (has_capability('moodle/role:assign', $this->manager->get_context())) {
-            $this->manager->get_moodlepage()->requires->strings_for_js(array(
+        if (has_capability('powereduc/role:assign', $this->manager->get_context())) {
+            $this->manager->get_powereducpage()->requires->strings_for_js(array(
                 'assignroles',
                 'confirmunassign',
                 'confirmunassigntitle',
                 'confirmunassignyes',
                 'confirmunassignno'
             ), 'role');
-            $modules = array('moodle-enrol-rolemanager', 'moodle-enrol-rolemanager-skin');
+            $modules = array('powereduc-enrol-rolemanager', 'powereduc-enrol-rolemanager-skin');
             $function = 'M.enrol.rolemanager.init';
             $arguments = array(
                 'containerId'=>$this->id,
                 'userIds'=>array_keys($this->users),
                 'courseId'=>$this->manager->get_course()->id,
                 'otherusers'=>isset($this->otherusers));
-            $this->manager->get_moodlepage()->requires->yui_module($modules, $function, array($arguments));
+            $this->manager->get_powereducpage()->requires->yui_module($modules, $function, array($arguments));
         }
     }
 
@@ -545,7 +545,7 @@ class course_enrolment_table extends html_table implements renderable {
      */
     public function get_paging_bar() {
         if ($this->pagingbar == null) {
-            $this->pagingbar = new paging_bar($this->totalusers, $this->page, $this->perpage, $this->manager->get_moodlepage()->url, self::PAGEVAR);
+            $this->pagingbar = new paging_bar($this->totalusers, $this->page, $this->perpage, $this->manager->get_powereducpage()->url, self::PAGEVAR);
         }
         return $this->pagingbar;
     }
@@ -662,15 +662,15 @@ class course_enrolment_other_users_table extends course_enrolment_table {
      */
     public function get_user_search_button() {
         static $count = 0;
-        if (!has_capability('moodle/role:assign', $this->manager->get_context())) {
+        if (!has_capability('powereduc/role:assign', $this->manager->get_context())) {
             return false;
         }
         $count++;
-        $url = new moodle_url('/admin/roles/assign.php', array('contextid'=>$this->manager->get_context()->id, 'sesskey'=>sesskey()));
+        $url = new powereduc_url('/admin/roles/assign.php', array('contextid'=>$this->manager->get_context()->id, 'sesskey'=>sesskey()));
         $control = new single_button($url, get_string('assignroles', 'role'), 'get');
         $control->class = 'singlebutton assignuserrole instance'.$count;
         if ($count == 1) {
-            $this->manager->get_moodlepage()->requires->strings_for_js(array(
+            $this->manager->get_powereducpage()->requires->strings_for_js(array(
                     'ajaxoneuserfound',
                     'ajaxxusersfound',
                     'ajaxxmoreusersfound',
@@ -688,15 +688,15 @@ class course_enrolment_other_users_table extends course_enrolment_table {
                     'startdatetoday',
                     'durationdays',
                     'enrolperiod'), 'enrol');
-            $this->manager->get_moodlepage()->requires->string_for_js('assignrole', 'role');
+            $this->manager->get_powereducpage()->requires->string_for_js('assignrole', 'role');
 
-            $modules = array('moodle-enrol-otherusersmanager', 'moodle-enrol-otherusersmanager-skin');
+            $modules = array('powereduc-enrol-otherusersmanager', 'powereduc-enrol-otherusersmanager-skin');
             $function = 'M.enrol.otherusersmanager.init';
             $arguments = array(
                 'courseId'=> $this->manager->get_course()->id,
                 'ajaxUrl' => '/enrol/ajax.php',
-                'url' => $this->manager->get_moodlepage()->url->out(false));
-            $this->manager->get_moodlepage()->requires->yui_module($modules, $function, array($arguments));
+                'url' => $this->manager->get_powereducpage()->url->out(false));
+            $this->manager->get_powereducpage()->requires->yui_module($modules, $function, array($arguments));
         }
         return $control;
     }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ class manager_test extends \advanced_testcase {
     use \tool_usertours_helper_trait;
 
     /**
-     * @var moodle_database
+     * @var powereduc_database
      */
     protected $db;
 
@@ -59,12 +59,12 @@ class manager_test extends \advanced_testcase {
     /**
      * Helper to mock the database.
      *
-     * @return moodle_database
+     * @return powereduc_database
      */
     public function mock_database() {
         global $DB;
 
-        $DB = $this->getMockBuilder('moodle_database')->getMock();
+        $DB = $this->getMockBuilder('powereduc_database')->getMock();
 
         return $DB;
     }
@@ -112,7 +112,7 @@ class manager_test extends \advanced_testcase {
         $rcm = $rc->getMethod($function);
         $rcm->setAccessible(true);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $rcm->invokeArgs($manager, $arguments);
     }
 
@@ -326,7 +326,7 @@ class manager_test extends \advanced_testcase {
             $this->helper_create_step((object) ['tourid' => $tour->get_id()]);
         }
 
-        $matches = \tool_usertours\manager::get_matching_tours(new \moodle_url($url));
+        $matches = \tool_usertours\manager::get_matching_tours(new \powereduc_url($url));
         $this->assertEquals(count($expected), count($matches));
         for ($i = 0; $i < count($matches); $i++) {
             $this->assertEquals($expected[$i], $matches[$i]->get_name());
@@ -354,12 +354,12 @@ class manager_test extends \advanced_testcase {
             'tourid' => $tour->get_id(),
         ]);
 
-        $matches = \tool_usertours\manager::get_matching_tours(new \moodle_url('/'));
+        $matches = \tool_usertours\manager::get_matching_tours(new \powereduc_url('/'));
         $this->assertEquals(1, count($matches));
 
         $CFG->sitepolicyguest = 'https://example.com';
 
-        $matches = \tool_usertours\manager::get_matching_tours(new \moodle_url('/'));
+        $matches = \tool_usertours\manager::get_matching_tours(new \powereduc_url('/'));
         $this->assertEmpty($matches);
     }
 }

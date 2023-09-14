@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  *
- * Login library file of login/password related Moodle functions.
+ * Login library file of login/password related PowerEduc functions.
  *
  * @package    core
  * @subpackage lib
@@ -79,13 +79,13 @@ function core_login_process_password_reset_request() {
  * @param  string $username the user name
  * @param  string $email    the user email
  * @return array an array containing fields indicating the reset status, a info notice and redirect URL.
- * @since  Moodle 3.4
+ * @since  PowerEduc 3.4
  */
 function core_login_process_password_reset($username, $email) {
     global $CFG, $DB;
 
     if (empty($username) && empty($email)) {
-        throw new \moodle_exception('cannotmailconfirm');
+        throw new \powereduc_exception('cannotmailconfirm');
     }
 
     // Next find the user account in the database which the requesting user claims to own.
@@ -131,11 +131,11 @@ function core_login_process_password_reset($username, $email) {
 
         $userauth = get_auth_plugin($user->auth);
         if (!$userauth->can_reset_password() or !is_enabled_auth($user->auth)
-          or !has_capability('moodle/user:changeownpassword', $systemcontext, $user->id)) {
+          or !has_capability('powereduc/user:changeownpassword', $systemcontext, $user->id)) {
             if (send_password_change_info($user)) {
                 $pwresetstatus = PWRESET_STATUS_OTHEREMAILSENT;
             } else {
-                throw new \moodle_exception('cannotmailconfirm');
+                throw new \powereduc_exception('cannotmailconfirm');
             }
         } else {
             // The account the requesting user claims to be is entitled to change their password.
@@ -170,7 +170,7 @@ function core_login_process_password_reset($username, $email) {
                 if ($sendresult) {
                     $pwresetstatus = PWRESET_STATUS_TOKENSENT;
                 } else {
-                    throw new \moodle_exception('cannotmailconfirm');
+                    throw new \powereduc_exception('cannotmailconfirm');
                 }
             }
         }
@@ -253,13 +253,13 @@ function core_login_process_password_set($token) {
     if ($user->auth === 'nologin' or !is_enabled_auth($user->auth)) {
         // Bad luck - user is not able to login, do not let them set password.
         echo $OUTPUT->header();
-        throw new \moodle_exception('forgotteninvalidurl');
+        throw new \powereduc_exception('forgotteninvalidurl');
         die; // Never reached.
     }
 
     // Check this isn't guest user.
     if (isguestuser($user)) {
-        throw new \moodle_exception('cannotresetguestpwd');
+        throw new \powereduc_exception('cannotresetguestpwd');
     }
 
     // Token is correct, and unexpired.
@@ -284,7 +284,7 @@ function core_login_process_password_set($token) {
         $DB->delete_records('user_password_resets', array('id' => $user->tokenid));
         $userauth = get_auth_plugin($user->auth);
         if (!$userauth->user_update_password($user, $data->password)) {
-            throw new \moodle_exception('errorpasswordupdate', 'auth');
+            throw new \powereduc_exception('errorpasswordupdate', 'auth');
         }
         user_add_password_history($user->id, $data->password);
         if (!empty($CFG->passwordchangelogout)) {
@@ -351,7 +351,7 @@ function core_login_get_return_url() {
     // If the url to go to is the same as the site page, check for default homepage.
     if ($urltogo == ($CFG->wwwroot . '/')) {
         $homepage = get_home_page();
-        // Go to my-moodle page instead of site homepage if defaulthomepage set to homepage_my.
+        // Go to my-powereduc page instead of site homepage if defaulthomepage set to homepage_my.
         if ($homepage === HOMEPAGE_MY && !isguestuser()) {
             if ($urltogo == $CFG->wwwroot or $urltogo == $CFG->wwwroot.'/' or $urltogo == $CFG->wwwroot.'/index.php') {
                 $urltogo = $CFG->wwwroot.'/my/';
@@ -372,7 +372,7 @@ function core_login_get_return_url() {
  * This is used by the forgot_password_form and by the core_auth_request_password_rest WS.
  * @param  array $data array containing the data to be validated (email and username)
  * @return array array of errors compatible with mform
- * @since  Moodle 3.4
+ * @since  PowerEduc 3.4
  */
 function core_login_validate_forgot_password_data($data) {
     global $CFG, $DB;

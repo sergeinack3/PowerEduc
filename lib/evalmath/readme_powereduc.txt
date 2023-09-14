@@ -1,4 +1,4 @@
-Description of EvalMath library import into Moodle
+Description of EvalMath library import into PowerEduc
 
 Our changes:
 * implicit multiplication (optionally) not allowed

@@ -1,7 +1,7 @@
 {
-  "name": "moodle-core-languninstallconfirm",
+  "name": "powereduc-core-languninstallconfirm",
   "builds": {
-    "moodle-core-languninstallconfirm": {
+    "powereduc-core-languninstallconfirm": {
       "jsfiles": [
         "languninstallconfirm.js"
       ]

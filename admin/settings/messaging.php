@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 /**
  * Adds messaging related settings links for Messaging category to admin tree.
  *
- * @copyright 2019 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright 2019 Amaia Anabitarte <amaia@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -26,7 +26,7 @@ defined('POWEREDUC_INTERNAL') || die();
 if ($hassiteconfig) {
     $temp = new admin_settingpage('messages',
         new lang_string('messagingssettings', 'admin'),
-        'moodle/site:config',
+        'powereduc/site:config',
         empty($CFG->messaging)
     );
 
@@ -43,9 +43,9 @@ if ($hassiteconfig) {
     $options = array(
         DAYSECS => new lang_string('secondstotime86400'),
         WEEKSECS => new lang_string('secondstotime604800'),
-        2620800 => new lang_string('nummonths', 'moodle', 1),
-        7862400 => new lang_string('nummonths', 'moodle', 3),
-        15724800 => new lang_string('nummonths', 'moodle', 6),
+        2620800 => new lang_string('nummonths', 'powereduc', 1),
+        7862400 => new lang_string('nummonths', 'powereduc', 3),
+        15724800 => new lang_string('nummonths', 'powereduc', 6),
         0 => new lang_string('never')
     );
     $temp->add(new admin_setting_configselect(

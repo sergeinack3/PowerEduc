@@ -1,7 +1,7 @@
 {
-    "name": "moodle-backup-confirmcancel",
+    "name": "powereduc-backup-confirmcancel",
     "builds": {
-        "moodle-backup-confirmcancel": {
+        "powereduc-backup-confirmcancel": {
             "jsfiles": [
                 "confirmcancel.js"
             ]

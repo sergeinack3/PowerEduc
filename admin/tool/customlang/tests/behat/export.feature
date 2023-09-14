@@ -1,5 +1,5 @@
 @tool @tool_customlang
-Feature: Within a moodle instance, an administrator should be able to export modified langstrings.
+Feature: Within a powereduc instance, an administrator should be able to export modified langstrings.
   In order to export modified langstrings in the adminsettings of the instance,
   As an admin
   I need to be able to export the php-files of the language customisation of a language.
@@ -23,7 +23,7 @@ Feature: Within a moodle instance, an administrator should be able to export mod
     And I set the field "lng" to "en"
     And I press "Open language pack for editing"
     And I press "Continue"
-    And I set the field "Show strings of these components" to "moodle.php"
+    And I set the field "Show strings of these components" to "powereduc.php"
     And I set the field "String identifier" to "accept"
     And I press "Show strings"
     And I set the field "core/accept" to "Accept-custom_export"
@@ -41,7 +41,7 @@ Feature: Within a moodle instance, an administrator should be able to export mod
     And I set the field "lng" to "en"
     And I press "Open language pack for editing"
     And I press "Continue"
-    And I set the field "Show strings of these components" to "moodle.php"
+    And I set the field "Show strings of these components" to "powereduc.php"
     And I set the field "String identifier" to "accept"
     And I press "Show strings"
     And I set the field "core/accept" to "Accept-custom_export"
@@ -50,4 +50,4 @@ Feature: Within a moodle instance, an administrator should be able to export mod
     And I click on "Continue" "button"
     Then I set the field "lng" to "en"
     And I click on "Export custom strings" "button"
-    And I set the field "Select component(s) to export" to "moodle.php"
+    And I set the field "Select component(s) to export" to "powereduc.php"

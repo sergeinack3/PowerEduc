@@ -29,14 +29,14 @@
  * @author Changhao Jiang (cjiang@facebook.com)
  */
 
-// Start moodle modification: moodleize this script.
+// Start powereduc modification: powereducize this script.
 require_once(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
-require_once($CFG->libdir . '/xhprof/xhprof_moodle.php');
+require_once($CFG->libdir . '/xhprof/xhprof_powereduc.php');
 require_login();
-require_capability('moodle/site:config', context_system::instance());
+require_capability('powereduc/site:config', context_system::instance());
 raise_memory_limit(MEMORY_HUGE);
 \core\session\manager::write_close();
-// End moodle modification.
+// End powereduc modification.
 
 // by default assume that xhprof_html & xhprof_lib directories
 // are at the same level.
@@ -87,10 +87,10 @@ if (!array_key_exists($type, $xhprof_legal_image_types)) {
   $type = $params['type'][1]; // default image type.
 }
 
-// Start moodle modification: use own XHProfRuns implementation.
+// Start powereduc modification: use own XHProfRuns implementation.
 // $xhprof_runs_impl = new XHProfRuns_Default();
-$xhprof_runs_impl = new moodle_xhprofrun();
-// End moodle modification.
+$xhprof_runs_impl = new powereduc_xhprofrun();
+// End powereduc modification.
 
 if (!empty($run)) {
   // single run call graph image generation

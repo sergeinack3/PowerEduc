@@ -55,7 +55,7 @@ Feature: Atto Autosave
     And I log out
     And I log in as "teacher2"
     And I follow "Manage private files..."
-    And I upload "lib/editor/atto/tests/fixtures/moodle-logo.png" file to "Files" filemanager
+    And I upload "lib/editor/atto/tests/fixtures/powereduc-logo.png" file to "Files" filemanager
     And I click on "Save changes" "button"
     And I am on "Course 1" course homepage
     And I navigate to "Settings" in current page administration
@@ -64,9 +64,9 @@ Feature: Atto Autosave
     And I click on "Insert or edit image" "button"
     And I click on "Browse repositories..." "button"
     And I click on "Private files" "link" in the ".fp-repo-area" "css_element"
-    And I click on "moodle-logo.png" "link"
+    And I click on "powereduc-logo.png" "link"
     And I click on "Select this file" "button"
-    And I set the field "Describe this image" to "It's the Moodle"
+    And I set the field "Describe this image" to "It's the PowerEduc"
     # Wait for the page to "settle".
     And I wait until the page is ready
     And I click on "Save image" "button"

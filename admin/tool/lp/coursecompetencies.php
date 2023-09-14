@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ require_login($course);
 $context = context_course::instance($course->id);
 $urlparams = array('courseid' => $id, 'mod' => $currentmodule);
 
-$url = new moodle_url('/admin/tool/lp/coursecompetencies.php', $urlparams);
+$url = new powereduc_url('/admin/tool/lp/coursecompetencies.php', $urlparams);
 
 list($title, $subtitle) = \tool_lp\page_helper::setup_for_course($url, $course);
 if ($currentmodule > 0) {
@@ -50,7 +50,7 @@ $output = $PAGE->get_renderer('tool_lp');
 $page = new \tool_lp\output\course_competencies_page($course->id, $currentmodule);
 
 echo $output->header();
-$baseurl = new moodle_url('/admin/tool/lp/coursecompetencies.php');
+$baseurl = new powereduc_url('/admin/tool/lp/coursecompetencies.php');
 $nav = new \tool_lp\output\module_navigation($course->id, $currentmodule, $baseurl);
 echo $output->render($nav);
 echo $output->heading($title);

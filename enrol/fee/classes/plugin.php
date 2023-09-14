@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,14 +20,14 @@
  * This plugin allows you to set up paid courses.
  *
  * @package    enrol_fee
- * @copyright  2019 Shamim Rezaie <shamim@moodle.com>
+ * @copyright  2019 Shamim Rezaie <shamim@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
  * Fee enrolment plugin implementation.
  *
- * @copyright  2019 Shamim Rezaie <shamim@moodle.com>
+ * @copyright  2019 Shamim Rezaie <shamim@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class enrol_fee_plugin extends enrol_plugin {
@@ -113,7 +113,7 @@ class enrol_fee_plugin extends enrol_plugin {
             return false;
         }
 
-        if (!has_capability('moodle/course:enrolconfig', $context) or !has_capability('enrol/fee:config', $context)) {
+        if (!has_capability('powereduc/course:enrolconfig', $context) or !has_capability('enrol/fee:config', $context)) {
             return false;
         }
 

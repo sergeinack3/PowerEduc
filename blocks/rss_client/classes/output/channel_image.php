@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -61,11 +61,11 @@ class channel_image implements \renderable, \templatable {
     /**
      * Contructor
      *
-     * @param \moodle_url $url The URL location of the image
+     * @param \powereduc_url $url The URL location of the image
      * @param string $title The title of the image
-     * @param \moodle_url $link The URL of the image link
+     * @param \powereduc_url $link The URL of the image link
      */
-    public function __construct(\moodle_url $url, $title, \moodle_url $link = null) {
+    public function __construct(\powereduc_url $url, $title, \powereduc_url $link = null) {
         $this->url      = $url;
         $this->title    = $title;
         $this->link     = $link;
@@ -89,10 +89,10 @@ class channel_image implements \renderable, \templatable {
     /**
      * Set the URL
      *
-     * @param \moodle_url $url
+     * @param \powereduc_url $url
      * @return \block_rss_client\output\channel_image
      */
-    public function set_url(\moodle_url $url) {
+    public function set_url(\powereduc_url $url) {
         $this->url = $url;
 
         return $this;
@@ -101,7 +101,7 @@ class channel_image implements \renderable, \templatable {
     /**
      * Get the URL
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_url() {
         return $this->url;
@@ -131,7 +131,7 @@ class channel_image implements \renderable, \templatable {
     /**
      * Set the link
      *
-     * @param \moodle_url $link
+     * @param \powereduc_url $link
      * @return \block_rss_client\output\channel_image
      */
     public function set_link($link) {
@@ -143,7 +143,7 @@ class channel_image implements \renderable, \templatable {
     /**
      * Get the link
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_link() {
         return $this->link;

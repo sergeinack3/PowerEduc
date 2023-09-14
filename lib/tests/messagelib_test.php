@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
@@ -31,14 +31,14 @@ class messagelib_test extends \advanced_testcase {
         $this->preventResetByRollback();
 
         // Disable instantmessage provider.
-        $disableprovidersetting = 'moodle_instantmessage_disable';
+        $disableprovidersetting = 'powereduc_instantmessage_disable';
         set_config($disableprovidersetting, 1, 'message');
         $preferences = get_message_output_default_preferences();
         $this->assertTrue($preferences->$disableprovidersetting == 1);
 
         $message = new \core\message\message();
         $message->courseid          = 1;
-        $message->component         = 'moodle';
+        $message->component         = 'powereduc';
         $message->name              = 'instantmessage';
         $message->userfrom          = get_admin();
         $message->userto            = $this->getDataGenerator()->create_user();;
@@ -152,32 +152,32 @@ class messagelib_test extends \advanced_testcase {
         $this->setUser($teacher);
 
         // Teacher shouldn't have the required capability so they shouldn't be able to see the backup message.
-        $this->assertFalse(has_capability('moodle/site:config', $modulecontext));
+        $this->assertFalse(has_capability('powereduc/site:config', $modulecontext));
         $providers = message_get_providers_for_user($teacher->id);
-        $this->assertFalse($this->message_type_present('moodle', 'backup', $providers));
+        $this->assertFalse($this->message_type_present('powereduc', 'backup', $providers));
 
         // Give the user the required capability in an activity module.
         // They should now be able to see the backup message.
-        assign_capability('moodle/site:config', CAP_ALLOW, $teacherrole->id, $modulecontext->id, true);
+        assign_capability('powereduc/site:config', CAP_ALLOW, $teacherrole->id, $modulecontext->id, true);
         accesslib_clear_all_caches_for_unit_testing();
         $modulecontext = \context_module::instance($assign->cmid);
-        $this->assertTrue(has_capability('moodle/site:config', $modulecontext));
+        $this->assertTrue(has_capability('powereduc/site:config', $modulecontext));
 
         $providers = message_get_providers_for_user($teacher->id);
-        $this->assertTrue($this->message_type_present('moodle', 'backup', $providers));
+        $this->assertTrue($this->message_type_present('powereduc', 'backup', $providers));
 
         // Prohibit the capability for the user at the course level.
         // This overrules the CAP_ALLOW at the module level.
         // They should not be able to see the backup message.
-        assign_capability('moodle/site:config', CAP_PROHIBIT, $teacherrole->id, $coursecontext->id, true);
+        assign_capability('powereduc/site:config', CAP_PROHIBIT, $teacherrole->id, $coursecontext->id, true);
         accesslib_clear_all_caches_for_unit_testing();
         $modulecontext = \context_module::instance($assign->cmid);
-        $this->assertFalse(has_capability('moodle/site:config', $modulecontext));
+        $this->assertFalse(has_capability('powereduc/site:config', $modulecontext));
 
         $providers = message_get_providers_for_user($teacher->id);
         // Actually, handling PROHIBITs would be too expensive. We do not
         // care if users with PROHIBITs see a few more preferences than they should.
-        // $this->assertFalse($this->message_type_present('moodle', 'backup', $providers));
+        // $this->assertFalse($this->message_type_present('powereduc', 'backup', $providers));
     }
 
     public function test_send_message_redirection() {
@@ -191,7 +191,7 @@ class messagelib_test extends \advanced_testcase {
         // Test basic message redirection.
         $message = new \core\message\message();
         $message->courseid = 1;
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = 'instantmessage';
         $message->userfrom = $user1;
         $message->userto = $user2;
@@ -236,7 +236,7 @@ class messagelib_test extends \advanced_testcase {
 
         $message = new \core\message\message();
         $message->courseid = 1;
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = 'instantmessage';
         $message->userfrom = $user1->id;
         $message->userto = $user2->id;
@@ -289,23 +289,23 @@ class messagelib_test extends \advanced_testcase {
         $sink = $this->redirectMessages();
         try {
             message_send($message);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
         $this->assertCount(0, $sink->get_messages());
         $this->assertDebuggingCalled('Attempt to send msg from a provider xxxxx/instantmessage '.
             'that is inactive or not allowed for the user id='.$user2->id);
 
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = 'xxx';
         $sink = $this->redirectMessages();
         try {
             message_send($message);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
         $this->assertCount(0, $sink->get_messages());
-        $this->assertDebuggingCalled('Attempt to send msg from a provider moodle/xxx '.
+        $this->assertDebuggingCalled('Attempt to send msg from a provider powereduc/xxx '.
             'that is inactive or not allowed for the user id='.$user2->id);
         $sink->close();
         $this->assertFalse($DB->record_exists('messages', array()));
@@ -314,7 +314,7 @@ class messagelib_test extends \advanced_testcase {
 
         $message = new \core\message\message();
         $message->courseid = 1;
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = 'instantmessage';
         $message->userfrom = $user1;
         $message->userto = -1;
@@ -331,7 +331,7 @@ class messagelib_test extends \advanced_testcase {
 
         $message = new \core\message\message();
         $message->courseid = 1;
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = 'instantmessage';
         $message->userfrom = -1;
         $message->userto = $user2;
@@ -348,7 +348,7 @@ class messagelib_test extends \advanced_testcase {
 
         $message = new \core\message\message();
         $message->courseid = 1;
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = 'instantmessage';
         $message->userfrom = $user1;
         $message->userto = \core_user::NOREPLY_USER;
@@ -368,7 +368,7 @@ class messagelib_test extends \advanced_testcase {
         unset($user2->emailstop);
         $message = new \core\message\message();
         $message->courseid = 1;
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = 'instantmessage';
         $message->userfrom = $user1;
         $message->userto = $user2;
@@ -411,11 +411,11 @@ class messagelib_test extends \advanced_testcase {
         $eventsink = $this->redirectEvents();
 
         // Will always use the pop-up processor.
-        set_user_preference('message_provider_moodle_instantmessage_enabled', 'none', $user2);
+        set_user_preference('message_provider_powereduc_instantmessage_enabled', 'none', $user2);
 
         $message = new \core\message\message();
         $message->courseid          = 1;
-        $message->component         = 'moodle';
+        $message->component         = 'powereduc';
         $message->name              = 'instantmessage';
         $message->userfrom          = $user1;
         $message->userto            = $user2;
@@ -445,7 +445,7 @@ class messagelib_test extends \advanced_testcase {
 
         $message = new \core\message\message();
         $message->courseid          = 1;
-        $message->component         = 'moodle';
+        $message->component         = 'powereduc';
         $message->name              = 'instantmessage';
         $message->userfrom          = $user1;
         $message->userto            = $user2;
@@ -458,7 +458,7 @@ class messagelib_test extends \advanced_testcase {
 
         $messageid = message_send($message);
         $this->assertFalse($messageid);
-        $this->assertDebuggingCalled('Attempt to send msg from a provider moodle/instantmessage '.
+        $this->assertDebuggingCalled('Attempt to send msg from a provider powereduc/instantmessage '.
             'that is inactive or not allowed for the user id='.$user2->id);
         $emails = $sink->get_messages();
         $this->assertCount(0, $emails);
@@ -474,7 +474,7 @@ class messagelib_test extends \advanced_testcase {
 
         $message = new \core\message\message();
         $message->courseid          = 1;
-        $message->component         = 'moodle';
+        $message->component         = 'powereduc';
         $message->name              = 'instantmessage';
         $message->userfrom          = $user1;
         $message->userto            = $user2;
@@ -499,11 +499,11 @@ class messagelib_test extends \advanced_testcase {
         $eventsink->clear();
 
         // Will always use the pop-up processor.
-        set_user_preference('message_provider_moodle_instantmessage_enabled', 'email', $user2);
+        set_user_preference('message_provider_powereduc_instantmessage_enabled', 'email', $user2);
 
         $message = new \core\message\message();
         $message->courseid          = 1;
-        $message->component         = 'moodle';
+        $message->component         = 'powereduc';
         $message->name              = 'instantmessage';
         $message->userfrom          = $user1;
         $message->userto            = $user2;
@@ -532,11 +532,11 @@ class messagelib_test extends \advanced_testcase {
         $user2->emailstop = '0';
 
         // Will always use the pop-up processor.
-        set_user_preference('message_provider_moodle_instantmessage_enabled', 'email', $user2);
+        set_user_preference('message_provider_powereduc_instantmessage_enabled', 'email', $user2);
 
         $message = new \core\message\message();
         $message->courseid          = 1;
-        $message->component         = 'moodle';
+        $message->component         = 'powereduc';
         $message->name              = 'instantmessage';
         $message->userfrom          = $user1;
         $message->userto            = $user2;
@@ -565,11 +565,11 @@ class messagelib_test extends \advanced_testcase {
         $this->assertInstanceOf('\core\event\message_sent', $events[0]);
         $eventsink->clear();
 
-        set_user_preference('message_provider_moodle_instantmessage_enabled', 'email,popup', $user2);
+        set_user_preference('message_provider_powereduc_instantmessage_enabled', 'email,popup', $user2);
 
         $message = new \core\message\message();
         $message->courseid          = 1;
-        $message->component         = 'moodle';
+        $message->component         = 'powereduc';
         $message->name              = 'instantmessage';
         $message->userfrom          = $user1;
         $message->userto            = $user2;
@@ -599,11 +599,11 @@ class messagelib_test extends \advanced_testcase {
         $this->assertInstanceOf('\core\event\message_sent', $events[0]);
         $eventsink->clear();
 
-        set_user_preference('message_provider_moodle_instantmessage_enabled', 'popup', $user2);
+        set_user_preference('message_provider_powereduc_instantmessage_enabled', 'popup', $user2);
 
         $message = new \core\message\message();
         $message->courseid          = 1;
-        $message->component         = 'moodle';
+        $message->component         = 'powereduc';
         $message->name              = 'instantmessage';
         $message->userfrom          = $user1;
         $message->userto            = $user2;
@@ -634,11 +634,11 @@ class messagelib_test extends \advanced_testcase {
         $transaction->allow_commit();
 
         // Will always use the pop-up processor.
-        set_user_preference('message_provider_moodle_instantmessage_enabled', 'none', $user2);
+        set_user_preference('message_provider_powereduc_instantmessage_enabled', 'none', $user2);
 
         $message = new \core\message\message();
         $message->courseid          = 1;
-        $message->component         = 'moodle';
+        $message->component         = 'powereduc';
         $message->name              = 'instantmessage';
         $message->userfrom          = $user1;
         $message->userto            = $user2;
@@ -667,11 +667,11 @@ class messagelib_test extends \advanced_testcase {
         $this->assertInstanceOf('\core\event\message_sent', $events[0]);
 
         // Will always use the pop-up processor.
-        set_user_preference('message_provider_moodle_instantmessage_enabled', 'email', $user2);
+        set_user_preference('message_provider_powereduc_instantmessage_enabled', 'email', $user2);
 
         $message = new \core\message\message();
         $message->courseid          = 1;
-        $message->component         = 'moodle';
+        $message->component         = 'powereduc';
         $message->name              = 'instantmessage';
         $message->userfrom          = $user1;
         $message->userto            = $user2;
@@ -765,7 +765,7 @@ class messagelib_test extends \advanced_testcase {
         // Generate the message.
         $message = new \core\message\message();
         $message->courseid          = 1;
-        $message->component         = 'moodle';
+        $message->component         = 'powereduc';
         $message->name              = 'instantmessage';
         $message->userfrom          = $user1;
         $message->convid            = $conversation->id;
@@ -782,7 +782,7 @@ class messagelib_test extends \advanced_testcase {
 
         // Ensure we're going to hit the email processor for this user.
         $DB->set_field_select('message_processors', 'enabled', 0, "name <> 'email'");
-        set_user_preference('message_provider_moodle_instantmessage_enabled', 'email', $user2);
+        set_user_preference('message_provider_powereduc_instantmessage_enabled', 'email', $user2);
 
         // Now, send a message and verify the message processors (in this case, email) are hit.
         $sink = $this->redirectEmails();
@@ -851,7 +851,7 @@ class messagelib_test extends \advanced_testcase {
         // Generate the message.
         $message = new \core\message\message();
         $message->courseid          = 1;
-        $message->component         = 'moodle';
+        $message->component         = 'powereduc';
         $message->name              = 'instantmessage';
         $message->userfrom          = $user1;
         $message->convid            = $conversation->id;
@@ -868,7 +868,7 @@ class messagelib_test extends \advanced_testcase {
 
         // Ensure we're going to hit the email processor for this user.
         $DB->set_field_select('message_processors', 'enabled', 0, "name <> 'email'");
-        set_user_preference('message_provider_moodle_instantmessage_enabled', 'email', $user1);
+        set_user_preference('message_provider_powereduc_instantmessage_enabled', 'email', $user1);
 
         // Now, send a message and verify the message processors are empty (self-conversations are not processed for now).
         $sink = $this->redirectEmails();
@@ -923,7 +923,7 @@ class messagelib_test extends \advanced_testcase {
         // Generate the message.
         $message = new \core\message\message();
         $message->courseid          = 1;
-        $message->component         = 'moodle';
+        $message->component         = 'powereduc';
         $message->name              = 'instantmessage';
         $message->userfrom          = $user1;
         $message->convid            = $conversation->id;
@@ -940,8 +940,8 @@ class messagelib_test extends \advanced_testcase {
 
         // Ensure the email processor is enabled for the recipient users.
         $DB->set_field_select('message_processors', 'enabled', 0, "name <> 'email'");
-        set_user_preference('message_provider_moodle_instantmessage_enabled', 'email', $user2);
-        set_user_preference('message_provider_moodle_instantmessage_enabled', 'email', $user3);
+        set_user_preference('message_provider_powereduc_instantmessage_enabled', 'email', $user2);
+        set_user_preference('message_provider_powereduc_instantmessage_enabled', 'email', $user3);
 
         // Now, send a message and verify the email processor are hit.
         $messageid = message_send($message);
@@ -1015,12 +1015,12 @@ class messagelib_test extends \advanced_testcase {
         $eventsink = $this->redirectEvents();
 
         // Will always use the pop-up processor.
-        set_user_preference('message_provider_moodle_instantmessage_enabled', 'email', $user2);
-        set_user_preference('message_provider_moodle_instantmessage_enabled', 'email', $user3);
+        set_user_preference('message_provider_powereduc_instantmessage_enabled', 'email', $user2);
+        set_user_preference('message_provider_powereduc_instantmessage_enabled', 'email', $user3);
 
         $message = new \core\message\message();
         $message->courseid          = 1;
-        $message->component         = 'moodle';
+        $message->component         = 'powereduc';
         $message->name              = 'instantmessage';
         $message->userfrom          = $user1;
         $message->convid            = $conversation->id;
@@ -1062,7 +1062,7 @@ class messagelib_test extends \advanced_testcase {
 
         $message = new \core\message\message();
         $message->courseid          = 1;
-        $message->component         = 'moodle';
+        $message->component         = 'powereduc';
         $message->name              = 'instantmessage';
         $message->userfrom          = $user1;
         $message->userto            = $user2;
@@ -1125,7 +1125,7 @@ class messagelib_test extends \advanced_testcase {
 
         $message = new \core\message\message();
         $message->courseid          = 1;
-        $message->component         = 'moodle';
+        $message->component         = 'powereduc';
         $message->name              = 'instantmessage';
         $message->userfrom          = $user1;
         $message->userto            = $user2;
@@ -1183,7 +1183,7 @@ class messagelib_test extends \advanced_testcase {
 
         $message = new \core\message\message();
         $message->courseid          = 1;
-        $message->component         = 'moodle';
+        $message->component         = 'powereduc';
         $message->name              = 'instantmessage';
         $message->userfrom          = get_admin();
         $message->userto            = $user;
@@ -1230,7 +1230,7 @@ class messagelib_test extends \advanced_testcase {
 
         $message = new \core\message\message();
         $message->courseid = 1;
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = 'instantmessage';
         $message->userfrom = $userfrom;
         $message->convid = $conversation->id;

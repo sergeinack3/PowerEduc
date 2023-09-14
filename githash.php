@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  * The following git hash can be used to identify the exact snapshot.
  *
  * You can find more information about using Git for Moodle development
- * and administration at http://docs.moodle.org/en/Git .
+ * and administration at http://docs.powereduc.org/en/Git .
  */
 
 $githash = '7f5f04d';

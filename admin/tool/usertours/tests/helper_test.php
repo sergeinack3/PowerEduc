@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -56,17 +56,17 @@ class helper_test extends advanced_testcase {
                 'administration,core',
                 'Administration',
             ],
-            'Text which is a langstring but uses "moodle" instead of "core"' => [
-                'administration,moodle',
+            'Text which is a langstring but uses "powereduc" instead of "core"' => [
+                'administration,powereduc',
                 'Administration',
             ],
             'Text which is a langstring, but with extra whitespace' => [
-                '  administration,moodle  ',
+                '  administration,powereduc  ',
                 'Administration',
             ],
             'Looks like a langstring, but has incorrect space around comma' => [
-                'administration , moodle',
-                'administration , moodle',
+                'administration , powereduc',
+                'administration , powereduc',
             ],
         ];
     }

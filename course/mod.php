@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -45,7 +45,7 @@ $cancelcopy    = optional_param('cancelcopy', 0, PARAM_BOOL);
 $confirm       = optional_param('confirm', 0, PARAM_BOOL);
 
 // This page should always redirect
-$url = new moodle_url('/course/mod.php');
+$url = new powereduc_url('/course/mod.php');
 foreach (compact('indent','update','hide','show','copy','moveto','movetosection','delete','course','cancelcopy','confirm') as $key=>$value) {
     if ($value !== 0) {
         $url->param($key, $value);
@@ -85,7 +85,7 @@ if (!empty($add)) {
 
     require_login($course, false, $cm);
     $modcontext = context_module::instance($cm->id);
-    require_capability('moodle/course:manageactivities', $modcontext);
+    require_capability('powereduc/course:manageactivities', $modcontext);
 
      // Duplicate the module.
      $newcm = duplicate_module($course, $cm);
@@ -97,7 +97,7 @@ if (!empty($add)) {
 
     require_login($course, false, $cm);
     $modcontext = context_module::instance($cm->id);
-    require_capability('moodle/course:manageactivities', $modcontext);
+    require_capability('powereduc/course:manageactivities', $modcontext);
 
     $return = course_get_url($course, $cm->sectionnum, array('sr' => $sectionreturn));
 
@@ -117,7 +117,7 @@ if (!empty($add)) {
 
         echo $OUTPUT->header();
         echo $OUTPUT->box_start('noticebox');
-        $formcontinue = new single_button(new moodle_url("$CFG->wwwroot/course/mod.php", $optionsyes), get_string('yes'));
+        $formcontinue = new single_button(new powereduc_url("$CFG->wwwroot/course/mod.php", $optionsyes), get_string('yes'));
         $formcancel = new single_button($return, get_string('no'), 'get');
         echo $OUTPUT->confirm($strdeletechecktypename, $formcontinue, $formcancel);
         echo $OUTPUT->box_end();
@@ -140,25 +140,25 @@ if ((!empty($movetosection) or !empty($moveto)) and confirm_sesskey()) {
     require_login($course, false, $cm);
     $coursecontext = context_course::instance($course->id);
     $modcontext = context_module::instance($cm->id);
-    require_capability('moodle/course:manageactivities', $modcontext);
+    require_capability('powereduc/course:manageactivities', $modcontext);
 
     if (!empty($movetosection)) {
         if (!$section = $DB->get_record('course_sections', array('id'=>$movetosection, 'course'=>$cm->course))) {
-            throw new \moodle_exception('sectionnotexist');
+            throw new \powereduc_exception('sectionnotexist');
         }
         $beforecm = NULL;
 
     } else {                      // normal moveto
         if (!$beforecm = get_coursemodule_from_id('', $moveto, $cm->course, true)) {
-            throw new \moodle_exception('invalidcoursemodule');
+            throw new \powereduc_exception('invalidcoursemodule');
         }
         if (!$section = $DB->get_record('course_sections', array('id'=>$beforecm->section, 'course'=>$cm->course))) {
-            throw new \moodle_exception('sectionnotexist');
+            throw new \powereduc_exception('sectionnotexist');
         }
     }
 
     if (!ismoving($section->course)) {
-        throw new \moodle_exception('needcopy', '', "view.php?id=$section->course");
+        throw new \powereduc_exception('needcopy', '', "view.php?id=$section->course");
     }
 
     moveto_module($cm, $section, $beforecm);
@@ -180,7 +180,7 @@ if ((!empty($movetosection) or !empty($moveto)) and confirm_sesskey()) {
     require_login($course, false, $cm);
     $coursecontext = context_course::instance($course->id);
     $modcontext = context_module::instance($cm->id);
-    require_capability('moodle/course:manageactivities', $modcontext);
+    require_capability('powereduc/course:manageactivities', $modcontext);
 
     $cm->indent += $indent;
 
@@ -203,7 +203,7 @@ if ((!empty($movetosection) or !empty($moveto)) and confirm_sesskey()) {
     require_login($course, false, $cm);
     $coursecontext = context_course::instance($course->id);
     $modcontext = context_module::instance($cm->id);
-    require_capability('moodle/course:activityvisibility', $modcontext);
+    require_capability('powereduc/course:activityvisibility', $modcontext);
 
     if (set_coursemodule_visible($cm->id, 0)) {
         \core\event\course_module_updated::create_from_cm($cm, $modcontext)->trigger();
@@ -213,7 +213,7 @@ if ((!empty($movetosection) or !empty($moveto)) and confirm_sesskey()) {
 } else if (!empty($stealth) and confirm_sesskey()) {
     list($course, $cm) = get_course_and_cm_from_cmid($stealth);
     require_login($course, false, $cm);
-    require_capability('moodle/course:activityvisibility', $cm->context);
+    require_capability('powereduc/course:activityvisibility', $cm->context);
 
     if (set_coursemodule_visible($cm->id, 1, 0)) {
         \core\event\course_module_updated::create_from_cm($cm)->trigger();
@@ -223,7 +223,7 @@ if ((!empty($movetosection) or !empty($moveto)) and confirm_sesskey()) {
 } else if (!empty($show) and confirm_sesskey()) {
     list($course, $cm) = get_course_and_cm_from_cmid($show);
     require_login($course, false, $cm);
-    require_capability('moodle/course:activityvisibility', $cm->context);
+    require_capability('powereduc/course:activityvisibility', $cm->context);
     $section = $cm->get_section_info();
 
     if (set_coursemodule_visible($cm->id, 1)) {
@@ -240,7 +240,7 @@ if ((!empty($movetosection) or !empty($moveto)) and confirm_sesskey()) {
     require_login($course, false, $cm);
     $coursecontext = context_course::instance($course->id);
     $modcontext = context_module::instance($cm->id);
-    require_capability('moodle/course:manageactivities', $modcontext);
+    require_capability('powereduc/course:manageactivities', $modcontext);
 
     set_coursemodule_groupmode($cm->id, $groupmode);
     \core\event\course_module_updated::create_from_cm($cm, $modcontext)->trigger();
@@ -253,7 +253,7 @@ if ((!empty($movetosection) or !empty($moveto)) and confirm_sesskey()) {
     require_login($course, false, $cm);
     $coursecontext = context_course::instance($course->id);
     $modcontext = context_module::instance($cm->id);
-    require_capability('moodle/course:manageactivities', $modcontext);
+    require_capability('powereduc/course:manageactivities', $modcontext);
 
     $section = $DB->get_record('course_sections', array('id'=>$cm->section), '*', MUST_EXIST);
 
@@ -277,5 +277,5 @@ if ((!empty($movetosection) or !empty($moveto)) and confirm_sesskey()) {
     unset($USER->activitycopysectionreturn);
     redirect(course_get_url($course, $cm->sectionnum, array('sr' => $sectionreturn)));
 } else {
-    throw new \moodle_exception('unknowaction');
+    throw new \powereduc_exception('unknowaction');
 }

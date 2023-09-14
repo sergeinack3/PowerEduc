@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Delegated database transaction support.
@@ -31,17 +31,17 @@ defined('POWEREDUC_INTERNAL') || die();
  * @copyright  2009 Petr Skoda (http://skodak.org)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class moodle_transaction {
+class powereduc_transaction {
     /** @var array The debug_backtrace() returned array.*/
     private $start_backtrace;
-    /**@var moodle_database The moodle_database instance.*/
+    /**@var powereduc_database The powereduc_database instance.*/
     private $database = null;
 
     /**
      * Delegated transaction constructor,
-     * can be called only from moodle_database class.
+     * can be called only from powereduc_database class.
      * Unfortunately PHP's protected keyword is useless.
-     * @param moodle_database $database
+     * @param powereduc_database $database
      */
     public function __construct($database) {
         $this->database = $database;
@@ -68,7 +68,7 @@ class moodle_transaction {
     /**
      * Mark transaction as disposed, no more
      * commits and rollbacks allowed.
-     * To be used only from moodle_database class
+     * To be used only from powereduc_database class
      * @return null
      */
     public function dispose() {

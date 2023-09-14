@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ global $CFG;
 require_once("{$CFG->libdir}/filelib.php");
 
 use curl;
-use moodle_url;
+use powereduc_url;
 
 /**
  * Class brickfieldconnect. Contains all function to connect to Brickfield external services.
@@ -35,7 +35,7 @@ use moodle_url;
 class brickfieldconnect extends curl {
 
     /** @var string The base api uri. */
-    private static $baseapiuri = 'https://api.mybrickfield.ie/moodle/';
+    private static $baseapiuri = 'https://api.mybrickfield.ie/powereduc/';
 
     /** @var array Endpoint details for setting and checking a site registration */
     const ACTION_CHECK_REGISTRATION = [
@@ -189,7 +189,7 @@ class brickfieldconnect extends curl {
      * @return  string
      */
     protected function get_siteurl(): string {
-        return (new moodle_url('/'))->out(false);
+        return (new powereduc_url('/'))->out(false);
     }
 
     /**

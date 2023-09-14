@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 /**
  * Blog entry edit page
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage blog
  * @copyright  2009 Nicolas Connault
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -55,7 +55,7 @@ $entry->id = null;
 
 if ($id) {
     if (!$entry = new blog_entry($id)) {
-        throw new \moodle_exception('wrongentryid', 'blog');
+        throw new \powereduc_exception('wrongentryid', 'blog');
     }
     $userid = $entry->userid;
 } else {
@@ -75,14 +75,14 @@ if ($modid) {
 require_login($courseid);
 
 if (empty($CFG->enableblogs)) {
-    throw new \moodle_exception('blogdisable', 'blog');
+    throw new \powereduc_exception('blogdisable', 'blog');
 }
 
 if (isguestuser()) {
-    throw new \moodle_exception('noguest');
+    throw new \powereduc_exception('noguest');
 }
 
-$returnurl = new moodle_url('/blog/index.php');
+$returnurl = new powereduc_url('/blog/index.php');
 
 if (!empty($courseid) && empty($modid)) {
     $returnurl->param('courseid', $courseid);
@@ -97,20 +97,20 @@ if (!empty($modid)) {
 
 $blogheaders = blog_get_headers();
 
-if (!has_capability('moodle/blog:create', $sitecontext) && !has_capability('moodle/blog:manageentries', $sitecontext)) {
-    throw new \moodle_exception('cannoteditentryorblog');
+if (!has_capability('powereduc/blog:create', $sitecontext) && !has_capability('powereduc/blog:manageentries', $sitecontext)) {
+    throw new \powereduc_exception('cannoteditentryorblog');
 }
 
 // Make sure that the person trying to edit has access right.
 if ($id) {
     if (!blog_user_can_edit_entry($entry)) {
-        throw new \moodle_exception('notallowedtoedit', 'blog');
+        throw new \powereduc_exception('notallowedtoedit', 'blog');
     }
     $entry->subject      = clean_text($entry->subject);
     $entry->summary      = clean_text($entry->summary, $entry->format);
 } else {
-    if (!has_capability('moodle/blog:create', $sitecontext)) {
-        throw new \moodle_exception('noentry', 'blog'); // The capability "manageentries" is not enough for adding.
+    if (!has_capability('powereduc/blog:create', $sitecontext)) {
+        throw new \powereduc_exception('noentry', 'blog'); // The capability "manageentries" is not enough for adding.
     }
 }
 $returnurl->param('userid', $userid);
@@ -125,12 +125,12 @@ if ($action === 'delete') {
     comment::init();
 
     if (empty($entry->id)) {
-        throw new \moodle_exception('wrongentryid', 'blog');
+        throw new \powereduc_exception('wrongentryid', 'blog');
     }
     if (data_submitted() && $confirm && confirm_sesskey()) {
         // Make sure the current user is the author of the blog entry, or has some deleteanyentry capability.
         if (!blog_user_can_edit_entry($entry)) {
-            throw new \moodle_exception('nopermissionstodeleteentry', 'blog');
+            throw new \powereduc_exception('nopermissionstodeleteentry', 'blog');
         } else {
             $entry->delete();
             blog_rss_delete_file($userid);
@@ -151,8 +151,8 @@ if ($action === 'delete') {
         echo $OUTPUT->heading($strblogs . ': ' . get_string('deleteentry', 'blog'), 2);
 
         echo $OUTPUT->confirm(get_string('blogdeleteconfirm', 'blog', format_string($entry->subject)),
-                              new moodle_url('edit.php', $optionsyes),
-                              new moodle_url('index.php', $optionsno));
+                              new powereduc_url('edit.php', $optionsyes),
+                              new powereduc_url('index.php', $optionsno));
 
         echo '<br />';
         // Output the entry.
@@ -232,14 +232,14 @@ if ($blogeditform->is_cancelled()) {
 
         case 'edit':
             if (empty($entry->id)) {
-                throw new \moodle_exception('wrongentryid', 'blog');
+                throw new \powereduc_exception('wrongentryid', 'blog');
             }
 
             $entry->edit($data, $blogeditform, $summaryoptions, $attachmentoptions);
         break;
 
         default :
-            throw new \moodle_exception('invalidaction');
+            throw new \powereduc_exception('invalidaction');
     }
 
     redirect($returnurl);
@@ -272,14 +272,14 @@ switch ($action) {
 
     case 'edit':
         if (empty($entry->id)) {
-            throw new \moodle_exception('wrongentryid', 'blog');
+            throw new \powereduc_exception('wrongentryid', 'blog');
         }
         $strformheading = get_string('updateentrywithid', 'blog');
 
         break;
 
     default :
-        throw new \moodle_exception('unknowaction');
+        throw new \powereduc_exception('unknowaction');
 }
 
 $entry->modid = $modid;

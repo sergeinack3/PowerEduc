@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -36,14 +36,14 @@ require_once($CFG->dirroot . "/message/lib.php");
  * @category   external
  * @copyright  2011 Jerome Mouneyrac
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.2
+ * @since PowerEduc 2.2
  */
 class core_message_external extends external_api {
     /**
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.6
+     * @since PowerEduc 3.6
      */
     public static function send_messages_to_conversation_parameters() {
         return new external_function_parameters(
@@ -69,7 +69,7 @@ class core_message_external extends external_api {
      * @param int $conversationid the id of the conversation to which the messages will be sent.
      * @param array $messages An array of message to send.
      * @return array the array of messages which were sent (created).
-     * @since Moodle 3.6
+     * @since PowerEduc 3.6
      */
     public static function send_messages_to_conversation(int $conversationid, array $messages = []) {
         global $CFG, $USER;
@@ -115,7 +115,7 @@ class core_message_external extends external_api {
      * Returns description of method result value.
      *
      * @return external_description
-     * @since Moodle 3.6
+     * @since PowerEduc 3.6
      */
     public static function send_messages_to_conversation_returns() {
         return new external_multiple_structure(
@@ -128,7 +128,7 @@ class core_message_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function send_instant_messages_parameters() {
         return new external_function_parameters(
@@ -152,7 +152,7 @@ class core_message_external extends external_api {
      *
      * @param array $messages An array of message to send.
      * @return array
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function send_instant_messages($messages = array()) {
         global $CFG, $USER, $DB;
@@ -265,7 +265,7 @@ class core_message_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function send_instant_messages_returns() {
         return new external_multiple_structure(
@@ -289,7 +289,7 @@ class core_message_external extends external_api {
      * Delete contacts parameters description.
      *
      * @return external_function_parameters
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function delete_contacts_parameters() {
         return new external_function_parameters(
@@ -310,7 +310,7 @@ class core_message_external extends external_api {
      * @param array $userids array of user IDs.
      * @param int $userid The id of the user we are deleting the contacts for
      * @return null
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function delete_contacts($userids, $userid = 0) {
         global $CFG, $USER;
@@ -347,7 +347,7 @@ class core_message_external extends external_api {
      * Delete contacts return description.
      *
      * @return external_description
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function delete_contacts_returns() {
         return null;
@@ -984,7 +984,7 @@ class core_message_external extends external_api {
      * Return the structure of a message area contact.
      *
      * @return external_single_structure
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     private static function get_messagearea_contact_structure() {
         return new external_single_structure(
@@ -1013,7 +1013,7 @@ class core_message_external extends external_api {
      * Return the structure of a conversation.
      *
      * @return external_single_structure
-     * @since Moodle 3.6
+     * @since PowerEduc 3.6
      */
     private static function get_conversation_structure() {
         return new external_single_structure(
@@ -1045,7 +1045,7 @@ class core_message_external extends external_api {
      * Return the structure of a conversation member.
      *
      * @return external_single_structure
-     * @since Moodle 3.6
+     * @since PowerEduc 3.6
      */
     private static function get_conversation_member_structure() {
         $result = [
@@ -1095,7 +1095,7 @@ class core_message_external extends external_api {
      * Return the structure of a message area message.
      *
      * @return external_single_structure
-     * @since Moodle 3.6
+     * @since PowerEduc 3.6
      */
     private static function get_conversation_message_structure() {
         return new external_single_structure(
@@ -1611,7 +1611,7 @@ class core_message_external extends external_api {
      * @param bool $newestmessagesfirst Order messages by newest first
      * @return stdClass
      * @throws \powereduc_exception if the messaging feature is disabled on the site.
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function get_self_conversation(
         int $userid,
@@ -1848,7 +1848,7 @@ class core_message_external extends external_api {
      * Search contacts parameters description.
      *
      * @return external_function_parameters
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function search_contacts_parameters() {
         return new external_function_parameters(
@@ -1866,7 +1866,7 @@ class core_message_external extends external_api {
      * @param string $searchtext query string.
      * @param bool $onlymycourses limit the search to the user's courses only.
      * @return external_description
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function search_contacts($searchtext, $onlymycourses = false) {
         global $CFG, $USER, $PAGE;
@@ -1931,7 +1931,7 @@ class core_message_external extends external_api {
      * Search contacts return description.
      *
      * @return external_description
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function search_contacts_returns() {
         return new external_multiple_structure(
@@ -2988,7 +2988,7 @@ class core_message_external extends external_api {
      * @param  int $userid the user id requesting the preferences
      * @return stdClass full user object
      * @throws powereduc_exception
-     * @since  Moodle 3.2
+     * @since  PowerEduc 3.2
      */
     protected static function validate_preferences_permissions($userid) {
         global $USER;
@@ -3019,7 +3019,7 @@ class core_message_external extends external_api {
      * Returns a notification or message preference structure.
      *
      * @return external_single_structure the structure
-     * @since  Moodle 3.2
+     * @since  PowerEduc 3.2
      * @todo Remove loggedin and loggedoff from processors structure on MDL-73284.
      */
     protected static function get_preferences_structure() {

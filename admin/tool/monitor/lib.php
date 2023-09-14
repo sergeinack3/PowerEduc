@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ defined('POWEREDUC_INTERNAL') || die;
  */
 function tool_monitor_extend_navigation_course($navigation, $course, $context) {
     if (has_capability('tool/monitor:managerules', $context) && get_config('tool_monitor', 'enablemonitor')) {
-        $url = new moodle_url('/admin/tool/monitor/managerules.php', array('courseid' => $course->id));
+        $url = new powereduc_url('/admin/tool/monitor/managerules.php', array('courseid' => $course->id));
         $settingsnode = navigation_node::create(get_string('managerules', 'tool_monitor'), $url, navigation_node::TYPE_SETTING,
                 null, null, new pix_icon('i/settings', ''));
         $reportnode = $navigation->get('coursereports');
@@ -54,7 +54,7 @@ function tool_monitor_extend_navigation_course($navigation, $course, $context) {
 function tool_monitor_extend_navigation_frontpage($navigation, $course, $context) {
 
     if (has_capability('tool/monitor:managerules', $context)) {
-        $url = new moodle_url('/admin/tool/monitor/managerules.php', array('courseid' => $course->id));
+        $url = new powereduc_url('/admin/tool/monitor/managerules.php', array('courseid' => $course->id));
         $settingsnode = navigation_node::create(get_string('managerules', 'tool_monitor'), $url, navigation_node::TYPE_SETTING,
                 null, null, new pix_icon('i/settings', ''));
         $reportnode = $navigation->get('coursereports');
@@ -78,8 +78,8 @@ function tool_monitor_extend_navigation_user_settings($navigation, $user, $userc
     global $USER, $PAGE;
 
     // Don't bother doing needless calculations unless we are on the relevant pages.
-    $onpreferencepage = $PAGE->url->compare(new moodle_url('/user/preferences.php'), URL_MATCH_BASE);
-    $onmonitorpage = $PAGE->url->compare(new moodle_url('/admin/tool/monitor/index.php'), URL_MATCH_BASE);
+    $onpreferencepage = $PAGE->url->compare(new powereduc_url('/user/preferences.php'), URL_MATCH_BASE);
+    $onmonitorpage = $PAGE->url->compare(new powereduc_url('/admin/tool/monitor/index.php'), URL_MATCH_BASE);
     if (!$onpreferencepage && !$onmonitorpage) {
         return null;
     }
@@ -89,7 +89,7 @@ function tool_monitor_extend_navigation_user_settings($navigation, $user, $userc
         // Now let's check to see if the user has any courses / site rules that they can subscribe to.
         // We skip doing a check here if we are on the event monitor page as the check is done internally on that page.
         if ($onmonitorpage || tool_monitor_can_subscribe()) {
-            $url = new moodle_url('/admin/tool/monitor/index.php');
+            $url = new powereduc_url('/admin/tool/monitor/index.php');
             $subsnode = navigation_node::create(get_string('managesubscriptions', 'tool_monitor'), $url,
                     navigation_node::TYPE_SETTING, null, 'monitor', new pix_icon('i/settings', ''));
 
@@ -140,7 +140,7 @@ function tool_monitor_get_user_courses() {
         foreach ($courses as $course) {
             context_helper::preload_from_record($course);
             $coursectx = context_course::instance($course->id);
-            if ($course->visible || has_capability('moodle/course:viewhiddencourses', $coursectx)) {
+            if ($course->visible || has_capability('powereduc/course:viewhiddencourses', $coursectx)) {
                 $options[$course->id] = format_string($course->fullname, true, array('context' => $coursectx));
             }
         }

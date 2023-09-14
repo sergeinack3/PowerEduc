@@ -3,7 +3,7 @@
   <NAME>Imported preset</NAME>
   <COMMENTS>&lt;p dir="ltr" style="text-align:left;"&gt;Porfolios enabled, Emojipicker enabled, Lesson  media width set to 900 and maxanswers set to 2 and disabled advanced. Plugins: disabled block_html, mod_database and mod_chat plugins and enabled atto_html, block_activity_modules and mod_lesson.&lt;/p&gt;</COMMENTS>
   <PRESET_DATE>1631615985</PRESET_DATE>
-  <SITE_URL>http://demo.moodle</SITE_URL>
+  <SITE_URL>http://demo.powereduc</SITE_URL>
   <AUTHOR>Ada Lovelace</AUTHOR>
   <POWEREDUC_VERSION>2021091100</POWEREDUC_VERSION>
   <POWEREDUC_RELEASE>4.0dev (Build: 20210911)</POWEREDUC_RELEASE>

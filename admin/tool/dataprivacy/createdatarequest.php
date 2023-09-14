@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,26 +29,26 @@ require_once('createdatarequest_form.php');
 $manage = optional_param('manage', 0, PARAM_INT);
 $requesttype = optional_param('type', \tool_dataprivacy\api::DATAREQUEST_TYPE_EXPORT, PARAM_INT);
 
-$url = new moodle_url('/admin/tool/dataprivacy/createdatarequest.php', ['manage' => $manage, 'type' => $requesttype]);
+$url = new powereduc_url('/admin/tool/dataprivacy/createdatarequest.php', ['manage' => $manage, 'type' => $requesttype]);
 
 $PAGE->set_url($url);
 
 require_login();
 if (isguestuser()) {
-    throw new \moodle_exception('noguest');
+    throw new \powereduc_exception('noguest');
 }
 
 // Return URL and context.
 if ($manage) {
     // For the case where DPO creates data requests on behalf of another user.
-    $returnurl = new moodle_url($CFG->wwwroot . '/admin/tool/dataprivacy/datarequests.php');
+    $returnurl = new powereduc_url($CFG->wwwroot . '/admin/tool/dataprivacy/datarequests.php');
     $context = context_system::instance();
     // Make sure the user has the proper capability.
     require_capability('tool/dataprivacy:managedatarequests', $context);
     navigation_node::override_active_url($returnurl);
 } else {
     // For the case where a user makes request for themselves (or for their children if they are the parent).
-    $returnurl = new moodle_url($CFG->wwwroot . '/admin/tool/dataprivacy/mydatarequests.php');
+    $returnurl = new powereduc_url($CFG->wwwroot . '/admin/tool/dataprivacy/mydatarequests.php');
     $context = context_user::instance($USER->id);
 }
 
@@ -88,17 +88,17 @@ if ($data = $mform->get_data()) {
     if ($data->type == \tool_dataprivacy\api::DATAREQUEST_TYPE_DELETE) {
         if ($data->userid == $USER->id) {
             if (!\tool_dataprivacy\api::can_create_data_deletion_request_for_self()) {
-                throw new moodle_exception('nopermissions', 'error', '',
+                throw new powereduc_exception('nopermissions', 'error', '',
                     get_string('errorcannotrequestdeleteforself', 'tool_dataprivacy'));
             }
         } else if (!\tool_dataprivacy\api::can_create_data_deletion_request_for_other()
             && !\tool_dataprivacy\api::can_create_data_deletion_request_for_children($data->userid)) {
-            throw new moodle_exception('nopermissions', 'error', '',
+            throw new powereduc_exception('nopermissions', 'error', '',
                 get_string('errorcannotrequestdeleteforother', 'tool_dataprivacy'));
         }
     } else if ($data->type == \tool_dataprivacy\api::DATAREQUEST_TYPE_EXPORT) {
         if ($data->userid == $USER->id && !\tool_dataprivacy\api::can_create_data_download_request_for_self()) {
-            throw new moodle_exception('nopermissions', 'error', '',
+            throw new powereduc_exception('nopermissions', 'error', '',
                 get_string('errorcannotrequestexportforself', 'tool_dataprivacy'));
         }
     }

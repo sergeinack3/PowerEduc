@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -39,13 +39,13 @@ $PAGE->set_context($syscontext);
 require_admin();
 require_sesskey();
 
-$return = new moodle_url('/admin/settings.php', ['section' => 'manageqbanks']);
+$return = new powereduc_url('/admin/settings.php', ['section' => 'manageqbanks']);
 
 $plugins = core_plugin_manager::instance()->get_plugins_of_type('qbank');
 $sortorder = array_flip(array_keys($plugins));
 
 if (!isset($plugins[$name])) {
-    throw new moodle_exception('qbanknotfound', 'question', $return, $name);
+    throw new powereduc_exception('qbanknotfound', 'question', $return, $name);
 }
 
 $plugintypename = $plugins[$name]->type . '_' . $plugins[$name]->name;

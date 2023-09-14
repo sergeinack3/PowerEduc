@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,12 +34,12 @@ class course_competency_settings_test extends \advanced_testcase {
         $dg = $this->getDataGenerator();
         $lpg = $dg->get_plugin_generator('core_competency');
         $role = create_role('Settings changer role', 'settingschanger', 'Someone who can change course competency settings');
-        assign_capability('moodle/competency:coursecompetencyconfigure', CAP_ALLOW, $role, $syscontext->id);
-        assign_capability('moodle/competency:competencygrade', CAP_ALLOW, $role, $syscontext->id);
-        assign_capability('moodle/competency:coursecompetencyview', CAP_ALLOW, $role, $syscontext->id);
-        assign_capability('moodle/competency:planview', CAP_ALLOW, $role, $syscontext->id);
+        assign_capability('powereduc/competency:coursecompetencyconfigure', CAP_ALLOW, $role, $syscontext->id);
+        assign_capability('powereduc/competency:competencygrade', CAP_ALLOW, $role, $syscontext->id);
+        assign_capability('powereduc/competency:coursecompetencyview', CAP_ALLOW, $role, $syscontext->id);
+        assign_capability('powereduc/competency:planview', CAP_ALLOW, $role, $syscontext->id);
         $gradedrole = create_role('Graded role', 'graded', 'Someone who can be graded');
-        assign_capability('moodle/competency:coursecompetencygradable', CAP_ALLOW, $gradedrole, $syscontext->id);
+        assign_capability('powereduc/competency:coursecompetencygradable', CAP_ALLOW, $gradedrole, $syscontext->id);
 
         $c1 = $dg->create_course();
         $u1 = $dg->create_user();

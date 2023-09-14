@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ require_sesskey();
 $plugins = core_plugin_manager::instance()->get_plugins_of_type('media');
 $sortorder = array_values(\core\plugininfo\media::get_enabled_plugins());
 
-$return = new moodle_url('/admin/settings.php', array('section' => 'managemediaplayers'));
+$return = new powereduc_url('/admin/settings.php', array('section' => 'managemediaplayers'));
 
 if (!array_key_exists($media, $plugins)) {
     redirect($return);

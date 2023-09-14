@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Common classes used by gradingform plugintypes are defined here
  *
  * @package    core_grading
- * @copyright  2011 David Mudrak <david@moodle.com>
+ * @copyright  2011 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -42,7 +42,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * definition to include additional data stored.
  *
  * @package    core_grading
- * @copyright  2011 David Mudrak <david@moodle.com>
+ * @copyright  2011 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @category   grading
  */
@@ -202,10 +202,10 @@ abstract class gradingform_controller {
     /**
      * Returns URL of a page where the grading form can be defined and edited.
      *
-     * @param moodle_url $returnurl optional URL of a page where the user should be sent once they are finished with editing
-     * @return moodle_url
+     * @param powereduc_url $returnurl optional URL of a page where the user should be sent once they are finished with editing
+     * @return powereduc_url
      */
-    public function get_editor_url(moodle_url $returnurl = null) {
+    public function get_editor_url(powereduc_url $returnurl = null) {
 
         $params = array('areaid' => $this->areaid);
 
@@ -213,14 +213,14 @@ abstract class gradingform_controller {
             $params['returnurl'] = $returnurl->out(false);
         }
 
-        return new moodle_url('/grade/grading/form/'.$this->get_method_name().'/edit.php', $params);
+        return new powereduc_url('/grade/grading/form/'.$this->get_method_name().'/edit.php', $params);
     }
 
     /**
      * Extends the module settings navigation
      *
      * This function is called when the context for the page is an activity module with the
-     * FEATURE_ADVANCED_GRADING, the user has the permission moodle/grade:managegradingforms
+     * FEATURE_ADVANCED_GRADING, the user has the permission powereduc/grade:managegradingforms
      * and there is an area with the active grading method set to the given plugin.
      *
      * @param settings_navigation $settingsnav {@link settings_navigation}
@@ -577,10 +577,10 @@ abstract class gradingform_controller {
      * Plugins are forced to override this. Ideally they should delegate
      * the task to their own renderer.
      *
-     * @param moodle_page $page the target page
+     * @param powereduc_page $page the target page
      * @return string
      */
-    abstract public function render_preview(moodle_page $page);
+    abstract public function render_preview(powereduc_page $page);
 
     /**
      * Deletes the form definition and all the associated data
@@ -674,7 +674,7 @@ abstract class gradingform_controller {
     /**
      * Returns html code to be included in student's feedback.
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @param int $itemid
      * @param array $gradinginfo result of function grade_get_grades if plugin want to use some of their info
      * @param string $defaultcontent default string to be returned if no active grading is found or for some reason can not be shown to a user
@@ -1052,7 +1052,7 @@ abstract class gradingform_instance {
      *
      * @see MoodleQuickForm_grading in lib/form/grading.php
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @param MoodleQuickForm_grading $gradingformelement
      * @return string
      */

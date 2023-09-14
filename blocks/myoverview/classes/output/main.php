@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Class containing data for my overview block.
  *
  * @package    block_myoverview
- * @copyright  2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2017 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace block_myoverview\output;
@@ -34,7 +34,7 @@ require_once($CFG->dirroot . '/blocks/myoverview/lib.php');
 /**
  * Class containing data for my overview block.
  *
- * @copyright  2018 Bas Brands <bas@moodle.com>
+ * @copyright  2018 Bas Brands <bas@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class main implements renderable, templatable {
@@ -413,7 +413,7 @@ class main implements renderable, templatable {
         $newcourseurl = '';
         $coursecat = \core_course_category::user_top();
         if ($coursecat && ($category = \core_course_category::get_nearest_editable_subcategory($coursecat, ['create']))) {
-            $newcourseurl = new \moodle_url('/course/edit.php', ['category' => $category->id]);
+            $newcourseurl = new \powereduc_url('/course/edit.php', ['category' => $category->id]);
         }
 
         $customfieldvalues = $this->get_customfield_values_for_export();

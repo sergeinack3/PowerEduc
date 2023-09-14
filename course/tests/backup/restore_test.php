@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@ class restore_test extends \advanced_testcase {
      */
     protected function backup_course($courseid, $userid = 2) {
         $backuptempdir = make_backup_temp_directory('');
-        $packer = get_file_packer('application/vnd.moodle.backup');
+        $packer = get_file_packer('application/vnd.powereduc.backup');
 
         $bc = new backup_controller(backup::TYPE_1COURSE, $courseid, backup::FORMAT_POWEREDUC, backup::INTERACTIVE_NO,
             backup::MODE_GENERAL, $userid);
@@ -352,7 +352,7 @@ class restore_test extends \advanced_testcase {
 
         $managers = get_archetype_roles('manager');
         $manager = array_shift($managers);
-        $roleid = $this->create_role_with_caps('moodle/course:changeidnumber', CAP_PROHIBIT);
+        $roleid = $this->create_role_with_caps('powereduc/course:changeidnumber', CAP_PROHIBIT);
         $dg->role_assign($manager->id, $u1->id);
         $dg->role_assign($roleid, $u1->id);
 
@@ -432,7 +432,7 @@ class restore_test extends \advanced_testcase {
 
         $managers = get_archetype_roles('manager');
         $manager = array_shift($managers);
-        $roleid = $this->create_role_with_caps('moodle/course:changeshortname', CAP_PROHIBIT);
+        $roleid = $this->create_role_with_caps('powereduc/course:changeshortname', CAP_PROHIBIT);
         $dg->role_assign($manager->id, $u1->id);
         $dg->role_assign($roleid, $u1->id);
 
@@ -456,7 +456,7 @@ class restore_test extends \advanced_testcase {
 
         $managers = get_archetype_roles('manager');
         $manager = array_shift($managers);
-        $roleid = $this->create_role_with_caps('moodle/course:changefullname', CAP_PROHIBIT);
+        $roleid = $this->create_role_with_caps('powereduc/course:changefullname', CAP_PROHIBIT);
         $dg->role_assign($manager->id, $u1->id);
         $dg->role_assign($roleid, $u1->id);
 
@@ -480,7 +480,7 @@ class restore_test extends \advanced_testcase {
 
         $managers = get_archetype_roles('manager');
         $manager = array_shift($managers);
-        $roleid = $this->create_role_with_caps('moodle/course:changesummary', CAP_PROHIBIT);
+        $roleid = $this->create_role_with_caps('powereduc/course:changesummary', CAP_PROHIBIT);
         $dg->role_assign($manager->id, $u1->id);
         $dg->role_assign($roleid, $u1->id);
 
@@ -504,7 +504,7 @@ class restore_test extends \advanced_testcase {
         $u1 = $dg->create_user();
         $managers = get_archetype_roles('manager');
         $manager = array_shift($managers);
-        $roleid = $this->create_role_with_caps('moodle/restore:rolldates', CAP_PROHIBIT);
+        $roleid = $this->create_role_with_caps('powereduc/restore:rolldates', CAP_PROHIBIT);
         $dg->role_assign($manager->id, $u1->id);
         $dg->role_assign($roleid, $u1->id);
 

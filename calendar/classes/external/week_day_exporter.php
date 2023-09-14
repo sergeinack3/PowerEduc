@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ namespace core_calendar\external;
 defined('POWEREDUC_INTERNAL') || die();
 
 use renderer_base;
-use moodle_url;
+use powereduc_url;
 
 /**
  * Class for displaying the day on month view.

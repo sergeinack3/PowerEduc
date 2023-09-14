@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ require_once($CFG->libdir . '/completionlib.php');
  * Contains the ajax update course module structure.
  *
  * @package   core_course
- * @copyright 2021 Ferran Recio <ferran@moodle.com>
+ * @copyright 2021 Ferran Recio <ferran@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class cm implements renderable {
@@ -138,7 +138,7 @@ class cm implements renderable {
             return !empty($cm->availableinfo);
         }
         // Content editors can see all restrictions if the activity is visible.
-        if (has_capability('moodle/course:viewhiddenactivities', $cm->context)) {
+        if (has_capability('powereduc/course:viewhiddenactivities', $cm->context)) {
             $ci = new info_module($cm);
             return !empty($ci->get_full_information());
         }

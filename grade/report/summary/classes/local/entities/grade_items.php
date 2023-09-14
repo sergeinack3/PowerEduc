@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ require_once($CFG->dirroot . '/grade/lib.php');
  * Grade summary entity class implementation
  *
  * @package    gradereport_summary
- * @copyright  2022 Ilya Tregubov <ilya@moodle.com>
+ * @copyright  2022 Ilya Tregubov <ilya@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class grade_items extends base {
@@ -139,9 +139,9 @@ class grade_items extends base {
 
                     if (file_exists($CFG->dirroot . '/mod/' . $row->itemmodule . '/grade.php')) {
                         $args = ['id' => $cm->id, 'itemnumber' => $row->itemnumber];
-                        $url = new \moodle_url('/mod/' . $row->itemmodule . '/grade.php', $args);
+                        $url = new \powereduc_url('/mod/' . $row->itemmodule . '/grade.php', $args);
                     } else {
-                        $url = new \moodle_url('/mod/' . $row->itemmodule . '/view.php', ['id' => $cm->id]);
+                        $url = new \powereduc_url('/mod/' . $row->itemmodule . '/view.php', ['id' => $cm->id]);
                     }
 
                     $imagedata = $renderer->pix_icon('monologo', '', $row->itemmodule, ['class' => 'activityicon']);

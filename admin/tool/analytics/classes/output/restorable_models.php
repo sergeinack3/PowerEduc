@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - https://moodle.org/
+// This file is part of Moodle - https://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package     tool_analytics
  * @category    output
- * @copyright   2019 David Mudrák <david@moodle.com>
+ * @copyright   2019 David Mudrák <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Represents the list of default models that can be eventually restored.
  *
- * @copyright 2019 David Mudrák <david@moodle.com>
+ * @copyright 2019 David Mudrák <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class restorable_models implements \renderable, \templatable {
@@ -116,8 +116,8 @@ class restorable_models implements \renderable, \templatable {
         $result = [
             'hasdata' => !empty($components),
             'components' => array_values($components),
-            'submiturl' => new \moodle_url('/admin/tool/analytics/restoredefault.php'),
-            'backurl' => new \moodle_url('/admin/tool/analytics/index.php'),
+            'submiturl' => new \powereduc_url('/admin/tool/analytics/restoredefault.php'),
+            'backurl' => new \powereduc_url('/admin/tool/analytics/index.php'),
             'sesskey' => sesskey(),
         ];
 

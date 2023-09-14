@@ -38,7 +38,7 @@ To display an alert modal.
 data-modal-content-str='["cookiesenabled_help_html", "core"]'>Show alert modal</button>
 {{< /highlight >}}
 
-You can also use it on PHP, you just need to set the attributes parameter to any moodle output component that takes attributes:
+You can also use it on PHP, you just need to set the attributes parameter to any powereduc output component that takes attributes:
 {{< php >}}
 echo $OUTPUT->single_button('#', get_string('delete'), 'get', [
     'data-modal' => 'modal',
@@ -130,5 +130,5 @@ data-modal-toast-confirmation-str='["deleteblockinprogress", "block", "Online us
 {{< example >}}
 <button type="button" class="btn btn-primary" data-modal="confirmation" data-modal-title-str='["delete", "core"]'
 data-modal-content-str='["areyousure"]' data-modal-yes-button-str='["delete", "core"]'
-data-modal-destination="http://moodle.com">Show confirmation modal</button>
+data-modal-destination="http://powereduc.com">Show confirmation modal</button>
 {{< /example >}}

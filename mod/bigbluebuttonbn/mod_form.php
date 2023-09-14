@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Config all BigBlueButtonBN instances in this course.
@@ -33,7 +33,7 @@ global $CFG;
 require_once($CFG->dirroot . '/course/powereducform_mod.php');
 
 /**
- * Moodle class for mod_form.
+ * PowerEduc class for mod_form.
  *
  * @copyright 2010 onwards, Blindside Networks Inc
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -281,11 +281,11 @@ class mod_bigbluebuttonbn_mod_form extends powereducform_mod {
     /**
      * Function for showing the block for selecting profiles.
      *
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      * @param array $profiles
      * @return void
      */
-    private function bigbluebuttonbn_mform_add_block_profiles(MoodleQuickForm &$mform, array $profiles): void {
+    private function bigbluebuttonbn_mform_add_block_profiles(PowerEducQuickForm &$mform, array $profiles): void {
         if ((boolean) \mod_bigbluebuttonbn\local\config::recordings_enabled()) {
             $mform->addElement('select', 'type', get_string('mod_form_field_instanceprofiles', 'bigbluebuttonbn'),
                 bigbluebutton_proxy::get_instance_profiles_array($profiles));
@@ -296,11 +296,11 @@ class mod_bigbluebuttonbn_mod_form extends powereducform_mod {
     /**
      * Function for showing the block for general settings.
      *
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      * @param array $cfg
      * @return void
      */
-    private function bigbluebuttonbn_mform_add_block_general(MoodleQuickForm &$mform, array $cfg): void {
+    private function bigbluebuttonbn_mform_add_block_general(PowerEducQuickForm &$mform, array $cfg): void {
         global $CFG;
         $mform->addElement('header', 'general', get_string('mod_form_block_general', 'bigbluebuttonbn'));
         $mform->addElement('text', 'name', get_string('mod_form_field_name', 'bigbluebuttonbn'),
@@ -315,11 +315,11 @@ class mod_bigbluebuttonbn_mod_form extends powereducform_mod {
     /**
      * Function for showing details of the room settings for the room.
      *
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      * @param array $cfg
      * @return void
      */
-    private function bigbluebuttonbn_mform_add_block_room_room(MoodleQuickForm &$mform, array $cfg): void {
+    private function bigbluebuttonbn_mform_add_block_room_room(PowerEducQuickForm &$mform, array $cfg): void {
         $field = ['type' => 'hidden', 'name' => 'welcome', 'data_type' => PARAM_INT,
             'description_key' => null];
         if ($cfg['welcome_editable']) {
@@ -402,11 +402,11 @@ class mod_bigbluebuttonbn_mod_form extends powereducform_mod {
     /**
      * Function for showing details of the lock settings for the room.
      *
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      * @param array $cfg
      * @return void
      */
-    private function bigbluebuttonbn_mform_add_block_locksettings(MoodleQuickForm &$mform, array $cfg): void {
+    private function bigbluebuttonbn_mform_add_block_locksettings(PowerEducQuickForm &$mform, array $cfg): void {
         $mform->addElement('header', 'lock', get_string('mod_form_locksettings', 'bigbluebuttonbn'));
 
         $locksettings = false;
@@ -477,11 +477,11 @@ class mod_bigbluebuttonbn_mod_form extends powereducform_mod {
     /**
      * Function for showing details of the recording settings for the room.
      *
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      * @param array $cfg
      * @return void
      */
-    private function bigbluebuttonbn_mform_add_block_room_recordings(MoodleQuickForm &$mform, array $cfg): void {
+    private function bigbluebuttonbn_mform_add_block_room_recordings(PowerEducQuickForm &$mform, array $cfg): void {
         $recordingsettings = false;
         $field = ['type' => 'hidden', 'name' => 'recordings_deleted', 'data_type' => PARAM_INT,
             'description_key' => null];
@@ -522,11 +522,11 @@ class mod_bigbluebuttonbn_mod_form extends powereducform_mod {
     /**
      * Function for showing the block for room settings.
      *
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      * @param array $cfg
      * @return void
      */
-    private function bigbluebuttonbn_mform_add_block_room(MoodleQuickForm &$mform, array $cfg) {
+    private function bigbluebuttonbn_mform_add_block_room(PowerEducQuickForm &$mform, array $cfg) {
         if ($cfg['voicebridge_editable'] || $cfg['waitformoderator_editable'] ||
             $cfg['userlimit_editable'] || $cfg['recording_editable'] || $cfg['muteonstart_editable']) {
             $mform->addElement('header', 'room', get_string('mod_form_block_room', 'bigbluebuttonbn'));
@@ -542,11 +542,11 @@ class mod_bigbluebuttonbn_mod_form extends powereducform_mod {
     /**
      * Function for showing the block for preuploaded presentation.
      *
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      * @param array $cfg
      * @return void
      */
-    private function bigbluebuttonbn_mform_add_block_preuploads(MoodleQuickForm &$mform, array $cfg): void {
+    private function bigbluebuttonbn_mform_add_block_preuploads(PowerEducQuickForm &$mform, array $cfg): void {
         if ($cfg['preuploadpresentation_editable']) {
             $mform->addElement('header', 'preuploadpresentation',
                 get_string('mod_form_block_presentation', 'bigbluebuttonbn'));
@@ -565,11 +565,11 @@ class mod_bigbluebuttonbn_mod_form extends powereducform_mod {
     /**
      * Function for showing the block for setting participant roles.
      *
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      * @param array $participantlist
      * @return void
      */
-    private function bigbluebuttonbn_mform_add_block_user_role_mapping(MoodleQuickForm &$mform, array $participantlist): void {
+    private function bigbluebuttonbn_mform_add_block_user_role_mapping(PowerEducQuickForm &$mform, array $participantlist): void {
         global $OUTPUT;
         $participantselection = roles::get_participant_selection_data();
         $mform->addElement('header', 'permissions', get_string('mod_form_block_participants', 'bigbluebuttonbn'));
@@ -603,13 +603,13 @@ class mod_bigbluebuttonbn_mod_form extends powereducform_mod {
     /**
      * Function to add guest acces settings to the instance
      *
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      * @param array $cfg
      * @param stdClass $current
      * @return void
      * @throws coding_exception
      */
-    private function bigbluebuttonbn_mform_add_block_guest_access(MoodleQuickForm $mform, array $cfg, stdClass $current) {
+    private function bigbluebuttonbn_mform_add_block_guest_access(PowerEducQuickForm $mform, array $cfg, stdClass $current) {
         if (!empty($cfg['guestaccess_enabled'])) {
             $mform->addElement('header', 'guestaccess', get_string('mod_form_block_guestaccess', 'bigbluebuttonbn'));
             $mform->setExpanded('guestaccess');
@@ -639,11 +639,11 @@ class mod_bigbluebuttonbn_mod_form extends powereducform_mod {
     /**
      * Function for showing the block for integration with the calendar.
      *
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      * @param stdClass $activity
      * @return void
      */
-    private function bigbluebuttonbn_mform_add_block_schedule(MoodleQuickForm &$mform, stdClass &$activity) {
+    private function bigbluebuttonbn_mform_add_block_schedule(PowerEducQuickForm &$mform, stdClass &$activity) {
         $mform->addElement('header', 'schedule', get_string('mod_form_block_schedule', 'bigbluebuttonbn'));
         if (!empty($activity->openingtime) || !empty($activity->closingtime)) {
             $mform->setExpanded('schedule');
@@ -659,7 +659,7 @@ class mod_bigbluebuttonbn_mod_form extends powereducform_mod {
     /**
      * Function for showing an element.
      *
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      * @param string $type
      * @param string $name
      * @param string|null $datatype
@@ -669,7 +669,7 @@ class mod_bigbluebuttonbn_mod_form extends powereducform_mod {
      * @param array|null $rule
      * @return void
      */
-    private function bigbluebuttonbn_mform_add_element(MoodleQuickForm &$mform, string $type, string $name, ?string $datatype,
+    private function bigbluebuttonbn_mform_add_element(PowerEducQuickForm &$mform, string $type, string $name, ?string $datatype,
         ?string $descriptionkey = "", $defaultvalue = null, ?array $options = null, ?array $rule = null): void {
         $datatype = $datatype ?? 'hidden';
         if ($type === 'hidden' || $type === 'static') {

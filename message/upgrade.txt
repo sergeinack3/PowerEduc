@@ -174,7 +174,7 @@ it can still be installed as a third-party plugin.
   - message_get_recent_conversations
 * Added new events for when a notification is sent and viewed.
 * Removed the database table 'message_working'. The 'message_working' table was introduced when
-  the messaging system was first introduced in Moodle, so, a long time ago. It was never necessary.
+  the messaging system was first introduced in PowerEduc, so, a long time ago. It was never necessary.
 * Replaced the usage of the table 'message_popup' to a new table 'message_popup_notifications'.
 
 === 3.2 ===

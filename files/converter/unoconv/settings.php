@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,6 +31,6 @@ $settings->add(new admin_setting_configexecutable('pathtounoconv',
         '/usr/bin/unoconv')
     );
 
-$url = new moodle_url('/files/converter/unoconv/testunoconv.php');
+$url = new powereduc_url('/files/converter/unoconv/testunoconv.php');
 $link = html_writer::link($url, get_string('test_unoconv', 'fileconverter_unoconv'));
 $settings->add(new admin_setting_heading('test_unoconv', '', $link));

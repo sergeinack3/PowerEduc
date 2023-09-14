@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -102,7 +102,7 @@ class manager_test extends advanced_testcase {
         \tool_licensemanager\form\edit_license::mock_submit($formdata);
 
         // Should not be able to update a license with a shortname that doesn't exist.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $method->invoke($manager, \tool_licensemanager\manager::ACTION_UPDATE, $formdata['shortname']);
     }
 
@@ -122,7 +122,7 @@ class manager_test extends advanced_testcase {
         \tool_licensemanager\form\edit_license::mock_submit($formdata);
 
         // Should not be able to update empty license shortname.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $method->invoke($manager, \tool_licensemanager\manager::ACTION_UPDATE, '');
     }
 
@@ -163,7 +163,7 @@ class manager_test extends advanced_testcase {
         \tool_licensemanager\form\edit_license::mock_submit($formdata);
 
         // Should not be able to create duplicate licenses.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $method->invoke($manager, \tool_licensemanager\manager::ACTION_CREATE, $formdata['shortname']);
     }
 

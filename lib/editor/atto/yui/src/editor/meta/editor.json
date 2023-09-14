@@ -1,5 +1,5 @@
 {
-    "moodle-editor_atto-editor": {
+    "powereduc-editor_atto-editor": {
         "requires": [
             "node",
             "transition",
@@ -12,15 +12,15 @@
             "node-event-html5",
             "node-event-simulate",
             "yui-throttle",
-            "moodle-core-notification-dialogue",
-            "moodle-core-notification-confirm",
-            "moodle-editor_atto-rangy",
+            "powereduc-core-notification-dialogue",
+            "powereduc-core-notification-confirm",
+            "powereduc-editor_atto-rangy",
             "handlebars",
             "timers",
             "querystring-stringify"
         ]
     },
-    "moodle-editor_atto-plugin": {
+    "powereduc-editor_atto-plugin": {
         "requires": [
             "node",
             "base",
@@ -30,12 +30,12 @@
             "handlebars",
             "event-custom",
             "timers",
-            "moodle-editor_atto-menu"
+            "powereduc-editor_atto-menu"
         ]
     },
-    "moodle-editor_atto-menu": {
+    "powereduc-editor_atto-menu": {
         "requires": [
-            "moodle-core-notification-dialogue",
+            "powereduc-core-notification-dialogue",
             "node",
             "event",
             "event-custom"

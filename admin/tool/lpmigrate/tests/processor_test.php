@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -395,7 +395,7 @@ class processor_test extends \advanced_testcase {
 
         $dg->enrol_user($u->id, $this->c1->id, 'editingteacher');
         $dg->enrol_user($u->id, $this->c2->id, 'editingteacher');
-        assign_capability('moodle/competency:coursecompetencymanage', CAP_PROHIBIT, $role, $sysctx->id);
+        assign_capability('powereduc/competency:coursecompetencymanage', CAP_PROHIBIT, $role, $sysctx->id);
         role_assign($role, $u->id, \context_course::instance($this->c1->id)->id);
         role_assign($role, $u->id, \context_module::instance($this->cms[$this->c2->id]['F1']->cmid)->id);
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Tests for the tool_provider class.
  *
  * @package enrol_lti
- * @copyright 2016 Jun Pataleta <jun@moodle.com>
+ * @copyright 2016 Jun Pataleta <jun@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -37,7 +37,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * Tests for the tool_provider class.
  *
  * @package enrol_lti
- * @copyright 2016 Jun Pataleta <jun@moodle.com>
+ * @copyright 2016 Jun Pataleta <jun@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class tool_provider_test extends \advanced_testcase {
@@ -298,7 +298,7 @@ class tool_provider_test extends \advanced_testcase {
 
         // If redirect was called here, we will encounter an 'unsupported redirect error'.
         // We just want to verify that redirect() was called if frame embedding is allowed.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
 
         // Suppress session header errors.
         @$tp->onLaunch();
@@ -515,7 +515,7 @@ class tool_provider_test extends \advanced_testcase {
      */
     public function test_map_tool_to_consumer_no_consumer() {
         $tp = new dummy_tool_provider($this->tool->id);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $tp->map_tool_to_consumer();
     }
 
@@ -581,7 +581,7 @@ class tool_provider_test extends \advanced_testcase {
  *
  * A class that extends tool_provider so that we can expose the protected methods that we have overridden.
  *
- * @copyright 2016 Jun Pataleta <jun@moodle.com>
+ * @copyright 2016 Jun Pataleta <jun@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class dummy_tool_provider extends tool_provider {
@@ -622,7 +622,7 @@ class dummy_tool_provider extends tool_provider {
  *
  * A class that extends ToolConsumer in order to override and simulate sending and receiving data to tool consumer endpoint.
  *
- * @copyright 2016 Jun Pataleta <jun@moodle.com>
+ * @copyright 2016 Jun Pataleta <jun@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class dummy_tool_consumer extends ToolConsumer {

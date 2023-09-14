@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,10 +29,10 @@ if (!defined('POWEREDUC_INTERNAL')) {
 require_once($CFG->libdir.'/formslib.php');
 
 /**
- * First implementation of the preferences in the form of a moodleform.
+ * First implementation of the preferences in the form of a powereducform.
  * TODO add "reset to site defaults" button
  */
-class course_settings_form extends moodleform {
+class course_settings_form extends powereducform {
 
     function definition() {
         global $USER, $CFG;
@@ -41,7 +41,7 @@ class course_settings_form extends moodleform {
 
         $systemcontext = context_system::instance();
         $can_view_admin_links = false;
-        if (has_capability('moodle/grade:manage', $systemcontext)) {
+        if (has_capability('powereduc/grade:manage', $systemcontext)) {
             $can_view_admin_links = true;
         }
 

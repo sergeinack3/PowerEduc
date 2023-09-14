@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * H5P core class.
  *
  * @package    core_h5p
- * @copyright  2019 Sara Arjona <sara@moodle.com>
+ * @copyright  2019 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,14 +32,14 @@ use Moodle\H5PCore;
 use Moodle\H5PFrameworkInterface;
 use Moodle\H5PHubEndpoints;
 use stdClass;
-use moodle_url;
+use powereduc_url;
 use core_h5p\local\library\autoloader;
 
 /**
  * H5P core class, containing functions and storage shared by the other H5P classes.
  *
  * @package    core_h5p
- * @copyright  2019 Sara Arjona <sara@moodle.com>
+ * @copyright  2019 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core extends H5PCore {
@@ -89,7 +89,7 @@ class core extends H5PCore {
         $context = \context_system::instance();
         foreach ($dependencies as $dependency) {
             $library = $this->find_library($dependency);
-            $roots[self::libraryToString($dependency, true)] = (moodle_url::make_pluginfile_url(
+            $roots[self::libraryToString($dependency, true)] = (powereduc_url::make_pluginfile_url(
                 $context->id,
                 'core_h5p',
                 'libraries',
@@ -154,7 +154,7 @@ class core extends H5PCore {
                 'ver' => $jsrev,
             ]);
         }
-        $urls[] = new moodle_url("/h5p/js/h5p_overrides.js", [
+        $urls[] = new powereduc_url("/h5p/js/h5p_overrides.js", [
             'ver' => $jsrev,
         ]);
 
@@ -303,22 +303,22 @@ class core extends H5PCore {
     /**
      * Get H5P endpoints.
      *
-     * If $endpoint = 'content' and $library is null, moodle_url is the endpoint of the latest version of the H5P content
-     * types; however, if $library is the machine name of a content type, moodle_url is the endpoint to download the content type.
+     * If $endpoint = 'content' and $library is null, powereduc_url is the endpoint of the latest version of the H5P content
+     * types; however, if $library is the machine name of a content type, powereduc_url is the endpoint to download the content type.
      * The SITES endpoint ($endpoint = 'site') may be use to get a site UUID or send site data.
      *
      * @param string|null $library The machineName of the library whose endpoint is requested.
      * @param string $endpoint The endpoint required. Valid values: "site", "content".
-     * @return moodle_url The endpoint moodle_url object.
+     * @return powereduc_url The endpoint powereduc_url object.
      */
-    public function get_api_endpoint(?string $library = null, string $endpoint = 'content'): moodle_url {
+    public function get_api_endpoint(?string $library = null, string $endpoint = 'content'): powereduc_url {
         if ($endpoint == 'site') {
             $h5purl = H5PHubEndpoints::createURL(H5PHubEndpoints::SITES );
         } else if ($endpoint == 'content') {
             $h5purl = H5PHubEndpoints::createURL(H5PHubEndpoints::CONTENT_TYPES ) . $library;
         }
 
-        return new moodle_url($h5purl);
+        return new powereduc_url($h5purl);
     }
 
     /**

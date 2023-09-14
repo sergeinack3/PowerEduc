@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@ namespace core_badges\output;
 
 use renderable;
 use renderer_base;
-use moodle_page;
+use powereduc_page;
 use navigation_node;
 use templatable;
 
@@ -30,7 +30,7 @@ use templatable;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 abstract class base_action_bar implements renderable, templatable {
-    /** @var moodle_page $page The context we are operating within. */
+    /** @var powereduc_page $page The context we are operating within. */
     protected $page;
     /** @var int $type The badge type. */
     protected $type;
@@ -38,10 +38,10 @@ abstract class base_action_bar implements renderable, templatable {
     /**
      * standard_action_bar constructor.
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @param int $type
      */
-    public function __construct(moodle_page $page, int $type) {
+    public function __construct(powereduc_page $page, int $type) {
         $this->type = $type;
         $this->page = $page;
     }

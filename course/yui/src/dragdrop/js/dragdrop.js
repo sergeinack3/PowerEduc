@@ -2,7 +2,7 @@
 /**
  * Drag and Drop for course sections and course modules.
  *
- * @module moodle-course-dragdrop
+ * @module powereduc-course-dragdrop
  */
 
 var CSS = {

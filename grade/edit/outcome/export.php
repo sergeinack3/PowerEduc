@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Exports selected outcomes in CSV format
  *
  * @package   core_grades
- * @copyright 2008 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2008 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,11 +32,11 @@ $action   = optional_param('action', '', PARAM_ALPHA);
 /// Make sure they can even access this course
 if ($courseid) {
     if (!$course = $DB->get_record('course', array('id' => $courseid))) {
-        throw new \moodle_exception('invalidcourseid');
+        throw new \powereduc_exception('invalidcourseid');
     }
     require_login($course);
     $context = context_course::instance($course->id);
-    require_capability('moodle/grade:manage', $context);
+    require_capability('powereduc/grade:manage', $context);
 
     if (empty($CFG->enableoutcomes)) {
         redirect('../../index.php?id='.$courseid);

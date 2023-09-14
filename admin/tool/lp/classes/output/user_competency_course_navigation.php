@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -86,7 +86,7 @@ class user_competency_course_navigation implements renderable, templatable {
         $data->baseurl = $this->baseurl;
         $data->groupselector = '';
 
-        if (has_any_capability(array('moodle/competency:usercompetencyview', 'moodle/competency:coursecompetencymanage'),
+        if (has_any_capability(array('powereduc/competency:usercompetencyview', 'powereduc/competency:coursecompetencymanage'),
                 $context)) {
             $course = $DB->get_record('course', array('id' => $this->courseid));
             $currentgroup = groups_get_course_group($course, true);
@@ -97,9 +97,9 @@ class user_competency_course_navigation implements renderable, templatable {
             // Fetch showactive.
             $defaultgradeshowactiveenrol = !empty($CFG->grade_report_showonlyactiveenrol);
             $showonlyactiveenrol = get_user_preferences('grade_report_showonlyactiveenrol', $defaultgradeshowactiveenrol);
-            $showonlyactiveenrol = $showonlyactiveenrol || !has_capability('moodle/course:viewsuspendedusers', $context);
+            $showonlyactiveenrol = $showonlyactiveenrol || !has_capability('powereduc/course:viewsuspendedusers', $context);
 
-            $users = get_enrolled_users($context, 'moodle/competency:coursecompetencygradable', $currentgroup,
+            $users = get_enrolled_users($context, 'powereduc/competency:coursecompetencygradable', $currentgroup,
                                         'u.*', null, 0, 0, $showonlyactiveenrol);
 
             $data->users = array();

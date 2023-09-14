@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core_grades
  * @category   test
- * @copyright  2014 Mark Nelson <markn@moodle.com>
+ * @copyright  2014 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -76,7 +76,7 @@ class behat_grade extends behat_base {
         $gradeitem = behat_context_helper::escape($gradeitem);
 
         if ($this->running_javascript()) {
-            $xpath = "//tr[contains(.,$gradeitem)]//*[contains(@class,'moodle-actionmenu')]";
+            $xpath = "//tr[contains(.,$gradeitem)]//*[contains(@class,'powereduc-actionmenu')]";
             if ($this->getSession()->getPage()->findAll('xpath', $xpath)) {
                 $this->execute("behat_action_menu::i_open_the_action_menu_in",
                         array("//tr[contains(.,$gradeitem)]",
@@ -107,7 +107,7 @@ class behat_grade extends behat_base {
         $gradeitem = behat_context_helper::escape($gradeitem);
 
         if ($this->running_javascript()) {
-            $xpath = "//tr[contains(.,$gradeitem)]//*[contains(@class,'moodle-actionmenu')]//a[contains(@class,'dropdown-toggle')]";
+            $xpath = "//tr[contains(.,$gradeitem)]//*[contains(@class,'powereduc-actionmenu')]//a[contains(@class,'dropdown-toggle')]";
             if ($this->getSession()->getPage()->findAll('xpath', $xpath)) {
                 $this->execute("behat_general::i_click_on", array($this->escape($xpath), "xpath_element"));
             }
@@ -130,7 +130,7 @@ class behat_grade extends behat_base {
         $gradeitem = behat_context_helper::escape($gradeitem);
 
         if ($this->running_javascript()) {
-            $xpath = "//tr[contains(.,$gradeitem)]//*[contains(@class,'moodle-actionmenu')]//a[contains(@class,'dropdown-toggle')]";
+            $xpath = "//tr[contains(.,$gradeitem)]//*[contains(@class,'powereduc-actionmenu')]//a[contains(@class,'dropdown-toggle')]";
             if ($this->getSession()->getPage()->findAll('xpath', $xpath)) {
                 $this->execute("behat_general::i_click_on", array($this->escape($xpath), "xpath_element"));
             }
@@ -154,7 +154,7 @@ class behat_grade extends behat_base {
         $gradeitem = behat_context_helper::escape($gradeitem);
 
         if ($this->running_javascript()) {
-            $xpath = "//tr[contains(.,$gradeitem)]//*[contains(@class,'moodle-actionmenu')]";
+            $xpath = "//tr[contains(.,$gradeitem)]//*[contains(@class,'powereduc-actionmenu')]";
             if ($this->getSession()->getPage()->findAll('xpath', $xpath)) {
                 $this->execute("behat_action_menu::i_open_the_action_menu_in",
                         array("//tr[contains(.,$gradeitem)]",
@@ -204,7 +204,7 @@ class behat_grade extends behat_base {
         $gradeitem = behat_context_helper::escape($gradeitem);
 
         if ($this->running_javascript()) {
-            $xpath = "//tr[contains(.,$gradecategorytotal)]//*[contains(@class,'moodle-actionmenu')]";
+            $xpath = "//tr[contains(.,$gradecategorytotal)]//*[contains(@class,'powereduc-actionmenu')]";
             if ($this->getSession()->getPage()->findAll('xpath', $xpath)) {
                 $xpath = "//tr[contains(.,$gradecategorytotal)]";
                 $this->execute("behat_action_menu::i_open_the_action_menu_in", array($xpath, "xpath_element"));
@@ -252,7 +252,7 @@ class behat_grade extends behat_base {
 
         if ($this->running_javascript()) {
             $gradeitemliteral = behat_context_helper::escape($gradeitem);
-            $xpath = "//tr[contains(.,$gradeitemliteral)]//*[contains(@class,'moodle-actionmenu')]";
+            $xpath = "//tr[contains(.,$gradeitemliteral)]//*[contains(@class,'powereduc-actionmenu')]";
             if ($this->getSession()->getPage()->findAll('xpath', $xpath)) {
                 $xpath = "//tr[contains(.,$gradeitemliteral)]";
                 $this->execute("behat_action_menu::i_open_the_action_menu_in", array($xpath, "xpath_element"));

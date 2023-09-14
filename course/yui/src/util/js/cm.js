@@ -1,8 +1,8 @@
 /**
  * A collection of utility classes for use with course modules.
  *
- * @module moodle-course-util
- * @submodule moodle-course-util-cm
+ * @module powereduc-course-util
+ * @submodule powereduc-course-util-cm
  */
 
 Y.namespace('Moodle.core_course.util.cm');

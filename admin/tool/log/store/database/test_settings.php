@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ require_once($CFG->dirroot . '/lib/adminlib.php');
 
 require_sesskey();
 
-navigation_node::override_active_url(new moodle_url('/admin/settings.php', array('section' => 'logsettingdatabase')));
+navigation_node::override_active_url(new powereduc_url('/admin/settings.php', array('section' => 'logsettingdatabase')));
 admin_externalpage_setup('logstoredbtestsettings');
 
 echo $OUTPUT->header();
@@ -44,7 +44,7 @@ if (empty($dbtable)) {
 
 $dbdriver = get_config('logstore_database', 'dbdriver');
 list($dblibrary, $dbtype) = explode('/', $dbdriver);
-if (!$db = \moodle_database::get_driver_instance($dbtype, $dblibrary, true)) {
+if (!$db = \powereduc_database::get_driver_instance($dbtype, $dblibrary, true)) {
     echo $OUTPUT->notification("Unknown driver $dblibrary/$dbtype", "notifyproblem");
     die();
 }
@@ -66,7 +66,7 @@ $dboptions['dbhandlesoptions'] = get_config('logstore_database', 'dbhandlesoptio
 try {
     $db->connect(get_config('logstore_database', 'dbhost'), get_config('logstore_database', 'dbuser'),
         get_config('logstore_database', 'dbpass'), get_config('logstore_database', 'dbname'), false, $dboptions);
-} catch (\moodle_exception $e) {
+} catch (\powereduc_exception $e) {
     echo $OUTPUT->notification('Cannot connect to the database.', 'notifyproblem');
     $CFG->debug = $olddebug;
     ini_set('display_errors', $olddisplay);

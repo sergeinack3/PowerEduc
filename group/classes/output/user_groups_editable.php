@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains class core_group\output\user_groups_editable
@@ -58,7 +58,7 @@ class user_groups_editable extends \core\output\inplace_editable {
      */
     public function __construct($course, $context, $user, $coursegroups, $value) {
         // Check capabilities to get editable value.
-        $editable = has_capability('moodle/course:managegroups', $context) && !empty($coursegroups);
+        $editable = has_capability('powereduc/course:managegroups', $context) && !empty($coursegroups);
 
         // Invent an itemid.
         $itemid = $course->id . ':' . $user->id;
@@ -78,7 +78,7 @@ class user_groups_editable extends \core\output\inplace_editable {
             $options[$group->id] = format_string($group->name, true, ['context' => $this->context]);
         }
 
-        $fullname = fullname($user, has_capability('moodle/site:viewfullnames', $this->context));
+        $fullname = fullname($user, has_capability('powereduc/site:viewfullnames', $this->context));
         $this->edithint = get_string('editusersgroupsa', 'group', $fullname);
         $this->editlabel = get_string('editusersgroupsa', 'group', $fullname);
 
@@ -148,7 +148,7 @@ class user_groups_editable extends \core\output\inplace_editable {
         }
         $groupids = $byid;
         // Check permissions.
-        require_capability('moodle/course:managegroups', $context);
+        require_capability('powereduc/course:managegroups', $context);
 
         // Process adds.
         foreach ($groupids as $groupid) {

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * First step page for creating a new badge
@@ -33,11 +33,11 @@ $courseid = optional_param('id', 0, PARAM_INT);
 require_login();
 
 if (empty($CFG->enablebadges)) {
-    throw new \moodle_exception('badgesdisabled', 'badges');
+    throw new \powereduc_exception('badgesdisabled', 'badges');
 }
 
 if (empty($CFG->badges_allowcoursebadges) && ($type == BADGE_TYPE_COURSE)) {
-    throw new \moodle_exception('coursebadgesdisabled', 'badges');
+    throw new \powereduc_exception('coursebadgesdisabled', 'badges');
 }
 
 $title = get_string('create', 'badges');
@@ -60,7 +60,7 @@ if (($type == BADGE_TYPE_COURSE) && ($course = $DB->get_record('course', array('
     $PAGE->set_title($title);
 }
 
-require_capability('moodle/badges:createbadge', $PAGE->context);
+require_capability('powereduc/badges:createbadge', $PAGE->context);
 
 $fordb = new stdClass();
 $fordb->id = null;
@@ -68,7 +68,7 @@ $fordb->id = null;
 $form = new \core_badges\form\badge($PAGE->url, array('action' => 'new'));
 
 if ($form->is_cancelled()) {
-    redirect(new moodle_url('/badges/index.php', array('type' => $type, 'id' => $courseid)));
+    redirect(new powereduc_url('/badges/index.php', array('type' => $type, 'id' => $courseid)));
 } else if ($data = $form->get_data()) {
     // Creating new badge here.
     $now = time();
@@ -118,10 +118,10 @@ if ($form->is_cancelled()) {
     $newbadge = new badge($newid);
     badges_process_badge_image($newbadge, $form->save_temp_file('image'));
     // If a user can configure badge criteria, they will be redirected to the criteria page.
-    if (has_capability('moodle/badges:configurecriteria', $PAGE->context)) {
-        redirect(new moodle_url('/badges/criteria.php', array('id' => $newid)));
+    if (has_capability('powereduc/badges:configurecriteria', $PAGE->context)) {
+        redirect(new powereduc_url('/badges/criteria.php', array('id' => $newid)));
     }
-    redirect(new moodle_url('/badges/overview.php', array('id' => $newid)));
+    redirect(new powereduc_url('/badges/overview.php', array('id' => $newid)));
 }
 
 echo $OUTPUT->header();

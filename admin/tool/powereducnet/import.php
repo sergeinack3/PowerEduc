@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,25 +20,25 @@
  * MoodleNet instances send the user agent to this endpoint via a form POST.
  * Then:
  * 1. The POSTed resource information is put in a session store for cross-request access.
- * 2. This page makes a GET request for admin/tool/moodlenet/index.php (the import confirmation page).
+ * 2. This page makes a GET request for admin/tool/powereducnet/index.php (the import confirmation page).
  * 3. Then, depending on whether the user is authenticated, the user will either:
  * - If not authenticated, they will be asked to login, after which they will see the confirmation page (leveraging $wantsurl).
  * - If authenticated, they will see the confirmation page immediately.
  *
- * @package     tool_moodlenet
+ * @package     tool_powereducnet
  * @copyright   2020 Jake Dallimore <jrhdallimore@gmail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use tool_moodlenet\local\import_info;
-use tool_moodlenet\local\remote_resource;
-use tool_moodlenet\local\url;
+use tool_powereducnet\local\import_info;
+use tool_powereducnet\local\remote_resource;
+use tool_powereducnet\local\url;
 
 require_once(__DIR__ . '/../../../config.php');
 
 // The integration must be enabled for this import endpoint to be active.
-if (!get_config('tool_moodlenet', 'enablemoodlenet')) {
-    throw new \moodle_exception('moodlenetnotenabled', 'tool_moodlenet');
+if (!get_config('tool_powereducnet', 'enablepowereducnet')) {
+    throw new \powereduc_exception('powereducnetnotenabled', 'tool_powereducnet');
 }
 
 $resourceurl = required_param('resourceurl', PARAM_URL);
@@ -77,9 +77,9 @@ if (!empty($_POST)) {
     $importinfo->save();
 
     // Redirect to the import confirmation page, detouring via the log in page if required.
-    redirect(new moodle_url('/admin/tool/moodlenet/index.php', ['id' => $importinfo->get_id()]));
+    redirect(new powereduc_url('/admin/tool/powereducnet/index.php', ['id' => $importinfo->get_id()]));
 
 }
 
 // Invalid or missing POST data. Show an error to the user.
-throw new \moodle_exception('missinginvalidpostdata', 'tool_moodlenet');
+throw new \powereduc_exception('missinginvalidpostdata', 'tool_powereducnet');

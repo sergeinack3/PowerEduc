@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Helper to get behat contexts from other contexts.
@@ -61,7 +61,7 @@ class behat_context_helper {
      * @param Environment $environment
      * @return void
      * @deprecated since 3.2 MDL-55072 - please use behat_context_helper::set_environment()
-     * @todo MDL-55365 This will be deleted in Moodle 3.6.
+     * @todo MDL-55365 This will be deleted in PowerEduc 3.6.
      */
     public static function set_session(Environment $environment) {
         debugging('set_session is deprecated. Please use set_environment instead.', DEBUG_DEVELOPER);
@@ -119,7 +119,7 @@ class behat_context_helper {
     /**
      * Find all Behat contexts which match the specified context class name prefix.
      *
-     * Moodle uses a consistent class naming scheme for all Behat contexts, whereby the context name is in the format:
+     * PowerEduc uses a consistent class naming scheme for all Behat contexts, whereby the context name is in the format:
      *
      *     behat_{component}
      *

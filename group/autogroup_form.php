@@ -1,29 +1,29 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
  * Auto group form
  *
  * @package    core_group
- * @copyright  2007 mattc-catalyst (http://moodle.com)
+ * @copyright  2007 mattc-catalyst (http://powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('POWEREDUC_INTERNAL')) {
-    die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
+    die('Direct access to this script is forbidden.');    ///  It must be included from a PowerEduc page
 }
 
 require_once($CFG->dirroot.'/lib/formslib.php');
@@ -33,10 +33,10 @@ require_once($CFG->dirroot.'/cohort/lib.php');
  * Auto group form class
  *
  * @package    core_group
- * @copyright  2007 mattc-catalyst (http://moodle.com)
+ * @copyright  2007 mattc-catalyst (http://powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class autogroup_form extends moodleform {
+class autogroup_form extends powereducform {
 
     /**
      * Form Definition
@@ -148,7 +148,7 @@ class autogroup_form extends moodleform {
         $mform->disabledIf('notingroup', 'groupingid', 'neq', 0);
         $mform->disabledIf('notingroup', 'groupid', 'neq', 0);
 
-        if (has_capability('moodle/course:viewsuspendedusers', $coursecontext)) {
+        if (has_capability('powereduc/course:viewsuspendedusers', $coursecontext)) {
             $mform->addElement('checkbox', 'includeonlyactiveenrol', get_string('includeonlyactiveenrol', 'group'), '');
             $mform->addHelpButton('includeonlyactiveenrol', 'includeonlyactiveenrol', 'group');
             $mform->setDefault('includeonlyactiveenrol', true);

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@ function auth_oauth2_extend_navigation_user_settings(navigation_node $useraccoun
         if (has_capability('auth/oauth2:managelinkedlogins', $context) && $user->id == $USER->id) {
 
             $parent = $useraccount->parent->find('useraccount', navigation_node::TYPE_CONTAINER);
-            $parent->add(get_string('linkedlogins', 'auth_oauth2'), new moodle_url('/auth/oauth2/linkedlogins.php'));
+            $parent->add(get_string('linkedlogins', 'auth_oauth2'), new powereduc_url('/auth/oauth2/linkedlogins.php'));
         }
     }
 }

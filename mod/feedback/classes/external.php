@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Feedback external API
@@ -21,7 +21,7 @@
  * @category   external
  * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.3
+ * @since      PowerEduc 3.3
  */
 
 defined('POWEREDUC_INTERNAL') || die;
@@ -42,7 +42,7 @@ use mod_feedback\external\feedback_completed_exporter;
  * @category   external
  * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.3
+ * @since      PowerEduc 3.3
  */
 class mod_feedback_external extends external_api {
 
@@ -50,7 +50,7 @@ class mod_feedback_external extends external_api {
      * Describes the parameters for get_feedbacks_by_courses.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_feedbacks_by_courses_parameters() {
         return new external_function_parameters (
@@ -68,7 +68,7 @@ class mod_feedback_external extends external_api {
      *
      * @param array $courseids course ids
      * @return array of warnings and feedbacks
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_feedbacks_by_courses($courseids = array()) {
         global $PAGE;
@@ -130,7 +130,7 @@ class mod_feedback_external extends external_api {
      * Describes the get_feedbacks_by_courses return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_feedbacks_by_courses_returns() {
         return new external_single_structure(
@@ -150,7 +150,7 @@ class mod_feedback_external extends external_api {
      * @param int $courseid courseid course where user completes the feedback (for site feedbacks only)
      * @return array containing the feedback, feedback course, context, course module and the course where is being completed.
      * @throws powereduc_exception
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     protected static function validate_feedback($feedbackid, $courseid = 0) {
         global $DB, $USER;
@@ -186,7 +186,7 @@ class mod_feedback_external extends external_api {
      * @param  stdClass   $context  context object
      * @throws powereduc_exception
      * @return mod_feedback_completion feedback completion instance
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     protected static function validate_feedback_access($feedback, $course, $cm, $context, $checksubmit = false) {
         $feedbackcompletion = new mod_feedback_completion($feedback, $cm, $course->id);
@@ -213,7 +213,7 @@ class mod_feedback_external extends external_api {
      * Describes the parameters for get_feedback_access_information.
      *
      * @return external_external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_feedback_access_information_parameters() {
         return new external_function_parameters (
@@ -231,7 +231,7 @@ class mod_feedback_external extends external_api {
      * @param int $feedbackid feedback instance id
      * @param int $courseid course where user completes the feedback (for site feedbacks only)
      * @return array of warnings and the access information
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @throws  powereduc_exception
      */
     public static function get_feedback_access_information($feedbackid, $courseid = 0) {
@@ -271,7 +271,7 @@ class mod_feedback_external extends external_api {
      * Describes the get_feedback_access_information return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_feedback_access_information_returns() {
         return new external_single_structure(
@@ -295,7 +295,7 @@ class mod_feedback_external extends external_api {
      * Describes the parameters for view_feedback.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function view_feedback_parameters() {
         return new external_function_parameters (
@@ -316,7 +316,7 @@ class mod_feedback_external extends external_api {
      * @param bool $moduleviewed If we need to mark the module as viewed for completion
      * @param int $courseid course where user completes the feedback (for site feedbacks only)
      * @return array of warnings and status result
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @throws powereduc_exception
      */
     public static function view_feedback($feedbackid, $moduleviewed = false, $courseid = 0) {
@@ -350,7 +350,7 @@ class mod_feedback_external extends external_api {
      * Describes the view_feedback return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function view_feedback_returns() {
         return new external_single_structure(
@@ -365,7 +365,7 @@ class mod_feedback_external extends external_api {
      * Describes the parameters for get_current_completed_tmp.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_current_completed_tmp_parameters() {
         return new external_function_parameters (
@@ -383,7 +383,7 @@ class mod_feedback_external extends external_api {
      * @param int $feedbackid feedback instance id
      * @param int $courseid course where user completes the feedback (for site feedbacks only)
      * @return array of warnings and status result
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @throws powereduc_exception
      */
     public static function get_current_completed_tmp($feedbackid, $courseid = 0) {
@@ -411,7 +411,7 @@ class mod_feedback_external extends external_api {
      * Describes the get_current_completed_tmp return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_current_completed_tmp_returns() {
         return new external_single_structure(
@@ -426,7 +426,7 @@ class mod_feedback_external extends external_api {
      * Describes the parameters for get_items.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_items_parameters() {
         return new external_function_parameters (
@@ -444,7 +444,7 @@ class mod_feedback_external extends external_api {
      * @param int $feedbackid feedback instance id
      * @param int $courseid course where user completes the feedback (for site feedbacks only)
      * @return array of warnings and feedbacks
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_items($feedbackid, $courseid = 0) {
         global $PAGE;
@@ -478,7 +478,7 @@ class mod_feedback_external extends external_api {
      * Describes the get_items return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_items_returns() {
         return new external_single_structure(
@@ -495,7 +495,7 @@ class mod_feedback_external extends external_api {
      * Describes the parameters for launch_feedback.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function launch_feedback_parameters() {
         return new external_function_parameters (
@@ -513,7 +513,7 @@ class mod_feedback_external extends external_api {
      * @param array $feedbackid feedback instance id
      * @param int $courseid course where user completes a feedback (for site feedbacks only).
      * @return array of warnings and launch information
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function launch_feedback($feedbackid, $courseid = 0) {
         global $PAGE;
@@ -543,7 +543,7 @@ class mod_feedback_external extends external_api {
      * Describes the launch_feedback return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function launch_feedback_returns() {
         return new external_single_structure(
@@ -558,7 +558,7 @@ class mod_feedback_external extends external_api {
      * Describes the parameters for get_page_items.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_page_items_parameters() {
         return new external_function_parameters (
@@ -578,7 +578,7 @@ class mod_feedback_external extends external_api {
      * @param int $page the page to get starting by 0
      * @param int $courseid course where user completes the feedback (for site feedbacks only)
      * @return array of warnings and launch information
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_page_items($feedbackid, $page, $courseid = 0) {
         global $PAGE;
@@ -619,7 +619,7 @@ class mod_feedback_external extends external_api {
      * Describes the get_page_items return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_page_items_returns() {
         return new external_single_structure(
@@ -638,7 +638,7 @@ class mod_feedback_external extends external_api {
      * Describes the parameters for process_page.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function process_page_parameters() {
         return new external_function_parameters (
@@ -669,7 +669,7 @@ class mod_feedback_external extends external_api {
      * @param bool $goprevious whether we want to jump to previous page
      * @param int $courseid course where user completes the feedback (for site feedbacks only)
      * @return array of warnings and launch information
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function process_page($feedbackid, $page, $responses = [], $goprevious = false, $courseid = 0) {
         global $USER, $SESSION;
@@ -743,7 +743,7 @@ class mod_feedback_external extends external_api {
      * Describes the process_page return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function process_page_returns() {
         return new external_single_structure(
@@ -761,7 +761,7 @@ class mod_feedback_external extends external_api {
      * Describes the parameters for get_analysis.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_analysis_parameters() {
         return new external_function_parameters (
@@ -782,7 +782,7 @@ class mod_feedback_external extends external_api {
      * @param int $groupid group id, 0 means that the function will determine the user group
      * @param int $courseid course where user completes the feedback (for site feedbacks only)
      * @return array of warnings and launch information
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_analysis($feedbackid, $groupid = 0, $courseid = 0) {
         global $PAGE;
@@ -867,7 +867,7 @@ class mod_feedback_external extends external_api {
      * Describes the get_analysis return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_analysis_returns() {
         return new external_single_structure(
@@ -893,7 +893,7 @@ class mod_feedback_external extends external_api {
      * Describes the parameters for get_unfinished_responses.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_unfinished_responses_parameters() {
         return new external_function_parameters (
@@ -911,7 +911,7 @@ class mod_feedback_external extends external_api {
      * @param array $feedbackid feedback instance id
      * @param int $courseid course where user completes the feedback (for site feedbacks only)
      * @return array of warnings and launch information
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_unfinished_responses($feedbackid, $courseid = 0) {
         global $PAGE;
@@ -942,7 +942,7 @@ class mod_feedback_external extends external_api {
      * Describes the get_unfinished_responses return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_unfinished_responses_returns() {
         return new external_single_structure(
@@ -959,7 +959,7 @@ class mod_feedback_external extends external_api {
      * Describes the parameters for get_finished_responses.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_finished_responses_parameters() {
         return new external_function_parameters (
@@ -977,7 +977,7 @@ class mod_feedback_external extends external_api {
      * @param array $feedbackid feedback instance id
      * @param int $courseid course where user completes the feedback (for site feedbacks only)
      * @return array of warnings and the responses
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_finished_responses($feedbackid, $courseid = 0) {
         global $PAGE;
@@ -1010,7 +1010,7 @@ class mod_feedback_external extends external_api {
      * Describes the get_finished_responses return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_finished_responses_returns() {
         return new external_single_structure(
@@ -1027,7 +1027,7 @@ class mod_feedback_external extends external_api {
      * Describes the parameters for get_non_respondents.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_non_respondents_parameters() {
         return new external_function_parameters (
@@ -1055,7 +1055,7 @@ class mod_feedback_external extends external_api {
      * @param int $perpage the number of records to return per page
      * @param int $courseid course where user completes the feedback (for site feedbacks only)
      * @return array of warnings and users ids
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_non_respondents($feedbackid, $groupid = 0, $sort = 'lastaccess', $page = 0, $perpage = 0,
             $courseid = 0) {
@@ -1133,7 +1133,7 @@ class mod_feedback_external extends external_api {
      * Describes the get_non_respondents return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_non_respondents_returns() {
         return new external_single_structure(
@@ -1158,7 +1158,7 @@ class mod_feedback_external extends external_api {
      * Describes the parameters for get_responses_analysis.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_responses_analysis_parameters() {
         return new external_function_parameters (
@@ -1184,7 +1184,7 @@ class mod_feedback_external extends external_api {
      * @param int $courseid course where user completes the feedback (for site feedbacks only)
      * @return array of warnings and users attemps and responses
      * @throws powereduc_exception
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_responses_analysis($feedbackid, $groupid = 0, $page = 0, $perpage = 0, $courseid = 0) {
 
@@ -1238,7 +1238,7 @@ class mod_feedback_external extends external_api {
      * Describes the get_responses_analysis return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_responses_analysis_returns() {
         $responsestructure = new external_multiple_structure(
@@ -1287,7 +1287,7 @@ class mod_feedback_external extends external_api {
      * Describes the parameters for get_last_completed.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_last_completed_parameters() {
         return new external_function_parameters (
@@ -1304,7 +1304,7 @@ class mod_feedback_external extends external_api {
      *
      * @param int $feedbackid feedback instance id
      * @return array of warnings and the last completed record
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @throws powereduc_exception
      */
     public static function get_last_completed($feedbackid, $courseid = 0) {
@@ -1335,7 +1335,7 @@ class mod_feedback_external extends external_api {
      * Describes the get_last_completed return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_last_completed_returns() {
         return new external_single_structure(

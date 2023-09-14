@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package moodlecore
+ * @package powereduccore
  * @subpackage backup-helper
  * @copyright 2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,7 +26,7 @@ require_once($CFG->dirroot.'/backup/util/xml/parser/processors/grouped_parser_pr
 
 /**
  * helper implementation of grouped_parser_processor that will
- * support the process of all the moodle2 backup files, with
+ * support the process of all the powereduc2 backup files, with
  * complete specs about what to load (grouped or no), dispatching
  * to corresponding methods and basic decoding of contents
  * (NULLs and legacy file.php uses)
@@ -70,7 +70,7 @@ class restore_structure_parser_processor extends grouped_parser_processor {
             }
 
             // We have to remove trailing slashes, otherwise file URLs will be restored with an extra slash.
-            $basefileurl = rtrim(moodle_url::make_legacyfile_url($this->courseid, null)->out(true), $slash);
+            $basefileurl = rtrim(powereduc_url::make_legacyfile_url($this->courseid, null)->out(true), $slash);
             // Decode file.php calls.
             $search = array ("$@FILEPHP@$");
             $replace = array($basefileurl);

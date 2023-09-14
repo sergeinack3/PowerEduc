@@ -65,7 +65,7 @@ Feature: Browse course list and return back from enrolment page
     And I log in as "admin"
     And I set the following system permissions of "Non-enrolled" role:
       | capability | permission |
-      | moodle/course:view | Allow |
+      | powereduc/course:view | Allow |
     And I log out
     When I log in as "user1"
     And I am on course index

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -55,12 +55,12 @@ class block_course_list extends block_list {
         }
 
         $allcourselink =
-            (has_capability('moodle/course:update', context_system::instance())
+            (has_capability('powereduc/course:update', context_system::instance())
             || empty($CFG->block_course_list_hideallcourseslink)) &&
             core_course_category::user_top();
 
         if (empty($CFG->disablemycourses) and isloggedin() and !isguestuser() and
-          !(has_capability('moodle/course:update', context_system::instance()) and $adminseesall)) {    // Just print My Courses
+          !(has_capability('powereduc/course:update', context_system::instance()) and $adminseesall)) {    // Just print My Courses
             if ($courses = enrol_get_my_courses()) {
                 foreach ($courses as $course) {
                     $coursecontext = context_course::instance($course->id);
@@ -117,7 +117,7 @@ class block_course_list extends block_list {
 
                     $this->content->icons[] = '';
                     $this->content->items[] = get_string('nocoursesyet');
-                    if (has_capability('moodle/course:create', context_coursecat::instance($category->id))) {
+                    if (has_capability('powereduc/course:create', context_coursecat::instance($category->id))) {
                         $this->content->footer = '<a href="'.$CFG->wwwroot.'/course/edit.php?category='.$category->id.'">'.get_string("addnewcourse").'</a> ...';
                     }
                     $this->get_remote_courses();

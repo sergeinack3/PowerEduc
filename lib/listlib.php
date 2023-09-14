@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Classes for displaying and editing a nested list of items.
@@ -40,11 +40,11 @@ defined('POWEREDUC_INTERNAL') || die();
  * database - they don't update the in-memory structure, instead they trigger a
  * page reload so everything is rebuilt from scratch.
  *
- * @package moodlecore
+ * @package powereduccore
  * @copyright Jamie Pratt
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-abstract class moodle_list {
+abstract class powereduc_list {
     public $attributes;
     public $listitemclassname = 'list_item';
 
@@ -85,7 +85,7 @@ abstract class moodle_list {
      * @param string $type
      * @param string $attributes
      * @param boolean $editable
-     * @param moodle_url $pageurl url for this page
+     * @param powereduc_url $pageurl url for this page
      * @param integer $page if 0 no pagination. (These three params only used in top level list.)
      * @param string $pageparamname name of url param that is used for passing page no
      * @param integer $itemsperpage no of top level items.
@@ -100,7 +100,7 @@ abstract class moodle_list {
         $this->pageparamname = $pageparamname;
         $this->itemsperpage = $itemsperpage;
         if ($pageurl === null) {
-            $this->pageurl = new moodle_url($PAGE->url);
+            $this->pageurl = new powereduc_url($PAGE->url);
             $this->pageurl->params(array($this->pageparamname => $this->page));
         } else {
             $this->pageurl = $pageurl;
@@ -171,7 +171,7 @@ abstract class moodle_list {
         }
 
         if (!$suppresserror) {
-            throw new \moodle_exception('listnoitem');
+            throw new \powereduc_exception('listnoitem');
         }
         return null;
     }
@@ -324,7 +324,7 @@ abstract class moodle_list {
                     $peers[$itemkey+1] = $id;
                     $peers[$itemkey] = $olditem;
                 } else {
-                    throw new \moodle_exception('listcantmoveup');
+                    throw new \powereduc_exception('listcantmoveup');
                 }
                 break;
 
@@ -334,7 +334,7 @@ abstract class moodle_list {
                     $peers[$itemkey-1] = $id;
                     $peers[$itemkey] = $olditem;
                 } else {
-                    throw new \moodle_exception('listcantmovedown');
+                    throw new \powereduc_exception('listcantmovedown');
                 }
                 break;
         }
@@ -359,7 +359,7 @@ abstract class moodle_list {
 
         $item = $this->find_item($id);
         if (!isset($item->parentlist->parentitem->parentlist)) {
-            throw new \moodle_exception('listcantmoveleft');
+            throw new \powereduc_exception('listcantmoveleft');
         } else {
             $newpeers = $this->get_items_peers($item->parentlist->parentitem->id);
             if (isset($item->parentlist->parentitem->parentlist->parentitem)) {
@@ -386,7 +386,7 @@ abstract class moodle_list {
         $peers = $this->get_items_peers($id);
         $itemkey = array_search($id, $peers);
         if (!isset($peers[$itemkey-1])) {
-            throw new \moodle_exception('listcantmoveright');
+            throw new \powereduc_exception('listcantmoveright');
         } else {
             $DB->set_field($this->table, "parent", $peers[$itemkey-1], array("id"=>$peers[$itemkey]));
             $newparent = $this->find_item($peers[$itemkey-1]);
@@ -471,7 +471,7 @@ abstract class moodle_list {
 }
 
 /**
- * @package moodlecore
+ * @package powereduccore
  * @copyright Jamie Pratt
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -489,10 +489,10 @@ abstract class list_item {
     public $display;
     public $icons = array();
 
-    /** @var moodle_list */
+    /** @var powereduc_list */
     public $parentlist;
 
-    /** @var moodle_list Set if there are any children of this listitem. */
+    /** @var powereduc_list Set if there are any children of this listitem. */
     public $children;
 
     /**
@@ -576,21 +576,21 @@ abstract class list_item {
             } else {
                 $action = $strmoveleft;
             }
-            $url = new moodle_url($this->parentlist->pageurl, (array('sesskey'=>sesskey(), 'left'=>$this->id)));
+            $url = new powereduc_url($this->parentlist->pageurl, (array('sesskey'=>sesskey(), 'left'=>$this->id)));
             $this->icons['left'] = $this->image_icon($action, $url, $leftarrow);
         } else {
             $this->icons['left'] =  $this->image_spacer();
         }
 
         if (!$first) {
-            $url = new moodle_url($this->parentlist->pageurl, (array('sesskey'=>sesskey(), 'moveup'=>$this->id)));
+            $url = new powereduc_url($this->parentlist->pageurl, (array('sesskey'=>sesskey(), 'moveup'=>$this->id)));
             $this->icons['up'] = $this->image_icon($strmoveup, $url, 'up');
         } else {
             $this->icons['up'] =  $this->image_spacer();
         }
 
         if (!$last) {
-            $url = new moodle_url($this->parentlist->pageurl, (array('sesskey'=>sesskey(), 'movedown'=>$this->id)));
+            $url = new powereduc_url($this->parentlist->pageurl, (array('sesskey'=>sesskey(), 'movedown'=>$this->id)));
             $this->icons['down'] = $this->image_icon($strmovedown, $url, 'down');
         } else {
             $this->icons['down'] =  $this->image_spacer();
@@ -598,7 +598,7 @@ abstract class list_item {
 
         if (!empty($lastitem)) {
             $makechildof = get_string('makechildof', 'question', $lastitem->name);
-            $url = new moodle_url($this->parentlist->pageurl, (array('sesskey'=>sesskey(), 'right'=>$this->id)));
+            $url = new powereduc_url($this->parentlist->pageurl, (array('sesskey'=>sesskey(), 'right'=>$this->id)));
             $this->icons['right'] = $this->image_icon($makechildof, $url, $rightarrow);
         } else {
             $this->icons['right'] =  $this->image_spacer();
@@ -617,7 +617,7 @@ abstract class list_item {
     }
 
     /**
-     * Recurse down tree creating list_items, called from moodle_list::list_from_records
+     * Recurse down tree creating list_items, called from powereduc_list::list_from_records
      *
      * @param array $records
      * @param array $children

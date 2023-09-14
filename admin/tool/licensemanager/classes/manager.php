@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -152,14 +152,14 @@ class manager {
             if ($action == self::ACTION_CREATE) {
                 // Check that license shortname isn't already in use.
                 if (!empty(license_manager::get_license_by_shortname($data->shortname))) {
-                    throw new \moodle_exception('duplicatelicenseshortname', 'tool_licensemanager',
+                    throw new \powereduc_exception('duplicatelicenseshortname', 'tool_licensemanager',
                         helper::get_licensemanager_url(),
                         $data->shortname);
                 }
                 $license->shortname = $data->shortname;
             } else {
                 if (empty(license_manager::get_license_by_shortname($licenseshortname))) {
-                    throw new \moodle_exception('licensenotfoundshortname', 'license',
+                    throw new \powereduc_exception('licensenotfoundshortname', 'license',
                         helper::get_licensemanager_url(),
                         $licenseshortname);
                 }

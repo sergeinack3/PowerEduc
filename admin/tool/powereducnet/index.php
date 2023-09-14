@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,13 +19,13 @@
  *
  * This page asks the user to confirm the import process, and takes them to the relevant next step.
  *
- * @package     tool_moodlenet
+ * @package     tool_powereducnet
  * @copyright   2020 Jake Dallimore <jrhdallimore@gmail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use tool_moodlenet\local\import_info;
-use tool_moodlenet\local\import_backup_helper;
+use tool_powereducnet\local\import_info;
+use tool_powereducnet\local\import_backup_helper;
 
 require_once(__DIR__ . '/../../../config.php');
 require_once($CFG->dirroot .'/course/lib.php');
@@ -35,16 +35,16 @@ $continue = optional_param('continue', null, PARAM_TEXT);
 $id = required_param('id', PARAM_ALPHANUM);
 
 if (is_null($importinfo = import_info::load($id))) {
-    throw new moodle_exception('missinginvalidpostdata', 'tool_moodlenet');
+    throw new powereduc_exception('missinginvalidpostdata', 'tool_powereducnet');
 }
 
 // Access control.
 require_login($importinfo->get_config()->course, false); // Course may be null here - that's ok.
 if ($importinfo->get_config()->course) {
-    require_capability('moodle/course:manageactivities', context_course::instance($importinfo->get_config()->course));
+    require_capability('powereduc/course:manageactivities', context_course::instance($importinfo->get_config()->course));
 }
-if (!get_config('tool_moodlenet', 'enablemoodlenet')) {
-    throw new \moodle_exception('moodlenetnotenabled', 'tool_moodlenet');
+if (!get_config('tool_powereducnet', 'enablepowereducnet')) {
+    throw new \powereduc_exception('powereducnetnotenabled', 'tool_powereducnet');
 }
 
 // Handle the form submits.
@@ -57,9 +57,9 @@ if (!get_config('tool_moodlenet', 'enablemoodlenet')) {
 // - 5. The course home, if the user decides to cancel but the course and section are found.
 if ($cancel) {
     if (!empty($importinfo->get_config()->course)) {
-        $url = new \moodle_url('/course/view.php', ['id' => $importinfo->get_config()->course]);
+        $url = new \powereduc_url('/course/view.php', ['id' => $importinfo->get_config()->course]);
     } else {
-        $url = new \moodle_url('/');
+        $url = new \powereduc_url('/');
     }
     redirect($url);
 } else if ($continue) {
@@ -73,7 +73,7 @@ if ($cancel) {
             $context = import_backup_helper::get_context_for_user($USER->id);
 
             if (is_null($context)) {
-                throw new \moodle_exception('nopermissions', 'error', '', get_string('restore:uploadfile', 'core_role'));
+                throw new \powereduc_exception('nopermissions', 'error', '', get_string('restore:uploadfile', 'core_role'));
             }
         } else {
             $context = context_course::instance($importinfo->get_config()->course);
@@ -82,7 +82,7 @@ if ($cancel) {
         $importbackuphelper = new import_backup_helper($importinfo->get_resource(), $USER, $context);
         $storedfile = $importbackuphelper->get_stored_file();
 
-        $url = new \moodle_url('/backup/restorefile.php', [
+        $url = new \powereduc_url('/backup/restorefile.php', [
             'component' => $storedfile->get_component(),
             'filearea' => $storedfile->get_filearea(),
             'itemid' => $storedfile->get_itemid(),
@@ -98,20 +98,20 @@ if ($cancel) {
     // Handle adding files to a course.
     // Course and section data present and confirmed. Redirect to the option select view.
     if (!is_null($importinfo->get_config()->course) && !is_null($importinfo->get_config()->section)) {
-        redirect(new \moodle_url('/admin/tool/moodlenet/options.php', ['id' => $id]));
+        redirect(new \powereduc_url('/admin/tool/powereducnet/options.php', ['id' => $id]));
     }
 
     if (is_null($importinfo->get_config()->course)) {
-        redirect(new \moodle_url('/admin/tool/moodlenet/select.php', ['id' => $id]));
+        redirect(new \powereduc_url('/admin/tool/powereducnet/select.php', ['id' => $id]));
     }
 }
 
 // Display the page.
 $PAGE->set_context(context_system::instance());
 $PAGE->set_pagelayout('base');
-$PAGE->set_title(get_string('addingaresource', 'tool_moodlenet'));
-$PAGE->set_heading(get_string('addingaresource', 'tool_moodlenet'));
-$url = new moodle_url('/admin/tool/moodlenet/index.php');
+$PAGE->set_title(get_string('addingaresource', 'tool_powereducnet'));
+$PAGE->set_heading(get_string('addingaresource', 'tool_powereducnet'));
+$url = new powereduc_url('/admin/tool/powereducnet/index.php');
 $PAGE->set_url($url);
 $renderer = $PAGE->get_renderer('core');
 
@@ -132,5 +132,5 @@ if (!is_null($importinfo->get_config()->course) && !is_null($importinfo->get_con
 }
 
 echo $OUTPUT->header();
-echo $renderer->render_from_template('tool_moodlenet/import_confirmation', $context);
+echo $renderer->render_from_template('tool_powereducnet/import_confirmation', $context);
 echo $OUTPUT->footer();

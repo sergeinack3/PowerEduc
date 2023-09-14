@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Privacy Subsystem implementation for tool_innodb.
  *
  * @package    tool_innodb
- * @copyright  2018 Zig Tan <zig@moodle.com>
+ * @copyright  2018 Zig Tan <zig@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,7 +29,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Privacy Subsystem for tool_innodb implementing null_provider.
  *
- * @copyright  2018 Zig Tan <zig@moodle.com>
+ * @copyright  2018 Zig Tan <zig@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements \core_privacy\local\metadata\null_provider {

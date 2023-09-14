@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * MSSQL specific SQL code generator.
@@ -514,7 +514,7 @@ class mssql_sql_generator extends sql_generator {
         // Now, check if, with the current field attributes, we have to build one default
         $default_clause = $this->getDefaultClause($xmldb_field);
         if ($default_clause) {
-            // We need to build the default (Moodle) default, so do it
+            // We need to build the default (PowerEduc) default, so do it
             $sql = 'ALTER TABLE ' . $tablename . ' ADD' . $default_clause . ' FOR ' . $fieldname;
             $results[] = $sql;
         }
@@ -532,7 +532,7 @@ class mssql_sql_generator extends sql_generator {
      * @param xmldb_field $xmldb_field The xmldb_field object instance.
      * @return array Array of SQL statements to create a field's default.
      *
-     * @todo MDL-31147 Moodle 2.1 - Drop getDropDefaultSQL()
+     * @todo MDL-31147 PowerEduc 2.1 - Drop getDropDefaultSQL()
      */
     public function getDropDefaultSQL($xmldb_table, $xmldb_field) {
         // MSSQL is a bit special and it requires the corresponding DEFAULT CONSTRAINT to be dropped
@@ -671,7 +671,7 @@ class mssql_sql_generator extends sql_generator {
     public static function getReservedWords() {
         // This file contains the reserved words for MSSQL databases
         // from http://msdn2.microsoft.com/en-us/library/ms189822.aspx
-        // Should be identical to sqlsrv_native_moodle_database::$reservewords.
+        // Should be identical to sqlsrv_native_powereduc_database::$reservewords.
         $reserved_words = array (
             "add", "all", "alter", "and", "any", "as", "asc", "authorization", "avg", "backup", "begin", "between", "break",
             "browse", "bulk", "by", "cascade", "case", "check", "checkpoint", "close", "clustered", "coalesce", "collate", "column",

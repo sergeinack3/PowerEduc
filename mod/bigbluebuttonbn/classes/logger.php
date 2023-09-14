@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_bigbluebuttonbn;
 
@@ -291,7 +291,7 @@ EOF;
      * @param instance $instance
      */
     public static function log_meeting_ended_event(instance $instance): void {
-        // Moodle event logger: Create an event for meeting ended.
+        // PowerEduc event logger: Create an event for meeting ended.
         self::log_powereduc_event($instance, events::$events['meeting_end']);
 
     }
@@ -303,7 +303,7 @@ EOF;
      * @param int $origin
      */
     public static function log_meeting_joined_event(instance $instance, int $origin): void {
-        // Moodle event logger: Create an event for meeting joined.
+        // PowerEduc event logger: Create an event for meeting joined.
         self::log_powereduc_event($instance, events::$events['meeting_join']);
 
         // Internal logger: Instert a record with the meeting created.
@@ -321,7 +321,7 @@ EOF;
      * @param instance $instance
      */
     public static function log_meeting_left_event(instance $instance): void {
-        // Moodle event logger: Create an event for meeting left.
+        // PowerEduc event logger: Create an event for meeting left.
         self::log_powereduc_event($instance, events::$events['meeting_left']);
     }
 
@@ -332,7 +332,7 @@ EOF;
      * @param int $rid RecordID
      */
     public static function log_recording_played_event(instance $instance, int $rid): void {
-        // Moodle event logger: Create an event for recording played.
+        // PowerEduc event logger: Create an event for recording played.
         self::log_powereduc_event($instance, events::$events['recording_play'], ['other' => $rid]);
 
         // Internal logger: Insert a record with the playback played.

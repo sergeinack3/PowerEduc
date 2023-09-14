@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Action interface.
  *
  * @package    core_calendar
- * @copyright  2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2017 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,7 +29,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Interface for a action class.
  *
- * @copyright  2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2017 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 interface action_interface {
@@ -43,7 +43,7 @@ interface action_interface {
     /**
      * Get the URL of the action.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_url();
 

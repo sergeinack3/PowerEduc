@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Base class for antivirus integration.
@@ -140,7 +140,7 @@ abstract class scanner {
      * @param string $eventname event name
      * @return void
      * @throws \coding_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public function message_admins($notice, $format = FORMAT_PLAIN, $eventname = 'errors') {
         $noticehtml = $format !== FORMAT_PLAIN ? format_text($notice, $format) : '';
@@ -163,7 +163,7 @@ abstract class scanner {
         foreach ($admins as $admin) {
             $eventdata = new \core\message\message();
             $eventdata->courseid          = SITEID;
-            $eventdata->component         = 'moodle';
+            $eventdata->component         = 'powereduc';
             $eventdata->name              = $eventname;
             $eventdata->userfrom          = get_admin();
             $eventdata->userto            = $admin;
@@ -219,7 +219,7 @@ abstract class scanner {
         $content->date = userdate(time(), get_string('strftimedatetimeshort'));
         $content->referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : $unknown;
         $content->notice = $notice;
-        $report = new \moodle_url('/report/infectedfiles/index.php');
+        $report = new \powereduc_url('/report/infectedfiles/index.php');
         $content->report = $report->out();
 
         // If this is not due to a virus, we need to change the header line.

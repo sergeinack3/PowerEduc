@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ require_once("{$CFG->dirroot}/course/externallib.php");
  * Class for fetching courses which have action event(s) and match given filter parameters.
  *
  * @package    core_course
- * @copyright  2022 Michael Hawkins <michaelh@moodle.com>
+ * @copyright  2022 Michael Hawkins <michaelh@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class get_enrolled_courses_with_action_events_by_timeline_classification extends external_api {

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -68,7 +68,7 @@ if ($newaccount) {
         // Site settings prevent creating new accounts.
         $errormsg = get_string('cannotcreateaccounts', 'auth_lti');
         $SESSION->loginerrormsg = $errormsg;
-        redirect(new moodle_url('/login/index.php'));
+        redirect(new powereduc_url('/login/index.php'));
     } else {
         // Create a new account and link it, logging the user in.
         $auth = get_auth_plugin('lti');
@@ -76,7 +76,7 @@ if ($newaccount) {
         complete_user_login($newuser);
 
         $PAGE->set_context(context_system::instance());
-        $PAGE->set_url(new moodle_url('/auth/lti/login.php'));
+        $PAGE->set_url(new powereduc_url('/auth/lti/login.php'));
         $PAGE->set_pagelayout('popup');
         $renderer = $PAGE->get_renderer('auth_lti');
         echo $OUTPUT->header();
@@ -100,7 +100,7 @@ if ($newaccount) {
     $auth->create_user_binding($launchdata['iss'], $launchdata['sub'], $USER->id);
 
     $PAGE->set_context(context_system::instance());
-    $PAGE->set_url(new moodle_url('/auth/lti/login.php'));
+    $PAGE->set_url(new powereduc_url('/auth/lti/login.php'));
     $PAGE->set_pagelayout('popup');
     $renderer = $PAGE->get_renderer('auth_lti');
     echo $OUTPUT->header();
@@ -114,7 +114,7 @@ if ($newaccount) {
 
 // Render the relevant account provisioning page, based on the provisioningmode set in the calling code.
 $PAGE->set_context(context_system::instance());
-$PAGE->set_url(new moodle_url('/auth/lti/login.php'));
+$PAGE->set_url(new powereduc_url('/auth/lti/login.php'));
 $PAGE->set_pagelayout('popup');
 $renderer = $PAGE->get_renderer('auth_lti');
 

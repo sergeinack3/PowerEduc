@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ abstract class core_role_capability_table_with_risks extends core_role_capabilit
     protected $allrisks;
     protected $allpermissions; // We don't need perms ourselves, but all our subclasses do.
     protected $strperms; // Language string cache.
-    protected $risksurl; // URL in moodledocs about risks.
+    protected $risksurl; // URL in powereducdocs about risks.
     /** @var array The capabilities to highlight as default/inherited. */
     protected $parentpermissions;
     protected $displaypermissions;
@@ -183,7 +183,7 @@ abstract class core_role_capability_table_with_risks extends core_role_capabilit
         $alt = get_string("{$type}short", "admin");
         $title = get_string($type, "admin");
 
-        $text = $OUTPUT->pix_icon('i/' . str_replace('risk', 'risk_', $type), $alt, 'moodle', [
+        $text = $OUTPUT->pix_icon('i/' . str_replace('risk', 'risk_', $type), $alt, 'powereduc', [
                 'title' => $title,
             ]);
         $action = new popup_action('click', $this->risksurl, 'docspopup');

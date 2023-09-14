@@ -104,7 +104,7 @@ Internally there is lots of magic going on. The important parts to know about ar
 
 ### Store
 The store is the bridge between the cache API and a cache solution.
-Cache store plugins exist within moodle/cache/store.
+Cache store plugins exist within powereduc/cache/store.
 The administrator of a site can configure multiple instances of each plugin, the configuration gets initialised as a store for the loader when required in code (during construction of the loader).
 The following points highlight things you should know about stores.
 * A cache_store interface is used to define the requirements of a store plugin.
@@ -264,7 +264,7 @@ To do this you must add the following to your config.php file:
 This tells Moodle to use the config at $CFG->altcacheconfigpath when running tests.
 There are a couple of considerations to using this method:
 * By setting $CFG->altcacheconfigpath your site will store the cache config in the specified path, not just the test cache config but your site config as well.
-* If you have configured your cache before setting $CFG->altcacheconfigpath you will need to copy it from moodledata/muc/config.php to the destination you specified.
+* If you have configured your cache before setting $CFG->altcacheconfigpath you will need to copy it from powereducdata/muc/config.php to the destination you specified.
 * This allows you to share a cache config between sites.
 * It also allows you to use tests to test your sites cache config.
 

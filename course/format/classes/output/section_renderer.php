@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Contains the default section course format output class.
  *
  * @package   core_courseformat
- * @copyright 2020 Ferran Recio <ferran@moodle.com>
+ * @copyright 2020 Ferran Recio <ferran@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -37,8 +37,8 @@ use context_course;
 use core_course_renderer;
 use core_courseformat\base as course_format;
 use html_writer;
-use moodle_page;
-use moodle_url;
+use powereduc_page;
+use powereduc_url;
 use pix_icon;
 use renderable;
 use section_info;
@@ -49,7 +49,7 @@ use url_select;
  * Base class to render a course add section buttons.
  *
  * @package   core_courseformat
- * @copyright 2020 Ferran Recio <ferran@moodle.com>
+ * @copyright 2020 Ferran Recio <ferran@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 abstract class section_renderer extends core_course_renderer {
@@ -69,10 +69,10 @@ abstract class section_renderer extends core_course_renderer {
      * depends on $this->courserenderer to access the course renderer methods. Since Moodle 4.0
      * core_courseformat\output\section_renderer extends core_course_renderer and all metdhos can be used directly from $this.
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @param string $target one of rendering target constants
      */
-    public function __construct(moodle_page $page, $target) {
+    public function __construct(powereduc_page $page, $target) {
         parent::__construct($page, $target);
         $this->courserenderer = $this->page->get_renderer('core', 'course');
     }
@@ -237,7 +237,7 @@ abstract class section_renderer extends core_course_renderer {
                 $attr = empty($value['attr']) ? array() : $value['attr'];
                 $class = empty($value['pixattr']['class']) ? '' : $value['pixattr']['class'];
                 $al = new action_menu_link_secondary(
-                    new moodle_url($url),
+                    new powereduc_url($url),
                     new pix_icon($icon, '', null, array('class' => "smallicon " . $class)),
                     $name,
                     $attr
@@ -629,7 +629,7 @@ abstract class section_renderer extends core_course_renderer {
             'core_courseformat\output\\local\\content\\section\\availability in your format plugin.', DEBUG_DEVELOPER);
 
         $context = context_course::instance($section->course);
-        $canviewhidden = has_capability('moodle/course:viewhiddensections', $context);
+        $canviewhidden = has_capability('powereduc/course:viewhiddensections', $context);
         return html_writer::div($this->section_availability_message($section, $canviewhidden), 'section_availability');
     }
 
@@ -652,7 +652,7 @@ abstract class section_renderer extends core_course_renderer {
         $o = '';
         // If currently moving a file then show the current clipboard.
         if (ismoving($course->id)) {
-            $url = new moodle_url(
+            $url = new powereduc_url(
                 '/course/mod.php',
                 array(
                     'sesskey' => sesskey(),
@@ -691,7 +691,7 @@ abstract class section_renderer extends core_course_renderer {
 
         // FIXME: This is really evil and should by using the navigation API.
         $course = course_get_format($course)->get_course();
-        $canviewhidden = has_capability('moodle/course:viewhiddensections', context_course::instance($course->id))
+        $canviewhidden = has_capability('powereduc/course:viewhiddensections', context_course::instance($course->id))
             or !$course->hiddensections;
 
         $links = array('previous' => '', 'next' => '');
@@ -906,7 +906,7 @@ abstract class section_renderer extends core_course_renderer {
         if (!($sectioninfo = $modinfo->get_section_info($displaysection)) || !$sectioninfo->uservisible) {
             // This section doesn't exist or is not available for the user.
             // We actually already check this in course/view.php but just in case exit from this function as well.
-            throw new \moodle_exception(
+            throw new \powereduc_exception(
                 'unknowncoursesection',
                 'error',
                 course_get_url($course),

@@ -1,7 +1,7 @@
 {
-    "name": "moodle-form-shortforms",
+    "name": "powereduc-form-shortforms",
     "builds": {
-        "moodle-form-shortforms": {
+        "powereduc-form-shortforms": {
             "jsfiles": [
                 "shortforms.js"
             ]

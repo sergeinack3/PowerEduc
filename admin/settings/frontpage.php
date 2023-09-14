@@ -6,21 +6,21 @@ if (!during_initial_install()) { //do not use during installation
     $frontpagecontext = context_course::instance(SITEID);
 
     if ($hassiteconfig or has_any_capability(array(
-            'moodle/course:update',
-            'moodle/role:assign',
-            'moodle/restore:restorecourse',
-            'moodle/backup:backupcourse',
-            'moodle/course:managefiles',
-            'moodle/question:add',
-            'moodle/question:editmine',
-            'moodle/question:editall',
-            'moodle/question:viewmine',
-            'moodle/question:viewall',
-            'moodle/question:movemine',
-            'moodle/question:moveall'), $frontpagecontext)) {
+            'powereduc/course:update',
+            'powereduc/role:assign',
+            'powereduc/restore:restorecourse',
+            'powereduc/backup:backupcourse',
+            'powereduc/course:managefiles',
+            'powereduc/question:add',
+            'powereduc/question:editmine',
+            'powereduc/question:editall',
+            'powereduc/question:viewmine',
+            'powereduc/question:viewall',
+            'powereduc/question:movemine',
+            'powereduc/question:moveall'), $frontpagecontext)) {
 
         // "frontpage" settingpage
-        $temp = new admin_settingpage('frontpagesettings', new lang_string('frontpagesettings','admin'), 'moodle/course:update', false, $frontpagecontext);
+        $temp = new admin_settingpage('frontpagesettings', new lang_string('frontpagesettings','admin'), 'powereduc/course:update', false, $frontpagecontext);
         $temp->add(new admin_setting_sitesettext('fullname', new lang_string('fullsitename'), '', NULL)); // no default
         $temp->add(new admin_setting_sitesettext('shortname', new lang_string('shortsitename'), '', NULL)); // no default
         $temp->add(new admin_setting_special_frontpagedesc());

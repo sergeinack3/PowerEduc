@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ require_login(null, false);
 
 $perpage = optional_param('perpage', 0, PARAM_INT);
 
-$url = new moodle_url('/admin/tool/dataprivacy/datarequests.php');
+$url = new powereduc_url('/admin/tool/dataprivacy/datarequests.php');
 
 $title = get_string('datarequests', 'tool_dataprivacy');
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -89,7 +89,7 @@ class add_persistent_mandatory extends XMLDBAction {
             }
         }
 
-        $returnurl = new \moodle_url('/admin/tool/xmldb/index.php', [
+        $returnurl = new \powereduc_url('/admin/tool/xmldb/index.php', [
             'table' => $tableparam,
             'dir' => $dir,
             'action' => 'edit_table'
@@ -112,7 +112,7 @@ class add_persistent_mandatory extends XMLDBAction {
                 }
             }
 
-            $confirmurl = new \moodle_url('/admin/tool/xmldb/index.php', [
+            $confirmurl = new \powereduc_url('/admin/tool/xmldb/index.php', [
                 'table' => $tableparam,
                 'dir' => $dir,
                 'action' => 'add_persistent_mandatory',

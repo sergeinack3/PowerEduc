@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ use renderable;
  * The base class for the action bar in the gradebook pages.
  *
  * @package    core_grades
- * @copyright  2021 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2021 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 abstract class action_bar implements templatable, renderable {

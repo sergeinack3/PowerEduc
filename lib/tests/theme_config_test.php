@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Tests the theme config class.
@@ -53,21 +53,21 @@ class theme_config_test extends advanced_testcase {
         $theme = theme_config::load(theme_config::DEFAULT_THEME);
 
         // First up test the forced setting.
-        $imagefile = $theme->resolve_image_location('i/test', 'moodle', true);
+        $imagefile = $theme->resolve_image_location('i/test', 'powereduc', true);
         $this->assertSame('test.svg', basename($imagefile));
-        $imagefile = $theme->resolve_image_location('i/test', 'moodle', false);
+        $imagefile = $theme->resolve_image_location('i/test', 'powereduc', false);
         $this->assertSame('test.png', basename($imagefile));
 
         // Now test the use of the svgicons config setting.
         // We need to clone the theme as usesvg property is calculated only once.
         $testtheme = clone $theme;
         $CFG->svgicons = true;
-        $imagefile = $testtheme->resolve_image_location('i/test', 'moodle', null);
+        $imagefile = $testtheme->resolve_image_location('i/test', 'powereduc', null);
         $this->assertSame('test.svg', basename($imagefile));
         $CFG->svgicons = false;
         // We need to clone the theme as usesvg property is calculated only once.
         $testtheme = clone $theme;
-        $imagefile = $testtheme->resolve_image_location('i/test', 'moodle', null);
+        $imagefile = $testtheme->resolve_image_location('i/test', 'powereduc', null);
         $this->assertSame('test.png', basename($imagefile));
         unset($CFG->svgicons);
 
@@ -120,7 +120,7 @@ class theme_config_test extends advanced_testcase {
             core_useragent::instance(true, $agent);
             // We need to clone the theme as usesvg property is calculated only once.
             $testtheme = clone $theme;
-            $imagefile = $testtheme->resolve_image_location('i/test', 'moodle', null);
+            $imagefile = $testtheme->resolve_image_location('i/test', 'powereduc', null);
             if ($expected) {
                 $this->assertSame('test.svg', basename($imagefile), 'Incorrect image returned for user agent `'.$agent.'`');
             } else {
@@ -145,7 +145,7 @@ class theme_config_test extends advanced_testcase {
         $exceptionoccured = false;
         try {
             core_useragent::set_user_device_type('featurephone');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $exceptionoccured = true;
         }
         $this->assertTrue($exceptionoccured);

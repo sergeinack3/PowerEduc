@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,19 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace tool_moodlenet\local;
+namespace tool_powereducnet\local;
 
-use tool_moodlenet\local\import_handler_registry;
-use tool_moodlenet\local\import_processor;
-use tool_moodlenet\local\import_strategy_file;
-use tool_moodlenet\local\import_strategy_link;
-use tool_moodlenet\local\remote_resource;
-use tool_moodlenet\local\url;
+use tool_powereducnet\local\import_handler_registry;
+use tool_powereducnet\local\import_processor;
+use tool_powereducnet\local\import_strategy_file;
+use tool_powereducnet\local\import_strategy_link;
+use tool_powereducnet\local\remote_resource;
+use tool_powereducnet\local\url;
 
 /**
- * Class tool_moodlenet_import_processor_testcase, providing test cases for the import_processor class.
+ * Class tool_powereducnet_import_processor_testcase, providing test cases for the import_processor class.
  *
- * @package    tool_moodlenet
+ * @package    tool_powereducnet
  * @category   test
  * @copyright  2020 Jake Dallimore <jrhdallimore@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

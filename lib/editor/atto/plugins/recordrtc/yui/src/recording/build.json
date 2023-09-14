@@ -1,7 +1,7 @@
 {
-    "name": "moodle-atto_recordrtc-recording",
+    "name": "powereduc-atto_recordrtc-recording",
     "builds": {
-        "moodle-atto_recordrtc-recording": {
+        "powereduc-atto_recordrtc-recording": {
             "jsfiles": [
                 "commonmodule.js",
                 "compatcheckmodule.js",

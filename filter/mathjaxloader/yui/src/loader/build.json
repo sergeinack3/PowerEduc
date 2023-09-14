@@ -1,7 +1,7 @@
 {
-    "name": "moodle-filter_mathjaxloader-loader",
+    "name": "powereduc-filter_mathjaxloader-loader",
     "builds": {
-        "moodle-filter_mathjaxloader-loader": {
+        "powereduc-filter_mathjaxloader-loader": {
             "jsfiles": [
                 "loader.js"
             ]

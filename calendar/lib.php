@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -478,7 +478,7 @@ class calendar_event {
         if (empty($this->properties->id) || $this->properties->id < 1) {
             if ($checkcapability) {
                 if (!calendar_add_event_allowed($this->properties)) {
-                    throw new \moodle_exception('nopermissiontoupdatecalendar');
+                    throw new \powereduc_exception('nopermissiontoupdatecalendar');
                 }
             }
 
@@ -594,7 +594,7 @@ class calendar_event {
 
             if ($checkcapability) {
                 if (!calendar_edit_event_allowed($this->properties)) {
-                    throw new \moodle_exception('nopermissiontoupdatecalendar');
+                    throw new \powereduc_exception('nopermissiontoupdatecalendar');
                 }
             }
 
@@ -776,7 +776,7 @@ class calendar_event {
      * This function returns all of the events properties as an object and optionally
      * can prepare an editor for the description field at the same time. This is
      * designed to work when the properties are going to be used to set the default
-     * values of a moodle forms form.
+     * values of a powereduc forms form.
      *
      * @param bool $prepareeditor If set to true a editor is prepared for use with
      *              the mforms editor element. (for description)
@@ -810,7 +810,7 @@ class calendar_event {
                     // First check the course is valid.
                     $course = $DB->get_record('course', array('id' => $properties->courseid));
                     if (!$course) {
-                        throw new \moodle_exception('invalidcourse');
+                        throw new \powereduc_exception('invalidcourse');
                     }
                     // Course context.
                     $this->editorcontext = $this->get_context();
@@ -1105,7 +1105,7 @@ class calendar_information {
             $calendar->context = context_course::instance($course->id);
 
             if (!$course->visible && !is_role_switched($course->id)) {
-                require_capability('moodle/course:viewhiddencourses', $calendar->context);
+                require_capability('powereduc/course:viewhiddencourses', $calendar->context);
             }
 
             $courses = [$course->id => $course];
@@ -1232,7 +1232,7 @@ class calendar_information {
                 $categories = [];
                 foreach (\core_course_category::get_all() as $category) {
                     if (isset($coursecategories[$category->id]) ||
-                            has_capability('moodle/category:manage', $category->get_context(), $USER, false)) {
+                            has_capability('powereduc/category:manage', $category->get_context(), $USER, false)) {
                         // If the user has access to a course in this category or can manage the category,
                         // then they can see all parent categories too.
                         $categories[$category->id] = true;
@@ -1249,10 +1249,10 @@ class calendar_information {
 
     /**
      * Ensures the date for the calendar is correct and either sets it to now
-     * or throws a moodle_exception if not
+     * or throws a powereduc_exception if not
      *
      * @param bool $defaultonow use current time
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @return bool validation of checkdate
      */
     public function checkdate($defaultonow = true) {
@@ -1264,7 +1264,7 @@ class calendar_information {
                 $this->year = intval($now['year']);
                 return true;
             } else {
-                throw new moodle_exception('invaliddate');
+                throw new powereduc_exception('invaliddate');
             }
         }
         return true;
@@ -1296,7 +1296,7 @@ class calendar_information {
     public function add_sidecalendar_blocks(core_calendar_renderer $renderer, $showfilters=false, $view=null) {
         global $PAGE;
 
-        if (!has_capability('moodle/block:view', $PAGE->context) ) {
+        if (!has_capability('powereduc/block:view', $PAGE->context) ) {
             return;
         }
 
@@ -1463,7 +1463,7 @@ function calendar_get_days() {
  * @since Moodle 2.5
  * @param int $id id of the subscription
  * @return stdClass Subscription record from DB
- * @throws moodle_exception for an invalid id
+ * @throws powereduc_exception for an invalid id
  */
 function calendar_get_subscription($id) {
     global $DB;
@@ -1506,7 +1506,7 @@ function calendar_get_courselink($course) {
     }
     $context = \context_course::instance($course->id);
     $fullname = format_string($course->fullname, true, array('context' => $context));
-    $url = new \moodle_url('/course/view.php', array('id' => $course->id));
+    $url = new \powereduc_url('/course/view.php', array('id' => $course->id));
     $link = \html_writer::link($url, $fullname);
 
     return $link;
@@ -1708,7 +1708,7 @@ function calendar_top_controls($type, $data) {
                 true, $prevmonthtime);
             $nextlink = calendar_get_link_next(get_string('monthnext', 'calendar'), $urlbase, false, false, false, true,
                 $nextmonthtime);
-            $calendarlink = calendar_get_link_href(new \moodle_url(CALENDAR_URL . 'view.php', array('view' => 'month')),
+            $calendarlink = calendar_get_link_href(new \powereduc_url(CALENDAR_URL . 'view.php', array('view' => 'month')),
                 false, false, false, $time);
 
             if (!empty($data['id'])) {
@@ -1732,7 +1732,7 @@ function calendar_top_controls($type, $data) {
                 true, $prevmonthtime);
             $nextlink = calendar_get_link_next(get_string('monthnext', 'calendar'), $urlbase, false, false, false,
                 true, $nextmonthtime);
-            $calendarlink = calendar_get_link_href(new \moodle_url(CALENDAR_URL . 'view.php', array('view' => 'month')),
+            $calendarlink = calendar_get_link_href(new \powereduc_url(CALENDAR_URL . 'view.php', array('view' => 'month')),
                 false, false, false, $time);
 
             if (!empty($data['id'])) {
@@ -1749,7 +1749,7 @@ function calendar_top_controls($type, $data) {
             $content .= \html_writer::end_tag('div');
             break;
         case 'upcoming':
-            $calendarlink = calendar_get_link_href(new \moodle_url(CALENDAR_URL . 'view.php', array('view' => 'upcoming')),
+            $calendarlink = calendar_get_link_href(new \powereduc_url(CALENDAR_URL . 'view.php', array('view' => 'upcoming')),
                 false, false, false, $time);
             if (!empty($data['id'])) {
                 $calendarlink->param('course', $data['id']);
@@ -1758,7 +1758,7 @@ function calendar_top_controls($type, $data) {
             $content .= \html_writer::tag('div', $calendarlink, array('class' => 'centered'));
             break;
         case 'display':
-            $calendarlink = calendar_get_link_href(new \moodle_url(CALENDAR_URL . 'view.php', array('view' => 'month')),
+            $calendarlink = calendar_get_link_href(new \powereduc_url(CALENDAR_URL . 'view.php', array('view' => 'month')),
                 false, false, false, $time);
             if (!empty($data['id'])) {
                 $calendarlink->param('course', $data['id']);
@@ -1882,23 +1882,23 @@ function calendar_time_representation($time) {
 }
 
 /**
- * Adds day, month, year arguments to a URL and returns a moodle_url object.
+ * Adds day, month, year arguments to a URL and returns a powereduc_url object.
  *
- * @param string|moodle_url $linkbase
+ * @param string|powereduc_url $linkbase
  * @param int $d The number of the day.
  * @param int $m The number of the month.
  * @param int $y The number of the year.
  * @param int $time the unixtime, used for multiple calendar support. The values $d,
  *     $m and $y are kept for backwards compatibility.
- * @return moodle_url|null $linkbase
+ * @return powereduc_url|null $linkbase
  */
 function calendar_get_link_href($linkbase, $d, $m, $y, $time = 0) {
     if (empty($linkbase)) {
         return null;
     }
 
-    if (!($linkbase instanceof \moodle_url)) {
-        $linkbase = new \moodle_url($linkbase);
+    if (!($linkbase instanceof \powereduc_url)) {
+        $linkbase = new \powereduc_url($linkbase);
     }
 
     $linkbase->param('time', calendar_get_timestamp($d, $m, $y, $time));
@@ -1910,7 +1910,7 @@ function calendar_get_link_href($linkbase, $d, $m, $y, $time = 0) {
  * Build and return a previous month HTML link, with an arrow.
  *
  * @param string $text The text label.
- * @param string|moodle_url $linkbase The URL stub.
+ * @param string|powereduc_url $linkbase The URL stub.
  * @param int $d The number of the date.
  * @param int $m The number of the month.
  * @param int $y year The number of the year.
@@ -1920,7 +1920,7 @@ function calendar_get_link_href($linkbase, $d, $m, $y, $time = 0) {
  * @return string HTML string.
  */
 function calendar_get_link_previous($text, $linkbase, $d, $m, $y, $accesshide = false, $time = 0) {
-    $href = calendar_get_link_href(new \moodle_url($linkbase), $d, $m, $y, $time);
+    $href = calendar_get_link_href(new \powereduc_url($linkbase), $d, $m, $y, $time);
 
     if (empty($href)) {
         return $text;
@@ -1938,7 +1938,7 @@ function calendar_get_link_previous($text, $linkbase, $d, $m, $y, $accesshide = 
  * Build and return a next month HTML link, with an arrow.
  *
  * @param string $text The text label.
- * @param string|moodle_url $linkbase The URL stub.
+ * @param string|powereduc_url $linkbase The URL stub.
  * @param int $d the number of the Day
  * @param int $m The number of the month.
  * @param int $y The number of the year.
@@ -1948,7 +1948,7 @@ function calendar_get_link_previous($text, $linkbase, $d, $m, $y, $accesshide = 
  * @return string HTML string.
  */
 function calendar_get_link_next($text, $linkbase, $d, $m, $y, $accesshide = false, $time = 0) {
-    $href = calendar_get_link_href(new \moodle_url($linkbase), $d, $m, $y, $time);
+    $href = calendar_get_link_href(new \powereduc_url($linkbase), $d, $m, $y, $time);
 
     if (empty($href)) {
         return $text;
@@ -2118,7 +2118,7 @@ function calendar_set_filters(array $courseeventsfrom, $ignorefilters = false, s
     $group = false;
 
     // Get the capabilities that allow seeing group events from all groups.
-    $allgroupscaps = array('moodle/site:accessallgroups', 'moodle/calendar:manageentries');
+    $allgroupscaps = array('powereduc/site:accessallgroups', 'powereduc/calendar:manageentries');
 
     $isvaliduser = !empty($user->id);
 
@@ -2186,7 +2186,7 @@ function calendar_set_filters(array $courseeventsfrom, $ignorefilters = false, s
 function calendar_can_manage_non_user_event_in_system($event) {
     $sitecontext = \context_system::instance();
     $isuserevent = $event->eventtype == 'user';
-    $canmanageentries = has_capability('moodle/calendar:manageentries', $sitecontext);
+    $canmanageentries = has_capability('powereduc/calendar:manageentries', $sitecontext);
     // If user has manageentries at site level and it's not user event, return true.
     if ($canmanageentries && !$isuserevent) {
         return true;
@@ -2215,8 +2215,8 @@ function calendar_view_event_allowed(calendar_event $event) {
 
     if (!empty($event->groupid)) {
         // If it is a group event we need to be able to manage events in the course, or be in the group.
-        if (has_capability('moodle/calendar:manageentries', $event->context) ||
-                has_capability('moodle/calendar:managegroupentries', $event->context)) {
+        if (has_capability('powereduc/calendar:manageentries', $event->context) ||
+                has_capability('powereduc/calendar:managegroupentries', $event->context)) {
             return true;
         }
 
@@ -2259,7 +2259,7 @@ function calendar_view_event_allowed(calendar_event $event) {
         return true;
     } else if (!empty($event->courseid)) {
         // If it is a course event we need to be able to manage events in the course, or be in the course.
-        if (has_capability('moodle/calendar:manageentries', $event->context)) {
+        if (has_capability('powereduc/calendar:manageentries', $event->context)) {
             return true;
         }
 
@@ -2267,7 +2267,7 @@ function calendar_view_event_allowed(calendar_event $event) {
     } else if ($event->userid) {
         return calendar_can_manage_user_event($event);
     } else {
-        throw new moodle_exception('unknown event type');
+        throw new powereduc_exception('unknown event type');
     }
 
     return false;
@@ -2322,7 +2322,7 @@ function calendar_edit_event_allowed($event, $manualedit = false) {
         // that the current user has the same capability before allowing them
         // to update the event because the changes to the event will be
         // reflected within the activity.
-        return has_capability('moodle/course:manageactivities', $context);
+        return has_capability('powereduc/course:manageactivities', $context);
     }
 
     if ($manualedit && !empty($event->component)) {
@@ -2349,18 +2349,18 @@ function calendar_edit_event_allowed($event, $manualedit = false) {
         // 2) They have managegroupentries AND are in the group.
         $group = $DB->get_record('groups', array('id' => $event->groupid));
         return $group && (
-                has_capability('moodle/calendar:manageentries', $event->context) ||
-                (has_capability('moodle/calendar:managegroupentries', $event->context)
+                has_capability('powereduc/calendar:manageentries', $event->context) ||
+                (has_capability('powereduc/calendar:managegroupentries', $event->context)
                     && groups_is_member($event->groupid)));
     } else if (!empty($event->courseid)) {
         // If groupid is not set, but course is set, it's definitely a course event.
-        return has_capability('moodle/calendar:manageentries', $event->context);
+        return has_capability('powereduc/calendar:manageentries', $event->context);
     } else if (!empty($event->categoryid)) {
         // If groupid is not set, but category is set, it's definitely a category event.
-        return has_capability('moodle/calendar:manageentries', $event->context);
+        return has_capability('powereduc/calendar:manageentries', $event->context);
     } else if (!empty($event->userid) && $event->userid == $USER->id) {
         // If course is not set, but userid id set, it's a user event.
-        return (has_capability('moodle/calendar:manageownentries', $event->context));
+        return (has_capability('powereduc/calendar:manageownentries', $event->context));
     } else if (!empty($event->userid)) {
         return calendar_can_manage_user_event($event);
     }
@@ -2381,8 +2381,8 @@ function calendar_can_manage_user_event($event): bool {
         $event = new \calendar_event(clone($event));
     }
 
-    $canmanage = has_capability('moodle/calendar:manageentries', $event->context);
-    $canmanageown = has_capability('moodle/calendar:manageownentries', $event->context);
+    $canmanage = has_capability('powereduc/calendar:manageentries', $event->context);
+    $canmanageown = has_capability('powereduc/calendar:manageownentries', $event->context);
     $ismyevent = $event->userid == $USER->id;
     $isadminevent = is_siteadmin($event->userid);
 
@@ -2434,7 +2434,7 @@ function calendar_get_default_courses($courseid = null, $fields = '*', $canmanag
     }
 
     if ((!empty($CFG->calendar_adminseesall) || $canmanage) &&
-            has_capability('moodle/calendar:manageentries', context_system::instance(), $userid)) {
+            has_capability('powereduc/calendar:manageentries', context_system::instance(), $userid)) {
 
         // Add a c. prefix to every field as expected by get_courses function.
         $fieldlist = explode(',', $fields);
@@ -2449,7 +2449,7 @@ function calendar_get_default_courses($courseid = null, $fields = '*', $canmanag
     }
 
     if ($courseid && $courseid != SITEID) {
-        if (empty($courses[$courseid]) && has_capability('moodle/calendar:manageentries', context_system::instance(), $userid)) {
+        if (empty($courses[$courseid]) && has_capability('powereduc/calendar:manageentries', context_system::instance(), $userid)) {
             // Allow a site admin to see calendars from courses he is not enrolled in.
             // This will come from $COURSE.
             $courses[$courseid] = get_course($courseid);
@@ -2500,7 +2500,7 @@ function calendar_format_event_time($event, $now, $linkparams = null, $usecommon
             // Set printable representation.
             if (!$showtime) {
                 $day = calendar_day_representation($event->timestart, $now, $usecommonwords);
-                $url = calendar_get_link_href(new \moodle_url(CALENDAR_URL . 'view.php', $linkparams), 0, 0, 0, $endtime);
+                $url = calendar_get_link_href(new \powereduc_url(CALENDAR_URL . 'view.php', $linkparams), 0, 0, 0, $endtime);
                 $eventtime = \html_writer::link($url, $day) . ', ' . $time;
             } else {
                 $eventtime = $time;
@@ -2519,14 +2519,14 @@ function calendar_format_event_time($event, $now, $linkparams = null, $usecommon
 
             // Set printable representation.
             if ($now >= $usermidnightstart && $now < strtotime('+1 day', $usermidnightstart)) {
-                $url = calendar_get_link_href(new \moodle_url(CALENDAR_URL . 'view.php', $linkparams), 0, 0, 0, $endtime);
+                $url = calendar_get_link_href(new \powereduc_url(CALENDAR_URL . 'view.php', $linkparams), 0, 0, 0, $endtime);
                 $eventtime = $timestart . ' <strong>&raquo;</strong> ' . \html_writer::link($url, $dayend) . $timeend;
             } else {
                 // The event is in the future, print start and end links.
-                $url = calendar_get_link_href(new \moodle_url(CALENDAR_URL . 'view.php', $linkparams), 0, 0, 0, $starttime);
+                $url = calendar_get_link_href(new \powereduc_url(CALENDAR_URL . 'view.php', $linkparams), 0, 0, 0, $starttime);
                 $eventtime = \html_writer::link($url, $daystart) . $timestart . ' <strong>&raquo;</strong> ';
 
-                $url = calendar_get_link_href(new \moodle_url(CALENDAR_URL . 'view.php', $linkparams),  0, 0, 0, $endtime);
+                $url = calendar_get_link_href(new \powereduc_url(CALENDAR_URL . 'view.php', $linkparams),  0, 0, 0, $endtime);
                 $eventtime .= \html_writer::link($url, $dayend) . $timeend;
             }
         }
@@ -2535,7 +2535,7 @@ function calendar_format_event_time($event, $now, $linkparams = null, $usecommon
         // Set printable representation.
         if (!$showtime) {
             $day = calendar_day_representation($event->timestart, $now, $usecommonwords);
-            $url = calendar_get_link_href(new \moodle_url(CALENDAR_URL . 'view.php', $linkparams),  0, 0, 0, $starttime);
+            $url = calendar_get_link_href(new \powereduc_url(CALENDAR_URL . 'view.php', $linkparams),  0, 0, 0, $starttime);
             $eventtime = \html_writer::link($url, $day) . ', ' . trim($time);
         } else {
             $eventtime = $time;
@@ -2599,7 +2599,7 @@ function calendar_show_event_type($type, $user = null) {
  *
  * @param int $type object of CALENDAR_EVENT_XXX
  * @param bool $display option to display event type
- * @param stdClass|int $user moodle user object or id, null means current user
+ * @param stdClass|int $user powereduc user object or id, null means current user
  */
 function calendar_set_event_type_display($type, $display = null, $user = null) {
     $persist = get_user_preferences('calendar_persistflt', 0, $user);
@@ -2646,14 +2646,14 @@ function calendar_get_allowed_types(&$allowed, $course = null, $groups = null, $
     global $USER, $DB;
 
     $allowed = new \stdClass();
-    $allowed->user = has_capability('moodle/calendar:manageownentries', \context_system::instance());
+    $allowed->user = has_capability('powereduc/calendar:manageownentries', \context_system::instance());
     $allowed->groups = false;
     $allowed->courses = false;
     $allowed->categories = false;
-    $allowed->site = has_capability('moodle/calendar:manageentries', \context_course::instance(SITEID));
+    $allowed->site = has_capability('powereduc/calendar:manageentries', \context_course::instance(SITEID));
     $getgroupsfunc = function($course, $context, $user) use ($groups) {
         if ($course->groupmode != NOGROUPS || !$course->groupmodeforce) {
-            if (has_capability('moodle/site:accessallgroups', $context)) {
+            if (has_capability('powereduc/site:accessallgroups', $context)) {
                 return is_null($groups) ? groups_get_all_groups($course->id) : $groups;
             } else {
                 if (is_null($groups)) {
@@ -2675,12 +2675,12 @@ function calendar_get_allowed_types(&$allowed, $course = null, $groups = null, $
         }
         if ($course->id != SITEID) {
             $coursecontext = \context_course::instance($course->id);
-            $allowed->user = has_capability('moodle/calendar:manageownentries', $coursecontext);
+            $allowed->user = has_capability('powereduc/calendar:manageownentries', $coursecontext);
 
-            if (has_capability('moodle/calendar:manageentries', $coursecontext)) {
+            if (has_capability('powereduc/calendar:manageentries', $coursecontext)) {
                 $allowed->courses = array($course->id => 1);
                 $allowed->groups = $getgroupsfunc($course, $coursecontext, $USER);
-            } else if (has_capability('moodle/calendar:managegroupentries', $coursecontext)) {
+            } else if (has_capability('powereduc/calendar:managegroupentries', $coursecontext)) {
                 $allowed->groups = $getgroupsfunc($course, $coursecontext, $USER);
             }
         }
@@ -2688,7 +2688,7 @@ function calendar_get_allowed_types(&$allowed, $course = null, $groups = null, $
 
     if (!empty($category)) {
         $catcontext = \context_coursecat::instance($category->id);
-        if (has_capability('moodle/category:manage', $catcontext)) {
+        if (has_capability('powereduc/category:manage', $catcontext)) {
             $allowed->categories = [$category->id => 1];
         }
     }
@@ -2730,24 +2730,24 @@ function calendar_add_event_allowed($event) {
 
     switch ($event->eventtype) {
         case 'category':
-            return has_capability('moodle/category:manage', $event->context);
+            return has_capability('powereduc/category:manage', $event->context);
         case 'course':
-            return has_capability('moodle/calendar:manageentries', $event->context);
+            return has_capability('powereduc/calendar:manageentries', $event->context);
         case 'group':
             // Allow users to add/edit group events if -
             // 1) They have manageentries (= entries for whole course).
             // 2) They have managegroupentries AND are in the group.
             $group = $DB->get_record('groups', array('id' => $event->groupid));
             return $group && (
-                    has_capability('moodle/calendar:manageentries', $event->context) ||
-                    (has_capability('moodle/calendar:managegroupentries', $event->context)
+                    has_capability('powereduc/calendar:manageentries', $event->context) ||
+                    (has_capability('powereduc/calendar:managegroupentries', $event->context)
                         && groups_is_member($event->groupid)));
         case 'user':
             return calendar_can_manage_user_event($event);
         case 'site':
-            return has_capability('moodle/calendar:manageentries', $event->context);
+            return has_capability('powereduc/calendar:manageentries', $event->context);
         default:
-            return has_capability('moodle/calendar:manageentries', $event->context);
+            return has_capability('powereduc/calendar:manageentries', $event->context);
     }
 }
 
@@ -2875,7 +2875,7 @@ function calendar_add_subscription($sub) {
             return $sub->id;
         }
     } else {
-        throw new \moodle_exception('errorbadsubscription', 'importcalendar');
+        throw new \powereduc_exception('errorbadsubscription', 'importcalendar');
     }
 }
 
@@ -2970,7 +2970,7 @@ function calendar_add_icalendar_event($event, $unused, $subscriptionid, $timezon
     if ($updaterecord = $DB->get_record('event', array('uuid' => $eventrecord->uuid,
         'subscriptionid' => $eventrecord->subscriptionid))) {
 
-        // Compare iCal event data against the moodle event to see if something has changed.
+        // Compare iCal event data against the powereduc event to see if something has changed.
         $result = array_diff((array) $eventrecord, (array) $updaterecord);
 
         // Unset timemodified field because it's always going to be different.
@@ -3061,7 +3061,7 @@ function calendar_get_icalendar($url) {
 
     // Http code validation should actually be the job of curl class.
     if (!$calendar || $curl->info['http_code'] != 200 || !empty($curl->errorno)) {
-        throw new \moodle_exception('errorinvalidicalurl', 'calendar');
+        throw new \powereduc_exception('errorinvalidicalurl', 'calendar');
     }
 
     $ical = new \iCalendar();
@@ -3629,7 +3629,7 @@ function calendar_output_fragment_event_form($args) {
         $event = calendar_event::load($eventid);
 
         if (!calendar_edit_event_allowed($event)) {
-            throw new \moodle_exception('nopermissiontoupdatecalendar');
+            throw new \powereduc_exception('nopermissiontoupdatecalendar');
         }
 
         $mapper = new \core_calendar\local\event\mappers\create_update_form_mapper();
@@ -3802,15 +3802,15 @@ function calendar_get_allowed_event_types(int $courseid = null) {
 
     if (!empty($courseid) && $courseid != SITEID) {
         $context = \context_course::instance($courseid);
-        $types['user'] = has_capability('moodle/calendar:manageownentries', $context);
+        $types['user'] = has_capability('powereduc/calendar:manageownentries', $context);
         calendar_internal_update_course_and_group_permission($courseid, $context, $types);
     }
 
-    if (has_capability('moodle/calendar:manageentries', \context_course::instance(SITEID))) {
+    if (has_capability('powereduc/calendar:manageentries', \context_course::instance(SITEID))) {
         $types['site'] = true;
     }
 
-    if (has_capability('moodle/calendar:manageownentries', \context_system::instance())) {
+    if (has_capability('powereduc/calendar:manageownentries', \context_system::instance())) {
         $types['user'] = true;
     }
     if (core_course_category::has_manage_capability_on_any()) {
@@ -3820,7 +3820,7 @@ function calendar_get_allowed_event_types(int $courseid = null) {
     // We still don't know if the user can create group and course events, so iterate over the courses to find out
     // if the user has capabilities in one of the courses.
     if ($types['course'] == false || $types['group'] == false) {
-        if ($CFG->calendar_adminseesall && has_capability('moodle/calendar:manageentries', context_system::instance())) {
+        if ($CFG->calendar_adminseesall && has_capability('powereduc/calendar:manageentries', context_system::instance())) {
             $sql = "SELECT c.id, " . context_helper::get_preload_record_columns_sql('ctx') . "
                       FROM {course} c
                       JOIN {context} ctx ON ctx.contextlevel = ? AND ctx.instanceid = c.id
@@ -3832,8 +3832,8 @@ function calendar_get_allowed_event_types(int $courseid = null) {
                 context_helper::preload_from_record($course);
                 $context = context_course::instance($course->id);
 
-                if (has_capability('moodle/calendar:manageentries', $context)) {
-                    if (has_any_capability(['moodle/site:accessallgroups', 'moodle/calendar:managegroupentries'], $context)) {
+                if (has_capability('powereduc/calendar:manageentries', $context)) {
+                    if (has_any_capability(['powereduc/site:accessallgroups', 'powereduc/calendar:managegroupentries'], $context)) {
                         // The user can manage group entries or access any group.
                         $types['group'] = true;
                         $types['course'] = true;
@@ -3857,7 +3857,7 @@ function calendar_get_allowed_event_types(int $courseid = null) {
                 foreach ($courses as $course) {
                     context_helper::preload_from_record($course);
                     $context = context_course::instance($course->id);
-                    if (has_capability('moodle/calendar:manageentries', $context)) {
+                    if (has_capability('powereduc/calendar:manageentries', $context)) {
                         $types['course'] = true;
                         break;
                     }
@@ -3908,7 +3908,7 @@ function calendar_get_allowed_event_types(int $courseid = null) {
                 foreach ($contextrecords as $course) {
                     context_helper::preload_from_record($course);
                     $coursecontext = context_course::instance($course->id);
-                    if (has_capability('moodle/calendar:manageentries', $coursecontext)
+                    if (has_capability('powereduc/calendar:manageentries', $coursecontext)
                             && ($courseid == $course->id || empty($courseid))) {
                         $types['course'] = true;
                         break;
@@ -3938,18 +3938,18 @@ function calendar_get_allowed_event_types(int $courseid = null) {
 function calendar_internal_update_course_and_group_permission(int $courseid, context $context, array &$types) {
     if (!$types['course']) {
         // If they have manageentries permission on the course, then they can update this course.
-        if (has_capability('moodle/calendar:manageentries', $context)) {
+        if (has_capability('powereduc/calendar:manageentries', $context)) {
             $types['course'] = true;
         }
     }
     // To update group events they must have EITHER manageentries OR managegroupentries.
-    if (!$types['group'] && (has_capability('moodle/calendar:manageentries', $context) ||
-            has_capability('moodle/calendar:managegroupentries', $context))) {
+    if (!$types['group'] && (has_capability('powereduc/calendar:manageentries', $context) ||
+            has_capability('powereduc/calendar:managegroupentries', $context))) {
         // And they also need for a group to exist on the course.
         $groups = groups_get_all_groups($courseid);
         if (!empty($groups)) {
             // And either accessallgroups, or belong to one of the groups.
-            if (has_capability('moodle/site:accessallgroups', $context)) {
+            if (has_capability('powereduc/site:accessallgroups', $context)) {
                 $types['group'] = true;
             } else {
                 foreach ($groups as $group) {

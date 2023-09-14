@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ class cohortname extends \core\output\inplace_editable {
      */
     public function __construct($cohort) {
         $cohortcontext = \context::instance_by_id($cohort->contextid);
-        $editable = has_capability('moodle/cohort:manage', $cohortcontext);
+        $editable = has_capability('powereduc/cohort:manage', $cohortcontext);
         $displayvalue = format_string($cohort->name, true, array('context' => $cohortcontext));
         parent::__construct('core_cohort', 'cohortname', $cohort->id, $editable,
             $displayvalue,
@@ -62,7 +62,7 @@ class cohortname extends \core\output\inplace_editable {
         $cohort = $DB->get_record('cohort', array('id' => $cohortid), '*', MUST_EXIST);
         $cohortcontext = \context::instance_by_id($cohort->contextid);
         \external_api::validate_context($cohortcontext);
-        require_capability('moodle/cohort:manage', $cohortcontext);
+        require_capability('powereduc/cohort:manage', $cohortcontext);
         $newvalue = clean_param($newvalue, PARAM_TEXT);
         if (strval($newvalue) !== '') {
             $record = (object)array('id' => $cohort->id, 'name' => $newvalue, 'contextid' => $cohort->contextid);

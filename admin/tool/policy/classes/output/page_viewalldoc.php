@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,20 +19,20 @@
  *
  * @package     tool_policy
  * @category    output
- * @copyright   2018 Sara Arjona <sara@moodle.com>
+ * @copyright   2018 Sara Arjona <sara@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace tool_policy\output;
 
-use moodle_exception;
+use powereduc_exception;
 
 defined('POWEREDUC_INTERNAL') || die();
 
 require_once("$CFG->libdir/filelib.php");
 
 use context_system;
-use moodle_url;
+use powereduc_url;
 use renderable;
 use renderer_base;
 use single_button;
@@ -43,7 +43,7 @@ use tool_policy\policy_version;
 /**
  * Represents a page for showing all the policy documents with a current version.
  *
- * @copyright 2018 Sara Arjona <sara@moodle.com>
+ * @copyright 2018 Sara Arjona <sara@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class page_viewalldoc implements renderable, templatable {
@@ -75,7 +75,7 @@ class page_viewalldoc implements renderable, templatable {
     protected function prepare_global_page_access() {
         global $PAGE, $SITE, $USER;
 
-        $myurl = new moodle_url('/admin/tool/policy/viewall.php', []);
+        $myurl = new powereduc_url('/admin/tool/policy/viewall.php', []);
 
         // Disable notifications for new users, guests or users who haven't agreed to the policies.
         if (isguestuser() || empty($USER->id) || !$USER->policyagreed) {
@@ -98,7 +98,7 @@ class page_viewalldoc implements renderable, templatable {
     public function export_for_template(renderer_base $output) {
 
         $data = (object) [
-            'pluginbaseurl' => (new moodle_url('/admin/tool/policy'))->out(false),
+            'pluginbaseurl' => (new powereduc_url('/admin/tool/policy'))->out(false),
         ];
 
         $data->policies = array_values($this->policies);

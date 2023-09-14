@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ defined('POWEREDUC_INTERNAL') || die();
 
 use core\external\exporter;
 use renderer_base;
-use moodle_url;
+use powereduc_url;
 
 /**
  * Class for displaying the month view.
@@ -56,7 +56,7 @@ class month_exporter extends exporter {
     protected $firstdayofweek;
 
     /**
-     * @var moodle_url $url The URL for the events page.
+     * @var powereduc_url $url The URL for the events page.
      */
     protected $url;
 
@@ -90,7 +90,7 @@ class month_exporter extends exporter {
         $this->calendar = $calendar;
         $this->firstdayofweek = $type->get_starting_weekday();
 
-        $this->url = new moodle_url('/calendar/view.php', [
+        $this->url = new powereduc_url('/calendar/view.php', [
                 'view' => 'month',
                 'time' => $calendar->time,
             ]);
@@ -230,10 +230,10 @@ class month_exporter extends exporter {
         $nextperiod = $this->get_next_month_data();
         $date = $this->related['type']->timestamp_to_date_array($this->calendar->time);
 
-        $nextperiodlink = new moodle_url($this->url);
+        $nextperiodlink = new powereduc_url($this->url);
         $nextperiodlink->param('time', $nextperiod[0]);
 
-        $previousperiodlink = new moodle_url($this->url);
+        $previousperiodlink = new powereduc_url($this->url);
         $previousperiodlink->param('time', $previousperiod[0]);
 
         $viewmode = $this->calendar->get_viewmode() ?? 'month';

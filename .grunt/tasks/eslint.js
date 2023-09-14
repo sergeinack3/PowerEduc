@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
  */
 
 module.exports = grunt => {
-    const files = grunt.moodleEnv.files;
+    const files = grunt.powereducEnv.files;
 
     // Project configuration.
     grunt.config.merge({
@@ -37,10 +37,10 @@ module.exports = grunt => {
             },
 
             // Check AMD src files.
-            amd: {src: files ? files : grunt.moodleEnv.amdSrc},
+            amd: {src: files ? files : grunt.powereducEnv.amdSrc},
 
             // Check YUI module source files.
-            yui: {src: files ? files : grunt.moodleEnv.yuiSrc},
+            yui: {src: files ? files : grunt.powereducEnv.yuiSrc},
         },
     });
 

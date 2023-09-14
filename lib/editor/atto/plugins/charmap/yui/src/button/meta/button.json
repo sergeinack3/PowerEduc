@@ -1,7 +1,7 @@
 {
-    "moodle-atto_charmap-button": {
+    "powereduc-atto_charmap-button": {
         "requires": [
-            "moodle-editor_atto-plugin"
+            "powereduc-editor_atto-plugin"
         ]
     }
 }

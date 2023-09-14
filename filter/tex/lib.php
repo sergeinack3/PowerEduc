@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ function filter_tex_get_executable($debug=false) {
         if (is_executable($pathmimetex)) {
             return $pathmimetex;
         } else {
-            throw new \moodle_exception('mimetexnotexecutable', 'error');
+            throw new \powereduc_exception('mimetexnotexecutable', 'error');
         }
     }
 
@@ -46,7 +46,7 @@ function filter_tex_get_executable($debug=false) {
         if (is_executable($custom_commandpath)) {
             return $custom_commandpath;
         } else {
-            throw new \moodle_exception('mimetexnotexecutable', 'error');
+            throw new \powereduc_exception('mimetexnotexecutable', 'error');
         }
     }
 
@@ -61,7 +61,7 @@ function filter_tex_get_executable($debug=false) {
             return "$CFG->dirroot/filter/tex/mimetex.linux";
     }
 
-    throw new \moodle_exception('mimetexisnotexist', 'error');
+    throw new \powereduc_exception('mimetexisnotexist', 'error');
 }
 
 /**

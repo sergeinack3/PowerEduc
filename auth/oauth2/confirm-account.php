@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ $PAGE->set_context(context_system::instance());
 $auth = get_auth_plugin('oauth2');
 
 if (!\auth_oauth2\api::is_enabled()) {
-    throw new \moodle_exception('notenabled', 'auth_oauth2');
+    throw new \powereduc_exception('notenabled', 'auth_oauth2');
 }
 
 $confirmed = $auth->user_confirm($username, $usersecret);
@@ -58,7 +58,7 @@ if ($confirmed == AUTH_CONFIRM_ALREADY) {
     // The user has confirmed successfully, let's log them in.
 
     if (!$user = get_complete_user_data('username', $username)) {
-        throw new \moodle_exception('cannotfinduser', '', '', s($username));
+        throw new \powereduc_exception('cannotfinduser', '', '', s($username));
     }
 
     if (!$user->suspended) {

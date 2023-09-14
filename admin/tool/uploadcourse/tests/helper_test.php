@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -309,7 +309,7 @@ class helper_test extends \advanced_testcase {
 
         // Now prohibit the capability to change locked fields for the manager role.
         $managerrole = $DB->get_record('role', ['shortname' => 'manager']);
-        role_change_permission($managerrole->id, $context, 'moodle/course:changelockedcustomfields', CAP_PROHIBIT);
+        role_change_permission($managerrole->id, $context, 'powereduc/course:changelockedcustomfields', CAP_PROHIBIT);
 
         // The locked 'mytext' custom field should not be returned.
         $fields = tool_uploadcourse_helper::get_custom_course_field_data($data, [], $context);

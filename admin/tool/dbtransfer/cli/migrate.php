@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -159,7 +159,7 @@ cli_heading(get_string('transferringdbto', 'tool_dbtransfer', $a));
 // Try target DB connection.
 $problem = '';
 
-$targetdb = moodle_database::get_driver_instance($options['dbtype'], $options['dblibrary']);
+$targetdb = powereduc_database::get_driver_instance($options['dbtype'], $options['dblibrary']);
 $dboptions = array();
 if ($options['dbport']) {
     $dboptions['dbport'] = $options['dbport'];
@@ -173,7 +173,7 @@ try {
     if ($targetdb->get_tables()) {
         $problem .= get_string('targetdatabasenotempty', 'tool_dbtransfer');
     }
-} catch (moodle_exception $e) {
+} catch (powereduc_exception $e) {
     $problem .= $e->debuginfo."\n\n";
     $problem .= get_string('notargetconectexception', 'tool_dbtransfer');
 }

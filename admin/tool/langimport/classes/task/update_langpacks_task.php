@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * A scheduled task for updating langpacks.
  *
  * @package    tool_langimport
- * @copyright  2014 Dan Poltawski <dan@moodle.com>
+ * @copyright  2014 Dan Poltawski <dan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace tool_langimport\task;
@@ -27,7 +27,7 @@ namespace tool_langimport\task;
  * A scheduled task for updating langpacks.
  *
  * @package    tool_langimport
- * @copyright  2014 Dan Poltawski <dan@moodle.com>
+ * @copyright  2014 Dan Poltawski <dan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class update_langpacks_task extends \core\task\scheduled_task {

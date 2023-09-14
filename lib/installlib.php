@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Functions to support installation process
@@ -232,7 +232,7 @@ function install_db_validate($database, $dbhost, $dbuser, $dbpass, $dbname, $pre
  * @return string
  */
 function install_generate_configphp($database, $cfg) {
-    $configphp = '<?php  // Moodle configuration file' . PHP_EOL . PHP_EOL;
+    $configphp = '<?php  // PowerEduc configuration file' . PHP_EOL . PHP_EOL;
 
     $configphp .= 'unset($CFG);' . PHP_EOL;
     $configphp .= 'global $CFG;' . PHP_EOL;
@@ -344,7 +344,7 @@ function install_print_header($config, $stagename, $heading, $stagetext, $stagec
           <link rel="shortcut icon" href="theme/clean/pix/favicon.ico" />';
 
     echo '<link rel="stylesheet" type="text/css" href="'.$CFG->wwwroot.'/install/css.php" />
-          <title>'.get_string('installation','install').' - Moodle '.$CFG->target_release.'</title>
+          <title>'.get_string('installation','install').' - PowerEduc '.$CFG->target_release.'</title>
           <meta name="robots" content="noindex">
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           <meta http-equiv="pragma" content="no-cache" />
@@ -409,7 +409,7 @@ function install_print_footer($config, $reload=false) {
     echo '</fieldset><div id="nav_buttons" class="mb-3 w-100 d-flex">'.$first.$next.'</div>';
 
     $homelink  = '<div class="sitelink">'.
-       '<a title="Moodle '. $CFG->target_release .'" href="http://docs.powereduc.org/en/Administrator_documentation" onclick="this.target=\'_blank\'">'.
+       '<a title="PowerEduc '. $CFG->target_release .'" href="http://docs.powereduc.org/en/Administrator_documentation" onclick="this.target=\'_blank\'">'.
        '<img src="pix/powereduclogo.png" alt="'.get_string('powereduclogo').'" /></a></div>';
 
     echo '</form></div>';
@@ -418,7 +418,7 @@ function install_print_footer($config, $reload=false) {
 }
 
 /**
- * Install Moodle DB,
+ * Install PowerEduc DB,
  * config.php must exist, there must not be any tables in db yet.
  *
  * @param array $options adminpass is mandatory

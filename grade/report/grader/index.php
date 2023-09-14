@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * The gradebook grader report
  *
  * @package   gradereport_grader
- * @copyright 2007 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2007 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -43,13 +43,13 @@ $toggle_type   = optional_param('toggle_type', 0, PARAM_ALPHANUM);
 $graderreportsifirst  = optional_param('sifirst', null, PARAM_NOTAGS);
 $graderreportsilast   = optional_param('silast', null, PARAM_NOTAGS);
 
-$PAGE->set_url(new moodle_url('/grade/report/grader/index.php', array('id'=>$courseid)));
+$PAGE->set_url(new powereduc_url('/grade/report/grader/index.php', array('id'=>$courseid)));
 $PAGE->set_pagelayout('report');
 $PAGE->requires->js_call_amd('gradereport_grader/stickycolspan', 'init');
 
 // basic access checks
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 require_login($course);
 $context = context_course::instance($course->id);
@@ -63,7 +63,7 @@ if (isset($graderreportsilast)) {
 }
 
 require_capability('gradereport/grader:view', $context);
-require_capability('moodle/grade:viewall', $context);
+require_capability('powereduc/grade:viewall', $context);
 
 // return tracking object
 $gpr = new grade_plugin_return(
@@ -84,7 +84,7 @@ $USER->grade_last_report[$course->id] = 'grader';
 // Build editing on/off buttons.
 $buttons = '';
 
-$PAGE->set_other_editing_capability('moodle/grade:edit');
+$PAGE->set_other_editing_capability('powereduc/grade:edit');
 if ($PAGE->user_allowed_editing() && !$PAGE->theme->haseditswitch) {
     if ($edit != - 1) {
         $USER->editing = $edit;
@@ -92,7 +92,7 @@ if ($PAGE->user_allowed_editing() && !$PAGE->theme->haseditswitch) {
 
     // Page params for the turn editing on button.
     $options = $gpr->get_options();
-    $buttons = $OUTPUT->edit_button(new moodle_url($PAGE->url, $options), 'get');
+    $buttons = $OUTPUT->edit_button(new powereduc_url($PAGE->url, $options), 'get');
 }
 
 $gradeserror = array();
@@ -128,7 +128,7 @@ if ($report->currentgroup == -2) {
 }
 
 $warnings = [];
-$isediting = has_capability('moodle/grade:edit', $context) && isset($USER->editing) && $USER->editing;
+$isediting = has_capability('powereduc/grade:edit', $context) && isset($USER->editing) && $USER->editing;
 if ($isediting && ($data = data_submitted()) && confirm_sesskey()) {
     // Processing posted grades & feedback here.
     $warnings = $report->process_data($data);
@@ -140,7 +140,7 @@ $report->load_final_grades();
 echo $report->group_selector;
 
 // User search
-$url = new moodle_url('/grade/report/grader/index.php', array('id' => $course->id));
+$url = new powereduc_url('/grade/report/grader/index.php', array('id' => $course->id));
 $firstinitial = $SESSION->gradereport["filterfirstname-{$context->id}"] ?? '';
 $lastinitial  = $SESSION->gradereport["filtersurname-{$context->id}"] ?? '';
 $totalusers = $report->get_numusers(true, false);

@@ -7,19 +7,19 @@ $ADMIN->add('users', new admin_category('roles', new lang_string('permissions', 
 $ADMIN->add('users', new admin_category('privacy', new lang_string('privacyandpolicies', 'admin')));
 
 if ($hassiteconfig
- or has_capability('moodle/user:create', $systemcontext)
- or has_capability('moodle/user:update', $systemcontext)
- or has_capability('moodle/user:delete', $systemcontext)
- or has_capability('moodle/role:manage', $systemcontext)
- or has_capability('moodle/role:assign', $systemcontext)
- or has_capability('moodle/cohort:manage', $systemcontext)
- or has_capability('moodle/cohort:view', $systemcontext)) { // Speedup for non-admins, add all caps used on this page.
+ or has_capability('powereduc/user:create', $systemcontext)
+ or has_capability('powereduc/user:update', $systemcontext)
+ or has_capability('powereduc/user:delete', $systemcontext)
+ or has_capability('powereduc/role:manage', $systemcontext)
+ or has_capability('powereduc/role:assign', $systemcontext)
+ or has_capability('powereduc/cohort:manage', $systemcontext)
+ or has_capability('powereduc/cohort:view', $systemcontext)) { // Speedup for non-admins, add all caps used on this page.
 
 
     // Stuff under the "accounts" subcategory.
-    $ADMIN->add('accounts', new admin_externalpage('editusers', new lang_string('userlist','admin'), "$CFG->wwwroot/$CFG->admin/user.php", array('moodle/user:update', 'moodle/user:delete')));
-    $ADMIN->add('accounts', new admin_externalpage('userbulk', new lang_string('userbulk','admin'), "$CFG->wwwroot/$CFG->admin/user/user_bulk.php", array('moodle/user:update', 'moodle/user:delete')));
-    $ADMIN->add('accounts', new admin_externalpage('addnewuser', new lang_string('addnewuser'), "$CFG->wwwroot/user/editadvanced.php?id=-1", 'moodle/user:create'));
+    $ADMIN->add('accounts', new admin_externalpage('editusers', new lang_string('userlist','admin'), "$CFG->wwwroot/$CFG->admin/user.php", array('powereduc/user:update', 'powereduc/user:delete')));
+    $ADMIN->add('accounts', new admin_externalpage('userbulk', new lang_string('userbulk','admin'), "$CFG->wwwroot/$CFG->admin/user/user_bulk.php", array('powereduc/user:update', 'powereduc/user:delete')));
+    $ADMIN->add('accounts', new admin_externalpage('addnewuser', new lang_string('addnewuser'), "$CFG->wwwroot/user/editadvanced.php?id=-1", 'powereduc/user:create'));
 
     // User management settingpage.
     $temp = new admin_settingpage('usermanagement', new lang_string('usermanagement', 'admin'));
@@ -99,8 +99,8 @@ if ($hassiteconfig
     }
     $ADMIN->add('accounts', $temp);
 
-    $ADMIN->add('accounts', new admin_externalpage('profilefields', new lang_string('profilefields','admin'), "$CFG->wwwroot/user/profile/index.php", 'moodle/site:config'));
-    $ADMIN->add('accounts', new admin_externalpage('cohorts', new lang_string('cohorts', 'cohort'), $CFG->wwwroot . '/cohort/index.php', array('moodle/cohort:manage', 'moodle/cohort:view')));
+    $ADMIN->add('accounts', new admin_externalpage('profilefields', new lang_string('profilefields','admin'), "$CFG->wwwroot/user/profile/index.php", 'powereduc/site:config'));
+    $ADMIN->add('accounts', new admin_externalpage('cohorts', new lang_string('cohorts', 'cohort'), $CFG->wwwroot . '/cohort/index.php', array('powereduc/cohort:manage', 'powereduc/cohort:view')));
 
 
     // Stuff under the "roles" subcategory.
@@ -198,7 +198,7 @@ if ($hassiteconfig
                              'email' => new lang_string('email'),
                              'city' => new lang_string('city'),
                              'country' => new lang_string('country'),
-                             'moodlenetprofile' => new lang_string('moodlenetprofile', 'user'),
+                             'powereducnetprofile' => new lang_string('powereducnetprofile', 'user'),
                              'timezone' => new lang_string('timezone'),
                              'firstaccess' => new lang_string('firstaccess'),
                              'lastaccess' => new lang_string('lastaccess'),
@@ -209,7 +209,7 @@ if ($hassiteconfig
                        )));
 
         // Select fields to display as part of user identity (only to those
-        // with moodle/site:viewuseridentity).
+        // with powereduc/site:viewuseridentity).
         // Options include fields from the user table that might be helpful to
         // distinguish when adding or listing users ('I want to add the John
         // Smith from Science faculty') and any custom profile fields.
@@ -263,9 +263,9 @@ if ($hassiteconfig
     if (is_siteadmin()) {
         $ADMIN->add('roles', new admin_externalpage('admins', new lang_string('siteadministrators', 'role'), "$CFG->wwwroot/$CFG->admin/roles/admins.php"));
     }
-    $ADMIN->add('roles', new admin_externalpage('defineroles', new lang_string('defineroles', 'role'), "$CFG->wwwroot/$CFG->admin/roles/manage.php", 'moodle/role:manage'));
-    $ADMIN->add('roles', new admin_externalpage('assignroles', new lang_string('assignglobalroles', 'role'), "$CFG->wwwroot/$CFG->admin/roles/assign.php?contextid=".$systemcontext->id, 'moodle/role:assign'));
-    $ADMIN->add('roles', new admin_externalpage('checkpermissions', new lang_string('checkglobalpermissions', 'role'), "$CFG->wwwroot/$CFG->admin/roles/check.php?contextid=".$systemcontext->id, array('moodle/role:assign', 'moodle/role:safeoverride', 'moodle/role:override', 'moodle/role:manage')));
+    $ADMIN->add('roles', new admin_externalpage('defineroles', new lang_string('defineroles', 'role'), "$CFG->wwwroot/$CFG->admin/roles/manage.php", 'powereduc/role:manage'));
+    $ADMIN->add('roles', new admin_externalpage('assignroles', new lang_string('assignglobalroles', 'role'), "$CFG->wwwroot/$CFG->admin/roles/assign.php?contextid=".$systemcontext->id, 'powereduc/role:assign'));
+    $ADMIN->add('roles', new admin_externalpage('checkpermissions', new lang_string('checkglobalpermissions', 'role'), "$CFG->wwwroot/$CFG->admin/roles/check.php?contextid=".$systemcontext->id, array('powereduc/role:assign', 'powereduc/role:safeoverride', 'powereduc/role:override', 'powereduc/role:manage')));
 
 } // End of speedup.
 
@@ -277,7 +277,7 @@ if ($hassiteconfig) {
         0 => get_string('no'),
         1 => get_string('yes')
     );
-    $url = new moodle_url('/admin/settings.php?section=supportcontact');
+    $url = new powereduc_url('/admin/settings.php?section=supportcontact');
     $url = $url->out();
     $setting = new admin_setting_configselect('agedigitalconsentverification',
         new lang_string('agedigitalconsentverification', 'admin'),

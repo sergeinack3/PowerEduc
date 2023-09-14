@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
@@ -58,8 +58,8 @@ class notification {
     public static function add($message, $level = null) {
         global $PAGE, $SESSION;
 
-        if ($PAGE && ($PAGE->state === \moodle_page::STATE_IN_BODY
-           || $PAGE->state === \moodle_page::STATE_DONE)) {
+        if ($PAGE && ($PAGE->state === \powereduc_page::STATE_IN_BODY
+           || $PAGE->state === \powereduc_page::STATE_DONE)) {
             // Currently in the page body - just render and exit immediately.
             // We insert some code to immediately insert this into the user-notifications created by the header.
             $id = uniqid();
@@ -124,7 +124,7 @@ class notification {
 
         $notification = $OUTPUT->render_from_template('core/local/notification/cta', $context);
 
-        if ($PAGE && $PAGE->state === \moodle_page::STATE_IN_BODY) {
+        if ($PAGE && $PAGE->state === \powereduc_page::STATE_IN_BODY) {
             $id = uniqid();
             echo \html_writer::span($notification, '', ['id' => $id]);
             echo \html_writer::script(

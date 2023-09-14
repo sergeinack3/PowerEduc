@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,5 +26,5 @@
 defined('POWEREDUC_INTERNAL') || die;
 
 if ($hassiteconfig) {
-    $ADMIN->add('unsupported', new admin_externalpage('toolinnodb', 'Convert to InnoDB', $CFG->wwwroot.'/'.$CFG->admin.'/tool/innodb/index.php', 'moodle/site:config', true));
+    $ADMIN->add('unsupported', new admin_externalpage('toolinnodb', 'Convert to InnoDB', $CFG->wwwroot.'/'.$CFG->admin.'/tool/innodb/index.php', 'powereduc/site:config', true));
 }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -138,7 +138,7 @@ class events_test extends \advanced_testcase {
         $gradescale->scale       = 'Distinction, Very Good, Good, Pass, Fail';
         $gradescale->description = 'This scale is used to mark standard assignments.';
 
-        $url = new \moodle_url('/grade/edit/scale/index.php', array('id' => $this->course->id));
+        $url = new \powereduc_url('/grade/edit/scale/index.php', array('id' => $this->course->id));
 
         // Trigger and capture the event.
         $sink = $this->redirectEvents();
@@ -189,7 +189,7 @@ class events_test extends \advanced_testcase {
         $id = $gradescale->insert();
 
         $gradescale->name = 'Updated info for this unittest grade_scale';
-        $url = new \moodle_url('/grade/edit/scale/index.php', array('id' => $this->course->id));
+        $url = new \powereduc_url('/grade/edit/scale/index.php', array('id' => $this->course->id));
 
         // Trigger and capture the event.
         $sink = $this->redirectEvents();

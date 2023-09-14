@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Behat basic functions
@@ -21,7 +21,7 @@
  *
  * This script should not be usually included, neither any of its functions
  * used, within mooodle code at all. It's for exclusive use of behat and
- * moodle setup.php. For places requiring a different/special behavior
+ * powereduc setup.php. For places requiring a different/special behavior
  * needing to check if are being run as part of behat tests, use:
  *     if (defined('BEHAT_SITE_RUNNING')) { ...
  *
@@ -136,7 +136,7 @@ function behat_error_handler($errno, $errstr, $errfile, $errline) {
     // This error handler receives E_ALL | E_STRICT, running the behat test site the debug level is
     // set to DEVELOPER and will always include E_NOTICE,E_USER_NOTICE... as part of E_ALL, if the current
     // error_reporting() value does not include one of those levels is because it has been forced through
-    // the moodle code (see fix_utf8() for example) in that cases we respect the forced error level value.
+    // the powereduc code (see fix_utf8() for example) in that cases we respect the forced error level value.
     $respect = array(E_NOTICE, E_USER_NOTICE, E_STRICT, E_WARNING, E_USER_WARNING);
     foreach ($respect as $respectable) {
 
@@ -243,7 +243,7 @@ function behat_clean_init_config() {
 function behat_check_config_vars() {
     global $CFG;
 
-    $moodleprefix = empty($CFG->prefix) ? '' : $CFG->prefix;
+    $powereducprefix = empty($CFG->prefix) ? '' : $CFG->prefix;
     $behatprefix = empty($CFG->behat_prefix) ? '' : $CFG->behat_prefix;
     $phpunitprefix = empty($CFG->phpunit_prefix) ? '' : $CFG->phpunit_prefix;
     $behatdbname = empty($CFG->behat_dbname) ? $CFG->dbname : $CFG->behat_dbname;
@@ -256,7 +256,7 @@ function behat_check_config_vars() {
         behat_error(BEHAT_EXITCODE_CONFIG,
             'Define $CFG->behat_prefix in config.php');
     }
-    if ($behatprefix == $moodleprefix && $behatdbname == $CFG->dbname && $behatdbhost == $CFG->dbhost) {
+    if ($behatprefix == $powereducprefix && $behatdbname == $CFG->dbname && $behatdbhost == $CFG->dbhost) {
         behat_error(BEHAT_EXITCODE_CONFIG,
             '$CFG->behat_prefix in config.php must be different from $CFG->prefix' .
             ' when $CFG->behat_dbname and $CFG->behat_host are not set or when $CFG->behat_dbname equals $CFG->dbname' .

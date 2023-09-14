@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ $returnurl  = optional_param('returnurl', null, PARAM_LOCALURL);
 
 list($context, $course, $cm) = get_context_info_array($contextid);
 
-$url = new moodle_url('/admin/roles/check.php', array('contextid' => $contextid));
+$url = new powereduc_url('/admin/roles/check.php', array('contextid' => $contextid));
 
 if ($course) {
     $isfrontpage = ($course->id == SITEID);
@@ -47,12 +47,12 @@ if ($course) {
 
 // Security first.
 require_login($course, false, $cm);
-if (!has_any_capability(array('moodle/role:assign', 'moodle/role:safeoverride', 'moodle/role:override', 'moodle/role:manage'), $context)) {
-    throw new \moodle_exception('nopermissions', 'error', '', get_string('checkpermissions', 'core_role'));
+if (!has_any_capability(array('powereduc/role:assign', 'powereduc/role:safeoverride', 'powereduc/role:override', 'powereduc/role:manage'), $context)) {
+    throw new \powereduc_exception('nopermissions', 'error', '', get_string('checkpermissions', 'core_role'));
 }
 
 navigation_node::override_active_url($url);
-$pageurl = new moodle_url($url);
+$pageurl = new powereduc_url($url);
 if ($returnurl) {
     $pageurl->param('returnurl', $returnurl);
 }
@@ -73,7 +73,7 @@ $contextname = $context->get_context_name();
 
 // Get the user_selector we will need.
 // Teachers within a course just get to see the same list of enrolled users.
-// Admins (people with moodle/role:manage) can run this report for any user.
+// Admins (people with powereduc/role:manage) can run this report for any user.
 $options = array('accesscontext' => $context);
 $userselector = new core_role_check_users_selector('reportuser', $options);
 $userselector->set_rows(20);
@@ -95,7 +95,7 @@ switch ($context->contextlevel) {
         admin_externalpage_setup('checkpermissions', '', array('contextid' => $contextid));
         break;
     case CONTEXT_USER:
-        $fullname = fullname($user, has_capability('moodle/site:viewfullnames', $context));
+        $fullname = fullname($user, has_capability('powereduc/site:viewfullnames', $context));
         $PAGE->set_heading($fullname);
         $showroles = 1;
         break;
@@ -150,8 +150,8 @@ if (!is_null($reportuser)) {
             $link = html_writer::link($racontext->get_url(), $racontext->get_context_name());
 
             $rolename = $rolenames[$ra->roleid]->localname;
-            if (has_capability('moodle/role:manage', $systemcontext)) {
-                $rolename = html_writer::link(new moodle_url('/admin/roles/define.php',
+            if (has_capability('powereduc/role:manage', $systemcontext)) {
+                $rolename = html_writer::link(new powereduc_url('/admin/roles/define.php',
                         array('action' => 'view', 'roleid' => $ra->roleid)), $rolename);
             }
 
@@ -189,7 +189,7 @@ echo $OUTPUT->box_end();
 if (!$PAGE->has_secondary_navigation() && $context->contextlevel > CONTEXT_USER) {
     echo html_writer::start_tag('div', array('class'=>'backlink'));
     if ($returnurl) {
-        $backurl = new moodle_url($returnurl);
+        $backurl = new powereduc_url($returnurl);
     } else {
         $backurl = $context->get_url();
     }

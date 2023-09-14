@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Provides {@link lib/editor/tests/fixtures/editor_form} class.
@@ -37,7 +37,7 @@ require_once($CFG->libdir.'/formslib.php');
  * @copyright 2018 Jake Hau <phuchau1509@gmail.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class editor_form extends moodleform {
+class editor_form extends powereducform {
 
     /**
      * Form definition. Abstract method - always override!
@@ -47,7 +47,7 @@ class editor_form extends moodleform {
         $editoroptions = $this->_customdata['editoroptions'] ?? null;
 
         // Add header.
-        $mform->addElement('header', 'myheader', 'Editor in Moodle form');
+        $mform->addElement('header', 'myheader', 'Editor in PowerEduc form');
 
         // Add element control.
         $mform->addElement('select', 'mycontrol', 'My control', ['Enable', 'Disable']);

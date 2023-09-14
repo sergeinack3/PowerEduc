@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
@@ -95,14 +95,14 @@ have been fixed <strong><a href="http://third.url/view.php">last week</a></stron
         $this->assertSame(false, strpos($result, '[4]'));
 
         // Test multiple occurrences of the same URL.
-        $text = '<p>See <a href="http://moodle.org">moodle.org</a>,
+        $text = '<p>See <a href="http://powereduc.org">powereduc.org</a>,
             <a href="http://www.google.fr">google</a>, <a href="http://www.univ-lemans.fr">univ-lemans</a>
             and <a href="http://www.google.fr">google</a>.
             Also try <a href="https://www.google.fr">google via HTTPS</a>.';
         $result = html_to_text($text, 5000, true);
-        $this->assertSame(0, strpos($result, 'See moodle.org [1], google [2], univ-lemans [3] and google [2]. Also try google via HTTPS [4].'));
+        $this->assertSame(0, strpos($result, 'See powereduc.org [1], google [2], univ-lemans [3] and google [2]. Also try google via HTTPS [4].'));
         $this->assertSame(false, strpos($result, '[0]'));
-        $this->assertSame(1, preg_match('|^'.preg_quote('[1] http://moodle.org').'$|m', $result));
+        $this->assertSame(1, preg_match('|^'.preg_quote('[1] http://powereduc.org').'$|m', $result));
         $this->assertSame(1, preg_match('|^'.preg_quote('[2] http://www.google.fr').'$|m', $result));
         $this->assertSame(1, preg_match('|^'.preg_quote('[3] http://www.univ-lemans.fr').'$|m', $result));
         $this->assertSame(1, preg_match('|^'.preg_quote('[4] https://www.google.fr').'$|m', $result));

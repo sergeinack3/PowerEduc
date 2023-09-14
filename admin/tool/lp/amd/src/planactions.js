@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -181,10 +181,10 @@ define(['jquery',
 
         requests[0].done(function(plan) {
             str.get_strings([
-                {key: 'confirm', component: 'moodle'},
+                {key: 'confirm', component: 'powereduc'},
                 {key: 'deleteplan', component: 'tool_lp', param: plan.name},
-                {key: 'delete', component: 'moodle'},
-                {key: 'cancel', component: 'moodle'}
+                {key: 'delete', component: 'powereduc'},
+                {key: 'cancel', component: 'powereduc'}
             ]).done(function(strings) {
                 notification.confirm(
                     strings[0], // Confirm.
@@ -228,10 +228,10 @@ define(['jquery',
 
         requests[0].done(function(plan) {
             str.get_strings([
-                {key: 'confirm', component: 'moodle'},
+                {key: 'confirm', component: 'powereduc'},
                 {key: 'reopenplanconfirm', component: 'tool_lp', param: plan.name},
                 {key: 'reopenplan', component: 'tool_lp'},
-                {key: 'cancel', component: 'moodle'}
+                {key: 'cancel', component: 'powereduc'}
             ]).done(function(strings) {
                 notification.confirm(
                     strings[0], // Confirm.
@@ -275,10 +275,10 @@ define(['jquery',
 
         requests[0].done(function(plan) {
             str.get_strings([
-                {key: 'confirm', component: 'moodle'},
+                {key: 'confirm', component: 'powereduc'},
                 {key: 'completeplanconfirm', component: 'tool_lp', param: plan.name},
                 {key: 'completeplan', component: 'tool_lp'},
-                {key: 'cancel', component: 'moodle'}
+                {key: 'cancel', component: 'powereduc'}
             ]).done(function(strings) {
                 notification.confirm(
                     strings[0], // Confirm.
@@ -321,10 +321,10 @@ define(['jquery',
 
         requests[0].done(function(plan) {
             str.get_strings([
-                {key: 'confirm', component: 'moodle'},
+                {key: 'confirm', component: 'powereduc'},
                 {key: 'unlinkplantemplateconfirm', component: 'tool_lp', param: plan.name},
                 {key: 'unlinkplantemplate', component: 'tool_lp'},
-                {key: 'cancel', component: 'moodle'}
+                {key: 'cancel', component: 'powereduc'}
             ]).done(function(strings) {
                 notification.confirm(
                     strings[0], // Confirm.

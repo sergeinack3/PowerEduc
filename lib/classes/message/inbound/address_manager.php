@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Incoming Message address manager.
@@ -325,7 +325,7 @@ class address_manager {
             if ($content['handlerid1'] > 0 || $content['userid1'] > 0 || $content['datavalue1'] > 0) {
                 // Any 64-bit integer which is greater than the 32-bit integer size will have a non-zero value in the first
                 // half of the integer.
-                throw new \moodle_exception('Mixed environment.' .
+                throw new \powereduc_exception('Mixed environment.' .
                     ' Key generated with a 64-bit machine but received into a 32-bit machine.');
             }
             $content['handlerid'] = $content['handlerid2'];

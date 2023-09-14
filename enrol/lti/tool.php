@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * The main entry point for the external system.
  *
  * @package    enrol_lti
- * @copyright  2016 Mark Nelson <markn@moodle.com>
+ * @copyright  2016 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,7 +27,7 @@ require_once(__DIR__ . '/../../config.php');
 $toolid = required_param('id', PARAM_INT);
 
 $PAGE->set_context(context_system::instance());
-$url = new moodle_url('/enrol/lti/tool.php');
+$url = new powereduc_url('/enrol/lti/tool.php');
 $PAGE->set_url($url);
 $PAGE->set_pagelayout('popup');
 $PAGE->set_title(get_string('opentool', 'enrol_lti'));
@@ -37,19 +37,19 @@ $tool = \enrol_lti\helper::get_lti_tool($toolid);
 
 // Check if the authentication plugin is disabled.
 if (!is_enabled_auth('lti')) {
-    throw new \moodle_exception('pluginnotenabled', 'auth', '', get_string('pluginname', 'auth_lti'));
+    throw new \powereduc_exception('pluginnotenabled', 'auth', '', get_string('pluginname', 'auth_lti'));
     exit();
 }
 
 // Check if the enrolment plugin is disabled.
 if (!enrol_is_enabled('lti')) {
-    throw new \moodle_exception('enrolisdisabled', 'enrol_lti');
+    throw new \powereduc_exception('enrolisdisabled', 'enrol_lti');
     exit();
 }
 
 // Check if the enrolment instance is disabled.
 if ($tool->status != ENROL_INSTANCE_ENABLED) {
-    throw new \moodle_exception('enrolisdisabled', 'enrol_lti');
+    throw new \powereduc_exception('enrolisdisabled', 'enrol_lti');
     exit();
 }
 
@@ -59,7 +59,7 @@ $messagetype = required_param('lti_message_type', PARAM_TEXT);
 
 // Only accept launch requests from this endpoint.
 if ($messagetype != "basic-lti-launch-request") {
-    throw new \moodle_exception('invalidrequest', 'enrol_lti');
+    throw new \powereduc_exception('invalidrequest', 'enrol_lti');
     exit();
 }
 

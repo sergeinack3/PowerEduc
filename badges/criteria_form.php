@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ require_once($CFG->libdir . '/badgeslib.php');
  * Form to edit badge criteria.
  *
  */
-class edit_criteria_form extends moodleform {
+class edit_criteria_form extends powereducform {
     public function definition() {
         global $DB;
         $mform = $this->_form;

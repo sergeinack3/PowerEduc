@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
@@ -511,7 +511,7 @@ class file_system_test extends \advanced_testcase {
         $filecontent = 'example content';
         $contenthash = \file_storage::hash_from_string($filecontent);
 
-        $DB = $this->getMockBuilder(\moodle_database::class)
+        $DB = $this->getMockBuilder(\powereduc_database::class)
             ->onlyMethods(['record_exists'])
             ->getMockForAbstractClass();
         $DB->method('record_exists')->willReturn(true);
@@ -535,7 +535,7 @@ class file_system_test extends \advanced_testcase {
         $filecontent = 'example content';
         $contenthash = \file_storage::hash_from_string($filecontent);
 
-        $DB = $this->getMockBuilder(\moodle_database::class)
+        $DB = $this->getMockBuilder(\powereduc_database::class)
             ->onlyMethods(['record_exists'])
             ->getMockForAbstractClass();
         $DB->method('record_exists')->willReturn(false);

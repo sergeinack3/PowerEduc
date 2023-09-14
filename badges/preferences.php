@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Badges user preferences page.
@@ -28,7 +28,7 @@ require_once(__DIR__ . '/../config.php');
 require_once('preferences_form.php');
 require_once($CFG->dirroot.'/user/editlib.php');
 
-$url = new moodle_url('/badges/preferences.php');
+$url = new powereduc_url('/badges/preferences.php');
 
 require_login();
 $PAGE->set_context(context_user::instance($USER->id));
@@ -36,7 +36,7 @@ $PAGE->set_url($url);
 $PAGE->set_pagelayout('standard');
 
 if (empty($CFG->enablebadges)) {
-    throw new \moodle_exception('badgesdisabled', 'badges');
+    throw new \powereduc_exception('badgesdisabled', 'badges');
 }
 
 $mform = new badges_preferences_form();

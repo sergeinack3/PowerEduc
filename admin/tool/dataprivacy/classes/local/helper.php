@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ namespace tool_dataprivacy\local;
 defined('POWEREDUC_INTERNAL') || die();
 
 use coding_exception;
-use moodle_exception;
+use powereduc_exception;
 use tool_dataprivacy\api;
 use tool_dataprivacy\data_request;
 
@@ -60,12 +60,12 @@ class helper {
      * @param int $requesttype The request type.
      * @return string
      * @throws coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_request_type_string($requesttype) {
         $types = self::get_request_types();
         if (!isset($types[$requesttype])) {
-            throw new moodle_exception('errorinvalidrequesttype', 'tool_dataprivacy');
+            throw new powereduc_exception('errorinvalidrequesttype', 'tool_dataprivacy');
         }
         return $types[$requesttype];
     }
@@ -76,12 +76,12 @@ class helper {
      * @param int $requesttype The request type.
      * @return string
      * @throws coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_shortened_request_type_string($requesttype) {
         $types = self::get_request_types_short();
         if (!isset($types[$requesttype])) {
-            throw new moodle_exception('errorinvalidrequesttype', 'tool_dataprivacy');
+            throw new powereduc_exception('errorinvalidrequesttype', 'tool_dataprivacy');
         }
         return $types[$requesttype];
     }
@@ -117,12 +117,12 @@ class helper {
      *
      * @param int $status The request status.
      * @return string
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_request_status_string($status) {
         $statuses = self::get_request_statuses();
         if (!isset($statuses[$status])) {
-            throw new moodle_exception('errorinvalidrequeststatus', 'tool_dataprivacy');
+            throw new powereduc_exception('errorinvalidrequeststatus', 'tool_dataprivacy');
         }
 
         return $statuses[$status];
@@ -153,12 +153,12 @@ class helper {
      *
      * @param int $creation The request creation method.
      * @return string
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_request_creation_method_string($creation) {
         $creationmethods = self::get_request_creation_methods();
         if (!isset($creationmethods[$creation])) {
-            throw new moodle_exception('errorinvalidrequestcreationmethod', 'tool_dataprivacy');
+            throw new powereduc_exception('errorinvalidrequestcreationmethod', 'tool_dataprivacy');
         }
 
         return $creationmethods[$creation];

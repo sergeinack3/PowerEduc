@@ -10,12 +10,12 @@ weight: 2
 
 In this step-by-step guide you will create a new page called Breadcrumb navigation and compile it from a markdown text file to a HTML page in the component library.
 
-To add a page to the component library on your local machine navigate open your editor or file manager and create a new markdown text file in folder /content/moodle/components/breadcrumbs.md
+To add a page to the component library on your local machine navigate open your editor or file manager and create a new markdown text file in folder /content/powereduc/components/breadcrumbs.md
 
 
 ```
 └── content
-    └── moodle
+    └── powereduc
        └── components
           └── breadcrumbs.md
 ```
@@ -57,8 +57,8 @@ Building sites …
 Total in 913 ms
 Running "componentlibrary:cssBuild" task
 Rendering Complete, saving .css file...
-Wrote CSS to /var/www/repositories/cl_master/moodle/admin/tool/componentlibrary/hugo/dist/css/docs.css
-Wrote Source Map to /var/www/repositories/cl_master/moodle/admin/tool/componentlibrary/hugo/dist/css/docs.css.map
+Wrote CSS to /var/www/repositories/cl_master/powereduc/admin/tool/componentlibrary/hugo/dist/css/docs.css
+Wrote Source Map to /var/www/repositories/cl_master/powereduc/admin/tool/componentlibrary/hugo/dist/css/docs.css.map
 Running "componentlibrary:indexBuild" task
 
 Done.

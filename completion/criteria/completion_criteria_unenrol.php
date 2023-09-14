@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -54,7 +54,7 @@ class completion_criteria_unenrol extends completion_criteria {
     /**
      * Add appropriate form elements to the critieria form
      *
-     * @param moodleform $mform Moodle forms object
+     * @param powereducform $mform Moodle forms object
      * @param stdClass $data Form data
      */
     public function config_form_display(&$mform, $data = null) {
@@ -140,6 +140,6 @@ class completion_criteria_unenrol extends completion_criteria {
      * @return pix_icon
      */
     public function get_icon($alt, array $attributes = null) {
-        return new pix_icon('i/user', $alt, 'moodle', $attributes);
+        return new pix_icon('i/user', $alt, 'powereduc', $attributes);
     }
 }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 /**
  * Core global functions for Blog.
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage blog
  * @copyright  2009 Nicolas Connault
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -32,8 +32,8 @@ require_once($CFG->dirroot .'/blog/rsslib.php');
 
 /**
  * User can edit a blog entry if this is their own blog entry and they have
- * the capability moodle/blog:create, or if they have the capability
- * moodle/blog:manageentries.
+ * the capability powereduc/blog:create, or if they have the capability
+ * powereduc/blog:manageentries.
  *
  * This also applies to deleting of entries.
  */
@@ -42,11 +42,11 @@ function blog_user_can_edit_entry($blogentry) {
 
     $sitecontext = context_system::instance();
 
-    if (has_capability('moodle/blog:manageentries', $sitecontext)) {
+    if (has_capability('powereduc/blog:manageentries', $sitecontext)) {
         return true; // Can edit any blog entry.
     }
 
-    if ($blogentry->userid == $USER->id && has_capability('moodle/blog:create', $sitecontext)) {
+    if ($blogentry->userid == $USER->id && has_capability('powereduc/blog:create', $sitecontext)) {
         return true; // Can edit own when having blog:create capability.
     }
 
@@ -71,12 +71,12 @@ function blog_user_can_view_user_entry($targetuserid, $blogentry=null) {
     }
 
     $sitecontext = context_system::instance();
-    if (has_capability('moodle/blog:manageentries', $sitecontext)) {
+    if (has_capability('powereduc/blog:manageentries', $sitecontext)) {
         return true; // Can manage all entries.
     }
 
     // If blog is in draft state, then make sure user have proper capability.
-    if ($blogentry && $blogentry->publishstate == 'draft' && !has_capability('moodle/blog:viewdrafts', $sitecontext)) {
+    if ($blogentry && $blogentry->publishstate == 'draft' && !has_capability('powereduc/blog:viewdrafts', $sitecontext)) {
         return false;  // Can not view draft of others.
     }
 
@@ -102,7 +102,7 @@ function blog_user_can_view_user_entry($targetuserid, $blogentry=null) {
         default:
             // If user is viewing other user blog, then user should have user:readuserblogs capability.
             $personalcontext = context_user::instance($targetuserid);
-            return has_capability('moodle/user:readuserblogs', $personalcontext);
+            return has_capability('powereduc/user:readuserblogs', $personalcontext);
         break;
 
     }
@@ -164,9 +164,9 @@ function blog_remove_associations_for_module($modcontextid) {
  */
 function blog_sync_external_entries($externalblog) {
     global $CFG, $DB;
-    require_once($CFG->libdir . '/simplepie/moodle_simplepie.php');
+    require_once($CFG->libdir . '/simplepie/powereduc_simplepie.php');
 
-    $rss = new moodle_simplepie();
+    $rss = new powereduc_simplepie();
     $rssfile = $rss->registry->create('File', array($externalblog->url));
     $filetest = $rss->registry->create('Locator', array($rssfile));
 
@@ -309,7 +309,7 @@ function blog_sync_external_entries($externalblog) {
  */
 function blog_delete_external_entries($externalblog) {
     global $DB;
-    require_capability('moodle/blog:manageexternal', context_system::instance());
+    require_capability('powereduc/blog:manageexternal', context_system::instance());
     $DB->delete_records_select('post',
                                "module='blog_external' AND " . $DB->sql_compare_text('content') . " = ?",
                                array($externalblog->id));
@@ -334,11 +334,11 @@ function blog_is_enabled_for_user() {
  * -  User specific options {@see blog_get_options_for_user}
  * -  General options (BLOG_LEVEL_GLOBAL)
  *
- * @param moodle_page $page The page to load for (normally $PAGE)
+ * @param powereduc_page $page The page to load for (normally $PAGE)
  * @param stdClass $userid Load for a specific user
  * @return array An array of options organised by type.
  */
-function blog_get_all_options(moodle_page $page, stdClass $userid = null) {
+function blog_get_all_options(powereduc_page $page, stdClass $userid = null) {
     global $CFG, $DB, $USER;
 
     $options = array();
@@ -379,11 +379,11 @@ function blog_get_all_options(moodle_page $page, stdClass $userid = null) {
     // If blog level is global then display a link to view all site entries.
     if (!empty($CFG->enableblogs)
         && $CFG->bloglevel >= BLOG_GLOBAL_LEVEL
-        && has_capability('moodle/blog:view', context_system::instance())) {
+        && has_capability('powereduc/blog:view', context_system::instance())) {
 
         $options[CONTEXT_SYSTEM] = array('viewsite' => array(
             'string' => get_string('viewsiteentries', 'blog'),
-            'link' => new moodle_url('/blog/index.php')
+            'link' => new powereduc_url('/blog/index.php')
         ));
     }
 
@@ -425,13 +425,13 @@ function blog_get_options_for_user(stdClass $user=null) {
     }
 
     $sitecontext = context_system::instance();
-    $canview = has_capability('moodle/blog:view', $sitecontext);
+    $canview = has_capability('powereduc/blog:view', $sitecontext);
 
     if (!$iscurrentuser && $canview && ($CFG->bloglevel >= BLOG_SITE_LEVEL)) {
         // Not the current user, but we can view and its blogs are enabled for SITE or GLOBAL.
         $options['userentries'] = array(
             'string' => get_string('viewuserentries', 'blog', fullname($user)),
-            'link' => new moodle_url('/blog/index.php', array('userid' => $user->id))
+            'link' => new powereduc_url('/blog/index.php', array('userid' => $user->id))
         );
     } else {
         // It's the current user.
@@ -439,21 +439,21 @@ function blog_get_options_for_user(stdClass $user=null) {
             // We can view our own blogs .... BIG surprise.
             $options['view'] = array(
                 'string' => get_string('blogentries', 'blog'),
-                'link' => new moodle_url('/blog/index.php', array('userid' => $USER->id))
+                'link' => new powereduc_url('/blog/index.php', array('userid' => $USER->id))
             );
         }
-        if (has_capability('moodle/blog:create', $sitecontext)) {
+        if (has_capability('powereduc/blog:create', $sitecontext)) {
             // We can add to our own blog.
             $options['add'] = array(
                 'string' => get_string('addnewentry', 'blog'),
-                'link' => new moodle_url('/blog/edit.php', array('action' => 'add'))
+                'link' => new powereduc_url('/blog/edit.php', array('action' => 'add'))
             );
         }
     }
     if ($canview && $CFG->enablerssfeeds) {
         $options['rss'] = array(
             'string' => get_string('rssfeed', 'blog'),
-            'link' => new moodle_url(rss_get_url($sitecontext->id, $USER->id, 'blog', 'user/'.$user->id))
+            'link' => new powereduc_url(rss_get_url($sitecontext->id, $USER->id, 'blog', 'user/'.$user->id))
         );
     }
 
@@ -497,34 +497,34 @@ function blog_get_options_for_course(stdClass $course, stdClass $user=null) {
         return $courseoptions[$key];
     }
 
-    if (has_capability('moodle/blog:view', $sitecontext)) {
+    if (has_capability('powereduc/blog:view', $sitecontext)) {
         // We can view!
         if ($CFG->bloglevel >= BLOG_SITE_LEVEL) {
             // View entries about this course.
             $options['courseview'] = array(
                 'string' => get_string('viewcourseblogs', 'blog'),
-                'link' => new moodle_url('/blog/index.php', array('courseid' => $course->id))
+                'link' => new powereduc_url('/blog/index.php', array('courseid' => $course->id))
             );
         }
         // View MY entries about this course.
         $options['courseviewmine'] = array(
             'string' => get_string('viewmyentriesaboutcourse', 'blog'),
-            'link' => new moodle_url('/blog/index.php', array('courseid' => $course->id, 'userid' => $USER->id))
+            'link' => new powereduc_url('/blog/index.php', array('courseid' => $course->id, 'userid' => $USER->id))
         );
         if (!empty($user) && ($CFG->bloglevel >= BLOG_SITE_LEVEL)) {
             // View the provided users entries about this course.
             $options['courseviewuser'] = array(
                 'string' => get_string('viewentriesbyuseraboutcourse', 'blog', fullname($user)),
-                'link' => new moodle_url('/blog/index.php', array('courseid' => $course->id, 'userid' => $user->id))
+                'link' => new powereduc_url('/blog/index.php', array('courseid' => $course->id, 'userid' => $user->id))
             );
         }
     }
 
-    if (has_capability('moodle/blog:create', $sitecontext)) {
+    if (has_capability('powereduc/blog:create', $sitecontext)) {
         // We can blog about this course.
         $options['courseadd'] = array(
             'string' => get_string('blogaboutthiscourse', 'blog'),
-            'link' => new moodle_url('/blog/edit.php', array('action' => 'add', 'courseid' => $course->id))
+            'link' => new powereduc_url('/blog/edit.php', array('action' => 'add', 'courseid' => $course->id))
         );
     }
 
@@ -567,7 +567,7 @@ function blog_get_options_for_module($module, $user=null) {
         return $moduleoptions[$key];
     }
 
-    if (has_capability('moodle/blog:view', $sitecontext)) {
+    if (has_capability('powereduc/blog:view', $sitecontext)) {
         // Save correct module name for later usage.
         $modulename = get_string('modulename', $module->modname);
 
@@ -578,13 +578,13 @@ function blog_get_options_for_module($module, $user=null) {
             $a->type = $modulename;
             $options['moduleview'] = array(
                 'string' => get_string('viewallmodentries', 'blog', $a),
-                'link' => new moodle_url('/blog/index.php', array('modid' => $module->id))
+                'link' => new powereduc_url('/blog/index.php', array('modid' => $module->id))
             );
         }
         // View MY entries about this module.
         $options['moduleviewmine'] = array(
             'string' => get_string('viewmyentriesaboutmodule', 'blog', $modulename),
-            'link' => new moodle_url('/blog/index.php', array('modid' => $module->id, 'userid' => $USER->id))
+            'link' => new powereduc_url('/blog/index.php', array('modid' => $module->id, 'userid' => $USER->id))
         );
         if (!empty($user) && ($CFG->bloglevel >= BLOG_SITE_LEVEL)) {
             // View the given users entries about this module.
@@ -593,16 +593,16 @@ function blog_get_options_for_module($module, $user=null) {
             $a->user = fullname($user);
             $options['moduleviewuser'] = array(
                 'string' => get_string('blogentriesbyuseraboutmodule', 'blog', $a),
-                'link' => new moodle_url('/blog/index.php', array('modid' => $module->id, 'userid' => $user->id))
+                'link' => new powereduc_url('/blog/index.php', array('modid' => $module->id, 'userid' => $user->id))
             );
         }
     }
 
-    if (has_capability('moodle/blog:create', $sitecontext)) {
+    if (has_capability('powereduc/blog:create', $sitecontext)) {
         // The user can blog about this module.
         $options['moduleadd'] = array(
             'string' => get_string('blogaboutthismodule', 'blog', $modulename),
-            'link' => new moodle_url('/blog/edit.php', array('action' => 'add', 'modid' => $module->id))
+            'link' => new powereduc_url('/blog/edit.php', array('action' => 'add', 'modid' => $module->id))
         );
     }
     // Cache the options.
@@ -620,7 +620,7 @@ function blog_get_options_for_module($module, $user=null) {
  * 1. heading: The heading displayed above the blog entries
  * 2. stradd:  The text to be used as the "Add entry" link
  * 3. strview: The text to be used as the "View entries" link
- * 4. url:     The moodle_url object used as the base for add and view links
+ * 4. url:     The powereduc_url object used as the base for add and view links
  * 5. filters: An array of parameters used to filter blog listings. Used by index.php and the Recent blogs block
  *
  * All other variables are set directly in $PAGE
@@ -665,7 +665,7 @@ function blog_get_headers($courseid=null, $groupid=null, $userid=null, $tagid=nu
 
     $headers = array('title' => '', 'heading' => '', 'cm' => null, 'filters' => array());
 
-    $blogurl = new moodle_url('/blog/index.php');
+    $blogurl = new powereduc_url('/blog/index.php');
 
     $headers['stradd'] = get_string('addnewentry', 'blog');
     $headers['strview'] = null;
@@ -900,7 +900,7 @@ function blog_get_headers($courseid=null, $groupid=null, $userid=null, $tagid=nu
         }
 
         // Append Search info.
-        if (!empty($search) && has_capability('moodle/blog:search', $sitecontext)) {
+        if (!empty($search) && has_capability('powereduc/blog:search', $sitecontext)) {
             $headers['filters']['search'] = $search;
             $blogurl->param('search', $search);
             $PAGE->navbar->add(get_string('searchterm', 'blog', $search), $blogurl->out());
@@ -1020,7 +1020,7 @@ function blog_comment_validate($commentparam) {
 
     // Validate if user has blog view permission.
     $sitecontext = context_system::instance();
-    return has_capability('moodle/blog:view', $sitecontext) &&
+    return has_capability('powereduc/blog:view', $sitecontext) &&
             blog_user_can_view_user_entry($blogentry->userid, $blogentry);
 }
 
@@ -1060,7 +1060,7 @@ function core_blog_myprofile_navigation(core_user\output\myprofile\tree $tree, $
     if (!blog_user_can_view_user_entry($user->id)) {
         return true;
     }
-    $url = new moodle_url("/blog/index.php", array('userid' => $user->id));
+    $url = new powereduc_url("/blog/index.php", array('userid' => $user->id));
     if (!empty($course)) {
         $url->param('courseid', $course->id);
     }
@@ -1096,7 +1096,7 @@ function blog_get_tagged_posts($tag, $exclusivemode = false, $fromctx = 0, $ctx 
     $context = $ctx ? context::instance_by_id($ctx) : context_system::instance();
 
     $content = '';
-    if (empty($CFG->enableblogs) || !has_capability('moodle/blog:view', $systemcontext)) {
+    if (empty($CFG->enableblogs) || !has_capability('powereduc/blog:view', $systemcontext)) {
         // Blogs are not enabled or are not visible to the current user.
         $totalpages = 0;
     } else if ($context->contextlevel != CONTEXT_SYSTEM && empty($CFG->useblogassociations)) {
@@ -1137,12 +1137,12 @@ function blog_get_tagged_posts($tag, $exclusivemode = false, $fromctx = 0, $ctx 
                     $class = '';
                 }
 
-                $url = new moodle_url('/blog/index.php', array('entryid' => $blog->id));
+                $url = new powereduc_url('/blog/index.php', array('entryid' => $blog->id));
                 $subject = html_writer::link($url, $subject, array('class' => $class));
 
                 $fullname = fullname($user);
                 if (user_can_view_profile($user)) {
-                    $profilelink = new moodle_url('/user/view.php', array('id' => $blog->userid));
+                    $profilelink = new powereduc_url('/user/view.php', array('id' => $blog->userid));
                     $fullname = html_writer::link($profilelink, $fullname);
                 }
                 $details = $fullname . ', ' . userdate($blog->created);
@@ -1159,7 +1159,7 @@ function blog_get_tagged_posts($tag, $exclusivemode = false, $fromctx = 0, $ctx 
             } else if ($context->contextlevel == CONTEXT_MODULE) {
                 $urlparams['modid'] = $context->instanceid;
             }
-            $allblogsurl = new moodle_url('/blog/index.php', $urlparams);
+            $allblogsurl = new powereduc_url('/blog/index.php', $urlparams);
 
             $rv = new core_tag\output\tagindex($tag, 'core', 'post',
                     $content,
@@ -1201,10 +1201,10 @@ function blog_validate_access($courseid, $modid, $groupid, $entryid, $userid) {
         $courseid = $DB->get_field('groups', 'courseid', array('id' => $groupid));
     }
 
-    if (!$userid && has_capability('moodle/blog:view', $sitecontext) && $CFG->bloglevel > BLOG_USER_LEVEL) {
+    if (!$userid && has_capability('powereduc/blog:view', $sitecontext) && $CFG->bloglevel > BLOG_USER_LEVEL) {
         if ($entryid) {
             if (!$entryobject = $DB->get_record('post', array('id' => $entryid))) {
-                throw new \moodle_exception('nosuchentry', 'blog');
+                throw new \powereduc_exception('nosuchentry', 'blog');
             }
             $userid = $entryobject->userid;
         }
@@ -1214,20 +1214,20 @@ function blog_validate_access($courseid, $modid, $groupid, $entryid, $userid) {
 
     if (!empty($modid)) {
         if ($CFG->bloglevel < BLOG_SITE_LEVEL) {
-            throw new \moodle_exception('courseblogdisable', 'blog');
+            throw new \powereduc_exception('courseblogdisable', 'blog');
         }
         if (!$mod = $DB->get_record('course_modules', array('id' => $modid))) {
-            throw new \moodle_exception('invalidmoduleid', 'error', $modid);
+            throw new \powereduc_exception('invalidmoduleid', 'error', $modid);
         }
         $courseid = $mod->course;
     }
 
     if ((empty($courseid) ? true : $courseid == SITEID) && empty($userid)) {
         if ($CFG->bloglevel < BLOG_SITE_LEVEL) {
-            throw new \moodle_exception('siteblogdisable', 'blog');
+            throw new \powereduc_exception('siteblogdisable', 'blog');
         }
-        if (!has_capability('moodle/blog:view', $sitecontext)) {
-            throw new \moodle_exception('cannotviewsiteblog', 'blog');
+        if (!has_capability('powereduc/blog:view', $sitecontext)) {
+            throw new \powereduc_exception('cannotviewsiteblog', 'blog');
         }
 
         $COURSE = $DB->get_record('course', array('format' => 'site'));
@@ -1236,13 +1236,13 @@ function blog_validate_access($courseid, $modid, $groupid, $entryid, $userid) {
 
     if (!empty($courseid)) {
         if (!$course = $DB->get_record('course', array('id' => $courseid))) {
-            throw new \moodle_exception('invalidcourseid');
+            throw new \powereduc_exception('invalidcourseid');
         }
 
         $courseid = $course->id;
 
-        if (!has_capability('moodle/blog:view', $sitecontext)) {
-            throw new \moodle_exception('cannotviewcourseblog', 'blog');
+        if (!has_capability('powereduc/blog:view', $sitecontext)) {
+            throw new \powereduc_exception('cannotviewcourseblog', 'blog');
         }
     } else {
         $coursecontext = context_course::instance(SITEID);
@@ -1250,54 +1250,54 @@ function blog_validate_access($courseid, $modid, $groupid, $entryid, $userid) {
 
     if (!empty($groupid)) {
         if ($CFG->bloglevel < BLOG_SITE_LEVEL) {
-            throw new \moodle_exception('groupblogdisable', 'blog');
+            throw new \powereduc_exception('groupblogdisable', 'blog');
         }
 
         if (! $group = groups_get_group($groupid)) {
-            throw new \moodle_exception('invalidgroupid', 'blog');
+            throw new \powereduc_exception('invalidgroupid', 'blog');
         }
 
         if (!$course = $DB->get_record('course', array('id' => $group->courseid))) {
-            throw new \moodle_exception('invalidcourseid');
+            throw new \powereduc_exception('invalidcourseid');
         }
 
         $coursecontext = context_course::instance($course->id);
         $courseid = $course->id;
 
-        if (!has_capability('moodle/blog:view', $sitecontext)) {
-            throw new \moodle_exception('cannotviewcourseorgroupblog', 'blog');
+        if (!has_capability('powereduc/blog:view', $sitecontext)) {
+            throw new \powereduc_exception('cannotviewcourseorgroupblog', 'blog');
         }
 
         if (groups_get_course_groupmode($course) == SEPARATEGROUPS &&
-                !has_capability('moodle/site:accessallgroups', $coursecontext)) {
+                !has_capability('powereduc/site:accessallgroups', $coursecontext)) {
 
             if (!groups_is_member($groupid)) {
-                throw new \moodle_exception('notmemberofgroup');
+                throw new \powereduc_exception('notmemberofgroup');
             }
         }
     }
 
     if (!empty($userid)) {
         if ($CFG->bloglevel < BLOG_USER_LEVEL) {
-            throw new \moodle_exception('blogdisable', 'blog');
+            throw new \powereduc_exception('blogdisable', 'blog');
         }
 
         if (!$user = $DB->get_record('user', array('id' => $userid))) {
-            throw new \moodle_exception('invaliduserid');
+            throw new \powereduc_exception('invaliduserid');
         }
 
         if ($user->deleted) {
-            throw new \moodle_exception('userdeleted');
+            throw new \powereduc_exception('userdeleted');
         }
 
         if ($USER->id == $userid) {
-            if (!has_capability('moodle/blog:create', $sitecontext)
-              && !has_capability('moodle/blog:view', $sitecontext)) {
-                throw new \moodle_exception('donothaveblog', 'blog');
+            if (!has_capability('powereduc/blog:create', $sitecontext)
+              && !has_capability('powereduc/blog:view', $sitecontext)) {
+                throw new \powereduc_exception('donothaveblog', 'blog');
             }
         } else {
-            if (!has_capability('moodle/blog:view', $sitecontext) || !blog_user_can_view_user_entry($userid)) {
-                throw new \moodle_exception('cannotviewcourseblog', 'blog');
+            if (!has_capability('powereduc/blog:view', $sitecontext) || !blog_user_can_view_user_entry($userid)) {
+                throw new \powereduc_exception('cannotviewcourseblog', 'blog');
             }
         }
     }

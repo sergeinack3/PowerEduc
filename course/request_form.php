@@ -5,7 +5,7 @@
 // NOTICE OF COPYRIGHT                                                   //
 //                                                                       //
 // Moodle - Modular Object-Oriented Dynamic Learning Environment         //
-//          http://moodle.org                                            //
+//          http://powereduc.org                                            //
 //                                                                       //
 // Copyright (C) 1999 onwards Martin Dougiamas  http://dougiamas.com     //
 //                                                                       //
@@ -40,7 +40,7 @@ require_once($CFG->libdir.'/formslib.php');
 /**
  * A form for a user to request a course.
  */
-class course_request_form extends moodleform {
+class course_request_form extends powereducform {
     function definition() {
         global $CFG, $DB, $USER;
 
@@ -69,7 +69,7 @@ class course_request_form extends moodleform {
         $mform->setType('shortname', PARAM_TEXT);
 
         if (empty($CFG->lockrequestcategory)) {
-            $displaylist = core_course_category::make_categories_list('moodle/course:request');
+            $displaylist = core_course_category::make_categories_list('powereduc/course:request');
             $mform->addElement('autocomplete', 'category', get_string('coursecategory'), $displaylist);
             $mform->addRule('category', null, 'required', null, 'client');
             $mform->setDefault('category', $CFG->defaultrequestcategory);
@@ -132,7 +132,7 @@ class course_request_form extends moodleform {
 /**
  * A form for an administrator to reject a course request.
  */
-class reject_request_form extends moodleform {
+class reject_request_form extends powereducform {
     function definition() {
         $mform =& $this->_form;
 

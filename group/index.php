@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -44,7 +44,7 @@ $returnurl = $CFG->wwwroot.'/group/index.php?id='.$courseid;
 
 $course = $DB->get_record('course', array('id'=>$courseid), '*', MUST_EXIST);
 
-$url = new moodle_url('/group/index.php', array('id'=>$courseid));
+$url = new powereduc_url('/group/index.php', array('id'=>$courseid));
 navigation_node::override_active_url($url);
 if ($userid) {
     $url->param('user', $userid);
@@ -58,7 +58,7 @@ $PAGE->set_url($url);
 require_login($course);
 
 $context = context_course::instance($course->id);
-require_capability('moodle/course:managegroups', $context);
+require_capability('powereduc/course:managegroups', $context);
 
 $PAGE->requires->js('/group/clientlib.js', true);
 $PAGE->requires->js('/group/module.js', true);
@@ -70,7 +70,7 @@ if (!$singlegroup) {
         case 'showgroupsettingsform':
         case 'showaddmembersform':
         case 'updatemembers':
-            throw new \moodle_exception('errorselectone', 'group', $returnurl);
+            throw new \powereduc_exception('errorselectone', 'group', $returnurl);
     }
 }
 
@@ -91,7 +91,7 @@ switch ($action) {
         if ($groupmemberroles = groups_get_members_by_role($groupids[0], $courseid,
                 'u.id, ' . $userfieldsselects, null, '', $userfieldsparams, $userfieldsjoin)) {
 
-            $viewfullnames = has_capability('moodle/site:viewfullnames', $context);
+            $viewfullnames = has_capability('powereduc/site:viewfullnames', $context);
 
             foreach($groupmemberroles as $roleid=>$roledata) {
                 $shortroledata = new stdClass();
@@ -120,26 +120,26 @@ switch ($action) {
 
     case 'deletegroup':
         if (count($groupids) == 0) {
-            throw new \moodle_exception('errorselectsome', 'group', $returnurl);
+            throw new \powereduc_exception('errorselectsome', 'group', $returnurl);
         }
         $groupidlist = implode(',', $groupids);
-        redirect(new moodle_url('/group/delete.php', array('courseid'=>$courseid, 'groups'=>$groupidlist)));
+        redirect(new powereduc_url('/group/delete.php', array('courseid'=>$courseid, 'groups'=>$groupidlist)));
         break;
 
     case 'showcreateorphangroupform':
-        redirect(new moodle_url('/group/group.php', array('courseid'=>$courseid)));
+        redirect(new powereduc_url('/group/group.php', array('courseid'=>$courseid)));
         break;
 
     case 'showautocreategroupsform':
-        redirect(new moodle_url('/group/autogroup.php', array('courseid'=>$courseid)));
+        redirect(new powereduc_url('/group/autogroup.php', array('courseid'=>$courseid)));
         break;
 
     case 'showimportgroups':
-        redirect(new moodle_url('/group/import.php', array('id'=>$courseid)));
+        redirect(new powereduc_url('/group/import.php', array('id'=>$courseid)));
         break;
 
     case 'showgroupsettingsform':
-        redirect(new moodle_url('/group/group.php', array('courseid'=>$courseid, 'id'=>$groupids[0])));
+        redirect(new powereduc_url('/group/group.php', array('courseid'=>$courseid, 'id'=>$groupids[0])));
         break;
 
     case 'updategroups': //Currently reloading.
@@ -149,14 +149,14 @@ switch ($action) {
         break;
 
     case 'showaddmembersform':
-        redirect(new moodle_url('/group/members.php', array('group'=>$groupids[0])));
+        redirect(new powereduc_url('/group/members.php', array('group'=>$groupids[0])));
         break;
 
     case 'updatemembers': //Currently reloading.
         break;
 
     default: //ERROR.
-        throw new \moodle_exception('unknowaction', '', $returnurl);
+        throw new \powereduc_exception('unknowaction', '', $returnurl);
         break;
 }
 
@@ -191,7 +191,7 @@ if ($groups) {
                 $selectedname = $groupname;
             }
         }
-        if (!empty($group->idnumber) && !has_capability('moodle/course:changeidnumber', $context)) {
+        if (!empty($group->idnumber) && !has_capability('powereduc/course:changeidnumber', $context)) {
             $preventgroupremoval[$group->id] = true;
         }
 
@@ -216,7 +216,7 @@ if ($singlegroup) {
     if ($groupmemberroles = groups_get_members_by_role(reset($groupids), $courseid,
             'u.id, ' . $userfieldsselects, null, '', $userfieldsparams, $userfieldsjoin)) {
 
-        $viewfullnames = has_capability('moodle/site:viewfullnames', $context);
+        $viewfullnames = has_capability('powereduc/site:viewfullnames', $context);
 
         foreach ($groupmemberroles as $roleid => $roledata) {
             $users = array();
@@ -254,7 +254,7 @@ echo $OUTPUT->footer();
 /**
  * Returns the first button action with the given prefix, taken from
  * POST or GET, otherwise returns false.
- * @see /lib/moodlelib.php function optional_param().
+ * @see /lib/powereduclib.php function optional_param().
  * @param string $prefix 'act_' as in 'action'.
  * @return string The action without the prefix, or false if no action found.
  */
@@ -278,7 +278,7 @@ function groups_param_action($prefix = 'act_') {
     }
     if ($action && !preg_match('/^\w+$/', $action)) {
         $action = false;
-        throw new \moodle_exception('unknowaction');
+        throw new \powereduc_exception('unknowaction');
     }
     ///if (debugging()) echo 'Debug: '.$action;
     return $action;

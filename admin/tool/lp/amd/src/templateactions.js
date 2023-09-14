@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * Handle actions on learning plan templates via ajax.
  *
  * @module     tool_lp/templateactions
- * @copyright  2015 Damyon Wiese <damyon@moodle.com>
+ * @copyright  2015 Damyon Wiese <damyon@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 define(['jquery', 'core/templates', 'core/ajax', 'core/notification', 'core/str', 'tool_lp/actionselector'],
@@ -132,8 +132,8 @@ define(['jquery', 'core/templates', 'core/ajax', 'core/notification', 'core/str'
                         {key: 'deletetemplatewithplans', component: 'tool_lp'},
                         {key: 'deleteplans', component: 'tool_lp'},
                         {key: 'unlinkplanstemplate', component: 'tool_lp'},
-                        {key: 'confirm', component: 'moodle'},
-                        {key: 'cancel', component: 'moodle'}
+                        {key: 'confirm', component: 'powereduc'},
+                        {key: 'cancel', component: 'powereduc'}
                     ]).done(function(strings) {
                         var actions = [{'text': strings[2], 'value': 'delete'},
                                        {'text': strings[3], 'value': 'unlink'}];
@@ -153,10 +153,10 @@ define(['jquery', 'core/templates', 'core/ajax', 'core/notification', 'core/str'
                     }).fail(notification.exception);
                 } else {
                     str.get_strings([
-                        {key: 'confirm', component: 'moodle'},
+                        {key: 'confirm', component: 'powereduc'},
                         {key: 'deletetemplate', component: 'tool_lp', param: template.shortname},
-                        {key: 'delete', component: 'moodle'},
-                        {key: 'cancel', component: 'moodle'}
+                        {key: 'delete', component: 'powereduc'},
+                        {key: 'cancel', component: 'powereduc'}
                     ]).done(function(strings) {
                         notification.confirm(
                         strings[0], // Confirm.

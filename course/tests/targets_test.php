@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ require_once($CFG->dirroot . '/lib/grade/constants.php');
  * Unit tests for core targets.
  *
  * @package   core_course
- * @copyright 2019 Victor Deniz <victor@moodle.com>
+ * @copyright 2019 Victor Deniz <victor@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class targets_test extends \advanced_testcase {
@@ -345,7 +345,7 @@ class targets_test extends \advanced_testcase {
 
         try {
             $course = $this->getDataGenerator()->create_course($courseparams);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $course = $this->getDataGenerator()->create_course();
             $courserecord = $courseparams;
             $courserecord['id'] = $course->id;

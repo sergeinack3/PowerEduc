@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 /**
  * Allows the admin to manage question types.
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage questionbank
  * @copyright  2008 Tim Hunt
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -33,10 +33,10 @@ require_once($CFG->libdir . '/tablelib.php');
 admin_externalpage_setup('manageqtypes');
 
 $systemcontext = context_system::instance();
-require_capability('moodle/question:config', $systemcontext);
+require_capability('powereduc/question:config', $systemcontext);
 $canviewreports = has_capability('report/questioninstances:view', $systemcontext);
 
-$thispageurl = new moodle_url('/admin/qtypes.php');
+$thispageurl = new powereduc_url('/admin/qtypes.php');
 
 $qtypes = question_bank::get_all_qtypes();
 $pluginmanager = core_plugin_manager::instance();
@@ -106,7 +106,7 @@ $sortedqtypes = question_bank::sort_qtype_array($sortedqtypes, $config);
 // Disable.
 if (($disable = optional_param('disable', '', PARAM_PLUGIN)) && confirm_sesskey()) {
     if (!isset($qtypes[$disable])) {
-        throw new \moodle_exception('unknownquestiontype', 'question', $thispageurl, $disable);
+        throw new \powereduc_exception('unknownquestiontype', 'question', $thispageurl, $disable);
     }
 
     $class = \core_plugin_manager::resolve_plugininfo_class('qtype');
@@ -117,11 +117,11 @@ if (($disable = optional_param('disable', '', PARAM_PLUGIN)) && confirm_sesskey(
 // Enable.
 if (($enable = optional_param('enable', '', PARAM_PLUGIN)) && confirm_sesskey()) {
     if (!isset($qtypes[$enable])) {
-        throw new \moodle_exception('unknownquestiontype', 'question', $thispageurl, $enable);
+        throw new \powereduc_exception('unknownquestiontype', 'question', $thispageurl, $enable);
     }
 
     if (!$qtypes[$enable]->menu_name()) {
-        throw new \moodle_exception('cannotenable', 'question', $thispageurl, $enable);
+        throw new \powereduc_exception('cannotenable', 'question', $thispageurl, $enable);
     }
 
     $class = \core_plugin_manager::resolve_plugininfo_class('qtype');
@@ -132,7 +132,7 @@ if (($enable = optional_param('enable', '', PARAM_PLUGIN)) && confirm_sesskey())
 // Move up in order.
 if (($up = optional_param('up', '', PARAM_PLUGIN)) && confirm_sesskey()) {
     if (!isset($qtypes[$up])) {
-        throw new \moodle_exception('unknownquestiontype', 'question', $thispageurl, $up);
+        throw new \powereduc_exception('unknownquestiontype', 'question', $thispageurl, $up);
     }
 
     $neworder = question_reorder_qtypes($sortedqtypes, $up, -1);
@@ -143,7 +143,7 @@ if (($up = optional_param('up', '', PARAM_PLUGIN)) && confirm_sesskey()) {
 // Move down in order.
 if (($down = optional_param('down', '', PARAM_PLUGIN)) && confirm_sesskey()) {
     if (!isset($qtypes[$down])) {
-        throw new \moodle_exception('unknownquestiontype', 'question', $thispageurl, $down);
+        throw new \powereduc_exception('unknownquestiontype', 'question', $thispageurl, $down);
     }
 
     $neworder = question_reorder_qtypes($sortedqtypes, $down, +1);
@@ -189,7 +189,7 @@ foreach ($sortedqtypes as $qtypename => $localname) {
             $strcount = $counts[$qtypename]->numquestions;
         }
         if ($canviewreports) {
-            $row[] = html_writer::link(new moodle_url('/report/questioninstances/index.php',
+            $row[] = html_writer::link(new powereduc_url('/report/questioninstances/index.php',
                     array('qtype' => $qtypename)), $strcount, array('title' => get_string('showdetails', 'admin')));
         } else {
             $strcount;
@@ -241,7 +241,7 @@ foreach ($sortedqtypes as $qtypename => $localname) {
     if ($settings instanceof admin_externalpage) {
         $row[] = html_writer::link($settings->url, get_string('settings'));
     } else if ($settings instanceof admin_settingpage) {
-        $row[] = html_writer::link(new moodle_url('/admin/settings.php',
+        $row[] = html_writer::link(new powereduc_url('/admin/settings.php',
                 array('section' => 'qtypesetting' . $qtypename)), get_string('settings'));
     } else {
         $row[] = '';
@@ -277,8 +277,8 @@ function question_types_enable_disable_icons($qtypename, $createable) {
 
 function question_type_icon_html($action, $qtypename, $icon, $alt, $tip) {
     global $OUTPUT;
-    return $OUTPUT->action_icon(new moodle_url('/admin/qtypes.php',
+    return $OUTPUT->action_icon(new powereduc_url('/admin/qtypes.php',
             array($action => $qtypename, 'sesskey' => sesskey())),
-            new pix_icon($icon, $alt, 'moodle', array('title' => '', 'class' => 'iconsmall')),
+            new pix_icon($icon, $alt, 'powereduc', array('title' => '', 'class' => 'iconsmall')),
             null, array('title' => $tip));
 }

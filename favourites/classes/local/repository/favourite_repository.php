@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -78,7 +78,7 @@ class favourite_repository implements favourite_repository_interface {
      * Basic validation, confirming we have the minimum field set needed to save a record to the store.
      *
      * @param favourite $favourite the favourite record to validate.
-     * @throws \moodle_exception if the supplied favourite has missing or unsupported fields.
+     * @throws \powereduc_exception if the supplied favourite has missing or unsupported fields.
      */
     protected function validate(favourite $favourite) {
 
@@ -103,12 +103,12 @@ class favourite_repository implements favourite_repository_interface {
         });
 
         if ($missingfields = array_keys(array_diff_key($requiredfields, $favourite))) {
-            throw new \moodle_exception("Missing object property(s) '" . join(', ', $missingfields) . "'.");
+            throw new \powereduc_exception("Missing object property(s) '" . join(', ', $missingfields) . "'.");
         }
 
         // If the record contains fields we don't allow, throw an exception.
         if ($unsupportedfields = array_keys(array_diff_key($favourite, $allowedfields))) {
-            throw new \moodle_exception("Unexpected object property(s) '" . join(', ', $unsupportedfields) . "'.");
+            throw new \powereduc_exception("Unexpected object property(s) '" . join(', ', $unsupportedfields) . "'.");
         }
     }
 
@@ -118,7 +118,7 @@ class favourite_repository implements favourite_repository_interface {
      * @param favourite $favourite the favourite to add.
      * @return favourite the favourite which has been stored.
      * @throws \dml_exception if any database errors are encountered.
-     * @throws \moodle_exception if the favourite has missing or invalid properties.
+     * @throws \powereduc_exception if the favourite has missing or invalid properties.
      */
     public function add(favourite $favourite) : favourite {
         global $DB;
@@ -137,7 +137,7 @@ class favourite_repository implements favourite_repository_interface {
      * @param array $items the list of favourites to add.
      * @return array the list of favourites which have been stored.
      * @throws \dml_exception if any database errors are encountered.
-     * @throws \moodle_exception if any of the favourites have missing or invalid properties.
+     * @throws \powereduc_exception if any of the favourites have missing or invalid properties.
      */
     public function add_all(array $items) : array {
         global $DB;

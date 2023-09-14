@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ define('NO_OUTPUT_BUFFERING', true);
 
 require_once('../config.php');
 require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
-require_once($CFG->dirroot . '/backup/moodle2/backup_plan_builder.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/backup_plan_builder.class.php');
 
 // Backup of large courses requires extra memory. Use the amount configured
 // in admin settings.
@@ -50,8 +50,8 @@ if (async_helper::is_async_enabled()) {
     $backupmode = backup::MODE_ASYNC;
 }
 
-$courseurl = new moodle_url('/course/view.php', array('id' => $courseid));
-$url = new moodle_url('/backup/backup.php', array('id'=>$courseid));
+$courseurl = new powereduc_url('/course/view.php', array('id' => $courseid));
+$url = new powereduc_url('/backup/backup.php', array('id'=>$courseid));
 if ($sectionid !== null) {
     $url->param('section', $sectionid);
 }
@@ -80,12 +80,12 @@ require_login($course, false, $cm);
 
 switch ($type) {
     case backup::TYPE_1COURSE :
-        require_capability('moodle/backup:backupcourse', $coursecontext);
+        require_capability('powereduc/backup:backupcourse', $coursecontext);
         $heading = get_string('backupcourse', 'backup', $course->shortname);
         $PAGE->set_secondary_active_tab('coursereuse');
         break;
     case backup::TYPE_1SECTION :
-        require_capability('moodle/backup:backupsection', $coursecontext);
+        require_capability('powereduc/backup:backupsection', $coursecontext);
         if ((string)$section->name !== '') {
             $sectionname = format_string($section->name, true, array('context' => $coursecontext));
             $heading = get_string('backupsection', 'backup', $sectionname);
@@ -97,12 +97,12 @@ switch ($type) {
         break;
     case backup::TYPE_1ACTIVITY :
         $activitycontext = context_module::instance($cm->id);
-        require_capability('moodle/backup:backupactivity', $activitycontext);
+        require_capability('powereduc/backup:backupactivity', $activitycontext);
         $contextid = $activitycontext->id;
         $heading = get_string('backupactivity', 'backup', $cm->name);
         break;
     default :
-        throw new \moodle_exception('unknownbackuptype');
+        throw new \powereduc_exception('unknownbackuptype');
 }
 
 $PAGE->set_title($heading);
@@ -207,7 +207,7 @@ if (!async_helper::is_async_pending($id, 'course', 'backup')) {
             \core\task\manager::queue_adhoc_task($asynctask);
 
             // Add ajax progress bar and initiate ajax via a template.
-            $restoreurl = new moodle_url('/backup/restorefile.php', array('contextid' => $contextid));
+            $restoreurl = new powereduc_url('/backup/restorefile.php', array('contextid' => $contextid));
             $progresssetup = array(
                     'backupid' => $backupid,
                     'contextid' => $contextid,

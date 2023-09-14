@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -57,7 +57,7 @@ class action_test extends \advanced_testcase {
             'Dataset 1' => [
                 'constructorparams' => [
                     'name' => 'Hello',
-                    'url' => new \moodle_url('http://example.com'),
+                    'url' => new \powereduc_url('http://example.com'),
                     'item_count' => 1,
                     'actionable' => true
                 ]
@@ -65,7 +65,7 @@ class action_test extends \advanced_testcase {
             'Dataset 2' => [
                 'constructorparams' => [
                     'name' => 'Goodbye',
-                    'url' => new \moodle_url('http://example.com'),
+                    'url' => new \powereduc_url('http://example.com'),
                     'item_count' => 2,
                     'actionable' => false
                 ]

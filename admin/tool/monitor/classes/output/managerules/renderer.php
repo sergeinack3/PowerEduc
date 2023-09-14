@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -78,14 +78,14 @@ class renderer extends \plugin_renderer_base {
         global $CFG;
 
         $button = \html_writer::tag('button', get_string('addrule', 'tool_monitor'), ['class' => 'btn btn-primary']);
-        $addurl = new \moodle_url($CFG->wwwroot. '/admin/tool/monitor/edit.php', array('courseid' => $courseid));
+        $addurl = new \powereduc_url($CFG->wwwroot. '/admin/tool/monitor/edit.php', array('courseid' => $courseid));
         return \html_writer::link($addurl, $button);
     }
 
     /**
      * Html to add a link to go to the subscription page.
      *
-     * @param moodle_url $manageurl The url of the subscription page.
+     * @param powereduc_url $manageurl The url of the subscription page.
      *
      * @return string html for the link to the subscription page.
      */

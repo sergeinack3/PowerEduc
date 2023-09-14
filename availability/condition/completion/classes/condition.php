@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -343,7 +343,7 @@ class condition extends \core_availability\condition {
         // On ajax duplicate get_fast_modinfo is called before $PAGE->set_context
         // so we cannot use $PAGE->user_is_editing().
         $coursecontext = \context_course::instance($course->id);
-        $editing = !empty($USER->editing) && has_capability('moodle/course:manageactivities', $coursecontext);
+        $editing = !empty($USER->editing) && has_capability('powereduc/course:manageactivities', $coursecontext);
         if ($this->cmid == self::OPTION_PREVIOUS && $editing) {
             // Previous activity name could be inconsistent when editing due to partial page loadings.
             $str .= 'previous_';

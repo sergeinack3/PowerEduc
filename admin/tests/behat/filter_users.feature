@@ -11,8 +11,8 @@ Feature: An administrator can filter user accounts by role, cohort and other pro
       | text     | undead    | Type of undead |
     And the following "users" exist:
       | username | firstname | lastname | email | auth | confirmed | lastip | institution | department | profile_field_frog | profile_field_undead |
-      | user1 | User | One | one@example.com | manual | 0 | 127.0.1.1       | moodle      | red        | Kermit             |                      |
-      | user2 | User | Two | two@example.com | ldap | 1 | 0.0.0.0           | moodle      | blue       | Mr Toad            | Zombie               |
+      | user1 | User | One | one@example.com | manual | 0 | 127.0.1.1       | powereduc      | red        | Kermit             |                      |
+      | user2 | User | Two | two@example.com | ldap | 1 | 0.0.0.0           | powereduc      | blue       | Mr Toad            | Zombie               |
       | user3 | User | Three | three@example.com | manual | 1 | 0.0.0.0 |                 |            |                    |                      |
       | user4 | User | Four | four@example.com | ldap | 0 | 127.0.1.2 |                   |            |                    |                      |
     And the following "cohorts" exist:
@@ -112,7 +112,7 @@ Feature: An administrator can filter user accounts by role, cohort and other pro
     And I should see "User Four"
 
   Scenario: Filter users by institution and department
-    When I set the field "id_institution" to "moodle"
+    When I set the field "id_institution" to "powereduc"
     And I press "Add filter"
     Then I should see "User One"
     And I should see "User Two"

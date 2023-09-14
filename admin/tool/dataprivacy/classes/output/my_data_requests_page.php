@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,8 +28,8 @@ use action_menu;
 use action_menu_link_secondary;
 use coding_exception;
 use context_user;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use renderable;
 use renderer_base;
 use stdClass;
@@ -64,13 +64,13 @@ class my_data_requests_page implements renderable, templatable {
      * @param renderer_base $output
      * @return stdClass
      * @throws coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function export_for_template(renderer_base $output) {
         global $USER;
 
         $data = new stdClass();
-        $data->newdatarequesturl = new moodle_url('/admin/tool/dataprivacy/createdatarequest.php');
+        $data->newdatarequesturl = new powereduc_url('/admin/tool/dataprivacy/createdatarequest.php');
 
         if (!is_https()) {
             $httpwarningmessage = get_string('httpwarning', 'tool_dataprivacy');
@@ -141,7 +141,7 @@ class my_data_requests_page implements renderable, templatable {
             // Prepare actions.
             $actions = [];
             if ($cancancel) {
-                $cancelurl = new moodle_url('#');
+                $cancelurl = new powereduc_url('#');
                 $canceldata = ['data-action' => 'cancel', 'data-requestid' => $requestid];
                 $canceltext = get_string('cancelrequest', 'tool_dataprivacy');
                 $actions[] = new action_menu_link_secondary($cancelurl, null, $canceltext, $canceldata);

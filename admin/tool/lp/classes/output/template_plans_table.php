@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ defined('POWEREDUC_INTERNAL') || die();
 require_once($CFG->libdir . '/tablelib.php');
 
 use html_writer;
-use moodle_url;
+use powereduc_url;
 use table_sql;
 use core_competency\template;
 
@@ -61,7 +61,7 @@ class template_plans_table extends table_sql {
 
         // This object should not be used without the right permissions.
         if (!$template->can_read()) {
-            throw new \required_capability_exception($template->get_context(), 'moodle/competency:templateview',
+            throw new \required_capability_exception($template->get_context(), 'powereduc/competency:templateview',
                 'nopermissions', '');
         }
 
@@ -84,7 +84,7 @@ class template_plans_table extends table_sql {
      * @return string
      */
     protected function col_name($row) {
-        return html_writer::link(new moodle_url('/admin/tool/lp/plan.php', array('id' => $row->id)),
+        return html_writer::link(new powereduc_url('/admin/tool/lp/plan.php', array('id' => $row->id)),
             format_string($row->name, true, array('context' => $this->context)));
     }
 
@@ -103,7 +103,7 @@ class template_plans_table extends table_sql {
 
         // Add headers for extra user fields.
         foreach ($extrafields as $field) {
-            if (get_string_manager()->string_exists($field, 'moodle')) {
+            if (get_string_manager()->string_exists($field, 'powereduc')) {
                 $cols[$field] = get_string($field);
             } else {
                 $cols[$field] = $field;

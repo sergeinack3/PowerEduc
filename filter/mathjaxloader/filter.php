@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * This filter provides automatic support for MathJax
  *
  * @package    filter_mathjaxloader
- * @copyright  2013 Damyon Wiese (damyon@moodle.com)
+ * @copyright  2013 Damyon Wiese (damyon@powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,15 +27,15 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Mathjax filtering
  */
-class filter_mathjaxloader extends moodle_text_filter {
+class filter_mathjaxloader extends powereduc_text_filter {
 
     /*
-     * Perform a mapping of the moodle language code to the equivalent for MathJax.
+     * Perform a mapping of the powereduc language code to the equivalent for MathJax.
      *
-     * @param string $moodlelangcode - The moodle language code - e.g. en_pirate
+     * @param string $powereduclangcode - The powereduc language code - e.g. en_pirate
      * @return string The MathJax language code.
      */
-    public function map_language_code($moodlelangcode) {
+    public function map_language_code($powereduclangcode) {
 
         // List of language codes found in the MathJax/localization/ directory.
         $mathjaxlangcodes = [
@@ -44,7 +44,7 @@ class filter_mathjaxloader extends moodle_text_filter {
             'pt-br', 'qqq', 'ru', 'scn', 'sco', 'sk', 'sl', 'sv', 'th', 'tr', 'uk', 'vi', 'zh-hans', 'zh-hant'
         ];
 
-        // List of explicit mappings and known exceptions (moodle => mathjax).
+        // List of explicit mappings and known exceptions (powereduc => mathjax).
         $explicit = [
             'cz' => 'cs',
             'pt_br' => 'pt-br',
@@ -53,17 +53,17 @@ class filter_mathjaxloader extends moodle_text_filter {
         ];
 
         // If defined, explicit mapping takes the highest precedence.
-        if (isset($explicit[$moodlelangcode])) {
-            return $explicit[$moodlelangcode];
+        if (isset($explicit[$powereduclangcode])) {
+            return $explicit[$powereduclangcode];
         }
 
         // If there is exact match, it will be probably right.
-        if (in_array($moodlelangcode, $mathjaxlangcodes)) {
-            return $moodlelangcode;
+        if (in_array($powereduclangcode, $mathjaxlangcodes)) {
+            return $powereduclangcode;
         }
 
         // Finally try to find the best matching mathjax pack.
-        $parts = explode('_', $moodlelangcode, 2);
+        $parts = explode('_', $powereduclangcode, 2);
         if (in_array($parts[0], $mathjaxlangcodes)) {
             return $parts[0];
         }
@@ -75,7 +75,7 @@ class filter_mathjaxloader extends moodle_text_filter {
     /*
      * Add the javascript to enable mathjax processing on this page.
      *
-     * @param moodle_page $page The current page.
+     * @param powereduc_page $page The current page.
      * @param context $context The current context.
      */
     public function setup($page, $context) {
@@ -83,7 +83,7 @@ class filter_mathjaxloader extends moodle_text_filter {
         if ($page->requires->should_create_one_time_item_now('filter_mathjaxloader-scripts')) {
             $url = get_config('filter_mathjaxloader', 'httpsurl');
             $lang = $this->map_language_code(current_language());
-            $url = new moodle_url($url, array('delayStartupUntil' => 'configured'));
+            $url = new powereduc_url($url, array('delayStartupUntil' => 'configured'));
 
             $moduleconfig = array(
                 'name' => 'mathjax',
@@ -93,13 +93,13 @@ class filter_mathjaxloader extends moodle_text_filter {
             $page->requires->js_module($moduleconfig);
 
             $config = get_config('filter_mathjaxloader', 'mathjaxconfig');
-            $wwwroot = new moodle_url('/');
+            $wwwroot = new powereduc_url('/');
 
             $config = str_replace('{wwwroot}', $wwwroot->out(true), $config);
 
             $params = array('mathjaxconfig' => $config, 'lang' => $lang);
 
-            $page->requires->yui_module('moodle-filter_mathjaxloader-loader', 'M.filter_mathjaxloader.configure', array($params));
+            $page->requires->yui_module('powereduc-filter_mathjaxloader-loader', 'M.filter_mathjaxloader.configure', array($params));
         }
     }
 
@@ -156,7 +156,7 @@ class filter_mathjaxloader extends moodle_text_filter {
         }
 
         if ($hasdisplayorinline || $hasextra) {
-            $PAGE->requires->yui_module('moodle-filter_mathjaxloader-loader', 'M.filter_mathjaxloader.typeset');
+            $PAGE->requires->yui_module('powereduc-filter_mathjaxloader-loader', 'M.filter_mathjaxloader.typeset');
             return '<span class="filter_mathjaxloader_equation">' . $text . '</span>';
         }
         return $text;

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ use core_user\reportbuilder\datasource\users;
  *
  * @package     core_reportbuilder
  * @covers      \core_cohort\reportbuilder\audience\cohortmember
- * @copyright   2021 David Matamoros <davidmc@moodle.com>
+ * @copyright   2021 David Matamoros <davidmc@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class cohortmember_test extends advanced_testcase {
@@ -82,9 +82,9 @@ class cohortmember_test extends advanced_testcase {
         self::setUser($user);
         $this->assertFalse($audience->user_can_add());
 
-        // Grant priveleges to user (moodle/cohort:view).
+        // Grant priveleges to user (powereduc/cohort:view).
         $roleid = create_role('Dummy role', 'dummyrole', 'dummy role description');
-        assign_capability('moodle/cohort:view', CAP_ALLOW, $roleid, $context->id);
+        assign_capability('powereduc/cohort:view', CAP_ALLOW, $roleid, $context->id);
         role_assign($roleid, $user->id, $context->id);
         $this->assertTrue($audience->user_can_add());
     }
@@ -117,9 +117,9 @@ class cohortmember_test extends advanced_testcase {
         self::setUser($user);
         $this->assertFalse($audience->user_can_edit());
 
-        // Grant priveleges to user (moodle/cohort:view).
+        // Grant priveleges to user (powereduc/cohort:view).
         $roleid = create_role('Dummy role', 'dummyrole', 'dummy role description');
-        assign_capability('moodle/cohort:view', CAP_ALLOW, $roleid, $context->id);
+        assign_capability('powereduc/cohort:view', CAP_ALLOW, $roleid, $context->id);
         role_assign($roleid, $user->id, $context->id);
         $this->assertTrue($audience->user_can_edit());
     }

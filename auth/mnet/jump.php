@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ $hostid = optional_param('hostid', '0', PARAM_INT);
 $hostwwwroot = optional_param('hostwwwroot', '', PARAM_URL);
 $wantsurl = optional_param('wantsurl', '', PARAM_RAW);
 
-$url = new moodle_url('/auth/mnet/jump.php');
+$url = new powereduc_url('/auth/mnet/jump.php');
 if ($hostid !== '0') $url->param('hostid', $hostid);
 if ($hostwwwroot !== '') $url->param('hostwwwroot', $hostwwwroot);
 if ($wantsurl !== '') $url->param('wantsurl', $wantsurl);
@@ -43,7 +43,7 @@ if (!isloggedin() or isguestuser()) {
 }
 
 if (!is_enabled_auth('mnet')) {
-    throw new \moodle_exception('mnetdisable');
+    throw new \powereduc_exception('mnetdisable');
 }
 
 // If hostid hasn't been specified, try getting it using wwwroot
@@ -63,7 +63,7 @@ $mnetauth = get_auth_plugin('mnet');
 $url      = $mnetauth->start_jump_session($hostid, $wantsurl);
 
 if (empty($url)) {
-    throw new \moodle_exception('DEBUG: Jump session was not started correctly or blank URL returned.'); // TODO: errors.
+    throw new \powereduc_exception('DEBUG: Jump session was not started correctly or blank URL returned.'); // TODO: errors.
 }
 redirect($url);
 

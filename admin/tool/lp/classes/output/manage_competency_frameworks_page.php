@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ use templatable;
 use renderer_base;
 use single_button;
 use stdClass;
-use moodle_url;
+use powereduc_url;
 use context;
 use context_system;
 use core_competency\api;
@@ -56,7 +56,7 @@ class manage_competency_frameworks_page implements renderable, templatable {
     /** @var bool $canmanage Result of permissions checks. */
     protected $canmanage = false;
 
-    /** @var moodle_url $pluginurlbase Base url to use constructing links. */
+    /** @var powereduc_url $pluginurlbase Base url to use constructing links. */
     protected $pluginbaseurl = null;
 
     /**
@@ -69,13 +69,13 @@ class manage_competency_frameworks_page implements renderable, templatable {
 
         if (competency_framework::can_manage_context($this->pagecontext)) {
             $addpage = new single_button(
-                new moodle_url('/admin/tool/lp/editcompetencyframework.php', array('pagecontextid' => $this->pagecontext->id)),
+                new powereduc_url('/admin/tool/lp/editcompetencyframework.php', array('pagecontextid' => $this->pagecontext->id)),
                 get_string('addnewcompetencyframework', 'tool_lp'),
                 'get'
             );
             $this->navigation[] = $addpage;
             $competenciesrepository = new single_button(
-                new moodle_url('https://archive.moodle.net/competencies'),
+                new powereduc_url('https://archive.powereduc.net/competencies'),
                 get_string('competencyframeworksrepository', 'tool_lp'),
                 'get'
             );
@@ -99,7 +99,7 @@ class manage_competency_frameworks_page implements renderable, templatable {
             $exporter = new competency_framework_exporter($framework);
             $data->competencyframeworks[] = $exporter->export($output);
         }
-        $data->pluginbaseurl = (new moodle_url('/admin/tool/lp'))->out(true);
+        $data->pluginbaseurl = (new powereduc_url('/admin/tool/lp'))->out(true);
         $data->navigation = array();
         foreach ($this->navigation as $button) {
             $data->navigation[] = $output->render($button);

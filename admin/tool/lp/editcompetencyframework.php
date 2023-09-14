@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ if (!empty($id)) {
 // We check that we have the permission to edit this framework, in its own context.
 require_login(null, false);
 \core_competency\api::require_enabled();
-require_capability('moodle/competency:competencymanage', $context);
+require_capability('powereduc/competency:competencymanage', $context);
 
 // Set up the framework page.
 list($pagetitle, $pagesubtitle, $url, $frameworksurl) = tool_lp\page_helper::setup_for_framework($id,
@@ -56,7 +56,7 @@ if ($form->is_cancelled()) {
         // Create new framework.
         $data->contextid = $context->id;
         $framework = \core_competency\api::create_framework($data);
-        $frameworkmanageurl = new moodle_url('/admin/tool/lp/competencies.php', array(
+        $frameworkmanageurl = new powereduc_url('/admin/tool/lp/competencies.php', array(
             'pagecontextid' => $pagecontextid,
             'competencyframeworkid' => $framework->get('id')
         ));

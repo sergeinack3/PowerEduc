@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,20 +33,20 @@ $mode = optional_param('mode', 'show', PARAM_ALPHAEXT);
 require_login();
 
 if (!$context = context_system::instance()) {
-    throw new moodle_exception('wrongcontext', 'error');
+    throw new powereduc_exception('wrongcontext', 'error');
 }
 
-require_capability('moodle/site:config', $context);
+require_capability('powereduc/site:config', $context);
 
 // Loads the required action class and form.
 $fileclassname = $action;
 $classname = 'tool_admin_presets\\local\\action\\'.$action;
 
 if (!class_exists($classname)) {
-    throw new moodle_exception('falseaction', 'tool_admin_presets', $action);
+    throw new powereduc_exception('falseaction', 'tool_admin_presets', $action);
 }
 
-$url = new moodle_url('/admin/tool/admin_presets/index.php');
+$url = new powereduc_url('/admin/tool/admin_presets/index.php');
 $url->param('action', $action);
 $url->param('mode', $mode);
 $PAGE->set_url($url);
@@ -57,7 +57,7 @@ $PAGE->set_primary_active_tab('siteadminnode');
 // Executes the required action.
 $instance = new $classname();
 if (!method_exists($instance, $mode)) {
-    throw new moodle_exception('falsemode', 'tool_admin_presets', $mode);
+    throw new powereduc_exception('falsemode', 'tool_admin_presets', $mode);
 }
 
 // Executes the required method and displays output.

@@ -92,7 +92,7 @@ class HTML_Common {
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
     public function HTML_Common($attributes = null, $tabOffset = 0) {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);

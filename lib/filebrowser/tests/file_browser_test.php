@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
@@ -97,7 +97,7 @@ class file_browser_test extends \advanced_testcase {
         $this->teacherrole = $DB->get_record('role', array('shortname' => 'editingteacher'));
 
         // Make sure we're testing what should be the default capabilities.
-        assign_capability('moodle/restore:viewautomatedfilearea', CAP_ALLOW, $this->teacherrole->id, $coursecontext1);
+        assign_capability('powereduc/restore:viewautomatedfilearea', CAP_ALLOW, $this->teacherrole->id, $coursecontext1);
 
         $this->getDataGenerator()->enrol_user($this->teacher->id, $this->course1->id, $this->teacherrole->id);
         $this->getDataGenerator()->enrol_user($this->teacher->id, $this->course2->id, $this->teacherrole->id);

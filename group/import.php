@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Bulk group creation registration script from a comma separated file
@@ -37,17 +37,17 @@ $PAGE->set_url('/group/import.php', array('id'=>$id));
 require_login($course);
 $context = context_course::instance($id);
 
-require_capability('moodle/course:managegroups', $context);
+require_capability('powereduc/course:managegroups', $context);
 
 $strimportgroups = get_string('importgroups', 'core_group');
 
 $PAGE->navbar->add($strimportgroups);
-navigation_node::override_active_url(new moodle_url('/group/index.php', array('id' => $course->id)));
+navigation_node::override_active_url(new powereduc_url('/group/index.php', array('id' => $course->id)));
 $PAGE->set_title("$course->shortname: $strimportgroups");
 $PAGE->set_heading($course->fullname);
 $PAGE->set_pagelayout('admin');
 
-$returnurl = new moodle_url('/group/index.php', array('id'=>$id));
+$returnurl = new powereduc_url('/group/index.php', array('id'=>$id));
 
 $importform = new groups_import_form(null, ['id' => $id]);
 
@@ -69,11 +69,11 @@ if ($importform->is_cancelled()) {
     $readcount = $csvimport->load_csv_content($text, $encoding, $delimiter);
 
     if ($readcount === false) {
-        throw new \moodle_exception('csvfileerror', 'error', $PAGE->url, $csvimport->get_error());
+        throw new \powereduc_exception('csvfileerror', 'error', $PAGE->url, $csvimport->get_error());
     } else if ($readcount == 0) {
-        throw new \moodle_exception('csvemptyfile', 'error', $PAGE->url, $csvimport->get_error());
+        throw new \powereduc_exception('csvemptyfile', 'error', $PAGE->url, $csvimport->get_error());
     } else if ($readcount == 1) {
-        throw new \moodle_exception('csvnodata', 'error', $PAGE->url);
+        throw new \powereduc_exception('csvnodata', 'error', $PAGE->url);
     }
 
     $csvimport->init();
@@ -100,7 +100,7 @@ if ($importform->is_cancelled()) {
     foreach ($header as $i => $h) {
         $h = trim($h); $header[$i] = $h; // remove whitespace
         if (!(isset($required[$h]) or isset($optionalDefaults[$h]) or isset($optional[$h]))) {
-                throw new \moodle_exception('invalidfieldname', 'error', $PAGE->url, $h);
+                throw new \powereduc_exception('invalidfieldname', 'error', $PAGE->url, $h);
             }
         if (isset($required[$h])) {
             $required[$h] = 2;
@@ -109,7 +109,7 @@ if ($importform->is_cancelled()) {
     // check for required fields
     foreach ($required as $key => $value) {
         if ($value < 2) {
-            throw new \moodle_exception('fieldrequired', 'error', $PAGE->url, $key);
+            throw new \powereduc_exception('fieldrequired', 'error', $PAGE->url, $key);
         }
     }
     $linenum = 2; // since header is line 1
@@ -130,7 +130,7 @@ if ($importform->is_cancelled()) {
             foreach ($record as $name => $value) {
                 // check for required values
                 if (isset($required[$name]) and !$value) {
-                    throw new \moodle_exception('missingfield', 'error', $PAGE->url, $name);
+                    throw new \powereduc_exception('missingfield', 'error', $PAGE->url, $name);
                 } else if ($name == "groupname") {
                     $newgroup->name = $value;
                 } else {
@@ -173,7 +173,7 @@ if ($importform->is_cancelled()) {
                 $newgrpcoursecontext = context_course::instance($newgroup->courseid);
 
                 ///Users cannot upload groups in courses they cannot update.
-                if (!has_capability('moodle/course:managegroups', $newgrpcoursecontext) or (!is_enrolled($newgrpcoursecontext) and !has_capability('moodle/course:view', $newgrpcoursecontext))) {
+                if (!has_capability('powereduc/course:managegroups', $newgrpcoursecontext) or (!is_enrolled($newgrpcoursecontext) and !has_capability('powereduc/course:view', $newgrpcoursecontext))) {
                     echo $OUTPUT->notification(get_string('nopermissionforcreation', 'group', $groupname));
 
                 } else {
@@ -181,7 +181,7 @@ if ($importform->is_cancelled()) {
                         // The CSV field for the group idnumber is groupidnumber rather than
                         // idnumber as that field is already in use for the course idnumber.
                         $newgroup->groupidnumber = trim($newgroup->groupidnumber);
-                        if (has_capability('moodle/course:changeidnumber', $newgrpcoursecontext)) {
+                        if (has_capability('powereduc/course:changeidnumber', $newgrpcoursecontext)) {
                             $newgroup->idnumber = $newgroup->groupidnumber;
                             if ($existing = groups_get_group_by_idnumber($newgroup->courseid, $newgroup->idnumber)) {
                                 // idnumbers must be unique to a course but we shouldn't ignore group creation for duplicates

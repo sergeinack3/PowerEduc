@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Login block
  *
  * @package   block_login
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -51,7 +51,7 @@ class block_login extends block_base {
         $forgot = $wwwroot . '/login/forgot_password.php';
 
 
-        $username = get_moodle_cookie();
+        $username = get_powereduc_cookie();
 
         $this->content = new stdClass();
         $this->content->footer = '';

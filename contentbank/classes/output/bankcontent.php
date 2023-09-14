@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * core_contentbank specific renderers
  *
  * @package   core_contentbank
- * @copyright  2020 Ferran Recio <ferran@moodle.com>
+ * @copyright  2020 Ferran Recio <ferran@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -34,7 +34,7 @@ use core_contentbank\content;
 /**
  * Class containing data for bank content
  *
- * @copyright  2020 Ferran Recio <ferran@moodle.com>
+ * @copyright  2020 Ferran Recio <ferran@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class bankcontent implements renderable, templatable {
@@ -133,7 +133,7 @@ class bankcontent implements renderable, templatable {
 
         $allowedcontexts = [];
         $systemcontext = \context_system::instance();
-        if (has_capability('moodle/contentbank:access', $systemcontext)) {
+        if (has_capability('powereduc/contentbank:access', $systemcontext)) {
             $allowedcontexts[$systemcontext->id] = get_string('coresystem');
         }
         $options = [];
@@ -154,7 +154,7 @@ class bankcontent implements renderable, templatable {
             $allowedcontexts['courses'] = [get_string('courses') => $options];
         }
         if (!empty($allowedcontexts)) {
-            $url = new \moodle_url('/contentbank/index.php');
+            $url = new \powereduc_url('/contentbank/index.php');
             $singleselect = new \single_select(
                 $url,
                 'contextid',

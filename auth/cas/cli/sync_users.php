@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 /**
  * CAS user sync script.
  *
- * This script is meant to be called from a cronjob to sync moodle with the CAS
+ * This script is meant to be called from a cronjob to sync powereduc with the CAS
  * backend in those setups where the CAS backend acts as 'master'.
  *
  * Notes:

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -153,12 +153,12 @@ class administration_helper_test extends \advanced_testcase {
      */
     public function test_get_add_store_form() {
         $form = cache_factory::get_administration_display_helper()->get_add_store_form('file');
-        $this->assertInstanceOf('moodleform', $form);
+        $this->assertInstanceOf('powereducform', $form);
 
         try {
             $form = cache_factory::get_administration_display_helper()->get_add_store_form('somethingstupid');
             $this->fail('You should not be able to create an add form for a store plugin that does not exist.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e, 'Needs to be: ' .get_class($e)." ::: ".$e->getMessage());
         }
     }
@@ -173,19 +173,19 @@ class administration_helper_test extends \advanced_testcase {
         $this->assertTrue($config->add_store_instance('test_get_edit_store_form', 'file'));
 
         $form = $administrationhelper->get_edit_store_form('file', 'test_get_edit_store_form');
-        $this->assertInstanceOf('moodleform', $form);
+        $this->assertInstanceOf('powereducform', $form);
 
         try {
             $form = $administrationhelper->get_edit_store_form('somethingstupid', 'moron');
             $this->fail('You should not be able to create an edit form for a store plugin that does not exist.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
         try {
             $form = $administrationhelper->get_edit_store_form('file', 'blisters');
             $this->fail('You should not be able to create an edit form for a store plugin that does not exist.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
     }

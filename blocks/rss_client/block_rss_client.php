@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -63,11 +63,11 @@
 
         if ($this->config->block_rss_client_show_channel_link) {
             global $CFG;
-            require_once($CFG->libdir.'/simplepie/moodle_simplepie.php');
+            require_once($CFG->libdir.'/simplepie/powereduc_simplepie.php');
 
             $feedrecord     = array_pop($feedrecords);
-            $feed           = new moodle_simplepie($feedrecord->url);
-            $channellink    = new moodle_url($feed->get_link());
+            $feed           = new powereduc_simplepie($feedrecord->url);
+            $channellink    = new powereduc_url($feed->get_link());
 
             if (!empty($channellink)) {
                 $footer = new block_rss_client\output\footer($channellink);
@@ -79,7 +79,7 @@
                 if ($footer === null) {
                     $footer = new block_rss_client\output\footer();
                 }
-                $manageurl = new moodle_url('/blocks/rss_client/managefeeds.php',
+                $manageurl = new powereduc_url('/blocks/rss_client/managefeeds.php',
                         ['courseid' => $this->page->course->id]);
                 $footer->set_failed($manageurl);
             }
@@ -182,7 +182,7 @@
      */
     public function get_feed($feedrecord, $maxentries, $showtitle) {
         global $CFG;
-        require_once($CFG->libdir.'/simplepie/moodle_simplepie.php');
+        require_once($CFG->libdir.'/simplepie/powereduc_simplepie.php');
 
         if ($feedrecord->skipuntil) {
             // Last attempt to gather this feed via cron failed - do not try to fetch it now.
@@ -190,7 +190,7 @@
             return null;
         }
 
-        $simplepiefeed = new moodle_simplepie($feedrecord->url);
+        $simplepiefeed = new powereduc_simplepie($feedrecord->url);
 
         if(isset($CFG->block_rss_client_timeout)){
             $simplepiefeed->set_cache_duration($CFG->block_rss_client_timeout * 60);
@@ -222,18 +222,18 @@
                 try {
                     $item = new \block_rss_client\output\item(
                         $simplepieitem->get_id(),
-                        new moodle_url($simplepieitem->get_link()),
+                        new powereduc_url($simplepieitem->get_link()),
                         $simplepieitem->get_title(),
                         $simplepieitem->get_description(),
-                        new moodle_url($simplepieitem->get_permalink()),
+                        new powereduc_url($simplepieitem->get_permalink()),
                         $simplepieitem->get_date('U'),
                         $this->config->display_description
                     );
 
                     $feed->add_item($item);
-                } catch (moodle_exception $e) {
+                } catch (powereduc_exception $e) {
                     // If there is an error with the RSS item, we don't
-                    // want to crash the page. Specifically, moodle_url can
+                    // want to crash the page. Specifically, powereduc_url can
                     // throw an exception of the param is an extremely
                     // malformed url.
                     debugging($e->getMessage());
@@ -245,15 +245,15 @@
         if ($imageurl = $simplepiefeed->get_image_url()) {
             try {
                 $image = new \block_rss_client\output\channel_image(
-                    new moodle_url($imageurl),
+                    new powereduc_url($imageurl),
                     $simplepiefeed->get_image_title(),
-                    new moodle_url($simplepiefeed->get_image_link())
+                    new powereduc_url($simplepiefeed->get_image_link())
                 );
 
                 $feed->set_image($image);
-            } catch (moodle_exception $e) {
+            } catch (powereduc_exception $e) {
                 // If there is an error with the RSS image, we don'twant to
-                // crash the page. Specifically, moodle_url can throw an
+                // crash the page. Specifically, powereduc_url can throw an
                 // exception if the param is an extremely malformed url.
                 debugging($e->getMessage());
             }

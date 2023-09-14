@@ -13,7 +13,7 @@ Here are the files that we have added.
 /lib.php
 
     Is a wrapper to get a Google_Client object with the default configuration
-    that should be used throughout Moodle. It also takes care of including the
+    that should be used throughout PowerEduc. It also takes care of including the
     required files and updating the include_path.
 
     Every use of the Google PHP API should always start by requiring this file.

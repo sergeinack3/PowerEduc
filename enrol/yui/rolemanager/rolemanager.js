@@ -1,4 +1,4 @@
-YUI.add('moodle-enrol-rolemanager', function(Y) {
+YUI.add('powereduc-enrol-rolemanager', function(Y) {
 
     var MOD_NAME                    = 'Moodle role manager',
         MOD_USER                    = 'Moodle role user',
@@ -367,7 +367,7 @@ YUI.add('moodle-enrol-rolemanager', function(Y) {
             var element = Y.Node.create('<div class="popover popover-bottom"><div class="arrow"></div>' +
                                         '<div class="header popover-title">' +
                                         '<div role="button" class="close" aria-label="' +
-                                        M.util.get_string('closebuttontitle', 'moodle') + '">' +
+                                        M.util.get_string('closebuttontitle', 'powereduc') + '">' +
                                         '<span aria-hidden="true">&times;</span></div>' +
                                         '<h3>'+M.util.get_string('assignroles', 'role')+'</h3>' +
                                         '</div><div class="content popover-content form-inline form-group"></div></div>');
@@ -445,4 +445,4 @@ YUI.add('moodle-enrol-rolemanager', function(Y) {
         }
     }
 
-}, '@VERSION@', {requires:['base','node','io-base','json-parse','test','moodle-core-notification']});
+}, '@VERSION@', {requires:['base','node','io-base','json-parse','test','powereduc-core-notification']});

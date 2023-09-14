@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core\task;
 
@@ -157,7 +157,7 @@ class scheduled_task_test extends \advanced_testcase {
         $userdate = userdate($nexttime);
 
         // Should be displayed in user timezone.
-        // I used http://www.timeanddate.com/worldclock/fixedtime.html?msg=Moodle+Test&iso=20160502T01&p1=113
+        // I used http://www.timeanddate.com/worldclock/fixedtime.html?msg=PowerEduc+Test&iso=20160502T01&p1=113
         // setting my location to Kathmandu to verify this time.
         $this->assertStringContainsString('2:15 AM', \core_text::strtoupper($userdate));
     }
@@ -165,7 +165,7 @@ class scheduled_task_test extends \advanced_testcase {
     public function test_reset_scheduled_tasks_for_component_customised(): void {
         $this->resetAfterTest(true);
 
-        $tasks = manager::load_scheduled_tasks_for_component('moodle');
+        $tasks = manager::load_scheduled_tasks_for_component('powereduc');
 
         // Customise a task.
         $task = reset($tasks);
@@ -178,7 +178,7 @@ class scheduled_task_test extends \advanced_testcase {
         manager::configure_scheduled_task($task);
 
         // Now call reset.
-        manager::reset_scheduled_tasks_for_component('moodle');
+        manager::reset_scheduled_tasks_for_component('powereduc');
 
         // Fetch the task again.
         $taskafterreset = manager::get_scheduled_task(get_class($task));
@@ -192,7 +192,7 @@ class scheduled_task_test extends \advanced_testcase {
         $this->resetAfterTest(true);
 
         // Delete a task to simulate the fact that its new.
-        $tasklist = manager::load_scheduled_tasks_for_component('moodle');
+        $tasklist = manager::load_scheduled_tasks_for_component('powereduc');
 
         // Note: This test must use a task which does not use any random values.
         $task = manager::get_scheduled_task(session_cleanup_task::class);
@@ -201,14 +201,14 @@ class scheduled_task_test extends \advanced_testcase {
         $this->assertFalse(manager::get_scheduled_task(session_cleanup_task::class));
 
         // Now call reset on all the tasks.
-        manager::reset_scheduled_tasks_for_component('moodle');
+        manager::reset_scheduled_tasks_for_component('powereduc');
 
         // Assert that the second task was added back.
         $taskafterreset = manager::get_scheduled_task(session_cleanup_task::class);
         $this->assertNotFalse($taskafterreset);
 
         $this->assertTaskEquals($task, $taskafterreset);
-        $this->assertCount(count($tasklist), manager::load_scheduled_tasks_for_component('moodle'));
+        $this->assertCount(count($tasklist), manager::load_scheduled_tasks_for_component('powereduc'));
     }
 
     public function test_reset_scheduled_tasks_for_component_changed_in_source(): void {
@@ -236,7 +236,7 @@ class scheduled_task_test extends \advanced_testcase {
         $this->assertTaskNotEquals($taskbeforechange, $taskafterchange);
 
         // Now call reset.
-        manager::reset_scheduled_tasks_for_component('moodle');
+        manager::reset_scheduled_tasks_for_component('powereduc');
 
         // Fetch the task again.
         $taskafterreset = manager::get_scheduled_task(session_cleanup_task::class);
@@ -252,38 +252,38 @@ class scheduled_task_test extends \advanced_testcase {
         global $DB;
         $this->resetAfterTest(true);
 
-        $count = $DB->count_records('task_scheduled', array('component' => 'moodle'));
+        $count = $DB->count_records('task_scheduled', array('component' => 'powereduc'));
         $allcount = $DB->count_records('task_scheduled');
 
         $task = new scheduled_test_task();
-        $task->set_component('moodle');
+        $task->set_component('powereduc');
         $record = manager::record_from_scheduled_task($task);
         $DB->insert_record('task_scheduled', $record);
         $this->assertTrue($DB->record_exists('task_scheduled', array('classname' => '\core\task\scheduled_test_task',
-            'component' => 'moodle')));
+            'component' => 'powereduc')));
 
         $task = new scheduled_test2_task();
-        $task->set_component('moodle');
+        $task->set_component('powereduc');
         $record = manager::record_from_scheduled_task($task);
         $DB->insert_record('task_scheduled', $record);
         $this->assertTrue($DB->record_exists('task_scheduled', array('classname' => '\core\task\scheduled_test2_task',
-            'component' => 'moodle')));
+            'component' => 'powereduc')));
 
-        $aftercount = $DB->count_records('task_scheduled', array('component' => 'moodle'));
+        $aftercount = $DB->count_records('task_scheduled', array('component' => 'powereduc'));
         $afterallcount = $DB->count_records('task_scheduled');
 
         $this->assertEquals($count + 2, $aftercount);
         $this->assertEquals($allcount + 2, $afterallcount);
 
         // Now check that the right things were deleted.
-        manager::reset_scheduled_tasks_for_component('moodle');
+        manager::reset_scheduled_tasks_for_component('powereduc');
 
-        $this->assertEquals($count, $DB->count_records('task_scheduled', array('component' => 'moodle')));
+        $this->assertEquals($count, $DB->count_records('task_scheduled', array('component' => 'powereduc')));
         $this->assertEquals($allcount, $DB->count_records('task_scheduled'));
         $this->assertFalse($DB->record_exists('task_scheduled', array('classname' => '\core\task\scheduled_test2_task',
-            'component' => 'moodle')));
+            'component' => 'powereduc')));
         $this->assertFalse($DB->record_exists('task_scheduled', array('classname' => '\core\task\scheduled_test_task',
-            'component' => 'moodle')));
+            'component' => 'powereduc')));
     }
 
     public function test_get_next_scheduled_task() {
@@ -758,7 +758,7 @@ class scheduled_task_test extends \advanced_testcase {
         $DB->set_field('task_scheduled', 'lastruntime', 123456789, ['classname' => '\core\task\session_cleanup_task']);
 
         // Reset the task.
-        manager::reset_scheduled_tasks_for_component('moodle');
+        manager::reset_scheduled_tasks_for_component('powereduc');
 
         // Fetch the task again.
         $taskafterreset = manager::get_scheduled_task(session_cleanup_task::class);

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -50,7 +50,7 @@ class adminpresets_auth_ldap_admin_setting_special_contexts_configtext extends a
         if (!defined($paramtype)) {
             $this->value = preg_replace($this->settingdata->paramtype, '', $this->value);
 
-            // Standard moodle param type.
+            // Standard powereduc param type.
         } else {
             $this->value = clean_param($this->value, constant($paramtype));
         }

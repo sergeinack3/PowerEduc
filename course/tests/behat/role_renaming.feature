@@ -42,7 +42,7 @@ Feature: Rename roles in a course
     Given I log in as "admin"
     And I set the following system permissions of "Teacher" role:
       | capability         | permission |
-      | moodle/course:renameroles | Inherit |
+      | powereduc/course:renameroles | Inherit |
     And I follow "Log out"
     When I log in as "teacher1"
     And I am on "Course 1" course homepage

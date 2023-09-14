@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Privacy provider implementation for core_contentbank.
  *
  * @package    contenttype_h5p
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,7 +27,7 @@ namespace contenttype_h5p\privacy;
 /**
  * Privacy provider implementation for contenttype_h5p.
  *
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements \core_privacy\local\metadata\null_provider {

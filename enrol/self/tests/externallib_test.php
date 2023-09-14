@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ require_once($CFG->dirroot . '/enrol/self/externallib.php');
  * Self enrol external PHPunit tests
  *
  * @package   enrol_self
- * @copyright 2013 Rajesh Taneja <rajesh@moodle.com>
+ * @copyright 2013 Rajesh Taneja <rajesh@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since     Moodle 2.6
  */
@@ -108,7 +108,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->setUser($user);
         try {
             enrol_self_external::get_instance_info($instanceid3);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('coursehidden', $e->errorcode);
         }
     }
@@ -164,7 +164,7 @@ class externallib_test extends externallib_advanced_testcase {
         // Try instance not enabled.
         try {
             enrol_self_external::enrol_user($course2->id);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             self::assertEquals('canntenrol', $e->errorcode);
         }
 

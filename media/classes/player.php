@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Base class for media players
@@ -154,7 +154,7 @@ abstract class core_media_player {
     public abstract function get_rank();
 
     /**
-     * @deprecated since Moodle 3.2
+     * @deprecated since PowerEduc 3.2
      */
     public function is_enabled() {
         throw new coding_exception('core_media_player::is_enabled() can not be used anymore.');
@@ -206,7 +206,7 @@ abstract class core_media_player {
     }
 
     /**
-     * @deprecated since Moodle 3.2
+     * @deprecated since PowerEduc 3.2
      */
     public static function compare_by_rank() {
         throw new coding_exception('core_media_player::compare_by_rank() can not be used anymore.');
@@ -237,7 +237,7 @@ abstract class core_media_player {
      * page. The {@link self::embed()} method is meant to be used for that.
      *
      * @param powereduc_page $page The page we are going to add requirements to.
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public function setup($page) {
         // Override is need be.

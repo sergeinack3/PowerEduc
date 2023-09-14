@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * This file contains the class that handles testing the calendar type system.
  *
  * @package core_calendar
- * @copyright 2013 Mark Nelson <markn@moodle.com>
+ * @copyright 2013 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -43,7 +43,7 @@ require_once($CFG->dirroot . '/user/profile/definelib.php');
  * Unit tests for the calendar type system.
  *
  * @package core_calendar
- * @copyright 2013 Mark Nelson <markn@moodle.com>
+ * @copyright 2013 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since Moodle 2.6
  */
@@ -202,7 +202,7 @@ class calendartype_test extends \advanced_testcase {
         $this->assertEquals($calendar->get_next_month('1986', '9'), calendar_add_month('9', '1986'));
         $this->assertEquals($calendar->get_prev_month('1986', '9'), calendar_sub_month('9', '1986'));
 
-        // Test the lib/moodle.php functions.
+        // Test the lib/powereduc.php functions.
         $this->assertEquals($calendar->get_num_days_in_month('1986', '9'), days_in_month('9', '1986'));
         $this->assertEquals($calendar->get_weekday('1986', '9', '16'), dayofweek('16', '9', '1986'));
     }
@@ -311,7 +311,7 @@ class calendartype_test extends \advanced_testcase {
 /**
  * Form object to be used in test case.
  */
-class temp_form_calendartype extends \moodleform {
+class temp_form_calendartype extends \powereducform {
     /**
      * Form definition.
      */

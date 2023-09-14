@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -96,7 +96,7 @@ class grade_report_overview extends grade_report {
 
         $this->studentcourseids = array();
         $this->teachercourses = array();
-        $roleids = explode(',', get_config('moodle', 'gradebookroles'));
+        $roleids = explode(',', get_config('powereduc', 'gradebookroles'));
 
         if ($this->courses) {
             foreach ($this->courses as $course) {
@@ -117,7 +117,7 @@ class grade_report_overview extends grade_report {
                     }
                 }
 
-                if (has_capability('moodle/grade:viewall', $coursecontext, $userid)) {
+                if (has_capability('powereduc/grade:viewall', $coursecontext, $userid)) {
                     $this->teachercourses[$course->id] = $course;
                 }
             }
@@ -188,21 +188,21 @@ class grade_report_overview extends grade_report {
 
             $coursecontext = context_course::instance($course->id);
 
-            if (!$course->visible && !has_capability('moodle/course:viewhiddencourses', $coursecontext)) {
+            if (!$course->visible && !has_capability('powereduc/course:viewhiddencourses', $coursecontext)) {
                 // The course is hidden and the user isn't allowed to see it.
                 continue;
             }
 
-            if (!has_capability('moodle/user:viewuseractivitiesreport', context_user::instance($this->user->id)) &&
-                    ((!has_capability('moodle/grade:view', $coursecontext) || $this->user->id != $USER->id) &&
-                    !has_capability('moodle/grade:viewall', $coursecontext))) {
+            if (!has_capability('powereduc/user:viewuseractivitiesreport', context_user::instance($this->user->id)) &&
+                    ((!has_capability('powereduc/grade:view', $coursecontext) || $this->user->id != $USER->id) &&
+                    !has_capability('powereduc/grade:viewall', $coursecontext))) {
                 continue;
             }
 
             $coursesdata[$course->id]['course'] = $course;
             $coursesdata[$course->id]['context'] = $coursecontext;
 
-            $canviewhidden = has_capability('moodle/grade:viewhidden', $coursecontext);
+            $canviewhidden = has_capability('powereduc/grade:viewhidden', $coursecontext);
 
             // Get course grade_item.
             $courseitem = grade_item::fetch_course_item($course->id);
@@ -274,8 +274,8 @@ class grade_report_overview extends grade_report {
 
             // Check whether current user can view all grades of this user - parent most probably.
             $viewasuser = $this->course->showgrades && has_any_capability([
-                'moodle/grade:viewall',
-                'moodle/user:viewuseractivitiesreport',
+                'powereduc/grade:viewall',
+                'powereduc/user:viewuseractivitiesreport',
             ], context_user::instance($this->user->id));
 
             foreach ($coursesdata as $coursedata) {
@@ -291,13 +291,13 @@ class grade_report_overview extends grade_report {
                 if ($activitylink &&
                         (has_capability('gradereport/' . $CFG->grade_profilereport .':view', $coursecontext) || $viewasuser)) {
 
-                    $coursenamelink = html_writer::link(new moodle_url('/course/user.php', [
+                    $coursenamelink = html_writer::link(new powereduc_url('/course/user.php', [
                         'mode' => 'grade',
                         'id' => $course->id,
                         'user' => $this->user->id,
                     ]), $coursenamelink);
                 } else if (!$activitylink && (has_capability('gradereport/user:view', $coursecontext) || $viewasuser)) {
-                    $coursenamelink = html_writer::link(new moodle_url('/grade/report/user/index.php', [
+                    $coursenamelink = html_writer::link(new powereduc_url('/grade/report/user/index.php', [
                         'id' => $course->id,
                         'userid' => $this->user->id,
                         'group' => $this->gpr->groupid,
@@ -354,7 +354,7 @@ class grade_report_overview extends grade_report {
         foreach ($this->teachercourses as $courseid => $course) {
             $coursecontext = context_course::instance($course->id);
             $coursenamelink = format_string($course->fullname, true, ['context' => $coursecontext]);
-            $url = new moodle_url('/grade/report/index.php', array('id' => $courseid));
+            $url = new powereduc_url('/grade/report/index.php', array('id' => $courseid));
             $table->data[] = array(html_writer::link($url, $coursenamelink));
         }
         echo html_writer::table($table);
@@ -392,23 +392,23 @@ class grade_report_overview extends grade_report {
         global $USER;
 
         $access = false;
-        if (has_capability('moodle/grade:viewall', $systemcontext)) {
+        if (has_capability('powereduc/grade:viewall', $systemcontext)) {
             // Ok - can view all course grades.
             $access = true;
 
-        } else if (has_capability('moodle/grade:viewall', $context)) {
+        } else if (has_capability('powereduc/grade:viewall', $context)) {
             // Ok - can view any grades in context.
             $access = true;
 
-        } else if ($userid == $USER->id and ((has_capability('moodle/grade:view', $context) and $course->showgrades)
+        } else if ($userid == $USER->id and ((has_capability('powereduc/grade:view', $context) and $course->showgrades)
                 || $course->id == SITEID)) {
             // Ok - can view own course grades.
             $access = true;
 
-        } else if (has_capability('moodle/grade:viewall', $personalcontext) and $course->showgrades) {
+        } else if (has_capability('powereduc/grade:viewall', $personalcontext) and $course->showgrades) {
             // Ok - can view grades of this user - parent most probably.
             $access = true;
-        } else if (has_capability('moodle/user:viewuseractivitiesreport', $personalcontext) and $course->showgrades) {
+        } else if (has_capability('powereduc/user:viewuseractivitiesreport', $personalcontext) and $course->showgrades) {
             // Ok - can view grades of this user - parent most probably.
             $access = true;
         }
@@ -485,7 +485,7 @@ function gradereport_overview_myprofile_navigation(core_user\output\myprofile\tr
     $usercontext = context_user::instance($user->id);
     $coursecontext = context_course::instance($course->id);
     if (grade_report_overview::check_access($systemcontext, $coursecontext, $usercontext, $course, $user->id)) {
-        $url = new moodle_url('/grade/report/overview/index.php', array('userid' => $user->id, 'id' => $course->id));
+        $url = new powereduc_url('/grade/report/overview/index.php', array('userid' => $user->id, 'id' => $course->id));
         $node = new core_user\output\myprofile\node('reports', 'grades', get_string('gradesoverview', 'gradereport_overview'),
                 null, $url);
         $tree->add_node($node);

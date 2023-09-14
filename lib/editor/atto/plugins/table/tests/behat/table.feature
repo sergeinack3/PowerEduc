@@ -51,8 +51,8 @@ Feature: Atto tables
     And I select the text in the "Blog entry body" Atto editor
     And I click on "Show more buttons" "button"
     When I click on "Table" "button"
-    Then the ".moodle-dialogue-base .atto_form .borderstyle" "css_element" should be disabled
-    And the ".moodle-dialogue-base .atto_form .bordersize" "css_element" should be disabled
+    Then the ".powereduc-dialogue-base .atto_form .borderstyle" "css_element" should be disabled
+    And the ".powereduc-dialogue-base .atto_form .bordersize" "css_element" should be disabled
     And the "borderColour" "radio" should be disabled
     And the field "borders" matches value "default"
     And the field "Theme default" matches value "1"
@@ -75,12 +75,12 @@ Feature: Atto tables
     And I click on "Show more buttons" "button"
     And I click on "Table" "button"
     And I click on "Edit table" "link"
-    And I click on "#FFFFFF" "radio" in the ".moodle-dialogue-base .atto_form .backgroundcolour" "css_element"
+    And I click on "#FFFFFF" "radio" in the ".powereduc-dialogue-base .atto_form .backgroundcolour" "css_element"
     And I set the field "Table width (in %)" to "100"
     And I set the field "Borders" to "Around table"
     And I set the field "Style of borders" to "Dashed"
     And I set the field "Size of borders" to "2"
-    And I click on "#FFFFFF" "radio" in the ".moodle-dialogue-base .atto_form .bordercolour" "css_element"
+    And I click on "#FFFFFF" "radio" in the ".powereduc-dialogue-base .atto_form .bordercolour" "css_element"
     And I press "Update table"
     And I select the text in the "Blog entry body" Atto editor
     And I click on "Table" "button"
@@ -110,13 +110,13 @@ Feature: Atto tables
     And I select the text in the "Blog entry body" Atto editor
     And I click on "Show more buttons" "button"
     When I click on "Table" "button"
-    Then ".moodle-dialogue-base .atto_form .borders" "css_element" should not exist
-    Then ".moodle-dialogue-base .atto_form .borderstyle" "css_element" should not exist
-    Then ".moodle-dialogue-base .atto_form .bordersize" "css_element" should not exist
-    Then ".moodle-dialogue-base .atto_form .bordercolour" "css_element" should not exist
-    Then ".moodle-dialogue-base .atto_form .backgroundcolour" "css_element" should exist
-    Then ".moodle-dialogue-base .atto_form .customwidth" "css_element" should exist
-    And I click on "#FFFFFF" "radio" in the ".moodle-dialogue-base .atto_form .backgroundcolour" "css_element"
+    Then ".powereduc-dialogue-base .atto_form .borders" "css_element" should not exist
+    Then ".powereduc-dialogue-base .atto_form .borderstyle" "css_element" should not exist
+    Then ".powereduc-dialogue-base .atto_form .bordersize" "css_element" should not exist
+    Then ".powereduc-dialogue-base .atto_form .bordercolour" "css_element" should not exist
+    Then ".powereduc-dialogue-base .atto_form .backgroundcolour" "css_element" should exist
+    Then ".powereduc-dialogue-base .atto_form .customwidth" "css_element" should exist
+    And I click on "#FFFFFF" "radio" in the ".powereduc-dialogue-base .atto_form .backgroundcolour" "css_element"
     And I set the field "Table width (in %)" to "100"
     And I press "Create table"
     And I press "Save changes"
@@ -143,7 +143,7 @@ Feature: Atto tables
     And I click on "Show more buttons" "button"
     And I click on "Table" "button"
     When I click on "Edit table" "link"
-    And I click on "#FFFFFF" "radio" in the ".moodle-dialogue-base .atto_form .backgroundcolour" "css_element"
+    And I click on "#FFFFFF" "radio" in the ".powereduc-dialogue-base .atto_form .backgroundcolour" "css_element"
     And I set the field "Table width (in %)" to "100"
     And I press "Update table"
     And I press "Save changes"
@@ -169,13 +169,13 @@ Feature: Atto tables
     And I select the text in the "Blog entry body" Atto editor
     And I click on "Show more buttons" "button"
     When I click on "Table" "button"
-    Then ".moodle-dialogue-base .atto_form .borders" "css_element" should exist
-    Then ".moodle-dialogue-base .atto_form .borderstyle" "css_element" should exist
-    Then ".moodle-dialogue-base .atto_form .bordersize" "css_element" should exist
-    Then ".moodle-dialogue-base .atto_form .bordercolour" "css_element" should exist
-    Then ".moodle-dialogue-base .atto_form .backgroundcolour" "css_element" should exist
-    Then ".moodle-dialogue-base .atto_form .customwidth" "css_element" should exist
-    And I click on "#FFFFFF" "radio" in the ".moodle-dialogue-base .atto_form .backgroundcolour" "css_element"
+    Then ".powereduc-dialogue-base .atto_form .borders" "css_element" should exist
+    Then ".powereduc-dialogue-base .atto_form .borderstyle" "css_element" should exist
+    Then ".powereduc-dialogue-base .atto_form .bordersize" "css_element" should exist
+    Then ".powereduc-dialogue-base .atto_form .bordercolour" "css_element" should exist
+    Then ".powereduc-dialogue-base .atto_form .backgroundcolour" "css_element" should exist
+    Then ".powereduc-dialogue-base .atto_form .customwidth" "css_element" should exist
+    And I click on "#FFFFFF" "radio" in the ".powereduc-dialogue-base .atto_form .backgroundcolour" "css_element"
     And I set the field "Table width (in %)" to "100"
     And I set the field "Borders" to "Around table"
     And I press "Create table"
@@ -203,7 +203,7 @@ Feature: Atto tables
     And I click on "Show more buttons" "button"
     And I click on "Table" "button"
     When I click on "Edit table" "link"
-    And I click on "#FFFFFF" "radio" in the ".moodle-dialogue-base .atto_form .backgroundcolour" "css_element"
+    And I click on "#FFFFFF" "radio" in the ".powereduc-dialogue-base .atto_form .backgroundcolour" "css_element"
     And I set the field "Table width (in %)" to "100"
     And I set the field "Borders" to "Around each cell"
     And I press "Update table"
@@ -230,7 +230,7 @@ Feature: Atto tables
     And I select the text in the "Blog entry body" Atto editor
     And I click on "Show more buttons" "button"
     When I click on "Table" "button"
-    And I click on "#FFFFFF" "radio" in the ".moodle-dialogue-base .atto_form .backgroundcolour" "css_element"
+    And I click on "#FFFFFF" "radio" in the ".powereduc-dialogue-base .atto_form .backgroundcolour" "css_element"
     And I set the field "Table width (in %)" to "100"
     And I set the field "Borders" to "Around table"
     And I set the field "Style of borders" to "Dashed"
@@ -260,7 +260,7 @@ Feature: Atto tables
     And I click on "Show more buttons" "button"
     And I click on "Table" "button"
     When I click on "Edit table" "link"
-    And I click on "#FFFFFF" "radio" in the ".moodle-dialogue-base .atto_form .backgroundcolour" "css_element"
+    And I click on "#FFFFFF" "radio" in the ".powereduc-dialogue-base .atto_form .backgroundcolour" "css_element"
     And I set the field "Table width (in %)" to "100"
     And I set the field "Borders" to "Around table"
     And I set the field "Style of borders" to "Dashed"
@@ -289,7 +289,7 @@ Feature: Atto tables
     And I select the text in the "Blog entry body" Atto editor
     And I click on "Show more buttons" "button"
     When I click on "Table" "button"
-    And I click on "#FFFFFF" "radio" in the ".moodle-dialogue-base .atto_form .backgroundcolour" "css_element"
+    And I click on "#FFFFFF" "radio" in the ".powereduc-dialogue-base .atto_form .backgroundcolour" "css_element"
     And I set the field "Table width (in %)" to "100"
     And I set the field "Borders" to "Around table"
     And I set the field "Style of borders" to "Dashed"
@@ -321,7 +321,7 @@ Feature: Atto tables
     And I click on "Show more buttons" "button"
     And I click on "Table" "button"
     When I click on "Edit table" "link"
-    And I click on "#FFFFFF" "radio" in the ".moodle-dialogue-base .atto_form .backgroundcolour" "css_element"
+    And I click on "#FFFFFF" "radio" in the ".powereduc-dialogue-base .atto_form .backgroundcolour" "css_element"
     And I set the field "Table width (in %)" to "100"
     And I set the field "Borders" to "Around table"
     And I set the field "Style of borders" to "Dashed"
@@ -352,12 +352,12 @@ Feature: Atto tables
     And I select the text in the "Blog entry body" Atto editor
     And I click on "Show more buttons" "button"
     When I click on "Table" "button"
-    And I click on "#FFFFFF" "radio" in the ".moodle-dialogue-base .atto_form .backgroundcolour" "css_element"
+    And I click on "#FFFFFF" "radio" in the ".powereduc-dialogue-base .atto_form .backgroundcolour" "css_element"
     And I set the field "Table width (in %)" to "100"
     And I set the field "Borders" to "Around table"
     And I set the field "Style of borders" to "Dashed"
     And I set the field "Size of borders" to "2"
-    And I click on "#FFFFFF" "radio" in the ".moodle-dialogue-base .atto_form .bordercolour" "css_element"
+    And I click on "#FFFFFF" "radio" in the ".powereduc-dialogue-base .atto_form .bordercolour" "css_element"
     And I press "Create table"
     And I press "Save changes"
     And I follow "Edit"
@@ -386,12 +386,12 @@ Feature: Atto tables
     And I click on "Show more buttons" "button"
     And I click on "Table" "button"
     When I click on "Edit table" "link"
-    And I click on "FFFFFF" "radio" in the ".moodle-dialogue-base .atto_form .backgroundcolour" "css_element"
+    And I click on "FFFFFF" "radio" in the ".powereduc-dialogue-base .atto_form .backgroundcolour" "css_element"
     And I set the field "Table width (in %)" to "100"
     And I set the field "Borders" to "Around table"
     And I set the field "Style of borders" to "Dashed"
     And I set the field "Size of borders" to "2"
-    And I click on "FFFFFF" "radio" in the ".moodle-dialogue-base .atto_form .bordercolour" "css_element"
+    And I click on "FFFFFF" "radio" in the ".powereduc-dialogue-base .atto_form .bordercolour" "css_element"
     And I press "Update table"
     And I press "Save changes"
     And I follow "Edit"

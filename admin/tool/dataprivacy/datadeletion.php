@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ require_login(null, false);
 
 $filter = optional_param('filter', CONTEXT_COURSE, PARAM_INT);
 
-$url = new moodle_url('/admin/tool/dataprivacy/datadeletion.php');
+$url = new powereduc_url('/admin/tool/dataprivacy/datadeletion.php');
 
 $title = get_string('datadeletion', 'tool_dataprivacy');
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -63,14 +63,14 @@ if (!$enrol_manual = enrol_get_plugin('manual')) {
     throw new coding_exception('Can not instantiate enrol_manual');
 }
 
-$url = new moodle_url('/enrol/manual/manage.php', ['enrolid' => $instance->id]);
+$url = new powereduc_url('/enrol/manual/manage.php', ['enrolid' => $instance->id]);
 $title = get_string('managemanualenrolements', 'enrol_manual');
 
 $PAGE->set_url($url);
 $PAGE->set_pagelayout('admin');
 $PAGE->set_title($title);
 $PAGE->set_heading($course->fullname);
-navigation_node::override_active_url(new moodle_url('/enrol/instances.php', ['id' => $course->id]));
+navigation_node::override_active_url(new powereduc_url('/enrol/instances.php', ['id' => $course->id]));
 $PAGE->navbar->add($title, $url);
 
 // Create the user selector objects.

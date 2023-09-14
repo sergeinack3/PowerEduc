@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 defined('POWEREDUC_INTERNAL') || die;
 
 if ($ADMIN->fulltree) {
-    $url = new moodle_url('/admin/settings.php', ['section' => 'managemediaplayers']);
+    $url = new powereduc_url('/admin/settings.php', ['section' => 'managemediaplayers']);
     $item = new admin_setting_heading('filter_mediaplugin/about',
         '',
         new lang_string('linktomedia', 'filter_mediaplugin', $url->out()));

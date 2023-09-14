@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ use external_api;
 use external_function_parameters;
 use external_value;
 use external_multiple_structure;
-use moodle_exception;
+use powereduc_exception;
 use coding_exception;
 use context_course;
 use core_courseformat\base as course_format;
@@ -34,7 +34,7 @@ use core_courseformat\base as course_format;
  * External secrvie to update the course from the course editor components.
  *
  * @package    core_course
- * @copyright  2021 Ferran Recio <moodle@moodle.com>
+ * @copyright  2021 Ferran Recio <powereduc@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 4.0
  */
@@ -133,7 +133,7 @@ class update_course extends external_api {
         $actions = new $actionsclass();
 
         if (!is_callable([$actions, $action])) {
-            throw new moodle_exception("Invalid course state action $action in ".get_class($actions));
+            throw new powereduc_exception("Invalid course state action $action in ".get_class($actions));
         }
 
         $course = $courseformat->get_course();

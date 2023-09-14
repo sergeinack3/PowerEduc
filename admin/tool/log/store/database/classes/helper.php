@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -40,11 +40,11 @@ class helper {
     public static function get_drivers() {
         return array(
             ''               => get_string('choosedots'),
-            'native/mysqli'  => \moodle_database::get_driver_instance('mysqli', 'native')->get_name(),
-            'native/mariadb' => \moodle_database::get_driver_instance('mariadb', 'native')->get_name(),
-            'native/pgsql'   => \moodle_database::get_driver_instance('pgsql', 'native')->get_name(),
-            'native/oci'     => \moodle_database::get_driver_instance('oci', 'native')->get_name(),
-            'native/sqlsrv'  => \moodle_database::get_driver_instance('sqlsrv', 'native')->get_name()
+            'native/mysqli'  => \powereduc_database::get_driver_instance('mysqli', 'native')->get_name(),
+            'native/mariadb' => \powereduc_database::get_driver_instance('mariadb', 'native')->get_name(),
+            'native/pgsql'   => \powereduc_database::get_driver_instance('pgsql', 'native')->get_name(),
+            'native/oci'     => \powereduc_database::get_driver_instance('oci', 'native')->get_name(),
+            'native/sqlsrv'  => \powereduc_database::get_driver_instance('sqlsrv', 'native')->get_name()
         );
     }
 

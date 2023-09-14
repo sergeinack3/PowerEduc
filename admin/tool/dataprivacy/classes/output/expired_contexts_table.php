@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Contains the class used for the displaying the expired contexts table.
  *
  * @package    tool_dataprivacy
- * @copyright  2018 Jun Pataleta <jun@moodle.com>
+ * @copyright  2018 Jun Pataleta <jun@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace tool_dataprivacy\output;
@@ -44,7 +44,7 @@ defined('POWEREDUC_INTERNAL') || die;
 /**
  * The class for displaying the expired contexts table.
  *
- * @copyright  2018 Jun Pataleta <jun@moodle.com>
+ * @copyright  2018 Jun Pataleta <jun@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class expired_contexts_table extends table_sql {

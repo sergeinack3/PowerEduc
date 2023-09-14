@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -120,12 +120,12 @@ class format_weeks extends core_courseformat\base {
      * @param array $options options for view URL. At the moment core uses:
      *     'navigation' (bool) if true and section has no separate page, the function returns null
      *     'sr' (int) used by multipage formats to specify to which section to return
-     * @return null|moodle_url
+     * @return null|powereduc_url
      */
     public function get_view_url($section, $options = array()) {
         global $CFG;
         $course = $this->get_course();
-        $url = new moodle_url('/course/view.php', array('id' => $course->id));
+        $url = new powereduc_url('/course/view.php', array('id' => $course->id));
 
         $sr = null;
         if (array_key_exists('sr', $options)) {
@@ -189,7 +189,7 @@ class format_weeks extends core_courseformat\base {
         if ($navigation->includesectionnum === false) {
             $selectedsection = optional_param('section', null, PARAM_INT);
             if ($selectedsection !== null && (!defined('AJAX_SCRIPT') || AJAX_SCRIPT == '0') &&
-                    $PAGE->url->compare(new moodle_url('/course/view.php'), URL_MATCH_BASE)) {
+                    $PAGE->url->compare(new powereduc_url('/course/view.php'), URL_MATCH_BASE)) {
                 $navigation->includesectionnum = $selectedsection;
             }
         }
@@ -261,7 +261,7 @@ class format_weeks extends core_courseformat\base {
     public function course_format_options($foreditform = false) {
         static $courseformatoptions = false;
         if ($courseformatoptions === false) {
-            $courseconfig = get_config('moodlecourse');
+            $courseconfig = get_config('powereduccourse');
             $courseformatoptions = array(
                 'hiddensections' => array(
                     'default' => $courseconfig->hiddensections,
@@ -282,7 +282,7 @@ class format_weeks extends core_courseformat\base {
                 'hiddensections' => array(
                     'label' => new lang_string('hiddensections'),
                     'help' => 'hiddensections',
-                    'help_component' => 'moodle',
+                    'help_component' => 'powereduc',
                     'element_type' => 'select',
                     'element_attributes' => array(
                         array(
@@ -301,7 +301,7 @@ class format_weeks extends core_courseformat\base {
                         )
                     ),
                     'help' => 'coursedisplay',
-                    'help_component' => 'moodle',
+                    'help_component' => 'powereduc',
                 ),
                 'automaticenddate' => array(
                     'label' => new lang_string('automaticenddate', 'format_weeks'),
@@ -333,7 +333,7 @@ class format_weeks extends core_courseformat\base {
             // with empty sections.
             // The "Number of sections" option is no longer available when editing course, instead teachers should
             // delete and add sections when needed.
-            $courseconfig = get_config('moodlecourse');
+            $courseconfig = get_config('powereduccourse');
             $max = (int)$courseconfig->maxsections;
             $element = $mform->addElement('select', 'numsections', get_string('numberweeks'), range(0, $max ?: 52));
             $mform->setType('numsections', PARAM_INT);
@@ -363,7 +363,7 @@ class format_weeks extends core_courseformat\base {
      * If previous course format did not have 'numsections' option, we populate it with the
      * current number of sections
      *
-     * @param stdClass|array $data return value from {@link moodleform::get_data()} or array with data
+     * @param stdClass|array $data return value from {@link powereducform::get_data()} or array with data
      * @param stdClass $oldcourse if this function is called from {@link update_course()}
      *     this object contains information about the course before update
      * @return bool whether there were any changes to the options values
@@ -475,7 +475,7 @@ class format_weeks extends core_courseformat\base {
     /**
      * Returns the default end date for weeks course format.
      *
-     * @param moodleform $mform
+     * @param powereducform $mform
      * @param array $fieldnames The form - field names mapping.
      * @return int
      */
@@ -498,7 +498,7 @@ class format_weeks extends core_courseformat\base {
             $numsections = $this->get_last_section_number();
         } else {
             // Fallback to the default value for new courses.
-            $numsections = get_config('moodlecourse', $fieldnames['numsections']);
+            $numsections = get_config('powereduccourse', $fieldnames['numsections']);
         }
 
         // Final week's last day.

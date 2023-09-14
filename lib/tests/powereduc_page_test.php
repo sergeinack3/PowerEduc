@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Tests for the moodle_page class.
+ * Tests for the powereduc_page class.
  *
  * @package   core
  * @category  test
@@ -25,7 +25,7 @@
 
 namespace core;
 
-use moodle_page;
+use powereduc_page;
 
 defined('POWEREDUC_INTERNAL') || die();
 
@@ -34,25 +34,25 @@ require_once($CFG->libdir . '/pagelib.php');
 require_once($CFG->libdir . '/blocklib.php');
 
 /**
- * Tests for the moodle_page class.
+ * Tests for the powereduc_page class.
  *
  * @package   core
  * @category  test
  * @copyright 2009 Tim Hunt
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @coversDefaultClass \moodle_page
+ * @coversDefaultClass \powereduc_page
  */
-class moodle_page_test extends \advanced_testcase {
+class powereduc_page_test extends \advanced_testcase {
 
     /**
-     * @var testable_moodle_page
+     * @var testable_powereduc_page
      */
     protected $testpage;
 
     public function setUp(): void {
         parent::setUp();
         $this->resetAfterTest();
-        $this->testpage = new testable_moodle_page();
+        $this->testpage = new testable_powereduc_page();
     }
 
     public function test_course_returns_site_before_set() {
@@ -139,22 +139,22 @@ class moodle_page_test extends \advanced_testcase {
         $this->testpage->set_context(\context_system::instance());
         $this->testpage->set_course($course);
 
-        $this->assertEquals(\moodle_page::STATE_BEFORE_HEADER, $this->testpage->state);
+        $this->assertEquals(\powereduc_page::STATE_BEFORE_HEADER, $this->testpage->state);
 
-        $this->testpage->set_state(\moodle_page::STATE_PRINTING_HEADER);
-        $this->assertEquals(\moodle_page::STATE_PRINTING_HEADER, $this->testpage->state);
+        $this->testpage->set_state(\powereduc_page::STATE_PRINTING_HEADER);
+        $this->assertEquals(\powereduc_page::STATE_PRINTING_HEADER, $this->testpage->state);
 
-        $this->testpage->set_state(\moodle_page::STATE_IN_BODY);
-        $this->assertEquals(\moodle_page::STATE_IN_BODY, $this->testpage->state);
+        $this->testpage->set_state(\powereduc_page::STATE_IN_BODY);
+        $this->assertEquals(\powereduc_page::STATE_IN_BODY, $this->testpage->state);
 
-        $this->testpage->set_state(\moodle_page::STATE_DONE);
-        $this->assertEquals(\moodle_page::STATE_DONE, $this->testpage->state);
+        $this->testpage->set_state(\powereduc_page::STATE_DONE);
+        $this->assertEquals(\powereduc_page::STATE_DONE, $this->testpage->state);
     }
 
     public function test_set_state_cannot_skip_one() {
         // Exercise SUT.
         $this->expectException(\coding_exception::class);
-        $this->testpage->set_state(\moodle_page::STATE_IN_BODY);
+        $this->testpage->set_state(\powereduc_page::STATE_IN_BODY);
     }
 
     public function test_header_printed_false_initially() {
@@ -168,8 +168,8 @@ class moodle_page_test extends \advanced_testcase {
         $this->testpage->set_course($course);
 
         // Exercise SUT.
-        $this->testpage->set_state(\moodle_page::STATE_PRINTING_HEADER);
-        $this->testpage->set_state(\moodle_page::STATE_IN_BODY);
+        $this->testpage->set_state(\powereduc_page::STATE_PRINTING_HEADER);
+        $this->testpage->set_state(\powereduc_page::STATE_IN_BODY);
         // Validated.
         $this->assertTrue($this->testpage->headerprinted);
     }
@@ -235,8 +235,8 @@ class moodle_page_test extends \advanced_testcase {
     public function test_url_to_class_name() {
         $this->assertSame('example-com', $this->testpage->url_to_class_name('http://example.com'));
         $this->assertSame('example-com--80', $this->testpage->url_to_class_name('http://example.com:80'));
-        $this->assertSame('example-com--moodle', $this->testpage->url_to_class_name('https://example.com/moodle'));
-        $this->assertSame('example-com--8080--nested-moodle', $this->testpage->url_to_class_name('https://example.com:8080/nested/moodle'));
+        $this->assertSame('example-com--powereduc', $this->testpage->url_to_class_name('https://example.com/powereduc'));
+        $this->assertSame('example-com--8080--nested-powereduc', $this->testpage->url_to_class_name('https://example.com:8080/nested/powereduc'));
     }
 
     public function test_set_docs_path() {
@@ -277,10 +277,10 @@ class moodle_page_test extends \advanced_testcase {
         $this->assertSame($CFG->wwwroot . '/mod/quiz/attempt.php?attempt=123&amp;page=7', $this->testpage->url->out());
     }
 
-    public function test_set_url_using_moodle_url() {
+    public function test_set_url_using_powereduc_url() {
         global $CFG;
         // Fixture setup.
-        $url = new \moodle_url('/mod/workshop/allocation.php', array('cmid' => 29, 'method' => 'manual'));
+        $url = new \powereduc_url('/mod/workshop/allocation.php', array('cmid' => 29, 'method' => 'manual'));
         // Exercise SUT.
         $this->testpage->set_url($url);
         // Validated.
@@ -553,7 +553,7 @@ class moodle_page_test extends \advanced_testcase {
         $this->setAdminUser();
 
         // Validated.
-        $this->assertEquals(array('moodle/site:manageblocks'), $this->testpage->all_editing_caps());
+        $this->assertEquals(array('powereduc/site:manageblocks'), $this->testpage->all_editing_caps());
     }
 
     public function test_other_block_editing_cap() {
@@ -561,9 +561,9 @@ class moodle_page_test extends \advanced_testcase {
         $this->setAdminUser();
 
         // Exercise SUT.
-        $this->testpage->set_blocks_editing_capability('moodle/my:manageblocks');
+        $this->testpage->set_blocks_editing_capability('powereduc/my:manageblocks');
         // Validated.
-        $this->assertEquals(array('moodle/my:manageblocks'), $this->testpage->all_editing_caps());
+        $this->assertEquals(array('powereduc/my:manageblocks'), $this->testpage->all_editing_caps());
     }
 
     public function test_other_editing_cap() {
@@ -571,10 +571,10 @@ class moodle_page_test extends \advanced_testcase {
         $this->setAdminUser();
 
         // Exercise SUT.
-        $this->testpage->set_other_editing_capability('moodle/course:manageactivities');
+        $this->testpage->set_other_editing_capability('powereduc/course:manageactivities');
         // Validated.
         $actualcaps = $this->testpage->all_editing_caps();
-        $expectedcaps = array('moodle/course:manageactivities', 'moodle/site:manageblocks');
+        $expectedcaps = array('powereduc/course:manageactivities', 'powereduc/site:manageblocks');
         $this->assertEquals(array_values($expectedcaps), array_values($actualcaps));
     }
 
@@ -583,10 +583,10 @@ class moodle_page_test extends \advanced_testcase {
         $this->setAdminUser();
 
         // Exercise SUT.
-        $this->testpage->set_other_editing_capability(array('moodle/course:manageactivities', 'moodle/site:other'));
+        $this->testpage->set_other_editing_capability(array('powereduc/course:manageactivities', 'powereduc/site:other'));
         // Validated.
         $actualcaps = $this->testpage->all_editing_caps();
-        $expectedcaps = array('moodle/course:manageactivities', 'moodle/site:other', 'moodle/site:manageblocks');
+        $expectedcaps = array('powereduc/course:manageactivities', 'powereduc/site:other', 'powereduc/site:manageblocks');
         $this->assertEquals(array_values($expectedcaps), array_values($actualcaps));
     }
 
@@ -821,7 +821,7 @@ class moodle_page_test extends \advanced_testcase {
 /**
  * Test-specific subclass to make some protected things public.
  */
-class testable_moodle_page extends moodle_page {
+class testable_powereduc_page extends powereduc_page {
     public function initialise_default_pagetype($script = null) {
         parent::initialise_default_pagetype($script);
     }

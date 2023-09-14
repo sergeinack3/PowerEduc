@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ namespace core_contentbank\form;
  * Upload files to content bank form
  *
  * @package    core_contentbank
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class upload_files extends \core_form\dynamic_form {
@@ -67,12 +67,12 @@ class upload_files extends \core_form\dynamic_form {
      * by calling $this->optional_param()
      */
     protected function check_access_for_dynamic_submission(): void {
-        require_capability('moodle/contentbank:upload', $this->get_context_for_dynamic_submission());
+        require_capability('powereduc/contentbank:upload', $this->get_context_for_dynamic_submission());
 
         // Check the context used by the content bank is allowed.
         $cb = new \core_contentbank\contentbank();
         if (!$cb->is_context_allowed($this->get_context_for_dynamic_submission())) {
-            throw new \moodle_exception('contextnotallowed', 'core_contentbank');
+            throw new \powereduc_exception('contextnotallowed', 'core_contentbank');
         }
 
         // If $id is defined, the file content will be replaced (instead of uploading a new one).
@@ -82,7 +82,7 @@ class upload_files extends \core_form\dynamic_form {
             $content = $cb->get_content_from_id($id);
             $contenttype = $content->get_content_type_instance();
             if (!$contenttype->can_manage($content) || !$contenttype->can_upload()) {
-                throw new \moodle_exception('nopermissions', 'error', '', null, get_string('replacecontent', 'contentbank'));
+                throw new \powereduc_exception('nopermissions', 'error', '', null, get_string('replacecontent', 'contentbank'));
             }
         }
     }
@@ -111,7 +111,7 @@ class upload_files extends \core_form\dynamic_form {
 
         $maxbytes = $CFG->userquota;
         $maxareabytes = $CFG->userquota;
-        if (has_capability('moodle/user:ignoreuserquota', $this->get_context_for_dynamic_submission())) {
+        if (has_capability('powereduc/user:ignoreuserquota', $this->get_context_for_dynamic_submission())) {
             $maxbytes = USER_CAN_IGNORE_FILE_SIZE_LIMITS;
             $maxareabytes = FILE_AREA_MAX_BYTES_UNLIMITED;
         }
@@ -160,7 +160,7 @@ class upload_files extends \core_form\dynamic_form {
                     $content = $cb->create_content_from_file($this->get_context_for_dynamic_submission(), $USER->id, $file);
                 }
                 $params = ['id' => $content->get_id(), 'contextid' => $this->get_context_for_dynamic_submission()->id];
-                $url = new \moodle_url('/contentbank/view.php', $params);
+                $url = new \powereduc_url('/contentbank/view.php', $params);
             } catch (\Exception $e) {
                 // Redirect to the right page (depending on if content is new or existing) and display an error.
                 if ($this->get_data()->id) {
@@ -170,9 +170,9 @@ class upload_files extends \core_form\dynamic_form {
                         'contextid' => $this->get_context_for_dynamic_submission()->id,
                         'errormsg' => 'notvalidpackage',
                     ];
-                    $url = new \moodle_url('/contentbank/view.php', $params);
+                    $url = new \powereduc_url('/contentbank/view.php', $params);
                 } else {
-                    $url = new \moodle_url('/contentbank/index.php', [
+                    $url = new \powereduc_url('/contentbank/index.php', [
                         'contextid' => $this->get_context_for_dynamic_submission()->id,
                         'errormsg' => 'notvalidpackage'],
                     );
@@ -210,9 +210,9 @@ class upload_files extends \core_form\dynamic_form {
      * If the form has arguments (such as 'id' of the element being edited), the URL should
      * also have respective argument.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
-    protected function get_page_url_for_dynamic_submission(): \moodle_url {
+    protected function get_page_url_for_dynamic_submission(): \powereduc_url {
         $params = ['contextid' => $this->get_context_for_dynamic_submission()->id];
 
         $id = $this->optional_param('id', null, PARAM_INT);
@@ -223,6 +223,6 @@ class upload_files extends \core_form\dynamic_form {
             $url = '/contentbank/index.php';
         }
 
-        return new \moodle_url($url, $params);
+        return new \powereduc_url($url, $params);
     }
 }

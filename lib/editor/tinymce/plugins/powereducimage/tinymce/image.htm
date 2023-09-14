@@ -25,8 +25,8 @@
             if (!cb)
                 return "";
 
-            html = '<a class="moodlebutton" id="' + id + '_link" href="javascript:openBrowser(\'' + id + '\',\'' + target_form_element + '\', \'' + type + '\',\'' + option + '\');" onmousedown="return false;">';
-            html += '<span id="' + id + '">' + tinyMCEPopup.getLang('moodleimage.browseimage') + '</span>';
+            html = '<a class="powereducbutton" id="' + id + '_link" href="javascript:openBrowser(\'' + id + '\',\'' + target_form_element + '\', \'' + type + '\',\'' + option + '\');" onmousedown="return false;">';
+            html += '<span id="' + id + '">' + tinyMCEPopup.getLang('powereducimage.browseimage') + '</span>';
             html += '</a>';
 
             return html;
@@ -36,7 +36,7 @@
     <script type="text/javascript" src="js/image.js"></script>
 	<link href="css/image.css" rel="stylesheet" type="text/css" />
 </head>
-<body id="moodleimage" style="display: none" role="application" aria-labelledby="app_title">
+<body id="powereducimage" style="display: none" role="application" aria-labelledby="app_title">
 	<span id="app_title" style="display:none">{#advimage_dlg.dialog_title}</span>
     <form onsubmit="ImageDialog.insert();return false;" action="#"> 
 		<div class="tabs">

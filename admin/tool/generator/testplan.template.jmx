@@ -12,8 +12,8 @@
             <stringProp name="Argument.value">${__time()}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="moodleversion" elementType="Argument">
-            <stringProp name="Argument.name">moodleversion</stringProp>
+          <elementProp name="powereducversion" elementType="Argument">
+            <stringProp name="Argument.name">powereducversion</stringProp>
             <stringProp name="Argument.value">{{POWEREDUCVERSION_PLACEHOLDER}}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>

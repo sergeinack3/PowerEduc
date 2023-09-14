@@ -1,7 +1,7 @@
 {
-  "name": "moodle-atto_recordrtc-button",
+  "name": "powereduc-atto_recordrtc-button",
   "builds": {
-    "moodle-atto_recordrtc-button": {
+    "powereduc-atto_recordrtc-button": {
       "jsfiles": [
         "button.js"
       ]

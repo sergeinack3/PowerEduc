@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -68,7 +68,7 @@ class grade_export_xml extends grade_export {
         make_temp_directory('gradeexport');
         $tempfilename = $CFG->tempdir .'/gradeexport/'. md5(sesskey().microtime().$downloadfilename);
         if (!$handle = fopen($tempfilename, 'w+b')) {
-            throw new \moodle_exception('cannotcreatetempdir');
+            throw new \powereduc_exception('cannotcreatetempdir');
         }
 
         /// time stamp to ensure uniqueness of batch export

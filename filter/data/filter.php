@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Database activity filtering
  */
-class filter_data extends moodle_text_filter {
+class filter_data extends powereduc_text_filter {
 
     public function filter($text, array $options = array()) {
         global $CFG, $DB, $USER;

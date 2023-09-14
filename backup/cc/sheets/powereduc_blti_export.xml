@@ -56,451 +56,451 @@
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/user:viewhiddendetails</NAME>
+          <NAME>powereduc/user:viewhiddendetails</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692105</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/user:viewdetails</NAME>
+          <NAME>powereduc/user:viewdetails</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692105</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/user:readuserposts</NAME>
+          <NAME>powereduc/user:readuserposts</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692108</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/user:readuserblogs</NAME>
+          <NAME>powereduc/user:readuserblogs</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692109</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/tag:manage</NAME>
+          <NAME>powereduc/tag:manage</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692111</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/tag:editblocks</NAME>
+          <NAME>powereduc/tag:editblocks</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692112</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/site:viewreports</NAME>
+          <NAME>powereduc/site:viewreports</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692104</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/site:viewfullnames</NAME>
+          <NAME>powereduc/site:viewfullnames</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692104</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/site:trustcontent</NAME>
+          <NAME>powereduc/site:trustcontent</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692104</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/site:restore</NAME>
+          <NAME>powereduc/site:restore</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692103</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/site:readallmessages</NAME>
+          <NAME>powereduc/site:readallmessages</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692103</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/site:manageblocks</NAME>
+          <NAME>powereduc/site:manageblocks</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692104</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/site:import</NAME>
+          <NAME>powereduc/site:import</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692103</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/site:doclinks</NAME>
+          <NAME>powereduc/site:doclinks</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692110</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/site:backup</NAME>
+          <NAME>powereduc/site:backup</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692103</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/site:accessallgroups</NAME>
+          <NAME>powereduc/site:accessallgroups</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692104</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/role:viewhiddenassigns</NAME>
+          <NAME>powereduc/role:viewhiddenassigns</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692105</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/role:unassignself</NAME>
+          <NAME>powereduc/role:unassignself</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692105</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/role:switchroles</NAME>
+          <NAME>powereduc/role:switchroles</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692105</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/role:safeoverride</NAME>
+          <NAME>powereduc/role:safeoverride</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692105</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/role:assign</NAME>
+          <NAME>powereduc/role:assign</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692105</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/question:viewmine</NAME>
+          <NAME>powereduc/question:viewmine</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692109</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/question:viewall</NAME>
+          <NAME>powereduc/question:viewall</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692109</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/question:usemine</NAME>
+          <NAME>powereduc/question:usemine</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692109</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/question:useall</NAME>
+          <NAME>powereduc/question:useall</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692109</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/question:movemine</NAME>
+          <NAME>powereduc/question:movemine</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692109</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/question:moveall</NAME>
+          <NAME>powereduc/question:moveall</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692109</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/question:managecategory</NAME>
+          <NAME>powereduc/question:managecategory</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692109</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/question:editmine</NAME>
+          <NAME>powereduc/question:editmine</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692109</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/question:editall</NAME>
+          <NAME>powereduc/question:editall</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692109</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/question:add</NAME>
+          <NAME>powereduc/question:add</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692109</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/notes:view</NAME>
+          <NAME>powereduc/notes:view</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692111</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/notes:manage</NAME>
+          <NAME>powereduc/notes:manage</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692111</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/legacy:editingteacher</NAME>
+          <NAME>powereduc/legacy:editingteacher</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692103</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/grade:viewhidden</NAME>
+          <NAME>powereduc/grade:viewhidden</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692110</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/grade:viewall</NAME>
+          <NAME>powereduc/grade:viewall</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692110</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/grade:unlock</NAME>
+          <NAME>powereduc/grade:unlock</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692111</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/grade:manageoutcomes</NAME>
+          <NAME>powereduc/grade:manageoutcomes</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692110</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/grade:manageletters</NAME>
+          <NAME>powereduc/grade:manageletters</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692111</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/grade:manage</NAME>
+          <NAME>powereduc/grade:manage</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692110</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/grade:lock</NAME>
+          <NAME>powereduc/grade:lock</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692111</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/grade:import</NAME>
+          <NAME>powereduc/grade:import</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692110</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/grade:hide</NAME>
+          <NAME>powereduc/grade:hide</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692111</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/grade:export</NAME>
+          <NAME>powereduc/grade:export</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692110</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/grade:edit</NAME>
+          <NAME>powereduc/grade:edit</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692110</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:visibility</NAME>
+          <NAME>powereduc/course:visibility</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692106</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:viewscales</NAME>
+          <NAME>powereduc/course:viewscales</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692107</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:viewparticipants</NAME>
+          <NAME>powereduc/course:viewparticipants</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692107</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:viewhiddenuserfields</NAME>
+          <NAME>powereduc/course:viewhiddenuserfields</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692106</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:viewhiddensections</NAME>
+          <NAME>powereduc/course:viewhiddensections</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692110</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:viewhiddencourses</NAME>
+          <NAME>powereduc/course:viewhiddencourses</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692106</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:viewhiddenactivities</NAME>
+          <NAME>powereduc/course:viewhiddenactivities</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692106</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:view</NAME>
+          <NAME>powereduc/course:view</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692106</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:useremail</NAME>
+          <NAME>powereduc/course:useremail</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692110</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:update</NAME>
+          <NAME>powereduc/course:update</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692106</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:setcurrentsection</NAME>
+          <NAME>powereduc/course:setcurrentsection</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692110</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:sectionvisibility</NAME>
+          <NAME>powereduc/course:sectionvisibility</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692110</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:reset</NAME>
+          <NAME>powereduc/course:reset</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692107</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:managescales</NAME>
+          <NAME>powereduc/course:managescales</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692107</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:managemetacourse</NAME>
+          <NAME>powereduc/course:managemetacourse</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692106</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:managegroups</NAME>
+          <NAME>powereduc/course:managegroups</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692107</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:managefiles</NAME>
+          <NAME>powereduc/course:managefiles</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692106</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:manageactivities</NAME>
+          <NAME>powereduc/course:manageactivities</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692106</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:changesummary</NAME>
+          <NAME>powereduc/course:changesummary</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692107</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:changeshortname</NAME>
+          <NAME>powereduc/course:changeshortname</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692107</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:changeidnumber</NAME>
+          <NAME>powereduc/course:changeidnumber</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692107</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:changefullname</NAME>
+          <NAME>powereduc/course:changefullname</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692107</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:changecategory</NAME>
+          <NAME>powereduc/course:changecategory</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692107</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:bulkmessaging</NAME>
+          <NAME>powereduc/course:bulkmessaging</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692106</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:activityvisibility</NAME>
+          <NAME>powereduc/course:activityvisibility</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692106</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/calendar:managegroupentries</NAME>
+          <NAME>powereduc/calendar:managegroupentries</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692108</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/calendar:manageentries</NAME>
+          <NAME>powereduc/calendar:manageentries</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692108</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/blog:view</NAME>
+          <NAME>powereduc/blog:view</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692108</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/blog:manageentries</NAME>
+          <NAME>powereduc/blog:manageentries</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692108</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/block:view</NAME>
+          <NAME>powereduc/block:view</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692112</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
@@ -1095,61 +1095,61 @@
       <SHORTNAME>student</SHORTNAME>
       <CAPABILITIES>
         <CAPABILITY>
-          <NAME>moodle/user:viewdetails</NAME>
+          <NAME>powereduc/user:viewdetails</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692105</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/user:readuserposts</NAME>
+          <NAME>powereduc/user:readuserposts</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692108</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/user:readuserblogs</NAME>
+          <NAME>powereduc/user:readuserblogs</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692109</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/legacy:student</NAME>
+          <NAME>powereduc/legacy:student</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692103</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/grade:view</NAME>
+          <NAME>powereduc/grade:view</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692110</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:viewscales</NAME>
+          <NAME>powereduc/course:viewscales</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692107</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:viewparticipants</NAME>
+          <NAME>powereduc/course:viewparticipants</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692107</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/course:view</NAME>
+          <NAME>powereduc/course:view</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692106</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/blog:view</NAME>
+          <NAME>powereduc/blog:view</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692108</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>
         </CAPABILITY>
         <CAPABILITY>
-          <NAME>moodle/block:view</NAME>
+          <NAME>powereduc/block:view</NAME>
           <PERMISSION>1</PERMISSION>
           <TIMEMODIFIED>1311692112</TIMEMODIFIED>
           <MODIFIERID>0</MODIFIERID>

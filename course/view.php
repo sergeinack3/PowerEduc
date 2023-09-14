@@ -29,7 +29,7 @@
     } else if (!empty($id)) {
         $params = array('id' => $id);
     }else {
-        throw new \moodle_exception('unspecifycourseid', 'error');
+        throw new \powereduc_exception('unspecifycourseid', 'error');
     }
 
     $course = $DB->get_record('course', $params, '*', MUST_EXIST);
@@ -62,7 +62,7 @@
     // Switchrole - sanity check in cost-order...
     $reset_user_allowed_editing = false;
     if ($switchrole > 0 && confirm_sesskey() &&
-        has_capability('moodle/role:switchroles', $context)) {
+        has_capability('powereduc/role:switchroles', $context)) {
         // is this role assignable in this context?
         // inquiring minds want to know...
         $aroles = get_switchable_roles($context);
@@ -116,7 +116,7 @@
                 // Note: We actually already know they don't have this capability
                 // or uservisible would have been true; this is just to get the
                 // correct error message shown.
-                require_capability('moodle/course:viewhiddensections', $context);
+                require_capability('powereduc/course:viewhiddensections', $context);
             }
         }
     }
@@ -126,12 +126,12 @@
     $course->format = $format->get_format();
 
     $PAGE->set_pagetype('course-view-' . $course->format);
-    $PAGE->set_other_editing_capability('moodle/course:update');
-    $PAGE->set_other_editing_capability('moodle/course:manageactivities');
-    $PAGE->set_other_editing_capability('moodle/course:activityvisibility');
+    $PAGE->set_other_editing_capability('powereduc/course:update');
+    $PAGE->set_other_editing_capability('powereduc/course:manageactivities');
+    $PAGE->set_other_editing_capability('powereduc/course:activityvisibility');
     if (course_format_uses_sections($course->format)) {
-        $PAGE->set_other_editing_capability('moodle/course:sectionvisibility');
-        $PAGE->set_other_editing_capability('moodle/course:movesections');
+        $PAGE->set_other_editing_capability('powereduc/course:sectionvisibility');
+        $PAGE->set_other_editing_capability('powereduc/course:movesections');
     }
 
     // Preload course format renderer before output starts.
@@ -156,7 +156,7 @@
             } else if (!empty($return)) {
                 redirect($CFG->wwwroot . $return);
             } else {
-                $url = new moodle_url($PAGE->url, array('notifyeditingon' => 1));
+                $url = new powereduc_url($PAGE->url, array('notifyeditingon' => 1));
                 redirect($url);
             }
         } else if (($edit == 0) and confirm_sesskey()) {
@@ -175,7 +175,7 @@
             }
         }
 
-        if (has_capability('moodle/course:sectionvisibility', $context)) {
+        if (has_capability('powereduc/course:sectionvisibility', $context)) {
             if ($hide && confirm_sesskey()) {
                 set_section_visible($course->id, $hide, '0');
                 redirect($PAGE->url);
@@ -188,7 +188,7 @@
         }
 
         if (!empty($section) && !empty($move) &&
-                has_capability('moodle/course:movesections', $context) && confirm_sesskey()) {
+                has_capability('powereduc/course:movesections', $context) && confirm_sesskey()) {
             $destsection = $section + $move;
             if (move_section_to($course, $section, $destsection)) {
                 if ($course->id == SITEID) {
@@ -227,9 +227,9 @@
     if ($section and $section > 0 and course_format_uses_sections($course->format)) {
         $sectionname = get_string('sectionname', "format_$course->format");
         $sectiontitle = get_section_name($course, $section);
-        $PAGE->set_title(get_string('coursesectiontitle', 'moodle', array('course' => $course->fullname, 'sectiontitle' => $sectiontitle, 'sectionname' => $sectionname)));
+        $PAGE->set_title(get_string('coursesectiontitle', 'powereduc', array('course' => $course->fullname, 'sectiontitle' => $sectiontitle, 'sectionname' => $sectionname)));
     } else {
-        $PAGE->set_title(get_string('coursetitle', 'moodle', array('course' => $course->fullname)));
+        $PAGE->set_title(get_string('coursetitle', 'powereduc', array('course' => $course->fullname)));
     }
 
     $PAGE->set_heading($course->fullname);

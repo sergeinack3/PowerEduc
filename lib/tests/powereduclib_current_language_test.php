@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Unit tests for current_language() in moodlelib.php.
+ * Unit tests for current_language() in powereduclib.php.
  *
  * @package   core
  * @category  test
@@ -25,18 +25,18 @@
 
 namespace core;
 
-use moodle_page;
+use powereduc_page;
 
 defined('POWEREDUC_INTERNAL') || die();
 
 /**
- * Unit tests for current_language() in moodlelib.php.
+ * Unit tests for current_language() in powereduclib.php.
  *
  * @copyright 2022 The Open University
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @covers    ::current_language
  */
-class moodlelib_current_language_test extends \advanced_testcase {
+class powereduclib_current_language_test extends \advanced_testcase {
 
     public function test_current_language_site_default(): void {
         $this->resetAfterTest();
@@ -83,7 +83,7 @@ class moodlelib_current_language_test extends \advanced_testcase {
 
         set_config('lang', 'en_ar');
         $this->setUser($this->getDataGenerator()->create_user(['lang' => 'fr']));
-        $PAGE = new moodle_page();
+        $PAGE = new powereduc_page();
         $PAGE->set_course($this->getDataGenerator()->create_course(['lang' => 'de']));
 
         $this->assertEquals('de', current_language());
@@ -98,7 +98,7 @@ class moodlelib_current_language_test extends \advanced_testcase {
                 ['en' => 'English', 'en_ar' => 'English (pirate)', 'fr' => 'French']);
 
         set_config('lang', 'en_ar');
-        $PAGE = new moodle_page();
+        $PAGE = new powereduc_page();
         $PAGE->set_course($this->getDataGenerator()->create_course());
 
         $this->assertEquals('en_ar', current_language());
@@ -119,7 +119,7 @@ class moodlelib_current_language_test extends \advanced_testcase {
 
         set_config('lang', 'en_ar');
         $this->setUser($this->getDataGenerator()->create_user(['lang' => 'fr']));
-        $PAGE = new moodle_page();
+        $PAGE = new powereduc_page();
         $PAGE->set_cm($cm, $course, $pageactivity);
 
         $this->assertEquals('en', current_language());
@@ -140,7 +140,7 @@ class moodlelib_current_language_test extends \advanced_testcase {
 
         set_config('lang', 'en_ar');
         $this->setUser($this->getDataGenerator()->create_user(['lang' => 'fr']));
-        $PAGE = new moodle_page();
+        $PAGE = new powereduc_page();
         $PAGE->set_cm($cm, $course, $pageactivity);
 
         $this->assertEquals('de', current_language());
@@ -151,7 +151,7 @@ class moodlelib_current_language_test extends \advanced_testcase {
 
 
 /**
- * Test helper class for test which need Moodle to think there are other languages installed.
+ * Test helper class for test which need PowerEduc to think there are other languages installed.
  *
  * @copyright 2022 The Open University
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

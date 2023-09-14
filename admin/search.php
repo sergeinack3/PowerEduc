@@ -16,10 +16,10 @@ $PAGE->set_context($context);
 // NOTE: hassecondarynavigation will be overridden in classic.
 $PAGE->set_secondary_navigation(true, !$query);
 
-$hassiteconfig = has_capability('moodle/site:config', $context);
+$hassiteconfig = has_capability('powereduc/site:config', $context);
 
-if ($hassiteconfig && moodle_needs_upgrading()) {
-    redirect(new moodle_url('/admin/index.php'));
+if ($hassiteconfig && powereduc_needs_upgrading()) {
+    redirect(new powereduc_url('/admin/index.php'));
 }
 
 // If site registration needs updating, redirect.
@@ -36,7 +36,7 @@ $focus = '';
 
 // now we'll deal with the case that the admin has submitted the form with changed settings
 if ($data = data_submitted() and confirm_sesskey() and isset($data->action) and $data->action == 'save-settings') {
-    require_capability('moodle/site:config', $context);
+    require_capability('powereduc/site:config', $context);
     $count = admin_write_settings($data);
     if (!empty($adminroot->errors)) {
         $errormsg = get_string('errorwithsettings', 'admin');

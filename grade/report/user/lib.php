@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -209,21 +209,21 @@ function gradereport_user_myprofile_navigation(tree $tree, stdClass $user, bool 
         $course = get_fast_modinfo(SITEID)->get_course();
     }
     $usercontext = context_user::instance($user->id);
-    $anyreport = has_capability('moodle/user:viewuseractivitiesreport', $usercontext);
+    $anyreport = has_capability('powereduc/user:viewuseractivitiesreport', $usercontext);
 
     // Start capability checks.
     if ($anyreport || $iscurrentuser) {
         // Add grade hardcoded grade report if necessary.
         $gradeaccess = false;
         $coursecontext = context_course::instance($course->id);
-        if (has_capability('moodle/grade:viewall', $coursecontext)) {
+        if (has_capability('powereduc/grade:viewall', $coursecontext)) {
             // Can view all course grades.
             $gradeaccess = true;
         } else if ($course->showgrades) {
-            if ($iscurrentuser && has_capability('moodle/grade:view', $coursecontext)) {
+            if ($iscurrentuser && has_capability('powereduc/grade:view', $coursecontext)) {
                 // Can view own grades.
                 $gradeaccess = true;
-            } else if (has_capability('moodle/grade:viewall', $usercontext)) {
+            } else if (has_capability('powereduc/grade:viewall', $usercontext)) {
                 // Can view grades of this user - parent most probably.
                 $gradeaccess = true;
             } else if ($anyreport) {
@@ -232,7 +232,7 @@ function gradereport_user_myprofile_navigation(tree $tree, stdClass $user, bool 
             }
         }
         if ($gradeaccess) {
-            $url = new moodle_url('/course/user.php', array('mode' => 'grade', 'id' => $course->id, 'user' => $user->id));
+            $url = new powereduc_url('/course/user.php', array('mode' => 'grade', 'id' => $course->id, 'user' => $user->id));
             $node = new core_user\output\myprofile\node('reports', 'grade', get_string('grades'), null, $url);
             $tree->add_node($node);
         }

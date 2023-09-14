@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Unit tests for MoodleQuickForm_date_selector
+ * Unit tests for PowerEducQuickForm_date_selector
  *
- * Contains test cases for testing MoodleQuickForm_date_selector
+ * Contains test cases for testing PowerEducQuickForm_date_selector
  *
  * @package    core_form
  * @category   test
@@ -27,8 +27,8 @@
 
 namespace core_form;
 
-use moodleform;
-use MoodleQuickForm_date_selector;
+use powereducform;
+use PowerEducQuickForm_date_selector;
 
 defined('POWEREDUC_INTERNAL') || die();
 
@@ -37,9 +37,9 @@ require_once($CFG->libdir . '/form/dateselector.php');
 require_once($CFG->libdir.'/formslib.php');
 
 /**
- * Unit tests for MoodleQuickForm_date_selector
+ * Unit tests for PowerEducQuickForm_date_selector
  *
- * Contains test cases for testing MoodleQuickForm_date_selector
+ * Contains test cases for testing PowerEducQuickForm_date_selector
  *
  * @package    core_form
  * @category   test
@@ -47,7 +47,7 @@ require_once($CFG->libdir.'/formslib.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class dateselector_test extends \advanced_testcase {
-    /** @var MoodleQuickForm Keeps reference of dummy form object */
+    /** @var PowerEducQuickForm Keeps reference of dummy form object */
     private $mform;
     /** @var array test fixtures */
     private $testvals;
@@ -135,7 +135,7 @@ class dateselector_test extends \advanced_testcase {
             // Create dateselector element with different timezones.
             $elparams = array('optional'=>false, 'timezone' => $vals['timezone']);
             $el = $this->mform->addElement('date_selector', 'dateselector', null, $elparams);
-            $this->assertTrue($el instanceof MoodleQuickForm_date_selector);
+            $this->assertTrue($el instanceof PowerEducQuickForm_date_selector);
             $submitvalues = array('dateselector' => $vals);
 
             $this->assertSame(array('dateselector' => $vals['timestamp']), $el->exportValue($submitvalues, true),
@@ -159,7 +159,7 @@ class dateselector_test extends \advanced_testcase {
             // Create dateselector element with different timezones.
             $elparams = array('optional'=>false, 'timezone' => $vals['timezone']);
             $el = $this->mform->addElement('date_selector', 'dateselector', null, $elparams);
-            $this->assertTrue($el instanceof MoodleQuickForm_date_selector);
+            $this->assertTrue($el instanceof PowerEducQuickForm_date_selector);
             $expectedvalues = array(
                 'day' => array($vals['day']),
                 'month' => array($vals['month']),
@@ -175,7 +175,7 @@ class dateselector_test extends \advanced_testcase {
 /**
  * Form object to be used in test case.
  */
-class temp_form_date extends moodleform {
+class temp_form_date extends powereducform {
     /**
      * Form definition.
      */
@@ -184,7 +184,7 @@ class temp_form_date extends moodleform {
     }
     /**
      * Returns form reference
-     * @return MoodleQuickForm
+     * @return PowerEducQuickForm
      */
     public function getform() {
         $mform = $this->_form;

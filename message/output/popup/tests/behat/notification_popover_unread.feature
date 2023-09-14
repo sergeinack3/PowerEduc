@@ -2,7 +2,7 @@
 Feature: Notification popover unread notifications
   In order to be kept informed
   As a user
-  I am notified about relevant events in Moodle
+  I am notified about relevant events in PowerEduc
 
   Background:
     Given the following "users" exist:

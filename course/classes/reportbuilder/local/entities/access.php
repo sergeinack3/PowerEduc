@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ use stdClass;
  * Course access entity implementation
  *
  * @package     core_course
- * @copyright   2022 David Matamoros <davidmc@moodle.com>
+ * @copyright   2022 David Matamoros <davidmc@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class access extends base {
@@ -85,7 +85,7 @@ class access extends base {
         // Last course access column.
         $columns[] = (new column(
             'timeaccess',
-            new lang_string('lastcourseaccess', 'moodle'),
+            new lang_string('lastcourseaccess', 'powereduc'),
             $this->get_entity_name()
         ))
             ->add_joins($this->get_joins())
@@ -119,7 +119,7 @@ class access extends base {
         $filters[] = (new filter(
             date::class,
             'timeaccess',
-            new lang_string('lastcourseaccess', 'moodle'),
+            new lang_string('lastcourseaccess', 'powereduc'),
             $this->get_entity_name(),
             "{$tablealias}.timeaccess"
         ))

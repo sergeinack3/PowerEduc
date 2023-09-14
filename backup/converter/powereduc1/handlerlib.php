@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,8 +22,8 @@
  * is similar to the functionality provided by steps in plan based restore process.
  *
  * @package    backup-convert
- * @subpackage moodle1
- * @copyright  2011 David Mudrak <david@moodle.com>
+ * @subpackage powereduc1
+ * @copyright  2011 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,24 +36,24 @@ require_once($CFG->dirroot . '/backup/util/xml/output/file_xml_output.class.php'
 /**
  * Handlers factory class
  */
-abstract class moodle1_handlers_factory {
+abstract class powereduc1_handlers_factory {
 
     /**
-     * @param moodle1_converter the converter requesting the converters
+     * @param powereduc1_converter the converter requesting the converters
      * @return list of all available conversion handlers
      */
-    public static function get_handlers(moodle1_converter $converter) {
+    public static function get_handlers(powereduc1_converter $converter) {
 
         $handlers = array(
-            new moodle1_root_handler($converter),
-            new moodle1_info_handler($converter),
-            new moodle1_course_header_handler($converter),
-            new moodle1_course_outline_handler($converter),
-            new moodle1_roles_definition_handler($converter),
-            new moodle1_question_bank_handler($converter),
-            new moodle1_scales_handler($converter),
-            new moodle1_outcomes_handler($converter),
-            new moodle1_gradebook_handler($converter),
+            new powereduc1_root_handler($converter),
+            new powereduc1_info_handler($converter),
+            new powereduc1_course_header_handler($converter),
+            new powereduc1_course_outline_handler($converter),
+            new powereduc1_roles_definition_handler($converter),
+            new powereduc1_question_bank_handler($converter),
+            new powereduc1_scales_handler($converter),
+            new powereduc1_outcomes_handler($converter),
+            new powereduc1_gradebook_handler($converter),
         );
 
         $handlers = array_merge($handlers, self::get_plugin_handlers('mod', $converter));
@@ -61,8 +61,8 @@ abstract class moodle1_handlers_factory {
 
         // make sure that all handlers have expected class
         foreach ($handlers as $handler) {
-            if (!$handler instanceof moodle1_handler) {
-                throw new moodle1_convert_exception('wrong_handler_class', get_class($handler));
+            if (!$handler instanceof powereduc1_handler) {
+                throw new powereduc1_convert_exception('wrong_handler_class', get_class($handler));
             }
         }
 
@@ -76,28 +76,28 @@ abstract class moodle1_handlers_factory {
      *
      * @todo ask mod's subplugins
      * @param string $type the plugin type
-     * @param moodle1_converter $converter the converter requesting the handler
-     * @throws moodle1_convert_exception
-     * @return array of {@link moodle1_handler} instances
+     * @param powereduc1_converter $converter the converter requesting the handler
+     * @throws powereduc1_convert_exception
+     * @return array of {@link powereduc1_handler} instances
      */
-    protected static function get_plugin_handlers($type, moodle1_converter $converter) {
+    protected static function get_plugin_handlers($type, powereduc1_converter $converter) {
         global $CFG;
 
         $handlers = array();
         $plugins = core_component::get_plugin_list($type);
         foreach ($plugins as $name => $dir) {
-            $handlerfile  = $dir . '/backup/moodle1/lib.php';
-            $handlerclass = "moodle1_{$type}_{$name}_handler";
+            $handlerfile  = $dir . '/backup/powereduc1/lib.php';
+            $handlerclass = "powereduc1_{$type}_{$name}_handler";
             if (file_exists($handlerfile)) {
                 require_once($handlerfile);
             } elseif ($type == 'block') {
-                $handlerclass = "moodle1_block_generic_handler";
+                $handlerclass = "powereduc1_block_generic_handler";
             } else {
                 continue;
             }
 
             if (!class_exists($handlerclass)) {
-                throw new moodle1_convert_exception('missing_handler_class', $handlerclass);
+                throw new powereduc1_convert_exception('missing_handler_class', $handlerclass);
             }
             $handlers[] = new $handlerclass($converter, $type, $name);
         }
@@ -109,20 +109,20 @@ abstract class moodle1_handlers_factory {
 /**
  * Base backup conversion handler
  */
-abstract class moodle1_handler implements loggable {
+abstract class powereduc1_handler implements loggable {
 
-    /** @var moodle1_converter */
+    /** @var powereduc1_converter */
     protected $converter;
 
     /**
-     * @param moodle1_converter $converter the converter that requires us
+     * @param powereduc1_converter $converter the converter that requires us
      */
-    public function __construct(moodle1_converter $converter) {
+    public function __construct(powereduc1_converter $converter) {
         $this->converter = $converter;
     }
 
     /**
-     * @return moodle1_converter the converter that required this handler
+     * @return powereduc1_converter the converter that required this handler
      */
     public function get_converter() {
         return $this->converter;
@@ -146,7 +146,7 @@ abstract class moodle1_handler implements loggable {
 /**
  * Base backup conversion handler that generates an XML file
  */
-abstract class moodle1_xml_handler extends moodle1_handler {
+abstract class powereduc1_xml_handler extends powereduc1_handler {
 
     /** @var null|string the name of file we are writing to */
     protected $xmlfilename;
@@ -163,7 +163,7 @@ abstract class moodle1_xml_handler extends moodle1_handler {
     protected function open_xml_writer($filename) {
 
         if (!is_null($this->xmlfilename) and $filename !== $this->xmlfilename) {
-            throw new moodle1_convert_exception('xml_writer_already_opened_for_other_file', $this->xmlfilename);
+            throw new powereduc1_convert_exception('xml_writer_already_opened_for_other_file', $this->xmlfilename);
         }
 
         if (!$this->xmlwriter instanceof xml_writer) {
@@ -172,9 +172,9 @@ abstract class moodle1_xml_handler extends moodle1_handler {
             $directory = pathinfo($fullpath, PATHINFO_DIRNAME);
 
             if (!check_dir_exists($directory)) {
-                throw new moodle1_convert_exception('unable_create_target_directory', $directory);
+                throw new powereduc1_convert_exception('unable_create_target_directory', $directory);
             }
-            $this->xmlwriter = new xml_writer(new file_xml_output($fullpath), new moodle1_xml_transformer());
+            $this->xmlwriter = new xml_writer(new file_xml_output($fullpath), new powereduc1_xml_transformer());
             $this->xmlwriter->start();
         }
     }
@@ -220,7 +220,7 @@ abstract class moodle1_xml_handler extends moodle1_handler {
     protected function write_xml($element, array $data, array $attribs = array(), $parent = '/') {
 
         if (!$this->has_xml_writer()) {
-            throw new moodle1_convert_exception('write_xml_without_writer');
+            throw new powereduc1_convert_exception('write_xml_without_writer');
         }
 
         $mypath    = $parent . $element;
@@ -296,7 +296,7 @@ abstract class moodle1_xml_handler extends moodle1_handler {
 /**
  * Process the root element of the backup file
  */
-class moodle1_root_handler extends moodle1_xml_handler {
+class powereduc1_root_handler extends powereduc1_xml_handler {
 
     public function get_paths() {
         return array(new convert_path('root_element', '/POWEREDUC_BACKUP'));
@@ -308,12 +308,12 @@ class moodle1_root_handler extends moodle1_xml_handler {
     public function on_root_element_start() {
 
         // convert course files
-        $fileshandler = new moodle1_files_handler($this->converter);
+        $fileshandler = new powereduc1_files_handler($this->converter);
         $fileshandler->process();
     }
 
     /**
-     * This is executed at the end of the moodle.xml parsing
+     * This is executed at the end of the powereduc.xml parsing
      */
     public function on_root_element_end() {
         global $CFG;
@@ -323,17 +323,17 @@ class moodle1_root_handler extends moodle1_xml_handler {
         $originalcourseinfo = $this->converter->get_stash('original_course_info');
 
         ////////////////////////////////////////////////////////////////////////
-        // write moodle_backup.xml
+        // write powereduc_backup.xml
         ////////////////////////////////////////////////////////////////////////
-        $this->open_xml_writer('moodle_backup.xml');
+        $this->open_xml_writer('powereduc_backup.xml');
 
-        $this->xmlwriter->begin_tag('moodle_backup');
+        $this->xmlwriter->begin_tag('powereduc_backup');
         $this->xmlwriter->begin_tag('information');
 
-        // moodle_backup/information
+        // powereduc_backup/information
         $this->xmlwriter->full_tag('name', $backupinfo['name']);
-        $this->xmlwriter->full_tag('moodle_version', $backupinfo['moodle_version']);
-        $this->xmlwriter->full_tag('moodle_release', $backupinfo['moodle_release']);
+        $this->xmlwriter->full_tag('powereduc_version', $backupinfo['powereduc_version']);
+        $this->xmlwriter->full_tag('powereduc_release', $backupinfo['powereduc_release']);
         $this->xmlwriter->full_tag('backup_version', $CFG->backup_version); // {@see restore_prechecks_helper::execute_prechecks}
         $this->xmlwriter->full_tag('backup_release', $CFG->backup_release);
         $this->xmlwriter->full_tag('backup_date', $backupinfo['date']);
@@ -361,7 +361,7 @@ class moodle1_root_handler extends moodle1_xml_handler {
         // within the MBZ file
         $this->xmlwriter->full_tag('original_course_contextid', $this->converter->get_contextid(CONTEXT_COURSE));
 
-        // moodle_backup/information/details
+        // powereduc_backup/information/details
         $this->xmlwriter->begin_tag('details');
         $this->write_xml('detail', array(
             'backup_id'     => $this->converter->get_id(),
@@ -374,10 +374,10 @@ class moodle1_root_handler extends moodle1_xml_handler {
         ), array('/detail/backup_id'));
         $this->xmlwriter->end_tag('details');
 
-        // moodle_backup/information/contents
+        // powereduc_backup/information/contents
         $this->xmlwriter->begin_tag('contents');
 
-        // moodle_backup/information/contents/activities
+        // powereduc_backup/information/contents/activities
         $this->xmlwriter->begin_tag('activities');
         $activitysettings = array();
         foreach ($this->converter->get_stash('coursecontents') as $activity) {
@@ -404,7 +404,7 @@ class moodle1_root_handler extends moodle1_xml_handler {
         }
         $this->xmlwriter->end_tag('activities');
 
-        // moodle_backup/information/contents/sections
+        // powereduc_backup/information/contents/sections
         $this->xmlwriter->begin_tag('sections');
         $sectionsettings = array();
         foreach ($this->converter->get_stash_itemids('sectioninfo') as $sectionid) {
@@ -418,7 +418,7 @@ class moodle1_root_handler extends moodle1_xml_handler {
                 'level'     => 'section',
                 'section'   => 'section_'.$sectionid,
                 'name'      => 'section_'.$sectionid.'_userinfo',
-                'value'     => 0); // @todo how to detect this from moodle.xml?
+                'value'     => 0); // @todo how to detect this from powereduc.xml?
             $this->write_xml('section', array(
                 'sectionid' => $sectionid,
                 'title'     => $sectioninfo['number'], // because the title is not available
@@ -426,7 +426,7 @@ class moodle1_root_handler extends moodle1_xml_handler {
         }
         $this->xmlwriter->end_tag('sections');
 
-        // moodle_backup/information/contents/course
+        // powereduc_backup/information/contents/course
         $this->write_xml('course', array(
             'courseid'  => $originalcourseinfo['original_course_id'],
             'title'     => $originalcourseinfo['original_course_shortname'],
@@ -435,13 +435,13 @@ class moodle1_root_handler extends moodle1_xml_handler {
 
         $this->xmlwriter->end_tag('contents');
 
-        // moodle_backup/information/settings
+        // powereduc_backup/information/settings
         $this->xmlwriter->begin_tag('settings');
 
         // fake backup root seetings
         $rootsettings = array(
             'filename'         => $backupinfo['name'],
-            'users'            => 0, // @todo how to detect this from moodle.xml?
+            'users'            => 0, // @todo how to detect this from powereduc.xml?
             'anonymize'        => 0,
             'role_assignments' => 0,
             'activities'       => 1,
@@ -476,7 +476,7 @@ class moodle1_root_handler extends moodle1_xml_handler {
         $this->xmlwriter->end_tag('settings');
 
         $this->xmlwriter->end_tag('information');
-        $this->xmlwriter->end_tag('moodle_backup');
+        $this->xmlwriter->end_tag('powereduc_backup');
 
         $this->close_xml_writer();
 
@@ -536,9 +536,9 @@ class moodle1_root_handler extends moodle1_xml_handler {
         $this->close_xml_writer();
 
         // make sure that the files required by the restore process have been generated.
-        // missing file may happen if the watched tag is not present in moodle.xml (for example
-        // QUESTION_CATEGORIES is optional in moodle.xml but questions.xml must exist in
-        // moodle2 format) or the handler has not been implemented yet.
+        // missing file may happen if the watched tag is not present in powereduc.xml (for example
+        // QUESTION_CATEGORIES is optional in powereduc.xml but questions.xml must exist in
+        // powereduc2 format) or the handler has not been implemented yet.
         // apparently this must be called after the handler had a chance to create the file.
         $this->make_sure_xml_exists('questions.xml', 'question_categories');
         $this->make_sure_xml_exists('groups.xml', 'groups');
@@ -557,7 +557,7 @@ class moodle1_root_handler extends moodle1_xml_handler {
  *
  * @todo migrate site_files
  */
-class moodle1_files_handler extends moodle1_xml_handler {
+class powereduc1_files_handler extends powereduc1_xml_handler {
 
     /**
      * Migrates course_files and site_files in the converter workdir
@@ -589,7 +589,7 @@ class moodle1_files_handler extends moodle1_xml_handler {
  * We do not produce any XML file here, just storing the data in the temp
  * table so thay can be used by a later handler.
  */
-class moodle1_info_handler extends moodle1_handler {
+class powereduc1_info_handler extends powereduc1_handler {
 
     /** @var array list of mod names included in info_details */
     protected $modnames = array();
@@ -607,7 +607,7 @@ class moodle1_info_handler extends moodle1_handler {
     }
 
     /**
-     * Stashes the backup info for later processing by {@link moodle1_root_handler}
+     * Stashes the backup info for later processing by {@link powereduc1_root_handler}
      */
     public function process_info($data) {
         $this->converter->set_stash('backup_info', $data);
@@ -629,14 +629,14 @@ class moodle1_info_handler extends moodle1_handler {
     }
 
     /**
-     * Stashes the backup info for later processing by {@link moodle1_root_handler}
+     * Stashes the backup info for later processing by {@link powereduc1_root_handler}
      */
     public function on_info_details_mod_end($data) {
         global $CFG;
 
-        // keep only such modules that seem to have the support for moodle1 implemented
+        // keep only such modules that seem to have the support for powereduc1 implemented
         $modname = $this->currentmod['name'];
-        if (file_exists($CFG->dirroot.'/mod/'.$modname.'/backup/moodle1/lib.php')) {
+        if (file_exists($CFG->dirroot.'/mod/'.$modname.'/backup/powereduc1/lib.php')) {
             $this->converter->set_stash('modinfo_'.$modname, $this->currentmod);
             $this->modnames[] = $modname;
         } else {
@@ -647,7 +647,7 @@ class moodle1_info_handler extends moodle1_handler {
     }
 
     /**
-     * Stashes the list of activity module types for later processing by {@link moodle1_root_handler}
+     * Stashes the list of activity module types for later processing by {@link powereduc1_root_handler}
      */
     public function on_info_details_end() {
         $this->converter->set_stash('modnameslist', $this->modnames);
@@ -658,7 +658,7 @@ class moodle1_info_handler extends moodle1_handler {
 /**
  * Handles the conversion of /POWEREDUC_BACKUP/COURSE/HEADER paths
  */
-class moodle1_course_header_handler extends moodle1_xml_handler {
+class powereduc1_course_header_handler extends powereduc1_xml_handler {
 
     /** @var array we need to merge course information because it is dispatched twice */
     protected $course = array();
@@ -753,7 +753,7 @@ class moodle1_course_header_handler extends moodle1_xml_handler {
 
         // migrate files embedded into the course summary and stash their ids
         $fileman = $this->converter->get_file_manager($contextid, 'course', 'summary');
-        $this->course['summary'] = moodle1_converter::migrate_referenced_files($this->course['summary'], $fileman);
+        $this->course['summary'] = powereduc1_converter::migrate_referenced_files($this->course['summary'], $fileman);
         $this->converter->set_stash('course_summary_files_ids', $fileman->get_fileids());
 
         // write course.xml
@@ -767,7 +767,7 @@ class moodle1_course_header_handler extends moodle1_xml_handler {
 /**
  * Handles the conversion of course sections and course modules
  */
-class moodle1_course_outline_handler extends moodle1_xml_handler {
+class powereduc1_course_outline_handler extends powereduc1_xml_handler {
 
     /** @var array ordered list of the course contents */
     protected $coursecontents = array();
@@ -887,7 +887,7 @@ class moodle1_course_outline_handler extends moodle1_xml_handler {
         // migrate files embedded into the section summary field
         $contextid = $this->converter->get_contextid(CONTEXT_COURSE);
         $fileman = $this->converter->get_file_manager($contextid, 'course', 'section', $this->currentsection['id']);
-        $this->currentsection['summary'] = moodle1_converter::migrate_referenced_files($this->currentsection['summary'], $fileman);
+        $this->currentsection['summary'] = powereduc1_converter::migrate_referenced_files($this->currentsection['summary'], $fileman);
 
         // write section's inforef.xml with the file references
         $this->open_xml_writer('sections/section_' . $this->currentsection['id'] . '/inforef.xml');
@@ -960,10 +960,10 @@ class moodle1_course_outline_handler extends moodle1_xml_handler {
 /**
  * Handles the conversion of the defined roles
  */
-class moodle1_roles_definition_handler extends moodle1_xml_handler {
+class powereduc1_roles_definition_handler extends powereduc1_xml_handler {
 
     /**
-     * Where the roles are defined in the source moodle.xml
+     * Where the roles are defined in the source powereduc.xml
      */
     public function get_paths() {
         return array(
@@ -982,7 +982,7 @@ class moodle1_roles_definition_handler extends moodle1_xml_handler {
     }
 
     /**
-     * If there are any roles defined in moodle.xml, convert them to roles.xml
+     * If there are any roles defined in powereduc.xml, convert them to roles.xml
      */
     public function process_roles_role($data) {
 
@@ -1002,7 +1002,7 @@ class moodle1_roles_definition_handler extends moodle1_xml_handler {
     public function on_roles_end() {
 
         if (!$this->has_xml_writer()) {
-            // no roles defined in moodle.xml so {link self::process_roles_role()}
+            // no roles defined in powereduc.xml so {link self::process_roles_role()}
             // was never executed
             $this->open_xml_writer('roles.xml');
             $this->write_xml('roles_definition', array());
@@ -1017,9 +1017,9 @@ class moodle1_roles_definition_handler extends moodle1_xml_handler {
 
 
 /**
- * Handles the conversion of the question bank included in the moodle.xml file
+ * Handles the conversion of the question bank included in the powereduc.xml file
  */
-class moodle1_question_bank_handler extends moodle1_xml_handler {
+class powereduc1_question_bank_handler extends powereduc1_xml_handler {
 
     /** @var array the current question category being parsed */
     protected $currentcategory = null;
@@ -1027,7 +1027,7 @@ class moodle1_question_bank_handler extends moodle1_xml_handler {
     /** @var array of the raw data for the current category */
     protected $currentcategoryraw = null;
 
-    /** @var moodle1_file_manager instance used to convert question images */
+    /** @var powereduc1_file_manager instance used to convert question images */
     protected $fileman = null;
 
     /** @var bool are the currentcategory data already written (this is a work around MDL-27693) */
@@ -1042,7 +1042,7 @@ class moodle1_question_bank_handler extends moodle1_xml_handler {
     /**
      * Return the file manager instance used.
      *
-     * @return moodle1_file_manager
+     * @return powereduc1_file_manager
      */
     public function get_file_manager() {
         return $this->fileman;
@@ -1144,7 +1144,7 @@ class moodle1_question_bank_handler extends moodle1_xml_handler {
             $this->currentcategory['contextinstanceid'] = $originalcourseid;
             break;
         case 'coursecategory':
-            // this is a bit hacky. the source moodle.xml defines COURSECATEGORYLEVEL as a distance
+            // this is a bit hacky. the source powereduc.xml defines COURSECATEGORYLEVEL as a distance
             // of the course category (1 = parent category, 2 = grand-parent category etc). We pretend
             // that this level*10 is the id of that category and create an artifical contextid for it
             $this->currentcategory['contextid'] = $this->converter->get_contextid(CONTEXT_COURSECAT, $data['coursecategorylevel'] * 10);
@@ -1213,11 +1213,11 @@ class moodle1_question_bank_handler extends moodle1_xml_handler {
         $this->fileman->component = 'question';
         $this->fileman->filearea  = 'questiontext';
         $this->fileman->itemid    = $data['id'];
-        $data['questiontext'] = moodle1_converter::migrate_referenced_files($data['questiontext'], $this->fileman);
+        $data['questiontext'] = powereduc1_converter::migrate_referenced_files($data['questiontext'], $this->fileman);
 
         // Migrate files in generalfeedback.
         $this->fileman->filearea  = 'generalfeedback';
-        $data['generalfeedback'] = moodle1_converter::migrate_referenced_files($data['generalfeedback'], $this->fileman);
+        $data['generalfeedback'] = powereduc1_converter::migrate_referenced_files($data['generalfeedback'], $this->fileman);
 
         // replay the upgrade step 2010080901 - updating question image
         if (!empty($data['image'])) {
@@ -1266,7 +1266,7 @@ class moodle1_question_bank_handler extends moodle1_xml_handler {
             'timecreated', 'timemodified', 'createdby', 'modifiedby'
         ) as $fieldname) {
             if (!array_key_exists($fieldname, $data)) {
-                throw new moodle1_convert_exception('missing_common_question_field', $fieldname);
+                throw new powereduc1_convert_exception('missing_common_question_field', $fieldname);
             }
             $this->xmlwriter->full_tag($fieldname, $data[$fieldname]);
         }
@@ -1327,9 +1327,9 @@ class moodle1_question_bank_handler extends moodle1_xml_handler {
      * Returns either list of all qtype handler instances (if passed '*') or a particular handler
      * for the given qtype or false if the qtype is not supported.
      *
-     * @throws moodle1_convert_exception
+     * @throws powereduc1_convert_exception
      * @param string $qtype the name of the question type or '*' for returning all
-     * @return array|moodle1_qtype_handler|bool
+     * @return array|powereduc1_qtype_handler|bool
      */
     protected function get_qtype_handler($qtype) {
 
@@ -1337,12 +1337,12 @@ class moodle1_question_bank_handler extends moodle1_xml_handler {
             // initialize the list of qtype handler instances
             $this->qtypehandlers = array();
             foreach (core_component::get_plugin_list('qtype') as $qtypename => $qtypelocation) {
-                $filename = $qtypelocation.'/backup/moodle1/lib.php';
+                $filename = $qtypelocation.'/backup/powereduc1/lib.php';
                 if (file_exists($filename)) {
-                    $classname = 'moodle1_qtype_'.$qtypename.'_handler';
+                    $classname = 'powereduc1_qtype_'.$qtypename.'_handler';
                     require_once($filename);
                     if (!class_exists($classname)) {
-                        throw new moodle1_convert_exception('missing_handler_class', $classname);
+                        throw new powereduc1_convert_exception('missing_handler_class', $classname);
                     }
                     $this->log('registering handler', backup::LOG_DEBUG, $classname, 2);
                     $this->qtypehandlers[$qtypename] = new $classname($this, $qtypename);
@@ -1364,11 +1364,11 @@ class moodle1_question_bank_handler extends moodle1_xml_handler {
 
 
 /**
- * Handles the conversion of the scales included in the moodle.xml file
+ * Handles the conversion of the scales included in the powereduc.xml file
  */
-class moodle1_scales_handler extends moodle1_handler {
+class powereduc1_scales_handler extends powereduc1_handler {
 
-    /** @var moodle1_file_manager instance used to convert question images */
+    /** @var powereduc1_file_manager instance used to convert question images */
     protected $fileman = null;
 
     /**
@@ -1417,7 +1417,7 @@ class moodle1_scales_handler extends moodle1_handler {
 
         // convert course files embedded into the scale description field
         $this->fileman->itemid = $data['id'];
-        $data['description'] = moodle1_converter::migrate_referenced_files($data['description'], $this->fileman);
+        $data['description'] = powereduc1_converter::migrate_referenced_files($data['description'], $this->fileman);
 
         // stash the scale
         $this->converter->set_stash('scales', $data, $data['id']);
@@ -1428,9 +1428,9 @@ class moodle1_scales_handler extends moodle1_handler {
 /**
  * Handles the conversion of the outcomes
  */
-class moodle1_outcomes_handler extends moodle1_xml_handler {
+class powereduc1_outcomes_handler extends powereduc1_xml_handler {
 
-    /** @var moodle1_file_manager instance used to convert images embedded into outcome descriptions */
+    /** @var powereduc1_file_manager instance used to convert images embedded into outcome descriptions */
     protected $fileman = null;
 
     /**
@@ -1476,7 +1476,7 @@ class moodle1_outcomes_handler extends moodle1_xml_handler {
 
         // convert course files embedded into the outcome description field
         $this->fileman->itemid = $data['id'];
-        $data['description'] = moodle1_converter::migrate_referenced_files($data['description'], $this->fileman);
+        $data['description'] = powereduc1_converter::migrate_referenced_files($data['description'], $this->fileman);
 
         // write the outcome data
         $this->write_xml('outcome', $data, array('/outcome/id'));
@@ -1495,9 +1495,9 @@ class moodle1_outcomes_handler extends moodle1_xml_handler {
 
 
 /**
- * Handles the conversion of the gradebook structures in the moodle.xml file
+ * Handles the conversion of the gradebook structures in the powereduc.xml file
  */
-class moodle1_gradebook_handler extends moodle1_xml_handler {
+class powereduc1_gradebook_handler extends powereduc1_xml_handler {
 
     /** @var array of (int)gradecategoryid => (int|null)parentcategoryid */
     protected $categoryparent = array();
@@ -1525,7 +1525,7 @@ class moodle1_gradebook_handler extends moodle1_xml_handler {
     /**
      * Initializes the in-memory structures
      *
-     * This should not be needed actually as the moodle.xml contains just one GRADEBOOK
+     * This should not be needed actually as the powereduc.xml contains just one GRADEBOOK
      * element. But who knows - maybe someone will want to write a mass conversion
      * tool in the future (not me definitely ;-)
      */
@@ -1647,7 +1647,7 @@ class moodle1_gradebook_handler extends moodle1_xml_handler {
     protected function calculate_category_path($categoryid) {
 
         if (!array_key_exists($categoryid, $this->categoryparent)) {
-            throw new moodle1_convert_exception('gradebook_unknown_categoryid', null, $categoryid);
+            throw new powereduc1_convert_exception('gradebook_unknown_categoryid', null, $categoryid);
         }
 
         $path = array($categoryid);
@@ -1656,7 +1656,7 @@ class moodle1_gradebook_handler extends moodle1_xml_handler {
             array_unshift($path, $parent);
             $parent = $this->categoryparent[$parent];
             if (in_array($parent, $path)) {
-                throw new moodle1_convert_exception('circular_reference_in_categories_tree');
+                throw new powereduc1_convert_exception('circular_reference_in_categories_tree');
             }
         }
 
@@ -1694,7 +1694,7 @@ class moodle1_gradebook_handler extends moodle1_xml_handler {
 /**
  * Shared base class for activity modules, blocks and qtype handlers
  */
-abstract class moodle1_plugin_handler extends moodle1_xml_handler {
+abstract class powereduc1_plugin_handler extends powereduc1_xml_handler {
 
     /** @var string */
     protected $plugintype;
@@ -1703,11 +1703,11 @@ abstract class moodle1_plugin_handler extends moodle1_xml_handler {
     protected $pluginname;
 
     /**
-     * @param moodle1_converter $converter the converter that requires us
+     * @param powereduc1_converter $converter the converter that requires us
      * @param string $plugintype
      * @param string $pluginname
      */
-    public function __construct(moodle1_converter $converter, $plugintype, $pluginname) {
+    public function __construct(powereduc1_converter $converter, $plugintype, $pluginname) {
 
         parent::__construct($converter);
         $this->plugintype = $plugintype;
@@ -1728,9 +1728,9 @@ abstract class moodle1_plugin_handler extends moodle1_xml_handler {
 /**
  * Base class for all question type handlers
  */
-abstract class moodle1_qtype_handler extends moodle1_plugin_handler {
+abstract class powereduc1_qtype_handler extends powereduc1_plugin_handler {
 
-    /** @var moodle1_question_bank_handler */
+    /** @var powereduc1_question_bank_handler */
     protected $qbankhandler;
 
     /**
@@ -1757,7 +1757,7 @@ abstract class moodle1_qtype_handler extends moodle1_plugin_handler {
      *
      * The structure "answers" is used by several qtypes. It contains data from {question_answers} table.
      *
-     * @param array $answers as parsed by the grouped parser in moodle.xml
+     * @param array $answers as parsed by the grouped parser in powereduc.xml
      * @param string $qtype containing the answers
      */
     protected function write_answers(array $answers, $qtype) {
@@ -1797,7 +1797,7 @@ abstract class moodle1_qtype_handler extends moodle1_plugin_handler {
         $fileman->component = $component;
         $fileman->filearea  = $filearea;
         $fileman->itemid    = $itemid;
-        $text = moodle1_converter::migrate_referenced_files($text, $fileman);
+        $text = powereduc1_converter::migrate_referenced_files($text, $fileman);
         return $text;
     }
 
@@ -1836,7 +1836,7 @@ abstract class moodle1_qtype_handler extends moodle1_plugin_handler {
     /**
      * Returns default numerical_option structure
      *
-     * This structure is not present in moodle.xml, we create a new artificial one here.
+     * This structure is not present in powereduc.xml, we create a new artificial one here.
      *
      * @see write_numerical_options()
      * @param int $oldquestiontextformat
@@ -1899,7 +1899,7 @@ abstract class moodle1_qtype_handler extends moodle1_plugin_handler {
 
     /// implementation details follow //////////////////////////////////////////
 
-    public function __construct(moodle1_question_bank_handler $qbankhandler, $qtype) {
+    public function __construct(powereduc1_question_bank_handler $qbankhandler, $qtype) {
 
         parent::__construct($qbankhandler->get_converter(), 'qtype', $qtype);
         $this->qbankhandler = $qbankhandler;
@@ -1909,21 +1909,21 @@ abstract class moodle1_qtype_handler extends moodle1_plugin_handler {
      * @see self::get_question_subpaths()
      */
     final public function get_paths() {
-        throw new moodle1_convert_exception('qtype_handler_get_paths');
+        throw new powereduc1_convert_exception('qtype_handler_get_paths');
     }
 
     /**
      * Question type handlers cannot open the xml_writer
      */
     final protected function open_xml_writer($filename) {
-        throw new moodle1_convert_exception('opening_xml_writer_forbidden');
+        throw new powereduc1_convert_exception('opening_xml_writer_forbidden');
     }
 
     /**
      * Question type handlers cannot close the xml_writer
      */
     final protected function close_xml_writer() {
-        throw new moodle1_convert_exception('opening_xml_writer_forbidden');
+        throw new powereduc1_convert_exception('opening_xml_writer_forbidden');
     }
 
     /**
@@ -1940,7 +1940,7 @@ abstract class moodle1_qtype_handler extends moodle1_plugin_handler {
      *
      * See question_backup_answers() in 1.9 and add_question_question_answers() in 2.0
      *
-     * @param array $old the parsed answer array in moodle.xml
+     * @param array $old the parsed answer array in powereduc.xml
      * @param string $qtype the question type the answer is part of
      * @return array
      */
@@ -1981,7 +1981,7 @@ abstract class moodle1_qtype_handler extends moodle1_plugin_handler {
 /**
  * Base class for activity module handlers
  */
-abstract class moodle1_mod_handler extends moodle1_plugin_handler {
+abstract class powereduc1_mod_handler extends powereduc1_plugin_handler {
 
     /**
      * Returns the name of the module, eg. 'forum'
@@ -1996,7 +1996,7 @@ abstract class moodle1_mod_handler extends moodle1_plugin_handler {
      * Returns course module information for the given instance id
      *
      * The information for this instance id has been stashed by
-     * {@link moodle1_course_outline_handler::process_course_module()}
+     * {@link powereduc1_course_outline_handler::process_course_module()}
      *
      * @param int $instance the module instance id
      * @param string $modname the module type, defaults to $this->pluginname
@@ -2015,11 +2015,11 @@ abstract class moodle1_mod_handler extends moodle1_plugin_handler {
 /**
  * Base class for all modules that are successors of the 1.9 resource module
  */
-abstract class moodle1_resource_successor_handler extends moodle1_mod_handler {
+abstract class powereduc1_resource_successor_handler extends powereduc1_mod_handler {
 
     /**
      * Resource successors do not attach to paths themselves, they are called explicitely
-     * by moodle1_mod_resource_handler
+     * by powereduc1_mod_resource_handler
      *
      * @return array
      */
@@ -2030,7 +2030,7 @@ abstract class moodle1_resource_successor_handler extends moodle1_mod_handler {
     /**
      * Converts /POWEREDUC_BACKUP/COURSE/MODULES/MOD/RESOURCE data
      *
-     * Called by {@link moodle1_mod_resource_handler::process_resource()}
+     * Called by {@link powereduc1_mod_resource_handler::process_resource()}
      *
      * @param array $data pre-cooked legacy resource data
      * @param array $raw raw legacy resource data
@@ -2050,7 +2050,7 @@ abstract class moodle1_resource_successor_handler extends moodle1_mod_handler {
 /**
  * Base class for block handlers
  */
-abstract class moodle1_block_handler extends moodle1_plugin_handler {
+abstract class powereduc1_block_handler extends powereduc1_plugin_handler {
 
     public function get_paths() {
         $blockname = strtoupper($this->pluginname);
@@ -2121,7 +2121,7 @@ abstract class moodle1_block_handler extends moodle1_plugin_handler {
     }
 
     protected function write_roles_xml($newdata, $data) {
-        // This is an empty shell, as the moodle1 converter doesn't handle user data.
+        // This is an empty shell, as the powereduc1 converter doesn't handle user data.
         $this->open_xml_writer("course/blocks/{$data['name']}_{$data['id']}/roles.xml");
         $this->xmlwriter->begin_tag('roles');
         $this->xmlwriter->full_tag('role_overrides', '');
@@ -2135,24 +2135,24 @@ abstract class moodle1_block_handler extends moodle1_plugin_handler {
 /**
  * Base class for block generic handler
  */
-class moodle1_block_generic_handler extends moodle1_block_handler {
+class powereduc1_block_generic_handler extends powereduc1_block_handler {
 
 }
 
 /**
  * Base class for the activity modules' subplugins
  */
-abstract class moodle1_submod_handler extends moodle1_plugin_handler {
+abstract class powereduc1_submod_handler extends powereduc1_plugin_handler {
 
-    /** @var moodle1_mod_handler */
+    /** @var powereduc1_mod_handler */
     protected $parenthandler;
 
     /**
-     * @param moodle1_mod_handler $parenthandler the handler of a module we are subplugin of
+     * @param powereduc1_mod_handler $parenthandler the handler of a module we are subplugin of
      * @param string $subplugintype the type of the subplugin
      * @param string $subpluginname the name of the subplugin
      */
-    public function __construct(moodle1_mod_handler $parenthandler, $subplugintype, $subpluginname) {
+    public function __construct(powereduc1_mod_handler $parenthandler, $subplugintype, $subpluginname) {
         $this->parenthandler = $parenthandler;
         parent::__construct($parenthandler->converter, $subplugintype, $subpluginname);
     }

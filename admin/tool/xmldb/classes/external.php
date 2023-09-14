@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -79,7 +79,7 @@ class tool_xmldb_external extends external_api {
         ]);
 
         self::validate_context(context_system::instance());
-        require_capability('moodle/site:config', context_system::instance());
+        require_capability('powereduc/site:config', context_system::instance());
 
         if (!in_array($action, ['move_updown_table', 'move_updown_field', 'move_updown_key', 'move_updown_index'])) {
             throw new coding_exception('Unsupported action');

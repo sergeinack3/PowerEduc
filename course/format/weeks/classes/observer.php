@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Event observers used by the weeks course format.
  *
  * @package format_weeks
- * @copyright 2017 Mark Nelson <markn@moodle.com>
+ * @copyright 2017 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,7 +28,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * Event observer for format_weeks.
  *
  * @package format_weeks
- * @copyright 2017 Mark Nelson <markn@moodle.com>
+ * @copyright 2017 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class format_weeks_observer {

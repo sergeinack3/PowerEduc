@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -60,7 +60,7 @@ class competency_framework_exporter extends \core\external\persistent_exporter {
             $competenciescount = 0;
         }
         return array(
-            'canmanage' => has_capability('moodle/competency:competencymanage', $context),
+            'canmanage' => has_capability('powereduc/competency:competencymanage', $context),
             'competenciescount' => $competenciescount,
             'contextname' => $context->get_context_name(),
             'contextnamenoprefix' => $context->get_context_name(false)

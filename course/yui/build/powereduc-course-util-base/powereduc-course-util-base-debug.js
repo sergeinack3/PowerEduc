@@ -1,9 +1,9 @@
-YUI.add('moodle-course-util-base', function (Y, NAME) {
+YUI.add('powereduc-course-util-base', function (Y, NAME) {
 
 /**
  * The Moodle.core_course.util classes provide course-related utility functions.
  *
- * @module moodle-course-util
+ * @module powereduc-course-util
  * @main
  */
 

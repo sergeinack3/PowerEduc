@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Unit tests for MoodleQuickForm_duration
+ * Unit tests for PowerEducQuickForm_duration
  *
- * Contains test cases for testing MoodleQuickForm_duration
+ * Contains test cases for testing PowerEducQuickForm_duration
  *
  * @package    core_form
  * @category   test
@@ -27,8 +27,8 @@
 
 namespace core_form;
 
-use moodleform;
-use MoodleQuickForm;
+use powereducform;
+use PowerEducQuickForm;
 
 defined('POWEREDUC_INTERNAL') || die();
 
@@ -36,9 +36,9 @@ global $CFG;
 require_once($CFG->libdir . '/form/duration.php');
 
 /**
- * Unit tests for MoodleQuickForm_duration
+ * Unit tests for PowerEducQuickForm_duration
  *
- * Contains test cases for testing MoodleQuickForm_duration
+ * Contains test cases for testing PowerEducQuickForm_duration
  *
  * @package    core_form
  * @category   test
@@ -50,9 +50,9 @@ class duration_test extends \basic_testcase {
     /**
      * Get a form that can be used for testing.
      *
-     * @return MoodleQuickForm
+     * @return PowerEducQuickForm
      */
-    protected function get_test_form(): MoodleQuickForm {
+    protected function get_test_form(): PowerEducQuickForm {
         $form = new temp_form_duration();
         return $form->getform();
     }
@@ -60,7 +60,7 @@ class duration_test extends \basic_testcase {
     /**
      * Get a form with a duration element that can be used for testing.
      *
-     * @return array with two elements, a MoodleQuickForm and a MoodleQuickForm_duration.
+     * @return array with two elements, a PowerEducQuickForm and a PowerEducQuickForm_duration.
      */
     protected function get_test_form_and_element(): array {
         $mform = $this->get_test_form();
@@ -197,7 +197,7 @@ class duration_test extends \basic_testcase {
 /**
  * Form object to be used in test case.
  */
-class temp_form_duration extends moodleform {
+class temp_form_duration extends powereducform {
     /**
      * Form definition.
      */
@@ -207,7 +207,7 @@ class temp_form_duration extends moodleform {
 
     /**
      * Returns form reference
-     * @return MoodleQuickForm
+     * @return PowerEducQuickForm
      */
     public function getform() {
         $mform = $this->_form;

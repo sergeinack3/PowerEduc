@@ -1,5 +1,5 @@
 @tool @tool_customlang
-Feature: Within a moodle instance, an administrator should be able to modify langstrings for the entire Moodle installation.
+Feature: Within a powereduc instance, an administrator should be able to modify langstrings for the entire Moodle installation.
   In order to change langstrings in the adminsettings of the instance,
   As an admin
   I need to be able to access and change values in the the language customisation of the language pack.
@@ -13,15 +13,15 @@ Feature: Within a moodle instance, an administrator should be able to modify lan
     And I set the field "lng" to "en"
     And I press "Open language pack for editing"
     And I press "Continue"
-    And I set the field "Show strings of these components" to "moodle.php"
-    And I set the field "String identifier" to "moodledocslink"
+    And I set the field "Show strings of these components" to "powereduc.php"
+    And I set the field "String identifier" to "powereducdocslink"
     And I press "Show strings"
-    And I set the field "core/moodledocslink" to "moodle documents"
+    And I set the field "core/powereducdocslink" to "powereduc documents"
 
   @javascript
   Scenario: Edit an string but don't save it to lang pack.
     When I press "Apply changes and continue editing"
-    Then I should not see "moodle documents" in the "page-footer" "region"
+    Then I should not see "powereduc documents" in the "page-footer" "region"
     And I should see "Help and documentation" in the "page-footer" "region"
 
   @javascript
@@ -30,4 +30,4 @@ Feature: Within a moodle instance, an administrator should be able to modify lan
     And I should see "There are 1 modified strings."
     When I click on "Continue" "button"
     Then I should not see "Help and documentation" in the "page-footer" "region"
-    And I should see "moodle documents" in the "page-footer" "region"
+    And I should see "powereduc documents" in the "page-footer" "region"

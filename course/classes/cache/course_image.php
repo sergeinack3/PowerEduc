@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@ namespace core_course\cache;
 
 use cache_data_source;
 use cache_definition;
-use moodle_url;
+use powereduc_url;
 use core_course_list_element;
 
 /**
@@ -71,7 +71,7 @@ class course_image implements cache_data_source {
         $courseinlist = new core_course_list_element($course);
         foreach ($courseinlist->get_course_overviewfiles() as $file) {
             if ($file->is_valid_image()) {
-                return moodle_url::make_pluginfile_url(
+                return powereduc_url::make_pluginfile_url(
                     $file->get_contextid(),
                     $file->get_component(),
                     $file->get_filearea(),

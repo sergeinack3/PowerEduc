@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,8 +25,8 @@ namespace tool_dataprivacy\output;
 defined('POWEREDUC_INTERNAL') || die();
 
 use coding_exception;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use renderable;
 use renderer_base;
 use single_select;
@@ -66,12 +66,12 @@ class data_deletion_page implements renderable, templatable {
      * @param renderer_base $output
      * @return stdClass
      * @throws coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function export_for_template(renderer_base $output) {
         $data = new stdClass();
 
-        $url = new moodle_url('/admin/tool/dataprivacy/datadeletion.php');
+        $url = new powereduc_url('/admin/tool/dataprivacy/datadeletion.php');
         $options = [
             CONTEXT_USER => get_string('user'),
             CONTEXT_COURSE => get_string('course'),

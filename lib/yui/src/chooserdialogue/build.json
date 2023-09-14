@@ -1,7 +1,7 @@
 {
-  "name": "moodle-core-chooserdialogue",
+  "name": "powereduc-core-chooserdialogue",
   "builds": {
-    "moodle-core-chooserdialogue": {
+    "powereduc-core-chooserdialogue": {
       "jsfiles": [
         "chooserdialogue.js"
       ]

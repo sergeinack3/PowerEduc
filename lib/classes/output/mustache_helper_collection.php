@@ -1,32 +1,32 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Custom Moodle helper collection for mustache.
+ * Custom PowerEduc helper collection for mustache.
  *
- * @copyright  2019 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2019 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace core\output;
 
 /**
- * Custom Moodle helper collection for mustache.
+ * Custom PowerEduc helper collection for mustache.
  *
- * @copyright  2019 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2019 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mustache_helper_collection extends \Mustache_HelperCollection {
@@ -177,7 +177,7 @@ class mustache_helper_collection extends \Mustache_HelperCollection {
     /**
      * Parse the given string and remove any reference to disallowed helpers.
      *
-     * @deprecated Deprecated since Moodle 3.10 (MDL-69050) - use {@see self::strip_disallowed_helpers()}
+     * @deprecated Deprecated since PowerEduc 3.10 (MDL-69050) - use {@see self::strip_disallowed_helpers()}
      * @param  string[] $disallowedlist List of helper names to strip
      * @param  string $string String to parse
      * @return string Parsed string

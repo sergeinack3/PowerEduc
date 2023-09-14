@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -64,7 +64,7 @@ abstract class grade_export {
      * Constructor should set up all the private variables ready to be pulled.
      *
      * This constructor used to accept the individual parameters as separate arguments, in
-     * 2.8 this was simplified to just accept the data from the moodle form.
+     * 2.8 this was simplified to just accept the data from the powereduc form.
      *
      * @access public
      * @param object $course
@@ -89,7 +89,7 @@ abstract class grade_export {
      * Old deprecated constructor.
      *
      * This deprecated constructor accepts the individual parameters as separate arguments, in
-     * 2.8 this was simplified to just accept the data from the moodle form.
+     * 2.8 this was simplified to just accept the data from the powereduc form.
      *
      * @deprecated since 2.8 MDL-46548. Instead call the shortened constructor which accepts the data
      * directly from the grade_export_form.
@@ -419,7 +419,7 @@ abstract class grade_export {
         if (!is_array($this->displaytype)) {
             $displaytypes = $this->displaytype;
         } else {
-            // Implode the grade display types array as moodle_url function doesn't accept arrays.
+            // Implode the grade display types array as powereduc_url function doesn't accept arrays.
             $displaytypes = implode(',', $this->displaytype);
         }
 
@@ -463,7 +463,7 @@ abstract class grade_export {
 
         if (!$this->userkey) {
             // This button should trigger a download prompt.
-            $url = new moodle_url('/grade/export/'.$this->plugin.'/export.php', $params);
+            $url = new powereduc_url('/grade/export/'.$this->plugin.'/export.php', $params);
             echo $OUTPUT->single_button($url, get_string('download', 'admin'));
 
         } else {
@@ -488,10 +488,10 @@ abstract class grade_export {
      *
      * Get submitted form data and create the url to be used on the grade publish feature.
      *
-     * @return moodle_url the url of grade publishing export.
+     * @return powereduc_url the url of grade publishing export.
      */
     public function get_export_url() {
-        return new moodle_url('/grade/export/'.$this->plugin.'/dump.php', $this->get_export_params());
+        return new powereduc_url('/grade/export/'.$this->plugin.'/dump.php', $this->get_export_params());
     }
 
     /**
@@ -715,6 +715,6 @@ class grade_export_update_buffer {
  */
 function export_verify_grades($courseid) {
     if (grade_needs_regrade_final_grades($courseid)) {
-        throw new moodle_exception('gradesneedregrading', 'grades');
+        throw new powereduc_exception('gradesneedregrading', 'grades');
     }
 }

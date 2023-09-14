@@ -1,4 +1,4 @@
-Description of import of various YUI libraries into Moodle:
+Description of import of various YUI libraries into PowerEduc:
 
 1/ YUI2 version 2.9.0:
 * copy of 2in3 without older version

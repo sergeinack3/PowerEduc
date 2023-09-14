@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,12 +17,12 @@
 /**
  * This is the external API for this component.
  *
- * @package    tool_moodlenet
+ * @package    tool_powereducnet
  * @copyright  2020 Mathew May {@link https://mathew.solutions}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace tool_moodlenet;
+namespace tool_powereducnet;
 
 defined('POWEREDUC_INTERNAL') || die();
 
@@ -78,19 +78,19 @@ class external extends external_api {
             ]
         );
         try {
-            $mnetprofile = new moodlenet_user_profile($params['profileurl'], $USER->id);
+            $mnetprofile = new powereducnet_user_profile($params['profileurl'], $USER->id);
         } catch (\Exception $e) {
             return [
                 'result' => false,
-                'message' => get_string('profilevalidationfail', 'tool_moodlenet'),
+                'message' => get_string('profilevalidationfail', 'tool_powereducnet'),
             ];
         }
 
-        $userlink = profile_manager::get_moodlenet_profile_link($mnetprofile);
+        $userlink = profile_manager::get_powereducnet_profile_link($mnetprofile);
 
         // There were no problems verifying the account so lets store it.
         if ($userlink['result'] === true) {
-            profile_manager::save_moodlenet_user_profile($mnetprofile);
+            profile_manager::save_powereducnet_user_profile($mnetprofile);
             $userlink['domain'] = generate_mnet_endpoint($mnetprofile->get_profile_name(), $course, $section);
         }
 
@@ -142,7 +142,7 @@ class external extends external_api {
 
         if ($arrcourses = \core_course_category::search_courses(array('search' => $params['searchvalue']))) {
             foreach ($arrcourses as $course) {
-                if (has_capability('moodle/course:manageactivities', \context_course::instance($course->id))) {
+                if (has_capability('powereduc/course:manageactivities', \context_course::instance($course->id))) {
                     $data = new \stdClass();
                     $data->id = $course->id;
                     $data->fullname = $course->fullname;
@@ -150,7 +150,7 @@ class external extends external_api {
                     $options = [
                         'course' => $course->id,
                     ];
-                    $viewurl = new \moodle_url('/admin/tool/moodlenet/options.php', $options);
+                    $viewurl = new \powereduc_url('/admin/tool/powereducnet/options.php', $options);
                     $data->viewurl = $viewurl->out(false);
                     $category = \core_course_category::get($course->category);
                     $data->coursecategory = $category->name;

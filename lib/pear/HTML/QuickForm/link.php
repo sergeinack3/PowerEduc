@@ -69,7 +69,7 @@ class HTML_QuickForm_link extends HTML_QuickForm_static
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
     public function HTML_QuickForm_link($elementName=null, $elementLabel=null, $href=null, $text=null, $attributes=null) {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);

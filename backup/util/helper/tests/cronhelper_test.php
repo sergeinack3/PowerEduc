@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package   core_backup
  * @category  test
- * @copyright 2012 Frédéric Massart <fred@moodle.com>
+ * @copyright 2012 Frédéric Massart <fred@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -40,7 +40,7 @@ require_once("$CFG->dirroot/backup/backup.class.php");
  *
  * @package   core_backup
  * @category  test
- * @copyright 2012 Frédéric Massart <fred@moodle.com>
+ * @copyright 2012 Frédéric Massart <fred@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class cronhelper_test extends \advanced_testcase {
@@ -511,7 +511,7 @@ class testable_backup_cron_automated_helper extends backup_cron_automated_helper
      * Provides access to protected method get_courses.
      *
      * @param int $now Timestamp to use.
-     * @return moodle_recordset The returned courses as a Moodle recordest.
+     * @return powereduc_recordset The returned courses as a Moodle recordest.
      */
     public static function testable_get_courses($now) {
         return parent::get_courses($now);

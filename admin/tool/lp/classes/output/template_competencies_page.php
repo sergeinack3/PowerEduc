@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ use renderer_base;
 use stdClass;
 use context;
 use context_system;
-use moodle_url;
+use powereduc_url;
 use core_competency\external\template_exporter;
 use core_competency\template;
 use core_competency\api;
@@ -79,9 +79,9 @@ class template_competencies_page implements renderable, templatable {
         $this->template = $template;
         $this->templatestatistics = new template_statistics($template->get('id'));
         $this->competencies = api::list_competencies_in_template($template);
-        $this->canmanagecompetencyframeworks = has_capability('moodle/competency:competencymanage', $this->pagecontext);
-        $this->canmanagetemplatecompetencies = has_capability('moodle/competency:templatemanage', $this->pagecontext);
-        $this->manageurl = new moodle_url('/admin/tool/lp/competencyframeworks.php',
+        $this->canmanagecompetencyframeworks = has_capability('powereduc/competency:competencymanage', $this->pagecontext);
+        $this->canmanagetemplatecompetencies = has_capability('powereduc/competency:templatemanage', $this->pagecontext);
+        $this->manageurl = new powereduc_url('/admin/tool/lp/competencyframeworks.php',
             array('pagecontextid' => $this->pagecontext->id));
     }
 
@@ -117,7 +117,7 @@ class template_competencies_page implements renderable, templatable {
             array_push($data->competencies, $record);
         }
 
-        $data->pluginbaseurl = (new moodle_url('/admin/tool/lp'))->out(false);
+        $data->pluginbaseurl = (new powereduc_url('/admin/tool/lp'))->out(false);
         $data->canmanagecompetencyframeworks = $this->canmanagecompetencyframeworks;
         $data->canmanagetemplatecompetencies = $this->canmanagetemplatecompetencies;
         $data->manageurl = $this->manageurl->out(true);

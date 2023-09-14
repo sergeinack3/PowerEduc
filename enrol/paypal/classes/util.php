@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -53,7 +53,7 @@ final class util {
 
         $eventdata = new \core\message\message();
         $eventdata->courseid          = empty($data->courseid) ? SITEID : $data->courseid;
-        $eventdata->modulename        = 'moodle';
+        $eventdata->modulename        = 'powereduc';
         $eventdata->component         = 'enrol_paypal';
         $eventdata->name              = 'paypal_enrolment';
         $eventdata->userfrom          = $admin;

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,5 +28,5 @@ defined('POWEREDUC_INTERNAL') || die();
 if ($hassiteconfig) {
     $ADMIN->add('root', new admin_externalpage('tool_admin_presets',
     get_string('pluginname', 'tool_admin_presets'),
-    new moodle_url('/admin/tool/admin_presets/index.php')));
+    new powereduc_url('/admin/tool/admin_presets/index.php')));
 }

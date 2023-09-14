@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,13 +37,13 @@ if ($contextid) {
     $context = context_system::instance();
 }
 if ($context->contextlevel != CONTEXT_COURSECAT && $context->contextlevel != CONTEXT_SYSTEM) {
-    throw new \moodle_exception('invalidcontext');
+    throw new \powereduc_exception('invalidcontext');
 }
 
-require_capability('moodle/cohort:manage', $context);
+require_capability('powereduc/cohort:manage', $context);
 
 $PAGE->set_context($context);
-$baseurl = new moodle_url('/cohort/upload.php', array('contextid' => $context->id));
+$baseurl = new powereduc_url('/cohort/upload.php', array('contextid' => $context->id));
 $PAGE->set_url($baseurl);
 $PAGE->set_pagelayout('admin');
 
@@ -56,13 +56,13 @@ if ($context->contextlevel == CONTEXT_COURSECAT) {
 
     $PAGE->set_secondary_active_tab('cohort');
 } else {
-    navigation_node::override_active_url(new moodle_url('/cohort/index.php', array()));
+    navigation_node::override_active_url(new powereduc_url('/cohort/index.php', array()));
     $PAGE->set_heading($COURSE->fullname);
 }
 
 $uploadform = new cohort_upload_form(null, array('contextid' => $context->id));
 
-$returnurl = new moodle_url('/cohort/index.php', array('contextid' => $context->id));
+$returnurl = new powereduc_url('/cohort/index.php', array('contextid' => $context->id));
 
 if ($uploadform->is_cancelled()) {
     redirect($returnurl);

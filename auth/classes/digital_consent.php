@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Contains helper class for digital consent.
  *
  * @package     core_auth
- * @copyright   2018 Mihail Geshoski <mihail@moodle.com>
+ * @copyright   2018 Mihail Geshoski <mihail@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,7 +29,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Helper class for digital consent.
  *
- * @copyright 2018 Mihail Geshoski <mihail@moodle.com>
+ * @copyright 2018 Mihail Geshoski <mihail@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class digital_consent {
@@ -78,7 +78,7 @@ class digital_consent {
             $arr = explode(",", $line);
             // Handle if there is more or less than one comma separator.
             if (count($arr) != 2) {
-                throw new \moodle_exception('agedigitalconsentmapinvalidcomma', 'error', '', $line);
+                throw new \powereduc_exception('agedigitalconsentmapinvalidcomma', 'error', '', $line);
             }
             $country = trim($arr[0]);
             $age = trim($arr[1]);
@@ -88,17 +88,17 @@ class digital_consent {
             }
             // Handle if the presented value for country is not valid.
             if ($country !== "*" && !array_key_exists($country, $countries)) {
-                throw new \moodle_exception('agedigitalconsentmapinvalidcountry', 'error', '', $country);
+                throw new \powereduc_exception('agedigitalconsentmapinvalidcountry', 'error', '', $country);
             }
             // Handle if the presented value for age is not valid.
             if (!is_numeric($age)) {
-                throw new \moodle_exception('agedigitalconsentmapinvalidage', 'error', '', $age);
+                throw new \powereduc_exception('agedigitalconsentmapinvalidage', 'error', '', $age);
             }
             $ageconsentmapparsed[$country] = $age;
         }
         // Handle if a default value does not exist.
         if (!$isdefaultvaluepresent) {
-            throw new \moodle_exception('agedigitalconsentmapinvaliddefault');
+            throw new \powereduc_exception('agedigitalconsentmapinvaliddefault');
         }
 
         return $ageconsentmapparsed;

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core_block
  * @category   external
- * @copyright  2017 Juan Leyva <juan@moodle.com>
+ * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.3
  */
@@ -34,7 +34,7 @@ require_once("$CFG->dirroot/my/lib.php");
  *
  * @package    core_block
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.3
  */
@@ -94,7 +94,7 @@ class core_block_external extends external_api {
         global $PAGE, $OUTPUT;
 
         // Set page URL to a fake URL to avoid errors.
-        $PAGE->set_url(new \moodle_url('/webservice/core_block_external/'));
+        $PAGE->set_url(new \powereduc_url('/webservice/core_block_external/'));
 
         // Load the block instances for all the regions.
         $PAGE->blocks->load_blocks($includeinvisible);
@@ -162,7 +162,7 @@ class core_block_external extends external_api {
      * @param int $courseid The course id
      * @param bool $returncontents Whether to return the block contents
      * @return array Blocks list and possible warnings
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since Moodle 3.3
      */
     public static function get_course_blocks($courseid, $returncontents = false) {
@@ -234,7 +234,7 @@ class core_block_external extends external_api {
      * @param bool $returncontents Whether to return the block contents
      * @param string $mypage The page to get blocks of within my
      * @return array Blocks list and possible warnings
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since Moodle 3.6
      */
     public static function get_dashboard_blocks($userid = 0, $returncontents = false, $mypage = MY_PAGE_DEFAULT) {
@@ -253,7 +253,7 @@ class core_block_external extends external_api {
 
         if ($USER->id != $userid) {
             // We must check if the current user can view other users dashboard.
-            require_capability('moodle/site:config', context_system::instance());
+            require_capability('powereduc/site:config', context_system::instance());
             $user = core_user::get_user($userid, '*', MUST_EXIST);
             core_user::require_active_user($user);
         }
@@ -269,7 +269,7 @@ class core_block_external extends external_api {
         }
 
         if (!$currentpage) {
-            throw new moodle_exception('mymoodlesetup');
+            throw new powereduc_exception('mypowereducsetup');
         }
 
         $PAGE->set_context($context);
@@ -279,12 +279,12 @@ class core_block_external extends external_api {
         $PAGE->set_subpage($currentpage->id);
 
         // Load the block instances in the current $PAGE for all the regions.
-        $returninvisible = has_capability('moodle/my:manageblocks', $context) ? true : false;
+        $returninvisible = has_capability('powereduc/my:manageblocks', $context) ? true : false;
         $allblocks = self::get_all_current_page_blocks($returninvisible, $params['returncontents']);
 
         // Temporary hack to be removed in 4.1.
         // Return always the course overview block so old versions of the app can list the user courses.
-        if ($mypage == MY_PAGE_DEFAULT && core_useragent::is_moodle_app()) {
+        if ($mypage == MY_PAGE_DEFAULT && core_useragent::is_powereduc_app()) {
             $myoverviewfound = false;
 
             foreach ($allblocks as $block) {

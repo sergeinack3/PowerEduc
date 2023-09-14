@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ use templatable;
 use renderer_base;
 use single_button;
 use stdClass;
-use moodle_url;
+use powereduc_url;
 use context_system;
 use core_competency\api;
 use core_competency\competency;
@@ -56,7 +56,7 @@ class manage_competencies_page implements renderable, templatable {
     /** @var bool $canmanage Result of permissions checks. */
     protected $canmanage = false;
 
-    /** @var moodle_url $pluginurlbase Base url to use constructing links. */
+    /** @var powereduc_url $pluginurlbase Base url to use constructing links. */
     protected $pluginbaseurl = null;
 
     /** @var context $pagecontext The page context. */
@@ -79,12 +79,12 @@ class manage_competencies_page implements renderable, templatable {
         $this->search = $search;
         $this->competency = $competency;
         $addpage = new single_button(
-           new moodle_url('/admin/tool/lp/editcompetencyframework.php'),
+           new powereduc_url('/admin/tool/lp/editcompetencyframework.php'),
            get_string('addnewcompetency', 'tool_lp')
         );
         $this->navigation[] = $addpage;
 
-        $this->canmanage = has_capability('moodle/competency:competencymanage', $framework->get_context());
+        $this->canmanage = has_capability('powereduc/competency:competencymanage', $framework->get_context());
     }
 
     /**
@@ -100,7 +100,7 @@ class manage_competencies_page implements renderable, templatable {
         $data->canmanage = $this->canmanage;
         $data->search = $this->search;
         $data->pagecontextid = $this->pagecontext->id;
-        $data->pluginbaseurl = (new moodle_url('/admin/tool/lp'))->out(true);
+        $data->pluginbaseurl = (new powereduc_url('/admin/tool/lp'))->out(true);
 
         $data->competencyid = 0;
         if ($this->competency) {

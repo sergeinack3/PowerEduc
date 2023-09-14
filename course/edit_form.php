@@ -8,7 +8,7 @@ require_once($CFG->libdir.'/completionlib.php');
 /**
  * The form for handling editing a course.
  */
-class course_edit_form extends moodleform {
+class course_edit_form extends powereducform {
     protected $course;
     protected $context;
 
@@ -38,7 +38,7 @@ class course_edit_form extends moodleform {
             $context = $categorycontext;
         }
 
-        $courseconfig = get_config('moodlecourse');
+        $courseconfig = get_config('powereduccourse');
 
         $this->course  = $course;
         $this->context = $context;
@@ -58,7 +58,7 @@ class course_edit_form extends moodleform {
         $mform->addHelpButton('fullname', 'fullnamecourse');
         $mform->addRule('fullname', get_string('missingfullname'), 'required', null, 'client');
         $mform->setType('fullname', PARAM_TEXT);
-        if (!empty($course->id) and !has_capability('moodle/course:changefullname', $coursecontext)) {
+        if (!empty($course->id) and !has_capability('powereduc/course:changefullname', $coursecontext)) {
             $mform->hardFreeze('fullname');
             $mform->setConstant('fullname', $course->fullname);
         }
@@ -67,15 +67,15 @@ class course_edit_form extends moodleform {
         $mform->addHelpButton('shortname', 'shortnamecourse');
         $mform->addRule('shortname', get_string('missingshortname'), 'required', null, 'client');
         $mform->setType('shortname', PARAM_TEXT);
-        if (!empty($course->id) and !has_capability('moodle/course:changeshortname', $coursecontext)) {
+        if (!empty($course->id) and !has_capability('powereduc/course:changeshortname', $coursecontext)) {
             $mform->hardFreeze('shortname');
             $mform->setConstant('shortname', $course->shortname);
         }
 
         // Verify permissions to change course category or keep current.
         if (empty($course->id)) {
-            if (has_capability('moodle/course:create', $categorycontext)) {
-                $displaylist = core_course_category::make_categories_list('moodle/course:create');
+            if (has_capability('powereduc/course:create', $categorycontext)) {
+                $displaylist = core_course_category::make_categories_list('powereduc/course:create');
                 $mform->addElement('autocomplete', 'category', get_string('coursecategory'), $displaylist);
                 $mform->addRule('category', null, 'required', null, 'client');
                 $mform->addHelpButton('category', 'coursecategory');
@@ -86,8 +86,8 @@ class course_edit_form extends moodleform {
                 $mform->setConstant('category', $category->id);
             }
         } else {
-            if (has_capability('moodle/course:changecategory', $coursecontext)) {
-                $displaylist = core_course_category::make_categories_list('moodle/course:changecategory');
+            if (has_capability('powereduc/course:changecategory', $coursecontext)) {
+                $displaylist = core_course_category::make_categories_list('powereduc/course:changecategory');
                 if (!isset($displaylist[$course->category])) {
                     //always keep current
                     $displaylist[$course->category] = core_course_category::get($course->category, MUST_EXIST, true)
@@ -133,12 +133,12 @@ class course_edit_form extends moodleform {
         $mform->addHelpButton('visible', 'coursevisibility');
         $mform->setDefault('visible', $courseconfig->visible);
         if (!empty($course->id)) {
-            if (!has_capability('moodle/course:visibility', $coursecontext)) {
+            if (!has_capability('powereduc/course:visibility', $coursecontext)) {
                 $mform->hardFreeze('visible');
                 $mform->setConstant('visible', $course->visible);
             }
         } else {
-            if (!guess_if_creator_will_have_course_capability('moodle/course:visibility', $categorycontext)) {
+            if (!guess_if_creator_will_have_course_capability('powereduc/course:visibility', $categorycontext)) {
                 $mform->hardFreeze('visible');
                 $mform->setConstant('visible', $courseconfig->visible);
             }
@@ -158,9 +158,9 @@ class course_edit_form extends moodleform {
             $mform->addHelpButton('downloadcontent', 'downloadcoursecontent', 'course');
             $mform->setDefault('downloadcontent', $downloadselectdefault);
 
-            if ((!empty($course->id) && !has_capability('moodle/course:configuredownloadcontent', $coursecontext)) ||
+            if ((!empty($course->id) && !has_capability('powereduc/course:configuredownloadcontent', $coursecontext)) ||
                     (empty($course->id) &&
-                    !guess_if_creator_will_have_course_capability('moodle/course:configuredownloadcontent', $categorycontext))) {
+                    !guess_if_creator_will_have_course_capability('powereduc/course:configuredownloadcontent', $categorycontext))) {
                 $mform->hardFreeze('downloadcontent');
                 $mform->setConstant('downloadcontent', $downloadselectdefault);
             }
@@ -198,7 +198,7 @@ class course_edit_form extends moodleform {
         $mform->addElement('text','idnumber', get_string('idnumbercourse'),'maxlength="100"  size="10"');
         $mform->addHelpButton('idnumber', 'idnumbercourse');
         $mform->setType('idnumber', PARAM_RAW);
-        if (!empty($course->id) and !has_capability('moodle/course:changeidnumber', $coursecontext)) {
+        if (!empty($course->id) and !has_capability('powereduc/course:changeidnumber', $coursecontext)) {
             $mform->hardFreeze('idnumber');
             $mform->setConstants('idnumber', $course->idnumber);
         }
@@ -218,7 +218,7 @@ class course_edit_form extends moodleform {
             $summaryfields .= ',overviewfiles_filemanager';
         }
 
-        if (!empty($course->id) and !has_capability('moodle/course:changesummary', $coursecontext)) {
+        if (!empty($course->id) and !has_capability('powereduc/course:changesummary', $coursecontext)) {
             // Remove the description header it does not contain anything any more.
             $mform->removeElement('descriptionhdr');
             $mform->hardFreeze($summaryfields);
@@ -236,7 +236,7 @@ class course_edit_form extends moodleform {
             $course->format = course_get_format($course)->get_format(); // replace with default if not found
             if (!in_array($course->format, $courseformats)) {
                 // this format is disabled. Still display it in the dropdown
-                $formcourseformats[$course->format] = get_string('withdisablednote', 'moodle',
+                $formcourseformats[$course->format] = get_string('withdisablednote', 'powereduc',
                         get_string('pluginname', 'format_'.$course->format));
             }
         }
@@ -273,8 +273,8 @@ class course_edit_form extends moodleform {
             $mform->addElement('select', 'theme', get_string('forcetheme'), $themes);
         }
 
-        if ((empty($course->id) && guess_if_creator_will_have_course_capability('moodle/course:setforcedlanguage', $categorycontext))
-                || (!empty($course->id) && has_capability('moodle/course:setforcedlanguage', $coursecontext))) {
+        if ((empty($course->id) && guess_if_creator_will_have_course_capability('powereduc/course:setforcedlanguage', $categorycontext))
+                || (!empty($course->id) && has_capability('powereduc/course:setforcedlanguage', $coursecontext))) {
 
             $languages = ['' => get_string('forceno')];
             $languages += get_string_manager()->get_list_of_translations();
@@ -298,7 +298,7 @@ class course_edit_form extends moodleform {
 
         $options = range(0, 10);
         $mform->addElement('select', 'newsitems', get_string('newsitemsnumber'), $options);
-        $courseconfig = get_config('moodlecourse');
+        $courseconfig = get_config('powereduccourse');
         $mform->setDefault('newsitems', $courseconfig->newsitems);
         $mform->addHelpButton('newsitems', 'newsitemsnumber');
 
@@ -382,8 +382,8 @@ class course_edit_form extends moodleform {
         $options[0] = get_string('none');
         $mform->addElement('select', 'defaultgroupingid', get_string('defaultgrouping', 'group'), $options);
 
-        if ((empty($course->id) && guess_if_creator_will_have_course_capability('moodle/course:renameroles', $categorycontext))
-                || (!empty($course->id) && has_capability('moodle/course:renameroles', $coursecontext))) {
+        if ((empty($course->id) && guess_if_creator_will_have_course_capability('powereduc/course:renameroles', $categorycontext))
+                || (!empty($course->id) && has_capability('powereduc/course:renameroles', $coursecontext))) {
             // Customizable role names in this course.
             $mform->addElement('header', 'rolerenaming', get_string('rolerenaming'));
             $mform->addHelpButton('rolerenaming', 'rolerenaming');
@@ -399,8 +399,8 @@ class course_edit_form extends moodleform {
         }
 
         if (core_tag_tag::is_enabled('core', 'course') &&
-                ((empty($course->id) && guess_if_creator_will_have_course_capability('moodle/course:tag', $categorycontext))
-                || (!empty($course->id) && has_capability('moodle/course:tag', $coursecontext)))) {
+                ((empty($course->id) && guess_if_creator_will_have_course_capability('powereduc/course:tag', $categorycontext))
+                || (!empty($course->id) && has_capability('powereduc/course:tag', $coursecontext)))) {
             $mform->addElement('header', 'tagshdr', get_string('tags', 'tag'));
             $mform->addElement('tags', 'tags', get_string('tags'),
                     array('itemtype' => 'course', 'component' => 'core'));

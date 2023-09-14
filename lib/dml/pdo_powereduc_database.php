@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Experimental pdo database class
@@ -24,8 +24,8 @@
 
 defined('POWEREDUC_INTERNAL') || die();
 
-require_once(__DIR__.'/moodle_database.php');
-require_once(__DIR__.'/pdo_moodle_recordset.php');
+require_once(__DIR__.'/powereduc_database.php');
+require_once(__DIR__.'/pdo_powereduc_recordset.php');
 
 /**
  * Experimental pdo database class
@@ -34,13 +34,13 @@ require_once(__DIR__.'/pdo_moodle_recordset.php');
  * @copyright  2008 Andrei Bautu
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-abstract class pdo_moodle_database extends moodle_database {
+abstract class pdo_powereduc_database extends powereduc_database {
 
     protected $pdb;
     protected $lastError = null;
 
     /**
-     * Constructor - instantiates the database, specifying if it's external (connect to other systems) or no (Moodle DB)
+     * Constructor - instantiates the database, specifying if it's external (connect to other systems) or no (PowerEduc DB)
      *               note this has effect to decide if prefix checks must be performed or no
      * @param bool true means external database used
      */
@@ -55,7 +55,7 @@ abstract class pdo_moodle_database extends moodle_database {
      * @param string $dbuser The database username.
      * @param string $dbpass The database username's password.
      * @param string $dbname The name of the database being connected to.
-     * @param mixed $prefix string means moodle db prefix, false used for external databases where prefix not used
+     * @param mixed $prefix string means powereduc db prefix, false used for external databases where prefix not used
      * @param array $dboptions driver specific options
      * @return bool success
      */
@@ -214,14 +214,14 @@ abstract class pdo_moodle_database extends moodle_database {
     }
 
     /**
-     * Factory method that creates a recordset for return by a query. The generic pdo_moodle_recordset
-     * class should fit most cases, but pdo_moodle_database subclasses can override this method to return
-     * a subclass of pdo_moodle_recordset.
+     * Factory method that creates a recordset for return by a query. The generic pdo_powereduc_recordset
+     * class should fit most cases, but pdo_powereduc_database subclasses can override this method to return
+     * a subclass of pdo_powereduc_recordset.
      * @param object $sth instance of PDOStatement
-     * @return object instance of pdo_moodle_recordset
+     * @return object instance of pdo_powereduc_recordset
      */
     protected function create_recordset($sth) {
-        return new pdo_moodle_recordset($sth);
+        return new pdo_powereduc_recordset($sth);
     }
 
     /**
@@ -250,7 +250,7 @@ abstract class pdo_moodle_database extends moodle_database {
     }
 
     /**
-     * Get a number of records as an moodle_recordset.  $sql must be a complete SQL query.
+     * Get a number of records as an powereduc_recordset.  $sql must be a complete SQL query.
      * Since this method is a little less readable, use of it should be restricted to
      * code where it's possible there might be large datasets being returned.  For known
      * small datasets use get_records_sql - it leads to simpler code.
@@ -262,7 +262,7 @@ abstract class pdo_moodle_database extends moodle_database {
      * @param array $params array of sql parameters
      * @param int $limitfrom return a subset of records, starting at this point (optional, required if $limitnum is set).
      * @param int $limitnum return a subset comprising this many records (optional, required if $limitfrom is set).
-     * @return moodle_recordset instance
+     * @return powereduc_recordset instance
      */
     public function get_recordset_sql($sql, array $params=null, $limitfrom=0, $limitnum=0) {
 
@@ -356,7 +356,7 @@ abstract class pdo_moodle_database extends moodle_database {
 
         if ($customsequence) {
             if (!isset($params['id'])) {
-                throw new coding_exception('moodle_database::insert_record_raw() id field must be specified if custom sequences used.');
+                throw new coding_exception('powereduc_database::insert_record_raw() id field must be specified if custom sequences used.');
             }
             $returnid = false;
         } else {
@@ -364,7 +364,7 @@ abstract class pdo_moodle_database extends moodle_database {
         }
 
         if (empty($params)) {
-            throw new coding_exception('moodle_database::insert_record_raw() no fields found.');
+            throw new coding_exception('powereduc_database::insert_record_raw() no fields found.');
         }
 
         $fields = implode(',', array_keys($params));
@@ -437,13 +437,13 @@ abstract class pdo_moodle_database extends moodle_database {
         $params = (array)$params;
 
         if (!isset($params['id'])) {
-            throw new coding_exception('moodle_database::update_record_raw() id field must be specified.');
+            throw new coding_exception('powereduc_database::update_record_raw() id field must be specified.');
         }
         $id = $params['id'];
         unset($params['id']);
 
         if (empty($params)) {
-            throw new coding_exception('moodle_database::update_record_raw() no fields found.');
+            throw new coding_exception('powereduc_database::update_record_raw() no fields found.');
         }
 
         $sets = array();
@@ -527,7 +527,7 @@ abstract class pdo_moodle_database extends moodle_database {
                 break;
             default:
                 $this->lastError = __FILE__ . ' LINE: ' . __LINE__ . '.';
-                throw new \moodle_exception(unknowparamtype, 'error', '', $this->lastError);
+                throw new \powereduc_exception(unknowparamtype, 'error', '', $this->lastError);
             }
         }
         $sql = "UPDATE {{$table}} SET $newfield $select";
@@ -535,11 +535,11 @@ abstract class pdo_moodle_database extends moodle_database {
     }
 
     public function sql_concat() {
-        throw new \moodle_exception('TODO');
+        throw new \powereduc_exception('TODO');
     }
 
     public function sql_concat_join($separator="' '", $elements=array()) {
-        throw new \moodle_exception('TODO');
+        throw new \powereduc_exception('TODO');
     }
 
     /**

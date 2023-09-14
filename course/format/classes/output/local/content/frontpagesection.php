@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  * The frontpage has a different wat of rendering the main topic.
  *
  * @package   core_courseformat
- * @copyright 2020 Ferran Recio <ferran@moodle.com>
+ * @copyright 2020 Ferran Recio <ferran@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ use context_course;
 use core\output\named_templatable;
 use core_courseformat\base as course_format;
 use core_courseformat\output\local\courseformat_named_templatable;
-use moodle_url;
+use powereduc_url;
 use renderable;
 use section_info;
 use stdClass;
@@ -39,7 +39,7 @@ use stdClass;
  * Represents the frontpage section 1.
  *
  * @package   core_courseformat
- * @copyright 2020 Ferran Recio <ferran@moodle.com>
+ * @copyright 2020 Ferran Recio <ferran@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class frontpagesection implements named_templatable, renderable {
@@ -92,9 +92,9 @@ class frontpagesection implements named_templatable, renderable {
             'sections' => [$sectionoutput->export_for_template($output)],
         ];
 
-        if ($format->show_editor(['moodle/course:update'])) {
+        if ($format->show_editor(['powereduc/course:update'])) {
             $data->showsettings = true;
-            $data->settingsurl = new moodle_url('/course/editsection.php', ['id' => $section->id]);
+            $data->settingsurl = new powereduc_url('/course/editsection.php', ['id' => $section->id]);
         }
 
         return $data;

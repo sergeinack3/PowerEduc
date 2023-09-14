@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ require_once($CFG->dirroot . '/course/edit_form.php');
 class testable_course_edit_form extends course_edit_form {
 
     /**
-     * Expose the internal moodleform's MoodleQuickForm
+     * Expose the internal powereducform's MoodleQuickForm
      *
      * @return MoodleQuickForm
      */

@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package moodlecore
+ * @package powereduccore
  * @subpackage backup-plan
  * @copyright 2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -77,7 +77,7 @@ abstract class restore_structure_step extends restore_step {
 
         // And it MUST exist
         if (!file_exists($fullpath)) { // Shouldn't happen ever, but...
-            throw new restore_step_exception('missing_moodle_backup_xml_file', $fullpath);
+            throw new restore_step_exception('missing_powereduc_backup_xml_file', $fullpath);
         }
 
         // Get restore_path elements array adapting and preparing it for processing
@@ -278,13 +278,13 @@ abstract class restore_structure_step extends restore_step {
             // We need to add also backup plugin classes on restore, they may contain
             // some stuff used both in backup & restore
             $backupclassname = 'backup_' . $plugintype . '_' . $name . '_plugin';
-            $backupfile = $pluginsdir . '/backup/moodle2/' . $backupclassname . '.class.php';
+            $backupfile = $pluginsdir . '/backup/powereduc2/' . $backupclassname . '.class.php';
             if (file_exists($backupfile)) {
                 require_once($backupfile);
             }
             // Now add restore plugin classes and prepare stuff
             $restoreclassname = 'restore_' . $plugintype . '_' . $name . '_plugin';
-            $restorefile = $pluginsdir . '/backup/moodle2/' . $restoreclassname . '.class.php';
+            $restorefile = $pluginsdir . '/backup/powereduc2/' . $restoreclassname . '.class.php';
             if (file_exists($restorefile)) {
                 require_once($restorefile);
                 $restoreplugin = new $restoreclassname($plugintype, $name, $this);
@@ -348,7 +348,7 @@ abstract class restore_structure_step extends restore_step {
         // class for shared stuff.
         $parentclass = 'restore_' . $plugintype . '_' . $pluginname . '_' . $subplugintype . '_subplugin';
         $parentfile = core_component::get_component_directory($plugintype . '_' . $pluginname) .
-            '/backup/moodle2/' . $parentclass . '.class.php';
+            '/backup/powereduc2/' . $parentclass . '.class.php';
         if (file_exists($parentfile)) {
             require_once($parentfile);
         }
@@ -357,7 +357,7 @@ abstract class restore_structure_step extends restore_step {
         $subpluginsdirs = core_component::get_plugin_list($subplugintype);
         foreach ($subpluginsdirs as $name => $subpluginsdir) {
             $classname = 'restore_' . $subplugintype . '_' . $name . '_subplugin';
-            $restorefile = $subpluginsdir . '/backup/moodle2/' . $classname . '.class.php';
+            $restorefile = $subpluginsdir . '/backup/powereduc2/' . $classname . '.class.php';
             if (file_exists($restorefile)) {
                 require_once($restorefile);
                 $restoresubplugin = new $classname($subplugintype, $name, $this);

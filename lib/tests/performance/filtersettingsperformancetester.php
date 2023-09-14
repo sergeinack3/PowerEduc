@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Run the unit tests.
@@ -32,9 +32,9 @@ require_once($CFG->libdir . '/ddllib.php');
 
 require_login();
 $syscontext = context_system::instance();
-require_capability('moodle/site:config', $syscontext);
+require_capability('powereduc/site:config', $syscontext);
 
-$baseurl = new moodle_url('/lib/tests/performance/filtersettingsperformancetester.php');
+$baseurl = new powereduc_url('/lib/tests/performance/filtersettingsperformancetester.php');
 
 $title = 'filter_get_active_in_context performance test';
 $PAGE->set_url($baseurl);
@@ -51,7 +51,7 @@ if (empty($CFG->unittestprefix)) {
 
 $requiredtables = array('context', 'filter_active', 'filter_config');
 $realdb = $DB;
-$testdb = moodle_database::get_driver_instance($CFG->dbtype, $CFG->dblibrary);
+$testdb = powereduc_database::get_driver_instance($CFG->dbtype, $CFG->dblibrary);
 $testdb->connect($CFG->dbhost, $CFG->dbuser, $CFG->dbpass, $CFG->dbname, $CFG->unittestprefix);
 $DB = $testdb;
 $dbman = $testdb->get_manager();
@@ -116,13 +116,13 @@ $DB = $realdb;
 
 echo $OUTPUT->container_start();
 
-$aurl = new moodle_url($baseurl, array('action' => 'setup', 'sesskey'=>sesskey()));
+$aurl = new powereduc_url($baseurl, array('action' => 'setup', 'sesskey'=>sesskey()));
 echo $OUTPUT->single_button($aurl, 'Set up test tables', 'get', array('disabled'=>($issetup > 0)));
 
-$aurl = new moodle_url($baseurl, array('action' => 'teardown', 'sesskey'=>sesskey()));
+$aurl = new powereduc_url($baseurl, array('action' => 'teardown', 'sesskey'=>sesskey()));
 echo $OUTPUT->single_button($aurl, 'Drop test tables', 'get', array('disabled'=>($issetup == 0)));
 
-$aurl = new moodle_url($baseurl, array('action' => 'test', 'sesskey'=>sesskey()));
+$aurl = new powereduc_url($baseurl, array('action' => 'test', 'sesskey'=>sesskey()));
 echo $OUTPUT->single_button($aurl, 'Run tests', 'get', array('disabled'=>($issetup != count($requiredtables))));
 
 echo $OUTPUT->container_end();

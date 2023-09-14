@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ require_once 'edit_form.php';
 $courseid = optional_param('courseid', 0, PARAM_INT);
 $id       = optional_param('id', 0, PARAM_INT);
 
-$url = new moodle_url('/grade/edit/outcome/edit.php');
+$url = new powereduc_url('/grade/edit/outcome/edit.php');
 if ($courseid !== 0) {
     $url->param('courseid', $courseid);
 }
@@ -49,27 +49,27 @@ if ($id) {
 
     /// editing existing outcome
     if (!$outcome_rec = $DB->get_record('grade_outcomes', array('id' => $id))) {
-        throw new \moodle_exception('invalidoutcome');
+        throw new \powereduc_exception('invalidoutcome');
     }
     if ($outcome_rec->courseid) {
         $outcome_rec->standard = 0;
         if (!$course = $DB->get_record('course', array('id' => $outcome_rec->courseid))) {
-            throw new \moodle_exception('invalidcourseid');
+            throw new \powereduc_exception('invalidcourseid');
         }
         require_login($course);
         $context = context_course::instance($course->id);
-        require_capability('moodle/grade:manage', $context);
+        require_capability('powereduc/grade:manage', $context);
         $courseid = $course->id;
     } else {
         if ($courseid) {
             if (!$course = $DB->get_record('course', array('id' => $courseid))) {
-                throw new \moodle_exception('invalidcourseid');
+                throw new \powereduc_exception('invalidcourseid');
             }
         }
         $outcome_rec->standard = 1;
         $outcome_rec->courseid = $courseid;
         require_login();
-        require_capability('moodle/grade:manage', $systemcontext);
+        require_capability('powereduc/grade:manage', $systemcontext);
         $PAGE->set_context($systemcontext);
     }
 
@@ -78,14 +78,14 @@ if ($id) {
     $course = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
     require_login($course);
     $context = context_course::instance($course->id);
-    require_capability('moodle/grade:manage', $context);
+    require_capability('powereduc/grade:manage', $context);
 
     $outcome_rec = new stdClass();
     $outcome_rec->standard = 0;
     $outcome_rec->courseid = $courseid;
 } else {
     require_login();
-    require_capability('moodle/grade:manage', $systemcontext);
+    require_capability('powereduc/grade:manage', $systemcontext);
     $PAGE->set_context($systemcontext);
 
     /// adding new outcome from admin section
@@ -100,9 +100,9 @@ if (!$courseid) {
 
     $PAGE->set_primary_active_tab('siteadminnode');
 } else {
-    navigation_node::override_active_url(new moodle_url('/grade/edit/outcome/course.php', ['id' => $courseid]));
+    navigation_node::override_active_url(new powereduc_url('/grade/edit/outcome/course.php', ['id' => $courseid]));
     $PAGE->navbar->add(get_string('manageoutcomes', 'grades'),
-        new moodle_url('/grade/edit/outcome/index.php', ['id' => $courseid]));
+        new powereduc_url('/grade/edit/outcome/index.php', ['id' => $courseid]));
 }
 
 // default return url
@@ -138,7 +138,7 @@ if ($mform->is_cancelled()) {
     if (empty($outcome->id)) {
         $data->description = $data->description_editor['text'];
         grade_outcome::set_properties($outcome, $data);
-        if (!has_capability('moodle/grade:manage', $systemcontext)) {
+        if (!has_capability('powereduc/grade:manage', $systemcontext)) {
             $data->standard = 0;
         }
         $outcome->courseid = !empty($data->standard) ? null : $courseid;

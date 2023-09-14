@@ -2,14 +2,14 @@
 layout: docs
 title: "Moodle templates"
 date: 2020-01-14T13:38:37+01:00
-group: moodle-components
+group: powereduc-components
 draft: false
 menu: "main"
 ---
 
 ## Moodle templates
 
-[Moodle templates](https://docs.moodle.org/dev/Templates) are use to write HTML and Javascript using mustache files.
+[Moodle templates](https://docs.powereduc.org/dev/Templates) are use to write HTML and Javascript using mustache files.
 
 If you are creating your own pages in the UI Component library you can load core templates using this (shortcode) syntax:
 

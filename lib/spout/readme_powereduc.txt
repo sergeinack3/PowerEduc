@@ -11,22 +11,22 @@ Box/Spout has been archived and is no longer maintained,
 MDL-73624 needs to fix with a couple of minor changes to
 Writer/WriterAbstract.php. The changes replace rawurldecode() with
 rawurlencode() in lines 143 and 144.
-by Meirza <meirza.arson@moodle.com>
+by Meirza <meirza.arson@powereduc.com>
 
 2021/09/01
 ----------
 Update to v3.3.0 (MDL-71707)
-by Paul Holden <paulh@moodle.com>
+by Paul Holden <paulh@powereduc.com>
 
 2020/12/07
 ----------
 Update to v3.1.0 (MDL-70302)
-by Peter Dias <peter@moodle.com>
+by Peter Dias <peter@powereduc.com>
 
 2019/06/17
 ----------
 Update to v3.0.1 (MDL-65762)
-by Adrian Greeve <adrian@moodle.com>
+by Adrian Greeve <adrian@powereduc.com>
 
 2017/10/10
 ----------
@@ -36,4 +36,4 @@ by Ankit Agarwal <ankit.agrr@gmail.com>
 2016/09/20
 ----------
 Updated to v2.6.0 (MDL-56012)
-by Adrian Greeve <adrian@moodle.com>
+by Adrian Greeve <adrian@powereduc.com>

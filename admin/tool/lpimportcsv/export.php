@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ $pagetitle = get_string('exportnavlink', 'tool_lpimportcsv');
 
 $context = context_system::instance();
 
-$url = new moodle_url("/admin/tool/lpimportcsv/export.php");
+$url = new powereduc_url("/admin/tool/lpimportcsv/export.php");
 $PAGE->set_context($context);
 $PAGE->set_url($url);
 $PAGE->set_title($pagetitle);
@@ -39,7 +39,7 @@ $PAGE->set_heading($pagetitle);
 $form = new \tool_lpimportcsv\form\export($url->out(false), array('persistent' => null, 'context' => $context));
 
 if ($form->is_cancelled()) {
-    redirect(new moodle_url('/admin/tool/lp/competencyframeworks.php', array('pagecontextid' => $context->id)));
+    redirect(new powereduc_url('/admin/tool/lp/competencyframeworks.php', array('pagecontextid' => $context->id)));
 } else if ($data = $form->get_data()) {
     require_sesskey();
 

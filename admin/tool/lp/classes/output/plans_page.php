@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ use templatable;
 use renderer_base;
 use stdClass;
 use single_button;
-use moodle_url;
+use powereduc_url;
 use core_competency\api;
 use core_competency\external\plan_exporter;
 use core_competency\plan;
@@ -68,7 +68,7 @@ class plans_page implements renderable, templatable {
 
         if (plan::can_manage_user($userid) || plan::can_manage_user_draft($userid)) {
             $addplan = new single_button(
-                new moodle_url('/admin/tool/lp/editplan.php', array('userid' => $userid)),
+                new powereduc_url('/admin/tool/lp/editplan.php', array('userid' => $userid)),
                 get_string('addnewplan', 'tool_lp'), 'get'
             );
             $this->navigation[] = $addplan;
@@ -84,7 +84,7 @@ class plans_page implements renderable, templatable {
     public function export_for_template(renderer_base $output) {
         $data = new stdClass();
         $data->userid = $this->userid;
-        $data->pluginbaseurl = (new moodle_url('/admin/tool/lp'))->out(true);
+        $data->pluginbaseurl = (new powereduc_url('/admin/tool/lp'))->out(true);
         $data->canreaduserevidence = user_evidence::can_read_user($this->userid);
         $data->canmanageuserplans = plan::can_manage_user($this->userid);
 

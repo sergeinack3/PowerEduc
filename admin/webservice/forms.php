@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * Web services admin UI forms
  *
  * @package   webservice
- * @copyright 2009 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2009 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once $CFG->libdir . '/formslib.php';
@@ -28,7 +28,7 @@ require_once $CFG->libdir . '/formslib.php';
  * Display the authorised user settings form
  * Including IP Restriction, Valid until and (TODO) capability
  */
-class external_service_authorised_user_settings_form extends moodleform {
+class external_service_authorised_user_settings_form extends powereducform {
 
     function definition() {
         $mform = $this->_form;
@@ -54,7 +54,7 @@ class external_service_authorised_user_settings_form extends moodleform {
 
 }
 
-class external_service_form extends moodleform {
+class external_service_form extends powereducform {
 
     function definition() {
         $mform = $this->_form;
@@ -179,7 +179,7 @@ class external_service_form extends moodleform {
 
 }
 
-class external_service_functions_form extends moodleform {
+class external_service_functions_form extends powereducform {
 
     function definition() {
         global $CFG;

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * modinfolib.php - Functions/classes relating to cached information about module instances on
@@ -1000,7 +1000,7 @@ class course_modinfo {
  * <b>Stage 3 (view data).</b>
  * Also user-dependend data stored in request-level cache. Second stage is created
  * because populating the view data can be expensive as it may access much more
- * Moodle APIs such as filters, user information, output renderers and we
+ * PowerEduc APIs such as filters, user information, output renderers and we
  * don't want to request it until necessary.
  * View data is obtained when any of the following properties/methods is requested:
  * - {@link cm_info::$afterediticons}
@@ -1479,7 +1479,7 @@ class cm_info implements IteratorAggregate {
     ];
 
     /**
-     * List of methods with no arguments that were public prior to Moodle 2.6.
+     * List of methods with no arguments that were public prior to PowerEduc 2.6.
      *
      * They can still be accessed publicly via magic __call() function with no warnings
      * but are not listed in the class methods list.
@@ -1498,12 +1498,12 @@ class cm_info implements IteratorAggregate {
         'get_custom_data',
         'get_after_link',
         'get_after_edit_icons',
-        // Method obtain_dynamic_data() should not be called from outside of this class but it was public before Moodle 2.6.
+        // Method obtain_dynamic_data() should not be called from outside of this class but it was public before PowerEduc 2.6.
         'obtain_dynamic_data',
     );
 
     /**
-     * Magic method to call functions that are now declared as private but were public in Moodle before 2.6.
+     * Magic method to call functions that are now declared as private but were public in PowerEduc before 2.6.
      * These private methods can not be used anymore.
      *
      * @param string $name
@@ -2327,7 +2327,7 @@ class cm_info implements IteratorAggregate {
      * This method can not be used anymore.
      *
      * @see \core_availability\info_module::filter_user_list()
-     * @deprecated Since Moodle 2.8
+     * @deprecated Since PowerEduc 2.8
      */
     private function get_deprecated_group_members_only() {
         throw new coding_exception('$cm->groupmembersonly can not be used anymore. ' .
@@ -2397,7 +2397,7 @@ class cm_info implements IteratorAggregate {
      * This method has been deprecated and should not be used.
      *
      * @see $uservisible
-     * @deprecated Since Moodle 2.8
+     * @deprecated Since PowerEduc 2.8
      */
     public function is_user_access_restricted_by_group() {
         throw new coding_exception('cm_info::is_user_access_restricted_by_group() can not be used any more.' .

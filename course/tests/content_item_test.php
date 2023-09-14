@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -47,13 +47,13 @@ class content_item_test extends \advanced_testcase {
         $this->resetAfterTest();
 
         $contentitem = new content_item(22, 'Item name', new lang_string_title('modulename', 'mod_assign'),
-            new \moodle_url('mod_edit.php'), '<img src="test">', 'Description of the module', MOD_ARCHETYPE_RESOURCE, 'mod_page',
+            new \powereduc_url('mod_edit.php'), '<img src="test">', 'Description of the module', MOD_ARCHETYPE_RESOURCE, 'mod_page',
                 MOD_PURPOSE_CONTENT);
 
         $this->assertEquals(22, $contentitem->get_id());
         $this->assertEquals('Item name', $contentitem->get_name());
         $this->assertEquals('Assignment', $contentitem->get_title()->get_value());
-        $this->assertEquals(new \moodle_url('mod_edit.php'), $contentitem->get_link());
+        $this->assertEquals(new \powereduc_url('mod_edit.php'), $contentitem->get_link());
         $this->assertEquals('<img src="test">', $contentitem->get_icon());
         $this->assertEquals('Description of the module', $contentitem->get_help());
         $this->assertEquals(MOD_ARCHETYPE_RESOURCE, $contentitem->get_archetype());
@@ -68,7 +68,7 @@ class content_item_test extends \advanced_testcase {
         $this->resetAfterTest();
 
         $contentitem = new content_item(22, 'Item name', new string_title('My custom string'),
-            new \moodle_url('mod_edit.php'), '<img src="test">', 'Description of the module', MOD_ARCHETYPE_RESOURCE, 'mod_page',
+            new \powereduc_url('mod_edit.php'), '<img src="test">', 'Description of the module', MOD_ARCHETYPE_RESOURCE, 'mod_page',
                 MOD_PURPOSE_CONTENT);
 
         $this->assertEquals('My custom string', $contentitem->get_title()->get_value());

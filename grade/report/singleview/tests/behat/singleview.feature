@@ -48,7 +48,7 @@ Feature: We can use Single view
       | Test grade item | C1 | Scale |
     And the following "permission overrides" exist:
       | capability                  | permission | role     | contextlevel  | reference |
-      | moodle/grade:edit           | Allow      | teacher  | Course        | C1        |
+      | powereduc/grade:edit           | Allow      | teacher  | Course        | C1        |
       | gradereport/singleview:view | Allow      | teacher  | Course        | C1        |
     And the following config values are set as admin:
       | fullnamedisplay | firstnamephonetic,lastnamephonetic |

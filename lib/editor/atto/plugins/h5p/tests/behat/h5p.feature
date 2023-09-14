@@ -17,7 +17,7 @@ Feature: Add h5ps to Atto
       | page     | PageName1  | PageDesc1  | 1           | C1     | H5Ptest  | 1             | 1        |
     And the "displayh5p" filter is "on"
     And the following config values are set as admin:
-      | allowedsources | https://moodle.h5p.com/content/[id] | filter_displayh5p |
+      | allowedsources | https://powereduc.h5p.com/content/[id] | filter_displayh5p |
     And the following "blocks" exist:
       | blockname     | contextlevel | reference | pagetypepattern | defaultregion |
       | private_files | System       | 1         | my-index        | side-post     |
@@ -27,7 +27,7 @@ Feature: Add h5ps to Atto
     Given I change window size to "large"
     And I am on the PageName1 "page activity editing" page logged in as admin
     And I click on "Insert H5P" "button" in the "#fitem_id_page" "css_element"
-    And I set the field with xpath "//input[@data-region='h5pfile']" to "https://moodle.h5p.com/content/1290772960722742119"
+    And I set the field with xpath "//input[@data-region='h5pfile']" to "https://powereduc.h5p.com/content/1290772960722742119"
     And I click on "Insert H5P" "button" in the "Insert H5P" "dialogue"
     And I wait until the page is ready
     When I click on "Save and display" "button"
@@ -59,7 +59,7 @@ Feature: Add h5ps to Atto
     And I am on the PageName1 "page activity editing" page logged in as admin
     And I click on "Insert H5P" "button" in the "#fitem_id_page" "css_element"
 #   This is not a real external URL, so this scenario shouldn't be labeled as external.
-    And I set the field with xpath "//input[@data-region='h5pfile']" to "ftp://moodle.h5p.com/content/1290772960722742119"
+    And I set the field with xpath "//input[@data-region='h5pfile']" to "ftp://powereduc.h5p.com/content/1290772960722742119"
     When I click on "Insert H5P" "button" in the "Insert H5P" "dialogue"
     And I wait until the page is ready
     Then I should see "Invalid URL" in the "Insert H5P" "dialogue"
@@ -69,7 +69,7 @@ Feature: Add h5ps to Atto
     Given the following "permission overrides" exist:
     | capability | permission | role | contextlevel | reference |
     | atto/h5p:addembed | Prohibit | editingteacher | Course | C1 |
-    | moodle/h5p:deploy | Prohibit | editingteacher | Course | C1 |
+    | powereduc/h5p:deploy | Prohibit | editingteacher | Course | C1 |
     When I am on the PageName1 "page activity editing" page logged in as teacher1
     Then "Insert H5P" "button" should not exist
 
@@ -88,7 +88,7 @@ Feature: Add h5ps to Atto
   Scenario: No upload h5p capabilities
     Given the following "permission overrides" exist:
     | capability | permission | role | contextlevel | reference |
-    | moodle/h5p:deploy | Prohibit | editingteacher | Course | C1 |
+    | powereduc/h5p:deploy | Prohibit | editingteacher | Course | C1 |
     When I am on the PageName1 "page activity editing" page logged in as teacher1
     And I click on "Insert H5P" "button"
     Then I should not see "H5P file upload" in the "Insert H5P" "dialogue"
@@ -120,7 +120,7 @@ Feature: Add h5ps to Atto
     And I click on ".h5p-placeholder" "css_element"
     And I click on "Insert H5P" "button" in the "#fitem_id_page" "css_element"
 #   External URL
-    And I set the field with xpath "//input[@data-region='h5pfile']" to "https://moodle.h5p.com/content/1290772960722742119"
+    And I set the field with xpath "//input[@data-region='h5pfile']" to "https://powereduc.h5p.com/content/1290772960722742119"
     And I click on "Insert H5P" "button" in the "Insert H5P" "dialogue"
     And I wait until the page is ready
     And I click on "Save and display" "button"
@@ -190,7 +190,7 @@ Feature: Add h5ps to Atto
     Given I change window size to "large"
     And I am on the PageName1 "page activity editing" page logged in as admin
     And I click on "Insert H5P" "button" in the "#fitem_id_page" "css_element"
-    And I set the field with xpath "//input[@data-region='h5pfile']" to "https://moodle.h5p.com/content/1291366510035871129"
+    And I set the field with xpath "//input[@data-region='h5pfile']" to "https://powereduc.h5p.com/content/1291366510035871129"
     And I click on "H5P options" "link"
     And I click on "Embed button" "checkbox"
     And I click on "Insert H5P" "button" in the "Insert H5P" "dialogue"

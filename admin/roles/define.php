@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ require_once($CFG->libdir.'/adminlib.php');
 
 $action = required_param('action', PARAM_ALPHA);
 if (!in_array($action, array('add', 'export', 'edit', 'reset', 'view'))) {
-    throw new moodle_exception('invalidaccess');
+    throw new powereduc_exception('invalidaccess');
 }
 if ($action != 'add') {
     $roleid = required_param('roleid', PARAM_INT);
@@ -44,20 +44,20 @@ $resettype = optional_param('resettype', '', PARAM_RAW);
 $return = optional_param('return', 'manage', PARAM_ALPHA);
 
 // Get the base URL for this and related pages into a convenient variable.
-$baseurl = new moodle_url('/admin/roles/define.php', array('action'=>$action, 'roleid'=>$roleid));
-$manageurl = new moodle_url('/admin/roles/manage.php');
+$baseurl = new powereduc_url('/admin/roles/define.php', array('action'=>$action, 'roleid'=>$roleid));
+$manageurl = new powereduc_url('/admin/roles/manage.php');
 if ($return === 'manage') {
     $returnurl = $manageurl;
 } else {
-    $returnurl = new moodle_url('/admin/roles/define.php', array('action'=>'view', 'roleid'=>$roleid));;
+    $returnurl = new powereduc_url('/admin/roles/define.php', array('action'=>'view', 'roleid'=>$roleid));;
 }
 
 admin_externalpage_setup('defineroles', '', array('action' => $action, 'roleid' => $roleid),
-    new moodle_url('/admin/roles/define.php'));
+    new powereduc_url('/admin/roles/define.php'));
 
 // Check access permissions.
 $systemcontext = context_system::instance();
-require_capability('moodle/role:manage', $systemcontext);
+require_capability('powereduc/role:manage', $systemcontext);
 
 // Export role.
 if ($action === 'export') {
@@ -206,7 +206,7 @@ if (optional_param('savechanges', false, PARAM_BOOL) && confirm_sesskey() && $de
     $tableroleid = $definitiontable->get_role_id();
 
     if ($action === 'add') {
-        redirect(new moodle_url('/admin/roles/define.php', array('action'=>'view', 'roleid'=>$definitiontable->get_role_id())));
+        redirect(new powereduc_url('/admin/roles/define.php', array('action'=>'view', 'roleid'=>$definitiontable->get_role_id())));
     } else {
         redirect($returnurl);
     }
@@ -230,12 +230,12 @@ if ($action === 'add') {
 // On the view page, show some extra controls at the top.
 if ($action === 'view') {
     echo $OUTPUT->container_start('buttons');
-    $url = new moodle_url('/admin/roles/define.php', array('action'=>'edit', 'roleid'=>$roleid, 'return'=>'define'));
-    echo $OUTPUT->single_button(new moodle_url($url), get_string('edit'));
-    $url = new moodle_url('/admin/roles/define.php', array('action'=>'reset', 'roleid'=>$roleid, 'return'=>'define'));
-    echo $OUTPUT->single_button(new moodle_url($url), get_string('resetrole', 'core_role'));
-    $url = new moodle_url('/admin/roles/define.php', array('action'=>'export', 'roleid'=>$roleid));
-    echo $OUTPUT->single_button(new moodle_url($url), get_string('export', 'core_role'));
+    $url = new powereduc_url('/admin/roles/define.php', array('action'=>'edit', 'roleid'=>$roleid, 'return'=>'define'));
+    echo $OUTPUT->single_button(new powereduc_url($url), get_string('edit'));
+    $url = new powereduc_url('/admin/roles/define.php', array('action'=>'reset', 'roleid'=>$roleid, 'return'=>'define'));
+    echo $OUTPUT->single_button(new powereduc_url($url), get_string('resetrole', 'core_role'));
+    $url = new powereduc_url('/admin/roles/define.php', array('action'=>'export', 'roleid'=>$roleid));
+    echo $OUTPUT->single_button(new powereduc_url($url), get_string('export', 'core_role'));
     echo $OUTPUT->single_button($manageurl, get_string('listallroles', 'core_role'));
     echo $OUTPUT->container_end();
 }

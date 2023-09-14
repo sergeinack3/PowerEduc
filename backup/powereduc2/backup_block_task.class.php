@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 
 /**
  * @package     core_backup
- * @subpackage  moodle2
+ * @subpackage  powereduc2
  * @category    backup
  * @copyright   2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -58,15 +58,15 @@ abstract class backup_block_task extends backup_task {
         $this->modulename = null;
         $this->parentcontextid = null;
 
-        // If moduleid passed, check exists, supports moodle2 format and save info
+        // If moduleid passed, check exists, supports powereduc2 format and save info
         // Check moduleid exists
         if (!empty($moduleid)) {
             if (!$coursemodule = get_coursemodule_from_id(false, $moduleid)) {
                 throw new backup_task_exception('block_task_coursemodule_not_found', $moduleid);
             }
-            // Check activity supports this moodle2 backup format
+            // Check activity supports this powereduc2 backup format
             if (!plugin_supports('mod', $coursemodule->modname, FEATURE_BACKUP_POWEREDUC2)) {
-                throw new backup_task_exception('block_task_activity_lacks_moodle2_backup_support', $coursemodule->modname);
+                throw new backup_task_exception('block_task_activity_lacks_powereduc2_backup_support', $coursemodule->modname);
             }
 
             $this->moduleid   = $moduleid;

@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,13 +27,13 @@ module.exports = grunt => {
      * @returns {Array}
      */
     const getGherkinLintTargets = () => {
-        if (grunt.moodleEnv.files) {
+        if (grunt.powereducEnv.files) {
             // Specific files were requested. Only check these.
-            return grunt.moodleEnv.files;
+            return grunt.powereducEnv.files;
         }
 
-        if (grunt.moodleEnv.inComponent) {
-            return [`${grunt.moodleEnv.runDir}/tests/behat/*.feature`];
+        if (grunt.powereducEnv.inComponent) {
+            return [`${grunt.powereducEnv.runDir}/tests/behat/*.feature`];
         }
 
         return ['**/tests/behat/*.feature'];
@@ -79,14 +79,14 @@ module.exports = grunt => {
     grunt.config.merge({
         watch: {
             gherkinlint: {
-                files: [grunt.moodleEnv.inComponent ? 'tests/behat/*.feature' : '**/tests/behat/*.feature'],
+                files: [grunt.powereducEnv.inComponent ? 'tests/behat/*.feature' : '**/tests/behat/*.feature'],
                 tasks: ['gherkinlint'],
             },
         },
     });
 
     // Add the 'gherkinlint' task as a startup task.
-    grunt.moodleEnv.startupTasks.push('gherkinlint');
+    grunt.powereducEnv.startupTasks.push('gherkinlint');
 
     return handler;
 };

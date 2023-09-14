@@ -162,12 +162,12 @@ Feature: Automatic creation of groups
     And I press "Preview"
     Then I should see "Suspended student 11 (suspendedstudent11@example.com)"
 
-  Scenario: Do not display 'Include only active enrolments' if user does not have the 'moodle/course:viewsuspendedusers' capability
+  Scenario: Do not display 'Include only active enrolments' if user does not have the 'powereduc/course:viewsuspendedusers' capability
     Given I log out
     And I log in as "admin"
     And I set the following system permissions of "Teacher" role:
       | capability | permission |
-      | moodle/course:viewsuspendedusers | Prevent |
+      | powereduc/course:viewsuspendedusers | Prevent |
     And I log out
     And I log in as "teacher1"
     And I am on the "Course 1" "groups" page

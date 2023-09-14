@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ namespace tool_lp\external;
 defined('POWEREDUC_INTERNAL') || die();
 
 use renderer_base;
-use moodle_url;
+use powereduc_url;
 use core_competency\external\competency_exporter;
 use core_competency\external\performance_helper;
 

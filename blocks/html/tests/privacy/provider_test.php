@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -133,10 +133,10 @@ class provider_test extends \core_privacy\tests\provider_testcase {
      * Constructs a Page object for the User Dashboard.
      *
      * @param   \stdClass       $user User to create Dashboard for.
-     * @return  \moodle_page
+     * @return  \powereduc_page
      */
     protected function construct_user_page(\stdClass $user) {
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context(\context_user::instance($user->id));
         $page->set_pagelayout('mydashboard');
         $page->set_pagetype('my-index');
@@ -148,10 +148,10 @@ class provider_test extends \core_privacy\tests\provider_testcase {
      * Constructs a Page object for the User Dashboard.
      *
      * @param   \stdClass       $course Course to create Dashboard for.
-     * @return  \moodle_page
+     * @return  \powereduc_page
      */
     protected function construct_course_page(\stdClass $course) {
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context(\context_course::instance($course->id));
         $page->set_pagelayout('standard');
         $page->set_pagetype('course-view');

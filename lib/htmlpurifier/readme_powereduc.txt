@@ -1,4 +1,4 @@
-Description of HTML Purifier library import into Moodle
+Description of HTML Purifier library import into PowerEduc
 
 * Make new (or delete contents of) /lib/htmlpurifier/
 * Copy everything from /library/ folder to /lib/htmlpurifier/
@@ -12,5 +12,5 @@ Description of HTML Purifier library import into Moodle
     HTMLPurifier.includes.php
     HTMLPurifier.kses.php
     HTMLPurifier.path.php
-* add locallib.php with Moodle specific extensions to /lib/htmlpurifier/
+* add locallib.php with PowerEduc specific extensions to /lib/htmlpurifier/
 * add this readme_powereduc.txt to /lib/htmlpurifier/

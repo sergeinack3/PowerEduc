@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,24 +31,24 @@ require_once($CFG->dirroot.'/calendar/lib.php');
 $courseid = optional_param('course', null, PARAM_INT);
 $categoryid = optional_param('category', null, PARAM_INT);
 
-$url = new moodle_url('/calendar/managesubscriptions.php');
+$url = new powereduc_url('/calendar/managesubscriptions.php');
 if ($courseid != SITEID && !empty($courseid)) {
     $url->param('course', $courseid);
-    navigation_node::override_active_url(new moodle_url('/course/view.php', ['id' => $courseid]));
+    navigation_node::override_active_url(new powereduc_url('/course/view.php', ['id' => $courseid]));
     $PAGE->navbar->add(
         get_string('calendar', 'calendar'),
-        new moodle_url('/calendar/view.php', ['view' => 'month', 'course' => $courseid])
+        new powereduc_url('/calendar/view.php', ['view' => 'month', 'course' => $courseid])
     );
 } else if ($categoryid) {
     $url->param('categoryid', $categoryid);
-    navigation_node::override_active_url(new moodle_url('/course/index.php', ['categoryid' => $categoryid]));
+    navigation_node::override_active_url(new powereduc_url('/course/index.php', ['categoryid' => $categoryid]));
     $PAGE->set_category_by_id($categoryid);
     $PAGE->navbar->add(
         get_string('calendar', 'calendar'),
-        new moodle_url('/calendar/view.php', ['view' => 'month', 'category' => $categoryid])
+        new powereduc_url('/calendar/view.php', ['view' => 'month', 'category' => $categoryid])
     );
 } else {
-    $PAGE->navbar->add(get_string('calendar', 'calendar'), new moodle_url('/calendar/view.php', ['view' => 'month']));
+    $PAGE->navbar->add(get_string('calendar', 'calendar'), new powereduc_url('/calendar/view.php', ['view' => 'month']));
 }
 
 $PAGE->set_url($url);
@@ -66,7 +66,7 @@ if ($courseid != SITEID && !empty($courseid)) {
 require_login($course, false);
 
 if (!calendar_user_can_add_event($course)) {
-    throw new \moodle_exception('errorcannotimport', 'calendar');
+    throw new \powereduc_exception('errorcannotimport', 'calendar');
 }
 $PAGE->navbar->add(get_string('managesubscriptions', 'calendar'), $PAGE->url);
 
@@ -129,7 +129,7 @@ if ($usedefaultfilters) {
 
     if (!empty($types['category'])) {
         list($categoryinsql, $categoryparams) = $DB->get_in_or_equal(
-                array_keys(\core_course_category::make_categories_list('moodle/category:manage')), SQL_PARAMS_NAMED, 'category');
+                array_keys(\core_course_category::make_categories_list('powereduc/category:manage')), SQL_PARAMS_NAMED, 'category');
         $searches[] = "(eventtype = 'category' AND categoryid {$categoryinsql})";
         $params += $categoryparams;
     }

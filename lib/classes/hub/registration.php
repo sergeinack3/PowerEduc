@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Class registration
@@ -25,14 +25,14 @@
 namespace core\hub;
 defined('POWEREDUC_INTERNAL') || die();
 
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use context_system;
 use stdClass;
 use html_writer;
 
 /**
- * Methods to use when registering the site at the moodle sites directory.
+ * Methods to use when registering the site at the powereduc sites directory.
  *
  * @package    core
  * @copyright  2017 Marina Glancy
@@ -56,9 +56,9 @@ class registration {
             'commnews', // Receive communication news. This was added in 3.4 and is "On" by default. Admin must confirm or opt-out.
             'mobileservicesenabled', 'mobilenotificationsenabled', 'registereduserdevices', 'registeredactiveuserdevices' // Mobile stats added in 3.4.
         ],
-        // Analytics stats added in Moodle 3.7.
+        // Analytics stats added in PowerEduc 3.7.
         2019022200 => ['analyticsenabledmodels', 'analyticspredictions', 'analyticsactions', 'analyticsactionsnotuseful'],
-        // Active users stats added in Moodle 3.9.
+        // Active users stats added in PowerEduc 3.9.
         2020022600 => ['activeusers', 'activeparticipantnumberaverage'],
     ];
 
@@ -98,16 +98,16 @@ class registration {
      * Same as get_registration except it throws exception if site not registered
      *
      * @return stdClass
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public static function require_registration() {
         if ($registration = self::get_registration()) {
             return $registration;
         }
-        if (has_capability('moodle/site:config', context_system::instance())) {
-            throw new moodle_exception('registrationwarning', 'admin', new moodle_url('/admin/registration/index.php'));
+        if (has_capability('powereduc/site:config', context_system::instance())) {
+            throw new powereduc_exception('registrationwarning', 'admin', new powereduc_url('/admin/registration/index.php'));
         } else {
-            throw new moodle_exception('registrationwarningcontactadmin', 'admin');
+            throw new powereduc_exception('registrationwarningcontactadmin', 'admin');
         }
     }
 
@@ -125,7 +125,7 @@ class registration {
      *
      * @param int $strictness if set to MUST_EXIST and site is not registered will throw an exception
      * @return null
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_token($strictness = IGNORE_MISSING) {
         if ($strictness == MUST_EXIST) {
@@ -182,7 +182,7 @@ class registration {
         $siteinfo['modulenumberaverage'] = average_number_of_courses_modules();
 
         // Version and url.
-        $siteinfo['moodlerelease'] = $CFG->release;
+        $siteinfo['powereducrelease'] = $CFG->release;
         $siteinfo['url'] = $CFG->wwwroot;
 
         // Mobile related information.
@@ -225,12 +225,12 @@ class registration {
 
         $mobileservicesenabled = $siteinfo['mobileservicesenabled'] ? get_string('yes') : get_string('no');
         $mobilenotificationsenabled = $siteinfo['mobilenotificationsenabled'] ? get_string('yes') : get_string('no');
-        $moodlerelease = $siteinfo['moodlerelease'];
-        if (preg_match('/^(\d+\.\d.*?)[\. ]/', $moodlerelease, $matches)) {
-            $moodlerelease = $matches[1];
+        $powereducrelease = $siteinfo['powereducrelease'];
+        if (preg_match('/^(\d+\.\d.*?)[\. ]/', $powereducrelease, $matches)) {
+            $powereducrelease = $matches[1];
         }
         $senddata = [
-            'moodlerelease' => get_string('sitereleasenum', 'hub', $moodlerelease),
+            'powereducrelease' => get_string('sitereleasenum', 'hub', $powereducrelease),
             'courses' => get_string('coursesnumber', 'hub', $siteinfo['courses']),
             'users' => get_string('usersnumber', 'hub', $siteinfo['users']),
             'activeusers' => get_string('activeusersnumber', 'hub', $siteinfo['activeusers']),
@@ -291,7 +291,7 @@ class registration {
         $siteinfo = self::get_site_info();
         try {
             api::update_registration($siteinfo);
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             if (!self::is_registered()) {
                 // Token was rejected during registration update and site and locally stored token was reset,
                 // proceed to site registration. This method will redirect away.
@@ -311,7 +311,7 @@ class registration {
     /**
      * Updates site registration via cron
      *
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function update_cron() {
         global $DB;
@@ -339,14 +339,14 @@ class registration {
      * @param string $token
      * @param string $newtoken
      * @param string $hubname
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function confirm_registration($token, $newtoken, $hubname) {
         global $DB;
 
         $registration = self::get_registration(false);
         if (!$registration || $registration->token !== $token) {
-            throw new moodle_exception('wrongtoken', 'hub', new moodle_url('/admin/registration/index.php'));
+            throw new powereduc_exception('wrongtoken', 'hub', new powereduc_url('/admin/registration/index.php'));
         }
         $record = ['id' => $registration->id];
         $record['token'] = $newtoken;
@@ -410,7 +410,7 @@ class registration {
             $hub->token = get_site_identifier();
             $hub->secret = $hub->token;
             $hub->huburl = HUB_POWEREDUCORGHUBURL;
-            $hub->hubname = 'moodle';
+            $hub->hubname = 'powereduc';
             $hub->confirmed = 0;
             $hub->timemodified = time();
             $hub->id = $DB->insert_record('registration_hubs', $hub);
@@ -421,8 +421,8 @@ class registration {
 
         // The most conservative limit for the redirect URL length is 2000 characters. Only pass parameters before
         // we reach this limit. The next registration update will update all fields.
-        // We will also update registration after we receive confirmation from moodle.net.
-        $url = new moodle_url(HUB_POWEREDUCORGHUBURL . '/local/hub/siteregistration.php',
+        // We will also update registration after we receive confirmation from powereduc.net.
+        $url = new powereduc_url(HUB_POWEREDUCORGHUBURL . '/local/hub/siteregistration.php',
             ['token' => $hub->token, 'url' => $params['url']]);
         foreach ($params as $key => $value) {
             if (strlen($url->out(false, [$key => $value])) > 2000) {
@@ -452,7 +452,7 @@ class registration {
         // Course unpublish went ok, unregister the site now.
         try {
             api::unregister_site();
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             \core\notification::add(get_string('unregistrationerror', 'hub', $e->getMessage()),
                 \core\output\notification::NOTIFY_ERROR);
             return false;
@@ -481,15 +481,15 @@ class registration {
      * Generate a new token for the site that is not registered
      *
      * @param string $token
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function reset_site_identifier($token) {
         global $DB, $CFG;
 
         $registration = self::get_registration(false);
         if (!$registration || $registration->token != $token) {
-            throw new moodle_exception('wrongtoken', 'hub',
-               new moodle_url('/admin/registration/index.php'));
+            throw new powereduc_exception('wrongtoken', 'hub',
+               new powereduc_url('/admin/registration/index.php'));
         }
 
         $DB->delete_records('registration_hubs', array('id' => $registration->id));
@@ -505,23 +505,23 @@ class registration {
      * Example of the return array:
      * {
      *     "courses": 384,
-     *     "description": "Official moodle sites directory",
+     *     "description": "Official powereduc sites directory",
      *     "downloadablecourses": 0,
      *     "enrollablecourses": 0,
      *     "hublogo": 1,
      *     "language": "en",
-     *     "name": "moodle",
+     *     "name": "powereduc",
      *     "sites": 274175,
-     *     "url": "https://stats.moodle.org",
-     *     "imgurl": "https://stats.moodle.org/local/hub/webservice/download.php?filetype=hubscreenshot"
+     *     "url": "https://stats.powereduc.org",
+     *     "imgurl": "https://stats.powereduc.org/local/hub/webservice/download.php?filetype=hubscreenshot"
      * }
      *
      * @return array|null
      */
-    public static function get_moodlenet_info() {
+    public static function get_powereducnet_info() {
         try {
             return api::get_hub_info();
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             // Ignore error, we only need it for displaying information about the sites directory.
             // If this request fails, it's not a big deal.
             return null;
@@ -580,19 +580,19 @@ class registration {
     /**
      * Redirect to the site registration form if it's a new install or registration needs updating
      *
-     * @param string|moodle_url $url
+     * @param string|powereduc_url $url
      */
     public static function registration_reminder($url) {
         if (defined('BEHAT_SITE_RUNNING') && BEHAT_SITE_RUNNING) {
             // No redirection during behat runs.
             return;
         }
-        if (!has_capability('moodle/site:config', context_system::instance())) {
+        if (!has_capability('powereduc/site:config', context_system::instance())) {
             return;
         }
         if (self::show_after_install() || self::get_new_registration_fields()) {
-            $returnurl = new moodle_url($url);
-            redirect(new moodle_url('/admin/registration/index.php', ['returnurl' => $returnurl->out_as_local_url(false)]));
+            $returnurl = new powereduc_url($url);
+            redirect(new powereduc_url('/admin/registration/index.php', ['returnurl' => $returnurl->out_as_local_url(false)]));
         }
     }
 }

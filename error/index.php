@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -45,7 +45,7 @@ if ($code == 404) {
     header("HTTP/1.0 404 Not Found");
 }
 
-$canmessage = has_capability('moodle/site:senderrormessage', $context);
+$canmessage = has_capability('powereduc/site:senderrormessage', $context);
 
 $supportuser = core_user::get_support_user();
 
@@ -66,7 +66,7 @@ if ($data = $mform->get_data()) {
     // Send the message and redirect.
     $message = new \core\message\message();
     $message->courseid         = SITEID;
-    $message->component        = 'moodle';
+    $message->component        = 'powereduc';
     $message->name             = 'errors';
     $message->userfrom          = $USER;
     $message->userto            = core_user::get_support_user();

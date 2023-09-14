@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - https://moodle.org/
+// This file is part of Moodle - https://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -108,20 +108,20 @@ if ($hassiteconfig) {
     $ADMIN->add('server', $temp);
 
     // Statistics.
-    $temp = new admin_settingpage('stats', new lang_string('stats'), 'moodle/site:config', empty($CFG->enablestats));
+    $temp = new admin_settingpage('stats', new lang_string('stats'), 'powereduc/site:config', empty($CFG->enablestats));
     $temp->add(new admin_setting_configselect('statsfirstrun', new lang_string('statsfirstrun', 'admin'),
         new lang_string('configstatsfirstrun', 'admin'), 'none',
         [
             'none' => new lang_string('none'),
-            60 * 60 * 24 * 7 => new lang_string('numweeks', 'moodle', 1),
-            60 * 60 * 24 * 14 => new lang_string('numweeks', 'moodle', 2),
-            60 * 60 * 24 * 21 => new lang_string('numweeks', 'moodle', 3),
-            60 * 60 * 24 * 28 => new lang_string('nummonths', 'moodle', 1),
-            60 * 60 * 24 * 56 => new lang_string('nummonths', 'moodle', 2),
-            60 * 60 * 24 * 84 => new lang_string('nummonths', 'moodle', 3),
-            60 * 60 * 24 * 112 => new lang_string('nummonths', 'moodle', 4),
-            60 * 60 * 24 * 140 => new lang_string('nummonths', 'moodle', 5),
-            60 * 60 * 24 * 168 => new lang_string('nummonths', 'moodle', 6),
+            60 * 60 * 24 * 7 => new lang_string('numweeks', 'powereduc', 1),
+            60 * 60 * 24 * 14 => new lang_string('numweeks', 'powereduc', 2),
+            60 * 60 * 24 * 21 => new lang_string('numweeks', 'powereduc', 3),
+            60 * 60 * 24 * 28 => new lang_string('nummonths', 'powereduc', 1),
+            60 * 60 * 24 * 56 => new lang_string('nummonths', 'powereduc', 2),
+            60 * 60 * 24 * 84 => new lang_string('nummonths', 'powereduc', 3),
+            60 * 60 * 24 * 112 => new lang_string('nummonths', 'powereduc', 4),
+            60 * 60 * 24 * 140 => new lang_string('nummonths', 'powereduc', 5),
+            60 * 60 * 24 * 168 => new lang_string('nummonths', 'powereduc', 6),
             'all' => new lang_string('all')
         ]
     ));
@@ -280,7 +280,7 @@ if ($hassiteconfig) {
 
     // Test outgoing mail configuration (hidden, accessed via direct link from the settings page).
     $ADMIN->add('server', new admin_externalpage('testoutgoingmailconf', new lang_string('testoutgoingmailconf', 'admin'),
-        new moodle_url('/admin/testoutgoingmailconf.php'), 'moodle/site:config', true));
+        new powereduc_url('/admin/testoutgoingmailconf.php'), 'powereduc/site:config', true));
 
     // Performance.
     $temp = new admin_settingpage('performance', new lang_string('performance', 'admin'));
@@ -521,7 +521,7 @@ if ($hassiteconfig) {
     $temp->add(new admin_setting_configtext('emaildkimselector', new lang_string('emaildkimselector', 'admin'),
         new lang_string('configemaildkimselector', 'admin'), '', PARAM_FILE));
 
-    $url = new moodle_url('/admin/testoutgoingmailconf.php');
+    $url = new powereduc_url('/admin/testoutgoingmailconf.php');
     $link = html_writer::link($url, get_string('testoutgoingmailconf', 'admin'));
     $temp->add(new admin_setting_heading('testoutgoinmailc', new lang_string('testoutgoingmailconf', 'admin'),
         new lang_string('testoutgoingmaildetail', 'admin', $link)));
@@ -596,7 +596,7 @@ if ($hassiteconfig) {
 
     // Web services > API documentation.
     $ADMIN->add('webservicesettings', new admin_externalpage('webservicedocumentation', new lang_string('wsdocapi', 'webservice'),
-        "{$CFG->wwwroot}/{$CFG->admin}/webservice/documentation.php", 'moodle/site:config', false));
+        "{$CFG->wwwroot}/{$CFG->admin}/webservice/documentation.php", 'powereduc/site:config', false));
 
     // Web services > External services.
     $temp = new admin_settingpage('externalservices', new lang_string('externalservices', 'webservice'));
@@ -609,19 +609,19 @@ if ($hassiteconfig) {
     $ADMIN->add('webservicesettings', $temp);
 
     $ADMIN->add('webservicesettings', new admin_externalpage('externalservice', new lang_string('editaservice', 'webservice'),
-        "{$CFG->wwwroot}/{$CFG->admin}/webservice/service.php", 'moodle/site:config', true));
+        "{$CFG->wwwroot}/{$CFG->admin}/webservice/service.php", 'powereduc/site:config', true));
 
     $ADMIN->add('webservicesettings', new admin_externalpage('externalservicefunctions',
         new lang_string('externalservicefunctions', 'webservice'), "{$CFG->wwwroot}/{$CFG->admin}/webservice/service_functions.php",
-        'moodle/site:config', true));
+        'powereduc/site:config', true));
 
     $ADMIN->add('webservicesettings', new admin_externalpage('externalserviceusers',
         new lang_string('externalserviceusers', 'webservice'), "{$CFG->wwwroot}/{$CFG->admin}/webservice/service_users.php",
-        'moodle/site:config', true));
+        'powereduc/site:config', true));
 
     $ADMIN->add('webservicesettings', new admin_externalpage('externalserviceusersettings',
         new lang_string('serviceusersettings', 'webservice'), "{$CFG->wwwroot}/{$CFG->admin}/webservice/service_user_settings.php",
-        'moodle/site:config', true));
+        'powereduc/site:config', true));
 
     // Web services > Manage protocols.
     $temp = new admin_settingpage('webserviceprotocols', new lang_string('manageprotocols', 'webservice'));
@@ -631,7 +631,7 @@ if ($hassiteconfig) {
     }
 
     // We cannot use $OUTPUT->doc_link() this early, we would lose the ability to set the page layout on all admin pages.
-    $url = new moodle_url(get_docs_url('How_to_get_a_security_key'));
+    $url = new powereduc_url(get_docs_url('How_to_get_a_security_key'));
     $wsdoclink = html_writer::link($url, new lang_string('supplyinfo', 'webservice'), ['target' => '_blank']);
     $temp->add(new admin_setting_configcheckbox('enablewsdocumentation', new lang_string('enablewsdocumentation', 'admin'),
         new lang_string('configenablewsdocumentation', 'admin', $wsdoclink), false));
@@ -647,5 +647,5 @@ if ($hassiteconfig) {
 
     // Web services > Manage tokens.
     $ADMIN->add('webservicesettings', new admin_externalpage('webservicetokens', new lang_string('managetokens', 'webservice'),
-        new moodle_url('/admin/webservice/tokens.php')));
+        new powereduc_url('/admin/webservice/tokens.php')));
 }

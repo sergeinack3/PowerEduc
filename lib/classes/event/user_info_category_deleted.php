@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * User profile field deleted event.
@@ -36,7 +36,7 @@ defined('POWEREDUC_INTERNAL') || die();
  *
  * @package    core
  * @copyright  2017 Web Courseworks, Ltd. {@link http://www.webcourseworks.com}
- * @since      Moodle 3.4
+ * @since      PowerEduc 3.4
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class user_info_category_deleted extends base {
@@ -53,7 +53,7 @@ class user_info_category_deleted extends base {
     /**
      * Creates an event from a profile info category.
      *
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      * @param \stdClass $category A snapshot of the deleted category.
      * @return \core\event\base
      */

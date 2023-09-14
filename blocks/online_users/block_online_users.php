@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -62,7 +62,7 @@ class block_online_users extends block_base {
         //Calculate if we are in separate groups
         $isseparategroups = ($this->page->course->groupmode == SEPARATEGROUPS
                              && $this->page->course->groupmodeforce
-                             && !has_capability('moodle/site:accessallgroups', $this->page->context));
+                             && !has_capability('powereduc/site:accessallgroups', $this->page->context));
 
         //Get the user current group
         $currentgroup = $isseparategroups ? groups_get_course_group($this->page->course) : NULL;
@@ -118,7 +118,7 @@ class block_online_users extends block_base {
             //Accessibility: Don't want 'Alt' text for the user picture; DO want it for the envelope/message link (existing lang string).
             //Accessibility: Converted <div> to <ul>, inherit existing classes & styles.
             $this->content->text .= "<ul class='list'>\n";
-            if (isloggedin() && has_capability('moodle/site:sendmessage', $this->page->context)
+            if (isloggedin() && has_capability('powereduc/site:sendmessage', $this->page->context)
                            && !empty($CFG->messaging) && !isguestuser()) {
                 $canshowicon = true;
             } else {
@@ -157,7 +157,7 @@ class block_online_users extends block_base {
                     } else {
                         if ($canshowicon) {  // Only when logged in and messaging active etc.
                             $anchortagcontents = $OUTPUT->pix_icon('t/message', get_string('messageselectadd'));
-                            $anchorurl = new moodle_url('/message/index.php', array('id' => $user->id));
+                            $anchorurl = new powereduc_url('/message/index.php', array('id' => $user->id));
                             $anchortag = html_writer::link($anchorurl, $anchortagcontents,
                                 array('title' => get_string('messageselectadd')));
 

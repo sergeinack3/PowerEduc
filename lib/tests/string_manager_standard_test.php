@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Unit tests for localization support in lib/moodlelib.php
+ * Unit tests for localization support in lib/powereduclib.php
  *
  * @package     core
  * @category    phpunit
- * @copyright   2013 David Mudrak <david@moodle.com>
+ * @copyright   2013 David Mudrak <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,16 +30,16 @@ use core_string_manager_standard;
 defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
-require_once($CFG->libdir.'/moodlelib.php');
+require_once($CFG->libdir.'/powereduclib.php');
 
 /**
  * Tests for the API of the string_manager.
  *
- * Unit tests for localization support in lib/moodlelib.php
+ * Unit tests for localization support in lib/powereduclib.php
  *
  * @package   core
  * @category  test
- * @copyright 2013 David Mudrak <david@moodle.com>
+ * @copyright 2013 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class string_manager_standard_test extends \advanced_testcase {
@@ -89,7 +89,7 @@ class string_manager_standard_test extends \advanced_testcase {
         $this->assertEquals('Course page', get_string('coursepage', 'core_admin'));
         $this->assertDebuggingCalled('String [coursepage,core_admin] is deprecated. '.
             'Either you should no longer be using that string, or the string has been incorrectly deprecated, in which case you should report this as a bug. '.
-            'Please refer to https://docs.moodle.org/dev/String_deprecation');
+            'Please refer to https://docs.powereduc.org/dev/String_deprecation');
     }
 
     /**
@@ -214,7 +214,7 @@ class string_manager_standard_test extends \advanced_testcase {
 /**
  * Helper class providing testable string_manager
  *
- * @copyright 2013 David Mudrak <david@moodle.com>
+ * @copyright 2013 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class testable_core_string_manager extends core_string_manager_standard {

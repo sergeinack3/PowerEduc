@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,21 +33,21 @@ $lang = current_language();
 
 require_login();
 if (empty($CFG->enablebadges)) {
-    throw new \moodle_exception('badgesdisabled', 'badges');
+    throw new \powereduc_exception('badgesdisabled', 'badges');
 }
 $badge = new badge($badgeid);
 $context = $badge->get_context();
-$navurl = new moodle_url('/badges/index.php', array('type' => $badge->type));
-require_capability('moodle/badges:configuredetails', $context);
+$navurl = new powereduc_url('/badges/index.php', array('type' => $badge->type));
+require_capability('powereduc/badges:configuredetails', $context);
 
 if ($badge->type == BADGE_TYPE_COURSE) {
     if (empty($CFG->badges_allowcoursebadges)) {
-        throw new \moodle_exception('coursebadgesdisabled', 'badges');
+        throw new \powereduc_exception('coursebadgesdisabled', 'badges');
     }
     require_login($badge->courseid);
     $course = get_course($badge->courseid);
     $heading = format_string($course->fullname, true, ['context' => $context]);
-    $navurl = new moodle_url('/badges/index.php', array('type' => $badge->type, 'id' => $badge->courseid));
+    $navurl = new powereduc_url('/badges/index.php', array('type' => $badge->type, 'id' => $badge->courseid));
     $PAGE->set_pagelayout('standard');
     navigation_node::override_active_url($navurl);
 } else {
@@ -56,7 +56,7 @@ if ($badge->type == BADGE_TYPE_COURSE) {
     navigation_node::override_active_url($navurl, true);
 }
 
-$currenturl = new moodle_url('/badges/alignment.php', array('id' => $badge->id));
+$currenturl = new powereduc_url('/badges/alignment.php', array('id' => $badge->id));
 $PAGE->set_context($context);
 $PAGE->set_url($currenturl);
 $PAGE->set_heading($heading);
@@ -66,7 +66,7 @@ $PAGE->navbar->add($badge->name);
 $output = $PAGE->get_renderer('core', 'badges');
 $msg = optional_param('msg', '', PARAM_TEXT);
 $emsg = optional_param('emsg', '', PARAM_TEXT);
-$url = new moodle_url('/badges/alignment.php', array('id' => $badge->id, 'action' => $action, 'alignmentid' => $alignmentid));
+$url = new powereduc_url('/badges/alignment.php', array('id' => $badge->id, 'action' => $action, 'alignmentid' => $alignmentid));
 $mform = new alignment_form($url, array('badge' => $badge, 'action' => $action, 'alignmentid' => $alignmentid));
 if ($mform->is_cancelled()) {
     redirect($currenturl);
@@ -98,7 +98,7 @@ if ($alignmentid || $action == 'add' || $action == 'edit') {
     $mform->display();
 } else if (empty($action)) {
     if (!$badge->is_active() && !$badge->is_locked()) {
-        $urlbutton = new moodle_url('/badges/alignment.php', array('id' => $badge->id, 'action' => 'add'));
+        $urlbutton = new powereduc_url('/badges/alignment.php', array('id' => $badge->id, 'action' => 'add'));
         echo $OUTPUT->box($OUTPUT->single_button($urlbutton, get_string('addalignment', 'badges')), 'clearfix mdl-align');
     }
     $alignments = $badge->get_alignments();

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 /**
  * @package    tool
  * @subpackage customlang
- * @copyright  2010 David Mudrak <david@moodle.com>
+ * @copyright  2010 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,7 +28,7 @@ require_once($CFG->dirroot . '/lib/formslib.php');
 /**
  * Form for filtering the strings to customize
  */
-class tool_customlang_filter_form extends moodleform {
+class tool_customlang_filter_form extends powereducform {
 
     function definition() {
         $mform = $this->_form;
@@ -40,7 +40,7 @@ class tool_customlang_filter_form extends moodleform {
         foreach (tool_customlang_utils::list_components() as $component => $normalized) {
             list($type, $plugin) = core_component::normalize_component($normalized);
             if ($type == 'core' and is_null($plugin)) {
-                $plugin = 'moodle';
+                $plugin = 'powereduc';
             }
             $options[$type][$normalized] = $component.'.php';
         }

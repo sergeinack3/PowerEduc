@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ use tool_policy\test\helper;
  *
  * @package   tool_policy
  * @category  test
- * @copyright 2018 David Mudrak <david@moodle.com>
+ * @copyright 2018 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class api_test extends \advanced_testcase {

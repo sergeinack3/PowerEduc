@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,11 +29,11 @@ use tool_admin_presets\form\import_form;
 class import extends base {
 
     /**
-     * Displays the import moodleform
+     * Displays the import powereducform
      */
     public function show(): void {
-        $url = new \moodle_url('/admin/tool/admin_presets/index.php', ['action' => 'import', 'mode' => 'execute']);
-        $this->moodleform = new import_form($url);
+        $url = new \powereduc_url('/admin/tool/admin_presets/index.php', ['action' => 'import', 'mode' => 'execute']);
+        $this->powereducform = new import_form($url);
     }
 
     /**
@@ -42,20 +42,20 @@ class import extends base {
     public function execute(): void {
         confirm_sesskey();
 
-        $url = new \moodle_url('/admin/tool/admin_presets/index.php', ['action' => 'import', 'mode' => 'execute']);
-        $this->moodleform = new import_form($url);
+        $url = new \powereduc_url('/admin/tool/admin_presets/index.php', ['action' => 'import', 'mode' => 'execute']);
+        $this->powereducform = new import_form($url);
 
-        if ($this->moodleform->is_cancelled()) {
-            $url = new \moodle_url('/admin/tool/admin_presets/index.php');
+        if ($this->powereducform->is_cancelled()) {
+            $url = new \powereduc_url('/admin/tool/admin_presets/index.php');
             redirect($url);
         }
 
-        if ($data = $this->moodleform->get_data()) {
+        if ($data = $this->powereducform->get_data()) {
             // Getting the file.
-            $xmlcontent = $this->moodleform->get_file_content('xmlfile');
+            $xmlcontent = $this->powereducform->get_file_content('xmlfile');
             list($xml, $preset, $settingsfound, $pluginsfound) = $this->manager->import_preset($xmlcontent, $data->name);
             if (!$xml) {
-                $url = new \moodle_url('/admin/tool/admin_presets/index.php', ['action' => 'import']);
+                $url = new \powereduc_url('/admin/tool/admin_presets/index.php', ['action' => 'import']);
                 redirect($url, get_string('wrongfile', 'tool_admin_presets'));
             }
 
@@ -66,14 +66,14 @@ class import extends base {
 
             // If there are no valid or selected settings, raise an error.
             if (!$settingsfound && !$pluginsfound) {
-                $url = new \moodle_url('/admin/tool/admin_presets/index.php', ['action' => 'import']);
+                $url = new \powereduc_url('/admin/tool/admin_presets/index.php', ['action' => 'import']);
                 redirect($url, get_string('novalidsettings', 'tool_admin_presets'));
             }
 
             // Trigger it after execute finishes.
             $this->log();
 
-            $url = new \moodle_url('/admin/tool/admin_presets/index.php', ['action' => 'load', 'id' => $preset->id]);
+            $url = new \powereduc_url('/admin/tool/admin_presets/index.php', ['action' => 'load', 'id' => $preset->id]);
             redirect($url);
         }
     }

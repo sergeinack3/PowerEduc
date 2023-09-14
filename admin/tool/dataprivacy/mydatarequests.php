@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ require_once('lib.php');
 
 $courseid = optional_param('course', 0, PARAM_INT);
 
-$url = new moodle_url('/admin/tool/dataprivacy/mydatarequests.php');
+$url = new powereduc_url('/admin/tool/dataprivacy/mydatarequests.php');
 if ($courseid) {
     $url->param('course', $courseid);
 }
@@ -36,7 +36,7 @@ $PAGE->set_url($url);
 
 require_login();
 if (isguestuser()) {
-    throw new \moodle_exception('noguest');
+    throw new \powereduc_exception('noguest');
 }
 
 $usercontext = context_user::instance($USER->id);
@@ -54,7 +54,7 @@ $params = ['id' => $USER->id];
 if ($courseid) {
     $params['course'] = $courseid;
 }
-$returnurl = new moodle_url('/user/profile.php', $params);
+$returnurl = new powereduc_url('/user/profile.php', $params);
 
 $PAGE->set_heading($title);
 $PAGE->set_title($title);

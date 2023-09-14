@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,9 +25,9 @@
 
 require_once(__DIR__ . '/../../config.php');
 require_once($CFG->libdir . '/formslib.php');
-require_once($CFG->libdir .'/simplepie/moodle_simplepie.php');
+require_once($CFG->libdir .'/simplepie/powereduc_simplepie.php');
 
-class feed_edit_form extends moodleform {
+class feed_edit_form extends powereducform {
     protected $isadding;
     protected $caneditshared;
     protected $title = '';
@@ -80,7 +80,7 @@ class feed_edit_form extends moodleform {
     function validation($data, $files) {
         $errors = parent::validation($data, $files);
 
-        $rss =  new moodle_simplepie();
+        $rss =  new powereduc_simplepie();
         // set timeout for longer than normal to try and grab the feed
         $rss->set_timeout(10);
         $rss->set_feed_url($data['url']);
@@ -127,7 +127,7 @@ class feed_edit_form extends moodleform {
      * @return string URL of feed or original url if none found
      */
     public static function autodiscover_feed_url($url){
-            $rss =  new moodle_simplepie();
+            $rss =  new powereduc_simplepie();
             $rss->set_feed_url($url);
             $rss->set_autodiscovery_level(SIMPLEPIE_LOCATOR_ALL);
             // When autodiscovering an RSS feed, simplepie will try lots of
@@ -140,7 +140,7 @@ class feed_edit_form extends moodleform {
             }
 
             // return URL without quoting..
-            $discoveredurl = new moodle_url($rss->subscribe_url());
+            $discoveredurl = new powereduc_url($rss->subscribe_url());
             return $discoveredurl->out(false);
     }
 }
@@ -173,7 +173,7 @@ if ($courseid) {
 if ($returnurl) {
     $urlparams['returnurl'] = $returnurl;
 }
-$managefeeds = new moodle_url('/blocks/rss_client/managefeeds.php', $urlparams);
+$managefeeds = new powereduc_url('/blocks/rss_client/managefeeds.php', $urlparams);
 
 $PAGE->set_url('/blocks/rss_client/editfeed.php', $urlparams);
 $PAGE->set_pagelayout('admin');

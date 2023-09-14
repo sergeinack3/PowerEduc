@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -47,7 +47,7 @@ if ($course) {
 }
 
 require_login($course, false, $cm);
-require_capability('moodle/site:managecontextlocks', $context);
+require_capability('powereduc/site:managecontextlocks', $context);
 
 $PAGE->set_pagelayout('admin');
 $PAGE->navigation->clear_cache();
@@ -68,7 +68,7 @@ if (null !== $confirm && confirm_sesskey()) {
     if (empty($returnurl)) {
         $returnurl = $context->get_url();
     } else {
-        $returnurl = new moodle_url($returnurl);
+        $returnurl = new powereduc_url($returnurl);
     }
     redirect($returnurl, $lockmessage);
 }
@@ -87,7 +87,7 @@ if ($context->locked) {
     $target = 1;
 }
 
-$confirmurl = new \moodle_url($PAGE->url, ['confirm' => $target]);
+$confirmurl = new \powereduc_url($PAGE->url, ['confirm' => $target]);
 if (!empty($returnurl)) {
     $confirmurl->param('returnurl', $returnurl);
 }

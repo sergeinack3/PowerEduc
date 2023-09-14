@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 /**
 * Adds or updates modules in a course using new formslib
 *
-* @package    moodlecore
+* @package    powereduccore
 * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
 * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 */
@@ -37,7 +37,7 @@ $return = optional_param('return', 0, PARAM_BOOL);    //return to course/view.ph
 $type   = optional_param('type', '', PARAM_ALPHANUM); //TODO: hopefully will be removed in 2.0
 $sectionreturn = optional_param('sr', null, PARAM_INT);
 
-$url = new moodle_url('/course/modedit.php');
+$url = new powereduc_url('/course/modedit.php');
 $url->param('sr', $sectionreturn);
 if (!empty($return)) {
     $url->param('return', $return);
@@ -66,7 +66,7 @@ if (!empty($add)) {
     $courseformat = course_get_format($course);
     $maxsections = $courseformat->get_max_sections();
     if ($section > $maxsections) {
-        throw new \moodle_exception('maxsectionslimit', 'moodle', '', $maxsections);
+        throw new \powereduc_exception('maxsectionslimit', 'powereduc', '', $maxsections);
     }
 
     list($module, $context, $cw, $cm, $data) = prepare_new_moduleinfo_data($course, $add, $section);
@@ -84,9 +84,9 @@ if (!empty($add)) {
         $heading = new stdClass();
         $heading->what = $fullmodulename;
         $heading->to   = $sectionname;
-        $pageheading = get_string('addinganewto', 'moodle', $heading);
+        $pageheading = get_string('addinganewto', 'powereduc', $heading);
     } else {
-        $pageheading = get_string('addinganew', 'moodle', $fullmodulename);
+        $pageheading = get_string('addinganew', 'powereduc', $fullmodulename);
     }
     $navbaraddition = $pageheading;
 
@@ -96,7 +96,7 @@ if (!empty($add)) {
     $PAGE->set_url($url);
 
     // Select the "Edit settings" from navigation.
-    navigation_node::override_active_url(new moodle_url('/course/modedit.php', array('update'=>$update, 'return'=>1)));
+    navigation_node::override_active_url(new powereduc_url('/course/modedit.php', array('update'=>$update, 'return'=>1)));
 
     // Check the course module exists.
     $cm = get_coursemodule_from_id('', $update, 0, false, MUST_EXIST);
@@ -119,15 +119,15 @@ if (!empty($add)) {
         $heading = new stdClass();
         $heading->what = $fullmodulename;
         $heading->in   = $sectionname;
-        $pageheading = get_string('updatingain', 'moodle', $heading);
+        $pageheading = get_string('updatingain', 'powereduc', $heading);
     } else {
-        $pageheading = get_string('updatinga', 'moodle', $fullmodulename);
+        $pageheading = get_string('updatinga', 'powereduc', $fullmodulename);
     }
     $navbaraddition = null;
 
 } else {
     require_login();
-    throw new \moodle_exception('invalidaction');
+    throw new \powereduc_exception('invalidaction');
 }
 
 $pagepath = 'mod-' . $module->name . '-';
@@ -141,11 +141,11 @@ $PAGE->set_pagelayout('admin');
 $PAGE->add_body_class('limitedwidth');
 
 
-$modmoodleform = "$CFG->dirroot/mod/$module->name/mod_form.php";
-if (file_exists($modmoodleform)) {
-    require_once($modmoodleform);
+$modpowereducform = "$CFG->dirroot/mod/$module->name/mod_form.php";
+if (file_exists($modpowereducform)) {
+    require_once($modpowereducform);
 } else {
-    throw new \moodle_exception('noformdesc');
+    throw new \powereduc_exception('noformdesc');
 }
 
 $mformclassname = 'mod_'.$module->name.'_mod_form';
@@ -158,7 +158,7 @@ if ($mform->is_cancelled()) {
             'id' => $cm->id, // We always need the activity id.
             'forceview' => 1, // Stop file downloads in resources.
         ];
-        $activityurl = new moodle_url("/mod/$module->name/view.php", $urlparams);
+        $activityurl = new powereduc_url("/mod/$module->name/view.php", $urlparams);
         redirect($activityurl);
     } else {
         redirect(course_get_url($course, $cw->section, array('sr' => $sectionreturn)));
@@ -169,11 +169,11 @@ if ($mform->is_cancelled()) {
     } else if (!empty($fromform->add)) {
         $fromform = add_moduleinfo($fromform, $course, $mform);
     } else {
-        throw new \moodle_exception('invaliddata');
+        throw new \powereduc_exception('invaliddata');
     }
 
     if (isset($fromform->submitbutton)) {
-        $url = new moodle_url("/mod/$module->name/view.php", array('id' => $fromform->coursemodule, 'forceview' => 1));
+        $url = new powereduc_url("/mod/$module->name/view.php", array('id' => $fromform->coursemodule, 'forceview' => 1));
         if (empty($fromform->showgradingmanagement)) {
             redirect($url);
         } else {
@@ -186,7 +186,7 @@ if ($mform->is_cancelled()) {
 
 } else {
 
-    $streditinga = get_string('editinga', 'moodle', $fullmodulename);
+    $streditinga = get_string('editinga', 'powereduc', $fullmodulename);
     $strmodulenameplural = get_string('modulenameplural', $module->name);
 
     if (!empty($cm->id)) {

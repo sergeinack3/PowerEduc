@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -70,7 +70,7 @@ function add_moduleinfo($moduleinfo, $course, $mform = null) {
     if (isset($moduleinfo->downloadcontent)) {
         $newcm->downloadcontent = $moduleinfo->downloadcontent;
     }
-    if (has_capability('moodle/course:setforcedlanguage', context_course::instance($course->id))) {
+    if (has_capability('powereduc/course:setforcedlanguage', context_course::instance($course->id))) {
         $newcm->lang = $moduleinfo->lang ?? null;
     } else {
         $newcm->lang = null;
@@ -121,7 +121,7 @@ function add_moduleinfo($moduleinfo, $course, $mform = null) {
     $transaction = $DB->start_delegated_transaction();
 
     if (!$moduleinfo->coursemodule = add_course_module($newcm)) {
-        throw new \moodle_exception('cannotaddcoursemodule');
+        throw new \powereduc_exception('cannotaddcoursemodule');
     }
 
     if (plugin_supports('mod', $moduleinfo->modulename, FEATURE_MOD_INTRO, true) &&
@@ -135,7 +135,7 @@ function add_moduleinfo($moduleinfo, $course, $mform = null) {
     $addinstancefunction    = $moduleinfo->modulename."_add_instance";
     try {
         $returnfromfunc = $addinstancefunction($moduleinfo, $mform);
-    } catch (moodle_exception $e) {
+    } catch (powereduc_exception $e) {
         $returnfromfunc = $e;
     }
     if (!$returnfromfunc or !is_number($returnfromfunc)) {
@@ -144,12 +144,12 @@ function add_moduleinfo($moduleinfo, $course, $mform = null) {
         context_helper::delete_instance(CONTEXT_MODULE, $moduleinfo->coursemodule);
         $DB->delete_records('course_modules', array('id'=>$moduleinfo->coursemodule));
 
-        if ($returnfromfunc instanceof moodle_exception) {
+        if ($returnfromfunc instanceof powereduc_exception) {
             throw $returnfromfunc;
         } else if (!is_number($returnfromfunc)) {
-            throw new \moodle_exception('invalidfunction', '', course_get_url($course, $moduleinfo->section));
+            throw new \powereduc_exception('invalidfunction', '', course_get_url($course, $moduleinfo->section));
         } else {
-            throw new \moodle_exception('cannotaddnewmodule', '', course_get_url($course, $moduleinfo->section),
+            throw new \powereduc_exception('cannotaddnewmodule', '', course_get_url($course, $moduleinfo->section),
                 $moduleinfo->modulename);
         }
     }
@@ -362,7 +362,7 @@ function edit_module_post_actions($moduleinfo, $course) {
     }
 
     if (plugin_supports('mod', $moduleinfo->modulename, FEATURE_ADVANCED_GRADING, false)
-            and has_capability('moodle/grade:managegradingforms', $modcontext)) {
+            and has_capability('powereduc/grade:managegradingforms', $modcontext)) {
         require_once($CFG->dirroot.'/grade/grading/lib.php');
         $gradingman = get_grading_manager($modcontext, 'mod_'.$moduleinfo->modulename);
         $showgradingmanagement = false;
@@ -485,7 +485,7 @@ function set_moduleinfo_defaults($moduleinfo) {
  * @param object $modulename the module name
  * @param object $section the section of the module
  * @return array list containing module, context, course section.
- * @throws moodle_exception if user is not allowed to perform the action or module is not allowed in this course
+ * @throws powereduc_exception if user is not allowed to perform the action or module is not allowed in this course
  */
 function can_add_moduleinfo($course, $modulename, $section) {
     global $DB;
@@ -493,13 +493,13 @@ function can_add_moduleinfo($course, $modulename, $section) {
     $module = $DB->get_record('modules', array('name'=>$modulename), '*', MUST_EXIST);
 
     $context = context_course::instance($course->id);
-    require_capability('moodle/course:manageactivities', $context);
+    require_capability('powereduc/course:manageactivities', $context);
 
     course_create_sections_if_missing($course, $section);
     $cw = get_fast_modinfo($course)->get_section_info($section);
 
     if (!course_allowed_module($course, $module->name)) {
-        throw new \moodle_exception('moduledisable');
+        throw new \powereduc_exception('moduledisable');
     }
 
     return array($module, $context, $cw);
@@ -510,14 +510,14 @@ function can_add_moduleinfo($course, $modulename, $section) {
  *
  * @param object $cm course module
  * @return array - list of course module, context, module, moduleinfo, and course section.
- * @throws moodle_exception if user is not allowed to perform the action
+ * @throws powereduc_exception if user is not allowed to perform the action
  */
 function can_update_moduleinfo($cm) {
     global $DB;
 
     // Check the $USER has the right capability.
     $context = context_module::instance($cm->id);
-    require_capability('moodle/course:manageactivities', $context);
+    require_capability('powereduc/course:manageactivities', $context);
 
     // Check module exists.
     $module = $DB->get_record('modules', array('id'=>$cm->module), '*', MUST_EXIST);
@@ -558,7 +558,7 @@ function update_moduleinfo($cm, $moduleinfo, $course, $mform = null) {
     $moduleinfo = set_moduleinfo_defaults($moduleinfo);
 
     $modcontext = context_module::instance($moduleinfo->coursemodule);
-    if (has_capability('moodle/course:setforcedlanguage', $modcontext)) {
+    if (has_capability('powereduc/course:setforcedlanguage', $modcontext)) {
         $cm->lang = $moduleinfo->lang ?? null;
     } else {
         unset($cm->lang);
@@ -645,7 +645,7 @@ function update_moduleinfo($cm, $moduleinfo, $course, $mform = null) {
 
     $updateinstancefunction = $moduleinfo->modulename."_update_instance";
     if (!$updateinstancefunction($moduleinfo, $mform)) {
-        throw new \moodle_exception('cannotupdatemod', '', course_get_url($course, $cm->section), $moduleinfo->modulename);
+        throw new \powereduc_exception('cannotupdatemod', '', course_get_url($course, $cm->section), $moduleinfo->modulename);
     }
 
     // This needs to happen AFTER the grademin/grademax have already been updated.
@@ -666,14 +666,14 @@ function update_moduleinfo($cm, $moduleinfo, $course, $mform = null) {
                 $newgradeitem->grademax
             );
             if (!component_callback('mod_' . $moduleinfo->modulename, 'rescale_activity_grades', $params)) {
-                throw new \moodle_exception('cannotreprocessgrades', '', course_get_url($course, $cm->section),
+                throw new \powereduc_exception('cannotreprocessgrades', '', course_get_url($course, $cm->section),
                     $moduleinfo->modulename);
             }
         }
     }
 
     // Make sure visibility is set correctly (in particular in calendar).
-    if (has_capability('moodle/course:activityvisibility', $modcontext)) {
+    if (has_capability('powereduc/course:activityvisibility', $modcontext)) {
         set_coursemodule_visible($moduleinfo->coursemodule, $moduleinfo->visible, $moduleinfo->visibleoncoursepage);
     }
 
@@ -711,7 +711,7 @@ function update_moduleinfo($cm, $moduleinfo, $course, $mform = null) {
  * Include once the module lib file.
  *
  * @param string $modulename module name of the lib to include
- * @throws moodle_exception if lib.php file for the module does not exist
+ * @throws powereduc_exception if lib.php file for the module does not exist
  */
 function include_modulelib($modulename) {
     global $CFG;
@@ -719,7 +719,7 @@ function include_modulelib($modulename) {
     if (file_exists($modlib)) {
         include_once($modlib);
     } else {
-        throw new moodle_exception('modulemissingcode', '', '', $modlib);
+        throw new powereduc_exception('modulemissingcode', '', '', $modlib);
     }
 }
 
@@ -768,7 +768,7 @@ function get_moduleinfo_data($cm, $course) {
     }
 
     if (plugin_supports('mod', $data->modulename, FEATURE_ADVANCED_GRADING, false)
-            and has_capability('moodle/grade:managegradingforms', $context)) {
+            and has_capability('powereduc/grade:managegradingforms', $context)) {
         require_once($CFG->dirroot.'/grade/grading/lib.php');
         $gradingman = get_grading_manager($context, 'mod_'.$data->modulename);
         $data->_advancedgradingdata['methods'] = $gradingman->get_available_methods();
@@ -870,7 +870,7 @@ function prepare_new_moduleinfo_data($course, $modulename, $section) {
     }
 
     if (plugin_supports('mod', $data->modulename, FEATURE_ADVANCED_GRADING, false)
-            and has_capability('moodle/grade:managegradingforms', $context)) {
+            and has_capability('powereduc/grade:managegradingforms', $context)) {
         require_once($CFG->dirroot.'/grade/grading/lib.php');
 
         $data->_advancedgradingdata['methods'] = grading_manager::available_methods();

@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -78,7 +78,7 @@ define(
             ACTIVITYLI: 'li.activity',
             ACTIONAREA: '.actions',
             ACTIVITYACTION: 'a.cm-edit-action',
-            MENU: '.moodle-actionmenu[data-enhance=moodle-core-actionmenu]',
+            MENU: '.powereduc-actionmenu[data-enhance=powereduc-core-actionmenu]',
             TOGGLE: '.toggle-display,.dropdown-toggle',
             SECTIONLI: 'li.section',
             SECTIONACTIONMENU: '.section_action_menu',
@@ -86,7 +86,7 @@ define(
             SECTIONBADGES: '[data-region="sectionbadges"]',
         };
 
-        Y.use('moodle-course-coursebase', function() {
+        Y.use('powereduc-course-coursebase', function() {
             var courseformatselector = M.course.format.get_section_selector();
             if (courseformatselector) {
                 SELECTOR.SECTIONLI = courseformatselector;
@@ -130,7 +130,7 @@ define(
             }
             // Use YUI way if data-id is not present.
             let id;
-            Y.use('moodle-course-util', function(Y) {
+            Y.use('powereduc-course-util', function(Y) {
                 id = Y.Moodle.core_course.util.cm.getId(Y.Node(item));
             });
             return id;
@@ -144,7 +144,7 @@ define(
          */
         var getModuleName = function(element) {
             var name;
-            Y.use('moodle-course-util', function(Y) {
+            Y.use('powereduc-course-util', function(Y) {
                 name = Y.Moodle.core_course.util.cm.getName(Y.Node(element.get(0)));
             });
             // Check if we have the name in the course state.
@@ -266,7 +266,7 @@ define(
          */
         var initActionMenu = function(elementid) {
             // Initialise action menu in the new activity.
-            Y.use('moodle-course-coursebase', function() {
+            Y.use('powereduc-course-coursebase', function() {
                 M.course.coursebase.invoke_function('setup_for_resource', '#' + elementid);
             });
             if (M.core.actionmenu && M.core.actionmenu.newDOMNode) {
@@ -760,7 +760,7 @@ define(
         };
 
         // Register a function to be executed after D&D of an activity.
-        Y.use('moodle-course-coursebase', function() {
+        Y.use('powereduc-course-coursebase', function() {
             M.course.coursebase.register_module({
                 // Ignore camelcase eslint rule for the next line because it is an expected name of the callback.
                 // eslint-disable-next-line camelcase

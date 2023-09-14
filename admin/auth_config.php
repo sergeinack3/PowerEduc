@@ -82,7 +82,7 @@ echo "</div>\n";
 echo "</form>\n";
 
 $PAGE->requires->string_for_js('unmaskpassword', 'core_form');
-$PAGE->requires->yui_module('moodle-auth-passwordunmask', 'M.auth.passwordunmask');
+$PAGE->requires->yui_module('powereduc-auth-passwordunmask', 'M.auth.passwordunmask');
 
 echo $OUTPUT->footer();
 exit;

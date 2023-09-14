@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -285,7 +285,7 @@ class acceptances_filter implements \templatable, \renderable {
             });
             if (!$found) {
                 // Throw exception that policy/version is not found.
-                throw new \moodle_exception('errorpolicyversionnotfound', 'tool_policy');
+                throw new \powereduc_exception('errorpolicyversionnotfound', 'tool_policy');
             }
         }
     }
@@ -312,7 +312,7 @@ class acceptances_filter implements \templatable, \renderable {
     /**
      * Returns URL of the acceptances page with all current filters applied
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_url() {
         $urlparams = [];
@@ -332,7 +332,7 @@ class acceptances_filter implements \templatable, \renderable {
                 }
             }
         }
-        return new \moodle_url('/admin/tool/policy/acceptances.php', $urlparams);
+        return new \powereduc_url('/admin/tool/policy/acceptances.php', $urlparams);
     }
 
     /**
@@ -443,7 +443,7 @@ class acceptances_filter implements \templatable, \renderable {
      */
     public function export_for_template(\renderer_base $output) {
         $data = new \stdClass();
-        $data->action = (new \moodle_url('/admin/tool/policy/acceptances.php'))->out(false);
+        $data->action = (new \powereduc_url('/admin/tool/policy/acceptances.php'))->out(false);
 
         $data->filteroptions = [];
         $originalfilteroptions = [];

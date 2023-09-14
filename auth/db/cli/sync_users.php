@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,12 +18,12 @@
  * Extdb user sync script.
  *
  * This script is meant to be called from a system cronjob to
- * sync moodle user accounts with external database.
+ * sync powereduc user accounts with external database.
  * It is required when using internal passwords (== passwords not defined in external database).
  *
  * Sample cron entry:
  * # 5 minutes past 4am
- * 5 4 * * * sudo -u www-data /usr/bin/php /var/www/moodle/auth/db/cli/sync_users.php
+ * 5 4 * * * sudo -u www-data /usr/bin/php /var/www/powereduc/auth/db/cli/sync_users.php
  *
  * Notes:
  *   - it is required to use the web server account when executing PHP CLI scripts
@@ -70,7 +70,7 @@ Example:
 
 Sample cron entry:
 # 5 minutes past 4am
-5 4 * * * sudo -u www-data /usr/bin/php /var/www/moodle/auth/db/cli/sync_users.php
+5 4 * * * sudo -u www-data /usr/bin/php /var/www/powereduc/auth/db/cli/sync_users.php
 ";
 
     echo $help;

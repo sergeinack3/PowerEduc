@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Library calls for Moodle and BigBlueButton.
+ * Library calls for PowerEduc and BigBlueButton.
  *
  * @package   mod_bigbluebuttonbn
  * @copyright 2010 onwards, Blindside Networks Inc
@@ -418,7 +418,7 @@ function bigbluebuttonbn_pluginfile($course, $cm, $context, $filearea, $args, $f
  * @param stdClass $course course object
  * @param cm_info $cm course module object
  * @param context $context context object
- * @since Moodle 3.0
+ * @since PowerEduc 3.0
  */
 function bigbluebuttonbn_view($bigbluebuttonbn, $course, $cm, $context) {
 
@@ -447,7 +447,7 @@ function bigbluebuttonbn_view($bigbluebuttonbn, $course, $cm, $context) {
  * @param int $from the time to check updates from
  * @param array $filter if we need to check only specific updates
  * @return stdClass an object with the different type of areas indicating if they were updated or not
- * @since Moodle 3.2
+ * @since PowerEduc 3.2
  */
 function bigbluebuttonbn_check_updates_since(cm_info $cm, $from, $filter = []) {
     $updates = course_check_module_updates_since($cm, $from, ['content'], $filter);

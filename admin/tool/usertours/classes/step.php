@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -388,7 +388,7 @@ class step {
     /**
      * Get the link to move this step up in the sortorder.
      *
-     * @return  moodle_url
+     * @return  powereduc_url
      */
     public function get_moveup_link() {
         return helper::get_move_step_link($this->get_id(), helper::MOVE_UP);
@@ -397,7 +397,7 @@ class step {
     /**
      * Get the link to move this step down in the sortorder.
      *
-     * @return  moodle_url
+     * @return  powereduc_url
      */
     public function get_movedown_link() {
         return helper::get_move_step_link($this->get_id(), helper::MOVE_DOWN);
@@ -464,7 +464,7 @@ class step {
     /**
      * Get the edit link for this step.
      *
-     * @return  moodle_url
+     * @return  powereduc_url
      */
     public function get_edit_link() {
         return helper::get_edit_step_link($this->tourid, $this->id);
@@ -473,7 +473,7 @@ class step {
     /**
      * Get the delete link for this step.
      *
-     * @return  moodle_url
+     * @return  powereduc_url
      */
     public function get_delete_link() {
         return helper::get_delete_step_link($this->id);
@@ -724,7 +724,7 @@ class step {
     }
 
     /**
-     * Prepare the configuration data for the moodle form.
+     * Prepare the configuration data for the powereduc form.
      *
      * @return  object
      */
@@ -821,7 +821,7 @@ class step {
             function(array $matches) {
                 global $OUTPUT;
                 $component = $matches['component'];
-                if ($component == 'moodle') {
+                if ($component == 'powereduc') {
                     $component = 'core';
                 }
                 return \html_writer::img($OUTPUT->image_url($matches['identifier'], $component)->out(false), '',

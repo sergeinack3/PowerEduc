@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,9 +16,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Import backup file or select existing backup file from moodle
- * @package   moodlecore
- * @copyright 2010 Dongsheng Cai <dongsheng@moodle.com>
+ * Import backup file or select existing backup file from powereduc
+ * @package   powereduccore
+ * @copyright 2010 Dongsheng Cai <dongsheng@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -46,7 +46,7 @@ if (!empty($filecontextid)) {
     $filecontext = context::instance_by_id($filecontextid);
 }
 
-$url = new moodle_url('/backup/restorefile.php', array('contextid'=>$contextid));
+$url = new powereduc_url('/backup/restorefile.php', array('contextid'=>$contextid));
 
 $PAGE->set_url($url);
 $PAGE->set_context($context);
@@ -69,7 +69,7 @@ switch ($context->contextlevel) {
 
 
 require_login($course, false, $cm);
-require_capability('moodle/restore:restorecourse', $context);
+require_capability('powereduc/restore:restorecourse', $context);
 
 if (is_null($course)) {
     $courseid = 0;
@@ -90,7 +90,7 @@ if (!check_dir_exists($tmpdir, true, true)) {
 // choose the backup file from backup files tree
 if ($action == 'choosebackupfile') {
     if ($filearea == 'automated') {
-        require_capability('moodle/restore:viewautomatedfilearea', $context);
+        require_capability('powereduc/restore:viewautomatedfilearea', $context);
     }
     if ($fileinfo = $browser->get_file_info($filecontext, $component, $filearea, $itemid, $filepath, $filename)) {
         if (is_a($fileinfo, 'file_info_stored')) {
@@ -100,7 +100,7 @@ if ($action == 'choosebackupfile') {
             $params = $fileinfo->get_params();
             $file = $fs->get_file($params['contextid'], $params['component'], $params['filearea'],
                     $params['itemid'], $params['filepath'], $params['filename']);
-            $restore_url = new moodle_url('/backup/restore.php', array('contextid' => $contextid,
+            $restore_url = new powereduc_url('/backup/restore.php', array('contextid' => $contextid,
                     'pathnamehash' => $file->get_pathnamehash(), 'contenthash' => $file->get_contenthash()));
         } else {
             // If it's some weird other kind of file then use old code.
@@ -109,7 +109,7 @@ if ($action == 'choosebackupfile') {
             if (!$fileinfo->copy_to_pathname($pathname)) {
                 throw new restore_ui_exception('errorcopyingbackupfile', null, $pathname);
             }
-            $restore_url = new moodle_url('/backup/restore.php', array(
+            $restore_url = new powereduc_url('/backup/restore.php', array(
                     'contextid' => $contextid, 'filename' => $filename));
         }
         redirect($restore_url);
@@ -126,13 +126,13 @@ $PAGE->requires->js_call_amd('core_backup/async_backup', 'asyncBackupAllStatus',
 
 $form = new course_restore_form(null, array('contextid'=>$contextid));
 $data = $form->get_data();
-if ($data && has_capability('moodle/restore:uploadfile', $context)) {
+if ($data && has_capability('powereduc/restore:uploadfile', $context)) {
     $filename = restore_controller::get_tempdir_name($courseid, $USER->id);
     $pathname = $tmpdir . '/' . $filename;
     if (!$form->save_file('backupfile', $pathname)) {
         throw new restore_ui_exception('errorcopyingbackupfile', null, $pathname);
     }
-    $restore_url = new moodle_url('/backup/restore.php', array('contextid'=>$contextid, 'filename'=>$filename));
+    $restore_url = new powereduc_url('/backup/restore.php', array('contextid'=>$contextid, 'filename'=>$filename));
     redirect($restore_url);
     die;
 }
@@ -140,7 +140,7 @@ if ($data && has_capability('moodle/restore:uploadfile', $context)) {
 echo $OUTPUT->header();
 
 // require uploadfile cap to use file picker
-if (has_capability('moodle/restore:uploadfile', $context)) {
+if (has_capability('powereduc/restore:uploadfile', $context)) {
     echo $OUTPUT->heading(get_string('importfile', 'backup'));
     echo $OUTPUT->container_start();
     $form->display();

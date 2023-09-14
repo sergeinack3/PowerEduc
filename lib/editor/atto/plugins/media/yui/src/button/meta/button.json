@@ -1,8 +1,8 @@
 {
-    "moodle-atto_media-button": {
+    "powereduc-atto_media-button": {
         "requires": [
-            "moodle-editor_atto-plugin",
-            "moodle-form-shortforms"
+            "powereduc-editor_atto-plugin",
+            "powereduc-form-shortforms"
         ]
     }
 }

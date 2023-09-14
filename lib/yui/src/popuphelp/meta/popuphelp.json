@@ -1,7 +1,7 @@
 {
-  "moodle-core-popuphelp": {
+  "powereduc-core-popuphelp": {
     "requires": [
-        "moodle-core-tooltip"
+        "powereduc-core-tooltip"
     ]
   }
 }

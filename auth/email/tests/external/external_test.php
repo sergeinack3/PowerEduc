@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -67,7 +67,7 @@ class external_test extends externallib_advanced_testcase {
 
         $CFG->defaultcity = 'Bcn';
         $CFG->country = 'ES';
-        $CFG->sitepolicy = 'https://moodle.org';
+        $CFG->sitepolicy = 'https://powereduc.org';
 
         $result = auth_email_external::get_signup_settings();
         $result = \external_api::clean_returnvalue(auth_email_external::get_signup_settings_returns(), $result);

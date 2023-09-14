@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// disable moodle specific debug messages and any errors in output
+// disable powereduc specific debug messages and any errors in output
 define('NO_DEBUG_DISPLAY', true);
 
 require_once('config.php');
@@ -41,16 +41,16 @@ $forcedownload = optional_param('forcedownload', 0, PARAM_BOOL);
 
 // relative path must start with '/', because of backup/restore!!!
 if (!$relativepath) {
-    throw new \moodle_exception('invalidargorconf');
+    throw new \powereduc_exception('invalidargorconf');
 } else if ($relativepath[0] != '/') {
-    throw new \moodle_exception('pathdoesnotstartslash');
+    throw new \powereduc_exception('pathdoesnotstartslash');
 }
 
 // extract relative path components
 $args = explode('/', ltrim($relativepath, '/'));
 
 if (count($args) == 0) { // always at least courseid, may search for index.html in course root
-    throw new \moodle_exception('invalidarguments');
+    throw new \powereduc_exception('invalidarguments');
 }
 
 $courseid = (int)array_shift($args);

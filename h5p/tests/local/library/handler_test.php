@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core_h5p
  * @category   test
- * @copyright  2020 Sara Arjona <sara@moodle.com>
+ * @copyright  2020 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,7 +31,7 @@ use advanced_testcase;
  * Test class covering the H5P library handler.
  *
  * @package    core_h5p
- * @copyright  2020 Sara Arjona <sara@moodle.com>
+ * @copyright  2020 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class handler_test extends advanced_testcase {

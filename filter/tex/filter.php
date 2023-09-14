@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -94,11 +94,11 @@ function filter_text_image($imagefile, $tex, $height, $width, $align, $alt) {
     }
     $anchorcontents .= "\" $style/>";
 
-    if (!file_exists("$CFG->dataroot/filter/tex/$imagefile") && has_capability('moodle/site:config', context_system::instance())) {
+    if (!file_exists("$CFG->dataroot/filter/tex/$imagefile") && has_capability('powereduc/site:config', context_system::instance())) {
         $link = '/filter/tex/texdebug.php';
         $action = null;
     } else {
-        $link = new moodle_url('/filter/tex/displaytex.php', array('texexp'=>$tex));
+        $link = new powereduc_url('/filter/tex/displaytex.php', array('texexp'=>$tex));
         $action = new popup_action('click', $link, 'popup', array('width'=>320,'height'=>240));
     }
     $output = $OUTPUT->action_link($link, $anchorcontents, $action, array('title'=>'TeX')); //TODO: the popups do not work when text caching is enabled!!
@@ -111,7 +111,7 @@ function filter_text_image($imagefile, $tex, $height, $width, $align, $alt) {
 /**
  * TeX filtering class.
  */
-class filter_tex extends moodle_text_filter {
+class filter_tex extends powereduc_text_filter {
     function filter($text, array $options = array()) {
 
         global $CFG, $DB;
@@ -125,7 +125,7 @@ class filter_tex extends moodle_text_filter {
             return $text;
         }
 
-#    //restrict filtering to forum 130 (Maths Tools on moodle.org)
+#    //restrict filtering to forum 130 (Maths Tools on powereduc.org)
 #    $scriptname = $_SERVER['SCRIPT_NAME'];
 #    if (!strstr($scriptname,'/forum/')) {
 #        return $text;

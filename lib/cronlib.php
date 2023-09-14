@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Cron functions.
@@ -34,8 +34,8 @@ function cron_run() {
         exit(1);
     }
 
-    if (moodle_needs_upgrading()) {
-        echo "Moodle upgrade pending, cron execution suspended.\n";
+    if (powereduc_needs_upgrading()) {
+        echo "PowerEduc upgrade pending, cron execution suspended.\n";
         exit(1);
     }
 
@@ -87,7 +87,7 @@ function cron_run() {
  * Execute all queued scheduled tasks, applying necessary concurrency limits and time limits.
  *
  * @param   int     $timenow The time this process started.
- * @throws \moodle_exception
+ * @throws \powereduc_exception
  */
 function cron_run_scheduled_tasks(int $timenow) {
     // Allow a restriction on the number of scheduled task runners at once.
@@ -137,7 +137,7 @@ function cron_run_scheduled_tasks(int $timenow) {
  * @param   int     $timenow The time this process started.
  * @param   int     $keepalive Keep this function alive for N seconds and poll for new adhoc tasks.
  * @param   bool    $checklimits Should we check limits?
- * @throws \moodle_exception
+ * @throws \powereduc_exception
  */
 function cron_run_adhoc_tasks(int $timenow, $keepalive = 0, $checklimits = true) {
     // Allow a restriction on the number of adhoc task runners at once.
@@ -325,7 +325,7 @@ function cron_run_inner_adhoc_task(\core\task\adhoc_task $task) {
             // User found. Check that they are suitable.
             try {
                 \core_user::require_active_user($user, true, true);
-            } catch (moodle_exception $e) {
+            } catch (powereduc_exception $e) {
                 mtrace("User {$userid} cannot be used to run an adhoc task: " . get_class($task) . ". Cancelling task.");
                 $user = null;
             }
@@ -459,7 +459,7 @@ function cron_prepare_core_renderer($restore = false) {
         // Setup a new General renderer.
         // Cron tasks may produce output to be used in web, so we must use the appropriate renderer target.
         // This allows correct use of templates, etc.
-        $PAGE = new \moodle_page();
+        $PAGE = new \powereduc_page();
         $OUTPUT = new \core_renderer($PAGE, RENDERER_TARGET_GENERAL);
     }
 }

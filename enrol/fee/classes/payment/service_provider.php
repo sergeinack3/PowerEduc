@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    enrol_fee
  * @category   payment
- * @copyright  2020 Shamim Rezaie <shamim@moodle.com>
+ * @copyright  2020 Shamim Rezaie <shamim@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,7 +28,7 @@ namespace enrol_fee\payment;
 /**
  * Payment subsystem callback implementation for enrol_fee.
  *
- * @copyright  2020 Shamim Rezaie <shamim@moodle.com>
+ * @copyright  2020 Shamim Rezaie <shamim@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class service_provider implements \core_payment\local\callback\service_provider {
@@ -54,14 +54,14 @@ class service_provider implements \core_payment\local\callback\service_provider 
      *
      * @param string $paymentarea Payment area
      * @param int $instanceid The enrolment instance id
-     * @return \moodle_url
+     * @return \powereduc_url
      */
-    public static function get_success_url(string $paymentarea, int $instanceid): \moodle_url {
+    public static function get_success_url(string $paymentarea, int $instanceid): \powereduc_url {
         global $DB;
 
         $courseid = $DB->get_field('enrol', 'courseid', ['enrol' => 'fee', 'id' => $instanceid], MUST_EXIST);
 
-        return new \moodle_url('/course/view.php', ['id' => $courseid]);
+        return new \powereduc_url('/course/view.php', ['id' => $courseid]);
     }
 
     /**

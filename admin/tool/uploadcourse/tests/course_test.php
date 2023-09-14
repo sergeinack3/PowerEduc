@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -45,7 +45,7 @@ class course_test extends \advanced_testcase {
         $data = array();
         $co = new tool_uploadcourse_course($mode, $updatemode, $data);
         $this->assertFalse($co->prepare());
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $co->proceed();
     }
 
@@ -155,7 +155,7 @@ class course_test extends \advanced_testcase {
         // Assign the user as a manager of the category, disable ability to configure course content download.
         $roleid = $DB->get_field('role', 'id', ['shortname' => 'manager']);
         role_assign($roleid, $user->id, $categorycontext);
-        role_change_permission($roleid, $categorycontext, 'moodle/course:configuredownloadcontent', CAP_PROHIBIT);
+        role_change_permission($roleid, $categorycontext, 'powereduc/course:configuredownloadcontent', CAP_PROHIBIT);
 
         $mode = tool_uploadcourse_processor::MODE_CREATE_NEW;
         $updatemode = tool_uploadcourse_processor::UPDATE_NOTHING;
@@ -247,7 +247,7 @@ class course_test extends \advanced_testcase {
         global $DB;
         $this->resetAfterTest(true);
         $updatemode = tool_uploadcourse_processor::UPDATE_NOTHING;
-        $defaultnumsections = get_config('moodlecourse', 'numsections');
+        $defaultnumsections = get_config('powereduccourse', 'numsections');
 
         // Add new course, make sure default number of sections is created.
         $mode = tool_uploadcourse_processor::MODE_CREATE_NEW;
@@ -399,7 +399,7 @@ class course_test extends \advanced_testcase {
         global $DB;
 
         $this->resetAfterTest(true);
-        $this->setAdminUser(); // To avoid warnings related to 'moodle/course:setforcedlanguage' capability check.
+        $this->setAdminUser(); // To avoid warnings related to 'powereduc/course:setforcedlanguage' capability check.
 
         set_config('downloadcoursecontentallowed', 1);
 

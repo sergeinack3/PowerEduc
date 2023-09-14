@@ -1,9 +1,9 @@
-YUI.add('moodle-tool_capability-search', function (Y, NAME) {
+YUI.add('powereduc-tool_capability-search', function (Y, NAME) {
 
 /**
  * This file contains the capability overview search functionality.
  *
- * @module moodle-tool_capability-search
+ * @module powereduc-tool_capability-search
  */
 
 /**

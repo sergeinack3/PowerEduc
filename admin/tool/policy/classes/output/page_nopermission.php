@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,21 +19,21 @@
  *
  * @package     tool_policy
  * @category    output
- * @copyright   2018 Sara Arjona <sara@moodle.com>
+ * @copyright   2018 Sara Arjona <sara@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace tool_policy\output;
 
 use core\session\manager;
-use moodle_exception;
+use powereduc_exception;
 
 defined('POWEREDUC_INTERNAL') || die();
 
 use context_system;
 use core_user;
 use html_writer;
-use moodle_url;
+use powereduc_url;
 use renderable;
 use renderer_base;
 use templatable;
@@ -45,7 +45,7 @@ use tool_policy\policy_version;
  *
  * This is used when a user has no permission to agree to policies or accept policies on behalf of defined behalfid.
  *
- * @copyright 2018 Sara Arjona <sara@moodle.com>
+ * @copyright 2018 Sara Arjona <sara@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class page_nopermission implements renderable, templatable {
@@ -103,7 +103,7 @@ class page_nopermission implements renderable, templatable {
     protected function prepare_global_page_access() {
         global $PAGE, $SITE, $USER;
 
-        $myurl = new moodle_url('/admin/tool/policy/index.php', [
+        $myurl = new powereduc_url('/admin/tool/policy/index.php', [
             'behalfid' => $this->behalfid,
         ]);
 
@@ -116,7 +116,7 @@ class page_nopermission implements renderable, templatable {
         $PAGE->set_url($myurl);
         $PAGE->set_heading($SITE->fullname);
         $PAGE->set_title(get_string('policiesagreements', 'tool_policy'));
-        $PAGE->navbar->add(get_string('policiesagreements', 'tool_policy'), new moodle_url('/admin/tool/policy/index.php'));
+        $PAGE->navbar->add(get_string('policiesagreements', 'tool_policy'), new powereduc_url('/admin/tool/policy/index.php'));
     }
 
     /**
@@ -129,7 +129,7 @@ class page_nopermission implements renderable, templatable {
         global $OUTPUT;
 
         $data = (object) [
-            'pluginbaseurl' => (new moodle_url('/admin/tool/policy'))->out(false),
+            'pluginbaseurl' => (new powereduc_url('/admin/tool/policy'))->out(false),
             'haspermissionagreedocs' => $this->haspermissionagreedocs,
             'supportemail' => $OUTPUT->supportemail(['class' => 'font-weight-bold'])
         ];
@@ -140,8 +140,8 @@ class page_nopermission implements renderable, templatable {
         if (!$this->haspermissionagreedocs) {
             if (!empty($this->behalfuser)) {
                 // If viewing docs in behalf of other user, get his/her full name and profile link.
-                $userfullname = fullname($this->behalfuser, has_capability('moodle/site:viewfullnames', \context_system::instance())
-                    || has_capability('moodle/site:viewfullnames', \context_user::instance($this->behalfid)));
+                $userfullname = fullname($this->behalfuser, has_capability('powereduc/site:viewfullnames', \context_system::instance())
+                    || has_capability('powereduc/site:viewfullnames', \context_user::instance($this->behalfid)));
                 $data->behalfuser = html_writer::link(\context_user::instance($this->behalfid)->get_url(), $userfullname);
 
                 $messagetitle = get_string('nopermissiontoagreedocsbehalf', 'tool_policy');
@@ -158,7 +158,7 @@ class page_nopermission implements renderable, templatable {
         $policieslinks = array();
         foreach ($this->policies as $policyversion) {
             // Get a link to display the full policy document.
-            $policyurl = new moodle_url('/admin/tool/policy/view.php',
+            $policyurl = new powereduc_url('/admin/tool/policy/view.php',
                 array('policyid' => $policyversion->policyid, 'returnurl' => qualified_me()));
             $policyattributes = array('data-action' => 'view',
                                       'data-versionid' => $policyversion->id,

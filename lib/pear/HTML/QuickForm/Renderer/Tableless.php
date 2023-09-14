@@ -125,7 +125,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
     public function HTML_QuickForm_Renderer_Tableless() {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
@@ -195,7 +195,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
             } else {
                 $id = $element->getName();
             }
-            if (!empty($id) and !is_a($element, 'MoodleQuickForm_group') and !is_a($element, 'HTML_QuickForm_static')) { // moodle hack
+            if (!empty($id) and !is_a($element, 'PowerEducQuickForm_group') and !is_a($element, 'HTML_QuickForm_static')) { // powereduc hack
                 $html = str_replace('<label', '<label for="' . $id . '"', $html);
                 $element_html = preg_replace('#name="' . $id . '#',
                                              'id="' . $id . '" name="' . $id . '',

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Customfield component provider class
  *
  * @package   core_customfield
- * @copyright 2018 David Matamoros <davidmc@moodle.com>
+ * @copyright 2018 David Matamoros <davidmc@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -43,7 +43,7 @@ use core_privacy\manager;
  * export/delete user data.
  *
  * @package core_customfield
- * @copyright 2018 David Matamoros <davidmc@moodle.com>
+ * @copyright 2018 David Matamoros <davidmc@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements

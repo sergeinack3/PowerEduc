@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -61,7 +61,7 @@ class course_module_name extends \core\output\inplace_editable {
         $value = $cm->name;
         $edithint = new lang_string('edittitle');
         $editlabel = new lang_string('newactivityname', '', $cm->get_formatted_name());
-        $editable = $editable && has_capability('moodle/course:manageactivities',
+        $editable = $editable && has_capability('powereduc/course:manageactivities',
                     context_module::instance($cm->id));
         parent::__construct(
             'core_course', 'activityname', $cm->id, $editable, $value, $value, $edithint, $editlabel);
@@ -94,7 +94,7 @@ class course_module_name extends \core\output\inplace_editable {
         $context = context_module::instance($itemid);
         // Check access.
         \external_api::validate_context($context);
-        require_capability('moodle/course:manageactivities', $context);
+        require_capability('powereduc/course:manageactivities', $context);
 
         // Trim module name and Update value.
         set_coursemodule_name($itemid, trim($newvalue));

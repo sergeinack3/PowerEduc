@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@ if (empty($courseid)) {
             $choose = true;
         } else {
             // return error.
-            throw new \moodle_exception('rulenopermission', 'tool_monitor');
+            throw new \powereduc_exception('rulenopermission', 'tool_monitor');
         }
     }
 } else {
@@ -67,7 +67,7 @@ if (!get_config('tool_monitor', 'enablemonitor')) {
 $PAGE->set_context(context_user::instance($USER->id));
 
 // Set up the page.
-$indexurl = new moodle_url('/admin/tool/monitor/index.php', array('courseid' => $courseid));
+$indexurl = new powereduc_url('/admin/tool/monitor/index.php', array('courseid' => $courseid));
 $PAGE->set_url($indexurl);
 $PAGE->set_pagelayout('report');
 $PAGE->set_title(get_string('managesubscriptions', 'tool_monitor'));
@@ -90,14 +90,14 @@ if (!empty($action)) {
         case 'unsubscribe' :
             // If the subscription does not exist, then redirect back as the subscription must have already been deleted.
             if (!$subscription = $DB->record_exists('tool_monitor_subscriptions', array('id' => $subscriptionid))) {
-                redirect(new moodle_url('/admin/tool/monitor/index.php', array('courseid' => $courseid)));
+                redirect(new powereduc_url('/admin/tool/monitor/index.php', array('courseid' => $courseid)));
             }
 
             // Set the URLs.
-            $confirmurl = new moodle_url('/admin/tool/monitor/index.php', array('subscriptionid' => $subscriptionid,
+            $confirmurl = new powereduc_url('/admin/tool/monitor/index.php', array('subscriptionid' => $subscriptionid,
                 'courseid' => $courseid, 'action' => 'unsubscribe', 'confirm' => true,
                 'sesskey' => sesskey()));
-            $cancelurl = new moodle_url('/admin/tool/monitor/index.php', array('subscriptionid' => $subscriptionid,
+            $cancelurl = new powereduc_url('/admin/tool/monitor/index.php', array('subscriptionid' => $subscriptionid,
                 'courseid' => $courseid, 'sesskey' => sesskey()));
             if ($confirm) {
                 \tool_monitor\subscription_manager::delete_subscription($subscriptionid);
@@ -151,7 +151,7 @@ if (empty($totalrules)) {
     echo html_writer::start_div();
     echo html_writer::tag('span', get_string('norules', 'tool_monitor'));
     if ($canmanagerules) {
-        $manageurl = new moodle_url("/admin/tool/monitor/managerules.php", array('courseid' => $courseid));
+        $manageurl = new powereduc_url("/admin/tool/monitor/managerules.php", array('courseid' => $courseid));
         $a = html_writer::link($manageurl, get_string('managerules', 'tool_monitor'));
         $link = "&nbsp;";
         $link .= html_writer::tag('span', get_string('manageruleslink', 'tool_monitor', $a));
@@ -159,7 +159,7 @@ if (empty($totalrules)) {
     }
     echo html_writer::end_div();
 } else if ($canmanagerules) {
-    $manageurl = new moodle_url("/admin/tool/monitor/managerules.php", array('courseid' => $courseid));
+    $manageurl = new powereduc_url("/admin/tool/monitor/managerules.php", array('courseid' => $courseid));
     echo $renderer->render_rules_link($manageurl);
 }
 echo $OUTPUT->footer();

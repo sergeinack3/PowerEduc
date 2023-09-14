@@ -1,5 +1,5 @@
 {
-  "moodle-core-maintenancemodetimer": {
+  "powereduc-core-maintenancemodetimer": {
     "requires": [
         "base",
         "node"

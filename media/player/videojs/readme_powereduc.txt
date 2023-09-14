@@ -2,7 +2,7 @@ VideoJS 7.20.3
 --------------
 https://github.com/videojs/video.js
 
-Instructions to import VideoJS player into Moodle:
+Instructions to import VideoJS player into PowerEduc:
 
 1. Download the latest release from https://github.com/videojs/video.js/releases
    (do not choose "Source code")
@@ -10,7 +10,7 @@ Instructions to import VideoJS player into Moodle:
 3. copy 'font/' into 'fonts/' folder
 4. copy 'video-js.css' into 'styles.css'
    Add /* stylelint-disable */ in the beginning.
-   Maintain the css after  "/* Modifications of player made by Moodle: */" to the end of the styles file.
+   Maintain the css after  "/* Modifications of player made by PowerEduc: */" to the end of the styles file.
    Check status of:
    https://github.com/videojs/video.js/issues/2777
 6. copy 'lang/' into 'videojs/' subfolder (so the result will be media/player/videojs/videojs/lang).

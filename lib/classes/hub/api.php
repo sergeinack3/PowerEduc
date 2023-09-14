@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Class communication
@@ -25,11 +25,11 @@
 namespace core\hub;
 defined('POWEREDUC_INTERNAL') || die();
 
-use moodle_exception;
+use powereduc_exception;
 use curl;
 use stdClass;
 use coding_exception;
-use moodle_url;
+use powereduc_url;
 
 /**
  * Provides methods to communicate with the hub (sites directory) web services.
@@ -56,7 +56,7 @@ class api {
      * @param array $data parameters of WS function
      * @param bool $allowpublic allow request without registration on the hub
      * @return mixed depends on the function
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected static function call($function, array $data = [], $allowpublic = false) {
 
@@ -76,13 +76,13 @@ class api {
      * @param string $function
      * @param array $data
      * @return mixed
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected static function call_rest($token, $function, array $data) {
         $params = [
                 'wstoken' => $token,
                 'wsfunction' => $function,
-                'moodlewsrestformat' => 'json'
+                'powereducwsrestformat' => 'json'
             ] + $data;
 
         $curl = new curl();
@@ -92,12 +92,12 @@ class api {
         $info = $curl->get_info();
         if ($curl->get_errno()) {
             // Connection error.
-            throw new moodle_exception('errorconnect', 'hub', '', $curl->error);
+            throw new powereduc_exception('errorconnect', 'hub', '', $curl->error);
         } else if (isset($curloutput['exception'])) {
             // Exception occurred on the remote side.
             self::process_curl_exception($token, $curloutput);
         } else if ($info['http_code'] != 200) {
-            throw new moodle_exception('errorconnect', 'hub', '', $info['http_code']);
+            throw new powereduc_exception('errorconnect', 'hub', '', $info['http_code']);
         } else {
             return $curloutput;
         }
@@ -108,7 +108,7 @@ class api {
      *
      * @param string $token token used for CURL request
      * @param array $curloutput output from CURL request
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected static function process_curl_exception($token, $curloutput) {
         if (!isset($curloutput['exception'])) {
@@ -116,21 +116,21 @@ class api {
         }
         if ($token === registration::get_token()) {
             // Check if registration token was rejected or there are other problems with registration.
-            if (($curloutput['exception'] === 'moodle_exception' && $curloutput['errorcode'] === 'invalidtoken')
+            if (($curloutput['exception'] === 'powereduc_exception' && $curloutput['errorcode'] === 'invalidtoken')
                     || $curloutput['exception'] === 'registration_exception') {
                 // Force admin to repeat site registration process.
                 registration::reset_token();
-                throw new moodle_exception('errorwstokenreset', 'hub', '', $curloutput['message']);
+                throw new powereduc_exception('errorwstokenreset', 'hub', '', $curloutput['message']);
             }
         }
-        throw new moodle_exception('errorws', 'hub', '', $curloutput['message']);
+        throw new powereduc_exception('errorws', 'hub', '', $curloutput['message']);
     }
 
     /**
      * Update site registration on the hub.
      *
      * @param array $siteinfo
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function update_registration(array $siteinfo) {
         $params = array('siteinfo' => $siteinfo, 'validateurl' => 1);
@@ -143,23 +143,23 @@ class api {
      * Example of the return array:
      * {
      *     "courses": 384,
-     *     "description": "Official Moodle sites directory.",
+     *     "description": "Official PowerEduc sites directory.",
      *     "downloadablecourses": 0,
      *     "enrollablecourses": 0,
      *     "hublogo": 1,
      *     "language": "en",
-     *     "name": "moodle",
+     *     "name": "powereduc",
      *     "sites": 274175,
-     *     "url": "https://stats.moodle.org",
-     *     "imgurl": "https://stats.moodle.org/local/hub/webservice/download.php?filetype=hubscreenshot"
+     *     "url": "https://stats.powereduc.org",
+     *     "imgurl": "https://stats.powereduc.org/local/hub/webservice/download.php?filetype=hubscreenshot"
      * }
      *
      * @return array
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_hub_info() {
         $info = self::call('hub_get_info', [], true);
-        $info['imgurl'] = new moodle_url(HUB_POWEREDUCORGHUBURL . '/local/hub/webservice/download.php',
+        $info['imgurl'] = new powereduc_url(HUB_POWEREDUCORGHUBURL . '/local/hub/webservice/download.php',
             ['filetype' => self::HUB_HUBSCREENSHOT_FILE_TYPE]);
         return $info;
     }
@@ -167,7 +167,7 @@ class api {
     /**
      * Calls WS function hub_get_courses
      *
-     * @deprecated since Moodle 3.8. Moodle.net has been sunsetted making this function useless.
+     * @deprecated since PowerEduc 3.8. PowerEduc.net has been sunsetted making this function useless.
      *
      * Parameter $options may have any of these fields:
      * [
@@ -243,8 +243,8 @@ class api {
      * ]
      *
      * Additional fields for each course:
-     *      'screenshotbaseurl' (moodle_url) URL of the first screenshot, only set if $course['screenshots']>0
-     *      'commenturl' (moodle_url) URL for comments
+     *      'screenshotbaseurl' (powereduc_url) URL of the first screenshot, only set if $course['screenshots']>0
+     *      'commenturl' (powereduc_url) URL for comments
      *
      * @param string $search search string
      * @param bool $downloadable return downloadable courses
@@ -254,17 +254,17 @@ class api {
      *              'educationallevel', 'language', 'orderby', 'givememore', 'allsitecourses'
      * @return array of two elements: [$courses, $coursetotal]
      * @throws \coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_courses($search, $downloadable, $enrollable, $options) {
-        debugging("This function has been deprecated as part of the Moodle.net sunsetting process.");
+        debugging("This function has been deprecated as part of the PowerEduc.net sunsetting process.");
         return [[], 0];
     }
 
     /**
      * Unregister the site
      *
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function unregister_site() {
         global $CFG;
@@ -274,19 +274,19 @@ class api {
     /**
      * Unpublish courses
      *
-     * @deprecated since Moodle 3.8. Moodle.net has been sunsetted making this function useless.
+     * @deprecated since PowerEduc 3.8. PowerEduc.net has been sunsetted making this function useless.
      *
      * @param int[]|int $courseids
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function unregister_courses($courseids) {
-        debugging("This function has been deprecated as part of the Moodle.net sunsetting process.");
+        debugging("This function has been deprecated as part of the PowerEduc.net sunsetting process.");
     }
 
     /**
      * Publish one course
      *
-     * @deprecated since Moodle 3.8. Moodle.net has been sunsetted making this function useless.
+     * @deprecated since PowerEduc 3.8. PowerEduc.net has been sunsetted making this function useless.
      *
      * Expected contents of $courseinfo:
      * [
@@ -326,47 +326,47 @@ class api {
      *
      * @param array|\stdClass $courseinfo
      * @return int id of the published course on the hub
-     * @throws moodle_exception if the communication with the hub failed or the course could not be published
+     * @throws powereduc_exception if the communication with the hub failed or the course could not be published
      */
     public static function register_course($courseinfo) {
-        debugging("This function has been deprecated as part of the Moodle.net sunsetting process.");
-        throw new moodle_exception('errorcoursewronglypublished', 'hub');
+        debugging("This function has been deprecated as part of the PowerEduc.net sunsetting process.");
+        throw new powereduc_exception('errorcoursewronglypublished', 'hub');
     }
 
     /**
      * Uploads a screenshot for the published course
      *
-     * @deprecated since Moodle 3.8. Moodle.net has been sunsetted making this function useless.
+     * @deprecated since PowerEduc 3.8. PowerEduc.net has been sunsetted making this function useless.
      *
      * @param int $hubcourseid id of the published course on the hub, it must be published from this site
      * @param \stored_file $file
      * @param int $screenshotnumber ordinal number of the screenshot
      */
     public static function add_screenshot($hubcourseid, \stored_file $file, $screenshotnumber) {
-        debugging("This function has been deprecated as part of the Moodle.net sunsetting process.");
+        debugging("This function has been deprecated as part of the PowerEduc.net sunsetting process.");
     }
 
     /**
      * Downloads course backup
      *
-     * @deprecated since Moodle 3.8. Moodle.net has been sunsetted making this function useless.
+     * @deprecated since PowerEduc 3.8. PowerEduc.net has been sunsetted making this function useless.
      *
      * @param int $hubcourseid id of the course on the hub
      * @param string $path local path (in tempdir) to save the downloaded backup to.
      */
     public static function download_course_backup($hubcourseid, $path) {
-        debugging("This function has been deprecated as part of the Moodle.net sunsetting process.");
+        debugging("This function has been deprecated as part of the PowerEduc.net sunsetting process.");
     }
 
     /**
      * Uploads a course backup
      *
-     * @deprecated since Moodle 3.8. Moodle.net has been sunsetted making this function useless.
+     * @deprecated since PowerEduc 3.8. PowerEduc.net has been sunsetted making this function useless.
      *
      * @param int $hubcourseid id of the published course on the hub, it must be published from this site
      * @param \stored_file $backupfile
      */
     public static function upload_course_backup($hubcourseid, \stored_file $backupfile) {
-        debugging("This function has been deprecated as part of the Moodle.net sunsetting process.");
+        debugging("This function has been deprecated as part of the PowerEduc.net sunsetting process.");
     }
 }

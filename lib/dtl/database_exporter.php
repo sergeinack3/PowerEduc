@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * General database export class
@@ -38,7 +38,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * @see export_table_data for the same table.
  */
 abstract class database_exporter {
-    /** @var moodle_database Connection to the source database (a @see moodle_database object). */
+    /** @var powereduc_database Connection to the source database (a @see powereduc_database object). */
     protected $mdb;
     /** @var database_manager Database manager of the source database (a @see database_manager object). */
     protected $manager;
@@ -55,13 +55,13 @@ abstract class database_exporter {
     /**
      * Object constructor.
      *
-     * @param moodle_database $mdb Connection to the source database (a
-     * @see moodle_database object).
+     * @param powereduc_database $mdb Connection to the source database (a
+     * @see powereduc_database object).
      * @param boolean $check_schema - whether or not to check that XML database
      * schema matches the RDBMS database schema before exporting (used by
      * @see export_database).
      */
-    public function __construct(moodle_database $mdb, $check_schema=true) {
+    public function __construct(powereduc_database $mdb, $check_schema=true) {
         $this->mdb          = $mdb;
         $this->manager      = $mdb->get_manager();
         $this->schema       = $this->manager->get_install_xml_schema();
@@ -74,7 +74,7 @@ abstract class database_exporter {
      * basic database information (version and timestamp).
      *
      * @param float $version the version of the system which generating the data
-     * @param string $release moodle release info
+     * @param string $release powereduc release info
      * @param string $timestamp the timestamp of the data (in ISO 8601) format.
      * @param string $description a user description of the data.
      * @return void

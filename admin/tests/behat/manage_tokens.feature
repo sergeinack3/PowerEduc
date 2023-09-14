@@ -42,7 +42,7 @@ Feature: Manage external services tokens
     And the following "core_webservice > Tokens" exist:
       | user      | service                       |
       | user2     | siteinfo                      |
-      | user3     | moodle_mobile_app             |
+      | user3     | powereduc_mobile_app             |
       | user4     | siteinfo                      |
     When I log in as "admin"
     And I navigate to "Server > Web services > Manage tokens" in site administration

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * The langimport langpack removed event.
  *
  * @package    tool_langimport
- * @copyright  2014 Dan Poltawski <dan@moodle.com>
+ * @copyright  2014 Dan Poltawski <dan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -37,7 +37,7 @@ defined('POWEREDUC_INTERNAL') || die();
  *
  * @package    tool_langimport
  * @since      Moodle 2.8
- * @copyright  2014 Dan Poltawski <dan@moodle.com>
+ * @copyright  2014 Dan Poltawski <dan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class langpack_removed extends \core\event\base {
@@ -80,10 +80,10 @@ class langpack_removed extends \core\event\base {
     /**
      * Returns relevant URL.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_url() {
-        return new \moodle_url('/admin/tool/langimport/');
+        return new \powereduc_url('/admin/tool/langimport/');
     }
 
     /**

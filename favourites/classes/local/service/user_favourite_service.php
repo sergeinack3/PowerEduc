@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -66,7 +66,7 @@ class user_favourite_service {
      * @param \context $context the context in which the item is to be favourited.
      * @param int|null $ordering optional ordering integer used for sorting the favourites in an area.
      * @return favourite the favourite, once created.
-     * @throws \moodle_exception if the component name is invalid, or if the repository encounters any errors.
+     * @throws \powereduc_exception if the component name is invalid, or if the repository encounters any errors.
      */
     public function create_favourite(string $component, string $itemtype, int $itemid, \context $context,
             int $ordering = null) : favourite {
@@ -74,7 +74,7 @@ class user_favourite_service {
 
         // Validate the component name.
         if (!in_array($component, \core_component::get_component_names())) {
-            throw new \moodle_exception("Invalid component name '$component'");
+            throw new \powereduc_exception("Invalid component name '$component'");
         }
 
         $favourite = new favourite($component, $itemtype, $itemid, $context->id, $this->userid);
@@ -93,11 +93,11 @@ class user_favourite_service {
      * @param int $limitfrom optional pagination control for returning a subset of records, starting at this point.
      * @param int $limitnum optional pagination control for returning a subset comprising this many records.
      * @return array the list of favourites found.
-     * @throws \moodle_exception if the component name is invalid, or if the repository encounters any errors.
+     * @throws \powereduc_exception if the component name is invalid, or if the repository encounters any errors.
      */
     public function find_favourites_by_type(string $component, string $itemtype, int $limitfrom = 0, int $limitnum = 0) : array {
         if (!in_array($component, \core_component::get_component_names())) {
-            throw new \moodle_exception("Invalid component name '$component'");
+            throw new \powereduc_exception("Invalid component name '$component'");
         }
         return $this->repo->find_by(
             [
@@ -121,11 +121,11 @@ class user_favourite_service {
      * @param int $limitfrom optional pagination control for returning a subset of records, starting at this point.
      * @param int $limitnum optional pagination control for returning a subset comprising this many records.
      * @return array the list of favourites found.
-     * @throws \moodle_exception if the component name is invalid, or if the repository encounters any errors.
+     * @throws \powereduc_exception if the component name is invalid, or if the repository encounters any errors.
      */
     public function find_all_favourites(string $component, array $itemtypes = [], int $limitfrom = 0, int $limitnum = 0) : array {
         if (!in_array($component, \core_component::get_component_names())) {
-            throw new \moodle_exception("Invalid component name '$component'");
+            throw new \powereduc_exception("Invalid component name '$component'");
         }
         $params = [
             'userid' => $this->userid,
@@ -196,18 +196,18 @@ class user_favourite_service {
      * @param string $itemtype the type of the favourited item.
      * @param int $itemid the id of the item which was favourited (not the favourite's id).
      * @param \context $context the context of the item which was favourited.
-     * @throws \moodle_exception if the user does not control the favourite, or it doesn't exist.
+     * @throws \powereduc_exception if the user does not control the favourite, or it doesn't exist.
      */
     public function delete_favourite(string $component, string $itemtype, int $itemid, \context $context) {
         if (!in_array($component, \core_component::get_component_names())) {
-            throw new \moodle_exception("Invalid component name '$component'");
+            throw new \powereduc_exception("Invalid component name '$component'");
         }
 
         // Business logic: check the user owns the favourite.
         try {
             $favourite = $this->repo->find_favourite($this->userid, $component, $itemtype, $itemid, $context->id);
-        } catch (\moodle_exception $e) {
-            throw new \moodle_exception("Favourite does not exist for the user. Cannot delete.");
+        } catch (\powereduc_exception $e) {
+            throw new \powereduc_exception("Favourite does not exist for the user. Cannot delete.");
         }
 
         $this->repo->delete($favourite->id);

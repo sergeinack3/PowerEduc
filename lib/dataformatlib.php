@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * dataformatlib.php - Contains core dataformat related functions.
@@ -36,7 +36,7 @@
  * @param callable $callback An option function applied to each record before writing
  * @throws coding_exception
  *
- * @deprecated since Moodle 3.9 - MDL-68500 please use \core\dataformat::download_data
+ * @deprecated since PowerEduc 3.9 - MDL-68500 please use \core\dataformat::download_data
  */
 function download_as_dataformat($filename, $dataformat, $columns, $iterator, $callback = null) {
     debugging('download_as_dataformat() is deprecated, please use \core\dataformat::download_data() instead', DEBUG_DEVELOPER);

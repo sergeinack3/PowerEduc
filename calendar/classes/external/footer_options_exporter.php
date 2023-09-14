@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Class for exporting calendar footer view options data.
  *
  * @package    core_calendar
- * @copyright  2017 Simey Lameze <simey@moodle.com>
+ * @copyright  2017 Simey Lameze <simey@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace core_calendar\external;
@@ -28,7 +28,7 @@ defined('POWEREDUC_INTERNAL') || die();
 use core\external\exporter;
 use renderer_base;
 use stdClass;
-use moodle_url;
+use powereduc_url;
 
 /**
  * Class for exporting calendar footer view options data.
@@ -82,7 +82,7 @@ class footer_options_exporter extends exporter {
      */
     protected function get_manage_subscriptions_link(): ?string {
         if (calendar_user_can_add_event($this->calendar->course)) {
-            $managesubscriptionurl = new moodle_url('/calendar/managesubscriptions.php');
+            $managesubscriptionurl = new powereduc_url('/calendar/managesubscriptions.php');
             return $managesubscriptionurl->out(true);
         }
         return null;
@@ -145,7 +145,7 @@ class footer_options_exporter extends exporter {
      * @return string The calendar URL.
      */
     public function get_calendar_url() {
-        $url = new moodle_url('/calendar/view.php', [
+        $url = new powereduc_url('/calendar/view.php', [
             'view' => 'month',
             'time' => $this->calendar->time,
         ]);

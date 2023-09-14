@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * DML read/read-write database handle tests for mysqli_native_moodle_database
+ * DML read/read-write database handle tests for mysqli_native_powereduc_database
  *
  * @package    core
  * @category   dml
@@ -25,20 +25,20 @@
 
 namespace core;
 
-use moodle_database;
+use powereduc_database;
 
 defined('POWEREDUC_INTERNAL') || die();
 
-require_once(__DIR__.'/fixtures/read_slave_moodle_database_mock_mysqli.php');
+require_once(__DIR__.'/fixtures/read_slave_powereduc_database_mock_mysqli.php');
 
 /**
- * DML mysqli_native_moodle_database read slave specific tests
+ * DML mysqli_native_powereduc_database read slave specific tests
  *
  * @package    core
  * @category   dml
  * @copyright  2018 Catalyst IT
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @covers     \mysqli_native_moodle_database
+ * @covers     \mysqli_native_powereduc_database
  */
 class dml_mysqli_read_slave_test extends \base_testcase {
     /**
@@ -48,7 +48,7 @@ class dml_mysqli_read_slave_test extends \base_testcase {
      * @return void
      */
     public function test_lock(): void {
-        $DB = new read_slave_moodle_database_mock_mysqli();
+        $DB = new read_slave_powereduc_database_mock_mysqli();
 
         $this->assertEquals(0, $DB->perf_get_reads_slave());
 
@@ -87,7 +87,7 @@ class dml_mysqli_read_slave_test extends \base_testcase {
         $cfg->dboptions['bulkinsertsize'] = null;
 
         // Get a separate disposable db connection handle with guaranteed 'readonly' config.
-        $db2 = moodle_database::get_driver_instance($cfg->dbtype, $cfg->dblibrary);
+        $db2 = powereduc_database::get_driver_instance($cfg->dbtype, $cfg->dblibrary);
         $db2->connect($cfg->dbhost, $cfg->dbuser, $cfg->dbpass, $cfg->dbname, $cfg->prefix, $cfg->dboptions);
 
         $reads = $db2->perf_get_reads();
@@ -114,7 +114,7 @@ class dml_mysqli_read_slave_test extends \base_testcase {
         // Readwrite handle queries.
 
         if (PHP_INT_SIZE !== 4) {
-            $rc = new \ReflectionClass(\mysqli_native_moodle_database::class);
+            $rc = new \ReflectionClass(\mysqli_native_powereduc_database::class);
             $rcm = $rc->getMethod('insert_chunk_size');
 
             $rcm->setAccessible(true);
@@ -158,7 +158,7 @@ class dml_mysqli_read_slave_test extends \base_testcase {
             'connecttimeout' => 1
         ];
 
-        $db2 = moodle_database::get_driver_instance($cfg->dbtype, $cfg->dblibrary);
+        $db2 = powereduc_database::get_driver_instance($cfg->dbtype, $cfg->dblibrary);
         $db2->connect($cfg->dbhost, $cfg->dbuser, $cfg->dbpass, $cfg->dbname, $cfg->prefix, $cfg->dboptions);
         $this->assertTrue(count($db2->get_records('user')) > 0);
     }

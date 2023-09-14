@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * @package   moodlecore
+ * @package   powereduccore
  * @subpackage backup-imscc
  * @copyright 2009 Mauro Rondinelli (mauro.rondinelli [AT] uvcms.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -22,16 +22,16 @@
 defined('POWEREDUC_INTERNAL') or die('Direct access to this script is forbidden.');
 
 require_once($CFG->dirroot . '/backup/cc/includes/constants.php');
-require_once($CFG->dirroot . '/backup/cc/cc2moodle.php');
+require_once($CFG->dirroot . '/backup/cc/cc2powereduc.php');
 
 function cc_convert ($dir) {
     global $OUTPUT;
 
     $manifest_file = $dir . DIRECTORY_SEPARATOR . 'imsmanifest.xml';
-    $moodle_file = $dir . DIRECTORY_SEPARATOR . 'moodle.xml';
+    $powereduc_file = $dir . DIRECTORY_SEPARATOR . 'powereduc.xml';
     $schema_file = 'cc' . DIRECTORY_SEPARATOR . '' . DIRECTORY_SEPARATOR . 'schemas' . DIRECTORY_SEPARATOR . 'cclibxml2validator.xsd';
 
-    if (is_readable($manifest_file) && !is_readable($moodle_file)) {
+    if (is_readable($manifest_file) && !is_readable($powereduc_file)) {
 
         $is_cc = detect_cc_format($manifest_file);
 
@@ -63,31 +63,31 @@ function cc_convert ($dir) {
                 return false;
             }
 
-            echo get_string('cc2moodle_checking_schema', 'imscc') . '<br />';
+            echo get_string('cc2powereduc_checking_schema', 'imscc') . '<br />';
 
             $cc_manifest = new DOMDocument();
 
             if ($cc_manifest->load($manifest_file)) {
                 if ($cc_manifest->schemaValidate($schema_file)) {
 
-                    echo get_string('cc2moodle_valid_schema', 'imscc') . '<br />';
+                    echo get_string('cc2powereduc_valid_schema', 'imscc') . '<br />';
 
-                    $cc2moodle = new cc2moodle($manifest_file);
+                    $cc2powereduc = new cc2powereduc($manifest_file);
 
-                    if (!$cc2moodle->is_auth()) {
-                        return $cc2moodle->generate_moodle_xml();
+                    if (!$cc2powereduc->is_auth()) {
+                        return $cc2powereduc->generate_powereduc_xml();
                     } else {
-                        echo $OUTPUT->notification(get_string('cc2moodle_req_auth', 'imscc'));
+                        echo $OUTPUT->notification(get_string('cc2powereduc_req_auth', 'imscc'));
                         return false;
                     }
 
                 } else {
-                    echo $OUTPUT->notification(get_string('cc2moodle_invalid_schema', 'imscc'));
+                    echo $OUTPUT->notification(get_string('cc2powereduc_invalid_schema', 'imscc'));
                     return false;
                 }
 
             } else {
-                echo $OUTPUT->notification(get_string('cc2moodle_manifest_dont_load', 'imscc'));
+                echo $OUTPUT->notification(get_string('cc2powereduc_manifest_dont_load', 'imscc'));
                 return false;
             }
         }

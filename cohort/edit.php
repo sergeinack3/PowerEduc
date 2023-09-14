@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@ if ($id) {
 } else {
     $context = context::instance_by_id($contextid, MUST_EXIST);
     if ($context->contextlevel != CONTEXT_COURSECAT and $context->contextlevel != CONTEXT_SYSTEM) {
-        throw new \moodle_exception('invalidcontext');
+        throw new \powereduc_exception('invalidcontext');
     }
     $cohort = new stdClass();
     $cohort->id          = 0;
@@ -53,12 +53,12 @@ if ($id) {
     $cohort->description = '';
 }
 
-require_capability('moodle/cohort:manage', $context);
+require_capability('powereduc/cohort:manage', $context);
 
 if ($returnurl) {
-    $returnurl = new moodle_url($returnurl);
+    $returnurl = new powereduc_url($returnurl);
 } else {
-    $returnurl = new moodle_url('/cohort/index.php', array('contextid'=>$context->id));
+    $returnurl = new powereduc_url('/cohort/index.php', array('contextid'=>$context->id));
 }
 
 if (!empty($cohort->component)) {
@@ -67,7 +67,7 @@ if (!empty($cohort->component)) {
 }
 
 $PAGE->set_context($context);
-$baseurl = new moodle_url('/cohort/edit.php', array('contextid' => $context->id, 'id' => $cohort->id));
+$baseurl = new powereduc_url('/cohort/edit.php', array('contextid' => $context->id, 'id' => $cohort->id));
 $PAGE->set_url($baseurl);
 $PAGE->set_context($context);
 $PAGE->set_pagelayout('admin');
@@ -82,7 +82,7 @@ if ($context->contextlevel == CONTEXT_COURSECAT) {
     $PAGE->set_secondary_active_tab('cohort');
 
 } else {
-    navigation_node::override_active_url(new moodle_url('/cohort/index.php', array()));
+    navigation_node::override_active_url(new powereduc_url('/cohort/index.php', array()));
     $PAGE->set_heading($COURSE->fullname);
 }
 
@@ -97,7 +97,7 @@ if ($delete and $cohort->id) {
     $PAGE->set_title($strheading);
     echo $OUTPUT->header();
     echo $OUTPUT->heading($strheading);
-    $yesurl = new moodle_url('/cohort/edit.php', array('id' => $cohort->id, 'delete' => 1,
+    $yesurl = new powereduc_url('/cohort/edit.php', array('id' => $cohort->id, 'delete' => 1,
         'confirm' => 1, 'sesskey' => sesskey(), 'returnurl' => $returnurl->out_as_local_url()));
     $message = get_string('delconfirm', 'cohort', format_string($cohort->name));
     echo $OUTPUT->confirm($message, $yesurl, $returnurl);
@@ -176,7 +176,7 @@ if ($editform->is_cancelled()) {
         redirect($returnurl);
     } else {
         // Use new context id, it has been changed.
-        redirect(new moodle_url('/cohort/index.php', array('contextid' => $data->contextid)));
+        redirect(new powereduc_url('/cohort/index.php', array('contextid' => $data->contextid)));
     }
 }
 

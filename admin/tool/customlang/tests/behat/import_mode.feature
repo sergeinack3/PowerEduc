@@ -1,5 +1,5 @@
 @tool @tool_customlang @_file_upload
-Feature: Within a moodle instance, an administrator should be able to import langstrings with several modes.
+Feature: Within a powereduc instance, an administrator should be able to import langstrings with several modes.
   In order to import modified langstrings in the adminsettings from one to another instance,
   As an admin
   I need to be able to import only some language customisation strings depending on some conditions.
@@ -14,7 +14,7 @@ Feature: Within a moodle instance, an administrator should be able to import lan
     And I set the field "lng" to "en"
     And I press "Open language pack for editing"
     And I press "Continue"
-    And I set the field "Show strings of these components" to "moodle.php"
+    And I set the field "Show strings of these components" to "powereduc.php"
     And I set the field "String identifier" to "administrationsite"
     And I press "Show strings"
     And I set the field "core/administrationsite" to "Custom string example"
@@ -28,7 +28,7 @@ Feature: Within a moodle instance, an administrator should be able to import lan
     When I set the field "lng" to "en"
     And I click on "Import custom strings" "button"
     And I press "Continue"
-    And I upload "admin/tool/customlang/tests/fixtures/moodle.php" file to "Language component(s)" filemanager
+    And I upload "admin/tool/customlang/tests/fixtures/powereduc.php" file to "Language component(s)" filemanager
     And I set the field "Import mode" to "Update only strings with local customisation"
     And I press "Import file"
     Then I should see "String core/administrationsite updated successfully."
@@ -48,7 +48,7 @@ Feature: Within a moodle instance, an administrator should be able to import lan
     When I set the field "lng" to "en"
     And I click on "Import custom strings" "button"
     And I press "Continue"
-    And I upload "admin/tool/customlang/tests/fixtures/moodle.php" file to "Language component(s)" filemanager
+    And I upload "admin/tool/customlang/tests/fixtures/powereduc.php" file to "Language component(s)" filemanager
     And I set the field "Import mode" to "Create only strings without local customisation"
     And I press "Import file"
     Then I should see "Ignoring string core/administrationsite because it is already defined."
@@ -68,7 +68,7 @@ Feature: Within a moodle instance, an administrator should be able to import lan
     When I set the field "lng" to "en"
     And I click on "Import custom strings" "button"
     And I press "Continue"
-    And I upload "admin/tool/customlang/tests/fixtures/moodle.php" file to "Language component(s)" filemanager
+    And I upload "admin/tool/customlang/tests/fixtures/powereduc.php" file to "Language component(s)" filemanager
     And I set the field "Import mode" to "Create or update all strings from the component(s)"
     And I press "Import file"
     Then I should see "String core/administrationsite updated successfully."

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Timeline block installation.
  *
  * @package    block_timeline
- * @copyright  2018 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2018 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -43,7 +43,7 @@ function xmldb_block_timeline_install() {
         $subpagepattern = null;
     }
 
-    $page = new moodle_page();
+    $page = new powereduc_page();
     $systemcontext = context_system::instance();
     $page->set_context($systemcontext);
     // Add the block to the default /my.

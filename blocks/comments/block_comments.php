@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * The comments block
  *
  * @package    block_comments
- * @copyright 2009 Dongsheng Cai <dongsheng@moodle.com>
+ * @copyright 2009 Dongsheng Cai <dongsheng@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_comments extends block_base {
@@ -88,10 +88,10 @@ class block_comments extends block_base {
     /**
      * This block shouldn't be added to a page if the comments advanced feature is disabled.
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @return bool
      */
-    public function can_block_be_added(moodle_page $page): bool {
+    public function can_block_be_added(powereduc_page $page): bool {
         global $CFG;
 
         return $CFG->usecomments;

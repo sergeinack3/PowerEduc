@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -138,7 +138,7 @@ class step_shown extends \core\event\base {
     /**
      * Returns relevant URL.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_url() {
         return \tool_usertours\helper::get_edit_step_link($this->other['tourid'], $this->objectid);

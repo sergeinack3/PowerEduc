@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -422,7 +422,7 @@ class acceptances_table extends \table_sql {
      */
     public function wrap_html_start() {
         echo \html_writer::start_tag('form',
-            ['action' => new \moodle_url('/admin/tool/policy/accept.php')]);
+            ['action' => new \powereduc_url('/admin/tool/policy/accept.php')]);
         echo \html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()]);
         echo \html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'returnurl',
             'value' => $this->get_return_url()]);
@@ -505,11 +505,11 @@ class acceptances_table extends \table_sql {
      * @return string
      */
     protected function username($user, $profilelink = true) {
-        $canviewfullnames = has_capability('moodle/site:viewfullnames', \context_system::instance()) ||
-            has_capability('moodle/site:viewfullnames', \context_user::instance($user->id));
+        $canviewfullnames = has_capability('powereduc/site:viewfullnames', \context_system::instance()) ||
+            has_capability('powereduc/site:viewfullnames', \context_user::instance($user->id));
         $name = fullname($user, $canviewfullnames);
         if (!$this->is_downloading() && $profilelink) {
-            $profileurl = new \moodle_url('/user/profile.php', array('id' => $user->id));
+            $profileurl = new \powereduc_url('/user/profile.php', array('id' => $user->id));
             return \html_writer::link($profileurl, $name);
         }
         return $name;
@@ -521,7 +521,7 @@ class acceptances_table extends \table_sql {
     protected function get_return_url() {
         $pageurl = $this->baseurl;
         if ($this->currpage) {
-            $pageurl = new \moodle_url($pageurl, [$this->request[TABLE_VAR_PAGE] => $this->currpage]);
+            $pageurl = new \powereduc_url($pageurl, [$this->request[TABLE_VAR_PAGE] => $this->currpage]);
         }
         return $pageurl;
     }

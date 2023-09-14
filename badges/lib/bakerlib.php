@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Baking badges library.
@@ -114,7 +114,7 @@ class PNG_MetaDataHandler
      * @param string $value Currently an assertion URL that is added to an image metadata.
      *
      * @return string $result File content with a new chunk as a string. Can be used in file_put_contents() to write to a file.
-     * @throws \moodle_exception when unsupported chunk type is defined.
+     * @throws \powereduc_exception when unsupported chunk type is defined.
      */
     public function add_chunks($type, $key, $value) {
         if (strlen($key) > 79) {
@@ -155,7 +155,7 @@ class PNG_MetaDataHandler
             // Text:                n bytes (character string).
             $dataparts[] = $value;
         } else {
-            throw new \moodle_exception('Unsupported chunk type: ' . $type);
+            throw new \powereduc_exception('Unsupported chunk type: ' . $type);
         }
 
         $data = implode($dataparts);

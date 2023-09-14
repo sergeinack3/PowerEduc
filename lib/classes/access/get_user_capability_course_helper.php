@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Helper functions to implement the complex get_user_capability_course function.
@@ -45,7 +45,7 @@ class get_user_capability_course_helper {
      * therefore, such information, if any, is absent from the results.
      *
      * @param int $userid User id
-     * @param string $capability Capability e.g. 'moodle/course:view'
+     * @param string $capability Capability e.g. 'powereduc/course:view'
      * @return array Array of capability constants, indexed by context path and role id
      */
     protected static function get_capability_info_at_each_context($userid, $capability) {
@@ -327,7 +327,7 @@ class get_user_capability_course_helper {
      * 'allow' (true or false), and 'children' (an array of similar objects).
      *
      * @param int $userid User id
-     * @param string $capability Capability e.g. 'moodle/course:view'
+     * @param string $capability Capability e.g. 'powereduc/course:view'
      * @return \stdClass Root node of tree
      */
     protected static function get_tree($userid, $capability) {
@@ -406,13 +406,13 @@ class get_user_capability_course_helper {
      *
      * This returns an array with two elements (SQL containing ? placeholders, and a params array).
      * The SQL is intended to be used as part of a WHERE clause. It relies on the prefix 'x' being
-     * used for the Moodle context table.
+     * used for the PowerEduc context table.
      *
      * If the user does not have the permission anywhere at all (so that there is no point doing
      * the query) then the two returned values will both be false.
      *
      * @param int $userid User id
-     * @param string $capability Capability e.g. 'moodle/course:view'
+     * @param string $capability Capability e.g. 'powereduc/course:view'
      * @return array Two-element array of SQL (containing ? placeholders) and then a params array
      */
     public static function get_sql($userid, $capability) {

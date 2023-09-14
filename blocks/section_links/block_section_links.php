@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -110,7 +110,7 @@ class block_section_links extends block_base {
 
         // Prepare an array of sections to create links for.
         $sections = array();
-        $canviewhidden = has_capability('moodle/course:update', $context);
+        $canviewhidden = has_capability('powereduc/course:update', $context);
         $coursesections = $courseformat->get_sections();
         $coursesectionscount = count($coursesections);
         $sectiontojumpto = false;

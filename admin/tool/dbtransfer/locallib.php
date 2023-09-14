@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@ require_once($CFG->libdir.'/dtllib.php');
 /**
  * Initiate database export.
  * @param string $description
- * @param moodle_database $mdb
+ * @param powereduc_database $mdb
  * @return does not return, calls die()
  */
 function tool_dbtransfer_export_xml_database($description, $mdb) {
@@ -71,12 +71,12 @@ function tool_dbtransfer_export_xml_database($description, $mdb) {
 
 /**
  * Initiate database transfer.
- * @param moodle_database $sourcedb
- * @param moodle_database $targetdb
+ * @param powereduc_database $sourcedb
+ * @param powereduc_database $targetdb
  * @param progress_trace $feedback
  * @return void
  */
-function tool_dbtransfer_transfer_database(moodle_database $sourcedb, moodle_database $targetdb, progress_trace $feedback = null) {
+function tool_dbtransfer_transfer_database(powereduc_database $sourcedb, powereduc_database $targetdb, progress_trace $feedback = null) {
     core_php_time_limit::raise();
 
     \core\session\manager::write_close(); // Release session.
@@ -89,12 +89,12 @@ function tool_dbtransfer_transfer_database(moodle_database $sourcedb, moodle_dat
 
 /**
  * Very hacky function for rebuilding of log actions in target database.
- * @param moodle_database $target
+ * @param powereduc_database $target
  * @param progress_trace $feedback
  * @return void
  * @throws Exception on conversion error
  */
-function tool_dbtransfer_rebuild_target_log_actions(moodle_database $target, progress_trace $feedback = null) {
+function tool_dbtransfer_rebuild_target_log_actions(powereduc_database $target, progress_trace $feedback = null) {
     global $DB, $CFG;
     require_once("$CFG->libdir/upgradelib.php");
 
@@ -103,8 +103,8 @@ function tool_dbtransfer_rebuild_target_log_actions(moodle_database $target, pro
     $olddb = $DB;
     $DB = $target;
     try {
-        $DB->delete_records('log_display', array('component'=>'moodle'));
-        log_update_descriptions('moodle');
+        $DB->delete_records('log_display', array('component'=>'powereduc'));
+        log_update_descriptions('powereduc');
         $plugintypes = core_component::get_plugin_types();
         foreach ($plugintypes as $type => $location) {
             $plugs = core_component::get_plugin_list($type);
@@ -129,12 +129,12 @@ function tool_dbtransfer_rebuild_target_log_actions(moodle_database $target, pro
 function tool_dbtransfer_get_drivers() {
     global $CFG;
 
-    $files = new RegexIterator(new DirectoryIterator("$CFG->libdir/dml"), '|^.*_moodle_database\.php$|');
+    $files = new RegexIterator(new DirectoryIterator("$CFG->libdir/dml"), '|^.*_powereduc_database\.php$|');
     $drivers = array();
 
     foreach ($files as $file) {
         $matches = null;
-        preg_match('|^([a-z0-9]+)_([a-z]+)_moodle_database\.php$|', $file->getFilename(), $matches);
+        preg_match('|^([a-z0-9]+)_([a-z]+)_powereduc_database\.php$|', $file->getFilename(), $matches);
         if (!$matches) {
             continue;
         }
@@ -146,7 +146,7 @@ function tool_dbtransfer_get_drivers() {
             continue;
         }
 
-        $targetdb = moodle_database::get_driver_instance($dbtype, $dblibrary, false);
+        $targetdb = powereduc_database::get_driver_instance($dbtype, $dblibrary, false);
         if ($targetdb->driver_installed() !== true) {
             continue;
         }

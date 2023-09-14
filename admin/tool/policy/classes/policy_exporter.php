@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Provides the {@link tool_policy\policy_exporter} class.
  *
  * @package   tool_policy
- * @copyright 2018 David Mudrak <david@moodle.com>
+ * @copyright 2018 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,7 +32,7 @@ use renderer_base;
 /**
  * Exporter of a policy document model.
  *
- * @copyright 2018 David Mudrak <david@moodle.com>
+ * @copyright 2018 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class policy_exporter extends exporter {

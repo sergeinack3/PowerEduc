@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -54,7 +54,7 @@ class block_site_main_menu extends block_list {
         $courserenderer = $format->get_renderer($this->page);
 
         $context = context_course::instance($course->id);
-        $isediting = $this->page->user_is_editing() && has_capability('moodle/course:manageactivities', $context);
+        $isediting = $this->page->user_is_editing() && has_capability('powereduc/course:manageactivities', $context);
 
         // Output classes.
         $cmnameclass = $format->get_output_classname('content\\cm\\cmname');
@@ -153,7 +153,7 @@ class block_site_main_menu extends block_list {
                     $menu = $controlmenu->get_action_menu($OUTPUT);
 
                     $moveaction = html_writer::link(
-                        new moodle_url('/course/mod.php', ['sesskey' => sesskey(), 'copy' => $mod->id]),
+                        new powereduc_url('/course/mod.php', ['sesskey' => sesskey(), 'copy' => $mod->id]),
                         $OUTPUT->pix_icon('i/dragdrop', $strmove),
                         ['class' => 'editing_move_activity']
                     );
@@ -168,12 +168,12 @@ class block_site_main_menu extends block_list {
                     $moveaction = '';
                 }
 
-                if ($mod->visible || has_capability('moodle/course:viewhiddenactivities', $mod->context)) {
+                if ($mod->visible || has_capability('powereduc/course:viewhiddenactivities', $mod->context)) {
                     if ($ismoving) {
                         if ($mod->id == $USER->activitycopy) {
                             continue;
                         }
-                        $movingurl = new moodle_url('/course/mod.php', array('moveto' => $mod->id, 'sesskey' => sesskey()));
+                        $movingurl = new powereduc_url('/course/mod.php', array('moveto' => $mod->id, 'sesskey' => sesskey()));
                         $this->content->items[] = html_writer::link($movingurl, '', array('title' => $strmovefull,
                             'class' => 'movehere'));
                         $this->content->icons[] = '';
@@ -232,7 +232,7 @@ class block_site_main_menu extends block_list {
         }
 
         if ($ismoving) {
-            $movingurl = new moodle_url('/course/mod.php', array('movetosection' => $section->id, 'sesskey' => sesskey()));
+            $movingurl = new powereduc_url('/course/mod.php', array('movetosection' => $section->id, 'sesskey' => sesskey()));
             $this->content->items[] = html_writer::link($movingurl, '', array('title' => $strmovefull, 'class' => 'movehere'));
             $this->content->icons[] = '';
         }

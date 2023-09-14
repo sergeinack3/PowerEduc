@@ -1,17 +1,17 @@
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Readme file for local customisations
@@ -74,14 +74,14 @@ Local plugin version specification
 ----------------------------------
 version.php is mandatory for most of the standard plugin infrastructure.
 The version number must be incremented most plugin changes, the changed
-version tells Moodle to invalidate all caches, do db upgrades if necessary,
+version tells PowerEduc to invalidate all caches, do db upgrades if necessary,
 install new capabilities, register event handlers, etc.
 
 Example:
 /local/nicehack/version.php
 <?php
 $plugin->version  = 2010022400;   // The (date) version of this plugin
-$plugin->requires = 2010021900;   // Requires this Moodle version
+$plugin->requires = 2010021900;   // Requires this PowerEduc version
 
 
 Local plugin capabilities
@@ -157,7 +157,7 @@ $handlers = array (
      ),
 );
 
-NOTE: events are not yet fully implemented in current Moodle 2.0dev.
+NOTE: events are not yet fully implemented in current PowerEduc 2.0dev.
 
 
 Local plugin database tables
@@ -181,7 +181,7 @@ List of upgrade related files:
 Local plugin web services
 -------------------------
 During plugin installation or upgrade, the web service definitions are read
-from /local/nicehack/db/services.php and are automatically installed/updated in Moodle.
+from /local/nicehack/db/services.php and are automatically installed/updated in PowerEduc.
 
 sample files
 /local/nicehack/db/services.php
@@ -289,7 +289,7 @@ Other site customisation outside of "/local/" directory
 
 Local language pack modifications
 ---------------------------------
-Moodle supports other type of local customisation of standard language
+PowerEduc supports other type of local customisation of standard language
 packs. If you want to create your own language pack based on another
 language create new dataroot directory with "_local" suffix, for example
 following file with content changes string "Login" to "Sign in":

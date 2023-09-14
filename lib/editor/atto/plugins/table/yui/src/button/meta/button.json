@@ -1,8 +1,8 @@
 {
-    "moodle-atto_table-button": {
+    "powereduc-atto_table-button": {
         "requires": [
-            "moodle-editor_atto-plugin",
-            "moodle-editor_atto-menu",
+            "powereduc-editor_atto-plugin",
+            "powereduc-editor_atto-menu",
             "event",
             "event-valuechange"
         ]

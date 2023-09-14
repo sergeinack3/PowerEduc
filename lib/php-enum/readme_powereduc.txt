@@ -1,4 +1,4 @@
-Instructions to import php-enum into Moodle:
+Instructions to import php-enum into PowerEduc:
 
 1/ Download from https://github.com/myclabs/php-enum/releases
 

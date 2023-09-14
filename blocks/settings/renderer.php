@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -140,7 +140,7 @@ class block_settings_renderer extends plugin_renderer_base {
         }
     }
 
-    public function search_form(moodle_url $formtarget, $searchvalue) {
+    public function search_form(powereduc_url $formtarget, $searchvalue) {
         $data = [
             'action' => $formtarget,
             'inputname' => 'query',

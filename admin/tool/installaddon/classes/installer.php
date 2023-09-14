@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  *
  * @package     tool_installaddon
  * @subpackage  classes
- * @copyright   2013 David Mudrak <david@moodle.com>
+ * @copyright   2013 David Mudrak <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,7 +29,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Implements main plugin features.
  *
- * @copyright 2013 David Mudrak <david@moodle.com>
+ * @copyright 2013 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class tool_installaddon_installer {
@@ -50,16 +50,16 @@ class tool_installaddon_installer {
      * Returns the URL to the main page of this admin tool
      *
      * @param array optional parameters
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function index_url(array $params = null) {
-        return new moodle_url('/admin/tool/installaddon/index.php', $params);
+        return new powereduc_url('/admin/tool/installaddon/index.php', $params);
     }
 
     /**
      * Returns URL to the repository that addons can be searched in and installed from
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function get_addons_repository_url() {
         global $CFG;
@@ -67,11 +67,11 @@ class tool_installaddon_installer {
         if (!empty($CFG->config_php_settings['alternativeaddonsrepositoryurl'])) {
             $url = $CFG->config_php_settings['alternativeaddonsrepositoryurl'];
         } else {
-            $url = 'https://moodle.org/plugins/get.php';
+            $url = 'https://powereduc.org/plugins/get.php';
         }
 
         if (!$this->should_send_site_info()) {
-            return new moodle_url($url);
+            return new powereduc_url($url);
         }
 
         // Append the basic information about our site.
@@ -83,7 +83,7 @@ class tool_installaddon_installer {
 
         $site = $this->encode_site_information($site);
 
-        return new moodle_url($url, array('site' => $site));
+        return new powereduc_url($url, array('site' => $site));
     }
 
     /**
@@ -241,7 +241,7 @@ class tool_installaddon_installer {
      * @return string major version like 2.5, 2.6 etc.
      */
     protected function get_site_major_version() {
-        return moodle_major_version();
+        return powereduc_major_version();
     }
 
     /**
@@ -319,7 +319,7 @@ class tool_installaddon_installer {
             return false;
         }
 
-        // Keep this regex in sync with the one used by the download.moodle.org/api/x.y/pluginfo.php
+        // Keep this regex in sync with the one used by the download.powereduc.org/api/x.y/pluginfo.php
         if (!preg_match('/^[0-9]+$/', $data->version)) {
             return false;
         }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -2578,11 +2578,11 @@ class provider_test extends provider_testcase {
     protected function allow_anyone_to_comment_anywhere() {
         global $DB;
         $roleid = $DB->get_field('role', 'id', ['shortname' => 'user'], MUST_EXIST);
-        assign_capability('moodle/competency:plancomment', CAP_ALLOW, $roleid, SYSCONTEXTID, true);
-        assign_capability('moodle/competency:planmanage', CAP_ALLOW, $roleid, SYSCONTEXTID, true);
-        assign_capability('moodle/competency:planmanagedraft', CAP_ALLOW, $roleid, SYSCONTEXTID, true);
-        assign_capability('moodle/competency:usercompetencycomment', CAP_ALLOW, $roleid, SYSCONTEXTID, true);
-        assign_capability('moodle/competency:usercompetencyview', CAP_ALLOW, $roleid, SYSCONTEXTID, true);
+        assign_capability('powereduc/competency:plancomment', CAP_ALLOW, $roleid, SYSCONTEXTID, true);
+        assign_capability('powereduc/competency:planmanage', CAP_ALLOW, $roleid, SYSCONTEXTID, true);
+        assign_capability('powereduc/competency:planmanagedraft', CAP_ALLOW, $roleid, SYSCONTEXTID, true);
+        assign_capability('powereduc/competency:usercompetencycomment', CAP_ALLOW, $roleid, SYSCONTEXTID, true);
+        assign_capability('powereduc/competency:usercompetencyview', CAP_ALLOW, $roleid, SYSCONTEXTID, true);
         accesslib_clear_all_caches_for_unit_testing();
     }
 

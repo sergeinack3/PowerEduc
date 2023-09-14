@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -247,7 +247,7 @@ class parser_test extends \advanced_testcase {
         $this->assertEquals($tags['id'], 1);
         $this->assertEquals($tags['intro'], '<p>One simple glossary to test backup &amp; restore. Here it\'s the standard image:</p>'.
                                            "\n".
-                                           '<p><img src="@@PLUGINFILE@@/88_31.png" alt="pwd by moodle" width="88" height="31" /></p>');
+                                           '<p><img src="@@PLUGINFILE@@/88_31.png" alt="pwd by powereduc" width="88" height="31" /></p>');
         $this->assertEquals($tags['timemodified'], 1275639747);
         $this->assertTrue(!isset($tags['categories']));
 
@@ -474,7 +474,7 @@ class parser_test extends \advanced_testcase {
         $this->assertEquals($tags['id'], 1);
         $this->assertEquals($tags['intro'], '<p>One simple glossary to test backup &amp; restore. Here it\'s the standard image:</p>'.
                                            "\n".
-                                           '<p><img src="@@PLUGINFILE@@/88_31.png" alt="pwd by moodle" width="88" height="31" /></p>');
+                                           '<p><img src="@@PLUGINFILE@@/88_31.png" alt="pwd by powereduc" width="88" height="31" /></p>');
         $this->assertEquals($tags['timemodified'], 1275639747);
         $this->assertTrue(!isset($tags['categories']));
         $this->assertTrue(isset($tags['entries']));
@@ -656,18 +656,18 @@ class parser_test extends \advanced_testcase {
         // Instantiate grouped_parser_processor.
         $pr = new mock_grouped_parser_processor();
         $this->assertTrue($pr instanceof progressive_parser_processor);
-        // Add interesting paths - moodle1 style.
+        // Add interesting paths - powereduc1 style.
         $pr->add_path('/test/POWEREDUC_BACKUP/COURSE/FORMATDATA', true);
         $pr->add_path('/test/POWEREDUC_BACKUP/COURSE/FORMATDATA/WEEKS/WEEK');
         $pr->add_path('/test/POWEREDUC_BACKUP/COURSE/EMPTYGROUPED', true);
         $pr->add_path('/test/POWEREDUC_BACKUP/COURSE/SECONDGROUPED', true);
         $pr->add_path('/test/POWEREDUC_BACKUP/COURSE/SECONDGROUPED/SUBS/SUB');
-        // Add interesting paths - moodle2 style.
-        $pr->add_path('/test/moodle2/grouped', true);
-        $pr->add_path('/test/moodle2/grouped/subs/sub');
-        $pr->add_path('/test/moodle2/groupedemptywithattr', true);
-        $pr->add_path('/test/moodle2/groupednonemptywithattr', true);
-        $pr->add_path('/test/moodle2/groupednonemptywithattr/subs/sub');
+        // Add interesting paths - powereduc2 style.
+        $pr->add_path('/test/powereduc2/grouped', true);
+        $pr->add_path('/test/powereduc2/grouped/subs/sub');
+        $pr->add_path('/test/powereduc2/groupedemptywithattr', true);
+        $pr->add_path('/test/powereduc2/groupednonemptywithattr', true);
+        $pr->add_path('/test/powereduc2/groupednonemptywithattr/subs/sub');
         // Assign processor to parser.
         $pp->set_processor($pr);
         // Set file from fixtures.
@@ -689,18 +689,18 @@ class parser_test extends \advanced_testcase {
         $this->assertEquals('/test/POWEREDUC_BACKUP/COURSE/SECONDGROUPED', $chunks[2]['path']);
         $this->assertEquals('Unit tests rock!', $chunks[2]['tags']['SUBS']['SUB'][0]['PROP']);
 
-        $this->assertEquals('/test/moodle2/grouped', $chunks[3]['path']);
+        $this->assertEquals('/test/powereduc2/grouped', $chunks[3]['path']);
         $this->assertFalse(isset($chunks[3]['tags']['id'])); // No final elements, this should be fixed one day.
         $this->assertEquals(34, $chunks[3]['tags']['subs']['sub'][0]['id']); // We have final element so this is parsed.
         $this->assertEquals('Oh yeah', $chunks[3]['tags']['subs']['sub'][0]['prop']);
 
-        $this->assertEquals('/test/moodle2/groupednonemptywithattr', $chunks[4]['path']);
+        $this->assertEquals('/test/powereduc2/groupednonemptywithattr', $chunks[4]['path']);
         $this->assertEquals(78, $chunks[4]['tags']['id']); // We have final element so this is parsed.
         $this->assertEquals('Go baby go', $chunks[4]['tags']['prop']);
         $this->assertEquals(89, $chunks[4]['tags']['subs']['sub'][0]['id']);
-        $this->assertEquals('http://moodle.org', $chunks[4]['tags']['subs']['sub'][0]['prop']);
+        $this->assertEquals('http://powereduc.org', $chunks[4]['tags']['subs']['sub'][0]['prop']);
 
-        $this->assertEquals('/test/moodle2/groupedemptywithattr', $chunks[5]['path']);
+        $this->assertEquals('/test/powereduc2/groupedemptywithattr', $chunks[5]['path']);
         $this->assertFalse(isset($chunks[5]['tags']['attr'])); // No final elements, this should be fixed one day.
 
         // Now check start notifications.
@@ -711,9 +711,9 @@ class parser_test extends \advanced_testcase {
         $this->assertEquals('/test/POWEREDUC_BACKUP/COURSE/FORMATDATA', $snotifs[0]);
         $this->assertEquals('/test/POWEREDUC_BACKUP/COURSE/EMPTYGROUPED', $snotifs[1]);
         $this->assertEquals('/test/POWEREDUC_BACKUP/COURSE/SECONDGROUPED', $snotifs[2]);
-        $this->assertEquals('/test/moodle2/grouped', $snotifs[3]);
-        $this->assertEquals('/test/moodle2/groupednonemptywithattr', $snotifs[4]);
-        $this->assertEquals('/test/moodle2/groupedemptywithattr', $snotifs[5]);
+        $this->assertEquals('/test/powereduc2/grouped', $snotifs[3]);
+        $this->assertEquals('/test/powereduc2/groupednonemptywithattr', $snotifs[4]);
+        $this->assertEquals('/test/powereduc2/groupedemptywithattr', $snotifs[5]);
 
         // Now check end notifications.
         $enotifs = $pr->get_end_notifications();
@@ -723,9 +723,9 @@ class parser_test extends \advanced_testcase {
         $this->assertEquals('/test/POWEREDUC_BACKUP/COURSE/FORMATDATA', $enotifs[0]);
         $this->assertEquals('/test/POWEREDUC_BACKUP/COURSE/EMPTYGROUPED', $enotifs[1]);
         $this->assertEquals('/test/POWEREDUC_BACKUP/COURSE/SECONDGROUPED', $enotifs[2]);
-        $this->assertEquals('/test/moodle2/grouped', $enotifs[3]);
-        $this->assertEquals('/test/moodle2/groupednonemptywithattr', $enotifs[4]);
-        $this->assertEquals('/test/moodle2/groupedemptywithattr', $enotifs[5]);
+        $this->assertEquals('/test/powereduc2/grouped', $enotifs[3]);
+        $this->assertEquals('/test/powereduc2/groupednonemptywithattr', $enotifs[4]);
+        $this->assertEquals('/test/powereduc2/groupedemptywithattr', $enotifs[5]);
 
         // Now verify that the start/process/end order is correct.
         $allnotifs = $pr->get_all_notifications();

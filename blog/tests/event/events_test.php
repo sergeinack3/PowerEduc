@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -130,7 +130,7 @@ class events_test extends \advanced_testcase {
 
         // Validate event data.
         $this->assertInstanceOf('\core\event\blog_entry_created', $event);
-        $url = new \moodle_url('/blog/index.php', array('entryid' => $event->objectid));
+        $url = new \powereduc_url('/blog/index.php', array('entryid' => $event->objectid));
         $this->assertEquals($url, $event->get_url());
         $this->assertEquals($sitecontext->id, $event->contextid);
         $this->assertEquals($blog->id, $event->objectid);
@@ -165,7 +165,7 @@ class events_test extends \advanced_testcase {
 
         // Validate event data.
         $this->assertInstanceOf('\core\event\blog_entry_updated', $event);
-        $url = new \moodle_url('/blog/index.php', array('entryid' => $event->objectid));
+        $url = new \powereduc_url('/blog/index.php', array('entryid' => $event->objectid));
         $this->assertEquals($url, $event->get_url());
         $this->assertEquals($sitecontext->id, $event->contextid);
         $this->assertEquals($blog->id, $event->objectid);
@@ -283,7 +283,7 @@ class events_test extends \advanced_testcase {
         // Validate event data.
         $this->assertInstanceOf('\core\event\blog_association_created', $event);
         $this->assertEquals($sitecontext->id, $event->contextid);
-        $url = new \moodle_url('/blog/index.php', array('entryid' => $event->other['blogid']));
+        $url = new \powereduc_url('/blog/index.php', array('entryid' => $event->other['blogid']));
         $this->assertEquals($url, $event->get_url());
         $this->assertEquals($blog->id, $event->other['blogid']);
         $this->assertEquals($this->courseid, $event->other['associateid']);
@@ -392,8 +392,8 @@ class events_test extends \advanced_testcase {
         $sink->close();
 
         // Validate event data.
-        $url = new \moodle_url('/blog/index.php', $other);
-        $url2 = new \moodle_url('index.php', $other);
+        $url = new \powereduc_url('/blog/index.php', $other);
+        $url2 = new \powereduc_url('index.php', $other);
         $this->assertEquals($url, $event->get_url());
         $arr = array(SITEID, 'blog', 'view', $url2->out(), 'view blog entry');
         $this->assertEventLegacyLogData($arr, $event);
@@ -431,7 +431,7 @@ class events_test extends \advanced_testcase {
         $this->assertInstanceOf('\core\event\blog_comment_created', $event);
         $this->assertEquals($context, $event->get_context());
         $this->assertEquals($this->postid, $event->other['itemid']);
-        $url = new \moodle_url('/blog/index.php', array('entryid' => $this->postid));
+        $url = new \powereduc_url('/blog/index.php', array('entryid' => $this->postid));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
     }
@@ -468,7 +468,7 @@ class events_test extends \advanced_testcase {
         $this->assertInstanceOf('\core\event\blog_comment_deleted', $event);
         $this->assertEquals($context, $event->get_context());
         $this->assertEquals($this->postid, $event->other['itemid']);
-        $url = new \moodle_url('/blog/index.php', array('entryid' => $this->postid));
+        $url = new \powereduc_url('/blog/index.php', array('entryid' => $this->postid));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
     }
@@ -485,7 +485,7 @@ class events_test extends \advanced_testcase {
         $eventparams = array(
             'context' => $context = \context_system::instance(),
             'objectid' => 1001,
-            'other' => array('url' => 'http://moodle.org')
+            'other' => array('url' => 'http://powereduc.org')
         );
 
         $event = \core\event\blog_external_added::create($eventparams);
@@ -498,7 +498,7 @@ class events_test extends \advanced_testcase {
         // Check that the event data is valid.
         $this->assertInstanceOf('\core\event\blog_external_added', $event);
         $this->assertEquals(1001, $event->objectid);
-        $this->assertEquals('http://moodle.org', $event->other['url']);
+        $this->assertEquals('http://powereduc.org', $event->other['url']);
         $this->assertDebuggingNotCalled();
     }
 
@@ -514,7 +514,7 @@ class events_test extends \advanced_testcase {
         $eventparams = array(
             'context' => $context = \context_system::instance(),
             'objectid' => 1001,
-            'other' => array('url' => 'http://moodle.org')
+            'other' => array('url' => 'http://powereduc.org')
         );
 
         $event = \core\event\blog_external_updated::create($eventparams);
@@ -527,7 +527,7 @@ class events_test extends \advanced_testcase {
         // Check that the event data is valid.
         $this->assertInstanceOf('\core\event\blog_external_updated', $event);
         $this->assertEquals(1001, $event->objectid);
-        $this->assertEquals('http://moodle.org', $event->other['url']);
+        $this->assertEquals('http://powereduc.org', $event->other['url']);
         $this->assertDebuggingNotCalled();
     }
 

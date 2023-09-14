@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Manage H5P libraries settings page.
  *
  * @package    core_h5p
- * @copyright  2019 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2019 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,10 +31,10 @@ $confirm = optional_param('confirm', false, PARAM_BOOL);
 $action = optional_param('action', null, PARAM_ALPHANUMEXT);
 
 $context = context_system::instance();
-require_capability('moodle/h5p:updatelibraries', $context);
+require_capability('powereduc/h5p:updatelibraries', $context);
 
 $pagetitle = get_string('h5pmanage', 'core_h5p');
-$url = new \moodle_url("/h5p/libraries.php");
+$url = new \powereduc_url("/h5p/libraries.php");
 
 $PAGE->set_context($context);
 $PAGE->set_url($url);
@@ -48,7 +48,7 @@ if ($deletelibrary) {
     if ($confirm) {
         require_sesskey();
         \core_h5p\api::delete_library($h5pfactory, $library);
-        redirect(new moodle_url('/h5p/libraries.php'));
+        redirect(new powereduc_url('/h5p/libraries.php'));
     }
 
     echo $OUTPUT->header();
@@ -58,8 +58,8 @@ if ($deletelibrary) {
             'name' => format_string($library->title),
             'version' => format_string($library->majorversion . '.' . $library->minorversion . '.' . $library->patchversion),
         ]),
-        new moodle_url($PAGE->url, ['deletelibrary' => $deletelibrary, 'confirm' => 1]),
-        new moodle_url('/h5p/libraries.php')
+        new powereduc_url($PAGE->url, ['deletelibrary' => $deletelibrary, 'confirm' => 1]),
+        new powereduc_url('/h5p/libraries.php')
     );
     echo $OUTPUT->footer();
     die();

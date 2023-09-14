@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -160,10 +160,10 @@ define(['jquery',
 
         requests[0].done(function(evidence) {
             str.get_strings([
-                {key: 'confirm', component: 'moodle'},
+                {key: 'confirm', component: 'powereduc'},
                 {key: 'deleteuserevidence', component: 'tool_lp', param: evidence.name},
-                {key: 'delete', component: 'moodle'},
-                {key: 'cancel', component: 'moodle'}
+                {key: 'delete', component: 'powereduc'},
+                {key: 'cancel', component: 'powereduc'}
             ]).done(function(strings) {
                 notification.confirm(
                     strings[0], // Confirm.
@@ -314,10 +314,10 @@ define(['jquery',
 
         requests[0].done(function(evidence) {
             str.get_strings([
-                {key: 'confirm', component: 'moodle'},
+                {key: 'confirm', component: 'powereduc'},
                 {key: 'sendallcompetenciestoreview', component: 'tool_lp', param: evidence.name},
-                {key: 'confirm', component: 'moodle'},
-                {key: 'cancel', component: 'moodle'}
+                {key: 'confirm', component: 'powereduc'},
+                {key: 'cancel', component: 'powereduc'}
             ]).done(function(strings) {
                 notification.confirm(
                     strings[0], // Confirm.

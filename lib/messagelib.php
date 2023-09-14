@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Functions for interacting with the message system
@@ -90,7 +90,7 @@ function message_send(\core\message\message $eventdata) {
         // Given this is the only 'message' type message provider, we can exit now if this is the case.
         // Don't waste processing time trying to work out the other conversation member, if it's an individual
         // conversation, just throw a generic debugging notice and return.
-        if (empty($CFG->messaging) || $eventdata->component !== 'moodle' || $eventdata->name !== 'instantmessage') {
+        if (empty($CFG->messaging) || $eventdata->component !== 'powereduc' || $eventdata->name !== 'instantmessage') {
             debugging('Attempt to send msg from a provider '.$eventdata->component.'/'.$eventdata->name.
                 ' that is inactive or not allowed for the user id='.$eventdata->userto->id, DEBUG_NORMAL);
             return false;
@@ -339,7 +339,7 @@ function message_send(\core\message\message $eventdata) {
     // Let the manager do the sending or buffering when db transaction in progress.
     try {
         return \core\message\manager::send_message($eventdata, $tabledata, $processorlist);
-    } catch (\moodle_exception $exception) {
+    } catch (\powereduc_exception $exception) {
         return false;
     }
 }
@@ -409,10 +409,10 @@ function message_handle_phpunit_redirection(\core\message\message $eventdata, st
 /**
  * Updates the message_providers table with the current set of message providers
  *
- * @param string $component For example 'moodle', 'mod_forum' or 'block_activity_results'
+ * @param string $component For example 'powereduc', 'mod_forum' or 'block_activity_results'
  * @return boolean True on success
  */
-function message_update_providers($component='moodle') {
+function message_update_providers($component='powereduc') {
     global $DB;
 
     // load message providers from files
@@ -495,7 +495,7 @@ function message_update_processors($processorname) {
 /**
  * Setting default messaging preferences for particular message provider
  *
- * @param  string $component   The name of component (e.g. moodle, mod_forum, etc.)
+ * @param  string $component   The name of component (e.g. powereduc, mod_forum, etc.)
  * @param  string $messagename The name of message provider
  * @param  array  $fileprovider The value of $messagename key in the array defined in plugin messages.php
  * @param  string $processorname The optional name of message processor
@@ -663,7 +663,7 @@ function message_get_providers_for_user($userid) {
  * This is an internal function used within messagelib.php
  *
  * @see message_update_providers()
- * @param string $component A moodle component like 'moodle', 'mod_forum', 'block_activity_results'
+ * @param string $component A powereduc component like 'powereduc', 'mod_forum', 'block_activity_results'
  * @return array An array of message providers
  */
 function message_get_providers_from_db($component) {
@@ -680,7 +680,7 @@ function message_get_providers_from_db($component) {
  *
  * @see message_update_providers()
  * @see message_update_processors()
- * @param string $component A moodle component like 'moodle', 'mod_forum', 'block_activity_results'
+ * @param string $component A powereduc component like 'powereduc', 'mod_forum', 'block_activity_results'
  * @return array An array of message providers or empty array if not exists
  */
 function message_get_providers_from_file($component) {
@@ -707,7 +707,7 @@ function message_get_providers_from_file($component) {
 /**
  * Remove all message providers for particular component and corresponding settings
  *
- * @param string $component A moodle component like 'moodle', 'mod_forum', 'block_activity_results'
+ * @param string $component A powereduc component like 'powereduc', 'mod_forum', 'block_activity_results'
  * @return void
  */
 function message_provider_uninstall($component) {

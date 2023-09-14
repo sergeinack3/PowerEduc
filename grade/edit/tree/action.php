@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ $PAGE->set_url('/grade/edit/tree/action.php', array('id'=>$courseid, 'action'=>$
 
 /// Make sure they can even access this course
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 require_login($course);
 $context = context_course::instance($course->id);
@@ -47,7 +47,7 @@ $gtree = new grade_tree($courseid, false, false);
 
 // what are we working with?
 if (!$element = $gtree->locate_element($eid)) {
-    throw new \moodle_exception('invalidelementid', '', $returnurl);
+    throw new \powereduc_exception('invalidelementid', '', $returnurl);
 }
 $object = $element['object'];
 $type   = $element['type'];
@@ -56,14 +56,14 @@ $type   = $element['type'];
 switch ($action) {
     case 'hide':
         if ($eid and confirm_sesskey()) {
-            if (!has_capability('moodle/grade:manage', $context) and !has_capability('moodle/grade:hide', $context)) {
-                throw new \moodle_exception('nopermissiontohide', '', $returnurl);
+            if (!has_capability('powereduc/grade:manage', $context) and !has_capability('powereduc/grade:hide', $context)) {
+                throw new \powereduc_exception('nopermissiontohide', '', $returnurl);
             }
             if ($type == 'grade' and empty($object->id)) {
                 $object->insert();
             }
             if (!$object->can_control_visibility()) {
-                throw new \moodle_exception('componentcontrolsvisibility', 'grades', $returnurl);
+                throw new \powereduc_exception('componentcontrolsvisibility', 'grades', $returnurl);
             }
             $object->set_hidden(1, true);
         }
@@ -71,14 +71,14 @@ switch ($action) {
 
     case 'show':
         if ($eid and confirm_sesskey()) {
-            if (!has_capability('moodle/grade:manage', $context) and !has_capability('moodle/grade:hide', $context)) {
-                throw new \moodle_exception('nopermissiontoshow', '', $returnurl);
+            if (!has_capability('powereduc/grade:manage', $context) and !has_capability('powereduc/grade:hide', $context)) {
+                throw new \powereduc_exception('nopermissiontoshow', '', $returnurl);
             }
             if ($type == 'grade' and empty($object->id)) {
                 $object->insert();
             }
             if (!$object->can_control_visibility()) {
-                throw new \moodle_exception('componentcontrolsvisibility', 'grades', $returnurl);
+                throw new \powereduc_exception('componentcontrolsvisibility', 'grades', $returnurl);
             }
             $object->set_hidden(0, true);
         }
@@ -86,8 +86,8 @@ switch ($action) {
 
     case 'lock':
         if ($eid and confirm_sesskey()) {
-            if (!has_capability('moodle/grade:manage', $context) and !has_capability('moodle/grade:lock', $context)) {
-                throw new \moodle_exception('nopermissiontolock', '', $returnurl);
+            if (!has_capability('powereduc/grade:manage', $context) and !has_capability('powereduc/grade:lock', $context)) {
+                throw new \powereduc_exception('nopermissiontolock', '', $returnurl);
             }
             if ($type == 'grade' and empty($object->id)) {
                 $object->insert();
@@ -98,8 +98,8 @@ switch ($action) {
 
     case 'unlock':
         if ($eid and confirm_sesskey()) {
-            if (!has_capability('moodle/grade:manage', $context) and !has_capability('moodle/grade:unlock', $context)) {
-                throw new \moodle_exception('nopermissiontounlock', '', $returnurl);
+            if (!has_capability('powereduc/grade:manage', $context) and !has_capability('powereduc/grade:unlock', $context)) {
+                throw new \powereduc_exception('nopermissiontounlock', '', $returnurl);
             }
             if ($type == 'grade' and empty($object->id)) {
                 $object->insert();
@@ -114,8 +114,8 @@ switch ($action) {
             // This is specific to category items with natural weight as an aggregation method, and can
             // only be done by someone who can manage the grades.
             if ($type != 'category' || $object->aggregation != GRADE_AGGREGATE_SUM ||
-                    !has_capability('moodle/grade:manage', $context)) {
-                throw new \moodle_exception('nopermissiontoresetweights', 'grades', $returnurl);
+                    !has_capability('powereduc/grade:manage', $context)) {
+                throw new \powereduc_exception('nopermissiontoresetweights', 'grades', $returnurl);
             }
 
             // Remove the weightoverride flag from the children.

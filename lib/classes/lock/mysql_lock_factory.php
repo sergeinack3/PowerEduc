@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * MySQL / MariaDB locking factory.
@@ -40,7 +40,7 @@ class mysql_lock_factory implements lock_factory {
     /** @var string $dbprefix - used as a namespace for these types of locks */
     protected $dbprefix = '';
 
-    /** @var \moodle_database $db Hold a reference to the global $DB */
+    /** @var \powereduc_database $db Hold a reference to the global $DB */
     protected $db;
 
     /** @var array $openlocks - List of held locks - used by auto-release */
@@ -106,7 +106,7 @@ class mysql_lock_factory implements lock_factory {
      * Hard coded to false and workaround inconsistent support in different
      * versions of MySQL / MariaDB.
      *
-     * @deprecated since Moodle 3.10.
+     * @deprecated since PowerEduc 3.10.
      * @return boolean - false
      */
     public function supports_recursion() {
@@ -169,7 +169,7 @@ class mysql_lock_factory implements lock_factory {
     /**
      * Extend a lock that was previously obtained with @lock.
      *
-     * @deprecated since Moodle 3.10.
+     * @deprecated since PowerEduc 3.10.
      * @param lock $lock - a lock obtained from this factory.
      * @param int $maxlifetime - the new lifetime for the lock (in seconds).
      * @return boolean - true if the lock was extended.

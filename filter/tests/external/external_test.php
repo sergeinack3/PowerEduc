@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -55,7 +55,7 @@ class external_test extends externallib_advanced_testcase {
         $this->resetAfterTest(true);
         $this->setAdminUser();
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         external::get_available_in_context(array(array('contextlevel' => 'system', 'instanceid' => 0)));
     }
 

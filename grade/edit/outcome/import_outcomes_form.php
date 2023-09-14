@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * A form to allow importing outcomes from a file
  *
  * @package   core_grades
- * @copyright 2008 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2008 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,7 +28,7 @@ if (!defined('POWEREDUC_INTERNAL')) {
 
 require_once($CFG->dirroot.'/lib/formslib.php');
 
-class import_outcomes_form extends moodleform {
+class import_outcomes_form extends powereducform {
 
     public function definition() {
         global $PAGE, $USER;
@@ -41,7 +41,7 @@ class import_outcomes_form extends moodleform {
         $mform->setType('courseid', PARAM_INT);
 
         $scope = array();
-        if (($PAGE->course->id > 1) && has_capability('moodle/grade:manage', context_system::instance())) {
+        if (($PAGE->course->id > 1) && has_capability('powereduc/grade:manage', context_system::instance())) {
             $mform->addElement('radio', 'scope', get_string('importcustom', 'grades'), null, 'custom');
             $mform->addElement('radio', 'scope', get_string('importstandard', 'grades'), null, 'global');
             $mform->setDefault('scope', 'custom');

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,13 +18,13 @@
  * Provides {@see \core_contentbank\form\edit_content} class.
  *
  * @package    core_contentbank
- * @copyright  2020 Victor Deniz <victor@moodle.com>
+ * @copyright  2020 Victor Deniz <victor@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace core_contentbank\form;
 
-use moodleform;
+use powereducform;
 
 defined('POWEREDUC_INTERNAL') || die();
 
@@ -34,10 +34,10 @@ require_once($CFG->libdir.'/formslib.php');
  * Defines the form for editing a content.
  *
  * @package    core_contentbank
- * @copyright  2020 Victor Deniz <victor@moodle.com>
+ * @copyright  2020 Victor Deniz <victor@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-abstract class edit_content extends moodleform {
+abstract class edit_content extends powereducform {
 
     /** @var int Context the content belongs to. */
     protected $contextid;

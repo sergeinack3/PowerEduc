@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * LTI enrolment plugin version information
  *
  * @package enrol_lti
- * @copyright 2016 Mark Nelson <markn@moodle.com>
+ * @copyright 2016 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -100,7 +100,7 @@ $string['membersyncmode_help'] = 'Whether remote users should be enrolled and/or
 $string['membersyncmodeenrolandunenrol'] = 'Enrol new and unenrol missing users';
 $string['membersyncmodeenrolnew'] = 'Enrol new users';
 $string['membersyncmodeunenrolmissing'] = 'Unenrol missing users';
-$string['moodle'] = 'Moodle';
+$string['powereduc'] = 'Moodle';
 $string['nodeployments'] = 'No tool deployments found';
 $string['nopublishedcontent'] = 'No resources or activities are published yet';
 $string['notoolsprovided'] = 'No tools provided';

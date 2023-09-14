@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ admin_externalpage_setup('tool_filetypes');
 $title = get_string('pluginname', 'tool_filetypes');
 
 $context = context_system::instance();
-$PAGE->set_url(new \moodle_url('/admin/tool/filetypes/index.php'));
+$PAGE->set_url(new \powereduc_url('/admin/tool/filetypes/index.php'));
 $PAGE->set_context($context);
 $PAGE->set_pagelayout('admin');
 $PAGE->set_title($SITE->fullname. ': ' . $title);

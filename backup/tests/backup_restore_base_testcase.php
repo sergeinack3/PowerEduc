@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -47,7 +47,7 @@ abstract class core_backup_backup_restore_base_testcase extends advanced_testcas
      * @param  stdClass $course Course for backup.
      * @return string Hash string ID from the backup.
      * @throws coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function perform_backup($course): string {
         global $CFG, $USER;
@@ -69,7 +69,7 @@ abstract class core_backup_backup_restore_base_testcase extends advanced_testcas
         // Extract backup file.
         $path = $CFG->tempdir . DIRECTORY_SEPARATOR . "backup" . DIRECTORY_SEPARATOR . $backupid;
 
-        $fp = get_file_packer('application/vnd.moodle.backup');
+        $fp = get_file_packer('application/vnd.powereduc.backup');
         $fp->extract_to_pathname($backupfile, $path);
 
         return $backupid;

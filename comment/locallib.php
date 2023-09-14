@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 defined('POWEREDUC_INTERNAL') || die();
 
 /**
- * comment_manager is helper class to manage moodle comments in admin page (Reports->Comments)
+ * comment_manager is helper class to manage powereduc comments in admin page (Reports->Comments)
  *
  * @package   core
  * @copyright 2010 Dongsheng Cai {@link http://dongsheng.org}
@@ -47,7 +47,7 @@ class comment_manager {
     /**
      * Return comments by pages
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @param int $page
      * @return array An array of comments
      */
@@ -91,8 +91,8 @@ class comment_manager {
     /**
      * Records the course object
      *
-     * @global moodle_page $PAGE
-     * @global moodle_database $DB
+     * @global powereduc_page $PAGE
+     * @global powereduc_database $DB
      * @param int $courseid
      */
     private function setup_course($courseid) {
@@ -111,7 +111,7 @@ class comment_manager {
     /**
      * Sets up the module or block information for a comment
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @param stdClass $comment
      * @return bool
      */
@@ -152,7 +152,7 @@ class comment_manager {
         $count = $DB->count_records('comments');
         $comments = $this->get_comments($page);
         if (count($comments) == 0) {
-            echo $OUTPUT->notification(get_string('nocomments', 'moodle'));
+            echo $OUTPUT->notification(get_string('nocomments', 'powereduc'));
             return false;
         }
 
@@ -169,15 +169,15 @@ class comment_manager {
         $table->id = 'commentstable';
         $table->data = array();
 
-        $link = new moodle_url('/comment/index.php', array('action' => 'delete', 'sesskey' => sesskey()));
+        $link = new powereduc_url('/comment/index.php', array('action' => 'delete', 'sesskey' => sesskey()));
         foreach ($comments as $c) {
-            $userdata = html_writer::link(new moodle_url('/user/profile.php', ['id' => $c->userid]), $c->fullname);
+            $userdata = html_writer::link(new powereduc_url('/user/profile.php', ['id' => $c->userid]), $c->fullname);
             $this->setup_plugin($c);
             if (!empty($this->plugintype)) {
                 $context_url = plugin_callback($this->plugintype, $this->pluginname, 'comment', 'url', array($c));
             }
             $checkbox = html_writer::checkbox('comments', $c->id, false);
-            $action = html_writer::link(new moodle_url($link, array('commentid' => $c->id)), get_string('delete'));
+            $action = html_writer::link(new powereduc_url($link, array('commentid' => $c->id)), get_string('delete'));
             if (!empty($context_url)) {
                 $action .= html_writer::empty_tag('br');
                 $action .= html_writer::link($context_url, get_string('commentincontext'), array('target'=>'_blank'));

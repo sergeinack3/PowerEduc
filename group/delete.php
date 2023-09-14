@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -36,25 +36,25 @@ $PAGE->set_pagelayout('standard');
 
 // Make sure course is OK and user has access to manage groups
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 require_login($course);
 $context = context_course::instance($course->id);
-require_capability('moodle/course:managegroups', $context);
-$changeidnumber = has_capability('moodle/course:changeidnumber', $context);
+require_capability('powereduc/course:managegroups', $context);
+$changeidnumber = has_capability('powereduc/course:changeidnumber', $context);
 
 // Make sure all groups are OK and belong to course
 $groupidarray = explode(',',$groupids);
 $groupnames = array();
 foreach($groupidarray as $groupid) {
     if (!$group = $DB->get_record('groups', array('id' => $groupid))) {
-        throw new \moodle_exception('invalidgroupid');
+        throw new \powereduc_exception('invalidgroupid');
     }
     if (!empty($group->idnumber) && !$changeidnumber) {
-        throw new \moodle_exception('grouphasidnumber', '', '', $group->name);
+        throw new \powereduc_exception('grouphasidnumber', '', '', $group->name);
     }
     if ($courseid != $group->courseid) {
-        throw new \moodle_exception('groupunknown', '', '', $group->courseid);
+        throw new \powereduc_exception('groupunknown', '', '', $group->courseid);
     }
     $groupnames[] = format_string($group->name);
 }
@@ -62,12 +62,12 @@ foreach($groupidarray as $groupid) {
 $returnurl='index.php?id='.$course->id;
 
 if(count($groupidarray)==0) {
-    throw new \moodle_exception('errorselectsome', 'group', $returnurl);
+    throw new \powereduc_exception('errorselectsome', 'group', $returnurl);
 }
 
 if ($confirm && data_submitted()) {
     if (!confirm_sesskey() ) {
-        throw new \moodle_exception('confirmsesskeybad', 'error', $returnurl);
+        throw new \powereduc_exception('confirmsesskeybad', 'error', $returnurl);
     }
 
     foreach($groupidarray as $groupid) {
@@ -90,8 +90,8 @@ if ($confirm && data_submitted()) {
         }
         $message.='</ul>';
     }
-    $formcontinue = new single_button(new moodle_url('delete.php', $optionsyes), get_string('yes'), 'post');
-    $formcancel = new single_button(new moodle_url('index.php', $optionsno), get_string('no'), 'get');
+    $formcontinue = new single_button(new powereduc_url('delete.php', $optionsyes), get_string('yes'), 'post');
+    $formcancel = new single_button(new powereduc_url('index.php', $optionsno), get_string('no'), 'get');
     echo $OUTPUT->confirm($message, $formcontinue, $formcancel);
     echo $OUTPUT->footer();
 }

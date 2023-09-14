@@ -7,7 +7,7 @@ require_once('lib.php');
 $id       = optional_param('id', SITEID, PARAM_INT);   // course id
 $redirect = optional_param('redirect', 0, PARAM_BOOL);
 
-$url = new moodle_url('/course/loginas.php', array('id'=>$id));
+$url = new powereduc_url('/course/loginas.php', array('id'=>$id));
 $PAGE->set_url($url);
 
 // Reset user back to their real self if needed, for security reasons you need to log out and log in again.
@@ -16,7 +16,7 @@ if (\core\session\manager::is_loggedinas()) {
     require_logout();
 
     // We can not set wanted URL here because the session is closed.
-    redirect(new moodle_url($url, array('redirect'=>1)));
+    redirect(new powereduc_url($url, array('redirect'=>1)));
 }
 
 if ($redirect) {
@@ -42,26 +42,26 @@ $coursecontext = context_course::instance($course->id);
 
 require_login();
 
-if (has_capability('moodle/user:loginas', $systemcontext)) {
+if (has_capability('powereduc/user:loginas', $systemcontext)) {
     if (is_siteadmin($userid)) {
-        throw new \moodle_exception('nologinas');
+        throw new \powereduc_exception('nologinas');
     }
     $context = $systemcontext;
     $PAGE->set_context($context);
 } else {
     require_login($course);
-    require_capability('moodle/user:loginas', $coursecontext);
+    require_capability('powereduc/user:loginas', $coursecontext);
     if (is_siteadmin($userid)) {
-        throw new \moodle_exception('nologinas');
+        throw new \powereduc_exception('nologinas');
     }
     if (!is_enrolled($coursecontext, $userid)) {
-        throw new \moodle_exception('usernotincourse');
+        throw new \powereduc_exception('usernotincourse');
     }
     $context = $coursecontext;
 
     // Check if course has SEPARATEGROUPS and user is part of that group.
     if (groups_get_course_groupmode($course) == SEPARATEGROUPS &&
-            !has_capability('moodle/site:accessallgroups', $context)) {
+            !has_capability('powereduc/site:accessallgroups', $context)) {
         $samegroup = false;
         if ($groups = groups_get_all_groups($course->id, $USER->id)) {
             foreach ($groups as $group) {
@@ -72,7 +72,7 @@ if (has_capability('moodle/user:loginas', $systemcontext)) {
             }
         }
         if (!$samegroup) {
-            throw new \moodle_exception('nologinas');
+            throw new \powereduc_exception('nologinas');
         }
     }
 }

@@ -1,10 +1,10 @@
 {
-  "moodle-core-tooltip": {
+  "powereduc-core-tooltip": {
     "requires": [
         "base",
         "node",
         "io-base",
-        "moodle-core-notification-dialogue",
+        "powereduc-core-notification-dialogue",
         "json-parse",
         "widget-position",
         "widget-position-align",

@@ -9,7 +9,7 @@ Feature: Add images to Atto
       | private_files | System       | 1         | my-index        | side-post     |
     And I log in as "admin"
     And I follow "Manage private files..."
-    And I upload "lib/editor/atto/tests/fixtures/moodle-logo.png" file to "Files" filemanager
+    And I upload "lib/editor/atto/tests/fixtures/powereduc-logo.png" file to "Files" filemanager
     And I click on "Save changes" "button"
     And I open my profile in edit mode
     When I set the field "Description" to "<p>Image test</p>"
@@ -17,9 +17,9 @@ Feature: Add images to Atto
     And I click on "Insert or edit image" "button"
     And I click on "Browse repositories..." "button"
     And I click on "Private files" "link" in the ".fp-repo-area" "css_element"
-    And I click on "moodle-logo.png" "link"
+    And I click on "powereduc-logo.png" "link"
     And I click on "Select this file" "button"
-    And I set the field "Describe this image for someone who cannot see it" to "It's the Moodle"
+    And I set the field "Describe this image for someone who cannot see it" to "It's the PowerEduc"
     # Wait for the page to "settle".
     And I wait until the page is ready
     And the field "Width" matches value "204"
@@ -48,7 +48,7 @@ Feature: Add images to Atto
     And I click on "Edit profile" "link" in the "region-main" "region"
     And I select the text in the "Description" Atto editor
     And I click on "Insert or edit image" "button"
-    Then the field "Describe this image for someone who cannot see it" matches value "It's the Moodle"
+    Then the field "Describe this image for someone who cannot see it" matches value "It's the PowerEduc"
     And the field "Width" matches value "123"
     And the field "Height" matches value "456"
 

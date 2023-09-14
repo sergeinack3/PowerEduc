@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -89,40 +89,40 @@ class externallib_test extends externallib_advanced_testcase {
         $authrole = $DB->get_record('role', array('id' => $CFG->defaultuserroleid));
 
         // Reset all default authenticated users permissions.
-        unassign_capability('moodle/competency:competencygrade', $authrole->id);
-        unassign_capability('moodle/competency:competencymanage', $authrole->id);
-        unassign_capability('moodle/competency:competencyview', $authrole->id);
-        unassign_capability('moodle/competency:planmanage', $authrole->id);
-        unassign_capability('moodle/competency:planmanagedraft', $authrole->id);
-        unassign_capability('moodle/competency:planmanageown', $authrole->id);
-        unassign_capability('moodle/competency:planview', $authrole->id);
-        unassign_capability('moodle/competency:planviewdraft', $authrole->id);
-        unassign_capability('moodle/competency:planviewown', $authrole->id);
-        unassign_capability('moodle/competency:planviewowndraft', $authrole->id);
-        unassign_capability('moodle/competency:templatemanage', $authrole->id);
-        unassign_capability('moodle/competency:templateview', $authrole->id);
-        unassign_capability('moodle/cohort:manage', $authrole->id);
-        unassign_capability('moodle/competency:coursecompetencyconfigure', $authrole->id);
+        unassign_capability('powereduc/competency:competencygrade', $authrole->id);
+        unassign_capability('powereduc/competency:competencymanage', $authrole->id);
+        unassign_capability('powereduc/competency:competencyview', $authrole->id);
+        unassign_capability('powereduc/competency:planmanage', $authrole->id);
+        unassign_capability('powereduc/competency:planmanagedraft', $authrole->id);
+        unassign_capability('powereduc/competency:planmanageown', $authrole->id);
+        unassign_capability('powereduc/competency:planview', $authrole->id);
+        unassign_capability('powereduc/competency:planviewdraft', $authrole->id);
+        unassign_capability('powereduc/competency:planviewown', $authrole->id);
+        unassign_capability('powereduc/competency:planviewowndraft', $authrole->id);
+        unassign_capability('powereduc/competency:templatemanage', $authrole->id);
+        unassign_capability('powereduc/competency:templateview', $authrole->id);
+        unassign_capability('powereduc/cohort:manage', $authrole->id);
+        unassign_capability('powereduc/competency:coursecompetencyconfigure', $authrole->id);
 
         // Creating specific roles.
         $this->creatorrole = create_role('Creator role', 'lpcreatorrole', 'learning plan creator role description');
         $this->userrole = create_role('User role', 'lpuserrole', 'learning plan user role description');
 
-        assign_capability('moodle/competency:competencymanage', CAP_ALLOW, $this->creatorrole, $syscontext->id);
-        assign_capability('moodle/competency:coursecompetencyconfigure', CAP_ALLOW, $this->creatorrole, $syscontext->id);
-        assign_capability('moodle/competency:planmanage', CAP_ALLOW, $this->creatorrole, $syscontext->id);
-        assign_capability('moodle/competency:planmanagedraft', CAP_ALLOW, $this->creatorrole, $syscontext->id);
-        assign_capability('moodle/competency:planmanageown', CAP_ALLOW, $this->creatorrole, $syscontext->id);
-        assign_capability('moodle/competency:planview', CAP_ALLOW, $this->creatorrole, $syscontext->id);
-        assign_capability('moodle/competency:planviewdraft', CAP_ALLOW, $this->creatorrole, $syscontext->id);
-        assign_capability('moodle/competency:templatemanage', CAP_ALLOW, $this->creatorrole, $syscontext->id);
-        assign_capability('moodle/competency:competencygrade', CAP_ALLOW, $this->creatorrole, $syscontext->id);
-        assign_capability('moodle/cohort:manage', CAP_ALLOW, $this->creatorrole, $syscontext->id);
+        assign_capability('powereduc/competency:competencymanage', CAP_ALLOW, $this->creatorrole, $syscontext->id);
+        assign_capability('powereduc/competency:coursecompetencyconfigure', CAP_ALLOW, $this->creatorrole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanage', CAP_ALLOW, $this->creatorrole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanagedraft', CAP_ALLOW, $this->creatorrole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanageown', CAP_ALLOW, $this->creatorrole, $syscontext->id);
+        assign_capability('powereduc/competency:planview', CAP_ALLOW, $this->creatorrole, $syscontext->id);
+        assign_capability('powereduc/competency:planviewdraft', CAP_ALLOW, $this->creatorrole, $syscontext->id);
+        assign_capability('powereduc/competency:templatemanage', CAP_ALLOW, $this->creatorrole, $syscontext->id);
+        assign_capability('powereduc/competency:competencygrade', CAP_ALLOW, $this->creatorrole, $syscontext->id);
+        assign_capability('powereduc/cohort:manage', CAP_ALLOW, $this->creatorrole, $syscontext->id);
 
-        assign_capability('moodle/competency:competencyview', CAP_ALLOW, $this->userrole, $syscontext->id);
-        assign_capability('moodle/competency:templateview', CAP_ALLOW, $this->userrole, $syscontext->id);
-        assign_capability('moodle/competency:planviewown', CAP_ALLOW, $this->userrole, $syscontext->id);
-        assign_capability('moodle/competency:planviewowndraft', CAP_ALLOW, $this->userrole, $syscontext->id);
+        assign_capability('powereduc/competency:competencyview', CAP_ALLOW, $this->userrole, $syscontext->id);
+        assign_capability('powereduc/competency:templateview', CAP_ALLOW, $this->userrole, $syscontext->id);
+        assign_capability('powereduc/competency:planviewown', CAP_ALLOW, $this->userrole, $syscontext->id);
+        assign_capability('powereduc/competency:planviewowndraft', CAP_ALLOW, $this->userrole, $syscontext->id);
 
         role_assign($this->creatorrole, $creator->id, $syscontext->id);
         role_assign($this->creatorrole, $catcreator->id, $catcontext->id);
@@ -151,7 +151,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         // First we search with no capability assigned.
         $this->setUser($ux);
-        $result = external::search_users('yyylan', 'moodle/competency:planmanage');
+        $result = external::search_users('yyylan', 'powereduc/competency:planmanage');
         $result = \external_api::clean_returnvalue(external::search_users_returns(), $result);
         $this->assertCount(0, $result['users']);
         $this->assertEquals(0, $result['count']);
@@ -159,25 +159,25 @@ class externallib_test extends externallib_advanced_testcase {
         // Now we assign a different capability.
         $usercontext = \context_user::instance($u1->id);
         $systemcontext = \context_system::instance();
-        $customrole = $this->assignUserCapability('moodle/competency:planview', $usercontext->id);
+        $customrole = $this->assignUserCapability('powereduc/competency:planview', $usercontext->id);
 
-        $result = external::search_users('yyylan', 'moodle/competency:planmanage');
+        $result = external::search_users('yyylan', 'powereduc/competency:planmanage');
         $result = \external_api::clean_returnvalue(external::search_users_returns(), $result);
         $this->assertCount(0, $result['users']);
         $this->assertEquals(0, $result['count']);
 
         // Now we assign a matching capability in the same role.
         $usercontext = \context_user::instance($u1->id);
-        $this->assignUserCapability('moodle/competency:planmanage', $usercontext->id, $customrole);
+        $this->assignUserCapability('powereduc/competency:planmanage', $usercontext->id, $customrole);
 
-        $result = external::search_users('yyylan', 'moodle/competency:planmanage');
+        $result = external::search_users('yyylan', 'powereduc/competency:planmanage');
         $result = \external_api::clean_returnvalue(external::search_users_returns(), $result);
         $this->assertCount(1, $result['users']);
         $this->assertEquals(1, $result['count']);
 
         // Now assign another role with the same capability (test duplicates).
         role_assign($this->creatorrole, $ux->id, $usercontext->id);
-        $result = external::search_users('yyylan', 'moodle/competency:planmanage');
+        $result = external::search_users('yyylan', 'powereduc/competency:planmanage');
         $result = \external_api::clean_returnvalue(external::search_users_returns(), $result);
         $this->assertCount(1, $result['users']);
         $this->assertEquals(1, $result['count']);
@@ -186,7 +186,7 @@ class externallib_test extends externallib_advanced_testcase {
         $ux2 = $dg->create_user();
         role_assign($this->creatorrole, $ux2->id, $systemcontext->id);
         $this->setUser($ux2);
-        $result = external::search_users('yyylan', 'moodle/competency:planmanage');
+        $result = external::search_users('yyylan', 'powereduc/competency:planmanage');
         $result = \external_api::clean_returnvalue(external::search_users_returns(), $result);
         $this->assertCount(1, $result['users']);
         $this->assertEquals(1, $result['count']);
@@ -195,7 +195,7 @@ class externallib_test extends externallib_advanced_testcase {
         $ux3 = $dg->create_user();
         role_assign($this->creatorrole, $ux3->id, $usercontext->id);
         $this->setUser($ux3);
-        $result = external::search_users('yyylan', 'moodle/competency:planmanage');
+        $result = external::search_users('yyylan', 'powereduc/competency:planmanage');
         $result = \external_api::clean_returnvalue(external::search_users_returns(), $result);
         $this->assertCount(1, $result['users']);
         $this->assertEquals(1, $result['count']);
@@ -204,15 +204,15 @@ class externallib_test extends externallib_advanced_testcase {
         $this->setUser($ux);
 
         // Now add a prevent override (will change nothing because we still have an ALLOW).
-        assign_capability('moodle/competency:planmanage', CAP_PREVENT, $customrole, $usercontext->id);
-        $result = external::search_users('yyylan', 'moodle/competency:planmanage');
+        assign_capability('powereduc/competency:planmanage', CAP_PREVENT, $customrole, $usercontext->id);
+        $result = external::search_users('yyylan', 'powereduc/competency:planmanage');
         $result = \external_api::clean_returnvalue(external::search_users_returns(), $result);
         $this->assertCount(1, $result['users']);
         $this->assertEquals(1, $result['count']);
 
         // Now change to a prohibit override (should prevent access).
-        assign_capability('moodle/competency:planmanage', CAP_PROHIBIT, $customrole, $usercontext->id);
-        $result = external::search_users('yyylan', 'moodle/competency:planmanage');
+        assign_capability('powereduc/competency:planmanage', CAP_PROHIBIT, $customrole, $usercontext->id);
+        $result = external::search_users('yyylan', 'powereduc/competency:planmanage');
         $result = \external_api::clean_returnvalue(external::search_users_returns(), $result);
         $this->assertCount(1, $result['users']);
         $this->assertEquals(1, $result['count']);
@@ -239,10 +239,10 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Creating a role giving the site config.
         $roleid = $dg->create_role();
-        assign_capability('moodle/site:config', CAP_ALLOW, $roleid, $syscontext->id, true);
+        assign_capability('powereduc/site:config', CAP_ALLOW, $roleid, $syscontext->id, true);
 
         // Create a role override for slave 2.
-        assign_capability('moodle/site:config', CAP_PROHIBIT, $roleid, $slave2context->id, true);
+        assign_capability('powereduc/site:config', CAP_PROHIBIT, $roleid, $slave2context->id, true);
 
         // Assigning the role.
         // Master -> System context.
@@ -256,28 +256,28 @@ class externallib_test extends externallib_advanced_testcase {
         // Confirm.
         // Master has system permissions.
         $this->setUser($master);
-        $this->assertTrue(has_capability('moodle/site:config', $syscontext));
-        $this->assertTrue(has_capability('moodle/site:config', $slave1context));
-        $this->assertFalse(has_capability('moodle/site:config', $slave2context));
-        $this->assertTrue(has_capability('moodle/site:config', $slave3context));
+        $this->assertTrue(has_capability('powereduc/site:config', $syscontext));
+        $this->assertTrue(has_capability('powereduc/site:config', $slave1context));
+        $this->assertFalse(has_capability('powereduc/site:config', $slave2context));
+        $this->assertTrue(has_capability('powereduc/site:config', $slave3context));
 
         // Manager only has permissions in slave 1.
         $this->setUser($manager);
-        $this->assertFalse(has_capability('moodle/site:config', $syscontext));
-        $this->assertTrue(has_capability('moodle/site:config', $slave1context));
-        $this->assertFalse(has_capability('moodle/site:config', $slave2context));
-        $this->assertFalse(has_capability('moodle/site:config', $slave3context));
+        $this->assertFalse(has_capability('powereduc/site:config', $syscontext));
+        $this->assertTrue(has_capability('powereduc/site:config', $slave1context));
+        $this->assertFalse(has_capability('powereduc/site:config', $slave2context));
+        $this->assertFalse(has_capability('powereduc/site:config', $slave3context));
 
         // Now do the test.
         $this->setUser($master);
-        $result = external::search_users('POWEREDUCR', 'moodle/site:config');
+        $result = external::search_users('POWEREDUCR', 'powereduc/site:config');
         $this->assertCount(2, $result['users']);
         $this->assertEquals(2, $result['count']);
         $this->assertArrayHasKey($slave1->id, $result['users']);
         $this->assertArrayHasKey($slave3->id, $result['users']);
 
         $this->setUser($manager);
-        $result = external::search_users('POWEREDUCR', 'moodle/site:config');
+        $result = external::search_users('POWEREDUCR', 'powereduc/site:config');
         $this->assertCount(1, $result['users']);
         $this->assertEquals(1, $result['count']);
         $this->assertArrayHasKey($slave1->id, $result['users']);
@@ -296,38 +296,38 @@ class externallib_test extends externallib_advanced_testcase {
             'email' => 'alyyyson@dyyylan.com', 'phone1' => '33333', 'phone2' => '77777', 'department' => 'Development',
             'institution' => 'O2'));
         $u3 = $dg->create_user(array('idnumber' => 'Fish', 'firstname' => 'Thomas', 'lastname' => 'Xow',
-            'email' => 'fishyyy@moodle.com', 'phone1' => '77777', 'phone2' => '33333', 'department' => 'Research',
+            'email' => 'fishyyy@powereduc.com', 'phone1' => '77777', 'phone2' => '33333', 'department' => 'Research',
             'institution' => 'Bob'));
 
         // We need to give the user the capability we are searching for on each of the test users.
         $this->setAdminUser();
         $usercontext = \context_user::instance($u1->id);
-        $dummyrole = $this->assignUserCapability('moodle/competency:planmanage', $usercontext->id);
+        $dummyrole = $this->assignUserCapability('powereduc/competency:planmanage', $usercontext->id);
         $usercontext = \context_user::instance($u2->id);
-        $this->assignUserCapability('moodle/competency:planmanage', $usercontext->id, $dummyrole);
+        $this->assignUserCapability('powereduc/competency:planmanage', $usercontext->id, $dummyrole);
         $usercontext = \context_user::instance($u3->id);
-        $this->assignUserCapability('moodle/competency:planmanage', $usercontext->id, $dummyrole);
+        $this->assignUserCapability('powereduc/competency:planmanage', $usercontext->id, $dummyrole);
 
         $this->setUser($ux);
         $usercontext = \context_user::instance($u1->id);
-        $this->assignUserCapability('moodle/competency:planmanage', $usercontext->id, $dummyrole);
+        $this->assignUserCapability('powereduc/competency:planmanage', $usercontext->id, $dummyrole);
         $usercontext = \context_user::instance($u2->id);
-        $this->assignUserCapability('moodle/competency:planmanage', $usercontext->id, $dummyrole);
+        $this->assignUserCapability('powereduc/competency:planmanage', $usercontext->id, $dummyrole);
         $usercontext = \context_user::instance($u3->id);
-        $this->assignUserCapability('moodle/competency:planmanage', $usercontext->id, $dummyrole);
+        $this->assignUserCapability('powereduc/competency:planmanage', $usercontext->id, $dummyrole);
 
         $this->setAdminUser();
 
         // No identity fields.
         $CFG->showuseridentity = '';
-        $result = external::search_users('cats', 'moodle/competency:planmanage');
+        $result = external::search_users('cats', 'powereduc/competency:planmanage');
         $result = \external_api::clean_returnvalue(external::search_users_returns(), $result);
         $this->assertCount(0, $result['users']);
         $this->assertEquals(0, $result['count']);
 
         // Filter by name.
         $CFG->showuseridentity = '';
-        $result = external::search_users('dyyylan', 'moodle/competency:planmanage');
+        $result = external::search_users('dyyylan', 'powereduc/competency:planmanage');
         $result = \external_api::clean_returnvalue(external::search_users_returns(), $result);
         $this->assertCount(2, $result['users']);
         $this->assertEquals(2, $result['count']);
@@ -336,7 +336,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Filter by institution and name.
         $CFG->showuseridentity = 'institution';
-        $result = external::search_users('bob', 'moodle/competency:planmanage');
+        $result = external::search_users('bob', 'powereduc/competency:planmanage');
         $result = \external_api::clean_returnvalue(external::search_users_returns(), $result);
         $this->assertCount(2, $result['users']);
         $this->assertEquals(2, $result['count']);
@@ -345,7 +345,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Filter by id number.
         $CFG->showuseridentity = 'idnumber';
-        $result = external::search_users('cats', 'moodle/competency:planmanage');
+        $result = external::search_users('cats', 'powereduc/competency:planmanage');
         $result = \external_api::clean_returnvalue(external::search_users_returns(), $result);
         $this->assertCount(1, $result['users']);
         $this->assertEquals(1, $result['count']);
@@ -359,7 +359,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Filter by email.
         $CFG->showuseridentity = 'email';
-        $result = external::search_users('yyy', 'moodle/competency:planmanage');
+        $result = external::search_users('yyy', 'powereduc/competency:planmanage');
         $result = \external_api::clean_returnvalue(external::search_users_returns(), $result);
         $this->assertCount(3, $result['users']);
         $this->assertEquals(3, $result['count']);
@@ -372,7 +372,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Filter by any.
         $CFG->showuseridentity = 'idnumber,email,phone1,phone2,department,institution';
-        $result = external::search_users('yyy', 'moodle/competency:planmanage');
+        $result = external::search_users('yyy', 'powereduc/competency:planmanage');
         $result = \external_api::clean_returnvalue(external::search_users_returns(), $result);
         $this->assertCount(3, $result['users']);
         $this->assertEquals(3, $result['count']);
@@ -393,7 +393,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertCount(0, $result['users']);
         $this->assertEquals(0, $result['count']);
 
-        $result = external::search_users('bob', 'moodle/competency:planmanage');
+        $result = external::search_users('bob', 'powereduc/competency:planmanage');
         $result = \external_api::clean_returnvalue(external::search_users_returns(), $result);
         $this->assertCount(1, $result['users']);
         $this->assertEquals(1, $result['count']);

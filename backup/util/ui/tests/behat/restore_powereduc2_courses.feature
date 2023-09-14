@@ -15,7 +15,7 @@ Feature: Restore Moodle 2 course backups
       | activity | course | idnumber | name | intro | section | externalurl           |
       | assign | C3 | assign1 | Test assign name | Assign description | 1 |           |
       | data | C3 | data1 | Test database name | Database description | 2 |           |
-      | url      | C1     | url1     | Test URL name | Test URL description | 3       | http://www.moodle.org |
+      | url      | C1     | url1     | Test URL name | Test URL description | 3       | http://www.powereduc.org |
     And I log in as "admin"
     And I am on "Course 1" course homepage with editing mode on
     And I add a "Forum" to section "1" and I fill the form with:

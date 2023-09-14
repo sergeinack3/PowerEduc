@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -245,7 +245,7 @@ function cohort_get_available_cohorts($currentcontext, $withmembers = 0, $offset
     // Since this method is normally called for the current course all parent contexts are already preloaded.
     $contextsany = array_filter($currentcontext->get_parent_context_ids(),
         function($a) {
-            return has_capability("moodle/cohort:view", context::instance_by_id($a));
+            return has_capability("powereduc/cohort:view", context::instance_by_id($a));
         });
     $contextsvisible = array_diff($currentcontext->get_parent_context_ids(), $contextsany);
     if (empty($contextsany) && empty($contextsvisible)) {
@@ -335,7 +335,7 @@ function cohort_can_view_cohort($cohortorid, $currentcontext) {
             return true;
         }
         $cohortcontext = context::instance_by_id($cohort->contextid);
-        if (has_capability('moodle/cohort:view', $cohortcontext)) {
+        if (has_capability('powereduc/cohort:view', $cohortcontext)) {
             return true;
         }
     }
@@ -362,7 +362,7 @@ function cohort_get_cohort($cohortorid, $currentcontext) {
             return $cohort;
         }
         $cohortcontext = context::instance_by_id($cohort->contextid);
-        if (has_capability('moodle/cohort:view', $cohortcontext)) {
+        if (has_capability('powereduc/cohort:view', $cohortcontext)) {
             return $cohort;
         }
     }
@@ -554,7 +554,7 @@ function cohort_get_invisible_contexts() {
         if (context::instance_by_id($ctx->id) == context_system::instance()) {
             continue; // System context cohorts should be available and permissions already checked.
         }
-        if (!has_any_capability(array('moodle/cohort:manage', 'moodle/cohort:view'), context::instance_by_id($ctx->id))) {
+        if (!has_any_capability(array('powereduc/cohort:manage', 'powereduc/cohort:view'), context::instance_by_id($ctx->id))) {
             $excludedcontexts[] = $ctx->id;
         }
     }
@@ -566,33 +566,33 @@ function cohort_get_invisible_contexts() {
  * Returns navigation controls (tabtree) to be displayed on cohort management pages
  *
  * @param context $context system or category context where cohorts controls are about to be displayed
- * @param moodle_url $currenturl
+ * @param powereduc_url $currenturl
  * @return null|renderable
  */
-function cohort_edit_controls(context $context, moodle_url $currenturl) {
+function cohort_edit_controls(context $context, powereduc_url $currenturl) {
     $tabs = array();
     $currenttab = 'view';
-    $viewurl = new moodle_url('/cohort/index.php', array('contextid' => $context->id));
+    $viewurl = new powereduc_url('/cohort/index.php', array('contextid' => $context->id));
     if (($searchquery = $currenturl->get_param('search'))) {
         $viewurl->param('search', $searchquery);
     }
     if ($context->contextlevel == CONTEXT_SYSTEM) {
-        $tabs[] = new tabobject('view', new moodle_url($viewurl, array('showall' => 0)), get_string('systemcohorts', 'cohort'));
-        $tabs[] = new tabobject('viewall', new moodle_url($viewurl, array('showall' => 1)), get_string('allcohorts', 'cohort'));
+        $tabs[] = new tabobject('view', new powereduc_url($viewurl, array('showall' => 0)), get_string('systemcohorts', 'cohort'));
+        $tabs[] = new tabobject('viewall', new powereduc_url($viewurl, array('showall' => 1)), get_string('allcohorts', 'cohort'));
         if ($currenturl->get_param('showall')) {
             $currenttab = 'viewall';
         }
     } else {
         $tabs[] = new tabobject('view', $viewurl, get_string('cohorts', 'cohort'));
     }
-    if (has_capability('moodle/cohort:manage', $context)) {
-        $addurl = new moodle_url('/cohort/edit.php', array('contextid' => $context->id));
+    if (has_capability('powereduc/cohort:manage', $context)) {
+        $addurl = new powereduc_url('/cohort/edit.php', array('contextid' => $context->id));
         $tabs[] = new tabobject('addcohort', $addurl, get_string('addcohort', 'cohort'));
         if ($currenturl->get_path() === $addurl->get_path() && !$currenturl->param('id')) {
             $currenttab = 'addcohort';
         }
 
-        $uploadurl = new moodle_url('/cohort/upload.php', array('contextid' => $context->id));
+        $uploadurl = new powereduc_url('/cohort/upload.php', array('contextid' => $context->id));
         $tabs[] = new tabobject('uploadcohorts', $uploadurl, get_string('uploadcohorts', 'cohort'));
         if ($currenturl->get_path() === $uploadurl->get_path()) {
             $currenttab = 'uploadcohorts';

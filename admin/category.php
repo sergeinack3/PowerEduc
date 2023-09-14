@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -41,17 +41,17 @@ $adminroot = admin_get_root(); // need all settings
 $settingspage = $adminroot->locate($category, true);
 
 if (empty($settingspage) or !($settingspage instanceof admin_category)) {
-    throw new \moodle_exception('categoryerror', 'error', "$CFG->wwwroot/$CFG->admin/");
+    throw new \powereduc_exception('categoryerror', 'error', "$CFG->wwwroot/$CFG->admin/");
 }
 
 if (!($settingspage->check_access())) {
-    throw new \moodle_exception('accessdenied', 'admin');
+    throw new \powereduc_exception('accessdenied', 'admin');
 }
 
-$hassiteconfig = has_capability('moodle/site:config', $PAGE->context);
+$hassiteconfig = has_capability('powereduc/site:config', $PAGE->context);
 if ($hassiteconfig) {
     $PAGE->add_header_action($OUTPUT->render_from_template('core_admin/header_search_input', [
-        'action' => new moodle_url('/admin/search.php'),
+        'action' => new powereduc_url('/admin/search.php'),
     ]));
 }
 
@@ -102,7 +102,7 @@ foreach ($settingspage->children as $childpage) {
     if ($childpage instanceof admin_externalpage) {
         $outputhtml .= $OUTPUT->heading(html_writer::link($childpage->url, $childpage->visiblename), 3);
     } else if ($childpage instanceof admin_settingpage) {
-        $outputhtml .= $OUTPUT->heading(html_writer::link(new moodle_url('/'.$CFG->admin.'/settings.php', array('section' => $childpage->name)), $childpage->visiblename), 3);
+        $outputhtml .= $OUTPUT->heading(html_writer::link(new powereduc_url('/'.$CFG->admin.'/settings.php', array('section' => $childpage->name)), $childpage->visiblename), 3);
         // If its a settings page and has settings lets display them.
         if (!empty($childpage->settings)) {
             $outputhtml .= html_writer::start_tag('fieldset', array('class' => 'adminsettings'));
@@ -122,7 +122,7 @@ foreach ($settingspage->children as $childpage) {
             $outputhtml .= html_writer::end_tag('fieldset');
         }
     } else if ($childpage instanceof admin_category) {
-        $outputhtml .= $OUTPUT->heading(html_writer::link(new moodle_url('/'.$CFG->admin.'/category.php', array('category' => $childpage->name)), get_string('admincategory', 'admin', $childpage->visiblename)), 3);
+        $outputhtml .= $OUTPUT->heading(html_writer::link(new powereduc_url('/'.$CFG->admin.'/category.php', array('category' => $childpage->name)), get_string('admincategory', 'admin', $childpage->visiblename)), 3);
     }
 }
 if ($savebutton) {
@@ -150,7 +150,7 @@ echo $OUTPUT->heading(get_string('admincategory', 'admin', $settingspage->visibl
 
 echo html_writer::start_tag('form', array('action' => '', 'method' => 'post', 'id' => 'adminsettings'));
 echo html_writer::start_tag('div');
-echo html_writer::input_hidden_params(new moodle_url($PAGE->url, array('sesskey' => sesskey(), 'return' => $return)));
+echo html_writer::input_hidden_params(new powereduc_url($PAGE->url, array('sesskey' => sesskey(), 'return' => $return)));
 echo html_writer::end_tag('div');
 echo html_writer::start_tag('fieldset');
 echo html_writer::tag('div', '<!-- -->', array('class' => 'clearer'));

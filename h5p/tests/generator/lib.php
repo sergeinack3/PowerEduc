@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core_h5p
  * @category   test
- * @copyright  2019 Victor Deniz <victor@moodle.com>
+ * @copyright  2019 Victor Deniz <victor@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -35,7 +35,7 @@ defined('POWEREDUC_INTERNAL') || die();
  *
  * @package    core_h5p
  * @category   test
- * @copyright  2019 Victor Deniz <victor@moodle.com>
+ * @copyright  2019 Victor Deniz <victor@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core_h5p_generator extends \component_generator_base {
@@ -495,7 +495,7 @@ class core_h5p_generator extends \component_generator_base {
 
         // Make the URL to pass to the player.
         if ($typeurl == self::WSPLUGINFILE) {
-            $url = \moodle_url::make_webservice_pluginfile_url(
+            $url = \powereduc_url::make_webservice_pluginfile_url(
                 $filerecord['contextid'],
                 $filerecord['component'],
                 $filerecord['filearea'],
@@ -508,7 +508,7 @@ class core_h5p_generator extends \component_generator_base {
             if ($typeurl == self::TOKENPLUGINFILE) {
                 $includetoken = true;
             }
-            $url = \moodle_url::make_pluginfile_url(
+            $url = \powereduc_url::make_pluginfile_url(
                 $filerecord['contextid'],
                 $filerecord['component'],
                 $filerecord['filearea'],
@@ -547,7 +547,7 @@ class core_h5p_generator extends \component_generator_base {
 
         // Create the url depending the request was made through typeurl.
         if ($typeurl == self::WSPLUGINFILE) {
-            $url  = \moodle_url::make_webservice_pluginfile_url(
+            $url  = \powereduc_url::make_webservice_pluginfile_url(
                 $fileh5p->get_contextid(),
                 $fileh5p->get_component(),
                 $fileh5p->get_filearea(),
@@ -560,7 +560,7 @@ class core_h5p_generator extends \component_generator_base {
             if ($typeurl == self::TOKENPLUGINFILE) {
                 $includetoken = true;
             }
-            $url = \moodle_url::make_pluginfile_url(
+            $url = \powereduc_url::make_pluginfile_url(
                 $fileh5p->get_contextid(),
                 $fileh5p->get_component(),
                 $fileh5p->get_filearea(),

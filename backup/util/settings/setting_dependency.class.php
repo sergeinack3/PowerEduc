@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package   moodlecore
+ * @package   powereduccore
  * @copyright 2010 Sam Hemelryk
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -149,11 +149,11 @@ abstract class setting_dependency {
      */
     abstract public function enforce();
     /**
-     * Returns an array of properties suitable to be used to define a moodleforms
+     * Returns an array of properties suitable to be used to define a powereducforms
      * disabled command
      * @return array
      */
-    abstract public function get_moodleform_properties();
+    abstract public function get_powereducform_properties();
     /**
      * Returns true if the dependent setting is locked by this setting_dependency.
      * @return bool
@@ -277,11 +277,11 @@ class setting_dependency_disabledif_equals extends setting_dependency {
         return $changes;
     }
     /**
-     * Returns an array of properties suitable to be used to define a moodleforms
+     * Returns an array of properties suitable to be used to define a powereducforms
      * disabled command
      * @return array
      */
-    public function get_moodleform_properties() {
+    public function get_powereducform_properties() {
         return array(
             'setting' => $this->dependentsetting->get_ui_name(),
             'dependenton' => $this->setting->get_ui_name(),
@@ -306,7 +306,7 @@ class setting_dependency_disabledif_equals extends setting_dependency {
  * A dependency that disables the secondary setting if the primary setting is
  * not equal to the provided value
  *
- * @copyright 2011 Darko Miletic <dmiletic@moodlerooms.com>
+ * @copyright 2011 Darko Miletic <dmiletic@powereducrooms.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class setting_dependency_disabledif_not_equals extends setting_dependency_disabledif_equals {
@@ -321,11 +321,11 @@ class setting_dependency_disabledif_not_equals extends setting_dependency_disabl
     }
 
     /**
-     * Returns an array of properties suitable to be used to define a moodleforms
+     * Returns an array of properties suitable to be used to define a powereducforms
      * disabled command
      * @return array
      */
-    public function get_moodleform_properties() {
+    public function get_powereducform_properties() {
         return array(
                 'setting' => $this->dependentsetting->get_ui_name(),
                 'dependenton' => $this->setting->get_ui_name(),
@@ -350,11 +350,11 @@ class setting_dependency_disabledif_in_array extends setting_dependency_disabled
     }
 
     /**
-     * Returns an array of properties suitable to be used to define a moodleforms
+     * Returns an array of properties suitable to be used to define a powereducforms
      * disabled command
      * @return array
      */
-    public function get_moodleform_properties() {
+    public function get_powereducform_properties() {
         return array(
             'setting' => $this->dependentsetting->get_ui_name(),
             'dependenton' => $this->setting->get_ui_name(),
@@ -383,11 +383,11 @@ class setting_dependency_disabledif_checked extends setting_dependency_disabledi
         $this->value = true;
     }
     /**
-     * Returns an array of properties suitable to be used to define a moodleforms
+     * Returns an array of properties suitable to be used to define a powereducforms
      * disabled command
      * @return array
      */
-    public function get_moodleform_properties() {
+    public function get_powereducform_properties() {
         return array(
             'setting' => $this->dependentsetting->get_ui_name(),
             'dependenton' => $this->setting->get_ui_name(),
@@ -409,11 +409,11 @@ class setting_dependency_disabledif_not_checked extends setting_dependency_disab
         $this->value = false;
     }
     /**
-     * Returns an array of properties suitable to be used to define a moodleforms
+     * Returns an array of properties suitable to be used to define a powereducforms
      * disabled command
      * @return array
      */
-    public function get_moodleform_properties() {
+    public function get_powereducform_properties() {
         return array(
             'setting' => $this->dependentsetting->get_ui_name(),
             'dependenton' => $this->setting->get_ui_name(),
@@ -445,11 +445,11 @@ class setting_dependency_disabledif_not_empty extends setting_dependency_disable
     }
 
     /**
-     * Returns an array of properties suitable to be used to define a moodleforms
+     * Returns an array of properties suitable to be used to define a powereducforms
      * disabled command
      * @return array
      */
-    public function get_moodleform_properties() {
+    public function get_powereducform_properties() {
         return array(
             'setting' => $this->dependentsetting->get_ui_name(),
             'dependenton' => $this->setting->get_ui_name(),
@@ -482,11 +482,11 @@ class setting_dependency_disabledif_empty extends setting_dependency_disabledif_
     }
 
     /**
-     * Returns an array of properties suitable to be used to define a moodleforms
+     * Returns an array of properties suitable to be used to define a powereducforms
      * disabled command
      * @return array
      */
-    public function get_moodleform_properties() {
+    public function get_powereducform_properties() {
         return array(
             'setting' => $this->dependentsetting->get_ui_name(),
             'dependenton' => $this->setting->get_ui_name(),

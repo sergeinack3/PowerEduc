@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Weblib tests.
@@ -285,7 +285,7 @@ class weblib_test extends advanced_testcase {
         global $PAGE, $FULLME, $CFG;
         $this->resetAfterTest();
 
-        $PAGE = new moodle_page();
+        $PAGE = new powereduc_page();
 
         $FULLME = $CFG->wwwroot.'/course/view.php?id=1&xx=yy';
         $this->assertSame($FULLME, qualified_me());
@@ -450,36 +450,36 @@ class weblib_test extends advanced_testcase {
         $source = <<<SOURCE
 Hello!
 
-I'm writing to you from the Moodle Majlis in Muscat, Oman, where we just had several days of Moodle community goodness.
+I'm writing to you from the PowerEduc Majlis in Muscat, Oman, where we just had several days of PowerEduc community goodness.
 
-URL outside a tag: https://moodle.org/logo/logo-240x60.gif
+URL outside a tag: https://powereduc.org/logo/logo-240x60.gif
 Plugin url outside a tag: @@PLUGINFILE@@/logo-240x60.gif
 
-External link 1:<img src='https://moodle.org/logo/logo-240x60.gif' alt='Moodle'/>
-External link 2:<img alt="Moodle" src="https://moodle.org/logo/logo-240x60.gif"/>
-Internal link 1:<img src='@@PLUGINFILE@@/logo-240x60.gif' alt='Moodle'/>
-Internal link 2:<img alt="Moodle" src="@@PLUGINFILE@@logo-240x60.gif"/>
+External link 1:<img src='https://powereduc.org/logo/logo-240x60.gif' alt='PowerEduc'/>
+External link 2:<img alt="PowerEduc" src="https://powereduc.org/logo/logo-240x60.gif"/>
+Internal link 1:<img src='@@PLUGINFILE@@/logo-240x60.gif' alt='PowerEduc'/>
+Internal link 2:<img alt="PowerEduc" src="@@PLUGINFILE@@logo-240x60.gif"/>
 Anchor link 1:<a href="@@PLUGINFILE@@logo-240x60.gif" alt="bananas">Link text</a>
 Anchor link 2:<a title="bananas" href="../logo-240x60.gif">Link text</a>
-Anchor + ext. img:<a title="bananas" href="../logo-240x60.gif"><img alt="Moodle" src="@@PLUGINFILE@@logo-240x60.gif"/></a>
-Ext. anchor + img:<a href="@@PLUGINFILE@@logo-240x60.gif"><img alt="Moodle" src="https://moodle.org/logo/logo-240x60.gif"/></a>
+Anchor + ext. img:<a title="bananas" href="../logo-240x60.gif"><img alt="PowerEduc" src="@@PLUGINFILE@@logo-240x60.gif"/></a>
+Ext. anchor + img:<a href="@@PLUGINFILE@@logo-240x60.gif"><img alt="PowerEduc" src="https://powereduc.org/logo/logo-240x60.gif"/></a>
 SOURCE;
         $expected = <<<EXPECTED
 Hello!
 
-I'm writing to you from the Moodle Majlis in Muscat, Oman, where we just had several days of Moodle community goodness.
+I'm writing to you from the PowerEduc Majlis in Muscat, Oman, where we just had several days of PowerEduc community goodness.
 
-URL outside a tag: https://moodle.org/logo/logo-240x60.gif
+URL outside a tag: https://powereduc.org/logo/logo-240x60.gif
 Plugin url outside a tag: @@PLUGINFILE@@/logo-240x60.gif
 
-External link 1:<img src="https://moodle.org/logo/logo-240x60.gif" alt="Moodle" />
-External link 2:<img alt="Moodle" src="https://moodle.org/logo/logo-240x60.gif" />
+External link 1:<img src="https://powereduc.org/logo/logo-240x60.gif" alt="PowerEduc" />
+External link 2:<img alt="PowerEduc" src="https://powereduc.org/logo/logo-240x60.gif" />
 Internal link 1:
 Internal link 2:
 Anchor link 1:Link text
 Anchor link 2:<a title="bananas" href="../logo-240x60.gif">Link text</a>
 Anchor + ext. img:<a title="bananas" href="../logo-240x60.gif"></a>
-Ext. anchor + img:<img alt="Moodle" src="https://moodle.org/logo/logo-240x60.gif" />
+Ext. anchor + img:<img alt="PowerEduc" src="https://powereduc.org/logo/logo-240x60.gif" />
 EXPECTED;
         $this->assertSame($expected, strip_pluginfile_content($source));
     }
@@ -549,15 +549,15 @@ EXPECTED;
         return [
             // Test addresses that should pass.
             [
-                'email' => 'moodle@example.com',
+                'email' => 'powereduc@example.com',
                 'result' => true
             ],
             [
-                'email' => 'moodle@localhost.local',
+                'email' => 'powereduc@localhost.local',
                 'result' => true
             ],
             [
-                'email' => 'verp_email+is=mighty@moodle.org',
+                'email' => 'verp_email+is=mighty@powereduc.org',
                 'result' => true
             ],
             [
@@ -565,21 +565,21 @@ EXPECTED;
                 'result' => true
             ],
             [
-                'email' => 'posts+AAAAAAAAAAIAAAAAAAAGQQAAAAABFSXz1eM/P/lR2bYyljM+@posts.moodle.org',
+                'email' => 'posts+AAAAAAAAAAIAAAAAAAAGQQAAAAABFSXz1eM/P/lR2bYyljM+@posts.powereduc.org',
                 'result' => true
             ],
 
             // Test addresses that should NOT pass.
             [
-                'email' => 'moodle@localhost',
+                'email' => 'powereduc@localhost',
                 'result' => false
             ],
             [
-                'email' => '"attacker\\" -oQ/tmp/ -X/var/www/vhost/moodle/backdoor.php  some"@email.com',
+                'email' => '"attacker\\" -oQ/tmp/ -X/var/www/vhost/powereduc/backdoor.php  some"@email.com',
                 'result' => false
             ],
             [
-                'email' => "moodle@example.com>\r\nRCPT TO:<victim@example.com",
+                'email' => "powereduc@example.com>\r\nRCPT TO:<victim@example.com",
                 'result' => false
             ],
             [

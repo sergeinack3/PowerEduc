@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -127,7 +127,7 @@ class renderer extends plugin_renderer_base {
         }
 
         if (!CLI_SCRIPT) {
-            $output .= $this->output->single_button(new \moodle_url('/admin/tool/analytics/index.php'),
+            $output .= $this->output->single_button(new \powereduc_url('/admin/tool/analytics/index.php'),
                     get_string('continue'), 'get');
         }
 
@@ -205,7 +205,7 @@ class renderer extends plugin_renderer_base {
         }
 
         if (!CLI_SCRIPT) {
-            $output .= $this->output->single_button(new \moodle_url('/admin/tool/analytics/index.php'),
+            $output .= $this->output->single_button(new \powereduc_url('/admin/tool/analytics/index.php'),
                     get_string('continue'), 'get');
         }
 
@@ -250,7 +250,7 @@ class renderer extends plugin_renderer_base {
         $output .= $this->output->notification(get_string('analyticsdisabled', 'analytics'),
                 \core\output\notification::NOTIFY_INFO);
         $output .= \html_writer::tag('a', get_string('continue'), ['class' => 'btn btn-primary',
-            'href' => (new \moodle_url('/'))->out()]);
+            'href' => (new \powereduc_url('/'))->out()]);
         $output .= $this->output->footer();
 
         return $output;

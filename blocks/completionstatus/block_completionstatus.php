@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -57,7 +57,7 @@ class block_completionstatus extends block_base {
         $this->content->footer = '';
 
         // Can edit settings?
-        $can_edit = has_capability('moodle/course:update', $context);
+        $can_edit = has_capability('powereduc/course:update', $context);
 
         // Get course completion data.
         $info = new completion_info($course);
@@ -231,7 +231,7 @@ class block_completionstatus extends block_base {
             $this->content->text .= html_writer::table($table);
 
             // Display link to detailed view.
-            $details = new moodle_url('/blocks/completionstatus/details.php', array('course' => $course->id));
+            $details = new powereduc_url('/blocks/completionstatus/details.php', array('course' => $course->id));
             $this->content->footer .= html_writer::link($details, get_string('moredetails', 'completion'));
         } else {
             // If user is not enrolled, show error.
@@ -239,7 +239,7 @@ class block_completionstatus extends block_base {
         }
 
         if (has_capability('report/completion:view', $context)) {
-            $report = new moodle_url('/report/completion/index.php', array('course' => $course->id));
+            $report = new powereduc_url('/report/completion/index.php', array('course' => $course->id));
             if (empty($this->content->footer)) {
                 $this->content->footer = '';
             }
@@ -253,10 +253,10 @@ class block_completionstatus extends block_base {
     /**
      * This block shouldn't be added to a page if the completion tracking advanced feature is disabled.
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @return bool
      */
-    public function can_block_be_added(moodle_page $page): bool {
+    public function can_block_be_added(powereduc_page $page): bool {
         global $CFG;
 
         return $CFG->enablecompletion;

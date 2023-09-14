@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,21 +35,21 @@ if ($id) {
 
     if ($id == SITEID) {
         // Don't allow editing of 'site course' using this form.
-        throw new \moodle_exception('cannoteditsiteform');
+        throw new \powereduc_exception('cannoteditsiteform');
     }
 
     if (!$course = $DB->get_record('course', array('id' => $id))) {
-        throw new \moodle_exception('invalidcourseid');
+        throw new \powereduc_exception('invalidcourseid');
     }
     require_login($course);
 
 } else {
     require_login();
-    throw new \moodle_exception('needcourseid');
+    throw new \powereduc_exception('needcourseid');
 }
 
 // Set up the page.
-navigation_node::override_active_url(new moodle_url('/course/completion.php', array('id' => $course->id)));
+navigation_node::override_active_url(new powereduc_url('/course/completion.php', array('id' => $course->id)));
 $PAGE->set_course($course);
 $PAGE->set_url('/course/bulkcompletion.php', array('id' => $course->id));
 $PAGE->set_title($course->shortname);
@@ -58,7 +58,7 @@ $PAGE->set_pagelayout('admin');
 
 // Check access.
 if (!core_completion\manager::can_edit_bulk_completion($id)) {
-    require_capability('moodle/course:manageactivities', context_course::instance($course->id));
+    require_capability('powereduc/course:manageactivities', context_course::instance($course->id));
 }
 
 // Get all that stuff I need for the renderer.

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -209,7 +209,7 @@ class task_check_subscriptions_test extends \advanced_testcase {
 
         // Strip the ability to see hidden courses, so we'll fail the check_subscriptions->user_can_access_course call.
         $context = \context_course::instance($this->course->id);
-        assign_capability('moodle/course:viewhiddencourses', CAP_PROHIBIT, $this->teacherrole->id, $context);
+        assign_capability('powereduc/course:viewhiddencourses', CAP_PROHIBIT, $this->teacherrole->id, $context);
 
         // Subscription should be active to start with.
         $this->assertEquals(true, \tool_monitor\subscription_manager::subscription_is_active($this->subscription));

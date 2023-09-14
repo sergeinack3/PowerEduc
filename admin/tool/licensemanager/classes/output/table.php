@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -154,12 +154,12 @@ class table implements \renderable {
         $editlicensecell = new html_table_cell($editlicense);
         $editlicensecell->attributes['class'] = 'edit-license';
 
-        $spacer = $output->pix_icon('spacer', '', 'moodle', ['class' => 'iconsmall']);
+        $spacer = $output->pix_icon('spacer', '', 'powereduc', ['class' => 'iconsmall']);
         $updown = '';
         if ($canmoveup) {
             $updown .= html_writer::link(\tool_licensemanager\helper::get_moveup_license_url($license->shortname),
                     $output->pix_icon('t/up', get_string('movelicenseupname', 'tool_licensemanager', $license->fullname),
-                        'moodle', ['class' => 'iconsmall']),
+                        'powereduc', ['class' => 'iconsmall']),
                     ['class' => 'move-up']) . '';
         } else {
             $updown .= $spacer;
@@ -168,7 +168,7 @@ class table implements \renderable {
         if ($canmovedown) {
             $updown .= '&nbsp;'.html_writer::link(\tool_licensemanager\helper::get_movedown_license_url($license->shortname),
                     $output->pix_icon('t/down', get_string('movelicensedownname', 'tool_licensemanager', $license->fullname),
-                        'moodle', ['class' => 'iconsmall']),
+                        'powereduc', ['class' => 'iconsmall']),
                     ['class' => 'move-down']);
         } else {
             $updown .= $spacer;

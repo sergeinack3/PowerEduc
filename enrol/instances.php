@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -38,9 +38,9 @@ if ($course->id == SITEID) {
 }
 
 require_login($course);
-require_capability('moodle/course:enrolreview', $context);
+require_capability('powereduc/course:enrolreview', $context);
 
-$canconfig = has_capability('moodle/course:enrolconfig', $context);
+$canconfig = has_capability('powereduc/course:enrolconfig', $context);
 
 $PAGE->set_url('/enrol/instances.php', array('id'=>$course->id));
 $PAGE->set_pagelayout('admin');
@@ -100,7 +100,7 @@ if ($canconfig and $action and confirm_sesskey()) {
                 if ($confirm) {
                     if (enrol_accessing_via_instance($instance)) {
                         if (!$confirm2) {
-                            $yesurl = new moodle_url('/enrol/instances.php',
+                            $yesurl = new powereduc_url('/enrol/instances.php',
                                                      array('id' => $course->id,
                                                            'action' => 'delete',
                                                            'instance' => $instance->id,
@@ -122,7 +122,7 @@ if ($canconfig and $action and confirm_sesskey()) {
                 }
 
                 echo $OUTPUT->header();
-                $yesurl = new moodle_url('/enrol/instances.php',
+                $yesurl = new powereduc_url('/enrol/instances.php',
                                          array('id' => $course->id,
                                                'action' => 'delete',
                                                'instance' => $instance->id,
@@ -150,7 +150,7 @@ if ($canconfig and $action and confirm_sesskey()) {
                 if ($instance->status != ENROL_INSTANCE_DISABLED) {
                     if (enrol_accessing_via_instance($instance)) {
                         if (!$confirm2) {
-                            $yesurl = new moodle_url('/enrol/instances.php',
+                            $yesurl = new powereduc_url('/enrol/instances.php',
                                                      array('id' => $course->id,
                                                            'action' => 'disable',
                                                            'instance' => $instance->id,
@@ -208,7 +208,7 @@ $table->data  = array();
 // iterate through enrol plugins and add to the display table
 $updowncount = 1;
 $icount = count($instances);
-$url = new moodle_url('/enrol/instances.php', array('sesskey'=>sesskey(), 'id'=>$course->id));
+$url = new powereduc_url('/enrol/instances.php', array('sesskey'=>sesskey(), 'id'=>$course->id));
 foreach ($instances as $instance) {
     if (!isset($plugins[$instance->enrol])) {
         continue;
@@ -227,13 +227,13 @@ foreach ($instances as $instance) {
 
     if ($canconfig) {
         if ($updowncount > 1) {
-            $aurl = new moodle_url($url, array('action'=>'up', 'instance'=>$instance->id));
+            $aurl = new powereduc_url($url, array('action'=>'up', 'instance'=>$instance->id));
             $updown[] = $OUTPUT->action_icon($aurl, new pix_icon('t/up', $strup, 'core', array('class' => 'iconsmall')));
         } else {
             $updown[] = $OUTPUT->spacer();
         }
         if ($updowncount < $icount) {
-            $aurl = new moodle_url($url, array('action'=>'down', 'instance'=>$instance->id));
+            $aurl = new powereduc_url($url, array('action'=>'down', 'instance'=>$instance->id));
             $updown[] = $OUTPUT->action_icon($aurl, new pix_icon('t/down', $strdown, 'core', array('class' => 'iconsmall')));
         } else {
             $updown[] = $OUTPUT->spacer();
@@ -241,16 +241,16 @@ foreach ($instances as $instance) {
         ++$updowncount;
 
         if ($plugin->can_delete_instance($instance)) {
-            $aurl = new moodle_url($url, array('action'=>'delete', 'instance'=>$instance->id));
+            $aurl = new powereduc_url($url, array('action'=>'delete', 'instance'=>$instance->id));
             $edit[] = $OUTPUT->action_icon($aurl, new pix_icon('t/delete', $strdelete, 'core', array('class' => 'iconsmall')));
         }
 
         if (enrol_is_enabled($instance->enrol) && $plugin->can_hide_show_instance($instance)) {
             if ($instance->status == ENROL_INSTANCE_ENABLED) {
-                $aurl = new moodle_url($url, array('action'=>'disable', 'instance'=>$instance->id));
+                $aurl = new powereduc_url($url, array('action'=>'disable', 'instance'=>$instance->id));
                 $edit[] = $OUTPUT->action_icon($aurl, new pix_icon('t/hide', $strdisable, 'core', array('class' => 'iconsmall')));
             } else if ($instance->status == ENROL_INSTANCE_DISABLED) {
-                $aurl = new moodle_url($url, array('action'=>'enable', 'instance'=>$instance->id));
+                $aurl = new powereduc_url($url, array('action'=>'enable', 'instance'=>$instance->id));
                 $edit[] = $OUTPUT->action_icon($aurl, new pix_icon('t/show', $strenable, 'core', array('class' => 'iconsmall')));
             } else {
                 // plugin specific state - do not mess with it!
@@ -280,7 +280,7 @@ foreach (enrol_get_plugins(true) as $name=>$plugin) {
         if ($plugin->can_add_instance($course->id)) {
             // Standard add/edit UI.
             $params = array('type' => $name, 'courseid' => $course->id);
-            $url = new moodle_url('/enrol/editinstance.php', $params);
+            $url = new powereduc_url('/enrol/editinstance.php', $params);
             $link = $url->out(false);
             $candidates[$link] = get_string('pluginname', 'enrol_'.$name);
         }

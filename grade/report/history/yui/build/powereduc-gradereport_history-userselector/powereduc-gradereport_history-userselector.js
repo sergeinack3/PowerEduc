@@ -1,6 +1,6 @@
-YUI.add('moodle-gradereport_history-userselector', function (Y, NAME) {
+YUI.add('powereduc-gradereport_history-userselector', function (Y, NAME) {
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,15 +18,15 @@ YUI.add('moodle-gradereport_history-userselector', function (Y, NAME) {
 /**
  * The User Selector for the grade history report.
  *
- * @module     moodle-gradereport_history-userselector
+ * @module     powereduc-gradereport_history-userselector
  * @package    gradereport_history
  * @copyright  2013 NetSpot Pty Ltd (https://www.netspot.com.au)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @main       moodle-gradereport_history-userselector
+ * @main       powereduc-gradereport_history-userselector
  */
 
 /**
- * @module moodle-gradereport_history-userselector
+ * @module powereduc-gradereport_history-userselector
  */
 
 var COMPONENT = 'gradereport_history';
@@ -35,7 +35,7 @@ var USP = {
     BASE: 'base',
     CHECKBOX_NAME_PREFIX: 'usp-u',
     COURSEID: 'courseid',
-    DIALOGUE_PREFIX: 'moodle-dialogue',
+    DIALOGUE_PREFIX: 'powereduc-dialogue',
     NAME: 'gradereport_history_usp',
     PAGE: 'page',
     PARAMS: 'params',
@@ -156,9 +156,9 @@ Y.namespace('M.gradereport_history').UserSelector = Y.extend(USERSELECTOR, M.cor
                     '<div class="{{CSS.SEARCH}}" role="search">' +
                         '<form>' +
                             '<input type="text" class="{{CSS.SEARCHFIELD}}" ' +
-                                'aria-label="{{get_string "search" "moodle"}}" value="" />' +
+                                'aria-label="{{get_string "search" "powereduc"}}" value="" />' +
                             '<input type="submit" class="{{CSS.SEARCHBTN}}"' +
-                                'value="{{get_string "search" "moodle"}}">' +
+                                'value="{{get_string "search" "powereduc"}}">' +
                         '</form>' +
                         '<div aria-live="polite" class="{{CSS.RESULTSCOUNT}}">{{get_string "loading" "admin"}}</div>' +
                     '</div>' +
@@ -181,7 +181,7 @@ Y.namespace('M.gradereport_history').UserSelector = Y.extend(USERSELECTOR, M.cor
             tpl({
                 COMPONENT: COMPONENT,
                 CSS: CSS,
-                loadingIcon: M.util.image_url('i/loading', 'moodle')
+                loadingIcon: M.util.image_url('i/loading', 'powereduc')
             })
         );
 
@@ -190,7 +190,7 @@ Y.namespace('M.gradereport_history').UserSelector = Y.extend(USERSELECTOR, M.cor
         this.setStdModContent(Y.WidgetStdMod.BODY, content, Y.WidgetStdMod.REPLACE);
 
         // Use standard dialogue class name. This removes the default styling of the footer.
-        this.get('boundingBox').one('.moodle-dialogue-wrap').addClass('moodle-dialogue-content');
+        this.get('boundingBox').one('.powereduc-dialogue-wrap').addClass('powereduc-dialogue-content');
 
         // Add the event on the button that opens the dialogue.
         Y.one(SELECTORS.TRIGGER).on('click', this.show, this);
@@ -448,7 +448,7 @@ Y.namespace('M.gradereport_history').UserSelector = Y.extend(USERSELECTOR, M.cor
         totalUsers = parseInt(result.response.totalusers, 10);
         if (!args.append) {
             if (totalUsers === 0) {
-                bb.one(SELECTORS.RESULTSCOUNT).setHTML(M.util.get_string('noresults', 'moodle'));
+                bb.one(SELECTORS.RESULTSCOUNT).setHTML(M.util.get_string('noresults', 'powereduc'));
                 content = '';
             } else {
                 if (totalUsers === 1) {
@@ -866,6 +866,6 @@ Y.namespace('M.gradereport_history.UserSelector').init = function(cfg) {
         "handlebars",
         "io-base",
         "json-parse",
-        "moodle-core-notification-dialogue"
+        "powereduc-core-notification-dialogue"
     ]
 });

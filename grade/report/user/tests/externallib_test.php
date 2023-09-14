@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ require_once($CFG->dirroot . '/webservice/tests/helpers.php');
  *
  * @package    gradereport_user
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class externallib_test extends externallib_advanced_testcase {
@@ -58,7 +58,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->getDataGenerator()->enrol_user($teacher->id, $course->id, $teacherrole->id);
 
         $context = \context_course::instance($course->id);
-        assign_capability('moodle/site:accessallgroups', CAP_PROHIBIT, $teacherrole->id, $context);
+        assign_capability('powereduc/site:accessallgroups', CAP_PROHIBIT, $teacherrole->id, $context);
         accesslib_clear_all_caches_for_unit_testing();
 
         $group1 = $this->getDataGenerator()->create_group(['courseid' => $course->id]);
@@ -163,7 +163,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             $studentgrade = user_external::get_grades_table($course->id, $student1->id);
             $this->fail('Exception expected due to not perissions to view other user grades.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('notingroup', $e->errorcode);
         }
     }
@@ -211,7 +211,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             $studentgrade = user_external::view_grade_report($course->id, $student1->id);
             $this->fail('Exception expected due to not permissions to view other user grades.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('nopermissiontoviewgrades', $e->errorcode);
         }
     }

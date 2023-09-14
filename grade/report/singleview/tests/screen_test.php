@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ require_once($CFG->libdir . '/gradelib.php');
  *
  * @package    gradereport_singleview
  * @category   test
- * @copyright  2014 onwards Simey Lameze <simey@moodle.com>
+ * @copyright  2014 onwards Simey Lameze <simey@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class screen_test extends \advanced_testcase {
@@ -71,7 +71,7 @@ class screen_test extends \advanced_testcase {
         $this->assertCount(1, $users);
 
         // Change the viewsuspendedusers capabilities and set the user preference to display suspended users.
-        assign_capability('moodle/course:viewsuspendedusers', CAP_ALLOW, $roleteacher->id, $coursecontext, true);
+        assign_capability('powereduc/course:viewsuspendedusers', CAP_ALLOW, $roleteacher->id, $coursecontext, true);
         set_user_preference('grade_report_showonlyactiveenrol', false, $teacher);
         accesslib_clear_all_caches_for_unit_testing();
         $this->setUser($teacher);
@@ -80,7 +80,7 @@ class screen_test extends \advanced_testcase {
         $this->assertCount(2, $users);
 
         // Change the capability again, now the user can't see the suspended enrolments.
-        assign_capability('moodle/course:viewsuspendedusers', CAP_PROHIBIT, $roleteacher->id, $coursecontext, true);
+        assign_capability('powereduc/course:viewsuspendedusers', CAP_PROHIBIT, $roleteacher->id, $coursecontext, true);
         set_user_preference('grade_report_showonlyactiveenrol', false, $teacher);
         accesslib_clear_all_caches_for_unit_testing();
         $users = $screentest->test_load_users();

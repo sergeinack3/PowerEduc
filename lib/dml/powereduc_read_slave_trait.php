@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Trait that adds read-only slave connection capability
@@ -81,7 +81,7 @@ defined('POWEREDUC_INTERNAL') || die();
  *    used again
  */
 
-trait moodle_read_slave_trait {
+trait powereduc_read_slave_trait {
 
     /** @var resource master write database handle */
     protected $dbhwrite;
@@ -125,7 +125,7 @@ trait moodle_read_slave_trait {
      * @param string $dbuser The database username.
      * @param string $dbpass The database username's password.
      * @param string $dbname The name of the database being connected to.
-     * @param mixed $prefix string means moodle db prefix, false used for external databases where prefix not used
+     * @param mixed $prefix string means powereduc db prefix, false used for external databases where prefix not used
      * @param array $dboptions driver specific options
      * @return bool true
      * @throws dml_connection_exception if error
@@ -140,7 +140,7 @@ trait moodle_read_slave_trait {
      * @param string $dbuser The database username.
      * @param string $dbpass The database username's password.
      * @param string $dbname The name of the database being connected to.
-     * @param mixed $prefix string means moodle db prefix, false used for external databases where prefix not used
+     * @param mixed $prefix string means powereduc db prefix, false used for external databases where prefix not used
      * @param array $dboptions driver specific options
      * @return bool true
      * @throws dml_connection_exception if error
@@ -254,7 +254,7 @@ trait moodle_read_slave_trait {
 
     /**
      * On DBs that support it, switch to transaction mode and begin a transaction
-     * @return moodle_transaction
+     * @return powereduc_transaction
      */
     public function start_delegated_transaction() {
         $this->set_dbhwrite();
@@ -378,11 +378,11 @@ trait moodle_read_slave_trait {
     /**
      * Indicates delegated transaction finished successfully.
      * Set written times after outermost transaction finished
-     * @param moodle_transaction $transaction The transaction to commit
+     * @param powereduc_transaction $transaction The transaction to commit
      * @return void
      * @throws dml_transaction_exception Creates and throws transaction related exceptions.
      */
-    public function commit_delegated_transaction(moodle_transaction $transaction) {
+    public function commit_delegated_transaction(powereduc_transaction $transaction) {
         if ($this->written) {
             // Adjust the written time.
             $now = microtime(true);

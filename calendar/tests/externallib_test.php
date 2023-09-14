@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -219,13 +219,13 @@ class externallib_test extends externallib_advanced_testcase {
         $this->getDataGenerator()->enrol_user($user->id, $course->id, $role->id);
 
         // Remove all caps.
-        $this->unassignUserCapability('moodle/calendar:manageentries', $sitecontext->id, $role->id);
-        $this->unassignUserCapability('moodle/calendar:manageentries', $coursecontext->id, $role->id);
-        $this->unassignUserCapability('moodle/calendar:managegroupentries', $coursecontext->id, $role->id);
-        $this->unassignUserCapability('moodle/calendar:manageownentries', $usercontext->id, $role->id);
+        $this->unassignUserCapability('powereduc/calendar:manageentries', $sitecontext->id, $role->id);
+        $this->unassignUserCapability('powereduc/calendar:manageentries', $coursecontext->id, $role->id);
+        $this->unassignUserCapability('powereduc/calendar:managegroupentries', $coursecontext->id, $role->id);
+        $this->unassignUserCapability('powereduc/calendar:manageownentries', $usercontext->id, $role->id);
 
         // Assign proper caps and attempt delete.
-         $this->assignUserCapability('moodle/calendar:manageentries', $sitecontext->id, $role->id);
+         $this->assignUserCapability('powereduc/calendar:manageentries', $sitecontext->id, $role->id);
          $events = array(
                 array('eventid' => $siteevent->id, 'repeat' => 0),
                 );
@@ -234,7 +234,7 @@ class externallib_test extends externallib_advanced_testcase {
         $count = $notdeletedcount+5;
         $this->assertEquals($count, $deletedcount);
 
-         $this->assignUserCapability('moodle/calendar:manageentries', $sitecontext->id, $role->id);
+         $this->assignUserCapability('powereduc/calendar:manageentries', $sitecontext->id, $role->id);
          $events = array(
                 array('eventid' => $courseevent->id, 'repeat' => 0),
                 );
@@ -243,7 +243,7 @@ class externallib_test extends externallib_advanced_testcase {
         $count = $notdeletedcount+4;
         $this->assertEquals($count, $deletedcount);
 
-         $this->assignUserCapability('moodle/calendar:manageownentries', $usercontext->id, $role->id);
+         $this->assignUserCapability('powereduc/calendar:manageownentries', $usercontext->id, $role->id);
          $events = array(
                 array('eventid' => $userevent->id, 'repeat' => 0),
                 );
@@ -252,7 +252,7 @@ class externallib_test extends externallib_advanced_testcase {
         $count = $notdeletedcount+3;
         $this->assertEquals($count, $deletedcount);
 
-         $this->assignUserCapability('moodle/calendar:managegroupentries', $coursecontext->id, $role->id);
+         $this->assignUserCapability('powereduc/calendar:managegroupentries', $coursecontext->id, $role->id);
          $events = array(
                 array('eventid' => $groupevent->id, 'repeat' => 0),
                 );
@@ -283,7 +283,7 @@ class externallib_test extends externallib_advanced_testcase {
             array('eventid' => $userevent->id, 'repeat' => 0),
             array('eventid' => $groupevent->id, 'repeat' => 0)
         );
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         core_calendar_external::delete_calendar_events($events);
     }
 
@@ -627,8 +627,8 @@ class externallib_test extends externallib_advanced_testcase {
         $role = $DB->get_record('role', array('shortname' => 'student'));
         $this->getDataGenerator()->enrol_user($user->id, $course->id, $role->id);
         groups_add_member($group, $user);
-        $this->assignUserCapability('moodle/calendar:manageentries', $coursecontext->id, $role->id);
-        $this->assignUserCapability('moodle/calendar:managegroupentries', $coursecontext->id, $role->id);
+        $this->assignUserCapability('powereduc/calendar:manageentries', $coursecontext->id, $role->id);
+        $this->assignUserCapability('powereduc/calendar:managegroupentries', $coursecontext->id, $role->id);
         $eventsret = core_calendar_external::create_calendar_events($events);
         $eventsret = \external_api::clean_returnvalue(core_calendar_external::create_calendar_events_returns(), $eventsret);
         // Check to see if things were created properly.
@@ -648,8 +648,8 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals(3, count($eventsret['warnings']));
 
         $this->setUser($user);
-        $this->unassignUserCapability('moodle/calendar:manageentries', $coursecontext->id, $role->id);
-        $this->unassignUserCapability('moodle/calendar:managegroupentries', $coursecontext->id, $role->id);
+        $this->unassignUserCapability('powereduc/calendar:manageentries', $coursecontext->id, $role->id);
+        $this->unassignUserCapability('powereduc/calendar:managegroupentries', $coursecontext->id, $role->id);
         $prevcount = $DB->count_records('event');
         $eventsret = core_calendar_external::create_calendar_events($events);
         $eventsret = \external_api::clean_returnvalue(core_calendar_external::create_calendar_events_returns(), $eventsret);
@@ -1679,7 +1679,7 @@ class externallib_test extends externallib_advanced_testcase {
             ];
         }
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         core_calendar_external::delete_calendar_events($params);
     }
 
@@ -1697,7 +1697,7 @@ class externallib_test extends externallib_advanced_testcase {
         $expected = new \DateTimeImmutable('2018-02-2T15:00:00+08:00');
 
         $generator->role_assign($roleid, $user->id, $context->id);
-        assign_capability('moodle/calendar:manageownentries', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageownentries', CAP_ALLOW, $roleid, $context, true);
 
         $this->setUser($user);
         $this->resetAfterTest(true);
@@ -1737,7 +1737,7 @@ class externallib_test extends externallib_advanced_testcase {
         $expected = new \DateTimeImmutable('2018-02-2T15:00:00+08:00');
 
         $generator->role_assign($roleid, $user->id, $context->id);
-        assign_capability('moodle/calendar:manageownentries', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageownentries', CAP_ALLOW, $roleid, $context, true);
 
         $this->setUser($user);
         $this->resetAfterTest(true);
@@ -1754,8 +1754,8 @@ class externallib_test extends externallib_advanced_testcase {
             ]
         );
 
-        assign_capability('moodle/calendar:manageownentries', CAP_PROHIBIT, $roleid, $context, true);
-        $this->expectException(\moodle_exception::class);
+        assign_capability('powereduc/calendar:manageownentries', CAP_PROHIBIT, $roleid, $context, true);
+        $this->expectException(\powereduc_exception::class);
         $result = core_calendar_external::update_event_start_day($event->id, $newstartdate->getTimestamp());
         $result = \external_api::clean_returnvalue(
             core_calendar_external::update_event_start_day_returns(),
@@ -1798,8 +1798,8 @@ class externallib_test extends externallib_advanced_testcase {
             ]
         );
 
-        assign_capability('moodle/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
-        $this->expectException(\moodle_exception::class);
+        assign_capability('powereduc/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
+        $this->expectException(\powereduc_exception::class);
         $result = core_calendar_external::update_event_start_day($event->id, $newstartdate->getTimestamp());
         $result = \external_api::clean_returnvalue(
             core_calendar_external::update_event_start_day_returns(),
@@ -1863,7 +1863,7 @@ class externallib_test extends externallib_advanced_testcase {
     }
 
     /**
-     * A user with the moodle/calendar:manageownentries capability at the
+     * A user with the powereduc/calendar:manageownentries capability at the
      * system context should be able to create a user event.
      */
     public function test_submit_create_update_form_create_user_event() {
@@ -1910,7 +1910,7 @@ class externallib_test extends externallib_advanced_testcase {
         $querystring = http_build_query($formdata, '', '&');
 
         $generator->role_assign($roleid, $user->id, $context->id);
-        assign_capability('moodle/calendar:manageownentries', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageownentries', CAP_ALLOW, $roleid, $context, true);
 
         $user->ignoresesskey = true;
         $this->resetAfterTest(true);
@@ -1928,7 +1928,7 @@ class externallib_test extends externallib_advanced_testcase {
     }
 
     /**
-     * A user without the moodle/calendar:manageownentries capability at the
+     * A user without the powereduc/calendar:manageownentries capability at the
      * system context should not be able to create a user event.
      */
     public function test_submit_create_update_form_create_user_event_no_permission() {
@@ -1974,13 +1974,13 @@ class externallib_test extends externallib_advanced_testcase {
         $querystring = http_build_query($formdata, '', '&');
 
         $generator->role_assign($roleid, $user->id, $context->id);
-        assign_capability('moodle/calendar:manageownentries', CAP_PROHIBIT, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageownentries', CAP_PROHIBIT, $roleid, $context, true);
 
         $user->ignoresesskey = true;
         $this->resetAfterTest(true);
         $this->setUser($user);
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
 
         \external_api::clean_returnvalue(
             core_calendar_external::submit_create_update_form_returns(),
@@ -1989,7 +1989,7 @@ class externallib_test extends externallib_advanced_testcase {
     }
 
     /**
-     * A user with the moodle/calendar:manageentries capability at the
+     * A user with the powereduc/calendar:manageentries capability at the
      * site course context should be able to create a site event.
      */
     public function test_submit_create_update_form_create_site_event() {
@@ -2037,7 +2037,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         $generator->role_assign($roleid, $user->id, $context->id);
 
-        assign_capability('moodle/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
 
         $user->ignoresesskey = true;
         $this->resetAfterTest(true);
@@ -2055,7 +2055,7 @@ class externallib_test extends externallib_advanced_testcase {
     }
 
     /**
-     * A user without the moodle/calendar:manageentries capability at the
+     * A user without the powereduc/calendar:manageentries capability at the
      * site course context should not be able to create a site event.
      */
     public function test_submit_create_update_form_create_site_event_no_permission() {
@@ -2102,7 +2102,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         $generator->role_assign($roleid, $user->id, $context->id);
 
-        assign_capability('moodle/calendar:manageentries', CAP_PROHIBIT, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_PROHIBIT, $roleid, $context, true);
 
         $user->ignoresesskey = true;
         $this->resetAfterTest(true);
@@ -2117,7 +2117,7 @@ class externallib_test extends externallib_advanced_testcase {
     }
 
     /**
-     * A user that has the moodle/calendar:manageentries in a course that they
+     * A user that has the powereduc/calendar:manageentries in a course that they
      * are enrolled in should be able to create a course event in that course.
      */
     public function test_submit_create_update_form_create_course_event() {
@@ -2168,7 +2168,7 @@ class externallib_test extends externallib_advanced_testcase {
         $generator->enrol_user($user->id, $course->id, 'student');
         $generator->role_assign($roleid, $user->id, $context->id);
 
-        assign_capability('moodle/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
 
         $user->ignoresesskey = true;
         $this->resetAfterTest(true);
@@ -2187,7 +2187,7 @@ class externallib_test extends externallib_advanced_testcase {
     }
 
     /**
-     * A user without the moodle/calendar:manageentries capability in a course
+     * A user without the powereduc/calendar:manageentries capability in a course
      * that they are enrolled in should not be able to create a course event in that course.
      */
     public function test_submit_create_update_form_create_course_event_no_permission() {
@@ -2237,7 +2237,7 @@ class externallib_test extends externallib_advanced_testcase {
         $generator->enrol_user($user->id, $course->id, 'student');
         $generator->role_assign($roleid, $user->id, $context->id);
 
-        assign_capability('moodle/calendar:manageentries', CAP_PROHIBIT, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_PROHIBIT, $roleid, $context, true);
 
         $user->ignoresesskey = true;
         $this->resetAfterTest(true);
@@ -2303,7 +2303,7 @@ class externallib_test extends externallib_advanced_testcase {
         $generator->enrol_user($user->id, $course->id, 'student');
         $generator->role_assign($roleid, $user->id, $context->id);
 
-        assign_capability('moodle/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
 
         $user->ignoresesskey = true;
         $this->resetAfterTest(true);
@@ -2319,7 +2319,7 @@ class externallib_test extends externallib_advanced_testcase {
 
     /**
      * A user should be able to create an event for a group that they are a member of in
-     * a course in which they are enrolled and have the moodle/calendar:manageentries capability.
+     * a course in which they are enrolled and have the powereduc/calendar:manageentries capability.
      */
     public function test_submit_create_update_form_create_group_event_group_member_manage_course() {
         $generator = $this->getDataGenerator();
@@ -2372,7 +2372,7 @@ class externallib_test extends externallib_advanced_testcase {
         $generator->role_assign($roleid, $user->id, $context->id);
         $generator->create_group_member(['groupid' => $group->id, 'userid' => $user->id]);
 
-        assign_capability('moodle/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
 
         $user->ignoresesskey = true;
         $this->resetAfterTest(true);
@@ -2392,7 +2392,7 @@ class externallib_test extends externallib_advanced_testcase {
 
     /**
      * A user should be able to create an event for a group that they are a member of in
-     * a course in which they are enrolled and have the moodle/calendar:managegroupentries capability.
+     * a course in which they are enrolled and have the powereduc/calendar:managegroupentries capability.
      */
     public function test_submit_create_update_form_create_group_event_group_member_manage_group_entries() {
         $generator = $this->getDataGenerator();
@@ -2445,8 +2445,8 @@ class externallib_test extends externallib_advanced_testcase {
         $generator->role_assign($roleid, $user->id, $context->id);
         $generator->create_group_member(['groupid' => $group->id, 'userid' => $user->id]);
 
-        assign_capability('moodle/calendar:manageentries', CAP_PROHIBIT, $roleid, $context, true);
-        assign_capability('moodle/calendar:managegroupentries', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_PROHIBIT, $roleid, $context, true);
+        assign_capability('powereduc/calendar:managegroupentries', CAP_ALLOW, $roleid, $context, true);
 
         $user->ignoresesskey = true;
         $this->resetAfterTest(true);
@@ -2466,7 +2466,7 @@ class externallib_test extends externallib_advanced_testcase {
 
     /**
      * A user should be able to create an event for any group in a course in which
-     * they are enrolled and have the moodle/site:accessallgroups capability.
+     * they are enrolled and have the powereduc/site:accessallgroups capability.
      */
     public function test_submit_create_update_form_create_group_event_access_all_groups() {
         $generator = $this->getDataGenerator();
@@ -2518,8 +2518,8 @@ class externallib_test extends externallib_advanced_testcase {
         $generator->enrol_user($user->id, $course->id, 'student');
         $generator->role_assign($roleid, $user->id, $context->id);
 
-        assign_capability('moodle/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
-        assign_capability('moodle/site:accessallgroups', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/site:accessallgroups', CAP_ALLOW, $roleid, $context, true);
 
         $user->ignoresesskey = true;
         $this->resetAfterTest(true);
@@ -2540,7 +2540,7 @@ class externallib_test extends externallib_advanced_testcase {
     /**
      * A user should not be able to create an event for any group that they are not a
      * member of in a course in which they are enrolled but don't have the
-     * moodle/site:accessallgroups capability.
+     * powereduc/site:accessallgroups capability.
      */
     public function test_submit_create_update_form_create_group_event_non_member_no_permission() {
         $generator = $this->getDataGenerator();
@@ -2591,8 +2591,8 @@ class externallib_test extends externallib_advanced_testcase {
         $generator->enrol_user($user->id, $course->id, 'student');
         $generator->role_assign($roleid, $user->id, $context->id);
 
-        assign_capability('moodle/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
-        assign_capability('moodle/site:accessallgroups', CAP_PROHIBIT, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/site:accessallgroups', CAP_PROHIBIT, $roleid, $context, true);
 
         $user->ignoresesskey = true;
         $this->resetAfterTest(true);
@@ -2783,7 +2783,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals($data['event']['id'], $courseevent->id);
         // User not enrolled in the course cannot load the course event.
         $this->setUser($user2);
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $data = \external_api::clean_returnvalue(
             core_calendar_external::get_calendar_event_by_id_returns(),
             core_calendar_external::get_calendar_event_by_id($courseevent->id)
@@ -2853,7 +2853,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         if ($expectexception) {
             // Setup if exception is expected for the test.
-            $this->expectException(\moodle_exception::class);
+            $this->expectException(\powereduc_exception::class);
         }
         \external_api::clean_returnvalue(
             core_calendar_external::get_calendar_event_by_id_returns(),
@@ -2916,7 +2916,7 @@ class externallib_test extends externallib_advanced_testcase {
         }
 
         if ($expectexception) {
-            $this->expectException(\moodle_exception::class);
+            $this->expectException(\powereduc_exception::class);
         }
         $events = [
             ['eventid' => $userevent->id, 'repeat' => 0]
@@ -2989,7 +2989,7 @@ class externallib_test extends externallib_advanced_testcase {
         $USER->ignoresesskey = true;
 
         if ($expectexception) {
-            $this->expectException(\moodle_exception::class);
+            $this->expectException(\powereduc_exception::class);
         }
         core_calendar_external::submit_create_update_form($querystring);
     }

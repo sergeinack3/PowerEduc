@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Applies the same callback to all recorset records.
  *
- * @since      Moodle 2.9
+ * @since      PowerEduc 2.9
  * @package    core
  * @category   dml
  * @copyright  2015 David Monllao
@@ -29,7 +29,7 @@ namespace core\dml;
 defined('POWEREDUC_INTERNAL') || die();
 
 /**
- * Iterator that walks through a moodle_recordset applying the provided function.
+ * Iterator that walks through a powereduc_recordset applying the provided function.
  *
  * The internal recordset can be closed using the close() function.
  *
@@ -38,7 +38,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * - Once all recordset records have been iterated
  * - The object is destroyed
  *
- * @since      Moodle 2.9
+ * @since      PowerEduc 2.9
  * @package    core
  * @category   dml
  * @copyright  2015 David Monllao
@@ -47,7 +47,7 @@ defined('POWEREDUC_INTERNAL') || die();
 class recordset_walk implements \Iterator {
 
     /**
-     * @var \moodle_recordset The recordset.
+     * @var \powereduc_recordset The recordset.
      */
     protected $recordset;
 
@@ -64,11 +64,11 @@ class recordset_walk implements \Iterator {
     /**
      * Create a new iterator applying the callback to each record.
      *
-     * @param \moodle_recordset $recordset Recordset to iterate.
+     * @param \powereduc_recordset $recordset Recordset to iterate.
      * @param callable $callback Apply this function to each record. If using a method, it should be public.
      * @param mixed $callbackextra An extra single parameter to pass to the callback. Use a container to pass multiple values.
      */
-    public function __construct(\moodle_recordset $recordset, callable $callback, $callbackextra = null) {
+    public function __construct(\powereduc_recordset $recordset, callable $callback, $callbackextra = null) {
         $this->recordset = $recordset;
         $this->callback = $callback;
         $this->callbackextra = $callbackextra;
@@ -148,7 +148,7 @@ class recordset_walk implements \Iterator {
      * @return void
      */
     public function rewind(): void {
-        // No rewind as it is not implemented in moodle_recordset.
+        // No rewind as it is not implemented in powereduc_recordset.
         return;
     }
 

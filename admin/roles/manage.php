@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -50,7 +50,7 @@ admin_externalpage_setup('defineroles');
 
 // Check access permissions.
 $systemcontext = context_system::instance();
-require_capability('moodle/role:manage', $systemcontext);
+require_capability('powereduc/role:manage', $systemcontext);
 
 // Get some basic data we are going to need.
 $roles = role_fix_names(get_all_roles(), $systemcontext, ROLENAME_ORIGINAL);
@@ -68,7 +68,7 @@ $confirmed = (optional_param('confirm', false, PARAM_BOOL) && data_submitted() &
 switch ($action) {
     case 'delete':
         if (isset($undeletableroles[$roleid])) {
-            throw new \moodle_exception('cannotdeletethisrole', '', $baseurl);
+            throw new \powereduc_exception('cannotdeletethisrole', '', $baseurl);
         }
         if (!$confirmed) {
             // Show confirmation.
@@ -81,15 +81,15 @@ switch ($action) {
             $a->count = $DB->count_records_select('role_assignments',
                 'roleid = ?', array($roleid), 'COUNT(DISTINCT userid)');
 
-            $formcontinue = new single_button(new moodle_url($baseurl, $optionsyes), get_string('yes'));
-            $formcancel = new single_button(new moodle_url($baseurl), get_string('no'), 'get');
+            $formcontinue = new single_button(new powereduc_url($baseurl, $optionsyes), get_string('yes'));
+            $formcancel = new single_button(new powereduc_url($baseurl), get_string('no'), 'get');
             echo $OUTPUT->confirm(get_string('deleterolesure', 'core_role', $a), $formcontinue, $formcancel);
             echo $OUTPUT->footer();
             die;
         }
         if (!delete_role($roleid)) {
             // The delete failed.
-            throw new \moodle_exception('cannotdeleterolewithid', 'error', $baseurl, $roleid);
+            throw new \powereduc_exception('cannotdeleterolewithid', 'error', $baseurl, $roleid);
         }
         // Deleted a role sitewide...
         redirect($baseurl);
@@ -108,10 +108,10 @@ switch ($action) {
                 }
             }
             if (is_null($thisrole) || is_null($prevrole)) {
-                throw new \moodle_exception('cannotmoverolewithid', 'error', '', $roleid);
+                throw new \powereduc_exception('cannotmoverolewithid', 'error', '', $roleid);
             }
             if (!switch_roles($thisrole, $prevrole)) {
-                throw new \moodle_exception('cannotmoverolewithid', 'error', '', $roleid);
+                throw new \powereduc_exception('cannotmoverolewithid', 'error', '', $roleid);
             }
         }
 
@@ -131,10 +131,10 @@ switch ($action) {
                 }
             }
             if (is_null($nextrole)) {
-                throw new \moodle_exception('cannotmoverolewithid', 'error', '', $roleid);
+                throw new \powereduc_exception('cannotmoverolewithid', 'error', '', $roleid);
             }
             if (!switch_roles($thisrole, $nextrole)) {
-                throw new \moodle_exception('cannotmoverolewithid', 'error', '', $roleid);
+                throw new \powereduc_exception('cannotmoverolewithid', 'error', '', $roleid);
             }
         }
 
@@ -208,7 +208,7 @@ foreach ($roles as $role) {
 echo html_writer::table($table);
 
 echo $OUTPUT->container_start('buttons');
-echo $OUTPUT->single_button(new moodle_url($defineurl, array('action' => 'add')), get_string('addrole', 'core_role'), 'get');
+echo $OUTPUT->single_button(new powereduc_url($defineurl, array('action' => 'add')), get_string('addrole', 'core_role'), 'get');
 echo $OUTPUT->container_end();
 
 echo $OUTPUT->footer();

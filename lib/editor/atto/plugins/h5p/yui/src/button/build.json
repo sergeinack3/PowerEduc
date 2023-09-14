@@ -1,7 +1,7 @@
 {
-  "name": "moodle-atto_h5p-button",
+  "name": "powereduc-atto_h5p-button",
   "builds": {
-    "moodle-atto_h5p-button": {
+    "powereduc-atto_h5p-button": {
       "jsfiles": [
         "button.js"
       ]

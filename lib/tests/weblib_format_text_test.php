@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
@@ -30,7 +30,7 @@ class weblib_format_text_test extends \advanced_testcase {
         $this->resetAfterTest();
         filter_set_global_state('emoticon', TEXTFILTER_ON);
         $this->assertMatchesRegularExpression('~^<p><img class="icon emoticon" alt="smile" title="smile" ' .
-                'src="https://www.example.com/moodle/theme/image.php/_s/boost/core/1/s/smiley" /></p>$~',
+                'src="https://www.example.com/powereduc/theme/image.php/_s/boost/core/1/s/smiley" /></p>$~',
                 format_text('<p>:-)</p>', FORMAT_HTML));
     }
 
@@ -60,7 +60,7 @@ class weblib_format_text_test extends \advanced_testcase {
         $this->resetAfterTest();
         filter_set_global_state('emoticon', TEXTFILTER_ON);
         $this->assertMatchesRegularExpression('~^<p><em><img class="icon emoticon" alt="smile" title="smile" ' .
-                'src="https://www.example.com/moodle/theme/image.php/_s/boost/core/1/s/smiley" />' .
+                'src="https://www.example.com/powereduc/theme/image.php/_s/boost/core/1/s/smiley" />' .
                 '</em></p>\n$~',
                 format_text('*:-)*', FORMAT_MARKDOWN));
     }
@@ -72,16 +72,16 @@ class weblib_format_text_test extends \advanced_testcase {
                 format_text('*:-)*', FORMAT_MARKDOWN, array('filter' => false)));
     }
 
-    public function test_format_text_format_moodle() {
+    public function test_format_text_format_powereduc() {
         $this->resetAfterTest();
         filter_set_global_state('emoticon', TEXTFILTER_ON);
         $this->assertMatchesRegularExpression('~^<div class="text_to_html"><p>' .
                 '<img class="icon emoticon" alt="smile" title="smile" ' .
-                'src="https://www.example.com/moodle/theme/image.php/_s/boost/core/1/s/smiley" /></p></div>$~',
+                'src="https://www.example.com/powereduc/theme/image.php/_s/boost/core/1/s/smiley" /></p></div>$~',
                 format_text('<p>:-)</p>', FORMAT_POWEREDUC));
     }
 
-    public function test_format_text_format_moodle_no_filters() {
+    public function test_format_text_format_powereduc_no_filters() {
         $this->resetAfterTest();
         filter_set_global_state('emoticon', TEXTFILTER_ON);
         $this->assertEquals('<div class="text_to_html"><p>:-)</p></div>',

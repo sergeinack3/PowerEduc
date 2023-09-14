@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ namespace tool_policy\output;
 
 defined('POWEREDUC_INTERNAL') || die();
 
-use moodle_url;
+use powereduc_url;
 use renderable;
 use renderer_base;
 use single_button;
@@ -47,7 +47,7 @@ class user_agreement implements \templatable, \renderable {
     /** @var bool */
     protected $onbehalf;
 
-    /** @var moodle_url */
+    /** @var powereduc_url */
     protected $pageurl;
 
     /** @var array */
@@ -71,13 +71,13 @@ class user_agreement implements \templatable, \renderable {
      * @param int $userid
      * @param array $accepted list of ids of accepted versions
      * @param array $declined list of ids of declined versions
-     * @param moodle_url $pageurl
+     * @param powereduc_url $pageurl
      * @param array $versions list of versions (id=>name)
      * @param bool $onbehalf whether at least one version was accepted by somebody else on behalf of the user
      * @param bool $canaccept does the current user have permission to accept/decline the policy on behalf of user $userid
      * @param bool $canrevoke does the current user have permission to revoke the policy on behalf of user $userid
      */
-    public function __construct($userid, array $accepted, array $declined, moodle_url $pageurl, $versions, $onbehalf = false,
+    public function __construct($userid, array $accepted, array $declined, powereduc_url $pageurl, $versions, $onbehalf = false,
                                 $canaccept = null, $canrevoke = null) {
 
         // Make sure that all ids in $accepted and $declined are present in $versions.
@@ -126,7 +126,7 @@ class user_agreement implements \templatable, \renderable {
                 'text' => get_string('useracceptanceactionaccept', 'tool_policy'),
                 'title' => get_string('useracceptanceactionacceptone', 'tool_policy', $versionname),
                 'data' => 'acceptmodal',
-                'url' => (new \moodle_url('/admin/tool/policy/accept.php', [
+                'url' => (new \powereduc_url('/admin/tool/policy/accept.php', [
                     'userids[]' => $this->userid,
                     'versionids[]' => $versionid,
                     'action' => 'accept',
@@ -138,7 +138,7 @@ class user_agreement implements \templatable, \renderable {
                 'text' => get_string('useracceptanceactionrevoke', 'tool_policy'),
                 'title' => get_string('useracceptanceactionrevokeone', 'tool_policy', $versionname),
                 'data' => 'acceptmodal',
-                'url' => (new \moodle_url('/admin/tool/policy/accept.php', [
+                'url' => (new \powereduc_url('/admin/tool/policy/accept.php', [
                     'userids[]' => $this->userid,
                     'versionids[]' => $versionid,
                     'action' => 'revoke',
@@ -150,7 +150,7 @@ class user_agreement implements \templatable, \renderable {
                 'text' => get_string('useracceptanceactiondecline', 'tool_policy'),
                 'title' => get_string('useracceptanceactiondeclineone', 'tool_policy', $versionname),
                 'data' => 'acceptmodal',
-                'url' => (new \moodle_url('/admin/tool/policy/accept.php', [
+                'url' => (new \powereduc_url('/admin/tool/policy/accept.php', [
                     'userids[]' => $this->userid,
                     'versionids[]' => $versionid,
                     'action' => 'decline',
@@ -199,14 +199,14 @@ class user_agreement implements \templatable, \renderable {
 
             $data->actions[] = (object)[
                 'text' => get_string('useracceptanceactiondetails', 'tool_policy'),
-                'url' => (new \moodle_url('/admin/tool/policy/user.php', [
+                'url' => (new \powereduc_url('/admin/tool/policy/user.php', [
                     'userid' => $this->userid,
                     'returnurl' => $this->pageurl->out_as_local_url(false),
                 ]))->out(false),
             ];
 
             // Prepare the action link to accept all pending policies.
-            $accepturl = new \moodle_url('/admin/tool/policy/accept.php', [
+            $accepturl = new \powereduc_url('/admin/tool/policy/accept.php', [
                 'userids[]' => $this->userid,
                 'action' => 'accept',
                 'returnurl' => $this->pageurl->out_as_local_url(false),
@@ -224,7 +224,7 @@ class user_agreement implements \templatable, \renderable {
             ];
 
             // Prepare the action link to revoke all agreed policies.
-            $revokeurl = new \moodle_url('/admin/tool/policy/accept.php', [
+            $revokeurl = new \powereduc_url('/admin/tool/policy/accept.php', [
                 'userids[]' => $this->userid,
                 'action' => 'revoke',
                 'returnurl' => $this->pageurl->out_as_local_url(false),
@@ -242,7 +242,7 @@ class user_agreement implements \templatable, \renderable {
             ];
 
             // Prepare the action link to decline all pending policies.
-            $declineurl = new \moodle_url('/admin/tool/policy/accept.php', [
+            $declineurl = new \powereduc_url('/admin/tool/policy/accept.php', [
                 'userids[]' => $this->userid,
                 'action' => 'decline',
                 'returnurl' => $this->pageurl->out_as_local_url(false),

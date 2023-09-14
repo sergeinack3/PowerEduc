@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Book module core interaction API
@@ -44,7 +44,7 @@ function book_get_numbering_types() {
 /**
  * Returns list of available navigation link types.
  *
- * @deprecated since Moodle 4.0. MDL-72376.
+ * @deprecated since PowerEduc 4.0. MDL-72376.
  * @return array
  */
 function book_get_nav_types() {
@@ -218,7 +218,7 @@ function book_grades($bookid) {
 }
 
 /**
- * @deprecated since Moodle 3.8
+ * @deprecated since PowerEduc 3.8
  */
 function book_scale_used() {
     throw new coding_exception('book_scale_used() can not be used anymore. Plugins can implement ' .
@@ -672,7 +672,7 @@ function book_export_contents($cm, $baseurl) {
  * @param  stdClass $course     course object
  * @param  stdClass $cm         course module object
  * @param  stdClass $context    context object
- * @since Moodle 3.0
+ * @since PowerEduc 3.0
  */
 function book_view($book, $chapter, $islastchapter, $course, $cm, $context) {
 
@@ -698,7 +698,7 @@ function book_view($book, $chapter, $islastchapter, $course, $cm, $context) {
  * @param  int $from the time to check updates from
  * @param  array $filter  if we need to check only specific updates
  * @return stdClass an object with the different type of areas indicating if they were updated or not
- * @since Moodle 3.2
+ * @since PowerEduc 3.2
  */
 function book_check_updates_since(cm_info $cm, $from, $filter = array()) {
     global $DB;

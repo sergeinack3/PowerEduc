@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -41,9 +41,9 @@ if ($badge->status != BADGE_STATUS_INACTIVE) {
         } else {
             $context = context_course::instance($badge->courseid);
         }
-        $urlimage = moodle_url::make_pluginfile_url($context->id, 'badges', 'badgeimage', $badge->id, '/', 'f3')->out(false);
+        $urlimage = powereduc_url::make_pluginfile_url($context->id, 'badges', 'badgeimage', $badge->id, '/', 'f3')->out(false);
 
-        $url = new moodle_url('/badges/badge_json.php', array('id' => $badge->id));
+        $url = new powereduc_url('/badges/badge_json.php', array('id' => $badge->id));
 
         $json['name'] = $badge->name;
         $json['description'] = $badge->description;
@@ -51,12 +51,12 @@ if ($badge->status != BADGE_STATUS_INACTIVE) {
                 $badge->imageauthoremail ||
                 $badge->imageauthorurl ||
                 $badge->imagecaption) {
-            $urlimage = moodle_url::make_pluginfile_url($context->id,
+            $urlimage = powereduc_url::make_pluginfile_url($context->id,
                 'badges', 'badgeimage', $badge->id, '/', 'f3')->out(false);
             $json['image'] = array();
             $json['image']['id'] = $urlimage;
             if ($badge->imageauthorname || $badge->imageauthoremail || $badge->imageauthorurl) {
-                $authorimage = new moodle_url('/badges/image_author_json.php', array('id' => $badge->id));
+                $authorimage = new powereduc_url('/badges/image_author_json.php', array('id' => $badge->id));
                 $json['image']['author'] = $authorimage->out(false);
             }
             if ($badge->imagecaption) {
@@ -67,7 +67,7 @@ if ($badge->status != BADGE_STATUS_INACTIVE) {
         }
 
         $params = ['id' => $badge->id];
-        $badgeurl = new moodle_url('/badges/badgeclass.php', $params);
+        $badgeurl = new powereduc_url('/badges/badgeclass.php', $params);
         $json['criteria']['id'] = $badgeurl->out(false);
         $json['criteria']['narrative'] = $badge->markdown_badge_criteria();
         $json['issuer'] = $badge->get_badge_issuer();
@@ -84,7 +84,7 @@ if ($badge->status != BADGE_STATUS_INACTIVE) {
         $relatedbadges = $badge->get_related_badges(true);
         if (!empty($relatedbadges)) {
             foreach ($relatedbadges as $related) {
-                $relatedurl = new moodle_url('/badges/badge_json.php', array('id' => $related->id));
+                $relatedurl = new powereduc_url('/badges/badge_json.php', array('id' => $related->id));
                 $relateds[] = array('id' => $relatedurl->out(false),
                     'version' => $related->version, '@language' => $related->language);
             }
@@ -93,7 +93,7 @@ if ($badge->status != BADGE_STATUS_INACTIVE) {
 
         $endorsement = $badge->get_endorsement();
         if (!empty($endorsement)) {
-            $endorsementurl = new moodle_url('/badges/endorsement_json.php', array('id' => $badge->id));
+            $endorsementurl = new powereduc_url('/badges/endorsement_json.php', array('id' => $badge->id));
             $json['endorsement'] = $endorsementurl->out(false);
         }
 
@@ -120,7 +120,7 @@ if ($badge->status != BADGE_STATUS_INACTIVE) {
 } else {
     // The badge doen't exist or not accessible for the users.
     header("HTTP/1.0 410 Gone");
-    $badgeurl = new moodle_url('/badges/badge_json.php', array('id' => $id));
+    $badgeurl = new powereduc_url('/badges/badge_json.php', array('id' => $id));
     $json['id'] = $badgeurl->out();
     $json['error'] = get_string('error:relatedbadgedoesntexist', 'badges');
 }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -170,7 +170,7 @@ abstract class lti_advantage_testcase extends \advanced_testcase {
                             "type" => ["http://purl.imsglobal.org/vocab/lis/v2/course#CourseOffering"]
                         ],
                         'https://purl.imsglobal.org/spec/lti/claim/target_link_uri' =>
-                            'https://this-moodle-tool.example.org/context/24/resource/14',
+                            'https://this-powereduc-tool.example.org/context/24/resource/14',
                         'given_name' => $mockuser['given_name'],
                         'family_name' => $mockuser['family_name'],
                         'email' => $mockuser['email'],
@@ -283,11 +283,11 @@ abstract class lti_advantage_testcase extends \advanced_testcase {
         $reg = application_registration::create(
             'Example LMS application',
             'a2c94a2c94',
-            new moodle_url($this->issuer),
+            new powereduc_url($this->issuer),
             '123',
-            new moodle_url('https://example.org/authrequesturl'),
-            new moodle_url('https://example.org/jwksurl'),
-            new moodle_url('https://example.org/accesstokenurl')
+            new powereduc_url('https://example.org/authrequesturl'),
+            new powereduc_url('https://example.org/jwksurl'),
+            new powereduc_url('https://example.org/accesstokenurl')
         );
         $regrepo = new application_registration_repository();
         $reg = $regrepo->save($reg);

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  * This file contains links and settings used by tool_componentlibrary
  *
  * @package    tool_componentlibrary
- * @copyright  2021 Bas Brands <bas@moodle.com>
+ * @copyright  2021 Bas Brands <bas@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('POWEREDUC_INTERNAL') || die;
@@ -31,7 +31,7 @@ if (file_exists($CFG->dirroot . '/'. $CFG->admin . $docsdir)) {
     $temp = new admin_externalpage(
         'toolcomponentlibrary',
         get_string('pluginname', 'tool_componentlibrary'),
-        new moodle_url('/admin/tool/componentlibrary/')
+        new powereduc_url('/admin/tool/componentlibrary/')
     );
     $ADMIN->add('development', $temp);
 }

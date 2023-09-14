@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,14 +28,14 @@ require_once($CFG->dirroot . '/course/lib.php');
 require_once($CFG->dirroot . '/course/request_form.php');
 
 // Where we came from. Used in a number of redirects.
-$url = new moodle_url('/course/request.php');
+$url = new powereduc_url('/course/request.php');
 $return = optional_param('return', null, PARAM_ALPHANUMEXT);
 $categoryid = optional_param('category', null, PARAM_INT);
 if ($return === 'management') {
     $url->param('return', $return);
-    $returnurl = new moodle_url('/course/management.php', array('categoryid' => $CFG->defaultrequestcategory));
+    $returnurl = new powereduc_url('/course/management.php', array('categoryid' => $CFG->defaultrequestcategory));
 } else {
-    $returnurl = new moodle_url('/course/index.php');
+    $returnurl = new powereduc_url('/course/index.php');
 }
 
 $PAGE->set_url($url);
@@ -43,10 +43,10 @@ $PAGE->set_url($url);
 // Check permissions.
 require_login(null, false);
 if (isguestuser()) {
-    throw new \moodle_exception('guestsarenotallowed', '', $returnurl);
+    throw new \powereduc_exception('guestsarenotallowed', '', $returnurl);
 }
 if (empty($CFG->enablecourserequests)) {
-    throw new \moodle_exception('courserequestdisabled', '', $returnurl);
+    throw new \powereduc_exception('courserequestdisabled', '', $returnurl);
 }
 
 if ($CFG->lockrequestcategory) {
@@ -55,13 +55,13 @@ if ($CFG->lockrequestcategory) {
 } else if (!$categoryid) {
     // Category selection is enabled but category is not specified.
     // Find a category where user has capability to request courses (preferably the default category).
-    $list = core_course_category::make_categories_list('moodle/course:request');
+    $list = core_course_category::make_categories_list('powereduc/course:request');
     $categoryid = array_key_exists($CFG->defaultrequestcategory, $list) ? $CFG->defaultrequestcategory : key($list);
 }
 
 $context = context_coursecat::instance($categoryid ?: $CFG->defaultrequestcategory);
 $PAGE->set_context($context);
-require_capability('moodle/course:request', $context);
+require_capability('powereduc/course:request', $context);
 
 // Set up the form.
 $data = $categoryid ? (object)['category' => $categoryid] : null;
@@ -86,7 +86,7 @@ if ($requestform->is_cancelled()){
     notice(get_string('courserequestsuccess'), $returnurl);
 }
 
-$categoryurl = new moodle_url('/course/index.php');
+$categoryurl = new powereduc_url('/course/index.php');
 if ($categoryid) {
     $categoryurl->param('categoryid', $categoryid);
 }

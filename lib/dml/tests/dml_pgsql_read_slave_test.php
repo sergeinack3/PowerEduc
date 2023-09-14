@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * DML read/read-write database handle tests for pgsql_native_moodle_database
+ * DML read/read-write database handle tests for pgsql_native_powereduc_database
  *
  * @package    core
  * @category   dml
@@ -25,21 +25,21 @@
 
 namespace core;
 
-use moodle_database;
+use powereduc_database;
 use xmldb_table;
 
 defined('POWEREDUC_INTERNAL') || die();
 
-require_once(__DIR__.'/fixtures/read_slave_moodle_database_mock_pgsql.php');
+require_once(__DIR__.'/fixtures/read_slave_powereduc_database_mock_pgsql.php');
 
 /**
- * DML pgsql_native_moodle_database read slave specific tests
+ * DML pgsql_native_powereduc_database read slave specific tests
  *
  * @package    core
  * @category   dml
  * @copyright  2018 Catalyst IT
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @covers     \pgsql_native_moodle_database
+ * @covers     \pgsql_native_powereduc_database
  */
 class dml_pgsql_read_slave_test extends \advanced_testcase {
     /**
@@ -48,7 +48,7 @@ class dml_pgsql_read_slave_test extends \advanced_testcase {
      * @return void
      */
     public function test_cursors(): void {
-        $DB = new read_slave_moodle_database_mock_pgsql();
+        $DB = new read_slave_powereduc_database_mock_pgsql();
 
         // Declare a cursor on a table that has not been written to.
         list($sql, $params, $type) = $DB->fix_sql_params("SELECT * FROM {table}");
@@ -96,7 +96,7 @@ class dml_pgsql_read_slave_test extends \advanced_testcase {
      * @return void
      */
     public function test_read_pg_table(): void {
-        $DB = new read_slave_moodle_database_mock_pgsql();
+        $DB = new read_slave_powereduc_database_mock_pgsql();
 
         $this->assertEquals(0, $DB->perf_get_reads_slave());
 
@@ -113,7 +113,7 @@ class dml_pgsql_read_slave_test extends \advanced_testcase {
      * @return void
      */
     public function test_read_pg_lock_table(): void {
-        $DB = new read_slave_moodle_database_mock_pgsql();
+        $DB = new read_slave_powereduc_database_mock_pgsql();
 
         $this->assertEquals(0, $DB->perf_get_reads_slave());
 
@@ -150,7 +150,7 @@ class dml_pgsql_read_slave_test extends \advanced_testcase {
         }
 
         // Get a separate disposable db connection handle with guaranteed 'readonly' config.
-        $db2 = moodle_database::get_driver_instance($cfg->dbtype, $cfg->dblibrary);
+        $db2 = powereduc_database::get_driver_instance($cfg->dbtype, $cfg->dblibrary);
         $db2->connect($cfg->dbhost, $cfg->dbuser, $cfg->dbpass, $cfg->dbname, $cfg->prefix, $cfg->dboptions);
 
         $reads = $db2->perf_get_reads();
@@ -196,7 +196,7 @@ class dml_pgsql_read_slave_test extends \advanced_testcase {
      * and getting temptables metadata.
      * This test is only possible because of no pg_query error reporting.
      * It may need to be removed in the future if we decide to handle null
-     * results in pgsql_native_moodle_database differently.
+     * results in pgsql_native_powereduc_database differently.
      *
      * @return void
      */
@@ -219,7 +219,7 @@ class dml_pgsql_read_slave_test extends \advanced_testcase {
         }
 
         // Get a separate disposable db connection handle with guaranteed 'readonly' config.
-        $db2 = moodle_database::get_driver_instance($cfg->dbtype, $cfg->dblibrary);
+        $db2 = powereduc_database::get_driver_instance($cfg->dbtype, $cfg->dblibrary);
         $db2->connect($cfg->dbhost, $cfg->dbuser, $cfg->dbpass, $cfg->dbname, $cfg->prefix, $cfg->dboptions);
 
         $dbman = $db2->get_manager();
@@ -277,7 +277,7 @@ class dml_pgsql_read_slave_test extends \advanced_testcase {
             'connecttimeout' => 1
         ];
 
-        $db2 = moodle_database::get_driver_instance($cfg->dbtype, $cfg->dblibrary);
+        $db2 = powereduc_database::get_driver_instance($cfg->dbtype, $cfg->dblibrary);
         $db2->connect($cfg->dbhost, $cfg->dbuser, $cfg->dbpass, $cfg->dbname, $cfg->prefix, $cfg->dboptions);
         $this->assertTrue(count($db2->get_records('user')) > 0);
     }

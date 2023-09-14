@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,13 +19,13 @@ namespace core_h5p;
 use Moodle\H5PFrameworkInterface;
 use Moodle\H5PCore;
 
-// phpcs:disable moodle.NamingConventions.ValidFunctionName.LowercaseMethod
+// phpcs:disable powereduc.NamingConventions.ValidFunctionName.LowercaseMethod
 
 /**
  * Moodle's implementation of the H5P framework interface.
  *
  * @package    core_h5p
- * @copyright  2019 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2019 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class framework implements H5PFrameworkInterface {
@@ -509,7 +509,7 @@ class framework implements H5PFrameworkInterface {
 
         $context = \context_system::instance();
 
-        return \moodle_url::make_pluginfile_url($context->id, 'core_h5p', 'libraries',
+        return \powereduc_url::make_pluginfile_url($context->id, 'core_h5p', 'libraries',
             $library->id, '/' . $libraryfilepath . '/', $filename)->out();
     }
 
@@ -730,7 +730,7 @@ class framework implements H5PFrameworkInterface {
      * @return boolean TRUE if H5P development mode is active FALSE otherwise
      */
     public function isInDevMode() {
-        return false; // Not supported (Files in moodle not editable).
+        return false; // Not supported (Files in powereduc not editable).
     }
 
     /**

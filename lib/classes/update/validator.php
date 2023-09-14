@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Provides validation class to check the plugin ZIP contents
@@ -22,7 +22,7 @@
  *
  * @package     core_plugin
  * @subpackage  validation
- * @copyright   2013, 2015 David Mudrak <david@moodle.com>
+ * @copyright   2013, 2015 David Mudrak <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -44,7 +44,7 @@ if (!defined('T_ML_COMMENT')) {
 /**
  * Validates the contents of extracted plugin ZIP file
  *
- * @copyright 2013, 2015 David Mudrak <david@moodle.com>
+ * @copyright 2013, 2015 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class validator {
@@ -106,12 +106,12 @@ class validator {
     }
 
     /**
-     * Set the expectation that the plugin can be installed into the given Moodle version
+     * Set the expectation that the plugin can be installed into the given PowerEduc version
      *
-     * @param string $required Moodle version we are about to install to
+     * @param string $required PowerEduc version we are about to install to
      */
-    public function assert_moodle_version($required) {
-        $this->assertions['moodleversion'] = $required;
+    public function assert_powereduc_version($required) {
+        $this->assertions['powereducversion'] = $required;
     }
 
     /**
@@ -333,8 +333,8 @@ class validator {
             throw new coding_exception('Required plugin type must be set before calling this');
         }
 
-        if (!isset($this->assertions['moodleversion'])) {
-            throw new coding_exception('Required Moodle version must be set before calling this');
+        if (!isset($this->assertions['powereducversion'])) {
+            throw new coding_exception('Required PowerEduc version must be set before calling this');
         }
 
         $fullpath = $this->extractdir.'/'.$this->rootdir.'/version.php';
@@ -368,11 +368,11 @@ class validator {
 
         if (isset($info['plugin->requires'])) {
             $this->versionphp['requires'] = $info['plugin->requires'];
-            if ($this->versionphp['requires'] > $this->assertions['moodleversion']) {
-                $this->add_message(self::ERROR, 'requiresmoodle', $this->versionphp['requires']);
+            if ($this->versionphp['requires'] > $this->assertions['powereducversion']) {
+                $this->add_message(self::ERROR, 'requirespowereduc', $this->versionphp['requires']);
                 return false;
             }
-            $this->add_message(self::INFO, 'requiresmoodle', $this->versionphp['requires']);
+            $this->add_message(self::INFO, 'requirespowereduc', $this->versionphp['requires']);
         }
 
         if (!isset($info['plugin->component'])) {

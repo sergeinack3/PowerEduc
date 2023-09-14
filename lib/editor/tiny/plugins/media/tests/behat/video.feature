@@ -24,6 +24,6 @@ Feature: Use the TinyMCE editor to upload a video
     When I click on the "Multimedia" button for the "Description" TinyMCE editor
     And I follow "Video"
     And I click on "Browse repositories..." "button" in the "#id_description_editor_video .tiny_media_source.tiny_media_media_source" "css_element"
-    And I upload "/lib/editor/tiny/tests/behat/fixtures/moodle-logo.mp4" to the file picker for TinyMCE
+    And I upload "/lib/editor/tiny/tests/behat/fixtures/powereduc-logo.mp4" to the file picker for TinyMCE
     When I click on "Insert media" "button"
     And I select the "video" element in position "1" of the "Description" TinyMCE editor

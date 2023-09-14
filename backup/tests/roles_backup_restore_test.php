@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ class roles_backup_restore_test extends advanced_testcase {
 
     /**
      * Create a course where the (non-editing) Teacher role is overridden
-     * to have 'moodle/user:loginas' and 'moodle/site:accessallgroups'.
+     * to have 'powereduc/user:loginas' and 'powereduc/site:accessallgroups'.
      *
      * @return stdClass the new course.
      */
@@ -46,8 +46,8 @@ class roles_backup_restore_test extends advanced_testcase {
         $generator->enrol_user($teacher->id, $course->id, 'teacher');
 
         $editingteacherrole = $this->get_role('teacher');
-        role_change_permission($editingteacherrole->id, $context, 'moodle/user:loginas', CAP_ALLOW);
-        role_change_permission($editingteacherrole->id, $context, 'moodle/site:accessallgroups', CAP_ALLOW);
+        role_change_permission($editingteacherrole->id, $context, 'powereduc/user:loginas', CAP_ALLOW);
+        role_change_permission($editingteacherrole->id, $context, 'powereduc/site:accessallgroups', CAP_ALLOW);
 
         return $course;
     }
@@ -153,10 +153,10 @@ class roles_backup_restore_test extends advanced_testcase {
         // Verify.
         $overrides = $this->get_overrides_for_role_on_context('teacher',
                 context_course::instance($newcourseid));
-        $this->assertArrayHasKey('moodle/user:loginas', $overrides);
-        $this->assertEquals(CAP_ALLOW, $overrides['moodle/user:loginas']);
-        $this->assertArrayHasKey('moodle/site:accessallgroups', $overrides);
-        $this->assertEquals(CAP_ALLOW, $overrides['moodle/site:accessallgroups']);
+        $this->assertArrayHasKey('powereduc/user:loginas', $overrides);
+        $this->assertEquals(CAP_ALLOW, $overrides['powereduc/user:loginas']);
+        $this->assertArrayHasKey('powereduc/site:accessallgroups', $overrides);
+        $this->assertEquals(CAP_ALLOW, $overrides['powereduc/site:accessallgroups']);
     }
 
     public function test_restore_role_overrides_as_teacher(): void {
@@ -173,8 +173,8 @@ class roles_backup_restore_test extends advanced_testcase {
         // Verify.
         $overrides = $this->get_overrides_for_role_on_context('teacher',
                 context_course::instance($newcourseid));
-        $this->assertArrayNotHasKey('moodle/user:loginas', $overrides);
-        $this->assertArrayHasKey('moodle/site:accessallgroups', $overrides);
-        $this->assertEquals(CAP_ALLOW, $overrides['moodle/site:accessallgroups']);
+        $this->assertArrayNotHasKey('powereduc/user:loginas', $overrides);
+        $this->assertArrayHasKey('powereduc/site:accessallgroups', $overrides);
+        $this->assertEquals(CAP_ALLOW, $overrides['powereduc/site:accessallgroups']);
     }
 }

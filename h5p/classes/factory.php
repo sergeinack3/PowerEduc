@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * This class is used to decouple the construction of H5P related objects.
  *
  * @package    core_h5p
- * @copyright  2019 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2019 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -38,7 +38,7 @@ use Moodle\H5PValidator as validator;
  * This class is used to decouple the construction of H5P related objects.
  *
  * @package    core_h5p
- * @copyright  2019 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2019 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class factory {
@@ -112,7 +112,7 @@ class factory {
             $language = \core_h5p\framework::get_language();
             $context = \context_system::instance();
 
-            $url = \moodle_url::make_pluginfile_url($context->id, 'core_h5p', '', null,
+            $url = \powereduc_url::make_pluginfile_url($context->id, 'core_h5p', '', null,
                 '', '')->out();
 
             $this->core = new core($this->get_framework(), $fs, $url, $language, true);

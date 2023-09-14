@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,26 +29,26 @@ $id      = required_param('id',PARAM_INT);       // course id
 $user    = required_param('user',PARAM_INT);     // user id
 $mode    = optional_param('mode', "todaylogs", PARAM_ALPHA);
 
-$url = new moodle_url('/course/user.php', array('id'=>$id,'user'=>$user, 'mode'=>$mode));
+$url = new powereduc_url('/course/user.php', array('id'=>$id,'user'=>$user, 'mode'=>$mode));
 
 $course = $DB->get_record('course', array('id'=>$id), '*', MUST_EXIST);
 $user = $DB->get_record("user", array("id"=>$user, 'deleted'=>0), '*', MUST_EXIST);
 
 if ($mode === 'outline' or $mode === 'complete') {
-    $url = new moodle_url('/report/outline/user.php', array('id'=>$user->id, 'course'=>$course->id, 'mode'=>$mode));
+    $url = new powereduc_url('/report/outline/user.php', array('id'=>$user->id, 'course'=>$course->id, 'mode'=>$mode));
     redirect($url);
 }
 if ($mode === 'todaylogs' or $mode === 'alllogs') {
     $logmode = ($mode === 'todaylogs') ? 'today' : 'all';
-    $url = new moodle_url('/report/log/user.php', array('id'=>$user->id, 'course'=>$course->id, 'mode'=>$logmode));
+    $url = new powereduc_url('/report/log/user.php', array('id'=>$user->id, 'course'=>$course->id, 'mode'=>$logmode));
     redirect($url);
 }
 if ($mode === 'stats') {
-    $url = new moodle_url('/report/stats/user.php', array('id'=>$user->id, 'course'=>$course->id));
+    $url = new powereduc_url('/report/stats/user.php', array('id'=>$user->id, 'course'=>$course->id));
     redirect($url);
 }
 if ($mode === 'coursecompletions' or $mode === 'coursecompletion') {
-    $url = new moodle_url('/report/completion/user.php', array('id'=>$user->id, 'course'=>$course->id));
+    $url = new powereduc_url('/report/completion/user.php', array('id'=>$user->id, 'course'=>$course->id));
     redirect($url);
 }
 
@@ -68,7 +68,7 @@ $PAGE->set_url('/course/user.php', array('id'=>$id, 'user'=>$user->id, 'mode'=>$
 
 require_login();
 $PAGE->set_pagelayout('report');
-if (has_capability('moodle/user:viewuseractivitiesreport', $personalcontext) and !is_enrolled($coursecontext)) {
+if (has_capability('powereduc/user:viewuseractivitiesreport', $personalcontext) and !is_enrolled($coursecontext)) {
     // do not require parents to be enrolled in courses ;-)
     $PAGE->set_course($course);
 } else {
@@ -84,22 +84,22 @@ if ($user->deleted) {
 
 // prepare list of allowed modes
 $myreports  = ($course->showreports and $USER->id == $user->id);
-$anyreport  = has_capability('moodle/user:viewuseractivitiesreport', $personalcontext);
+$anyreport  = has_capability('powereduc/user:viewuseractivitiesreport', $personalcontext);
 
 $modes = array();
 
 // Used for grade reports, it represents whether we should be viewing the report as ourselves, or as the targetted user.
 $viewasuser = false;
 
-if (has_capability('moodle/grade:viewall', $coursecontext)) {
+if (has_capability('powereduc/grade:viewall', $coursecontext)) {
     //ok - can view all course grades
     $modes[] = 'grade';
 
-} else if ($course->showgrades and $user->id == $USER->id and has_capability('moodle/grade:view', $coursecontext)) {
+} else if ($course->showgrades and $user->id == $USER->id and has_capability('powereduc/grade:view', $coursecontext)) {
     //ok - can view own grades
     $modes[] = 'grade';
 
-} else if ($course->showgrades and has_capability('moodle/grade:viewall', $personalcontext)) {
+} else if ($course->showgrades and has_capability('powereduc/grade:viewall', $personalcontext)) {
     // ok - can view grades of this user - parent most probably
     $modes[] = 'grade';
     $viewasuser = true;
@@ -111,7 +111,7 @@ if (has_capability('moodle/grade:viewall', $coursecontext)) {
 }
 
 if (empty($modes)) {
-    require_capability('moodle/user:viewuseractivitiesreport', $personalcontext);
+    require_capability('powereduc/user:viewuseractivitiesreport', $personalcontext);
 }
 
 if (!in_array($mode, $modes)) {
@@ -149,12 +149,12 @@ switch ($mode) {
             $coursenode->make_inactive();
 
             if (!preg_match('/^user\d{0,}$/', $activenode->key)) { // No user name found.
-                $userurl = new moodle_url('/user/view.php', array('id' => $user->id, 'course' => $course->id));
+                $userurl = new powereduc_url('/user/view.php', array('id' => $user->id, 'course' => $course->id));
                 // Add the user name.
                 $usernode = $activenode->add(fullname($user), $userurl, navigation_node::TYPE_SETTING);
                 $usernode->add(get_string('grades'));
             } else {
-                $url = new moodle_url('/course/user.php', array('id' => $id, 'user' => $user->id, 'mode' => $mode));
+                $url = new powereduc_url('/course/user.php', array('id' => $id, 'user' => $user->id, 'mode' => $mode));
                 $reportnode = $activenode->add(get_string('pluginname', 'gradereport_user'), $url);
             }
         } else {
@@ -167,12 +167,12 @@ switch ($mode) {
 
             // Check to see if the active node is a user name.
             if (!preg_match('/^user\d{0,}$/', $activenode->key)) { // No user name found.
-                $userurl = new moodle_url('/user/view.php', array('id' => $user->id, 'course' => $course->id));
+                $userurl = new powereduc_url('/user/view.php', array('id' => $user->id, 'course' => $course->id));
                 // Add the user name.
                 $PAGE->navbar->add(fullname($user), $userurl, navigation_node::TYPE_SETTING);
             }
             $PAGE->navbar->add(get_string('report'));
-            $gradeurl = new moodle_url('/course/user.php', array('id' => $id, 'user' => $user->id, 'mode' => $mode));
+            $gradeurl = new powereduc_url('/course/user.php', array('id' => $id, 'user' => $user->id, 'mode' => $mode));
             // Add the 'grades' node to the navbar.
             $navbar = $PAGE->navbar->add(get_string('grades', 'grades'), $gradeurl, navigation_node::TYPE_SETTING);
         }
@@ -181,13 +181,13 @@ switch ($mode) {
 
         if ($course->id !== SITEID) {
             $userheading = array(
-                'heading' => fullname($user, has_capability('moodle/site:viewfullnames', $PAGE->context)),
+                'heading' => fullname($user, has_capability('powereduc/site:viewfullnames', $PAGE->context)),
                 'user' => $user,
                 'usercontext' => $personalcontext,
             );
             echo $OUTPUT->context_header($userheading, 2);
 
-            echo $OUTPUT->heading(get_string('grades', 'moodle'), 2, 'main mt-4 mb-4');
+            echo $OUTPUT->heading(get_string('grades', 'powereduc'), 2, 'main mt-4 mb-4');
         }
 
         if (empty($CFG->grade_profilereport) or !file_exists($CFG->dirroot.'/grade/report/'.$CFG->grade_profilereport.'/lib.php')) {

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Postgres advisory locking factory.
@@ -49,7 +49,7 @@ class postgres_lock_factory implements lock_factory {
     /** @var array $lockidcache - static cache for string -> int conversions required for pg advisory locks. */
     protected static $lockidcache = array();
 
-    /** @var \moodle_database $db Hold a reference to the global $DB */
+    /** @var \powereduc_database $db Hold a reference to the global $DB */
     protected $db;
 
     /** @var string $type Used to prefix lock keys */
@@ -120,7 +120,7 @@ class postgres_lock_factory implements lock_factory {
     /**
      * Multiple locks for the same resource can NOT be held by a single process.
      *
-     * @deprecated since Moodle 3.10.
+     * @deprecated since PowerEduc 3.10.
      * @return boolean - false.
      */
     public function supports_recursion() {
@@ -135,7 +135,7 @@ class postgres_lock_factory implements lock_factory {
      *
      * @param string $key
      * @return int
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     protected function get_index_from_key($key) {
 
@@ -206,7 +206,7 @@ class postgres_lock_factory implements lock_factory {
     /**
      * Extend a lock that was previously obtained with @lock.
      *
-     * @deprecated since Moodle 3.10.
+     * @deprecated since PowerEduc 3.10.
      * @param lock $lock - a lock obtained from this factory.
      * @param int $maxlifetime - the new lifetime for the lock (in seconds).
      * @return boolean - true if the lock was extended.

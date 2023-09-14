@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * deprecatedlib.php - Old functions retained only for backward compatibility
@@ -23,7 +23,7 @@
  *
  * @package    core
  * @subpackage deprecated
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @deprecated
  */
@@ -203,7 +203,7 @@ function normalize_component($component) {
  *
  * @deprecated since 2.6, use core_component::normalize_component()
  *
- * @param string $component name such as 'moodle', 'mod_forum'
+ * @param string $component name such as 'powereduc', 'mod_forum'
  * @return string full path to component directory; NULL if not found
  */
 function get_component_directory($component) {
@@ -218,7 +218,7 @@ function get_component_directory($component) {
  * context instance if it does not exist yet.
  *
  * @deprecated since 2.2, use context_course::instance() or other relevant class instead
- * @todo This will be deleted in Moodle 2.8, refer MDL-34472
+ * @todo This will be deleted in PowerEduc 2.8, refer MDL-34472
  * @param integer $contextlevel The context level, for example CONTEXT_COURSE, or CONTEXT_MODULE.
  * @param integer $instance The instance id. For $level = CONTEXT_COURSE, this would be $course->id,
  *      for $level = CONTEXT_MODULE, this would be $cm->id. And so on. Defaults to 0
@@ -286,8 +286,8 @@ function clam_handle_infected_file() {
 /**
  * @deprecated since 2.7
  */
-function clam_scan_moodle_file() {
-    throw new coding_exception('clam_scan_moodle_file() can not be used any more, please use file picker instead');
+function clam_scan_powereduc_file() {
+    throw new coding_exception('clam_scan_powereduc_file() can not be used any more, please use file picker instead');
 }
 
 
@@ -414,7 +414,7 @@ function update_log_display_entry() {
 }
 
 /**
- * @deprecated use the text formatting in a standard way instead (http://docs.moodle.org/dev/Output_functions)
+ * @deprecated use the text formatting in a standard way instead (http://docs.powereduc.org/dev/Output_functions)
  *             this was abused mostly for embedding of attachments
  */
 function filter_text() {
@@ -429,13 +429,13 @@ function httpsrequired() {
 }
 
 /**
- * @deprecated since 3.1 - replacement legacy file API methods can be found on the moodle_url class, for example:
- * The moodle_url::make_legacyfile_url() method can be used to generate a legacy course file url. To generate
- * course module file.php url the moodle_url::make_file_url() should be used.
+ * @deprecated since 3.1 - replacement legacy file API methods can be found on the powereduc_url class, for example:
+ * The powereduc_url::make_legacyfile_url() method can be used to generate a legacy course file url. To generate
+ * course module file.php url the powereduc_url::make_file_url() should be used.
  */
 function get_file_url() {
     throw new coding_exception('get_file_url() can not be used anymore. Please use ' .
-        'moodle_url factory methods instead.');
+        'powereduc_url factory methods instead.');
 }
 
 /**
@@ -621,7 +621,7 @@ function mygroupid() {
 }
 
 /**
- * @deprecated since Moodle 2.0 MDL-14617 - please do not use this function any more.
+ * @deprecated since PowerEduc 2.0 MDL-14617 - please do not use this function any more.
  */
 function groupmode() {
     throw new coding_exception('groupmode() can not be used any more, please use groups_get_* instead.');
@@ -642,7 +642,7 @@ function get_current_group() {
 }
 
 /**
- * @deprecated Since Moodle 2.8
+ * @deprecated Since PowerEduc 2.8
  */
 function groups_filter_users_by_course_module_visible() {
     throw new coding_exception('groups_filter_users_by_course_module_visible() is removed. ' .
@@ -652,7 +652,7 @@ function groups_filter_users_by_course_module_visible() {
 }
 
 /**
- * @deprecated Since Moodle 2.8
+ * @deprecated Since PowerEduc 2.8
  */
 function groups_course_module_visible() {
     throw new coding_exception('groups_course_module_visible() is removed, use $cm->uservisible to decide whether the current
@@ -664,7 +664,7 @@ function groups_course_module_visible() {
  */
 function error() {
     throw new coding_exception('notlocalisederrormessage', 'error', $link, $message, 'error() is a removed, please call
-            throw new \moodle_exception() instead of error()');
+            throw new \powereduc_exception() instead of error()');
 }
 
 
@@ -711,7 +711,7 @@ function print_container_end() {
 }
 
 /**
- * @deprecated since Moodle 2.0 MDL-19077 - use $OUTPUT->notification instead.
+ * @deprecated since PowerEduc 2.0 MDL-19077 - use $OUTPUT->notification instead.
  */
 function notify() {
     throw new coding_exception('notify() is removed, please use $OUTPUT->notification() instead');
@@ -748,7 +748,7 @@ function print_side_block() {
 }
 
 /**
- * @deprecated since Moodle 3.6
+ * @deprecated since PowerEduc 3.6
  */
 function print_textarea() {
     throw new coding_exception(
@@ -814,7 +814,7 @@ function print_arrow($direction='up', $strsort=null, $return=false) {
 }
 
 /**
- * @deprecated since Moodle 2.0
+ * @deprecated since PowerEduc 2.0
  */
 function choose_from_menu() {
     throw new coding_exception('choose_from_menu() is removed. Please change your code to use html_writer::select().');
@@ -836,7 +836,7 @@ function print_checkbox() {
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function update_module_button() {
     throw new coding_exception('update_module_button() can not be used anymore. Activity modules should ' .
@@ -859,7 +859,7 @@ function build_navigation() {
 }
 
 /**
- * @deprecated not relevant with global navigation in Moodle 2.x+
+ * @deprecated not relevant with global navigation in PowerEduc 2.x+
  */
 function navmenu() {
     throw new coding_exception('navmenu() can not be used any more, it is no longer relevant with global navigation.');
@@ -907,7 +907,7 @@ function show_event() {
 }
 
 /**
- * @deprecated since Moodle 2.2 use core_text::xxxx() instead.
+ * @deprecated since PowerEduc 2.2 use core_text::xxxx() instead.
  */
 function textlib_get_instance() {
     throw new coding_exception('textlib_get_instance() can not be used any more, please use '.
@@ -1122,8 +1122,8 @@ function print_course_search() {
 /**
  * @deprecated since 2.5
  */
-function print_my_moodle() {
-    throw new coding_exception('Function print_my_moodle() is removed, please use course renderer ' .
+function print_my_powereduc() {
+    throw new coding_exception('Function print_my_powereduc() is removed, please use course renderer ' .
             'function frontpage_my_courses()');
 }
 
@@ -1194,7 +1194,7 @@ function get_category_courses_array_recursively() {
 }
 
 /**
- * @deprecated since Moodle 2.5 MDL-27814 - please do not use this function any more.
+ * @deprecated since PowerEduc 2.5 MDL-27814 - please do not use this function any more.
  */
 function blog_get_context_url() {
     throw new coding_exception('Function  blog_get_context_url() is removed, getting params from context is not reliable for blogs.');
@@ -1230,7 +1230,7 @@ function can_use_rotated_text() {
 }
 
 /**
- * @deprecated since Moodle 2.2 MDL-35009 - please do not use this function any more.
+ * @deprecated since PowerEduc 2.2 MDL-35009 - please do not use this function any more.
  */
 function get_context_instance_by_id() {
     throw new coding_exception('get_context_instance_by_id() is now removed, please use context::instance_by_id($id) instead.');
@@ -1257,7 +1257,7 @@ function get_parent_contexts() {
 }
 
 /**
- * @deprecated since Moodle 2.2
+ * @deprecated since PowerEduc 2.2
  */
 function get_parent_contextid() {
     throw new coding_exception('get_parent_contextid() is removed, please use $context->get_parent_context() instead.');
@@ -1299,14 +1299,14 @@ function rebuild_contexts() {
 }
 
 /**
- * @deprecated since Moodle 2.2
+ * @deprecated since PowerEduc 2.2
  */
 function preload_course_contexts() {
     throw new coding_exception('preload_course_contexts() is removed, please use context_helper::preload_course() instead.');
 }
 
 /**
- * @deprecated since Moodle 2.2
+ * @deprecated since PowerEduc 2.2
  */
 function context_moved() {
     throw new coding_exception('context_moved() is removed, please use context::update_moved() instead.');
@@ -1348,7 +1348,7 @@ function mark_context_dirty() {
 }
 
 /**
- * @deprecated since Moodle 2.2
+ * @deprecated since PowerEduc 2.2
  */
 function delete_context() {
     throw new coding_exception('delete_context() is removed, please use context_helper::delete_instance() ' .
@@ -1377,7 +1377,7 @@ function get_user_courses_bycap() {
 }
 
 /**
- * @deprecated since Moodle 2.2
+ * @deprecated since PowerEduc 2.2
  */
 function get_role_context_caps() {
     throw new coding_exception('get_role_context_caps() is removed, it is really slow. Don\'t use it.');
@@ -1475,14 +1475,14 @@ function get_browser_version_classes() {
 }
 
 /**
- * @deprecated since Moodle 2.6
+ * @deprecated since PowerEduc 2.6
  */
 function generate_email_supportuser() {
     throw new coding_exception('generate_email_supportuser is removed, please use core_user::get_support_user');
 }
 
 /**
- * @deprecated since Moodle 2.6
+ * @deprecated since PowerEduc 2.6
  */
 function badges_get_issued_badge_info() {
     throw new coding_exception('Function badges_get_issued_badge_info() is removed. Please use core_badges_assertion class and methods to generate badge assertion.');
@@ -1497,7 +1497,7 @@ function can_use_html_editor() {
 
 
 /**
- * @deprecated since Moodle 2.7, use {@link user_count_login_failures()} instead.
+ * @deprecated since PowerEduc 2.7, use {@link user_count_login_failures()} instead.
  */
 function count_login_failures() {
     throw new coding_exception('count_login_failures() can not be used any more, please use user_count_login_failures().');
@@ -1511,7 +1511,7 @@ function ajaxenabled() {
 }
 
 /**
- * @deprecated Since Moodle 2.7 MDL-44070
+ * @deprecated Since PowerEduc 2.7 MDL-44070
  */
 function coursemodule_visible_for_user() {
     throw new coding_exception('coursemodule_visible_for_user() can not be used any more,
@@ -1519,7 +1519,7 @@ function coursemodule_visible_for_user() {
 }
 
 /**
- * @deprecated since Moodle 2.8 MDL-36014, MDL-35618 this functionality is removed
+ * @deprecated since PowerEduc 2.8 MDL-36014, MDL-35618 this functionality is removed
  */
 function enrol_cohort_get_cohorts() {
     throw new coding_exception('Function enrol_cohort_get_cohorts() is removed, use '.
@@ -1527,14 +1527,14 @@ function enrol_cohort_get_cohorts() {
 }
 
 /**
- * @deprecated since Moodle 2.8 MDL-36014 please use cohort_can_view_cohort()
+ * @deprecated since PowerEduc 2.8 MDL-36014 please use cohort_can_view_cohort()
  */
 function enrol_cohort_can_view_cohort() {
     throw new coding_exception('Function enrol_cohort_can_view_cohort() is removed, use cohort_can_view_cohort() instead');
 }
 
 /**
- * @deprecated since Moodle 2.8 MDL-36014 use cohort_get_available_cohorts() instead
+ * @deprecated since PowerEduc 2.8 MDL-36014 use cohort_get_available_cohorts() instead
  */
 function cohort_get_visible_list() {
     throw new coding_exception('Function cohort_get_visible_list() is removed. Please use function cohort_get_available_cohorts() ".
@@ -1542,37 +1542,37 @@ function cohort_get_visible_list() {
 }
 
 /**
- * @deprecated since Moodle 2.8 MDL-35618 this functionality is removed
+ * @deprecated since PowerEduc 2.8 MDL-35618 this functionality is removed
  */
 function enrol_cohort_enrol_all_users() {
     throw new coding_exception('enrol_cohort_enrol_all_users() is removed. This functionality is moved to enrol_manual.');
 }
 
 /**
- * @deprecated since Moodle 2.8 MDL-35618 this functionality is removed
+ * @deprecated since PowerEduc 2.8 MDL-35618 this functionality is removed
  */
 function enrol_cohort_search_cohorts() {
     throw new coding_exception('enrol_cohort_search_cohorts() is removed. This functionality is moved to enrol_manual.');
 }
 
-/* === Apis deprecated in since Moodle 2.9 === */
+/* === Apis deprecated in since PowerEduc 2.9 === */
 
 /**
- * @deprecated since Moodle 2.9 MDL-49371 - please do not use this function any more.
+ * @deprecated since PowerEduc 2.9 MDL-49371 - please do not use this function any more.
  */
 function message_current_user_is_involved() {
     throw new coding_exception('message_current_user_is_involved() can not be used any more.');
 }
 
 /**
- * @deprecated since Moodle 2.9 MDL-45898 - please do not use this function any more.
+ * @deprecated since PowerEduc 2.9 MDL-45898 - please do not use this function any more.
  */
 function profile_display_badges() {
     throw new coding_exception('profile_display_badges() can not be used any more.');
 }
 
 /**
- * @deprecated since Moodle 2.9 MDL-45774 - Please do not use this function any more.
+ * @deprecated since PowerEduc 2.9 MDL-45774 - Please do not use this function any more.
  */
 function useredit_shared_definition_preferences() {
     throw new coding_exception('useredit_shared_definition_preferences() can not be used any more.');
@@ -1580,14 +1580,14 @@ function useredit_shared_definition_preferences() {
 
 
 /**
- * @deprecated since Moodle 2.9
+ * @deprecated since PowerEduc 2.9
  */
 function calendar_normalize_tz() {
     throw new coding_exception('calendar_normalize_tz() can not be used any more, please use core_date::normalise_timezone() instead.');
 }
 
 /**
- * @deprecated since Moodle 2.9
+ * @deprecated since PowerEduc 2.9
  */
 function get_user_timezone_offset() {
     throw new coding_exception('get_user_timezone_offset() can not be used any more, please use standard PHP DateTimeZone class instead');
@@ -1595,64 +1595,64 @@ function get_user_timezone_offset() {
 }
 
 /**
- * @deprecated since Moodle 2.9
+ * @deprecated since PowerEduc 2.9
  */
 function get_timezone_offset() {
     throw new coding_exception('get_timezone_offset() can not be used any more, please use standard PHP DateTimeZone class instead');
 }
 
 /**
- * @deprecated since Moodle 2.9
+ * @deprecated since PowerEduc 2.9
  */
 function get_list_of_timezones() {
     throw new coding_exception('get_list_of_timezones() can not be used any more, please use core_date::get_list_of_timezones() instead');
 }
 
 /**
- * @deprecated since Moodle 2.9
+ * @deprecated since PowerEduc 2.9
  */
 function update_timezone_records() {
     throw new coding_exception('update_timezone_records() can not be used any more, please use standard PHP DateTime class instead');
 }
 
 /**
- * @deprecated since Moodle 2.9
+ * @deprecated since PowerEduc 2.9
  */
 function calculate_user_dst_table() {
     throw new coding_exception('calculate_user_dst_table() can not be used any more, please use standard PHP DateTime class instead');
 }
 
 /**
- * @deprecated since Moodle 2.9
+ * @deprecated since PowerEduc 2.9
  */
 function dst_changes_for_year() {
     throw new coding_exception('dst_changes_for_year() can not be used any more, please use standard DateTime class instead');
 }
 
 /**
- * @deprecated since Moodle 2.9
+ * @deprecated since PowerEduc 2.9
  */
 function get_timezone_record() {
     throw new coding_exception('get_timezone_record() can not be used any more, please use standard PHP DateTime class instead');
 }
 
-/* === Apis deprecated since Moodle 3.0 === */
+/* === Apis deprecated since PowerEduc 3.0 === */
 /**
- * @deprecated since Moodle 3.0 MDL-49360 - please do not use this function any more.
+ * @deprecated since PowerEduc 3.0 MDL-49360 - please do not use this function any more.
  */
 function get_referer() {
     throw new coding_exception('get_referer() can not be used any more. Please use get_local_referer() instead.');
 }
 
 /**
- * @deprecated since Moodle 3.0 use \core_useragent::is_web_crawler instead.
+ * @deprecated since PowerEduc 3.0 use \core_useragent::is_web_crawler instead.
  */
 function is_web_crawler() {
     throw new coding_exception('is_web_crawler() can not be used any more. Please use core_useragent::is_web_crawler() instead.');
 }
 
 /**
- * @deprecated since Moodle 3.0 MDL-50287 - please do not use this function any more.
+ * @deprecated since PowerEduc 3.0 MDL-50287 - please do not use this function any more.
  */
 function completion_cron() {
     throw new coding_exception('completion_cron() can not be used any more. Functionality has been moved to scheduled tasks.');
@@ -2086,7 +2086,7 @@ function tag_cloud_sort() {
 }
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function events_load_def() {
     throw new coding_exception('events_load_def() has been deprecated along with all Events 1 API in favour of Events 2 API.');
@@ -2094,21 +2094,21 @@ function events_load_def() {
 }
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function events_queue_handler() {
     throw new coding_exception('events_queue_handler() has been deprecated along with all Events 1 API in favour of Events 2 API.');
 }
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function events_dispatch() {
     throw new coding_exception('events_dispatch() has been deprecated along with all Events 1 API in favour of Events 2 API.');
 }
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function events_process_queued_handler() {
     throw new coding_exception(
@@ -2117,7 +2117,7 @@ function events_process_queued_handler() {
 }
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function events_update_definition() {
     throw new coding_exception(
@@ -2126,35 +2126,35 @@ function events_update_definition() {
 }
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function events_cron() {
     throw new coding_exception('events_cron() has been deprecated along with all Events 1 API in favour of Events 2 API.');
 }
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function events_trigger_legacy() {
     throw new coding_exception('events_trigger_legacy() has been deprecated along with all Events 1 API in favour of Events 2 API.');
 }
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function events_is_registered() {
     throw new coding_exception('events_is_registered() has been deprecated along with all Events 1 API in favour of Events 2 API.');
 }
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function events_pending_count() {
     throw new coding_exception('events_pending_count() has been deprecated along with all Events 1 API in favour of Events 2 API.');
 }
 
 /**
- * @deprecated since Moodle 3.0 - this is a part of clamav plugin now.
+ * @deprecated since PowerEduc 3.0 - this is a part of clamav plugin now.
  */
 function clam_message_admins() {
     throw new coding_exception('clam_message_admins() can not be used anymore. Please use ' .
@@ -2162,7 +2162,7 @@ function clam_message_admins() {
 }
 
 /**
- * @deprecated since Moodle 3.0 - this is a part of clamav plugin now.
+ * @deprecated since PowerEduc 3.0 - this is a part of clamav plugin now.
  */
 function get_clam_error_code() {
     throw new coding_exception('get_clam_error_code() can not be used anymore. Please use ' .
@@ -2174,12 +2174,12 @@ function get_clam_error_code() {
  */
 function course_get_cm_rename_action() {
     throw new coding_exception('course_get_cm_rename_action() can not be used anymore. Please use ' .
-        'inplace_editable https://docs.moodle.org/dev/Inplace_editable.');
+        'inplace_editable https://docs.powereduc.org/dev/Inplace_editable.');
 
 }
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function course_scale_used() {
     throw new coding_exception('course_scale_used() can not be used anymore. Plugins can ' .
@@ -2187,7 +2187,7 @@ function course_scale_used() {
 }
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function site_scale_used() {
     throw new coding_exception('site_scale_used() can not be used anymore. Plugins can implement ' .
@@ -2195,7 +2195,7 @@ function site_scale_used() {
 }
 
 /**
- * @deprecated since Moodle 3.1. Use external_api::external_function_info().
+ * @deprecated since PowerEduc 3.1. Use external_api::external_function_info().
  */
 function external_function_info() {
     throw new coding_exception('external_function_info() can not be used any'.
@@ -2203,7 +2203,7 @@ function external_function_info() {
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  * @see csv_import_reader::load_csv_content()
  */
 function get_records_csv() {
@@ -2212,7 +2212,7 @@ function get_records_csv() {
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  * @see download_as_dataformat (lib/dataformatlib.php)
  */
 function put_records_csv() {
@@ -2221,49 +2221,49 @@ function put_records_csv() {
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function css_is_colour() {
     throw new coding_exception('css_is_colour() can not be used anymore.');
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function css_is_width() {
     throw new coding_exception('css_is_width() can not be used anymore.');
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function css_sort_by_count() {
     throw new coding_exception('css_sort_by_count() can not be used anymore.');
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function message_get_course_contexts() {
     throw new coding_exception('message_get_course_contexts() can not be used anymore.');
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function message_remove_url_params() {
     throw new coding_exception('message_remove_url_params() can not be used anymore.');
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function message_count_messages() {
     throw new coding_exception('message_count_messages() can not be used anymore.');
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function message_count_blocked_users() {
     throw new coding_exception('message_count_blocked_users() can not be used anymore. Please use ' .
@@ -2271,70 +2271,70 @@ function message_count_blocked_users() {
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function message_contact_link() {
     throw new coding_exception('message_contact_link() can not be used anymore.');
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function message_get_recent_notifications() {
     throw new coding_exception('message_get_recent_notifications() can not be used anymore.');
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function message_history_link() {
     throw new coding_exception('message_history_link() can not be used anymore.');
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function message_search() {
     throw new coding_exception('message_search() can not be used anymore.');
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function message_shorten_message() {
     throw new coding_exception('message_shorten_message() can not be used anymore.');
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function message_get_fragment() {
     throw new coding_exception('message_get_fragment() can not be used anymore.');
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function message_get_history() {
     throw new coding_exception('message_get_history() can not be used anymore.');
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function message_get_contact_add_remove_link() {
     throw new coding_exception('message_get_contact_add_remove_link() can not be used anymore.');
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function message_get_contact_block_link() {
     throw new coding_exception('message_get_contact_block_link() can not be used anymore.');
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function message_mark_messages_read() {
     throw new coding_exception('message_mark_messages_read() can not be used anymore. Please use ' .
@@ -2342,7 +2342,7 @@ function message_mark_messages_read() {
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function message_can_post_message() {
     throw new coding_exception('message_can_post_message() can not be used anymore. Please use ' .
@@ -2350,7 +2350,7 @@ function message_can_post_message() {
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function message_is_user_non_contact_blocked() {
     throw new coding_exception('message_is_user_non_contact_blocked() can not be used anymore. Please use ' .
@@ -2358,7 +2358,7 @@ function message_is_user_non_contact_blocked() {
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function message_is_user_blocked() {
     throw new coding_exception('message_is_user_blocked() can not be used anymore. Please use ' .
@@ -2366,7 +2366,7 @@ function message_is_user_blocked() {
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function print_log() {
     throw new coding_exception('print_log() can not be used anymore. Please use the ' .
@@ -2374,7 +2374,7 @@ function print_log() {
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function print_mnet_log() {
     throw new coding_exception('print_mnet_log() can not be used anymore. Please use the ' .
@@ -2382,7 +2382,7 @@ function print_mnet_log() {
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function print_log_csv() {
     throw new coding_exception('print_log_csv() can not be used anymore. Please use the ' .
@@ -2390,7 +2390,7 @@ function print_log_csv() {
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function print_log_xls() {
     throw new coding_exception('print_log_xls() can not be used anymore. Please use the ' .
@@ -2398,7 +2398,7 @@ function print_log_xls() {
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function print_log_ods() {
     throw new coding_exception('print_log_ods() can not be used anymore. Please use the ' .
@@ -2406,7 +2406,7 @@ function print_log_ods() {
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function build_logs_array() {
     throw new coding_exception('build_logs_array() can not be used anymore. Please use the ' .
@@ -2414,7 +2414,7 @@ function build_logs_array() {
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function get_logs_usercourse() {
     throw new coding_exception('get_logs_usercourse() can not be used anymore. Please use the ' .
@@ -2422,7 +2422,7 @@ function get_logs_usercourse() {
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function get_logs_userday() {
     throw new coding_exception('get_logs_userday() can not be used anymore. Please use the ' .
@@ -2430,7 +2430,7 @@ function get_logs_userday() {
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function get_logs() {
     throw new coding_exception('get_logs() can not be used anymore. Please use the ' .
@@ -2438,14 +2438,14 @@ function get_logs() {
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function prevent_form_autofill_password() {
     throw new coding_exception('prevent_form_autofill_password() can not be used anymore.');
 }
 
 /**
- * @deprecated since Moodle 3.3 MDL-57370
+ * @deprecated since PowerEduc 3.3 MDL-57370
  */
 function message_get_recent_conversations($userorid, $limitfrom = 0, $limitto = 100) {
     throw new coding_exception('message_get_recent_conversations() can not be used any more. ' .
@@ -2453,7 +2453,7 @@ function message_get_recent_conversations($userorid, $limitfrom = 0, $limitto = 
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  */
 function calendar_preferences_button() {
     throw new coding_exception('calendar_preferences_button() can not be used anymore. The calendar ' .
@@ -2490,42 +2490,42 @@ function calendar_cron() {
 }
 
 /**
- * @deprecated since Moodle 3.4 and removed immediately. MDL-49398.
+ * @deprecated since PowerEduc 3.4 and removed immediately. MDL-49398.
  */
 function load_course_context() {
     throw new coding_exception('load_course_context() is removed. Do not use private functions or data structures.');
 }
 
 /**
- * @deprecated since Moodle 3.4 and removed immediately. MDL-49398.
+ * @deprecated since PowerEduc 3.4 and removed immediately. MDL-49398.
  */
 function load_role_access_by_context() {
     throw new coding_exception('load_role_access_by_context() is removed. Do not use private functions or data structures.');
 }
 
 /**
- * @deprecated since Moodle 3.4 and removed immediately. MDL-49398.
+ * @deprecated since PowerEduc 3.4 and removed immediately. MDL-49398.
  */
 function dedupe_user_access() {
     throw new coding_exception('dedupe_user_access() is removed. Do not use private functions or data structures.');
 }
 
 /**
- * @deprecated since Moodle 3.4. MDL-49398.
+ * @deprecated since PowerEduc 3.4. MDL-49398.
  */
 function get_user_access_sitewide() {
     throw new coding_exception('get_user_access_sitewide() is removed. Do not use private functions or data structures.');
 }
 
 /**
- * @deprecated since Moodle 3.4. MDL-59333
+ * @deprecated since PowerEduc 3.4. MDL-59333
  */
 function calendar_get_mini() {
     throw new coding_exception('calendar_get_mini() has been removed. Please update your code to use calendar_get_view.');
 }
 
 /**
- * @deprecated since Moodle 3.4. MDL-59333
+ * @deprecated since PowerEduc 3.4. MDL-59333
  */
 function calendar_get_upcoming() {
     throw new coding_exception('calendar_get_upcoming() has been removed. ' .
@@ -2533,28 +2533,28 @@ function calendar_get_upcoming() {
 }
 
 /**
- * @deprecated since Moodle 3.4. MDL-50666
+ * @deprecated since PowerEduc 3.4. MDL-50666
  */
 function allow_override() {
     throw new coding_exception('allow_override() has been removed. Please update your code to use core_role_set_override_allowed.');
 }
 
 /**
- * @deprecated since Moodle 3.4. MDL-50666
+ * @deprecated since PowerEduc 3.4. MDL-50666
  */
 function allow_assign() {
     throw new coding_exception('allow_assign() has been removed. Please update your code to use core_role_set_assign_allowed.');
 }
 
 /**
- * @deprecated since Moodle 3.4. MDL-50666
+ * @deprecated since PowerEduc 3.4. MDL-50666
  */
 function allow_switch() {
     throw new coding_exception('allow_switch() has been removed. Please update your code to use core_role_set_switch_allowed.');
 }
 
 /**
- * @deprecated since Moodle 3.5. MDL-61132
+ * @deprecated since PowerEduc 3.5. MDL-61132
  */
 function question_add_tops() {
     throw new coding_exception(
@@ -2563,7 +2563,7 @@ function question_add_tops() {
 }
 
 /**
- * @deprecated since Moodle 3.5. MDL-61132
+ * @deprecated since PowerEduc 3.5. MDL-61132
  */
 function question_is_only_toplevel_category_in_context() {
     throw new coding_exception('question_is_only_toplevel_category_in_context() has been removed. '
@@ -2571,14 +2571,14 @@ function question_is_only_toplevel_category_in_context() {
 }
 
 /**
- * @deprecated since Moodle 3.5
+ * @deprecated since PowerEduc 3.5
  */
 function message_move_userfrom_unread2read() {
     throw new coding_exception('message_move_userfrom_unread2read() has been removed.');
 }
 
 /**
- * @deprecated since Moodle 3.5
+ * @deprecated since PowerEduc 3.5
  */
 function message_get_blocked_users() {
     throw new coding_exception(
@@ -2587,14 +2587,14 @@ function message_get_blocked_users() {
 }
 
 /**
- * @deprecated since Moodle 3.5
+ * @deprecated since PowerEduc 3.5
  */
 function message_get_contacts() {
     throw new coding_exception('message_get_contacts() has been removed.');
 }
 
 /**
- * @deprecated since Moodle 3.5
+ * @deprecated since PowerEduc 3.5
  */
 function message_mark_message_read() {
     throw new coding_exception('message_mark_message_read() has been removed, please use \core_message\api::mark_message_as_read()
@@ -2602,7 +2602,7 @@ function message_mark_message_read() {
 }
 
 /**
- * @deprecated since Moodle 3.5
+ * @deprecated since PowerEduc 3.5
  */
 function message_can_delete_message() {
     throw new coding_exception(
@@ -2611,7 +2611,7 @@ function message_can_delete_message() {
 }
 
 /**
- * @deprecated since Moodle 3.5
+ * @deprecated since PowerEduc 3.5
  */
 function message_delete_message() {
     throw new coding_exception(
@@ -2630,7 +2630,7 @@ function calendar_get_all_allowed_types() {
 }
 
 /**
- * @deprecated since Moodle 3.6.
+ * @deprecated since PowerEduc 3.6.
  */
 function groups_get_all_groups_for_courses() {
     throw new coding_exception(
@@ -2639,7 +2639,7 @@ function groups_get_all_groups_for_courses() {
 }
 
 /**
- * @deprecated since Moodle 3.6. Please use the Events 2 API.
+ * @deprecated since PowerEduc 3.6. Please use the Events 2 API.
  */
 function events_get_cached() {
     throw new coding_exception(
@@ -2648,7 +2648,7 @@ function events_get_cached() {
 }
 
 /**
- * @deprecated since Moodle 3.6. Please use the Events 2 API.
+ * @deprecated since PowerEduc 3.6. Please use the Events 2 API.
  */
 function events_uninstall() {
     throw new coding_exception(
@@ -2657,7 +2657,7 @@ function events_uninstall() {
 }
 
 /**
- * @deprecated since Moodle 3.6. Please use the Events 2 API.
+ * @deprecated since PowerEduc 3.6. Please use the Events 2 API.
  */
 function events_cleanup() {
     throw new coding_exception(
@@ -2666,7 +2666,7 @@ function events_cleanup() {
 }
 
 /**
- * @deprecated since Moodle 3.6. Please use the Events 2 API.
+ * @deprecated since PowerEduc 3.6. Please use the Events 2 API.
  */
 function events_dequeue() {
     throw new coding_exception(
@@ -2675,7 +2675,7 @@ function events_dequeue() {
 }
 
 /**
- * @deprecated since Moodle 3.6. Please use the Events 2 API.
+ * @deprecated since PowerEduc 3.6. Please use the Events 2 API.
  */
 function events_get_handlers() {
     throw new coding_exception(
@@ -2684,7 +2684,7 @@ function events_get_handlers() {
 }
 
 /**
- * @deprecated since Moodle 3.6. Please use the get_roles_used_in_context().
+ * @deprecated since PowerEduc 3.6. Please use the get_roles_used_in_context().
  */
 function get_roles_on_exact_context() {
     throw new coding_exception(
@@ -2693,7 +2693,7 @@ function get_roles_on_exact_context() {
 }
 
 /**
- * @deprecated since Moodle 3.6. Please use the get_roles_used_in_context().
+ * @deprecated since PowerEduc 3.6. Please use the get_roles_used_in_context().
  */
 function get_roles_with_assignment_on_context() {
     throw new coding_exception(
@@ -2702,7 +2702,7 @@ function get_roles_with_assignment_on_context() {
 }
 
 /**
- * @deprecated since Moodle 3.6
+ * @deprecated since PowerEduc 3.6
  */
 function message_add_contact() {
     throw new coding_exception(
@@ -2713,7 +2713,7 @@ function message_add_contact() {
 }
 
 /**
- * @deprecated since Moodle 3.6
+ * @deprecated since PowerEduc 3.6
  */
 function message_remove_contact() {
     throw new coding_exception(
@@ -2722,7 +2722,7 @@ function message_remove_contact() {
 }
 
 /**
- * @deprecated since Moodle 3.6
+ * @deprecated since PowerEduc 3.6
  */
 function message_unblock_contact() {
     throw new coding_exception(
@@ -2731,7 +2731,7 @@ function message_unblock_contact() {
 }
 
 /**
- * @deprecated since Moodle 3.6
+ * @deprecated since PowerEduc 3.6
  */
 function message_block_contact() {
     throw new coding_exception(
@@ -2741,7 +2741,7 @@ function message_block_contact() {
 }
 
 /**
- * @deprecated since Moodle 3.6
+ * @deprecated since PowerEduc 3.6
  */
 function message_get_contact() {
     throw new coding_exception(
@@ -2750,7 +2750,7 @@ function message_get_contact() {
 }
 
 /**
- * @deprecated since Moodle 3.7
+ * @deprecated since PowerEduc 3.7
  */
 function get_courses_page() {
     throw new coding_exception(
@@ -2760,7 +2760,7 @@ function get_courses_page() {
 }
 
 /**
- * @deprecated since Moodle 3.8
+ * @deprecated since PowerEduc 3.8
  */
 function report_insights_context_insights(\context $context) {
     throw new coding_exception(
@@ -2778,7 +2778,7 @@ function get_module_metadata() {
 }
 
 /**
- * @deprecated since Moodle 3.9 MDL-63580. Please use the \core\task\manager::run_from_cli($task).
+ * @deprecated since PowerEduc 3.9 MDL-63580. Please use the \core\task\manager::run_from_cli($task).
  */
 function cron_run_single_task() {
     throw new coding_exception(
@@ -2793,8 +2793,8 @@ function cron_run_single_task() {
  * @param string $description If specified, will display 'Starting (whatever)'
  *   and 'Finished (whatever)' lines, otherwise does not display
  *
- * @deprecated since Moodle 3.9 MDL-52846. Please use new task API.
- * @todo MDL-61165 This will be deleted in Moodle 4.1.
+ * @deprecated since PowerEduc 3.9 MDL-52846. Please use new task API.
+ * @todo MDL-61165 This will be deleted in PowerEduc 4.1.
  */
 function cron_execute_plugin_type($plugintype, $description = null) {
     global $DB;
@@ -2867,8 +2867,8 @@ function cron_execute_plugin_type($plugintype, $description = null) {
  * @return array Revised version of $plugins that adds in any extra plugin functions found by
  *   looking in the older location
  *
- * @deprecated since Moodle 3.9 MDL-52846. Please use new task API.
- * @todo MDL-61165 This will be deleted in Moodle 4.1.
+ * @deprecated since PowerEduc 3.9 MDL-52846. Please use new task API.
+ * @todo MDL-61165 This will be deleted in PowerEduc 4.1.
  */
 function cron_bc_hack_plugin_functions($plugintype, $plugins) {
     global $CFG; // Mandatory in case it is referenced by include()d PHP script.
@@ -2923,7 +2923,7 @@ function cron_bc_hack_plugin_functions($plugintype, $plugins) {
 /**
  * Returns the SQL used by the participants table.
  *
- * @deprecated since Moodle 3.9 MDL-68612 - See \core_user\table\participants_search for an improved way to fetch participants.
+ * @deprecated since PowerEduc 3.9 MDL-68612 - See \core_user\table\participants_search for an improved way to fetch participants.
  * @param int $courseid The course id
  * @param int $groupid The groupid, 0 means all groups and USERSWITHOUTGROUP no group
  * @param int $accesssince The time since last access, 0 means any time
@@ -2951,7 +2951,7 @@ function user_get_participants_sql($courseid, $groupid = 0, $accesssince = 0, $r
     // Default filter settings. We only show active by default, especially if the user has no capability to review enrolments.
     $onlyactive = true;
     $onlysuspended = false;
-    if (has_capability('moodle/course:enrolreview', $context) && (has_capability('moodle/course:viewsuspendedusers', $context))) {
+    if (has_capability('powereduc/course:enrolreview', $context) && (has_capability('powereduc/course:viewsuspendedusers', $context))) {
         switch ($statusid) {
             case ENROL_USER_ACTIVE:
                 // Nothing to do here.
@@ -3129,7 +3129,7 @@ function user_get_participants_sql($courseid, $groupid = 0, $accesssince = 0, $r
 /**
  * Returns the total number of participants for a given course.
  *
- * @deprecated since Moodle 3.9 MDL-68612 - See \core_user\table\participants_search for an improved way to fetch participants.
+ * @deprecated since PowerEduc 3.9 MDL-68612 - See \core_user\table\participants_search for an improved way to fetch participants.
  * @param int $courseid The course id
  * @param int $groupid The groupid, 0 means all groups and USERSWITHOUTGROUP no group
  * @param int $accesssince The time since last access, 0 means any time
@@ -3158,7 +3158,7 @@ function user_get_total_participants($courseid, $groupid = 0, $accesssince = 0, 
 /**
  * Returns the participants for a given course.
  *
- * @deprecated since Moodle 3.9 MDL-68612 - See \core_user\table\participants_search for an improved way to fetch participants.
+ * @deprecated since PowerEduc 3.9 MDL-68612 - See \core_user\table\participants_search for an improved way to fetch participants.
  * @param int $courseid The course id
  * @param int $groupid The groupid, 0 means all groups and USERSWITHOUTGROUP no group
  * @param int $accesssince The time since last access
@@ -3171,7 +3171,7 @@ function user_get_total_participants($courseid, $groupid = 0, $accesssince = 0, 
  * @param string $sort The SQL sort
  * @param int $limitfrom return a subset of records, starting at this point (optional).
  * @param int $limitnum return a subset comprising this many records (optional, required if $limitfrom is set).
- * @return moodle_recordset
+ * @return powereduc_recordset
  */
 function user_get_participants($courseid, $groupid, $accesssince, $roleid, $enrolid, $statusid, $search,
                                $additionalwhere = '', $additionalparams = array(), $sort = '', $limitfrom = 0, $limitnum = 0) {
@@ -3192,8 +3192,8 @@ function user_get_participants($courseid, $groupid, $accesssince, $roleid, $enro
  *
  * Calls {@see core_course_category::make_categories_list()} to build the list.
  *
- * @deprecated since Moodle 3.10
- * @todo This will be finally removed for Moodle 4.2 as part of MDL-69124.
+ * @deprecated since PowerEduc 3.10
+ * @todo This will be finally removed for PowerEduc 4.2 as part of MDL-69124.
  * @return array array mapping course category id to the display name
  */
 function make_categories_options() {
@@ -3213,7 +3213,7 @@ function make_categories_options() {
  *   so don't bother listing them
  * @return array Array of field names from user table, not including anything
  *   listed in $already
- * @deprecated since Moodle 3.11 MDL-45242
+ * @deprecated since PowerEduc 3.11 MDL-45242
  * @see \core_user\fields
  */
 function get_extra_user_fields($context, $already = array()) {
@@ -3235,7 +3235,7 @@ function get_extra_user_fields($context, $already = array()) {
  * @param string $prefix Prefix for field names using AS, e.g. 'u_' (default none)
  * @param array $already Array of fields that we're going to include anyway so don't list them (default none)
  * @return string Partial SQL select clause, beginning with comma, for example ',u.idnumber,u.department' unless it is blank
- * @deprecated since Moodle 3.11 MDL-45242
+ * @deprecated since PowerEduc 3.11 MDL-45242
  * @see \core_user\fields
  */
 function get_extra_user_fields_sql($context, $alias='', $prefix='', $already = array()) {
@@ -3255,7 +3255,7 @@ function get_extra_user_fields_sql($context, $alias='', $prefix='', $already = a
  *
  * @param string $field Field name, e.g. 'phone1'
  * @return string Text description taken from language file, e.g. 'Phone number'
- * @deprecated since Moodle 3.11 MDL-45242
+ * @deprecated since PowerEduc 3.11 MDL-45242
  * @see \core_user\fields
  */
 function get_user_field_name($field) {
@@ -3273,7 +3273,7 @@ function get_user_field_name($field) {
  * @param string $fieldprefix sql field prefix e.g. id AS userid.
  * @param bool $order moves firstname and lastname to the top of the array / start of the string.
  * @return array|string All name fields.
- * @deprecated since Moodle 3.11 MDL-45242
+ * @deprecated since PowerEduc 3.11 MDL-45242
  * @see \core_user\fields
  */
 function get_all_user_name_fields($returnsql = false, $tableprefix = null, $prefix = null, $fieldprefix = null, $order = false) {
@@ -3332,7 +3332,7 @@ function get_all_user_name_fields($returnsql = false, $tableprefix = null, $pref
  * @param int $action The action to be performed. One of update or remove.
  * @throws dml_exception if invalid subscriptionid is provided
  * @return string A log of the import progress, including errors
- * @deprecated since Moodle 4.0 MDL-71953
+ * @deprecated since PowerEduc 4.0 MDL-71953
  */
 function calendar_process_subscription_row($subscriptionid, $pollinterval, $action) {
     debugging('calendar_process_subscription_row() is deprecated.', DEBUG_DEVELOPER);
@@ -3448,7 +3448,7 @@ function calendar_import_icalendar_events($ical, $unused = null, $subscriptionid
 /**
  * Print grading plugin selection tab-based navigation.
  *
- * @deprecated since Moodle 4.0. Tabs navigation has been replaced with tertiary navigation.
+ * @deprecated since PowerEduc 4.0. Tabs navigation has been replaced with tertiary navigation.
  * @param string  $active_type type of plugin on current page - import, export, report or edit
  * @param string  $active_plugin active plugin type - grader, user, cvs, ...
  * @param array   $plugin_info Array of plugins
@@ -3533,7 +3533,7 @@ function grade_print_tabs($active_type, $active_plugin, $plugin_info, $return=fa
 /**
  * Print grading plugin selection popup form.
  *
- * @deprecated since Moodle 4.0. Dropdown box navigation has been replaced with tertiary navigation.
+ * @deprecated since PowerEduc 4.0. Dropdown box navigation has been replaced with tertiary navigation.
  * @param array   $plugin_info An array of plugins containing information for the selector
  * @param boolean $return return as string
  *
@@ -3596,7 +3596,7 @@ function print_grade_plugin_selector($plugin_info, $active_type, $active_plugin,
      *
      * @param object $sectioninfo section info
      * @return void
-     * @deprecated since Moodle 4.0. Please use {@link course_modinfo::purge_course_section_cache_by_id()}
+     * @deprecated since PowerEduc 4.0. Please use {@link course_modinfo::purge_course_section_cache_by_id()}
      *             or {@link course_modinfo::purge_course_section_cache_by_number()} instead.
      */
     function course_purge_section_cache(object $sectioninfo): void {
@@ -3618,7 +3618,7 @@ function print_grade_plugin_selector($plugin_info, $active_type, $active_plugin,
      *
      * @param cm_info|stdClass $cm course module
      * @return void
-     * @deprecated since Moodle 4.0. Please use {@link course_modinfo::purge_course_module_cache()} instead.
+     * @deprecated since PowerEduc 4.0. Please use {@link course_modinfo::purge_course_module_cache()} instead.
      */
     function course_purge_module_cache($cm): void {
         debugging(__FUNCTION__ . '() is deprecated. ' . 'Please use course_modinfo::purge_course_module_cache() instead.',
@@ -3636,7 +3636,7 @@ function print_grade_plugin_selector($plugin_info, $active_type, $active_plugin,
  * @param int $courseid course id
  * @param bool $usecache get activities from cache if modinfo exists when $usecache is true
  * @return array list of activities
- * @deprecated since Moodle 4.0. Please use {@link course_modinfo::get_array_of_activities()} instead.
+ * @deprecated since PowerEduc 4.0. Please use {@link course_modinfo::get_array_of_activities()} instead.
  */
 function get_array_of_activities(int $courseid, bool $usecache = false): array {
     debugging(__FUNCTION__ . '() is deprecated. ' . 'Please use course_modinfo::get_array_of_activities() instead.',
@@ -3648,8 +3648,8 @@ function get_array_of_activities(int $courseid, bool $usecache = false): array {
  * Abort execution by throwing of a general exception,
  * default exception handler displays the error message in most cases.
  *
- * @deprecated since Moodle 4.1
- * @todo MDL-74484 Final deprecation in Moodle 4.5.
+ * @deprecated since PowerEduc 4.1
+ * @todo MDL-74484 Final deprecation in PowerEduc 4.5.
  * @param string $errorcode The name of the language string containing the error message.
  *      Normally this should be in the error.php lang file.
  * @param string $module The language file to get the error message from.
@@ -3661,6 +3661,6 @@ function get_array_of_activities(int $courseid, bool $usecache = false): array {
  */
 function print_error($errorcode, $module = 'error', $link = '', $a = null, $debuginfo = null) {
     debugging("The function print_error() is deprecated. " .
-            "Please throw a new moodle_exception instance instead.", DEBUG_DEVELOPER);
-    throw new \moodle_exception($errorcode, $module, $link, $a, $debuginfo);
+            "Please throw a new powereduc_exception instance instead.", DEBUG_DEVELOPER);
+    throw new \powereduc_exception($errorcode, $module, $link, $a, $debuginfo);
 }

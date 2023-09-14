@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ use core\external\persistent_exporter;
 use core_user;
 use core_user\external\user_summary_exporter;
 use dml_exception;
-use moodle_exception;
+use powereduc_exception;
 use renderer_base;
 use tool_dataprivacy\api;
 use tool_dataprivacy\data_request;
@@ -122,7 +122,7 @@ class data_request_exporter extends persistent_exporter {
      * @return array
      * @throws coding_exception
      * @throws dml_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function get_other_values(renderer_base $output) {
         $values = [];

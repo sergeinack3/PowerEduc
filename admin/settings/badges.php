@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,19 +28,19 @@
 global $SITE;
 
 if (($hassiteconfig || has_any_capability(array(
-            'moodle/badges:viewawarded',
-            'moodle/badges:createbadge',
-            'moodle/badges:manageglobalsettings',
-            'moodle/badges:awardbadge',
-            'moodle/badges:configurecriteria',
-            'moodle/badges:configuremessages',
-            'moodle/badges:configuredetails',
-            'moodle/badges:deletebadge'), $systemcontext))) {
+            'powereduc/badges:viewawarded',
+            'powereduc/badges:createbadge',
+            'powereduc/badges:manageglobalsettings',
+            'powereduc/badges:awardbadge',
+            'powereduc/badges:configurecriteria',
+            'powereduc/badges:configuremessages',
+            'powereduc/badges:configuredetails',
+            'powereduc/badges:deletebadge'), $systemcontext))) {
 
     require_once($CFG->libdir . '/badgeslib.php');
 
     $globalsettings = new admin_settingpage('badgesettings', new lang_string('badgesettings', 'badges'),
-            array('moodle/badges:manageglobalsettings'), empty($CFG->enablebadges));
+            array('powereduc/badges:manageglobalsettings'), empty($CFG->enablebadges));
 
     $globalsettings->add(new admin_setting_configtext('badges_defaultissuername',
             new lang_string('defaultissuername', 'badges'),
@@ -50,7 +50,7 @@ if (($hassiteconfig || has_any_capability(array(
     $globalsettings->add(new admin_setting_configtext('badges_defaultissuercontact',
             new lang_string('defaultissuercontact', 'badges'),
             new lang_string('defaultissuercontact_desc', 'badges'),
-            get_config('moodle','supportemail'), PARAM_EMAIL));
+            get_config('powereduc','supportemail'), PARAM_EMAIL));
 
     $globalsettings->add(new admin_setting_configtext('badges_badgesalt',
             new lang_string('badgesalt', 'badges'),
@@ -70,15 +70,15 @@ if (($hassiteconfig || has_any_capability(array(
     $ADMIN->add('badges',
         new admin_externalpage('managebadges',
             new lang_string('managebadges', 'badges'),
-            new moodle_url('/badges/index.php', array('type' => BADGE_TYPE_SITE)),
+            new powereduc_url('/badges/index.php', array('type' => BADGE_TYPE_SITE)),
             array(
-                'moodle/badges:viewawarded',
-                'moodle/badges:createbadge',
-                'moodle/badges:awardbadge',
-                'moodle/badges:configurecriteria',
-                'moodle/badges:configuremessages',
-                'moodle/badges:configuredetails',
-                'moodle/badges:deletebadge'
+                'powereduc/badges:viewawarded',
+                'powereduc/badges:createbadge',
+                'powereduc/badges:awardbadge',
+                'powereduc/badges:configurecriteria',
+                'powereduc/badges:configuremessages',
+                'powereduc/badges:configuredetails',
+                'powereduc/badges:deletebadge'
             ),
             empty($CFG->enablebadges)
         )
@@ -87,16 +87,16 @@ if (($hassiteconfig || has_any_capability(array(
     $ADMIN->add('badges',
         new admin_externalpage('newbadge',
             new lang_string('newbadge', 'badges'),
-            new moodle_url('/badges/newbadge.php', array('type' => BADGE_TYPE_SITE)),
-            array('moodle/badges:createbadge'), empty($CFG->enablebadges)
+            new powereduc_url('/badges/newbadge.php', array('type' => BADGE_TYPE_SITE)),
+            array('powereduc/badges:createbadge'), empty($CFG->enablebadges)
         )
     );
 
     $ADMIN->add('badges',
         new admin_externalpage('managebackpacks',
             new lang_string('managebackpacks', 'badges'),
-            new moodle_url('/badges/backpacks.php'),
-            array('moodle/badges:manageglobalsettings'), empty($CFG->enablebadges) || empty($CFG->badges_allowexternalbackpack)
+            new powereduc_url('/badges/backpacks.php'),
+            array('powereduc/badges:manageglobalsettings'), empty($CFG->enablebadges) || empty($CFG->badges_allowexternalbackpack)
         )
     );
 }

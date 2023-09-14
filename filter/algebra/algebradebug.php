@@ -6,7 +6,7 @@
     require_once("../../config.php");
 
     if (!filter_is_enabled('algebra')) {
-        throw new \moodle_exception('filternotenabled');
+        throw new \powereduc_exception('filternotenabled');
     }
 
     require_once($CFG->libdir.'/filelib.php');
@@ -16,7 +16,7 @@
     $algebra = optional_param('algebra', '', PARAM_RAW);
 
     require_login();
-    require_capability('moodle/site:config', context_system::instance());
+    require_capability('powereduc/site:config', context_system::instance());
     if ($action || $algebra) {
         require_sesskey();
     }
@@ -264,8 +264,8 @@ function slasharguments($texexp, $md5) {
   echo "It should display correctly as ";
   echo "<img src=\"pix.php?file=$image\" align=\"absmiddle\"></p>\n";
   echo "<p>If neither equation image displays correctly, please seek ";
-  echo "further help at moodle.org at the ";
-  echo "<a href=\"http://moodle.org/mod/forum/view.php?id=752&loginguest=true\" target=\"_blank\">";
+  echo "further help at powereduc.org at the ";
+  echo "<a href=\"http://powereduc.org/mod/forum/view.php?id=752&loginguest=true\" target=\"_blank\">";
   echo "Mathematics Tools Forum</a></p>";
 }
 
@@ -332,8 +332,8 @@ both Unix and Windows servers is that the web server doesn't have execute permis
 on the algebra2tex.pl script. In that case change permissions accordingly</li>
 <li>The Second Stage TeX Translation produces malformed TeX. This indicates
 a bug in the algebra filter. Post the original algebraic expression and the
-bad TeX translation in the <a href="http://moodle.org/mod/forum/view.php?id=752">
-Mathematics Tools</a> forum in the Using Moodle course on moodle.org.</li>
+bad TeX translation in the <a href="http://powereduc.org/mod/forum/view.php?id=752">
+Mathematics Tools</a> forum in the Using Moodle course on powereduc.org.</li>
 <li>The TeX to gif image conversion process does not work. If your server is
 running Unix, a likely cause is that the mimetex binary you are using is
 incompatible with your operating system. You can try compiling it from the

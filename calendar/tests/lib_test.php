@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ namespace core_calendar;
  * Class contaning unit tests for the calendar lib.
  *
  * @package    core_calendar
- * @copyright  2017 Mark Nelson <markn@moodle.com>
+ * @copyright  2017 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class lib_test extends \advanced_testcase {
@@ -571,8 +571,8 @@ class lib_test extends \advanced_testcase {
         $types = calendar_get_allowed_event_types();
         $this->assertFalse($types['course']);
 
-        assign_capability('moodle/calendar:manageentries', CAP_ALLOW, $roleid, $context1, true);
-        assign_capability('moodle/calendar:manageentries', CAP_PROHIBIT, $roleid, $context2, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_ALLOW, $roleid, $context1, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_PROHIBIT, $roleid, $context2, true);
 
         // The user only has the correct capability in course 1 so that is the only
         // one that should be in the results.
@@ -583,7 +583,7 @@ class lib_test extends \advanced_testcase {
         $types = calendar_get_allowed_event_types();
         $this->assertTrue($types['course']);
 
-        assign_capability('moodle/calendar:manageentries', CAP_PROHIBIT, $roleid, $context1, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_PROHIBIT, $roleid, $context1, true);
 
         // The user only now has the correct capability in both course 1 and 2 so we
         // expect both to be in the results.
@@ -607,8 +607,8 @@ class lib_test extends \advanced_testcase {
 
         $this->setUser($user);
 
-        assign_capability('moodle/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
-        assign_capability('moodle/site:accessallgroups', CAP_PROHIBIT, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/site:accessallgroups', CAP_PROHIBIT, $roleid, $context, true);
 
         // The user has the correct capability in the course but they aren't a member
         // of any of the groups and don't have the accessallgroups capability.
@@ -631,7 +631,7 @@ class lib_test extends \advanced_testcase {
         $generator->enrol_user($user->id, $course->id, 'student');
         $generator->role_assign($roleid, $user->id, $context->id);
         $this->setUser($user);
-        assign_capability('moodle/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
         // The user has the correct capability in the course but there are
         // no groups so we shouldn't see a group type.
         $types = calendar_get_allowed_event_types($course->id);
@@ -659,10 +659,10 @@ class lib_test extends \advanced_testcase {
         $generator->role_assign($roleid, $user->id, $context1->id);
         $generator->role_assign($roleid, $user->id, $context2->id);
         $this->setUser($user);
-        assign_capability('moodle/calendar:manageentries', CAP_ALLOW, $roleid, $context1, true);
-        assign_capability('moodle/calendar:manageentries', CAP_ALLOW, $roleid, $context2, true);
-        assign_capability('moodle/site:accessallgroups', CAP_ALLOW, $roleid, $context1, true);
-        assign_capability('moodle/site:accessallgroups', CAP_ALLOW, $roleid, $context2, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_ALLOW, $roleid, $context1, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_ALLOW, $roleid, $context2, true);
+        assign_capability('powereduc/site:accessallgroups', CAP_ALLOW, $roleid, $context1, true);
+        assign_capability('powereduc/site:accessallgroups', CAP_ALLOW, $roleid, $context2, true);
         // The user has the correct capability in the course and has
         // the accessallgroups capability.
         $types = calendar_get_allowed_event_types($course1->id);
@@ -686,7 +686,7 @@ class lib_test extends \advanced_testcase {
         $generator->create_group_member(array('groupid' => $group1->id, 'userid' => $user->id));
         $generator->create_group_member(array('groupid' => $group2->id, 'userid' => $user->id));
         $this->setUser($user);
-        assign_capability('moodle/site:accessallgroups', CAP_PROHIBIT, $roleid, $context, true);
+        assign_capability('powereduc/site:accessallgroups', CAP_PROHIBIT, $roleid, $context, true);
         // The user has the correct capability in the course but can't access
         // groups that they are not a member of.
         $types = calendar_get_allowed_event_types($course->id);
@@ -696,8 +696,8 @@ class lib_test extends \advanced_testcase {
         $types = calendar_get_allowed_event_types();
         $this->assertFalse($types['group']);
 
-        assign_capability('moodle/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
-        assign_capability('moodle/site:accessallgroups', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/site:accessallgroups', CAP_ALLOW, $roleid, $context, true);
         $types = calendar_get_allowed_event_types($course->id);
         $this->assertTrue($types['group']);
 
@@ -715,7 +715,7 @@ class lib_test extends \advanced_testcase {
         $group = $generator->create_group(['courseid' => $course->id]);
         $generator->enrol_user($user->id, $course->id, 'student');
         $generator->role_assign($roleid, $user->id, $context->id);
-        assign_capability('moodle/calendar:managegroupentries', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/calendar:managegroupentries', CAP_ALLOW, $roleid, $context, true);
 
         $this->setUser($user);
         $types = calendar_get_allowed_event_types($course->id);
@@ -738,7 +738,7 @@ class lib_test extends \advanced_testcase {
         $generator->enrol_user($user->id, $course->id, 'student');
         $generator->role_assign($roleid, $user->id, $context->id);
         groups_add_member($group, $user);
-        assign_capability('moodle/calendar:managegroupentries', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/calendar:managegroupentries', CAP_ALLOW, $roleid, $context, true);
 
         $this->setUser($user);
         $types = calendar_get_allowed_event_types($course->id);
@@ -760,8 +760,8 @@ class lib_test extends \advanced_testcase {
         $group = $generator->create_group(['courseid' => $course->id]);
         $generator->enrol_user($user->id, $course->id, 'student');
         $generator->role_assign($roleid, $user->id, $context->id);
-        assign_capability('moodle/calendar:managegroupentries', CAP_ALLOW, $roleid, $context, true);
-        assign_capability('moodle/site:accessallgroups', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/calendar:managegroupentries', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/site:accessallgroups', CAP_ALLOW, $roleid, $context, true);
 
         $this->setUser($user);
         $types = calendar_get_allowed_event_types($course->id);

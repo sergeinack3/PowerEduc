@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@
  * via MNet framework.
  *
  * @package    enrol_mnet
- * @copyright  2010 David Mudrak <david@moodle.com>
+ * @copyright  2010 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -140,7 +140,7 @@ class enrol_mnet_mnetservice_enrol {
 
         if ($user === false) {
             // here we could check the setting if the enrol_mnet is allowed to auto-register
-            // users {@link http://tracker.moodle.org/browse/MDL-21327}
+            // users {@link http://tracker.powereduc.org/browse/MDL-21327}
             $user = mnet_strip_user((object)$userdata, mnet_fields_to_import($client));
             $user->mnethostid = $client->id;
             $user->auth = 'mnet';

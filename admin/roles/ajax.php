@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ list($context, $course, $cm) = get_context_info_array($contextid);
 $PAGE->set_context($context);
 
 require_login($course, false, $cm);
-require_capability('moodle/role:review', $context);
+require_capability('powereduc/role:review', $context);
 require_sesskey();
 
 $OUTPUT->header();
@@ -55,12 +55,12 @@ $action = required_param('action', PARAM_ALPHA);
 $capability = $DB->get_record('capabilities', array('name' => $capability), '*', MUST_EXIST);
 
 if (!isset($overridableroles[$roleid])) {
-    throw new moodle_exception('invalidarguments');
+    throw new powereduc_exception('invalidarguments');
 }
 
-if (!has_capability('moodle/role:override', $context)) {
-    if (!has_capability('moodle/role:safeoverride', $context) || !is_safe_capability($capability)) {
-        require_capability('moodle/role:override', $context);
+if (!has_capability('powereduc/role:override', $context)) {
+    if (!has_capability('powereduc/role:safeoverride', $context) || !is_safe_capability($capability)) {
+        require_capability('powereduc/role:override', $context);
     }
 }
 
@@ -78,7 +78,7 @@ switch ($action) {
         role_change_permission($roleid, $context, $capability->name, CAP_INHERIT);
         break;
     default:
-        throw new moodle_exception('invalidarguments');
+        throw new powereduc_exception('invalidarguments');
 }
 
 echo json_encode($action);

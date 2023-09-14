@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -78,7 +78,7 @@ class insights_report implements \renderable, \templatable {
         // Context selector.
         $predictioncontexts = $this->model->get_predictions_contexts(false);
         if ($predictioncontexts && count($predictioncontexts) > 1) {
-            $url = new \moodle_url('/admin/tool/analytics/model.php', ['id' => $this->model->get_id(),
+            $url = new \powereduc_url('/admin/tool/analytics/model.php', ['id' => $this->model->get_id(),
                 'action' => 'insightsreport']);
 
             if ($this->context) {
@@ -96,7 +96,7 @@ class insights_report implements \renderable, \templatable {
             foreach ($predictionactionrecords as $record) {
 
                 // Using this unusual execution flow to init the chart data because $predictionactionrecords
-                // is a \moodle_recordset.
+                // is a \powereduc_recordset.
                 if (empty($actionlabels)) {
                     list($actionlabels, $actionvalues, $actiontypes) = $this->init_action_labels($record);
                 }

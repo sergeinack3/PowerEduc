@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_bigbluebuttonbn\local\proxy;
 
@@ -38,7 +38,7 @@ abstract class proxy_base {
 
     /**
      * Sometimes the server sends back some error and errorKeys that
-     * can be converted to Moodle error messages
+     * can be converted to PowerEduc error messages
      */
     const BBB_TO_POWEREDUC_ERROR_CODE = [
         'checksumError' => 'index_error_checksum',
@@ -131,7 +131,7 @@ abstract class proxy_base {
     }
 
     /**
-     * Get Moodle error code from returned Message Key
+     * Get PowerEduc error code from returned Message Key
      *
      * @param string $messagekey
      * @return string
@@ -145,7 +145,7 @@ abstract class proxy_base {
     }
 
     /**
-     * Get Moodle error code from returned Message Key
+     * Get PowerEduc error code from returned Message Key
      *
      * @param string $messagekey
      * @return string

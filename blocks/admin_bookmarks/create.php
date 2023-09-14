@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ if ($section = optional_param('section', '', PARAM_SAFEPATH) and confirm_sesskey
         $bookmarks = explode(',', get_user_preferences('admin_bookmarks'));
 
         if (in_array($section, $bookmarks)) {
-            throw new \moodle_exception('bookmarkalreadyexists', 'admin');
+            throw new \powereduc_exception('bookmarkalreadyexists', 'admin');
             die;
         }
 
@@ -53,7 +53,7 @@ if ($section = optional_param('section', '', PARAM_SAFEPATH) and confirm_sesskey
         set_user_preference('admin_bookmarks', $bookmarks);
 
     } else {
-        throw new \moodle_exception('invalidsection', 'admin');
+        throw new \powereduc_exception('invalidsection', 'admin');
         die;
     }
 
@@ -69,7 +69,7 @@ if ($section = optional_param('section', '', PARAM_SAFEPATH) and confirm_sesskey
     }
 
 } else {
-    throw new \moodle_exception('invalidsection', 'admin');
+    throw new \powereduc_exception('invalidsection', 'admin');
     die;
 }
 

@@ -43,9 +43,9 @@ abstract class answerbase extends base {
      * Find recordset of the relevant areas.
      *
      * @param \core\event\base $event
-     * @return \moodle_recordset|null
+     * @return \powereduc_recordset|null
      */
-    public function find_relevant_areas(\core\event\base $event): ?\moodle_recordset {
+    public function find_relevant_areas(\core\event\base $event): ?\powereduc_recordset {
         global $DB;
         if (($event instanceof question_created) || ($event instanceof question_updated)) {
             $sql = "SELECT {$this->get_type()} AS type,
@@ -83,7 +83,7 @@ abstract class answerbase extends base {
      *
      * @return mixed
      */
-    public function find_system_areas(): ?\moodle_recordset {
+    public function find_system_areas(): ?\powereduc_recordset {
         global $DB;
         $params = [
             'syscontext' => CONTEXT_SYSTEM,
@@ -125,9 +125,9 @@ abstract class answerbase extends base {
      * Find recordset of the course areas.
      *
      * @param int $courseid
-     * @return \moodle_recordset
+     * @return \powereduc_recordset
      */
-    public function find_course_areas(int $courseid): ?\moodle_recordset {
+    public function find_course_areas(int $courseid): ?\powereduc_recordset {
         global $DB;
 
         $coursecontext = \context_course::instance($courseid);

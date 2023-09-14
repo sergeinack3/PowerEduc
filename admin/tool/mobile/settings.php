@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ if ($hassiteconfig) {
     // We should wait to the installation to finish since we depend on some configuration values that are set once
     // the admin user profile is configured.
     if (!during_initial_install()) {
-        $enablemobiledocurl = new moodle_url(get_docs_url('Enable_mobile_web_services'));
+        $enablemobiledocurl = new powereduc_url(get_docs_url('Enable_mobile_web_services'));
         $enablemobiledoclink = html_writer::link($enablemobiledocurl, new lang_string('documentation'));
         $default = is_https() ? 1 : 0;
         $optionalsubsystems = $ADMIN->locate('optionalsubsystems');
@@ -50,7 +50,7 @@ if ($hassiteconfig) {
 
     $temp = new admin_settingpage('mobilesettings',
         new lang_string('mobilesettings', 'tool_mobile'),
-        'moodle/site:config',
+        'powereduc/site:config',
         $ismobilewsdisabled
     );
 
@@ -62,9 +62,9 @@ if ($hassiteconfig) {
     $featuresnotice = null;
     if (empty($CFG->disablemobileappsubscription)) {
         // General notification about limited features due to app restrictions.
-        $subscriptionurl = (new moodle_url("/$CFG->admin/tool/mobile/subscription.php"))->out(false);
+        $subscriptionurl = (new powereduc_url("/$CFG->admin/tool/mobile/subscription.php"))->out(false);
         $notify = new \core\output\notification(
-            get_string('moodleappsportalfeatureswarning', 'tool_mobile', $subscriptionurl),
+            get_string('powereducappsportalfeatureswarning', 'tool_mobile', $subscriptionurl),
             \core\output\notification::NOTIFY_WARNING);
         $featuresnotice = $OUTPUT->render($notify);
     }
@@ -78,7 +78,7 @@ if ($hassiteconfig) {
             'mobileappsubscription',
             new lang_string('mobileappsubscription', 'tool_mobile'),
             "$CFG->wwwroot/$CFG->admin/tool/mobile/subscription.php",
-            'moodle/site:config',
+            'powereduc/site:config',
             $hideappsubscription
         )
     );
@@ -87,11 +87,11 @@ if ($hassiteconfig) {
     $temp = new admin_settingpage(
         'mobileauthentication',
         new lang_string('mobileauthentication', 'tool_mobile'),
-        'moodle/site:config',
+        'powereduc/site:config',
         $ismobilewsdisabled
     );
 
-    $temp->add(new admin_setting_heading('tool_mobile/moodleappsportalfeaturesauth', '', $featuresnotice));
+    $temp->add(new admin_setting_heading('tool_mobile/powereducappsportalfeaturesauth', '', $featuresnotice));
 
     $options = array(
         tool_mobile\api::LOGIN_VIA_APP => new lang_string('loginintheapp', 'tool_mobile'),
@@ -129,7 +129,7 @@ if ($hassiteconfig) {
 
     $temp->add(new admin_setting_configtext('tool_mobile/forcedurlscheme',
                 new lang_string('forcedurlscheme_key', 'tool_mobile'),
-                new lang_string('forcedurlscheme', 'tool_mobile'), 'moodlemobile', PARAM_NOTAGS));
+                new lang_string('forcedurlscheme', 'tool_mobile'), 'powereducmobile', PARAM_NOTAGS));
 
     $temp->add(new admin_setting_configtext('tool_mobile/minimumversion',
                 new lang_string('minimumversion_key', 'tool_mobile'),
@@ -153,12 +153,12 @@ if ($hassiteconfig) {
     $temp = new admin_settingpage(
         'mobileappearance',
         new lang_string('mobileappearance', 'tool_mobile'),
-        'moodle/site:config',
+        'powereduc/site:config',
         $ismobilewsdisabled
     );
 
     if (!empty($featuresnotice)) {
-        $temp->add(new admin_setting_heading('tool_mobile/moodleappsportalfeaturesappearance', '', $featuresnotice));
+        $temp->add(new admin_setting_heading('tool_mobile/powereducappsportalfeaturesappearance', '', $featuresnotice));
     }
 
     $temp->add(new admin_setting_configtext('mobilecssurl', new lang_string('mobilecssurl', 'tool_mobile'),
@@ -166,9 +166,9 @@ if ($hassiteconfig) {
 
     // Reference to Branded Mobile App.
     if (empty($CFG->disableserviceads_branded)) {
-        $temp->add(new admin_setting_description('moodlebrandedappreference',
-            new lang_string('moodlebrandedapp', 'admin'),
-            new lang_string('moodlebrandedappreference', 'admin')
+        $temp->add(new admin_setting_description('powereducbrandedappreference',
+            new lang_string('powereducbrandedapp', 'admin'),
+            new lang_string('powereducbrandedappreference', 'admin')
         ));
     }
 
@@ -186,7 +186,7 @@ if ($hassiteconfig) {
                 new lang_string('androidappid_desc', 'tool_mobile'), tool_mobile\api::DEFAULT_ANDROID_APP_ID, PARAM_NOTAGS));
 
     $temp->add(new admin_setting_configtext('tool_mobile/setuplink', new lang_string('setuplink', 'tool_mobile'),
-        new lang_string('setuplink_desc', 'tool_mobile'), 'https://download.moodle.org/mobile', PARAM_URL));
+        new lang_string('setuplink_desc', 'tool_mobile'), 'https://download.powereduc.org/mobile', PARAM_URL));
 
     $ADMIN->add('mobileapp', $temp);
 
@@ -194,12 +194,12 @@ if ($hassiteconfig) {
     $temp = new admin_settingpage(
         'mobilefeatures',
         new lang_string('mobilefeatures', 'tool_mobile'),
-        'moodle/site:config',
+        'powereduc/site:config',
         $ismobilewsdisabled
     );
 
     if (!empty($featuresnotice)) {
-        $temp->add(new admin_setting_heading('tool_mobile/moodleappsportalfeatures', '', $featuresnotice));
+        $temp->add(new admin_setting_heading('tool_mobile/powereducappsportalfeatures', '', $featuresnotice));
     }
 
     $temp->add(new admin_setting_heading('tool_mobile/logout',
@@ -232,7 +232,7 @@ if ($hassiteconfig) {
     }
 
     $attributes = [
-        'manageurl' => new \moodle_url('/admin/tool/filetypes/index.php'),
+        'manageurl' => new \powereduc_url('/admin/tool/filetypes/index.php'),
         'managetext' => get_string('managefiletypes', 'tool_mobile'),
         'multiple' => true,
         'delimiter' => ',',

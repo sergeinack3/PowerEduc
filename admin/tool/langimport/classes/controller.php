@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Lang import controller
  *
  * @package    tool_langimport
- * @copyright  2014 Dan Poltawski <dan@moodle.com>
+ * @copyright  2014 Dan Poltawski <dan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,7 +32,7 @@ require_once($CFG->libdir.'/componentlib.class.php');
  * Lang import controller
  *
  * @package    tool_langimport
- * @copyright  2014 Dan Poltawski <dan@moodle.com>
+ * @copyright  2014 Dan Poltawski <dan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class controller {
@@ -65,7 +65,7 @@ class controller {
      * @param string|array $langs array of langcodes or individual langcodes
      * @param bool $updating true if updating the langpacks
      * @return int false if an error encountered or
-     * @throws \moodle_exception when error is encountered installing langpack
+     * @throws \powereduc_exception when error is encountered installing langpack
      */
     public function install_languagepacks($langs, $updating = false) {
         global $CFG;
@@ -82,7 +82,7 @@ class controller {
                     $a->url  = $this->installer->lang_pack_url($langcode);
                     $a->dest = $CFG->dataroot.'/lang';
                     $this->errors[] = get_string('remotedownloaderror', 'error', $a);
-                    throw new \moodle_exception('remotedownloaderror', 'error', '', $a);
+                    throw new \powereduc_exception('remotedownloaderror', 'error', '', $a);
                     break;
                 case \lang_installer::RESULT_INSTALLED:
                     $updatedpacks++;
@@ -183,7 +183,7 @@ class controller {
 
         try {
             $updated = $this->install_languagepacks($neededlangs, true);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->errors[] = 'An exception occurred while installing language packs: ' . $e->getMessage();
             return false;
         }
@@ -200,7 +200,7 @@ class controller {
     }
 
     /**
-     * checks the md5 of the zip file, grabbed from download.moodle.org,
+     * checks the md5 of the zip file, grabbed from download.powereduc.org,
      * against the md5 of the local language file from last update
      * @param string $lang language code
      * @param string $md5check md5 to check

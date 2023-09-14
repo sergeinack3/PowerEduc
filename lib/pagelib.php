@@ -1,27 +1,27 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file contains the moodle_page class. There is normally a single instance
+ * This file contains the powereduc_page class. There is normally a single instance
  * of this class in the $PAGE global variable. This class is a central repository
  * of information about the page we are building up to send back to the user.
  *
  * @package core
  * @category page
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -43,7 +43,7 @@ use core\output\activity_header;
  *
  * @copyright 2009 Tim Hunt
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category page
  *
@@ -105,9 +105,9 @@ use core\output\activity_header;
  * @property-read string $subpage The subpage identifier, if any.
  * @property-read theme_config $theme The theme for this page.
  * @property-read string $title The title that should go in the <head> section of the HTML of this page.
- * @property-read moodle_url $url The moodle url object for this page.
+ * @property-read powereduc_url $url The powereduc url object for this page.
  */
-class moodle_page {
+class powereduc_page {
 
     /** The state of the page before it has printed the header **/
     const STATE_BEFORE_HEADER = 0;
@@ -220,7 +220,7 @@ class moodle_page {
     protected $_legacyclass = null;
 
     /**
-     * @var moodle_url The URL for this page. This is mandatory and must be set
+     * @var powereduc_url The URL for this page. This is mandatory and must be set
      * before output is started.
      */
     protected $_url = null;
@@ -250,7 +250,7 @@ class moodle_page {
      * @var string The capability required by the user in order to edit blocks
      * and block settings on this page.
      */
-    protected $_blockseditingcap = 'moodle/site:manageblocks';
+    protected $_blockseditingcap = 'powereduc/site:manageblocks';
 
     /**
      * @var bool An internal flag to record when block actions have been processed.
@@ -285,7 +285,7 @@ class moodle_page {
 
     /**
      * @var theme_config The theme to use with this page. This has to be properly
-     * initialised via {@link moodle_page::initialise_theme_and_output()} which
+     * initialised via {@link powereduc_page::initialise_theme_and_output()} which
      * happens magically before any operation that requires it.
      */
     protected $_theme = null;
@@ -453,7 +453,7 @@ class moodle_page {
     // methods, but instead use the $PAGE->x syntax.
 
     /**
-     * Please do not call this method directly, use the ->state syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->state syntax. {@link powereduc_page::__get()}.
      * @return integer one of the STATE_XXX constants. You should not normally need
      * to use this in your code. It is intended for internal use by this class
      * and its friends like print_header, to check that everything is working as
@@ -464,7 +464,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->headerprinted syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->headerprinted syntax. {@link powereduc_page::__get()}.
      * @return bool has the header already been printed?
      */
     protected function magic_get_headerprinted() {
@@ -472,7 +472,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->course syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->course syntax. {@link powereduc_page::__get()}.
      * @return stdClass the current course that we are inside - a row from the
      * course table. (Also available as $COURSE global.) If we are not inside
      * an actual course, this will be the site course.
@@ -486,7 +486,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->cm syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->cm syntax. {@link powereduc_page::__get()}.
      * @return cm_info the course_module that this page belongs to. Will be null
      * if this page is not within a module. This is a full cm object, as loaded
      * by get_coursemodule_from_id or get_coursemodule_from_instance,
@@ -497,7 +497,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->activityrecord syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->activityrecord syntax. {@link powereduc_page::__get()}.
      * @return stdClass the row from the activities own database table (for example
      * the forum or quiz table) that this page belongs to. Will be null
      * if this page is not within a module.
@@ -510,7 +510,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->activityname syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->activityname syntax. {@link powereduc_page::__get()}.
      * @return string the The type of activity we are in, for example 'forum' or 'quiz'.
      * Will be null if this page is not within a module.
      */
@@ -522,7 +522,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->category syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->category syntax. {@link powereduc_page::__get()}.
      * @return stdClass the category that the page course belongs to. If there isn't one
      * (that is, if this is the front page course) returns null.
      */
@@ -536,7 +536,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->categories syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->categories syntax. {@link powereduc_page::__get()}.
      * @return array an array of all the categories the page course belongs to,
      * starting with the immediately containing category, and working out to
      * the top-level category. This may be the empty array if we are in the
@@ -548,7 +548,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->context syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->context syntax. {@link powereduc_page::__get()}.
      * @return context the main context to which this page belongs.
      */
     protected function magic_get_context() {
@@ -572,7 +572,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->pagetype syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->pagetype syntax. {@link powereduc_page::__get()}.
      * @return string e.g. 'my-index' or 'mod-quiz-attempt'.
      */
     protected function magic_get_pagetype() {
@@ -584,7 +584,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->pagetype syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->pagetype syntax. {@link powereduc_page::__get()}.
      * @return string The id to use on the body tag, uses {@link magic_get_pagetype()}.
      */
     protected function magic_get_bodyid() {
@@ -592,7 +592,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->pagelayout syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->pagelayout syntax. {@link powereduc_page::__get()}.
      * @return string the general type of page this is. For example 'standard', 'popup', 'home'.
      *      Allows the theme to display things differently, if it wishes to.
      */
@@ -601,7 +601,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->layout_options syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->layout_options syntax. {@link powereduc_page::__get()}.
      * @return array returns arrays with options for layout file
      */
     protected function magic_get_layout_options() {
@@ -612,7 +612,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->subpage syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->subpage syntax. {@link powereduc_page::__get()}.
      * @return string The subpage identifier, if any.
      */
     protected function magic_get_subpage() {
@@ -620,7 +620,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->bodyclasses syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->bodyclasses syntax. {@link powereduc_page::__get()}.
      * @return string the class names to put on the body element in the HTML.
      */
     protected function magic_get_bodyclasses() {
@@ -628,7 +628,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->title syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->title syntax. {@link powereduc_page::__get()}.
      * @return string the title that should go in the <head> section of the HTML of this page.
      */
     protected function magic_get_title() {
@@ -636,7 +636,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->heading syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->heading syntax. {@link powereduc_page::__get()}.
      * @return string the main heading that should be displayed at the top of the <body>.
      */
     protected function magic_get_heading() {
@@ -644,7 +644,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->heading syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->heading syntax. {@link powereduc_page::__get()}.
      * @return string The menu (or actions) to display in the heading
      */
     protected function magic_get_headingmenu() {
@@ -652,7 +652,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->docspath syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->docspath syntax. {@link powereduc_page::__get()}.
      * @return string the path to the Help and documentation.
      */
     protected function magic_get_docspath() {
@@ -664,19 +664,19 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->url syntax. {@link moodle_page::__get()}.
-     * @return moodle_url the clean URL required to load the current page. (You
+     * Please do not call this method directly, use the ->url syntax. {@link powereduc_page::__get()}.
+     * @return powereduc_url the clean URL required to load the current page. (You
      * should normally use this in preference to $ME or $FULLME.)
      */
     protected function magic_get_url() {
         global $FULLME;
         if (is_null($this->_url)) {
             debugging('This page did not call $PAGE->set_url(...). Using '.s($FULLME), DEBUG_DEVELOPER);
-            $this->_url = new moodle_url($FULLME);
+            $this->_url = new powereduc_url($FULLME);
             // Make sure the guessed URL cannot lead to dangerous redirects.
             $this->_url->remove_params('sesskey');
         }
-        return new moodle_url($this->_url); // Return a clone for safety.
+        return new powereduc_url($this->_url); // Return a clone for safety.
     }
 
     /**
@@ -688,7 +688,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->blocks syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->blocks syntax. {@link powereduc_page::__get()}.
      * @return block_manager the blocks manager object for this page.
      */
     protected function magic_get_blocks() {
@@ -708,7 +708,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->requires syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->requires syntax. {@link powereduc_page::__get()}.
      * @return page_requirements_manager tracks the JavaScript, CSS files, etc. required by this page.
      */
     protected function magic_get_requires() {
@@ -719,7 +719,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->cacheable syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->cacheable syntax. {@link powereduc_page::__get()}.
      * @return bool can this page be cached by the user's browser.
      */
     protected function magic_get_cacheable() {
@@ -727,7 +727,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->focuscontrol syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->focuscontrol syntax. {@link powereduc_page::__get()}.
      * @return string the id of the HTML element to be focused when the page has loaded.
      */
     protected function magic_get_focuscontrol() {
@@ -735,7 +735,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->button syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->button syntax. {@link powereduc_page::__get()}.
      * @return string the HTML to go where the Turn editing on button normally goes.
      */
     protected function magic_get_button() {
@@ -743,7 +743,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->theme syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->theme syntax. {@link powereduc_page::__get()}.
      * @return theme_config the initialised theme for this page.
      */
     protected function magic_get_theme() {
@@ -756,7 +756,7 @@ class moodle_page {
     /**
      * Returns an array of minipulations or false if there are none to make.
      *
-     * @since Moodle 2.5.1 2.6
+     * @since PowerEduc 2.5.1 2.6
      * @return bool|array
      */
     protected function magic_get_blockmanipulations() {
@@ -770,7 +770,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly, use the ->devicetypeinuse syntax. {@link moodle_page::__get()}.
+     * Please do not call this method directly, use the ->devicetypeinuse syntax. {@link powereduc_page::__get()}.
      * @return string The device type being used.
      */
     protected function magic_get_devicetypeinuse() {
@@ -782,7 +782,7 @@ class moodle_page {
 
     /**
      * Please do not call this method directly use the ->periodicrefreshdelay syntax
-     * {@link moodle_page::__get()}
+     * {@link powereduc_page::__get()}
      * @return int The periodic refresh delay to use with meta refresh
      */
     protected function magic_get_periodicrefreshdelay() {
@@ -790,7 +790,7 @@ class moodle_page {
     }
 
     /**
-     * Please do not call this method directly use the ->opencontainers syntax. {@link moodle_page::__get()}
+     * Please do not call this method directly use the ->opencontainers syntax. {@link powereduc_page::__get()}
      * @return xhtml_container_stack tracks XHTML tags on this page that have been opened but not closed.
      *      mainly for internal use by the rendering code.
      */
@@ -970,7 +970,7 @@ class moodle_page {
      *
      * This method has been created to catch obvious coding errors where the
      * developer has tried to set a page property using $PAGE->key = $value.
-     * In the moodle_page class all properties must be set using the appropriate
+     * In the powereduc_page class all properties must be set using the appropriate
      * $PAGE->set_something($value) method.
      *
      * @param string $name property name
@@ -1111,7 +1111,7 @@ class moodle_page {
      */
     public function set_state($state) {
         if ($state != $this->_state + 1 || $state > self::STATE_DONE) {
-            throw new coding_exception('Invalid state passed to moodle_page::set_state. We are in state ' .
+            throw new coding_exception('Invalid state passed to powereduc_page::set_state. We are in state ' .
                     $this->_state . ' and state ' . $state . ' was requested.');
         }
 
@@ -1139,7 +1139,7 @@ class moodle_page {
         global $COURSE, $PAGE, $CFG, $SITE;
 
         if (empty($course->id)) {
-            throw new coding_exception('$course passed to moodle_page::set_course does not look like a proper course object.');
+            throw new coding_exception('$course passed to powereduc_page::set_course does not look like a proper course object.');
         }
 
         $this->ensure_theme_not_set();
@@ -1152,7 +1152,7 @@ class moodle_page {
 
         if ($this === $PAGE) {
             $COURSE = $this->_course;
-            moodle_setlocale();
+            powereduc_setlocale();
         }
 
         if (!$this->_context) {
@@ -1298,10 +1298,10 @@ class moodle_page {
      * in the standard theme.
      *
      * For an idea of the common page layouts see
-     * {@link http://docs.moodle.org/dev/Themes_2.0#The_different_layouts_as_of_August_17th.2C_2010}
+     * {@link http://docs.powereduc.org/dev/Themes_2.0#The_different_layouts_as_of_August_17th.2C_2010}
      * But please keep in mind that it may be (and normally is) out of date.
      * The only place to find an accurate up-to-date list of the page layouts
-     * available for your version of Moodle is {@link theme/base/config.php}
+     * available for your version of PowerEduc is {@link theme/base/config.php}
      *
      * @param string $pagelayout the page layout this is. For example 'popup', 'home'.
      */
@@ -1349,7 +1349,7 @@ class moodle_page {
      */
     public function add_body_class($class) {
         if ($this->_state > self::STATE_BEFORE_HEADER) {
-            throw new coding_exception('Cannot call moodle_page::add_body_class after output has been started.');
+            throw new coding_exception('Cannot call powereduc_page::add_body_class after output has been started.');
         }
         $this->_bodyclasses[$class] = 1;
     }
@@ -1390,7 +1390,7 @@ class moodle_page {
     }
 
     /**
-     * Sets some HTML to use next to the heading {@link moodle_page::set_heading()}
+     * Sets some HTML to use next to the heading {@link powereduc_page::set_heading()}
      *
      * @param string $menu The menu/content to show in the heading
      */
@@ -1430,7 +1430,7 @@ class moodle_page {
      * script name. So, for example, for mod/quiz/attempt.php, pagetype is
      * mod-quiz-attempt, and so docspath is mod/quiz/attempt.
      *
-     * @param string $path the path to use at the end of the moodle docs URL.
+     * @param string $path the path to use at the end of the powereduc docs URL.
      */
     public function set_docs_path($path) {
         $this->_docspath = $path;
@@ -1445,7 +1445,7 @@ class moodle_page {
      *      $id = optional_param('id', 0, PARAM_INT);
      *      $PAGE->set_url('/course/view.php', array('id' => $id));
      *
-     * @param moodle_url|string $url URL relative to $CFG->wwwroot or {@link moodle_url} instance
+     * @param powereduc_url|string $url URL relative to $CFG->wwwroot or {@link powereduc_url} instance
      * @param array $params parameters to add to the URL
      * @throws coding_exception
      */
@@ -1461,7 +1461,7 @@ class moodle_page {
             }
         }
 
-        $this->_url = new moodle_url($url, $params);
+        $this->_url = new powereduc_url($url, $params);
 
         $fullurl = $this->_url->out_omit_querystring();
         if (strpos($fullurl, "$CFG->wwwroot/") !== 0) {
@@ -1498,13 +1498,13 @@ class moodle_page {
      * For each alternative version a link will be included in the <head> tag.
      *
      * @param string $title The title to give the alternate version.
-     * @param string|moodle_url $url The URL of the alternate version.
+     * @param string|powereduc_url $url The URL of the alternate version.
      * @param string $mimetype The mime-type of the alternate version.
      * @throws coding_exception
      */
     public function add_alternate_version($title, $url, $mimetype) {
         if ($this->_state > self::STATE_BEFORE_HEADER) {
-            throw new coding_exception('Cannot call moodle_page::add_alternate_version after output has been started.');
+            throw new coding_exception('Cannot call powereduc_page::add_alternate_version after output has been started.');
         }
         $alt = new stdClass;
         $alt->title = $title;
@@ -1533,9 +1533,9 @@ class moodle_page {
     /**
      * Set the capability that allows users to edit blocks on this page.
      *
-     * Normally the default of 'moodle/site:manageblocks' is used, but a few
-     * pages like the My Moodle page need to use a different capability
-     * like 'moodle/my:manageblocks'.
+     * Normally the default of 'powereduc/site:manageblocks' is used, but a few
+     * pages like the My PowerEduc page need to use a different capability
+     * like 'powereduc/my:manageblocks'.
      *
      * @param string $capability a capability.
      */
@@ -1624,14 +1624,14 @@ class moodle_page {
     }
 
     /**
-     * @deprecated since Moodle 3.4
+     * @deprecated since PowerEduc 3.4
      */
     public function https_required() {
         throw new coding_exception('https_required() cannot be used anymore.');
     }
 
     /**
-     * @deprecated since Moodle 3.4
+     * @deprecated since PowerEduc 3.4
      */
     public function verify_https_required() {
         throw new coding_exception('verify_https_required() cannot be used anymore.');
@@ -1675,7 +1675,7 @@ class moodle_page {
     }
 
     /**
-     * Method for use by Moodle core to set up the theme. Do not
+     * Method for use by PowerEduc core to set up the theme. Do not
      * use this in your own code.
      *
      * Make sure the right theme for this page is loaded. Tell our
@@ -1987,9 +1987,9 @@ class moodle_page {
      * Loads the activity record for the current CM object associated with this
      * page.
      *
-     * This will load {@link moodle_page::$_module} with a row from the related
+     * This will load {@link powereduc_page::$_module} with a row from the related
      * module table in the database.
-     * For instance if {@link moodle_page::$_cm} is a forum then a row from the
+     * For instance if {@link powereduc_page::$_cm} is a forum then a row from the
      * forum table will be loaded.
      */
     protected function load_activity_record() {
@@ -2025,13 +2025,13 @@ class moodle_page {
      * Loads the requested category into the pages categories array.
      *
      * @param int $categoryid
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function load_category($categoryid) {
         global $DB;
         $category = $DB->get_record('course_categories', array('id' => $categoryid));
         if (!$category) {
-            throw new moodle_exception('unknowncategory');
+            throw new powereduc_exception('unknowncategory');
         }
         $this->_categories[$category->id] = $category;
         $parentcategoryids = explode('/', trim($category->path, '/'));
@@ -2154,7 +2154,7 @@ class moodle_page {
     /**
      * Returns the block region having made any required theme manipulations.
      *
-     * @since Moodle 2.5.1 2.6
+     * @since PowerEduc 2.5.1 2.6
      * @param string $region
      * @return string
      */

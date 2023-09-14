@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
@@ -36,7 +36,7 @@ require_once($CFG->libdir . '/outputcomponents.php');
  *
  * @package   core
  * @category  test
- * @copyright 2011 David Mudrak <david@moodle.com>
+ * @copyright 2011 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class outputcomponents_test extends \advanced_testcase {
@@ -44,7 +44,7 @@ class outputcomponents_test extends \advanced_testcase {
     /**
      * Tests user_picture::fields.
      *
-     * @deprecated since Moodle 3.11 MDL-45242
+     * @deprecated since PowerEduc 3.11 MDL-45242
      */
     public function test_fields_aliasing() {
         $fields = user_picture::fields();
@@ -147,12 +147,12 @@ class outputcomponents_test extends \advanced_testcase {
         $this->assertEquals(1, $CFG->slasharguments);
         $this->assertEquals(1, $CFG->themerev);
         $this->assertEquals(0, $CFG->themedesignermode);
-        $this->assertSame('https://www.example.com/moodle', $CFG->wwwroot);
+        $this->assertSame('https://www.example.com/powereduc', $CFG->wwwroot);
         $this->assertEquals(0, $CFG->enablegravatar);
         $this->assertSame('mm', $CFG->gravatardefaulturl);
 
         // Create some users.
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_url('/user/profile.php');
         $page->set_context(\context_system::instance());
         $renderer = $page->get_renderer('core');
@@ -247,7 +247,7 @@ class outputcomponents_test extends \advanced_testcase {
         // Without gravatardefaulturl, verify we pick own file.
         set_config('gravatardefaulturl', '');
         $up2 = new user_picture($user2);
-        $this->assertSame('http://www.gravatar.com/avatar/ab53a2911ddf9b4817ac01ddcd3d975f?s=35&d=http%3A%2F%2Fwww.example.com%2Fmoodle%2Fpix%2Fu%2Ff2.png', $up2->get_url($page, $renderer)->out(false));
+        $this->assertSame('http://www.gravatar.com/avatar/ab53a2911ddf9b4817ac01ddcd3d975f?s=35&d=http%3A%2F%2Fwww.example.com%2Fpowereduc%2Fpix%2Fu%2Ff2.png', $up2->get_url($page, $renderer)->out(false));
         // Uploaded image takes precedence before gravatar.
         $up1 = new user_picture($user1);
         $this->assertSame($CFG->wwwroot.'/pluginfile.php/'.$context1->id.'/user/icon/boost/f2?rev=11', $up1->get_url($page, $renderer)->out(false));
@@ -271,7 +271,7 @@ class outputcomponents_test extends \advanced_testcase {
         $this->assertSame($CFG->wwwroot.'/pluginfile.php/'.$context1->id.'/user/icon/boost/f2?rev=11', $up1->get_url($page, $renderer)->out(false));
 
         $up2 = new user_picture($user2);
-        $this->assertSame('https://secure.gravatar.com/avatar/ab53a2911ddf9b4817ac01ddcd3d975f?s=35&d=https%3A%2F%2Fwww.example.com%2Fmoodle%2Fpix%2Fu%2Ff2.png', $up2->get_url($page, $renderer)->out(false));
+        $this->assertSame('https://secure.gravatar.com/avatar/ab53a2911ddf9b4817ac01ddcd3d975f?s=35&d=https%3A%2F%2Fwww.example.com%2Fpowereduc%2Fpix%2Fu%2Ff2.png', $up2->get_url($page, $renderer)->out(false));
 
         $up3 = new user_picture($user3);
         $this->assertSame($CFG->wwwroot.'/theme/image.php/boost/core/1/u/f2', $up3->get_url($page, $renderer)->out(false));
@@ -283,23 +283,23 @@ class outputcomponents_test extends \advanced_testcase {
         // Now test gravatar with one theme having own images (afterburner).
         // $this->assertFileExists("$CFG->dirroot/theme/afterburner/config.php");
         // set_config('theme', 'afterburner');
-        // $page = new \moodle_page();
+        // $page = new \powereduc_page();
         // $page->set_url('/user/profile.php');
         // $page->set_context(\context_system::instance());
         // $renderer = $page->get_renderer('core');
 
         // $up2 = new user_picture($user2);
-        // $this->assertEquals('http://www.gravatar.com/avatar/ab53a2911ddf9b4817ac01ddcd3d975f?s=35&d=http%3A%2F%2Fwww.example.com%2Fmoodle%2Ftheme%2Fafterburner%2Fpix_core%2Fu%2Ff2.png', $up2->get_url($page, $renderer)->out(false));
+        // $this->assertEquals('http://www.gravatar.com/avatar/ab53a2911ddf9b4817ac01ddcd3d975f?s=35&d=http%3A%2F%2Fwww.example.com%2Fpowereduc%2Ftheme%2Fafterburner%2Fpix_core%2Fu%2Ff2.png', $up2->get_url($page, $renderer)->out(false));
 
         // $up2 = new user_picture($user2);
-        // $this->assertSame('https://secure.gravatar.com/avatar/ab53a2911ddf9b4817ac01ddcd3d975f?s=35&d=https%3A%2F%2Fwww.example.com%2Fmoodle%2Ftheme%2Fafterburner%2Fpix_core%2Fu%2Ff2.png', $up2->get_url($page, $renderer)->out(false));
+        // $this->assertSame('https://secure.gravatar.com/avatar/ab53a2911ddf9b4817ac01ddcd3d975f?s=35&d=https%3A%2F%2Fwww.example.com%2Fpowereduc%2Ftheme%2Fafterburner%2Fpix_core%2Fu%2Ff2.png', $up2->get_url($page, $renderer)->out(false));
         // End of gravatar tests.
 
         // Test themed images.
         // set_config('enablegravatar', 0);
         // $this->assertFileExists("$CFG->dirroot/theme/formal_white/config.php"); // Use any other theme.
         // set_config('theme', 'formal_white');
-        // $page = new \moodle_page();
+        // $page = new \powereduc_page();
         // $page->set_url('/user/profile.php');
         // $page->set_context(\context_system::instance());
         // $renderer = $page->get_renderer('core');
@@ -314,7 +314,7 @@ class outputcomponents_test extends \advanced_testcase {
         set_config('theme', 'classic');
         $CFG->wwwroot = str_replace('https:', 'http:', $CFG->wwwroot);
         $CFG->slasharguments = 0;
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_url('/user/profile.php');
         $page->set_context(\context_system::instance());
         $renderer = $page->get_renderer('core');
@@ -331,15 +331,15 @@ class outputcomponents_test extends \advanced_testcase {
 
     public function test_basic_syntax() {
         $definition = <<<EOF
-Moodle community|http://moodle.org
--Moodle free support|http://moodle.org/support
--Moodle development|http://moodle.org/development
---Moodle Tracker|http://tracker.moodle.org
---Moodle Docs|http://docs.moodle.org
--Moodle News|http://moodle.org/news
-Moodle company||Moodle trust pty
--Hosting|http://moodle.com/hosting|Commercial hosting
--Support|http://moodle.com/support|Commercial support
+PowerEduc community|http://powereduc.org
+-PowerEduc free support|http://powereduc.org/support
+-PowerEduc development|http://powereduc.org/development
+--PowerEduc Tracker|http://tracker.powereduc.org
+--PowerEduc Docs|http://docs.powereduc.org
+-PowerEduc News|http://powereduc.org/news
+PowerEduc company||PowerEduc trust pty
+-Hosting|http://powereduc.com/hosting|Commercial hosting
+-Support|http://powereduc.com/support|Commercial support
 EOF;
 
         $menu = new custom_menu($definition);
@@ -353,19 +353,19 @@ EOF;
         $this->assertInstanceOf('custom_menu_item', $item);
         $this->assertTrue($item->has_children());
         $this->assertCount(3, $item->get_children());
-        $this->assertEquals('Moodle community', $item->get_text());
+        $this->assertEquals('PowerEduc community', $item->get_text());
         $itemurl = $item->get_url();
-        $this->assertTrue($itemurl instanceof \moodle_url);
-        $this->assertEquals('http://moodle.org', $itemurl->out());
+        $this->assertTrue($itemurl instanceof \powereduc_url);
+        $this->assertEquals('http://powereduc.org', $itemurl->out());
         $this->assertNull($item->get_title()); // Implicit title.
 
         /** @var custom_menu_item $item */
         $item = array_shift($firstlevel);
         $this->assertTrue($item->has_children());
         $this->assertCount(2, $item->get_children());
-        $this->assertSame('Moodle company', $item->get_text());
+        $this->assertSame('PowerEduc company', $item->get_text());
         $this->assertNull($item->get_url());
-        $this->assertSame('Moodle trust pty', $item->get_title());
+        $this->assertSame('PowerEduc trust pty', $item->get_title());
 
         $children = $item->get_children();
         $subitem = array_shift($children);
@@ -468,7 +468,7 @@ EOF;
                            '<a href="page?page=7">8</a>',
                            );
 
-        $mpage = new \moodle_page();
+        $mpage = new \powereduc_page();
         $rbase = new renderer_base($mpage, "/");
         $pbara = new paging_bar(40, 0, 5, 'index.php');
         $pbara->prepare($rbase, $mpage, "/");
@@ -483,7 +483,7 @@ EOF;
     public function test_pix_icon() {
         $this->resetAfterTest();
 
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
 
         set_config('theme', 'boost');
         // Need to reset after changing theme.
@@ -551,7 +551,7 @@ EOF;
         $options = [ "Option A", "Option B", "Option C" ];
         $nothing = ['' => 'choosedots'];
 
-        $url = new \moodle_url('/');
+        $url = new \powereduc_url('/');
 
         $singleselect = new single_select($url, $realname, $options, null, $nothing, 'someformid');
         $singleselect->class = $realclass;
@@ -627,9 +627,9 @@ EOF;
             'style' => $labelstyle
         ];
 
-        $url1 = new \moodle_url("/#a");
-        $url2 = new \moodle_url("/#b");
-        $url3 = new \moodle_url("/#c");
+        $url1 = new \powereduc_url("/#a");
+        $url2 = new \powereduc_url("/#b");
+        $url3 = new \powereduc_url("/#c");
 
         $urls = [
             $url1->out() => 'A',

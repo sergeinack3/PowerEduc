@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Session manager class.
@@ -29,7 +29,7 @@ defined('POWEREDUC_INTERNAL') || die();
 use html_writer;
 
 /**
- * Session manager, this is the public Moodle API for sessions.
+ * Session manager, this is the public PowerEduc API for sessions.
  *
  * Following PHP functions MUST NOT be used directly:
  * - session_start() - not necessary, lib/setup.php starts session automatically,
@@ -173,7 +173,7 @@ class manager {
             if (!empty($CFG->enable_read_only_sessions) && isset($_SESSION['SESSION']->cachestore_session)) {
                 $caches = join(', ', array_keys($_SESSION['SESSION']->cachestore_session));
                 $caches = str_replace('default_session-', '', $caches);
-                throw new \moodle_exception("The session caches can not be in the session store when "
+                throw new \powereduc_exception("The session caches can not be in the session store when "
                     . "enable_read_only_sessions is enabled. Please map all session mode caches to be outside of the "
                     . "default session store before enabling this features. Found these definitions in the session: $caches");
             }
@@ -315,7 +315,7 @@ class manager {
     protected static function prepare_cookies() {
         global $CFG;
 
-        $cookiesecure = is_moodle_cookie_secure();
+        $cookiesecure = is_powereduc_cookie_secure();
 
         if (!isset($CFG->cookiehttponly)) {
             $CFG->cookiehttponly = 0;
@@ -325,7 +325,7 @@ class manager {
         if (!isset($CFG->sessioncookie)) {
             $CFG->sessioncookie = '';
         }
-        $sessionname = 'MoodleSession'.$CFG->sessioncookie;
+        $sessionname = 'PowerEducSession'.$CFG->sessioncookie;
 
         // Make sure cookie domain makes sense for this wwwroot.
         if (!isset($CFG->sessioncookiedomain)) {
@@ -395,9 +395,9 @@ class manager {
         ini_set('session.use_trans_sid', '0');
         ini_set('session.use_only_cookies', '1');
         ini_set('session.use_strict_mode', '0');      // We have custom protection in session init.
-        ini_set('session.serialize_handler', 'php');  // We can move to 'php_serialize' after we require PHP 5.5.4 form Moodle.
+        ini_set('session.serialize_handler', 'php');  // We can move to 'php_serialize' after we require PHP 5.5.4 form PowerEduc.
 
-        // Moodle does normal session timeouts, this is for leftovers only.
+        // PowerEduc does normal session timeouts, this is for leftovers only.
         ini_set('session.gc_probability', 1);
         ini_set('session.gc_divisor', 1000);
         ini_set('session.gc_maxlifetime', 60*60*24*4);
@@ -637,7 +637,7 @@ class manager {
         // that introduces a default of lax, setting it to none for the current version of chrome (2 releases before the change).
         // We also check you are using secure cookies and HTTPS because if you are not running over HTTPS
         // then setting SameSite=None will cause your session cookie to be rejected.
-        if (\core_useragent::is_chrome() && \core_useragent::check_chrome_version('78') && is_moodle_cookie_secure()) {
+        if (\core_useragent::is_chrome() && \core_useragent::check_chrome_version('78') && is_powereduc_cookie_secure()) {
             return true;
         }
         return false;
@@ -1167,7 +1167,7 @@ class manager {
     /**
      * Get the current login token or generate a new one.
      *
-     * All login forms generated from Moodle must include a login token
+     * All login forms generated from PowerEduc must include a login token
      * named "logintoken" with the value being the result of this function.
      * Logins will be rejected if they do not include this token as well as
      * the username and password fields.
@@ -1384,7 +1384,7 @@ class manager {
      * Compares two arrays outputs the difference.
      *
      * Note this does not use array_diff_assoc due to
-     * the use of stdClasses in Moodle sessions.
+     * the use of stdClasses in PowerEduc sessions.
      *
      * @param array $array1
      * @param array $array2

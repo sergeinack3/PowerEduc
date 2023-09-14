@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 /**
  * Grade export key edit page.
  *
- * @package   moodlecore
+ * @package   powereduccore
  * @copyright 2008 Petr Skoda
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -37,22 +37,22 @@ $PAGE->set_url('/grade/export/key.php', array('id' => $id, 'courseid' => $course
 
 if ($id) {
     if (!$key = $DB->get_record('user_private_key', array('id' => $id))) {
-        throw new \moodle_exception('invalidgroupid');
+        throw new \powereduc_exception('invalidgroupid');
     }
     if (empty($courseid)) {
         $courseid = $key->instance;
 
     } else if ($courseid != $key->instance) {
-        throw new \moodle_exception('invalidcourseid');
+        throw new \powereduc_exception('invalidcourseid');
     }
 
     if (!$course = $DB->get_record('course', array('id'=>$courseid))) {
-        throw new \moodle_exception('invalidcourseid');
+        throw new \powereduc_exception('invalidcourseid');
     }
 
 } else {
     if (!$course = $DB->get_record('course', array('id'=>$courseid))) {
-        throw new \moodle_exception('invalidcourseid');
+        throw new \powereduc_exception('invalidcourseid');
     }
     $key = new stdClass();
 }
@@ -61,25 +61,25 @@ $key->courseid = $course->id;
 
 require_login($course);
 $context = context_course::instance($course->id);
-require_capability('moodle/grade:export', $context);
+require_capability('powereduc/grade:export', $context);
 
 // Check if the user has at least one grade publishing capability.
 $plugins = grade_helper::get_plugins_export($course->id);
 if (!isset($plugins['keymanager'])) {
-    throw new \moodle_exception('nopermissions');
+    throw new \powereduc_exception('nopermissions');
 }
 
 // extra security check
 if (!empty($key->userid) and $USER->id != $key->userid) {
-    throw new \moodle_exception('notownerofkey');
+    throw new \powereduc_exception('notownerofkey');
 }
 
 $returnurl = $CFG->wwwroot.'/grade/export/keymanager.php?id='.$course->id;
 
 $strkeys   = get_string('keymanager', 'userkey');
 $strexportgrades = get_string('export', 'grades');
-$PAGE->navbar->add($strexportgrades, new moodle_url('/grade/export/index.php', ['id' => $courseid]));
-$PAGE->navbar->add($strkeys, new moodle_url('/grade/export/keymanager.php', ['id' => $courseid]));
+$PAGE->navbar->add($strexportgrades, new powereduc_url('/grade/export/index.php', ['id' => $courseid]));
+$PAGE->navbar->add($strkeys, new powereduc_url('/grade/export/keymanager.php', ['id' => $courseid]));
 
 if ($id and $delete) {
     if (!$confirm) {
@@ -91,8 +91,8 @@ if ($id and $delete) {
         echo $OUTPUT->header();
         $optionsyes = array('id'=>$id, 'delete'=>1, 'courseid'=>$courseid, 'sesskey'=>sesskey(), 'confirm'=>1);
         $optionsno  = array('id'=>$courseid);
-        $formcontinue = new single_button(new moodle_url('key.php', $optionsyes), get_string('yes'), 'get');
-        $formcancel = new single_button(new moodle_url('keymanager.php', $optionsno), get_string('no'), 'get');
+        $formcontinue = new single_button(new powereduc_url('key.php', $optionsyes), get_string('yes'), 'get');
+        $formcancel = new single_button(new powereduc_url('keymanager.php', $optionsno), get_string('no'), 'get');
         echo $OUTPUT->confirm(get_string('deletekeyconfirm', 'userkey', $key->value), $formcontinue, $formcancel);
         echo $OUTPUT->footer();
         die;

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * User agent test suite.
@@ -1385,9 +1385,9 @@ class useragent_test extends advanced_testcase {
                ),
             ),
 
-            // MoodleBot.
+            // PowerEducBot.
             array(
-                'User-Agent: MoodleBot/3.8 (+https://moodle.org)',
+                'User-Agent: PowerEducBot/3.8 (+https://powereduc.org)',
                 array(
                     'is_web_crawler'                => true,
                     'versionclasses'                => array(
@@ -1397,9 +1397,9 @@ class useragent_test extends advanced_testcase {
 
             // Macos Desktop app.
             array(
-                'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) moodlemobile/3.6.0 Chrome/69.0.3497.106 Electron/4.0.1 Safari/537.36 MoodleMobile',
+                'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) powereducmobile/3.6.0 Chrome/69.0.3497.106 Electron/4.0.1 Safari/537.36 PowerEducMobile',
                 array(
-                    'is_moodle_app'                => true,
+                    'is_powereduc_app'                => true,
                     'is_webkit'                    => true,
                     'is_chrome'                    => true,
                     'check_chrome_version'         => array(
@@ -1416,9 +1416,9 @@ class useragent_test extends advanced_testcase {
 
             // Linux Desktop app.
             array(
-                'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) moodledesktop/3.6.0 Chrome/69.0.3497.106 Electron/4.0.1 Safari/537.36 MoodleMobile',
+                'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) powereducdesktop/3.6.0 Chrome/69.0.3497.106 Electron/4.0.1 Safari/537.36 PowerEducMobile',
                 array(
-                    'is_moodle_app'                => true,
+                    'is_powereduc_app'                => true,
                     'is_webkit'                    => true,
                     'is_chrome'                    => true,
                     'check_chrome_version'         => array(
@@ -1435,9 +1435,9 @@ class useragent_test extends advanced_testcase {
 
             // Windows Desktop app.
             array(
-                'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) moodledesktop/3.6.0 Chrome/69.0.3497.106 Electron/4.0.1 Safari/537.36 MoodleMobile',
+                'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) powereducdesktop/3.6.0 Chrome/69.0.3497.106 Electron/4.0.1 Safari/537.36 PowerEducMobile',
                 array(
-                    'is_moodle_app'                => true,
+                    'is_powereduc_app'                => true,
                     'is_webkit'                    => true,
                     'is_chrome'                    => true,
                     'check_chrome_version'         => array(
@@ -1454,9 +1454,9 @@ class useragent_test extends advanced_testcase {
 
             // Android app.
             array(
-                'Mozilla/5.0 (Linux; Android 7.1.1; Moto G Play Build/NPIS26.48-43-2; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/71.0.3578.99 Mobile Safari/537.36 MoodleMobile',
+                'Mozilla/5.0 (Linux; Android 7.1.1; Moto G Play Build/NPIS26.48-43-2; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/71.0.3578.99 Mobile Safari/537.36 PowerEducMobile',
                 array(
-                    'is_moodle_app'                => true,
+                    'is_powereduc_app'                => true,
                     'is_webkit'                    => true,
                     'is_webkit_android'            => true,
                     'is_chrome'                    => true,
@@ -1480,9 +1480,9 @@ class useragent_test extends advanced_testcase {
 
             // Android app, user agent lower case.
             array(
-                'Mozilla/5.0 (Linux; Android 7.1.1; Moto G Play Build/NPIS26.48-43-2; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/71.0.3578.99 Mobile Safari/537.36 moodlemobile',
+                'Mozilla/5.0 (Linux; Android 7.1.1; Moto G Play Build/NPIS26.48-43-2; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/71.0.3578.99 Mobile Safari/537.36 powereducmobile',
                 array(
-                    'is_moodle_app'                => true,
+                    'is_powereduc_app'                => true,
                     'is_webkit'                    => true,
                     'is_webkit_android'            => true,
                     'is_chrome'                    => true,
@@ -1506,9 +1506,9 @@ class useragent_test extends advanced_testcase {
 
             // iOS (iPhone) app.
             array(
-                'Mozilla/5.0 (iPhone; CPU OS 13_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60 MoodleMobile',
+                'Mozilla/5.0 (iPhone; CPU OS 13_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60 PowerEducMobile',
                 array(
-                    'is_moodle_app'                => true,
+                    'is_powereduc_app'                => true,
                     'is_ios'                       => true,
                     'is_webkit'                    => true,
                     'devicetype'                   => 'mobile',
@@ -1519,9 +1519,9 @@ class useragent_test extends advanced_testcase {
 
             // iOS (iPad) app.
             array(
-                'Mozilla/5.0 (iPad; CPU OS 12_1_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/16D39 MoodleMobile',
+                'Mozilla/5.0 (iPad; CPU OS 12_1_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/16D39 PowerEducMobile',
                 array(
-                    'is_moodle_app'                => true,
+                    'is_powereduc_app'                => true,
                     'is_ios'                       => true,
                     'is_webkit'                    => true,
                     'devicetype'                   => 'tablet',
@@ -1853,7 +1853,7 @@ class useragent_test extends advanced_testcase {
             $this->assertTrue(core_useragent::is_ios(),
                 "Browser was not identified as an iOS device browser");
             // The iOS app is not Safari based.
-            if (!isset($tests['is_moodle_app']) || !$tests['is_moodle_app']) {
+            if (!isset($tests['is_powereduc_app']) || !$tests['is_powereduc_app']) {
                 $this->assertTrue(core_useragent::check_safari_ios_version());
             }
         } else {
@@ -2029,11 +2029,11 @@ class useragent_test extends advanced_testcase {
     /**
      * @dataProvider user_agents_providers
      */
-    public function test_useragent_moodle_app($useragent, $tests) {
+    public function test_useragent_powereduc_app($useragent, $tests) {
         // Setup the core_useragent instance.
         core_useragent::instance(true, $useragent);
 
-        $expectation = isset($tests['is_moodle_app']) ? $tests['is_moodle_app'] : false;
-        $this->assertSame($expectation, core_useragent::is_moodle_app());
+        $expectation = isset($tests['is_powereduc_app']) ? $tests['is_powereduc_app'] : false;
+        $this->assertSame($expectation, core_useragent::is_powereduc_app());
     }
 }

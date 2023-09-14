@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -69,22 +69,22 @@ if ($options['showdebugging']) {
 }
 
 if (!$admin = get_admin()) {
-    throw new \moodle_exception('noadmins');
+    throw new \powereduc_exception('noadmins');
 }
 
 if (!file_exists($options['file'])) {
-    throw new \moodle_exception('filenotfound');
+    throw new \powereduc_exception('filenotfound');
 }
 
 if (!$category = $DB->get_record('course_categories', ['id' => $options['categoryid']], 'id')) {
-    throw new \moodle_exception('invalidcategoryid');
+    throw new \powereduc_exception('invalidcategoryid');
 }
 
 $backupdir = "restore_" . uniqid();
 $path = $CFG->tempdir . DIRECTORY_SEPARATOR . "backup" . DIRECTORY_SEPARATOR . $backupdir;
 
 cli_heading(get_string('extractingbackupfileto', 'backup', $path));
-$fp = get_file_packer('application/vnd.moodle.backup');
+$fp = get_file_packer('application/vnd.powereduc.backup');
 $fp->extract_to_pathname($options['file'], $path);
 
 cli_heading(get_string('preprocessingbackupfile'));
@@ -102,7 +102,7 @@ try {
 } catch (Exception $e) {
     cli_heading(get_string('cleaningtempdata'));
     fulldelete($path);
-    throw new \moodle_exception('generalexceptionmessage', 'error', '', $e->getMessage());
+    throw new \powereduc_exception('generalexceptionmessage', 'error', '', $e->getMessage());
 }
 
 cli_heading(get_string('restoredcourseid', 'backup', $courseid));

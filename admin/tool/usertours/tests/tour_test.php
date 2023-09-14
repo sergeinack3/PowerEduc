@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ require_once($CFG->libdir . '/formslib.php');
 class tour_test extends \advanced_testcase {
 
     /**
-     * @var moodle_database
+     * @var powereduc_database
      */
     protected $db;
 
@@ -61,7 +61,7 @@ class tour_test extends \advanced_testcase {
     public function mock_database() {
         global $DB;
 
-        $DB = $this->getMockBuilder(\moodle_database::class)
+        $DB = $this->getMockBuilder(\powereduc_database::class)
             ->getMock()
             ;
 

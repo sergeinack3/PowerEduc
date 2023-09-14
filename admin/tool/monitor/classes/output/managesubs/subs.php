@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -52,11 +52,11 @@ class subs extends \table_sql implements \renderable {
      * Sets up the table_log parameters.
      *
      * @param string $uniqueid unique id of form.
-     * @param \moodle_url $url url where this table is displayed.
+     * @param \powereduc_url $url url where this table is displayed.
      * @param int $courseid course id.
      * @param int $perpage Number of rules to display per page.
      */
-    public function __construct($uniqueid, \moodle_url $url, $courseid = 0, $perpage = 100) {
+    public function __construct($uniqueid, \powereduc_url $url, $courseid = 0, $perpage = 100) {
         parent::__construct($uniqueid);
 
         $this->set_attribute('class', 'toolmonitor subscriptions generaltable generalbox');
@@ -117,7 +117,7 @@ class subs extends \table_sql implements \renderable {
         if (empty($courseid)) {
             return $coursename;
         } else {
-            return \html_writer::link(new \moodle_url('/course/view.php', array('id' => $courseid)), $coursename);
+            return \html_writer::link(new \powereduc_url('/course/view.php', array('id' => $courseid)), $coursename);
         }
     }
 
@@ -170,7 +170,7 @@ class subs extends \table_sql implements \renderable {
     public function col_unsubscribe(\tool_monitor\subscription $sub) {
         global $OUTPUT, $CFG;
 
-        $deleteurl = new \moodle_url($CFG->wwwroot. '/admin/tool/monitor/index.php', array('subscriptionid' => $sub->id,
+        $deleteurl = new \powereduc_url($CFG->wwwroot. '/admin/tool/monitor/index.php', array('subscriptionid' => $sub->id,
                 'action' => 'unsubscribe', 'courseid' => $this->courseid, 'sesskey' => sesskey()));
         $icon = $OUTPUT->render(new \pix_icon('t/delete', get_string('deletesubscription', 'tool_monitor')));
 

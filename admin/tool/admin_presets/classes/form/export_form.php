@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 
 namespace tool_admin_presets\form;
 
-use moodleform;
+use powereducform;
 
 defined('POWEREDUC_INTERNAL') || die();
 
@@ -31,7 +31,7 @@ require_once($CFG->dirroot . '/lib/formslib.php');
  * @author           Jordan Kesraoui | Sylvain Revenu | Pimenko based on David Monllaó <david.monllao@urv.cat> code
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class export_form extends moodleform {
+class export_form extends powereducform {
 
     public function definition(): void {
         global $USER;

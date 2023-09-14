@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    tool_policy
  * @category   test
- * @copyright  2018 Sara Arjona <sara@moodle.com>
+ * @copyright  2018 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace tool_policy\privacy;
@@ -36,7 +36,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Privacy provider tests class.
  *
- * @copyright  2018 Sara Arjona <sara@moodle.com>
+ * @copyright  2018 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider_test extends \core_privacy\tests\provider_testcase {

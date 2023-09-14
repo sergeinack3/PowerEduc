@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Contains alignment class for displaying a badge alignment.
  *
  * @package   core_badges
- * @copyright 2018 Dani Palou <dani@moodle.com>
+ * @copyright 2018 Dani Palou <dani@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,7 +32,7 @@ use core\external\exporter;
  * Class for displaying a badge alignment.
  *
  * @package   core_badges
- * @copyright 2018 Dani Palou <dani@moodle.com>
+ * @copyright 2018 Dani Palou <dani@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class alignment_exporter extends exporter {

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle Course Rollover Plugin
+// This file is part of PowerEduc Course Rollover Plugin
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package     local_powerschool
@@ -33,7 +33,7 @@ require_login();
 $context = context_system::instance();
 // require_capability('local/message:managemessages', $context);
 
-$PAGE->set_url(new moodle_url('/local/powerschool/reglages.php'));
+$PAGE->set_url(new powereduc_url('/local/powerschool/reglages.php'));
 $PAGE->set_context(\context_system::instance());
 $PAGE->set_title(get_string('reglages', 'local_powerschool'));
 $PAGE->set_heading(get_string('reglages', 'local_powerschool'));
@@ -49,24 +49,24 @@ $mform=new reglages();
 
 $templatecontext = (object)[
     // 'reglages' => array_values($reglages),
-    'reglagesedit' => new moodle_url('/local/powerschool/reglagesedit.php'),
-    'reglagessupp'=> new moodle_url('/local/powerschool/reglages.php'),
-    'filiere' => new moodle_url('/local/powerschool/filiere.php'),
+    'reglagesedit' => new powereduc_url('/local/powerschool/reglagesedit.php'),
+    'reglagessupp'=> new powereduc_url('/local/powerschool/reglages.php'),
+    'filiere' => new powereduc_url('/local/powerschool/filiere.php'),
 ];
 
 $menu = (object)[
-    'statistique' => new moodle_url('/local/powerschool/statistique.php'),
-    'reglage' => new moodle_url('/local/powerschool/reglages.php'),
-    // 'matiere' => new moodle_url('/local/powerschool/matiere.php'),
-    'seance' => new moodle_url('/local/powerschool/seance.php'),
-    'programme' => new moodle_url('/local/powerschool/programme.php'),
+    'statistique' => new powereduc_url('/local/powerschool/statistique.php'),
+    'reglage' => new powereduc_url('/local/powerschool/reglages.php'),
+    // 'matiere' => new powereduc_url('/local/powerschool/matiere.php'),
+    'seance' => new powereduc_url('/local/powerschool/seance.php'),
+    'programme' => new powereduc_url('/local/powerschool/programme.php'),
 
-    'inscription' => new moodle_url('/local/powerschool/inscription.php'),
-    // 'notes' => new moodle_url('/local/powerschool/note.php'),
-    'bulletin' => new moodle_url('/local/powerschool/bulletin.php'),
-    'configurermini' => new moodle_url('/local/powerschool/configurationmini.php'),
-    'listeetudiant' => new moodle_url('/local/powerschool/listeetudiant.php'),
-    // 'gerer' => new moodle_url('/local/powerschool/gerer.php'),
+    'inscription' => new powereduc_url('/local/powerschool/inscription.php'),
+    // 'notes' => new powereduc_url('/local/powerschool/note.php'),
+    'bulletin' => new powereduc_url('/local/powerschool/bulletin.php'),
+    'configurermini' => new powereduc_url('/local/powerschool/configurationmini.php'),
+    'listeetudiant' => new powereduc_url('/local/powerschool/listeetudiant.php'),
+    // 'gerer' => new powereduc_url('/local/powerschool/gerer.php'),
 
     //navbar
     'statistiquenavr'=>get_string('statistique', 'local_powerschool'),
@@ -94,15 +94,15 @@ echo"  <div class='card-header text-center'>
 <p class=''> Gérer les réglages de vos Etablissements</p>
 </div>";
 echo" <ul class='list-group list-group-flush'>";
-    echo "<li class='list-group-item '>".html_writer::link(new moodle_url('/local/powerschool/anneescolaire.php'),get_string('annee', 'local_powerschool'),array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</il>";echo "<br/>";
-    echo "<li class='list-group-item '>".html_writer::link(new moodle_url('/local/powerschool/campus.php'),get_string('campus', 'local_powerschool'),array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
-    echo "<li class='list-group-item '>".html_writer::link(new moodle_url('/local/powerschool/semestre.php'),get_string('semestre', 'local_powerschool'),array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
-    echo "<li class='list-group-item '>".html_writer::link(new moodle_url('/local/powerschool/salle.php'),get_string('salle', 'local_powerschool'),array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
-    echo "<li class='list-group-item '>".html_writer::link(new moodle_url('/local/powerschool/filiere.php'),get_string('filiere', 'local_powerschool'),array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
-    echo "<li class='list-group-item '>".html_writer::link(new moodle_url('/local/powerschool/specialite.php'),get_string('specialite', 'local_powerschool'),array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
-    echo "<li class='list-group-item '>".html_writer::link(new moodle_url('/local/powerschool/cycle.php'),get_string('cycle', 'local_powerschool'),array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
-    // echo "<li class='list-group-item '>".html_writer::link(new moodle_url('/local/powerschool/logo.php'),"Logo",array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
-    echo "<li class='list-group-item '>".html_writer::link(new moodle_url('/local/powerschool/modepaiement.php'),get_string('modepaiement', 'local_powerschool'),array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
+    echo "<li class='list-group-item '>".html_writer::link(new powereduc_url('/local/powerschool/anneescolaire.php'),get_string('annee', 'local_powerschool'),array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</il>";echo "<br/>";
+    echo "<li class='list-group-item '>".html_writer::link(new powereduc_url('/local/powerschool/campus.php'),get_string('campus', 'local_powerschool'),array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
+    echo "<li class='list-group-item '>".html_writer::link(new powereduc_url('/local/powerschool/semestre.php'),get_string('semestre', 'local_powerschool'),array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
+    echo "<li class='list-group-item '>".html_writer::link(new powereduc_url('/local/powerschool/salle.php'),get_string('salle', 'local_powerschool'),array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
+    echo "<li class='list-group-item '>".html_writer::link(new powereduc_url('/local/powerschool/filiere.php'),get_string('filiere', 'local_powerschool'),array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
+    echo "<li class='list-group-item '>".html_writer::link(new powereduc_url('/local/powerschool/specialite.php'),get_string('specialite', 'local_powerschool'),array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
+    echo "<li class='list-group-item '>".html_writer::link(new powereduc_url('/local/powerschool/cycle.php'),get_string('cycle', 'local_powerschool'),array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
+    // echo "<li class='list-group-item '>".html_writer::link(new powereduc_url('/local/powerschool/logo.php'),"Logo",array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
+    echo "<li class='list-group-item '>".html_writer::link(new powereduc_url('/local/powerschool/modepaiement.php'),get_string('modepaiement', 'local_powerschool'),array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
  echo"</ul>";
 echo html_writer::end_div();
 

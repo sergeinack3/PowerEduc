@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ $id       = optional_param('id', 0, PARAM_INT);
 $itemid   = optional_param('itemid', 0, PARAM_INT);
 $userid   = optional_param('userid', 0, PARAM_INT);
 
-$url = new moodle_url('/grade/edit/tree/grade.php', array('courseid'=>$courseid));
+$url = new powereduc_url('/grade/edit/tree/grade.php', array('courseid'=>$courseid));
 if ($id !== 0) {
     $url->param('id', $id);
 }
@@ -45,14 +45,14 @@ if ($userid !== 0) {
 $PAGE->set_url($url);
 
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 $PAGE->set_pagelayout('incourse');
 require_login($course);
 $context = context_course::instance($course->id);
-if (!has_capability('moodle/grade:manage', $context)) {
-    require_capability('moodle/grade:edit', $context);
+if (!has_capability('powereduc/grade:manage', $context)) {
+    require_capability('powereduc/grade:edit', $context);
 }
 
 // default return url
@@ -62,31 +62,31 @@ $returnurl = $gpr->get_return_url($CFG->wwwroot.'/grade/report/index.php?id='.$c
 // security checks!
 if (!empty($id)) {
     if (!$grade = $DB->get_record('grade_grades', array('id' => $id))) {
-        throw new \moodle_exception('invalidgroupid');
+        throw new \powereduc_exception('invalidgroupid');
     }
 
     if (!empty($itemid) and $itemid != $grade->itemid) {
-        throw new \moodle_exception('invaliditemid');
+        throw new \powereduc_exception('invaliditemid');
     }
     $itemid = $grade->itemid;
 
     if (!empty($userid) and $userid != $grade->userid) {
-        throw new \moodle_exception('invaliduser');
+        throw new \powereduc_exception('invaliduser');
     }
     $userid = $grade->userid;
 
     unset($grade);
 
 } else if (empty($userid) or empty($itemid)) {
-    throw new \moodle_exception('missinguseranditemid');
+    throw new \powereduc_exception('missinguseranditemid');
 }
 
 if (!$grade_item = grade_item::fetch(array('id'=>$itemid, 'courseid'=>$courseid))) {
-    throw new \moodle_exception('cannotfindgradeitem');
+    throw new \powereduc_exception('cannotfindgradeitem');
 }
 
 // now verify grading user has access to all groups or is member of the same group when separate groups used in course
-if (groups_get_course_groupmode($COURSE) == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $context)) {
+if (groups_get_course_groupmode($COURSE) == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $context)) {
     if ($groups = groups_get_all_groups($COURSE->id, $userid)) {
         $ok = false;
         foreach ($groups as $group) {
@@ -95,10 +95,10 @@ if (groups_get_course_groupmode($COURSE) == SEPARATEGROUPS and !has_capability('
             }
         }
         if (!$ok) {
-            throw new \moodle_exception('cannotgradeuser');
+            throw new \powereduc_exception('cannotgradeuser');
         }
     } else {
-        throw new \moodle_exception('cannotgradeuser');
+        throw new \powereduc_exception('cannotgradeuser');
     }
 }
 
@@ -204,7 +204,7 @@ if ($mform->is_cancelled()) {
     $grade_grade = new grade_grade(array('userid'=>$data->userid, 'itemid'=>$grade_item->id), true);
     $grade_grade->grade_item =& $grade_item; // no db fetching
 
-    if (has_capability('moodle/grade:manage', $context) or has_capability('moodle/grade:edit', $context)) {
+    if (has_capability('powereduc/grade:manage', $context) or has_capability('powereduc/grade:edit', $context)) {
         // change overridden flag
         if (!isset($data->overridden)) {
             $data->overridden = 0; // checkbox unticked
@@ -212,7 +212,7 @@ if ($mform->is_cancelled()) {
         $grade_grade->set_overridden($data->overridden);
     }
 
-    if (has_capability('moodle/grade:manage', $context) or has_capability('moodle/grade:hide', $context)) {
+    if (has_capability('powereduc/grade:manage', $context) or has_capability('powereduc/grade:hide', $context)) {
         $hidden      = empty($data->hidden) ? 0: $data->hidden;
         $hiddenuntil = empty($data->hiddenuntil) ? 0: $data->hiddenuntil;
 
@@ -233,11 +233,11 @@ if ($mform->is_cancelled()) {
 
     if (isset($data->locked) and !$grade_item->is_locked()) {
         if (($old_grade_grade->locked or $old_grade_grade->locktime)
-          and (!has_capability('moodle/grade:manage', $context) and !has_capability('moodle/grade:unlock', $context))) {
+          and (!has_capability('powereduc/grade:manage', $context) and !has_capability('powereduc/grade:unlock', $context))) {
             //ignore data
 
         } else if ((!$old_grade_grade->locked and !$old_grade_grade->locktime)
-          and (!has_capability('moodle/grade:manage', $context) and !has_capability('moodle/grade:lock', $context))) {
+          and (!has_capability('powereduc/grade:manage', $context) and !has_capability('powereduc/grade:lock', $context))) {
             //ignore data
 
         } else {
@@ -249,7 +249,7 @@ if ($mform->is_cancelled()) {
         }
     }
 
-    if (isset($data->excluded) and has_capability('moodle/grade:manage', $context)) {
+    if (isset($data->excluded) and has_capability('powereduc/grade:manage', $context)) {
         $grade_grade->set_excluded($data->excluded);
     }
 

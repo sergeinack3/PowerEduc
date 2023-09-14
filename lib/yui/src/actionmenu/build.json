@@ -1,7 +1,7 @@
 {
-  "name": "moodle-core-actionmenu",
+  "name": "powereduc-core-actionmenu",
   "builds": {
-    "moodle-core-actionmenu": {
+    "powereduc-core-actionmenu": {
       "jsfiles": [
         "actionmenu.js"
       ]

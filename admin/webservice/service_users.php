@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * Web services services UI
  *
  * @package   webservice
- * @copyright 2009 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2009 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once('../../config.php');
@@ -38,7 +38,7 @@ if ($node) {
     $node->make_active();
 }
 $PAGE->navbar->add(get_string('serviceusers', 'webservice'),
-        new moodle_url('/' . $CFG->admin . '/webservice/service_users.php', array('id' => $id)));
+        new powereduc_url('/' . $CFG->admin . '/webservice/service_users.php', array('id' => $id)));
 
 $webservicemanager = new webservice();
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ use core_reportbuilder\local\report\action;
 use core_reportbuilder\local\report\column;
 use html_writer;
 use lang_string;
-use moodle_url;
+use powereduc_url;
 use pix_icon;
 use core_reportbuilder\system_report;
 use stdClass;
@@ -34,7 +34,7 @@ use stdClass;
  * Cohorts system report class implementation
  *
  * @package    core_cohort
- * @copyright  2021 David Matamoros <davidmc@moodle.com>
+ * @copyright  2021 David Matamoros <davidmc@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class cohorts extends system_report {
@@ -83,7 +83,7 @@ class cohorts extends system_report {
             $context = context_system::instance();
         }
 
-        return has_any_capability(['moodle/cohort:manage', 'moodle/cohort:view'], $context);
+        return has_any_capability(['powereduc/cohort:manage', 'powereduc/cohort:view'], $context);
     }
 
     /**
@@ -105,7 +105,7 @@ class cohorts extends system_report {
                 ->add_callback(static function(string $value, stdClass $cohort): string {
                     $context = context::instance_by_id($cohort->contextid);
                     if ($context instanceof context_coursecat) {
-                        return html_writer::link(new moodle_url('/cohort/index.php',
+                        return html_writer::link(new powereduc_url('/cohort/index.php',
                             ['contextid' => $cohort->contextid]), $value);
                     }
 
@@ -196,62 +196,62 @@ class cohorts extends system_report {
 
         $contextid = $this->get_parameter('contextid', 0, PARAM_INT);
         $showall = $this->get_parameter('showall', true, PARAM_BOOL);
-        $returnurl = (new moodle_url('/cohort/index.php',
+        $returnurl = (new powereduc_url('/cohort/index.php',
             ['id' => ':id', 'contextid' => $contextid, 'showall' => $showall]))->out(false);
 
-        // Hide action. It will be only shown if the property 'visible' is true and user has 'moodle/cohort:manage' capabillity.
+        // Hide action. It will be only shown if the property 'visible' is true and user has 'powereduc/cohort:manage' capabillity.
         $this->add_action((new action(
-            new moodle_url('/cohort/edit.php', ['id' => ':id', 'sesskey' => sesskey(), 'hide' => 1, 'returnurl' => $returnurl]),
+            new powereduc_url('/cohort/edit.php', ['id' => ':id', 'sesskey' => sesskey(), 'hide' => 1, 'returnurl' => $returnurl]),
             new pix_icon('t/show', '', 'core'),
             [],
             false,
             new lang_string('hide')
         ))->add_callback(function($row) {
-            return $row->visible && has_capability('moodle/cohort:manage', context::instance_by_id($row->contextid));
+            return $row->visible && has_capability('powereduc/cohort:manage', context::instance_by_id($row->contextid));
         }));
 
-        // Show action. It will be only shown if the property 'visible' is false and user has 'moodle/cohort:manage' capabillity.
+        // Show action. It will be only shown if the property 'visible' is false and user has 'powereduc/cohort:manage' capabillity.
         $this->add_action((new action(
-            new moodle_url('/cohort/edit.php', ['id' => ':id', 'sesskey' => sesskey(), 'show' => 1, 'returnurl' => $returnurl]),
+            new powereduc_url('/cohort/edit.php', ['id' => ':id', 'sesskey' => sesskey(), 'show' => 1, 'returnurl' => $returnurl]),
             new pix_icon('t/hide', '', 'core'),
             [],
             false,
             new lang_string('show')
         ))->add_callback(function($row) {
-            return !$row->visible && has_capability('moodle/cohort:manage', context::instance_by_id($row->contextid));
+            return !$row->visible && has_capability('powereduc/cohort:manage', context::instance_by_id($row->contextid));
         }));
 
-        // Edit action. It will be only shown if user has 'moodle/cohort:manage' capabillity.
+        // Edit action. It will be only shown if user has 'powereduc/cohort:manage' capabillity.
         $this->add_action((new action(
-            new moodle_url('/cohort/edit.php', ['id' => ':id', 'returnurl' => $returnurl]),
+            new powereduc_url('/cohort/edit.php', ['id' => ':id', 'returnurl' => $returnurl]),
             new pix_icon('t/edit', '', 'core'),
             [],
             false,
             new lang_string('edit')
         ))->add_callback(function($row) {
-            return has_capability('moodle/cohort:manage', context::instance_by_id($row->contextid));
+            return has_capability('powereduc/cohort:manage', context::instance_by_id($row->contextid));
         }));
 
-        // Delete action. It will be only shown if user has 'moodle/cohort:manage' capabillity.
+        // Delete action. It will be only shown if user has 'powereduc/cohort:manage' capabillity.
         $this->add_action((new action(
-            new moodle_url('/cohort/edit.php', ['id' => ':id', 'delete' => 1, 'returnurl' => $returnurl]),
+            new powereduc_url('/cohort/edit.php', ['id' => ':id', 'delete' => 1, 'returnurl' => $returnurl]),
             new pix_icon('t/delete', '', 'core'),
             [],
             false,
             new lang_string('delete')
         ))->add_callback(function($row) {
-            return has_capability('moodle/cohort:manage', context::instance_by_id($row->contextid));
+            return has_capability('powereduc/cohort:manage', context::instance_by_id($row->contextid));
         }));
 
-        // Assign members to cohort action. It will be only shown if user has 'moodle/cohort:assign' capabillity.
+        // Assign members to cohort action. It will be only shown if user has 'powereduc/cohort:assign' capabillity.
         $this->add_action((new action(
-            new moodle_url('/cohort/assign.php', ['id' => ':id', 'returnurl' => $returnurl]),
+            new powereduc_url('/cohort/assign.php', ['id' => ':id', 'returnurl' => $returnurl]),
             new pix_icon('i/users', '', 'core'),
             [],
             false,
             new lang_string('assign', 'core_cohort')
         ))->add_callback(function($row) {
-            return has_capability('moodle/cohort:assign', context::instance_by_id($row->contextid));
+            return has_capability('powereduc/cohort:assign', context::instance_by_id($row->contextid));
         }));
     }
 

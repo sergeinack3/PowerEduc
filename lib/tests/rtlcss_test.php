@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Tests for the core_rtlcss class.
  *
- * The core_rtlcss class extends \MoodleHQ\RTLCSS\RTLCSS library which depends on sabberworm/php-css-parser library.
+ * The core_rtlcss class extends \PowerEducHQ\RTLCSS\RTLCSS library which depends on sabberworm/php-css-parser library.
  * This test verifies that css parsing works as expected should any of the above change.
  *
  * @package    core
@@ -40,7 +40,7 @@ class rtlcss_test extends basic_testcase {
      */
     public function background_image_provider() {
         return [
-            /* Not supported by MoodleHQ/RTLCSS yet.
+            /* Not supported by PowerEducHQ/RTLCSS yet.
             [[
                 'should' => 'Should process string map in url (processUrls:true)',
                 'expected' => 'div { background-image: url(images/rtl.png), url(images/right.png);}',
@@ -86,7 +86,7 @@ class rtlcss_test extends basic_testcase {
                 'input' => 'div {background-position:0 75%;}',
                 'reversable' => false
             ]],
-            /* Not supported by MoodleHQ/RTLCSS yet.
+            /* Not supported by PowerEducHQ/RTLCSS yet.
             [[
                 'should' => 'Should complement percentage horizontal position with calc',
                 'expected' => 'div {background-position:calc(100% - (30% + 50px)) 75%;}',
@@ -135,7 +135,7 @@ class rtlcss_test extends basic_testcase {
                 'input' => 'div {background-position-x:18.25%, 89%;}',
                 'reversable' => true
             ]],
-            /* Not supported by MoodleHQ/RTLCSS yet.
+            /* Not supported by PowerEducHQ/RTLCSS yet.
             [[
                 'should' => 'Should complement percentage with calc: position-x',
                 'expected' => 'div {background-position-x:calc(100% - (30% + 50px)), -webkit-calc(100% - (30% + 50px));}',
@@ -196,7 +196,7 @@ class rtlcss_test extends basic_testcase {
                 'input' => '.banner { background: 19% top url("topbanner.png") #00d repeat-y fixed; }',
                 'reversable' => true
             ]],
-            /* Not supported by MoodleHQ/RTLCSS yet.
+            /* Not supported by PowerEducHQ/RTLCSS yet.
             [[
                 'should' => 'Should complement calc horizontal position',
                 'expected' => '.banner { background: calc(100% - (19% + 2px)) top url(topbanner.png) #00d repeat-y fixed; }',
@@ -217,7 +217,7 @@ class rtlcss_test extends basic_testcase {
                 'input' => '.banner { background: 10px top url("ltr-top-right-banner.png") #00d repeat-y fixed; }',
                 'reversable' => true
             ]],
-            /* Not supported by MoodleHQ/RTLCSS yet.
+            /* Not supported by PowerEducHQ/RTLCSS yet.
             [[
                 'should' => 'Should process string map in url (processUrls:true)',
                 'expected' => '.banner { background: 10px top url(rtl-top-left-banner.png) #00d repeat-y fixed; }',
@@ -248,7 +248,7 @@ class rtlcss_test extends basic_testcase {
                 'input' => '.banner { background: 10px top url("ultra/bright.png") #00d repeat-y fixed; }',
                 'reversable' => true
             ]],
-            /* Not supported by MoodleHQ/RTLCSS yet.
+            /* Not supported by PowerEducHQ/RTLCSS yet.
             [[
                 'should' => 'Should swap bright:bleft, ultra:urtla (processUrls: true, greedy)',
                 'expected' => '.banner { background: 10px top url("urtla/bleft.png") #00d repeat-y fixed; }',
@@ -285,7 +285,7 @@ class rtlcss_test extends basic_testcase {
                 'input' => '/*!rtl:ignore*/div { left:10px; text-align:right;}',
                 'reversable' => false,
             ]],
-            // Not supported by MoodleHQ/RTLCSS yet.
+            // Not supported by PowerEducHQ/RTLCSS yet.
             //[[
             //    'should' => 'Should ignore flipping - decl. level (default)',
             //    'expected' => 'div {left:10px;text-align:left;}',
@@ -341,7 +341,7 @@ class rtlcss_test extends basic_testcase {
                 'input' => 'div {/*rtl:begin:remove*/left:10px; text-align:left;/*rtl:end:remove*/ display:inline;}',
                 'reversable' => false
             ]],
-            // Not supported by MoodleHQ/RTLCSS yet.
+            // Not supported by PowerEducHQ/RTLCSS yet.
             //[[
             //    'should' => 'Final/trailing comment ignored bug (block style): note a tag rules are NOT flipped as they should be',
             //    'expected' => 'div {left:10px;text-align:left;} a {right:10px;}',
@@ -421,7 +421,7 @@ class rtlcss_test extends basic_testcase {
      */
     public function special_provider() {
         return [
-            /* Not supported by MoodleHQ/RTLCSS yet.
+            /* Not supported by PowerEducHQ/RTLCSS yet.
             [[
                 'should' => 'Should not negate tokens',
                 'expected' => 'div { box-shadow: rgba(0, 128, 128, .98) inset -5em 1em 0;}',
@@ -451,7 +451,7 @@ class rtlcss_test extends basic_testcase {
                 'input' => 'div { transform-origin:9.75%; }',
                 'reversable' => true
             ]],
-            /* Not supported by MoodleHQ/RTLCSS yet.
+            /* Not supported by PowerEducHQ/RTLCSS yet.
             [[
                 'should' => 'Should mirror calc (x-offset)',
                 'expected' => 'div { transform-origin: -moz-calc(100% - (((25%/2) * 10px))); }',
@@ -478,7 +478,7 @@ class rtlcss_test extends basic_testcase {
                 'input' => 'div { transform-origin:0 0; }',
                 'reversable' => false
             ]],
-            /* Not supported by MoodleHQ/RTLCSS yet.
+            /* Not supported by PowerEducHQ/RTLCSS yet.
             [[
                 'should' => 'Should mirror with y being calc (x-offset y-offset: 0 means 0%)',
                 'expected' => 'div { transform-origin:100% -webkit-calc(15% * (3/2)); }',
@@ -493,7 +493,7 @@ class rtlcss_test extends basic_testcase {
                 'input' => 'div { transform-origin:69.75% 10%; }',
                 'reversable' => true
             ]],
-            /* Not supported by MoodleHQ/RTLCSS yet.
+            /* Not supported by PowerEducHQ/RTLCSS yet.
             [[
                 'should' => 'Should mirror with x being calc (x-offset y-offset)',
                 'expected' => 'div { transform-origin: -webkit-calc(100% - (15% * (3/2))) 30.25%; }',
@@ -515,7 +515,7 @@ class rtlcss_test extends basic_testcase {
                 'input' => 'div { transform-origin:70% left; }',
                 'reversable' => true
             ]],
-            /* Not supported by MoodleHQ/RTLCSS yet.
+            /* Not supported by PowerEducHQ/RTLCSS yet.
             [[
                 'should' => 'Should mirror with calc (y-offset x-offset-keyword)',
                 'expected' => 'div { transform-origin:-ms-calc(140%/2) right; }',
@@ -530,7 +530,7 @@ class rtlcss_test extends basic_testcase {
                 'input' => 'div { transform-origin:left 70%; }',
                 'reversable' => true
             ]],
-            /* Not supported by MoodleHQ/RTLCSS yet.
+            /* Not supported by PowerEducHQ/RTLCSS yet.
             [[
                 'should' => 'Should mirror with calc (x-offset-keyword y-offset)',
                 'expected' => 'div { transform-origin:right -moz-calc(((140%/2))); }',
@@ -545,7 +545,7 @@ class rtlcss_test extends basic_testcase {
                 'input' => 'div { transform-origin:top 69.75%; }',
                 'reversable' => true
             ]],
-            /* Not supported by MoodleHQ/RTLCSS yet.
+            /* Not supported by PowerEducHQ/RTLCSS yet.
             [[
                 'should' => 'Should not mirror with x being calc (y-offset-keyword x-offset)',
                 'expected' => 'div { transform-origin:top calc(100% - (((140%/2)))); }',
@@ -572,7 +572,7 @@ class rtlcss_test extends basic_testcase {
                 'input' => 'div { transform-origin:19.75% 30% 10%; }',
                 'reversable' => true
             ]],
-            /* Not supported by MoodleHQ/RTLCSS yet.
+            /* Not supported by PowerEducHQ/RTLCSS yet.
             [[
                 'should' => 'Should mirror with x being calc (x-offset y-offset z-offset)',
                 'expected' => 'div { transform-origin: calc(100% - (25% * 3 + 20px)) 30% 10%; }',
@@ -614,7 +614,7 @@ class rtlcss_test extends basic_testcase {
      */
     public function transforms_provider() {
         return [
-            /* Not supported by MoodleHQ/RTLCSS yet.
+            /* Not supported by PowerEducHQ/RTLCSS yet.
             [[
                 'should' => 'Should mirror transform : matrix',
                 'expected' => 'div { transform: matrix(2, 0.1, 20.75, 2, 2, 2); }',
@@ -916,7 +916,7 @@ class rtlcss_test extends basic_testcase {
                 'input' => 'div { border-radius: 10.75px 40.25px; }',
                 'reversable' => true
             ]],
-            /* Not supported by MoodleHQ/RTLCSS yet.
+            /* Not supported by PowerEducHQ/RTLCSS yet.
             [[
                 'should' => 'Should mirror property value: border-radius (4 values - double)',
                 'expected' => 'div { border-radius: 40.25px 10.75px .5px 40.75px / .4em 1em 1em 4.5em; }',
@@ -987,7 +987,7 @@ class rtlcss_test extends basic_testcase {
                 'input' => 'div { padding: 1px 2.5em .3rem 4px; }',
                 'reversable' => true
             ]],
-            /* Not supported by MoodleHQ/RTLCSS yet.
+            /* Not supported by PowerEducHQ/RTLCSS yet.
             [[
                 'should' => 'Should mirror property value: box-shadow',
                 'expected' => 'div { box-shadow: -60px -16px rgba(0, 128, 128, 0.98), -10.25px 5px 5px #ff0, inset -0.5em 1em 0 white; }',
@@ -1067,7 +1067,7 @@ class rtlcss_test extends basic_testcase {
                 'input' => 'div { cursor:ew-resize; }',
                 'reversable' => false
             ]],
-            /* Not supported by MoodleHQ/RTLCSS yet.
+            /* Not supported by PowerEducHQ/RTLCSS yet.
             [[
                 'should' => 'Should process string map in url: cursor (processUrls: true)',
                 'expected' => '.foo { cursor: url(right.cur), url(rtl.cur), se-resize, auto }',
@@ -1129,7 +1129,7 @@ class rtlcss_test extends basic_testcase {
      * @param array $data the provider data.
      * @dataProvider background_image_provider
      */
-    /* Not supported by MoodleHQ/RTLCSS yet.
+    /* Not supported by PowerEducHQ/RTLCSS yet.
     public function test_background_image($data) {
         $output = new OutputFormat();
         $this->assert_sample($data, $output);
@@ -1197,7 +1197,7 @@ class rtlcss_test extends basic_testcase {
      * @param array $data the provider data.
      * @dataProvider special_provider
      */
-    /* Not supported by MoodleHQ/RTLCSS yet.
+    /* Not supported by PowerEducHQ/RTLCSS yet.
     public function test_special($data) {
         $output = new OutputFormat();
         $output->set('SpaceBeforeRules', ' ');
@@ -1226,7 +1226,7 @@ class rtlcss_test extends basic_testcase {
      * @param array $data the provider data.
      * @dataProvider transforms_provider
      */
-    /* Not supported by MoodleHQ/RTLCSS yet.
+    /* Not supported by PowerEducHQ/RTLCSS yet.
     public function test_transforms($data) {
         $output = new OutputFormat();
         $output->set('SpaceBeforeRules', ' ');

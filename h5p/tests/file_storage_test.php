@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ use core_h5p\file_storage;
 use core_h5p\local\library\autoloader;
 use core_h5p\helper;
 use file_archive;
-use moodle_exception;
+use powereduc_exception;
 use ReflectionMethod;
 use stored_file;
 use zip_archive;
@@ -30,7 +30,7 @@ use zip_archive;
  *
  * @package    core_h5p
  * @category   test
- * @copyright  2019 Victor Deniz <victor@moodle.com>
+ * @copyright  2019 Victor Deniz <victor@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @runTestsInSeparateProcesses
  */
@@ -654,7 +654,7 @@ class file_storage_test extends \advanced_testcase {
         $filename = 'fake.png';
         $h5pcontentfolder = $tempfolder . '/fakeH5Pcontent/content' . $filepath;
         if (!check_dir_exists($h5pcontentfolder, true, true)) {
-            throw new moodle_exception('error_creating_temp_dir', 'error', $h5pcontentfolder);
+            throw new powereduc_exception('error_creating_temp_dir', 'error', $h5pcontentfolder);
         }
 
         $file = $h5pcontentfolder . $filename;
@@ -781,7 +781,7 @@ class file_storage_test extends \advanced_testcase {
         $h5pcontentfolder = $tempfolder . '/fakeH5Pcontent';
         $contentfolder = $h5pcontentfolder . '/content';
         if (!check_dir_exists($contentfolder, true, true)) {
-            throw new moodle_exception('error_creating_temp_dir', 'error', $contentfolder);
+            throw new powereduc_exception('error_creating_temp_dir', 'error', $contentfolder);
         }
 
         // Add content.json file.
@@ -794,7 +794,7 @@ class file_storage_test extends \advanced_testcase {
             $foldername = '/folder' . $numfolder;
             $newfolder = $contentfolder . $foldername;
             if (!check_dir_exists($newfolder, true, true)) {
-                throw new moodle_exception('error_creating_temp_dir', 'error', $newfolder);
+                throw new powereduc_exception('error_creating_temp_dir', 'error', $newfolder);
             }
             $numfiles = random_int(2, 5);
             for ($numfile = 1; $numfile < $numfiles; $numfile++) {

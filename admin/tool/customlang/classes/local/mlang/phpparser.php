@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,14 +18,14 @@
  * Mlang PHP based on David Mudrak phpparser for local_amos.
  *
  * @package    tool_customlang
- * @copyright  2020 Ferran Recio <ferran@moodle.com>
+ * @copyright  2020 Ferran Recio <ferran@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace tool_customlang\local\mlang;
 
 use coding_exception;
-use moodle_exception;
+use powereduc_exception;
 
 /**
  * Parser of Moodle strings defined as associative array.
@@ -155,7 +155,7 @@ class phpparser {
                     $expect = 'STRING_ID';
                     continue;
                 } else {
-                    throw new moodle_exception('Parsing error. Expected character [ at line '.$line);
+                    throw new powereduc_exception('Parsing error. Expected character [ at line '.$line);
                 }
             }
 
@@ -165,7 +165,7 @@ class phpparser {
                     $expect = 'RIGHT_BRACKET';
                     continue;
                 } else {
-                    throw new moodle_exception('Parsing error. Expected T_CONSTANT_ENCAPSED_STRING array key at line '.$line);
+                    throw new powereduc_exception('Parsing error. Expected T_CONSTANT_ENCAPSED_STRING array key at line '.$line);
                 }
             }
 
@@ -174,7 +174,7 @@ class phpparser {
                     $expect = 'ASSIGNMENT';
                     continue;
                 } else {
-                    throw new moodle_exception('Parsing error. Expected character ] at line '.$line);
+                    throw new powereduc_exception('Parsing error. Expected character ] at line '.$line);
                 }
             }
 
@@ -183,7 +183,7 @@ class phpparser {
                     $expect = 'STRING_TEXT';
                     continue;
                 } else {
-                    throw new moodle_exception('Parsing error. Expected character = at line '.$line);
+                    throw new powereduc_exception('Parsing error. Expected character = at line '.$line);
                 }
             }
 
@@ -193,7 +193,7 @@ class phpparser {
                     $expect = 'SEMICOLON';
                     continue;
                 } else {
-                    throw new moodle_exception(
+                    throw new powereduc_exception(
                         'Parsing error. Expected T_CONSTANT_ENCAPSED_STRING array item value at line '.$line
                     );
                 }
@@ -201,7 +201,7 @@ class phpparser {
 
             if ($expect == 'SEMICOLON') {
                 if (is_null($id) or is_null($text)) {
-                    throw new moodle_exception('Parsing error. NULL string id or value at line '.$line);
+                    throw new powereduc_exception('Parsing error. NULL string id or value at line '.$line);
                 }
                 if ($foundtype === 'char' and $founddata === ';') {
                     if (!empty($id)) {
@@ -212,7 +212,7 @@ class phpparser {
                     $expect = 'STRING_VAR';
                     continue;
                 } else {
-                    throw new moodle_exception('Parsing error. Expected character ; at line '.$line);
+                    throw new powereduc_exception('Parsing error. Expected character ; at line '.$line);
                 }
             }
 
@@ -234,7 +234,7 @@ class phpparser {
     protected function decapsulate(string $text): string {
 
         if (strlen($text) < 2) {
-            throw new moodle_exception('Parsing error. Expected T_CONSTANT_ENCAPSED_STRING in decapsulate()');
+            throw new powereduc_exception('Parsing error. Expected T_CONSTANT_ENCAPSED_STRING in decapsulate()');
         }
 
         if (substr($text, 0, 1) == "'" and substr($text, -1) == "'") {
@@ -252,7 +252,7 @@ class phpparser {
             return $text;
 
         } else {
-            throw new moodle_exception(
+            throw new powereduc_exception(
                 'Parsing error. Unexpected quotation in T_CONSTANT_ENCAPSED_STRING in decapsulate(): '.$text
             );
         }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ use renderable;
 use templatable;
 use renderer_base;
 use stdClass;
-use moodle_url;
+use powereduc_url;
 use action_menu;
 use action_menu_link;
 use pix_icon;
@@ -83,19 +83,19 @@ class libraries implements renderable, templatable {
                 $actionmenu->set_menu_trigger(get_string('actions', 'core_h5p'));
                 $actionmenu->prioritise = true;
                 $actionmenu->add_primary_action(new action_menu_link(
-                    new moodle_url('/h5p/libraries.php', ['deletelibrary' => $version->id]),
+                    new powereduc_url('/h5p/libraries.php', ['deletelibrary' => $version->id]),
                     new pix_icon('t/delete', get_string('deletelibraryversion', 'core_h5p')),
                     get_string('deletelibraryversion', 'core_h5p')
                 ));
                 $version->actionmenu = $actionmenu->export_for_template($output);
                 if ($version->enabled) {
-                    $version->toggleenabledurl = new moodle_url('/h5p/libraries.php', [
+                    $version->toggleenabledurl = new powereduc_url('/h5p/libraries.php', [
                         'id' => $version->id,
                         'action' => 'disable',
                         'sesskey' => sesskey(),
                     ]);
                 } else {
-                    $version->toggleenabledurl = new moodle_url('/h5p/libraries.php', [
+                    $version->toggleenabledurl = new powereduc_url('/h5p/libraries.php', [
                         'id' => $version->id,
                         'action' => 'enable',
                         'sesskey' => sesskey(),

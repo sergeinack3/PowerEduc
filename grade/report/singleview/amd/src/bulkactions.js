@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * Javascript module for bulk actions.
  *
  * @module      gradereport_singleview/bulkactions
- * @copyright   2022 Ilya Tregubov <ilya@moodle.com>
+ * @copyright   2022 Ilya Tregubov <ilya@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -67,7 +67,7 @@ const registerListenerEvents = () => {
                             {key: 'removeoverride', component: 'gradereport_singleview'},
                             {key: 'overridenoneconfirm', component: 'gradereport_singleview'},
                             {key: 'removeoverridesave', component: 'gradereport_singleview'},
-                            {key: 'cancel', component: 'moodle'},
+                            {key: 'cancel', component: 'powereduc'},
                         ]).done((strings) => {
                             Notification.confirm(
                                 strings[0],
@@ -103,7 +103,7 @@ const registerListenerEvents = () => {
                     // Modal for bulk insert grades.
                     Str.get_strings([
                         {key: 'bulklegend', component: 'gradereport_singleview'},
-                        {key: 'save', component: 'moodle'},
+                        {key: 'save', component: 'powereduc'},
                     ]).done((strings) => {
                         ModalFactory.create({
                             type: ModalFactory.types.SAVE_CANCEL,

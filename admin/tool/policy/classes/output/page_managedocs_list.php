@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package     tool_policy
  * @category    output
- * @copyright   2018 David Mudrák <david@moodle.com>
+ * @copyright   2018 David Mudrák <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,7 +32,7 @@ defined('POWEREDUC_INTERNAL') || die();
 
 use action_menu;
 use action_menu_link;
-use moodle_url;
+use powereduc_url;
 use pix_icon;
 use renderable;
 use renderer_base;
@@ -45,14 +45,14 @@ use tool_policy\policy_version;
  *
  * The page displays all policy documents in their sort order, together with draft future versions.
  *
- * @copyright 2018 David Mudrak <david@moodle.com>
+ * @copyright 2018 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class page_managedocs_list implements renderable, templatable {
 
     /** @var int  */
     protected $policyid = null;
-    /** @var moodle_url */
+    /** @var powereduc_url */
     protected $returnurl = null;
 
     /**
@@ -61,7 +61,7 @@ class page_managedocs_list implements renderable, templatable {
      */
     public function __construct($policyid = null) {
         $this->policyid = $policyid;
-        $this->returnurl = new moodle_url('/admin/tool/policy/managedocs.php');
+        $this->returnurl = new powereduc_url('/admin/tool/policy/managedocs.php');
         if ($this->policyid) {
             $this->returnurl->param('archived', $this->policyid);
         }
@@ -76,7 +76,7 @@ class page_managedocs_list implements renderable, templatable {
     public function export_for_template(renderer_base $output) {
 
         $data = (object) [];
-        $data->pluginbaseurl = (new moodle_url('/admin/tool/policy'))->out(false);
+        $data->pluginbaseurl = (new powereduc_url('/admin/tool/policy'))->out(false);
         $data->canmanage = has_capability('tool/policy:managedocs', \context_system::instance());
         $data->canaddnew = $data->canmanage && !$this->policyid;
         $data->canviewacceptances = has_capability('tool/policy:viewacceptances', \context_system::instance());
@@ -85,7 +85,7 @@ class page_managedocs_list implements renderable, templatable {
 
         if ($this->policyid) {
             // We are only interested in the archived versions of the given policy.
-            $data->backurl = (new moodle_url('/admin/tool/policy/managedocs.php'))->out(false);
+            $data->backurl = (new powereduc_url('/admin/tool/policy/managedocs.php'))->out(false);
             $policy = api::list_policies([$this->policyid], true)[0];
             if ($firstversion = $policy->currentversion ?: (reset($policy->draftversions) ?: reset($policy->archivedversions))) {
                 $data->title = get_string('previousversions', 'tool_policy', format_string($firstversion->name));
@@ -167,13 +167,13 @@ class page_managedocs_list implements renderable, templatable {
 
         $version->indented = $isindented;
 
-        $editbaseurl = new moodle_url('/admin/tool/policy/editpolicydoc.php', [
+        $editbaseurl = new powereduc_url('/admin/tool/policy/editpolicydoc.php', [
             'sesskey' => sesskey(),
             'policyid' => $policy->id,
             'returnurl' => $this->returnurl->out_as_local_url(false),
         ]);
 
-        $viewurl = new moodle_url('/admin/tool/policy/view.php', [
+        $viewurl = new powereduc_url('/admin/tool/policy/view.php', [
             'policyid' => $policy->id,
             'versionid' => $version->id,
             'manage' => 1,
@@ -185,7 +185,7 @@ class page_managedocs_list implements renderable, templatable {
         $actionmenu->prioritise = true;
         if ($moveup) {
             $actionmenu->add(new action_menu_link(
-                new moodle_url($editbaseurl, ['moveup' => $policy->id]),
+                new powereduc_url($editbaseurl, ['moveup' => $policy->id]),
                 new pix_icon('t/up', get_string('moveup', 'tool_policy')),
                 get_string('moveup', 'tool_policy'),
                 true
@@ -193,7 +193,7 @@ class page_managedocs_list implements renderable, templatable {
         }
         if ($movedown) {
             $actionmenu->add(new action_menu_link(
-                new moodle_url($editbaseurl, ['movedown' => $policy->id]),
+                new powereduc_url($editbaseurl, ['movedown' => $policy->id]),
                 new pix_icon('t/down', get_string('movedown', 'tool_policy')),
                 get_string('movedown', 'tool_policy'),
                 true
@@ -207,7 +207,7 @@ class page_managedocs_list implements renderable, templatable {
         ));
         if ($status != policy_version::STATUS_ARCHIVED) {
             $actionmenu->add(new action_menu_link(
-                new moodle_url($editbaseurl, ['versionid' => $version->id]),
+                new powereduc_url($editbaseurl, ['versionid' => $version->id]),
                 null,
                 get_string('edit'),
                 false
@@ -215,7 +215,7 @@ class page_managedocs_list implements renderable, templatable {
         }
         if ($status == policy_version::STATUS_ACTIVE) {
             $actionmenu->add(new action_menu_link(
-                new moodle_url($editbaseurl, ['inactivate' => $policy->id]),
+                new powereduc_url($editbaseurl, ['inactivate' => $policy->id]),
                 null,
                 get_string('inactivate', 'tool_policy'),
                 false,
@@ -224,7 +224,7 @@ class page_managedocs_list implements renderable, templatable {
         }
         if ($status == policy_version::STATUS_DRAFT) {
             $actionmenu->add(new action_menu_link(
-                new moodle_url($editbaseurl, ['makecurrent' => $version->id]),
+                new powereduc_url($editbaseurl, ['makecurrent' => $version->id]),
                 null,
                 get_string('activate', 'tool_policy'),
                 false,
@@ -233,7 +233,7 @@ class page_managedocs_list implements renderable, templatable {
         }
         if (api::can_delete_version($version)) {
             $actionmenu->add(new action_menu_link(
-                new moodle_url($editbaseurl, ['delete' => $version->id]),
+                new powereduc_url($editbaseurl, ['delete' => $version->id]),
                 null,
                 get_string('delete'),
                 false,
@@ -242,7 +242,7 @@ class page_managedocs_list implements renderable, templatable {
         }
         if ($status == policy_version::STATUS_ARCHIVED) {
             $actionmenu->add(new action_menu_link(
-                new moodle_url($editbaseurl, ['versionid' => $version->id]),
+                new powereduc_url($editbaseurl, ['versionid' => $version->id]),
                 null,
                 get_string('settodraft', 'tool_policy'),
                 false
@@ -251,7 +251,7 @@ class page_managedocs_list implements renderable, templatable {
         if (!$this->policyid && !$isindented && $policy->archivedversions &&
                 ($status != policy_version::STATUS_ARCHIVED || count($policy->archivedversions) > 1)) {
             $actionmenu->add(new action_menu_link(
-                new moodle_url('/admin/tool/policy/managedocs.php', ['archived' => $policy->id]),
+                new powereduc_url('/admin/tool/policy/managedocs.php', ['archived' => $policy->id]),
                 null,
                 get_string('viewarchived', 'tool_policy'),
                 false

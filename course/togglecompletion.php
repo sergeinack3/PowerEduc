@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -39,12 +39,12 @@ $user = optional_param('user', 0, PARAM_INT);
 $rolec = optional_param('rolec', 0, PARAM_INT);
 
 if (!$cmid && !$courseid) {
-    throw new \moodle_exception('invalidarguments');
+    throw new \powereduc_exception('invalidarguments');
 }
 
 // Process self completion
 if ($courseid) {
-    $PAGE->set_url(new moodle_url('/course/togglecompletion.php', array('course'=>$courseid)));
+    $PAGE->set_url(new powereduc_url('/course/togglecompletion.php', array('course'=>$courseid)));
 
     // Check user is logged in
     $course = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
@@ -55,9 +55,9 @@ if ($courseid) {
     $trackeduser = ($user ? $user : $USER->id);
 
     if (!$completion->is_enabled()) {
-        throw new moodle_exception('completionnotenabled', 'completion');
+        throw new powereduc_exception('completionnotenabled', 'completion');
     } else if (!$completion->is_tracked_user($trackeduser)) {
-        throw new moodle_exception('nottracked', 'completion');
+        throw new powereduc_exception('nottracked', 'completion');
     }
 
     if ($user && $rolec) {
@@ -92,12 +92,12 @@ if ($courseid) {
             $completion = $completion->get_completion($USER->id, COMPLETION_CRITERIA_TYPE_SELF);
 
             if (!$completion) {
-                throw new \moodle_exception('noselfcompletioncriteria', 'completion');
+                throw new \powereduc_exception('noselfcompletioncriteria', 'completion');
             }
 
             // Check if the user has already marked themselves as complete
             if ($completion->is_complete()) {
-                throw new \moodle_exception('useralreadymarkedcomplete', 'completion');
+                throw new \powereduc_exception('useralreadymarkedcomplete', 'completion');
             }
 
             $completion->mark_complete();
@@ -111,8 +111,8 @@ if ($courseid) {
         $PAGE->set_heading($course->fullname);
         $PAGE->navbar->add($strconfirm);
         echo $OUTPUT->header();
-        $buttoncontinue = new single_button(new moodle_url('/course/togglecompletion.php', array('course'=>$courseid, 'confirm'=>1, 'sesskey'=>sesskey())), get_string('yes'), 'post');
-        $buttoncancel   = new single_button(new moodle_url('/course/view.php', array('id'=>$courseid)), get_string('no'), 'get');
+        $buttoncontinue = new single_button(new powereduc_url('/course/togglecompletion.php', array('course'=>$courseid, 'confirm'=>1, 'sesskey'=>sesskey())), get_string('yes'), 'post');
+        $buttoncancel   = new single_button(new powereduc_url('/course/view.php', array('id'=>$courseid)), get_string('no'), 'get');
         echo $OUTPUT->confirm($strconfirm, $buttoncontinue, $buttoncancel);
         echo $OUTPUT->footer();
         exit;
@@ -128,7 +128,7 @@ switch($targetstate) {
     case COMPLETION_INCOMPLETE:
         break;
     default:
-        throw new \moodle_exception('unsupportedstate');
+        throw new \powereduc_exception('unsupportedstate');
 }
 
 // Get course-modules entry
@@ -137,16 +137,16 @@ $course = $DB->get_record('course', array('id'=>$cm->course), '*', MUST_EXIST);
 
 // Check user is logged in
 require_login($course, false, $cm);
-require_capability('moodle/course:togglecompletion', context_module::instance($cmid));
+require_capability('powereduc/course:togglecompletion', context_module::instance($cmid));
 
 if (isguestuser() or !confirm_sesskey()) {
-    throw new \moodle_exception('error');
+    throw new \powereduc_exception('error');
 }
 
 // Set up completion object and check it is enabled.
 $completion = new completion_info($course);
 if (!$completion->is_enabled()) {
-    throw new moodle_exception('completionnotenabled', 'completion');
+    throw new powereduc_exception('completionnotenabled', 'completion');
 }
 
 // NOTE: All users are allowed to toggle their completion state, including
@@ -156,7 +156,7 @@ if (!$completion->is_enabled()) {
 
 // Check completion state is manual
 if($cm->completion != COMPLETION_TRACKING_MANUAL) {
-    throw new moodle_exception('cannotmanualctrack');
+    throw new powereduc_exception('cannotmanualctrack');
 }
 
 $completion->update_state($cm, $targetstate);

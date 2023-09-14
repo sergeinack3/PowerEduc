@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * core_text unit tests.
@@ -45,7 +45,7 @@ class text_test extends advanced_testcase {
      */
     public function test_parse_charset() {
         $this->assertSame('windows-1250', core_text::parse_charset('Cp1250'));
-        // Some encoding moodle does not use.
+        // Some encoding powereduc does not use.
         $this->assertSame('windows-1252', core_text::parse_charset('ms-ansi'));
     }
 
@@ -425,12 +425,12 @@ class text_test extends advanced_testcase {
      * Tests the static encode_mimeheader method.
      *
      * @covers ::encode_mimeheader()
-     * @covers \moodle_phpmailer::encodeHeader()
+     * @covers \powereduc_phpmailer::encodeHeader()
      */
     public function test_encode_mimeheader() {
         global $CFG;
-        require_once($CFG->libdir.'/phpmailer/moodle_phpmailer.php');
-        $mailer = new moodle_phpmailer();
+        require_once($CFG->libdir.'/phpmailer/powereduc_phpmailer.php');
+        $mailer = new powereduc_phpmailer();
 
         // Encode short string with non-latin characters.
         $str = "Žluťoučký koníček";

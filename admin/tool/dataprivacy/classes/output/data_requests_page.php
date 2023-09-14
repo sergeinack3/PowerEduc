@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,8 +26,8 @@ defined('POWEREDUC_INTERNAL') || die();
 
 use coding_exception;
 use dml_exception;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use renderable;
 use renderer_base;
 use single_select;
@@ -68,11 +68,11 @@ class data_requests_page implements renderable, templatable {
      * @return stdClass
      * @throws coding_exception
      * @throws dml_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function export_for_template(renderer_base $output) {
         $data = new stdClass();
-        $data->newdatarequesturl = new moodle_url('/admin/tool/dataprivacy/createdatarequest.php');
+        $data->newdatarequesturl = new powereduc_url('/admin/tool/dataprivacy/createdatarequest.php');
         $data->newdatarequesturl->param('manage', true);
 
         if (!is_https()) {
@@ -80,7 +80,7 @@ class data_requests_page implements renderable, templatable {
             $data->httpsite = array('message' => $httpwarningmessage, 'announce' => 1);
         }
 
-        $url = new moodle_url('/admin/tool/dataprivacy/datarequests.php');
+        $url = new powereduc_url('/admin/tool/dataprivacy/datarequests.php');
         $filteroptions = helper::get_request_filter_options();
         $filter = new request_filter($filteroptions, $this->filters, $url);
         $data->filter = $filter->export_for_template($output);

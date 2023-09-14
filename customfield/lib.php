@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ function core_customfield_inplace_editable($itemtype, $itemid, $newvalue) {
         $handler = $category->get_handler();
         \external_api::validate_context($handler->get_configuration_context());
         if (!$handler->can_configure()) {
-            throw new moodle_exception('nopermissionconfigure', 'core_customfield');
+            throw new powereduc_exception('nopermissionconfigure', 'core_customfield');
         }
         $newvalue = clean_param($newvalue, PARAM_NOTAGS);
         $handler->rename_category($category, $newvalue);

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -101,7 +101,7 @@ class external_test extends externallib_advanced_testcase {
 
         // Admin as DPO. (The default when no one's assigned as a DPO in the site).
         $this->setAdminUser();
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         external::approve_data_request($datarequest->get('id'));
     }
 
@@ -364,7 +364,7 @@ class external_test extends externallib_advanced_testcase {
 
         // Admin as DPO. (The default when no one's assigned as a DPO in the site).
         $this->setAdminUser();
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         external::deny_data_request($datarequest->get('id'));
     }
 
@@ -1011,7 +1011,7 @@ class external_test extends externallib_advanced_testcase {
 
     /**
      * Test for external::get_users(), case search using identity field but
-     * don't have "moodle/site:viewuseridentity" permission.
+     * don't have "powereduc/site:viewuseridentity" permission.
      *
      * @throws coding_exception
      * @throws dml_exception
@@ -1043,7 +1043,7 @@ class external_test extends externallib_advanced_testcase {
 
     /**
      * Test for external::get_users(), case search using disabled identity field
-     * even they have "moodle/site:viewuseridentity" permission.
+     * even they have "powereduc/site:viewuseridentity" permission.
      *
      * @throws coding_exception
      * @throws dml_exception
@@ -1059,7 +1059,7 @@ class external_test extends externallib_advanced_testcase {
         $role = $this->getDataGenerator()->create_role();
         role_assign($role, $requester->id, $context);
         assign_capability('tool/dataprivacy:managedatarequests', CAP_ALLOW, $role, $context);
-        assign_capability('moodle/site:viewuseridentity', CAP_ALLOW, $role, $context);
+        assign_capability('powereduc/site:viewuseridentity', CAP_ALLOW, $role, $context);
         $this->setUser($requester);
 
         $this->getDataGenerator()->create_user([
@@ -1072,7 +1072,7 @@ class external_test extends externallib_advanced_testcase {
 
     /**
      * Test for external::get_users(), case search using enabled identity field
-     * with "moodle/site:viewuseridentity" permission.
+     * with "powereduc/site:viewuseridentity" permission.
      *
      * @throws coding_exception
      * @throws dml_exception
@@ -1089,7 +1089,7 @@ class external_test extends externallib_advanced_testcase {
         $role = $this->getDataGenerator()->create_role();
         role_assign($role, $requester->id, $context);
         assign_capability('tool/dataprivacy:managedatarequests', CAP_ALLOW, $role, $context);
-        assign_capability('moodle/site:viewuseridentity', CAP_ALLOW, $role, $context);
+        assign_capability('powereduc/site:viewuseridentity', CAP_ALLOW, $role, $context);
         $this->setUser($requester);
 
         $student1 = $this->getDataGenerator()->create_user([

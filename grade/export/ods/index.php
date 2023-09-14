@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,13 +24,13 @@ $id = required_param('id', PARAM_INT); // course id
 $PAGE->set_url('/grade/export/ods/index.php', array('id'=>$id));
 
 if (!$course = $DB->get_record('course', array('id'=>$id))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 require_login($course);
 $context = context_course::instance($id);
 
-require_capability('moodle/grade:export', $context);
+require_capability('powereduc/grade:export', $context);
 require_capability('gradeexport/ods:view', $context);
 
 $actionbar = new \core_grades\output\export_action_bar($context, null, 'ods');
@@ -43,7 +43,7 @@ if (!empty($CFG->gradepublishing)) {
     $CFG->gradepublishing = has_capability('gradeexport/ods:publish', $context);
 }
 
-$actionurl = new moodle_url('/grade/export/ods/export.php');
+$actionurl = new powereduc_url('/grade/export/ods/export.php');
 $formoptions = array(
     'publishing' => true,
     'simpleui' => true,
@@ -57,7 +57,7 @@ $currentgroup = groups_get_course_group($course, true);
 
 if (($groupmode == SEPARATEGROUPS) &&
         (!$currentgroup) &&
-        (!has_capability('moodle/site:accessallgroups', $context))) {
+        (!has_capability('powereduc/site:accessallgroups', $context))) {
     echo $OUTPUT->heading(get_string("notingroup"));
     echo $OUTPUT->footer();
     die;

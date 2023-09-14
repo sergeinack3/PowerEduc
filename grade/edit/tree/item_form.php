@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * A moodleform allowing the editing of the grade options for an individual grade item
+ * A powereducform allowing the editing of the grade options for an individual grade item
  *
  * @package   core_grades
  * @copyright 2007 Petr Skoda
@@ -28,7 +28,7 @@ if (!defined('POWEREDUC_INTERNAL')) {
 
 require_once $CFG->libdir.'/formslib.php';
 
-class edit_item_form extends moodleform {
+class edit_item_form extends powereducform {
     private $displayoptions;
 
     function definition() {
@@ -114,7 +114,7 @@ class edit_item_form extends moodleform {
         $mform->addHelpButton('grademax', 'grademax', 'grades');
         $mform->disabledIf('grademax', 'gradetype', 'noteq', GRADE_TYPE_VALUE);
 
-        if ((bool) get_config('moodle', 'grade_report_showmin')) {
+        if ((bool) get_config('powereduc', 'grade_report_showmin')) {
             $mform->addElement('float', 'grademin', get_string('grademin', 'grades'));
             $mform->addHelpButton('grademin', 'grademin', 'grades');
             $mform->disabledIf('grademin', 'gradetype', 'noteq', GRADE_TYPE_VALUE);
@@ -468,7 +468,7 @@ class edit_item_form extends moodleform {
         }
         if ($grade_item) {
             if ($grade_item->gradetype == GRADE_TYPE_VALUE) {
-                if ((((bool) get_config('moodle', 'grade_report_showmin')) &&
+                if ((((bool) get_config('powereduc', 'grade_report_showmin')) &&
                     grade_floats_different($grademin, $grade_item->grademin)) ||
                     grade_floats_different($grademax, $grade_item->grademax)) {
                     if ($grade_item->has_grades() && empty($data['rescalegrades'])) {

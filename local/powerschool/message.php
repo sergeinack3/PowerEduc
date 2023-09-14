@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle Course Rollover Plugin
+// This file is part of PowerEduc Course Rollover Plugin
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package     local_powerschool
@@ -34,12 +34,12 @@ require_login();
 $context = context_system::instance();
 // require_capability('local/message:managemessages', $context);
 
-$PAGE->set_url(new moodle_url('/local/powerschool/message.php'));
+$PAGE->set_url(new powereduc_url('/local/powerschool/message.php'));
 $PAGE->set_context(\context_system::instance());
 $PAGE->set_title(get_string('message', 'local_powerschool'));
 $PAGE->set_heading(get_string('message', 'local_powerschool'));
 
-$PAGE->navbar->add(get_string('configurationminini', 'local_powerschool'),  new moodle_url('/local/powerschool/configurationmini.php'));
+$PAGE->navbar->add(get_string('configurationminini', 'local_powerschool'),  new powereduc_url('/local/powerschool/configurationmini.php'));
 $PAGE->navbar->add(get_string('message', 'local_powerschool'), $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
@@ -110,26 +110,26 @@ $message=$DB->get_records("messagesstocke",array("idcampus"=>$_GET["idca"]));
 $templatecontext = (object)[
     'message' => array_values($message),
     // 'nb'=>array_values($tab),
-    'messagesc' => new moodle_url('/local/powerschool/PHPMailer/email.php'),
-    'inscriptionpayer'=> new moodle_url('/local/powerschool/paiement.php'),
-    'affectercours'=> new moodle_url('/local/powerschool/inscription.php'),
+    'messagesc' => new powereduc_url('/local/powerschool/PHPMailer/email.php'),
+    'inscriptionpayer'=> new powereduc_url('/local/powerschool/paiement.php'),
+    'affectercours'=> new powereduc_url('/local/powerschool/inscription.php'),
     'idca'=>$_GET["idca"]
-    // 'imprimer' => new moodle_url('/local/powerschool/imp.php'),
+    // 'imprimer' => new powereduc_url('/local/powerschool/imp.php'),
 ];
 // $campus=$DB->get_records('campus');
 // $campuss=(object)[
 //         'campus'=>array_values($campus),
-//         'confpaie'=>new moodle_url('/local/powerschool/affecterprof.php'),
+//         'confpaie'=>new powereduc_url('/local/powerschool/affecterprof.php'),
 //     ];
 $menumini = (object)[
-    'affecterprof' => new moodle_url('/local/powerschool/affecterprof.php'),
-    'configurerpaie' => new moodle_url('/local/powerschool/configurerpaiement.php'),
-    'coursspecialite' => new moodle_url('/local/powerschool/coursspecialite.php'),
-    'semestre' => new moodle_url('/local/powerschool/semestre.php'),
-    'salleele' => new moodle_url('/local/powerschool/salleele.php'),
-    'message' => new moodle_url('/local/powerschool/message.php'),
-    'logo' => new moodle_url('/local/powerschool/logo.php'),
-    'confinot' => new moodle_url('/local/powerschool/configurationnote.php'),
+    'affecterprof' => new powereduc_url('/local/powerschool/affecterprof.php'),
+    'configurerpaie' => new powereduc_url('/local/powerschool/configurerpaiement.php'),
+    'coursspecialite' => new powereduc_url('/local/powerschool/coursspecialite.php'),
+    'semestre' => new powereduc_url('/local/powerschool/semestre.php'),
+    'salleele' => new powereduc_url('/local/powerschool/salleele.php'),
+    'message' => new powereduc_url('/local/powerschool/message.php'),
+    'logo' => new powereduc_url('/local/powerschool/logo.php'),
+    'confinot' => new powereduc_url('/local/powerschool/configurationnote.php'),
 
 
 ];
@@ -137,7 +137,7 @@ $menumini = (object)[
 $campus=$DB->get_records("campus");
 $campuss=(object)[
     'campus'=>array_values($campus),
-    'confpaie'=>new moodle_url('/local/powerschool/message.php'),
+    'confpaie'=>new powereduc_url('/local/powerschool/message.php'),
 ];
 
 echo $OUTPUT->header();

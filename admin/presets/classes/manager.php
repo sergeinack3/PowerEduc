@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 namespace core_adminpresets;
 
 use memory_xml_output;
-use moodle_exception;
+use powereduc_exception;
 use stdClass;
 use xml_writer;
 
@@ -120,8 +120,8 @@ class manager {
         'timecreated' => 'PRESET_DATE',
         'site' => 'SITE_URL',
         'author' => 'AUTHOR',
-        'moodleversion' => 'POWEREDUC_VERSION',
-        'moodlerelease' => 'POWEREDUC_RELEASE'
+        'powereducversion' => 'POWEREDUC_VERSION',
+        'powereducrelease' => 'POWEREDUC_RELEASE'
     ];
 
     /** @var int Non-core preset */
@@ -392,7 +392,7 @@ class manager {
         global $DB;
 
         if (!$DB->get_record('adminpresets', ['id' => $presetid])) {
-            throw new moodle_exception('errornopreset', 'core_adminpresets');
+            throw new powereduc_exception('errornopreset', 'core_adminpresets');
         }
 
         // Apply preset settings.
@@ -430,7 +430,7 @@ class manager {
             'author' => $data->author ?? '',
         ];
         if (!$presetid = helper::create_preset($presetdata)) {
-            throw new moodle_exception('errorinserting', 'core_adminpresets');
+            throw new powereduc_exception('errorinserting', 'core_adminpresets');
         }
 
         // Store settings.
@@ -455,7 +455,7 @@ class manager {
                 $setting->name = $settingname;
                 $setting->value = $sitesetting->get_value();
                 if (!$setting->id = $DB->insert_record('adminpresets_it', $setting)) {
-                    throw new moodle_exception('errorinserting', 'core_adminpresets');
+                    throw new powereduc_exception('errorinserting', 'core_adminpresets');
                 }
 
                 // Setting attributes must also be exported.
@@ -513,7 +513,7 @@ class manager {
         global $DB;
 
         if (!$preset = $DB->get_record('adminpresets', ['id' => $presetid])) {
-            throw new moodle_exception('errornopreset', 'core_adminpresets');
+            throw new powereduc_exception('errornopreset', 'core_adminpresets');
         }
 
         // Start.
@@ -642,7 +642,7 @@ class manager {
 
         // Create the preset.
         if (!$preset->id = $DB->insert_record('adminpresets', $preset)) {
-            throw new moodle_exception('errorinserting', 'core_adminpresets');
+            throw new powereduc_exception('errorinserting', 'core_adminpresets');
         }
 
         // Process settings.
@@ -688,7 +688,7 @@ class manager {
 
                     // Insert preset item.
                     if (!$item->id = $DB->insert_record('adminpresets_it', $item)) {
-                        throw new moodle_exception('errorinserting', 'core_adminpresets');
+                        throw new powereduc_exception('errorinserting', 'core_adminpresets');
                     }
 
                     // Add setting attributes.
@@ -731,7 +731,7 @@ class manager {
 
                     // Insert plugin.
                     if (!$entry->id = $DB->insert_record('adminpresets_plug', $entry)) {
-                        throw new moodle_exception('errorinserting', 'core_adminpresets');
+                        throw new powereduc_exception('errorinserting', 'core_adminpresets');
                     }
                 }
             }
@@ -758,7 +758,7 @@ class manager {
         // Check the preset exists.
         $preset = $DB->get_record('adminpresets', ['id' => $presetid]);
         if (!$preset) {
-            throw new moodle_exception('errordeleting', 'core_adminpresets');
+            throw new powereduc_exception('errordeleting', 'core_adminpresets');
         }
 
         // Deleting the preset applications.
@@ -770,7 +770,7 @@ class manager {
             $DB->delete_records_select('adminpresets_app_plug', "adminpresetapplyid $insql", $inparams);
 
             if (!$DB->delete_records('adminpresets_app', ['adminpresetid' => $presetid])) {
-                throw new moodle_exception('errordeleting', 'core_adminpresets');
+                throw new powereduc_exception('errordeleting', 'core_adminpresets');
             }
         }
 
@@ -783,17 +783,17 @@ class manager {
         }
 
         if (!$DB->delete_records('adminpresets_it', ['adminpresetid' => $presetid])) {
-            throw new moodle_exception('errordeleting', 'core_adminpresets');
+            throw new powereduc_exception('errordeleting', 'core_adminpresets');
         }
 
         // Delete plugins.
         if (!$DB->delete_records('adminpresets_plug', ['adminpresetid' => $presetid])) {
-            throw new moodle_exception('errordeleting', 'core_adminpresets');
+            throw new powereduc_exception('errordeleting', 'core_adminpresets');
         }
 
         // Delete preset.
         if (!$DB->delete_records('adminpresets', ['id' => $presetid])) {
-            throw new moodle_exception('errordeleting', 'core_adminpresets');
+            throw new powereduc_exception('errordeleting', 'core_adminpresets');
         }
     }
 
@@ -818,7 +818,7 @@ class manager {
         $sitesettings = $this->get_site_settings();
 
         if (!$DB->get_record('adminpresets_app', ['id' => $presetappid])) {
-            throw new moodle_exception('wrongid', 'core_adminpresets');
+            throw new powereduc_exception('wrongid', 'core_adminpresets');
         }
 
         // Items.
@@ -1047,7 +1047,7 @@ class manager {
                         $presetapplied->userid = $USER->id;
                         $presetapplied->time = time();
                         if (!$simulate && !$adminpresetapplyid = $DB->insert_record('adminpresets_app', $presetapplied)) {
-                            throw new moodle_exception('errorinserting', 'core_adminpresets');
+                            throw new powereduc_exception('errorinserting', 'core_adminpresets');
                         }
                     }
 
@@ -1146,7 +1146,7 @@ class manager {
                             $presetapplied->userid = $USER->id;
                             $presetapplied->time = time();
                             if (!$adminpresetapplyid = $DB->insert_record('adminpresets_app', $presetapplied)) {
-                                throw new moodle_exception('errorinserting', 'core_adminpresets');
+                                throw new powereduc_exception('errorinserting', 'core_adminpresets');
                             }
                         }
 

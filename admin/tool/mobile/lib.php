@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -52,9 +52,9 @@ function tool_mobile_before_standard_html_head() {
 }
 
 /**
- * Generate the app download url to promote moodle mobile.
+ * Generate the app download url to promote powereduc mobile.
  *
- * @return moodle_url|void App download moodle_url object or return if setuplink is not set.
+ * @return powereduc_url|void App download powereduc_url object or return if setuplink is not set.
  */
 function tool_mobile_create_app_download_url() {
     global $CFG;
@@ -65,10 +65,10 @@ function tool_mobile_create_app_download_url() {
         return;
     }
 
-    $downloadurl = new moodle_url($mobilesettings->setuplink);
+    $downloadurl = new powereduc_url($mobilesettings->setuplink);
 
     // Do not update the URL if it is a custom one (we may break it completely).
-    if ($mobilesettings->setuplink != 'https://download.moodle.org/mobile') {
+    if ($mobilesettings->setuplink != 'https://download.powereduc.org/mobile') {
         return $downloadurl;
     }
 
@@ -100,7 +100,7 @@ function tool_mobile_get_token($userid) {
               FROM {external_tokens} t, {external_services} s
              WHERE t.externalserviceid = s.id
                AND s.enabled = 1
-               AND s.shortname IN ('moodle_mobile_app', 'local_mobile')
+               AND s.shortname IN ('powereduc_mobile_app', 'local_mobile')
                AND t.userid = ?";
 
     return $DB->get_record_sql($sql, [$userid], IGNORE_MULTIPLE);
@@ -120,7 +120,7 @@ function tool_mobile_user_has_token($userid) {
 /**
  * User profile page callback.
  *
- * Used add a section about the moodle mobile app.
+ * Used add a section about the powereduc mobile app.
  *
  * @param \core_user\output\myprofile\tree $tree My profile tree where the setting will be added.
  * @param stdClass $user The user object.
@@ -183,7 +183,7 @@ function tool_mobile_myprofile_navigation(\core_user\output\myprofile\tree $tree
                 // Logout link.
                 $validtoken = empty($usertoken->validuntil) || time() < $usertoken->validuntil;
                 if ($iscurrentuser && $validtoken) {
-                    $url = new moodle_url('/'.$CFG->admin.'/tool/mobile/logout.php', ['sesskey' => sesskey()]);
+                    $url = new powereduc_url('/'.$CFG->admin.'/tool/mobile/logout.php', ['sesskey' => sesskey()]);
                     $logoutlink = html_writer::link($url, get_string('logout'));
                     $mobilelastaccess .= "&nbsp; ($logoutlink)";
                 }
@@ -222,7 +222,7 @@ function tool_mobile_standard_footer_html() {
     global $CFG;
     $output = '';
     if (!empty($CFG->enablemobilewebservice) && $url = tool_mobile_create_app_download_url()) {
-        $output .= html_writer::link($url, get_string('getmoodleonyourmobile', 'tool_mobile'));
+        $output .= html_writer::link($url, get_string('getpowereduconyourmobile', 'tool_mobile'));
     }
     return $output;
 }

@@ -3,10 +3,10 @@
 //                                                                       //
 // NOTICE OF COPYRIGHT                                                   //
 //                                                                       //
-// Moodle - Modular Object-Oriented Dynamic Learning Environment         //
+// PowerEduc - Modular Object-Oriented Dynamic Learning Environment         //
 //          http://powereduc.org                                            //
 //                                                                       //
-// Copyright (C) 1999-onwards Moodle Pty Ltd  http://powereduc.com          //
+// Copyright (C) 1999-onwards PowerEduc Pty Ltd  http://powereduc.com          //
 //                                                                       //
 // This program is free software; you can redistribute it and/or modify  //
 // it under the terms of the GNU General Public License as published by  //
@@ -162,7 +162,7 @@ class data_field_radiobutton extends data_field_base {
      * Return the plugin configs for external functions.
      *
      * @return array the list of config parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public function get_config_for_external() {
         // Return all the config parameters.

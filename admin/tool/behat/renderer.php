@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ class tool_behat_renderer extends plugin_renderer_base {
      * Renders the list of available steps according to the submitted filters.
      *
      * @param mixed $stepsdefinitions Available steps array.
-     * @param moodleform $form
+     * @param powereducform $form
      * @return string HTML code
      */
     public function render_stepsdefinitions($stepsdefinitions, $form) {
@@ -84,7 +84,7 @@ class tool_behat_renderer extends plugin_renderer_base {
                     global $CFG;
 
                     // Creating a link to a popup with the help.
-                    $url = new moodle_url(
+                    $url = new powereduc_url(
                         '/help.php',
                         array(
                             'component' => 'tool_behat',
@@ -156,9 +156,9 @@ class tool_behat_renderer extends plugin_renderer_base {
         // Info.
         $installurl = behat_command::DOCS_URL;
         $installlink = html_writer::tag('a', $installurl, array('href' => $installurl, 'target' => '_blank'));
-        $writetestsurl = 'https://docs.moodle.org/dev/Writing acceptance tests';
+        $writetestsurl = 'https://docs.powereduc.org/dev/Writing acceptance tests';
         $writetestslink = html_writer::tag('a', $writetestsurl, array('href' => $writetestsurl, 'target' => '_blank'));
-        $writestepsurl = 'https://docs.moodle.org/dev/Writing_new_acceptance_test_step_definitions';
+        $writestepsurl = 'https://docs.powereduc.org/dev/Writing_new_acceptance_test_step_definitions';
         $writestepslink = html_writer::tag('a', $writestepsurl, array('href' => $writestepsurl, 'target' => '_blank'));
         $infos = array(
             get_string('installinfo', 'tool_behat', $installlink),

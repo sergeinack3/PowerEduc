@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ if ($oldextension) {
     // This is editing an existing filetype, load data to the form.
     $mimetypes = get_mimetypes_array();
     if (!array_key_exists($oldextension, $mimetypes)) {
-        throw new moodle_exception('error_notfound', 'tool_filetypes');
+        throw new powereduc_exception('error_notfound', 'tool_filetypes');
     }
     $typeinfo = $mimetypes[$oldextension];
     $formdata = array(
@@ -65,7 +65,7 @@ if ($oldextension) {
     $title = get_string('editfiletypes', 'tool_filetypes');
 }
 
-$backurl = new \moodle_url('/admin/tool/filetypes/index.php');
+$backurl = new \powereduc_url('/admin/tool/filetypes/index.php');
 if ($mform->is_cancelled()) {
     redirect($backurl);
 } else if ($data = $mform->get_data()) {
@@ -99,7 +99,7 @@ if ($mform->is_cancelled()) {
 
 // Page settings.
 $context = context_system::instance();
-$PAGE->set_url(new \moodle_url('/admin/tool/filetypes/edit.php', array('oldextension' => $oldextension)));
+$PAGE->set_url(new \powereduc_url('/admin/tool/filetypes/edit.php', array('oldextension' => $oldextension)));
 
 $PAGE->set_primary_active_tab('siteadminnode');
 $PAGE->set_secondary_active_tab('server');

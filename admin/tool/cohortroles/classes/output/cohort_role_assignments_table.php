@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ require_once($CFG->libdir . '/tablelib.php');
 use context_helper;
 use context_system;
 use html_writer;
-use moodle_url;
+use powereduc_url;
 use table_sql;
 
 /**
@@ -46,7 +46,7 @@ class cohort_role_assignments_table extends table_sql {
      * Sets up the table.
      *
      * @param string $uniqueid Unique id of table.
-     * @param moodle_url $url The base URL.
+     * @param powereduc_url $url The base URL.
      */
     public function __construct($uniqueid, $url) {
         global $CFG;
@@ -58,7 +58,7 @@ class cohort_role_assignments_table extends table_sql {
         $this->rolenames = role_get_names();
 
         // This object should not be used without the right permissions.
-        require_capability('moodle/role:manage', $context);
+        require_capability('powereduc/role:manage', $context);
 
         $this->useridfield = 'userid';
 
@@ -116,7 +116,7 @@ class cohort_role_assignments_table extends table_sql {
         global $OUTPUT;
 
         $action = new \confirm_action(get_string('removecohortroleassignmentconfirm', 'tool_cohortroles'));
-        $url = new moodle_url($this->baseurl);
+        $url = new powereduc_url($this->baseurl);
         $url->params(array('removecohortroleassignment' => $data->id, 'sesskey' => sesskey()));
         $pix = new \pix_icon('t/delete', get_string('removecohortroleassignment', 'tool_cohortroles'));
         return $OUTPUT->action_link($url, '', $action, null, $pix);
@@ -138,7 +138,7 @@ class cohort_role_assignments_table extends table_sql {
 
         // Add headers for extra user fields.
         foreach ($extrafields as $field) {
-            if (get_string_manager()->string_exists($field, 'moodle')) {
+            if (get_string_manager()->string_exists($field, 'powereduc')) {
                 $cols[$field] = get_string($field);
             } else {
                 $cols[$field] = $field;

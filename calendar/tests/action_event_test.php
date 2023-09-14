@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -71,7 +71,7 @@ class action_event_test extends \advanced_testcase {
                     'event' => new core_calendar_action_event_test_event(),
                     'action' => new action(
                         'action 1',
-                        new \moodle_url('http://example.com'),
+                        new \powereduc_url('http://example.com'),
                         2,
                         true
                     )
@@ -82,7 +82,7 @@ class action_event_test extends \advanced_testcase {
                     'event' => new core_calendar_action_event_test_event(),
                     'action' => new action(
                         'action 2',
-                        new \moodle_url('http://example.com'),
+                        new \powereduc_url('http://example.com'),
                         5,
                         false
                     )

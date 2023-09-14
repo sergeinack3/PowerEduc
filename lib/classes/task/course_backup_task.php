@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Adhoc task that performs single automated course backup.
@@ -48,7 +48,7 @@ class course_backup_task extends \core\task\adhoc_task {
 
         try {
             $course = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             mtrace('Invalid course id: ' . $courseid . ', task aborted.');
             return;
         }
@@ -84,7 +84,7 @@ class course_backup_task extends \core\task\adhoc_task {
             $backupcourse->lastendtime = time();
             $backupcourse->nextstarttime = \backup_cron_automated_helper::calculate_next_automated_backup(null, time());
             $DB->update_record('backup_courses', $backupcourse);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             mtrace('Automated backup for course: ' . $course->fullname . ' encounters an error.');
             mtrace('Exception: ' . $e->getMessage());
             mtrace('Debug: ' . $e->debuginfo);

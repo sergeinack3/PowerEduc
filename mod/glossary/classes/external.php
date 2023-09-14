@@ -322,7 +322,7 @@ class mod_glossary_external extends external_api {
      * @param int $id The glossary instance ID.
      * @param string $mode The view mode.
      * @return array of warnings and status result
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      * @throws powereduc_exception
      */
     public static function view_glossary($id, $mode) {
@@ -350,7 +350,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function return value.
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function view_glossary_returns() {
         return new external_single_structure(array(
@@ -363,7 +363,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function view_entry_parameters() {
         return new external_function_parameters(array(
@@ -376,7 +376,7 @@ class mod_glossary_external extends external_api {
      *
      * @param int $id The entry ID.
      * @return array of warnings and status result
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      * @throws powereduc_exception
      * @throws invalid_parameter_exception
      */
@@ -408,7 +408,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function return value.
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function view_entry_returns() {
         return new external_single_structure(array(
@@ -421,7 +421,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_entries_by_letter_parameters() {
         return new external_function_parameters(array(
@@ -445,7 +445,7 @@ class mod_glossary_external extends external_api {
      * @param int $limit Number of records to return.
      * @param array $options Array of options.
      * @return array Containing count, entries and warnings.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      * @throws powereduc_exception
      * @throws invalid_parameter_exception
      */
@@ -492,7 +492,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function return value.
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_entries_by_letter_returns() {
         return new external_single_structure(array(
@@ -509,7 +509,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_entries_by_date_parameters() {
         return new external_function_parameters(array(
@@ -536,7 +536,7 @@ class mod_glossary_external extends external_api {
      * @param int $limit Number of records to return.
      * @param array $options Array of options.
      * @return array Containing count, entries and warnings.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      * @throws powereduc_exception
      * @throws invalid_parameter_exception
      */
@@ -591,7 +591,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function return value.
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_entries_by_date_returns() {
         return new external_single_structure(array(
@@ -608,7 +608,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_categories_parameters() {
         return new external_function_parameters(array(
@@ -625,7 +625,7 @@ class mod_glossary_external extends external_api {
      * @param int $from Start returning records from here.
      * @param int $limit Number of records to return.
      * @return array Containing count, categories and warnings.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      * @throws powereduc_exception
      */
     public static function get_categories($id, $from, $limit) {
@@ -661,7 +661,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function return value.
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_categories_returns() {
         return new external_single_structure(array(
@@ -682,7 +682,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_entries_by_category_parameters() {
         return new external_function_parameters(array(
@@ -707,7 +707,7 @@ class mod_glossary_external extends external_api {
      * @param int $limit Number of records to return.
      * @param array $options Array of options.
      * @return array Containing count, entries and warnings.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      * @throws powereduc_exception
      * @throws invalid_parameter_exception
      */
@@ -770,7 +770,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function return value.
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_entries_by_category_returns() {
         return new external_single_structure(array(
@@ -787,7 +787,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_authors_parameters() {
         return new external_function_parameters(array(
@@ -809,7 +809,7 @@ class mod_glossary_external extends external_api {
      * @param int $limit Number of records to return.
      * @param array $options Array of options.
      * @return array Containing count, authors and warnings.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      * @throws powereduc_exception
      */
     public static function get_authors($id, $from, $limit, $options) {
@@ -857,7 +857,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function return value.
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_authors_returns() {
         return new external_single_structure(array(
@@ -877,7 +877,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_entries_by_author_parameters() {
         return new external_function_parameters(array(
@@ -907,7 +907,7 @@ class mod_glossary_external extends external_api {
      * @param int $limit Number of records to return.
      * @param array $options Array of options.
      * @return array Containing count, entries and warnings.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      * @throws powereduc_exception
      * @throws invalid_parameter_exception
      */
@@ -966,7 +966,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function return value.
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_entries_by_author_returns() {
         return new external_single_structure(array(
@@ -983,7 +983,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_entries_by_author_id_parameters() {
         return new external_function_parameters(array(
@@ -1012,7 +1012,7 @@ class mod_glossary_external extends external_api {
      * @param int $limit Number of records to return.
      * @param array $options Array of options.
      * @return array Containing count, entries and warnings.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      * @throws powereduc_exception
      * @throws invalid_parameter_exception
      */
@@ -1071,7 +1071,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function return value.
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_entries_by_author_id_returns() {
         return new external_single_structure(array(
@@ -1088,7 +1088,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_entries_by_search_parameters() {
         return new external_function_parameters(array(
@@ -1119,7 +1119,7 @@ class mod_glossary_external extends external_api {
      * @param int $limit Number of records to return.
      * @param array $options Array of options.
      * @return array Containing count, entries and warnings.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      * @throws powereduc_exception
      * @throws invalid_parameter_exception
      */
@@ -1174,7 +1174,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function return value.
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_entries_by_search_returns() {
         return new external_single_structure(array(
@@ -1191,7 +1191,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_entries_by_term_parameters() {
         return new external_function_parameters(array(
@@ -1215,7 +1215,7 @@ class mod_glossary_external extends external_api {
      * @param int $limit Number of records to return.
      * @param array $options Array of options.
      * @return array Containing count, entries and warnings.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      * @throws powereduc_exception
      */
     public static function get_entries_by_term($id, $term, $from, $limit, $options) {
@@ -1256,7 +1256,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function return value.
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_entries_by_term_returns() {
         return new external_single_structure(array(
@@ -1273,7 +1273,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_entries_to_approve_parameters() {
         return new external_function_parameters(array(
@@ -1298,7 +1298,7 @@ class mod_glossary_external extends external_api {
      * @param int $from Start returning records from here.
      * @param int $limit Number of records to return.
      * @return array Containing count, entries and warnings.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      * @throws powereduc_exception
      */
     public static function get_entries_to_approve($id, $letter, $order, $sort, $from, $limit) {
@@ -1344,7 +1344,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function return value.
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_entries_to_approve_returns() {
         return new external_single_structure(array(
@@ -1361,7 +1361,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_entry_by_id_parameters() {
         return new external_function_parameters(array(
@@ -1374,7 +1374,7 @@ class mod_glossary_external extends external_api {
      *
      * @param int $id The entry ID.
      * @return array Containing entry and warnings.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      * @throws powereduc_exception
      * @throws invalid_parameter_exception
      */
@@ -1415,7 +1415,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function return value.
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_entry_by_id_returns() {
         return new external_single_structure(array(
@@ -1436,7 +1436,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function add_entry_parameters() {
         return new external_function_parameters(array(
@@ -1473,7 +1473,7 @@ class mod_glossary_external extends external_api {
      * @param int $definitionformat the concept definition format
      * @param array  $options    additional settings
      * @return array Containing entry and warnings.
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      * @throws powereduc_exception
      * @throws invalid_parameter_exception
      */
@@ -1555,7 +1555,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function return value.
      *
      * @return external_description
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function add_entry_returns() {
         return new external_single_structure(array(

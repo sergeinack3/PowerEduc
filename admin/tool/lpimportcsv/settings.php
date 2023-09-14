@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,16 +30,16 @@ if (get_config('core_competency', 'enabled')) {
     $temp = new admin_externalpage(
         'toollpimportcsv',
         get_string('pluginname', 'tool_lpimportcsv'),
-        new moodle_url('/admin/tool/lpimportcsv/index.php'),
-        'moodle/competency:competencymanage'
+        new powereduc_url('/admin/tool/lpimportcsv/index.php'),
+        'powereduc/competency:competencymanage'
     );
     $ADMIN->add('competencies', $temp);
     // Export competency framework page.
     $temp = new admin_externalpage(
         'toollpexportcsv',
         get_string('exportnavlink', 'tool_lpimportcsv'),
-        new moodle_url('/admin/tool/lpimportcsv/export.php'),
-        'moodle/competency:competencymanage'
+        new powereduc_url('/admin/tool/lpimportcsv/export.php'),
+        'powereduc/competency:competencymanage'
     );
     $ADMIN->add('competencies', $temp);
 }

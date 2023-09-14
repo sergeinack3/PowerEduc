@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -57,7 +57,7 @@ class block_admin_bookmarks extends block_base {
      * @return array
      */
     function applicable_formats() {
-        if (has_capability('moodle/site:config', context_system::instance())) {
+        if (has_capability('powereduc/site:config', context_system::instance())) {
             return array('all' => true);
         } else {
             return array('site' => true);
@@ -88,15 +88,15 @@ class block_admin_bookmarks extends block_base {
             foreach($bookmarks as $bookmark) {
                 $temp = $adminroot->locate($bookmark);
                 if ($temp instanceof admin_settingpage) {
-                    $contenturl = new moodle_url('/admin/settings.php', array('section'=>$bookmark));
+                    $contenturl = new powereduc_url('/admin/settings.php', array('section'=>$bookmark));
                     $contentlink = html_writer::link($contenturl, $temp->visiblename);
                     $contents[] = html_writer::tag('li', $contentlink);
                 } else if ($temp instanceof admin_externalpage) {
-                    $contenturl = new moodle_url($temp->url);
+                    $contenturl = new powereduc_url($temp->url);
                     $contentlink = html_writer::link($contenturl, $temp->visiblename);
                     $contents[] = html_writer::tag('li', $contentlink);
                 } else if ($temp instanceof admin_category) {
-                    $contenturl = new moodle_url('/admin/category.php', array('category' => $bookmark));
+                    $contenturl = new powereduc_url('/admin/category.php', array('category' => $bookmark));
                     $contentlink = html_writer::link($contenturl, $temp->visiblename);
                     $contents[] = html_writer::tag('li', $contentlink);
                 }
@@ -118,10 +118,10 @@ class block_admin_bookmarks extends block_base {
             // the search page can't be properly bookmarked at present
             $this->content->footer = '';
         } else if (in_array($section, $bookmarks)) {
-            $deleteurl = new moodle_url('/blocks/admin_bookmarks/delete.php', array('section'=>$section, 'sesskey'=>sesskey()));
+            $deleteurl = new powereduc_url('/blocks/admin_bookmarks/delete.php', array('section'=>$section, 'sesskey'=>sesskey()));
             $this->content->footer =  html_writer::link($deleteurl, get_string('unbookmarkthispage','admin'));
         } else {
-            $createurl = new moodle_url('/blocks/admin_bookmarks/create.php', array('section'=>$section, 'sesskey'=>sesskey()));
+            $createurl = new powereduc_url('/blocks/admin_bookmarks/create.php', array('section'=>$section, 'sesskey'=>sesskey()));
             $this->content->footer = html_writer::link($createurl, get_string('bookmarkthispage','admin'));
         }
 

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * BBB Library tests class.
@@ -29,7 +29,7 @@ use calendar_event;
 use context_module;
 use mod_bigbluebuttonbn\test\testcase_helper_trait;
 use mod_bigbluebuttonbn_mod_form;
-use MoodleQuickForm;
+use PowerEducQuickForm;
 use navigation_node;
 use ReflectionClass;
 use stdClass;
@@ -434,7 +434,7 @@ class lib_test extends \advanced_testcase {
         $formprop = $refclass->getProperty('_form');
         $formprop->setAccessible(true);
 
-        /* @var $mform MoodleQuickForm quickform object definition */
+        /* @var $mform PowerEducQuickForm quickform object definition */
         $mform = $formprop->getValue($form);
         bigbluebuttonbn_reset_course_form_definition($mform);
         $this->assertNotNull($mform->getElement('bigbluebuttonbnheader'));

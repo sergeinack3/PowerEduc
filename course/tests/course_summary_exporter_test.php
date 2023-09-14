@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -65,7 +65,7 @@ class course_summary_exporter_test extends \advanced_testcase {
         $course = $this->getDataGenerator()->create_course(['overviewfiles_filemanager' => $draftid]);
         $coursecontext = context_course::instance($course->id);
 
-        $expected = 'https://www.example.com/moodle/pluginfile.php/' . $coursecontext->id . '/course/overviewfiles/image.jpg';
+        $expected = 'https://www.example.com/powereduc/pluginfile.php/' . $coursecontext->id . '/course/overviewfiles/image.jpg';
         $actual = course_summary_exporter::get_course_image($course);
         $this->assertSame($expected, $actual);
     }

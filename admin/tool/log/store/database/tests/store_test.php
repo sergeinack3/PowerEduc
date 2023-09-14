@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ class store_test extends \advanced_testcase {
      *
      * @param bool $jsonformat True to test with JSON format
      * @dataProvider test_log_writing_provider
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function test_log_writing(bool $jsonformat) {
         global $DB, $CFG;

@@ -26,10 +26,10 @@ function xmldb_data_upgrade($oldversion) {
 
     $dbman = $DB->get_manager(); // Loads ddl manager and xmldb classes.
 
-    // Automatically generated Moodle v3.9.0 release upgrade line.
+    // Automatically generated PowerEduc v3.9.0 release upgrade line.
     // Put any upgrade step following this.
 
-    // Automatically generated Moodle v4.0.0 release upgrade line.
+    // Automatically generated PowerEduc v4.0.0 release upgrade line.
     // Put any upgrade step following this.
     if ($oldversion < 2022081600) {
         // Define key userid (foreign) to be added to data_records.
@@ -42,7 +42,7 @@ function xmldb_data_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2022081600, 'data');
     }
 
-    // Automatically generated Moodle v4.1.0 release upgrade line.
+    // Automatically generated PowerEduc v4.1.0 release upgrade line.
     // Put any upgrade step following this.
 
     return true;

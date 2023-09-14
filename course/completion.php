@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -46,28 +46,28 @@ if ($id) {
 
     if($id == SITEID){
         // Don't allow editing of 'site course' using this form.
-        throw new \moodle_exception('cannoteditsiteform');
+        throw new \powereduc_exception('cannoteditsiteform');
     }
 
     if (!$course = $DB->get_record('course', array('id'=>$id))) {
-        throw new \moodle_exception('invalidcourseid');
+        throw new \powereduc_exception('invalidcourseid');
     }
     require_login($course);
     $context = context_course::instance($course->id);
-    if (!has_capability('moodle/course:update', $context)) {
+    if (!has_capability('powereduc/course:update', $context)) {
         // User is not allowed to modify course completion.
         // Check if they can see default completion or edit bulk completion and redirect there.
         if ($options = core_completion\manager::get_available_completion_options($course->id)) {
             // Redirect to the first available completion page.
             redirect(array_key_first($options));
         } else {
-            require_capability('moodle/course:update', $context);
+            require_capability('powereduc/course:update', $context);
         }
     }
 
 } else {
     require_login();
-    throw new \moodle_exception('needcourseid');
+    throw new \powereduc_exception('needcourseid');
 }
 
 // Set up the page.
@@ -154,7 +154,7 @@ if ($form->is_cancelled()){
     $event->trigger();
 
     // Redirect to the course main page.
-    $url = new moodle_url('/course/view.php', array('id' => $course->id));
+    $url = new powereduc_url('/course/view.php', array('id' => $course->id));
     redirect($url);
 }
 

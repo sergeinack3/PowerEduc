@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ namespace core_grades;
 use context;
 use gradingform_controller;
 use gradingform_instance;
-use moodle_exception;
+use powereduc_exception;
 use stdClass;
 use grade_item as core_gradeitem;
 use grading_manager;
@@ -320,7 +320,7 @@ abstract class component_gradeitem {
      * Check whether the supplied grade is valid and throw an exception if not.
      *
      * @param float $grade The value being checked
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @return bool
      */
     public function check_grade_validity(?float $grade): bool {
@@ -332,7 +332,7 @@ abstract class component_gradeitem {
 
                 if ($grade != -1 && !array_key_exists((int) $grade, $scaleoptions)) {
                     // The selected option did not exist.
-                    throw new moodle_exception('error:notinrange', 'core_grading', '', (object) [
+                    throw new powereduc_exception('error:notinrange', 'core_grading', '', (object) [
                         'maxgrade' => count($scaleoptions),
                         'grade' => $grade,
                     ]);
@@ -341,13 +341,13 @@ abstract class component_gradeitem {
                 $maxgrade = $this->get_gradeitem_value();
                 if ($grade > $maxgrade) {
                     // The grade is greater than the maximum possible value.
-                    throw new moodle_exception('error:notinrange', 'core_grading', '', (object) [
+                    throw new powereduc_exception('error:notinrange', 'core_grading', '', (object) [
                         'maxgrade' => $maxgrade,
                         'grade' => $grade,
                     ]);
                 } else if ($grade < 0) {
                     // Negative grades are not supported.
-                    throw new moodle_exception('error:notinrange', 'core_grading', '', (object) [
+                    throw new powereduc_exception('error:notinrange', 'core_grading', '', (object) [
                         'maxgrade' => $maxgrade,
                         'grade' => $grade,
                     ]);
@@ -566,7 +566,7 @@ abstract class component_gradeitem {
         $contextname = $this->context->get_context_name();
         $eventdata = new \core\message\message();
         $eventdata->courseid          = $this->context->get_course_context()->instanceid;
-        $eventdata->component         = 'moodle';
+        $eventdata->component         = 'powereduc';
         $eventdata->name              = 'gradenotifications';
         $eventdata->userfrom          = $grader;
         $eventdata->userto            = $gradeduser;

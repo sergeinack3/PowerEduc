@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Provides core\update\code_manager class.
  *
  * @package     core_plugin
- * @copyright   2012, 2013, 2015 David Mudrak <david@moodle.com>
+ * @copyright   2012, 2013, 2015 David Mudrak <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -26,7 +26,7 @@ namespace core\update;
 
 use core_component;
 use coding_exception;
-use moodle_exception;
+use powereduc_exception;
 use SplFileInfo;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -39,17 +39,17 @@ require_once($CFG->libdir.'/filelib.php');
  * General purpose class managing the plugins source code files deployment
  *
  * The class is able and supposed to
- * - fetch and cache ZIP files distributed via the Moodle Plugins directory
+ * - fetch and cache ZIP files distributed via the PowerEduc Plugins directory
  * - unpack the ZIP files in a temporary storage
  * - archive existing version of the plugin source code
  * - move (deploy) the plugin source code into the $CFG->dirroot
  *
- * @copyright 2015 David Mudrak <david@moodle.com>
+ * @copyright 2015 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class code_manager {
 
-    /** @var string full path to the Moodle app directory root */
+    /** @var string full path to the PowerEduc app directory root */
     protected $dirroot;
     /** @var string full path to the temp directory root */
     protected $temproot;
@@ -57,7 +57,7 @@ class code_manager {
     /**
      * Instantiate the class instance
      *
-     * @param string $dirroot full path to the moodle app directory root
+     * @param string $dirroot full path to the powereduc app directory root
      * @param string $temproot full path to our temp directory
      */
     public function __construct($dirroot=null, $temproot=null) {
@@ -239,12 +239,12 @@ class code_manager {
 
         if ($component !== clean_param($component, PARAM_SAFEDIR)) {
             // This should never happen, but just in case.
-            throw new moodle_exception('unexpected_plugin_component_format', 'core_plugin', '', null, $component);
+            throw new powereduc_exception('unexpected_plugin_component_format', 'core_plugin', '', null, $component);
         }
 
         if ((string)$version !== clean_param((string)$version, PARAM_FILE)) {
             // Prevent some nasty injections via $plugin->version tricks.
-            throw new moodle_exception('unexpected_plugin_version_format', 'core_plugin', '', null, $version);
+            throw new powereduc_exception('unexpected_plugin_version_format', 'core_plugin', '', null, $version);
         }
 
         if (empty($component) or empty($version)) {
@@ -273,7 +273,7 @@ class code_manager {
         $actualname = $this->get_plugin_zip_root_dir($tmpzip);
         if ($actualname !== $expectedname) {
             // This should not happen.
-            throw new moodle_exception('unexpected_archive_structure', 'core_plugin');
+            throw new powereduc_exception('unexpected_archive_structure', 'core_plugin');
         }
 
         make_writable_directory(dirname($archzip));
@@ -312,7 +312,7 @@ class code_manager {
      *  [workshop/lang/workshop.php] => /full/path/to/mod/workshop/lang/workshop.php
      *  ...
      *
-     * Which mathes the format used by Moodle file packers.
+     * Which mathes the format used by PowerEduc file packers.
      *
      * @param string $folderpath full path to the plugin directory
      * @return array (string)relpath => (string)fullpath
@@ -329,7 +329,7 @@ class code_manager {
                 continue;
             }
             if (strpos($fileinfo->getRealPath(), $folderpathinfo->getRealPath()) !== 0) {
-                throw new moodle_exception('unexpected_filepath_mismatch', 'core_plugin');
+                throw new powereduc_exception('unexpected_filepath_mismatch', 'core_plugin');
             }
             $key = substr($fileinfo->getRealPath(), $strip);
             if ($fileinfo->isDir() and substr($key, -1) !== '/') {
@@ -344,7 +344,7 @@ class code_manager {
      * Detects the plugin's name from its ZIP file.
      *
      * Plugin ZIP packages are expected to contain a single directory and the
-     * directory name would become the plugin name once extracted to the Moodle
+     * directory name would become the plugin name once extracted to the PowerEduc
      * dirroot.
      *
      * @param string $zipfilepath full path to the ZIP files
@@ -480,7 +480,7 @@ class code_manager {
             if (is_dir($dirname.'/'.$item)) {
                 if ($found !== null and $found !== $item) {
                     // Multiple directories found.
-                    throw new moodle_exception('unexpected_archive_structure', 'core_plugin');
+                    throw new powereduc_exception('unexpected_archive_structure', 'core_plugin');
                 }
                 $found = $item;
             }
@@ -541,7 +541,7 @@ class code_manager {
 
         foreach ($files as $file => $status) {
             if ($status !== true) {
-                throw new moodle_exception('corrupted_archive_structure', 'core_plugin', '', $file, $status);
+                throw new powereduc_exception('corrupted_archive_structure', 'core_plugin', '', $file, $status);
             }
 
             $source = $sourcedir.'/'.$file;

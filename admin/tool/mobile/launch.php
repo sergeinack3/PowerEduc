@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,26 +30,26 @@ require_once($CFG->libdir . '/externallib.php');
 
 $serviceshortname  = required_param('service',  PARAM_ALPHANUMEXT);
 $passport          = required_param('passport',  PARAM_RAW);    // Passport send from the app to validate the response URL.
-$urlscheme         = optional_param('urlscheme', 'moodlemobile', PARAM_NOTAGS); // The URL scheme the app supports.
+$urlscheme         = optional_param('urlscheme', 'powereducmobile', PARAM_NOTAGS); // The URL scheme the app supports.
 $confirmed         = optional_param('confirmed', false, PARAM_BOOL);  // If we are being redirected after user confirmation.
 $oauthsso          = optional_param('oauthsso', 0, PARAM_INT); // Id of the OpenID issuer (for OAuth direct SSO).
 
 // Validate that the urlscheme is valid.
 if (!preg_match('/^[a-zA-Z][a-zA-Z0-9-\+\.]*$/', $urlscheme)) {
-    throw new moodle_exception('Invalid parameter: the value of urlscheme isn\'t valid. ' .
+    throw new powereduc_exception('Invalid parameter: the value of urlscheme isn\'t valid. ' .
             'It should start with a letter and can only contain letters, numbers and the characters "." "+" "-".');
 }
 
 // Check web services enabled.
 if (!$CFG->enablewebservices) {
-    throw new moodle_exception('enablewsdescription', 'webservice');
+    throw new powereduc_exception('enablewsdescription', 'webservice');
 }
 
 // We have been requested to start a SSO process via OpenID.
 if (!empty($oauthsso) && is_enabled_auth('oauth2')) {
-    $wantsurl = new moodle_url('/admin/tool/mobile/launch.php',
+    $wantsurl = new powereduc_url('/admin/tool/mobile/launch.php',
         array('service' => $serviceshortname, 'passport' => $passport, 'urlscheme' => $urlscheme, 'confirmed' => $confirmed));
-    $oauthurl = new moodle_url('/auth/oauth2/login.php',
+    $oauthurl = new powereduc_url('/auth/oauth2/login.php',
         array('id' => $oauthsso, 'sesskey' => sesskey(), 'wantsurl' => $wantsurl));
     header('Location: ' . $oauthurl->out(false));
     die;
@@ -60,13 +60,13 @@ $typeoflogin = get_config('tool_mobile', 'typeoflogin');
 if (empty($SESSION->justloggedin) and
         $typeoflogin != tool_mobile\api::LOGIN_VIA_BROWSER and
         $typeoflogin != tool_mobile\api::LOGIN_VIA_EMBEDDED_BROWSER) {
-    throw new moodle_exception('pluginnotenabledorconfigured', 'tool_mobile');
+    throw new powereduc_exception('pluginnotenabledorconfigured', 'tool_mobile');
 }
 
 // Check if the service exists and is enabled.
 $service = $DB->get_record('external_services', array('shortname' => $serviceshortname, 'enabled' => 1));
 if (empty($service)) {
-    throw new moodle_exception('servicenotavailable', 'webservice');
+    throw new powereduc_exception('servicenotavailable', 'webservice');
 }
 
 require_login(0, false);
@@ -85,7 +85,7 @@ if (empty($SESSION->justloggedin) and $token->timecreated < $timenow) {
     $privatetoken = null;
 }
 
-$siteadmin = has_capability('moodle/site:config', context_system::instance(), $USER->id);
+$siteadmin = has_capability('powereduc/site:config', context_system::instance(), $USER->id);
 
 // Passport is generated in the mobile app, so the app opening can be validated using that variable.
 // Passports are valid only one time, it's deleted in the app once used.
@@ -121,7 +121,7 @@ if ($confirmed or $isios) {
         $PAGE->set_title($confirmedstr);
         echo $OUTPUT->notification($confirmedstr, \core\output\notification::NOTIFY_SUCCESS);
         echo $OUTPUT->box_start('generalbox centerpara boxwidthnormal boxaligncenter');
-        echo $OUTPUT->single_button(new moodle_url('/course/'), get_string('courses'));
+        echo $OUTPUT->single_button(new powereduc_url('/course/'), get_string('courses'));
         echo $OUTPUT->box_end();
     }
 

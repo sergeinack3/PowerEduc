@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -188,8 +188,8 @@ document.onreadystatechange = async() => {
 
     // Get emitted xAPI data.
     H5P.externalDispatcher.on('xAPI', function(event) {
-        var moodlecomponent = H5P.getMoodleComponent();
-        if (moodlecomponent == undefined) {
+        var powereduccomponent = H5P.getMoodleComponent();
+        if (powereduccomponent == undefined) {
             return;
         }
         // Skip malformed events.
@@ -214,7 +214,7 @@ document.onreadystatechange = async() => {
 
         if (isCompleted && !isChild) {
             var statements = H5P.getXAPIStatements(this.contentId, statement);
-            H5PEmbedCommunicator.post(moodlecomponent, statements);
+            H5PEmbedCommunicator.post(powereduccomponent, statements);
         }
     });
 

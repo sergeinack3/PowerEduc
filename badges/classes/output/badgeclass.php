@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,14 +25,14 @@ use context_course;
 use stdClass;
 use renderable;
 use core_badges\badge;
-use moodle_url;
+use powereduc_url;
 use renderer_base;
 
 /**
  * Page to display badge information, such as name, description or criteria. This information is unrelated to assertions.
  *
  * @package    core_badges
- * @copyright  2022 Sara Arjona (sara@moodle.com)
+ * @copyright  2022 Sara Arjona (sara@powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class badgeclass implements renderable {
@@ -153,7 +153,7 @@ class badgeclass implements renderable {
             $data->relatedbadges = [];
             foreach ($relatedbadges as $related) {
                 if (isloggedin() && !is_guest($this->context)) {
-                    $related->url = (new moodle_url('/badges/overview.php', ['id' => $related->id]))->out(false);
+                    $related->url = (new powereduc_url('/badges/overview.php', ['id' => $related->id]))->out(false);
                 }
                 $data->relatedbadges[] = (array)$related;
             }

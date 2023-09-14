@@ -8,12 +8,12 @@
 }
 
 /**
- * These styles are required to ensure that icons loaded from Moodle are displayed correctly in TinyMCE.
+ * These styles are required to ensure that icons loaded from PowerEduc are displayed correctly in TinyMCE.
  * The first selector targets the menu.
  * The second selector targets the context menu.
  */
-.tox .tox-tbtn svg[data-buttonsource="moodle"] image,
-.tox-collection__item-icon svg[data-buttonsource="moodle"] image {
+.tox .tox-tbtn svg[data-buttonsource="powereduc"] image,
+.tox-collection__item-icon svg[data-buttonsource="powereduc"] image {
     width: inherit;
     height: inherit;
 }

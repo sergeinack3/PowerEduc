@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ $context = context_system::instance();
 require_login(null, false);
 require_capability('tool/lpmigrate:frameworksmigrate', $context);
 
-$url = new moodle_url('/admin/tool/lpmigrate/frameworks.php');
+$url = new powereduc_url('/admin/tool/lpmigrate/frameworks.php');
 $title = get_string('migrateframeworks', 'tool_lpmigrate');
 $PAGE->set_context($context);
 $PAGE->set_pagelayout('standard');

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -50,7 +50,7 @@ if (!is_null($storedsecret)) {
         // Make sure we have all the required information before trying to save the connection.
         $backpackuid = $bp->authenticate();
         if (empty($backpackuid) || !empty($backpackuid->error)) {
-            redirect(new moodle_url($redirect), get_string('backpackconnectionunexpectedresult', 'badges'),
+            redirect(new powereduc_url($redirect), get_string('backpackconnectionunexpectedresult', 'badges'),
                 null, \core\output\notification::NOTIFY_ERROR);
         }
 
@@ -69,15 +69,15 @@ if (!is_null($storedsecret)) {
         unset_user_preference('badges_email_verify_address');
         unset_user_preference('badges_email_verify_backpackid');
         unset_user_preference('badges_email_verify_password');
-        redirect(new moodle_url($redirect), get_string('backpackemailverifysuccess', 'badges'),
+        redirect(new powereduc_url($redirect), get_string('backpackemailverifysuccess', 'badges'),
             null, \core\output\notification::NOTIFY_SUCCESS);
     } else {
         // Stored secret doesn't match the supplied secret. Take user back to the mybackpack page and present a warning message.
-        redirect(new moodle_url($redirect), get_string('backpackemailverifytokenmismatch', 'badges'),
+        redirect(new powereduc_url($redirect), get_string('backpackemailverifytokenmismatch', 'badges'),
             null, \core\output\notification::NOTIFY_ERROR);
     }
 } else {
     // Stored secret is null. Either the email address has already been verified, or there is no record of a verification attempt
     // for the current user. Either way, just redirect to the mybackpack page.
-    redirect(new moodle_url($redirect));
+    redirect(new powereduc_url($redirect));
 }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file contains the generic moodleform bridge for the backup user interface
+ * This file contains the generic powereducform bridge for the backup user interface
  * as well as the individual forms that relate to the different stages the user
  * interface can exist within.
  *
@@ -27,9 +27,9 @@
 defined('POWEREDUC_INTERNAL') || die();
 
 /**
- * Backup moodleform bridge
+ * Backup powereducform bridge
  *
- * Ahhh the mighty moodleform bridge! Strong enough to take the weight of 682 full
+ * Ahhh the mighty powereducform bridge! Strong enough to take the weight of 682 full
  * grown african swallows all of whom have been carring coconuts for several days.
  * EWWWWW!!!!!!!!!!!!!!!!!!!!!!!!
  *
@@ -37,14 +37,14 @@ defined('POWEREDUC_INTERNAL') || die();
  * @copyright 2010 Sam Hemelryk
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-abstract class backup_moodleform extends base_moodleform {
+abstract class backup_powereducform extends base_powereducform {
     /**
      * Creates the form
      *
      * Overridden for type hinting on the first arg.
      *
      * @param backup_ui_stage $uistage
-     * @param moodle_url|string $action
+     * @param powereduc_url|string $action
      * @param mixed $customdata
      * @param string $method get|post
      * @param string $target
@@ -58,40 +58,40 @@ abstract class backup_moodleform extends base_moodleform {
 }
 
 /**
- * Initial backup user interface stage moodleform.
+ * Initial backup user interface stage powereducform.
  *
- * Nothing to override we only need it defined so that moodleform doesn't get confused
+ * Nothing to override we only need it defined so that powereducform doesn't get confused
  * between stages.
  *
  * @package   core_backup
  * @copyright 2010 Sam Hemelryk
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class backup_initial_form extends backup_moodleform {}
+class backup_initial_form extends backup_powereducform {}
 
 /**
- * Schema backup user interface stage moodleform.
+ * Schema backup user interface stage powereducform.
  *
- * Nothing to override we only need it defined so that moodleform doesn't get confused
+ * Nothing to override we only need it defined so that powereducform doesn't get confused
  * between stages.
  *
  * @package   core_backup
  * @copyright 2010 Sam Hemelryk
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class backup_schema_form extends backup_moodleform {}
+class backup_schema_form extends backup_powereducform {}
 
 /**
- * Confirmation backup user interface stage moodleform.
+ * Confirmation backup user interface stage powereducform.
  *
- * Nothing to override we only need it defined so that moodleform doesn't get confused
+ * Nothing to override we only need it defined so that powereducform doesn't get confused
  * between stages.
  *
  * @package   core_backup
  * @copyright 2010 Sam Hemelryk
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class backup_confirmation_form extends backup_moodleform {
+class backup_confirmation_form extends backup_powereducform {
 
     /**
      * Adds the last elements, rules, settings etc to the form after data has been set.

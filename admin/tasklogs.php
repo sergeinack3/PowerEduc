@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ require_once("{$CFG->libdir}/adminlib.php");
 use core_admin\reportbuilder\local\systemreports\task_logs;
 use core_reportbuilder\system_report_factory;
 
-$PAGE->set_url(new \moodle_url('/admin/tasklogs.php'));
+$PAGE->set_url(new \powereduc_url('/admin/tasklogs.php'));
 $PAGE->set_context(context_system::instance());
 $PAGE->set_pagelayout('admin');
 $strheading = get_string('tasklogs', 'admin');

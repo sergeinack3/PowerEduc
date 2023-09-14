@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@ class course extends \core_search\base {
      *
      * @param int $modifiedfrom timestamp
      * @param \context|null $context Restriction context
-     * @return \moodle_recordset|null Recordset or null if no change possible
+     * @return \powereduc_recordset|null Recordset or null if no change possible
      */
     public function get_document_recordset($modifiedfrom = 0, \context $context = null) {
         global $DB;
@@ -75,7 +75,7 @@ class course extends \core_search\base {
     public function get_document($record, $options = array()) {
         try {
             $context = \context_course::instance($record->id);
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             // Notify it as we run here as admin, we should see everything.
             debugging('Error retrieving ' . $this->areaid . ' ' . $record->id . ' document, not all required data is available: ' .
                 $ex->getMessage(), DEBUG_DEVELOPER);
@@ -124,7 +124,7 @@ class course extends \core_search\base {
      * Link to the course.
      *
      * @param \core_search\document $doc
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_doc_url(\core_search\document $doc) {
         return $this->get_context_url($doc);
@@ -134,10 +134,10 @@ class course extends \core_search\base {
      * Link to the course.
      *
      * @param \core_search\document $doc
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_context_url(\core_search\document $doc) {
-        return new \moodle_url('/course/view.php', array('id' => $doc->get('courseid')));
+        return new \powereduc_url('/course/view.php', array('id' => $doc->get('courseid')));
     }
 
     /**
@@ -167,7 +167,7 @@ class course extends \core_search\base {
     }
 
     /**
-     * Returns the moodle component name.
+     * Returns the powereduc component name.
      *
      * It might be the plugin name (whole frankenstyle name) or the core subsystem name.
      *

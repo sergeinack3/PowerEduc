@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,10 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * @package   moodlecore
+ * @package   powereduccore
  * @subpackage backup-imscc
  * @copyright 2009 Mauro Rondinelli (mauro.rondinelli [AT] uvcms.com)
- * @copyright 2011 Darko Miletic (dmiletic@moodlerooms.com)
+ * @copyright 2011 Darko Miletic (dmiletic@powereducrooms.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -38,7 +38,7 @@ class cc_quiz extends entities {
 
     public function generate_node_course_modules_mod () {
 
-        cc2moodle::log_action('Creating Quiz mods');
+        cc2powereduc::log_action('Creating Quiz mods');
 
         $node_course_modules_mod = '';
         $instances = $this->generate_instances();
@@ -57,7 +57,7 @@ class cc_quiz extends entities {
 
     private function create_node_course_modules_mod_quiz_feedback () {
 
-        $sheet_question_mod_feedback = cc2moodle::loadsheet(SHEET_COURSE_SECTIONS_SECTION_MODS_MOD_QUIZ_FEEDBACK);
+        $sheet_question_mod_feedback = cc2powereduc::loadsheet(SHEET_COURSE_SECTIONS_SECTION_MODS_MOD_QUIZ_FEEDBACK);
 
         return $sheet_question_mod_feedback;
     }
@@ -74,9 +74,9 @@ class cc_quiz extends entities {
 
         foreach ($types as $type) {
 
-            if (!empty(cc2moodle::$instances['instances'][$type])) {
+            if (!empty(cc2powereduc::$instances['instances'][$type])) {
 
-                foreach (cc2moodle::$instances['instances'][$type] as $instance) {
+                foreach (cc2powereduc::$instances['instances'][$type] as $instance) {
 
                     if ($type == POWEREDUC_TYPE_QUIZ) {
                         $is_question_bank = 0;
@@ -89,7 +89,7 @@ class cc_quiz extends entities {
                     if (!empty($assessment_file)) {
 
                         $assessment = $this->load_xml_resource(
-                            cc2moodle::$path_to_manifest_folder . DIRECTORY_SEPARATOR . $assessment_file
+                            cc2powereduc::$path_to_manifest_folder . DIRECTORY_SEPARATOR . $assessment_file
                         );
 
                         if (!empty($assessment)) {
@@ -126,7 +126,7 @@ class cc_quiz extends entities {
 
     private function create_node_course_modules_mod ($instance) {
 
-        $sheet_question_mod = cc2moodle::loadsheet(SHEET_COURSE_SECTIONS_SECTION_MODS_MOD_QUIZ);
+        $sheet_question_mod = cc2powereduc::loadsheet(SHEET_COURSE_SECTIONS_SECTION_MODS_MOD_QUIZ);
 
         $node_course_modules_quiz_question_instances = $this->create_node_course_modules_mod_quiz_question_instances($instance);
         $node_course_modules_quiz_feedback = $this->create_node_course_modules_mod_quiz_feedback($instance);
@@ -163,7 +163,7 @@ class cc_quiz extends entities {
 
     private function get_global_config ($assessment, $option, $default_value, $replace_values = '') {
 
-        $xpath = cc2moodle::newx_path($assessment, cc2moodle::getquizns());
+        $xpath = cc2powereduc::newx_path($assessment, cc2powereduc::getquizns());
         $metadata = $xpath->query('/xmlns:questestinterop/xmlns:assessment/xmlns:qtimetadata/xmlns:qtimetadatafield');
 
         foreach ($metadata as $field) {
@@ -192,7 +192,7 @@ class cc_quiz extends entities {
     private function create_node_course_modules_mod_quiz_question_instances ($instance) {
 
         $node_course_module_mod_quiz_questions_instances = '';
-        $sheet_question_mod_instance = cc2moodle::loadsheet(SHEET_COURSE_SECTIONS_SECTION_MODS_MOD_QUIZ_QUESTION_INSTANCE);
+        $sheet_question_mod_instance = cc2powereduc::loadsheet(SHEET_COURSE_SECTIONS_SECTION_MODS_MOD_QUIZ_QUESTION_INSTANCE);
 
         $find_tags = array('[#question_id#]' , '[#instance_id#]');
 
@@ -230,7 +230,7 @@ class cc_quiz extends entities {
 
     private function create_node_course_question_categories($instances) {
 
-        $sheet_question_categories = cc2moodle::loadsheet(SHEET_COURSE_QUESTION_CATEGORIES);
+        $sheet_question_categories = cc2powereduc::loadsheet(SHEET_COURSE_QUESTION_CATEGORIES);
 
         if (!empty($instances)) {
 
@@ -254,7 +254,7 @@ class cc_quiz extends entities {
 
     private function create_node_course_question_categories_question_category ($instance) {
 
-        $sheet_question_categories_quetion_category = cc2moodle::loadsheet(SHEET_COURSE_QUESTION_CATEGORIES_QUESTION_CATEGORY);
+        $sheet_question_categories_quetion_category = cc2powereduc::loadsheet(SHEET_COURSE_QUESTION_CATEGORIES_QUESTION_CATEGORY);
 
         $find_tags = array('[#quiz_id#]',
                            '[#quiz_name#]',
@@ -296,7 +296,7 @@ class cc_quiz extends entities {
                            '[#question_version#]',
                            '[#logged_user#]');
 
-        $sheet_question_categories_question = cc2moodle::loadsheet(SHEET_COURSE_QUESTION_CATEGORIES_QUESTION_CATEGORY_QUESTION);
+        $sheet_question_categories_question = cc2powereduc::loadsheet(SHEET_COURSE_QUESTION_CATEGORIES_QUESTION_CATEGORY_QUESTION);
 
         $questions = $instance['questions'];
 
@@ -307,20 +307,20 @@ class cc_quiz extends entities {
                 $quiz_stamp = 'localhost+' . time() . '+' . $this->generate_random_string(6);
                 $quiz_version = 'localhost+' . time() . '+' . $this->generate_random_string(6);
 
-                $question_moodle_type = $question['moodle_type'];
+                $question_powereduc_type = $question['powereduc_type'];
                 $question_cc_type = $question['cc_type'];
 
                 $question_type_node = '';
 
-                $question_type_node = ($question_moodle_type == POWEREDUC_QUIZ_MULTIPLE_CHOICE) ? $this->create_node_course_question_categories_question_category_question_multiple_choice($question) : $question_type_node;
-                $question_type_node = ($question_moodle_type == POWEREDUC_QUIZ_TRUE_FALSE) ? $this->create_node_course_question_categories_question_category_question_true_false($question) : $question_type_node;
-                $question_type_node = ($question_moodle_type == POWEREDUC_QUIZ_ESSAY) ? $this->create_node_course_question_categories_question_category_question_eesay($question) : $question_type_node;
-                $question_type_node = ($question_moodle_type == POWEREDUC_QUIZ_SHORTANSWER) ? $this->create_node_course_question_categories_question_category_question_shortanswer($question) : $question_type_node;
+                $question_type_node = ($question_powereduc_type == POWEREDUC_QUIZ_MULTIPLE_CHOICE) ? $this->create_node_course_question_categories_question_category_question_multiple_choice($question) : $question_type_node;
+                $question_type_node = ($question_powereduc_type == POWEREDUC_QUIZ_TRUE_FALSE) ? $this->create_node_course_question_categories_question_category_question_true_false($question) : $question_type_node;
+                $question_type_node = ($question_powereduc_type == POWEREDUC_QUIZ_ESSAY) ? $this->create_node_course_question_categories_question_category_question_eesay($question) : $question_type_node;
+                $question_type_node = ($question_powereduc_type == POWEREDUC_QUIZ_SHORTANSWER) ? $this->create_node_course_question_categories_question_category_question_shortanswer($question) : $question_type_node;
 
                 $replace_values = array($question['id'],
                                         self::safexml($this->truncate_text($question['title'], 255, true)),
                                         self::safexml($question['title']),
-                                        $question_moodle_type,
+                                        $question_powereduc_type,
                                         self::safexml($question['feedback']),
                                         $question['defaultgrade'], //default grade
                                         time(),
@@ -342,7 +342,7 @@ class cc_quiz extends entities {
 
         $questions = array();
 
-        $xpath = cc2moodle::newx_path($assessment, cc2moodle::getquizns());
+        $xpath = cc2powereduc::newx_path($assessment, cc2powereduc::getquizns());
 
         if (!$is_question_bank) {
             $questions_items = $xpath->query('/xmlns:questestinterop/xmlns:assessment/xmlns:section/xmlns:item');
@@ -369,7 +369,7 @@ class cc_quiz extends entities {
 
                 $question_type = $this->get_question_type($question_identifier, $assessment);
 
-                if (!empty($question_type['moodle'])) {
+                if (!empty($question_type['powereduc'])) {
 
                     $last_question_id++;
 
@@ -380,7 +380,7 @@ class cc_quiz extends entities {
 
                     $questions[$question_identifier]['title'] = $question_title;
                     $questions[$question_identifier]['identifier'] = $question_identifier;
-                    $questions[$question_identifier]['moodle_type'] = $question_type['moodle'];
+                    $questions[$question_identifier]['powereduc_type'] = $question_type['powereduc'];
                     $questions[$question_identifier]['cc_type'] = $question_type['cc'];
                     $questions[$question_identifier]['feedback'] = $this->get_general_feedback($assessment, $question_identifier);
                     $questions[$question_identifier]['defaultgrade'] = $this->get_defaultgrade($assessment, $question_identifier);
@@ -413,7 +413,7 @@ class cc_quiz extends entities {
 
     private function get_defaultgrade($assessment, $question_identifier) {
         $result = 1;
-        $xpath = cc2moodle::newx_path($assessment, cc2moodle::getquizns());
+        $xpath = cc2powereduc::newx_path($assessment, cc2powereduc::getquizns());
         $query = '//xmlns:item[@ident="' . $question_identifier . '"]';
         $query .= '//xmlns:qtimetadatafield[xmlns:fieldlabel="cc_weighting"]/xmlns:fieldentry';
         $defgrade = $xpath->query($query);
@@ -428,7 +428,7 @@ class cc_quiz extends entities {
 
     private function get_general_feedback ($assessment, $question_identifier) {
 
-        $xpath = cc2moodle::newx_path($assessment, cc2moodle::getquizns());
+        $xpath = cc2powereduc::newx_path($assessment, cc2powereduc::getquizns());
 
         $respconditions = $xpath->query('//xmlns:item[@ident="' . $question_identifier . '"]/xmlns:resprocessing/xmlns:respcondition');
 
@@ -473,7 +473,7 @@ class cc_quiz extends entities {
 
     private function get_feedback ($assessment, $identifier, $item_identifier, $question_type) {
 
-        $xpath = cc2moodle::newx_path($assessment, cc2moodle::getquizns());
+        $xpath = cc2powereduc::newx_path($assessment, cc2powereduc::getquizns());
 
         $resource_processing = $xpath->query('//xmlns:item[@ident="' . $item_identifier . '"]/xmlns:resprocessing/xmlns:respcondition');
 
@@ -518,7 +518,7 @@ class cc_quiz extends entities {
 
     private function get_answers_fib ($question_identifier, $identifier, $assessment, &$last_answer_id) {
 
-        $xpath = cc2moodle::newx_path($assessment, cc2moodle::getquizns());
+        $xpath = cc2powereduc::newx_path($assessment, cc2powereduc::getquizns());
 
         $answers_fib = array();
 
@@ -584,7 +584,7 @@ class cc_quiz extends entities {
 
     private function get_answers_pattern_match ($question_identifier, $identifier, $assessment, &$last_answer_id) {
 
-        $xpath = cc2moodle::newx_path($assessment, cc2moodle::getquizns());
+        $xpath = cc2powereduc::newx_path($assessment, cc2powereduc::getquizns());
 
         $answers_fib = array();
 
@@ -660,7 +660,7 @@ class cc_quiz extends entities {
 
     private function get_answers ($identifier, $assessment, &$last_answer_id) {
 
-        $xpath = cc2moodle::newx_path($assessment, cc2moodle::getquizns());
+        $xpath = cc2powereduc::newx_path($assessment, cc2powereduc::getquizns());
 
         $answers = array();
 
@@ -766,7 +766,7 @@ class cc_quiz extends entities {
 
     private function get_score ($assessment, $identifier, $question_identifier) {
 
-        $xpath = cc2moodle::newx_path($assessment, cc2moodle::getquizns());
+        $xpath = cc2powereduc::newx_path($assessment, cc2powereduc::getquizns());
 
         $resource_processing = $xpath->query('//xmlns:item[@ident="' . $question_identifier . '"]/xmlns:resprocessing/xmlns:respcondition');
 
@@ -795,7 +795,7 @@ class cc_quiz extends entities {
     private function create_node_course_question_categories_question_category_question_multiple_choice ($question) {
 
         $node_course_question_categories_question_answer = '';
-        $sheet_question_categories_question = cc2moodle::loadsheet(SHEET_COURSE_QUESTION_CATEGORIES_QUESTION_CATEGORY_QUESTION_MULTIPLE_CHOICE);
+        $sheet_question_categories_question = cc2powereduc::loadsheet(SHEET_COURSE_QUESTION_CATEGORIES_QUESTION_CATEGORY_QUESTION_MULTIPLE_CHOICE);
 
         if (!empty($question['answers'])) {
             foreach ($question['answers'] as $answer) {
@@ -824,7 +824,7 @@ class cc_quiz extends entities {
 
         $node_course_question_categories_question_answer = '';
 
-        $sheet_question_categories_question = cc2moodle::loadsheet(SHEET_COURSE_QUESTION_CATEGORIES_QUESTION_CATEGORY_QUESTION_EESAY);
+        $sheet_question_categories_question = cc2powereduc::loadsheet(SHEET_COURSE_QUESTION_CATEGORIES_QUESTION_CATEGORY_QUESTION_EESAY);
 
         if (!empty($question['answers'])) {
             foreach ($question['answers'] as $answer) {
@@ -842,7 +842,7 @@ class cc_quiz extends entities {
 
     private function create_node_course_question_categories_question_category_question_shortanswer ($question) { //, &$fib_questions) {
 
-        $sheet_question_categories_question = cc2moodle::loadsheet(SHEET_COURSE_QUESTION_CATEGORIES_QUESTION_CATEGORY_QUESTION_SHORTANSWER);
+        $sheet_question_categories_question = cc2powereduc::loadsheet(SHEET_COURSE_QUESTION_CATEGORIES_QUESTION_CATEGORY_QUESTION_SHORTANSWER);
         $node_course_question_categories_question_answer = '';
 
         if (!empty($question['answers'])) {
@@ -883,7 +883,7 @@ class cc_quiz extends entities {
 
         $node_course_question_categories_question_answer = '';
 
-        $sheet_question_categories_question = cc2moodle::loadsheet(SHEET_COURSE_QUESTION_CATEGORIES_QUESTION_CATEGORY_QUESTION_TRUE_FALSE);
+        $sheet_question_categories_question = cc2powereduc::loadsheet(SHEET_COURSE_QUESTION_CATEGORIES_QUESTION_CATEGORY_QUESTION_TRUE_FALSE);
 
         $trueanswer  = null;
         $falseanswer = null;
@@ -943,7 +943,7 @@ class cc_quiz extends entities {
 
     private function create_node_course_question_categories_question_category_question_answer ($answer) {
 
-        $sheet_question_categories_question_answer = cc2moodle::loadsheet(SHEET_COURSE_QUESTION_CATEGORIES_QUESTION_CATEGORY_QUESTION_ANSWER);
+        $sheet_question_categories_question_answer = cc2powereduc::loadsheet(SHEET_COURSE_QUESTION_CATEGORIES_QUESTION_CATEGORY_QUESTION_ANSWER);
 
         $find_tags = array('[#answer_id#]',
                            '[#answer_text#]',
@@ -962,7 +962,7 @@ class cc_quiz extends entities {
 
     private function get_question_type ($identifier, $assessment) {
 
-        $xpath = cc2moodle::newx_path($assessment, cc2moodle::getquizns());
+        $xpath = cc2powereduc::newx_path($assessment, cc2powereduc::getquizns());
 
         $metadata = $xpath->query('//xmlns:item[@ident="' . $identifier . '"]/xmlns:itemmetadata/xmlns:qtimetadata/xmlns:qtimetadatafield');
 
@@ -979,26 +979,26 @@ class cc_quiz extends entities {
 
         $return_type = array();
 
-        $return_type['moodle'] = '';
+        $return_type['powereduc'] = '';
         $return_type['cc'] = $type;
 
         if ($type == CC_QUIZ_MULTIPLE_CHOICE) {
-            $return_type['moodle'] = POWEREDUC_QUIZ_MULTIPLE_CHOICE;
+            $return_type['powereduc'] = POWEREDUC_QUIZ_MULTIPLE_CHOICE;
         }
         if ($type == CC_QUIZ_MULTIPLE_RESPONSE) {
-            $return_type['moodle'] = POWEREDUC_QUIZ_MULTIPLE_CHOICE;
+            $return_type['powereduc'] = POWEREDUC_QUIZ_MULTIPLE_CHOICE;
         }
         if ($type == CC_QUIZ_TRUE_FALSE) {
-            $return_type['moodle'] = POWEREDUC_QUIZ_TRUE_FALSE;
+            $return_type['powereduc'] = POWEREDUC_QUIZ_TRUE_FALSE;
         }
         if ($type == CC_QUIZ_ESSAY) {
-            $return_type['moodle'] = POWEREDUC_QUIZ_ESSAY;
+            $return_type['powereduc'] = POWEREDUC_QUIZ_ESSAY;
         }
         if ($type == CC_QUIZ_FIB) {
-            $return_type['moodle'] = POWEREDUC_QUIZ_SHORTANSWER;
+            $return_type['powereduc'] = POWEREDUC_QUIZ_SHORTANSWER;
         }
         if ($type == CC_QUIZ_PATTERN_MACHT) {
-            $return_type['moodle'] = POWEREDUC_QUIZ_SHORTANSWER;
+            $return_type['powereduc'] = POWEREDUC_QUIZ_SHORTANSWER;
         }
 
         return $return_type;

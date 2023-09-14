@@ -1,7 +1,7 @@
 /**
  * This file contains the capability overview search functionality.
  *
- * @module moodle-tool_capability-search
+ * @module powereduc-tool_capability-search
  */
 
 /**

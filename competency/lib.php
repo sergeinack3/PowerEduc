@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -117,7 +117,7 @@ function core_competency_comment_add($comment, $params) {
 
         $message = new \core\message\message();
         $message->courseid = SITEID;
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = 'competencyusercompcomment';
         $message->notification = 1;
         $message->userfrom = core_user::get_noreply_user();
@@ -193,7 +193,7 @@ function core_competency_comment_add($comment, $params) {
 
         $message = new \core\message\message();
         $message->courseid = SITEID;
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = 'competencyplancomment';
         $message->notification = 1;
         $message->userfrom = core_user::get_noreply_user();

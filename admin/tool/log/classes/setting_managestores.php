@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -143,7 +143,7 @@ class tool_log_setting_managestores extends admin_setting {
         // Iterate through store plugins and add to the display table.
         $updowncount = 1;
         $storecount = count($enabled);
-        $url = new moodle_url('/admin/tool/log/stores.php', array('sesskey' => sesskey()));
+        $url = new powereduc_url('/admin/tool/log/stores.php', array('sesskey' => sesskey()));
         $printed = array();
         foreach ($allstores as $store => $unused) {
             $plugininfo = $pluginmanager->get_plugin_info($store);
@@ -167,14 +167,14 @@ class tool_log_setting_managestores extends admin_setting {
 
             // Hide/show links.
             if (isset($enabled[$store])) {
-                $aurl = new moodle_url($url, array('action' => 'disable', 'store' => $store));
+                $aurl = new powereduc_url($url, array('action' => 'disable', 'store' => $store));
                 $hideshow = "<a href=\"$aurl\">";
                 $hideshow .= $OUTPUT->pix_icon('t/hide', $strdisable) . '</a>';
                 $isenabled = true;
                 $displayname = "<span>$name</span>";
             } else {
                 if (isset($available[$store])) {
-                    $aurl = new moodle_url($url, array('action' => 'enable', 'store' => $store));
+                    $aurl = new powereduc_url($url, array('action' => 'enable', 'store' => $store));
                     $hideshow = "<a href=\"$aurl\">";
                     $hideshow .= $OUTPUT->pix_icon('t/show', $strenable) . '</a>';
                     $isenabled = false;
@@ -195,14 +195,14 @@ class tool_log_setting_managestores extends admin_setting {
             $updown = '';
             if ($isenabled) {
                 if ($updowncount > 1) {
-                    $aurl = new moodle_url($url, array('action' => 'up', 'store' => $store));
+                    $aurl = new powereduc_url($url, array('action' => 'up', 'store' => $store));
                     $updown .= "<a href=\"$aurl\">";
                     $updown .= $OUTPUT->pix_icon('t/up', $strup) . '</a>&nbsp;';
                 } else {
                     $updown .= $OUTPUT->spacer();
                 }
                 if ($updowncount < $storecount) {
-                    $aurl = new moodle_url($url, array('action' => 'down', 'store' => $store));
+                    $aurl = new powereduc_url($url, array('action' => 'down', 'store' => $store));
                     $updown .= "<a href=\"$aurl\">";
                     $updown .= $OUTPUT->pix_icon('t/down', $strdown) . '</a>&nbsp;';
                 } else {

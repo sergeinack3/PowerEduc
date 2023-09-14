@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -147,7 +147,7 @@ class content_item_service {
                     if (component_callback_exists($subpluginname, 'get_course_content_items')) {
                         $itemtypes[] = $prefix . $subpluginname;
                     }
-                } catch (\moodle_exception $e) {
+                } catch (\powereduc_exception $e) {
                     debugging('Cannot get_course_content_items: ' . $e->getMessage(), DEBUG_DEVELOPER);
                 }
             }
@@ -239,7 +239,7 @@ class content_item_service {
     public function get_content_items_for_user_in_course(\stdClass $user, \stdClass $course, array $linkparams = []): array {
         global $PAGE;
 
-        if (!has_capability('moodle/course:manageactivities', \context_course::instance($course->id), $user)) {
+        if (!has_capability('powereduc/course:manageactivities', \context_course::instance($course->id), $user)) {
             return [];
         }
 
@@ -263,7 +263,7 @@ class content_item_service {
                         }
                     }
                 }
-                throw new \moodle_exception('Only modules and submodules can generate content items. \''
+                throw new \powereduc_exception('Only modules and submodules can generate content items. \''
                     . $contentitem->get_component_name() . '\' is neither.');
             }
             $parents[$contentitem->get_component_name()] = $contentitem->get_component_name();

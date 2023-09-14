@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -87,7 +87,7 @@ Options:
 Example from Moodle root directory:
 \$ php admin/tool/behat/cli/run.php --tags=\"@javascript\"
 
-More info in http://docs.moodle.org/dev/Acceptance_testing#Running_tests
+More info in http://docs.powereduc.org/dev/Acceptance_testing#Running_tests
 ";
 
 if (!empty($options['help'])) {
@@ -268,7 +268,7 @@ if (empty($parallelrun)) {
         define('BEHAT_PARALLEL_START_DELAY', 0);
     }
 
-    // Execute all commands, relative to moodle root directory.
+    // Execute all commands, relative to powereduc root directory.
     $processes = cli_execute_parallel($cmds, __DIR__ . "/../../../../", BEHAT_PARALLEL_START_DELAY);
     $stoponfail = empty($options['stop-on-failure']) ? false : true;
 

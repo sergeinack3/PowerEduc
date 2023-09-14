@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Renderer for the grade single view report.
  *
  * @package   gradereport_singleview
- * @copyright 2022 Mihail Geshoski <mihail@moodle.com>
+ * @copyright 2022 Mihail Geshoski <mihail@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ use gradereport_singleview\report\singleview;
  * To get an instance of this use the following code:
  * $renderer = $PAGE->get_renderer('gradereport_singleview');
  *
- * @copyright 2022 Mihail Geshoski <mihail@moodle.com>
+ * @copyright 2022 Mihail Geshoski <mihail@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class gradereport_singleview_renderer extends plugin_renderer_base {
@@ -100,7 +100,7 @@ class gradereport_singleview_renderer extends plugin_renderer_base {
      * @param string $itemtype User or Grade item type
      * @param int $itemid Either User ID or Grade item ID
      * @return string The raw HTML to render.
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function report_navigation(object $gpr, int $courseid, \context_course $context, singleview $report,
                                       ?int $groupid, string $itemtype, int $itemid): string {
@@ -127,7 +127,7 @@ class gradereport_singleview_renderer extends plugin_renderer_base {
 
         if ($i > 0) {
             $navparams['itemid'] = $reloptionssorting[$i - 1];
-            $link = (new moodle_url('/grade/report/singleview/index.php', $navparams))
+            $link = (new powereduc_url('/grade/report/singleview/index.php', $navparams))
                 ->out(false);
             $navigationdata['previoususer'] = [
                 'name' => $reloptions[$navparams['itemid']],
@@ -137,7 +137,7 @@ class gradereport_singleview_renderer extends plugin_renderer_base {
         }
         if ($i < count($reloptionssorting) - 1) {
             $navparams['itemid'] = $reloptionssorting[$i + 1];
-            $link = (new moodle_url('/grade/report/singleview/index.php', $navparams))
+            $link = (new powereduc_url('/grade/report/singleview/index.php', $navparams))
                 ->out(false);
             $navigationdata['nextuser'] = [
                 'name' => $reloptions[$navparams['itemid']],

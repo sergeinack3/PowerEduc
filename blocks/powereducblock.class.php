@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file contains the parent class for moodle blocks, block_base.
+ * This file contains the parent class for powereduc blocks, block_base.
  *
  * @package    core_block
  * @license    http://www.gnu.org/copyleft/gpl.html GNU Public License
@@ -38,7 +38,7 @@ define('BLOCK_TYPE_TEXT',    2);
 define('BLOCK_TYPE_TREE',    3);
 
 /**
- * Class for describing a moodle block, all Moodle blocks derive from this class
+ * Class for describing a powereduc block, all Moodle blocks derive from this class
  *
  * @author Jon Papaioannou
  * @package core_block
@@ -83,7 +83,7 @@ class block_base {
 
     /**
      * The page that this block is appearing on.
-     * @var moodle_page
+     * @var powereduc_page
      */
     public $page       = NULL;
 
@@ -181,7 +181,7 @@ class block_base {
      * @return boolean
      */
     function is_empty() {
-        if ( !has_capability('moodle/block:view', $this->context) ) {
+        if ( !has_capability('powereduc/block:view', $this->context) ) {
             return true;
         }
 
@@ -218,7 +218,7 @@ class block_base {
         global $CFG;
 
         // We can exit early if the current user doesn't have the capability to view the block.
-        if (!has_capability('moodle/block:view', $this->context)) {
+        if (!has_capability('powereduc/block:view', $this->context)) {
             return null;
         }
 
@@ -462,7 +462,7 @@ class block_base {
      * table and the current page. (See {@link block_manager::load_blocks()}.)
      *
      * @param stdClass $instance data from block_insances, block_positions, etc.
-     * @param moodle_page $the page this block is on.
+     * @param powereduc_page $the page this block is on.
      */
     function _load_instance($instance, $page) {
         if (!empty($instance->configdata)) {
@@ -568,7 +568,7 @@ class block_base {
     function user_can_edit() {
         global $USER;
 
-        if (has_capability('moodle/block:edit', $this->context)) {
+        if (has_capability('powereduc/block:edit', $this->context)) {
             return true;
         }
 
@@ -577,7 +577,7 @@ class block_base {
             && $this->instance->parentcontextid == $this->page->context->id   // Block belongs to this page
             && $this->page->context->contextlevel == CONTEXT_USER             // Page belongs to a user
             && $this->page->context->instanceid == $USER->id) {               // Page belongs to this user
-            return has_capability('moodle/my:manageblocks', $this->page->context);
+            return has_capability('powereduc/my:manageblocks', $this->page->context);
         }
 
         return false;
@@ -589,7 +589,7 @@ class block_base {
      * but if the framework does allow it, the block can still decide to refuse.
      * This function has access to the complete page object, the creation related to which is being determined.
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @return boolean
      */
     function user_can_addto($page) {
@@ -604,7 +604,7 @@ class block_base {
         if (array_key_exists($page->pagetype, $userpagetypes)) {
             $capability = 'block/' . $this->name() . ':addinstance';
             return $this->has_add_block_capability($page, $capability)
-                && has_capability('moodle/user:manageownblocks', $page->context);
+                && has_capability('powereduc/user:manageownblocks', $page->context);
         }
 
         // The blocks in My Moodle are a special case and use a different capability.
@@ -622,7 +622,7 @@ class block_base {
             } else {
                 $capability = 'block/' . $this->name() . ':myaddinstance';
                 return $this->has_add_block_capability($page, $capability)
-                       && has_capability('moodle/my:manageblocks', $page->context);
+                       && has_capability('powereduc/my:manageblocks', $page->context);
             }
         }
         // Check if this is a block only used on /my.
@@ -634,7 +634,7 @@ class block_base {
 
         $capability = 'block/' . $this->name() . ':addinstance';
         if ($this->has_add_block_capability($page, $capability)
-                && has_capability('moodle/block:edit', $page->context)) {
+                && has_capability('powereduc/block:edit', $page->context)) {
             return true;
         }
 
@@ -644,7 +644,7 @@ class block_base {
     /**
      * Returns true if the user can add a block to a page.
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @param string $capability the capability to check
      * @return boolean true if user can add a block, false otherwise.
      */
@@ -666,7 +666,7 @@ class block_base {
     }
 
     static function get_extra_capabilities() {
-        return array('moodle/block:view', 'moodle/block:edit');
+        return array('powereduc/block:view', 'powereduc/block:edit');
     }
 
     /**
@@ -760,10 +760,10 @@ EOD;
      * It doesn't need to do the standard capability checks as they will be performed by has_add_block_capability().
      * This method is user agnostic. If you want to check if a user can add a block or not, you should use user_can_addto().
      *
-     * @param moodle_page $page The page where this block will be added.
+     * @param powereduc_page $page The page where this block will be added.
      * @return bool Whether the block can be added or not to the given page.
      */
-    public function can_block_be_added(moodle_page $page): bool {
+    public function can_block_be_added(powereduc_page $page): bool {
         return true;
     }
 }
@@ -782,7 +782,7 @@ class block_list extends block_base {
     var $content_type  = BLOCK_TYPE_LIST;
 
     function is_empty() {
-        if ( !has_capability('moodle/block:view', $this->context) ) {
+        if ( !has_capability('powereduc/block:view', $this->context) ) {
             return true;
         }
 

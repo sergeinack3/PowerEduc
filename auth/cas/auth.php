@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -148,7 +148,7 @@ class auth_plugin_cas extends auth_plugin_ldap {
 
             // Redirect to a course if multi-auth is activated, authCAS is set to CAS and the courseid is specified.
             if ($this->config->multiauth && !empty($courseid)) {
-                redirect(new moodle_url('/course/view.php', array('id'=>$courseid)));
+                redirect(new powereduc_url('/course/view.php', array('id'=>$courseid)));
             }
 
             return;
@@ -180,7 +180,7 @@ class auth_plugin_cas extends auth_plugin_ldap {
 
         if (!$connected) {
             // Form the base URL of the server with just the protocol and hostname.
-            $serverurl = new moodle_url("/");
+            $serverurl = new powereduc_url("/");
             $servicebaseurl = $serverurl->get_scheme() ? $serverurl->get_scheme() . "://" : '';
             $servicebaseurl .= $serverurl->get_host();
             // Add the port if set.
@@ -235,7 +235,7 @@ class auth_plugin_cas extends auth_plugin_ldap {
      * Returns the URL for changing the user's pw, or empty if the default can
      * be used.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
     function change_password_url() {
         return null;
@@ -313,7 +313,7 @@ class auth_plugin_cas extends auth_plugin_ldap {
     }
 
     /**
-     * Syncronizes users from LDAP server to moodle user table.
+     * Syncronizes users from LDAP server to powereduc user table.
      *
      * If no LDAP servers are configured, simply return. Otherwise,
      * call parent class method to do the work.
@@ -366,7 +366,7 @@ class auth_plugin_cas extends auth_plugin_ldap {
     /**
      * Return a list of identity providers to display on the login page.
      *
-     * @param string|moodle_url $wantsurl The requested URL.
+     * @param string|powereduc_url $wantsurl The requested URL.
      * @return array List of arrays with keys url, iconurl and name.
      */
     public function loginpage_idp_list($wantsurl) {
@@ -376,7 +376,7 @@ class auth_plugin_cas extends auth_plugin_ldap {
         }
 
         if ($this->config->auth_logo) {
-            $iconurl = moodle_url::make_pluginfile_url(
+            $iconurl = powereduc_url::make_pluginfile_url(
                 context_system::instance()->id,
                 'auth_cas',
                 'logo',
@@ -389,7 +389,7 @@ class auth_plugin_cas extends auth_plugin_ldap {
 
         return [
             [
-                'url' => new moodle_url(get_login_url(), [
+                'url' => new powereduc_url(get_login_url(), [
                         'authCAS' => 'CAS',
                     ]),
                 'iconurl' => $iconurl,

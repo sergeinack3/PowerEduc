@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * TinyMCE text editor plugin base class.
  *
- * This is a base class for TinyMCE plugins implemented within Moodle. These
+ * This is a base class for TinyMCE plugins implemented within PowerEduc. These
  * plugins can optionally provide new buttons/plugins within TinyMCE itself,
  * or configure the TinyMCE options.
  *
@@ -333,16 +333,16 @@ abstract class editor_tinymce_plugin {
         // Add plugin to list in params, so it doesn't try to load it again.
         $params['plugins'] .= ',-' . $pluginname;
 
-        // Add special param that causes Moodle TinyMCE init to load the plugin.
-        if (!isset($params['moodle_init_plugins'])) {
-            $params['moodle_init_plugins'] = '';
+        // Add special param that causes PowerEduc TinyMCE init to load the plugin.
+        if (!isset($params['powereduc_init_plugins'])) {
+            $params['powereduc_init_plugins'] = '';
         } else {
-            $params['moodle_init_plugins'] .= ',';
+            $params['powereduc_init_plugins'] .= ',';
         }
 
         // Get URL of main JS file and store in params.
         $jsurl = $this->get_tinymce_file_url($jsfile, false);
-        $params['moodle_init_plugins'] .= $pluginname . ':' . $jsurl;
+        $params['powereduc_init_plugins'] .= $pluginname . ':' . $jsurl;
     }
 
     /**
@@ -415,8 +415,8 @@ abstract class editor_tinymce_plugin {
 
         // Get list of disabled subplugins.
         $disabled = array();
-        if ($params['moodle_config']->disabledsubplugins) {
-            foreach (explode(',', $params['moodle_config']->disabledsubplugins) as $sp) {
+        if ($params['powereduc_config']->disabledsubplugins) {
+            foreach (explode(',', $params['powereduc_config']->disabledsubplugins) as $sp) {
                 $sp = trim($sp);
                 if ($sp !== '') {
                     $disabled[$sp] = $sp;
@@ -447,7 +447,7 @@ abstract class editor_tinymce_plugin {
     /**
      * Gets a named plugin object. Will cause fatal error if plugin doesn't exist.
      *
-     * @param string $plugin Name of plugin e.g. 'moodleemoticon'
+     * @param string $plugin Name of plugin e.g. 'powereducemoticon'
      * @return editor_tinymce_plugin Plugin object
      */
     public static function get($plugin) {

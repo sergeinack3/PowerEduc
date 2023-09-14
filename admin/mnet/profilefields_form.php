@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ require_once($CFG->libdir . '/formslib.php');
 /**
  * small form to allow the administrator to configure (override) which profile fields are sent/imported over mnet
  */
-class mnet_profile_form extends moodleform {
+class mnet_profile_form extends powereducform {
 
     function definition() {
         global $CFG;

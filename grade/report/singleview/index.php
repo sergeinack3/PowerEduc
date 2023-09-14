@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Displays the Single view
  *
  * @package   gradereport_singleview
- * @copyright 2014 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2014 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -58,26 +58,26 @@ $pageparams = [
     'page'      => $page,
     'perpage'   => $perpage,
 ];
-$PAGE->set_url(new moodle_url('/grade/report/singleview/index.php', $pageparams));
+$PAGE->set_url(new powereduc_url('/grade/report/singleview/index.php', $pageparams));
 $PAGE->set_pagelayout('report');
-$PAGE->set_other_editing_capability('moodle/grade:edit');
+$PAGE->set_other_editing_capability('powereduc/grade:edit');
 
 if (!$course = $DB->get_record('course', $courseparams)) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 require_login($course);
 
 if (!in_array($itemtype, gradereport_singleview\report\singleview::valid_screens())) {
-    throw new \moodle_exception('notvalid', 'gradereport_singleview', '', $itemtype);
+    throw new \powereduc_exception('notvalid', 'gradereport_singleview', '', $itemtype);
 }
 
 $context = context_course::instance($course->id);
 
 // This is the normal requirements.
 require_capability('gradereport/singleview:view', $context);
-require_capability('moodle/grade:viewall', $context);
-require_capability('moodle/grade:edit', $context);
+require_capability('powereduc/grade:viewall', $context);
+require_capability('powereduc/grade:edit', $context);
 
 $gpr = new grade_plugin_return([
     'type' => 'report',
@@ -94,7 +94,7 @@ if ($PAGE->user_allowed_editing() && !$PAGE->theme->haseditswitch) {
 
     // Page params for the turn editing on button.
     $options = $gpr->get_options();
-    $button = $OUTPUT->edit_button(new moodle_url($PAGE->url, $options), 'get');
+    $button = $OUTPUT->edit_button(new powereduc_url($PAGE->url, $options), 'get');
 }
 
 // Last selected report session tracking.
@@ -112,7 +112,7 @@ if ($itemtype == 'user' || $itemtype == 'user_select') {
 } else if ($itemtype == 'grade' || $itemtype == 'grade_select') {
     $actionbar = new \gradereport_singleview\output\action_bar($context, $report, 'grade');
 } else {
-    $actionbar = new \core_grades\output\general_action_bar($context, new moodle_url('/grade/report/singleview/index.php',
+    $actionbar = new \core_grades\output\general_action_bar($context, new powereduc_url('/grade/report/singleview/index.php',
         ['id' => $courseid]), 'report', 'singleview');
 }
 
@@ -155,7 +155,7 @@ if (($itemtype !== 'select') && ($itemtype !== 'grade_select') &&($itemtype !== 
 
     $defaultgradeshowactiveenrol = !empty($CFG->grade_report_showonlyactiveenrol);
     $showonlyactiveenrol = get_user_preferences('grade_report_showonlyactiveenrol', $defaultgradeshowactiveenrol);
-    $showonlyactiveenrol = $showonlyactiveenrol || !has_capability('moodle/course:viewsuspendedusers', $context);
+    $showonlyactiveenrol = $showonlyactiveenrol || !has_capability('powereduc/course:viewsuspendedusers', $context);
 
     $currentgroup = $gpr->groupid;
 

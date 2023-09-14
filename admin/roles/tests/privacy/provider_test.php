@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core_role
  * @category   test
- * @copyright  2018 Carlos Escobedo <carlos@moodle.com>
+ * @copyright  2018 Carlos Escobedo <carlos@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace core_role\privacy;
@@ -37,7 +37,7 @@ use core_privacy\local\request\approved_userlist;
 /**
  * Privacy test for core_role
  *
- * @copyright  2018 Carlos Escobedo <carlos@moodle.com>
+ * @copyright  2018 Carlos Escobedo <carlos@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider_test extends provider_testcase {
@@ -103,7 +103,7 @@ class provider_test extends provider_testcase {
 
         // Role capabilities.
         $this->setUser($user);
-        $result = assign_capability('moodle/backup:backupcourse', CAP_ALLOW, $student->id, $cmcontext->id);
+        $result = assign_capability('powereduc/backup:backupcourse', CAP_ALLOW, $student->id, $cmcontext->id);
 
         $contextlist = provider::get_contexts_for_userid($user->id)->get_contextids();
         $this->assertCount(8, $contextlist);
@@ -164,12 +164,12 @@ class provider_test extends provider_testcase {
         role_assign($manager->id, $user2->id, $systemcontext->id);
 
         // Test overridable roles in module, course, category, user, system and block.
-        assign_capability('moodle/backup:backupactivity', CAP_ALLOW, $student->id, $cmcontext->id, true);
-        assign_capability('moodle/backup:backupcourse', CAP_ALLOW, $student->id, $coursecontext->id, true);
-        assign_capability('moodle/category:manage', CAP_ALLOW, $student->id, $coursecatcontext->id, true);
-        assign_capability('moodle/backup:backupcourse', CAP_ALLOW, $student->id, $systemcontext->id, true);
-        assign_capability('moodle/block:edit', CAP_ALLOW, $student->id, $blockcontext->id, true);
-        assign_capability('moodle/competency:evidencedelete', CAP_ALLOW, $student->id, $usercontext2->id, true);
+        assign_capability('powereduc/backup:backupactivity', CAP_ALLOW, $student->id, $cmcontext->id, true);
+        assign_capability('powereduc/backup:backupcourse', CAP_ALLOW, $student->id, $coursecontext->id, true);
+        assign_capability('powereduc/category:manage', CAP_ALLOW, $student->id, $coursecatcontext->id, true);
+        assign_capability('powereduc/backup:backupcourse', CAP_ALLOW, $student->id, $systemcontext->id, true);
+        assign_capability('powereduc/block:edit', CAP_ALLOW, $student->id, $blockcontext->id, true);
+        assign_capability('powereduc/competency:evidencedelete', CAP_ALLOW, $student->id, $usercontext2->id, true);
 
         // Retrieve the user's context ids.
         $contextlist = provider::get_contexts_for_userid($user->id);
@@ -191,7 +191,7 @@ class provider_test extends provider_testcase {
                     $this->assertEquals($user->id, reset($data)->userid);
                 }
                 if ($data = (array)$writer->get_data($subcontextrc)) {
-                    $this->assertEquals('moodle/backup:backupactivity', reset($data)->capability);
+                    $this->assertEquals('powereduc/backup:backupactivity', reset($data)->capability);
                     $this->assertEquals($strpermissions[CAP_ALLOW], reset($data)->permission);
                 }
             }
@@ -200,7 +200,7 @@ class provider_test extends provider_testcase {
                     $this->assertEquals($user->id, reset($data)->userid);
                 }
                 if ($data = (array)$writer->get_data($subcontextrc)) {
-                    $this->assertEquals('moodle/backup:backupcourse', reset($data)->capability);
+                    $this->assertEquals('powereduc/backup:backupcourse', reset($data)->capability);
                 }
             }
             if ($context->contextlevel == CONTEXT_COURSECAT) {
@@ -208,7 +208,7 @@ class provider_test extends provider_testcase {
                     $this->assertEquals($user->id, reset($data)->modifierid);
                 }
                 if ($data = (array)$writer->get_data($subcontextrc)) {
-                    $this->assertEquals('moodle/category:manage', reset($data)->capability);
+                    $this->assertEquals('powereduc/category:manage', reset($data)->capability);
                 }
             }
             if ($context->contextlevel == CONTEXT_SYSTEM) {
@@ -216,7 +216,7 @@ class provider_test extends provider_testcase {
                     $this->assertEquals($user->id, reset($data)->modifierid);
                 }
                 if ($data = (array)$writer->get_data($subcontextrc)) {
-                    $this->assertEquals('moodle/backup:backupcourse', reset($data)->capability);
+                    $this->assertEquals('powereduc/backup:backupcourse', reset($data)->capability);
                 }
             }
             if ($context->contextlevel == CONTEXT_BLOCK) {
@@ -224,7 +224,7 @@ class provider_test extends provider_testcase {
                     $this->assertEquals($user->id, reset($data)->userid);
                 }
                 if ($data = (array)$writer->get_data($subcontextrc)) {
-                    $this->assertEquals('moodle/block:edit', reset($data)->capability);
+                    $this->assertEquals('powereduc/block:edit', reset($data)->capability);
                 }
             }
             if ($context->contextlevel == CONTEXT_USER) {
@@ -232,7 +232,7 @@ class provider_test extends provider_testcase {
                     $this->assertEquals($user->id, reset($data)->userid);
                 }
                 if ($data = (array)$writer->get_data($subcontextrc)) {
-                    $this->assertEquals('moodle/competency:evidencedelete', reset($data)->capability);
+                    $this->assertEquals('powereduc/competency:evidencedelete', reset($data)->capability);
                 }
             }
         }
@@ -523,7 +523,7 @@ class provider_test extends provider_testcase {
 
         // Role capabilities.
         $this->setUser($user1);
-        assign_capability('moodle/backup:backupcourse', CAP_ALLOW, $studentrole->id, $cmcontext->id);
+        assign_capability('powereduc/backup:backupcourse', CAP_ALLOW, $studentrole->id, $cmcontext->id);
 
         // The user list for usercontext1 should not return any users.
         $userlist1 = new \core_privacy\local\request\userlist($usercontext1, $component);
@@ -643,7 +643,7 @@ class provider_test extends provider_testcase {
 
         // Role capabilities.
         $this->setUser($user1);
-        assign_capability('moodle/backup:backupcourse', CAP_ALLOW, $studentrole->id, $cmcontext->id);
+        assign_capability('powereduc/backup:backupcourse', CAP_ALLOW, $studentrole->id, $cmcontext->id);
 
         // The user list for usercontext2 should user1 and admin (role creator).
         $userlist1 = new \core_privacy\local\request\userlist($usercontext2, $component);

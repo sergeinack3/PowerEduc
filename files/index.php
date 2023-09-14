@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  *
  * @package    core
  * @subpackage file
- * @copyright  2010 Dongsheng Cai <dongsheng@moodle.com>
+ * @copyright  2010 Dongsheng Cai <dongsheng@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -39,7 +39,7 @@ if (empty($contextid)) {
 }
 
 $PAGE->set_url('/files/index.php', array('contextid'=>$contextid, 'filepath'=>$filepath, 'filename'=>$filename));
-navigation_node::override_active_url(new moodle_url('/files/index.php', array('contextid'=>$contextid)));
+navigation_node::override_active_url(new powereduc_url('/files/index.php', array('contextid'=>$contextid)));
 
 if ($filepath === '') {
     $filepath = null;
@@ -53,7 +53,7 @@ list($context, $course, $cm) = get_context_info_array($contextid);
 $PAGE->set_context($context);
 
 require_login($course, false, $cm);
-require_capability('moodle/course:managefiles', $context);
+require_capability('powereduc/course:managefiles', $context);
 
 $browser = get_file_browser();
 

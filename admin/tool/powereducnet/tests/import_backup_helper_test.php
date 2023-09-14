@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,14 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace tool_moodlenet;
+namespace tool_powereducnet;
 
 /**
  * Unit tests for the import_backup_helper
  *
- * @package    tool_moodlenet
+ * @package    tool_powereducnet
  * @category   test
- * @copyright  2020 Adrian Greeve <adrian@moodle.com>
+ * @copyright  2020 Adrian Greeve <adrian@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class import_backup_helper_test extends \advanced_testcase {
@@ -55,22 +55,22 @@ class import_backup_helper_test extends \advanced_testcase {
 
         $roleid = $this->getDataGenerator()->create_role();
         $sitecontext = \context_system::instance();
-        assign_capability('moodle/restore:uploadfile', CAP_ALLOW, $roleid, $sitecontext->id, true);
+        assign_capability('powereduc/restore:uploadfile', CAP_ALLOW, $roleid, $sitecontext->id, true);
         accesslib_clear_all_caches_for_unit_testing();
         $this->getDataGenerator()->role_assign($roleid, $user4->id, $sitecontext->id);
 
-        $result = \tool_moodlenet\local\import_backup_helper::get_context_for_user($user1->id);
+        $result = \tool_powereducnet\local\import_backup_helper::get_context_for_user($user1->id);
         $this->assertNull($result);
-        $result = \tool_moodlenet\local\import_backup_helper::get_context_for_user($user2->id);
+        $result = \tool_powereducnet\local\import_backup_helper::get_context_for_user($user2->id);
         $this->assertEquals($result, $coursecontext);
         $this->assertEquals(CONTEXT_COURSE, $result->contextlevel);
-        $result = \tool_moodlenet\local\import_backup_helper::get_context_for_user($user3->id);
+        $result = \tool_powereducnet\local\import_backup_helper::get_context_for_user($user3->id);
         $this->assertEquals($result, $categorycontext);
         $this->assertEquals(CONTEXT_COURSECAT, $result->contextlevel);
-        $result = \tool_moodlenet\local\import_backup_helper::get_context_for_user($user4->id);
+        $result = \tool_powereducnet\local\import_backup_helper::get_context_for_user($user4->id);
         $this->assertEquals($result, $sitecontext);
         $this->assertEquals(CONTEXT_SYSTEM, $result->contextlevel);
-        $result = \tool_moodlenet\local\import_backup_helper::get_context_for_user($user5->id);
+        $result = \tool_powereducnet\local\import_backup_helper::get_context_for_user($user5->id);
         $this->assertEquals($result, $categorycontext);
         $this->assertEquals(CONTEXT_COURSECAT, $result->contextlevel);
     }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * File containing the class activity information renderable.
  *
  * @package    core_course
- * @copyright  2021 Jun Pataleta <jun@moodle.com>
+ * @copyright  2021 Jun Pataleta <jun@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace core_course\output;
@@ -42,7 +42,7 @@ use templatable;
  * The activity information renderable class.
  *
  * @package    core_course
- * @copyright  2021 Jun Pataleta <jun@moodle.com>
+ * @copyright  2021 Jun Pataleta <jun@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class activity_information implements renderable, templatable {

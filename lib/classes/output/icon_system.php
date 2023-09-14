@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains class \core\output\icon_system
@@ -35,7 +35,7 @@ defined('POWEREDUC_INTERNAL') || die();
  *
  * Possible icon styles are:
  *   1. standard - image tags are generated which point to pix icons stored in a plugin pix folder.
- *   2. fontawesome - font awesome markup is generated with the name of the icon mapped from the moodle icon name.
+ *   2. fontawesome - font awesome markup is generated with the name of the icon mapped from the powereduc icon name.
  *   3. inline - inline tags are used for svg and png so no separate page requests are made (at the expense of page size).
  *
  * @package    core
@@ -59,7 +59,7 @@ abstract class icon_system {
     private static $instance = null;
 
     /**
-     * @var array $map A cached mapping of moodle icons to other icons
+     * @var array $map A cached mapping of powereduc icons to other icons
      */
     private $map = null;
 
@@ -143,7 +143,7 @@ abstract class icon_system {
         if ($this->map === null) {
             $this->map = $this->get_icon_name_map();
         }
-        if ($component == null || $component == 'moodle') {
+        if ($component == null || $component == 'powereduc') {
             $component = 'core';
         } else if ($component != 'theme') {
             $component = \core_component::normalize_componentname($component);

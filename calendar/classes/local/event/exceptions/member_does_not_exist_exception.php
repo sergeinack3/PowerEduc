@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,5 +32,5 @@ defined('POWEREDUC_INTERNAL') || die();
  * @copyright  2017 Cameron Ball <cameron@cameron1729.xyz>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class member_does_not_exist_exception extends \moodle_exception {
+class member_does_not_exist_exception extends \powereduc_exception {
 }

@@ -5,13 +5,13 @@
  *
  * @package    core
  * @subpackage backup-convert
- * @copyright  2011 Darko Miletic <dmiletic@moodlerooms.com>
+ * @copyright  2011 Darko Miletic <dmiletic@powereducrooms.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 require_once($CFG->dirroot.'/backup/converter/convertlib.php');
 require_once($CFG->dirroot.'/backup/cc/includes/constants.php');
-require_once($CFG->dirroot.'/backup/cc/cc2moodle.php');
+require_once($CFG->dirroot.'/backup/cc/cc2powereduc.php');
 require_once($CFG->dirroot.'/backup/cc/validator.php');
 
 class imscc1_converter extends base_converter {
@@ -41,7 +41,7 @@ class imscc1_converter extends base_converter {
         if (!is_dir($filepath)) {
             throw new convert_helper_exception('tmp_backup_directory_not_found', $filepath);
         }
-        $manifest = cc2moodle::get_manifest($filepath);
+        $manifest = cc2powereduc::get_manifest($filepath);
         if (!empty($manifest)) {
             // Looks promising, lets load some information.
             $handle = fopen($manifest, 'r');
@@ -85,7 +85,7 @@ class imscc1_converter extends base_converter {
     protected function execute() {
         global $CFG;
 
-        $manifest = cc2moodle::get_manifest($this->get_tempdir_path());
+        $manifest = cc2powereduc::get_manifest($this->get_tempdir_path());
         if (empty($manifest)) {
             throw new imscc1_convert_exception('No Manifest detected!');
         }
@@ -98,11 +98,11 @@ class imscc1_converter extends base_converter {
         }
 
         $manifestdir = dirname($manifest);
-        $cc2moodle = new cc2moodle($manifest);
-        if ($cc2moodle->is_auth()) {
+        $cc2powereduc = new cc2powereduc($manifest);
+        if ($cc2powereduc->is_auth()) {
             throw new imscc1_convert_exception('protected_cc_not_supported');
         }
-        $status = $cc2moodle->generate_moodle_xml();
+        $status = $cc2powereduc->generate_powereduc_xml();
         // Final cleanup.
         $xml_error = new libxml_errors_mgr(true);
         $mdoc = new DOMDocument();
@@ -110,8 +110,8 @@ class imscc1_converter extends base_converter {
         $mdoc->formatOutput = true;
         $mdoc->validateOnParse = false;
         $mdoc->strictErrorChecking = false;
-        if ($mdoc->load($manifestdir.'/moodle.xml', LIBXML_NONET)) {
-            $mdoc->save($this->get_workdir_path().'/moodle.xml', LIBXML_NOEMPTYTAG);
+        if ($mdoc->load($manifestdir.'/powereduc.xml', LIBXML_NONET)) {
+            $mdoc->save($this->get_workdir_path().'/powereduc.xml', LIBXML_NOEMPTYTAG);
         } else {
             $xml_error->collect();
             $this->log('validation error(s): '.PHP_EOL.error_messages::instance(), backup::LOG_DEBUG, null, 2);

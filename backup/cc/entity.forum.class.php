@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,10 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * @package   moodlecore
+ * @package   powereduccore
  * @subpackage backup-imscc
  * @copyright 2009 Mauro Rondinelli (mauro.rondinelli [AT] uvcms.com)
- * @copyright 2011 Darko Miletic (dmiletic@moodlerooms.com)
+ * @copyright 2011 Darko Miletic (dmiletic@powereducrooms.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -70,12 +70,12 @@ class cc_forum extends entities {
 
     public function generate_node () {
 
-        cc2moodle::log_action('Creating Forum mods');
+        cc2powereduc::log_action('Creating Forum mods');
 
         $response = '';
 
-        if (!empty(cc2moodle::$instances['instances'][POWEREDUC_TYPE_FORUM])) {
-            foreach (cc2moodle::$instances['instances'][POWEREDUC_TYPE_FORUM] as $instance) {
+        if (!empty(cc2powereduc::$instances['instances'][POWEREDUC_TYPE_FORUM])) {
+            foreach (cc2powereduc::$instances['instances'][POWEREDUC_TYPE_FORUM] as $instance) {
                 $response .= $this->create_node_course_modules_mod_forum($instance);
             }
         }
@@ -85,7 +85,7 @@ class cc_forum extends entities {
 
     private function create_node_course_modules_mod_forum ($instance) {
 
-        $sheet_mod_forum = cc2moodle::loadsheet(SHEET_COURSE_SECTIONS_SECTION_MODS_MOD_FORUM);
+        $sheet_mod_forum = cc2powereduc::loadsheet(SHEET_COURSE_SECTIONS_SECTION_MODS_MOD_FORUM);
 
         $topic_data = $this->get_topic_data($instance);
 
@@ -118,13 +118,13 @@ class cc_forum extends entities {
 
         if (!empty($topic_file)) {
 
-            $topic_file_path = cc2moodle::$path_to_manifest_folder . DIRECTORY_SEPARATOR . $topic_file;
+            $topic_file_path = cc2powereduc::$path_to_manifest_folder . DIRECTORY_SEPARATOR . $topic_file;
             $topic_file_dir = dirname($topic_file_path);
             $topic = $this->load_xml_resource($topic_file_path);
 
             if (!empty($topic)) {
 
-                $xpath = cc2moodle::newx_path($topic, cc2moodle::getforumns());
+                $xpath = cc2powereduc::newx_path($topic, cc2powereduc::getforumns());
 
                 $topic_title = $xpath->query('/dt:topic/title');
                 $topic_title = !empty($topic_title->item(0)->nodeValue) ? $topic_title->item(0)->nodeValue : 'Untitled Topic';

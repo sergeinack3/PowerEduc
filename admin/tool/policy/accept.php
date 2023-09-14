@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,24 +32,24 @@ $action = optional_param('action', null, PARAM_ALPHA);
 
 require_login();
 if (isguestuser()) {
-    throw new \moodle_exception('noguest');
+    throw new \powereduc_exception('noguest');
 }
 $context = context_system::instance();
 
 $PAGE->set_context($context);
-$PAGE->set_url(new moodle_url('/admin/tool/policy/accept.php'));
+$PAGE->set_url(new powereduc_url('/admin/tool/policy/accept.php'));
 
 if (!in_array($action, ['accept', 'decline', 'revoke'])) {
-    throw new moodle_exception('invalidaccessparameter');
+    throw new powereduc_exception('invalidaccessparameter');
 }
 
 if ($returnurl) {
-    $returnurl = new moodle_url($returnurl);
+    $returnurl = new powereduc_url($returnurl);
 } else if (count($userids) == 1) {
     $userid = reset($userids);
-    $returnurl = new moodle_url('/admin/tool/policy/user.php', ['userid' => $userid]);
+    $returnurl = new powereduc_url('/admin/tool/policy/user.php', ['userid' => $userid]);
 } else {
-    $returnurl = new moodle_url('/admin/tool/policy/acceptances.php');
+    $returnurl = new powereduc_url('/admin/tool/policy/acceptances.php');
 }
 // Initialise the form, this will also validate users, versions and check permission to accept policies.
 $form = new \tool_policy\form\accept_policy(null,

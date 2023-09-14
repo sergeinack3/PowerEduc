@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package   mod_data
@@ -38,8 +38,8 @@ define ('DATA_TAGS', -5);
 
 define ('DATA_CAP_EXPORT', 'mod/data:viewalluserpresets');
 // Users having assigned the default role "Non-editing teacher" can export database records
-// Using the mod/data capability "viewalluserpresets" existing in Moodle 1.9.x.
-// In Moodle >= 2, new roles may be introduced and used instead.
+// Using the mod/data capability "viewalluserpresets" existing in PowerEduc 1.9.x.
+// In PowerEduc >= 2, new roles may be introduced and used instead.
 
 define('DATA_PRESET_COMPONENT', 'mod_data');
 define('DATA_PRESET_FILEAREA', 'site_presets');
@@ -666,7 +666,7 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
      * in some cases the configs will need formatting or be returned only if the current user has some capabilities enabled.
      *
      * @return array the list of config parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public function get_config_for_external() {
         // Return all the field configs to null (maybe there is a private key for a service or something similar there).
@@ -1427,8 +1427,8 @@ function data_grade_item_delete($data) {
  * takes a list of records, the current data, a search string,
  * and mode to display prints the translated template
  *
- * @deprecated since Moodle 4.1 MDL-75146 - please do not use this function any more.
- * @todo MDL-75189 Final deprecation in Moodle 4.5.
+ * @deprecated since PowerEduc 4.1 MDL-75146 - please do not use this function any more.
+ * @todo MDL-75189 Final deprecation in PowerEduc 4.5.
  * @param string $templatename the template name
  * @param array $records the entries records
  * @param stdClass $data the database instance object
@@ -2082,8 +2082,8 @@ function data_convert_to_roles($data, $teacherroles=array(), $studentroles=array
  * @param string $shortname
  * @param  string $path
  * @return string
- * @deprecated since Moodle 4.1 MDL-75148 - please, use the preset::get_name_from_plugin() function instead.
- * @todo MDL-75189 This will be deleted in Moodle 4.5.
+ * @deprecated since PowerEduc 4.1 MDL-75148 - please, use the preset::get_name_from_plugin() function instead.
+ * @todo MDL-75189 This will be deleted in PowerEduc 4.5.
  * @see preset::get_name_from_plugin()
  */
 function data_preset_name($shortname, $path) {
@@ -2096,8 +2096,8 @@ function data_preset_name($shortname, $path) {
  * Returns an array of all the available presets.
  *
  * @return array
- * @deprecated since Moodle 4.1 MDL-75148 - please, use the manager::get_available_presets() function instead.
- * @todo MDL-75189 This will be deleted in Moodle 4.5.
+ * @deprecated since PowerEduc 4.1 MDL-75148 - please, use the manager::get_available_presets() function instead.
+ * @todo MDL-75189 This will be deleted in PowerEduc 4.5.
  * @see manager::get_available_presets()
  */
 function data_get_available_presets($context) {
@@ -2114,8 +2114,8 @@ function data_get_available_presets($context) {
  * @param stdClass $context The context that we are looking from.
  * @param array $presets
  * @return array An array of presets
- * @deprecated since Moodle 4.1 MDL-75148 - please, use the manager::get_available_saved_presets() function instead.
- * @todo MDL-75189 This will be deleted in Moodle 4.5.
+ * @deprecated since PowerEduc 4.1 MDL-75148 - please, use the manager::get_available_saved_presets() function instead.
+ * @todo MDL-75189 This will be deleted in PowerEduc 4.5.
  * @see manager::get_available_saved_presets()
  */
 function data_get_available_site_presets($context, array $presets=array()) {
@@ -2135,8 +2135,8 @@ function data_get_available_site_presets($context, array $presets=array()) {
  *
  * @param string $name
  * @return bool
- * @deprecated since Moodle 4.1 MDL-75187 - please, use the preset::delete() function instead.
- * @todo MDL-75189 This will be deleted in Moodle 4.5.
+ * @deprecated since PowerEduc 4.1 MDL-75187 - please, use the preset::delete() function instead.
+ * @todo MDL-75189 This will be deleted in PowerEduc 4.5.
  * @see preset::delete()
  */
 function data_delete_site_preset($name) {
@@ -2295,8 +2295,8 @@ function data_in_readonly_period($data) {
  *
  * @return bool Wheter the defined $directory has or not all the expected preset files.
  *
- * @deprecated since Moodle 4.1 MDL-75148 - please, use the preset::is_directory_a_preset() function instead.
- * @todo MDL-75189 This will be deleted in Moodle 4.5.
+ * @deprecated since PowerEduc 4.1 MDL-75148 - please, use the preset::is_directory_a_preset() function instead.
+ * @todo MDL-75189 This will be deleted in PowerEduc 4.5.
  * @see manager::is_directory_a_preset()
  */
 function is_directory_a_preset($directory) {
@@ -2308,8 +2308,8 @@ function is_directory_a_preset($directory) {
 /**
  * Abstract class used for data preset importers
  *
- * @deprecated since Moodle 4.1 MDL-75140 - please do not use this class any more.
- * @todo MDL-75189 Final deprecation in Moodle 4.5.
+ * @deprecated since PowerEduc 4.1 MDL-75140 - please do not use this class any more.
+ * @todo MDL-75189 Final deprecation in PowerEduc 4.5.
  */
 abstract class data_preset_importer {
 
@@ -2347,10 +2347,10 @@ abstract class data_preset_importer {
     }
 
     /**
-     * Retreive the contents of a file. That file may either be in a conventional directory of the Moodle file storage
+     * Retreive the contents of a file. That file may either be in a conventional directory of the PowerEduc file storage
      * @param file_storage $filestorage. should be null if using a conventional directory
      * @param stored_file $fileobj the directory to look in. null if using a conventional directory
-     * @param string $dir the directory to look in. null if using the Moodle file storage
+     * @param string $dir the directory to look in. null if using the PowerEduc file storage
      * @param string $filename the name of the file we want
      * @return string the contents of the file or null if the file doesn't exist.
      */
@@ -2385,7 +2385,7 @@ abstract class data_preset_importer {
 
         $fs = $fileobj = null;
         if (!preset::is_directory_a_preset($this->directory)) {
-            //maybe the user requested a preset stored in the Moodle file storage
+            //maybe the user requested a preset stored in the PowerEduc file storage
 
             $fs = get_file_storage();
             $files = $fs->get_area_files(DATA_PRESET_CONTEXT, DATA_PRESET_COMPONENT, DATA_PRESET_FILEAREA);
@@ -2603,8 +2603,8 @@ abstract class data_preset_importer {
 /**
  * Data preset importer for uploaded presets
  *
- * @deprecated since Moodle 4.1 MDL-75140 - please do not use this class any more.
- * @todo MDL-75189 Final deprecation in Moodle 4.5.
+ * @deprecated since PowerEduc 4.1 MDL-75140 - please do not use this class any more.
+ * @todo MDL-75189 Final deprecation in PowerEduc 4.5.
  */
 class data_preset_upload_importer extends data_preset_importer {
     public function __construct($course, $cm, $module, $filepath) {
@@ -2633,8 +2633,8 @@ class data_preset_upload_importer extends data_preset_importer {
 /**
  * Data preset importer for existing presets
  *
- * @deprecated since Moodle 4.1 MDL-75140 - please do not use this class any more.
- * @todo MDL-75189 Final deprecation in Moodle 4.5.
+ * @deprecated since PowerEduc 4.1 MDL-75140 - please do not use this class any more.
+ * @todo MDL-75189 Final deprecation in PowerEduc 4.5.
  */
 class data_preset_existing_importer extends data_preset_importer {
     protected $userid;
@@ -3112,7 +3112,7 @@ function data_export_xls($export, $dataname, $count) {
     $filename .= '.xls';
 
     $filearg = '-';
-    $workbook = new MoodleExcelWorkbook($filearg);
+    $workbook = new PowerEducExcelWorkbook($filearg);
     $workbook->send($filename);
     $worksheet = array();
     $worksheet[0] = $workbook->add_worksheet('');
@@ -3146,7 +3146,7 @@ function data_export_ods($export, $dataname, $count) {
     $filename .= clean_filename('-' . gmdate("Ymd_Hi"));
     $filename .= '.ods';
     $filearg = '-';
-    $workbook = new MoodleODSWorkbook($filearg);
+    $workbook = new PowerEducODSWorkbook($filearg);
     $workbook->send($filename);
     $worksheet = array();
     $worksheet[0] = $workbook->add_worksheet('');
@@ -3549,8 +3549,8 @@ function data_extend_settings_navigation(settings_navigation $settings, navigati
  * @param stdClass $data The database record
  * @param string $path
  * @return bool
- * @deprecated since Moodle 4.1 MDL-75142 - please, use the preset::save() function instead.
- * @todo MDL-75189 This will be deleted in Moodle 4.5.
+ * @deprecated since PowerEduc 4.1 MDL-75142 - please, use the preset::save() function instead.
+ * @todo MDL-75189 This will be deleted in PowerEduc 4.5.
  * @see preset::save()
  */
 function data_presets_save($course, $cm, $data, $path) {
@@ -3569,8 +3569,8 @@ function data_presets_save($course, $cm, $data, $path) {
  * @param stdClass $cm The course module record
  * @param stdClass $data The database record
  * @return string The XML for the preset
- * @deprecated since Moodle 4.1 MDL-75142 - please, use the protected preset::generate_preset_xml() function instead.
- * @todo MDL-75189 This will be deleted in Moodle 4.5.
+ * @deprecated since PowerEduc 4.1 MDL-75142 - please, use the protected preset::generate_preset_xml() function instead.
+ * @todo MDL-75189 This will be deleted in PowerEduc 4.5.
  * @see preset::generate_preset_xml()
  */
 function data_presets_generate_xml($course, $cm, $data) {
@@ -3595,8 +3595,8 @@ function data_presets_generate_xml($course, $cm, $data) {
  * @param stdClass $data The database record
  * @param bool $tostorage
  * @return string the full path to the exported preset file.
- * @deprecated since Moodle 4.1 MDL-75142 - please, use the preset::export() function instead.
- * @todo MDL-75189 This will be deleted in Moodle 4.5.
+ * @deprecated since PowerEduc 4.1 MDL-75142 - please, use the preset::export() function instead.
+ * @todo MDL-75189 This will be deleted in PowerEduc 4.5.
  * @see preset::export()
  */
 function data_presets_export($course, $cm, $data, $tostorage=false) {
@@ -3946,8 +3946,8 @@ function data_get_advanced_search_sql($sort, $data, $recordids, $selectdata, $so
  * @param stdClass $context  Context object.
  * @param stdClass $preset  The preset object that we are checking for deletion.
  * @return bool  Returns true if the user can delete, otherwise false.
- * @deprecated since Moodle 4.1 MDL-75187 - please, use the preset::can_manage() function instead.
- * @todo MDL-75189 This will be deleted in Moodle 4.5.
+ * @deprecated since PowerEduc 4.1 MDL-75187 - please, use the preset::can_manage() function instead.
+ * @todo MDL-75189 This will be deleted in PowerEduc 4.5.
  * @see preset::can_manage()
  */
 function data_user_can_delete_preset($context, $preset) {
@@ -4218,7 +4218,7 @@ function data_set_config(&$database, $key, $value) {
 /**
  * Sets the automatic completion state for this database item based on the
  * count of on its entries.
- * @since Moodle 3.3
+ * @since PowerEduc 3.3
  * @param object $data The data object for this activity
  * @param object $course Course
  * @param object $cm course-module
@@ -4240,13 +4240,13 @@ function data_update_completion_state($data, $course, $cm) {
 /**
  * Mark the activity completed (if required) and trigger the course_module_viewed event.
  *
- * @deprecated since Moodle 4.1 MDL-75146 - please do not use this function any more.
- * @todo MDL-75189 Final deprecation in Moodle 4.5.
+ * @deprecated since PowerEduc 4.1 MDL-75146 - please do not use this function any more.
+ * @todo MDL-75189 Final deprecation in PowerEduc 4.5.
  * @param  stdClass $data       data object
  * @param  stdClass $course     course object
  * @param  stdClass $cm         course module object
  * @param  stdClass $context    context object
- * @since Moodle 3.3
+ * @since PowerEduc 3.3
  */
 function data_view($data, $course, $cm, $context) {
     global $CFG;
@@ -4297,7 +4297,7 @@ function mod_data_get_fontawesome_icon_map() {
  * @param  int $from the time to check updates from
  * @param  array $filter  if we need to check only specific updates
  * @return stdClass an object with the different type of areas indicating if they were updated or not
- * @since Moodle 3.2
+ * @since PowerEduc 3.2
  */
 function data_check_updates_since(cm_info $cm, $from, $filter = array()) {
     global $DB, $CFG;

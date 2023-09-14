@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Choice module external API
@@ -21,7 +21,7 @@
  * @category   external
  * @copyright  2015 Costantino Cito <ccito@cvaconsulting.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.0
+ * @since      PowerEduc 3.0
  */
 
 use core_course\external\helper_for_get_mods_by_courses;
@@ -37,7 +37,7 @@ require_once($CFG->dirroot . '/mod/choice/lib.php');
  * @category   external
  * @copyright  2015 Costantino Cito <ccito@cvaconsulting.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.0
+ * @since      PowerEduc 3.0
  */
 class mod_choice_external extends external_api {
 
@@ -45,7 +45,7 @@ class mod_choice_external extends external_api {
      * Describes the parameters for get_choices_by_courses.
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_choice_results_parameters() {
         return new external_function_parameters (array('choiceid' => new external_value(PARAM_INT, 'choice instance id')));
@@ -56,7 +56,7 @@ class mod_choice_external extends external_api {
      *
      * @param int $choiceid the choice instance id
      * @return array of responses details
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_choice_results($choiceid) {
         global $USER, $PAGE;
@@ -134,7 +134,7 @@ class mod_choice_external extends external_api {
      * Describes the get_choice_results return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_choice_results_returns() {
         return new external_single_structure(
@@ -170,7 +170,7 @@ class mod_choice_external extends external_api {
      * Describes the parameters for mod_choice_get_choice_options.
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_choice_options_parameters() {
         return new external_function_parameters (array('choiceid' => new external_value(PARAM_INT, 'choice instance id')));
@@ -181,7 +181,7 @@ class mod_choice_external extends external_api {
      *
      * @param int $choiceid the choice instance id
      * @return array of options details
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_choice_options($choiceid) {
         global $USER;
@@ -264,7 +264,7 @@ class mod_choice_external extends external_api {
      * Describes the get_choice_results return value.
      *
      * @return external_multiple_structure
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_choice_options_returns() {
         return new external_single_structure(
@@ -291,7 +291,7 @@ class mod_choice_external extends external_api {
      * Describes the parameters for submit_choice_response.
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function submit_choice_response_parameters() {
         return new external_function_parameters (
@@ -311,7 +311,7 @@ class mod_choice_external extends external_api {
      * @param int $choiceid the choice instance id
      * @param array $responses the response ids
      * @return array answers information and warnings
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function submit_choice_response($choiceid, $responses) {
         global $USER;
@@ -363,7 +363,7 @@ class mod_choice_external extends external_api {
      * Describes the submit_choice_response return value.
      *
      * @return external_multiple_structure
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function submit_choice_response_returns() {
         return new external_single_structure(
@@ -388,7 +388,7 @@ class mod_choice_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function view_choice_parameters() {
         return new external_function_parameters(
@@ -403,7 +403,7 @@ class mod_choice_external extends external_api {
      *
      * @param int $choiceid the choice instance id
      * @return array of warnings and status result
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      * @throws powereduc_exception
      */
     public static function view_choice($choiceid) {
@@ -437,7 +437,7 @@ class mod_choice_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function view_choice_returns() {
         return new external_single_structure(
@@ -452,7 +452,7 @@ class mod_choice_external extends external_api {
      * Describes the parameters for get_choices_by_courses.
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_choices_by_courses_parameters() {
         return new external_function_parameters (
@@ -470,7 +470,7 @@ class mod_choice_external extends external_api {
      *
      * @param array $courseids the course ids
      * @return array of choices details
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_choices_by_courses($courseids = array()) {
         $returnedchoices = array();
@@ -529,7 +529,7 @@ class mod_choice_external extends external_api {
      * Describes the mod_choice_get_choices_by_courses return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_choices_by_courses_returns() {
         return new external_single_structure(
@@ -565,7 +565,7 @@ class mod_choice_external extends external_api {
      * Describes the parameters for delete_choice_responses.
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function delete_choice_responses_parameters() {
         return new external_function_parameters (
@@ -588,7 +588,7 @@ class mod_choice_external extends external_api {
      * @param array $responses the response ids,  empty for deleting all the current user responses
      * @return array status information and warnings
      * @throws powereduc_exception
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function delete_choice_responses($choiceid, $responses = array()) {
 
@@ -665,7 +665,7 @@ class mod_choice_external extends external_api {
      * Describes the delete_choice_responses return value.
      *
      * @return external_multiple_structure
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function delete_choice_responses_returns() {
         return new external_single_structure(

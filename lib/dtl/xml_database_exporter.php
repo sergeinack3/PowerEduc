@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * XML format exporter class
@@ -37,10 +37,10 @@ abstract class xml_database_exporter extends database_exporter {
     protected abstract function output($text);
 
     /**
-     * Callback function. Outputs open XML PI and moodle_database opening tag.
+     * Callback function. Outputs open XML PI and powereduc_database opening tag.
      *
      * @param float $version the version of the system which generating the data
-     * @param string $release moodle release info
+     * @param string $release powereduc release info
      * @param string $timestamp the timestamp of the data (in ISO 8601) format.
      * @param string $description a user description of the data.
      * @return void
@@ -48,7 +48,7 @@ abstract class xml_database_exporter extends database_exporter {
     public function begin_database_export($version, $release, $timestamp, $description) {
         $this->output('<?xml version="1.0" encoding="utf-8"?>');
         //TODO add xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" and schema information
-        $this->output('<moodle_database version="'.$version.'" release="'.$release.'" timestamp="'.$timestamp.'"'.(empty ($description) ? '' : ' comment="'.htmlspecialchars($description, ENT_QUOTES, 'UTF-8').'"').'>');
+        $this->output('<powereduc_database version="'.$version.'" release="'.$release.'" timestamp="'.$timestamp.'"'.(empty ($description) ? '' : ' comment="'.htmlspecialchars($description, ENT_QUOTES, 'UTF-8').'"').'>');
     }
 
     /**
@@ -71,10 +71,10 @@ abstract class xml_database_exporter extends database_exporter {
     }
 
     /**
-     * Callback function. Outputs moodle_database closing tag.
+     * Callback function. Outputs powereduc_database closing tag.
      */
     public function finish_database_export() {
-        $this->output('</moodle_database>');
+        $this->output('</powereduc_database>');
     }
 
     /**

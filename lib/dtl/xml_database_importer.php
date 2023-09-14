@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * XML format importer class
@@ -61,7 +61,7 @@ abstract class xml_database_importer extends database_importer {
      */
     protected function tag_open($parser, $tag, $attributes) {
         switch ($tag) {
-            case 'moodle_database' :
+            case 'powereduc_database' :
                 if (empty($attributes['version']) || empty($attributes['timestamp'])) {
                     throw new dbtransfer_exception('malformedxmlexception');
                 }
@@ -109,7 +109,7 @@ abstract class xml_database_importer extends database_importer {
      */
     protected function tag_close($parser, $tag) {
         switch ($tag) {
-            case 'moodle_database' :
+            case 'powereduc_database' :
                 $this->finish_database_import();
                 break;
 

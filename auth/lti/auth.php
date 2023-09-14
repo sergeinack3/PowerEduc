@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ require_once($CFG->libdir.'/accesslib.php');
  * LTI Authentication plugin.
  *
  * @package auth_lti
- * @copyright 2016 Mark Nelson <markn@moodle.com>
+ * @copyright 2016 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class auth_plugin_lti extends \auth_plugin_base {
@@ -100,12 +100,12 @@ class auth_plugin_lti extends \auth_plugin_base {
      * The JWT data must be verified elsewhere. The code here assumes its integrity/authenticity.
      *
      * @param array $launchdata the JWT data provided in the link launch.
-     * @param moodle_url $returnurl the local URL to return to if authentication workflows are required.
+     * @param powereduc_url $returnurl the local URL to return to if authentication workflows are required.
      * @param int $provisioningmode the desired account provisioning mode, which controls the auth flow for unbound users.
      * @param array $legacyconsumersecrets an array of secrets used by the legacy consumer if a migration claim exists.
      * @throws coding_exception if the specified provisioning mode is invalid.
      */
-    public function complete_login(array $launchdata, moodle_url $returnurl, int $provisioningmode,
+    public function complete_login(array $launchdata, powereduc_url $returnurl, int $provisioningmode,
             array $legacyconsumersecrets = []): void {
 
         // The platform user is already linked with a user account.
@@ -151,7 +151,7 @@ class auth_plugin_lti extends \auth_plugin_base {
                     'returnurl' => $returnurl,
                     'provisioningmode' => $provisioningmode
                 ];
-                redirect(new moodle_url('/auth/lti/login.php', [
+                redirect(new powereduc_url('/auth/lti/login.php', [
                     'sesskey' => sesskey(),
                 ]));
                 break;
@@ -397,7 +397,7 @@ class auth_plugin_lti extends \auth_plugin_base {
      *
      * @param int $userid the id of the user to update.
      * @param string $url the string URL where the new image can be found.
-     * @throws moodle_exception if there were any problems updating the picture.
+     * @throws powereduc_exception if there were any problems updating the picture.
      */
     protected function update_user_picture(int $userid, string $url): void {
         global $CFG, $DB;
@@ -428,7 +428,7 @@ class auth_plugin_lti extends \auth_plugin_base {
         try {
             $fs->create_file_from_url($filerecord, $url, $urlparams);
         } catch (\file_exception $e) {
-            throw new moodle_exception(get_string($e->errorcode, $e->module, $e->a));
+            throw new powereduc_exception(get_string($e->errorcode, $e->module, $e->a));
         }
 
         $iconfile = $fs->get_area_files($context->id, 'user', 'newicon', false, 'itemid', false);
@@ -439,7 +439,7 @@ class auth_plugin_lti extends \auth_plugin_base {
         // Something went wrong while creating temp file - remove the uploaded file.
         if (!$iconfile = $iconfile->copy_content_to_temp()) {
             $fs->delete_area_files($context->id, 'user', 'newicon');
-            throw new moodle_exception('There was a problem copying the profile picture to temp.');
+            throw new powereduc_exception('There was a problem copying the profile picture to temp.');
         }
 
         // Copy file to temporary location and the send it for processing icon.

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -144,7 +144,7 @@ class model {
         if (is_scalar($model)) {
             $model = $DB->get_record('analytics_models', array('id' => $model), '*', MUST_EXIST);
             if (!$model) {
-                throw new \moodle_exception('errorunexistingmodel', 'analytics', '', $model);
+                throw new \powereduc_exception('errorunexistingmodel', 'analytics', '', $model);
             }
         }
         $this->model = $model;
@@ -283,7 +283,7 @@ class model {
         $indicators = $this->get_indicators();
 
         if (empty($target)) {
-            throw new \moodle_exception('errornotarget', 'analytics');
+            throw new \powereduc_exception('errornotarget', 'analytics');
         }
 
         $potentialtimesplittings = $this->get_potential_timesplittings();
@@ -296,7 +296,7 @@ class model {
                     $timesplitting = \core_analytics\manager::get_time_splitting($options['timesplitting']);
 
                     if (empty($potentialtimesplittings[$timesplitting->get_id()])) {
-                        throw new \moodle_exception('errorcannotusetimesplitting', 'analytics');
+                        throw new \powereduc_exception('errorcannotusetimesplitting', 'analytics');
                     }
                     $timesplittings = array($timesplitting->get_id() => $timesplitting);
                 } else {
@@ -308,7 +308,7 @@ class model {
             } else {
 
                 if (empty($this->model->timesplitting)) {
-                    throw new \moodle_exception('invalidtimesplitting', 'analytics', '', $this->model->id);
+                    throw new \powereduc_exception('invalidtimesplitting', 'analytics', '', $this->model->id);
                 }
 
                 // Returned as an array as all actions (evaluation, training and prediction) go through the same process.
@@ -316,7 +316,7 @@ class model {
             }
 
             if (empty($timesplittings)) {
-                throw new \moodle_exception('errornotimesplittings', 'analytics');
+                throw new \powereduc_exception('errornotimesplittings', 'analytics');
             }
         }
 
@@ -393,10 +393,10 @@ class model {
 
         if ($timesplittingid) {
             if (!\core_analytics\manager::is_valid($timesplittingid, '\core_analytics\local\time_splitting\base')) {
-                throw new \moodle_exception('errorinvalidtimesplitting', 'analytics');
+                throw new \powereduc_exception('errorinvalidtimesplitting', 'analytics');
             }
             if (substr($timesplittingid, 0, 1) !== '\\') {
-                throw new \moodle_exception('errorinvalidtimesplitting', 'analytics');
+                throw new \powereduc_exception('errorinvalidtimesplitting', 'analytics');
             }
             $modelobj->timesplitting = $timesplittingid;
         }
@@ -608,13 +608,13 @@ class model {
                 break;
 
             default:
-                throw new \moodle_exception('errorunknownaction', 'analytics');
+                throw new \powereduc_exception('errorunknownaction', 'analytics');
         }
 
         $this->init_analyser($options);
 
         if (empty($this->get_indicators())) {
-            throw new \moodle_exception('errornoindicators', 'analytics');
+            throw new \powereduc_exception('errornoindicators', 'analytics');
         }
 
         $this->heavy_duty_mode();
@@ -699,11 +699,11 @@ class model {
         }
 
         if (!$this->is_enabled() || empty($this->model->timesplitting)) {
-            throw new \moodle_exception('invalidtimesplitting', 'analytics', '', $this->model->id);
+            throw new \powereduc_exception('invalidtimesplitting', 'analytics', '', $this->model->id);
         }
 
         if (empty($this->get_indicators())) {
-            throw new \moodle_exception('errornoindicators', 'analytics');
+            throw new \powereduc_exception('errornoindicators', 'analytics');
         }
 
         $this->heavy_duty_mode();
@@ -767,11 +767,11 @@ class model {
         \core_analytics\manager::check_can_manage_models();
 
         if (!$this->is_enabled() || empty($this->model->timesplitting)) {
-            throw new \moodle_exception('invalidtimesplitting', 'analytics', '', $this->model->id);
+            throw new \powereduc_exception('invalidtimesplitting', 'analytics', '', $this->model->id);
         }
 
         if (empty($this->get_indicators())) {
-            throw new \moodle_exception('errornoindicators', 'analytics');
+            throw new \powereduc_exception('errornoindicators', 'analytics');
         }
 
         $this->heavy_duty_mode();
@@ -800,7 +800,7 @@ class model {
             // We need to throw an exception if we are trying to predict stuff that was already predicted.
             $params = array('modelid' => $this->model->id, 'action' => 'predicted', 'fileid' => $samplesfile->get_id());
             if ($predicted = $DB->get_record('analytics_used_files', $params)) {
-                throw new \moodle_exception('erroralreadypredict', 'analytics', '', $samplesfile->get_id());
+                throw new \powereduc_exception('erroralreadypredict', 'analytics', '', $samplesfile->get_id());
             }
 
             $indicatorcalculations = \core_analytics\dataset_manager::get_structured_data($samplesfile);
@@ -1153,11 +1153,11 @@ class model {
         if ($timesplittingid && $timesplittingid !== $this->model->timesplitting) {
 
             if (!\core_analytics\manager::is_valid($timesplittingid, '\core_analytics\local\time_splitting\base')) {
-                throw new \moodle_exception('errorinvalidtimesplitting', 'analytics');
+                throw new \powereduc_exception('errorinvalidtimesplitting', 'analytics');
             }
 
             if (substr($timesplittingid, 0, 1) !== '\\') {
-                throw new \moodle_exception('errorinvalidtimesplitting', 'analytics');
+                throw new \powereduc_exception('errorinvalidtimesplitting', 'analytics');
             }
 
             // Delete generated predictions before changing the model version.
@@ -1175,7 +1175,7 @@ class model {
             }
         } else if (empty($this->model->timesplitting)) {
             // A valid timesplitting method needs to be supplied before a model can be enabled.
-            throw new \moodle_exception('invalidtimesplitting', 'analytics', '', $this->model->id);
+            throw new \powereduc_exception('invalidtimesplitting', 'analytics', '', $this->model->id);
 
         }
 
@@ -1409,9 +1409,9 @@ class model {
      * Returns the actions executed by users on the predictions.
      *
      * @param  \context|null $context
-     * @return \moodle_recordset
+     * @return \powereduc_recordset
      */
-    public function get_prediction_actions(?\context $context): \moodle_recordset {
+    public function get_prediction_actions(?\context $context): \powereduc_recordset {
         global $DB;
 
         $sql = "SELECT apa.id, apa.predictionid, apa.userid, apa.actionname, apa.timecreated,
@@ -1440,7 +1440,7 @@ class model {
         list($unused, $samplesdata) = $this->get_samples(array($predictionobj->sampleid));
 
         if (empty($samplesdata[$predictionobj->sampleid])) {
-            throw new \moodle_exception('errorsamplenotavailable', 'analytics');
+            throw new \powereduc_exception('errorsamplenotavailable', 'analytics');
         }
 
         return $samplesdata[$predictionobj->sampleid];
@@ -1610,7 +1610,7 @@ class model {
      *
      * Note that this method assumes that model_config::check_dependencies has already been called.
      *
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @param  string $zipfilepath Zip file path
      * @return \core_analytics\model
      */
@@ -1762,7 +1762,7 @@ class model {
                 } else if (is_object($indicator)) {
                     $indicator = '\\' . get_class($indicator);
                 }
-                throw new \moodle_exception('errorinvalidindicator', 'analytics', '', $indicator);
+                throw new \powereduc_exception('errorinvalidindicator', 'analytics', '', $indicator);
             }
             $indicatorclasses[] = $indicator->get_id();
         }
@@ -1863,7 +1863,7 @@ class model {
         $displayname = format_string($this->get_name());
 
         return new \core\output\inplace_editable('core_analytics', 'modelname', $this->model->id,
-            has_capability('moodle/analytics:managemodels', \context_system::instance()), $displayname, $this->model->name);
+            has_capability('powereduc/analytics:managemodels', \context_system::instance()), $displayname, $this->model->name);
     }
 
     /**

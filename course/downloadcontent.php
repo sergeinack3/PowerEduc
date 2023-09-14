@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core
  * @subpackage course
- * @copyright  2020 Michael Hawkins <michaelh@moodle.com>
+ * @copyright  2020 Michael Hawkins <michaelh@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,7 +32,7 @@ $contextid = required_param('contextid', PARAM_INT);
 $isdownload = optional_param('download', 0, PARAM_BOOL);
 $coursecontext = context::instance_by_id($contextid);
 $courseid = $coursecontext->instanceid;
-$courselink = new moodle_url('/course/view.php', ['id' => $courseid]);
+$courselink = new powereduc_url('/course/view.php', ['id' => $courseid]);
 
 if (!\core\content::can_export_context($coursecontext, $USER)) {
     redirect($courselink);
@@ -88,7 +88,7 @@ if ($isdownload) {
 
     // Prepare download confirmation information and display it.
     $maxfilesize = display_size($CFG->maxsizeperdownloadcoursefile, 0);
-    $downloadlink = new moodle_url('/course/downloadcontent.php', ['contextid' => $contextid, 'download' => 1]);
+    $downloadlink = new powereduc_url('/course/downloadcontent.php', ['contextid' => $contextid, 'download' => 1]);
 
     echo $OUTPUT->confirm(get_string('downloadcourseconfirmation', 'course', $maxfilesize), $downloadlink, $courselink);
 }

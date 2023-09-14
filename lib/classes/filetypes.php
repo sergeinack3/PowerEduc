@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Class to manage the custom filetypes list that is stored in a config variable.
@@ -148,7 +148,7 @@ abstract class core_filetypes {
             'json' => array('type' => 'application/json', 'icon' => 'text'),
             'latex' => array('type' => 'application/x-latex', 'icon' => 'text'),
             'm' => array('type' => 'text/plain', 'icon' => 'sourcecode'),
-            'mbz' => array('type' => 'application/vnd.moodle.backup', 'icon' => 'moodle'),
+            'mbz' => array('type' => 'application/vnd.powereduc.backup', 'icon' => 'powereduc'),
             'mdb' => array('type' => 'application/x-msaccess', 'icon' => 'base'),
             'mht' => array('type' => 'message/rfc822', 'icon' => 'archive'),
             'mhtml' => array('type' => 'message/rfc822', 'icon' => 'archive'),
@@ -174,7 +174,7 @@ abstract class core_filetypes {
                     'string' => 'video'),
             'mpg' => array('type' => 'video/mpeg', 'icon' => 'mpeg', 'groups' => array('video', 'web_video'),
                     'string' => 'video'),
-            'mpr' => array('type' => 'application/vnd.moodle.profiling', 'icon' => 'moodle'),
+            'mpr' => array('type' => 'application/vnd.powereduc.profiling', 'icon' => 'powereduc'),
 
             'nbk' => array('type' => 'application/x-smarttech-notebook', 'icon' => 'archive'),
             'notebook' => array('type' => 'application/x-smarttech-notebook', 'icon' => 'archive'),

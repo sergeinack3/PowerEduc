@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ namespace core_adminpresets;
  *
  * @package    core_adminpresets
  * @category   test
- * @copyright  2021 Sara Arjona (sara@moodle.com)
+ * @copyright  2021 Sara Arjona (sara@powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @coversDefaultClass core_adminpresets_generator
  */
@@ -85,8 +85,8 @@ class generator_test extends \advanced_testcase {
         $this->assertEquals($comments, $preset->comments);
         $this->assertEquals($author, $preset->author);
         $this->assertEquals($iscoreresult, $preset->iscore);
-        $this->assertEquals($CFG->version, $preset->moodleversion);
-        $this->assertEquals($CFG->release, $preset->moodlerelease);
+        $this->assertEquals($CFG->version, $preset->powereducversion);
+        $this->assertEquals($CFG->release, $preset->powereducrelease);
         $this->assertEquals($CFG->wwwroot, $preset->site);
 
         // Check the settings.

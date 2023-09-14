@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -64,7 +64,7 @@ class award_criteria_manual extends award_criteria {
         $options = '';
         $none = true;
 
-        $roles = get_roles_with_capability('moodle/badges:awardbadge', CAP_ALLOW, $PAGE->context);
+        $roles = get_roles_with_capability('powereduc/badges:awardbadge', CAP_ALLOW, $PAGE->context);
         $visibleroles = get_viewable_roles($PAGE->context);
         $roleids = array_map(function($o) {
             return $o->id;

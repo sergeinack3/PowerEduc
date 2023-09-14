@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -144,8 +144,8 @@ class resource_link_test extends \advanced_testcase {
         return [
             'Valid, both URLs, some scopes' => [
                 'args' => [
-                    'lineitemsurl' => new \moodle_url('https://platform.example.org/10/lineitems'),
-                    'lineitemurl' => new \moodle_url('https://platform.example.org/10/lineitems/4/lineitem'),
+                    'lineitemsurl' => new \powereduc_url('https://platform.example.org/10/lineitems'),
+                    'lineitemurl' => new \powereduc_url('https://platform.example.org/10/lineitems/4/lineitem'),
                     'scope' => [
                         'https://purl.imsglobal.org/spec/lti-ags/scope/lineitem',
                         'https://purl.imsglobal.org/spec/lti-ags/scope/score'
@@ -158,7 +158,7 @@ class resource_link_test extends \advanced_testcase {
             'Valid, only coupled line item URL, some scopes' => [
                 'args' => [
                     'lineitemsurl' => null,
-                    'lineitemurl' => new \moodle_url('https://platform.example.org/10/lineitems/4/lineitem'),
+                    'lineitemurl' => new \powereduc_url('https://platform.example.org/10/lineitems/4/lineitem'),
                     'scope' => [
                         'https://purl.imsglobal.org/spec/lti-ags/scope/score'
                     ]
@@ -169,7 +169,7 @@ class resource_link_test extends \advanced_testcase {
             ],
             'Valid, only decoupled line items URL, some scopes' => [
                 'args' => [
-                    'lineitemsurl' => new \moodle_url('https://platform.example.org/10/lineitems'),
+                    'lineitemsurl' => new \powereduc_url('https://platform.example.org/10/lineitems'),
                     'lineitemurl' => null,
                     'scope' => [
                         'https://purl.imsglobal.org/spec/lti-ags/scope/lineitem',
@@ -183,8 +183,8 @@ class resource_link_test extends \advanced_testcase {
             ],
             'Valid, URLs without any scopes' => [
                 'args' => [
-                    'lineitemsurl' => new \moodle_url('https://platform.example.org/10/lineitems'),
-                    'lineitemurl' => new \moodle_url('https://platform.example.org/10/lineitems/4/lineitem'),
+                    'lineitemsurl' => new \powereduc_url('https://platform.example.org/10/lineitems'),
+                    'lineitemurl' => new \powereduc_url('https://platform.example.org/10/lineitems/4/lineitem'),
                     'scope' => []
                 ],
                 'expected' => [
@@ -215,10 +215,10 @@ class resource_link_test extends \advanced_testcase {
     public function test_add_names_and_roles_service() {
         $reslink = resource_link::create('res-link-id-123', 24, 44);
         $this->assertNull($reslink->get_names_and_roles_service());
-        $reslink->add_names_and_roles_service(new \moodle_url('https://lms.example.com/10/memberships'), ['2.0']);
+        $reslink->add_names_and_roles_service(new \powereduc_url('https://lms.example.com/10/memberships'), ['2.0']);
         $nrps = $reslink->get_names_and_roles_service();
         $this->assertInstanceOf(nrps_info::class, $nrps);
-        $this->assertEquals(new \moodle_url('https://lms.example.com/10/memberships'),
+        $this->assertEquals(new \powereduc_url('https://lms.example.com/10/memberships'),
             $nrps->get_context_memberships_url());
         $this->assertEquals(['2.0'], $nrps->get_service_versions());
     }

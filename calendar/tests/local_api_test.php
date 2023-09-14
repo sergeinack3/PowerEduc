@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ require_once(__DIR__ . '/helpers.php');
  * Class contaning unit tests for the calendar local API.
  *
  * @package    core_calendar
- * @copyright  2017 Mark Nelson <markn@moodle.com>
+ * @copyright  2017 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @coversDefaultClass \core_calendar\local\api
  */
@@ -1059,7 +1059,7 @@ class local_api_test extends \advanced_testcase {
         $mapper = container::get_event_mapper();
 
         $generator->role_assign($roleid, $user->id, $context->id);
-        assign_capability('moodle/calendar:manageownentries', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageownentries', CAP_ALLOW, $roleid, $context, true);
 
         $this->setUser($user);
         $this->resetAfterTest(true);
@@ -1107,8 +1107,8 @@ class local_api_test extends \advanced_testcase {
         ]);
         $event = $mapper->from_legacy_event_to_event($event);
 
-        assign_capability('moodle/calendar:manageownentries', CAP_PROHIBIT, $roleid, $context, true);
-        $this->expectException('moodle_exception');
+        assign_capability('powereduc/calendar:manageownentries', CAP_PROHIBIT, $roleid, $context, true);
+        $this->expectException('powereduc_exception');
         $newEvent = \core_calendar\local\api::update_event_start_day($event, $newstartdate);
     }
 
@@ -1247,7 +1247,7 @@ class local_api_test extends \advanced_testcase {
             ]
         );
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $newevent = \core_calendar\local\api::update_event_start_day($event, $newstartdate);
     }
 
@@ -1388,7 +1388,7 @@ class local_api_test extends \advanced_testcase {
             ]
         );
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $newevent = \core_calendar\local\api::update_event_start_day($event, $newstartdate);
     }
 
@@ -1434,7 +1434,7 @@ class local_api_test extends \advanced_testcase {
 
         $DB->insert_record('quiz_overrides', $record);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $newevent = \core_calendar\local\api::update_event_start_day($event, $newstartdate);
     }
 }

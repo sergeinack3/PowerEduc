@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -106,7 +106,7 @@ class framework_autocomplete extends MoodleQuickForm_autocomplete {
         list($insql, $inparams) = $DB->get_in_or_equal($ids, SQL_PARAMS_NAMED, 'param');
         $frameworks = competency_framework::get_records_select("id $insql", $inparams, 'shortname');
         foreach ($frameworks as $framework) {
-            if (!has_any_capability(array('moodle/competency:competencyview', 'moodle/competency:competencymanage'),
+            if (!has_any_capability(array('powereduc/competency:competencyview', 'powereduc/competency:competencymanage'),
                     $framework->get_context())) {
                 continue;
             } else if ($this->onlyvisible && !$framework->get('visible')) {

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ $page          = optional_param('page', 0, PARAM_INT);   // Active page.
 $showreport    = optional_param('showreport', 0, PARAM_INT);
 
 $PAGE->set_pagelayout('report');
-$url = new moodle_url('/grade/report/history/index.php', array('id' => $courseid, 'showreport' => 1));
+$url = new powereduc_url('/grade/report/history/index.php', array('id' => $courseid, 'showreport' => 1));
 $PAGE->set_url($url);
 
 $course = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
@@ -41,7 +41,7 @@ require_login($course);
 $context = context_course::instance($course->id);
 
 require_capability('gradereport/history:view', $context);
-require_capability('moodle/grade:viewall', $context);
+require_capability('powereduc/grade:viewall', $context);
 
 // Last selected report session tracking.
 if (!isset($USER->grade_last_report)) {
@@ -109,7 +109,7 @@ if ($table->is_downloading()) {
 
 // Print header.
 $actionbar = new \core_grades\output\general_action_bar($context,
-    new moodle_url('/grade/report/history/index.php', ['id' => $courseid]), 'report', 'history');
+    new powereduc_url('/grade/report/history/index.php', ['id' => $courseid]), 'report', 'history');
 print_grade_page_head($COURSE->id, 'report', 'history', get_string('pluginname',
     'gradereport_history'), false, false, true, null, null,
     null, $actionbar);

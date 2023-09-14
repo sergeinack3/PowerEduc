@@ -17,7 +17,7 @@ If needed a theme can override this map and provide its own mapping.
 
 ## Rendering icons in Mustache Templates
 
-Icons can be rendered in moodle templates using this notation:
+Icons can be rendered in powereduc templates using this notation:
 
 ```{{#pix}} i/edit, core {{/pix}}```
 
@@ -26,7 +26,7 @@ Icons can be rendered in moodle templates using this notation:
 Use the pix_icon method to retreive the HTML for an icon.
 
 {{< php >}}
-    $icon = $OUTPUT->pix_icon('i/edit', 'Edit me', 'moodle');
+    $icon = $OUTPUT->pix_icon('i/edit', 'Edit me', 'powereduc');
 {{< / php >}}
 
 Options:
@@ -43,4 +43,4 @@ Options:
 
 The top title of each cards displayse the name of the icon. The icon shown left is the font-awesome icons. The icon shown on the right is the old image base icon.
 
-{{< moodleicons >}}
+{{< powereducicons >}}

@@ -1,7 +1,7 @@
 {
-    "moodle-atto_html-codemirror": {
+    "powereduc-atto_html-codemirror": {
         "requires": [
-            "moodle-atto_html-codemirror-skin"
+            "powereduc-atto_html-codemirror-skin"
         ]
     }
 }

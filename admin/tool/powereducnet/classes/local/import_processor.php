@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,11 +16,11 @@
 /**
  * Contains the import_processor class.
  *
- * @package tool_moodlenet
+ * @package tool_powereducnet
  * @copyright 2020 Jake Dallimore <jrhdallimore@gmail.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace tool_moodlenet\local;
+namespace tool_powereducnet\local;
 
 /**
  * The import_processor class.
@@ -121,7 +121,7 @@ class import_processor {
      */
     protected function update_module_description(int $instanceid): void {
         global $DB, $CFG;
-        require_once($CFG->libdir . '/moodlelib.php');
+        require_once($CFG->libdir . '/powereduclib.php');
 
         if (plugin_supports('mod', $this->handlerinfo->get_module_name(), FEATURE_MOD_INTRO, true)) {
             require_once($CFG->libdir . '/editorlib.php');
@@ -171,7 +171,7 @@ class import_processor {
         if (!$instanceid) {
             // Something has gone wrong - undo everything we can.
             course_delete_module($cmid);
-            throw new \moodle_exception('errorcreatingactivity', 'moodle', '', $this->handlerinfo->get_module_name());
+            throw new \powereduc_exception('errorcreatingactivity', 'powereduc', '', $this->handlerinfo->get_module_name());
         }
 
         // Note the section visibility.
@@ -194,7 +194,7 @@ class import_processor {
         if (!isset($info->cms[$cmid])) {
             // The course module has not been properly created in the course - undo everything.
             course_delete_module($cmid);
-            throw new \moodle_exception('errorcreatingactivity', 'moodle', '', $this->handlerinfo->get_module_name());
+            throw new \powereduc_exception('errorcreatingactivity', 'powereduc', '', $this->handlerinfo->get_module_name());
         }
         $mod = $info->get_cm($cmid);
 

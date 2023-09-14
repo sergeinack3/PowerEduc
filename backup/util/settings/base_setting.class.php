@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage backup-settings
  * @copyright  2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -255,7 +255,7 @@ abstract class base_setting {
         }
         $dependencies = array();
         foreach ($this->dependenton as $dependenton) {
-            $properties = $dependenton->get_moodleform_properties();
+            $properties = $dependenton->get_powereducform_properties();
             $properties['setting'] = $settingname;
             $dependencies[$properties['setting'].'-'.$properties['dependenton']] = $properties;
             $dependencies = array_merge($dependencies, $dependenton->get_setting()->get_my_dependency_properties($settingname));
@@ -538,7 +538,7 @@ abstract class base_setting {
      * @param string $identifier
      * @param string $component
      */
-    public function set_help($identifier, $component='moodle') {
+    public function set_help($identifier, $component='powereduc') {
         $this->help = array($identifier, $component);
     }
 

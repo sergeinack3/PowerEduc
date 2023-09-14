@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - https://moodle.org/
+// This file is part of Moodle - https://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ require_once(__DIR__ . '/fixtures/test_target_shortname.php');
  *
  * @package     core_analytics
  * @category    test
- * @copyright 2019 David Mudrák <david@moodle.com>
+ * @copyright 2019 David Mudrák <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class stats_test extends \advanced_testcase {

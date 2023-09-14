@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -137,7 +137,7 @@ class summary implements renderable, templatable {
             'hasmoreplanstoreview' => $this->planstoreview['count'] > 3,
 
             'plansurl' => url::plans($this->user->id)->out(false),
-            'pluginbaseurl' => (new \moodle_url('/blocks/lp'))->out(false),
+            'pluginbaseurl' => (new \powereduc_url('/blocks/lp'))->out(false),
             'userid' => $this->user->id,
         );
 

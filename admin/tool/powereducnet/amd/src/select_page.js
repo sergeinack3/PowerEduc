@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 /**
  * When returning to Moodle let the user select which course to add the resource to.
  *
- * @module     tool_moodlenet/select_page
+ * @module     tool_powereducnet/select_page
  * @copyright  2020 Mathew May <mathew.solutions>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -24,7 +24,7 @@
 define([
     'core/ajax',
     'core/templates',
-    'tool_moodlenet/selectors',
+    'tool_powereducnet/selectors',
     'core/notification'
 ], function(
     Ajax,
@@ -57,7 +57,7 @@ define([
      * @returns {Promise}
      */
     var renderNoCourses = function(areaReplace) {
-        return Templates.renderPix('courses', 'tool_moodlenet').then(function(img) {
+        return Templates.renderPix('courses', 'tool_powereducnet').then(function(img) {
             return img;
         }).then(function(img) {
             var temp = document.createElement('div');
@@ -81,7 +81,7 @@ define([
      * @returns {Promise}
      */
     var renderCourses = function(areaReplace, courses) {
-        return Templates.render('tool_moodlenet/view-cards', {
+        return Templates.render('tool_powereducnet/view-cards', {
             courses: courses
         }).then(function(html, js) {
             Templates.replaceNodeContents(areaReplace, html, js);
@@ -114,7 +114,7 @@ define([
             searchvalue: inputValue,
         };
         Ajax.call([{
-            methodname: 'tool_moodlenet_search_courses',
+            methodname: 'tool_powereducnet_search_courses',
             args: args
         }])[0].then(function(result) {
             if (result.courses.length === 0) {

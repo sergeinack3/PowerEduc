@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="lib/editor/tiny/plugins/autosave/db" VERSION="20140819" COMMENT="XMLDB file for Moodle tiny_autosave"
+<XMLDB PATH="lib/editor/tiny/plugins/autosave/db" VERSION="20140819" COMMENT="XMLDB file for PowerEduc tiny_autosave"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../../../../lib/xmldb/xmldb.xsd"
 >

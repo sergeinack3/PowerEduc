@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,8 +26,8 @@ defined('POWEREDUC_INTERNAL') || die;
 
 if ($hassiteconfig) {
     $ADMIN->add('experimental', new admin_externalpage('tooldbtransfer', get_string('dbtransfer', 'tool_dbtransfer'),
-        $CFG->wwwroot.'/'.$CFG->admin.'/tool/dbtransfer/index.php', 'moodle/site:config', false));
+        $CFG->wwwroot.'/'.$CFG->admin.'/tool/dbtransfer/index.php', 'powereduc/site:config', false));
     // DB export/import is not ready yet - keep it hidden for now.
     $ADMIN->add('experimental', new admin_externalpage('tooldbexport', get_string('dbexport', 'tool_dbtransfer'),
-        $CFG->wwwroot.'/'.$CFG->admin.'/tool/dbtransfer/dbexport.php', 'moodle/site:config', true));
+        $CFG->wwwroot.'/'.$CFG->admin.'/tool/dbtransfer/dbexport.php', 'powereduc/site:config', true));
 }

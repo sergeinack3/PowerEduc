@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -73,13 +73,13 @@ class tool_messageinbound_renderer extends plugin_renderer_base {
         $descriptionoptions->newlines = false;
         $descriptionoptions->overflowdiv = true;
 
-        $editurlbase = new moodle_url('/admin/tool/messageinbound/index.php');
+        $editurlbase = new powereduc_url('/admin/tool/messageinbound/index.php');
         foreach ($handlers as $handler) {
             $handlername = new html_table_cell($handler->name . "\n" .
                     html_writer::tag('span', $handler->classname, array('class' => 'handler-function')));
             $handlername->header = true;
 
-            $editurl = new moodle_url($editurlbase, array('classname' => $handler->classname));
+            $editurl = new powereduc_url($editurlbase, array('classname' => $handler->classname));
             $editlink = $this->action_icon($editurl, new pix_icon('t/edit',
                     get_string('edithandler', 'tool_messageinbound', $handler->classname)));
 

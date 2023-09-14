@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * This page lets users to manage template competencies.
  *
  * @package    tool_lp
- * @copyright  2015 Mark Nelson <markn@moodle.com>
+ * @copyright  2015 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -35,14 +35,14 @@ $pagecontext = context::instance_by_id($pagecontextid);
 $template = \core_competency\api::read_template($templateid);
 $context = $template->get_context();
 if (!$template->can_read()) {
-    throw new required_capability_exception($context, 'moodle/competency:templateview', 'nopermissions', '');
+    throw new required_capability_exception($context, 'powereduc/competency:templateview', 'nopermissions', '');
 }
 
 // Trigger a template viewed event.
 \core_competency\api::template_viewed($template);
 
 // Set up the page.
-$url = new moodle_url('/admin/tool/lp/templatecompetencies.php', array('templateid' => $template->get('id'),
+$url = new powereduc_url('/admin/tool/lp/templatecompetencies.php', array('templateid' => $template->get('id'),
     'pagecontextid' => $pagecontextid));
 list($title, $subtitle) = \tool_lp\page_helper::setup_for_template($pagecontextid, $url, $template);
 

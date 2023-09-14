@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Native oci class representing moodle database interface.
+ * Native oci class representing powereduc database interface.
  *
  * @package    core_dml
  * @copyright  2008 Petr Skoda (http://skodak.org)
@@ -24,12 +24,12 @@
 
 defined('POWEREDUC_INTERNAL') || die();
 
-require_once(__DIR__.'/moodle_database.php');
-require_once(__DIR__.'/oci_native_moodle_recordset.php');
-require_once(__DIR__.'/oci_native_moodle_temptables.php');
+require_once(__DIR__.'/powereduc_database.php');
+require_once(__DIR__.'/oci_native_powereduc_recordset.php');
+require_once(__DIR__.'/oci_native_powereduc_temptables.php');
 
 /**
- * Native oci class representing moodle database interface.
+ * Native oci class representing powereduc database interface.
  *
  * One complete reference for PHP + OCI:
  * http://www.oracle.com/technology/tech/php/underground-php-oracle-manual.html
@@ -38,7 +38,7 @@ require_once(__DIR__.'/oci_native_moodle_temptables.php');
  * @copyright  2008 Petr Skoda (http://skodak.org)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class oci_native_moodle_database extends moodle_database {
+class oci_native_powereduc_database extends powereduc_database {
 
     protected $oci     = null;
 
@@ -126,7 +126,7 @@ class oci_native_moodle_database extends moodle_database {
      * @param string $dbuser The database username.
      * @param string $dbpass The database username's password.
      * @param string $dbname The name of the database being connected to.
-     * @param mixed $prefix string means moodle db prefix, false used for external databases where prefix not used
+     * @param mixed $prefix string means powereduc db prefix, false used for external databases where prefix not used
      * @param array $dboptions driver specific options
      * @return bool true
      * @throws dml_connection_exception if error
@@ -192,7 +192,7 @@ class oci_native_moodle_database extends moodle_database {
         // Disable logging until we are fully setup.
         $this->query_log_prevent();
 
-        // Make sure moodle package is installed - now required.
+        // Make sure powereduc package is installed - now required.
         if (!$this->oci_package_installed()) {
             try {
                 $this->attempt_oci_package_install();
@@ -201,7 +201,7 @@ class oci_native_moodle_database extends moodle_database {
                 // admins have to fix it manually if necessary.
             }
             if (!$this->oci_package_installed()) {
-                throw new dml_exception('dbdriverproblem', 'Oracle PL/SQL Moodle support package POWEREDUCLIB is not installed! Database administrator has to execute /lib/dml/oci_native_moodle_package.sql script.');
+                throw new dml_exception('dbdriverproblem', 'Oracle PL/SQL PowerEduc support package POWEREDUCLIB is not installed! Database administrator has to execute /lib/dml/oci_native_powereduc_package.sql script.');
             }
         }
 
@@ -223,7 +223,7 @@ class oci_native_moodle_database extends moodle_database {
         $this->query_log_allow();
 
         // Connection stabilised and configured, going to instantiate the temptables controller
-        $this->temptables = new oci_native_moodle_temptables($this, $this->unique_session_id);
+        $this->temptables = new oci_native_powereduc_temptables($this, $this->unique_session_id);
 
         return true;
     }
@@ -383,7 +383,7 @@ class oci_native_moodle_database extends moodle_database {
             $searcharr[':' . $name] = ':' . $newname;
         }
         // sort by length desc to avoid potential str_replace() overlap
-        uksort($searcharr, array('oci_native_moodle_database', 'compare_by_length_desc'));
+        uksort($searcharr, array('oci_native_powereduc_database', 'compare_by_length_desc'));
 
         $sql = str_replace(array_keys($searcharr), $searcharr, $sql);
         return array($sql, $newparams);
@@ -788,10 +788,10 @@ class oci_native_moodle_database extends moodle_database {
         }
         $column = $columns[$field];
 
-        // !! This paragraph explains behaviour before Moodle 2.0:
+        // !! This paragraph explains behaviour before PowerEduc 2.0:
         //
         // For Oracle DB, empty strings are converted to NULLs in DB
-        // and this breaks a lot of NOT NULL columns currently Moodle. In the future it's
+        // and this breaks a lot of NOT NULL columns currently PowerEduc. In the future it's
         // planned to move some of them to NULL, if they must accept empty values and this
         // piece of code will become less and less used. But, for now, we need it.
         // What we are going to do is to examine all the data being inserted and if it's
@@ -801,14 +801,14 @@ class oci_native_moodle_database extends moodle_database {
         // In the opposite, when retrieving records from Oracle, we'll decode " " back to
         // empty strings to allow everything to work properly. DIRTY HACK.
 
-        // !! These paragraphs explain the rationale about the change for Moodle 2.5:
+        // !! These paragraphs explain the rationale about the change for PowerEduc 2.5:
         //
-        // Before Moodle 2.0, we only used to apply this DIRTY HACK to NOT NULL columns, as
+        // Before PowerEduc 2.0, we only used to apply this DIRTY HACK to NOT NULL columns, as
         // stated above, but it causes one problem in NULL columns where both empty strings
         // and real NULLs are stored as NULLs, being impossible to differentiate them when
         // being retrieved from DB.
         //
-        // So, starting with Moodle 2.0, we are going to apply the DIRTY HACK to all the
+        // So, starting with PowerEduc 2.0, we are going to apply the DIRTY HACK to all the
         // CHAR/CLOB columns no matter of their nullability. That way, when retrieving
         // NULLABLE fields we'll get proper empties and NULLs differentiated, so we'll be able
         // to rely in NULL/empty/content contents without problems, until now that wasn't
@@ -820,7 +820,7 @@ class oci_native_moodle_database extends moodle_database {
         //
         // !! Conclusions:
         //
-        // From Moodle 2.5 onwards, ALL empty strings in Oracle DBs will be stored as
+        // From PowerEduc 2.5 onwards, ALL empty strings in Oracle DBs will be stored as
         // 1-whitespace char, ALL NULLs as NULLs and, obviously, content as content. And
         // those 1-whitespace chars will be converted back to empty strings by all the
         // get_field/record/set() functions transparently and any SQL needing direct handling
@@ -939,7 +939,7 @@ class oci_native_moodle_database extends moodle_database {
                     if (isset($value['clob'])) {
                         $lob = oci_new_descriptor($this->oci, OCI_DTYPE_LOB);
                         if ($descriptors === null) {
-                            throw new coding_exception('moodle_database::bind_params() $descriptors not specified for clob');
+                            throw new coding_exception('powereduc_database::bind_params() $descriptors not specified for clob');
                         }
                         $descriptors[] = $lob;
                         oci_bind_by_name($stmt, $key, $lob, -1, SQLT_CLOB);
@@ -948,7 +948,7 @@ class oci_native_moodle_database extends moodle_database {
                     } else if (isset($value['blob'])) {
                         $lob = oci_new_descriptor($this->oci, OCI_DTYPE_LOB);
                         if ($descriptors === null) {
-                            throw new coding_exception('moodle_database::bind_params() $descriptors not specified for clob');
+                            throw new coding_exception('powereduc_database::bind_params() $descriptors not specified for clob');
                         }
                         $descriptors[] = $lob;
                         oci_bind_by_name($stmt, $key, $lob, -1, SQLT_BLOB);
@@ -963,7 +963,7 @@ class oci_native_moodle_database extends moodle_database {
                     if (!is_null($value) && strlen($value) > 4000) {
                         $lob = oci_new_descriptor($this->oci, OCI_DTYPE_LOB);
                         if ($descriptors === null) {
-                            throw new coding_exception('moodle_database::bind_params() $descriptors not specified for clob');
+                            throw new coding_exception('powereduc_database::bind_params() $descriptors not specified for clob');
                         }
                         $descriptors[] = $lob;
                         oci_bind_by_name($stmt, $key, $lob, -1, SQLT_CLOB);
@@ -1030,7 +1030,7 @@ class oci_native_moodle_database extends moodle_database {
     /**
      * This function is used to convert all the Oracle 1-space defaults to the empty string
      * like a really DIRTY HACK to allow it to work better until all those NOT NULL DEFAULT ''
-     * fields will be out from Moodle.
+     * fields will be out from PowerEduc.
      * @param string the string to be converted to '' (empty string) if it's ' ' (one space)
      * @param mixed the key of the array in case we are using this function from array_walk,
      *              defaults to null for other (direct) uses
@@ -1053,7 +1053,7 @@ class oci_native_moodle_database extends moodle_database {
         list($sql, $params, $type) = $this->fix_sql_params($sql, $params);
 
         if (strpos($sql, ';') !== false) {
-            throw new coding_exception('moodle_database::execute() Multiple sql statements found or bound parameters not used properly in query!');
+            throw new coding_exception('powereduc_database::execute() Multiple sql statements found or bound parameters not used properly in query!');
         }
 
         list($sql, $params) = $this->tweak_param_names($sql, $params);
@@ -1100,7 +1100,7 @@ class oci_native_moodle_database extends moodle_database {
     }
 
     /**
-     * Get a number of records as a moodle_recordset using a SQL statement.
+     * Get a number of records as a powereduc_recordset using a SQL statement.
      *
      * Since this method is a little less readable, use of it should be restricted to
      * code where it's possible there might be large datasets being returned.  For known
@@ -1113,7 +1113,7 @@ class oci_native_moodle_database extends moodle_database {
      * @param array $params array of sql parameters
      * @param int $limitfrom return a subset of records, starting at this point (optional, required if $limitnum is set).
      * @param int $limitnum return a subset comprising this many records (optional, required if $limitfrom is set).
-     * @return moodle_recordset instance
+     * @return powereduc_recordset instance
      * @throws dml_exception A DML specific exception is thrown for any errors.
      */
     public function get_recordset_sql($sql, array $params=null, $limitfrom=0, $limitnum=0) {
@@ -1135,7 +1135,7 @@ class oci_native_moodle_database extends moodle_database {
     }
 
     protected function create_recordset($stmt) {
-        return new oci_native_moodle_recordset($stmt);
+        return new oci_native_powereduc_recordset($stmt);
     }
 
     /**
@@ -1177,7 +1177,7 @@ class oci_native_moodle_database extends moodle_database {
         foreach ($records as $row) {
             $row = array_change_key_case($row, CASE_LOWER);
             unset($row['oracle_rownum']);
-            array_walk($row, array('oci_native_moodle_database', 'onespace2empty'));
+            array_walk($row, array('oci_native_powereduc_database', 'onespace2empty'));
             $id = reset($row);
             if (isset($return[$id])) {
                 $colname = key($row);
@@ -1214,7 +1214,7 @@ class oci_native_moodle_database extends moodle_database {
         oci_free_statement($stmt);
 
         $return = reset($records);
-        array_walk($return, array('oci_native_moodle_database', 'onespace2empty'));
+        array_walk($return, array('oci_native_powereduc_database', 'onespace2empty'));
 
         return $return;
     }
@@ -1238,7 +1238,7 @@ class oci_native_moodle_database extends moodle_database {
 
         if ($customsequence) {
             if (!isset($params['id'])) {
-                throw new coding_exception('moodle_database::insert_record_raw() id field must be specified if custom sequences used.');
+                throw new coding_exception('powereduc_database::insert_record_raw() id field must be specified if custom sequences used.');
             }
             $returnid = false;
         } else {
@@ -1249,7 +1249,7 @@ class oci_native_moodle_database extends moodle_database {
         }
 
         if (empty($params)) {
-            throw new coding_exception('moodle_database::insert_record_raw() no fields found.');
+            throw new coding_exception('powereduc_database::insert_record_raw() no fields found.');
         }
 
         $fields = implode(',', array_keys($params));
@@ -1364,11 +1364,11 @@ class oci_native_moodle_database extends moodle_database {
         $params = (array)$params;
 
         if (!isset($params['id'])) {
-            throw new coding_exception('moodle_database::update_record_raw() id field must be specified.');
+            throw new coding_exception('powereduc_database::update_record_raw() id field must be specified.');
         }
 
         if (empty($params)) {
-            throw new coding_exception('moodle_database::update_record_raw() no fields found.');
+            throw new coding_exception('powereduc_database::update_record_raw() no fields found.');
         }
 
         $sets = array();
@@ -1667,7 +1667,7 @@ class oci_native_moodle_database extends moodle_database {
     /**
      * Constructs 'IN()' or '=' sql fragment
      *
-     * Method overriding {@link moodle_database::get_in_or_equal} to be able to get
+     * Method overriding {@link powereduc_database::get_in_or_equal} to be able to get
      * more than 1000 elements working, to avoid ORA-01795. We use a pivoting technique
      * to be able to transform the params into virtual rows, so the original IN()
      * expression gets transformed into a subquery. Once more, be noted that we shouldn't
@@ -1802,10 +1802,10 @@ class oci_native_moodle_database extends moodle_database {
     }
 
     /**
-     * Try to add required moodle package into oracle server.
+     * Try to add required powereduc package into oracle server.
      */
     protected function attempt_oci_package_install() {
-        $sqls = file_get_contents(__DIR__.'/oci_native_moodle_package.sql');
+        $sqls = file_get_contents(__DIR__.'/oci_native_powereduc_package.sql');
         $sqls = preg_split('/^\/$/sm', $sqls);
         foreach ($sqls as $sql) {
             $sql = trim($sql);
@@ -1819,7 +1819,7 @@ class oci_native_moodle_database extends moodle_database {
     /**
      * Does this driver support tool_replace?
      *
-     * @since Moodle 2.8
+     * @since PowerEduc 2.8
      * @return bool
      */
     public function replace_all_text_supported() {

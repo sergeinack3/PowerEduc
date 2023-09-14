@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,13 +35,13 @@ $course = $DB->get_record('course', array('id' => $id), '*', MUST_EXIST);
 $context = context_course::instance($course->id, MUST_EXIST);
 
 if ($course->id == SITEID) {
-    throw new moodle_exception('invalidcourse');
+    throw new powereduc_exception('invalidcourse');
 }
 
 require_sesskey();
 require_login($course);
 require_capability('gradereport/history:view', $context);
-require_capability('moodle/grade:viewall', $context);
+require_capability('powereduc/grade:viewall', $context);
 
 $outcome = new stdClass();
 $outcome->success = true;

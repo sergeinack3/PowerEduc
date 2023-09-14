@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ defined('POWEREDUC_INTERNAL') || die;
 global $CFG;
 require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
 require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
-require_once($CFG->dirroot . '/backup/moodle2/backup_plan_builder.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/backup_plan_builder.class.php');
 
 /**
  * The primary renderer for the backup.
@@ -117,7 +117,7 @@ class core_backup_renderer extends plugin_renderer_base {
      * Displays the details of a backup file
      *
      * @param stdClass $details
-     * @param moodle_url $nextstageurl
+     * @param powereduc_url $nextstageurl
      * @return string
      */
     public function backup_details($details, $nextstageurl) {
@@ -133,12 +133,12 @@ class core_backup_renderer extends plugin_renderer_base {
         $html .= $this->backup_detail_pair(get_string('backupformat', 'backup'), get_string('backupformat'.$details->format, 'backup'));
         $html .= $this->backup_detail_pair(get_string('backupmode', 'backup'), get_string('backupmode'.$details->mode, 'backup'));
         $html .= $this->backup_detail_pair(get_string('backupdate', 'backup'), userdate($details->backup_date));
-        $html .= $this->backup_detail_pair(get_string('moodleversion', 'backup'),
-                html_writer::tag('span', $details->moodle_release, array('class' => 'moodle_release')).
-                html_writer::tag('span', '['.$details->moodle_version.']', array('class' => 'moodle_version sub-detail')));
+        $html .= $this->backup_detail_pair(get_string('powereducversion', 'backup'),
+                html_writer::tag('span', $details->powereduc_release, array('class' => 'powereduc_release')).
+                html_writer::tag('span', '['.$details->powereduc_version.']', array('class' => 'powereduc_version sub-detail')));
         $html .= $this->backup_detail_pair(get_string('backupversion', 'backup'),
-                html_writer::tag('span', $details->backup_release, array('class' => 'moodle_release')).
-                html_writer::tag('span', '['.$details->backup_version.']', array('class' => 'moodle_version sub-detail')));
+                html_writer::tag('span', $details->backup_release, array('class' => 'powereduc_release')).
+                html_writer::tag('span', '['.$details->backup_version.']', array('class' => 'powereduc_version sub-detail')));
         $html .= $this->backup_detail_pair(get_string('originalwwwroot', 'backup'),
                 html_writer::tag('span', $details->original_wwwroot, array('class' => 'originalwwwroot')).
                 html_writer::tag('span', '['.$details->original_site_identifier_hash.']', array('class' => 'sitehash sub-detail')));
@@ -228,7 +228,7 @@ class core_backup_renderer extends plugin_renderer_base {
     /**
      * Displays the general information about a backup file with non-standard format
      *
-     * @param moodle_url $nextstageurl URL to send user to
+     * @param powereduc_url $nextstageurl URL to send user to
      * @param array $details basic info about the file (format, type)
      * @return string HTML code to display
      */
@@ -254,10 +254,10 @@ class core_backup_renderer extends plugin_renderer_base {
     /**
      * Displays the general information about a backup file with unknown format
      *
-     * @param moodle_url $nextstageurl URL to send user to
+     * @param powereduc_url $nextstageurl URL to send user to
      * @return string HTML code to display
      */
-    public function backup_details_unknown(moodle_url $nextstageurl) {
+    public function backup_details_unknown(powereduc_url $nextstageurl) {
 
         $html  = html_writer::start_div('unknownformat');
         $html .= $this->output->heading(get_string('errorinvalidformat', 'backup'), 2);
@@ -271,14 +271,14 @@ class core_backup_renderer extends plugin_renderer_base {
     /**
      * Displays a course selector for restore
      *
-     * @param moodle_url $nextstageurl
+     * @param powereduc_url $nextstageurl
      * @param bool $wholecourse true if we are restoring whole course (as with backup::TYPE_1COURSE), false otherwise
      * @param restore_category_search $categories
      * @param restore_course_search $courses
      * @param int $currentcourse
      * @return string
      */
-    public function course_selector(moodle_url $nextstageurl, $wholecourse = true, restore_category_search $categories = null,
+    public function course_selector(powereduc_url $nextstageurl, $wholecourse = true, restore_category_search $categories = null,
                                     restore_course_search $courses = null, $currentcourse = null) {
         global $CFG;
         require_once($CFG->dirroot.'/course/lib.php');
@@ -391,11 +391,11 @@ class core_backup_renderer extends plugin_renderer_base {
     /**
      * Displays the import course selector
      *
-     * @param moodle_url $nextstageurl
+     * @param powereduc_url $nextstageurl
      * @param import_course_search $courses
      * @return string
      */
-    public function import_course_selector(moodle_url $nextstageurl, import_course_search $courses = null) {
+    public function import_course_selector(powereduc_url $nextstageurl, import_course_search $courses = null) {
         $html  = html_writer::start_tag('div', array('class' => 'import-course-selector backup-restore'));
         $html .= html_writer::start_tag('form', array('method' => 'post', 'action' => $nextstageurl->out_omit_querystring()));
         foreach ($nextstageurl->params() as $key => $value) {
@@ -556,13 +556,13 @@ class core_backup_renderer extends plugin_renderer_base {
      * Displays a continue button, overriding core renderer method of the same in order
      * to override submission method of the button form
      *
-     * @param string|moodle_url $url
+     * @param string|powereduc_url $url
      * @param string $method
      * @return string
      */
     public function continue_button($url, $method = 'post') {
-        if (!($url instanceof moodle_url)) {
-            $url = new moodle_url($url);
+        if (!($url instanceof powereduc_url)) {
+            $url = new powereduc_url($url);
         }
         if ($method != 'post') {
             $method = 'get';
@@ -655,7 +655,7 @@ class core_backup_renderer extends plugin_renderer_base {
             if ($file->is_directory()) {
                 continue;
             }
-            $fileurl = moodle_url::make_pluginfile_url(
+            $fileurl = powereduc_url::make_pluginfile_url(
                 $file->get_contextid(),
                 $file->get_component(),
                 $file->get_filearea(),
@@ -673,13 +673,13 @@ class core_backup_renderer extends plugin_renderer_base {
             $params['filecontextid'] = $file->get_contextid();
             $params['contextid'] = $viewer->currentcontext->id;
             $params['itemid'] = $file->get_itemid();
-            $restoreurl = new moodle_url('/backup/restorefile.php', $params);
+            $restoreurl = new powereduc_url('/backup/restorefile.php', $params);
             $restorelink = html_writer::link($restoreurl, get_string('restore'));
             $downloadlink = html_writer::link($fileurl, get_string('download'));
 
             // Conditional display of the restore and download links, initially only for the 'automated' filearea.
             if ($params['filearea'] == 'automated') {
-                if (!has_capability('moodle/restore:viewautomatedfilearea', $viewer->currentcontext)) {
+                if (!has_capability('powereduc/restore:viewautomatedfilearea', $viewer->currentcontext)) {
                     $restorelink = '';
                 }
                 if (!can_download_from_backup_filearea($params['filearea'], $viewer->currentcontext)) {
@@ -713,7 +713,7 @@ class core_backup_renderer extends plugin_renderer_base {
 
         if ($canmanagebackups) {
             $html .= $this->output->single_button(
-                new moodle_url('/backup/backupfilesedit.php', array(
+                new powereduc_url('/backup/backupfilesedit.php', array(
                         'currentcontext' => $viewer->currentcontext->id,
                         'contextid' => $viewer->filecontext->id,
                         'filearea' => $viewer->filearea,
@@ -1025,7 +1025,7 @@ class core_backup_renderer extends plugin_renderer_base {
         $copies = \copy_helper::get_copies($userid, $courseid);
 
         foreach ($copies as $copy) {
-            $sourceurl = new \moodle_url('/course/view.php', array('id' => $copy->sourceid));
+            $sourceurl = new \powereduc_url('/course/view.php', array('id' => $copy->sourceid));
 
             $tablerow = array(
                 html_writer::link($sourceurl, $copy->source),

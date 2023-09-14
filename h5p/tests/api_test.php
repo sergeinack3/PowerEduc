@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core_h5p
  * @category   test
- * @copyright  2020 Sara Arjona <sara@moodle.com>
+ * @copyright  2020 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -35,7 +35,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * Test class covering the H5P API.
  *
  * @package    core_h5p
- * @copyright  2020 Sara Arjona <sara@moodle.com>
+ * @copyright  2020 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @coversDefaultClass \core_h5p\api
  */
@@ -298,7 +298,7 @@ class api_test extends \advanced_testcase {
 
         // Get URL for this H5P content file.
         $syscontext = \context_system::instance();
-        $url = \moodle_url::make_pluginfile_url(
+        $url = \powereduc_url::make_pluginfile_url(
             $syscontext->id,
             \core_h5p\file_storage::COMPONENT,
             'unittest',
@@ -322,7 +322,7 @@ class api_test extends \advanced_testcase {
         $this->assertEquals($fakefile->get_contenthash(), $h5p->contenthash);
 
         // Scenario 3: Get the H5P for an unexisting H5P file.
-        $url = \moodle_url::make_pluginfile_url(
+        $url = \powereduc_url::make_pluginfile_url(
             $syscontext->id,
             \core_h5p\file_storage::COMPONENT,
             'unittest',
@@ -368,7 +368,7 @@ class api_test extends \advanced_testcase {
             'copyright' => 0,
         ];
 
-        $originalurl = \moodle_url::make_pluginfile_url(
+        $originalurl = \powereduc_url::make_pluginfile_url(
             $originalfile->get_contextid(),
             $originalfile->get_component(),
             $originalfile->get_filearea(),
@@ -394,7 +394,7 @@ class api_test extends \advanced_testcase {
         $referencedfile = $fs->create_file_from_reference($reffilerecord, $userrepository->id, $ref);
         $this->assertEquals($referencedfile->get_contenthash(), $originalfile->get_contenthash());
 
-        $referencedurl = \moodle_url::make_pluginfile_url(
+        $referencedurl = \powereduc_url::make_pluginfile_url(
             $syscontext->id,
             'core',
             'phpunit',
@@ -422,7 +422,7 @@ class api_test extends \advanced_testcase {
         $this->assertEquals($referencedfile->get_contenthash(), $file->get_contenthash());
 
         // Scenario 3: Unexisting file.
-        $unexistingurl = \moodle_url::make_pluginfile_url(
+        $unexistingurl = \powereduc_url::make_pluginfile_url(
             $syscontext->id,
             'core',
             'phpunit',
@@ -765,7 +765,7 @@ class api_test extends \advanced_testcase {
 
         // Get URL for this H5P content file.
         $syscontext = \context_system::instance();
-        $url = \moodle_url::make_pluginfile_url(
+        $url = \powereduc_url::make_pluginfile_url(
             $syscontext->id,
             \core_h5p\file_storage::COMPONENT,
             'unittest',
@@ -785,7 +785,7 @@ class api_test extends \advanced_testcase {
         $this->assertTrue(empty($messages->info));
 
         // Scenario 2: Create the H5P for an unexisting H5P file.
-        $url = \moodle_url::make_pluginfile_url(
+        $url = \powereduc_url::make_pluginfile_url(
             $syscontext->id,
             \core_h5p\file_storage::COMPONENT,
             'unittest',
@@ -823,7 +823,7 @@ class api_test extends \advanced_testcase {
 
         // Get URL for this H5P content file.
         $syscontext = \context_system::instance();
-        $url = \moodle_url::make_pluginfile_url(
+        $url = \powereduc_url::make_pluginfile_url(
             $syscontext->id,
             \core_h5p\file_storage::COMPONENT,
             'unittest',
@@ -849,7 +849,7 @@ class api_test extends \advanced_testcase {
         $this->assertEquals(0, $DB->count_records('h5p'));
 
         // Scenario 3: Try to remove the H5P for an unexisting H5P URL.
-        $url = \moodle_url::make_pluginfile_url(
+        $url = \powereduc_url::make_pluginfile_url(
             $syscontext->id,
             \core_h5p\file_storage::COMPONENT,
             'unittest',
@@ -1056,7 +1056,7 @@ class api_test extends \advanced_testcase {
         }
 
         if ($exception) {
-            $this->expectException(\moodle_exception::class);
+            $this->expectException(\powereduc_exception::class);
         }
 
         $result = api::is_library_enabled((object) $librarydata);

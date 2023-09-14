@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 /**
  * Grade export key management form.
  *
- * @package   moodlecore
+ * @package   powereduccore
  * @copyright 2008 Petr Skoda
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -29,7 +29,7 @@ if (!defined('POWEREDUC_INTERNAL')) {
 
 require_once($CFG->dirroot.'/lib/formslib.php');
 
-class key_form extends moodleform {
+class key_form extends powereducform {
 
     // Define the form
     function definition () {

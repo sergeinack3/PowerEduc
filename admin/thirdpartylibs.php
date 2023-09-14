@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * List of 3rd party libs used in moodle and all plugins.
+ * List of 3rd party libs used in powereduc and all plugins.
  *
  * @package   admin
  * @copyright 2013 Petr Skoda {@link http://skodak.org}

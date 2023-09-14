@@ -10,7 +10,7 @@ Moodle icons are usually rendered using the template ```{{pix}}``` helper.
 
 For example:
 
-```{{#pix}}t/up, moodle, {{#str}} up, moodle {{/str}}{{/pix}}```
+```{{#pix}}t/up, powereduc, {{#str}} up, powereduc {{/str}}{{/pix}}```
 
 which results in
 

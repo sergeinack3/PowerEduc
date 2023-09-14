@@ -19,7 +19,7 @@ if (is_https()) {
 
 // If the shibboleth plugin is not enable, throw an exception.
 if (!is_enabled_auth('shibboleth')) {
-    throw new moodle_exception(get_string('pluginnotenabled', 'auth', 'shibboleth'));
+    throw new powereduc_exception(get_string('pluginnotenabled', 'auth', 'shibboleth'));
 }
 
 // Front channel logout.
@@ -134,7 +134,7 @@ function LogoutNotification($spsessionid) {
         case '\core\session\database':
             return \auth_shibboleth\helper::logout_db_session($spsessionid);
         default:
-            throw new moodle_exception("Shibboleth logout not implemented for '$sessionclass'");
+            throw new powereduc_exception("Shibboleth logout not implemented for '$sessionclass'");
     }
     // If no SoapFault was thrown, the function will return OK as the SP assumes.
 }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -283,7 +283,7 @@ class manager {
                 'title' => get_string('importtour', 'tool_usertours'),
             ],
             (object) [
-                'link'  => new \moodle_url('https://archive.moodle.net/tours'),
+                'link'  => new \powereduc_url('https://archive.powereduc.net/tours'),
                 'linkproperties' => [
                         'target' => '_blank',
                     ],
@@ -624,10 +624,10 @@ class manager {
     /**
      * Get all tours matching the specified URL.
      *
-     * @param   moodle_url  $pageurl        The URL to match.
+     * @param   powereduc_url  $pageurl        The URL to match.
      * @return  array
      */
-    public static function get_matching_tours(\moodle_url $pageurl): array {
+    public static function get_matching_tours(\powereduc_url $pageurl): array {
         global $PAGE;
 
         if (\core_user::awaiting_action()) {

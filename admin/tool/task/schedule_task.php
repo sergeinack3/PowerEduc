@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -51,26 +51,26 @@ $context = context_system::instance();
 // create some kind of security problem by specifying a class that isn't a task or whatever).
 $task = \core\task\manager::get_scheduled_task($taskname);
 if (!$task) {
-    throw new moodle_exception('cannotfindinfo', 'error', new moodle_url('/admin/tool/task/scheduledtasks.php'), $taskname);
+    throw new powereduc_exception('cannotfindinfo', 'error', new powereduc_url('/admin/tool/task/scheduledtasks.php'), $taskname);
 }
 
 if (!\core\task\manager::is_runnable()) {
-    $redirecturl = new \moodle_url('/admin/settings.php', ['section' => 'systempaths']);
-    throw new moodle_exception('cannotfindthepathtothecli', 'tool_task', $redirecturl->out());
+    $redirecturl = new \powereduc_url('/admin/settings.php', ['section' => 'systempaths']);
+    throw new powereduc_exception('cannotfindthepathtothecli', 'tool_task', $redirecturl->out());
 }
 
 if (!get_config('tool_task', 'enablerunnow') || !$task->can_run()) {
-    throw new moodle_exception('nopermissions', 'error', new moodle_url('/admin/tool/task/scheduledtasks.php'),
+    throw new powereduc_exception('nopermissions', 'error', new powereduc_url('/admin/tool/task/scheduledtasks.php'),
         get_string('runnow', 'tool_task'), $task->get_name());
 }
 
 // Start output.
-$PAGE->set_url(new moodle_url('/admin/tool/task/schedule_task.php', ['task' => $taskname]));
+$PAGE->set_url(new powereduc_url('/admin/tool/task/schedule_task.php', ['task' => $taskname]));
 $PAGE->set_context($context);
 $PAGE->set_heading($SITE->fullname);
 $PAGE->set_title($task->get_name());
 
-navigation_node::override_active_url(new moodle_url('/admin/tool/task/scheduledtasks.php'));
+navigation_node::override_active_url(new powereduc_url('/admin/tool/task/scheduledtasks.php'));
 $PAGE->navbar->add(s($task->get_name()));
 
 echo $OUTPUT->header();
@@ -80,10 +80,10 @@ echo $OUTPUT->heading($task->get_name());
 // they confirm.
 if (!optional_param('confirm', 0, PARAM_INT)) {
     echo $OUTPUT->confirm(get_string('runnow_confirm', 'tool_task', $task->get_name()),
-            new single_button(new moodle_url('/admin/tool/task/schedule_task.php',
+            new single_button(new powereduc_url('/admin/tool/task/schedule_task.php',
                     ['task' => $taskname, 'confirm' => 1, 'sesskey' => sesskey()]),
             get_string('runnow', 'tool_task')),
-            new single_button(new moodle_url('/admin/tool/task/scheduledtasks.php',
+            new single_button(new powereduc_url('/admin/tool/task/scheduledtasks.php',
                     ['lastchanged' => get_class($task)]),
             get_string('cancel'), false));
     echo $OUTPUT->footer();
@@ -107,7 +107,7 @@ echo html_writer::end_tag('pre');
 $output = $PAGE->get_renderer('tool_task');
 
 // Re-run the specified task (this will output an error if it doesn't exist).
-echo $OUTPUT->single_button(new moodle_url('/admin/tool/task/schedule_task.php',
+echo $OUTPUT->single_button(new powereduc_url('/admin/tool/task/schedule_task.php',
         array('task' => $taskname, 'confirm' => 1, 'sesskey' => sesskey())),
         get_string('runagain', 'tool_task'));
 echo $output->link_back(get_class($task));

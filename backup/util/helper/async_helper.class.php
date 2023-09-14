@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -122,7 +122,7 @@ class async_helper  {
     /**
      * Get the link to the resource that is being backuped or restored.
      *
-     * @return moodle_url $url The link to the resource.
+     * @return powereduc_url $url The link to the resource.
      */
     private function get_resource_link() {
         // Get activity context only for backups.
@@ -135,7 +135,7 @@ class async_helper  {
         // Generate link based on operation type.
         if ($this->type == 'backup') {
             // For backups simply generate link to restore file area UI.
-            $url = new moodle_url('/backup/restorefile.php', array('contextid' => $context->id));
+            $url = new powereduc_url('/backup/restorefile.php', array('contextid' => $context->id));
         } else {
             // For restore generate link to the item itself.
             $url = $context->get_url();
@@ -166,7 +166,7 @@ class async_helper  {
         $messagetext = html_to_text($messagehtml);
 
         $message = new \core\message\message();
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = 'asyncbackupnotification';
         $message->userfrom          = $USER;
         $message->userto            = $this->user;
@@ -246,7 +246,7 @@ class async_helper  {
         $fs = get_file_storage();
         $file = $fs->get_file($contextid, 'backup', $filearea, 0, '/', $filename);
         $filesize = display_size ($file->get_filesize());
-        $fileurl = moodle_url::make_pluginfile_url(
+        $fileurl = powereduc_url::make_pluginfile_url(
             $file->get_contextid(),
             $file->get_component(),
             $file->get_filearea(),
@@ -265,7 +265,7 @@ class async_helper  {
         $params['filecontextid'] = $file->get_contextid();
         $params['contextid'] = $contextid;
         $params['itemid'] = $file->get_itemid();
-        $restoreurl = new moodle_url('/backup/restorefile.php', $params);
+        $restoreurl = new powereduc_url('/backup/restorefile.php', $params);
         $filesize = display_size ($file->get_filesize());
 
         $results = array(

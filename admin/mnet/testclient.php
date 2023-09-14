@@ -18,7 +18,7 @@ require_once($CFG->libdir.'/adminlib.php');
 include_once($CFG->dirroot.'/mnet/lib.php');
 
 if ($CFG->mnet_dispatcher_mode === 'off') {
-    throw new \moodle_exception('mnetdisabled', 'mnet');
+    throw new \powereduc_exception('mnetdisabled', 'mnet');
 }
 
 admin_externalpage_setup('mnettestclient');
@@ -27,7 +27,7 @@ error_reporting(DEBUG_ALL);
 
 echo $OUTPUT->header();
 if (!extension_loaded('openssl')) {
-    throw new \moodle_exception('requiresopenssl', 'mnet', '', null, true);
+    throw new \powereduc_exception('requiresopenssl', 'mnet', '', null, true);
 }
 
 // optional drilling down parameters
@@ -36,9 +36,9 @@ $servicename = optional_param('servicename', '', PARAM_SAFEDIR);
 $methodid = optional_param('method', 0, PARAM_INT);
 
 $hosts = $DB->get_records('mnet_host');
-$moodleapplicationid = $DB->get_field('mnet_application', 'id', array('name' => 'moodle'));
+$powereducapplicationid = $DB->get_field('mnet_application', 'id', array('name' => 'powereduc'));
 
-$url = new moodle_url('/admin/mnet/testclient.php');
+$url = new powereduc_url('/admin/mnet/testclient.php');
 $PAGE->set_url($url);
 
 echo $OUTPUT->heading(get_string('hostlist', 'mnet'));
@@ -46,14 +46,14 @@ foreach ($hosts as $id => $host) {
     if (empty($host->wwwroot) || $host->wwwroot == $CFG->wwwroot) {
         continue;
     }
-    $newurl = new moodle_url($url, array('hostid' => $host->id));
+    $newurl = new powereduc_url($url, array('hostid' => $host->id));
     echo '<p>' . html_writer::link($newurl, $host->wwwroot) . '</p>';
 }
 
 if (!empty($hostid) && array_key_exists($hostid, $hosts)) {
     $host = $hosts[$hostid];
-    if ($host->applicationid != $moodleapplicationid) {
-        echo $OUTPUT->notification(get_string('notmoodleapplication', 'mnet'));
+    if ($host->applicationid != $powereducapplicationid) {
+        echo $OUTPUT->notification(get_string('notpowereducapplication', 'mnet'));
     }
     $mnet_peer = new mnet_peer();
     $mnet_peer->set_wwwroot($host->wwwroot);
@@ -116,7 +116,7 @@ if (!empty($hostid) && array_key_exists($hostid, $hosts)) {
         } else {
             $servicedata['humanname'] = get_string('unknown', 'mnet');
         }
-        $newurl = new moodle_url($url, array('hostid' => $host->id, 'servicename' => $servicedata['name']));
+        $newurl = new powereduc_url($url, array('hostid' => $host->id, 'servicename' => $servicedata['name']));
         $table->data[] = array(
             $servicedata['name'],
             $servicedata['humanname'],
@@ -161,7 +161,7 @@ if (!empty($hostid) && array_key_exists($hostid, $hosts)) {
         if (isset($servicename)) {
             $params['servicename'] = $servicename;
         }
-        $newurl = new moodle_url($url, $params);
+        $newurl = new powereduc_url($url, $params);
         $table->data[] = array(
             $method,
             html_writer::link($newurl, get_string('inspect', 'mnet'))

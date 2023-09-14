@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Unit tests for core_table\local\filter\filterset.
@@ -30,7 +30,7 @@ namespace core_table\local\filter;
 use InvalidArgumentException;
 use UnexpectedValueException;
 use advanced_testcase;
-use moodle_exception;
+use powereduc_exception;
 
 /**
  * Unit tests for core_table\local\filter\filterset.
@@ -238,12 +238,12 @@ class filterset_test extends advanced_testcase {
         $filterset = $this->get_mocked_filterset(['get_optional_filters']);
         $filterset->method('get_optional_filters')
             ->will($this->returnValue([
-                'name' => '\\moodle\\this\\is\\a\\fake\\class\\name',
+                'name' => '\\powereduc\\this\\is\\a\\fake\\class\\name',
             ]));
 
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
-            "The filter class '\\moodle\\this\\is\\a\\fake\\class\\name' for filter 'name' could not be found."
+            "The filter class '\\powereduc\\this\\is\\a\\fake\\class\\name' for filter 'name' could not be found."
         );
         $filterset->add_filter_from_params('name', filter::JOINTYPE_DEFAULT, ['kevin']);
     }
@@ -339,7 +339,7 @@ class filterset_test extends advanced_testcase {
                  'species' => filter::class,
              ]);
 
-        $this->expectException(moodle_exception::Class);
+        $this->expectException(powereduc_exception::Class);
         $this->expectExceptionMessage("One or more required filters were missing (name, species)");
         $filterset->check_validity();
     }

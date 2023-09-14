@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * File containing the grade_report class
  *
  * @package   core_grades
- * @copyright 2007 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2007 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -26,7 +26,7 @@ require_once($CFG->libdir.'/gradelib.php');
 
 /**
  * An abstract class containing variables and methods used by all or most reports.
- * @copyright 2007 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2007 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 abstract class grade_report {
@@ -165,7 +165,7 @@ abstract class grade_report {
         global $CFG, $COURSE, $DB;
 
         if (empty($CFG->gradebookroles)) {
-            throw new \moodle_exception('norolesdefined', 'grades');
+            throw new \powereduc_exception('norolesdefined', 'grades');
         }
 
         $this->courseid  = $courseid;
@@ -339,7 +339,7 @@ abstract class grade_report {
 
             $defaultgradeshowactiveenrol = !empty($CFG->grade_report_showonlyactiveenrol);
             $showonlyactiveenrol = get_user_preferences('grade_report_showonlyactiveenrol', $defaultgradeshowactiveenrol);
-            $showonlyactiveenrol = $showonlyactiveenrol || !has_capability('moodle/course:viewsuspendedusers', $coursecontext);
+            $showonlyactiveenrol = $showonlyactiveenrol || !has_capability('powereduc/course:viewsuspendedusers', $coursecontext);
 
             if ($showonlyactiveenrol) {
                 $useractiveenrolments = get_enrolled_users($coursecontext, '', 0, 'u.id',  null, 0, 0, true);
@@ -374,7 +374,7 @@ abstract class grade_report {
             }
             $this->group_selector = groups_print_course_menu($this->course, $this->pbarurl, true);
 
-            if ($this->groupmode == SEPARATEGROUPS and !$this->currentgroup and !has_capability('moodle/site:accessallgroups', $this->context)) {
+            if ($this->groupmode == SEPARATEGROUPS and !$this->currentgroup and !has_capability('powereduc/site:accessallgroups', $this->context)) {
                 $this->currentgroup = -2; // means can not access any groups at all
             }
             if ($this->currentgroup) {
@@ -412,7 +412,7 @@ abstract class grade_report {
     /**
      * Returns an arrow icon inside an <a> tag, for the purpose of sorting a column.
      * @param string $direction
-     * @param moodle_url $sortlink
+     * @param powereduc_url $sortlink
      */
     protected function get_sort_arrow($direction='move', $sortlink=null) {
         global $OUTPUT;
@@ -658,7 +658,7 @@ abstract class grade_report {
         $defaultgradeshowactiveenrol = !empty($CFG->grade_report_showonlyactiveenrol);
         $showonlyactiveenrol = get_user_preferences('grade_report_showonlyactiveenrol', $defaultgradeshowactiveenrol);
         $showonlyactiveenrol = $showonlyactiveenrol ||
-            !has_capability('moodle/course:viewsuspendedusers', $this->context);
+            !has_capability('powereduc/course:viewsuspendedusers', $this->context);
         list($enrolledsql, $enrolledparams) = get_enrolled_sql($this->context, '', 0, $showonlyactiveenrol);
 
         $params = array_merge($this->groupwheresql_params, $gradebookrolesparams, $enrolledparams, $relatedctxparams);

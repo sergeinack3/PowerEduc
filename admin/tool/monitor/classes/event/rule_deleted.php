@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * The tool_monitor rule deleted event.
  *
  * @package    tool_monitor
- * @copyright  2014 Mark Nelson <markn@moodle.com>
+ * @copyright  2014 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,7 +31,7 @@ defined('POWEREDUC_INTERNAL') || die();
  *
  * @package    tool_monitor
  * @since      Moodle 2.8
- * @copyright  2014 Mark Nelson <markn@moodle.com>
+ * @copyright  2014 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class rule_deleted extends \core\event\base {
@@ -68,10 +68,10 @@ class rule_deleted extends \core\event\base {
     /**
      * Get URL related to the action
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_url() {
-        return new \moodle_url('/admin/tool/monitor/managerules.php', array('courseid' => $this->courseid));
+        return new \powereduc_url('/admin/tool/monitor/managerules.php', array('courseid' => $this->courseid));
     }
 
     public static function get_objectid_mapping() {

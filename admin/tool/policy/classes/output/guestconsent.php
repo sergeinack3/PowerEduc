@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package     tool_policy
  * @category    output
- * @copyright   2018 Sara Arjona <sara@moodle.com>
+ * @copyright   2018 Sara Arjona <sara@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,7 +27,7 @@ namespace tool_policy\output;
 
 defined('POWEREDUC_INTERNAL') || die();
 
-use moodle_url;
+use powereduc_url;
 use renderable;
 use renderer_base;
 use templatable;
@@ -37,7 +37,7 @@ use tool_policy\policy_version;
 /**
  * Renderer for the policies plugin.
  *
- * @copyright 2018 Sara Arjona <sara@moodle.com>
+ * @copyright 2018 Sara Arjona <sara@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class guestconsent implements renderable, templatable {
@@ -52,7 +52,7 @@ class guestconsent implements renderable, templatable {
         global $PAGE;
 
         $data = (object) [];
-        $data->pluginbaseurl = (new moodle_url('/admin/tool/policy'))->out(true);
+        $data->pluginbaseurl = (new powereduc_url('/admin/tool/policy'))->out(true);
         if (strpos(qualified_me(), '/tool/policy/view.php') === false) {
             // Current page is not a policy doc, so returnurl parameter will be it.
             $data->returnurl = qualified_me();

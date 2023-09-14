@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -74,7 +74,7 @@ define(['jquery', 'core/str', 'core/ajax', 'core/notification', 'core/templates'
             var stringKeys = [
                 {
                     key: 'changessaved',
-                    component: 'moodle'
+                    component: 'powereduc'
                 }, {
                     key: 'contextpurposecategorysaved',
                     component: 'tool_dataprivacy'

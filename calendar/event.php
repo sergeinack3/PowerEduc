@@ -10,13 +10,13 @@
 //                                                                         //
 // Designed by:                                                            //
 //     Avgoustos Tsinakos (tsinakos@teikav.edu.gr)                         //
-//     Jon Papaioannou (pj@moodle.org)                                     //
+//     Jon Papaioannou (pj@powereduc.org)                                     //
 //                                                                         //
 // Programming and development:                                            //
-//     Jon Papaioannou (pj@moodle.org)                                     //
+//     Jon Papaioannou (pj@powereduc.org)                                     //
 //                                                                         //
 // For bugs, suggestions, etc contact:                                     //
-//     Jon Papaioannou (pj@moodle.org)                                     //
+//     Jon Papaioannou (pj@powereduc.org)                                     //
 //                                                                         //
 // The current module was developed at the University of Macedonia         //
 // (www.uom.gr) under the funding of the Greek School Network (www.sch.gr) //
@@ -41,7 +41,7 @@
 /**
  * This file is part of the Calendar section Moodle
  *
- * @copyright 2003-2004 Jon Papaioannou (pj@moodle.org)
+ * @copyright 2003-2004 Jon Papaioannou (pj@powereduc.org)
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v2 or later
  * @package calendar
  */
@@ -75,7 +75,7 @@ if (!empty($day) && !empty($month) && !empty($year)) {
     $time = time();
 }
 
-$url = new moodle_url('/calendar/event.php', array('action' => $action));
+$url = new powereduc_url('/calendar/event.php', array('action' => $action));
 
 if ($eventid != 0) {
     $url->param('id', $eventid);
@@ -100,7 +100,7 @@ if ($courseid != SITEID && !empty($courseid)) {
 require_login($course, false);
 
 if ($action === 'delete' && $eventid > 0) {
-    $deleteurl = new moodle_url('/calendar/delete.php', array('id'=>$eventid));
+    $deleteurl = new powereduc_url('/calendar/delete.php', array('id'=>$eventid));
     if ($courseid > 0) {
         $deleteurl->param('course', $courseid);
     }
@@ -115,7 +115,7 @@ if ($eventid !== 0) {
     $title = get_string('editevent', 'calendar');
     $event = calendar_event::load($eventid);
     if (!calendar_edit_event_allowed($event, true)) {
-        throw new \moodle_exception('nopermissions');
+        throw new \powereduc_exception('nopermissions');
     }
     $event->action = $action;
     $event->course = $courseid;
@@ -123,7 +123,7 @@ if ($eventid !== 0) {
     $event->count_repeats();
 
     if (!calendar_add_event_allowed($event)) {
-        throw new \moodle_exception('nopermissions');
+        throw new \powereduc_exception('nopermissions');
     }
 
     // Check to see if this event is part of a subscription or import.
@@ -151,7 +151,7 @@ if ($eventid !== 0) {
     $event->timestart = $time;
     $event = new calendar_event($event);
     if (!calendar_add_event_allowed($event)) {
-        throw new \moodle_exception('nopermissions');
+        throw new \powereduc_exception('nopermissions');
     }
 }
 
@@ -176,7 +176,7 @@ if ($data) {
         'view' => 'day',
         'time' => $event->timestart,
     );
-    $eventurl = new moodle_url('/calendar/view.php', $params);
+    $eventurl = new powereduc_url('/calendar/view.php', $params);
     if (!empty($event->courseid) && $event->courseid != SITEID) {
         $eventurl->param('course', $event->courseid);
     }
@@ -184,7 +184,7 @@ if ($data) {
     redirect($eventurl);
 }
 
-$viewcalendarurl = new moodle_url(CALENDAR_URL.'view.php', $PAGE->url->params());
+$viewcalendarurl = new powereduc_url(CALENDAR_URL.'view.php', $PAGE->url->params());
 $viewcalendarurl->remove_params(array('id', 'action'));
 $viewcalendarurl->param('view', 'upcoming');
 $strcalendar = get_string('calendar', 'calendar');

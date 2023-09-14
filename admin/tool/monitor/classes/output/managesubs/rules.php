@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -57,11 +57,11 @@ class rules extends \table_sql implements \renderable {
      * Sets up the table_log parameters.
      *
      * @param string $uniqueid unique id of form.
-     * @param \moodle_url $url url where this table is displayed.
+     * @param \powereduc_url $url url where this table is displayed.
      * @param int $courseid course id.
      * @param int $perpage Number of rules to display per page.
      */
-    public function __construct($uniqueid, \moodle_url $url, $courseid = 0, $perpage = 100) {
+    public function __construct($uniqueid, \powereduc_url $url, $courseid = 0, $perpage = 100) {
         parent::__construct($uniqueid);
 
         $this->set_attribute('class', 'toolmonitor subscriberules generaltable generalbox');
@@ -122,7 +122,7 @@ class rules extends \table_sql implements \renderable {
         if (empty($courseid)) {
             return $coursename;
         } else {
-            return \html_writer::link(new \moodle_url('/course/view.php', array('id' => $this->courseid)), $coursename);
+            return \html_writer::link(new \powereduc_url('/course/view.php', array('id' => $this->courseid)), $coursename);
         }
     }
 
@@ -171,8 +171,8 @@ class rules extends \table_sql implements \renderable {
         if ($options instanceof \single_select) {
             $options->set_label($text, array('class' => 'accesshide'));
             return $OUTPUT->render($options);
-        } else if ($options instanceof \moodle_url) {
-            // A \moodle_url to subscribe.
+        } else if ($options instanceof \powereduc_url) {
+            // A \powereduc_url to subscribe.
             $icon = $OUTPUT->pix_icon('t/add', $text);
             $link = new \action_link($options, $icon);
             return $OUTPUT->render($link);
@@ -219,7 +219,7 @@ class rules extends \table_sql implements \renderable {
             $selected = null;
             $nothing = array('choosedots');
         }
-        $url = new \moodle_url('/admin/tool/monitor/index.php');
+        $url = new \powereduc_url('/admin/tool/monitor/index.php');
         $select = new \single_select($url, 'courseid', $options, $selected, $nothing);
         $select->set_label(get_string('selectacourse', 'tool_monitor'));
         return $select;

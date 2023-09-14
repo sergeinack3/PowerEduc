@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@ class cronrunning extends check {
         $this->name = get_string('checkcronrunning', 'tool_task');
         if (empty($CFG->cronclionly)) {
             $this->actionlink = new \action_link(
-                new \moodle_url('/admin/cron.php'),
+                new \powereduc_url('/admin/cron.php'),
                 get_string('cron', 'admin'));
         }
     }
@@ -83,7 +83,7 @@ class cronrunning extends check {
 
             if (empty($lastcron)) {
                 if (empty($CFG->cronclionly)) {
-                    $url = new \moodle_url('/admin/cron.php');
+                    $url = new \powereduc_url('/admin/cron.php');
                     $summary = get_string('cronwarningneverweb', 'admin', [
                         'url' => $url->out(),
                         'expected' => $formatexpected,
@@ -94,7 +94,7 @@ class cronrunning extends check {
                     ]);
                 }
             } else if (empty($CFG->cronclionly)) {
-                $url = new \moodle_url('/admin/cron.php');
+                $url = new \powereduc_url('/admin/cron.php');
                 $summary = get_string('cronwarning', 'admin', [
                     'url' => $url->out(),
                     'actual'   => $formatdelta,

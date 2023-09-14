@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,12 +33,12 @@ require_login();
 
 // Check capabilities but do not call require_login($course) - the user does not have to be enrolled.
 $context = context_course::instance($course->id);
-if (!$course->visible and !has_capability('moodle/course:viewhiddencourses', $context)) {
-    throw new \moodle_exception('coursehidden', '', $CFG->wwwroot .'/');
+if (!$course->visible and !has_capability('powereduc/course:viewhiddencourses', $context)) {
+    throw new \powereduc_exception('coursehidden', '', $CFG->wwwroot .'/');
 }
-require_capability('moodle/course:tag', $context);
+require_capability('powereduc/course:tag', $context);
 if (!core_tag_tag::is_enabled('core', 'course')) {
-    throw new \moodle_exception('tagsaredisabled', 'tag');
+    throw new \powereduc_exception('tagsaredisabled', 'tag');
 }
 
 $PAGE->set_course($course);
@@ -51,7 +51,7 @@ $form = new coursetags_form();
 $data = array('id' => $course->id, 'tags' => core_tag_tag::get_item_tags_array('core', 'course', $course->id));
 $form->set_data($data);
 
-$redirecturl = $returnurl ? new moodle_url($returnurl) : course_get_url($course);
+$redirecturl = $returnurl ? new powereduc_url($returnurl) : course_get_url($course);
 if ($form->is_cancelled()) {
     redirect($redirecturl);
 } else if ($data = $form->get_data()) {

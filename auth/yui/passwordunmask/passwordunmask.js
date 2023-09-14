@@ -1,4 +1,4 @@
-YUI.add('moodle-auth-passwordunmask', function(Y) {
+YUI.add('powereduc-auth-passwordunmask', function(Y) {
     var PASSWORDUNMASK = function() {
         PASSWORDUNMASK.superclass.constructor.apply(this, arguments);
     }

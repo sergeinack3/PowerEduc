@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -36,17 +36,17 @@ require_once("$CFG->dirroot/group/lib.php");
 $id      = required_param('id', PARAM_INT); // course id
 $action  = required_param('action', PARAM_ALPHANUMEXT);
 
-$PAGE->set_url(new moodle_url('/enrol/ajax.php', array('id'=>$id, 'action'=>$action)));
+$PAGE->set_url(new powereduc_url('/enrol/ajax.php', array('id'=>$id, 'action'=>$action)));
 
 $course = $DB->get_record('course', array('id'=>$id), '*', MUST_EXIST);
 $context = context_course::instance($course->id, MUST_EXIST);
 
 if ($course->id == SITEID) {
-    throw new moodle_exception('invalidcourse');
+    throw new powereduc_exception('invalidcourse');
 }
 
 require_login($course);
-require_capability('moodle/course:enrolreview', $context);
+require_capability('powereduc/course:enrolreview', $context);
 require_sesskey();
 
 echo $OUTPUT->header(); // send headers
@@ -71,7 +71,7 @@ switch ($action) {
     case 'unassign':
         $role = required_param('role', PARAM_INT);
         $user = required_param('user', PARAM_INT);
-        if (!has_capability('moodle/role:assign', $manager->get_context()) || !$manager->unassign_role_from_user($user, $role)) {
+        if (!has_capability('powereduc/role:assign', $manager->get_context()) || !$manager->unassign_role_from_user($user, $role)) {
             throw new enrol_ajax_exception('unassignnotpermitted');
         }
         break;
@@ -81,7 +81,7 @@ switch ($action) {
         if (!array_key_exists($roleid, $manager->get_assignable_roles())) {
             throw new enrol_ajax_exception('invalidrole');
         }
-        if (!has_capability('moodle/role:assign', $manager->get_context()) || !$manager->assign_role_to_user($roleid, $user->id)) {
+        if (!has_capability('powereduc/role:assign', $manager->get_context()) || !$manager->assign_role_to_user($roleid, $user->id)) {
             throw new enrol_ajax_exception('assignnotpermitted');
         }
         $outcome->response->roleid = $roleid;
@@ -98,7 +98,7 @@ switch ($action) {
         $extrafields = \core_user\fields::get_identity_fields($context, false);
         $useroptions = array();
         // User is not enrolled, either link to site profile or do not link at all.
-        if (has_capability('moodle/user:viewdetails', context_system::instance())) {
+        if (has_capability('powereduc/user:viewdetails', context_system::instance())) {
             $useroptions['courseid'] = SITEID;
         } else {
             $useroptions['link'] = false;

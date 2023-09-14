@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Field controller abstract class
  *
  * @package   core_customfield
- * @copyright 2018 Toni Barbera <toni@moodle.com>
+ * @copyright 2018 Toni Barbera <toni@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,7 +36,7 @@ defined('POWEREDUC_INTERNAL') || die;
  * \{pluginname}\field_controller extends \core_customfield\field_controller
  *
  * @package core_customfield
- * @copyright 2018 Toni Barbera <toni@moodle.com>
+ * @copyright 2018 Toni Barbera <toni@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 abstract class field_controller {
@@ -79,7 +79,7 @@ abstract class field_controller {
      * @param category_controller|null $category
      * @return field_controller will return the instance of the class from the customfield element plugin
      * @throws \coding_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public static function create(int $id, \stdClass $record = null, category_controller $category = null) : field_controller {
         global $DB;
@@ -90,7 +90,7 @@ abstract class field_controller {
         }
         if ($id) {
             if (!$record = $DB->get_record(field::TABLE, array('id' => $id), '*', IGNORE_MISSING)) {
-                throw new \moodle_exception('fieldnotfound', 'core_customfield');
+                throw new \powereduc_exception('fieldnotfound', 'core_customfield');
             }
         }
 
@@ -115,7 +115,7 @@ abstract class field_controller {
 
         $customfieldtype = "\\customfield_{$type}\\field_controller";
         if (!class_exists($customfieldtype) || !is_subclass_of($customfieldtype, self::class)) {
-            throw new \moodle_exception('errorfieldtypenotfound', 'core_customfield', '', s($type));
+            throw new \powereduc_exception('errorfieldtypenotfound', 'core_customfield', '', s($type));
         }
         $fieldcontroller = new $customfieldtype(0, $record);
         $fieldcontroller->category = $category;

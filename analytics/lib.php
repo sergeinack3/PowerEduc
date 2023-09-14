@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - https://moodle.org/
+// This file is part of Moodle - https://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * The interface library between the core and the subsystem.
  *
  * @package     core_analytics
- * @copyright   2019 David Mudrák <david@moodle.com>
+ * @copyright   2019 David Mudrák <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,7 +36,7 @@ function core_analytics_inplace_editable($itemtype, $itemid, $newvalue) {
 
     if ($itemtype === 'modelname') {
         \external_api::validate_context(context_system::instance());
-        require_capability('moodle/analytics:managemodels', \context_system::instance());
+        require_capability('powereduc/analytics:managemodels', \context_system::instance());
 
         $model = new \core_analytics\model($itemid);
         $model->rename(clean_param($newvalue, PARAM_NOTAGS));

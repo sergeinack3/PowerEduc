@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Tiny text editor integration - Language Producer.
@@ -24,7 +24,7 @@
 
 namespace editor_tiny;
 
-// Disable moodle specific debug messages and any errors in output,
+// Disable powereduc specific debug messages and any errors in output,
 // comment out when debugging or better look into error log!
 define('NO_DEBUG_DISPLAY', true);
 
@@ -47,7 +47,7 @@ class lang {
     /** @var int The revision requested */
     protected $rev;
 
-    /** @var bool Whether Moodle is fully loaded or not */
+    /** @var bool Whether PowerEduc is fully loaded or not */
     protected $fullyloaded = false;
 
     /**
@@ -112,16 +112,16 @@ class lang {
     }
 
     /**
-     * Load the full Moodle Framework.
+     * Load the full PowerEduc Framework.
      */
-    protected function load_full_moodle(): void {
+    protected function load_full_powereduc(): void {
         global $CFG, $DB, $SESSION, $OUTPUT, $PAGE;
 
-        if ($this->is_full_moodle_loaded()) {
+        if ($this->is_full_powereduc_loaded()) {
             return;
         }
 
-        // Ok, now we need to start normal moodle script, we need to load all libs and $DB.
+        // Ok, now we need to start normal powereduc script, we need to load all libs and $DB.
         define('ABORT_AFTER_CONFIG_CANCEL', true);
 
         // Session not used here.
@@ -135,11 +135,11 @@ class lang {
     }
 
     /**
-     * Check whether Moodle is fully loaded.
+     * Check whether PowerEduc is fully loaded.
      *
      * @return bool
      */
-    public function is_full_moodle_loaded(): bool {
+    public function is_full_powereduc_loaded(): bool {
         return $this->fullyloaded;
     }
 
@@ -149,8 +149,8 @@ class lang {
      * @return string[]
      */
     protected function load_language_pack(): array {
-        // We need to load the full moodle API to use the string manager.
-        $this->load_full_moodle();
+        // We need to load the full powereduc API to use the string manager.
+        $this->load_full_powereduc();
 
         // We maintain a list of string identifier to original TinyMCE string.
         // TinyMCE uses English language strings to perform translations.
@@ -164,7 +164,7 @@ class lang {
             $this->send_not_found("Failed to load strings from tinystrings.json");
         }
 
-        // Load all strings for the TinyMCE Editor which have a prefix of `tiny:` from the Moodle String Manager.
+        // Load all strings for the TinyMCE Editor which have a prefix of `tiny:` from the PowerEduc String Manager.
         $stringmanager = get_string_manager();
         $translatedvalues = array_filter(
             $stringmanager->load_component_strings('editor_tiny', $this->lang),
@@ -175,7 +175,7 @@ class lang {
         );
 
         // We will associate the _original_ TinyMCE string to its translation, but only where it is different.
-        // Where the original TinyMCE string matches the Moodle translation of it, we do not supply the string.
+        // Where the original TinyMCE string matches the PowerEduc translation of it, we do not supply the string.
         $strings = [];
         foreach ($stringlist as $key => $value) {
             if (array_key_exists($key, $translatedvalues)) {
@@ -278,7 +278,7 @@ class lang {
     protected function send_cached(): void {
         $path = $this->candidatefile;
 
-        // 90 days only - based on Moodle point release cadence being every 3 months.
+        // 90 days only - based on PowerEduc point release cadence being every 3 months.
         $lifetime = 60 * 60 * 24 * 90;
 
         header('Etag: "' . $this->get_etag() . '"');
@@ -320,7 +320,7 @@ class lang {
      * @param int $lastmodified
      */
     protected function send_unmodified_headers($lastmodified): void {
-        // 90 days only - based on Moodle point release cadence being every 3 months.
+        // 90 days only - based on PowerEduc point release cadence being every 3 months.
         $lifetime = 60 * 60 * 24 * 90;
         header('HTTP/1.1 304 Not Modified');
         header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $lifetime) . ' GMT');

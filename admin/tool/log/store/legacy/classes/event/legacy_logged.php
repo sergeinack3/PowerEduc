@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -48,6 +48,6 @@ class legacy_logged extends \core\event\base {
         if (!$url) {
             return null;
         }
-        return new \moodle_url($url);
+        return new \powereduc_url($url);
     }
 }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ use tool_policy\test\helper;
  *
  * @package     tool_policy
  * @category    test
- * @copyright 2018 David Mudrak <david@moodle.com>
+ * @copyright 2018 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class sitepolicy_handler_test extends \advanced_testcase {
@@ -50,7 +50,7 @@ class sitepolicy_handler_test extends \advanced_testcase {
         // URL only when there is actually some policy to show.
         $policy2 = helper::add_policy(['audience' => policy_version::AUDIENCE_LOGGEDIN])->to_record();
         api::make_current($policy2->id);
-        $this->assertInstanceOf('moodle_url', handler::get_redirect_url());
+        $this->assertInstanceOf('powereduc_url', handler::get_redirect_url());
     }
 
     /**
@@ -69,14 +69,14 @@ class sitepolicy_handler_test extends \advanced_testcase {
 
         // Policy exists for guests only.
         $this->assertNull(handler::get_embed_url());
-        $this->assertInstanceOf('moodle_url', handler::get_embed_url(true));
+        $this->assertInstanceOf('powereduc_url', handler::get_embed_url(true));
 
         $policy2 = helper::add_policy(['audience' => policy_version::AUDIENCE_LOGGEDIN])->to_record();
         api::make_current($policy2->id);
 
         // Some policy exists for all users.
-        $this->assertInstanceOf('moodle_url', handler::get_embed_url());
-        $this->assertInstanceOf('moodle_url', handler::get_embed_url(true));
+        $this->assertInstanceOf('powereduc_url', handler::get_embed_url());
+        $this->assertInstanceOf('powereduc_url', handler::get_embed_url(true));
     }
 
     /**

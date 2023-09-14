@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -148,7 +148,7 @@ class auth_plugin_ldap extends auth_plugin_base {
      */
     function user_login($username, $password) {
         if (! function_exists('ldap_bind')) {
-            throw new \moodle_exception('auth_ldapnotinstalled', 'auth_ldap');
+            throw new \powereduc_exception('auth_ldapnotinstalled', 'auth_ldap');
             return false;
         }
 
@@ -229,7 +229,7 @@ class auth_plugin_ldap extends auth_plugin_base {
      * Reads user information from ldap and returns it in array()
      *
      * Function should return all information available. If you are saving
-     * this information to moodle user-table you should honor syncronization flags
+     * this information to powereduc user-table you should honor syncronization flags
      *
      * @param string $username username
      *
@@ -262,7 +262,7 @@ class auth_plugin_ldap extends auth_plugin_base {
             return false; // error!
         }
 
-        $user_entry = ldap_get_entries_moodle($ldapconnection, $user_info_result);
+        $user_entry = ldap_get_entries_powereduc($ldapconnection, $user_info_result);
         if (empty($user_entry)) {
             $this->ldap_close();
             return false; // entry not found
@@ -450,12 +450,12 @@ class auth_plugin_ldap extends auth_plugin_base {
                 // strings (UCS-2 Little Endian format) and surrounded with
                 // double quotes. See http://support.microsoft.com/?kbid=269190
                 if (!function_exists('mb_convert_encoding')) {
-                    throw new \moodle_exception('auth_ldap_no_mbstring', 'auth_ldap');
+                    throw new \powereduc_exception('auth_ldap_no_mbstring', 'auth_ldap');
                 }
 
                 // Check for invalid sAMAccountName characters.
                 if (preg_match('#[/\\[\]:;|=,+*?<>@"]#', $extusername)) {
-                    throw new \moodle_exception ('auth_ldap_ad_invalidchars', 'auth_ldap');
+                    throw new \powereduc_exception ('auth_ldap_ad_invalidchars', 'auth_ldap');
                 }
 
                 // First create the user account, and mark it as disabled.
@@ -465,7 +465,7 @@ class auth_plugin_ldap extends auth_plugin_base {
                                                  AUTH_AD_ACCOUNTDISABLE;
                 $userdn = 'cn='.ldap_addslashes($extusername).','.$this->config->create_context;
                 if (!ldap_add($ldapconnection, $userdn, $newuser)) {
-                    throw new \moodle_exception('auth_ldap_ad_create_req', 'auth_ldap');
+                    throw new \powereduc_exception('auth_ldap_ad_create_req', 'auth_ldap');
                 }
 
                 // Now set the password
@@ -475,19 +475,19 @@ class auth_plugin_ldap extends auth_plugin_base {
                 if(!ldap_modify($ldapconnection, $userdn, $newuser)) {
                     // Something went wrong: delete the user account and error out
                     ldap_delete ($ldapconnection, $userdn);
-                    throw new \moodle_exception('auth_ldap_ad_create_req', 'auth_ldap');
+                    throw new \powereduc_exception('auth_ldap_ad_create_req', 'auth_ldap');
                 }
                 $uadd = true;
                 break;
             default:
-               throw new \moodle_exception('auth_ldap_unsupportedusertype', 'auth_ldap', '', $this->config->user_type_name);
+               throw new \powereduc_exception('auth_ldap_unsupportedusertype', 'auth_ldap', '', $this->config->user_type_name);
         }
         $this->ldap_close();
         return $uadd;
     }
 
     /**
-     * Returns true if plugin allows resetting of password from moodle.
+     * Returns true if plugin allows resetting of password from powereduc.
      *
      * @return bool
      */
@@ -528,14 +528,14 @@ class auth_plugin_ldap extends auth_plugin_base {
         require_once($CFG->dirroot.'/user/lib.php');
 
         if ($this->user_exists($user->username)) {
-            throw new \moodle_exception('auth_ldap_user_exists', 'auth_ldap');
+            throw new \powereduc_exception('auth_ldap_user_exists', 'auth_ldap');
         }
 
         $plainslashedpassword = $user->password;
         unset($user->password);
 
         if (! $this->user_create($user, $plainslashedpassword)) {
-            throw new \moodle_exception('auth_ldap_create_error', 'auth_ldap');
+            throw new \powereduc_exception('auth_ldap_create_error', 'auth_ldap');
         }
 
         $user->id = user_create_user($user, false, false);
@@ -558,7 +558,7 @@ class auth_plugin_ldap extends auth_plugin_base {
         \core\event\user_created::create_from_userid($user->id)->trigger();
 
         if (! send_confirmation_email($user)) {
-            throw new \moodle_exception('noemail', 'auth_ldap');
+            throw new \powereduc_exception('noemail', 'auth_ldap');
         }
 
         if ($notify) {
@@ -633,7 +633,7 @@ class auth_plugin_ldap extends auth_plugin_base {
         $search_attribs = array($this->config->expireattr);
         $sr = ldap_read($ldapconnection, $user_dn, '(objectClass=*)', $search_attribs);
         if ($sr)  {
-            $info = ldap_get_entries_moodle($ldapconnection, $sr);
+            $info = ldap_get_entries_powereduc($ldapconnection, $sr);
             if (!empty ($info)) {
                 $info = $info[0];
                 if (isset($info[$this->config->expireattr][0])) {
@@ -656,7 +656,7 @@ class auth_plugin_ldap extends auth_plugin_base {
     }
 
     /**
-     * Syncronizes user fron external LDAP server to moodle user table
+     * Syncronizes user fron external LDAP server to powereduc user table
      *
      * Sync is now using username attribute.
      *
@@ -1013,7 +1013,7 @@ class auth_plugin_ldap extends auth_plugin_base {
                                                  & (~AUTH_AD_ACCOUNTDISABLE);
                 break;
             default:
-                throw new \moodle_exception('user_activatenotsupportusertype', 'auth_ldap', '', $this->config->user_type_name);
+                throw new \powereduc_exception('user_activatenotsupportusertype', 'auth_ldap', '', $this->config->user_type_name);
         }
         $result = ldap_modify($ldapconnection, $userdn, $newinfo);
         $this->ldap_close();
@@ -1160,7 +1160,7 @@ class auth_plugin_ldap extends auth_plugin_base {
         $success = true;
         $user_info_result = ldap_read($ldapconnection, $user_dn, '(objectClass=*)', $search_attribs);
         if ($user_info_result) {
-            $user_entry = ldap_get_entries_moodle($ldapconnection, $user_info_result);
+            $user_entry = ldap_get_entries_powereduc($ldapconnection, $user_info_result);
             if (empty($user_entry)) {
                 $attribs = join (', ', $search_attribs);
                 error_log($this->errorlogtag.get_string('updateusernotfound', 'auth_ldap',
@@ -1353,7 +1353,7 @@ class auth_plugin_ldap extends auth_plugin_base {
                 $search_attribs = array($this->config->expireattr, 'passwordExpirationInterval', 'loginGraceLimit');
                 $sr = ldap_read($ldapconnection, $user_dn, '(objectClass=*)', $search_attribs);
                 if ($sr) {
-                    $entry = ldap_get_entries_moodle($ldapconnection, $sr);
+                    $entry = ldap_get_entries_powereduc($ldapconnection, $sr);
                     $info = $entry[0];
                     $newattrs = array();
                     if (!empty($info[$this->config->expireattr][0])) {
@@ -1448,7 +1448,7 @@ class auth_plugin_ldap extends auth_plugin_base {
                 $result = $this->ldap_get_ad_pwdexpire($time, $ldapconnection, $user_dn);
                 break;
             default:
-                throw new \moodle_exception('auth_ldap_usertypeundefined', 'auth_ldap');
+                throw new \powereduc_exception('auth_ldap_usertypeundefined', 'auth_ldap');
         }
         return $result;
     }
@@ -1469,20 +1469,20 @@ class auth_plugin_ldap extends auth_plugin_base {
                 $result = $time ; // Already in correct format
                 break;
             default:
-                throw new \moodle_exception('auth_ldap_usertypeundefined2', 'auth_ldap');
+                throw new \powereduc_exception('auth_ldap_usertypeundefined2', 'auth_ldap');
         }
         return $result;
 
     }
 
     /**
-     * Returns user attribute mappings between moodle and LDAP
+     * Returns user attribute mappings between powereduc and LDAP
      *
      * @return array
      */
 
     function ldap_attributes () {
-        $moodleattributes = array();
+        $powereducattributes = array();
         // If we have custom fields then merge them with user fields.
         $customfields = $this->get_custom_user_profile_fields();
         if (!empty($customfields) && !empty($this->userfields)) {
@@ -1493,15 +1493,15 @@ class auth_plugin_ldap extends auth_plugin_base {
 
         foreach ($userfields as $field) {
             if (!empty($this->config->{"field_map_$field"})) {
-                $moodleattributes[$field] = core_text::strtolower(trim($this->config->{"field_map_$field"}));
-                if (preg_match('/,/', $moodleattributes[$field])) {
-                    $moodleattributes[$field] = explode(',', $moodleattributes[$field]); // split ?
+                $powereducattributes[$field] = core_text::strtolower(trim($this->config->{"field_map_$field"}));
+                if (preg_match('/,/', $powereducattributes[$field])) {
+                    $powereducattributes[$field] = explode(',', $powereducattributes[$field]); // split ?
                 }
             }
         }
-        $moodleattributes['username'] = core_text::strtolower(trim($this->config->user_attribute));
-        $moodleattributes['suspended'] = core_text::strtolower(trim($this->config->suspended_attribute));
-        return $moodleattributes;
+        $powereducattributes['username'] = core_text::strtolower(trim($this->config->user_attribute));
+        $powereducattributes['suspended'] = core_text::strtolower(trim($this->config->suspended_attribute));
+        return $powereducattributes;
     }
 
     /**
@@ -1561,7 +1561,7 @@ class auth_plugin_ldap extends auth_plugin_base {
                         $ldap_cookie = $controls[LDAP_CONTROL_PAGEDRESULTS]['value']['cookie'];
                     }
                 }
-                $users = ldap_get_entries_moodle($ldapconnection, $ldap_result);
+                $users = ldap_get_entries_powereduc($ldapconnection, $ldap_result);
                 // Add found users to list.
                 for ($i = 0; $i < count($users); $i++) {
                     $extuser = core_text::convert($users[$i][$this->config->user_attribute][0],
@@ -1578,7 +1578,7 @@ class auth_plugin_ldap extends auth_plugin_base {
     }
 
     /**
-     * Indicates if password hashes should be stored in local moodle database.
+     * Indicates if password hashes should be stored in local powereduc database.
      *
      * @return bool true means flag 'not_cached' stored instead of password hash
      */
@@ -1609,12 +1609,12 @@ class auth_plugin_ldap extends auth_plugin_base {
      * Returns the URL for changing the user's password, or empty if the default can
      * be used.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
     function change_password_url() {
         if (empty($this->config->stdchangepassword)) {
             if (!empty($this->config->changepasswordurl)) {
-                return new moodle_url($this->config->changepasswordurl);
+                return new powereduc_url($this->config->changepasswordurl);
             } else {
                 return null;
             }
@@ -1844,7 +1844,7 @@ class auth_plugin_ldap extends auth_plugin_base {
             return 0;
         }
 
-        $entry = ldap_get_entries_moodle($ldapconn, $sr);
+        $entry = ldap_get_entries_powereduc($ldapconn, $sr);
         $info = $entry[0];
         $useraccountcontrol = $info['useraccountcontrol'][0];
         if ($useraccountcontrol & UF_DONT_EXPIRE_PASSWD) {
@@ -1889,17 +1889,17 @@ class auth_plugin_ldap extends auth_plugin_base {
             return 0;
         }
 
-        $entry = ldap_get_entries_moodle($ldapconn, $sr);
+        $entry = ldap_get_entries_powereduc($ldapconn, $sr);
         $info = $entry[0];
         $domaindn = $info['defaultnamingcontext'][0];
 
         $sr = ldap_read ($ldapconn, $domaindn, '(objectClass=*)',
                          array('maxPwdAge'));
-        $entry = ldap_get_entries_moodle($ldapconn, $sr);
+        $entry = ldap_get_entries_powereduc($ldapconn, $sr);
         $info = $entry[0];
         $maxpwdage = $info['maxpwdage'][0];
         if ($sr = ldap_read($ldapconn, $user_dn, '(objectClass=*)', array('msDS-ResultantPSO'))) {
-            if ($entry = ldap_get_entries_moodle($ldapconn, $sr)) {
+            if ($entry = ldap_get_entries_powereduc($ldapconn, $sr)) {
                 $info = $entry[0];
                 $userpso = $info['msds-resultantpso'][0];
 
@@ -1907,7 +1907,7 @@ class auth_plugin_ldap extends auth_plugin_base {
                 // Grab the new maxpwdage from the msDS-MaximumPasswordAge attribute of the PSO.
                 if (!empty($userpso)) {
                     $sr = ldap_read($ldapconn, $userpso, '(objectClass=*)', array('msDS-MaximumPasswordAge'));
-                    if ($entry = ldap_get_entries_moodle($ldapconn, $sr)) {
+                    if ($entry = ldap_get_entries_powereduc($ldapconn, $sr)) {
                         $info = $entry[0];
                         // Default value of msds-maximumpasswordage is 42 and is always set.
                         $maxpwdage = $info['msds-maximumpasswordage'][0];
@@ -1970,7 +1970,7 @@ class auth_plugin_ldap extends auth_plugin_base {
 
     /**
      * Connect to the LDAP server, using the plugin configured
-     * settings. It's actually a wrapper around ldap_connect_moodle()
+     * settings. It's actually a wrapper around ldap_connect_powereduc()
      *
      * @return resource A valid LDAP connection (or dies if it can't connect)
      */
@@ -1985,7 +1985,7 @@ class auth_plugin_ldap extends auth_plugin_base {
             return $this->ldapconnection;
         }
 
-        if($ldapconnection = ldap_connect_moodle($this->config->host_url, $this->config->ldap_version,
+        if($ldapconnection = ldap_connect_powereduc($this->config->host_url, $this->config->ldap_version,
                                                  $this->config->user_type, $this->config->bind_dn,
                                                  $this->config->bind_pw, $this->config->opt_deref,
                                                  $debuginfo, $this->config->start_tls)) {
@@ -1994,7 +1994,7 @@ class auth_plugin_ldap extends auth_plugin_base {
             return $ldapconnection;
         }
 
-        throw new \moodle_exception('auth_ldap_noconnect_all', 'auth_ldap', '', $debuginfo);
+        throw new \powereduc_exception('auth_ldap_noconnect_all', 'auth_ldap', '', $debuginfo);
     }
 
     /**

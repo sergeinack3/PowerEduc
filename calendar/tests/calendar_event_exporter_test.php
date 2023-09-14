@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ require_once(__DIR__ . '/helpers.php');
  * Calendar event exporter testcase.
  *
  * @package core_calendar
- * @copyright 2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright 2017 Ryan Wyllie <ryan@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class calendar_event_exporter_test extends \advanced_testcase {
@@ -170,7 +170,7 @@ class calendar_event_exporter_test extends \advanced_testcase {
             'context' => $context,
             'course' => $course,
             'moduleinstance' => null,
-            'daylink' => new \moodle_url(''),
+            'daylink' => new \powereduc_url(''),
             'type' => type_factory::get_calendar_instance(),
             'today' => $now
         ]);
@@ -209,7 +209,7 @@ class calendar_event_exporter_test extends \advanced_testcase {
             'context' => $context,
             'course' => null,
             'moduleinstance' => null,
-            'daylink' => new \moodle_url(''),
+            'daylink' => new \powereduc_url(''),
             'type' => type_factory::get_calendar_instance(),
             'today' => $now
         ]);
@@ -251,7 +251,7 @@ class calendar_event_exporter_test extends \advanced_testcase {
             'context' => $coursecontext,
             'course' => $course,
             'moduleinstance' => null,
-            'daylink' => new \moodle_url(''),
+            'daylink' => new \powereduc_url(''),
             'type' => type_factory::get_calendar_instance(),
             'today' => $now
         ]);
@@ -289,7 +289,7 @@ class calendar_event_exporter_test extends \advanced_testcase {
             'context' => $coursecontext,
             'course' => $course,
             'moduleinstance' => null,
-            'daylink' => new \moodle_url(''),
+            'daylink' => new \powereduc_url(''),
             'type' => type_factory::get_calendar_instance(),
             'today' => $now
         ]);

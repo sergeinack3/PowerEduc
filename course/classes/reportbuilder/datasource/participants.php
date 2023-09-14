@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ use core_reportbuilder\local\helpers\database;
  * Course participants datasource
  *
  * @package     core_course
- * @copyright   2022 David Matamoros <davidmc@moodle.com>
+ * @copyright   2022 David Matamoros <davidmc@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class participants extends datasource {

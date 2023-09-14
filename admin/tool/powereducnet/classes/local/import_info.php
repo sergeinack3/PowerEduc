@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,11 +16,11 @@
 /**
  * Contains the import_info class.
  *
- * @package tool_moodlenet
+ * @package tool_powereducnet
  * @copyright 2020 Jake Dallimore <jrhdallimore@gmail.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace tool_moodlenet\local;
+namespace tool_powereducnet\local;
 
 /**
  * Class import_info, describing objects which represent a resource being imported by a user.
@@ -105,7 +105,7 @@ class import_info {
         // This currently lives in the session, so we don't need userid.
         // It might be useful if we ever move to another storage mechanism however, where we would need it.
         global $SESSION;
-        return isset($SESSION->moodlenetimports[$id]) ? unserialize($SESSION->moodlenetimports[$id]) : null;
+        return isset($SESSION->powereducnetimports[$id]) ? unserialize($SESSION->powereducnetimports[$id]) : null;
     }
 
     /**
@@ -113,7 +113,7 @@ class import_info {
      */
     public function save(): void {
         global $SESSION;
-        $SESSION->moodlenetimports[$this->id] = serialize($this);
+        $SESSION->powereducnetimports[$this->id] = serialize($this);
     }
 
     /**
@@ -121,6 +121,6 @@ class import_info {
      */
     public function purge(): void {
         global $SESSION;
-        unset($SESSION->moodlenetimports[$this->id]);
+        unset($SESSION->powereducnetimports[$this->id]);
     }
 }

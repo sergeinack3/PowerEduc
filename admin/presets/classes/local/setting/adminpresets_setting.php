@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 namespace core_adminpresets\local\setting;
 
 use admin_setting;
-use moodle_exception;
+use powereduc_exception;
 use stdClass;
 
 /**
@@ -207,7 +207,7 @@ class adminpresets_setting {
      * @param mixed $value Setting value to store.
      * @return int|false config_log inserted id or false whenever the new value is the same as old value.
      * @throws dml_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function save_value($name = false, $value = null) {
         // Object values if no arguments.
@@ -260,7 +260,7 @@ class adminpresets_setting {
 
         // Getting the inserted config_log id.
         if (!$id = $DB->insert_record('config_log', $log)) {
-            throw new moodle_exception('errorinserting', 'core_adminpresets');
+            throw new powereduc_exception('errorinserting', 'core_adminpresets');
         }
 
         return $id;

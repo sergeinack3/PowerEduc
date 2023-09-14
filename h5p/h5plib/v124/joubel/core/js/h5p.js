@@ -267,7 +267,7 @@ H5P.init = function (target) {
 
           // Note:  Force layout reflow
           //        This fixes a flickering bug for embedded content on iPads
-          //        @see https://github.com/h5p/h5p-moodle-plugin/issues/237
+          //        @see https://github.com/h5p/h5p-powereduc-plugin/issues/237
           iframe.getBoundingClientRect();
 
           // Reset iframe height, in case content has shrinked.

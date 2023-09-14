@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ use MoodleQuickForm;
  * The backend class for Cohort member audience type
  *
  * @package     core_reportbuilder
- * @copyright   2021 David Matamoros <davidmc@moodle.com>
+ * @copyright   2021 David Matamoros <davidmc@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class cohortmember extends base {
@@ -102,11 +102,11 @@ class cohortmember extends base {
      */
     public function user_can_add(): bool {
         // Check system context first.
-        if (has_capability('moodle/cohort:view', context_system::instance())) {
+        if (has_capability('powereduc/cohort:view', context_system::instance())) {
             return true;
         }
         // If there is at least one category with given permissions, user can add.
-        return !empty(core_course_category::make_categories_list('moodle/cohort:view'));
+        return !empty(core_course_category::make_categories_list('powereduc/cohort:view'));
     }
 
     /**
@@ -133,7 +133,7 @@ class cohortmember extends base {
         $cohorts = $DB->get_records_list('cohort', 'id', $cohortids);
         foreach ($cohorts as $cohort) {
             $context = context::instance_by_id($cohort->contextid, MUST_EXIST);
-            $canedit = $canedit && has_capability('moodle/cohort:view', $context);
+            $canedit = $canedit && has_capability('powereduc/cohort:view', $context);
             if ($canedit === false) {
                 break;
             }
@@ -160,7 +160,7 @@ class cohortmember extends base {
         // The previous method doesn't check cohorts on system context.
         $syscontext = context_system::instance();
         $cohorts = array_filter($usercohorts['cohorts'], static function(stdClass $cohort) use ($syscontext): bool {
-            return ($cohort->contextid != $syscontext->id) || has_capability('moodle/cohort:view', $syscontext);
+            return ($cohort->contextid != $syscontext->id) || has_capability('powereduc/cohort:view', $syscontext);
         });
 
         foreach ($cohorts as $cohort) {

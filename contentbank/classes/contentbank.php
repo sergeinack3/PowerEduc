@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Content bank class
  *
  * @package    core_contentbank
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,7 +32,7 @@ use context;
  * Content bank class
  *
  * @package    core_contentbank
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class contentbank {
@@ -232,7 +232,7 @@ class contentbank {
      * @param  int|null $userid Optional userid. $USER by default.
      * @return array Array of the courses and course categories where the user has the given capability.
      */
-    public function get_contexts_with_capabilities_by_user($capability = 'moodle/contentbank:access', $userid = null): array {
+    public function get_contexts_with_capabilities_by_user($capability = 'powereduc/contentbank:access', $userid = null): array {
         global $USER;
 
         if (!$userid) {

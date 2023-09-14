@@ -45,7 +45,7 @@ Feature: Export calendar events
     And I set the field "Recent and next 60 days" to "1"
     And I press "Export"
     And I should see "SUMMARY:My event"
-    # We need to split the step in two because Bennu library use days with leading zero and moodle removes it.
+    # We need to split the step in two because Bennu library use days with leading zero and powereduc removes it.
     And I should see "##today##DTSTART:%Y%m##"
     And I should see "##today##%dT050000Z##"
 

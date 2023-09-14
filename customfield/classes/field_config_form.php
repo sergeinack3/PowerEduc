@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Customfield package
  *
  * @package   core_customfield
- * @copyright 2018 David Matamoros <davidmc@moodle.com>
+ * @copyright 2018 David Matamoros <davidmc@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ defined('POWEREDUC_INTERNAL') || die;
  * Class field_config_form
  *
  * @package core_customfield
- * @copyright 2018 David Matamoros <davidmc@moodle.com>
+ * @copyright 2018 David Matamoros <davidmc@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class field_config_form extends \core_form\dynamic_form {
@@ -131,7 +131,7 @@ class field_config_form extends \core_form\dynamic_form {
      * Get field
      *
      * @return field_controller
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     protected function get_field(): field_controller {
         if ($this->field === null) {
@@ -142,7 +142,7 @@ class field_config_form extends \core_form\dynamic_form {
                 $type = clean_param($this->_ajaxformdata['type'], PARAM_PLUGIN);
                 $this->field = \core_customfield\field_controller::create(0, (object)['type' => $type], $category);
             } else {
-                throw new \moodle_exception('fieldnotfound', 'core_customfield');
+                throw new \powereduc_exception('fieldnotfound', 'core_customfield');
             }
         }
         return $this->field;
@@ -158,7 +158,7 @@ class field_config_form extends \core_form\dynamic_form {
         $field = $this->get_field();
         $handler = $field->get_handler();
         if (!$handler->can_configure()) {
-            throw new \moodle_exception('nopermissionconfigure', 'core_customfield');
+            throw new \powereduc_exception('nopermissionconfigure', 'core_customfield');
         }
     }
 
@@ -200,15 +200,15 @@ class field_config_form extends \core_form\dynamic_form {
 
     /**
      * Page url
-     * @return \moodle_url
+     * @return \powereduc_url
      */
-    protected function get_page_url_for_dynamic_submission(): \moodle_url {
+    protected function get_page_url_for_dynamic_submission(): \powereduc_url {
         $field = $this->get_field();
         if ($field->get('id')) {
             $params = ['action' => 'editfield', 'id' => $field->get('id')];
         } else {
             $params = ['action' => 'addfield', 'categoryid' => $field->get('categoryid'), 'type' => $field->get('type')];
         }
-        return new \moodle_url($field->get_handler()->get_configuration_url(), $params);
+        return new \powereduc_url($field->get_handler()->get_configuration_url(), $params);
     }
 }

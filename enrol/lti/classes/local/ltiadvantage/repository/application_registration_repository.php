@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -44,29 +44,29 @@ class application_registration_repository {
                 $record->id
             );
             if (!empty($record->platformid)) {
-                $appreg->set_platformid(new \moodle_url($record->platformid));
+                $appreg->set_platformid(new \powereduc_url($record->platformid));
             }
             if (!empty($record->clientid)) {
                 $appreg->set_clientid($record->clientid);
             }
             if (!empty($record->authenticationrequesturl)) {
-                $appreg->set_authenticationrequesturl(new \moodle_url($record->authenticationrequesturl));
+                $appreg->set_authenticationrequesturl(new \powereduc_url($record->authenticationrequesturl));
             }
             if (!empty($record->jwksurl)) {
-                $appreg->set_jwksurl(new \moodle_url($record->jwksurl));
+                $appreg->set_jwksurl(new \powereduc_url($record->jwksurl));
             }
             if (!empty($record->accesstokenurl)) {
-                $appreg->set_accesstokenurl(new \moodle_url($record->accesstokenurl));
+                $appreg->set_accesstokenurl(new \powereduc_url($record->accesstokenurl));
             }
         } else if ($record->status == application_registration::REGISTRATION_STATUS_COMPLETE) {
             $appreg = application_registration::create(
                 $record->name,
                 $record->uniqueid,
-                new \moodle_url($record->platformid),
+                new \powereduc_url($record->platformid),
                 $record->clientid,
-                new \moodle_url($record->authenticationrequesturl),
-                new \moodle_url($record->jwksurl),
-                new \moodle_url($record->accesstokenurl),
+                new \powereduc_url($record->authenticationrequesturl),
+                new \powereduc_url($record->jwksurl),
+                new \powereduc_url($record->accesstokenurl),
                 $record->id
             );
         }

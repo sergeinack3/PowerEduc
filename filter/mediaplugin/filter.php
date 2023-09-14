@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  *
  * @package    filter
  * @subpackage mediaplugin
- * @copyright  2004 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  2004 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,17 +36,17 @@ defined('POWEREDUC_INTERNAL') || die();
  *
  * @package    filter
  * @subpackage mediaplugin
- * @copyright  2004 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  2004 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class filter_mediaplugin extends moodle_text_filter {
+class filter_mediaplugin extends powereduc_text_filter {
     /** @var bool True if currently filtering trusted text */
     private $trusted;
 
     /**
      * Setup page with filter requirements and other prepare stuff.
      *
-     * @param moodle_page $page The page we are going to add requirements to.
+     * @param powereduc_page $page The page we are going to add requirements to.
      * @param context $context The context which contents are going to be filtered.
      */
     public function setup($page, $context) {
@@ -168,7 +168,7 @@ class filter_mediaplugin extends moodle_text_filter {
      *
      * Wrapper for {@link core_media_manager::embed_alternatives()}
      *
-     * @param array $urls Array of moodle_url to media files
+     * @param array $urls Array of powereduc_url to media files
      * @param string $name Optional user-readable name to display in download link
      * @param int $width Width in pixels (optional)
      * @param int $height Height in pixels (optional)
@@ -215,11 +215,11 @@ class filter_mediaplugin extends moodle_text_filter {
         // Find all sources both as <video src=""> and as embedded <source> tags.
         $urls = [];
         if (preg_match('/^<[^>]*\bsrc="(.*?)"/im', $fulltext, $matches)) {
-            $urls[] = new moodle_url($matches[1]);
+            $urls[] = new powereduc_url($matches[1]);
         }
         if (preg_match_all('/<source\b[^>]*\bsrc="(.*?)"/im', $fulltext, $matches)) {
             foreach ($matches[1] as $url) {
-                $urls[] = new moodle_url($url);
+                $urls[] = new powereduc_url($url);
             }
         }
         // Extract width/height/title attributes and call embed_alternatives to find a suitable media player.

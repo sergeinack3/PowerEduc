@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * H5P Content manager class
  *
  * @package    contenttype_h5p
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,7 +28,7 @@ namespace contenttype_h5p;
  * H5P Content manager class
  *
  * @package    contenttype_h5p
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class content extends \core_contentbank\content {
@@ -63,7 +63,7 @@ class content extends \core_contentbank\content {
                 // - Invalid H5P package (it won't be never deployed).
                 // - Disabled content-type library (it can't be deployed so there is no way to know the mainlibraryid).
                 $context = \context::instance_by_id($this->content->contextid);
-                if (!has_capability('moodle/contentbank:manageanycontent', $context)) {
+                if (!has_capability('powereduc/contentbank:manageanycontent', $context)) {
                     return false;
                 }
             } else if (!\core_h5p\api::is_library_enabled((object) ['id' => $h5p->mainlibraryid])) {

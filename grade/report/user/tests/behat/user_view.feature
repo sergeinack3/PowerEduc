@@ -183,7 +183,7 @@ Feature: View the user report as the student will see it
     And I log in as "admin"
     And I set the following system permissions of "Student" role:
       | capability | permission |
-      | moodle/grade:viewhidden | Allow |
+      | powereduc/grade:viewhidden | Allow |
     And I log out
     And I log in as "teacher1"
     And I am on "Course 1" course homepage

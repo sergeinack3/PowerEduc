@@ -1,7 +1,7 @@
 {
-    "name": "moodle-course-coursebase",
+    "name": "powereduc-course-coursebase",
     "builds": {
-        "moodle-course-coursebase": {
+        "powereduc-course-coursebase": {
             "jsfiles": [
                 "coursebase.js"
             ]

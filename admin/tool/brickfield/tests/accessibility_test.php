@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ class accessibility_test extends \advanced_testcase {
      *
      * @throws \coding_exception
      * @throws \dml_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public function test_get_title() {
         $this->resetAfterTest();

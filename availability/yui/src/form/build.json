@@ -1,7 +1,7 @@
 {
-  "name": "moodle-core_availability-form",
+  "name": "powereduc-core_availability-form",
   "builds": {
-    "moodle-core_availability-form": {
+    "powereduc-core_availability-form": {
       "jsfiles": [
         "form.js"
       ]

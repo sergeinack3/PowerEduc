@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -54,7 +54,7 @@ class enrol_manual_plugin extends enrol_plugin {
      * Does the access control tests automatically.
      *
      * @param stdClass $instance
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function get_manual_enrol_link($instance) {
         $name = $this->get_name();
@@ -74,7 +74,7 @@ class enrol_manual_plugin extends enrol_plugin {
             return NULL;
         }
 
-        return new moodle_url('/enrol/manual/manage.php', array('enrolid'=>$instance->id, 'id'=>$instance->courseid));
+        return new powereduc_url('/enrol/manual/manage.php', array('enrolid'=>$instance->id, 'id'=>$instance->courseid));
     }
 
     /**
@@ -87,7 +87,7 @@ class enrol_manual_plugin extends enrol_plugin {
         global $DB;
 
         $context = context_course::instance($courseid, MUST_EXIST);
-        if (!has_capability('moodle/course:enrolconfig', $context) or !has_capability('enrol/manual:config', $context)) {
+        if (!has_capability('powereduc/course:enrolconfig', $context) or !has_capability('enrol/manual:config', $context)) {
             return false;
         }
 
@@ -111,7 +111,7 @@ class enrol_manual_plugin extends enrol_plugin {
 
         $icons = array();
         if (has_capability('enrol/manual:enrol', $context) or has_capability('enrol/manual:unenrol', $context)) {
-            $managelink = new moodle_url("/enrol/manual/manage.php", array('enrolid'=>$instance->id));
+            $managelink = new powereduc_url("/enrol/manual/manage.php", array('enrolid'=>$instance->id));
             $icons[] = $OUTPUT->action_icon($managelink, new pix_icon('t/enrolusers', get_string('enrolusers', 'enrol_manual'), 'core', array('class'=>'iconsmall')));
         }
         $parenticons = parent::get_action_icons($instance);

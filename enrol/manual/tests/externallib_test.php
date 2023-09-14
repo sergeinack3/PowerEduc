@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -60,11 +60,11 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Set the required capabilities by the external function.
         $roleid = $this->assignUserCapability('enrol/manual:enrol', $context1->id);
-        $this->assignUserCapability('moodle/course:view', $context1->id, $roleid);
-        $this->assignUserCapability('moodle/role:assign', $context1->id, $roleid);
+        $this->assignUserCapability('powereduc/course:view', $context1->id, $roleid);
+        $this->assignUserCapability('powereduc/role:assign', $context1->id, $roleid);
         $this->assignUserCapability('enrol/manual:enrol', $context2->id, $roleid);
-        $this->assignUserCapability('moodle/course:view', $context2->id, $roleid);
-        $this->assignUserCapability('moodle/role:assign', $context2->id, $roleid);
+        $this->assignUserCapability('powereduc/course:view', $context2->id, $roleid);
+        $this->assignUserCapability('powereduc/role:assign', $context2->id, $roleid);
 
         core_role_set_assign_allowed($roleid, 3);
 
@@ -87,7 +87,7 @@ class externallib_test extends externallib_advanced_testcase {
                 array('roleid' => 3, 'userid' => $user1->id, 'courseid' => $course1->id),
             ));
             $this->fail('Exception expected if not having capability to enrol');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('required_capability_exception', $e);
             $this->assertSame('nopermissions', $e->errorcode);
         }
@@ -100,7 +100,7 @@ class externallib_test extends externallib_advanced_testcase {
                 array('roleid' => 1, 'userid' => $user1->id, 'courseid' => $course1->id),
             ));
             $this->fail('Exception expected if not allowed to assign role.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertSame('wsusercannotassign', $e->errorcode);
         }
         $this->assertEquals(0, $DB->count_records('user_enrolments'));
@@ -114,7 +114,7 @@ class externallib_test extends externallib_advanced_testcase {
                 array('roleid' => 3, 'userid' => $user1->id, 'courseid' => $course2->id),
             ));
             $this->fail('Exception expected if course does not have manual instance');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertSame('wsnoinstance', $e->errorcode);
         }
     }
@@ -123,7 +123,7 @@ class externallib_test extends externallib_advanced_testcase {
      * Test for unerolling a single user.
      * @throws coding_exception
      * @throws invalid_parameter_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function test_unenrol_user_single() {
         global $CFG, $DB;
@@ -140,8 +140,8 @@ class externallib_test extends externallib_advanced_testcase {
         // Set the capability for the user.
         $roleid = $this->assignUserCapability('enrol/manual:enrol', $coursecontext);
         $this->assignUserCapability('enrol/manual:unenrol', $coursecontext, $roleid);
-        $this->assignUserCapability('moodle/course:view', $coursecontext, $roleid);
-        $this->assignUserCapability('moodle/role:assign', $coursecontext, $roleid);
+        $this->assignUserCapability('powereduc/course:view', $coursecontext, $roleid);
+        $this->assignUserCapability('powereduc/role:assign', $coursecontext, $roleid);
         // Create a student and enrol them into the course.
         $student = $this->getDataGenerator()->create_user();
         $enrol->enrol_user($enrolinstance, $student->id);
@@ -157,7 +157,7 @@ class externallib_test extends externallib_advanced_testcase {
      * Test for unenrolling multiple users.
      * @throws coding_exception
      * @throws invalid_parameter_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function test_unenrol_user_multiple() {
         global $CFG, $DB;
@@ -173,8 +173,8 @@ class externallib_test extends externallib_advanced_testcase {
         // Set the capability for the user.
         $roleid = $this->assignUserCapability('enrol/manual:enrol', $coursecontext);
         $this->assignUserCapability('enrol/manual:unenrol', $coursecontext, $roleid);
-        $this->assignUserCapability('moodle/course:view', $coursecontext, $roleid);
-        $this->assignUserCapability('moodle/role:assign', $coursecontext, $roleid);
+        $this->assignUserCapability('powereduc/course:view', $coursecontext, $roleid);
+        $this->assignUserCapability('powereduc/role:assign', $coursecontext, $roleid);
         $enrol = enrol_get_plugin('manual');
         // Create a student and enrol them into the course.
         $student1 = $this->getDataGenerator()->create_user();
@@ -196,7 +196,7 @@ class externallib_test extends externallib_advanced_testcase {
      * Test for unenrol capability.
      * @throws coding_exception
      * @throws invalid_parameter_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function test_unenrol_user_error_no_capability() {
         global $CFG, $DB;
@@ -224,7 +224,7 @@ class externallib_test extends externallib_advanced_testcase {
             $this->assertTrue($ex instanceof \require_login_exception);
         }
         // Set the capability for the course, then try again.
-        $roleid = $this->assignUserCapability('moodle/course:view', $coursecontext);
+        $roleid = $this->assignUserCapability('powereduc/course:view', $coursecontext);
         try {
             enrol_manual_external::unenrol_users(array(
                 array('userid' => $student->id, 'courseid' => $course->id),
@@ -260,8 +260,8 @@ class externallib_test extends externallib_advanced_testcase {
         // Set the capability for the user.
         $roleid = $this->assignUserCapability('enrol/manual:enrol', $coursecontext);
         $this->assignUserCapability('enrol/manual:unenrol', $coursecontext, $roleid);
-        $this->assignUserCapability('moodle/course:view', $coursecontext, $roleid);
-        $this->assignUserCapability('moodle/role:assign', $coursecontext, $roleid);
+        $this->assignUserCapability('powereduc/course:view', $coursecontext, $roleid);
+        $this->assignUserCapability('powereduc/role:assign', $coursecontext, $roleid);
         // Create a student and enrol them into the course.
         $student = $this->getDataGenerator()->create_user();
         $enrol->enrol_user($enrolinstance, $student->id);
@@ -281,7 +281,7 @@ class externallib_test extends externallib_advanced_testcase {
             ));
             $this->fail('Exception expected: invalid student id');
         } catch (\Exception $ex) {
-            $this->assertTrue($ex instanceof \moodle_exception);
+            $this->assertTrue($ex instanceof \powereduc_exception);
         }
     }
 }

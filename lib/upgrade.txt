@@ -45,9 +45,9 @@ information provided here is intended especially for developers.
   changed. It was (for example) mod_mymodule\local\views\secondary but is now
   mod_mymodule\navigation\views\secondary. The old location will continue to work, but is deprecated.
 * The check for $plugin->incompatible was found to be incorrect. The $plugin->incompatible attribute is meant to define the minimum
-  Moodle version the plugin is incompatible with but the implemented logic for the check was the opposite. Plugins declaring this
-  attribute may encounter different behaviours between older Moodle versions (<v3.11.8, <v4.0.2) and the later ones. We recommend
-  plugin developers to not use this attribute for Moodle versions 4.0 and below in order to avoid this problem.
+  PowerEduc version the plugin is incompatible with but the implemented logic for the check was the opposite. Plugins declaring this
+  attribute may encounter different behaviours between older PowerEduc versions (<v3.11.8, <v4.0.2) and the later ones. We recommend
+  plugin developers to not use this attribute for PowerEduc versions 4.0 and below in order to avoid this problem.
 * Added $CFG->proxylogunsafe and proxyfixunsafe to detect code which doesn't honor the proxy config
 * Function admin_externalpage_setup() now has additional option 'nosearch' allowing to remove Site administration search form.
 * The function print_error has been deprecated. Kindly use powereduc_exception.
@@ -59,7 +59,7 @@ information provided here is intended especially for developers.
 * New DML driver method `$DB->sql_order_by_null` for sorting nulls sort nulls first when ascending and last when descending.
 * Allow plugins to callback on all pages just prior to the session start.
 * New function set_additional_classes() has been implemented to add additional classes to action_menu.
-* Most Behat functionality for the Moodle App has been removed from core, refer to the documentation in order to upgrade your testing
+* Most Behat functionality for the PowerEduc App has been removed from core, refer to the documentation in order to upgrade your testing
   setup: https://powereducdev.io/general/app/development/testing/acceptance-testing#upgrading-tests-from-an-older-version
 * New DML driver methods `$DB->sql_regex_get_word_beginning_boundary_marker` and `$DB->sql_regex_get_word_end_boundary_marker`
   for managing word boundary markers in a database driver supporting regex syntax when searching.
@@ -105,7 +105,7 @@ information provided here is intended especially for developers.
 * A new index has been added on mdl_user_preferences.name. This upgrade step might take some time on big sites.
 * The completion_info function display_help_icon() which returned the 'Your progress' help icon has been deprecated and
   should no longer be used.
-* The completion_info function print_help_icon() which has been deprecated since Moodle 2.0 should no longer be used.
+* The completion_info function print_help_icon() which has been deprecated since PowerEduc 2.0 should no longer be used.
 * @babel/polyfill has been removed in favour of corejs@3.
 * A new parameter $partialrebuild has been added to the rebuild_course_cache to invalidate the cache
   of the section or module only, not the whole course cache
@@ -154,13 +154,13 @@ information provided here is intended especially for developers.
   that wants to listen for the events. Backwards compatibility with existing code using jQuery is preserved.
 * The function message_send() in messagelib.php now returns false if there is an error sending the message to the
   message processor (MDL-70046).
-* Moodle 4.0 has major changes to the question bank. Therefore, there are major changes in questionlib.php
+* PowerEduc 4.0 has major changes to the question bank. Therefore, there are major changes in questionlib.php
   and the core_question database tables. These are documented in detail in question/upgrade.txt.
 * The postgres driver now wraps calls to pg_field_type() and caches them in databasemeta to save an invisible internal
   DB call on every request.
 * The default type of 'core/toast' messages has been changed to 'information' (callers can still explicitely set the type)
 * As the message_jabber notification plugin has been moved to the plugins database, the XMPPHP library (aka Jabber) has been
-completely removed from Moodle core too.
+completely removed from PowerEduc core too.
 * The SWF media player has been completely removed (The Flash Player was deprecated in 2017 and officially discontinued
   on 31 December 2020).
 * The display_size function has been improved to add new optional parameters (decimal places,
@@ -300,7 +300,7 @@ defined or can't be applied.
 * A new option dontforcesvgdownload has been added to the $options parameter of the send_file() function.
   Note: This option overrides the forced download of directly accessed SVGs, so should only be used where the calling method is
   rendering SVGs directly for content created using XSS risk flagged capabilities (such as creating a SCORM activity).
-  This is also not necessary where SVGs are already being safely loaded into <img> tags by Moodle (eg within forum posts).
+  This is also not necessary where SVGs are already being safely loaded into <img> tags by PowerEduc (eg within forum posts).
 
 === 3.11.2 ===
 * For security reasons, filelib has been updated so all requests now use emulated redirects.
@@ -352,10 +352,10 @@ defined or can't be applied.
        - <whitelist> has been replaced by <include>.
        - <exclude> is not a child of <whitelist> anymore, but of <coverage>.
      Note that this only will affect if you've custom phpunit.xml files
-     instead of using the automatically generated ones by Moodle.
+     instead of using the automatically generated ones by PowerEduc.
    - Deprecation: Related to the previous point, the $whitelistxxx properties
      used by the coverage.php files have been deprecated (will continue
-     working until Moodle 4.3) to follow the same pattern:
+     working until PowerEduc 4.3) to follow the same pattern:
        - whitelistfolders -> includelistfolders
        - whitelistfiles   -> includelistfiles
    - Internal: Custom autoloaders are deprecated and will be removed with
@@ -363,7 +363,7 @@ defined or can't be applied.
      Note that it was not useful since PHPUnit 8.5, where the ability
      to run tests by class name was removed.
    - Warning: Because of some new restrictions about how test files and
-     test classes must be named (that Moodle haven't followed ever) it's not
+     test classes must be named (that PowerEduc haven't followed ever) it's not
      possible to run individual test files any more. Use any of the alternative
      execution methods (filter, suite, config) to specify which tests
      you want to run. This will be hopefully fixed in MDL-71049
@@ -379,7 +379,7 @@ defined or can't be applied.
   location in config.php if required. To get the best possible security for this feature, we
   recommend enabling the Sodium PHP extension.
   The OpenSSL alternative for this API, used when Sodium is not available, is considered deprecated
-  at all effects, and will be removed in Moodle 4.2. See MDL-71421 for more information.
+  at all effects, and will be removed in PowerEduc 4.2. See MDL-71421 for more information.
 * Behat timeout constants behat_base::TIMEOUT, EXTENDED_TIMEOUT, and REDUCED_TIMEOUT, which were deprecated in 3.7, have been removed.
 * \core_table\local\filter\filterset::JOINTYPE_DEFAULT is being changed from 1 (ANY) to 2 (ALL). Filterset implementations
   can override the default filterset join type by overriding \core_table\local\filter\filterset::get_join_type() instead.
@@ -513,9 +513,9 @@ defined or can't be applied.
 * New library function rename_to_unused_name() to rename a file within its current location.
 * Constant \core_h5p\file_storage::EDITOR_FILEAREA has been deprecated
   because it's not required any more.
-* The ZipStream-PHP library has been added to Moodle core in /lib/zipstream.
-* The php-enum library has been added to Moodle core in /lib/php-enum.
-* The http-message library has been added to Moodle core in /lib/http-message.
+* The ZipStream-PHP library has been added to PowerEduc core in /lib/zipstream.
+* The php-enum library has been added to PowerEduc core in /lib/php-enum.
+* The http-message library has been added to PowerEduc core in /lib/http-message.
 * Methods `filetypes_util::is_whitelisted()` and `filetypes_util::get_not_whitelisted()` have been deprecated and
   renamed to `is_listed()` and `get_not_listed()` respectively.
 * Method `mustache_helper_collection::strip_blacklisted_helpers()` has been deprecated and renamed to
@@ -538,7 +538,7 @@ defined or can't be applied.
   - admin/tool/task/cli/adhoc_task.php please use admin/cli/adhoc_task.php
 * Old Safe Exam Browser quiz access rule (quizaccess_safebrowser) replaced by new Safe Exam Browser access rule (quizaccess_seb).
   Experimental setting enablesafebrowserintegration was deleted.
-* New CFPropertyList library has been added to Moodle core in /lib/plist.
+* New CFPropertyList library has been added to PowerEduc core in /lib/plist.
 * behat_data_generators::the_following_exist() has been removed, please use
   behat_data_generators::the_following_entities_exist() instead. See MDL-67691 for more info.
 * admin/tool/task/cli/adhoc_task.php now observers the concurrency limits.
@@ -551,12 +551,12 @@ defined or can't be applied.
 * plagiarism_save_form_elements() has been deprecated. Please use {plugin name}_coursemodule_edit_post_actions() instead.
 * plagiarism_get_form_elements_module() has been deprecated. Please use {plugin name}_coursemodule_standard_elements() instead.
 * Changed default sessiontimeout to 8 hours to cover most normal working days
-* Plugins can now explicitly declare supported and incompatible Moodle versions in version.php
+* Plugins can now explicitly declare supported and incompatible PowerEduc versions in version.php
   - $plugin->supported = [37,39];
     supported takes an array of ascending numbers, that correspond to a range of branch numbers of supported versions, inclusive.
-    Moodle versions that are outside of this range will produce a message notifying at install time, but will allow for installation.
+    PowerEduc versions that are outside of this range will produce a message notifying at install time, but will allow for installation.
   - $plugin->incompatible = 36;
-    incompatible takes a single int corresponding to the first incompatible branch. Any Moodle versions including and
+    incompatible takes a single int corresponding to the first incompatible branch. Any PowerEduc versions including and
     above this will be prevented from installing the plugin, and a message will be given when attempting installation.
 * Added the <component>_bulk_user_actions() callback which returns a list of custom action_links objects
 * Add 'required' admin flag for mod forms allows elements to be toggled between being required or not in admin settings.
@@ -594,7 +594,7 @@ defined or can't be applied.
     - type: specifies the calendar type. Optional, defaults to Gregorian.
     - fixday: Whether to remove leading zero for day. Optional, defaults to 1.
     - fixhour: Whether to remove leading zero for hour. Optional, defaults to 1.
-* Legacy cron has been deprecated and will be removed in Moodle 4.1. This includes the functions:
+* Legacy cron has been deprecated and will be removed in PowerEduc 4.1. This includes the functions:
   - cron_execute_plugin_type()
   - cron_bc_hack_plugin_functions()
   Please, use the Task API instead: https://docs.powereduc.org/dev/Task_API
@@ -667,8 +667,8 @@ validation against and defaults to null (so, no user needed) if not provided.
 * Following behat steps have been removed from core:
     - I go to "<gradepath_string>" in the course gradebook
 * A new admin setting widget 'core_admin\local\settings\filesize' is added.
-* Core capabilities 'powereduc/community:add' and 'powereduc/community:download' have been removed from core as part of Moodle.net sunsetting.
-* As part of Moodle.net sunsetting process the following hub api functions have been deprecated:
+* Core capabilities 'powereduc/community:add' and 'powereduc/community:download' have been removed from core as part of PowerEduc.net sunsetting.
+* As part of PowerEduc.net sunsetting process the following hub api functions have been deprecated:
     - get_courses
     - unregister_courses
     - register_course
@@ -682,17 +682,17 @@ validation against and defaults to null (so, no user needed) if not provided.
 * \single_button constructor has a new attributes param to add attributes to the button HTML tag.
 * Improved url matching behaviour for profiled urls and excluded urls
 * Attempting to use xsendfile via the 3rd param of readstring_accel() is now ignored.
-* New H5P libraries have been added to Moodle core in /lib/h5p.
+* New H5P libraries have been added to PowerEduc core in /lib/h5p.
 * New H5P core subsystem have been added.
 * Introduced new callback for plugin developers '<component>_get_path_from_pluginfile($filearea, $args)': This will return
 the itemid and filepath for the filearea and path defined in $args. It has been added in order to get the correct itemid and
 filepath because some components, such as mod_page or mod_resource, add the revision to the URL where the itemid should be placed
 (to prevent caching problems), but then they don't store it in database.
 * New utility function \core_form\util::form_download_complete should be called if your code sends
-  a file with Content-Disposition: Attachment in response to a Moodle form submit button (to ensure
+  a file with Content-Disposition: Attachment in response to a PowerEduc form submit button (to ensure
   that disabled submit buttons get re-enabled in that case). It is automatically called by the
   filelib.php send_xx functions.
-* If you have a form which sends a file in response to a Moodle form submit button, but you cannot
+* If you have a form which sends a file in response to a PowerEduc form submit button, but you cannot
   call the above function because the file is sent by a third party library, then you should add
   the attribute data-double-submit-protection="off" to your form.
 
@@ -709,7 +709,7 @@ attribute on forms to avoid collisions in forms loaded in AJAX requests.
 * The \core_rating provider's get_sql_join function now accepts an optional $innerjoin parameter.
   It is recommended that privacy providers using this function call rewrite any long query into a number of separate
   calls to add_from_sql for improved performance, and that the new argument is used.
-  This will allow queries to remain backwards-compatible with older versions of Moodle but will have significantly better performance in version supporting the innerjoin parameter.
+  This will allow queries to remain backwards-compatible with older versions of PowerEduc but will have significantly better performance in version supporting the innerjoin parameter.
 * /message/defaultoutputs.php file and admin_page_defaultmessageoutputs class have been deprecated
   and all their settings moved to admin/message.php (see MDL-64495). Please use admin_page_managemessageoutputs class instead.
 * A new parameter $lang has been added to mustache_template_source_loader->load_with_dependencies() method
@@ -909,7 +909,7 @@ the groupid field.
   additional optional parameters, $admindefaultsettings and $settingsoutput.  It also has a return value $settingsoutput.
   The function now does not need to be called twice to ensure all default settings are set.  Instead the function calls itself recursively
   until all settings have been set. The additional parameters are used recursively and shouldn't be need to be explicitly passed in when calling
-  the function from other parts of Moodle.
+  the function from other parts of PowerEduc.
   The return value: $settingsoutput is an array of setting names and the values that were set by the function.
 * Webservices no longer update the lastaccess time for a user in a course. Call core_course_view_course() manually if needed.
 * A new field has been added to the context table. Please ensure that any contxt preloading uses get_preload_record_columns_sql or get_preload_record_columns to fetch the list of columns.
@@ -922,7 +922,7 @@ the groupid field.
   privacy API in your plugin.
 * The cron runner now sets up a fresh PAGE and OUTPUT between each task.
 * The core_renderer methods notify_problem(), notify_success(), notify_message() and notify_redirect() that were
-  deprecated in Moodle 3.1 have been removed. Use \core\notification::add(), or \core\output\notification as required.
+  deprecated in PowerEduc 3.1 have been removed. Use \core\notification::add(), or \core\output\notification as required.
 * The maximum supported precision (the total number of digits) for XMLDB_TYPE_NUMBER ("number") fields raised from 20 to
   38 digits. Additionally, the whole number part (precision minus scale) must not be longer than the maximum length of
   integer fields (20 digits). Note that PHP floats commonly support precision of roughly 15 digits only (MDL-32113).
@@ -1024,13 +1024,13 @@ the groupid field.
   existing test expecting the old HTTP URLs will need to be switched to the new HTTPS value (reference: MDL-54901).
 * The information returned by the idp list has changed. This is usually only rendered by the login page and login block.
   The icon attribute is removed and an iconurl attribute has been added.
-* Support added for a new type of external file: FILE_CONTROLLED_LINK. This is an external file that Moodle can control
-  the permissions. Moodle makes files read-only but can grant temporary write access.
+* Support added for a new type of external file: FILE_CONTROLLED_LINK. This is an external file that PowerEduc can control
+  the permissions. PowerEduc makes files read-only but can grant temporary write access.
     When accessing a URL, the info from file_browser::get_file_info will be checked to determine if the user has write access,
     if they do - the remote file will have access controls set to allow editing.
 * The method powereducform::after_definition() has been added and can now be used to add some logic
   to be performed after the form's definition was set. This is useful for intermediate subclasses.
-* Moodle has support for font-awesome icons. Plugins should use the xxx_get_fontawesome_icon_map callback
+* PowerEduc has support for font-awesome icons. Plugins should use the xxx_get_fontawesome_icon_map callback
   to map their custom icons to one from font-awesome.
 * $OUTPUT->pix_url() has been deprecated because it is was used mostly to manually generate image tags for icons.
   We now distinguish between icons and "small images". The difference is that an icon does not have to be rendered as an image tag
@@ -1117,7 +1117,7 @@ the groupid field.
 * JQuery has been updated to 3.1.0. JQuery migrate plugins are no longer shipped - please read
   https://jquery.com/upgrade-guide/3.0/ and update your javascript.
 * New option 'blanktarget' added to format_text. This option adds target="_blank" to links
-* A new webservice structure `external_files` has been created which provides a standardised view of files in Moodle and
+* A new webservice structure `external_files` has been created which provides a standardised view of files in PowerEduc and
   should be used for all file return descriptions.
   Files matching this format can be retrieved via the new `external_util::get_area_files` method.
   See MDL-54951 for further information.
@@ -1190,8 +1190,8 @@ the groupid field.
   - 3. Run: Which process behat should be initialise for.
 * behat_context_helper::set_session() has been deprecated, please use behat_context_helper::set_environment() instead.
 * data-fieldtype="type" attribute has been added to form field default template.
-* form elements extending MoodleQuickForm_group must call $this->createFormElement() instead of
-  @MoodleQuickForm::createElement() in order to be compatible with PHP 7.1
+* form elements extending PowerEducQuickForm_group must call $this->createFormElement() instead of
+  @PowerEducQuickForm::createElement() in order to be compatible with PHP 7.1
 * Relative paths in $CFG->alternateloginurl will be resolved to absolute path within powereduc site. Previously they
   were resolved to absolute path within the server. That means:
   - $CFG->wwwroot: http://example.com/powereduc
@@ -1221,12 +1221,12 @@ the groupid field.
   in minifier output.
 * context_header additional buttons can now have a class attribute provided in the link attributes.
 * The return signature for the antivirus::scan_file() function has changed.
-  The calling function will now handle removal of infected files from Moodle based on the new integer return value.
+  The calling function will now handle removal of infected files from PowerEduc based on the new integer return value.
 * The first parameter $eventdata of both message_send() and \core\message\manager::send_message() should
   be \core\message\message. Use of stdClass is deprecated.
 * The message_sent event now expects other[courseid] to be always set, exception otherwise. For BC with contrib code,
   message_sent::create_from_ids() will show a debugging notice if the \core\message\message being sent is missing
-  the courseid property, defaulting to SITEID automatically. In Moodle 3.6 (MDL-55449) courseid will be fully mandatory
+  the courseid property, defaulting to SITEID automatically. In PowerEduc 3.6 (MDL-55449) courseid will be fully mandatory
   for all messages sent.
 * The send_confirmation_email() function has a new optional parameter $confirmationurl to provide a different confirmation URL.
 * Introduced a new hook for plugin developers:
@@ -1313,9 +1313,9 @@ the groupid field.
 * Ajax calls going through lib/ajax/* now validate the return values before sending
   the response. If the validation does not pass an exception is raised. This behaviour
   is consistent with web services.
-* Several changes in Moodle core, standard plugins and third party libraries to
+* Several changes in PowerEduc core, standard plugins and third party libraries to
   ensure compatibility with PHP7. All plugins are recommended to perform testing
-  against PHP7 as well. Refer to https://docs.powereduc.org/dev/Moodle_and_PHP7 for more
+  against PHP7 as well. Refer to https://docs.powereduc.org/dev/PowerEduc_and_PHP7 for more
   information. The following changes may affect you:
   * Class powereducform, powereducform_mod and some module classes have been changed to use
     __construct() for the constructor. Calling parent constructors by the class
@@ -1545,7 +1545,7 @@ the groupid field.
 * Deprecated JS global methods have been removed (show_item, destroy_item, hide_item, addonload, getElementsByTagName, findChildNodes).
 * For 3rd party plugin specific environment.xml files, it's now possible to specify version independent checks by using the
   <PLUGIN name="component_name"> tag instead of the version dependent <POWEREDUC version="x.y"> one. If the PLUGIN tag is used any
-  Moodle specific tags will be ignored.
+  PowerEduc specific tags will be ignored.
 * html_table: new API for adding captions to tables (new field, $table->caption) and subsequently hiding said captions from sighted users using accesshide (enabled using $table->captionhide).
 * The authorization procedure in the mdeploy.php script has been improved. The script
   now relies on the main config.php when deploying an available update.
@@ -1580,7 +1580,7 @@ the groupid field.
   found to be using this setting, a warning to check the grades will be shown in the
   course grader report after upgrading the site. The same warning will be shown on
   courses restored from backup that had this setting enabled (see MDL-47503).
-* lib/excelllib.class.php has been updated. The class MoodleExcelWorkbook will now only produce excel 2007 files.
+* lib/excelllib.class.php has been updated. The class PowerEducExcelWorkbook will now only produce excel 2007 files.
 * renderers: We now remove the suffix _renderable when looking for a render method for a renderable.
   If you have a renderable class named like "blah_renderable" and have a method on a renderer named "render_blah_renderable"
   you will need to change the name of your render method to "render_blah" instead, as renderable at the end is no longer accepted.
@@ -1605,10 +1605,10 @@ the groupid field.
 * grade_get_grades() optional parameteres $itemtype, $itemmodule, $iteminstance are now required.
 
 DEPRECATIONS:
-* completion_info->get_incomplete_criteria() is deprecated and will be removed in Moodle 3.0.
-* grade_category::aggregate_values() is deprecated and will be removed in Moodle 3.0.
+* completion_info->get_incomplete_criteria() is deprecated and will be removed in PowerEduc 3.0.
+* grade_category::aggregate_values() is deprecated and will be removed in PowerEduc 3.0.
 * groups_filter_users_by_course_module_visible() is deprecated; replace with
-  core_availability\info::filter_user_list. Will be removed in Moodle 3.0.
+  core_availability\info::filter_user_list. Will be removed in PowerEduc 3.0.
 * groups_course_module_visible() is deprecated; replace with $cm->uservisible.
 * cm_info property $cm->groupmembersonly is deprecated and always returns 0.
   Use core_availability\info::filter_user_list if trying to determine which
@@ -1672,7 +1672,7 @@ Events and Logging:
     - \core\event\webservice_token_created
 
 DEPRECATIONS:
-* $module uses in mod/xxx/version.php files is now deprecated. Please use $plugin instead. It will be removed in Moodle 2.10.
+* $module uses in mod/xxx/version.php files is now deprecated. Please use $plugin instead. It will be removed in PowerEduc 2.10.
 * Update init methods in all event classes - "level" property was renamed to "edulevel", the level property is now deprecated.
 * Abstract class \core\event\course_module_instances_list_viewed is deprecated now, use \core\event\instances_list_viewed instead.
 * Abstract class core\event\content_viewed has been deprecated. Please extend base event or other relevant abstract class.
@@ -1711,8 +1711,8 @@ Conditional availability (activities and sections):
 YUI:
   * The lightbox attribute for powereduc-core-notification-dialogue has been
     deprecated and replaced by the modal attribute. This was actually
-    changed in Moodle 2.2, but has only been marked as deprecated now. It
-    will be removed in Moodle 2.9.
+    changed in PowerEduc 2.2, but has only been marked as deprecated now. It
+    will be removed in PowerEduc 2.9.
   * When destroying any type of dialogue based on powereduc-core-notification, the relevant content is also removed from
     the DOM. Previously it was left orphaned.
 

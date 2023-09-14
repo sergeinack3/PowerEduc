@@ -7,7 +7,7 @@ Feature: Change password
   Background:
     Given the following "users" exist:
       | username | firstname | lastname | email |
-      | testuser | Test | User | moodle@example.com |
+      | testuser | Test | User | powereduc@example.com |
 
   Scenario: A user can change his password manually
     Given I am on site homepage

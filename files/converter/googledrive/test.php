@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,17 +26,17 @@ require_once($CFG->libdir . '/filelib.php');
 
 $sendpdf = optional_param('sendpdf', 0, PARAM_BOOL);
 
-$PAGE->set_url(new moodle_url('/files/converter/googledrive/test.php'));
+$PAGE->set_url(new powereduc_url('/files/converter/googledrive/test.php'));
 $PAGE->set_context(context_system::instance());
 
 require_login();
-require_capability('moodle/site:config', context_system::instance());
+require_capability('powereduc/site:config', context_system::instance());
 
 $strheading = get_string('test_conversion', 'fileconverter_googledrive');
 $PAGE->navbar->add(get_string('administrationsite'));
 $PAGE->navbar->add(get_string('plugins', 'admin'));
 $PAGE->navbar->add(get_string('pluginname', 'fileconverter_googledrive'),
-        new moodle_url('/admin/settings.php', array('section' => 'fileconvertergoogledrive')));
+        new powereduc_url('/admin/settings.php', array('section' => 'fileconvertergoogledrive')));
 $PAGE->navbar->add($strheading);
 $PAGE->set_heading($strheading);
 $PAGE->set_title($strheading);
@@ -53,7 +53,7 @@ if ($sendpdf) {
 $result = $converter->are_requirements_met();
 if ($result) {
     $msg = $OUTPUT->notification(get_string('test_conversionready', 'fileconverter_googledrive'), 'success');
-    $pdflink = new moodle_url($PAGE->url, array('sendpdf' => 1, 'sesskey' => sesskey()));
+    $pdflink = new powereduc_url($PAGE->url, array('sendpdf' => 1, 'sesskey' => sesskey()));
     $msg .= html_writer::link($pdflink, get_string('test_conversion', 'fileconverter_googledrive'));
     $msg .= html_writer::empty_tag('br');
 } else {
@@ -88,7 +88,7 @@ if ($result) {
         $msg = $OUTPUT->notification(get_string('test_conversionnotready', 'fileconverter_googledrive'), 'warning');
     }
 }
-$returl = new moodle_url('/admin/settings.php', array('section' => 'fileconvertergoogledrive'));
+$returl = new powereduc_url('/admin/settings.php', array('section' => 'fileconvertergoogledrive'));
 $msg .= $OUTPUT->continue_button($returl);
 
 echo $OUTPUT->header();

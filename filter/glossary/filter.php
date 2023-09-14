@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,17 +32,17 @@ defined('POWEREDUC_INTERNAL') || die();
  *
  * NOTE: multilang glossary entries are not compatible with this filter.
  */
-class filter_glossary extends moodle_text_filter {
+class filter_glossary extends powereduc_text_filter {
     /** @var null|cache_store cache used to store the terms for this course. */
     protected $cache = null;
 
     public function setup($page, $context) {
         if ($page->requires->should_create_one_time_item_now('filter_glossary_autolinker')) {
             $page->requires->yui_module(
-                    'moodle-filter_glossary-autolinker',
+                    'powereduc-filter_glossary-autolinker',
                     'M.filter_glossary.init_filter_autolinking',
                     array(array('courseid' => 0)));
-            $page->requires->strings_for_js(array('ok'), 'moodle');
+            $page->requires->strings_for_js(array('ok'), 'powereduc');
         }
     }
 
@@ -126,7 +126,7 @@ class filter_glossary extends moodle_text_filter {
         if ($concept->category) { // Link to a category.
             $title = get_string('glossarycategory', 'filter_glossary',
                     ['glossary' => $glossaries[$concept->glossaryid], 'category' => $concept->concept]);
-            $link = new moodle_url('/mod/glossary/view.php',
+            $link = new powereduc_url('/mod/glossary/view.php',
                     ['g' => $concept->glossaryid, 'mode' => 'cat', 'hook' => $concept->id]);
             $attributes = array(
                     'href'  => $link,
@@ -140,7 +140,7 @@ class filter_glossary extends moodle_text_filter {
             // to the current glossary format which may not work in a popup.
             // for example "entry list" means the popup would only contain
             // a link that opens another popup.
-            $link = new moodle_url('/mod/glossary/showentry.php',
+            $link = new powereduc_url('/mod/glossary/showentry.php',
                     ['eid' => $concept->id, 'displayformat' => 'dictionary']);
             $attributes = array(
                     'href'  => $link,

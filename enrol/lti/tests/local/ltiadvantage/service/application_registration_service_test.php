@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -101,11 +101,11 @@ class application_registration_service_test extends \lti_advantage_testcase {
         // Verify details saved and complete status.
         $this->assertEquals($updatedto->id, $reg->get_id());
         $this->assertEquals($updatedto->name, $reg->get_name());
-        $this->assertEquals(new \moodle_url($updatedto->platformid), $reg->get_platformid());
+        $this->assertEquals(new \powereduc_url($updatedto->platformid), $reg->get_platformid());
         $this->assertEquals($updatedto->clientid, $reg->get_clientid());
-        $this->assertEquals(new \moodle_url($updatedto->authenticationrequesturl), $reg->get_authenticationrequesturl());
-        $this->assertEquals(new \moodle_url($updatedto->jwksurl), $reg->get_jwksurl());
-        $this->assertEquals(new \moodle_url($updatedto->accesstokenurl), $reg->get_accesstokenurl());
+        $this->assertEquals(new \powereduc_url($updatedto->authenticationrequesturl), $reg->get_authenticationrequesturl());
+        $this->assertEquals(new \powereduc_url($updatedto->jwksurl), $reg->get_jwksurl());
+        $this->assertEquals(new \powereduc_url($updatedto->accesstokenurl), $reg->get_accesstokenurl());
         $this->assertTrue($reg->is_complete());
 
         // Update again.
@@ -123,11 +123,11 @@ class application_registration_service_test extends \lti_advantage_testcase {
         // Verify again.
         $this->assertEquals($updatedto->id, $reg->get_id());
         $this->assertEquals($updatedto->name, $reg->get_name());
-        $this->assertEquals(new \moodle_url($updatedto->platformid), $reg->get_platformid());
+        $this->assertEquals(new \powereduc_url($updatedto->platformid), $reg->get_platformid());
         $this->assertEquals($updatedto->clientid, $reg->get_clientid());
-        $this->assertEquals(new \moodle_url($updatedto->authenticationrequesturl), $reg->get_authenticationrequesturl());
-        $this->assertEquals(new \moodle_url($updatedto->jwksurl), $reg->get_jwksurl());
-        $this->assertEquals(new \moodle_url($updatedto->accesstokenurl), $reg->get_accesstokenurl());
+        $this->assertEquals(new \powereduc_url($updatedto->authenticationrequesturl), $reg->get_authenticationrequesturl());
+        $this->assertEquals(new \powereduc_url($updatedto->jwksurl), $reg->get_jwksurl());
+        $this->assertEquals(new \powereduc_url($updatedto->accesstokenurl), $reg->get_accesstokenurl());
         $this->assertTrue($reg->is_complete());
 
         // Update missing id.

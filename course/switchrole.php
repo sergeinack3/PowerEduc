@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ $returnurl  = optional_param('returnurl', '', PARAM_RAW);
 
 if (strpos($returnurl, '?') === false) {
     // Looks like somebody did not set proper page url, better go to course page.
-    $returnurl = new moodle_url('/course/view.php', array('id' => $id));
+    $returnurl = new powereduc_url('/course/view.php', array('id' => $id));
 } else {
     if (strpos($returnurl, $CFG->wwwroot) !== 0) {
         $returnurl = $CFG->wwwroot.$returnurl;
@@ -53,7 +53,7 @@ if ($switchrole >= 0) {
 }
 
 if (!$course = $DB->get_record('course', array('id'=>$id))) {
-    redirect(new moodle_url('/'));
+    redirect(new powereduc_url('/'));
 }
 
 $context = context_course::instance($course->id);
@@ -65,7 +65,7 @@ if ($switchrole == 0) {
 require_login($course);
 
 // Switchrole - sanity check in cost-order...
-if ($switchrole > 0 && has_capability('moodle/role:switchroles', $context)) {
+if ($switchrole > 0 && has_capability('powereduc/role:switchroles', $context)) {
     // Is this role assignable in this context?
     // inquiring minds want to know...
     $aroles = get_switchable_roles($context);
@@ -100,12 +100,12 @@ if ($switchrole > 0 && has_capability('moodle/role:switchroles', $context)) {
     echo $OUTPUT->box(markdown_to_html(get_string('switchroleto_help')));
 
     foreach ($roles as $key => $role) {
-        $url = new moodle_url('/course/switchrole.php', array('id' => $id, 'switchrole' => $key, 'returnurl' => $returnurl));
+        $url = new powereduc_url('/course/switchrole.php', array('id' => $id, 'switchrole' => $key, 'returnurl' => $returnurl));
         // Button encodes special characters, apply htmlspecialchars_decode() to avoid double escaping.
         echo $OUTPUT->container($OUTPUT->single_button($url, htmlspecialchars_decode($role, ENT_COMPAT)), 'mx-3 mb-1');
     }
 
-    $url = new moodle_url($returnurl);
+    $url = new powereduc_url($returnurl);
     echo $OUTPUT->container($OUTPUT->action_link($url, get_string('cancel')), 'mx-3 mb-1');
 
     echo $OUTPUT->footer();

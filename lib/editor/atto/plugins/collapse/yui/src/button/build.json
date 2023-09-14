@@ -1,7 +1,7 @@
 {
-  "name": "moodle-atto_collapse-button",
+  "name": "powereduc-atto_collapse-button",
   "builds": {
-    "moodle-atto_collapse-button": {
+    "powereduc-atto_collapse-button": {
       "jsfiles": [
         "button.js"
       ]

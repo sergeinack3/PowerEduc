@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core_h5p
  * @category   test
- * @copyright  2020 Victor Deniz <victor@moodle.com>
+ * @copyright  2020 Victor Deniz <victor@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -38,7 +38,7 @@ use Moodle\H5PCore;
  * Test class covering the editor class.
  *
  * @package    core_h5p
- * @copyright  2020 Victor Deniz <victor@moodle.com>
+ * @copyright  2020 Victor Deniz <victor@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
  * @runTestsInSeparateProcesses
@@ -53,7 +53,7 @@ class editor_test extends advanced_testcase {
 
         require_once($CFG->libdir . '/formslib.php');
 
-        return new class extends \moodleform {
+        return new class extends \powereducform {
             /**
              * Form definition.
              */
@@ -98,7 +98,7 @@ class editor_test extends advanced_testcase {
         $fs = get_file_storage();
         $file = $fs->create_file_from_pathname($filerecord, $path);
         // Make the URL to pass to the WS.
-        $url = \moodle_url::make_pluginfile_url(
+        $url = \powereduc_url::make_pluginfile_url(
             $syscontext->id,
             \core_h5p\file_storage::COMPONENT,
             'unittest',
@@ -218,7 +218,7 @@ class editor_test extends advanced_testcase {
             $item = $h5pcorepath . $item . $cachebuster;
         });
 
-        $expectedjs[] = (new \moodle_url('/h5p/js/h5p_overrides.js' . $cachebuster))->out();
+        $expectedjs[] = (new \powereduc_url('/h5p/js/h5p_overrides.js' . $cachebuster))->out();
         $expectedjs[] = autoloader::get_h5p_editor_library_url('scripts/h5peditor-editor.js' . $cachebuster)->out();
         $expectedjs[] = autoloader::get_h5p_editor_library_url('scripts/h5peditor-init.js' . $cachebuster)->out();
 

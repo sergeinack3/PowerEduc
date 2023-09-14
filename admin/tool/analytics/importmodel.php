@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,8 +34,8 @@ if (!\core_analytics\manager::is_analytics_enabled()) {
     exit(0);
 }
 
-$returnurl = new \moodle_url('/admin/tool/analytics/index.php');
-$url = new \moodle_url('/admin/tool/analytics/importmodel.php');
+$returnurl = new \powereduc_url('/admin/tool/analytics/index.php');
+$url = new \powereduc_url('/admin/tool/analytics/importmodel.php');
 $title = get_string('importmodel', 'tool_analytics');
 
 \tool_analytics\output\helper::set_navbar($title, $url);

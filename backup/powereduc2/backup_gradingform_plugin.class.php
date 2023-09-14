@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,8 +18,8 @@
  * Contains class backup_gradingform_plugin responsible for advanced grading form plugin backup
  *
  * @package     core_backup
- * @subpackage  moodle2
- * @copyright   2011 David Mudrak <david@moodle.com>
+ * @subpackage  powereduc2
+ * @copyright   2011 David Mudrak <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ defined('POWEREDUC_INTERNAL') || die();
  *
  * As an example of implementation see {@link backup_gradingform_rubric_plugin}
  *
- * @copyright  2011 David Mudrak <david@moodle.com>
+ * @copyright  2011 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @category   backup
  */

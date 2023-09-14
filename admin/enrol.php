@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ require_sesskey();
 $enabled = enrol_get_plugins(true);
 $all     = enrol_get_plugins(false);
 
-$return = new moodle_url('/admin/settings.php', array('section'=>'manageenrols'));
+$return = new powereduc_url('/admin/settings.php', array('section'=>'manageenrols'));
 
 switch ($action) {
     case 'disable':
@@ -114,7 +114,7 @@ switch ($action) {
         echo $OUTPUT->notification(get_string('success'), 'notifysuccess');
 
         if (!$return = core_plugin_manager::instance()->get_uninstall_url('enrol_'.$enrol, 'manage')) {
-            $return = new moodle_url('/admin/plugins.php');
+            $return = new powereduc_url('/admin/plugins.php');
         }
         echo $OUTPUT->continue_button($return);
         echo $OUTPUT->footer();

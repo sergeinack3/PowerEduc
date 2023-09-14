@@ -1,5 +1,5 @@
 /**
- * moodle readme
+ * powereduc readme
  *
  * Lunrjs can be downloaded from https://github.com/olivernn/lunr.js. To update this library get the lunr.js file
  * from this project and replace the content below with the new content.

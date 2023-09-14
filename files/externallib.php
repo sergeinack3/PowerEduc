@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -64,7 +64,7 @@ class core_files_external extends external_api {
     }
 
     /**
-     * Return moodle files listing
+     * Return powereduc files listing
      *
      * @param int $contextid context id
      * @param int $component component
@@ -259,7 +259,7 @@ class core_files_external extends external_api {
     }
 
     /**
-     * Uploading a file to moodle
+     * Uploading a file to powereduc
      *
      * @param int    $contextid    context id
      * @param string $component    component
@@ -282,7 +282,7 @@ class core_files_external extends external_api {
                 'instanceid' => $instanceid));
 
         if (!isset($fileinfo['filecontent'])) {
-            throw new moodle_exception('nofile');
+            throw new powereduc_exception('nofile');
         }
         // Saving file.
         $dir = make_temp_directory('wsupload');
@@ -338,14 +338,14 @@ class core_files_external extends external_api {
         $context = self::get_context_from_params($fileinfo);
         self::validate_context($context);
         if (($fileinfo['component'] == 'user' and $fileinfo['filearea'] == 'private')) {
-            throw new moodle_exception('privatefilesupload');
+            throw new powereduc_exception('privatefilesupload');
         }
 
         $browser = get_file_browser();
 
         // Check existing file.
         if ($file = $browser->get_file_info($context, $component, $filearea, $itemid, $filepath, $filename)) {
-            throw new moodle_exception('fileexist');
+            throw new powereduc_exception('fileexist');
         }
 
         // Move file to filepool.
@@ -363,7 +363,7 @@ class core_files_external extends external_api {
                 'url'=>$info->get_url()
                 );
         } else {
-            throw new moodle_exception('nofile');
+            throw new powereduc_exception('nofile');
         }
     }
 

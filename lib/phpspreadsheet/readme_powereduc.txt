@@ -1,4 +1,4 @@
-Description of PhpSpreadsheet import into Moodle
+Description of PhpSpreadsheet import into PowerEduc
 
 Last release package can be found in https://github.com/PHPOffice/PhpSpreadsheet/releases
 
@@ -7,7 +7,7 @@ NOTICE:
  * Composer version 2.2.4 2022-01-08 12:30:42
 
 STEPS:
- * Create a temporary folder outside your moodle installation
+ * Create a temporary folder outside your powereduc installation
  * Create a composer.json file with the following content (you will need to replace X.YY to the proper version to be upgraded):
 {
     "require": {
@@ -27,7 +27,7 @@ STEPS:
    - /vendor/myclabs/*
    - /vendor/symfony/polyfill-mbstring
  * If it has pulled these through, remove them from the required packages and run composer again.
- * Check any new libraries that have been added and make sure they do not exist in Moodle already.
+ * Check any new libraries that have been added and make sure they do not exist in PowerEduc already.
  * If the following exist, remove the following folders (and their content):
    - vendor/phpoffice/phpspreadsheet/bin
    - vendor/phpoffice/phpspreadsheet/docs
@@ -71,14 +71,14 @@ STEPS:
  * Update lib/thirdpartylibs.xml
  * Apply the modifications described in the CHANGES section
  * Create another commit with the previous two steps of changes
- * Go to http://<your moodle root>/lib/tests/other/spreadsheettestpage.php and test the generated files
+ * Go to http://<your powereduc root>/lib/tests/other/spreadsheettestpage.php and test the generated files
 
 
 CHANGES:
 
- * Add the next Moodle hack at the beginning of the function sysGetTempDir()
+ * Add the next PowerEduc hack at the beginning of the function sysGetTempDir()
 located in lib/phpspreadsheet/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Shared/File.php
-    // Moodle hack!
+    // PowerEduc hack!
      if (function_exists('make_temp_directory')) {
          $temp = make_temp_directory('phpspreadsheet');
          return realpath(dirname($temp));

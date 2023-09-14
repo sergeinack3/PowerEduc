@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Repeat event collection tests.
  *
  * @package    core_calendar
- * @copyright  2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2017 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -42,7 +42,7 @@ require_once($CFG->dirroot . '/calendar/lib.php');
  * Repeat event collection tests.
  *
  * @package core_calendar
- * @copyright 2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright 2017 Ryan Wyllie <ryan@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class repeat_event_collection_test extends \advanced_testcase {
@@ -180,7 +180,7 @@ class repeat_event_collection_test extends \advanced_testcase {
 /**
  * Test event factory.
  *
- * @copyright 2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright 2017 Ryan Wyllie <ryan@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core_calendar_repeat_event_collection_event_test_factory implements event_factory_interface {

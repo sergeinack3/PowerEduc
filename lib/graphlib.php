@@ -29,12 +29,12 @@
 defined('POWEREDUC_INTERNAL') || die();
 
 /* This file contains modifications by Martin Dougiamas
- * as part of Moodle (http://moodle.com).  Modified lines
- * are marked with "Moodle".
+ * as part of PowerEduc (http://powereduc.com).  Modified lines
+ * are marked with "PowerEduc".
  */
 
 /**
- * @package moodlecore
+ * @package powereduccore
  */
 class graph {
   var $image;
@@ -157,7 +157,7 @@ class graph {
     // init all text - title, labels, and axis text.
     function init() {
 
-      /// Moodle mods:  overrides the font path and encodings
+      /// PowerEduc mods:  overrides the font path and encodings
 
       global $CFG;
 
@@ -183,7 +183,7 @@ class graph {
 
       $this->parameter['path_to_fonts'] = $fontpath;
 
-      /// End Moodle mods
+      /// End PowerEduc mods
 
 
 
@@ -308,12 +308,12 @@ class graph {
 
         if (($bar!='none') && (string)$thisY != 'none') {
             if (isset($this->offset_relation[$set]) && $relatedset = $this->offset_relation[$set]) {
-                $yoffset = $this->calculated['y_plot'][$relatedset][$index];                // Moodle
-            } else {                                                                        // Moodle
-                $yoffset = 0;                                                               // Moodle
-            }                                                                               // Moodle
-            //$this->bar($thisX, $thisY, $bar, $barSize, $colour, $offset, $set);           // Moodle
-            $this->bar($thisX, $thisY, $bar, $barSize, $colour, $offset, $set, $yoffset);   // Moodle
+                $yoffset = $this->calculated['y_plot'][$relatedset][$index];                // PowerEduc
+            } else {                                                                        // PowerEduc
+                $yoffset = 0;                                                               // PowerEduc
+            }                                                                               // PowerEduc
+            //$this->bar($thisX, $thisY, $bar, $barSize, $colour, $offset, $set);           // PowerEduc
+            $this->bar($thisX, $thisY, $bar, $barSize, $colour, $offset, $set, $yoffset);   // PowerEduc
         }
 
         if (($area!='none') && (((string)$lastY != 'none') && ((string)$thisY != 'none')))
@@ -1161,9 +1161,9 @@ class graph {
         if ($max < 0) $factor = - pow(10, (floor(log10(abs($max))) + $resolution) );
         else $factor = pow(10, (floor(log10(abs($max))) - $resolution) );
       }
-      if ($factor > 0.1) { // To avoid some wierd rounding errors (Moodle)
-        $factor = round($factor * 1000.0) / 1000.0; // To avoid some wierd rounding errors (Moodle)
-      } // To avoid some wierd rounding errors (Moodle)
+      if ($factor > 0.1) { // To avoid some wierd rounding errors (PowerEduc)
+        $factor = round($factor * 1000.0) / 1000.0; // To avoid some wierd rounding errors (PowerEduc)
+      } // To avoid some wierd rounding errors (PowerEduc)
 
       $max = $factor * @ceil($max / $factor);
       $min = $factor * @floor($min / $factor);
@@ -1193,7 +1193,7 @@ class graph {
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
     public function graph() {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
@@ -1272,9 +1272,9 @@ class graph {
           $x = 0;
           break;
       }
-      // start of Moodle addition
+      // start of PowerEduc addition
       $text = core_text::utf8_to_entities($text, true, true); //does not work with hex entities!
-      // end of Moodle addition
+      // end of PowerEduc addition
       ImageTTFText($this->image, $points, $angle, $x, $y, $colour, $font, $text);
     }
 
@@ -1377,9 +1377,9 @@ class graph {
       }
 
       // get boundary box and offsets for printing at an angle
-      // start of Moodle addition
+      // start of PowerEduc addition
       $text = core_text::utf8_to_entities($text, true, true); //gd does not work with hex entities!
-      // end of Moodle addition
+      // end of PowerEduc addition
       $bounds = ImageTTFBBox($points, $angle, $font, $text);
 
       if ($angle < 0) {
@@ -1634,12 +1634,12 @@ class graph {
         $u_right = $x_right + $offset - 1;
         $v       = $this->calculated['boundary_box']['bottom'] - $y + $offset;
 
-        // Moodle addition, plus the function parameter yoffset
-        if ($yoffset) {                                           // Moodle
-            $yoffset = $yoffset - round(($bottom - $v) / 2.0);    // Moodle
-            $bottom -= $yoffset;                                  // Moodle
-            $v      -= $yoffset;                                  // Moodle
-        }                                                         // Moodle
+        // PowerEduc addition, plus the function parameter yoffset
+        if ($yoffset) {                                           // PowerEduc
+            $yoffset = $yoffset - round(($bottom - $v) / 2.0);    // PowerEduc
+            $bottom -= $yoffset;                                  // PowerEduc
+            $v      -= $yoffset;                                  // PowerEduc
+        }                                                         // PowerEduc
 
         switch ($type) {
           case 'open':

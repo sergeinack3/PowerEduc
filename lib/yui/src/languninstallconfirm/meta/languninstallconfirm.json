@@ -1,10 +1,10 @@
 {
-  "moodle-core-languninstallconfirm": {
+  "powereduc-core-languninstallconfirm": {
     "requires": [
         "base",
         "node",
-        "moodle-core-notification-confirm",
-        "moodle-core-notification-alert"
+        "powereduc-core-notification-confirm",
+        "powereduc-core-notification-alert"
     ]
   }
 }

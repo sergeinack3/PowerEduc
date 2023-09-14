@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * Defines various backup steps that will be used by common tasks in backup
  *
  * @package     core_backup
- * @subpackage  moodle2
+ * @subpackage  powereduc2
  * @category    backup
  * @copyright   2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -1950,7 +1950,7 @@ class move_inforef_annotations_to_final extends backup_execution_step {
 /**
  * structure in charge of constructing the files.xml file with all the
  * annotated (final) files along the process. At, the same time, and
- * using one specialised nested_element, will copy them form moodle storage
+ * using one specialised nested_element, will copy them form powereduc storage
  * to backup storage
  */
 class backup_final_files_structure_step extends backup_structure_step {
@@ -1988,7 +1988,7 @@ class backup_final_files_structure_step extends backup_structure_step {
 }
 
 /**
- * Structure step in charge of creating the main moodle_backup.xml file
+ * Structure step in charge of creating the main powereduc_backup.xml file
  * where all the information related to the backup, settings, license and
  * other information needed on restore is added*/
 class backup_main_structure_step extends backup_structure_step {
@@ -2000,8 +2000,8 @@ class backup_main_structure_step extends backup_structure_step {
         $info = array();
 
         $info['name'] = $this->get_setting_value('filename');
-        $info['moodle_version'] = $CFG->version;
-        $info['moodle_release'] = $CFG->release;
+        $info['powereduc_version'] = $CFG->version;
+        $info['powereduc_release'] = $CFG->release;
         $info['backup_version'] = $CFG->backup_version;
         $info['backup_release'] = $CFG->backup_release;
         $info['backup_date']    = time();
@@ -2023,15 +2023,15 @@ class backup_main_structure_step extends backup_structure_step {
         $info['original_system_contextid'] = context_system::instance()->id;
 
         // Get more information from controller
-        list($dinfo, $cinfo, $sinfo) = backup_controller_dbops::get_moodle_backup_information(
+        list($dinfo, $cinfo, $sinfo) = backup_controller_dbops::get_powereduc_backup_information(
                 $this->get_backupid(), $this->get_task()->get_progress());
 
         // Define elements
 
-        $moodle_backup = new backup_nested_element('moodle_backup');
+        $powereduc_backup = new backup_nested_element('powereduc_backup');
 
         $information = new backup_nested_element('information', null, array(
-            'name', 'moodle_version', 'moodle_release', 'backup_version',
+            'name', 'powereduc_version', 'powereduc_release', 'backup_version',
             'backup_release', 'backup_date', 'mnet_remoteusers', 'include_files', 'include_file_references_to_external_content', 'original_wwwroot',
             'original_site_identifier_hash', 'original_course_id', 'original_course_format',
             'original_course_fullname', 'original_course_shortname', 'original_course_startdate', 'original_course_enddate',
@@ -2066,7 +2066,7 @@ class backup_main_structure_step extends backup_structure_step {
 
         // Build the tree
 
-        $moodle_backup->add_child($information);
+        $powereduc_backup->add_child($information);
 
         $information->add_child($details);
         $details->add_child($detail);
@@ -2102,8 +2102,8 @@ class backup_main_structure_step extends backup_structure_step {
 
         $setting->set_source_array($sinfo);
 
-        // Prepare some information to be sent to main moodle_backup.xml file
-        return $moodle_backup;
+        // Prepare some information to be sent to main powereduc_backup.xml file
+        return $powereduc_backup;
     }
 
 }
@@ -2132,14 +2132,14 @@ class backup_zip_contents extends backup_execution_step implements file_progress
         // Add the log file if exists
         $logfilepath = $basepath . '.log';
         if (file_exists($logfilepath)) {
-             $files['moodle_backup.log'] = $logfilepath;
+             $files['powereduc_backup.log'] = $logfilepath;
         }
 
         // Calculate the zip fullpath (in OS temp area it's always backup.mbz)
         $zipfile = $basepath . '/backup.mbz';
 
         // Get the zip packer
-        $zippacker = get_file_packer('application/vnd.moodle.backup');
+        $zippacker = get_file_packer('application/vnd.powereduc.backup');
 
         // Track overall progress for the 2 long-running steps (archive to
         // pathname, get backup information).

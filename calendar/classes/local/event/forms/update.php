@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * The mform for updating a calendar event. Based on the old event form.
  *
  * @package    core_calendar
- * @copyright 2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright 2017 Ryan Wyllie <ryan@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace core_calendar\local\event\forms;
@@ -30,7 +30,7 @@ require_once($CFG->dirroot.'/lib/formslib.php');
 /**
  * The mform class for updating a calendar event.
  *
- * @copyright 2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright 2017 Ryan Wyllie <ryan@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class update extends create {

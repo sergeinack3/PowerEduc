@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -116,7 +116,7 @@ class core_course_external extends external_api {
                             if (is_numeric($value)) {
                                 $filters[$name] = $value;
                             } else {
-                                throw new moodle_exception('errorinvalidparam', 'webservice', '', $name);
+                                throw new powereduc_exception('errorinvalidparam', 'webservice', '', $name);
                             }
                             break;
                         case 'modname':
@@ -124,11 +124,11 @@ class core_course_external extends external_api {
                             if ($value) {
                                 $filters[$name] = $value;
                             } else {
-                                throw new moodle_exception('errorinvalidparam', 'webservice', '', $name);
+                                throw new powereduc_exception('errorinvalidparam', 'webservice', '', $name);
                             }
                             break;
                         default:
-                            throw new moodle_exception('errorinvalidparam', 'webservice', '', $name);
+                            throw new powereduc_exception('errorinvalidparam', 'webservice', '', $name);
                     }
                 }
             }
@@ -140,7 +140,7 @@ class core_course_external extends external_api {
         if ($course->id != SITEID) {
             // Check course format exist.
             if (!file_exists($CFG->dirroot . '/course/format/' . $course->format . '/lib.php')) {
-                throw new moodle_exception('cannotgetcoursecontents', 'webservice', '', null,
+                throw new powereduc_exception('cannotgetcoursecontents', 'webservice', '', null,
                                             get_string('courseformatnotfound', 'error', $course->format));
             } else {
                 require_once($CFG->dirroot . '/course/format/' . $course->format . '/lib.php');
@@ -155,16 +155,16 @@ class core_course_external extends external_api {
             $exceptionparam = new stdClass();
             $exceptionparam->message = $e->getMessage();
             $exceptionparam->courseid = $course->id;
-            throw new moodle_exception('errorcoursecontextnotvalid', 'webservice', '', $exceptionparam);
+            throw new powereduc_exception('errorcoursecontextnotvalid', 'webservice', '', $exceptionparam);
         }
 
-        $canupdatecourse = has_capability('moodle/course:update', $context);
+        $canupdatecourse = has_capability('powereduc/course:update', $context);
 
         //create return value
         $coursecontents = array();
 
         if ($canupdatecourse or $course->visible
-                or has_capability('moodle/course:viewhiddencourses', $context)) {
+                or has_capability('powereduc/course:viewhiddencourses', $context)) {
 
             //retrieve sections
             $modinfo = get_fast_modinfo($course);
@@ -301,7 +301,7 @@ class core_course_external extends external_api {
                             $module['url'] = $url->out(false);
                         }
 
-                        $canviewhidden = has_capability('moodle/course:viewhiddenactivities',
+                        $canviewhidden = has_capability('powereduc/course:viewhiddenactivities',
                                             context_module::instance($cm->id));
                         //user that can view hidden module should know about the visibility
                         $module['visible'] = $cm->visible;
@@ -506,7 +506,7 @@ class core_course_external extends external_api {
                                                     VALUE_OPTIONAL),
 
                                                   // copyright related info
-                                                  'userid' => new external_value(PARAM_INT, 'User who added this content to moodle'),
+                                                  'userid' => new external_value(PARAM_INT, 'User who added this content to powereduc'),
                                                   'author' => new external_value(PARAM_TEXT, 'Content owner'),
                                                   'license' => new external_value(PARAM_TEXT, 'Content license'),
                                                   'tags' => new external_multiple_structure(
@@ -592,10 +592,10 @@ class core_course_external extends external_api {
                 $exceptionparam = new stdClass();
                 $exceptionparam->message = $e->getMessage();
                 $exceptionparam->courseid = $course->id;
-                throw new moodle_exception('errorcoursecontextnotvalid', 'webservice', '', $exceptionparam);
+                throw new powereduc_exception('errorcoursecontextnotvalid', 'webservice', '', $exceptionparam);
             }
             if ($course->id != SITEID) {
-                require_capability('moodle/course:view', $context);
+                require_capability('powereduc/course:view', $context);
             }
 
             $courseinfo = array();
@@ -631,7 +631,7 @@ class core_course_external extends external_api {
             }
 
             //some field should be returned only if the user has update permission
-            $courseadmin = has_capability('moodle/course:update', $context);
+            $courseadmin = has_capability('powereduc/course:update', $context);
             if ($courseadmin) {
                 $courseinfo['categorysortorder'] = $course->sortorder;
                 $courseinfo['idnumber'] = $course->idnumber;
@@ -665,7 +665,7 @@ class core_course_external extends external_api {
             }
 
             if ($courseadmin or $course->visible
-                    or has_capability('moodle/course:viewhiddencourses', $context)) {
+                    or has_capability('powereduc/course:viewhiddencourses', $context)) {
                 $coursesinfo[] = $courseinfo;
             }
         }
@@ -766,7 +766,7 @@ class core_course_external extends external_api {
      * @since Moodle 2.2
      */
     public static function create_courses_parameters() {
-        $courseconfig = get_config('moodlecourse'); //needed for many default values
+        $courseconfig = get_config('powereduccourse'); //needed for many default values
         return new external_function_parameters(
             array(
                 'courses' => new external_multiple_structure(
@@ -870,23 +870,23 @@ class core_course_external extends external_api {
                 $exceptionparam = new stdClass();
                 $exceptionparam->message = $e->getMessage();
                 $exceptionparam->catid = $course['categoryid'];
-                throw new moodle_exception('errorcatcontextnotvalid', 'webservice', '', $exceptionparam);
+                throw new powereduc_exception('errorcatcontextnotvalid', 'webservice', '', $exceptionparam);
             }
-            require_capability('moodle/course:create', $context);
+            require_capability('powereduc/course:create', $context);
 
             // Fullname and short name are required to be non-empty.
             if (trim($course['fullname']) === '') {
-                throw new moodle_exception('errorinvalidparam', 'webservice', '', 'fullname');
+                throw new powereduc_exception('errorinvalidparam', 'webservice', '', 'fullname');
             } else if (trim($course['shortname']) === '') {
-                throw new moodle_exception('errorinvalidparam', 'webservice', '', 'shortname');
+                throw new powereduc_exception('errorinvalidparam', 'webservice', '', 'shortname');
             }
 
             // Make sure lang is valid
             if (array_key_exists('lang', $course)) {
                 if (empty($availablelangs[$course['lang']])) {
-                    throw new moodle_exception('errorinvalidparam', 'webservice', '', 'lang');
+                    throw new powereduc_exception('errorinvalidparam', 'webservice', '', 'lang');
                 }
-                if (!has_capability('moodle/course:setforcedlanguage', $context)) {
+                if (!has_capability('powereduc/course:setforcedlanguage', $context)) {
                     unset($course['lang']);
                 }
             }
@@ -895,7 +895,7 @@ class core_course_external extends external_api {
             if (array_key_exists('forcetheme', $course)) {
                 if (!empty($CFG->allowcoursethemes)) {
                     if (empty($availablethemes[$course['forcetheme']])) {
-                        throw new moodle_exception('errorinvalidparam', 'webservice', '', 'forcetheme');
+                        throw new powereduc_exception('errorinvalidparam', 'webservice', '', 'forcetheme');
                     } else {
                         $course['theme'] = $course['forcetheme'];
                     }
@@ -904,12 +904,12 @@ class core_course_external extends external_api {
 
             //force visibility if ws user doesn't have the permission to set it
             $category = $DB->get_record('course_categories', array('id' => $course['categoryid']));
-            if (!has_capability('moodle/course:visibility', $context)) {
+            if (!has_capability('powereduc/course:visibility', $context)) {
                 $course['visible'] = $category->visible;
             }
 
             //set default value for completion
-            $courseconfig = get_config('moodlecourse');
+            $courseconfig = get_config('powereduccourse');
             if (completion_info::is_enabled_for_site()) {
                 if (!array_key_exists('enablecompletion', $course)) {
                     $course['enablecompletion'] = $courseconfig->enablecompletion;
@@ -1058,56 +1058,56 @@ class core_course_external extends external_api {
 
                 $oldcourse = course_get_format($course['id'])->get_course();
 
-                require_capability('moodle/course:update', $context);
+                require_capability('powereduc/course:update', $context);
 
                 // Check if user can change category.
                 if (array_key_exists('categoryid', $course) && ($oldcourse->category != $course['categoryid'])) {
-                    require_capability('moodle/course:changecategory', $context);
+                    require_capability('powereduc/course:changecategory', $context);
                     $course['category'] = $course['categoryid'];
                 }
 
                 // Check if the user can change fullname, and the new value is non-empty.
                 if (array_key_exists('fullname', $course) && ($oldcourse->fullname != $course['fullname'])) {
-                    require_capability('moodle/course:changefullname', $context);
+                    require_capability('powereduc/course:changefullname', $context);
                     if (trim($course['fullname']) === '') {
-                        throw new moodle_exception('errorinvalidparam', 'webservice', '', 'fullname');
+                        throw new powereduc_exception('errorinvalidparam', 'webservice', '', 'fullname');
                     }
                 }
 
                 // Check if the user can change shortname, and the new value is non-empty.
                 if (array_key_exists('shortname', $course) && ($oldcourse->shortname != $course['shortname'])) {
-                    require_capability('moodle/course:changeshortname', $context);
+                    require_capability('powereduc/course:changeshortname', $context);
                     if (trim($course['shortname']) === '') {
-                        throw new moodle_exception('errorinvalidparam', 'webservice', '', 'shortname');
+                        throw new powereduc_exception('errorinvalidparam', 'webservice', '', 'shortname');
                     }
                 }
 
                 // Check if the user can change the idnumber.
                 if (array_key_exists('idnumber', $course) && ($oldcourse->idnumber != $course['idnumber'])) {
-                    require_capability('moodle/course:changeidnumber', $context);
+                    require_capability('powereduc/course:changeidnumber', $context);
                 }
 
                 // Check if user can change summary.
                 if (array_key_exists('summary', $course) && ($oldcourse->summary != $course['summary'])) {
-                    require_capability('moodle/course:changesummary', $context);
+                    require_capability('powereduc/course:changesummary', $context);
                 }
 
                 // Summary format.
                 if (array_key_exists('summaryformat', $course) && ($oldcourse->summaryformat != $course['summaryformat'])) {
-                    require_capability('moodle/course:changesummary', $context);
+                    require_capability('powereduc/course:changesummary', $context);
                     $course['summaryformat'] = external_validate_format($course['summaryformat']);
                 }
 
                 // Check if user can change visibility.
                 if (array_key_exists('visible', $course) && ($oldcourse->visible != $course['visible'])) {
-                    require_capability('moodle/course:visibility', $context);
+                    require_capability('powereduc/course:visibility', $context);
                 }
 
                 // Make sure lang is valid.
                 if (array_key_exists('lang', $course) && ($oldcourse->lang != $course['lang'])) {
-                    require_capability('moodle/course:setforcedlanguage', $context);
+                    require_capability('powereduc/course:setforcedlanguage', $context);
                     if (empty($availablelangs[$course['lang']])) {
-                        throw new moodle_exception('errorinvalidparam', 'webservice', '', 'lang');
+                        throw new powereduc_exception('errorinvalidparam', 'webservice', '', 'lang');
                     }
                 }
 
@@ -1115,7 +1115,7 @@ class core_course_external extends external_api {
                 if (array_key_exists('forcetheme', $course)) {
                     if (!empty($CFG->allowcoursethemes)) {
                         if (empty($availablethemes[$course['forcetheme']])) {
-                            throw new moodle_exception('errorinvalidparam', 'webservice', '', 'forcetheme');
+                            throw new powereduc_exception('errorinvalidparam', 'webservice', '', 'forcetheme');
                         } else {
                             $course['theme'] = $course['forcetheme'];
                         }
@@ -1157,7 +1157,7 @@ class core_course_external extends external_api {
                 $warning = array();
                 $warning['item'] = 'course';
                 $warning['itemid'] = $course['id'];
-                if ($e instanceof moodle_exception) {
+                if ($e instanceof powereduc_exception) {
                     $warning['warningcode'] = $e->errorcode;
                 } else {
                     $warning['warningcode'] = $e->getCode();
@@ -1344,7 +1344,7 @@ class core_course_external extends external_api {
         // Context validation.
 
         if (! ($course = $DB->get_record('course', array('id'=>$params['courseid'])))) {
-            throw new moodle_exception('invalidcourseid', 'error');
+            throw new powereduc_exception('invalidcourseid', 'error');
         }
 
         // Category where duplicated course is going to be created.
@@ -1377,11 +1377,11 @@ class core_course_external extends external_api {
                 $value = clean_param($option['value'], PARAM_INT);
 
                 if ($value !== 0 and $value !== 1) {
-                    throw new moodle_exception('invalidextparam', 'webservice', '', $option['name']);
+                    throw new powereduc_exception('invalidextparam', 'webservice', '', $option['name']);
                 }
 
                 if (!isset($backupdefaults[$option['name']])) {
-                    throw new moodle_exception('invalidextparam', 'webservice', '', $option['name']);
+                    throw new powereduc_exception('invalidextparam', 'webservice', '', $option['name']);
                 }
 
                 $backupsettings[$option['name']] = $value;
@@ -1391,13 +1391,13 @@ class core_course_external extends external_api {
         // Capability checking.
 
         // The backup controller check for this currently, this may be redundant.
-        require_capability('moodle/course:create', $categorycontext);
-        require_capability('moodle/restore:restorecourse', $categorycontext);
-        require_capability('moodle/backup:backupcourse', $coursecontext);
+        require_capability('powereduc/course:create', $categorycontext);
+        require_capability('powereduc/restore:restorecourse', $categorycontext);
+        require_capability('powereduc/backup:backupcourse', $coursecontext);
 
         if (!empty($backupsettings['users'])) {
-            require_capability('moodle/backup:userinfo', $coursecontext);
-            require_capability('moodle/restore:userinfo', $categorycontext);
+            require_capability('powereduc/backup:userinfo', $coursecontext);
+            require_capability('powereduc/restore:userinfo', $categorycontext);
         }
 
         // Check if the shortname is used.
@@ -1407,7 +1407,7 @@ class core_course_external extends external_api {
             }
 
             $foundcoursenamestring = implode(',', $foundcoursenames);
-            throw new moodle_exception('shortnametaken', '', '', $foundcoursenamestring);
+            throw new powereduc_exception('shortnametaken', '', '', $foundcoursenamestring);
         }
 
         // Backup the course.
@@ -1433,8 +1433,8 @@ class core_course_external extends external_api {
         // Restore the backup immediately.
 
         // Check if we need to unzip the file because the backup temp dir does not contains backup files.
-        if (!file_exists($backupbasepath . "/moodle_backup.xml")) {
-            $file->extract_to_pathname(get_file_packer('application/vnd.moodle.backup'), $backupbasepath);
+        if (!file_exists($backupbasepath . "/powereduc_backup.xml")) {
+            $file->extract_to_pathname(get_file_packer('application/vnd.powereduc.backup'), $backupbasepath);
         }
 
         // Create new course.
@@ -1469,7 +1469,7 @@ class core_course_external extends external_api {
                     }
                 }
 
-                throw new moodle_exception('backupprecheckerrors', 'webservice', '', $errorinfo);
+                throw new powereduc_exception('backupprecheckerrors', 'webservice', '', $errorinfo);
             }
         }
 
@@ -1565,17 +1565,17 @@ class core_course_external extends external_api {
         );
 
         if ($params['deletecontent'] !== 0 and $params['deletecontent'] !== 1) {
-            throw new moodle_exception('invalidextparam', 'webservice', '', $params['deletecontent']);
+            throw new powereduc_exception('invalidextparam', 'webservice', '', $params['deletecontent']);
         }
 
         // Context validation.
 
         if (! ($importfrom = $DB->get_record('course', array('id'=>$params['importfrom'])))) {
-            throw new moodle_exception('invalidcourseid', 'error');
+            throw new powereduc_exception('invalidcourseid', 'error');
         }
 
         if (! ($importto = $DB->get_record('course', array('id'=>$params['importto'])))) {
-            throw new moodle_exception('invalidcourseid', 'error');
+            throw new powereduc_exception('invalidcourseid', 'error');
         }
 
         $importfromcontext = context_course::instance($importfrom->id);
@@ -1600,11 +1600,11 @@ class core_course_external extends external_api {
                 $value = clean_param($option['value'], PARAM_INT);
 
                 if ($value !== 0 and $value !== 1) {
-                    throw new moodle_exception('invalidextparam', 'webservice', '', $option['name']);
+                    throw new powereduc_exception('invalidextparam', 'webservice', '', $option['name']);
                 }
 
                 if (!isset($backupdefaults[$option['name']])) {
-                    throw new moodle_exception('invalidextparam', 'webservice', '', $option['name']);
+                    throw new powereduc_exception('invalidextparam', 'webservice', '', $option['name']);
                 }
 
                 $backupsettings[$option['name']] = $value;
@@ -1613,8 +1613,8 @@ class core_course_external extends external_api {
 
         // Capability checking.
 
-        require_capability('moodle/backup:backuptargetimport', $importfromcontext);
-        require_capability('moodle/restore:restoretargetimport', $importtocontext);
+        require_capability('powereduc/backup:backuptargetimport', $importfromcontext);
+        require_capability('powereduc/restore:restoretargetimport', $importtocontext);
 
         $bc = new backup_controller(backup::TYPE_1COURSE, $importfrom->id, backup::FORMAT_POWEREDUC,
                 backup::INTERACTIVE_NO, backup::MODE_IMPORT, $USER->id);
@@ -1664,7 +1664,7 @@ class core_course_external extends external_api {
                     }
                 }
 
-                throw new moodle_exception('backupprecheckerrors', 'webservice', '', $errorinfo);
+                throw new powereduc_exception('backupprecheckerrors', 'webservice', '', $errorinfo);
             }
         } else {
             if ($restoretarget == backup::TARGET_EXISTING_DELETING) {
@@ -1711,12 +1711,12 @@ class core_course_external extends external_api {
                                          '"name" (string) the category name,'.
                                          '"parent" (int) the parent category id,'.
                                          '"idnumber" (string) category idnumber'.
-                                         ' - user must have \'moodle/category:manage\' to search on idnumber,'.
+                                         ' - user must have \'powereduc/category:manage\' to search on idnumber,'.
                                          '"visible" (int) whether the returned categories must be visible or hidden. If the key is not passed,
                                              then the function return all categories that the user can see.'.
-                                         ' - user must have \'moodle/category:manage\' or \'moodle/category:viewhiddencategories\' to search on visible,'.
+                                         ' - user must have \'powereduc/category:manage\' or \'powereduc/category:viewhiddencategories\' to search on visible,'.
                                          '"theme" (string) only return the categories having this theme'.
-                                         ' - user must have \'moodle/category:manage\' to search on theme'),
+                                         ' - user must have \'powereduc/category:manage\' to search on theme'),
                             'value' => new external_value(PARAM_RAW, 'the value to match')
                         )
                     ), 'criteria', VALUE_DEFAULT, array()
@@ -1773,14 +1773,14 @@ class core_course_external extends external_api {
                             break;
 
                         case 'idnumber':
-                            if (has_capability('moodle/category:manage', $context)) {
+                            if (has_capability('powereduc/category:manage', $context)) {
                                 $value = clean_param($crit['value'], PARAM_RAW);
                                 $conditions[$key] = $value;
                                 $wheres[] = $key . " = :" . $key;
                             } else {
                                 // We must throw an exception.
                                 // Otherwise the dev client would think no idnumber exists.
-                                throw new moodle_exception('criteriaerror',
+                                throw new powereduc_exception('criteriaerror',
                                         'webservice', '', null,
                                         'You don\'t have the permissions to search on the "idnumber" field.');
                             }
@@ -1799,31 +1799,31 @@ class core_course_external extends external_api {
                             break;
 
                         case 'visible':
-                            if (has_capability('moodle/category:viewhiddencategories', $context)) {
+                            if (has_capability('powereduc/category:viewhiddencategories', $context)) {
                                 $value = clean_param($crit['value'], PARAM_INT);
                                 $conditions[$key] = $value;
                                 $wheres[] = $key . " = :" . $key;
                             } else {
-                                throw new moodle_exception('criteriaerror',
+                                throw new powereduc_exception('criteriaerror',
                                         'webservice', '', null,
                                         'You don\'t have the permissions to search on the "visible" field.');
                             }
                             break;
 
                         case 'theme':
-                            if (has_capability('moodle/category:manage', $context)) {
+                            if (has_capability('powereduc/category:manage', $context)) {
                                 $value = clean_param($crit['value'], PARAM_THEME);
                                 $conditions[$key] = $value;
                                 $wheres[] = $key . " = :" . $key;
                             } else {
-                                throw new moodle_exception('criteriaerror',
+                                throw new powereduc_exception('criteriaerror',
                                         'webservice', '', null,
                                         'You don\'t have the permissions to search on the "theme" field.');
                             }
                             break;
 
                         default:
-                            throw new moodle_exception('criteriaerror',
+                            throw new powereduc_exception('criteriaerror',
                                     'webservice', '', null,
                                     'You can not search on this criteria: ' . $key);
                     }
@@ -1901,7 +1901,7 @@ class core_course_external extends external_api {
                     $exceptionparam = new stdClass();
                     $exceptionparam->message = $e->getMessage();
                     $exceptionparam->catid = $category->id;
-                    throw new moodle_exception('errorcatcontextnotvalid', 'webservice', '', $exceptionparam);
+                    throw new powereduc_exception('errorcatcontextnotvalid', 'webservice', '', $exceptionparam);
                 }
             }
 
@@ -1924,7 +1924,7 @@ class core_course_external extends external_api {
                     $categoryinfo['path'] = $category->path;
 
                     // Some fields only returned for admin.
-                    if (has_capability('moodle/category:manage', $context)) {
+                    if (has_capability('powereduc/category:manage', $context)) {
                         $categoryinfo['idnumber'] = $category->idnumber;
                         $categoryinfo['visible'] = $category->visible;
                         $categoryinfo['visibleold'] = $category->visibleold;
@@ -2023,7 +2023,7 @@ class core_course_external extends external_api {
                                         'the new category description', VALUE_OPTIONAL),
                                 'descriptionformat' => new external_format_value('description', VALUE_DEFAULT),
                                 'theme' => new external_value(PARAM_THEME,
-                                        'the new category theme. This option must be enabled on moodle',
+                                        'the new category theme. This option must be enabled on powereduc',
                                         VALUE_OPTIONAL),
                         )
                     )
@@ -2051,14 +2051,14 @@ class core_course_external extends external_api {
         foreach ($params['categories'] as $category) {
             if ($category['parent']) {
                 if (!$DB->record_exists('course_categories', array('id' => $category['parent']))) {
-                    throw new moodle_exception('unknowcategory');
+                    throw new powereduc_exception('unknowcategory');
                 }
                 $context = context_coursecat::instance($category['parent']);
             } else {
                 $context = context_system::instance();
             }
             self::validate_context($context);
-            require_capability('moodle/category:manage', $context);
+            require_capability('powereduc/category:manage', $context);
 
             // this will validate format and throw an exception if there are errors
             external_validate_format($category['descriptionformat']);
@@ -2113,7 +2113,7 @@ class core_course_external extends external_api {
                             'description' => new external_value(PARAM_RAW, 'category description', VALUE_OPTIONAL),
                             'descriptionformat' => new external_format_value('description', VALUE_DEFAULT),
                             'theme' => new external_value(PARAM_THEME,
-                                    'the category theme. This option must be enabled on moodle', VALUE_OPTIONAL),
+                                    'the category theme. This option must be enabled on powereduc', VALUE_OPTIONAL),
                         )
                     )
                 )
@@ -2141,7 +2141,7 @@ class core_course_external extends external_api {
 
             $categorycontext = context_coursecat::instance($cat['id']);
             self::validate_context($categorycontext);
-            require_capability('moodle/category:manage', $categorycontext);
+            require_capability('powereduc/category:manage', $categorycontext);
 
             // this will throw an exception if descriptionformat is not valid
             external_validate_format($cat['descriptionformat']);
@@ -2205,7 +2205,7 @@ class core_course_external extends external_api {
         foreach ($params['categories'] as $category) {
             $deletecat = core_course_category::get($category['id'], MUST_EXIST);
             $context = context_coursecat::instance($deletecat->id);
-            require_capability('moodle/category:manage', $context);
+            require_capability('powereduc/category:manage', $context);
             self::validate_context($context);
             self::validate_context(get_category_or_system_context($deletecat->parent));
 
@@ -2214,7 +2214,7 @@ class core_course_external extends external_api {
                 if ($deletecat->can_delete_full()) {
                     $deletecat->delete_full(false);
                 } else {
-                    throw new moodle_exception('youcannotdeletecategory', '', '', $deletecat->get_formatted_name());
+                    throw new powereduc_exception('youcannotdeletecategory', '', '', $deletecat->get_formatted_name());
                 }
             } else {
                 // In this situation, we don't delete the category's contents, we either move it to newparent or parent.
@@ -2228,14 +2228,14 @@ class core_course_external extends external_api {
 
                 // This operation is not allowed. We must move contents to an existing category.
                 if (!$newparentcat->id) {
-                    throw new moodle_exception('movecatcontentstoroot');
+                    throw new powereduc_exception('movecatcontentstoroot');
                 }
 
                 self::validate_context(context_coursecat::instance($newparentcat->id));
                 if ($deletecat->can_move_content_to($newparentcat->id)) {
                     $deletecat->delete_move($newparentcat->id, false);
                 } else {
-                    throw new moodle_exception('youcannotdeletecategory', '', '', $deletecat->get_formatted_name());
+                    throw new powereduc_exception('youcannotdeletecategory', '', '', $deletecat->get_formatted_name());
                 }
             }
         }
@@ -2301,7 +2301,7 @@ class core_course_external extends external_api {
 
             // Ensure they can delete this module.
             $modcontext = context_module::instance($cm->id);
-            require_capability('moodle/course:manageactivities', $modcontext);
+            require_capability('powereduc/course:manageactivities', $modcontext);
 
             // Delete the module.
             course_delete_module($cm->id);
@@ -2340,7 +2340,7 @@ class core_course_external extends external_api {
      * @param int $sectionnumber sectionnumber (0, 1, 2...)
      * @return array of warnings and status result
      * @since Moodle 2.9
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function view_course($courseid, $sectionnumber = 0) {
         global $CFG;
@@ -2366,7 +2366,7 @@ class core_course_external extends external_api {
 
             // Check user is allowed to see it.
             if (!$coursesection->uservisible) {
-                require_capability('moodle/course:viewhiddensections', $context);
+                require_capability('powereduc/course:viewhiddensections', $context);
             }
         }
 
@@ -2439,7 +2439,7 @@ class core_course_external extends external_api {
         // Retrieve course overview used files.
         $files = array();
         foreach ($course->get_course_overviewfiles() as $file) {
-            $fileurl = moodle_url::make_webservice_pluginfile_url($file->get_contextid(), $file->get_component(),
+            $fileurl = powereduc_url::make_webservice_pluginfile_url($file->get_contextid(), $file->get_component(),
                                                                     $file->get_filearea(), null, $file->get_filepath(),
                                                                     $file->get_filename())->out(false);
             $files[] = array(
@@ -2530,7 +2530,7 @@ class core_course_external extends external_api {
      * @param int onlywithcompletion Limit to only courses where completion is enabled
      * @return array of course objects and warnings
      * @since Moodle 3.0
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function search_courses($criterianame,
                                           $criteriavalue,
@@ -2562,7 +2562,7 @@ class core_course_external extends external_api {
         }
 
         if ($params['criterianame'] == 'modulelist' or $params['criterianame'] == 'blocklist') {
-            require_capability('moodle/site:config', context_system::instance());
+            require_capability('powereduc/site:config', context_system::instance());
         }
 
         $paramtype = array(
@@ -2755,7 +2755,7 @@ class core_course_external extends external_api {
      * @param int $cmid the course module id
      * @return array of warnings and the course module
      * @since Moodle 3.0
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_course_module($cmid) {
         global $CFG, $DB;
@@ -2768,7 +2768,7 @@ class core_course_external extends external_api {
         self::validate_context($context);
 
         // If the user has permissions to manage the activity, return all the information.
-        if (has_capability('moodle/course:manageactivities', $context)) {
+        if (has_capability('powereduc/course:manageactivities', $context)) {
             require_once($CFG->dirroot . '/course/modlib.php');
             require_once($CFG->libdir . '/gradelib.php');
 
@@ -2925,7 +2925,7 @@ class core_course_external extends external_api {
      * @param int $instance the activity instance id
      * @return array of warnings and the course module
      * @since Moodle 3.0
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_course_module_by_instance($module, $instance) {
 
@@ -2971,7 +2971,7 @@ class core_course_external extends external_api {
      * @param array $courseids a list of course ids
      * @return array of warnings and the options availability
      * @since Moodle 3.2
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_user_navigation_options($courseids) {
         global $CFG;
@@ -3061,7 +3061,7 @@ class core_course_external extends external_api {
      * @param array $courseids a list of course ids
      * @return array of warnings and the options availability
      * @since Moodle 3.2
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_user_administration_options($courseids) {
         global $CFG;
@@ -3196,8 +3196,8 @@ class core_course_external extends external_api {
         $coursesdata = array();
         foreach ($courses as $course) {
             $context = context_course::instance($course->id);
-            $canupdatecourse = has_capability('moodle/course:update', $context);
-            $canviewhiddencourses = has_capability('moodle/course:viewhiddencourses', $context);
+            $canupdatecourse = has_capability('powereduc/course:update', $context);
+            $canviewhiddencourses = has_capability('powereduc/course:viewhiddencourses', $context);
 
             // Check if the course is visible in the site for the user.
             if (!$course->visible and !$canviewhiddencourses and !$canupdatecourse) {
@@ -3317,7 +3317,7 @@ class core_course_external extends external_api {
      * @param array $tocheck the list of modules to check
      * @param array $filter check only for updates in these areas
      * @return array list of updates and warnings
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since Moodle 3.2
      */
     public static function check_updates($courseid, $tocheck, $filter = array()) {
@@ -3436,7 +3436,7 @@ class core_course_external extends external_api {
      * @param int $since check updates since this time stamp
      * @param array $filter check only for updates in these areas
      * @return array list of updates and warnings
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since Moodle 3.3
      */
     public static function get_updates_since($courseid, $since, $filter = array()) {
@@ -3524,12 +3524,12 @@ class core_course_external extends external_api {
 
         // Set of permissions an editing user may have.
         $contextarray = [
-                'moodle/course:update',
-                'moodle/course:manageactivities',
-                'moodle/course:activityvisibility',
-                'moodle/course:sectionvisibility',
-                'moodle/course:movesections',
-                'moodle/course:setcurrentsection',
+                'powereduc/course:update',
+                'powereduc/course:manageactivities',
+                'powereduc/course:activityvisibility',
+                'powereduc/course:sectionvisibility',
+                'powereduc/course:movesections',
+                'powereduc/course:setcurrentsection',
         ];
         $PAGE->set_other_editing_capability($contextarray);
 
@@ -3547,18 +3547,18 @@ class core_course_external extends external_api {
             case 'hide':
             case 'show':
             case 'stealth':
-                require_capability('moodle/course:activityvisibility', $modcontext);
+                require_capability('powereduc/course:activityvisibility', $modcontext);
                 $visible = ($action === 'hide') ? 0 : 1;
                 $visibleoncoursepage = ($action === 'stealth') ? 0 : 1;
                 set_coursemodule_visible($id, $visible, $visibleoncoursepage);
                 \core\event\course_module_updated::create_from_cm($cm, $modcontext)->trigger();
                 break;
             case 'duplicate':
-                require_capability('moodle/course:manageactivities', $coursecontext);
-                require_capability('moodle/backup:backuptargetimport', $coursecontext);
-                require_capability('moodle/restore:restoretargetimport', $coursecontext);
+                require_capability('powereduc/course:manageactivities', $coursecontext);
+                require_capability('powereduc/backup:backuptargetimport', $coursecontext);
+                require_capability('powereduc/restore:restoretargetimport', $coursecontext);
                 if (!course_allowed_module($course, $cm->modname)) {
-                    throw new moodle_exception('No permission to create that activity');
+                    throw new powereduc_exception('No permission to create that activity');
                 }
                 if ($newcm = duplicate_module($course, $cm)) {
 
@@ -3575,7 +3575,7 @@ class core_course_external extends external_api {
             case 'groupsseparate':
             case 'groupsvisible':
             case 'groupsnone':
-                require_capability('moodle/course:manageactivities', $modcontext);
+                require_capability('powereduc/course:manageactivities', $modcontext);
                 if ($action === 'groupsseparate') {
                     $newgroupmode = SEPARATEGROUPS;
                 } else if ($action === 'groupsvisible') {
@@ -3589,7 +3589,7 @@ class core_course_external extends external_api {
                 break;
             case 'moveleft':
             case 'moveright':
-                require_capability('moodle/course:manageactivities', $modcontext);
+                require_capability('powereduc/course:manageactivities', $modcontext);
                 $indent = $cm->indent + (($action === 'moveright') ? 1 : -1);
                 if ($cm->indent >= 0) {
                     $DB->update_record('course_modules', array('id' => $cm->id, 'indent' => $indent));
@@ -3597,7 +3597,7 @@ class core_course_external extends external_api {
                 }
                 break;
             case 'delete':
-                require_capability('moodle/course:manageactivities', $modcontext);
+                require_capability('powereduc/course:manageactivities', $modcontext);
                 course_delete_module($cm->id, true);
                 return '';
             default:
@@ -3652,12 +3652,12 @@ class core_course_external extends external_api {
 
         // Set of permissions an editing user may have.
         $contextarray = [
-            'moodle/course:update',
-            'moodle/course:manageactivities',
-            'moodle/course:activityvisibility',
-            'moodle/course:sectionvisibility',
-            'moodle/course:movesections',
-            'moodle/course:setcurrentsection',
+            'powereduc/course:update',
+            'powereduc/course:manageactivities',
+            'powereduc/course:activityvisibility',
+            'powereduc/course:sectionvisibility',
+            'powereduc/course:movesections',
+            'powereduc/course:setcurrentsection',
         ];
         $PAGE->set_other_editing_capability($contextarray);
 
@@ -4003,7 +4003,7 @@ class core_course_external extends external_api {
                                 \context_course::instance($course['id']));
                     } catch (Exception $e) {
                         $warning['courseid'] = $course['id'];
-                        if ($e instanceof moodle_exception) {
+                        if ($e instanceof powereduc_exception) {
                             $warning['warningcode'] = $e->errorcode;
                         } else {
                             $warning['warningcode'] = $e->getCode();
@@ -4025,7 +4025,7 @@ class core_course_external extends external_api {
                                 \context_course::instance($course['id']));
                     } catch (Exception $e) {
                         $warning['courseid'] = $course['id'];
-                        if ($e instanceof moodle_exception) {
+                        if ($e instanceof powereduc_exception) {
                             $warning['warningcode'] = $e->errorcode;
                         } else {
                             $warning['warningcode'] = $e->getCode();
@@ -4113,7 +4113,7 @@ class core_course_external extends external_api {
 
         self::validate_context($usercontext);
 
-        if ($userid != $USER->id and !has_capability('moodle/user:viewdetails', $usercontext)) {
+        if ($userid != $USER->id and !has_capability('powereduc/user:viewdetails', $usercontext)) {
             return array();
         }
 
@@ -4403,7 +4403,7 @@ class core_course_external extends external_api {
         $context = context_system::instance();
         self::validate_context($context);
 
-        require_capability('moodle/course:recommendactivity', $context);
+        require_capability('powereduc/course:recommendactivity', $context);
 
         $manager = \core_course\local\factory\content_item_service_factory::get_content_item_service();
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 namespace core_courseformat\external;
 
 use stdClass;
-use moodle_exception;
+use powereduc_exception;
 
 defined('POWEREDUC_INTERNAL') || die();
 
@@ -29,7 +29,7 @@ require_once($CFG->dirroot . '/webservice/tests/helpers.php');
  *
  * @package    core_course
  * @category   test
- * @copyright  2021 Sara Arjona (sara@moodle.com)
+ * @copyright  2021 Sara Arjona (sara@powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @coversDefaultClass \core_courseformat\external\update_course
  */
@@ -76,7 +76,7 @@ class update_course_test extends \externallib_advanced_testcase {
 
         // Expect exception.
         if ($expectexception) {
-            $this->expectException(moodle_exception::class);
+            $this->expectException(powereduc_exception::class);
         }
 
         // Execute course action.
@@ -195,7 +195,7 @@ class update_course_test extends \externallib_advanced_testcase {
         $this->setAdminUser();
 
         // Expect exception.
-        $this->expectException(moodle_exception::class);
+        $this->expectException(powereduc_exception::class);
 
         // Execute course action.
         $results = json_decode(update_course::execute('cm_state', $course->id + 1, [$activity->cmid]));

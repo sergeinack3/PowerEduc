@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core_calendar
  * @since      Moodle 3.10
- * @copyright  2020 Juan Leyva <juan@moodle.com>
+ * @copyright  2020 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -38,12 +38,12 @@ use external_multiple_structure;
 use external_single_structure;
 use external_value;
 use external_warnings;
-use moodle_exception;
+use powereduc_exception;
 
 /**
  * This is the external method for exporting a calendar token.
  *
- * @copyright  2020 Juan Leyva <juan@moodle.com>
+ * @copyright  2020 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class token extends external_api {
@@ -62,7 +62,7 @@ class token extends external_api {
      * Return the auth token required for exporting a calendar.
      *
      * @return array The access information
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since  Moodle 3.10
      */
     public static function execute() {
@@ -72,7 +72,7 @@ class token extends external_api {
         self::validate_context($context);
 
         if (empty($CFG->enablecalendarexport)) {
-            throw new moodle_exception('Calendar export is disabled in this site.');
+            throw new powereduc_exception('Calendar export is disabled in this site.');
         }
 
         return [

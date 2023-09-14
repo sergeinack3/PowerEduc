@@ -1,10 +1,10 @@
-YUI.add('moodle-course-coursebase', function (Y, NAME) {
+YUI.add('powereduc-course-coursebase', function (Y, NAME) {
 
 /**
  * The coursebase class to provide shared functionality to Modules within
  * Moodle.
  *
- * @module moodle-course-coursebase
+ * @module powereduc-course-coursebase
  */
 var COURSEBASENAME = 'course-coursebase';
 

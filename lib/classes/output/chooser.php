@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * The chooser renderable.
@@ -26,7 +26,7 @@ namespace core\output;
 defined('POWEREDUC_INTERNAL') || die();
 
 use lang_string;
-use moodle_url;
+use powereduc_url;
 use renderer_base;
 use renderable;
 use stdClass;
@@ -41,7 +41,7 @@ use templatable;
  */
 class chooser implements renderable, templatable {
 
-    /** @var moodle_url The form action URL. */
+    /** @var powereduc_url The form action URL. */
     public $actionurl;
     /** @var lang_string The instructions to display. */
     public $instructions;
@@ -59,12 +59,12 @@ class chooser implements renderable, templatable {
     /**
      * Constructor.
      *
-     * @param moodle_url $actionurl The form action URL.
+     * @param powereduc_url $actionurl The form action URL.
      * @param lang_string $title The title of the chooser.
      * @param chooser_section[] $sections The sections.
      * @param string $paramname The name of the parameter for the items value.
      */
-    public function __construct(moodle_url $actionurl, lang_string $title, array $sections, $paramname) {
+    public function __construct(powereduc_url $actionurl, lang_string $title, array $sections, $paramname) {
         $this->actionurl = $actionurl;
         $this->title = $title;
         $this->sections = $sections;

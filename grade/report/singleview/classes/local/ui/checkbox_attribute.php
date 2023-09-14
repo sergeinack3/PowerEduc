@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * A checkbox ui element.
  *
  * @package   gradereport_singleview
- * @copyright 2014 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2014 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace gradereport_singleview\local\ui;
@@ -31,7 +31,7 @@ defined('POWEREDUC_INTERNAL') || die;
  * A checkbox ui element.
  *
  * @package   gradereport_singleview
- * @copyright 2014 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2014 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class checkbox_attribute extends element {
@@ -111,7 +111,7 @@ class checkbox_attribute extends element {
             );
         } else if ($this->ischecked) {
             return $OUTPUT->pix_icon('i/checked', get_string('selected', 'core_form'),
-                'moodle', ['class' => 'overrideexcludecheck']);
+                'powereduc', ['class' => 'overrideexcludecheck']);
         } else {
             return '';
         }

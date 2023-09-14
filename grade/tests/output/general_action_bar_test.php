@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,13 +19,13 @@ namespace core_grades\output;
 use advanced_testcase;
 use grade_helper;
 use context_course;
-use moodle_url;
+use powereduc_url;
 
 /**
  * A test class used to test general_action_bar.
  *
  * @package    core_grades
- * @copyright  2021 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2021 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class general_action_bar_test extends advanced_testcase {
@@ -62,7 +62,7 @@ class general_action_bar_test extends advanced_testcase {
         }
 
         $generalactionbar = new general_action_bar($coursecontext,
-            new moodle_url('/grade/report/user/index.php', ['id' => $course->id]), 'report', 'user');
+            new powereduc_url('/grade/report/user/index.php', ['id' => $course->id]), 'report', 'user');
         $renderer = $PAGE->get_renderer('core');
         $generalactionbardata = $generalactionbar->export_for_template($renderer);
 

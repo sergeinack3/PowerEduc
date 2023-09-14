@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -54,7 +54,7 @@ class completion_criteria_duration extends completion_criteria {
     /**
      * Add appropriate form elements to the critieria form
      *
-     * @param moodleform $mform Moodle forms object
+     * @param powereducform $mform Moodle forms object
      * @param stdClass $data not used
      */
     public function config_form_display(&$mform, $data = null) {

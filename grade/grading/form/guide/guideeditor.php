@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ require_once("HTML/QuickForm/input.php");
  * @copyright  2012 Dan Marsden <dan@danmarsden.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class moodlequickform_guideeditor extends HTML_QuickForm_input {
+class powereducquickform_guideeditor extends HTML_QuickForm_input {
     /** @var string help message */
     public $_helpbutton = '';
     /** @var null|false|string stores the result of the last validation: null - undefined, false - no errors,
@@ -62,7 +62,7 @@ class moodlequickform_guideeditor extends HTML_QuickForm_input {
      *
      * @deprecated since Moodle 3.1
      */
-    public function moodlequickform_guideeditor($elementname=null, $elementlabel=null, $attributes=null) {
+    public function powereducquickform_guideeditor($elementname=null, $elementlabel=null, $attributes=null) {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
         self::__construct($elementname, $elementlabel, $attributes);
     }

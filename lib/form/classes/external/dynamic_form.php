@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_form\external;
 
@@ -52,7 +52,7 @@ class dynamic_form extends external_api {
      * @param string $formclass
      * @param string $formdatastr
      * @return array
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public static function execute(string $formclass, string $formdatastr): array {
         global $PAGE, $OUTPUT;
@@ -66,7 +66,7 @@ class dynamic_form extends external_api {
 
         if (!class_exists($formclass) || !is_subclass_of($formclass, \core_form\dynamic_form::class)) {
             // For security reason we don't throw exception "class does not exist" but rather an access exception.
-            throw new \moodle_exception('nopermissionform', 'core_form');
+            throw new \powereduc_exception('nopermissionform', 'core_form');
         }
 
         /** @var \core_form\dynamic_form $form */
@@ -79,7 +79,7 @@ class dynamic_form extends external_api {
 
         // Render actual form.
 
-        // Hack alert: Forcing bootstrap_renderer to initiate moodle page.
+        // Hack alert: Forcing bootstrap_renderer to initiate powereduc page.
         $OUTPUT->header();
 
         $PAGE->start_collecting_javascript_requirements();

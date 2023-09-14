@@ -1,7 +1,7 @@
 {
-    "name": "moodle-tool_lp-dragdrop-reorder",
+    "name": "powereduc-tool_lp-dragdrop-reorder",
     "builds": {
-        "moodle-tool_lp-dragdrop-reorder": {
+        "powereduc-tool_lp-dragdrop-reorder": {
             "jsfiles": [
                 "dragdropreorder.js"
             ]

@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * YUI text editor integration.
  *
  * @package    editor_atto
- * @copyright  2013 Damyon Wiese  <damyon@moodle.com>
+ * @copyright  2013 Damyon Wiese  <damyon@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -26,7 +26,7 @@ defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * This is the texteditor implementation.
- * @copyright  2013 Damyon Wiese  <damyon@moodle.com>
+ * @copyright  2013 Damyon Wiese  <damyon@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class atto_texteditor extends texteditor {
@@ -105,7 +105,7 @@ class atto_texteditor extends texteditor {
             }
         }
 
-        $modules = array('moodle-editor_atto-editor');
+        $modules = array('powereduc-editor_atto-editor');
         $options['context'] = empty($options['context']) ? context_system::instance() : $options['context'];
 
         $jsplugins = array();
@@ -125,7 +125,7 @@ class atto_texteditor extends texteditor {
                 $jsplugin = array();
                 $jsplugin['name'] = $plugin;
                 $jsplugin['params'] = array();
-                $modules[] = 'moodle-atto_' . $plugin . '-button';
+                $modules[] = 'powereduc-atto_' . $plugin . '-button';
 
                 component_callback('atto_' . $plugin, 'strings_for_js');
                 $extra = component_callback('atto_' . $plugin, 'params_for_js', array($elementid, $options, $fpoptions));
@@ -153,7 +153,7 @@ class atto_texteditor extends texteditor {
         $PAGE->requires->strings_for_js(array(
                 'warning',
                 'info'
-            ), 'moodle');
+            ), 'powereduc');
         $PAGE->requires->yui_module($modules,
                                     'Y.M.editor_atto.Editor.init',
                                     array($this->get_init_params($elementid, $options, $fpoptions, $jsplugins)));

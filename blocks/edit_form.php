@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ require_once($CFG->libdir . '/blocklib.php');
  * @copyright 2009 Tim Hunt
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class block_edit_form extends moodleform {
+class block_edit_form extends powereducform {
     /**
      * The block instance we are editing.
      * @var block_base
@@ -46,7 +46,7 @@ class block_edit_form extends moodleform {
     public $block;
     /**
      * The page we are editing this block in association with.
-     * @var moodle_page
+     * @var powereduc_page
      */
     public $page;
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -56,7 +56,7 @@ class enrol_self_deleteselectedusers_operation extends enrol_bulk_enrolment_oper
      * Returns a enrol_bulk_enrolment_operation extension form to be used
      * in collecting required information for this operation to be processed.
      *
-     * @param string|moodle_url|null $defaultaction
+     * @param string|powereduc_url|null $defaultaction
      * @param mixed $defaultcustomdata
      * @return enrol_self_deleteselectedusers_form
      */

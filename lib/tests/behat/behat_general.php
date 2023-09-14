@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * General use steps definitions.
@@ -69,7 +69,7 @@ class behat_general extends behat_base {
     private $pageloaddetectionrunning = false;
 
     /**
-     * Opens Moodle homepage.
+     * Opens PowerEduc homepage.
      *
      * @Given /^I am on homepage$/
      */
@@ -78,7 +78,7 @@ class behat_general extends behat_base {
     }
 
     /**
-     * Opens Moodle site homepage.
+     * Opens PowerEduc site homepage.
      *
      * @Given /^I am on site homepage$/
      */
@@ -188,7 +188,7 @@ class behat_general extends behat_base {
     }
 
     /**
-     * Switches to the main Moodle frame.
+     * Switches to the main PowerEduc frame.
      *
      * @Given /^I switch to the main frame$/
      */
@@ -229,7 +229,7 @@ class behat_general extends behat_base {
     }
 
     /**
-     * Switches to the main Moodle window. Useful when you finish interacting with popup windows.
+     * Switches to the main PowerEduc window. Useful when you finish interacting with popup windows.
      *
      * @Given /^I switch to the main window$/
      */
@@ -1540,8 +1540,8 @@ EOF;
         }
 
         // Download the URL and check the size.
-        $session = $this->getSession()->getCookie('MoodleSession');
-        return download_file_content($url, array('Cookie' => 'MoodleSession=' . $session));
+        $session = $this->getSession()->getCookie('PowerEducSession');
+        return download_file_content($url, array('Cookie' => 'PowerEducSession=' . $session));
     }
 
     /**
@@ -1640,8 +1640,8 @@ EOF;
             throw new ExpectationException('Element does not have src attribute',
                 $this->getSession());
         }
-        $session = $this->getSession()->getCookie('MoodleSession');
-        $content = download_file_content($url, array('Cookie' => 'MoodleSession=' . $session));
+        $session = $this->getSession()->getCookie('PowerEducSession');
+        $content = download_file_content($url, array('Cookie' => 'PowerEducSession=' . $session));
 
         // Get the content of the fixture file.
         // Replace 'admin/' if it is in start of path with $CFG->admin .
@@ -2000,7 +2000,7 @@ EOF;
      * @Given /^database family used is one of the following:$/
      * @param TableNode $databasefamilies list of database.
      * @return void.
-     * @throws \Moodle\BehatExtension\Exception\SkippedException
+     * @throws \PowerEduc\BehatExtension\Exception\SkippedException
      */
     public function database_family_used_is_one_of_the_following(TableNode $databasefamilies) {
         global $DB;
@@ -2014,7 +2014,7 @@ EOF;
             }
         }
 
-        throw new \Moodle\BehatExtension\Exception\SkippedException();
+        throw new \PowerEduc\BehatExtension\Exception\SkippedException();
     }
 
     /**
@@ -2022,12 +2022,12 @@ EOF;
      *
      * @Given the :plugin plugin is installed
      * @param string $plugin frankenstyle plugin name, e.g. 'filter_embedquestion'.
-     * @throws \Moodle\BehatExtension\Exception\SkippedException
+     * @throws \PowerEduc\BehatExtension\Exception\SkippedException
      */
     public function plugin_is_installed(string $plugin): void {
         $path = core_component::get_component_directory($plugin);
         if (!is_readable($path . '/version.php')) {
-            throw new \Moodle\BehatExtension\Exception\SkippedException(
+            throw new \PowerEduc\BehatExtension\Exception\SkippedException(
                     'Skipping this scenario because the ' . $plugin . ' is not installed.');
         }
     }

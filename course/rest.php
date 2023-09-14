@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -58,10 +58,10 @@ echo $OUTPUT->header(); // send headers
 
 if ($class === 'section' && $field === 'move') {
     if (!$DB->record_exists('course_sections', array('course' => $course->id, 'section' => $id))) {
-        throw new moodle_exception('AJAX commands.php: Bad Section ID ' . $id);
+        throw new powereduc_exception('AJAX commands.php: Bad Section ID ' . $id);
     }
 
-    require_capability('moodle/course:movesections', $coursecontext);
+    require_capability('powereduc/course:movesections', $coursecontext);
     move_section_to($course, $id, $value);
     // See if format wants to do something about it.
     $response = course_get_format($course)->ajax_section_move();
@@ -71,9 +71,9 @@ if ($class === 'section' && $field === 'move') {
 
 } else if ($class === 'resource' && $field === 'move') {
 
-    require_capability('moodle/course:manageactivities', $modcontext);
+    require_capability('powereduc/course:manageactivities', $modcontext);
     if (!$section = $DB->get_record('course_sections', array('course' => $course->id, 'section' => $sectionid))) {
-        throw new moodle_exception('AJAX commands.php: Bad section ID '.$sectionid);
+        throw new powereduc_exception('AJAX commands.php: Bad section ID '.$sectionid);
     }
 
     if ($beforeid > 0) {

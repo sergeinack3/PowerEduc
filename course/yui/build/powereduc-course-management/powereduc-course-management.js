@@ -1,4 +1,4 @@
-YUI.add('moodle-course-management', function (Y, NAME) {
+YUI.add('powereduc-course-management', function (Y, NAME) {
 
 var Category;
 var Console;
@@ -8,7 +8,7 @@ var Item;
 /**
  * Provides drop down menus for list of action links.
  *
- * @module moodle-course-management
+ * @module powereduc-course-management
  */
 
 /**
@@ -24,7 +24,7 @@ var Item;
 Console = function() {
     Console.superclass.constructor.apply(this, arguments);
 };
-Console.NAME = 'moodle-course-management';
+Console.NAME = 'powereduc-course-management';
 Console.CSS_PREFIX = 'management';
 Console.ATTRS = {
     /**
@@ -597,7 +597,7 @@ M.course.management.init = function(config) {
 DragDrop = function(config) {
     Console.superclass.constructor.apply(this, [config]);
 };
-DragDrop.NAME = 'moodle-course-management-dd';
+DragDrop.NAME = 'powereduc-course-management-dd';
 DragDrop.CSS_PREFIX = 'management-dd';
 DragDrop.ATTRS = {
     /**
@@ -867,7 +867,7 @@ Y.extend(DragDrop, Y.Base, DragDrop.prototype);
 Item = function() {
     Item.superclass.constructor.apply(this, arguments);
 };
-Item.NAME = 'moodle-course-management-item';
+Item.NAME = 'powereduc-course-management-item';
 Item.CSS_PREFIX = 'management-item';
 Item.ATTRS = {
     /**
@@ -1167,7 +1167,7 @@ Y.extend(Item, Y.Base, Item.prototype);
 Category = function() {
     Category.superclass.constructor.apply(this, arguments);
 };
-Category.NAME = 'moodle-course-management-category';
+Category.NAME = 'powereduc-course-management-category';
 Category.CSS_PREFIX = 'management-category';
 Category.ATTRS = {
     /**
@@ -1323,7 +1323,7 @@ Category.prototype = {
             ul = node.one('ul[role=group]');
         node.removeClass('collapsed').setAttribute('aria-expanded', 'true');
         action.setAttribute('data-action', 'collapse').setAttrs({
-            title: M.util.get_string('collapsecategory', 'moodle', this.getName())
+            title: M.util.get_string('collapsecategory', 'powereduc', this.getName())
         });
 
         require(['core/str', 'core/templates', 'core/notification'], function(Str, Templates, Notification) {
@@ -1353,7 +1353,7 @@ Category.prototype = {
             ul = node.one('ul[role=group]');
         node.addClass('collapsed').setAttribute('aria-expanded', 'false');
         action.setAttribute('data-action', 'expand').setAttrs({
-            title: M.util.get_string('expandcategory', 'moodle', this.getName())
+            title: M.util.get_string('expandcategory', 'powereduc', this.getName())
         });
 
         require(['core/str', 'core/templates', 'core/notification'], function(Str, Templates, Notification) {
@@ -1413,15 +1413,15 @@ Category.prototype = {
      */
     moveCourseTo: function(course) {
         var self = this;
-        Y.use('moodle-core-notification-confirm', function() {
+        Y.use('powereduc-core-notification-confirm', function() {
             var confirm = new M.core.confirm({
-                title: M.util.get_string('confirm', 'moodle'),
-                question: M.util.get_string('confirmcoursemove', 'moodle', {
+                title: M.util.get_string('confirm', 'powereduc'),
+                question: M.util.get_string('confirmcoursemove', 'powereduc', {
                     course: course.getName(),
                     category: self.getName()
                 }),
-                yesLabel: M.util.get_string('move', 'moodle'),
-                noLabel: M.util.get_string('cancel', 'moodle')
+                yesLabel: M.util.get_string('move', 'powereduc'),
+                noLabel: M.util.get_string('cancel', 'powereduc')
             });
             confirm.on('complete-yes', function() {
                 confirm.hide();
@@ -1613,7 +1613,7 @@ Y.extend(Category, Item, Category.prototype);
 Course = function() {
     Course.superclass.constructor.apply(this, arguments);
 };
-Course.NAME = 'moodle-course-management-course';
+Course.NAME = 'powereduc-course-management-course';
 Course.CSS_PREFIX = 'management-course';
 Course.ATTRS = {
 
@@ -1792,7 +1792,7 @@ Y.extend(Course, Item, Course.prototype);
         "base",
         "node",
         "io-base",
-        "moodle-core-notification-exception",
+        "powereduc-core-notification-exception",
         "json-parse",
         "dd-constrain",
         "dd-proxy",

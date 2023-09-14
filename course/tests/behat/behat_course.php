@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -215,7 +215,7 @@ class behat_course extends behat_base {
         // Clicks add activity or resource section link.
         $sectionnode = $this->find('xpath', $sectionxpath);
         $this->execute('behat_general::i_click_on_in_the', [
-            get_string('addresourceoractivity', 'moodle'),
+            get_string('addresourceoractivity', 'powereduc'),
             'button',
             $sectionnode,
             'NodeElement',
@@ -1249,7 +1249,7 @@ class behat_course extends behat_base {
 
         $exception = new ExpectationException('You are not in a course page', $this->getSession());
 
-        // The moodle body's id attribute contains the course format.
+        // The powereduc body's id attribute contains the course format.
         $node = $this->getSession()->getPage()->find('css', 'body');
         if (!$node) {
             throw $exception;

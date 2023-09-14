@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,11 +34,11 @@ list($context, $course, $cm) = get_context_info_array($contextid);
 
 /// Check login and permissions.
 require_login($course, false, $cm);
-require_capability('moodle/filter:manage', $context);
+require_capability('powereduc/filter:manage', $context);
 $PAGE->set_context($context);
 
 $args = array('contextid'=>$contextid);
-$baseurl = new moodle_url('/filter/manage.php', $args);
+$baseurl = new powereduc_url('/filter/manage.php', $args);
 if (!empty($forfilter)) {
     $args['filter'] = $forfilter;
 }
@@ -49,7 +49,7 @@ if ($returnto !== null) {
 
 // This is a policy decision, rather than something that would be impossible to implement.
 if (!in_array($context->contextlevel, array(CONTEXT_COURSECAT, CONTEXT_COURSE, CONTEXT_MODULE))) {
-    throw new \moodle_exception('cannotcustomisefiltersblockuser', 'error');
+    throw new \powereduc_exception('cannotcustomisefiltersblockuser', 'error');
 }
 
 $isfrontpage = ($context->contextlevel == CONTEXT_COURSE && $context->instanceid == SITEID);
@@ -67,20 +67,20 @@ if ($context->contextlevel == CONTEXT_COURSECAT) {
 
 /// Check login and permissions.
 require_login($course, false, $cm);
-require_capability('moodle/filter:manage', $context);
+require_capability('powereduc/filter:manage', $context);
 
 $PAGE->set_context($context);
 
 /// Get the list of available filters.
 $availablefilters = filter_get_available_in_context($context);
 if (!$isfrontpage && empty($availablefilters)) {
-    throw new \moodle_exception('nofiltersenabled', 'error');
+    throw new \powereduc_exception('nofiltersenabled', 'error');
 }
 
 // If we are handling local settings for a particular filter, start processing.
 if ($forfilter) {
     if (!filter_has_local_settings($forfilter)) {
-        throw new \moodle_exception('filterdoesnothavelocalconfig', 'error', $forfilter);
+        throw new \powereduc_exception('filterdoesnothavelocalconfig', 'error', $forfilter);
     }
     require_once($CFG->dirroot . '/filter/local_settings_form.php');
     require_once($CFG->dirroot . '/filter/' . $forfilter . '/filterlocalsettings.php');
@@ -211,7 +211,7 @@ if (empty($availablefilters)) {
 if (!$isfrontpage) {
 
     if ($context->contextlevel === CONTEXT_COURSECAT && $returnto === 'management') {
-        $url = new moodle_url('/course/management.php', array('categoryid' => $context->instanceid));
+        $url = new powereduc_url('/course/management.php', array('categoryid' => $context->instanceid));
     } else {
         $url = $context->get_url();
     }

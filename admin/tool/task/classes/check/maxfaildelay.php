@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@ class maxfaildelay extends check {
         $this->id = 'cronfaildelay';
         $this->name = get_string('checkmaxfaildelay', 'tool_task');
         $this->actionlink = new \action_link(
-            new \moodle_url('/admin/tool/task/scheduledtasks.php'),
+            new \powereduc_url('/admin/tool/task/scheduledtasks.php'),
             get_string('scheduledtasks', 'tool_task'));
     }
 

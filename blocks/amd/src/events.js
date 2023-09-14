@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/ //
+// This file is part of Moodle - http://powereduc.org/ //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -72,7 +72,7 @@ if (!legacyEventsRegistered) {
     // The following approach provides a backwards-compatability layer for the new events.
     // Code should be updated to make use of native events.
 
-    Y.use('event', 'moodle-core-event', Y => {
+    Y.use('event', 'powereduc-core-event', Y => {
         // Provide a backwards-compatability layer for YUI Events.
         document.addEventListener(eventTypes.blockContentUpdated, e => {
             // Trigger the legacy YUI event.

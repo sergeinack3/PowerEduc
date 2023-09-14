@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * DML read/read-write database handle use tests
@@ -27,8 +27,8 @@ namespace core;
 
 defined('POWEREDUC_INTERNAL') || die();
 
-require_once(__DIR__.'/fixtures/read_slave_moodle_database_table_names.php');
-require_once(__DIR__.'/fixtures/read_slave_moodle_database_special.php');
+require_once(__DIR__.'/fixtures/read_slave_powereduc_database_table_names.php');
+require_once(__DIR__.'/fixtures/read_slave_powereduc_database_special.php');
 require_once(__DIR__.'/../../tests/fixtures/event_fixtures.php');
 
 /**
@@ -38,7 +38,7 @@ require_once(__DIR__.'/../../tests/fixtures/event_fixtures.php');
  * @category   dml
  * @copyright  2018 Catalyst IT
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @covers     \moodle_read_slave_trait
+ * @covers     \powereduc_read_slave_trait
  */
 class dml_read_slave_test extends \base_testcase {
 
@@ -51,7 +51,7 @@ class dml_read_slave_test extends \base_testcase {
      * @param bool $wantlatency
      * @param mixed $readonly
      * @param mixed $dbclass
-     * @return read_slave_moodle_database $db
+     * @return read_slave_powereduc_database $db
      */
     public function new_db(
         $wantlatency = false,
@@ -60,8 +60,8 @@ class dml_read_slave_test extends \base_testcase {
             ['dbhost' => 'test_ro2', 'dbport' => 2, 'dbuser' => 'test2', 'dbpass' => 'test2'],
             ['dbhost' => 'test_ro3', 'dbport' => 3, 'dbuser' => 'test3', 'dbpass' => 'test3'],
         ],
-        $dbclass = read_slave_moodle_database::class
-    ) : read_slave_moodle_database {
+        $dbclass = read_slave_powereduc_database::class
+    ) : read_slave_powereduc_database {
         $dbhost = 'test_rw';
         $dbname = 'test';
         $dbuser = 'test';
@@ -78,7 +78,7 @@ class dml_read_slave_test extends \base_testcase {
     }
 
     /**
-     * Asert that the mock handle returned from read_slave_moodle_database methods
+     * Asert that the mock handle returned from read_slave_powereduc_database methods
      * is a readonly slave handle.
      *
      * @param string $handle
@@ -89,7 +89,7 @@ class dml_read_slave_test extends \base_testcase {
     }
 
     /**
-     * moodle_read_slave_trait::table_names() test data provider
+     * powereduc_read_slave_trait::table_names() test data provider
      *
      * @return array
      * @dataProvider table_names_provider
@@ -133,7 +133,7 @@ class dml_read_slave_test extends \base_testcase {
     }
 
     /**
-     * Test moodle_read_slave_trait::table_names() query parser.
+     * Test powereduc_read_slave_trait::table_names() query parser.
      *
      * @param string $sql
      * @param array $tables
@@ -141,7 +141,7 @@ class dml_read_slave_test extends \base_testcase {
      * @dataProvider table_names_provider
      */
     public function test_table_names($sql, $tables) : void {
-        $db = new read_slave_moodle_database_table_names();
+        $db = new read_slave_powereduc_database_table_names();
 
         $this->assertEquals($tables, $db->table_names($db->fix_sql_params($sql)[0]));
     }
@@ -389,7 +389,7 @@ class dml_read_slave_test extends \base_testcase {
         $this->with_global_db(function () {
             global $DB;
 
-            $DB = $this->new_db(true, ['test_ro'], read_slave_moodle_database_special::class);
+            $DB = $this->new_db(true, ['test_ro'], read_slave_powereduc_database_special::class);
             $DB->set_tables([
                 'config_plugins' => [
                     'columns' => [
@@ -514,7 +514,7 @@ class dml_read_slave_test extends \base_testcase {
         $this->with_global_db(function () {
             global $DB;
 
-            $DB = $this->new_db(true, ['test_ro'], read_slave_moodle_database_special::class);
+            $DB = $this->new_db(true, ['test_ro'], read_slave_powereduc_database_special::class);
             $DB->set_tables([
                 'lock_db' => [
                     'columns' => [
@@ -549,7 +549,7 @@ class dml_read_slave_test extends \base_testcase {
             global $DB, $CFG;
 
             $CFG->dbsessions = true;
-            $DB = $this->new_db(true, ['test_ro'], read_slave_moodle_database_special::class);
+            $DB = $this->new_db(true, ['test_ro'], read_slave_powereduc_database_special::class);
             $DB->set_tables([
                 'sessions' => [
                     'columns' => [

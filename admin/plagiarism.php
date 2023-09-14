@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  * Displays the list of found plagiarism plugins, their version (if found) and
  * a link to uninstall the plagiarism plugin.
  *
- * @see       http://docs.moodle.org/dev/Plagiarism_API
+ * @see       http://docs.powereduc.org/dev/Plagiarism_API
  * @package   admin
  * @copyright 2012 Dan Marsden <dan@danmarsden.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -62,7 +62,7 @@ foreach ($plagiarismplugins as $plugin => $dir) {
     if (file_exists($dir.'/settings.php')) {
         $displayname = "<span>".get_string($plugin, 'plagiarism_'.$plugin)."</span>";
         // Settings link.
-        $url = new moodle_url("/plagiarism/$plugin/settings.php");
+        $url = new powereduc_url("/plagiarism/$plugin/settings.php");
         $settings = html_writer::link($url, $txt->settings);
         // Get version.
         $version = get_config('plagiarism_' . $plugin);

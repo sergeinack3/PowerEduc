@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 
 namespace core_grades\output;
 
-use moodle_url;
+use powereduc_url;
 use core\output\select_menu;
 
 /**
@@ -25,12 +25,12 @@ use core\output\select_menu;
  * This class is responsible for rendering the general navigation select menu in the gradebook pages.
  *
  * @package    core_grades
- * @copyright  2021 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2021 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class general_action_bar extends action_bar {
 
-    /** @var moodle_url $activeurl The URL that should be set as active in the URL selector element. */
+    /** @var powereduc_url $activeurl The URL that should be set as active in the URL selector element. */
     protected $activeurl;
 
     /**
@@ -47,12 +47,12 @@ class general_action_bar extends action_bar {
      * The class constructor.
      *
      * @param \context $context The context object.
-     * @param moodle_url $activeurl The URL that should be set as active in the URL selector element.
+     * @param powereduc_url $activeurl The URL that should be set as active in the URL selector element.
      * @param string $activetype The type of the current gradebook page (report, settings, import, export, scales,
      *                           outcomes, letters).
      * @param string $activeplugin The plugin of the current gradebook page (grader, fullview, ...).
      */
-    public function __construct(\context $context, moodle_url $activeurl, string $activetype, string $activeplugin) {
+    public function __construct(\context $context, powereduc_url $activeurl, string $activetype, string $activeplugin) {
         parent::__construct($context);
         $this->activeurl = $activeurl;
         $this->activetype = $activetype;
@@ -154,7 +154,7 @@ class general_action_bar extends action_bar {
                         $moregroup[$plugin->link->out(false)] = get_string('gradeletters', 'grades');
                         break;
                     case 'import':
-                        $link = new moodle_url('/grade/import/index.php', ['id' => $courseid]);
+                        $link = new powereduc_url('/grade/import/index.php', ['id' => $courseid]);
                         // If the link to the grade import options is already added to the group, skip and continue to
                         // the next plugin.
                         if (array_key_exists($link->out(false), $moregroup)) {
@@ -163,7 +163,7 @@ class general_action_bar extends action_bar {
                         $moregroup[$link->out(false)] = get_string('import', 'grades');
                         break;
                     case 'export':
-                        $link = new moodle_url('/grade/export/index.php', ['id' => $courseid]);
+                        $link = new powereduc_url('/grade/export/index.php', ['id' => $courseid]);
                         // If the link to the grade export options is already added to the group, skip and continue to
                         // the next plugin.
                         if (array_key_exists($link->out(false), $moregroup)) {

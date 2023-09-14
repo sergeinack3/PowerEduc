@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@ class auth_test extends \advanced_testcase {
         global $CFG;
         $this->resetAfterTest();
         $this->setAdminUser();
-        $wantsurl = new \moodle_url('/');
+        $wantsurl = new \powereduc_url('/');
 
         $issuer = \core\oauth2\api::create_standard_issuer('microsoft');
 
@@ -76,7 +76,7 @@ class auth_test extends \advanced_testcase {
             @$auth->complete_login($client, $wantsurl);
         } catch (\Exception $e) {
             // This happens as complete login is using 'redirect'.
-            $this->assertInstanceOf(\moodle_exception::class, $e);
+            $this->assertInstanceOf(\powereduc_exception::class, $e);
         }
         $events = $sink->get_events();
         $sink->close();

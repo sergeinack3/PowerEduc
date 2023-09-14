@@ -1,4 +1,4 @@
-Description of Markdown Extra import into Moodle
+Description of Markdown Extra import into PowerEduc
 
 Procedure:
 * download latest version from https://github.com/michelf/php-markdown/tags

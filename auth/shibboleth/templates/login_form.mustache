@@ -1,5 +1,5 @@
 {{!
-    This file is part of Moodle - http://moodle.org/
+    This file is part of Moodle - http://powereduc.org/
 
     Moodle is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -84,7 +84,7 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block mb-1" accesskey="s">
-                            {{#str}}select, moodle{{/str}}
+                            {{#str}}select, powereduc{{/str}}
                         </button>
                         <p class="form-text text-muted mt-1 mb-1">
                             {{#str}}auth_shib_contact_administrator, auth_shibboleth, {{adminemail}}{{/str}}
@@ -94,7 +94,7 @@
                 {{#guestlogin}}
                 <div class="col-md-5">
                     <p>
-                        {{#str}}someallowguest, moodle{{/str}}
+                        {{#str}}someallowguest, powereduc{{/str}}
                     </p>
                     <form action="{{guestloginurl}}" method="post" id="guestlogin">
                         <div class="guestform">
@@ -102,7 +102,7 @@
                             <input type="hidden" name="username" value="guest">
                             <input type="hidden" name="password" value="guest">
                             <button type="submit" class="btn btn-secondary btn-block">
-                                {{#str}}loginguest, moodle{{/str}}
+                                {{#str}}loginguest, powereduc{{/str}}
                             </button>
                         </div>
                     </form>
@@ -114,13 +114,13 @@
     {{#showinstructions}}
     <div class="card mt-1">
         <div class="card-body ml-1 mr-1 mb-1">
-            <h2 class="card-title">{{#str}}firsttime, moodle{{/str}}</h2>
+            <h2 class="card-title">{{#str}}firsttime, powereduc{{/str}}</h2>
             <p>
                 {{{instructions}}}
             </p>
             {{#cansignup}}
             <form action="{{signupurl}}" method="get" id="signup">
-                <button type="submit" class="btn btn-secondary">{{#str}}startsignup, moodle{{/str}}</button>
+                <button type="submit" class="btn btn-secondary">{{#str}}startsignup, powereduc{{/str}}</button>
             </form>
             {{/cansignup}}
         </div>

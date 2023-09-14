@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -50,7 +50,7 @@ class core_role_check_users_selector extends user_selector_base {
         parent::__construct($name, $options);
 
         $coursecontext = $this->accesscontext->get_course_context(false);
-        if ($coursecontext and $coursecontext->id != SITEID and !has_capability('moodle/role:manage', $coursecontext)) {
+        if ($coursecontext and $coursecontext->id != SITEID and !has_capability('powereduc/role:manage', $coursecontext)) {
             // Prevent normal teachers from looking up all users.
             $this->onlyenrolled = true;
         } else {

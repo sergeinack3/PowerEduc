@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -229,7 +229,7 @@ module.exports = function(grunt) {
     verifyNodeVersion(grunt);
 
     // Setup the Moodle environemnt within the Grunt object.
-    grunt.moodleEnv = setupMoodleEnvironment(grunt);
+    grunt.powereducEnv = setupMoodleEnvironment(grunt);
 
     /**
      * Add the named task.
@@ -247,7 +247,7 @@ module.exports = function(grunt) {
     };
 
     // Startup tasks.
-    grunt.moodleEnv.startupTasks = [];
+    grunt.powereducEnv.startupTasks = [];
 
     // Add Moodle task configuration.
     addTask('gherkinlint', grunt);

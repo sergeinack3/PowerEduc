@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,18 +30,18 @@ $contextid = optional_param('id', SYSCONTEXTID, PARAM_INT);
 $action   = optional_param('action', '', PARAM_ALPHA);
 $edit     = optional_param('edit', false, PARAM_BOOL); //are we editing?
 
-$url = new moodle_url('/grade/edit/letter/index.php', array('id' => $contextid));
+$url = new powereduc_url('/grade/edit/letter/index.php', array('id' => $contextid));
 
 list($context, $course, $cm) = get_context_info_array($contextid);
 $contextid = null;//now we have a context object throw away the $contextid from the params
 
 //if viewing
 if (!$edit) {
-    if (!has_capability('moodle/grade:manage', $context) and !has_capability('moodle/grade:manageletters', $context)) {
-        throw new \moodle_exception('nopermissiontoviewletergrade');
+    if (!has_capability('powereduc/grade:manage', $context) and !has_capability('powereduc/grade:manageletters', $context)) {
+        throw new \powereduc_exception('nopermissiontoviewletergrade');
     }
 } else {//else we're editing
-    require_capability('moodle/grade:manageletters', $context);
+    require_capability('powereduc/grade:manageletters', $context);
     navigation_node::override_active_url($url);
     $url->param('edit', 1);
     $PAGE->navbar->add(get_string('editgradeletters', 'grades'), $url);
@@ -71,7 +71,7 @@ if ($context->contextlevel == CONTEXT_SYSTEM or $context->contextlevel == CONTEX
 
     $gpr = new grade_plugin_return(array('type'=>'edit', 'plugin'=>'letter', 'courseid'=>$course->id));
 } else {
-    throw new \moodle_exception('invalidcourselevel');
+    throw new \powereduc_exception('invalidcourselevel');
 }
 
 $strgrades = get_string('grades');

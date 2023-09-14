@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file keeps track of upgrades to Moodle.
+ * This file keeps track of upgrades to PowerEduc.
  *
  * Sometimes, changes between versions involve
  * alterations to database structures and other
@@ -43,9 +43,9 @@
 defined('POWEREDUC_INTERNAL') || die();
 
 /**
- * Main upgrade tasks to be executed on Moodle version bump
+ * Main upgrade tasks to be executed on PowerEduc version bump
  *
- * This function is automatically executed after one bump in the Moodle core
+ * This function is automatically executed after one bump in the PowerEduc core
  * version is detected. It's in charge of performing the required tasks
  * to raise core from the previous version to the next one.
  *
@@ -60,13 +60,13 @@ defined('POWEREDUC_INTERNAL') || die();
  *     // Explanation of the update step, linking to issue in the Tracker if necessary
  *     upgrade_set_timeout(XX); // Optional for big tasks
  *     // Code to execute goes here, usually the XMLDB Editor will
- *     // help you here. See {@link http://docs.moodle.org/dev/XMLDB_editor}.
+ *     // help you here. See {@link http://docs.powereduc.org/dev/XMLDB_editor}.
  *     upgrade_main_savepoint(true, XXXXXXXXXX.XX);
  * }
  *
- * All plugins within Moodle (modules, blocks, reports...) support the existence of
+ * All plugins within PowerEduc (modules, blocks, reports...) support the existence of
  * their own upgrade.php file, using the "Frankenstyle" component name as
- * defined at {@link http://docs.moodle.org/dev/Frankenstyle}, for example:
+ * defined at {@link http://docs.powereduc.org/dev/Frankenstyle}, for example:
  *     - {@link xmldb_page_upgrade($oldversion)}. (modules don't require the plugintype ("mod_") to be used.
  *     - {@link xmldb_auth_manual_upgrade($oldversion)}.
  *     - {@link xmldb_workshopform_accumulative_upgrade($oldversion)}.
@@ -78,8 +78,8 @@ defined('POWEREDUC_INTERNAL') || die();
  * about what can be used within it.
  *
  * For more information, take a look to the documentation available:
- *     - Data definition API: {@link http://docs.moodle.org/dev/Data_definition_API}
- *     - Upgrade API: {@link http://docs.moodle.org/dev/Upgrade_API}
+ *     - Data definition API: {@link http://docs.powereduc.org/dev/Data_definition_API}
+ *     - Upgrade API: {@link http://docs.powereduc.org/dev/Upgrade_API}
  *
  * @param int $oldversion
  * @return bool always true
@@ -101,7 +101,7 @@ function xmldb_main_upgrade($oldversion) {
         upgrade_main_savepoint(true, 2020061500);
     }
 
-    // Automatically generated Moodle v3.9.0 release upgrade line.
+    // Automatically generated PowerEduc v3.9.0 release upgrade line.
     // Put any upgrade step following this.
 
     if ($oldversion < 2020061500.02) {
@@ -116,7 +116,7 @@ function xmldb_main_upgrade($oldversion) {
         ]);
 
         // Check if the current age of digital consent map matches the old one.
-        if (get_config('moodle', 'agedigitalconsentmap') === $oldageofdigitalconsentmap) {
+        if (get_config('powereduc', 'agedigitalconsentmap') === $oldageofdigitalconsentmap) {
             // If the site is still using the old defaults, upgrade to the new default.
             $ageofdigitalconsentmap = implode(PHP_EOL, [
                 '*, 16',
@@ -1313,7 +1313,7 @@ function xmldb_main_upgrade($oldversion) {
             // Clean config.
             unset_all_config_for_plugin('block_quiz_results');
 
-            // Remove Moodle-level quiz_results based capabilities.
+            // Remove PowerEduc-level quiz_results based capabilities.
             $capabilitiestoberemoved = ['block/quiz_results:addinstance'];
             // Delete any role_capabilities for the old roles.
             $DB->delete_records_list('role_capabilities', 'capability', $capabilitiestoberemoved);
@@ -1485,7 +1485,7 @@ function xmldb_main_upgrade($oldversion) {
 
     if ($oldversion < 2021121700.01) {
         // Get current support email setting value.
-        $config = get_config('moodle', 'supportemail');
+        $config = get_config('powereduc', 'supportemail');
 
         // Check if support email setting is empty and then set it to null.
         // We must do that so the setting is displayed during the upgrade.
@@ -1505,16 +1505,16 @@ function xmldb_main_upgrade($oldversion) {
         $oldcustomusermenuitems = 'grades,grades|/grade/report/mygrades.php|t/grades
 calendar,core_calendar|/calendar/view.php?view=month|i/calendar
 messages,message|/message/index.php|t/message
-preferences,moodle|/user/preferences.php|t/preferences';
+preferences,powereduc|/user/preferences.php|t/preferences';
 
         // Check if the current customusermenuitems config matches the old customusermenuitems config.
         $samecustomusermenuitems = $currentcustomusermenuitems == $oldcustomusermenuitems;
         if ($samecustomusermenuitems) {
             // If the site is still using the old defaults, upgrade to the new default.
-            $newcustomusermenuitems = 'profile,moodle|/user/profile.php
+            $newcustomusermenuitems = 'profile,powereduc|/user/profile.php
 grades,grades|/grade/report/mygrades.php
 calendar,core_calendar|/calendar/view.php?view=month
-privatefiles,moodle|/user/files.php';
+privatefiles,powereduc|/user/files.php';
             // Set the new configuration back.
             set_config('customusermenuitems', $newcustomusermenuitems);
         } else {
@@ -1530,19 +1530,19 @@ privatefiles,moodle|/user/files.php';
             // Remove the Preference entry from the menu to prevent duplication
             // since it will be added again in user_get_user_navigation_info().
             $lines = array_filter($lines, function($value) {
-                return strpos($value, 'preferences,moodle|/user/preferences.php') === false;
+                return strpos($value, 'preferences,powereduc|/user/preferences.php') === false;
             });
 
             $matches = preg_grep('/\|\/user\/files.php/i', $lines);
             if (!$matches) {
                 // Add the Private files entry to the menu.
-                $lines[] = 'privatefiles,moodle|/user/files.php';
+                $lines[] = 'privatefiles,powereduc|/user/files.php';
             }
 
             $matches = preg_grep('/\|\/user\/profile.php/i', $lines);
             if (!$matches) {
                 // Add the Profile entry to top of the menu.
-                array_unshift($lines, 'profile,moodle|/user/profile.php');
+                array_unshift($lines, 'profile,powereduc|/user/profile.php');
             }
 
             // Set the new configuration back.
@@ -1628,8 +1628,8 @@ privatefiles,moodle|/user/files.php';
             $table->add_field('comments', XMLDB_TYPE_TEXT, null, null, null, null, null);
             $table->add_field('site', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
             $table->add_field('author', XMLDB_TYPE_CHAR, '255', null, null, null, null);
-            $table->add_field('moodleversion', XMLDB_TYPE_CHAR, '20', null, XMLDB_NOTNULL, null, null);
-            $table->add_field('moodlerelease', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+            $table->add_field('powereducversion', XMLDB_TYPE_CHAR, '20', null, XMLDB_NOTNULL, null, null);
+            $table->add_field('powereducrelease', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
             $table->add_field('iscore', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0');
             $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
             $table->add_field('timeimported', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
@@ -1971,8 +1971,8 @@ privatefiles,moodle|/user/files.php';
             unset_config('message_provider_'.$prefname.'_loggedoff', 'message');
         }
 
-        // Migrate user preferences. ie merging message_provider_moodle_instantmessage_loggedoff with
-        // message_provider_moodle_instantmessage_loggedin to message_provider_moodle_instantmessage_enabled.
+        // Migrate user preferences. ie merging message_provider_powereduc_instantmessage_loggedoff with
+        // message_provider_powereduc_instantmessage_loggedin to message_provider_powereduc_instantmessage_enabled.
 
         $allrecordsloggedoff = $DB->sql_like('name', ':loggedoff');
         $total = $DB->count_records_select(
@@ -2762,7 +2762,7 @@ privatefiles,moodle|/user/files.php';
         upgrade_main_savepoint(true, 2022041200.01);
     }
 
-    // Automatically generated Moodle v4.0.0 release upgrade line.
+    // Automatically generated PowerEduc v4.0.0 release upgrade line.
     // Put any upgrade step following this.
 
     if ($oldversion < 2022042900.01) {
@@ -3031,7 +3031,7 @@ privatefiles,moodle|/user/files.php';
         upgrade_main_savepoint(true, 2022110600.00);
     }
 
-    // Automatically generated Moodle v4.1.0 release upgrade line.
+    // Automatically generated PowerEduc v4.1.0 release upgrade line.
     // Put any upgrade step following this.
 
     return true;

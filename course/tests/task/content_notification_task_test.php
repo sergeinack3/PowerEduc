@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ use context_user;
  * @package    core
  * @subpackage course
  * @covers     \core_course\task\content_notification_task
- * @copyright  2021 Juan Leyva <juan@moodle.com>
+ * @copyright  2021 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class content_notification_task_test extends \advanced_testcase {
@@ -74,7 +74,7 @@ class content_notification_task_test extends \advanced_testcase {
             'text' => '<p>Yo</p>',
             'format' => FORMAT_HTML
         ];
-        $modurl = (new \moodle_url('/mod/url/view.php', ['id' => $url->cmid]))->out(false);
+        $modurl = (new \powereduc_url('/mod/url/view.php', ['id' => $url->cmid]))->out(false);
 
         // Check course content changed notifications.
         $moduleinfo->coursecontentnotification = 1;

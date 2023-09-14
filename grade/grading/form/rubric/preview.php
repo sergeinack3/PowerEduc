@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -39,11 +39,11 @@ $controller = $manager->get_controller('rubric');
 $options = $controller->get_options();
 
 if (!$controller->is_form_defined() || empty($options['alwaysshowdefinition'])) {
-    throw new moodle_exception('nopermissions', 'error', '', get_string('previewrubric', 'gradingform_rubric'));
+    throw new powereduc_exception('nopermissions', 'error', '', get_string('previewrubric', 'gradingform_rubric'));
 }
 
 $title = get_string('gradingof', 'gradingform_rubric', $manager->get_area_title());
-$PAGE->set_url(new moodle_url('/grade/grading/form/rubric/preview.php', array('areaid' => $areaid)));
+$PAGE->set_url(new powereduc_url('/grade/grading/form/rubric/preview.php', array('areaid' => $areaid)));
 $PAGE->set_title($title);
 $PAGE->set_heading($title);
 

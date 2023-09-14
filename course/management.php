@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -47,7 +47,7 @@ if ($issearching) {
     $viewmode = 'courses';
 }
 
-$url = new moodle_url('/course/management.php');
+$url = new powereduc_url('/course/management.php');
 $systemcontext = $context = context_system::instance();
 if ($courseid) {
     $record = get_course($courseid);
@@ -70,7 +70,7 @@ if ($courseid) {
     $courseid = null;
     $topchildren = core_course_category::top()->get_children();
     if (empty($topchildren)) {
-        throw new moodle_exception('cannotviewcategory', 'error');
+        throw new powereduc_exception('cannotviewcategory', 'error');
     }
     $category = reset($topchildren);
     $categoryid = $category->id;
@@ -113,9 +113,9 @@ $PAGE->set_secondary_active_tab('categorymain');
 // This is a system level page that operates on other contexts.
 require_login();
 
-if (!core_course_category::has_capability_on_any(array('moodle/category:manage', 'moodle/course:create'))) {
+if (!core_course_category::has_capability_on_any(array('powereduc/category:manage', 'powereduc/course:create'))) {
     // The user isn't able to manage any categories. Lets redirect them to the relevant course/index.php page.
-    $url = new moodle_url('/course/index.php');
+    $url = new powereduc_url('/course/index.php');
     if ($categoryid) {
         $url->param('categoryid', $categoryid);
     }
@@ -128,7 +128,7 @@ if (!$issearching && $category !== null) {
     foreach ($parents as $parent) {
         $PAGE->navbar->add(
             $parent->get_formatted_name(),
-            new moodle_url('/course/index.php', array('categoryid' => $parent->id))
+            new powereduc_url('/course/index.php', array('categoryid' => $parent->id))
         );
     }
     if ($course instanceof core_course_list_element) {
@@ -141,23 +141,23 @@ if (!$issearching && $category !== null) {
 // tree and the management link within it.
 // This is the most accurate form of navigation.
 $capabilities = array(
-    'moodle/site:config',
-    'moodle/backup:backupcourse',
-    'moodle/category:manage',
-    'moodle/course:create',
-    'moodle/site:approvecourse'
+    'powereduc/site:config',
+    'powereduc/backup:backupcourse',
+    'powereduc/category:manage',
+    'powereduc/course:create',
+    'powereduc/site:approvecourse'
 );
 if ($category && !has_any_capability($capabilities, $systemcontext)) {
     // If the user doesn't poses any of these system capabilities then we're going to mark the category link in the
     // settings block as active, tell the page to ignore the active path and just build what the user would expect.
     // This will at least give the page some relevant navigation.
-    navigation_node::override_active_url(new moodle_url('/course/index.php', array('categoryid' => $category->id)));
+    navigation_node::override_active_url(new powereduc_url('/course/index.php', array('categoryid' => $category->id)));
     $PAGE->set_category_by_id($category->id);
     $PAGE->navbar->ignore_active(true);
 } else {
     // If user has system capabilities, make sure the "Category" item in Administration block is active.
     navigation_node::require_admin_tree();
-    navigation_node::override_active_url(new moodle_url('/course/index.php'));
+    navigation_node::override_active_url(new powereduc_url('/course/index.php'));
 }
 $PAGE->navbar->add(get_string('coursemgmt', 'admin'), $PAGE->url->out_omit_querystring());
 $PAGE->set_primary_active_tab('home');
@@ -238,7 +238,7 @@ if ($action !== false && confirm_sesskey()) {
             // They must have specified a category.
             required_param('categoryid', PARAM_INT);
             if (!$category->can_delete()) {
-                throw new moodle_exception('permissiondenied', 'error', '', null, 'core_course_category::can_resort');
+                throw new powereduc_exception('permissiondenied', 'error', '', null, 'core_course_category::can_resort');
             }
             $mform = new core_course_deletecategory_form(null, $category);
             if ($mform->is_cancelled()) {
@@ -248,12 +248,12 @@ if ($action !== false && confirm_sesskey()) {
             /* @var core_course_management_renderer|core_renderer $renderer */
             $renderer = $PAGE->get_renderer('core_course', 'management');
             echo $renderer->header();
-            echo $renderer->heading(get_string('deletecategory', 'moodle', $category->get_formatted_name()));
+            echo $renderer->heading(get_string('deletecategory', 'powereduc', $category->get_formatted_name()));
 
             if ($data = $mform->get_data()) {
                 // The form has been submit handle it.
                 if ($data->fulldelete == 1 && $category->can_delete_full()) {
-                    $continueurl = new moodle_url('/course/management.php');
+                    $continueurl = new powereduc_url('/course/management.php');
                     if ($category->parent != '0') {
                         $continueurl->param('categoryid', $category->parent);
                     }
@@ -265,7 +265,7 @@ if ($action !== false && confirm_sesskey()) {
                     echo $renderer->notification($notification, 'notifysuccess');
                     echo $renderer->continue_button($continueurl);
                 } else if ($data->fulldelete == 0 && $category->can_move_content_to($data->newparent)) {
-                    $continueurl = new moodle_url('/course/management.php', array('categoryid' => $data->newparent));
+                    $continueurl = new powereduc_url('/course/management.php', array('categoryid' => $data->newparent));
                     $category->delete_move($data->newparent, true);
                     echo $renderer->continue_button($continueurl);
                 } else {
@@ -303,9 +303,9 @@ if ($action !== false && confirm_sesskey()) {
                         $a = new stdClass;
                         $a->category = $moveto->get_formatted_name();
                         $a->courses = count($courseids);
-                        $redirectmessage = get_string('bulkmovecoursessuccess', 'moodle', $a);
+                        $redirectmessage = get_string('bulkmovecoursessuccess', 'powereduc', $a);
                     }
-                } catch (moodle_exception $ex) {
+                } catch (powereduc_exception $ex) {
                     $redirectback = false;
                     $notificationsfail[] = $ex->getMessage();
                 }
@@ -342,7 +342,7 @@ if ($action !== false && confirm_sesskey()) {
                     if ($movetocatid == 0) {
                         $movesuccessstrkey = 'movecategoriestotopsuccess';
                     }
-                    $notificationspass[] = get_string($movesuccessstrkey, 'moodle', $a);
+                    $notificationspass[] = get_string($movesuccessstrkey, 'powereduc', $a);
                 } else if ($movecount === 1) {
                     $a = new stdClass;
                     $a->moved = $cattomove->get_formatted_name();
@@ -351,7 +351,7 @@ if ($action !== false && confirm_sesskey()) {
                     if ($movetocatid == 0) {
                         $movesuccessstrkey = 'movecategorytotopsuccess';
                     }
-                    $notificationspass[] = get_string($movesuccessstrkey, 'moodle', $a);
+                    $notificationspass[] = get_string($movesuccessstrkey, 'powereduc', $a);
                 }
             } else if ($bulkresortcategories) {
                 $for = required_param('selectsortby', PARAM_ALPHA);
@@ -391,7 +391,7 @@ if ($action !== false && confirm_sesskey()) {
                         \core_course\management\helper::action_category_resort_subcategories(
                             core_course_category::top(), $sortcategoriesby);
                     }
-                    $categorieslist = core_course_category::make_categories_list('moodle/category:manage');
+                    $categorieslist = core_course_category::make_categories_list('powereduc/category:manage');
                     $categoryids = array_keys($categorieslist);
                     $categories = core_course_category::get_many($categoryids);
                     unset($categorieslist);
@@ -411,7 +411,7 @@ if ($action !== false && confirm_sesskey()) {
                 if ($category === null && count($categoryids) === 1) {
                     // They're bulk sorting just a single category and they've not selected a category.
                     // Lets for convenience sake auto-select the category that has been resorted for them.
-                    redirect(new moodle_url($PAGE->url, array('categoryid' => reset($categoryids))));
+                    redirect(new powereduc_url($PAGE->url, array('categoryid' => reset($categoryids))));
                 }
             }
     }

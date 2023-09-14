@@ -89,7 +89,7 @@ Feature: Organize students into groups
     And I press "Back to groups"
     And the "members" select box should contain "Student 1 (student@example.com\, DE)"
 
-  Scenario: Create groups and groupings without the 'moodle/course:changeidnumber' capability
+  Scenario: Create groups and groupings without the 'powereduc/course:changeidnumber' capability
     Given the following "courses" exist:
       | fullname | shortname | category | groupmode |
       | Course 1 | C1 | 0 | 1 |
@@ -101,7 +101,7 @@ Feature: Organize students into groups
       | teacher1 | C1 | editingteacher |
     And I log in as "admin"
     And I set the following system permissions of "Teacher" role:
-      | moodle/course:changeidnumber | Prevent |
+      | powereduc/course:changeidnumber | Prevent |
     And I log out
     And I log in as "teacher1"
     And I am on the "Course 1" "groups" page

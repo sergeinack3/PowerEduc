@@ -31,12 +31,12 @@ Changes:
 
 Moodle Configuration with Dual login
 -------------------------------------------------------------------------------
-1. Protect the directory moodle/auth/shibboleth/index.php with Shibboleth.
+1. Protect the directory powereduc/auth/shibboleth/index.php with Shibboleth.
    The page index.php in that directory actually logs in a Shibboleth user.
    For Apache you have to define a rule like the following in the Apache config:
 
 --
-<Directory  /path/to/moodle/auth/shibboleth/index.php>
+<Directory  /path/to/powereduc/auth/shibboleth/index.php>
         AuthType shibboleth
         ShibRequireSession On
         require valid-user
@@ -51,7 +51,7 @@ Moodle Configuration with Dual login
    shibboleth2.xml).
 
 --
-<Path name="moodle" requireSession="false" >
+<Path name="powereduc" requireSession="false" >
    <Path name="auth/shibboleth/index.php" requireSession="true" >
       <AccessControl>
           ...
@@ -82,7 +82,7 @@ Moodle Configuration with Dual login
    that is used as username in Moodle. It has to be unique for all Shibboleth
    Be aware that Moodle converts the username to lowercase. So, the overall
    behaviour of the username will be case-insensitive.
-   All attributes used for moodle must obey a certain length, otherwise Moodle
+   All attributes used for powereduc must obey a certain length, otherwise Moodle
    cuts off the ends. Consult the Moodle documentation for further information
    on the maximum lengths for each field in the user profile.
    #############################################################################
@@ -90,7 +90,7 @@ Moodle Configuration with Dual login
 4.a  If you want Shibboleth as your only authentication method with an external
      Where Are You From (WAYF) Service , set the 'Alternate Login URL' in the
      'Common settings' in 'Administrations >> Users >> Authentication Options'
-     to the the URL of the file 'moodle/auth/shibboleth/index.php'.
+     to the the URL of the file 'powereduc/auth/shibboleth/index.php'.
      This will enforce Shibboleth login.
 
 4.b If you want to use the Moodle integrated WAYF service, you have to activate it
@@ -107,7 +107,7 @@ Moodle Configuration with Dual login
     Important Note: If you upgraded from a previous version of Moodle and now
                     want to use the integrated WAYF, you have to make sure that
                     in step 1 only the index.php script in
-                    moodle/auth/shibboleth/ is protected but *not* the other
+                    powereduc/auth/shibboleth/ is protected but *not* the other
                     scripts and especially not the login.php script.
 
     If you were using the integrated WAYF alread with Shibboleth 1.3, it could
@@ -127,7 +127,7 @@ Moodle Configuration with Dual login
 6.  If you want to use Shibboleth in addition to another authentication method
     not using the integrated WAYF service from 4.b, change the 'Instructions' in
     'Administrations >> Users >> Manage authentication' to contain a link to the
-     moodle/auth/shibboleth/index.php file which is protected by
+     powereduc/auth/shibboleth/index.php file which is protected by
      Shibboleth (see step 1.) and causes the Shibboleth login procedure to start.
      You can also use HTML code in that field, e.g. to include an image as a
      Shibboleth login button.
@@ -173,7 +173,7 @@ to work, you have to set up the two authentication methods (e.g. 'Manual
 Accounts' and 'Shibboleth') and specify an alternate login link to your own dual
 login page. On that page you basically need a link to the Shibboleth-protected
 page ('/auth/shibboleth/index.php') for the Shibboleth login and a
-form that sends 'username' and 'password' to moodle/login/index.php. Set this
+form that sends 'username' and 'password' to powereduc/login/index.php. Set this
 web page then als alternate login page.
 Consult the Moodle documentation for further instructions and requirements.
 
@@ -196,7 +196,7 @@ Example 2: The country, city and street are provided in one Shibboleth attribute
 
 If you want to use this hook you have to be a skilled PHP programmer. It is
 strongly recommended that you take a look at the file
-moodle/auth/shibboleth/auth.php, especially the function 'get_userinfo'
+powereduc/auth/shibboleth/auth.php, especially the function 'get_userinfo'
 where this file is included.
 The context of the file is the same as within this login function. So you
 can directly edit the object $result.
@@ -280,7 +280,7 @@ just before the <MetadataProvider> element.
 --
 <Notify
     Channel="back"
-    Location="https://#YOUR_POWEREDUC_HOSTNAME#/moodle/auth/shibboleth/logout.php" />
+    Location="https://#YOUR_POWEREDUC_HOSTNAME#/powereduc/auth/shibboleth/logout.php" />
 --
 
 Then restart the Shibboleth daemon and check the log file for errors. If there
@@ -295,12 +295,12 @@ Requirements:
 - PHP needs the Soap Extension, which maybe must installed manually:
   More information is available here http://ch.php.net/soap
 - Logout only works with Shibboleth Service Provider 2.1 or higher
-- /moodle/auth/shibboleth/logout.php *must not* be protected by Shibboleth!
+- /powereduc/auth/shibboleth/logout.php *must not* be protected by Shibboleth!
   In case all of Moodle is protected with Shibboleth, you have to add something
   like this to your Apache configuration after all the other require rules
 
 --
-<Directory /path/to/moodle/auth/shibboleth/logout.php>
+<Directory /path/to/powereduc/auth/shibboleth/logout.php>
     AuthType shibboleth
     ShibRequireSession Off
     require shibboleth

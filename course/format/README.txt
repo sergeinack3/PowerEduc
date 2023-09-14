@@ -43,7 +43,7 @@ $string['nameyourformat']='section'; // Name of a section within your format
   is used when editing an activity within a course of your format.
 
   Note that existing formats store their language strings in the main
-  moodle.php, which you can also do, but this separate file is recommended
+  powereduc.php, which you can also do, but this separate file is recommended
   for contributed formats.
 
   You can also store other strings in this file if you wish. They can be

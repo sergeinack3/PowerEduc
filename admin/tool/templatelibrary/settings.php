@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,6 +28,6 @@ defined('POWEREDUC_INTERNAL') || die;
 $temp = new admin_externalpage(
     'tooltemplatelibrary',
     get_string('pluginname', 'tool_templatelibrary'),
-    new moodle_url('/admin/tool/templatelibrary/index.php')
+    new powereduc_url('/admin/tool/templatelibrary/index.php')
 );
 $ADMIN->add('development', $temp);

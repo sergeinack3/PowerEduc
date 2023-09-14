@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -399,11 +399,11 @@ class provider_test extends provider_testcase {
      * @return block_manager
      */
     protected function get_block_manager($regions, $context, $pagetype = 'page-type', $subpage = '') {
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context($context);
         $page->set_pagetype($pagetype);
         $page->set_subpage($subpage);
-        $page->set_url(new \moodle_url('/'));
+        $page->set_url(new \powereduc_url('/'));
 
         $blockmanager = new \block_manager($page);
         $blockmanager->add_regions($regions, false);

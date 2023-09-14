@@ -1,7 +1,7 @@
 {
-    "moodle-atto_recordrtc-recording": {
+    "powereduc-atto_recordrtc-recording": {
         "requires": [
-            "moodle-atto_recordrtc-button"
+            "powereduc-atto_recordrtc-button"
         ]
     }
 }

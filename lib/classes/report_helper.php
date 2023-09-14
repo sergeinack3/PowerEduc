@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Report plugins helper class
@@ -24,7 +24,7 @@
  */
 
 namespace core;
-use moodle_url;
+use powereduc_url;
 use url_select;
 
 /**
@@ -86,16 +86,16 @@ class report_helper {
     /**
      * Save the last selected report in the session
      *
-     * @deprecated since Moodle 4.0
+     * @deprecated since PowerEduc 4.0
      * @param int $id The course id
-     * @param moodle_url $url The moodle url
+     * @param powereduc_url $url The powereduc url
      * @return void
      */
-    public static function save_selected_report(int $id, moodle_url $url):void {
+    public static function save_selected_report(int $id, powereduc_url $url):void {
         global $USER;
 
         debugging('save_selected_report() has been deprecated because it is no longer used and will be '.
-            'removed in future versions of Moodle', DEBUG_DEVELOPER);
+            'removed in future versions of PowerEduc', DEBUG_DEVELOPER);
 
         // Last selected report.
         if (!isset($USER->course_last_report)) {

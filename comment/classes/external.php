@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -99,7 +99,7 @@ class core_comment_external extends external_api {
         $context = self::get_context_from_params($params);
         self::validate_context($context);
 
-        require_capability('moodle/comment:view', $context);
+        require_capability('powereduc/comment:view', $context);
 
         $args = new stdClass;
         $args->context   = $context;
@@ -112,7 +112,7 @@ class core_comment_external extends external_api {
 
         // False means no permissions to see comments.
         if ($comments === false) {
-            throw new moodle_exception('nopermissions', 'error', '', 'view comments');
+            throw new powereduc_exception('nopermissions', 'error', '', 'view comments');
         }
         $options = array('blanktarget' => true);
 
@@ -217,7 +217,7 @@ class core_comment_external extends external_api {
         global $CFG, $SITE;
 
         if (empty($CFG->usecomments)) {
-            throw new comment_exception('commentsnotenabled', 'moodle');
+            throw new comment_exception('commentsnotenabled', 'powereduc');
         }
 
         $params = self::validate_parameters(self::add_comments_parameters(), ['comments' => $comments]);
@@ -301,7 +301,7 @@ class core_comment_external extends external_api {
         global $CFG, $DB, $USER, $SITE;
 
         if (empty($CFG->usecomments)) {
-            throw new comment_exception('commentsnotenabled', 'moodle');
+            throw new comment_exception('commentsnotenabled', 'powereduc');
         }
 
         $params = self::validate_parameters(self::delete_comments_parameters(), ['comments' => $comments]);

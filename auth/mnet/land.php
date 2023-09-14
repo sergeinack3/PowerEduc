@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ $remotewwwroot = required_param('idp',      PARAM_URL);
 $wantsurl      = required_param('wantsurl', PARAM_LOCALURL);
 $wantsremoteurl = optional_param('remoteurl', false, PARAM_BOOL);
 
-$url = new moodle_url('/auth/mnet/jump.php', array('token'=>$token, 'idp'=>$remotewwwroot, 'wantsurl'=>$wantsurl));
+$url = new powereduc_url('/auth/mnet/jump.php', array('token'=>$token, 'idp'=>$remotewwwroot, 'wantsurl'=>$wantsurl));
 if ($wantsremoteurl !== false) $url->param('remoteurl', $wantsremoteurl);
 $PAGE->set_url($url);
 $PAGE->set_context(context_system::instance());
@@ -40,7 +40,7 @@ $PAGE->set_context(context_system::instance());
 $site = get_site();
 
 if (!is_enabled_auth('mnet')) {
-    throw new \moodle_exception('mnetdisable');
+    throw new \powereduc_exception('mnetdisable');
 }
 
 // confirm the MNET session

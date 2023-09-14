@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 namespace core_course\output;
 
 use core_completion\manager;
-use moodle_url;
+use powereduc_url;
 use renderable;
 use renderer_base;
 use templatable;
@@ -27,7 +27,7 @@ use url_select;
  * Renderable class for the action bar elements in the course completion pages.
  *
  * @package    core_course
- * @copyright  2022 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2022 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class completion_action_bar implements templatable, renderable {
@@ -35,16 +35,16 @@ class completion_action_bar implements templatable, renderable {
     /** @var int $courseid The course id. */
     private $courseid;
 
-    /** @var moodle_url $currenturl The URL of the current page. */
+    /** @var powereduc_url $currenturl The URL of the current page. */
     private $currenturl;
 
     /**
      * The class constructor.
      *
      * @param int $courseid The course id.
-     * @param moodle_url $pageurl The URL of the current page.
+     * @param powereduc_url $pageurl The URL of the current page.
      */
-    public function __construct(int $courseid, moodle_url $pageurl) {
+    public function __construct(int $courseid, powereduc_url $pageurl) {
         $this->courseid = $courseid;
         $this->currenturl = $pageurl;
     }

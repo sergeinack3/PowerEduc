@@ -1,7 +1,7 @@
 <?php
 ///////////////////////////////////////////////////////////////////////////
 //                                                                       //
-// This file is part of Moodle - http://moodle.org/                      //
+// This file is part of Moodle - http://powereduc.org/                      //
 // Moodle - Modular Object-Oriented Dynamic Learning Environment         //
 //                                                                       //
 // Moodle is free software: you can redistribute it and/or modify        //
@@ -45,7 +45,7 @@ class core_files_renderer extends plugin_renderer_base {
     }
 
     public function render_files_tree_viewer(files_tree_viewer $tree) {
-        $html = $this->output->heading_with_help(get_string('coursefiles'), 'courselegacyfiles', 'moodle');
+        $html = $this->output->heading_with_help(get_string('coursefiles'), 'courselegacyfiles', 'powereduc');
 
         $html .= $this->output->container_start('coursefilesbreadcrumb');
         foreach($tree->path as $path) {
@@ -84,7 +84,7 @@ class core_files_renderer extends plugin_renderer_base {
         }
 
         $html .= html_writer::table($table);
-        $html .= $this->output->single_button(new moodle_url('/files/coursefilesedit.php', array('contextid'=>$tree->context->id)), get_string('coursefilesedit'), 'get');
+        $html .= $this->output->single_button(new powereduc_url('/files/coursefilesedit.php', array('contextid'=>$tree->context->id)), get_string('coursefilesedit'), 'get');
         $html .= $this->output->box_end();
         return $html;
     }
@@ -106,17 +106,17 @@ class core_files_renderer extends plugin_renderer_base {
         $module = array(
             'name'=>'form_filemanager',
             'fullpath'=>'/lib/form/filemanager.js',
-            'requires' => array('moodle-core-notification-dialogue', 'core_filepicker', 'base', 'io-base', 'node', 'json', 'core_dndupload', 'panel', 'resize-plugin', 'dd-plugin'),
+            'requires' => array('powereduc-core-notification-dialogue', 'core_filepicker', 'base', 'io-base', 'node', 'json', 'core_dndupload', 'panel', 'resize-plugin', 'dd-plugin'),
             'strings' => array(
-                array('error', 'moodle'), array('info', 'moodle'), array('confirmdeletefile', 'repository'),
+                array('error', 'powereduc'), array('info', 'powereduc'), array('confirmdeletefile', 'repository'),
                 array('draftareanofiles', 'repository'), array('entername', 'repository'), array('enternewname', 'repository'),
                 array('invalidjson', 'repository'), array('popupblockeddownload', 'repository'),
                 array('unknownoriginal', 'repository'), array('confirmdeletefolder', 'repository'),
                 array('confirmdeletefilewithhref', 'repository'), array('confirmrenamefolder', 'repository'),
-                array('confirmrenamefile', 'repository'), array('newfolder', 'repository'), array('edit', 'moodle'),
+                array('confirmrenamefile', 'repository'), array('newfolder', 'repository'), array('edit', 'powereduc'),
                 array('originalextensionchange', 'repository'), array('originalextensionremove', 'repository'),
                 array('aliaseschange', 'repository'), ['nofilesselected', 'repository'],
-                ['confirmdeleteselectedfile', 'repository'], ['selectall', 'moodle'], ['deselectall', 'moodle'],
+                ['confirmdeleteselectedfile', 'repository'], ['selectall', 'powereduc'], ['deselectall', 'powereduc'],
                 ['selectallornone', 'form'],
             )
         );
@@ -295,13 +295,13 @@ class core_files_renderer extends plugin_renderer_base {
         $hasmaxfiles = !empty($fm->options->maxfiles) && $fm->options->maxfiles > 0;
         $hasarealimit = !empty($fm->options->areamaxbytes) && $fm->options->areamaxbytes != -1;
         if ($hasmaxfiles && $hasarealimit) {
-            $maxsize = get_string('maxsizeandattachmentsandareasize', 'moodle', $strparam);
+            $maxsize = get_string('maxsizeandattachmentsandareasize', 'powereduc', $strparam);
         } else if ($hasmaxfiles) {
-            $maxsize = get_string('maxsizeandattachments', 'moodle', $strparam);
+            $maxsize = get_string('maxsizeandattachments', 'powereduc', $strparam);
         } else if ($hasarealimit) {
-            $maxsize = get_string('maxsizeandareasize', 'moodle', $strparam);
+            $maxsize = get_string('maxsizeandareasize', 'powereduc', $strparam);
         } else {
-            $maxsize = get_string('maxfilesize', 'moodle', $maxbytes);
+            $maxsize = get_string('maxfilesize', 'powereduc', $maxbytes);
         }
 
         return '<span>'. $maxsize . '</span>';
@@ -550,14 +550,14 @@ class core_files_renderer extends plugin_renderer_base {
 
         $iconcontext = new stdClass();
         $iconcontext->text = $helptext;
-        $iconcontext->alt = get_string('helpprefix2', 'moodle', get_string('chooselicense', 'repository'));
+        $iconcontext->alt = get_string('helpprefix2', 'powereduc', get_string('chooselicense', 'repository'));
 
         return $iconcontext;
     }
 }
 
 /**
- * Data structure representing a general moodle file tree viewer
+ * Data structure representing a general powereduc file tree viewer
  *
  * @copyright 2010 Dongsheng Cai
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -569,7 +569,7 @@ class files_tree_viewer implements renderable {
     public $context;
 
     /**
-     * Constructor of moodle_file_tree_viewer class
+     * Constructor of powereduc_file_tree_viewer class
      * @param file_info $file_info
      * @param array $options
      */
@@ -598,7 +598,7 @@ class files_tree_viewer implements renderable {
             unset($params['filearea']);
             unset($params['filename']);
             unset($params['itemid']);
-            $url = new moodle_url('/files/index.php', $params);
+            $url = new powereduc_url('/files/index.php', $params);
             $this->path[] = html_writer::link($url, $level->get_visible_name());
             $level = $level->get_parent();
         }
@@ -623,7 +623,7 @@ class files_tree_viewer implements renderable {
                     'filedate' => $filedate ? $filedate : '',
                     'filesize' => $filesize ? $filesize : ''
                     );
-            $url = new moodle_url('/files/index.php', $params);
+            $url = new powereduc_url('/files/index.php', $params);
             if ($child->is_directory()) {
                 $fileitem['isdir'] = true;
                 $fileitem['url'] = $url->out(false);

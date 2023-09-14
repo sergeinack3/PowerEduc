@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 
 require_once(__DIR__ . '/../../../config.php');
 require_once($CFG->libdir.'/adminlib.php');
-require_once($CFG->libdir . '/xhprof/xhprof_moodle.php');
+require_once($CFG->libdir . '/xhprof/xhprof_powereduc.php');
 require_once(__DIR__ . '/import_form.php');
 
 admin_externalpage_setup('toolprofiling');
@@ -36,7 +36,7 @@ $tempdir = 'profiling';
 make_temp_directory($tempdir);
 
 // URL where we'll end, both on success and failure.
-$url = new moodle_url('/admin/tool/profiling/index.php');
+$url = new powereduc_url('/admin/tool/profiling/index.php');
 
 // Instantiate the upload profiling runs form.
 $mform = new profiling_import_form();

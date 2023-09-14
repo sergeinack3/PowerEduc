@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -51,7 +51,7 @@ class block_recent_activity_renderer extends plugin_renderer_base {
                 array('class' => 'activityhead'));
 
         $output .= html_writer::tag('div',
-                html_writer::link(new moodle_url('/course/recent.php', array('id' => $course->id)),
+                html_writer::link(new powereduc_url('/course/recent.php', array('id' => $course->id)),
                     get_string('recentactivityreport')),
                 array('class' => 'activityhead mb-3'));
 
@@ -61,14 +61,14 @@ class block_recent_activity_renderer extends plugin_renderer_base {
         if ($recentenrolments) {
             $content = true;
             $context = context_course::instance($course->id);
-            $viewfullnames = has_capability('moodle/site:viewfullnames', $context);
+            $viewfullnames = has_capability('powereduc/site:viewfullnames', $context);
             $output .= html_writer::start_tag('div', array('class' => 'newusers'));
             $output .= $this->heading(get_string("newusers").':', 3);
             //Accessibility: new users now appear in an <OL> list.
             $output .= html_writer::start_tag('ol', array('class' => 'list'));
             foreach ($recentenrolments as $user) {
                 $output .= html_writer::tag('li',
-                        html_writer::link(new moodle_url('/user/view.php', array('id' => $user->id, 'course' => $course->id)),
+                        html_writer::link(new powereduc_url('/user/view.php', array('id' => $user->id, 'course' => $course->id)),
                                 fullname($user, $viewfullnames)),
                         array('class' => 'name'));
             }
@@ -110,14 +110,14 @@ class block_recent_activity_renderer extends plugin_renderer_base {
         $cm = $change['module'];
         switch ($change['action']) {
             case 'delete mod':
-                $text = get_string('deletedactivity', 'moodle', $cm->modfullname);
+                $text = get_string('deletedactivity', 'powereduc', $cm->modfullname);
                 break;
             case 'add mod':
-                $text = get_string('added', 'moodle', $cm->modfullname). '<br />'.
+                $text = get_string('added', 'powereduc', $cm->modfullname). '<br />'.
                     html_writer::link($cm->url, format_string($cm->name, true));
                 break;
             case 'update mod':
-                $text = get_string('updated', 'moodle', $cm->modfullname). '<br />'.
+                $text = get_string('updated', 'powereduc', $cm->modfullname). '<br />'.
                     html_writer::link($cm->url, format_string($cm->name, true));
                 break;
             default:

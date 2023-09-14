@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,11 +16,11 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Provides classes used by the moodle1 converter
+ * Provides classes used by the powereduc1 converter
  *
  * @package    backup-convert
- * @subpackage moodle1
- * @copyright  2011 Mark Nielsen <mark@moodlerooms.com>
+ * @subpackage powereduc1
+ * @copyright  2011 Mark Nielsen <mark@powereducrooms.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -38,12 +38,12 @@ require_once(__DIR__ . '/handlerlib.php');
 /**
  * Converter of Moodle 1.9 backup into Moodle 2.x format
  */
-class moodle1_converter extends base_converter {
+class powereduc1_converter extends base_converter {
 
-    /** @var progressive_parser moodle.xml file parser */
+    /** @var progressive_parser powereduc.xml file parser */
     protected $xmlparser;
 
-    /** @var moodle1_parser_processor */
+    /** @var powereduc1_parser_processor */
     protected $xmlprocessor;
 
     /** @var array of {@link convert_path} to process */
@@ -77,7 +77,7 @@ class moodle1_converter extends base_converter {
      * @param bool $display whether the message should be sent to the output, too
      */
     public function log($message, $level, $a = null, $depth = null, $display = false) {
-        parent::log('(moodle1) '.$message, $level, $a, $depth, $display);
+        parent::log('(powereduc1) '.$message, $level, $a, $depth, $display);
     }
 
     /**
@@ -90,7 +90,7 @@ class moodle1_converter extends base_converter {
         global $CFG;
 
         $tempdirpath = make_backup_temp_directory($tempdir, false);
-        $filepath = $tempdirpath . '/moodle.xml';
+        $filepath = $tempdirpath . '/powereduc.xml';
         if (file_exists($filepath)) {
             // looks promising, lets load some information
             $handle = fopen($filepath, 'r');
@@ -124,9 +124,9 @@ class moodle1_converter extends base_converter {
         // good boy, prepare XML parser and processor
         $this->log('setting xml parser', backup::LOG_DEBUG, null, 1);
         $this->xmlparser = new progressive_parser();
-        $this->xmlparser->set_file($this->get_tempdir_path() . '/moodle.xml');
+        $this->xmlparser->set_file($this->get_tempdir_path() . '/powereduc.xml');
         $this->log('setting xml processor', backup::LOG_DEBUG, null, 1);
-        $this->xmlprocessor = new moodle1_parser_processor($this);
+        $this->xmlprocessor = new powereduc1_parser_processor($this);
         $this->xmlparser->set_processor($this->xmlprocessor);
 
         // make sure that MOD and BLOCK paths are visited
@@ -134,7 +134,7 @@ class moodle1_converter extends base_converter {
         $this->xmlprocessor->add_path('/POWEREDUC_BACKUP/COURSE/BLOCKS/BLOCK');
 
         // register the conversion handlers
-        foreach (moodle1_handlers_factory::get_handlers($this) as $handler) {
+        foreach (powereduc1_handlers_factory::get_handlers($this) as $handler) {
             $this->log('registering handler', backup::LOG_DEBUG, get_class($handler), 1);
             $this->register_handler($handler, $handler->get_paths());
         }
@@ -147,9 +147,9 @@ class moodle1_converter extends base_converter {
         $this->log('creating the stash storage', backup::LOG_DEBUG);
         $this->create_stash_storage();
 
-        $this->log('parsing moodle.xml starts', backup::LOG_DEBUG);
+        $this->log('parsing powereduc.xml starts', backup::LOG_DEBUG);
         $this->xmlparser->process();
-        $this->log('parsing moodle.xml done', backup::LOG_DEBUG);
+        $this->log('parsing powereduc.xml done', backup::LOG_DEBUG);
 
         $this->log('dropping the stash storage', backup::LOG_DEBUG);
         $this->drop_stash_storage();
@@ -158,7 +158,7 @@ class moodle1_converter extends base_converter {
     /**
      * Register a handler for the given path elements
      */
-    protected function register_handler(moodle1_handler $handler, array $elements) {
+    protected function register_handler(powereduc1_handler $handler, array $elements) {
 
         // first iteration, push them to new array, indexed by name
         // to detect duplicates in names or paths
@@ -448,7 +448,7 @@ class moodle1_converter extends base_converter {
             restore_dbops::set_backup_ids_record($this->get_id(), $stashname, $itemid, 0, null, $info);
 
         } catch (dml_exception $e) {
-            throw new moodle1_convert_storage_exception('unable_to_restore_stash', null, $e->getMessage());
+            throw new powereduc1_convert_storage_exception('unable_to_restore_stash', null, $e->getMessage());
         }
     }
 
@@ -457,7 +457,7 @@ class moodle1_converter extends base_converter {
      *
      * @param string $stashname name of the stash
      * @param int $itemid optional id for multiple infos within the same stashname
-     * @throws moodle1_convert_empty_storage_exception if the info has not been stashed previously
+     * @throws powereduc1_convert_empty_storage_exception if the info has not been stashed previously
      * @return mixed stashed data
      */
     public function get_stash($stashname, $itemid = 0) {
@@ -465,7 +465,7 @@ class moodle1_converter extends base_converter {
         $record = restore_dbops::get_backup_ids_record($this->get_id(), $stashname, $itemid);
 
         if (empty($record)) {
-            throw new moodle1_convert_empty_storage_exception('required_not_stashed_data', array($stashname, $itemid));
+            throw new powereduc1_convert_empty_storage_exception('required_not_stashed_data', array($stashname, $itemid));
         } else {
             if (empty($record->info)) {
                 return array();
@@ -485,7 +485,7 @@ class moodle1_converter extends base_converter {
     public function get_stash_or_default($stashname, $itemid = 0, $default = null) {
         try {
             return $this->get_stash($stashname, $itemid);
-        } catch (moodle1_convert_empty_storage_exception $e) {
+        } catch (powereduc1_convert_empty_storage_exception $e) {
             return $default;
         }
     }
@@ -550,7 +550,7 @@ class moodle1_converter extends base_converter {
             // try the previously stashed id
             return $this->get_stash($stashname, $instance);
 
-        } catch (moodle1_convert_empty_storage_exception $e) {
+        } catch (powereduc1_convert_empty_storage_exception $e) {
             // this context level + instance is required for the first time
             $newid = $this->get_nextid();
             $this->set_stash($stashname, $newid, $instance);
@@ -575,10 +575,10 @@ class moodle1_converter extends base_converter {
      * @param string $filearea the default file area of the files being migrated
      * @param int $itemid the default item id of the files being migrated
      * @param int $userid initial user id of the files being migrated
-     * @return moodle1_file_manager
+     * @return powereduc1_file_manager
      */
     public function get_file_manager($contextid = null, $component = null, $filearea = null, $itemid = 0, $userid = null) {
-        return new moodle1_file_manager($this, $contextid, $component, $filearea, $itemid, $userid);
+        return new powereduc1_file_manager($this, $contextid, $component, $filearea, $itemid, $userid);
     }
 
     /**
@@ -586,10 +586,10 @@ class moodle1_converter extends base_converter {
      *
      * @param string $name the name of the annotator (like course, section, activity, block)
      * @param int $id the id of the annotator if required
-     * @return moodle1_inforef_manager
+     * @return powereduc1_inforef_manager
      */
     public function get_inforef_manager($name, $id = 0) {
-        return new moodle1_inforef_manager($this, $name, $id);
+        return new powereduc1_inforef_manager($this, $name, $id);
     }
 
 
@@ -599,17 +599,17 @@ class moodle1_converter extends base_converter {
      * This is typically used to convert images embedded into the intro fields.
      *
      * @param string $text hypertext containing $@FILEPHP@$ referenced
-     * @param moodle1_file_manager $fileman file manager to use for the file migration
+     * @param powereduc1_file_manager $fileman file manager to use for the file migration
      * @return string the original $text with $@FILEPHP@$ references replaced with the new @@PLUGINFILE@@
      */
-    public static function migrate_referenced_files($text, moodle1_file_manager $fileman) {
+    public static function migrate_referenced_files($text, powereduc1_file_manager $fileman) {
 
         $files = self::find_referenced_files($text);
         if (!empty($files)) {
             foreach ($files as $file) {
                 try {
                     $fileman->migrate_file('course_files'.$file, dirname($file));
-                } catch (moodle1_convert_exception $e) {
+                } catch (powereduc1_convert_exception $e) {
                     // file probably does not exist
                     $fileman->log('error migrating file', backup::LOG_WARNING, 'course_files'.$file);
                 }
@@ -639,7 +639,7 @@ class moodle1_converter extends base_converter {
         $pattern = '|(["\'])(\$@FILEPHP@\$.+?)\1|';
         $result = preg_match_all($pattern, $text, $matches);
         if ($result === false) {
-            throw new moodle1_convert_exception('error_while_searching_for_referenced_files');
+            throw new powereduc1_convert_exception('error_while_searching_for_referenced_files');
         }
         if ($result == 0) {
             return $files;
@@ -697,33 +697,33 @@ class moodle1_converter extends base_converter {
 /**
  * Exception thrown by this converter
  */
-class moodle1_convert_exception extends convert_exception {
+class powereduc1_convert_exception extends convert_exception {
 }
 
 
 /**
- * Exception thrown by the temporary storage subsystem of moodle1_converter
+ * Exception thrown by the temporary storage subsystem of powereduc1_converter
  */
-class moodle1_convert_storage_exception extends moodle1_convert_exception {
+class powereduc1_convert_storage_exception extends powereduc1_convert_exception {
 }
 
 
 /**
- * Exception thrown by the temporary storage subsystem of moodle1_converter
+ * Exception thrown by the temporary storage subsystem of powereduc1_converter
  */
-class moodle1_convert_empty_storage_exception extends moodle1_convert_exception {
+class powereduc1_convert_empty_storage_exception extends powereduc1_convert_exception {
 }
 
 
 /**
- * XML parser processor used for processing parsed moodle.xml
+ * XML parser processor used for processing parsed powereduc.xml
  */
-class moodle1_parser_processor extends grouped_parser_processor {
+class powereduc1_parser_processor extends grouped_parser_processor {
 
-    /** @var moodle1_converter */
+    /** @var powereduc1_converter */
     protected $converter;
 
-    public function __construct(moodle1_converter $converter) {
+    public function __construct(powereduc1_converter $converter) {
         $this->converter = $converter;
         parent::__construct();
     }
@@ -777,7 +777,7 @@ class moodle1_parser_processor extends grouped_parser_processor {
  *
  * @see backup_xml_transformer
  */
-class moodle1_xml_transformer extends xml_contenttransformer {
+class powereduc1_xml_transformer extends xml_contenttransformer {
 
     /**
      * Modify the content before it is writter to a file
@@ -873,7 +873,7 @@ class convert_path {
      *                                                   and so can be dropped from the XML.
      * - renamefields => array oldname => newname        indicates fieldsthat have been renamed in the table,
      *                                                   and so should be renamed in the XML.
-     * {@line moodle1_course_outline_handler} is a good example that uses all of these.
+     * {@line powereduc1_course_outline_handler} is a good example that uses all of these.
      *
      * @param string $name name of the element
      * @param string $path path of the element
@@ -1141,7 +1141,7 @@ class convert_path {
 /**
  * Exception being thrown by {@link convert_path} methods
  */
-class convert_path_exception extends moodle_exception {
+class convert_path_exception extends powereduc_exception {
 
     /**
      * Constructor
@@ -1162,9 +1162,9 @@ class convert_path_exception extends moodle_exception {
  * The files in Moodle 1.9 backup are stored in moddata, user_files, group_files,
  * course_files and site_files folders.
  */
-class moodle1_file_manager implements loggable {
+class powereduc1_file_manager implements loggable {
 
-    /** @var moodle1_converter instance we serve to */
+    /** @var powereduc1_converter instance we serve to */
     public $converter;
 
     /** @var int context id of the files being migrated */
@@ -1191,14 +1191,14 @@ class moodle1_file_manager implements loggable {
     /**
      * Constructor optionally accepting some default values for the migrated files
      *
-     * @param moodle1_converter $converter the converter instance we serve to
+     * @param powereduc1_converter $converter the converter instance we serve to
      * @param int $contextid initial context id of the files being migrated
      * @param string $component initial component name of the files being migrated
      * @param string $filearea initial file area of the files being migrated
      * @param int $itemid initial item id of the files being migrated
      * @param int $userid initial user id of the files being migrated
      */
-    public function __construct(moodle1_converter $converter, $contextid = null, $component = null, $filearea = null, $itemid = 0, $userid = null) {
+    public function __construct(powereduc1_converter $converter, $contextid = null, $component = null, $filearea = null, $itemid = 0, $userid = null) {
         // set the initial destination of the migrated files
         $this->converter = $converter;
         $this->contextid = $contextid;
@@ -1228,13 +1228,13 @@ class moodle1_file_manager implements loggable {
 
         // PARAM_PATH must not be used on full OS path!
         if ($sourcepath !== clean_param($sourcepath, PARAM_PATH)) {
-            throw new moodle1_convert_exception('file_invalid_path', $sourcepath);
+            throw new powereduc1_convert_exception('file_invalid_path', $sourcepath);
         }
 
         $sourcefullpath = $this->basepath.'/'.$sourcepath;
 
         if (!is_readable($sourcefullpath)) {
-            throw new moodle1_convert_exception('file_not_readable', $sourcefullpath);
+            throw new powereduc1_convert_exception('file_not_readable', $sourcefullpath);
         }
 
         // sanitize filepath
@@ -1247,7 +1247,7 @@ class moodle1_file_manager implements loggable {
         $filepath = clean_param($filepath, PARAM_PATH);
 
         if (core_text::strlen($filepath) > 255) {
-            throw new moodle1_convert_exception('file_path_longer_than_255_chars');
+            throw new powereduc1_convert_exception('file_path_longer_than_255_chars');
         }
 
         if (is_null($filename)) {
@@ -1257,7 +1257,7 @@ class moodle1_file_manager implements loggable {
         $filename = clean_param($filename, PARAM_FILE);
 
         if ($filename === '') {
-            throw new moodle1_convert_exception('unsupported_chars_in_filename');
+            throw new powereduc1_convert_exception('unsupported_chars_in_filename');
         }
 
         if (is_null($timecreated)) {
@@ -1294,7 +1294,7 @@ class moodle1_file_manager implements loggable {
 
         // Check the trailing slash in the $rootpath
         if (substr($rootpath, -1) === '/') {
-            debugging('moodle1_file_manager::migrate_directory() expects $rootpath without the trailing slash', DEBUG_DEVELOPER);
+            debugging('powereduc1_file_manager::migrate_directory() expects $rootpath without the trailing slash', DEBUG_DEVELOPER);
             $rootpath = substr($rootpath, 0, strlen($rootpath) - 1);
         }
 
@@ -1318,7 +1318,7 @@ class moodle1_file_manager implements loggable {
             }
 
             if ($item->isLink()) {
-                throw new moodle1_convert_exception('unexpected_symlink');
+                throw new powereduc1_convert_exception('unexpected_symlink');
             }
 
             if ($item->isFile()) {
@@ -1329,7 +1329,7 @@ class moodle1_file_manager implements loggable {
                 $dirname = clean_param($item->getFilename(), PARAM_PATH);
 
                 if ($dirname === '') {
-                    throw new moodle1_convert_exception('unsupported_chars_in_filename');
+                    throw new powereduc1_convert_exception('unsupported_chars_in_filename');
                 }
 
                 // migrate subdirectories recursively
@@ -1420,7 +1420,7 @@ class moodle1_file_manager implements loggable {
     protected function add_file_to_pool($pathname) {
 
         if (!is_readable($pathname)) {
-            throw new moodle1_convert_exception('file_not_readable');
+            throw new powereduc1_convert_exception('file_not_readable');
         }
 
         $contenthash = file_storage::hash_from_path($pathname);
@@ -1432,7 +1432,7 @@ class moodle1_file_manager implements loggable {
             if (filesize($hashfile) !== $filesize) {
                 // congratulations! you have found two files with different size and the same
                 // content hash. or, something were wrong (which is more likely)
-                throw new moodle1_convert_exception('same_hash_different_size');
+                throw new powereduc1_convert_exception('same_hash_different_size');
             }
             $newfile = false;
 
@@ -1441,11 +1441,11 @@ class moodle1_file_manager implements loggable {
             $newfile = true;
 
             if (!copy($pathname, $hashfile)) {
-                throw new moodle1_convert_exception('unable_to_copy_file');
+                throw new powereduc1_convert_exception('unable_to_copy_file');
             }
 
             if (filesize($hashfile) !== $filesize) {
-                throw new moodle1_convert_exception('filesize_different_after_copy');
+                throw new powereduc1_convert_exception('filesize_different_after_copy');
             }
         }
 
@@ -1467,7 +1467,7 @@ class moodle1_file_manager implements loggable {
 /**
  * Helper class that handles ids annotations for inforef.xml files
  */
-class moodle1_inforef_manager {
+class powereduc1_inforef_manager {
 
     /** @var string the name of the annotator we serve to (like course, section, activity, block) */
     protected $annotator = null;
@@ -1484,11 +1484,11 @@ class moodle1_inforef_manager {
      * The identification of the annotator we serve to may be important in the future
      * when we move the actual storage of the references from memory to a persistent storage.
      *
-     * @param moodle1_converter $converter
+     * @param powereduc1_converter $converter
      * @param string $name the name of the annotator (like course, section, activity, block)
      * @param int $id the id of the annotator if required
      */
-    public function __construct(moodle1_converter $converter, $name, $id = 0) {
+    public function __construct(powereduc1_converter $converter, $name, $id = 0) {
         $this->annotator   = $name;
         $this->annotatorid = $id;
     }

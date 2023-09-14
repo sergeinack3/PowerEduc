@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,10 +27,10 @@ $itemid    = 0;
 
 list($context, $course, $cm) = get_context_info_array($contextid);
 
-$url = new moodle_url('/files/coursefilesedit.php', array('contextid'=>$contextid));
+$url = new powereduc_url('/files/coursefilesedit.php', array('contextid'=>$contextid));
 
 require_login($course);
-require_capability('moodle/course:managefiles', $context);
+require_capability('powereduc/course:managefiles', $context);
 
 $PAGE->set_url($url);
 $heading = get_string('coursefiles') . ': ' . format_string($course->fullname, true, array('context' => $context));
@@ -50,7 +50,7 @@ $options = array('subdirs'=>1, 'maxfiles'=>-1, 'accepted_types'=>'*', 'return_ty
 file_prepare_standard_filemanager($data, 'files', $options, $context, $component, $filearea, $itemid);
 $form = new coursefiles_edit_form(null, array('data'=>$data, 'contextid'=>$contextid));
 
-$returnurl = new moodle_url('/files/index.php', array('contextid'=>$contextid));
+$returnurl = new powereduc_url('/files/index.php', array('contextid'=>$contextid));
 
 if ($form->is_cancelled()) {
     redirect($returnurl);

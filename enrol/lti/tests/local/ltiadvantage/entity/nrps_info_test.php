@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -56,7 +56,7 @@ class nrps_info_test extends \advanced_testcase {
         return [
             'Valid creation' => [
                 'args' => [
-                    'contextmembershipsurl' => new \moodle_url('https://lms.example.com/45/memberships'),
+                    'contextmembershipsurl' => new \powereduc_url('https://lms.example.com/45/memberships'),
                     'serviceversions' => ['1.0', '2.0'],
                 ],
                 'expectations' => [
@@ -66,7 +66,7 @@ class nrps_info_test extends \advanced_testcase {
             ],
             'Missing service version' => [
                 'args' => [
-                    'contextmembershipsurl' => new \moodle_url('https://lms.example.com/45/memberships'),
+                    'contextmembershipsurl' => new \powereduc_url('https://lms.example.com/45/memberships'),
                     'serviceversions' => [],
                 ],
                 'expectations' => [
@@ -77,7 +77,7 @@ class nrps_info_test extends \advanced_testcase {
             ],
             'Invalid service version' => [
                 'args' => [
-                    'contextmembershipsurl' => new \moodle_url('https://lms.example.com/45/memberships'),
+                    'contextmembershipsurl' => new \powereduc_url('https://lms.example.com/45/memberships'),
                     'serviceversions' => ['1.1'],
                 ],
                 'expectations' => [
@@ -88,7 +88,7 @@ class nrps_info_test extends \advanced_testcase {
             ],
             'Duplicate service version' => [
                 'args' => [
-                    'contextmembershipsurl' => new \moodle_url('https://lms.example.com/45/memberships'),
+                    'contextmembershipsurl' => new \powereduc_url('https://lms.example.com/45/memberships'),
                     'serviceversions' => ['1.0', '1.0'],
                 ],
                 'expectations' => [

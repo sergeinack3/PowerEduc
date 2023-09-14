@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
@@ -20,7 +20,7 @@ namespace core;
  * Test core_user class.
  *
  * @package    core
- * @copyright  2013 Rajesh Taneja <rajesh@moodle.com>
+ * @copyright  2013 Rajesh Taneja <rajesh@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class user_test extends \advanced_testcase {
@@ -425,7 +425,7 @@ class user_test extends \advanced_testcase {
         $DB->set_field('user', 'confirmed', 0, array('id' => $userexpected->id));
         try {
             \core_user::require_active_user($userexpected);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('usernotconfirmed', $e->errorcode);
         }
         $DB->set_field('user', 'confirmed', 1, array('id' => $userexpected->id));
@@ -434,7 +434,7 @@ class user_test extends \advanced_testcase {
         $DB->set_field('user', 'auth', 'nologin', array('id' => $userexpected->id));
         try {
             \core_user::require_active_user($userexpected, false, true);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('suspended', $e->errorcode);
         }
         // Check no exceptions are thrown if we don't specify to check suspended.
@@ -445,7 +445,7 @@ class user_test extends \advanced_testcase {
         $DB->set_field('user', 'suspended', 1, array('id' => $userexpected->id));
         try {
             \core_user::require_active_user($userexpected, true);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('suspended', $e->errorcode);
         }
         // Check no exceptions are thrown if we don't specify to check suspended.
@@ -455,7 +455,7 @@ class user_test extends \advanced_testcase {
         delete_user($userexpected);
         try {
             \core_user::require_active_user($userexpected);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('userdeleted', $e->errorcode);
         }
 
@@ -463,7 +463,7 @@ class user_test extends \advanced_testcase {
         $noreplyuser = \core_user::get_noreply_user();
         try {
             \core_user::require_active_user($noreplyuser, true);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('invaliduser', $e->errorcode);
         }
 
@@ -471,7 +471,7 @@ class user_test extends \advanced_testcase {
         $guestuser = $DB->get_record('user', array('username' => 'guest'));
         try {
             \core_user::require_active_user($guestuser, true);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('guestsarenotallowed', $e->errorcode);
         }
 
@@ -713,7 +713,7 @@ class user_test extends \advanced_testcase {
         $langconfig = "<?php\n\defined('POWEREDUC_INTERNAL') || die();";
         file_put_contents($langfolder . '/langconfig.php', $langconfig);
         $langconfig = "<?php\n\$string['noreplyname'] = 'XXX';";
-        file_put_contents($langfolder . '/moodle.php', $langconfig);
+        file_put_contents($langfolder . '/powereduc.php', $langconfig);
 
         $CFG->lang='en';
         $enuser = \core_user::get_noreply_user();

@@ -60,7 +60,7 @@
         <KEY NAME="ltideploymentid" TYPE="foreign" FIELDS="ltideploymentid" REFTABLE="enrol_lti_deployment" REFFIELDS="id"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="enrol_lti_lti2_consumer" COMMENT="LTI consumers interacting with moodle">
+    <TABLE NAME="enrol_lti_lti2_consumer" COMMENT="LTI consumers interacting with powereduc">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="name" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false"/>
@@ -89,7 +89,7 @@
         <INDEX NAME="consumerkey256_uniq" UNIQUE="true" FIELDS="consumerkey256"/>
       </INDEXES>
     </TABLE>
-    <TABLE NAME="enrol_lti_lti2_tool_proxy" COMMENT="A tool proxy between moodle and a consumer">
+    <TABLE NAME="enrol_lti_lti2_tool_proxy" COMMENT="A tool proxy between powereduc and a consumer">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="toolproxykey" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false"/>
@@ -119,7 +119,7 @@
         <KEY NAME="consumerid" TYPE="foreign" FIELDS="consumerid" REFTABLE="enrol_lti_lti2_consumer" REFFIELDS="id"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="enrol_lti_lti2_nonce" COMMENT="Nonce used for authentication between moodle and a consumer">
+    <TABLE NAME="enrol_lti_lti2_nonce" COMMENT="Nonce used for authentication between powereduc and a consumer">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="consumerid" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false"/>

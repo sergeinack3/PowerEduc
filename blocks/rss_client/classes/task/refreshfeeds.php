@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -68,7 +68,7 @@ class refreshfeeds extends \core\task\scheduled_task {
      */
     public function execute() {
         global $CFG, $DB;
-        require_once("{$CFG->libdir}/simplepie/moodle_simplepie.php");
+        require_once("{$CFG->libdir}/simplepie/powereduc_simplepie.php");
 
         // We are going to measure execution times.
         $starttime = microtime();
@@ -117,13 +117,13 @@ class refreshfeeds extends \core\task\scheduled_task {
      * Fetch a feed for the specified URL.
      *
      * @param   string  $url The URL to fetch
-     * @return  \moodle_simplepie
+     * @return  \powereduc_simplepie
      */
-    protected function fetch_feed(string $url) : \moodle_simplepie {
+    protected function fetch_feed(string $url) : \powereduc_simplepie {
         // Fetch the rss feed, using standard simplepie caching so feeds will be renewed only if cache has expired.
         \core_php_time_limit::raise(60);
 
-        $feed = new \moodle_simplepie();
+        $feed = new \powereduc_simplepie();
 
         // Set timeout for longer than normal to be agressive at fetching feeds if possible..
         $feed->set_timeout(40);

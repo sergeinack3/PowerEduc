@@ -18,7 +18,7 @@ Feature: Data export from the privacy API
       | capability                                   | permission | role    | contextlevel | reference |
       | tool/dataprivacy:makedatarequestsforchildren | Allow      | tired   | System       |           |
       | tool/dataprivacy:managedatarequests          | Allow      | manager | System       |           |
-      | moodle/site:viewuseridentity                 | Prevent    | manager | System       |           |
+      | powereduc/site:viewuseridentity                 | Prevent    | manager | System       |           |
     And the following "role assigns" exist:
       | user   | role  | contextlevel | reference |
       | parent | tired | User         | victim    |
@@ -140,7 +140,7 @@ Feature: Data export from the privacy API
   Scenario: Test search for user using extra field.
     Given the following "permission overrides" exist:
       | capability                   | permission | role    | contextlevel | reference |
-      | moodle/site:viewuseridentity | Allow      | manager | System       |           |
+      | powereduc/site:viewuseridentity | Allow      | manager | System       |           |
     And the following config values are set as admin:
       | showuseridentity | institution |
     And I log in as "requester"

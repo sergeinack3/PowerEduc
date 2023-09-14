@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Self enrol plugin external functions
  *
  * @package    enrol_self
- * @copyright  2013 Rajesh Taneja <rajesh@moodle.com>
+ * @copyright  2013 Rajesh Taneja <rajesh@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ require_once("$CFG->libdir/externallib.php");
  * Self enrolment external functions.
  *
  * @package   enrol_self
- * @copyright 2012 Rajesh Taneja <rajesh@moodle.com>
+ * @copyright 2012 Rajesh Taneja <rajesh@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since     Moodle 2.6
  */
@@ -52,7 +52,7 @@ class enrol_self_external extends external_api {
      *
      * @param int $instanceid instance id of self enrolment plugin.
      * @return array instance information.
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_instance_info($instanceid) {
         global $DB, $CFG;
@@ -64,7 +64,7 @@ class enrol_self_external extends external_api {
         // Retrieve self enrolment plugin.
         $enrolplugin = enrol_get_plugin('self');
         if (empty($enrolplugin)) {
-            throw new moodle_exception('invaliddata', 'error');
+            throw new powereduc_exception('invaliddata', 'error');
         }
 
         self::validate_context(context_system::instance());
@@ -72,7 +72,7 @@ class enrol_self_external extends external_api {
         $enrolinstance = $DB->get_record('enrol', array('id' => $params['instanceid']), '*', MUST_EXIST);
         $course = $DB->get_record('course', array('id' => $enrolinstance->courseid), '*', MUST_EXIST);
         if (!core_course_category::can_view_course_info($course) && !can_access_course($course)) {
-            throw new moodle_exception('coursehidden');
+            throw new powereduc_exception('coursehidden');
         }
 
         $instanceinfo = (array) $enrolplugin->get_enrol_info($enrolinstance);
@@ -126,7 +126,7 @@ class enrol_self_external extends external_api {
      * @param int $instanceid instance id of self enrolment plugin
      * @return array of warnings and status result
      * @since Moodle 3.0
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function enrol_user($courseid, $password = '', $instanceid = 0) {
         global $CFG;
@@ -147,13 +147,13 @@ class enrol_self_external extends external_api {
         self::validate_context(context_system::instance());
 
         if (!core_course_category::can_view_course_info($course)) {
-            throw new moodle_exception('coursehidden');
+            throw new powereduc_exception('coursehidden');
         }
 
         // Retrieve the self enrolment plugin.
         $enrol = enrol_get_plugin('self');
         if (empty($enrol)) {
-            throw new moodle_exception('canntenrol', 'enrol_self');
+            throw new powereduc_exception('canntenrol', 'enrol_self');
         }
 
         // We can expect multiple self-enrolment instances.
@@ -174,7 +174,7 @@ class enrol_self_external extends external_api {
             }
         }
         if (empty($instances)) {
-            throw new moodle_exception('canntenrol', 'enrol_self');
+            throw new powereduc_exception('canntenrol', 'enrol_self');
         }
 
         // Try to enrol the user in the instance/s.

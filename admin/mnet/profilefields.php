@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -54,9 +54,9 @@ if ($data = $form->get_data()) {
     set_config('host' . $hostid . 'exportdefault', $data->exportdefault, 'mnet');
     set_config('host' . $hostid . 'exportfields', implode(',', $data->exportfields), 'mnet');
 
-    redirect(new moodle_url('/admin/mnet/peers.php'), get_string('changessaved'));
+    redirect(new powereduc_url('/admin/mnet/peers.php'), get_string('changessaved'));
 } elseif ($form->is_cancelled()) {
-    redirect(new moodle_url('/admin/mnet/peers.php', array('hostid' => $hostid)));
+    redirect(new powereduc_url('/admin/mnet/peers.php', array('hostid' => $hostid)));
 }
 
 echo $OUTPUT->header();

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Book external API
@@ -21,7 +21,7 @@
  * @category   external
  * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.0
+ * @since      PowerEduc 3.0
  */
 
 use core_course\external\helper_for_get_mods_by_courses;
@@ -37,7 +37,7 @@ require_once("$CFG->libdir/externallib.php");
  * @category   external
  * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.0
+ * @since      PowerEduc 3.0
  */
 class mod_book_external extends external_api {
 
@@ -45,7 +45,7 @@ class mod_book_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function view_book_parameters() {
         return new external_function_parameters(
@@ -62,7 +62,7 @@ class mod_book_external extends external_api {
      * @param int $bookid the book instance id
      * @param int $chapterid the book chapter id
      * @return array of warnings and status result
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      * @throws powereduc_exception
      */
     public static function view_book($bookid, $chapterid = 0) {
@@ -140,7 +140,7 @@ class mod_book_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function view_book_returns() {
         return new external_single_structure(
@@ -155,7 +155,7 @@ class mod_book_external extends external_api {
      * Describes the parameters for get_books_by_courses.
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_books_by_courses_parameters() {
         return new external_function_parameters (
@@ -173,7 +173,7 @@ class mod_book_external extends external_api {
      *
      * @param array $courseids the course ids
      * @return array of books details
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_books_by_courses($courseids = array()) {
 
@@ -221,7 +221,7 @@ class mod_book_external extends external_api {
      * Describes the get_books_by_courses return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_books_by_courses_returns() {
         return new external_single_structure(

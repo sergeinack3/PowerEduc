@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -80,7 +80,7 @@ abstract class backup_cron_automated_helper {
      * Finally, all else being equal, defer to the sortorder of the courses.
      *
      * @param null|int $now timestamp to use in course selection.
-     * @return moodle_recordset The recordset of matching courses.
+     * @return powereduc_recordset The recordset of matching courses.
      */
     protected static function get_courses($now = null) {
         global $DB;
@@ -240,7 +240,7 @@ abstract class backup_cron_automated_helper {
         // Send the message.
         $eventdata = new \core\message\message();
         $eventdata->courseid          = SITEID;
-        $eventdata->modulename        = 'moodle';
+        $eventdata->modulename        = 'powereduc';
         $eventdata->userfrom          = $admin;
         $eventdata->userto            = $admin;
         $eventdata->subject           = $subject;
@@ -249,7 +249,7 @@ abstract class backup_cron_automated_helper {
         $eventdata->fullmessagehtml   = '';
         $eventdata->smallmessage      = '';
 
-        $eventdata->component         = 'moodle';
+        $eventdata->component         = 'powereduc';
         $eventdata->name         = 'backup';
 
         return message_send($eventdata);
@@ -465,7 +465,7 @@ abstract class backup_cron_automated_helper {
             $file = $results['backup_destination']; // May be empty if file already moved to target location.
 
             // If we need to copy the backup file to an external dir and it is not writable, change status to error.
-            // This is a feature to prevent moodledata to be filled up and break a site when the admin misconfigured
+            // This is a feature to prevent powereducdata to be filled up and break a site when the admin misconfigured
             // the automated backups storage type and destination directory.
             if ($storage !== 0 && (empty($dir) || !file_exists($dir) || !is_dir($dir) || !is_writable($dir))) {
                 $bc->log('Specified backup directory is not writable - ', backup::LOG_ERROR, $dir);
@@ -491,7 +491,7 @@ abstract class backup_cron_automated_helper {
                 }
             }
 
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $bc->log('backup_auto_failed_on_course', backup::LOG_ERROR, $course->shortname); // Log error header.
             $bc->log('Exception: ' . $e->errorcode, backup::LOG_ERROR, $e->a, 1); // Log original exception problem.
             $bc->log('Debug: ' . $e->debuginfo, backup::LOG_DEBUG, null, 1); // Log original debug information.

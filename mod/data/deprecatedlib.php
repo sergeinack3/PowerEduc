@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * List of deprecated mod_data functions.
@@ -27,10 +27,10 @@
  * on its settings. The call for this is in completion lib where the modulename is appended
  * to the function name. This is why there are unused parameters.
  *
- * @deprecated since Moodle 3.11
- * @todo MDL-71196 Final deprecation in Moodle 4.3
+ * @deprecated since PowerEduc 3.11
+ * @todo MDL-71196 Final deprecation in PowerEduc 4.3
  * @see \mod_data\completion\custom_completion
- * @since Moodle 3.3
+ * @since PowerEduc 3.3
  * @param stdClass $course Course
  * @param cm_info|stdClass $cm course-module
  * @param int $userid User ID

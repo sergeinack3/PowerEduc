@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,10 +32,10 @@ if (!core_component::is_valid_plugin_name('auth', $auth)) {
     $auth = '';
 }
 
-navigation_node::override_active_url(new moodle_url('/admin/settings.php', array('section'=>'manageauths')));
+navigation_node::override_active_url(new powereduc_url('/admin/settings.php', array('section'=>'manageauths')));
 admin_externalpage_setup('authtestsettings');
 
-$returnurl = new moodle_url('/admin/settings.php', array('section'=>'manageauths'));
+$returnurl = new powereduc_url('/admin/settings.php', array('section'=>'manageauths'));
 
 echo $OUTPUT->header();
 
@@ -56,7 +56,7 @@ if (!$auth) {
 
     echo $OUTPUT->heading(get_string('testsettings', 'core_auth'));
 
-    $url = new moodle_url('/auth/test_settings.php', array('sesskey'=>sesskey()));
+    $url = new powereduc_url('/auth/test_settings.php', array('sesskey'=>sesskey()));
     echo $OUTPUT->single_select($url, 'auth', $options);
 
     echo $OUTPUT->footer();

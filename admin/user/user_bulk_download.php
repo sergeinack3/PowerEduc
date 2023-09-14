@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,10 +32,10 @@ require_once($CFG->dirroot.'/user/profile/lib.php');
 $dataformat = optional_param('dataformat', '', PARAM_ALPHA);
 
 admin_externalpage_setup('userbulk');
-require_capability('moodle/user:update', context_system::instance());
+require_capability('powereduc/user:update', context_system::instance());
 
 if (empty($SESSION->bulk_users)) {
-    redirect(new moodle_url('/admin/user/user_bulk.php'));
+    redirect(new powereduc_url('/admin/user/user_bulk.php'));
 }
 
 if ($dataformat) {

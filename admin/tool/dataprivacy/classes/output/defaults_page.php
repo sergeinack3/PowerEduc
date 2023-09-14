@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,8 +26,8 @@ defined('POWEREDUC_INTERNAL') || die();
 
 use action_menu_link_primary;
 use coding_exception;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use renderable;
 use renderer_base;
 use stdClass;
@@ -82,16 +82,16 @@ class defaults_page implements renderable, templatable {
      * @param renderer_base $output
      * @return stdClass
      * @throws coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function export_for_template(renderer_base $output) {
         $data = new stdClass();
 
         // Set tab URLs.
-        $coursecaturl = new moodle_url('/admin/tool/dataprivacy/defaults.php', ['mode' => CONTEXT_COURSECAT]);
-        $courseurl = new moodle_url('/admin/tool/dataprivacy/defaults.php', ['mode' => CONTEXT_COURSE]);
-        $moduleurl = new moodle_url('/admin/tool/dataprivacy/defaults.php', ['mode' => CONTEXT_MODULE]);
-        $blockurl = new moodle_url('/admin/tool/dataprivacy/defaults.php', ['mode' => CONTEXT_BLOCK]);
+        $coursecaturl = new powereduc_url('/admin/tool/dataprivacy/defaults.php', ['mode' => CONTEXT_COURSECAT]);
+        $courseurl = new powereduc_url('/admin/tool/dataprivacy/defaults.php', ['mode' => CONTEXT_COURSE]);
+        $moduleurl = new powereduc_url('/admin/tool/dataprivacy/defaults.php', ['mode' => CONTEXT_MODULE]);
+        $blockurl = new powereduc_url('/admin/tool/dataprivacy/defaults.php', ['mode' => CONTEXT_BLOCK]);
         $data->coursecaturl = $coursecaturl;
         $data->courseurl = $courseurl;
         $data->moduleurl = $moduleurl;
@@ -132,7 +132,7 @@ class defaults_page implements renderable, templatable {
 
         // Set other defaults.
         $otherdefaults = [];
-        $url = new moodle_url('#');
+        $url = new powereduc_url('#');
         foreach ($this->otherdefaults as $pluginname => $values) {
             $defaults = [
                 'name' => $values->name,

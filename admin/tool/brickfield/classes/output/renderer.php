@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@ namespace tool_brickfield\output;
 
 use tool_brickfield\accessibility;
 use plugin_renderer_base;
-use moodle_url;
+use powereduc_url;
 use tabobject;
 use tabtree;
 use html_writer;
@@ -60,13 +60,13 @@ class renderer extends plugin_renderer_base {
      * @param filter $filter
      * @param array $tools
      * @return string
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public function tabs(filter $filter, array $tools): string {
         $idprefix = 'tab_';
         $tabs = [];
         foreach ($tools as $toolname => $tool) {
-            $link = new moodle_url(
+            $link = new powereduc_url(
                 accessibility::get_plugin_url(),
                 array_merge(['tab' => $toolname, ], $tool->toplevel_arguments($filter))
             );
@@ -87,7 +87,7 @@ class renderer extends plugin_renderer_base {
      *
      * @param tabtree $tabtree
      * @return string
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     protected function render_tabtree(tabtree $tabtree): string {
         if (empty($tabtree->subtree)) {
@@ -123,7 +123,7 @@ class renderer extends plugin_renderer_base {
      * @param int $courseid
      * @return string
      * @throws \coding_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public function analysisalert(int $courseid): string {
         $siteorcourse = ($courseid == SITEID) ? 'site' : '';
@@ -156,10 +156,10 @@ class renderer extends plugin_renderer_base {
      * @param int $courseid
      * @return string
      * @throws \coding_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public function analysisbutton(int $courseid) : string {
-        $link = new moodle_url(accessibility::get_plugin_url(), [
+        $link = new powereduc_url(accessibility::get_plugin_url(), [
             'action' => 'requestanalysis',
             'courseid' => $courseid
         ]);

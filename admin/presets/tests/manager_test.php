@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ use stdClass;
  *
  * @package    core_adminpresets
  * @category   test
- * @copyright  2021 Sara Arjona (sara@moodle.com)
+ * @copyright  2021 Sara Arjona (sara@powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @coversDefaultClass \core_adminpresets\manager
  */
@@ -161,7 +161,7 @@ class manager_test extends \advanced_testcase {
         $unexistingid = $presetid * 2;
 
         $manager = new manager();
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $manager->apply_preset($unexistingid);
     }
 
@@ -394,7 +394,7 @@ class manager_test extends \advanced_testcase {
         $unexistingid = $presetid * 2;
 
         $manager = new manager();
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $manager->download_preset($unexistingid);
     }
 
@@ -446,7 +446,7 @@ class manager_test extends \advanced_testcase {
                 $this->assertArrayHasKey($preset->id, $presets);
                 $preset = $presets[$preset->id];
                 $this->assertEquals($expectedpresetname, $preset->name);
-                $this->assertEquals('http://demo.moodle', $preset->site);
+                $this->assertEquals('http://demo.powereduc', $preset->site);
                 $this->assertEquals('Ada Lovelace', $preset->author);
                 $this->assertEquals(manager::NONCORE_PRESET, $preset->iscore);
 
@@ -599,7 +599,7 @@ class manager_test extends \advanced_testcase {
 
         $manager = new manager();
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $manager->delete_preset($unexistingid);
     }
 
@@ -677,7 +677,7 @@ class manager_test extends \advanced_testcase {
         $unexistingid = $presetappid * 2;
 
         $manager = new manager();
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $manager->revert_preset($unexistingid);
     }
 

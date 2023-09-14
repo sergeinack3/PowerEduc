@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ require_once($CFG->dirroot . '/webservice/tests/helpers.php');
  *
  * @package    core_completion
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 2.9
  */
@@ -286,13 +286,13 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Change teacher role capabilities (disable access all groups).
         $context = \context_course::instance($course->id);
-        assign_capability('moodle/site:accessallgroups', CAP_PROHIBIT, $teacherrole->id, $context);
+        assign_capability('powereduc/site:accessallgroups', CAP_PROHIBIT, $teacherrole->id, $context);
         accesslib_clear_all_caches_for_unit_testing();
 
         try {
             $result = core_completion_external::get_activities_completion_status($course->id, $student->id);
             $this->fail('Exception expected due to groups permissions.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('accessdenied', $e->errorcode);
         }
 
@@ -364,7 +364,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals(COMPLETION_INCOMPLETE, $completionforum->completionstate);
 
         // Test overriding the status of the auto-completion-activity to an invalid state.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_completion_external::override_activity_completion_status($student->id, $forum->cmid, 3);
     }
 
@@ -392,7 +392,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Test overriding the status of the activity for a user without the capability.
         $this->setUser($teacher);
-        assign_capability('moodle/course:overridecompletion', CAP_PREVENT, $teacherrole->id, $coursecontext);
+        assign_capability('powereduc/course:overridecompletion', CAP_PREVENT, $teacherrole->id, $coursecontext);
         $this->expectException('required_capability_exception');
         core_completion_external::override_activity_completion_status($student->id, $forum->cmid, COMPLETION_COMPLETE);
     }
@@ -507,13 +507,13 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Change teacher role capabilities (disable access al goups).
         $context = \context_course::instance($course->id);
-        assign_capability('moodle/site:accessallgroups', CAP_PROHIBIT, $teacherrole->id, $context);
+        assign_capability('powereduc/site:accessallgroups', CAP_PROHIBIT, $teacherrole->id, $context);
         accesslib_clear_all_caches_for_unit_testing();
 
         try {
             $result = core_completion_external::get_course_completion_status($course->id, $student->id);
             $this->fail('Exception expected due to groups permissions.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('accessdenied', $e->errorcode);
         }
 
@@ -589,7 +589,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             $result = core_completion_external::mark_course_self_completed($course->id);
             $this->fail('Exception expected due course already self completed.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('useralreadymarkedcomplete', $e->errorcode);
         }
 

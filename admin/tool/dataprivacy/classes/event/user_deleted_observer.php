@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Event observers supported by this module.
  *
  * @package    tool_dataprivacy
- * @copyright   2018 Mihail Geshoski <mihail@moodle.com>
+ * @copyright   2018 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,7 +33,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * Event observers supported by this module.
  *
  * @package    tool_dataprivacy
- * @copyright   2018 Mihail Geshoski <mihail@moodle.com>
+ * @copyright   2018 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class user_deleted_observer {

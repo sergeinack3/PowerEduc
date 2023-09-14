@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 /**
  * @package    tool
  * @subpackage customlang
- * @copyright  2010 David Mudrak <david@moodle.com>
+ * @copyright  2010 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -34,7 +34,7 @@ $currentpage            = optional_param('p', 0, PARAM_INT);
 $translatorsubmitted    = optional_param('translatorsubmitted', 0, PARAM_BOOL);
 
 admin_externalpage_setup('toolcustomlang', '', null,
-    new moodle_url('/admin/tool/customlang/edit.php', array('lng' => $lng)),
+    new powereduc_url('/admin/tool/customlang/edit.php', array('lng' => $lng)),
     array('pagelayout' => 'report')); // Hack: allows for wide page contents.
 
 $PAGE->requires->js_init_call('M.tool_customlang.init_editor', array(), true);
@@ -46,7 +46,7 @@ $PAGE->navbar->add(get_string('editlangpack', 'tool_customlang'), $PAGE->url);
 
 if (empty($lng)) {
     // PARAM_LANG validation failed
-    throw new \moodle_exception('missingparameter');
+    throw new \powereduc_exception('missingparameter');
 }
 
 // pre-output processing
@@ -59,7 +59,7 @@ if ($filter->is_cancelled()) {
 
 } elseif ($submitted = $filter->get_data()) {
     tool_customlang_utils::save_filter($submitted, $USER);
-    redirect(new moodle_url($PAGE->url, array('p'=>0)));
+    redirect(new powereduc_url($PAGE->url, array('p'=>0)));
 }
 
 if ($translatorsubmitted) {
@@ -68,9 +68,9 @@ if ($translatorsubmitted) {
     $checkin = optional_param('savecheckin', false, PARAM_RAW);
 
     if ($checkin === false) {
-        $nexturl = new moodle_url($PAGE->url, array('p' => $currentpage));
+        $nexturl = new powereduc_url($PAGE->url, array('p' => $currentpage));
     } else {
-        $nexturl = new moodle_url('/admin/tool/customlang/index.php', array('action'=>'checkin', 'lng' => $lng, 'sesskey'=>sesskey()));
+        $nexturl = new powereduc_url('/admin/tool/customlang/index.php', array('action'=>'checkin', 'lng' => $lng, 'sesskey'=>sesskey()));
     }
 
     if (!is_array($strings)) {

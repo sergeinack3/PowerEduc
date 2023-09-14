@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    moodle
+ * @package    powereduc
  * @subpackage registration
  * @author     Jerome Mouneyrac <jerome@mouneyrac.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
@@ -30,7 +30,7 @@
 require_once('../../config.php');
 require_once($CFG->libdir . '/adminlib.php');
 
-admin_externalpage_setup('registrationmoodleorg');
+admin_externalpage_setup('registrationpowereducorg');
 
 $unregistration = optional_param('unregistration', false, PARAM_BOOL);
 $confirm = optional_param('confirm', false, PARAM_BOOL);
@@ -41,15 +41,15 @@ if ($unregistration && \core\hub\registration::is_registered()) {
         \core\hub\registration::unregister(false, false);
 
         if (!\core\hub\registration::is_registered()) {
-            redirect(new moodle_url('/admin/registration/index.php'));
+            redirect(new powereduc_url('/admin/registration/index.php'));
         }
     }
 
     echo $OUTPUT->header();
     echo $OUTPUT->confirm(
-        get_string('registerwithmoodleorgremove', 'core_hub'),
-        new moodle_url(new moodle_url('/admin/registration/index.php', ['unregistration' => 1, 'confirm' => 1])),
-        new moodle_url(new moodle_url('/admin/registration/index.php'))
+        get_string('registerwithpowereducorgremove', 'core_hub'),
+        new powereduc_url(new powereduc_url('/admin/registration/index.php', ['unregistration' => 1, 'confirm' => 1])),
+        new powereduc_url(new powereduc_url('/admin/registration/index.php'))
     );
     echo $OUTPUT->footer();
     exit;
@@ -69,9 +69,9 @@ if ($fromform = $siteregistrationform->get_data()) {
 
     if (\core\hub\registration::is_registered()) {
         if (\core\hub\registration::update_manual()) {
-            redirect(new moodle_url($returnurl));
+            redirect(new powereduc_url($returnurl));
         }
-        redirect(new moodle_url('/admin/registration/index.php', ['returnurl' => $returnurl]));
+        redirect(new powereduc_url('/admin/registration/index.php', ['returnurl' => $returnurl]));
     } else {
         \core\hub\registration::register($returnurl);
         // This method will redirect away.
@@ -105,24 +105,24 @@ if (\core\hub\registration::is_registered()) {
 
 // Heading.
 if (\core\hub\registration::is_registered()) {
-    echo $OUTPUT->heading(get_string('registerwithmoodleorgupdate', 'core_hub'));
+    echo $OUTPUT->heading(get_string('registerwithpowereducorgupdate', 'core_hub'));
 } else if ($isinitialregistration) {
-    echo $OUTPUT->heading(get_string('registerwithmoodleorgcomplete', 'core_hub'));
+    echo $OUTPUT->heading(get_string('registerwithpowereducorgcomplete', 'core_hub'));
 } else {
-    echo $OUTPUT->heading(get_string('registerwithmoodleorg', 'core_hub'));
+    echo $OUTPUT->heading(get_string('registerwithpowereducorg', 'core_hub'));
 }
 
 $renderer = $PAGE->get_renderer('core', 'admin');
-echo $renderer->moodleorg_registration_message();
+echo $renderer->powereducorg_registration_message();
 
 $siteregistrationform->display();
 
 if (\core\hub\registration::is_registered()) {
     // Unregister link.
-    $unregisterhuburl = new moodle_url("/admin/registration/index.php", ['unregistration' => 1]);
+    $unregisterhuburl = new powereduc_url("/admin/registration/index.php", ['unregistration' => 1]);
     echo html_writer::div(html_writer::link($unregisterhuburl, get_string('unregister', 'hub')), 'unregister mt-2');
 } else if ($isinitialregistration) {
-    echo html_writer::div(html_writer::link(new moodle_url($returnurl), get_string('skipregistration', 'hub')),
+    echo html_writer::div(html_writer::link(new powereduc_url($returnurl), get_string('skipregistration', 'hub')),
         'skipregistration mt-2');
 }
 echo $OUTPUT->footer();

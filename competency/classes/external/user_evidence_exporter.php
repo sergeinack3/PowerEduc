@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 namespace core_competency\external;
 defined('POWEREDUC_INTERNAL') || die();
 
-use moodle_url;
+use powereduc_url;
 use renderer_base;
 use core_competency\external\performance_helper;
 use core_files\external\stored_file_exporter;
@@ -90,7 +90,7 @@ class user_evidence_exporter extends \core\external\persistent_exporter {
         $urlshort = '';
         $url = $this->persistent->get('url');
         if (!empty($url)) {
-            $murl = new moodle_url($url);
+            $murl = new powereduc_url($url);
             $shorturl = preg_replace('@^https?://(www\.)?@', '', $murl->out(false));
             $urlshort = shorten_text($shorturl, 30, true);
         }

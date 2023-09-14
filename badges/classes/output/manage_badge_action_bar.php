@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,10 +17,10 @@
 namespace core_badges\output;
 
 use core_badges\badge;
-use moodle_url;
+use powereduc_url;
 use renderer_base;
 use single_button;
-use moodle_page;
+use powereduc_page;
 use url_select;
 
 /**
@@ -38,9 +38,9 @@ class manage_badge_action_bar extends base_action_bar {
      * manage_badge_action_bar constructor
      *
      * @param badge $badge The badge we are viewing
-     * @param moodle_page $page The page object
+     * @param powereduc_page $page The page object
      */
-    public function __construct(badge $badge, moodle_page $page) {
+    public function __construct(badge $badge, powereduc_page $page) {
         parent::__construct($page, $badge->type);
         $this->badge = $badge;
     }
@@ -66,7 +66,7 @@ class manage_badge_action_bar extends base_action_bar {
         if ($this->page->context->contextlevel == CONTEXT_COURSE) {
             $params['id'] = $this->page->context->instanceid;
         }
-        $elements['button'] = new single_button(new moodle_url('/badges/index.php', $params), get_string('back'), 'get');
+        $elements['button'] = new single_button(new powereduc_url('/badges/index.php', $params), get_string('back'), 'get');
         $elements['urlselect'] = new url_select($this->generate_badge_navigation(), $this->page->url->out(false), null);
         foreach ($elements as $key => $element) {
             $elements[$key] = $element->export_for_template($output);
@@ -94,33 +94,33 @@ class manage_badge_action_bar extends base_action_bar {
             'bdetails' => [
                 'url' => '/badges/edit.php',
                 'additionalparams' => ['action' => 'badge'],
-                'capability' => 'moodle/badges:configuredetails'
+                'capability' => 'powereduc/badges:configuredetails'
             ],
             'bcriteria' => [
                 'url' => '/badges/criteria.php',
-                'capability' => 'moodle/badges:configurecriteria'
+                'capability' => 'powereduc/badges:configurecriteria'
             ],
             'bmessage' => [
                 'url' => '/badges/edit.php',
                 'additionalparams' => ['action' => 'message'],
-                'capability' => 'moodle/badges:configuremessages'
+                'capability' => 'powereduc/badges:configuremessages'
             ],
             'bawards' => [
                 'url' => '/badges/recipients.php',
                 'additionalparams' => ['sort' => 'dateissued', 'dir' => 'DESC'],
-                'capability' => 'moodle/badges:viewawarded'
+                'capability' => 'powereduc/badges:viewawarded'
             ],
             'bendorsement' => [
                 'url' => '/badges/endorsement.php',
-                'capability' => 'moodle/badges:configuredetails'
+                'capability' => 'powereduc/badges:configuredetails'
             ],
             'brelated' => [
                 'url' => '/badges/related.php',
-                'capability' => 'moodle/badges:configuredetails'
+                'capability' => 'powereduc/badges:configuredetails'
             ],
             'balignment' => [
                 'url' => '/badges/alignment.php',
-                'capability' => 'moodle/badges:configuredetails'
+                'capability' => 'powereduc/badges:configuredetails'
             ],
         ];
     }
@@ -166,7 +166,7 @@ class manage_badge_action_bar extends base_action_bar {
                 $content = $DB->count_records_sql($sql, ['badgeid' => $this->badge->id, 'badgeid2' => $this->badge->id]);
             }
 
-            $url = new moodle_url($checks['url'], $params + ($checks['additionalparams'] ?? []));
+            $url = new powereduc_url($checks['url'], $params + ($checks['additionalparams'] ?? []));
             $options[get_string($stringidentifier, 'core_badges', $content)] = $url->out(false);
         }
         return array_flip($options);

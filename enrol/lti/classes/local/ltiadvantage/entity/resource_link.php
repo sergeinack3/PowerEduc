@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -163,11 +163,11 @@ class resource_link {
     /**
      * Add grade service information to this resource_link instance.
      *
-     * @param \moodle_url|null $lineitemsurl the service URL for get/put of line items, if supported.
-     * @param \moodle_url|null $lineitemurl the service URL if only a single line item is present in the platform.
+     * @param \powereduc_url|null $lineitemsurl the service URL for get/put of line items, if supported.
+     * @param \powereduc_url|null $lineitemurl the service URL if only a single line item is present in the platform.
      * @param string[] $scopes the string array of grade service scopes which may be used by the service.
      */
-    public function add_grade_service(?\moodle_url $lineitemsurl = null, ?\moodle_url $lineitemurl = null, array $scopes = []) {
+    public function add_grade_service(?\powereduc_url $lineitemsurl = null, ?\powereduc_url $lineitemurl = null, array $scopes = []) {
         $this->gradeservice = ags_info::create($lineitemsurl, $lineitemurl, $scopes);
     }
 
@@ -183,10 +183,10 @@ class resource_link {
     /**
      * Add names and roles service information to this resource_link instance.
      *
-     * @param \moodle_url $contextmembershipurl the service URL for memberships.
+     * @param \powereduc_url $contextmembershipurl the service URL for memberships.
      * @param string[] $serviceversions the string array of supported service versions.
      */
-    public function add_names_and_roles_service(\moodle_url $contextmembershipurl, array $serviceversions): void {
+    public function add_names_and_roles_service(\powereduc_url $contextmembershipurl, array $serviceversions): void {
         $this->namesrolesservice = nrps_info::create($contextmembershipurl, $serviceversions);
     }
 

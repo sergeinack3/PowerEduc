@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
@@ -203,14 +203,14 @@ class ldaplib_test extends \advanced_testcase {
                 '(objectClass=leopard)',
             ),
             'Supplied complex' => array(
-                array('(&(objectClass=cheetah)(enabledMoodleUser=1))'),
-                '(&(objectClass=cheetah)(enabledMoodleUser=1))',
+                array('(&(objectClass=cheetah)(enabledPowerEducUser=1))'),
+                '(&(objectClass=cheetah)(enabledPowerEducUser=1))',
             ),
         );
     }
 
     /**
-     * Tests for ldap_get_entries_moodle.
+     * Tests for ldap_get_entries_powereduc.
      *
      * NOTE: in order to execute this test you need to set up OpenLDAP server with core,
      *       cosine, nis and internet schemas and add configuration constants to
@@ -223,7 +223,7 @@ class ldaplib_test extends \advanced_testcase {
      * define('TEST_LDAPLIB_DOMAIN',  'dc=example,dc=local');
      *
      */
-    public function test_ldap_get_entries_moodle() {
+    public function test_ldap_get_entries_powereduc() {
         $this->resetAfterTest();
 
         if (!defined('TEST_LDAPLIB_HOST_URL') or !defined('TEST_LDAPLIB_BIND_DN') or
@@ -233,18 +233,18 @@ class ldaplib_test extends \advanced_testcase {
 
         // Make sure we can connect the server.
         $debuginfo = '';
-        if (!$connection = ldap_connect_moodle(TEST_LDAPLIB_HOST_URL, 3, 'rfc2307', TEST_LDAPLIB_BIND_DN,
+        if (!$connection = ldap_connect_powereduc(TEST_LDAPLIB_HOST_URL, 3, 'rfc2307', TEST_LDAPLIB_BIND_DN,
                                                TEST_LDAPLIB_BIND_PW, LDAP_DEREF_NEVER, $debuginfo, false)) {
             $this->markTestSkipped('Cannot connect to LDAP test server: '.$debuginfo);
         }
 
         // Create new empty test container.
-        if (!($containerdn = $this->create_test_container($connection, 'moodletest'))) {
+        if (!($containerdn = $this->create_test_container($connection, 'powereductest'))) {
             $this->markTestSkipped('Can not create test LDAP container.');
         }
 
         // Add all the test objects.
-        $testobjects = $this->get_ldap_get_entries_moodle_test_objects();
+        $testobjects = $this->get_ldap_get_entries_powereduc_test_objects();
         if (!$this->add_test_objects($connection, $containerdn, $testobjects)) {
             $this->markTestSkipped('Can not create LDAP test objects.');
         }
@@ -260,7 +260,7 @@ class ldaplib_test extends \advanced_testcase {
                 $this->markTestSkipped('Cannot retrieve test objects from LDAP test server.');
             }
 
-            $entries = ldap_get_entries_moodle($connection, $sr);
+            $entries = ldap_get_entries_powereduc($connection, $sr);
             $actual = array_keys($entries[0]);
             $expected = $object['expected'];
 
@@ -277,11 +277,11 @@ class ldaplib_test extends \advanced_testcase {
     }
 
     /**
-     * Provide the array of test objects for the ldap_get_entries_moodle test case.
+     * Provide the array of test objects for the ldap_get_entries_powereduc test case.
      *
      * @return array of test objects
      */
-    protected function get_ldap_get_entries_moodle_test_objects() {
+    protected function get_ldap_get_entries_powereduc_test_objects() {
         $testobjects = array(
             // Test object 1.
             array(
@@ -418,7 +418,7 @@ class ldaplib_test extends \advanced_testcase {
      * @param string $containerdn The distinguished name of the container for the created objects.
      * @param array $testobjects Array of the tests objects to create. The structure of
      *              the array elements *must* follow the structure of the value returned
-     *              by ldap_get_entries_moodle_test_objects() member function.
+     *              by ldap_get_entries_powereduc_test_objects() member function.
      *
      * @return boolean True on success, false otherwise.
      */
@@ -443,7 +443,7 @@ class ldaplib_test extends \advanced_testcase {
      * @param string $containerdn The distinguished name of the container for the objects to remove.
      * @param array $testobjects Array of the tests objects to create. The structure of
      *              the array elements *must* follow the structure of the value returned
-     *              by ldap_get_entries_moodle_test_objects() member function.
+     *              by ldap_get_entries_powereduc_test_objects() member function.
      *
      */
     protected function remove_test_objects($connection, $containerdn, $testobjects) {

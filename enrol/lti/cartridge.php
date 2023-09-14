@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Generates an XML IMS Cartridge with the details for the given tool
  *
  * @package    enrol_lti
- * @copyright  2016 John Okely <john@moodle.com>
+ * @copyright  2016 John Okely <john@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -41,19 +41,19 @@ $token = optional_param('token', $token, PARAM_ALPHANUM);
 // If we do not compare with a shared secret, someone could very easily
 // guess an id for the enrolment.
 if (!\enrol_lti\helper::verify_cartridge_token($toolid, $token)) {
-    throw new \moodle_exception('incorrecttoken', 'enrol_lti');
+    throw new \powereduc_exception('incorrecttoken', 'enrol_lti');
 }
 
 $tool = \enrol_lti\helper::get_lti_tool($toolid);
 
 if (!is_enabled_auth('lti')) {
-    throw new \moodle_exception('pluginnotenabled', 'auth', '', get_string('pluginname', 'auth_lti'));
+    throw new \powereduc_exception('pluginnotenabled', 'auth', '', get_string('pluginname', 'auth_lti'));
 
 } else if (!enrol_is_enabled('lti')) {
-    throw new \moodle_exception('enrolisdisabled', 'enrol_lti');
+    throw new \powereduc_exception('enrolisdisabled', 'enrol_lti');
 
 } else if ($tool->status != ENROL_INSTANCE_ENABLED) {
-    throw new \moodle_exception('enrolisdisabled', 'enrol_lti');
+    throw new \powereduc_exception('enrolisdisabled', 'enrol_lti');
 
 } else {
     header('Content-Type: text/xml; charset=utf-8');

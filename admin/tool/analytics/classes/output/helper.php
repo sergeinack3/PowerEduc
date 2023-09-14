@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -63,11 +63,11 @@ class helper {
      * Sets an analytics > analytics models > $title breadcrumb.
      *
      * @param string $title
-     * @param \moodle_url $url
+     * @param \powereduc_url $url
      * @param \context|null $context Defaults to context_system
      * @return null
      */
-    public static function set_navbar(string $title, \moodle_url $url, ?\context $context = null) {
+    public static function set_navbar(string $title, \powereduc_url $url, ?\context $context = null) {
         global $PAGE;
 
         if (!$context) {
@@ -113,14 +113,14 @@ class helper {
      * Convert a list of contexts to an associative array where the value is the context name.
      *
      * @param  array            $contexts
-     * @param  \moodle_url      $url
+     * @param  \powereduc_url      $url
      * @param  \renderer_base   $output
      * @param  int|null         $selected
      * @param  bool             $includeall
      * @param  bool             $shortentext
      * @return \stdClass
      */
-    public static function prediction_context_selector(array $contexts, \moodle_url $url, \renderer_base $output,
+    public static function prediction_context_selector(array $contexts, \powereduc_url $url, \renderer_base $output,
             ?int $selected = null, ?bool $includeall = false, ?bool $shortentext = true): \stdClass {
 
         foreach ($contexts as $contextid => $unused) {

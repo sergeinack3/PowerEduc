@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ echo $OUTPUT->header();
 echo $OUTPUT->heading('Convert all MySQL tables from MYISAM to InnoDB');
 
 if ($DB->get_dbfamily() != 'mysql') {
-    notice('This function is for MySQL databases only!', new moodle_url('/admin/'));
+    notice('This function is for MySQL databases only!', new powereduc_url('/admin/'));
 }
 
 $prefix = str_replace('_', '\\_', $DB->get_prefix()).'%';
@@ -62,21 +62,21 @@ if (data_submitted() and $confirm and confirm_sesskey()) {
         $fulltable = $table->name;
         try {
             $DB->change_database_structure("ALTER TABLE $fulltable ENGINE=INNODB");
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             echo $OUTPUT->notification(s($e->getMessage()).'<br />'.s($e->debuginfo));
         }
         $DB->set_debug(false);
     }
     $rs->close();
     echo $OUTPUT->notification('... done.', 'notifysuccess');
-    echo $OUTPUT->continue_button(new moodle_url('/admin/'));
+    echo $OUTPUT->continue_button(new powereduc_url('/admin/'));
     echo $OUTPUT->footer();
 
 } else {
     $rs->close();
     $optionsyes = array('confirm'=>'1', 'sesskey'=>sesskey());
-    $formcontinue = new single_button(new moodle_url('/admin/tool/innodb/index.php', $optionsyes), get_string('yes'));
-    $formcancel = new single_button(new moodle_url('/admin/'), get_string('no'), 'get');
+    $formcontinue = new single_button(new powereduc_url('/admin/tool/innodb/index.php', $optionsyes), get_string('yes'));
+    $formcancel = new single_button(new powereduc_url('/admin/'), get_string('no'), 'get');
     echo $OUTPUT->confirm('Are you sure you want convert all your tables to the InnoDB format?', $formcontinue, $formcancel);
     echo $OUTPUT->footer();
 }

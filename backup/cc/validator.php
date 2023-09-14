@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * Provides validation classes used by the imscc converters
  *
  * @package    backup-convert
- * @copyright  2011 Darko Miletic <dmiletic@moodlerooms.com>
+ * @copyright  2011 Darko Miletic <dmiletic@powereducrooms.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * @package   moodlecore
+ * @package   powereduccore
  * @subpackage backup-imscc
  * @copyright 2009 Mauro Rondinelli (mauro.rondinelli [AT] uvcms.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -28,7 +28,7 @@ require_once($CFG->dirroot . '/backup/cc/entity.resource.class.php');
 require_once($CFG->dirroot . '/backup/cc/entity.forum.class.php');
 require_once($CFG->dirroot . '/backup/cc/entity.quiz.class.php');
 
-class cc2moodle {
+class cc2powereduc {
 
     const CC_TYPE_FORUM              = 'imsdt_xmlv1p0';
     const CC_TYPE_QUIZ               = 'imsqti_xmlv1p2/imscc_xmlv1p0/assessment';
@@ -142,7 +142,7 @@ class cc2moodle {
         return $value;
     }
 
-    public function generate_moodle_xml () {
+    public function generate_powereduc_xml () {
 
         global $CFG, $OUTPUT;
 
@@ -205,8 +205,8 @@ class cc2moodle {
 
         if (array_key_exists("index", self::$instances)) {
 
-            if (!file_put_contents(static::$path_to_manifest_folder . DIRECTORY_SEPARATOR . 'moodle.xml', $result_xml)) {
-                static::log_action('Cannot save the moodle manifest file: ' . static::$path_to_tmp_folder . DIRECTORY_SEPARATOR . 'moodle.xml', true);
+            if (!file_put_contents(static::$path_to_manifest_folder . DIRECTORY_SEPARATOR . 'powereduc.xml', $result_xml)) {
+                static::log_action('Cannot save the powereduc manifest file: ' . static::$path_to_tmp_folder . DIRECTORY_SEPARATOR . 'powereduc.xml', true);
             } else {
                 $status = true;
             }
@@ -329,7 +329,7 @@ class cc2moodle {
                 $i++;
                 $node_node_course_sections_section_mods_mod = $this->create_node_course_sections_section_mods_mod($topic['index']);
 
-                if ($topic['moodle_type'] == POWEREDUC_TYPE_LABEL) {
+                if ($topic['powereduc_type'] == POWEREDUC_TYPE_LABEL) {
 
                     $find_tags = array('[#section_id#]',
                                        '[#section_number#]',
@@ -466,7 +466,7 @@ class cc2moodle {
 
             foreach ($childs as $child) {
 
-                if ($child['moodle_type'] == POWEREDUC_TYPE_LABEL) {
+                if ($child['powereduc_type'] == POWEREDUC_TYPE_LABEL) {
                     if ($child['index'] == $child['root_parent']) {
                         $is_summary = true;
                     } else {
@@ -493,7 +493,7 @@ class cc2moodle {
 
                     $replace_values = array($child['index'],
                                             $child['instance'],
-                                            $child['moodle_type'],
+                                            $child['powereduc_type'],
                                             time(),
                                             $indent,
                                             $this->get_module_visible($child['resource_indentifier']));
@@ -632,10 +632,10 @@ class cc2moodle {
                     }
 
                     $cc_type = $this->get_item_cc_type($identifierref);
-                    $moodle_type = $this->convert_to_moodle_type($cc_type);
+                    $powereduc_type = $this->convert_to_powereduc_type($cc_type);
                     //Fix the label issue - MDL-33523
                     if (empty($identifierref) && empty($title)) {
-                      $moodle_type = TYPE_UNKNOWN;
+                      $powereduc_type = TYPE_UNKNOWN;
                     }
                 }
                 elseif ($item->nodeName == "resource")  {
@@ -644,9 +644,9 @@ class cc2moodle {
                     $identifierref = !empty($identifierref->item(0)->nodeValue) ? $identifierref->item(0)->nodeValue : '';
 
                     $cc_type = $this->get_item_cc_type($identifierref);
-                    $moodle_type = $this->convert_to_moodle_type($cc_type);
+                    $powereduc_type = $this->convert_to_powereduc_type($cc_type);
 
-                    $title = 'Quiz Bank ' . ($this->count_instances($moodle_type) + 1);
+                    $title = 'Quiz Bank ' . ($this->count_instances($powereduc_type) + 1);
 
                 }
 
@@ -655,15 +655,15 @@ class cc2moodle {
                 }
 
                 static::$instances['index'][$array_index]['common_cartriedge_type'] = $cc_type;
-                static::$instances['index'][$array_index]['moodle_type'] = $moodle_type;
+                static::$instances['index'][$array_index]['powereduc_type'] = $powereduc_type;
                 static::$instances['index'][$array_index]['title'] = $title ? $title : '';
                 static::$instances['index'][$array_index]['root_parent'] = $index_root;
                 static::$instances['index'][$array_index]['index'] = $array_index;
                 static::$instances['index'][$array_index]['deep'] = $level;
-                static::$instances['index'][$array_index]['instance'] = $this->count_instances($moodle_type);
+                static::$instances['index'][$array_index]['instance'] = $this->count_instances($powereduc_type);
                 static::$instances['index'][$array_index]['resource_indentifier'] = $identifierref;
 
-                static::$instances['instances'][$moodle_type][] = array('title' => $title,
+                static::$instances['instances'][$powereduc_type][] = array('title' => $title,
                                                                         'instance' => static::$instances['index'][$array_index]['instance'],
                                                                         'common_cartriedge_type' => $cc_type,
                                                                         'resource_indentifier' => $identifierref,
@@ -689,8 +689,8 @@ class cc2moodle {
             if (static::$instances['index'] && $type) {
 
                 foreach (static::$instances['index'] as $instance) {
-                    if (!empty($instance['moodle_type'])) {
-                        $types[] = $instance['moodle_type'];
+                    if (!empty($instance['powereduc_type'])) {
+                        $types[] = $instance['powereduc_type'];
                     }
                 }
 
@@ -702,7 +702,7 @@ class cc2moodle {
         return $quantity;
     }
 
-    public function convert_to_moodle_type ($cc_type) {
+    public function convert_to_powereduc_type ($cc_type) {
         $type = TYPE_UNKNOWN;
 
         if ($cc_type == static::CC_TYPE_FORUM) {
@@ -780,7 +780,7 @@ class cc2moodle {
     }
 
     public static function log_file() {
-        return static::$path_to_manifest_folder . DIRECTORY_SEPARATOR . 'cc2moodle.log';
+        return static::$path_to_manifest_folder . DIRECTORY_SEPARATOR . 'cc2powereduc.log';
     }
 
     public static function log_action ($text, $critical_error = false) {

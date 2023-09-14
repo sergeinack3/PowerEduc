@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -233,7 +233,7 @@ class tool_uploadcourse_helper {
 
             if (!empty($backupfile)) {
                 // Extracting the backup file.
-                $packer = get_file_packer('application/vnd.moodle.backup');
+                $packer = get_file_packer('application/vnd.powereduc.backup');
                 $backupid = restore_controller::get_tempdir_name(SITEID, $USER->id);
                 $path = make_backup_temp_directory($backupid, false);
                 $result = $packer->extract_to_pathname($backupfile, $path);
@@ -390,7 +390,7 @@ class tool_uploadcourse_helper {
         $fields = self::get_custom_course_fields();
         $result = [];
 
-        $canchangelockedfields = guess_if_creator_will_have_course_capability('moodle/course:changelockedcustomfields', $context);
+        $canchangelockedfields = guess_if_creator_will_have_course_capability('powereduc/course:changelockedcustomfields', $context);
 
         foreach ($data as $name => $originalvalue) {
             if (preg_match('/^customfield_(?<name>.*)?$/', $name, $matches)

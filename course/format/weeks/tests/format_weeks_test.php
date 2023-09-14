@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -139,7 +139,7 @@ class format_weeks_test extends \advanced_testcase {
         try {
             \core_external::update_inplace_editable('format_weeks', 'sectionname', $section->id, 'New section name');
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('Course or activity not accessible. (Not enrolled)',
                     $e->getMessage());
         }
@@ -181,7 +181,7 @@ class format_weeks_test extends \advanced_testcase {
         try {
             $tmpl = component_callback('format_topics', 'inplace_editable', array('sectionname', $section->id, 'New name'));
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals(1, preg_match('/^Can\'t find data record in database/', $e->getMessage()));
         }
     }
@@ -211,8 +211,8 @@ class format_weeks_test extends \advanced_testcase {
                 'context' => \context_course::instance($course->id),
                 'subdirs' => 0
             ],
-            'returnto' => new \moodle_url('/'),
-            'returnurl' => new \moodle_url('/'),
+            'returnto' => new \powereduc_url('/'),
+            'returnurl' => new \powereduc_url('/'),
         ];
 
         $PAGE->set_course($course);

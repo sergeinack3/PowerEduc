@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,16 +28,16 @@ require_once(__DIR__ . '/../../../config.php');
 require_once($CFG->dirroot . '/lib/filelib.php');
 
 require_login();
-require_capability('moodle/site:configview', context_system::instance());
+require_capability('powereduc/site:configview', context_system::instance());
 
 $jsdocdir = "{$CFG->dirroot}/jsdoc";
 if (file_exists($jsdocdir) && is_dir($jsdocdir)) {
     $relativepath = get_file_argument();
-    redirect(new moodle_url("/jsdoc/${relativepath}"));
+    redirect(new powereduc_url("/jsdoc/${relativepath}"));
 }
 
 $PAGE->set_pagelayout('base');
-$PAGE->set_url(new moodle_url('/admin/tool/componentlibrary/jsdocspage.php'));
+$PAGE->set_url(new powereduc_url('/admin/tool/componentlibrary/jsdocspage.php'));
 $PAGE->set_context(context_system::instance());
 $title = get_string('pluginname', 'tool_componentlibrary');
 $PAGE->set_heading($title);

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Grade overview report upgrade steps.
  *
  * @package    gradereport_history
- * @copyright  2020 Michael Hawkins <michaelh@moodle.com>
+ * @copyright  2020 Michael Hawkins <michaelh@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,7 +33,7 @@ defined('POWEREDUC_INTERNAL') || die();
 function xmldb_gradereport_history_upgrade($oldversion) {
 
     if ($oldversion < 2019111801) {
-        $perpageconfig = get_config('moodle', 'grade_report_historyperpage');
+        $perpageconfig = get_config('powereduc', 'grade_report_historyperpage');
 
         // For existing installations with a non-integer 'per page' config, update the value to the default.
         if (!empty($perpageconfig) && filter_var($perpageconfig, FILTER_VALIDATE_INT) === false) {

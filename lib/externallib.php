@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -31,13 +31,13 @@ defined('POWEREDUC_INTERNAL') || die();
  * @package    core_webservice
  * @copyright  2009 Petr Skodak
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  */
-class restricted_context_exception extends moodle_exception {
+class restricted_context_exception extends powereduc_exception {
     /**
      * Constructor
      *
-     * @since Moodle 2.0
+     * @since PowerEduc 2.0
      */
     function __construct() {
         parent::__construct('restrictedcontextexception', 'error');
@@ -50,7 +50,7 @@ class restricted_context_exception extends moodle_exception {
  * @package    core_webservice
  * @copyright  2009 Petr Skodak
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  */
 class external_api {
 
@@ -64,7 +64,7 @@ class external_api {
      * @param int $strictness IGNORE_MISSING means compatible mode, false returned if record not found, debug message if more found;
      *                        MUST_EXIST means throw exception if no record or multiple records found
      * @return stdClass description or false if not found or exception thrown
-     * @since Moodle 2.0
+     * @since PowerEduc 2.0
      */
     public static function external_function_info($function, $strictness=MUST_EXIST) {
         global $DB, $CFG;
@@ -207,28 +207,28 @@ class external_api {
 
         try {
             // Taken straight from from setup.php.
-            if (!empty($CFG->moodlepageclass)) {
-                if (!empty($CFG->moodlepageclassfile)) {
-                    require_once($CFG->moodlepageclassfile);
+            if (!empty($CFG->powereducpageclass)) {
+                if (!empty($CFG->powereducpageclassfile)) {
+                    require_once($CFG->powereducpageclassfile);
                 }
-                $classname = $CFG->moodlepageclass;
+                $classname = $CFG->powereducpageclass;
             } else {
-                $classname = 'moodle_page';
+                $classname = 'powereduc_page';
             }
             $PAGE = new $classname();
             $COURSE = clone($SITE);
 
             if ($ajaxonly && !$externalfunctioninfo->allowed_from_ajax) {
-                throw new moodle_exception('servicenotavailable', 'webservice');
+                throw new powereduc_exception('servicenotavailable', 'webservice');
             }
 
             // Do not allow access to write or delete webservices as a public user.
             if ($externalfunctioninfo->loginrequired && !WS_SERVER) {
                 if (defined('NO_POWEREDUC_COOKIES') && NO_POWEREDUC_COOKIES && !PHPUNIT_TEST) {
-                    throw new moodle_exception('servicerequireslogin', 'webservice');
+                    throw new powereduc_exception('servicerequireslogin', 'webservice');
                 }
                 if (!isloggedin()) {
-                    throw new moodle_exception('servicerequireslogin', 'webservice');
+                    throw new powereduc_exception('servicerequireslogin', 'webservice');
                 } else {
                     require_sesskey();
                 }
@@ -240,7 +240,7 @@ class external_api {
                                      $args);
             $params = array_values($params);
 
-            // Allow any Moodle plugin a chance to override this call. This is a convenient spot to
+            // Allow any PowerEduc plugin a chance to override this call. This is a convenient spot to
             // make arbitrary behaviour customisations. The overriding plugin could call the 'real'
             // function first and then modify the results, or it could do a completely separate
             // thing.
@@ -292,7 +292,7 @@ class external_api {
      * Set context restriction for all following subsequent function calls.
      *
      * @param stdClass $context the context restriction
-     * @since Moodle 2.0
+     * @since PowerEduc 2.0
      */
     public static function set_context_restriction($context) {
         self::$contextrestriction = $context;
@@ -303,7 +303,7 @@ class external_api {
      * that takes a longer time to finish!
      *
      * @param int $seconds max expected time the next operation needs
-     * @since Moodle 2.0
+     * @since PowerEduc 2.0
      */
     public static function set_timeout($seconds=360) {
         $seconds = ($seconds < 300) ? 300 : $seconds;
@@ -319,7 +319,7 @@ class external_api {
      * @param external_description $description description of parameters
      * @param mixed $params the actual parameters
      * @return mixed params with added defaults for optional items, invalid_parameters_exception thrown if any problem found
-     * @since Moodle 2.0
+     * @since PowerEduc 2.0
      */
     public static function validate_parameters(external_description $description, $params) {
         if ($description instanceof external_value) {
@@ -400,7 +400,7 @@ class external_api {
      * @param mixed $response the actual response
      * @return mixed response with added defaults for optional items, invalid_response_exception thrown if any problem found
      * @author 2010 Jerome Mouneyrac
-     * @since Moodle 2.0
+     * @since PowerEduc 2.0
      */
     public static function clean_returnvalue(external_description $description, $response) {
         if ($description instanceof external_value) {
@@ -484,7 +484,7 @@ class external_api {
      * Makes sure user may execute functions in this context.
      *
      * @param stdClass $context
-     * @since Moodle 2.0
+     * @since PowerEduc 2.0
      */
     public static function validate_context($context) {
         global $CFG, $PAGE;
@@ -524,7 +524,7 @@ class external_api {
      * See context_helper::get_all_levels() for a list of valid context levels.
      *
      * @param array $param
-     * @since Moodle 2.6
+     * @since PowerEduc 2.6
      * @throws invalid_parameter_exception
      * @return context
      */
@@ -582,7 +582,7 @@ class external_api {
  * @package    core_webservice
  * @copyright  2009 Petr Skodak
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  */
 abstract class external_description {
     /** @var string Description of element */
@@ -600,7 +600,7 @@ abstract class external_description {
      * @param string $desc
      * @param bool $required
      * @param mixed $default
-     * @since Moodle 2.0
+     * @since PowerEduc 2.0
      */
     public function __construct($desc, $required, $default) {
         $this->desc = $desc;
@@ -615,7 +615,7 @@ abstract class external_description {
  * @package    core_webservice
  * @copyright  2009 Petr Skodak
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  */
 class external_value extends external_description {
 
@@ -633,7 +633,7 @@ class external_value extends external_description {
      * @param bool $required
      * @param mixed $default
      * @param bool $allownull
-     * @since Moodle 2.0
+     * @since PowerEduc 2.0
      */
     public function __construct($type, $desc='', $required=VALUE_REQUIRED,
             $default=null, $allownull=NULL_ALLOWED) {
@@ -649,7 +649,7 @@ class external_value extends external_description {
  * @package    core_webservice
  * @copyright  2009 Petr Skodak
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  */
 class external_single_structure extends external_description {
 
@@ -663,7 +663,7 @@ class external_single_structure extends external_description {
      * @param string $desc
      * @param bool $required
      * @param array $default
-     * @since Moodle 2.0
+     * @since PowerEduc 2.0
      */
     public function __construct(array $keys, $desc='',
             $required=VALUE_REQUIRED, $default=null) {
@@ -678,7 +678,7 @@ class external_single_structure extends external_description {
  * @package    core_webservice
  * @copyright  2009 Petr Skodak
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  */
 class external_multiple_structure extends external_description {
 
@@ -692,7 +692,7 @@ class external_multiple_structure extends external_description {
      * @param string $desc
      * @param bool $required
      * @param array $default
-     * @since Moodle 2.0
+     * @since PowerEduc 2.0
      */
     public function __construct(external_description $content, $desc='',
             $required=VALUE_REQUIRED, $default=null) {
@@ -707,7 +707,7 @@ class external_multiple_structure extends external_description {
  * @package    core_webservice
  * @copyright  2009 Petr Skodak
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  */
 class external_function_parameters extends external_single_structure {
 
@@ -747,7 +747,7 @@ class external_function_parameters extends external_single_structure {
  * @param string $iprestriction allowed ip - if 0 or empty then all ips are allowed
  * @return string generated token
  * @author  2010 Jamie Pratt
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  */
 function external_generate_token($tokentype, $serviceorid, $userid, $contextorid, $validuntil=0, $iprestriction=''){
     global $DB, $USER;
@@ -757,7 +757,7 @@ function external_generate_token($tokentype, $serviceorid, $userid, $contextorid
         $numtries ++;
         $generatedtoken = md5(uniqid(rand(),1));
         if ($numtries > 5){
-            throw new moodle_exception('tokengenerationfailed');
+            throw new powereduc_exception('tokengenerationfailed');
         }
     } while ($DB->record_exists('external_tokens', array('token'=>$generatedtoken)));
     $newtoken = new stdClass();
@@ -775,7 +775,7 @@ function external_generate_token($tokentype, $serviceorid, $userid, $contextorid
     if (empty($service->requiredcapability) || has_capability($service->requiredcapability, $context, $userid)) {
         $newtoken->externalserviceid = $service->id;
     } else {
-        throw new moodle_exception('nocapabilitytousethisservice');
+        throw new powereduc_exception('nocapabilitytousethisservice');
     }
     $newtoken->tokentype = $tokentype;
     $newtoken->userid = $userid;
@@ -798,14 +798,14 @@ function external_generate_token($tokentype, $serviceorid, $userid, $contextorid
 
 /**
  * Create and return a session linked token. Token to be used for html embedded client apps that want to communicate
- * with the Moodle server through web services. The token is linked to the current session for the current page request.
+ * with the PowerEduc server through web services. The token is linked to the current session for the current page request.
  * It is expected this will be called in the script generating the html page that is embedding the client app and that the
  * returned token will be somehow passed into the client app being embedded in the page.
  *
  * @param string $servicename name of the web service. Service name as defined in db/services.php
  * @param int $context context within which the web service can operate.
  * @return int returns token id.
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  */
 function external_create_service_token($servicename, $context){
     global $USER, $DB;
@@ -816,7 +816,7 @@ function external_create_service_token($servicename, $context){
 /**
  * Delete all pre-built services (+ related tokens) and external functions information defined in the specified component.
  *
- * @param string $component name of component (moodle, mod_assignment, etc.)
+ * @param string $component name of component (powereduc, mod_assignment, etc.)
  */
 function external_delete_descriptions($component) {
     global $DB;
@@ -834,19 +834,19 @@ function external_delete_descriptions($component) {
 }
 
 /**
- * Standard Moodle web service warnings
+ * Standard PowerEduc web service warnings
  *
  * @package    core_webservice
  * @copyright  2012 Jerome Mouneyrac
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.3
+ * @since PowerEduc 2.3
  */
 class external_warnings extends external_multiple_structure {
 
     /**
      * Constructor
      *
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     public function __construct($itemdesc = 'item', $itemiddesc = 'item id',
         $warningcodedesc = 'the warning code can be used by the client app to implement specific behaviour') {
@@ -874,7 +874,7 @@ class external_warnings extends external_multiple_structure {
  * @package    core_webservice
  * @copyright  2012 Jerome Mouneyrac
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.3
+ * @since PowerEduc 2.3
  */
 class external_format_value extends external_value {
 
@@ -884,7 +884,7 @@ class external_format_value extends external_value {
      * @param string $textfieldname Name of the text field
      * @param int $required if VALUE_REQUIRED then set standard default FORMAT_HTML
      * @param int $default Default value.
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     public function __construct($textfieldname, $required = VALUE_REQUIRED, $default = null) {
 
@@ -907,13 +907,13 @@ class external_format_value extends external_value {
  * @param array $format the format to validate
  * @return the validated format
  * @throws coding_exception
- * @since Moodle 2.3
+ * @since PowerEduc 2.3
  */
 function external_validate_format($format) {
     $allowedformats = array(FORMAT_HTML, FORMAT_POWEREDUC, FORMAT_PLAIN, FORMAT_MARKDOWN);
     if (!in_array($format, $allowedformats)) {
-        throw new moodle_exception('formatnotsupported', 'webservice', '' , null,
-                'The format with value=' . $format . ' is not supported by this Moodle site');
+        throw new powereduc_exception('formatnotsupported', 'webservice', '' , null,
+                'The format with value=' . $format . ' is not supported by this PowerEduc site');
     }
     return $format;
 }
@@ -931,11 +931,11 @@ function external_validate_format($format) {
  *
  * @param string $str The string to be filtered. Should be plain text, expect
  * possibly for multilang tags.
- * @param boolean $striplinks To strip any link in the result text. Moodle 1.8 default changed from false to true! MDL-8713
+ * @param boolean $striplinks To strip any link in the result text. PowerEduc 1.8 default changed from false to true! MDL-8713
  * @param context|int $contextorid The id of the context for the string or the context (affects filters).
  * @param array $options options array/object or courseid
  * @return string text
- * @since Moodle 3.0
+ * @since PowerEduc 3.0
  */
 function external_format_string($str, $contextorid, $striplinks = true, $options = array()) {
 
@@ -990,8 +990,8 @@ function external_format_string($str, $contextorid, $striplinks = true, $options
  * @param int $itemid helps identify the file area.
  * @param object/array $options text formatting options
  * @return array text + textformat
- * @since Moodle 2.3
- * @since Moodle 3.2 component, filearea and itemid are optional parameters
+ * @since PowerEduc 2.3
+ * @since PowerEduc 3.2 component, filearea and itemid are optional parameters
  */
 function external_format_text($text, $textformat, $contextorid, $component = null, $filearea = null, $itemid = null,
                                 $options = null) {
@@ -1046,8 +1046,8 @@ function external_format_text($text, $textformat, $contextorid, $component = nul
  *
  * @param stdClass $service external service object
  * @return stdClass token object
- * @since Moodle 3.2
- * @throws moodle_exception
+ * @since PowerEduc 3.2
+ * @throws powereduc_exception
  */
 function external_generate_token_for_current_user($service) {
     global $DB, $USER, $CFG;
@@ -1056,7 +1056,7 @@ function external_generate_token_for_current_user($service) {
 
     // Check if there is any required system capability.
     if ($service->requiredcapability and !has_capability($service->requiredcapability, context_system::instance())) {
-        throw new moodle_exception('missingrequiredcapability', 'webservice', '', $service->requiredcapability);
+        throw new powereduc_exception('missingrequiredcapability', 'webservice', '', $service->requiredcapability);
     }
 
     // Specific checks related to user restricted service.
@@ -1065,15 +1065,15 @@ function external_generate_token_for_current_user($service) {
             array('externalserviceid' => $service->id, 'userid' => $USER->id));
 
         if (empty($authoriseduser)) {
-            throw new moodle_exception('usernotallowed', 'webservice', '', $service->shortname);
+            throw new powereduc_exception('usernotallowed', 'webservice', '', $service->shortname);
         }
 
         if (!empty($authoriseduser->validuntil) and $authoriseduser->validuntil < time()) {
-            throw new moodle_exception('invalidtimedtoken', 'webservice');
+            throw new powereduc_exception('invalidtimedtoken', 'webservice');
         }
 
         if (!empty($authoriseduser->iprestriction) and !address_in_subnet(getremoteaddr(), $authoriseduser->iprestriction)) {
-            throw new moodle_exception('invalidiptoken', 'webservice');
+            throw new powereduc_exception('invalidiptoken', 'webservice');
         }
     }
 
@@ -1122,8 +1122,8 @@ function external_generate_token_for_current_user($service) {
         $context = context_system::instance();
         $isofficialservice = $service->shortname == POWEREDUC_OFFICIAL_MOBILE_SERVICE;
 
-        if (($isofficialservice and has_capability('moodle/webservice:createmobiletoken', $context)) or
-                (!is_siteadmin($USER) && has_capability('moodle/webservice:createtoken', $context))) {
+        if (($isofficialservice and has_capability('powereduc/webservice:createmobiletoken', $context)) or
+                (!is_siteadmin($USER) && has_capability('powereduc/webservice:createtoken', $context))) {
 
             // Create a new token.
             $token = new stdClass;
@@ -1156,7 +1156,7 @@ function external_generate_token_for_current_user($service) {
             $event->add_record_snapshot('external_tokens', $eventtoken);
             $event->trigger();
         } else {
-            throw new moodle_exception('cannotcreatetoken', 'webservice', '', $service->shortname);
+            throw new powereduc_exception('cannotcreatetoken', 'webservice', '', $service->shortname);
         }
     }
     return $token;
@@ -1169,7 +1169,7 @@ function external_generate_token_for_current_user($service) {
  * In order to protect the privatetoken, we remove it from the event params.
  *
  * @param  stdClass $token token object
- * @since  Moodle 3.2
+ * @since  PowerEduc 3.2
  */
 function external_log_token_request($token) {
     global $DB, $USER;
@@ -1193,14 +1193,14 @@ function external_log_token_request($token) {
 
         $logintime = time();
         $useragent = \core_useragent::get_user_agent_string();
-        $ismoodleapp = \core_useragent::is_moodle_app();
+        $ispowereducapp = \core_useragent::is_powereduc_app();
 
         // Schedule adhoc task to sent a login notification to the user.
         $task = new \core\task\send_login_notifications();
         $task->set_userid($USER->id);
-        $task->set_custom_data(compact('ismoodleapp', 'useragent', 'loginip', 'logintime'));
+        $task->set_custom_data(compact('ispowereducapp', 'useragent', 'loginip', 'logintime'));
         $task->set_component('core');
-        // We need sometime so the mobile app will send to Moodle the device information after login.
+        // We need sometime so the mobile app will send to PowerEduc the device information after login.
         $task->set_next_run_time($logintime + (2 * MINSECS));
         \core\task\manager::reschedule_or_queue_adhoc_task($task);
     }
@@ -1214,7 +1214,7 @@ function external_log_token_request($token) {
  * @package    core_webservice
  * @copyright  2012 Jerome Mouneyrac
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.3
+ * @since PowerEduc 2.3
  */
 class external_settings {
 
@@ -1379,7 +1379,7 @@ class external_settings {
  * @package    core_webservice
  * @copyright  2015 Juan Leyva
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 3.0
+ * @since PowerEduc 3.0
  */
 class external_util {
 
@@ -1471,7 +1471,7 @@ class external_util {
      * @param int $itemid item ID or all files if not specified
      * @param bool $useitemidinurl wether to use the item id in the file URL (modules intro don't use it)
      * @return array of files, compatible with the external_files structure.
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_area_files($contextid, $component, $filearea, $itemid = false, $useitemidinurl = true) {
         $files = array();
@@ -1490,7 +1490,7 @@ class external_util {
                     $file['repositorytype'] = $areafile->get_repository_type();
                 }
                 $fileitemid = $useitemidinurl ? $areafile->get_itemid() : null;
-                $file['fileurl'] = moodle_url::make_webservice_pluginfile_url($contextid, $component, $filearea,
+                $file['fileurl'] = powereduc_url::make_webservice_pluginfile_url($contextid, $component, $filearea,
                                     $fileitemid, $areafile->get_filepath(), $areafile->get_filename())->out(false);
                 $files[] = $file;
             }
@@ -1505,7 +1505,7 @@ class external_util {
  * @package    core_webservice
  * @copyright  2016 Juan Leyva
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.2
+ * @since      PowerEduc 3.2
  */
 class external_files extends external_multiple_structure {
 
@@ -1539,7 +1539,7 @@ class external_files extends external_multiple_structure {
      * Return the properties ready to be used by an exporter.
      *
      * @return array properties
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public static function get_properties_for_exporter() {
         return [

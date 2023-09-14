@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Course copy form class.
  *
  * @package     core_backup
- * @copyright   2020 onward The Moodle Users Association <https://moodleassociation.org/>
+ * @copyright   2020 onward The Moodle Users Association <https://powereducassociation.org/>
  * @author      Matt Porritt <mattp@catalyst-au.net>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -36,17 +36,17 @@ require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
  * Course copy form class.
  *
  * @package     core_backup
- * @copyright  2020 onward The Moodle Users Association <https://moodleassociation.org/>
+ * @copyright  2020 onward The Moodle Users Association <https://powereducassociation.org/>
  * @author     Matt Porritt <mattp@catalyst-au.net>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class copy_form extends \moodleform {
+class copy_form extends \powereducform {
 
     /**
      * Build form for the course copy settings.
      *
      * {@inheritDoc}
-     * @see \moodleform::definition()
+     * @see \powereducform::definition()
      */
     public function definition() {
         global $CFG, $OUTPUT, $USER;
@@ -54,7 +54,7 @@ class copy_form extends \moodleform {
         $mform = $this->_form;
         $course = $this->_customdata['course'];
         $coursecontext = \context_course::instance($course->id);
-        $courseconfig = get_config('moodlecourse');
+        $courseconfig = get_config('powereduccourse');
         $returnto = $this->_customdata['returnto'];
         $returnurl = $this->_customdata['returnurl'];
 
@@ -74,7 +74,7 @@ class copy_form extends \moodleform {
         // Notifications of current copies.
         $copies = \copy_helper::get_copies($USER->id, $course->id);
         if (!empty($copies)) {
-            $progresslink = new \moodle_url('/backup/copyprogress.php?', array('id' => $course->id));
+            $progresslink = new \powereduc_url('/backup/copyprogress.php?', array('id' => $course->id));
             $notificationmsg = get_string('copiesinprogress', 'backup', $progresslink->out());
             $notification = $OUTPUT->notification($notificationmsg, 'notifymessage');
             $mform->addElement('html', $notification);
@@ -117,7 +117,7 @@ class copy_form extends \moodleform {
         $mform->addElement('select', 'visible', get_string('coursevisibility'), $choices);
         $mform->addHelpButton('visible', 'coursevisibility');
         $mform->setDefault('visible', $courseconfig->visible);
-        if (!has_capability('moodle/course:visibility', $coursecontext)) {
+        if (!has_capability('powereduc/course:visibility', $coursecontext)) {
             $mform->hardFreeze('visible');
             $mform->setConstant('visible', $course->visible);
         }
@@ -158,7 +158,7 @@ class copy_form extends \moodleform {
         $mform->setDefault('idnumber', $course->idnumber);
         $mform->addHelpButton('idnumber', 'idnumbercourse');
         $mform->setType('idnumber', PARAM_RAW);
-        if (!has_capability('moodle/course:changeidnumber', $coursecontext)) {
+        if (!has_capability('powereduc/course:changeidnumber', $coursecontext)) {
             $mform->hardFreeze('idnumber');
             $mform->setConstant('idnumber', '');
         }
@@ -170,7 +170,7 @@ class copy_form extends \moodleform {
         $mform->addHelpButton('userdata', 'userdata', 'backup');
 
         $requiredcapabilities = array(
-            'moodle/restore:createuser', 'moodle/backup:userinfo', 'moodle/restore:userinfo'
+            'powereduc/restore:createuser', 'powereduc/backup:userinfo', 'powereduc/restore:userinfo'
         );
         if (!has_all_capabilities($requiredcapabilities, $coursecontext)) {
             $mform->hardFreeze('userdata');
@@ -182,7 +182,7 @@ class copy_form extends \moodleform {
         $roles = role_fix_names(get_roles_used_in_context($coursecontext, false), $coursecontext);
 
         // Only add the option if there are roles in this course.
-        if (!empty($roles) && has_capability('moodle/restore:createuser', $coursecontext)) {
+        if (!empty($roles) && has_capability('powereduc/restore:createuser', $coursecontext)) {
             $rolearray = array();
             foreach ($roles as $role) {
                 $roleid = 'role_' . $role->id;

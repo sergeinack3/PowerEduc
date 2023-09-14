@@ -34,7 +34,7 @@
     // If data submitted, then process and store.
     if (!empty($hide) && confirm_sesskey()) {
         if (!$block = $DB->get_record('block', ['id' => $hide])) {
-            throw new \moodle_exception('blockdoesnotexist', 'error');
+            throw new \powereduc_exception('blockdoesnotexist', 'error');
         }
 
         $class = \core_plugin_manager::resolve_plugininfo_class('block');
@@ -45,7 +45,7 @@
 
     if (!empty($show) && confirm_sesskey() ) {
         if (!$block = $DB->get_record('block', ['id' => $show])) {
-            throw new \moodle_exception('blockdoesnotexist', 'error');
+            throw new \powereduc_exception('blockdoesnotexist', 'error');
         }
 
         $class = \core_plugin_manager::resolve_plugininfo_class('block');
@@ -75,7 +75,7 @@
 /// Get and sort the existing blocks
 
     if (!$blocks = $DB->get_records('block', array(), 'name ASC')) {
-        throw new \moodle_exception('noblocks', 'error');  // Should never happen.
+        throw new \powereduc_exception('noblocks', 'error');  // Should never happen.
     }
 
     $incompatible = array();
@@ -151,7 +151,7 @@
             }
         }
 
-        // MDL-11167, blocks can be placed on mymoodle, or the blogs page
+        // MDL-11167, blocks can be placed on mypowereduc, or the blogs page
         // and it should not show up on course search page
 
         $totalcount = $DB->count_records('block_instances', array('blockname'=>$blockname));

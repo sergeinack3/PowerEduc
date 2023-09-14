@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Defines classes used for updates.
  *
  * @package    core
- * @copyright  2011 David Mudrak <david@moodle.com>
+ * @copyright  2011 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace core\update;
@@ -38,11 +38,11 @@ class checker {
     protected $recentfetch = null;
     /** @var null|array the recent response from the update notification provider */
     protected $recentresponse = null;
-    /** @var null|string the numerical version of the local Moodle code */
+    /** @var null|string the numerical version of the local PowerEduc code */
     protected $currentversion = null;
-    /** @var null|string the release info of the local Moodle code */
+    /** @var null|string the release info of the local PowerEduc code */
     protected $currentrelease = null;
-    /** @var null|string branch of the local Moodle code */
+    /** @var null|string branch of the local PowerEduc code */
     protected $currentbranch = null;
     /** @var array of (string)frankestyle => (string)version list of additional plugins deployed at this site */
     protected $currentplugins = array();
@@ -270,7 +270,7 @@ class checker {
             throw new checker_exception('err_response_format_version', $response['apiver']);
         }
 
-        if (empty($response['forbranch']) or $response['forbranch'] !== moodle_major_version(true)) {
+        if (empty($response['forbranch']) or $response['forbranch'] !== powereduc_major_version(true)) {
             throw new checker_exception('err_response_target_version', $response['forbranch']);
         }
     }
@@ -335,7 +335,7 @@ class checker {
             } catch (checker_exception $e) {
                 // The server response is not valid. Behave as if no data were fetched yet.
                 // This may happen when the most recent update info (cached locally) has been
-                // fetched with the previous branch of Moodle (like during an upgrade from 2.x
+                // fetched with the previous branch of PowerEduc (like during an upgrade from 2.x
                 // to 2.y) or when the API of the response has changed.
                 $this->recentresponse = array();
             }
@@ -413,7 +413,7 @@ class checker {
         if (!empty($CFG->config_php_settings['alternativeupdateproviderurl'])) {
             return $CFG->config_php_settings['alternativeupdateproviderurl'];
         } else {
-            return 'https://download.moodle.org/api/1.3/updates.php';
+            return 'https://download.powereduc.org/api/1.3/updates.php';
         }
     }
 
@@ -436,7 +436,7 @@ class checker {
         require($CFG->dirroot.'/version.php');
         $this->currentversion = $version;
         $this->currentrelease = $release;
-        $this->currentbranch = moodle_major_version(true);
+        $this->currentbranch = powereduc_major_version(true);
 
         $pluginman = \core_plugin_manager::instance();
         foreach ($pluginman->get_plugins() as $type => $plugins) {
@@ -469,13 +469,13 @@ class checker {
         if (isset($this->currentversion)) {
             $params['version'] = $this->currentversion;
         } else {
-            throw new coding_exception('Main Moodle version must be already known here');
+            throw new coding_exception('Main PowerEduc version must be already known here');
         }
 
         if (isset($this->currentbranch)) {
             $params['branch'] = $this->currentbranch;
         } else {
-            throw new coding_exception('Moodle release must be already known here');
+            throw new coding_exception('PowerEduc release must be already known here');
         }
 
         $plugins = array();
@@ -595,7 +595,7 @@ class checker {
      * between 01:00 and 06:00 AM (local time). The exact moment is defined by so called
      * execution offset, that is the amount of time after 01:00 AM. The offset value is
      * initially generated randomly and then used consistently at the site. This way, the
-     * regular checks against the download.moodle.org server are spread in time.
+     * regular checks against the download.powereduc.org server are spread in time.
      *
      * @return int the offset number of seconds from range 1 sec to 5 hours
      */
@@ -664,7 +664,7 @@ class checker {
                             // In case of 'core', we already know that the $componentupdate
                             // is a real update with higher version ({@see self::get_update_info()}).
                             // We just perform additional check for the release property as there
-                            // can be two Moodle releases having the same version (e.g. 2.4.0 and 2.5dev shortly
+                            // can be two PowerEduc releases having the same version (e.g. 2.4.0 and 2.5dev shortly
                             // after the release). We can do that because we have the release info
                             // always available for the core.
                             if ((string)$componentupdate->release === (string)$componentchange['release']) {
@@ -800,7 +800,7 @@ class checker {
         foreach ($admins as $admin) {
             $message = new \core\message\message();
             $message->courseid          = SITEID;
-            $message->component         = 'moodle';
+            $message->component         = 'powereduc';
             $message->name              = 'availableupdate';
             $message->userfrom          = get_admin();
             $message->userto            = $admin;

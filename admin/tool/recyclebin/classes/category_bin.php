@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -101,7 +101,7 @@ class category_bin extends base_bin {
      * Store a course in the recycle bin.
      *
      * @param \stdClass $course Course
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public function store_item($course) {
         global $CFG, $DB;
@@ -138,7 +138,7 @@ class category_bin extends base_bin {
         // Grab the result.
         $result = $controller->get_results();
         if (!isset($result['backup_destination'])) {
-            throw new \moodle_exception('Failed to backup activity prior to deletion.');
+            throw new \powereduc_exception('Failed to backup activity prior to deletion.');
         }
 
         // Have finished with the controller, let's destroy it, freeing mem and resources.
@@ -147,7 +147,7 @@ class category_bin extends base_bin {
         // Grab the filename.
         $file = $result['backup_destination'];
         if (!$file->get_contenthash()) {
-            throw new \moodle_exception('Failed to backup activity prior to deletion (invalid file).');
+            throw new \powereduc_exception('Failed to backup activity prior to deletion (invalid file).');
         }
 
         // Record the activity, get an ID.
@@ -175,7 +175,7 @@ class category_bin extends base_bin {
                 'id' => $binid
             ));
 
-            throw new \moodle_exception("Failed to copy backup file to recyclebin.");
+            throw new \powereduc_exception("Failed to copy backup file to recyclebin.");
         }
 
         // Delete the old file.
@@ -193,7 +193,7 @@ class category_bin extends base_bin {
      * Restore an item from the recycle bin.
      *
      * @param \stdClass $item The item database record
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public function restore_item($item) {
         global $CFG, $OUTPUT, $PAGE;
@@ -212,11 +212,11 @@ class category_bin extends base_bin {
             'itemid, filepath, filename', false);
 
         if (empty($files)) {
-            throw new \moodle_exception('Invalid recycle bin item!');
+            throw new \powereduc_exception('Invalid recycle bin item!');
         }
 
         if (count($files) > 1) {
-            throw new \moodle_exception('Too many files found!');
+            throw new \powereduc_exception('Too many files found!');
         }
 
         // Get the backup file.
@@ -227,7 +227,7 @@ class category_bin extends base_bin {
         $fulltempdir = make_backup_temp_directory($tempdir);
 
         // Extract the backup to tmpdir.
-        $fb = get_file_packer('application/vnd.moodle.backup');
+        $fb = get_file_packer('application/vnd.powereduc.backup');
         $fb->extract_to_pathname($file, $fulltempdir);
 
         // Build a course.
@@ -240,7 +240,7 @@ class category_bin extends base_bin {
         // Create a new course.
         $course = create_course($course);
         if (!$course) {
-            throw new \moodle_exception("Could not create course to restore into.");
+            throw new \powereduc_exception("Could not create course to restore into.");
         }
 
         // As far as recycle bin is using MODE_AUTOMATED, it observes the General restore settings.
@@ -278,7 +278,7 @@ class category_bin extends base_bin {
                 echo $OUTPUT->header();
                 $backuprenderer = $PAGE->get_renderer('core', 'backup');
                 echo $backuprenderer->precheck_notices($results);
-                echo $OUTPUT->continue_button(new \moodle_url('/course/index.php', array('categoryid' => $this->_categoryid)));
+                echo $OUTPUT->continue_button(new \powereduc_url('/course/index.php', array('categoryid' => $this->_categoryid)));
                 echo $OUTPUT->footer();
                 exit();
             }

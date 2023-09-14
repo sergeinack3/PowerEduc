@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ class completion_enabled extends \core_analytics\local\indicator\binary {
      * @return new \lang_string
      */
     public static function get_name() : \lang_string {
-        return new \lang_string('indicator:completionenabled', 'moodle');
+        return new \lang_string('indicator:completionenabled', 'powereduc');
     }
 
     /**

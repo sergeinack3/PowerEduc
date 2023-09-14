@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -67,7 +67,7 @@ if ($data = $mform->get_data()) {
     $id = $backend->make();
 
     echo html_writer::div(
-            html_writer::link(new moodle_url('/course/view.php', array('id' => $id)),
+            html_writer::link(new powereduc_url('/course/view.php', array('id' => $id)),
                 get_string('continue')));
 } else {
     // Display form.

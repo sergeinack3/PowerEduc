@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Functions for file handling.
@@ -58,7 +58,7 @@ require_once("$CFG->libdir/filebrowser/file_browser.php");
 /**
  * Encodes file serving url
  *
- * @deprecated use moodle_url factory methods instead
+ * @deprecated use powereduc_url factory methods instead
  *
  * @todo MDL-31071 deprecate this function
  * @global stdClass $CFG
@@ -358,7 +358,7 @@ function file_postupdate_standard_filemanager($data, $field, array $options, $co
  * Generate a draft itemid
  *
  * @category files
- * @global moodle_database $DB
+ * @global powereduc_database $DB
  * @global stdClass $USER
  * @return int a random but available draft itemid that can be used to create a new draft
  * file area.
@@ -368,7 +368,7 @@ function file_get_unused_draft_itemid() {
 
     if (isguestuser() or !isloggedin()) {
         // guests and not-logged-in users can not be allowed to upload anything!!!!!!
-        throw new \moodle_exception('noguest');
+        throw new \powereduc_exception('noguest');
     }
 
     $contextid = context_user::instance($USER->id)->id;
@@ -558,7 +558,7 @@ function file_get_draft_area_info($draftitemid, $filepath = '/') {
  *      'filesize' => total size of the files in the area.
  *      'foldercount' => number of folders in the area.
  *      'filesize_without_references' => total size of the area excluding file references.
- * @since Moodle 3.4
+ * @since PowerEduc 3.4
  */
 function file_get_file_area_info($contextid, $component, $filearea, $itemid = 0, $filepath = '/') {
 
@@ -600,7 +600,7 @@ function file_get_file_area_info($contextid, $component, $filearea, $itemid = 0,
  * @param int $newfilesize the size that would be added to the current area.
  * @param bool $includereferences true to include the size of the references in the area size.
  * @return bool true if the area will/has exceeded its limit.
- * @since Moodle 2.4
+ * @since PowerEduc 2.4
  */
 function file_is_draft_area_limit_reached($draftitemid, $areamaxbytes, $newfilesize = 0, $includereferences = false) {
     if ($areamaxbytes != FILE_AREA_MAX_BYTES_UNLIMITED) {
@@ -667,7 +667,7 @@ function file_is_draft_areas_limit_reached(int $userid): bool {
 
 /**
  * Get used space of files
- * @global moodle_database $DB
+ * @global powereduc_database $DB
  * @global stdClass $USER
  * @return int total bytes
  */
@@ -805,7 +805,7 @@ function file_get_drafarea_files($draftitemid, $filepath = '/') {
                 } else {
                     $item->type = 'file';
                 }
-                $itemurl = moodle_url::make_draftfile_url($draftitemid, $item->filepath, $item->filename);
+                $itemurl = powereduc_url::make_draftfile_url($draftitemid, $item->filepath, $item->filename);
                 $item->url = $itemurl->out();
                 $item->icon = $OUTPUT->image_url(file_file_icon($file, 24))->out(false);
                 $item->thumbnail = $OUTPUT->image_url(file_file_icon($file, 90))->out(false);
@@ -911,7 +911,7 @@ function file_restore_source_field_from_draft_file($storedfile) {
             $restoredsource = $source->source;
             $storedfile->set_source($restoredsource);
         } else {
-            throw new moodle_exception('invalidsourcefield', 'error');
+            throw new powereduc_exception('invalidsourcefield', 'error');
         }
     }
     return $storedfile;
@@ -1349,7 +1349,7 @@ function file_rewrite_urls_to_pluginfile($text, $draftitemid, $forcehttps = fals
 /**
  * Set file sort order
  *
- * @global moodle_database $DB
+ * @global powereduc_database $DB
  * @param int $contextid the context id
  * @param string $component file component
  * @param string $filearea file area.
@@ -1373,7 +1373,7 @@ function file_set_sortorder($contextid, $component, $filearea, $itemid, $filepat
 
 /**
  * reset file sort order number to 0
- * @global moodle_database $DB
+ * @global powereduc_database $DB
  * @param int $contextid the context id
  * @param string $component
  * @param string $filearea file area.
@@ -1697,11 +1697,11 @@ function download_file_content($url, $headers=null, $postdata=null, $fullrespons
  * The following elements expected in value array for each extension:
  * 'type' - mimetype
  * 'icon' - location of the icon file. If value is FILENAME, then either pix/f/FILENAME.gif
- *     or pix/f/FILENAME.png must be present in moodle and contain 16x16 filetype icon;
+ *     or pix/f/FILENAME.png must be present in powereduc and contain 16x16 filetype icon;
  *     also files with bigger sizes under names
  *     FILENAME-24, FILENAME-32, FILENAME-64, FILENAME-128, FILENAME-256 are recommended.
  * 'groups' (optional) - array of filetype groups this filetype extension is part of;
- *     commonly used in moodle the following groups:
+ *     commonly used in powereduc the following groups:
  *       - web_image - image that can be included as <img> in HTML
  *       - image - image that we can parse using GD to find it's dimensions, also used for portfolio format
  *       - optimised_image - image that will be processed and optimised
@@ -2137,7 +2137,7 @@ function send_file_not_found() {
     }
 
     send_header_404();
-    throw new \moodle_exception('filenotfound', 'error',
+    throw new \powereduc_exception('filenotfound', 'error',
         $CFG->wwwroot.'/course/view.php?id='.$COURSE->id); // This is not displayed on IIS?
 }
 /**
@@ -2357,7 +2357,7 @@ function readstring_accel($string, $mimetype, $accelerate = false) {
  * Handles the sending of temporary file to user, download is forced.
  * File is deleted after abort or successful sending, does not return, script terminated
  *
- * @param string $path path to file, preferably from moodledata/temp/something; or content of file itself
+ * @param string $path path to file, preferably from powereducdata/temp/something; or content of file itself
  * @param string $filename proposed file name when saving file
  * @param bool $pathisstring If the path is string
  */
@@ -2373,7 +2373,7 @@ function send_temp_file($path, $filename, $pathisstring=false) {
     if (!$pathisstring) {
         if (!file_exists($path)) {
             send_header_404();
-            throw new \moodle_exception('filenotfound', 'error', $CFG->wwwroot.'/');
+            throw new \powereduc_exception('filenotfound', 'error', $CFG->wwwroot.'/');
         }
         // executed after normal finish or abort
         core_shutdown_manager::register_function('send_temp_file_finished', array($path));
@@ -2562,7 +2562,7 @@ function send_file($path, $filename, $lifetime = null , $filter=0, $pathisstring
         if (!empty($options['immutable'])) {
             $immutable = ', immutable';
             // Overwrite lifetime accordingly:
-            // 90 days only - based on Moodle point release cadence being every 3 months.
+            // 90 days only - based on PowerEduc point release cadence being every 3 months.
             $lifetimemin = 60 * 60 * 24 * 90;
             $lifetime = max($lifetime, $lifetimemin);
         }
@@ -2909,8 +2909,8 @@ function file_is_executable($filename) {
  *
  * @param  stored_file $newfile      the new file with the new content and meta-data
  * @param  stored_file $existingfile the file that will be overwritten
- * @throws moodle_exception
- * @since Moodle 3.2
+ * @throws powereduc_exception
+ * @since PowerEduc 3.2
  */
 function file_overwrite_existing_draftfile(stored_file $newfile, stored_file $existingfile) {
     if ($existingfile->get_component() != 'user' or $existingfile->get_filearea() != 'draft') {
@@ -2925,7 +2925,7 @@ function file_overwrite_existing_draftfile(stored_file $newfile, stored_file $ex
     if ($newfile->is_external_file()) {
         // New file is a reference. Check that existing file does not have any other files referencing to it
         if (isset($source->original) && $fs->search_references_count($source->original)) {
-            throw new moodle_exception('errordoublereference', 'repository');
+            throw new powereduc_exception('errordoublereference', 'repository');
         }
     }
 
@@ -2967,7 +2967,7 @@ function file_overwrite_existing_draftfile(stored_file $newfile, stored_file $ex
  * @param int $itemid identifies the item id or false for all items in the file area
  * @param array $options area options (subdirs=false, maxfiles=-1, maxbytes=0, areamaxbytes=FILE_AREA_MAX_BYTES_UNLIMITED)
  * @see file_save_draft_area_files
- * @since Moodle 3.2
+ * @since PowerEduc 3.2
  */
 function file_merge_files_from_draft_area_into_filearea($draftitemid, $contextid, $component, $filearea, $itemid,
                                                         array $options = null) {
@@ -2987,7 +2987,7 @@ function file_merge_files_from_draft_area_into_filearea($draftitemid, $contextid
  * @param int $getfromdraftid the id of the draft area where are the files to merge.
  * @param int $mergeintodraftid the id of the draft area where new files will be merged.
  * @throws coding_exception
- * @since Moodle 3.2
+ * @since PowerEduc 3.2
  */
 function file_merge_draft_area_into_draft_area($getfromdraftid, $mergeintodraftid) {
     global $USER;
@@ -3054,11 +3054,11 @@ function file_is_svg_image_from_mimetype(string $mimetype): bool {
 }
 
 /**
- * Returns the moodle proxy configuration as a formatted url
+ * Returns the powereduc proxy configuration as a formatted url
  *
  * @return string the string to use for proxy settings.
  */
-function get_moodle_proxy_url() {
+function get_powereduc_proxy_url() {
     global $CFG;
     $proxy = '';
     if (empty($CFG->proxytype)) {
@@ -3101,14 +3101,14 @@ function get_moodle_proxy_url() {
  * // HTTP GET Method
  * $html = $c->get('http://example.com');
  * // HTTP POST Method
- * $html = $c->post('http://example.com/', array('q'=>'words', 'name'=>'moodle'));
+ * $html = $c->post('http://example.com/', array('q'=>'words', 'name'=>'powereduc'));
  * // HTTP PUT Method
  * $html = $c->put('http://example.com/', array('file'=>'/var/www/test.txt');
  * </code>
  *
  * @package   core_files
  * @category files
- * @copyright Dongsheng Cai <dongsheng@moodle.com>
+ * @copyright Dongsheng Cai <dongsheng@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU Public License
  */
 class curl {
@@ -3249,7 +3249,7 @@ class curl {
      */
     public function resetopt() {
         $this->options = array();
-        $this->options['CURLOPT_USERAGENT']         = \core_useragent::get_moodlebot_useragent();
+        $this->options['CURLOPT_USERAGENT']         = \core_useragent::get_powereducbot_useragent();
         // True to include the header in the output
         $this->options['CURLOPT_HEADER']            = 0;
         // True to Exclude the body from the output
@@ -3278,8 +3278,8 @@ class curl {
         global $CFG;
 
         // Bundle in dataroot always wins.
-        if (is_readable("$CFG->dataroot/moodleorgca.crt")) {
-            return realpath("$CFG->dataroot/moodleorgca.crt");
+        if (is_readable("$CFG->dataroot/powereducorgca.crt")) {
+            return realpath("$CFG->dataroot/powereducorgca.crt");
         }
 
         // Next comes the default from php.ini
@@ -3496,7 +3496,7 @@ class curl {
         } else if (!empty($this->options['CURLOPT_USERAGENT'])) {
             $useragent = $this->options['CURLOPT_USERAGENT'];
         } else {
-            $useragent = \core_useragent::get_moodlebot_useragent();
+            $useragent = \core_useragent::get_powereducbot_useragent();
         }
 
         // Set headers.
@@ -3929,7 +3929,7 @@ class curl {
         } else {
             return $this->error;
             // exception is not ajax friendly
-            //throw new moodle_exception($this->error, 'curl');
+            //throw new powereduc_exception($this->error, 'curl');
         }
     }
 
@@ -4101,7 +4101,7 @@ class curl {
                 return null;
             }
             if (!isset($this->options['CURLOPT_USERPWD'])) {
-                $this->setopt(array('CURLOPT_USERPWD' => 'anonymous: noreply@moodle.org'));
+                $this->setopt(array('CURLOPT_USERPWD' => 'anonymous: noreply@powereduc.org'));
             }
         } else {
             $options['CURLOPT_CUSTOMREQUEST'] = 'PUT';
@@ -4126,7 +4126,7 @@ class curl {
     public function delete($url, $param = array(), $options = array()) {
         $options['CURLOPT_CUSTOMREQUEST'] = 'DELETE';
         if (!isset($options['CURLOPT_USERPWD'])) {
-            $options['CURLOPT_USERPWD'] = 'anonymous: noreply@moodle.org';
+            $options['CURLOPT_USERPWD'] = 'anonymous: noreply@powereduc.org';
         }
         $ret = $this->request($url, $options);
         return $ret;
@@ -4228,7 +4228,7 @@ class curl {
  * </code>
  *
  * @package   core_files
- * @copyright Dongsheng Cai <dongsheng@moodle.com>
+ * @copyright Dongsheng Cai <dongsheng@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class curl_cache {
@@ -4360,16 +4360,16 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null, $offlin
     global $DB, $CFG, $USER;
     // relative path must start with '/'
     if (!$relativepath) {
-        throw new \moodle_exception('invalidargorconf');
+        throw new \powereduc_exception('invalidargorconf');
     } else if ($relativepath[0] != '/') {
-        throw new \moodle_exception('pathdoesnotstartslash');
+        throw new \powereduc_exception('pathdoesnotstartslash');
     }
 
     // extract relative path components
     $args = explode('/', ltrim($relativepath, '/'));
 
     if (count($args) < 3) { // always at least context, component and filearea
-        throw new \moodle_exception('invalidarguments');
+        throw new \powereduc_exception('invalidarguments');
     }
 
     $contextid = (int)array_shift($args);
@@ -4393,7 +4393,7 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null, $offlin
         }
 
         if (empty($CFG->enableblogs)) {
-            throw new \moodle_exception('siteblogdisable', 'blog');
+            throw new \powereduc_exception('siteblogdisable', 'blog');
         }
 
         $entryid = (int)array_shift($args);
@@ -4403,7 +4403,7 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null, $offlin
         if ($CFG->bloglevel < BLOG_GLOBAL_LEVEL) {
             require_login();
             if (isguestuser()) {
-                throw new \moodle_exception('noguest');
+                throw new \powereduc_exception('noguest');
             }
             if ($CFG->bloglevel == BLOG_USER_LEVEL) {
                 if ($USER->id != $entry->userid) {
@@ -4479,7 +4479,7 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null, $offlin
 
             if (!$iscurrentuser) {
                 $coursecontext = context_course::instance($course->id);
-                if (!has_capability('moodle/grade:viewall', $coursecontext)) {
+                if (!has_capability('powereduc/grade:viewall', $coursecontext)) {
                     send_file_not_found();
                 }
             }
@@ -4656,7 +4656,7 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null, $offlin
 
             // If its a group event require either membership of view all groups capability
             if ($event->eventtype === 'group') {
-                if (!has_capability('moodle/site:accessallgroups', $context) && !groups_is_member($event->groupid, $USER->id)) {
+                if (!has_capability('powereduc/site:accessallgroups', $context) && !groups_is_member($event->groupid, $USER->id)) {
                     send_file_not_found();
                 }
             } else if ($event->eventtype === 'course' || $event->eventtype === 'site') {
@@ -4702,7 +4702,7 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null, $offlin
                 // also if login is required for profile images and is not logged in or guest
                 // do not use require_login() because it is expensive and not suitable here anyway
                 $theme = theme_config::load($themename);
-                redirect($theme->image_url('u/'.$filename, 'moodle')); // intentionally not cached
+                redirect($theme->image_url('u/'.$filename, 'powereduc')); // intentionally not cached
             }
 
             if (!$file = $fs->get_file($context->id, 'user', 'icon', 0, '/', $filename.'.png')) {
@@ -4724,7 +4724,7 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null, $offlin
                 }
                 // no redirect here because it is not cached
                 $theme = theme_config::load($themename);
-                $imagefile = $theme->resolve_image_location('u/'.$filename, 'moodle', null);
+                $imagefile = $theme->resolve_image_location('u/'.$filename, 'powereduc', null);
                 send_file($imagefile, basename($imagefile), 60*60*24*14);
             }
 
@@ -4928,8 +4928,8 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null, $offlin
 
         // User is able to access cohort if they have view cap on cohort level or
         // the cohort is visible and they have view cap on course level.
-        $canview = has_capability('moodle/cohort:view', $cohortcontext) ||
-                ($cohort->visible && has_capability('moodle/cohort:view', $context));
+        $canview = has_capability('powereduc/cohort:view', $cohortcontext) ||
+                ($cohort->visible && has_capability('powereduc/cohort:view', $context));
 
         if ($filearea === 'description' && $canview) {
             $filename = array_pop($args);
@@ -4953,7 +4953,7 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null, $offlin
         $groupid = (int)array_shift($args);
 
         $group = $DB->get_record('groups', array('id'=>$groupid, 'courseid'=>$course->id), '*', MUST_EXIST);
-        if (($course->groupmodeforce and $course->groupmode == SEPARATEGROUPS) and !has_capability('moodle/site:accessallgroups', $context) and !groups_is_member($group->id, $USER->id)) {
+        if (($course->groupmodeforce and $course->groupmode == SEPARATEGROUPS) and !has_capability('powereduc/site:accessallgroups', $context) and !groups_is_member($group->id, $USER->id)) {
             // do not allow access to separate group info if not member or teacher
             send_file_not_found();
         }
@@ -5019,7 +5019,7 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null, $offlin
     } else if ($component === 'backup') {
         if ($filearea === 'course' and $context->contextlevel == CONTEXT_COURSE) {
             require_login($course);
-            require_capability('moodle/backup:downloadfile', $context);
+            require_capability('powereduc/backup:downloadfile', $context);
 
             $filename = array_pop($args);
             $filepath = $args ? '/'.implode('/', $args).'/' : '/';
@@ -5032,7 +5032,7 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null, $offlin
 
         } else if ($filearea === 'section' and $context->contextlevel == CONTEXT_COURSE) {
             require_login($course);
-            require_capability('moodle/backup:downloadfile', $context);
+            require_capability('powereduc/backup:downloadfile', $context);
 
             $sectionid = (int)array_shift($args);
 
@@ -5047,7 +5047,7 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null, $offlin
 
         } else if ($filearea === 'activity' and $context->contextlevel == CONTEXT_MODULE) {
             require_login($course, false, $cm);
-            require_capability('moodle/backup:downloadfile', $context);
+            require_capability('powereduc/backup:downloadfile', $context);
 
             $filename = array_pop($args);
             $filepath = $args ? '/'.implode('/', $args).'/' : '/';
@@ -5062,8 +5062,8 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null, $offlin
             // Backup files that were generated by the automated backup systems.
 
             require_login($course);
-            require_capability('moodle/backup:downloadfile', $context);
-            require_capability('moodle/restore:userinfo', $context);
+            require_capability('powereduc/backup:downloadfile', $context);
+            require_capability('powereduc/restore:userinfo', $context);
 
             $filename = array_pop($args);
             $filepath = $args ? '/'.implode('/', $args).'/' : '/';
@@ -5233,7 +5233,7 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null, $offlin
 
             $bprecord = $DB->get_record('block_positions', array('contextid' => $context->id, 'blockinstanceid' => $context->instanceid));
             // User can't access file, if block is hidden or doesn't have block:view capability
-            if (($bprecord && !$bprecord->visible) || !has_capability('moodle/block:view', $context)) {
+            if (($bprecord && !$bprecord->visible) || !has_capability('powereduc/block:view', $context)) {
                  send_file_not_found();
             }
         } else {

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * TinyMCE text editor integration.
@@ -78,11 +78,11 @@ class tinymce_texteditor extends texteditor {
      */
     public function use_editor($elementid, array $options=null, $fpoptions=null) {
         global $PAGE, $CFG;
-        // Note: use full moodle_url instance to prevent standard JS loader, make sure we are using https on profile page if required.
+        // Note: use full powereduc_url instance to prevent standard JS loader, make sure we are using https on profile page if required.
         if ($CFG->debugdeveloper) {
-            $PAGE->requires->js(new moodle_url('/lib/editor/tinymce/tiny_mce/'.$this->version.'/tiny_mce_src.js'));
+            $PAGE->requires->js(new powereduc_url('/lib/editor/tinymce/tiny_mce/'.$this->version.'/tiny_mce_src.js'));
         } else {
-            $PAGE->requires->js(new moodle_url('/lib/editor/tinymce/tiny_mce/'.$this->version.'/tiny_mce.js'));
+            $PAGE->requires->js(new powereduc_url('/lib/editor/tinymce/tiny_mce/'.$this->version.'/tiny_mce.js'));
         }
         $PAGE->requires->js_init_call('M.editor_tinymce.init_editor', array($elementid, $this->get_init_params($elementid, $options)), true);
         if ($fpoptions) {
@@ -123,19 +123,19 @@ class tinymce_texteditor extends texteditor {
         }
 
         $params = array(
-            'moodle_config' => $config,
+            'powereduc_config' => $config,
             'mode' => "exact",
             'elements' => $elementid,
             'relative_urls' => false,
             'document_base_url' => $CFG->wwwroot,
-            'moodle_plugin_base' => "$CFG->wwwroot/lib/editor/tinymce/plugins/",
+            'powereduc_plugin_base' => "$CFG->wwwroot/lib/editor/tinymce/plugins/",
             'content_css' => $contentcss,
             'language' => $lang,
             'directionality' => $directionality,
             'plugin_insertdate_dateFormat ' => $strdate,
             'plugin_insertdate_timeFormat ' => $strtime,
             'theme' => "advanced",
-            'skin' => "moodle",
+            'skin' => "powereduc",
             'apply_source_formatting' => true,
             'remove_script_host' => false,
             'entity_encoding' => "raw",
@@ -154,7 +154,7 @@ class tinymce_texteditor extends texteditor {
             'min_height' => 30,
             'theme_advanced_toolbar_location' => "top",
             'theme_advanced_statusbar_location' => "bottom",
-            'language_load' => false, // We load all lang strings directly from Moodle.
+            'language_load' => false, // We load all lang strings directly from PowerEduc.
             'langrev' => $langrev,
         );
 
@@ -181,12 +181,12 @@ class tinymce_texteditor extends texteditor {
         }
 
         if (!empty($options['legacy']) or !empty($options['noclean']) or !empty($options['trusted'])) {
-            // now deal somehow with non-standard tags, people scream when we do not make moodle code xtml strict,
+            // now deal somehow with non-standard tags, people scream when we do not make powereduc code xtml strict,
             // but they scream even more when we strip all tags that are not strict :-(
             $params['valid_elements'] = 'script[src|type],*[*]'; // for some reason the *[*] does not inlcude javascript src attribute MDL-25836
             $params['invalid_elements'] = '';
         }
-        // Add unique moodle elements - unfortunately we have to decide if these are SPANs or DIVs.
+        // Add unique powereduc elements - unfortunately we have to decide if these are SPANs or DIVs.
         $params['extended_valid_elements'] = 'nolink,tex,algebra,lang[lang]';
         $params['custom_elements'] = 'nolink,~tex,~algebra,lang';
 
@@ -199,7 +199,7 @@ class tinymce_texteditor extends texteditor {
         editor_tinymce_plugin::all_update_init_params($params, $context, $options);
 
         // Remove temporary parameters.
-        unset($params['moodle_config']);
+        unset($params['powereduc_config']);
 
         return $params;
     }
@@ -241,7 +241,7 @@ class tinymce_texteditor extends texteditor {
      * Gets a named plugin object. Will cause fatal error if plugin doesn't
      * exist. This is intended for use by plugin files themselves.
      *
-     * @param string $plugin Name of plugin e.g. 'moodleemoticon'
+     * @param string $plugin Name of plugin e.g. 'powereducemoticon'
      * @return editor_tinymce_plugin Plugin object
      */
     public function get_plugin($plugin) {
@@ -251,13 +251,13 @@ class tinymce_texteditor extends texteditor {
 
     /**
      * Equivalent to tinyMCE.baseURL value available from JavaScript,
-     * always use instead of /../ when referencing tinymce core code from moodle plugins!
+     * always use instead of /../ when referencing tinymce core code from powereduc plugins!
      *
-     * @return moodle_url url pointing to the root of TinyMCE javascript code.
+     * @return powereduc_url url pointing to the root of TinyMCE javascript code.
      */
     public function get_tinymce_base_url() {
         global $CFG;
-        return new moodle_url("/lib/editor/tinymce/tiny_mce/$this->version/");
+        return new powereduc_url("/lib/editor/tinymce/tiny_mce/$this->version/");
     }
 
 }

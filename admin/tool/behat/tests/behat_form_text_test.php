@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - https://moodle.org/
+// This file is part of Moodle - https://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -166,7 +166,7 @@ class phpunit_string_manager extends core_string_manager_standard {
      * @param string $component The module the string is associated with
      * @param string|object|array $a An object, string or number that can be used
      *      within translation strings
-     * @param string $lang moodle translation language, null means use current
+     * @param string $lang powereduc translation language, null means use current
      * @return string The String !
      */
     public function get_string($identifier, $component = '', $a = null, $lang = null) {

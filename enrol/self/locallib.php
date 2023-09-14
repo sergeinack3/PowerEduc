@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -53,7 +53,7 @@ function enrol_self_check_group_enrolment_key($courseid, $enrolpassword) {
     return $found;
 }
 
-class enrol_self_enrol_form extends moodleform {
+class enrol_self_enrol_form extends powereducform {
     protected $instance;
     protected $toomany = false;
 
@@ -92,7 +92,7 @@ class enrol_self_enrol_form extends moodleform {
                     $mform->addElement('static', 'keyholder', '', get_string('keyholder', 'enrol_self'));
                 }
                 $keyholdercontext = context_user::instance($keyholder->id);
-                if ($USER->id == $keyholder->id || has_capability('moodle/user:viewdetails', context_system::instance()) ||
+                if ($USER->id == $keyholder->id || has_capability('powereduc/user:viewdetails', context_system::instance()) ||
                         has_coursecontact_role($keyholder->id)) {
                     $profilelink = '<a href="' . $CFG->wwwroot . '/user/view.php?id=' . $keyholder->id . '&amp;course=' .
                     $this->instance->courseid . '">' . fullname($keyholder) . '</a>';

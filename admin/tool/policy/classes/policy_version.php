@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Provides the {@link tool_policy\policy_version} persistent.
  *
  * @package    tool_policy
- * @copyright  2018 Sara Arjona (sara@moodle.com)
+ * @copyright  2018 Sara Arjona (sara@powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,7 +31,7 @@ use core\persistent;
 /**
  * Persistent model representing a single policy document version.
  *
- * @copyright  2018 Sara Arjona (sara@moodle.com)
+ * @copyright  2018 Sara Arjona (sara@powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class policy_version extends persistent {

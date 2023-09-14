@@ -28,8 +28,8 @@ Feature: Inline editing H5P content anywhere
     # Override this capability to let teachers and students to Turn editing on.
     And the following "permission overrides" exist:
       | capability                 | permission | role           | contextlevel | reference |
-      | moodle/course:update       | Allow      | teacher        | System       |           |
-      | moodle/course:update       | Allow      | student        | System       |           |
+      | powereduc/course:update       | Allow      | teacher        | System       |           |
+      | powereduc/course:update       | Allow      | student        | System       |           |
     And the following "blocks" exist:
       | blockname     | contextlevel | reference | pagetypepattern | defaultregion |
       | private_files | System       | 1         | my-index        | side-post     |
@@ -38,7 +38,7 @@ Feature: Inline editing H5P content anywhere
   Scenario: Edit H5P content from a page using link to private file
     Given the following "permission overrides" exist:
       | capability                 | permission | role           | contextlevel | reference |
-      | moodle/h5p:updatelibraries | Allow      | editingteacher | System       |           |
+      | powereduc/h5p:updatelibraries | Allow      | editingteacher | System       |           |
     And I log in as "teacher1"
     # Upload the H5P to private user files.
     And I follow "Manage private files..."
@@ -177,13 +177,13 @@ Feature: Inline editing H5P content anywhere
   @javascript @mod @mod_page
   Scenario: Edit H5P content from a page using external URL
     Given the following config values are set as admin:
-      | allowedsources | https://moodle.h5p.com/content/[id] | filter_displayh5p |
+      | allowedsources | https://powereduc.h5p.com/content/[id] | filter_displayh5p |
     And I am on the "C1" "Course" page logged in as "admin"
     # Add H5P content to the page.
     And I am on the "PageName1" "page activity" page
     And I navigate to "Settings" in current page administration
     And I click on "Insert H5P" "button" in the "#fitem_id_page" "css_element"
-    And I set the field with xpath "//input[@data-region='h5pfile']" to "https://moodle.h5p.com/content/1290772960722742119"
+    And I set the field with xpath "//input[@data-region='h5pfile']" to "https://powereduc.h5p.com/content/1290772960722742119"
     And I click on "Insert H5P" "button" in the "Insert H5P" "dialogue"
     And I click on "Save and display" "button"
     And ".h5p-placeholder" "css_element" should exist

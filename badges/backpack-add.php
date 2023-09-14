@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -72,7 +72,7 @@ if (!empty($issuedbadge->recipient->id)) {
             if (!($issuerentityid = badges_external_get_mapping($sitebackpack->id, OPEN_BADGES_V2_TYPE_ISSUER, $issuer['email']))) {
                 $response = $api->put_issuer($issuer);
                 if (!$response) {
-                    throw new moodle_exception('invalidrequest', 'error');
+                    throw new powereduc_exception('invalidrequest', 'error');
                 }
                 $issuerentityid = $response->id;
                 badges_external_create_mapping($sitebackpack->id, OPEN_BADGES_V2_TYPE_ISSUER, $issuer['email'],
@@ -84,7 +84,7 @@ if (!empty($issuedbadge->recipient->id)) {
             if (!($badgeentityid = badges_external_get_mapping($sitebackpack->id, OPEN_BADGES_V2_TYPE_BADGE, $badgeid))) {
                 $response = $api->put_badgeclass($issuerentityid, $badge);
                 if (!$response) {
-                    throw new moodle_exception('invalidrequest', 'error');
+                    throw new powereduc_exception('invalidrequest', 'error');
                 }
                 $badgeentityid = $response->id;
                 badges_external_create_mapping($sitebackpack->id, OPEN_BADGES_V2_TYPE_BADGE, $badgeid,
@@ -110,7 +110,7 @@ if (!empty($issuedbadge->recipient->id)) {
             if (!$assertionentityid) {
                 $response = $api->put_badgeclass_assertion($badgeentityid, $assertiondata);
                 if (!$response) {
-                    throw new moodle_exception('invalidrequest', 'error');
+                    throw new powereduc_exception('invalidrequest', 'error');
                 }
                 $assertionentityid = badges_generate_badgr_open_url($sitebackpack, OPEN_BADGES_V2_TYPE_ASSERTION, $response->id);
                 $badgeadded = true;
@@ -126,7 +126,7 @@ if (!empty($issuedbadge->recipient->id)) {
                 );
                 $response = $api->update_assertion($internalid, $assertiondata);
                 if (!$response) {
-                    throw new moodle_exception('invalidrequest', 'error');
+                    throw new powereduc_exception('invalidrequest', 'error');
                 }
             }
         }
@@ -141,7 +141,7 @@ if (!empty($issuedbadge->recipient->id)) {
         $userapi->authenticate();
         $response = $userapi->import_badge_assertion($assertionentityid);
         if (!$response) {
-            throw new moodle_exception('invalidrequest', 'error');
+            throw new powereduc_exception('invalidrequest', 'error');
         }
         $assertionentityid = $response->id;
         $badgeadded = true;
@@ -150,7 +150,7 @@ if (!empty($issuedbadge->recipient->id)) {
     }
 
     $response = $badgeadded ? ['success' => 'addedtobackpack'] : ['warning' => 'existsinbackpack'];
-    redirect(new moodle_url('/badges/mybadges.php', $response));
+    redirect(new powereduc_url('/badges/mybadges.php', $response));
 } else {
-    redirect(new moodle_url('/badges/mybadges.php'));
+    redirect(new powereduc_url('/badges/mybadges.php'));
 }

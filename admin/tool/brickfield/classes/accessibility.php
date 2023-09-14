@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,8 +17,8 @@
 namespace tool_brickfield;
 
 use context_system;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use stdClass;
 use tool_brickfield\local\tool\filter;
 
@@ -59,11 +59,11 @@ class accessibility {
     /**
      * Throw an error if the toolkit is not enabled.
      * @return bool
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function require_accessibility_enabled(): bool {
         if (!static::is_accessibility_enabled()) {
-            throw new moodle_exception('accessibilitydisabled', manager::PLUGINNAME);
+            throw new powereduc_exception('accessibilitydisabled', manager::PLUGINNAME);
         }
         return true;
     }
@@ -74,12 +74,12 @@ class accessibility {
      * This takes into account the value of the admin config value.
      *
      * @param   string $url The URL within the plugin
-     * @return  moodle_url
+     * @return  powereduc_url
      */
-    public static function get_plugin_url(string $url = ''): moodle_url {
+    public static function get_plugin_url(string $url = ''): powereduc_url {
         $url = ($url == '') ? 'index.php' : $url;
         $pluginpath = self::$pluginpath;
-        return new moodle_url("/admin/{$pluginpath}/{$url}");
+        return new powereduc_url("/admin/{$pluginpath}/{$url}");
     }
 
     /**
@@ -113,7 +113,7 @@ class accessibility {
      * @return string
      * @throws \coding_exception
      * @throws \dml_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public static function get_title(filter $filter, int $countdata): string {
         global $DB;
@@ -479,7 +479,7 @@ class accessibility {
 
         $summarydata = new \stdClass();
         $summarydata->siteurl = (substr($CFG->wwwroot, -1) !== '/') ? $CFG->wwwroot . '/' : $CFG->wwwroot;
-        $summarydata->moodlerelease = (preg_match('/^(\d+\.\d.*?)[. ]/', $CFG->release, $matches)) ? $matches[1] : $CFG->release;
+        $summarydata->powereducrelease = (preg_match('/^(\d+\.\d.*?)[. ]/', $CFG->release, $matches)) ? $matches[1] : $CFG->release;
         $summarydata->numcourses = $DB->count_records('course') - 1;
         $summarydata->numusers = $DB->count_records('user', array('deleted' => 0));
         $summarydata->numfiles = $DB->count_records('files');

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -100,7 +100,7 @@ class set_content_visibility extends external_api {
                     ];
                 }
             }
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             // The content or the context don't exist.
             $warnings[] = [
                 'item' => $params['contentid'],

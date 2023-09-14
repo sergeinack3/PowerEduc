@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core\output;
 
@@ -22,7 +22,7 @@ namespace core\output;
  * Unit tests for lib/classes/output/mustache_template_source_loader.php
  *
  * @package   core
- * @copyright 2018 Ryan Wyllie <ryan@moodle.com>
+ * @copyright 2018 Ryan Wyllie <ryan@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mustache_template_source_loader_test extends \advanced_testcase {
@@ -73,20 +73,20 @@ class mustache_template_source_loader_test extends \advanced_testcase {
 TBD;
         $templatewithcomment = <<<TBC
         {{!
-            This file is part of Moodle - http://moodle.org/
+            This file is part of PowerEduc - http://powereduc.org/
 
-            Moodle is free software: you can redistribute it and/or modify
+            PowerEduc is free software: you can redistribute it and/or modify
             it under the terms of the GNU General Public License as published by
             the Free Software Foundation, either version 3 of the License, or
             (at your option) any later version.
 
-            Moodle is distributed in the hope that it will be useful,
+            PowerEduc is distributed in the hope that it will be useful,
             but WITHOUT ANY WARRANTY; without even the implied warranty of
             MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
             GNU General Public License for more details.
 
             You should have received a copy of the GNU General Public License
-            along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+            along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
         }}
         {{!
             @template mod_lemmings/lemmings
@@ -165,7 +165,7 @@ TBC;
      *
      * @dataProvider test_load_test_cases()
      * @param mustache_template_source_loader $loader The loader
-     * @param string $component The moodle component
+     * @param string $component The powereduc component
      * @param string $name The template name
      * @param bool $includecomments Whether to strip comments
      * @param string $expected The expected output
@@ -332,7 +332,7 @@ TBC;
      *
      * @dataProvider test_load_with_dependencies_test_cases()
      * @param mustache_template_source_loader $loader The loader
-     * @param string $component The moodle component
+     * @param string $component The powereduc component
      * @param string $name The template name
      * @param bool $includecomments Whether to strip comments
      * @param string $expected The expected output

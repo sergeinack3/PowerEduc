@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -179,14 +179,14 @@ class completion_completion extends data_object {
         $messagesubject = get_string('coursecompleted', 'completion');
         $a = [
             'coursename' => get_course_display_name_for_list($course),
-            'courselink' => (string) new moodle_url('/course/view.php', array('id' => $course->id)),
+            'courselink' => (string) new powereduc_url('/course/view.php', array('id' => $course->id)),
         ];
         $messagebody = get_string('coursecompletedmessage', 'completion', $a);
         $messageplaintext = html_to_text($messagebody);
 
         $eventdata = new \core\message\message();
         $eventdata->courseid          = $course->id;
-        $eventdata->component         = 'moodle';
+        $eventdata->component         = 'powereduc';
         $eventdata->name              = 'coursecompleted';
         $eventdata->userfrom          = core_user::get_noreply_user();
         $eventdata->userto            = $data->userid;

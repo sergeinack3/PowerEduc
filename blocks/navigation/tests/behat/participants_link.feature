@@ -59,7 +59,7 @@ Feature: Displaying the link to the Participants page
     And I log in as "admin"
     And I set the following system permissions of "Guest" role:
       | capability                     | permission |
-      | moodle/course:viewparticipants | Allow      |
+      | powereduc/course:viewparticipants | Allow      |
     And I log in as "guest"
     And I am on "Course1" course homepage
     And I should see "Participants" in the "Navigation" "block"

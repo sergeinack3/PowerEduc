@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  *
  * @package    core_comment
  * @category   test
- * @copyright  2018 Adrian Greeve <adrian@moodle.com>
+ * @copyright  2018 Adrian Greeve <adrian@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace core_comment\privacy;
@@ -36,7 +36,7 @@ use core_privacy\tests\request\approved_contextlist;
 /**
  * Unit tests for comment/classes/privacy/policy
  *
- * @copyright  2018 Adrian Greeve <adrian@moodle.com>
+ * @copyright  2018 Adrian Greeve <adrian@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider_test extends provider_testcase {

@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Generic moodleforms field.
+ * Generic powereducforms field.
  *
  * @package    core_form
  * @category   test
@@ -164,10 +164,10 @@ class behat_form_field implements behat_session_interface {
      *
      * This class is the generic field type, behat_field_manager::get_form_field()
      * should be able to find the appropiate class for the field type, but
-     * in cases like moodle form group elements we can not find the type of
+     * in cases like powereduc form group elements we can not find the type of
      * the field through the DOM so we also need to take care of the
      * different field types from here. If we need to deal with more complex
-     * moodle form elements we will need to refactor this simple HTML elements
+     * powereduc form elements we will need to refactor this simple HTML elements
      * guess method.
      *
      * @return behat_form_field

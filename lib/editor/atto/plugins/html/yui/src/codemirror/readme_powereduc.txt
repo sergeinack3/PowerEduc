@@ -1,4 +1,4 @@
-Description of importing the codemirror library into Moodle.
+Description of importing the codemirror library into PowerEduc.
 
 NOTE: To make it more readable, in this explanation [LIBRARYPATH] means:
     [PATH TO YOUR POWEREDUC]/lib/editor/atto/plugins/html/yui/src/codemirror
@@ -6,7 +6,7 @@ NOTE: To make it more readable, in this explanation [LIBRARYPATH] means:
 1 Download the latest codemirror code somewhere (example /tmp/cm) using: npm install codemirror OR download the zip file
   (note down the version number displayed by the command, you'll need it later)
 
-2 Then copy the following files to your local Moodle directory:
+2 Then copy the following files to your local PowerEduc directory:
 If using npm install:
 [CODEMIRRORPATH] = node_modules
 

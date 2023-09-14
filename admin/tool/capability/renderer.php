@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -89,7 +89,7 @@ class tool_capability_renderer extends plugin_renderer_base {
         $table->attributes['class'] = 'comparisontable';
         $table->head = array('&nbsp;');
         foreach ($roles as $role) {
-            $url = new moodle_url('/admin/roles/define.php', array('action' => 'view', 'roleid' => $role->id));
+            $url = new powereduc_url('/admin/roles/define.php', array('action' => 'view', 'roleid' => $role->id));
             $table->head[] = html_writer::div(html_writer::link($url, $role->localname));
         }
         $table->data = array();
@@ -133,9 +133,9 @@ class tool_capability_renderer extends plugin_renderer_base {
         $context = context::instance_by_id($contextid);
 
         if ($context instanceof context_system) {
-            $url = new moodle_url('/admin/roles/manage.php');
+            $url = new powereduc_url('/admin/roles/manage.php');
         } else {
-            $url = new moodle_url('/admin/roles/permissions.php', ['contextid' => $contextid]);
+            $url = new powereduc_url('/admin/roles/permissions.php', ['contextid' => $contextid]);
         }
 
         $title = get_string('permissionsincontext', 'core_role', $context->get_context_name());

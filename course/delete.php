@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -36,18 +36,18 @@ require_login();
 
 if ($SITE->id == $course->id || !can_delete_course($id)) {
     // Can not delete frontpage or don't have permission to delete the course.
-    throw new \moodle_exception('cannotdeletecourse');
+    throw new \powereduc_exception('cannotdeletecourse');
 }
 
 $categorycontext = context_coursecat::instance($course->category);
 $PAGE->set_url('/course/delete.php', array('id' => $id));
 $PAGE->set_context($categorycontext);
 $PAGE->set_pagelayout('admin');
-navigation_node::override_active_url(new moodle_url('/course/management.php', array('categoryid'=>$course->category)));
+navigation_node::override_active_url(new powereduc_url('/course/management.php', array('categoryid'=>$course->category)));
 
 $courseshortname = format_string($course->shortname, true, array('context' => $coursecontext));
 $coursefullname = format_string($course->fullname, true, array('context' => $coursecontext));
-$categoryurl = new moodle_url('/course/management.php', array('categoryid' => $course->category));
+$categoryurl = new powereduc_url('/course/management.php', array('categoryid' => $course->category));
 
 // Check if we've got confirmation.
 if ($delete === md5($course->timemodified)) {
@@ -86,7 +86,7 @@ if (!async_helper::is_async_pending($id, 'course', 'backup')) {
     $strdeletecoursecheck = get_string("deletecoursecheck");
     $message = "{$strdeletecoursecheck}<br /><br />{$coursefullname} ({$courseshortname})";
 
-    $continueurl = new moodle_url('/course/delete.php', array('id' => $course->id, 'delete' => md5($course->timemodified)));
+    $continueurl = new powereduc_url('/course/delete.php', array('id' => $course->id, 'delete' => md5($course->timemodified)));
     $continuebutton = new single_button($continueurl, get_string('delete'), 'post');
     echo $OUTPUT->confirm($message, $continuebutton, $categoryurl);
 } else {

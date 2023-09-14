@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,10 +30,10 @@ require_once $CFG->dirroot.'/grade/report/overview/lib.php';
 $courseid = optional_param('id', SITEID, PARAM_INT);
 $userid   = optional_param('userid', $USER->id, PARAM_INT);
 
-$PAGE->set_url(new moodle_url('/grade/report/overview/index.php', array('id' => $courseid, 'userid' => $userid)));
+$PAGE->set_url(new powereduc_url('/grade/report/overview/index.php', array('id' => $courseid, 'userid' => $userid)));
 
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 require_login(null, false);
 $PAGE->set_course($course);
@@ -48,11 +48,11 @@ if ($courseid != SITEID) {
 }
 
 if (empty($userid)) {
-    require_capability('moodle/grade:viewall', $context);
+    require_capability('powereduc/grade:viewall', $context);
 
 } else {
     if (!$DB->get_record('user', array('id'=>$userid, 'deleted'=>0)) or isguestuser($userid)) {
-        throw new \moodle_exception('invaliduserid');
+        throw new \powereduc_exception('invaliduserid');
     }
     $personalcontext = context_user::instance($userid);
 }
@@ -75,7 +75,7 @@ $access = grade_report_overview::check_access($systemcontext, $context, $persona
 
 if (!$access) {
     // no access to grades!
-    throw new \moodle_exception('nopermissiontoviewgrades', 'error',  $CFG->wwwroot.'/course/view.php?id='.$courseid);
+    throw new \powereduc_exception('nopermissiontoviewgrades', 'error',  $CFG->wwwroot.'/course/view.php?id='.$courseid);
 }
 
 /// return tracking object
@@ -91,9 +91,9 @@ $USER->grade_last_report[$course->id] = 'overview';
 grade_regrade_final_grades_if_required($course);
 
 $actionbar = new \core_grades\output\general_action_bar($context,
-    new moodle_url('/grade/report/overview/index.php', ['id' => $courseid]), 'report', 'overview');
+    new powereduc_url('/grade/report/overview/index.php', ['id' => $courseid]), 'report', 'overview');
 
-if (has_capability('moodle/grade:viewall', $context) && $courseid != SITEID) {
+if (has_capability('powereduc/grade:viewall', $context) && $courseid != SITEID) {
     // Please note this would be extremely slow if we wanted to implement this properly for all teachers.
     $groupmode    = groups_get_course_groupmode($course);   // Groups are being used
     $currentgroup = $gpr->groupid;
@@ -102,7 +102,7 @@ if (has_capability('moodle/grade:viewall', $context) && $courseid != SITEID) {
         $currentgroup = NULL;
     }
 
-    $isseparategroups = ($course->groupmode == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $context));
+    $isseparategroups = ($course->groupmode == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $context));
 
     if ($isseparategroups and (!$currentgroup)) {
         // no separate group access, can view only self

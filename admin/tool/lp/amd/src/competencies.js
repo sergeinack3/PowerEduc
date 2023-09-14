@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * Handle add/remove competency links.
  *
  * @module     tool_lp/competencies
- * @copyright  2015 Damyon Wiese <damyon@moodle.com>
+ * @copyright  2015 Damyon Wiese <damyon@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 define(['jquery',
@@ -279,10 +279,10 @@ define(['jquery',
 
         requests[0].done(function(competency) {
             str.get_strings([
-                {key: 'confirm', component: 'moodle'},
+                {key: 'confirm', component: 'powereduc'},
                 {key: message, component: 'tool_lp', param: competency.shortname},
-                {key: 'confirm', component: 'moodle'},
-                {key: 'cancel', component: 'moodle'}
+                {key: 'confirm', component: 'powereduc'},
+                {key: 'cancel', component: 'powereduc'}
             ]).done(function(strings) {
                 notification.confirm(
                     strings[0], // Confirm.

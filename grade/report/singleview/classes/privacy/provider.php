@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Privacy Subsystem implementation for gradereport_singleview.
  *
  * @package    gradereport_singleview
- * @copyright  2018 Sara Arjona <sara@moodle.com>
+ * @copyright  2018 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,7 +29,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Privacy Subsystem for gradereport_singleview implementing null_provider.
  *
- * @copyright  2018 Sara Arjona <sara@moodle.com>
+ * @copyright  2018 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements \core_privacy\local\metadata\null_provider {

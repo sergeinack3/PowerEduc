@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,14 +18,14 @@
  * Strings for component 'enrol_ldap', language 'en'.
  *
  * @package    enrol_ldap
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @copyright  2010 Iñaki Arenaza <iarenaza@eps.mondragon.edu>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 $string['assignrole']  = "Assigning role '{\$a->role_shortname}' to user '{\$a->user_username}' into course '{\$a->course_shortname}' (id {\$a->course_id})";
 $string['assignrolefailed'] = "Failed to assign role '{\$a->role_shortname}' to user '{\$a->user_username}' into course '{\$a->course_shortname}' (id {\$a->course_id})\n";
-$string['autocreate'] = '<p>Courses can be created automatically if there are enrolments to a course that doesn\'t yet exist in Moodle</p><p>If you are using automatic course creation, it is recommended that you remove the following capabilities: moodle/course:changeidnumber, moodle/course:changeshortname, moodle/course:changefullname and moodle/course:changesummary, from the relevant roles to prevent modifications of the four course fields specified above (ID number, shortname, fullname and summary).</p>';
+$string['autocreate'] = '<p>Courses can be created automatically if there are enrolments to a course that doesn\'t yet exist in Moodle</p><p>If you are using automatic course creation, it is recommended that you remove the following capabilities: powereduc/course:changeidnumber, powereduc/course:changeshortname, powereduc/course:changefullname and powereduc/course:changesummary, from the relevant roles to prevent modifications of the four course fields specified above (ID number, shortname, fullname and summary).</p>';
 $string['autocreate_key'] = 'Auto create';
 $string['autocreation_settings'] = 'Automatic course creation settings';
 $string['autoupdate_settings'] = 'Automatic course update settings';

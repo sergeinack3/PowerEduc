@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -77,7 +77,7 @@ class award_criteria_cohort extends award_criteria {
     /**
      * Add appropriate new criteria options to the form
      *
-     * @param object $mform moodle form
+     * @param object $mform powereduc form
      */
     public function get_options(&$mform) {
         global $DB;

@@ -1,10 +1,10 @@
-Description of PDW Toolbar Toggle integration in Moodle
+Description of PDW Toolbar Toggle integration in PowerEduc
 =========================================================================================
 
 Copyright: Guido Neele (www.neele.name)
 License: MIT
 
-Moodle maintainer: Jason Fowler (phalacee)
+PowerEduc maintainer: Jason Fowler (phalacee)
 
 =========================================================================================
 Upgrade procedure:

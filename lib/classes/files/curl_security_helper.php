@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains a class providing functions used to check the allowed/blocked host/ports for curl.
@@ -33,12 +33,12 @@ defined('POWEREDUC_INTERNAL') || exit();
  *
  * This class provides a means to check URL/host/port against the system-level cURL security entries.
  * It does not provide a means to add URLs, hosts or ports to the allowed/blocked lists; this is configured manually
- * via the site admin section of Moodle (See: 'Site admin' > 'Security' > 'HTTP Security').
+ * via the site admin section of PowerEduc (See: 'Site admin' > 'Security' > 'HTTP Security').
  *
  * This class is currently used by the 'curl' wrapper class in lib/filelib.php.
  * Depends on:
  *  core\ip_utils (several functions)
- *  moodlelib (clean_param)
+ *  powereduclib (clean_param)
  *
  * @package   core
  * @copyright 2016 Jake Dallimore
@@ -76,12 +76,12 @@ class curl_security_helper extends curl_security_helper_base {
 
         // Try to parse the URL to get the 'host' and 'port' components.
         try {
-            $url = new \moodle_url($urlstring);
+            $url = new \powereduc_url($urlstring);
             $parsed['scheme'] = $url->get_scheme();
             $parsed['host'] = $url->get_host();
             $parsed['port'] = $url->get_port();
-        } catch (\moodle_exception $e) {
-            // Moodle exception is thrown if the $urlstring is invalid. Treat as blocked.
+        } catch (\powereduc_exception $e) {
+            // PowerEduc exception is thrown if the $urlstring is invalid. Treat as blocked.
             return true;
         }
 

@@ -4,7 +4,7 @@ POWEREDUC-SPECIFIC PEAR MODIFICATIONS
 XML/Parser
 =================
 1/ changed ereg_ to preg_
-* http://cvs.moodle.org/moodle/lib/pear/XML/Parser.php.diff?r1=1.1&r2=1.2
+* http://cvs.powereduc.org/powereduc/lib/pear/XML/Parser.php.diff?r1=1.1&r2=1.2
 
 
 Quickforms
@@ -13,11 +13,11 @@ Full of our custom hacks, no way to upgrade to latest upstream.
 Most probably we will stop using this library in the future.
 
 Just dropping a couple of links here, for whenever we update/switch or whatever:
-- QF2: https://github.com/pear/HTML_QuickForm2 (https://moodle.org/mod/forum/discuss.php?d=200124)
+- QF2: https://github.com/pear/HTML_QuickForm2 (https://powereduc.org/mod/forum/discuss.php?d=200124)
 - Quickform (fork): https://github.com/openpsa/quickform
 
 MDL-20876 - replaced split() with explode() or preg_split() where appropriate
-MDL-40267 - Moodle core_text strlen functions used for range rule rule to be utf8 safe.
+MDL-40267 - PowerEduc core_text strlen functions used for range rule rule to be utf8 safe.
 MDL-46467 - $mform->hardfreeze causes labels to loose their for HTML attribute
 MDL-52081 - made all constructors PHP7 compatible
 MDL-52826 - Remove onsubmit events pointing to the global validation functions and script

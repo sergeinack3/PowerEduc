@@ -1,4 +1,4 @@
-Description of emoji data import into Moodle.
+Description of emoji data import into PowerEduc.
 
 1. Download the latest release of emoji data from https://github.com/iamcal/emoji-data/tags
 
@@ -16,13 +16,13 @@ Description of emoji data import into Moodle.
       2. include these categories in the emoji picker template (lib/templates/emoji/picker.mustache).
       3. add appropriate icon mappings for these categories in get_core_icon_map() in
          lib/classes/output/icon_system_fontawesome.php.
-      4. add language strings for these categories in lang/en/moodle.php.
+      4. add language strings for these categories in lang/en/powereduc.php.
    * 'The following categories are no longer used: xyz, xyz, ...'
       1. remove these categories from $categorysortorder in generate_emoji_data.php
       2. remove these categories from the emoji picker template (lib/templates/emoji/picker.mustache).
       3. remove the icon mappings for these categories in get_core_icon_map() in
          lib/classes/output/icon_system_fontawesome.php.
-      4. remove (deprecate) the language strings for these categories in lang/en/moodle.php.
+      4. remove (deprecate) the language strings for these categories in lang/en/powereduc.php.
 
    Rerun 'php lib/emoji-data/generate_emoji_data.php > lib/amd/src/emoji/data.js'
    ==================================================================================================================

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_message;
 
@@ -1380,7 +1380,7 @@ class externallib_test extends externallib_advanced_testcase {
         $eventdata->name              = 'paypal_enrolment';
         $eventdata->userfrom          = get_admin();
         $eventdata->userto            = $user1;
-        $eventdata->subject           = "Moodle: PayPal payment";
+        $eventdata->subject           = "PowerEduc: PayPal payment";
         $eventdata->fullmessage       = "Your PayPal payment is pending.";
         $eventdata->fullmessageformat = FORMAT_PLAIN;
         $eventdata->fullmessagehtml   = '';
@@ -3216,7 +3216,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->send_message($user1, $user3, 'Nothing.');
         $this->send_message($user3, $user1, 'Cool.');
 
-        $this->send_message($user1, $user4, 'Hey mate, you see the new messaging UI in Moodle?');
+        $this->send_message($user1, $user4, 'Hey mate, you see the new messaging UI in PowerEduc?');
         $this->send_message($user4, $user1, 'Yah brah, it\'s pretty rad.');
         $this->send_message($user1, $user4, 'Dope.');
 
@@ -3256,7 +3256,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->send_message($user1, $user3, 'Nothing.');
         $this->send_message($user3, $user1, 'Cool.');
 
-        $this->send_message($user1, $user4, 'Hey mate, you see the new messaging UI in Moodle?');
+        $this->send_message($user1, $user4, 'Hey mate, you see the new messaging UI in PowerEduc?');
         $this->send_message($user4, $user1, 'Yah brah, it\'s pretty rad.');
         $this->send_message($user1, $user4, 'Dope.');
 
@@ -3578,7 +3578,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->send_message($user3, $user1, 'Whaaat?');
         $this->send_message($user1, $user3, 'Nothing.');
 
-        $this->send_message($user1, $user4, 'Hey mate, you see the new messaging UI in Moodle?');
+        $this->send_message($user1, $user4, 'Hey mate, you see the new messaging UI in PowerEduc?');
         $this->send_message($user4, $user1, 'Yah brah, it\'s pretty rad.');
 
         // Favourite 2 conversations as user 1.
@@ -3685,7 +3685,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->send_message($user3, $user1, 'Whaaat?');
         $this->send_message($user1, $user3, 'Nothing.');
 
-        $this->send_message($user1, $user4, 'Hey mate, you see the new messaging UI in Moodle?');
+        $this->send_message($user1, $user4, 'Hey mate, you see the new messaging UI in PowerEduc?');
         $this->send_message($user4, $user1, 'Yah brah, it\'s pretty rad.');
 
         // Favourite 2 conversations as user 1.

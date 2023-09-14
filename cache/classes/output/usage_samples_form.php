@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ require_once($CFG->libdir . '/formslib.php');
  *
  * @package core_cache
  */
-class usage_samples_form extends \moodleform {
+class usage_samples_form extends \powereducform {
     /**
      * Constructor sets form up to use GET request to current page.
      */

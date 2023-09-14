@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,12 +17,12 @@
 /**
  * Select page.
  *
- * @package    tool_moodlenet
+ * @package    tool_powereducnet
  * @copyright  2020 Mathew May {@link https://mathew.solutions}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-use tool_moodlenet\local\import_info;
-use tool_moodlenet\output\select_page;
+use tool_powereducnet\local\import_info;
+use tool_powereducnet\output\select_page;
 
 require_once(__DIR__ . '/../../../config.php');
 
@@ -30,24 +30,24 @@ $id = required_param('id', PARAM_ALPHANUM);
 
 // Access control.
 require_login();
-if (!get_config('tool_moodlenet', 'enablemoodlenet')) {
-    throw new \moodle_exception('moodlenetnotenabled', 'tool_moodlenet');
+if (!get_config('tool_powereducnet', 'enablepowereducnet')) {
+    throw new \powereduc_exception('powereducnetnotenabled', 'tool_powereducnet');
 }
 
 if (is_null($importinfo = import_info::load($id))) {
-    throw new moodle_exception('missinginvalidpostdata', 'tool_moodlenet');
+    throw new powereduc_exception('missinginvalidpostdata', 'tool_powereducnet');
 }
 
-$PAGE->set_url('/admin/tool/moodlenet/select.php');
+$PAGE->set_url('/admin/tool/powereducnet/select.php');
 $PAGE->set_context(context_system::instance());
 $PAGE->set_pagelayout('standard');
-$PAGE->set_title(get_string('selectpagetitle', 'tool_moodlenet'));
+$PAGE->set_title(get_string('selectpagetitle', 'tool_powereducnet'));
 $PAGE->set_heading(format_string($SITE->fullname));
 
 echo $OUTPUT->header();
 
 $renderable = new select_page($importinfo);
-$renderer = $PAGE->get_renderer('tool_moodlenet');
+$renderer = $PAGE->get_renderer('tool_powereducnet');
 echo $renderer->render($renderable);
 
 echo $OUTPUT->footer();

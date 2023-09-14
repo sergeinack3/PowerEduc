@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -313,7 +313,7 @@ class dataset_manager {
         // Start writing to the merge file.
         $wh = fopen($tmpfilepath, 'w');
         if (!$wh) {
-            throw new \moodle_exception('errorcannotwritedataset', 'analytics', '', $tmpfilepath);
+            throw new \powereduc_exception('errorcannotwritedataset', 'analytics', '', $tmpfilepath);
         }
 
         fputcsv($wh, $varnames);

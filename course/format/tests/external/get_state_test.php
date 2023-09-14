@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ use external_api;
  *
  * @package    core_course
  * @category   test
- * @copyright  2021 Sara Arjona (sara@moodle.com)
+ * @copyright  2021 Sara Arjona (sara@powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @coversDefaultClass \core_courseformat\external\get_state
  */
@@ -182,7 +182,7 @@ class get_state_test extends \externallib_advanced_testcase {
             'Unenroled user should raise an exception' => [
                 'role' => 'unenroled',
                 'format' => 'topics',
-                'expectedexception' => 'moodle_exception',
+                'expectedexception' => 'powereduc_exception',
             ],
 
             // COURSEFORMAT. Test behaviour depending on course formats.
@@ -221,22 +221,22 @@ class get_state_test extends \externallib_advanced_testcase {
             'Single activity format should raise an exception (unenroled)' => [
                 'role' => 'unenroled',
                 'format' => 'singleactivity',
-                'expectedexception' => 'moodle_exception',
+                'expectedexception' => 'powereduc_exception',
             ],
             'Social format should raise an exception (unenroled)' => [
                 'role' => 'unenroled',
                 'format' => 'social',
-                'expectedexception' => 'moodle_exception',
+                'expectedexception' => 'powereduc_exception',
             ],
             'Weeks format should raise an exception (unenroled)' => [
                 'role' => 'unenroled',
                 'format' => 'weeks',
-                'expectedexception' => 'moodle_exception',
+                'expectedexception' => 'powereduc_exception',
             ],
             'The unit tests format should raise an exception (unenroled)' => [
                 'role' => 'unenroled',
                 'format' => 'theunittest',
-                'expectedexception' => 'moodle_exception',
+                'expectedexception' => 'powereduc_exception',
             ],
         ];
     }

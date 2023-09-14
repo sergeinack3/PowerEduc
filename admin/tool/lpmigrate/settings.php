@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ if (get_config('core_competency', 'enabled')) {
     $temp = new admin_externalpage(
         'toollpmigrateframeworks',
         get_string('migrateframeworks', 'tool_lpmigrate'),
-        new moodle_url('/admin/tool/lpmigrate/frameworks.php'),
+        new powereduc_url('/admin/tool/lpmigrate/frameworks.php'),
         array('tool/lpmigrate:frameworksmigrate')
     );
     $ADMIN->add($parentname, $temp);

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ require_once(__DIR__ . '/../config.php');
 require_once($CFG->libdir . '/badgeslib.php');
 
 if (empty($CFG->enablebadges)) {
-    throw new \moodle_exception('badgesdisabled', 'badges');
+    throw new \powereduc_exception('badgesdisabled', 'badges');
 }
 
 $hash = required_param('b', PARAM_ALPHANUM); // Issued badge unique hash for badge assertion.
@@ -53,7 +53,7 @@ if (!is_null($action)) {
         header("HTTP/1.0 410 Gone");
         $assertion = array();
         if ($obversion >= OPEN_BADGES_V2) {
-            $assertionurl = new moodle_url('/badges/assertion.php', array('b' => $hash));
+            $assertionurl = new powereduc_url('/badges/assertion.php', array('b' => $hash));
             $assertion['id'] = $assertionurl->out();
         }
         $assertion['revoked'] = true;

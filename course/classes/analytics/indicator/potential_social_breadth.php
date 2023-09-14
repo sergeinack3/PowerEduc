@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@ class potential_social_breadth extends \core_analytics\local\indicator\linear {
      * @return \lang_string
      */
     public static function get_name() : \lang_string {
-        return new \lang_string('indicator:potentialsocial', 'moodle');
+        return new \lang_string('indicator:potentialsocial', 'powereduc');
     }
 
     /**

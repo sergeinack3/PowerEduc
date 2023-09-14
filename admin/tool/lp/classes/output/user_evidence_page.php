@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  */
 namespace tool_lp\output;
 
-use moodle_url;
+use powereduc_url;
 use renderable;
 use templatable;
 use stdClass;
@@ -67,7 +67,7 @@ class user_evidence_page implements renderable, templatable {
         $userevidencesummaryexporter = new user_evidence_summary_exporter($this->userevidence, array(
             'context' => $this->context));
         $data->userevidence = $userevidencesummaryexporter->export($output);
-        $data->pluginbaseurl = (new moodle_url('/admin/tool/lp'))->out(true);
+        $data->pluginbaseurl = (new powereduc_url('/admin/tool/lp'))->out(true);
 
         return $data;
     }

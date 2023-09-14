@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 /**
 * @package    backup-convert
 * @subpackage cc-library
-* @copyright  2011 Darko Miletic <dmiletic@moodlerooms.com>
+* @copyright  2011 Darko Miletic <dmiletic@powereducrooms.com>
 * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 */
 
@@ -24,7 +24,7 @@ if (!extension_loaded('fileinfo')) {
     die('You must install fileinfo extension!');
 }
 
-abstract class cc_convert_moodle2 {
+abstract class cc_convert_powereduc2 {
 
     /**
      *
@@ -74,10 +74,10 @@ abstract class cc_convert_moodle2 {
             //Package structure - default organization and resources
             //Get the course structure - this will be transformed into organization
             //Step 1 - Get the list and order of sections/topics
-            $moodle_backup = $dir . DIRECTORY_SEPARATOR . 'moodle_backup.xml';
+            $powereduc_backup = $dir . DIRECTORY_SEPARATOR . 'powereduc_backup.xml';
             $secp = new XMLGenericDocument();
             $docp = new XMLGenericDocument();
-            if ($docp->load($moodle_backup)) {
+            if ($docp->load($powereduc_backup)) {
                 //sections
                 $sections = array();
                 $coursef = new XMLGenericDocument();
@@ -85,7 +85,7 @@ abstract class cc_convert_moodle2 {
                 $coursef->load($course_file);
                 //$numsections = (int)$coursef->nodeValue('/course/numsections');
                 // TODO MDL-35781, this is commented because numsections is now optional attribute
-                $section_list = $docp->nodeList('/moodle_backup/information/contents/sections/section');
+                $section_list = $docp->nodeList('/powereduc_backup/information/contents/sections/section');
                 if (!empty($section_list)) {
                     $count = 0;
                     foreach ($section_list as $node) {
@@ -143,12 +143,12 @@ abstract class cc_convert_moodle2 {
     * @throws DOMException
     */
     protected static function process_sequence(cc_i_item &$item, cc_i_manifest &$manifest, array $sequence, $packageroot, $outdir) {
-        $moodle_backup = $packageroot . DIRECTORY_SEPARATOR . 'moodle_backup.xml';
+        $powereduc_backup = $packageroot . DIRECTORY_SEPARATOR . 'powereduc_backup.xml';
         $doc = new XMLGenericDocument();
-        if(!$doc->load($moodle_backup)) {
+        if(!$doc->load($powereduc_backup)) {
             return;
         }
-        $activities = $doc->nodeList('/moodle_backup/information/contents/activities/activity');
+        $activities = $doc->nodeList('/powereduc_backup/information/contents/activities/activity');
         if (!empty($activities)) {
             $dpp = new XMLGenericDocument();
             foreach ($activities as $activity) {

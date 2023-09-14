@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -190,13 +190,13 @@ class cli_helper {
      * Wrapper for "die()" method so we can unittest it
      *
      * @param mixed $errorcode
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     protected function die($errorcode): void {
         if (!PHPUNIT_TEST) {
             die($errorcode);
         } else {
-            throw new \moodle_exception('CLI script finished with error code '.$errorcode);
+            throw new \powereduc_exception('CLI script finished with error code '.$errorcode);
         }
     }
 

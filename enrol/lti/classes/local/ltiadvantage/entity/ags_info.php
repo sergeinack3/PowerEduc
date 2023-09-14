@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -38,10 +38,10 @@ class ags_info {
     /** @var string Scope for posting scores.*/
     private const SCOPES_SCORES_POST = 'https://purl.imsglobal.org/spec/lti-ags/scope/score';
 
-    /** @var \moodle_url|null The service URL used to get/put lineitems, if supported*/
+    /** @var \powereduc_url|null The service URL used to get/put lineitems, if supported*/
     private $lineitemsurl;
 
-    /** @var \moodle_url|null The lineitemurl, which is only present when a single lineitem is supported.*/
+    /** @var \powereduc_url|null The lineitemurl, which is only present when a single lineitem is supported.*/
     private $lineitemurl;
 
     /** @var array The array of supported lineitem-related scopes for this service instance.*/
@@ -56,11 +56,11 @@ class ags_info {
     /**
      * The ags_info constructor.
      *
-     * @param \moodle_url|null $lineitemsurl The service URL used to get/put lineitems, if supported.
-     * @param \moodle_url|null $lineitemurl The lineitemurl, which is only present when a single lineitem is supported.
+     * @param \powereduc_url|null $lineitemsurl The service URL used to get/put lineitems, if supported.
+     * @param \powereduc_url|null $lineitemurl The lineitemurl, which is only present when a single lineitem is supported.
      * @param array $scopes The array of supported scopes for this service instance.
      */
-    private function __construct(?\moodle_url $lineitemsurl, ?\moodle_url $lineitemurl, array $scopes) {
+    private function __construct(?\powereduc_url $lineitemsurl, ?\powereduc_url $lineitemurl, array $scopes) {
 
         // Platforms may support just lineitemurl, just lineitemsurl or both. At least one of the two is required.
         if (is_null($lineitemsurl) && is_null($lineitemurl)) {
@@ -75,12 +75,12 @@ class ags_info {
     /**
      * Factory method to create a new ags_info instance.
      *
-     * @param \moodle_url|null $lineitemsurl The service URL used to get/put lineitems, if supported.
-     * @param \moodle_url|null $lineitemurl The lineitemurl, which is only present when a single lineitem is supported.
+     * @param \powereduc_url|null $lineitemsurl The service URL used to get/put lineitems, if supported.
+     * @param \powereduc_url|null $lineitemurl The lineitemurl, which is only present when a single lineitem is supported.
      * @param array $scopes The array of supported scopes for this service instance.
      * @return ags_info the object instance.
      */
-    public static function create(?\moodle_url $lineitemsurl = null, ?\moodle_url $lineitemurl = null,
+    public static function create(?\powereduc_url $lineitemsurl = null, ?\powereduc_url $lineitemurl = null,
             array $scopes = []): ags_info {
         return new self($lineitemsurl, $lineitemurl, $scopes);
     }
@@ -118,18 +118,18 @@ class ags_info {
     /**
      * Get the url for querying line items, if supported.
      *
-     * @return \moodle_url the url.
+     * @return \powereduc_url the url.
      */
-    public function get_lineitemsurl(): ?\moodle_url {
+    public function get_lineitemsurl(): ?\powereduc_url {
         return $this->lineitemsurl;
     }
 
     /**
      * Get the single line item url, in cases where only one line item exists.
      *
-     * @return \moodle_url|null the url, or null if not present.
+     * @return \powereduc_url|null the url, or null if not present.
      */
-    public function get_lineitemurl(): ?\moodle_url {
+    public function get_lineitemurl(): ?\powereduc_url {
         return $this->lineitemurl;
     }
 

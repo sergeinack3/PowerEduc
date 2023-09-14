@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,11 +16,11 @@
 /**
  * Contains the remote_resource class definition.
  *
- * @package tool_moodlenet
+ * @package tool_powereducnet
  * @copyright 2020 Jake Dallimore <jrhdallimore@gmail.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace tool_moodlenet\local;
+namespace tool_powereducnet\local;
 
 /**
  * The remote_resource class.
@@ -122,20 +122,20 @@ class remote_resource {
      * Download the remote resource to a local requestdir, returning the path and name of the resulting file.
      *
      * @return array an array containing filepath adn filename, e.g. [filepath, filename].
-     * @throws \moodle_exception if the file cannot be downloaded.
+     * @throws \powereduc_exception if the file cannot be downloaded.
      */
     public function download_to_requestdir(): array {
         $filename = sprintf('%s.%s', $this->filename, $this->get_extension());
         $path = make_request_directory();
         $fullpathwithname = sprintf('%s/%s', $path, $filename);
 
-        // In future, use a timeout (download and/or connection) controlled by a tool_moodlenet setting.
+        // In future, use a timeout (download and/or connection) controlled by a tool_powereducnet setting.
         $downloadtimeout = 30;
 
         $result = $this->curl->download_one($this->url->get_value(), null, ['filepath' => $fullpathwithname,
             'timeout' => $downloadtimeout]);
         if ($result !== true) {
-            throw new \moodle_exception('errorduringdownload', 'tool_moodlenet', '', $result);
+            throw new \powereduc_exception('errorduringdownload', 'tool_powereducnet', '', $result);
         }
 
         return [$path, $filename];

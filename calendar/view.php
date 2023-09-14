@@ -10,13 +10,13 @@
 //                                                                         //
 // Designed by:                                                            //
 //     Avgoustos Tsinakos (tsinakos@teikav.edu.gr)                         //
-//     Jon Papaioannou (pj@moodle.org)                                     //
+//     Jon Papaioannou (pj@powereduc.org)                                     //
 //                                                                         //
 // Programming and development:                                            //
-//     Jon Papaioannou (pj@moodle.org)                                     //
+//     Jon Papaioannou (pj@powereduc.org)                                     //
 //                                                                         //
 // For bugs, suggestions, etc contact:                                     //
-//     Jon Papaioannou (pj@moodle.org)                                     //
+//     Jon Papaioannou (pj@powereduc.org)                                     //
 //                                                                         //
 // The current module was developed at the University of Macedonia         //
 // (www.uom.gr) under the funding of the Greek School Network (www.sch.gr) //
@@ -58,7 +58,7 @@ $year = optional_param('cal_y', 0, PARAM_INT);
 $time = optional_param('time', 0, PARAM_INT);
 $lookahead = optional_param('lookahead', null, PARAM_INT);
 
-$url = new moodle_url('/calendar/view.php');
+$url = new powereduc_url('/calendar/view.php');
 
 // If a day, month and year were passed then convert it to a timestamp. If these were passed
 // then we can assume the day, month and year are passed as Gregorian, as no where in core
@@ -95,19 +95,19 @@ $PAGE->set_url($url);
 $course = get_course($courseid);
 
 if ($iscoursecalendar && !empty($courseid)) {
-    navigation_node::override_active_url(new moodle_url('/course/view.php', array('id' => $course->id)));
+    navigation_node::override_active_url(new powereduc_url('/course/view.php', array('id' => $course->id)));
     $PAGE->navbar->add(
         get_string('calendar', 'calendar'),
-        new moodle_url('/calendar/view.php', ['view' => 'month', 'course' => $course->id])
+        new powereduc_url('/calendar/view.php', ['view' => 'month', 'course' => $course->id])
     );
     $PAGE->set_secondary_navigation(false);
 } else if (!empty($categoryid)) {
     core_course_category::get($categoryid); // Check that category exists and can be accessed.
     $PAGE->set_category_by_id($categoryid);
-    navigation_node::override_active_url(new moodle_url('/course/index.php', array('categoryid' => $categoryid)));
+    navigation_node::override_active_url(new powereduc_url('/course/index.php', array('categoryid' => $categoryid)));
     $PAGE->navbar->add(
         get_string('calendar', 'calendar'),
-        new moodle_url('/calendar/view.php', ['view' => 'month', 'category' => $categoryid])
+        new powereduc_url('/calendar/view.php', ['view' => 'month', 'category' => $categoryid])
     );
     $PAGE->set_secondary_navigation(false);
 } else {

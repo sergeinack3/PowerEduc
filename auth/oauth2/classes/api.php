@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,8 +25,8 @@ namespace auth_oauth2;
 
 use context_user;
 use stdClass;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 
 defined('POWEREDUC_INTERNAL') || die();
 
@@ -65,7 +65,7 @@ class api {
         }
 
         if (\core\session\manager::is_loggedinas()) {
-            throw new moodle_exception('notwhileloggedinas', 'auth_oauth2');
+            throw new powereduc_exception('notwhileloggedinas', 'auth_oauth2');
         }
 
         $context = context_user::instance($userid);
@@ -116,11 +116,11 @@ class api {
         }
 
         if (linked_login::has_existing_issuer_match($issuer, $userinfo['username'])) {
-            throw new moodle_exception('alreadylinked', 'auth_oauth2');
+            throw new powereduc_exception('alreadylinked', 'auth_oauth2');
         }
 
         if (\core\session\manager::is_loggedinas()) {
-            throw new moodle_exception('notwhileloggedinas', 'auth_oauth2');
+            throw new powereduc_exception('notwhileloggedinas', 'auth_oauth2');
         }
 
         $context = context_user::instance($userid);
@@ -159,7 +159,7 @@ class api {
         $record->username = $userinfo['username'];
         $record->userid = $userid;
         if (linked_login::has_existing_issuer_match($issuer, $userinfo['username'])) {
-            throw new moodle_exception('alreadylinked', 'auth_oauth2');
+            throw new powereduc_exception('alreadylinked', 'auth_oauth2');
         }
         $record->email = $userinfo['email'];
         $record->confirmtoken = random_string(32);
@@ -190,7 +190,7 @@ class api {
             'username' => $userinfo['username'],
             'issuerid' => $issuer->get('id'),
         ];
-        $confirmationurl = new moodle_url('/auth/oauth2/confirm-linkedlogin.php', $params);
+        $confirmationurl = new powereduc_url('/auth/oauth2/confirm-linkedlogin.php', $params);
 
         $data->link = $confirmationurl->out(false);
         $message = get_string('confirmlinkedloginemail', 'auth_oauth2', $data);
@@ -297,7 +297,7 @@ class api {
         require_once($CFG->dirroot.'/user/lib.php');
 
         if (linked_login::has_existing_issuer_match($issuer, $userinfo['username'])) {
-            throw new moodle_exception('alreadylinked', 'auth_oauth2');
+            throw new powereduc_exception('alreadylinked', 'auth_oauth2');
         }
 
         $user = new stdClass();
@@ -345,7 +345,7 @@ class api {
             'token' => $user->secret,
             'username' => $userinfo['username']
         ];
-        $confirmationurl = new moodle_url('/auth/oauth2/confirm-account.php', $params);
+        $confirmationurl = new powereduc_url('/auth/oauth2/confirm-account.php', $params);
 
         $data->link = $confirmationurl->out(false);
         $message = get_string('confirmaccountemail', 'auth_oauth2', $data);
@@ -373,7 +373,7 @@ class api {
         $userid = $login->get('userid');
 
         if (\core\session\manager::is_loggedinas()) {
-            throw new moodle_exception('notwhileloggedinas', 'auth_oauth2');
+            throw new powereduc_exception('notwhileloggedinas', 'auth_oauth2');
         }
 
         $context = context_user::instance($userid);

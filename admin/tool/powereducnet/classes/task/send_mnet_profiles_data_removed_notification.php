@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 
 declare(strict_types=1);
 
-namespace tool_moodlenet\task;
+namespace tool_powereducnet\task;
 
 use core\message\message;
 
@@ -24,21 +24,21 @@ use core\message\message;
  * Ad-hoc task to send a notification to admin stating that the user data related to the linked MoodleNet profiles has
  * been removed.
  *
- * @package   tool_moodlenet
- * @copyright 2022 Mihail Geshoski <mihail@moodle.com>
+ * @package   tool_powereducnet
+ * @copyright 2022 Mihail Geshoski <mihail@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class send_mnet_profiles_data_removed_notification extends \core\task\adhoc_task {
     public function execute(): void {
         $message = new message();
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = 'notices';
         $message->userfrom = \core_user::get_noreply_user();
         $message->userto = get_admin();
         $message->notification = 1;
-        $message->subject = get_string('removedmnetprofilenotification_subject', 'tool_moodlenet');
+        $message->subject = get_string('removedmnetprofilenotification_subject', 'tool_powereducnet');
         $message->fullmessageformat = FORMAT_HTML;
-        $message->fullmessagehtml = get_string('removedmnetprofilenotification', 'tool_moodlenet');
+        $message->fullmessagehtml = get_string('removedmnetprofilenotification', 'tool_powereducnet');
         $message->smallmessage = strip_tags($message->fullmessagehtml);
         message_send($message);
     }

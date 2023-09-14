@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,14 +16,14 @@
 
 namespace gradereport_user\output;
 
-use moodle_url;
+use powereduc_url;
 use core_grades\output\general_action_bar;
 
 /**
  * Renderable class for the action bar elements in the user report page.
  *
  * @package    gradereport_user
- * @copyright  2022 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2022 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class action_bar extends \core_grades\output\action_bar {
@@ -74,12 +74,12 @@ class action_bar extends \core_grades\output\action_bar {
         $courseid = $this->context->instanceid;
         // Get the data used to output the general navigation selector.
         $generalnavselector = new general_action_bar($this->context,
-            new moodle_url('/grade/report/user/index.php', ['id' => $courseid]), 'gradereport', 'user');
+            new powereduc_url('/grade/report/user/index.php', ['id' => $courseid]), 'gradereport', 'user');
         $data = $generalnavselector->export_for_template($output);
 
         // If the user has the capability to view all grades, display the group selector (if applicable), the user selector
         // and the view mode selector (if applicable).
-        if (has_capability('moodle/grade:viewall', $this->context)) {
+        if (has_capability('powereduc/grade:viewall', $this->context)) {
             $course = get_course($courseid);
             $gradesrenderer = $PAGE->get_renderer('core_grades');
             $userreportrenderer = $PAGE->get_renderer('gradereport_user');

@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,13 +24,13 @@
  * @package    filter
  * @subpackage emoticon
  * @see        emoticon_manager
- * @copyright  2010 David Mudrak <david@moodle.com>
+ * @copyright  2010 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('POWEREDUC_INTERNAL') || die();
 
-class filter_emoticon extends moodle_text_filter {
+class filter_emoticon extends powereduc_text_filter {
 
     /**
      * Internal cache used for replacing. Multidimensional array;

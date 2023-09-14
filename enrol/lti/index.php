@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * List the tool provided in a course
  *
  * @package    enrol_lti
- * @copyright  2016 Mark Nelson <markn@moodle.com>
+ * @copyright  2016 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -42,11 +42,11 @@ $course = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
 $context = context_course::instance($course->id);
 
 require_login($course);
-require_capability('moodle/course:enrolreview', $context);
+require_capability('powereduc/course:enrolreview', $context);
 
 $ltiplugin = enrol_get_plugin('lti');
-$canconfig = has_capability('moodle/course:enrolconfig', $context);
-$pageurl = new moodle_url('/enrol/lti/index.php', array('courseid' => $courseid, 'legacy' => $legacy));
+$canconfig = has_capability('powereduc/course:enrolconfig', $context);
+$pageurl = new powereduc_url('/enrol/lti/index.php', array('courseid' => $courseid, 'legacy' => $legacy));
 
 $PAGE->set_url($pageurl);
 $PAGE->set_title(get_string('course') . ': ' . $course->fullname);
@@ -61,7 +61,7 @@ if ($action) {
                 redirect($PAGE->url);
             }
 
-            $yesurl = new moodle_url('/enrol/lti/index.php',
+            $yesurl = new powereduc_url('/enrol/lti/index.php',
                 array('courseid' => $course->id,
                     'action' => 'delete',
                     'instanceid' => $instance->id,
@@ -114,9 +114,9 @@ echo html_writer::tag('p', $OUTPUT->doc_link('enrol/lti/index', get_string('more
 // Distinguish between legacy published tools and LTI-Advantage published resources.
 $tabs = [
     0 => [
-        new tabobject('0', new moodle_url('/enrol/lti/index.php', ['courseid' => $courseid]),
+        new tabobject('0', new powereduc_url('/enrol/lti/index.php', ['courseid' => $courseid]),
             get_string('lti13', 'enrol_lti')),
-        new tabobject('1', new moodle_url('/enrol/lti/index.php', ['legacy' => 1, 'courseid' => $courseid]),
+        new tabobject('1', new powereduc_url('/enrol/lti/index.php', ['legacy' => 1, 'courseid' => $courseid]),
              get_string('ltilegacy', 'enrol_lti')),
     ]
 ];
@@ -151,12 +151,12 @@ if ($legacy) {
 }
 
 if ($ltiplugin->can_add_instance($course->id)) {
-    echo $OUTPUT->single_button(new moodle_url('/enrol/editinstance.php',
+    echo $OUTPUT->single_button(new powereduc_url('/enrol/editinstance.php',
         array(
             'legacy' => $legacy,
             'type' => 'lti',
             'courseid' => $course->id,
-            'returnurl' => new moodle_url('/enrol/lti/index.php', ['courseid' => $course->id, 'legacy' => $legacy]))
+            'returnurl' => new powereduc_url('/enrol/lti/index.php', ['courseid' => $course->id, 'legacy' => $legacy]))
         ),
         get_string('add'));
 }

@@ -17,11 +17,11 @@ Feature: Courses can be created in Single Activity mode
     And I log in as "admin"
     And I set the following system permissions of "Creator" role:
       | capability | permission |
-      | moodle/course:create | Allow |
-      | moodle/course:update | Allow |
-      | moodle/course:manageactivities | Allow |
-      | moodle/course:viewparticipants | Allow |
-      | moodle/role:assign | Allow |
+      | powereduc/course:create | Allow |
+      | powereduc/course:update | Allow |
+      | powereduc/course:manageactivities | Allow |
+      | powereduc/course:viewparticipants | Allow |
+      | powereduc/role:assign | Allow |
       | mod/quiz:addinstance | Allow |
     And I log out
     And I log in as "kevin"

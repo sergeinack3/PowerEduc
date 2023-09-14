@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Contains the class used for the displaying the data requests table.
  *
  * @package    tool_dataprivacy
- * @copyright  2018 Jun Pataleta <jun@moodle.com>
+ * @copyright  2018 Jun Pataleta <jun@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace tool_dataprivacy\output;
@@ -31,7 +31,7 @@ use action_menu_link_secondary;
 use coding_exception;
 use dml_exception;
 use html_writer;
-use moodle_url;
+use powereduc_url;
 use stdClass;
 use table_sql;
 use tool_dataprivacy\api;
@@ -42,7 +42,7 @@ defined('POWEREDUC_INTERNAL') || die;
 /**
  * The class for displaying the data requests table.
  *
- * @copyright  2018 Jun Pataleta <jun@moodle.com>
+ * @copyright  2018 Jun Pataleta <jun@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class data_requests_table extends table_sql {
@@ -116,7 +116,7 @@ class data_requests_table extends table_sql {
      *
      * @param stdClass $data The row data.
      * @return string
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @throws coding_exception
      */
     public function col_select($data) {
@@ -220,7 +220,7 @@ class data_requests_table extends table_sql {
         $actions = [];
 
         // View action.
-        $actionurl = new moodle_url('#');
+        $actionurl = new powereduc_url('#');
         $actiondata = ['data-action' => 'view', 'data-requestid' => $requestid];
         $actiontext = get_string('viewrequest', 'tool_dataprivacy');
         $actions[] = new action_menu_link_secondary($actionurl, null, $actiontext, $actiondata);
@@ -273,7 +273,7 @@ class data_requests_table extends table_sql {
             $canreset = $canreset && ($persistent->get('type') != api::DATAREQUEST_TYPE_DELETE ||
                     api::can_create_data_deletion_request_for_other());
             if ($canreset) {
-                $reseturl = new moodle_url('/admin/tool/dataprivacy/resubmitrequest.php', [
+                $reseturl = new powereduc_url('/admin/tool/dataprivacy/resubmitrequest.php', [
                         'requestid' => $requestid,
                     ]);
                 $actiondata = ['data-action' => 'reset', 'data-requestid' => $requestid];
@@ -388,9 +388,9 @@ class data_requests_table extends table_sql {
         ];
 
         $perpageoptions = array_combine($this->perpageoptions, $this->perpageoptions);
-        $perpageselect = new \single_select(new moodle_url(''), 'perpage',
+        $perpageselect = new \single_select(new powereduc_url(''), 'perpage',
                 $perpageoptions, get_user_preferences('tool_dataprivacy_request-perpage'), null, 'selectgroup');
-        $perpageselect->label = get_string('perpage', 'moodle');
+        $perpageselect->label = get_string('perpage', 'powereduc');
         $data->perpage = $OUTPUT->render($perpageselect);
 
         echo $OUTPUT->render_from_template('tool_dataprivacy/data_requests_bulk_actions', $data);

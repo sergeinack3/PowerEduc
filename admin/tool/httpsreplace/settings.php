@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ if ($hassiteconfig) {
 
     $pluginname = get_string('pluginname', 'tool_httpsreplace');
     $url = $CFG->wwwroot.'/'.$CFG->admin.'/tool/httpsreplace/index.php';
-    $ADMIN->add('security', new admin_externalpage('toolhttpsreplace', $pluginname, $url, 'moodle/site:config', true));
+    $ADMIN->add('security', new admin_externalpage('toolhttpsreplace', $pluginname, $url, 'powereduc/site:config', true));
 
     $httpsreplaceurl = $CFG->wwwroot.'/'.$CFG->admin.'/tool/httpsreplace/index.php';
     $ADMIN->locate('httpsecurity')->add(

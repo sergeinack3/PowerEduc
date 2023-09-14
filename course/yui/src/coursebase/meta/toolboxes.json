@@ -1,5 +1,5 @@
 {
-    "moodle-course-coursebase": {
+    "powereduc-course-coursebase": {
         "requires": [
             "base",
             "node"

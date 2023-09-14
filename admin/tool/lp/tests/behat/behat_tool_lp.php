@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -72,14 +72,14 @@ class behat_tool_lp extends behat_base {
      *
      * @param string $page identifies which type of page this is, e.g. 'Course competencies'.
      * @param string $identifier identifies the particular page, e.g. 'C1'.
-     * @return moodle_url the corresponding URL.
+     * @return powereduc_url the corresponding URL.
      * @throws Exception with a meaningful error message if the specified page cannot be found.
      */
-    protected function resolve_page_instance_url(string $page, string $identifier): moodle_url {
+    protected function resolve_page_instance_url(string $page, string $identifier): powereduc_url {
         switch (strtolower($page)) {
             case 'course competencies':
                 $courseid = $this->get_course_id($identifier);
-                return new moodle_url('/admin/tool/lp/coursecompetencies.php', [
+                return new powereduc_url('/admin/tool/lp/coursecompetencies.php', [
                     'courseid' => $courseid,
                 ]);
             default:

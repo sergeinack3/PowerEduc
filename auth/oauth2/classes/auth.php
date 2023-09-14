@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ namespace auth_oauth2;
 defined('POWEREDUC_INTERNAL') || die();
 
 use pix_icon;
-use moodle_url;
+use powereduc_url;
 use core_text;
 use context_system;
 use stdClass;
@@ -105,7 +105,7 @@ class auth extends \auth_plugin_base {
     }
 
     /**
-     * Indicates if moodle should automatically update internal user
+     * Indicates if powereduc should automatically update internal user
      * records with data from external sources using the information
      * from auth_plugin_base::get_userinfo().
      *
@@ -129,7 +129,7 @@ class auth extends \auth_plugin_base {
      * Returns the URL for changing the user's pw, or empty if the default can
      * be used.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function change_password_url() {
         return null;
@@ -169,7 +169,7 @@ class auth extends \auth_plugin_base {
     /**
      * Return a list of identity providers to display on the login page.
      *
-     * @param string|moodle_url $wantsurl The requested URL.
+     * @param string|powereduc_url $wantsurl The requested URL.
      * @return array List of arrays with keys url, iconurl and name.
      */
     public function loginpage_idp_list($wantsurl) {
@@ -181,7 +181,7 @@ class auth extends \auth_plugin_base {
         foreach ($providers as $idp) {
             if ($idp->is_available_for_login()) {
                 $params = ['id' => $idp->get('id'), 'wantsurl' => $wantsurl, 'sesskey' => sesskey()];
-                $url = new moodle_url('/auth/oauth2/login.php', $params);
+                $url = new powereduc_url('/auth/oauth2/login.php', $params);
                 $icon = $idp->get('image');
                 $result[] = ['url' => $url, 'iconurl' => $icon, 'name' => $idp->get_display_name()];
             }
@@ -411,7 +411,7 @@ class auth extends \auth_plugin_base {
             $errormsg = get_string('loginerror_nouserinfo', 'auth_oauth2');
             $SESSION->loginerrormsg = $errormsg;
             $client->log_out();
-            redirect(new moodle_url('/login/index.php'));
+            redirect(new powereduc_url('/login/index.php'));
         }
         if (empty($userinfo['username']) || empty($userinfo['email'])) {
             // Trigger login failed event.
@@ -423,7 +423,7 @@ class auth extends \auth_plugin_base {
             $errormsg = get_string('loginerror_userincomplete', 'auth_oauth2');
             $SESSION->loginerrormsg = $errormsg;
             $client->log_out();
-            redirect(new moodle_url('/login/index.php'));
+            redirect(new powereduc_url('/login/index.php'));
         }
 
         $userinfo['username'] = trim(core_text::strtolower($userinfo['username']));
@@ -464,7 +464,7 @@ class auth extends \auth_plugin_base {
                 $event->trigger();
                 $SESSION->loginerrormsg = get_string('invalidlogin');
                 $client->log_out();
-                redirect(new moodle_url('/login/index.php'));
+                redirect(new powereduc_url('/login/index.php'));
             } else if ($mappeduser && ($mappeduser->confirmed || !$issuer->get('requireconfirmation'))) {
                 // Update user fields.
                 $userinfo = $this->update_user($userinfo, $mappeduser);
@@ -479,7 +479,7 @@ class auth extends \auth_plugin_base {
                 $errormsg = get_string('confirmationpending', 'auth_oauth2');
                 $SESSION->loginerrormsg = $errormsg;
                 $client->log_out();
-                redirect(new moodle_url('/login/index.php'));
+                redirect(new powereduc_url('/login/index.php'));
             }
         } else if (!empty($linkedlogin)) {
             // Trigger login failed event.
@@ -491,7 +491,7 @@ class auth extends \auth_plugin_base {
             $errormsg = get_string('confirmationpending', 'auth_oauth2');
             $SESSION->loginerrormsg = $errormsg;
             $client->log_out();
-            redirect(new moodle_url('/login/index.php'));
+            redirect(new powereduc_url('/login/index.php'));
         }
 
 
@@ -505,27 +505,27 @@ class auth extends \auth_plugin_base {
             $errormsg = get_string('notloggedindebug', 'auth_oauth2', get_string('loginerror_invaliddomain', 'auth_oauth2'));
             $SESSION->loginerrormsg = $errormsg;
             $client->log_out();
-            redirect(new moodle_url('/login/index.php'));
+            redirect(new powereduc_url('/login/index.php'));
         }
 
         if (!$userwasmapped) {
             // No defined mapping - we need to see if there is an existing account with the same email.
 
-            $moodleuser = \core_user::get_user_by_email($userinfo['email']);
-            if (!empty($moodleuser)) {
+            $powereducuser = \core_user::get_user_by_email($userinfo['email']);
+            if (!empty($powereducuser)) {
                 if ($issuer->get('requireconfirmation')) {
                     $PAGE->set_url('/auth/oauth2/confirm-link-login.php');
                     $PAGE->set_context(context_system::instance());
 
-                    \auth_oauth2\api::send_confirm_link_login_email($userinfo, $issuer, $moodleuser->id);
+                    \auth_oauth2\api::send_confirm_link_login_email($userinfo, $issuer, $powereducuser->id);
                     // Request to link to existing account.
                     $emailconfirm = get_string('emailconfirmlink', 'auth_oauth2');
-                    $message = get_string('emailconfirmlinksent', 'auth_oauth2', $moodleuser->email);
+                    $message = get_string('emailconfirmlinksent', 'auth_oauth2', $powereducuser->email);
                     $this->print_confirm_required($emailconfirm, $message);
                     exit();
                 } else {
-                    \auth_oauth2\api::link_login($userinfo, $issuer, $moodleuser->id, true);
-                    $userinfo = $this->update_user($userinfo, $moodleuser);
+                    \auth_oauth2\api::link_login($userinfo, $issuer, $powereducuser->id, true);
+                    $userinfo = $this->update_user($userinfo, $powereducuser);
                     // No redirect, we will complete this login.
                 }
 
@@ -544,7 +544,7 @@ class auth extends \auth_plugin_base {
                     $errormsg = get_string('accountexists', 'auth_oauth2');
                     $SESSION->loginerrormsg = $errormsg;
                     $client->log_out();
-                    redirect(new moodle_url('/login/index.php'));
+                    redirect(new powereduc_url('/login/index.php'));
                 }
 
                 if (email_is_not_allowed($userinfo['email'])) {
@@ -558,7 +558,7 @@ class auth extends \auth_plugin_base {
                     $errormsg = get_string('notloggedindebug', 'auth_oauth2', $reason);
                     $SESSION->loginerrormsg = $errormsg;
                     $client->log_out();
-                    redirect(new moodle_url('/login/index.php'));
+                    redirect(new powereduc_url('/login/index.php'));
                 }
 
                 if (!empty($CFG->authpreventaccountcreation)) {
@@ -572,7 +572,7 @@ class auth extends \auth_plugin_base {
                     $errormsg = get_string('notloggedindebug', 'auth_oauth2', $reason);
                     $SESSION->loginerrormsg = $errormsg;
                     $client->log_out();
-                    redirect(new moodle_url('/login/index.php'));
+                    redirect(new powereduc_url('/login/index.php'));
                 }
 
                 if ($issuer->get('requireconfirmation')) {

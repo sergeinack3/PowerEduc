@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core\output;
 
-use moodle_page;
+use powereduc_page;
 use renderer_base;
 use url_select;
 
@@ -27,12 +27,12 @@ use url_select;
  *
  * @copyright 2021 Peter
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 4.0
+ * @since PowerEduc 4.0
  * @package core
  * @category output
  */
 class activity_header implements \renderable, \templatable {
-    /** @var moodle_page $page The current page we are looking at */
+    /** @var powereduc_page $page The current page we are looking at */
     protected $page;
     /** @var string $title The title to be displayed in the header. Defaults to activityrecord name. */
     protected $title;
@@ -52,10 +52,10 @@ class activity_header implements \renderable, \templatable {
     /**
      * Constructor for activity_header
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @param \stdClass $user
      */
-    public function __construct(moodle_page $page, \stdClass $user) {
+    public function __construct(powereduc_page $page, \stdClass $user) {
         $this->page = $page;
         $this->user = $user;
         $pageoptions = $this->page->theme->activityheaderconfig ?? [];

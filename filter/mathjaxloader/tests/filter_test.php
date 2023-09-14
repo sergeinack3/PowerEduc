@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package     filter_mathjaxloader
  * @category    test
- * @copyright   2017 David Mudrák <david@moodle.com>
+ * @copyright   2017 David Mudrák <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -35,7 +35,7 @@ require_once($CFG->dirroot.'/filter/mathjaxloader/filter.php');
 /**
  * Unit tests for the MathJax loader filter.
  *
- * @copyright 2017 David Mudrak <david@moodle.com>
+ * @copyright 2017 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class filter_test extends \advanced_testcase {
@@ -43,21 +43,21 @@ class filter_test extends \advanced_testcase {
     /**
      * Test the functionality of {@link filter_mathjaxloader::map_language_code()}.
      *
-     * @param string $moodlelangcode the user's current language
-     * @param string $mathjaxlangcode the mathjax language to be used for the moodle language
+     * @param string $powereduclangcode the user's current language
+     * @param string $mathjaxlangcode the mathjax language to be used for the powereduc language
      *
      * @dataProvider test_map_language_code_expected_mappings
      */
-    public function test_map_language_code($moodlelangcode, $mathjaxlangcode) {
+    public function test_map_language_code($powereduclangcode, $mathjaxlangcode) {
 
         $filter = new filter_mathjaxloader(\context_system::instance(), []);
-        $this->assertEquals($mathjaxlangcode, $filter->map_language_code($moodlelangcode));
+        $this->assertEquals($mathjaxlangcode, $filter->map_language_code($powereduclangcode));
     }
 
     /**
      * Data provider for {@link self::test_map_language_code}
      *
-     * @return array of [moodlelangcode, mathjaxcode] tuples
+     * @return array of [powereduclangcode, mathjaxcode] tuples
      */
     public function test_map_language_code_expected_mappings() {
 

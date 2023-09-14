@@ -1,21 +1,21 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Client-side JavaScript for group management interface.
- * @copyright vy-shane AT moodle.com
+ * @copyright vy-shane AT powereduc.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @package core_group
  */
@@ -194,7 +194,7 @@ var createLoaderImg = function (elClass, parentId, wwwRoot) {
     }
     var loadingImg = document.createElement("img");
 
-    loadingImg.setAttribute("src", M.util.image_url('/i/ajaxloader', 'moodle'));
+    loadingImg.setAttribute("src", M.util.image_url('/i/ajaxloader', 'powereduc'));
     loadingImg.setAttribute("class", elClass);
     loadingImg.setAttribute("alt", "Loading");
     loadingImg.setAttribute("id", "loaderImg");

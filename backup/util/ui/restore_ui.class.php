@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -335,7 +335,7 @@ class restore_ui extends base_ui {
             }
             $item = array('text' => strlen(decbin($stage)).'. '.get_string('restorestage'.$stage, 'backup'), 'class' => join(' ', $classes));
             if ($stage < $currentstage && $currentstage < self::STAGE_COMPLETE && $stage > self::STAGE_DESTINATION) {
-                $item['link'] = new moodle_url($PAGE->url, array('restore' => $this->get_restoreid(), 'stage' => $stage));
+                $item['link'] = new powereduc_url($PAGE->url, array('restore' => $this->get_restoreid(), 'stage' => $stage));
             }
             array_unshift($items, $item);
             $stage = floor($stage / 2);

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -49,7 +49,7 @@ $notifications = array();
 $forminfo = [];
 
 $PAGE->set_primary_active_tab('siteadminnode');
-$PAGE->navbar->add(get_string('cacheconfig', 'cache'), new moodle_url('/cache/admin.php'));
+$PAGE->navbar->add(get_string('cacheconfig', 'cache'), new powereduc_url('/cache/admin.php'));
 
 // Handle page actions in admin helper class.
 if (!empty($action) && confirm_sesskey()) {
@@ -76,7 +76,7 @@ echo $renderer->header();
 echo $renderer->heading($title);
 echo $renderer->notifications($notifications);
 
-if ($mform instanceof moodleform) {
+if ($mform instanceof powereducform) {
     $mform->display();
 } else {
     // Handle main page definition in admin helper class.

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -58,7 +58,7 @@ class events_test extends \advanced_testcase {
         $expected = array(SITEID, "admin", "tool capability", "tool/capability/index.php");
         $this->assertEventLegacyLogData($expected, $event);
         $this->assertEventContextNotUsed($event);
-        $url = new \moodle_url('/admin/tool/capability/index.php');
+        $url = new \powereduc_url('/admin/tool/capability/index.php');
         $this->assertEquals($url, $event->get_url());
         $event->get_name();
     }

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'userkey', language 'en', branch 'POWEREDUC_20_STABLE'
@@ -44,5 +44,5 @@ $string['privacy:metadata:user_private_key:validuntil'] = 'The date that the pri
 $string['privacy:metadata:user_private_key:timecreated'] = 'The date and time that the key was created.';
 $string['privacy:metadata:user_private_key'] = 'Private keys for the user.';
 $string['userkey'] = 'User key';
-$string['userkey_help'] = 'Select a saved key that will give users access to the data published by this export plugin, without having to log into Moodle. Select "Create a new user key" to generate a new key when submitting this form.';
+$string['userkey_help'] = 'Select a saved key that will give users access to the data published by this export plugin, without having to log into PowerEduc. Select "Create a new user key" to generate a new key when submitting this form.';
 $string['userkeys'] = 'User keys';

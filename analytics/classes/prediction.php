@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -141,7 +141,7 @@ class prediction {
 
         $context = \context::instance_by_id($this->get_prediction_data()->contextid, IGNORE_MISSING);
         if (!$context) {
-            throw new \moodle_exception('errorpredictioncontextnotavailable', 'analytics');
+            throw new \powereduc_exception('errorpredictioncontextnotavailable', 'analytics');
         }
 
         // Check that the provided action exists.
@@ -158,7 +158,7 @@ class prediction {
             }
         }
         if (empty($found)) {
-            throw new \moodle_exception('errorunknownaction', 'analytics');
+            throw new \powereduc_exception('errorunknownaction', 'analytics');
         }
 
         $predictionid = $this->get_prediction_data()->id;
@@ -222,7 +222,7 @@ class prediction {
                 // Time range indicators don't belong to any indicator class, we don't store them.
                 continue;
             } else if (!\core_analytics\manager::is_valid($indicatorclass, '\core_analytics\local\indicator\base')) {
-                throw new \moodle_exception('errorpredictionformat', 'analytics');
+                throw new \powereduc_exception('errorpredictionformat', 'analytics');
             }
 
             $this->calculations[$featurename] = new \stdClass();

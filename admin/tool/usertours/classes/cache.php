@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -76,16 +76,16 @@ EOF;
     /**
      * Fetch all enabled tours matching the specified target.
      *
-     * @param   moodle_url  $targetmatch    The URL to match.
+     * @param   powereduc_url  $targetmatch    The URL to match.
      */
-    public static function get_matching_tourdata(\moodle_url $targetmatch) {
+    public static function get_matching_tourdata(\powereduc_url $targetmatch) {
         $tours = self::get_enabled_tourdata();
 
         // Attempt to determine whether this is the front page.
         // This is a special case because the frontpage uses a shortened page path making it difficult to detect exactly.
-        $isfrontpage = $targetmatch->compare(new \moodle_url('/'), URL_MATCH_BASE);
-        $isdashboard = $targetmatch->compare(new \moodle_url('/my/'), URL_MATCH_BASE);
-        $ismycourses = $targetmatch->compare(new \moodle_url('/my/courses.php'), URL_MATCH_BASE);
+        $isfrontpage = $targetmatch->compare(new \powereduc_url('/'), URL_MATCH_BASE);
+        $isdashboard = $targetmatch->compare(new \powereduc_url('/my/'), URL_MATCH_BASE);
+        $ismycourses = $targetmatch->compare(new \powereduc_url('/my/courses.php'), URL_MATCH_BASE);
 
         $possiblematches = [];
         if ($isfrontpage) {

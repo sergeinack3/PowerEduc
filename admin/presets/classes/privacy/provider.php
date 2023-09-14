@@ -52,7 +52,7 @@ class provider implements
                 'name'          => 'privacy:metadata:adminpresets:name',
                 'comments'      => 'privacy:metadata:adminpresets:comments',
                 'site'          => 'privacy:metadata:adminpresets:site',
-                'moodlerelease' => 'privacy:metadata:adminpresets:moodlerelease',
+                'powereducrelease' => 'privacy:metadata:adminpresets:powereducrelease',
                 'timecreated'   => 'privacy:metadata:adminpresets:timecreated',
             ], 'privacy:metadata:adminpresets');
 

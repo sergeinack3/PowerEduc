@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * H5P content type manager class
  *
  * @package    contenttype_h5p
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -35,7 +35,7 @@ use Moodle\H5PCore;
  * H5P content bank manager class
  *
  * @package    contenttype_h5p
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class contenttype extends \core_contentbank\contenttype {
@@ -82,7 +82,7 @@ class contenttype extends \core_contentbank\contenttype {
     public function get_icon(\core_contentbank\content $content): string {
         global $OUTPUT, $DB;
 
-        $iconurl = $OUTPUT->image_url('f/h5p-64', 'moodle')->out(false);
+        $iconurl = $OUTPUT->image_url('f/h5p-64', 'powereduc')->out(false);
         $file = $content->get_file();
         if (!empty($file)) {
             $h5p = \core_h5p\api::get_content_from_pathnamehash($file->get_pathnamehash());

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Event create form and update form mapper.
  *
  * @package    core_calendar
- * @copyright  2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2017 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -39,7 +39,7 @@ require_once($CFG->dirroot . '/calendar/lib.php');
  * and take the returned form data and provide a data structure that can
  * be used to set legacy event properties.
  *
- * @copyright 2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright 2017 Ryan Wyllie <ryan@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class create_update_form_mapper implements create_update_form_mapper_interface {

@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
 use database_column_info;
-use moodle_database;
+use powereduc_database;
 use sql_generator;
 use xmldb_field;
 use xmldb_index;
@@ -91,7 +91,7 @@ class ddl_test extends \database_driver_testcase {
         $table = new xmldb_table ('test_table1');
         $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
         $table->add_field('course', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
-        $table->add_field('name', XMLDB_TYPE_CHAR, '30', null, null, null, 'Moodle');
+        $table->add_field('name', XMLDB_TYPE_CHAR, '30', null, null, null, 'PowerEduc');
         $table->add_field('secondname', XMLDB_TYPE_CHAR, '30', null, XMLDB_NOTNULL, null, null);
         $table->add_field('thirdname', XMLDB_TYPE_CHAR, '30', null, null, null, ''); // Nullable column with empty default.
         $table->add_field('intro', XMLDB_TYPE_TEXT, 'medium', null, XMLDB_NOTNULL, null, null);
@@ -240,7 +240,7 @@ class ddl_test extends \database_driver_testcase {
         $this->assertTrue($columns['course']->has_default);
         $this->assertEquals(0, $columns['course']->default_value);
         $this->assertTrue($columns['name']->has_default);
-        $this->assertSame('Moodle', $columns['name']->default_value);
+        $this->assertSame('PowerEduc', $columns['name']->default_value);
         $this->assertTrue($columns['secondname']->has_default);
         $this->assertSame('', $columns['secondname']->default_value);
         $this->assertTrue($columns['thirdname']->has_default);
@@ -265,7 +265,7 @@ class ddl_test extends \database_driver_testcase {
 
         // Check defined defaults are working ok.
         $dbrec = $DB->get_record('test_table1', array('id' => 1));
-        $this->assertSame('Moodle', $dbrec->name);
+        $this->assertSame('PowerEduc', $dbrec->name);
         $this->assertSame('', $dbrec->thirdname);
 
         // Check exceptions if multiple R columns.
@@ -282,7 +282,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->create_table($table);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('ddl_exception', $e);
         }
 
@@ -297,7 +297,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->create_table($table);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('ddl_exception', $e);
         }
 
@@ -328,7 +328,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->create_table($table);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
@@ -344,7 +344,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->create_table($table);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
@@ -373,7 +373,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->create_table($table);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
@@ -389,7 +389,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->create_table($table);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
@@ -405,7 +405,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->create_table($table);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
@@ -421,7 +421,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->create_table($table);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
@@ -437,7 +437,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->create_table($table);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
@@ -453,7 +453,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->create_table($table);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
@@ -469,7 +469,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->create_table($table);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
@@ -485,7 +485,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->create_table($table);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
@@ -501,7 +501,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->create_table($table);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
@@ -517,7 +517,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->create_table($table);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
@@ -533,7 +533,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->create_table($table);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
@@ -549,7 +549,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->create_table($table);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
     }
@@ -703,7 +703,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->rename_table($sourcetable, $targettable->getName());
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('ddl_exception', $e);
             $this->assertEquals('Table "test_table1" already exists (can not rename table)', $e->getMessage());
         }
@@ -722,8 +722,8 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->field_exists('nonexistenttable', 'id');
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
-            $this->assertInstanceOf('moodle_exception', $e);
+        } catch (\powereduc_exception $e) {
+            $this->assertInstanceOf('powereduc_exception', $e);
         }
 
         // Give a nonexistent field as second param (return false).
@@ -740,8 +740,8 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->field_exists($nonexistenttable, $realfield);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
-            $this->assertInstanceOf('moodle_exception', $e);
+        } catch (\powereduc_exception $e) {
+            $this->assertInstanceOf('powereduc_exception', $e);
         }
 
         // Give a nonexistent field as second param (return false).
@@ -759,14 +759,14 @@ class ddl_test extends \database_driver_testcase {
         try {
             $this->assertFalse($dbman->field_exists($nonexistenttable, 'id'));
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
-            $this->assertInstanceOf('moodle_exception', $e);
+        } catch (\powereduc_exception $e) {
+            $this->assertInstanceOf('powereduc_exception', $e);
         }
         try {
             $this->assertFalse($dbman->field_exists('nonexistenttable', $realfield));
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
-            $this->assertInstanceOf('moodle_exception', $e);
+        } catch (\powereduc_exception $e) {
+            $this->assertInstanceOf('powereduc_exception', $e);
         }
         // Non existing fields (return false).
         $this->assertFalse($dbman->field_exists($table, 'nonexistentfield'));
@@ -791,7 +791,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->add_field($table, $field);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('ddl_exception', $e);
         }
 
@@ -801,7 +801,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->add_field($table, $field);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('ddl_exception', $e);
         }
 
@@ -868,7 +868,7 @@ class ddl_test extends \database_driver_testcase {
         $this->assertSame('N', $columns['onefloat']->meta_type);
         // Just rounding DB information to 7 decimal digits. Fair enough to test 3.550 and avoids one nasty bug
         // in MSSQL core returning wrong floats (http://social.msdn.microsoft.com/Forums/en-US/sqldataaccess/thread/5e08de63-16bb-4f24-b645-0cf8fc669de3)
-        // In any case, floats aren't officially supported by Moodle, with number/decimal type being the correct ones, so
+        // In any case, floats aren't officially supported by PowerEduc, with number/decimal type being the correct ones, so
         // this isn't a real problem at all.
         $this->assertEquals(3.550, round($DB->get_field('test_table1', 'onefloat', array(), IGNORE_MULTIPLE), 7)); // Check default has been applied.
 
@@ -956,7 +956,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->drop_field($table, $field);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('ddl_dependency_exception', $e);
         }
         $this->assertTrue($dbman->field_exists($table, 'type')); // Continues existing, drop aborted.
@@ -967,7 +967,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->drop_field($table, $field);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('ddl_dependency_exception', $e);
         }
         $this->assertTrue($dbman->field_exists($table, $field)); // Continues existing, drop aborted.
@@ -978,7 +978,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->drop_field($table, $field);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('ddl_field_missing_exception', $e);
         }
 
@@ -1023,7 +1023,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->change_field_type($table, $field);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('ddl_dependency_exception', $e);
         }
         // Column continues being integer 10 not null default 2.
@@ -1068,7 +1068,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->change_field_type($table, $field);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('ddl_change_structure_exception', $e);
         }
         // Column continues being char 30 not null default "test'n drop" now.
@@ -1190,7 +1190,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->change_field_precision($table, $field);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('ddl_change_structure_exception', $e);
         }
         // No changes in field specs at all.
@@ -1236,7 +1236,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->change_field_precision($table, $field);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('ddl_change_structure_exception', $e);
         }
         // No changes in field specs at all.
@@ -1250,7 +1250,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->change_field_precision($table, $field);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('ddl_dependency_exception', $e);
         }
         // No changes in field specs at all.
@@ -1311,12 +1311,12 @@ class ddl_test extends \database_driver_testcase {
         $table = new xmldb_table('test_table_cust0');
         $table->add_field('id', XMLDB_TYPE_INTEGER, '2', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
         $table->add_field('onenumber', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
-        $table->add_field('name', XMLDB_TYPE_CHAR, '30', null, XMLDB_NOTNULL, null, 'Moodle');
+        $table->add_field('name', XMLDB_TYPE_CHAR, '30', null, XMLDB_NOTNULL, null, 'PowerEduc');
         $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
         $dbman->create_table($table);
 
         $field = new xmldb_field('name');
-        $field->set_attributes(XMLDB_TYPE_CHAR, '30', null, XMLDB_NOTNULL, null, 'Moodle2');
+        $field->set_attributes(XMLDB_TYPE_CHAR, '30', null, XMLDB_NOTNULL, null, 'PowerEduc2');
         $dbman->change_field_default($table, $field);
 
         $record = new \stdClass();
@@ -1324,7 +1324,7 @@ class ddl_test extends \database_driver_testcase {
         $id = $DB->insert_record('test_table_cust0', $record);
 
         $record = $DB->get_record('test_table_cust0', array('id'=>$id));
-        $this->assertSame('Moodle2', $record->name);
+        $this->assertSame('PowerEduc2', $record->name);
 
         $field = new xmldb_field('onenumber');
         $field->set_attributes(XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, 666);
@@ -1347,7 +1347,7 @@ class ddl_test extends \database_driver_testcase {
         $table = new xmldb_table('test_table_cust0');
         $table->add_field('id', XMLDB_TYPE_INTEGER, '2', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
         $table->add_field('onenumber', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
-        $table->add_field('name', XMLDB_TYPE_CHAR, '30', null, XMLDB_NOTNULL, null, 'Moodle');
+        $table->add_field('name', XMLDB_TYPE_CHAR, '30', null, XMLDB_NOTNULL, null, 'PowerEduc');
         $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
         $dbman->create_table($table);
 
@@ -1383,7 +1383,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->add_index($table, $index);
             $this->fail('Exception expected for duplicate indexes');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('ddl_exception', $e);
         }
 
@@ -1392,35 +1392,35 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->add_index($table, $index);
             $this->fail('Exception expected for duplicate indexes');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('ddl_exception', $e);
         }
 
         $table = new xmldb_table('test_table_cust0');
         $table->add_field('id', XMLDB_TYPE_INTEGER, '2', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
         $table->add_field('onenumber', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
-        $table->add_field('name', XMLDB_TYPE_CHAR, '30', null, XMLDB_NOTNULL, null, 'Moodle');
+        $table->add_field('name', XMLDB_TYPE_CHAR, '30', null, XMLDB_NOTNULL, null, 'PowerEduc');
         $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
         $table->add_key('onenumber', XMLDB_KEY_FOREIGN, array('onenumber'));
 
         try {
             $table->add_index('onenumber', XMLDB_INDEX_NOTUNIQUE, array('onenumber'));
             $this->fail('Coding exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
         $table = new xmldb_table('test_table_cust0');
         $table->add_field('id', XMLDB_TYPE_INTEGER, '2', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
         $table->add_field('onenumber', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
-        $table->add_field('name', XMLDB_TYPE_CHAR, '30', null, XMLDB_NOTNULL, null, 'Moodle');
+        $table->add_field('name', XMLDB_TYPE_CHAR, '30', null, XMLDB_NOTNULL, null, 'PowerEduc');
         $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
         $table->add_index('onenumber', XMLDB_INDEX_NOTUNIQUE, array('onenumber'));
 
         try {
             $table->add_key('onenumber', XMLDB_KEY_FOREIGN, array('onenumber'));
             $this->fail('Coding exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
@@ -1622,24 +1622,24 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->delete_tables_from_xmldb_file('fpsoiudfposui');
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->resetDebugging();
-            $this->assertInstanceOf('moodle_exception', $e);
+            $this->assertInstanceOf('powereduc_exception', $e);
         }
 
         try {
             $dbman->delete_tables_from_xmldb_file(__DIR__ . '/fixtures/invalid.xml');
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->resetDebugging();
-            $this->assertInstanceOf('moodle_exception', $e);
+            $this->assertInstanceOf('powereduc_exception', $e);
         }
 
         // Check that the table has not been deleted from DB.
         $this->assertTrue($dbman->table_exists('test_table1'));
 
         // Real and valid xml file.
-        // TODO: drop UNSINGED completely in Moodle 2.4.
+        // TODO: drop UNSINGED completely in PowerEduc 2.4.
         $dbman->delete_tables_from_xmldb_file(__DIR__ . '/fixtures/xmldb_table.xml');
 
         // Check that the table has been deleted from DB.
@@ -1653,17 +1653,17 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->install_from_xmldb_file('fpsoiudfposui');
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->resetDebugging();
-            $this->assertInstanceOf('moodle_exception', $e);
+            $this->assertInstanceOf('powereduc_exception', $e);
         }
 
         try {
             $dbman->install_from_xmldb_file(__DIR__ . '/fixtures/invalid.xml');
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->resetDebugging();
-            $this->assertInstanceOf('moodle_exception', $e);
+            $this->assertInstanceOf('powereduc_exception', $e);
         }
 
         // Check that the table has not yet been created in DB.
@@ -1688,7 +1688,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->create_temp_table($dupetable);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('ddl_exception', $e);
         }
 
@@ -1697,7 +1697,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->create_table($dupetable);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('ddl_exception', $e);
         }
 
@@ -1712,7 +1712,7 @@ class ddl_test extends \database_driver_testcase {
         $this->assertTrue($columns['name'] instanceof database_column_info);
         $this->assertEquals(30, $columns['name']->max_length);
         $this->assertTrue($columns['name']->has_default);
-        $this->assertEquals('Moodle', $columns['name']->default_value);
+        $this->assertEquals('PowerEduc', $columns['name']->default_value);
 
         // Insert some records.
         $inserted = $this->fill_deftable('test_table1');
@@ -1734,7 +1734,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->drop_table($noetable);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('ddl_table_missing_exception', $e);
         }
 
@@ -1816,7 +1816,7 @@ class ddl_test extends \database_driver_testcase {
         if (!isset($cfg->dboptions)) {
             $cfg->dboptions = array();
         }
-        $DB2 = moodle_database::get_driver_instance($cfg->dbtype, $cfg->dblibrary);
+        $DB2 = powereduc_database::get_driver_instance($cfg->dbtype, $cfg->dblibrary);
         $DB2->connect($cfg->dbhost, $cfg->dbuser, $cfg->dbpass, $cfg->dbname, $cfg->prefix, $cfg->dboptions);
         $dbman2 = $DB2->get_manager();
         $this->assertFalse($dbman2->table_exists('test_table1')); // Temp table not exists in DB2.
@@ -1883,7 +1883,7 @@ class ddl_test extends \database_driver_testcase {
 
         $dbman->drop_table($table0);
 
-        $rc = new \ReflectionClass('moodle_database');
+        $rc = new \ReflectionClass('powereduc_database');
         $rcm = $rc->getMethod('get_temp_tables_cache');
         $rcm->setAccessible(true);
         $metacachetemp = $rcm->invokeArgs($DB, []);
@@ -1894,7 +1894,7 @@ class ddl_test extends \database_driver_testcase {
         // Data of test_table1 should be intact.
         $this->assertEquals(true, $metacachetemp->has('test_table1'));
 
-        $rc = new \ReflectionClass('moodle_database');
+        $rc = new \ReflectionClass('powereduc_database');
         $rcm = $rc->getMethod('get_metacache');
         $rcm->setAccessible(true);
         $metacache = $rcm->invokeArgs($DB, []);
@@ -2037,7 +2037,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->create_table($table);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
     }
@@ -2096,7 +2096,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->create_table($table);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
     }
@@ -2171,7 +2171,7 @@ class ddl_test extends \database_driver_testcase {
         try {
             $dbman->create_table($table);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
     }
@@ -2299,7 +2299,7 @@ class ddl_test extends \database_driver_testcase {
                 case 'mysql':
                     $this->assertSame("`$columnname`", $gen->getEncQuoted($columnname));
                     break;
-                case 'mssql': // The Moodle connection runs under 'QUOTED_IDENTIFIER ON'.
+                case 'mssql': // The PowerEduc connection runs under 'QUOTED_IDENTIFIER ON'.
                 case 'oracle':
                 case 'postgres':
                 case 'sqlite':
@@ -2356,7 +2356,7 @@ class ddl_test extends \database_driver_testcase {
                     // Skip it, since the DB is not supported yet.
                     // BTW renaming a column name is already covered by the integration test 'testRenameField'.
                     break;
-                case 'mssql': // The Moodle connection runs under 'QUOTED_IDENTIFIER ON'.
+                case 'mssql': // The PowerEduc connection runs under 'QUOTED_IDENTIFIER ON'.
                     $this->assertSame(
                         [ "sp_rename '{$prefix}$tablename.[$oldcolumnname]', '$newcolumnname', 'COLUMN'" ],
                         $gen->getRenameFieldSQL($table, $field, $newcolumnname)
@@ -2384,7 +2384,7 @@ class ddl_test extends \database_driver_testcase {
                     // Skip it, since the DB is not supported yet.
                     // BTW renaming a column name is already covered by the integration test 'testRenameField'.
                 break;
-                case 'mssql': // The Moodle connection runs under 'QUOTED_IDENTIFIER ON'.
+                case 'mssql': // The PowerEduc connection runs under 'QUOTED_IDENTIFIER ON'.
                     $this->assertSame(
                         [ "sp_rename '{$prefix}$tablename.[$oldcolumnname]', '$newcolumnname', 'COLUMN'" ],
                         $gen->getRenameFieldSQL($table, $field, $newcolumnname)

@@ -14,7 +14,7 @@ The Markdown file for this page is located here:
 
 ```
 └── content
-     └── moodle
+     └── powereduc
          └── getting-started
             └── adding-images.md
 ```
@@ -23,7 +23,7 @@ To access images for this page create a new folder here.
 
 ```
 └── static
-     └── moodle
+     └── powereduc
          └── getting-started
             └── adding-images
 ```
@@ -32,7 +32,7 @@ Place your images in this new folder:
 
 ```
 └── static
-     └── moodle
+     └── powereduc
          └── getting-started
             └── adding-images
                 ├── wildebeest-1200.jpg

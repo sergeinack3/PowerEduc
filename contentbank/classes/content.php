@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Content manager class
  *
  * @package    core_contentbank
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,14 +29,14 @@ use stored_file;
 use stdClass;
 use coding_exception;
 use context;
-use moodle_url;
+use powereduc_url;
 use core\event\contentbank_content_updated;
 
 /**
  * Content manager class
  *
  * @package    core_contentbank
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 abstract class content {
@@ -48,7 +48,7 @@ abstract class content {
 
     /**
      * @var int Visibility value. Unlisted content is only visible to the author and to users with
-     * moodle/contentbank:viewunlistedcontent capability.
+     * powereduc/contentbank:viewunlistedcontent capability.
      */
     public const VISIBILITY_UNLISTED = 2;
 
@@ -373,7 +373,7 @@ abstract class content {
         if (!$file = $this->get_file()) {
             return '';
         }
-        $fileurl = moodle_url::make_pluginfile_url(
+        $fileurl = powereduc_url::make_pluginfile_url(
             $this->content->contextid,
             'contentbank',
             'public',
@@ -397,6 +397,6 @@ abstract class content {
 
         return $USER->id == $this->content->usercreated ||
             $this->get_visibility() == self::VISIBILITY_PUBLIC ||
-            has_capability('moodle/contentbank:viewunlistedcontent', $context);
+            has_capability('powereduc/contentbank:viewunlistedcontent', $context);
     }
 }

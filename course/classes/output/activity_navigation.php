@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * File containing the class activity navigation renderable.
  *
  * @package    core_course
- * @copyright  2017 Mark Nelson <markn@moodle.com>
+ * @copyright  2017 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace core_course\output;
@@ -33,7 +33,7 @@ use url_select;
  * The class activity navigation renderable.
  *
  * @package    core_course
- * @copyright  2017 Mark Nelson <markn@moodle.com>
+ * @copyright  2017 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class activity_navigation implements renderable, templatable {
@@ -65,7 +65,7 @@ class activity_navigation implements renderable, templatable {
 
         // Check if there is a previous module to display.
         if ($prevmod) {
-            $linkurl = new \moodle_url($prevmod->url, array('forceview' => 1));
+            $linkurl = new \powereduc_url($prevmod->url, array('forceview' => 1));
             $linkname = $prevmod->get_formatted_name();
             if (!$prevmod->visible) {
                 $linkname .= ' ' . get_string('hiddenwithbrackets');
@@ -80,7 +80,7 @@ class activity_navigation implements renderable, templatable {
 
         // Check if there is a next module to display.
         if ($nextmod) {
-            $linkurl = new \moodle_url($nextmod->url, array('forceview' => 1));
+            $linkurl = new \powereduc_url($nextmod->url, array('forceview' => 1));
             $linkname = $nextmod->get_formatted_name();
             if (!$nextmod->visible) {
                 $linkname .= ' ' . get_string('hiddenwithbrackets');

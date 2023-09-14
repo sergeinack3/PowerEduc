@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ use core_calendar\local\event\value_objects\action;
  */
 class action_factory implements action_factory_interface {
 
-    public function create_instance($name, \moodle_url $url, $itemcount, $actionable) {
+    public function create_instance($name, \powereduc_url $url, $itemcount, $actionable) {
         return new action ($name, $url, $itemcount, $actionable);
     }
 }

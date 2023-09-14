@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -367,7 +367,7 @@ class tour {
     /**
      * The link to view this tour.
      *
-     * @return  moodle_url
+     * @return  powereduc_url
      */
     public function get_view_link() {
         return helper::get_view_tour_link($this->id);
@@ -376,7 +376,7 @@ class tour {
     /**
      * The link to edit this tour.
      *
-     * @return  moodle_url
+     * @return  powereduc_url
      */
     public function get_edit_link() {
         return helper::get_edit_tour_link($this->id);
@@ -385,7 +385,7 @@ class tour {
     /**
      * The link to reset the state of this tour for all users.
      *
-     * @return  moodle_url
+     * @return  powereduc_url
      */
     public function get_reset_link() {
         return helper::get_reset_tour_for_all_link($this->id);
@@ -394,7 +394,7 @@ class tour {
     /**
      * The link to export this tour.
      *
-     * @return  moodle_url
+     * @return  powereduc_url
      */
     public function get_export_link() {
         return helper::get_export_tour_link($this->id);
@@ -403,7 +403,7 @@ class tour {
     /**
      * The link to duplicate this tour.
      *
-     * @return  moodle_url
+     * @return  powereduc_url
      */
     public function get_duplicate_link() {
         return helper::get_duplicate_tour_link($this->id);
@@ -412,7 +412,7 @@ class tour {
     /**
      * The link to remove this tour.
      *
-     * @return  moodle_url
+     * @return  powereduc_url
      */
     public function get_delete_link() {
         return helper::get_delete_tour_link($this->id);
@@ -495,7 +495,7 @@ class tour {
     /**
      * Get the link to move this tour up in the sortorder.
      *
-     * @return  moodle_url
+     * @return  powereduc_url
      */
     public function get_moveup_link() {
         return helper::get_move_tour_link($this->get_id(), helper::MOVE_UP);
@@ -504,7 +504,7 @@ class tour {
     /**
      * Get the link to move this tour down in the sortorder.
      *
-     * @return  moodle_url
+     * @return  powereduc_url
      */
     public function get_movedown_link() {
         return helper::get_move_tour_link($this->get_id(), helper::MOVE_DOWN);
@@ -769,7 +769,7 @@ class tour {
     }
 
     /**
-     * Prepare the configuration data for the moodle form.
+     * Prepare the configuration data for the powereduc form.
      *
      * @return  object
      */

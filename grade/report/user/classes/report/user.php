@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -303,10 +303,10 @@ class user extends grade_report {
         $coursecontext = context_course::instance($this->courseid);
         if ($viewasuser) {
             $this->modinfo = new course_modinfo($this->course, $this->user->id);
-            $this->canviewhidden = has_capability('moodle/grade:viewhidden', $coursecontext, $this->user->id);
+            $this->canviewhidden = has_capability('powereduc/grade:viewhidden', $coursecontext, $this->user->id);
         } else {
             $this->modinfo = $this->gtree->modinfo;
-            $this->canviewhidden = has_capability('moodle/grade:viewhidden', $coursecontext);
+            $this->canviewhidden = has_capability('powereduc/grade:viewhidden', $coursecontext);
         }
 
         // Determine the number of rows and indentation.
@@ -320,7 +320,7 @@ class user extends grade_report {
         $this->tabledata = [];
 
         // The base url for sorting by first/last name.
-        $this->baseurl = new \moodle_url('/grade/report', ['id' => $courseid, 'userid' => $userid]);
+        $this->baseurl = new \powereduc_url('/grade/report', ['id' => $courseid, 'userid' => $userid]);
         $this->pbarurl = $this->baseurl;
 
         // There no groups on this report - rank is from all course users.
@@ -536,7 +536,7 @@ class user extends grade_report {
             }
 
             if (!$hide) {
-                $canviewall = has_capability('moodle/grade:viewall', $this->context);
+                $canviewall = has_capability('powereduc/grade:viewall', $this->context);
                 // Other class information.
                 $class .= $hidden . $excluded;
                 // Alter style based on whether aggregation is first or last.
@@ -1146,7 +1146,7 @@ class user extends grade_report {
             $defaultgradeshowactiveenrol = !empty($CFG->grade_report_showonlyactiveenrol);
             $showonlyactiveenrol = get_user_preferences('grade_report_showonlyactiveenrol', $defaultgradeshowactiveenrol);
             $showonlyactiveenrol = $showonlyactiveenrol ||
-                !has_capability('moodle/course:viewsuspendedusers', $coursecontext);
+                !has_capability('powereduc/course:viewsuspendedusers', $coursecontext);
             list($enrolledsql, $enrolledparams) = get_enrolled_sql($this->context, '', 0, $showonlyactiveenrol);
 
             $params = array_merge($this->groupwheresql_params, $gradebookrolesparams, $enrolledparams, $relatedctxparams);

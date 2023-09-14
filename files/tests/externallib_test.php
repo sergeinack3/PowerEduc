@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -100,7 +100,7 @@ class externallib_test extends \advanced_testcase {
         $this->assertNotEmpty($file);
 
         // Make sure the same file cannot be created again.
-        $this->expectException("moodle_exception");
+        $this->expectException("powereduc_exception");
         core_files_external::upload($contextid, $component, $filearea, $itemid, $filepath,
                 $filename, $filecontent, $contextlevel, $instanceid);
     }
@@ -276,7 +276,7 @@ class externallib_test extends \advanced_testcase {
                                         'itemid' => $itemid,
                                         'filepath' => '/',
                                         'filename' => 'Simple4.txt',
-                                        'url' => 'https://www.example.com/moodle/pluginfile.php/'.$context->id.'/mod_data/content/'.$itemid.'/Simple4.txt',
+                                        'url' => 'https://www.example.com/powereduc/pluginfile.php/'.$context->id.'/mod_data/content/'.$itemid.'/Simple4.txt',
                                         'isdir' => false,
                                         'timemodified' => $timemodified,
                                         'timecreated' => $timecreated,

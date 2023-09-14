@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage backup-helper
  * @copyright  2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,7 +25,7 @@
 /**
  * Collection of helper functions to handle files
  *
- * This class implements various functions related with moodle storage
+ * This class implements various functions related with powereduc storage
  * handling (get file from storage, put it there...) and some others
  * to use the zip/unzip facilities.
  *
@@ -57,9 +57,9 @@ class backup_file_manager {
     }
 
     /**
-     * Copy one file from moodle storage to backup storage
+     * Copy one file from powereduc storage to backup storage
      */
-    public static function copy_file_moodle2backup($backupid, $filerecorid) {
+    public static function copy_file_powereduc2backup($backupid, $filerecorid) {
         global $DB;
 
         if (!backup_controller_dbops::backup_includes_files($backupid)) {

@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage backup-helper
  * @copyright  2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -96,12 +96,12 @@ abstract class restore_prechecks_helper {
         }
 
         // Compare Moodle's versions
-        if ($CFG->version < $controller->get_info()->moodle_version) {
+        if ($CFG->version < $controller->get_info()->powereduc_version) {
             $message = new stdclass();
             $message->serverversion = $CFG->version;
             $message->serverrelease = $CFG->release;
-            $message->backupversion = $controller->get_info()->moodle_version;
-            $message->backuprelease = $controller->get_info()->moodle_release;
+            $message->backupversion = $controller->get_info()->powereduc_version;
+            $message->backuprelease = $controller->get_info()->powereduc_release;
             $warnings[] = get_string('noticenewerbackup','',$message);
         }
 
@@ -128,7 +128,7 @@ abstract class restore_prechecks_helper {
         // If restoring to different site and restoring users and backup has mnet users warn/error
         if (!$samesite && $restoreusers && $hasmnetusers) {
             // User is admin (can create users at sysctx), warn
-            if (has_capability('moodle/user:create', context_system::instance(), $controller->get_userid())) {
+            if (has_capability('powereduc/user:create', context_system::instance(), $controller->get_userid())) {
                 $warnings[] = get_string('mnetrestore_extusers_admin', 'admin');
             // User not admin
             } else {

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ if (optional_param('add', false, PARAM_BOOL) and confirm_sesskey()) {
         $user = reset($userstoadd);
         $username = $potentialadmisselector->output_user($user);
         echo $OUTPUT->header();
-        $yesurl = new moodle_url('/admin/roles/admins.php', array('confirmadd'=>$user->id, 'sesskey'=>sesskey()));
+        $yesurl = new powereduc_url('/admin/roles/admins.php', array('confirmadd'=>$user->id, 'sesskey'=>sesskey()));
         echo $OUTPUT->confirm(get_string('confirmaddadmin', 'core_role', $username), $yesurl, $PAGE->url);
         echo $OUTPUT->footer();
         die;
@@ -57,7 +57,7 @@ if (optional_param('add', false, PARAM_BOOL) and confirm_sesskey()) {
         } else {
             $username = $admisselector->output_user($user);
             echo $OUTPUT->header();
-            $yesurl = new moodle_url('/admin/roles/admins.php', array('confirmdel'=>$user->id, 'sesskey'=>sesskey()));
+            $yesurl = new powereduc_url('/admin/roles/admins.php', array('confirmdel'=>$user->id, 'sesskey'=>sesskey()));
             echo $OUTPUT->confirm(get_string('confirmdeladmin', 'core_role', $username), $yesurl, $PAGE->url);
             echo $OUTPUT->footer();
             die;

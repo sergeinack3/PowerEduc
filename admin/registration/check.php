@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  * Moodle linkchecker will check this endpoint when it cannot get the Moodle version otherwise.
  *
  * @package    core
- * @copyright  2022 Victor Deniz <victor@moodle.com>
+ * @copyright  2022 Victor Deniz <victor@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

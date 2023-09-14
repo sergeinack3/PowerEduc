@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,8 +19,8 @@ namespace tool_dataprivacy\form;
 
 use context;
 use context_user;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use core_form\dynamic_form;
 use tool_dataprivacy\api;
 use tool_dataprivacy\external;
@@ -29,7 +29,7 @@ use tool_dataprivacy\external;
  * Contact DPO modal form
  *
  * @package    tool_dataprivacy
- * @copyright  2021 Paul Holden <paulh@moodle.com>
+ * @copyright  2021 Paul Holden <paulh@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class contactdpo extends dynamic_form {
@@ -63,11 +63,11 @@ class contactdpo extends dynamic_form {
     /**
      * Check if current user has access to this form, otherwise throw exception
      *
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function check_access_for_dynamic_submission(): void {
         if (!api::can_contact_dpo()) {
-            throw new moodle_exception('errorcontactdpodisabled', 'tool_dataprivacy');
+            throw new powereduc_exception('errorcontactdpodisabled', 'tool_dataprivacy');
         }
     }
 
@@ -90,11 +90,11 @@ class contactdpo extends dynamic_form {
     /**
      * Returns url to set in $PAGE->set_url() when form is being rendered or submitted via AJAX
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    protected function get_page_url_for_dynamic_submission(): moodle_url {
+    protected function get_page_url_for_dynamic_submission(): powereduc_url {
         global $USER;
 
-        return new moodle_url('/user/profile.php', ['id' => $USER->id]);
+        return new powereduc_url('/user/profile.php', ['id' => $USER->id]);
     }
 }

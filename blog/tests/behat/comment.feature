@@ -7,8 +7,8 @@ Feature: Comment on a blog entry
   Background:
     Given the following "users" exist:
       | username | firstname | lastname | email |
-      | testuser | Test | User | moodle@example.com |
-      | testuser2 | Test2 | User2 | moodle2@example.com |
+      | testuser | Test | User | powereduc@example.com |
+      | testuser2 | Test2 | User2 | powereduc2@example.com |
     And the following "core_blog > entries" exist:
       | subject               | body                     | user     |
       | Blog post from user 1 | User 1 blog post content | testuser |

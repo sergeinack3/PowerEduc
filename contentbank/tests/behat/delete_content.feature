@@ -49,7 +49,7 @@ Feature: Delete H5P file from the content bank
   Scenario: Users without the required capability can only delete their own content
     Given the following "permission overrides" exist:
       | capability                            | permission | role    | contextlevel | reference |
-      | moodle/contentbank:deleteanycontent   | Prohibit   | manager | System       |           |
+      | powereduc/contentbank:deleteanycontent   | Prohibit   | manager | System       |           |
     And the following "users" exist:
       | username    | firstname | lastname | email              |
       | manager     | Max       | Manager  | man@example.com    |

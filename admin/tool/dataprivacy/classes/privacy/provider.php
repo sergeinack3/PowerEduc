@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -147,7 +147,7 @@ class provider implements
      * @param approved_contextlist $contextlist The approved contexts to export information for.
      * @throws coding_exception
      * @throws dml_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public static function export_user_data(approved_contextlist $contextlist) {
         if (empty($contextlist->count())) {

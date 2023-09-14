@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
  * @package    core
  * @subpackage course
  * @deprecated Moodle 2.8 MDL-46428 - Now redirects to mod.php.
- * @copyright  2011 David Mudrak <david@moodle.com>
+ * @copyright  2011 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,10 +36,10 @@ $sectionreturn  = optional_param('sr', null, PARAM_INT);
 
 require_sesskey();
 
-debugging('Please use moodle_url(\'/course/mod.php\', array(\'duplicate\' => $cmid
+debugging('Please use powereduc_url(\'/course/mod.php\', array(\'duplicate\' => $cmid
     , \'id\' => $courseid, \'sesskey\' => sesskey(), \'sr\' => $sectionreturn)))
-    instead of new moodle_url(\'/course/modduplicate.php\', array(\'cmid\' => $cmid
+    instead of new powereduc_url(\'/course/modduplicate.php\', array(\'cmid\' => $cmid
     , \'course\' => $courseid, \'sr\' => $sectionreturn))', DEBUG_DEVELOPER);
 
-redirect(new moodle_url('/course/mod.php', array('duplicate' => $cmid, 'id' => $courseid,
+redirect(new powereduc_url('/course/mod.php', array('duplicate' => $cmid, 'id' => $courseid,
                                                  'sesskey' => sesskey(), 'sr' => $sectionreturn)));

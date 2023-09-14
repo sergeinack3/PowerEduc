@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -107,7 +107,7 @@ $string['invalidtimesplittinginmodels'] = 'The analysis interval used by some of
 $string['invalidprediction'] = 'Invalid to get predictions';
 $string['invalidtraining'] = 'Invalid to train the model';
 $string['loginfo'] = 'Log extra info';
-$string['missingmoodleversion'] = 'Imported file doesn\'t define a version number';
+$string['missingpowereducversion'] = 'Imported file doesn\'t define a version number';
 $string['modelid'] = 'Model ID';
 $string['modelinvalidanalysables'] = 'Invalid analysable elements for "{$a}" model';
 $string['modelname'] = 'Model name';

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,18 +16,18 @@
 /**
  * Contains the import_backup_helper class.
  *
- * @package tool_moodlenet
- * @copyright 2020 Adrian Greeve <adrian@moodle.com>
+ * @package tool_powereducnet
+ * @copyright 2020 Adrian Greeve <adrian@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace tool_moodlenet\local;
+namespace tool_powereducnet\local;
 
 /**
  * The import_backup_helper class.
  *
  * The import_backup_helper objects provide a means to prepare a backup for for restoration of a course or activity backup file.
  *
- * @copyright 2020 Adrian Greeve <adrian@moodle.com>
+ * @copyright 2020 Adrian Greeve <adrian@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class import_backup_helper {
@@ -73,7 +73,7 @@ class import_backup_helper {
     public function get_stored_file(): \stored_file {
 
         // Check if the user can upload a backup to this context.
-        require_capability('moodle/restore:uploadfile', $this->context, $this->user->id);
+        require_capability('powereduc/restore:uploadfile', $this->context, $this->user->id);
 
         // Before starting a potentially lengthy download, try to ensure the file size does not exceed the upload size restrictions
         // for the user. This is a time saving measure.
@@ -81,7 +81,7 @@ class import_backup_helper {
         // Because of potential content encoding (compression), the stored file will be checked again after download as well.
         $size = $this->remoteresource->get_download_size() ?? -1;
         if ($this->size_exceeds_upload_limit($size)) {
-            throw new \moodle_exception('uploadlimitexceeded', 'tool_moodlenet', '', ['filesize' => $size,
+            throw new \powereduc_exception('uploadlimitexceeded', 'tool_powereducnet', '', ['filesize' => $size,
                 'uploadlimit' => $this->useruploadlimit]);
         }
 
@@ -91,7 +91,7 @@ class import_backup_helper {
         // Check the final size of file against the user upload limits.
         $localsize = filesize(sprintf('%s/%s', $filepath, $filename));
         if ($this->size_exceeds_upload_limit($localsize)) {
-            throw new \moodle_exception('uploadlimitexceeded', 'tool_moodlenet', '', ['filesize' => $localsize,
+            throw new \powereduc_exception('uploadlimitexceeded', 'tool_powereducnet', '', ['filesize' => $localsize,
                 'uploadlimit' => $this->useruploadlimit]);
         }
 
@@ -185,7 +185,7 @@ class import_backup_helper {
             } else {
                 $context = \context_system::instance();
             }
-            if (has_capability('moodle/restore:uploadfile', $context, $userid)) {
+            if (has_capability('powereduc/restore:uploadfile', $context, $userid)) {
                 return $context;
             }
         }

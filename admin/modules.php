@@ -34,7 +34,7 @@
         $class::enable_plugin($hide, false);
 
         admin_get_root(true, false);  // settings not required - only pages
-        redirect(new moodle_url('/admin/modules.php'));
+        redirect(new powereduc_url('/admin/modules.php'));
     }
 
     if (!empty($show) and confirm_sesskey()) {
@@ -52,7 +52,7 @@
             $class = \core_plugin_manager::resolve_plugininfo_class('mod');
             $class::enable_plugin($show, true);
             admin_get_root(true, false);  // Settings not required - only pages.
-            redirect(new moodle_url('/admin/modules.php'));
+            redirect(new powereduc_url('/admin/modules.php'));
         }
     }
 
@@ -62,7 +62,7 @@
 /// Get and sort the existing modules
 
     if (!$modules = $DB->get_records('modules', array(), 'name ASC')) {
-        throw new \moodle_exception('moduledoesnotexist', 'error');
+        throw new \powereduc_exception('moduledoesnotexist', 'error');
     }
 
 /// Print the table of all modules
@@ -109,7 +109,7 @@
             $count = -1;
         }
         if ($count>0) {
-            $countlink = $OUTPUT->action_link(new moodle_url('/course/search.php', ['modulelist' => $module->name]),
+            $countlink = $OUTPUT->action_link(new powereduc_url('/course/search.php', ['modulelist' => $module->name]),
                 $count, null, ['title' => $strshowmodulecourse]);
         } else if ($count < 0) {
             $countlink = get_string('error');

@@ -18,10 +18,10 @@ Keyboard accessibility is one of the most important aspects of web accessibility
 
 A keyboard user typically uses the Tab key to navigate through interactive elements on a web page—links, buttons, fields for inputting text, etc. When an item has keyboard "focus", it can be activated or manipulated with the keyboard. A sighted keyboard user must be provided with a visual indicator of the element that currently has keyboard focus.
 
-The focus outline contrast must meet the WCAG colour contrast guidelines, to ensure focus visibility of buttons the standard Bootstrap button focus colours are used. For links the focus colour was changed in [MDL-67874](https://tracker.moodle.org/browse/MDL-67874)
+The focus outline contrast must meet the WCAG colour contrast guidelines, to ensure focus visibility of buttons the standard Bootstrap button focus colours are used. For links the focus colour was changed in [MDL-67874](https://tracker.powereduc.org/browse/MDL-67874)
 
 ## Link focus colours
-The focus outlines colours in Moodle have been made more accessible in [MDL-67874](https://tracker.moodle.org/browse/MDL-67874). Typically your OS or browser has default values for the focus outline colours. In some cases the colour contrast of these outlines is not enough so the outline colours for links has changed to a darker shade.
+The focus outlines colours in Moodle have been made more accessible in [MDL-67874](https://tracker.powereduc.org/browse/MDL-67874). Typically your OS or browser has default values for the focus outline colours. In some cases the colour contrast of these outlines is not enough so the outline colours for links has changed to a darker shade.
 
 ## Example focus outlines
 {{< example show_markup="false">}}
@@ -66,6 +66,6 @@ exampleContainer.querySelectorAll('.aalink').forEach(function (link) {
 
 ## Tab focus order.
 The focus order when navigating a Moodle page needs to be logical.
-An example of logical focus order would be starting at the main menu before then following through to the main content and finally the footer. To achieve this the navdrawer menu has been relocate in the DOM to be positioned right after the navdrawer in [MDL-67863](https://tracker.moodle.org/browse/MDL-67863).
+An example of logical focus order would be starting at the main menu before then following through to the main content and finally the footer. To achieve this the navdrawer menu has been relocate in the DOM to be positioned right after the navdrawer in [MDL-67863](https://tracker.powereduc.org/browse/MDL-67863).
 
 Testing with a keyboard is essential when evaluating the accessibility of your compoment, You should never be able to tab to hidden items and there should always be a visual que to your current location in the page.

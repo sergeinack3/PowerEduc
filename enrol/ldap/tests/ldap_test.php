@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -82,22 +82,22 @@ class ldap_test extends \advanced_testcase {
 
         // Make sure we can connect the server.
         $debuginfo = '';
-        if (!$connection = ldap_connect_moodle(TEST_ENROL_LDAP_HOST_URL, 3, 'rfc2307', TEST_ENROL_LDAP_BIND_DN, TEST_ENROL_LDAP_BIND_PW, LDAP_DEREF_NEVER, $debuginfo, false)) {
+        if (!$connection = ldap_connect_powereduc(TEST_ENROL_LDAP_HOST_URL, 3, 'rfc2307', TEST_ENROL_LDAP_BIND_DN, TEST_ENROL_LDAP_BIND_PW, LDAP_DEREF_NEVER, $debuginfo, false)) {
             $this->markTestSkipped('Can not connect to LDAP test server: '.$debuginfo);
         }
 
         $this->enable_plugin();
 
         // Create new empty test container.
-        $topdn = 'dc=moodletest,'.TEST_ENROL_LDAP_DOMAIN;
+        $topdn = 'dc=powereductest,'.TEST_ENROL_LDAP_DOMAIN;
 
-        $this->recursive_delete($connection, TEST_ENROL_LDAP_DOMAIN, 'dc=moodletest');
+        $this->recursive_delete($connection, TEST_ENROL_LDAP_DOMAIN, 'dc=powereductest');
 
         $o = array();
         $o['objectClass'] = array('dcObject', 'organizationalUnit');
-        $o['dc']         = 'moodletest';
+        $o['dc']         = 'powereductest';
         $o['ou']         = 'POWEREDUCTEST';
-        if (!ldap_add($connection, 'dc=moodletest,'.TEST_ENROL_LDAP_DOMAIN, $o)) {
+        if (!ldap_add($connection, 'dc=powereductest,'.TEST_ENROL_LDAP_DOMAIN, $o)) {
             $this->markTestSkipped('Can not create test LDAP container.');
         }
 
@@ -424,7 +424,7 @@ class ldap_test extends \advanced_testcase {
         $this->assertEquals(5, $DB->count_records('course'));
         $this->assertIsNotEnrolled($course1->id, $user1->id);
 
-        $this->recursive_delete($connection, TEST_ENROL_LDAP_DOMAIN, 'dc=moodletest');
+        $this->recursive_delete($connection, TEST_ENROL_LDAP_DOMAIN, 'dc=powereductest');
         ldap_close($connection);
 
         // NOTE: multiple roles in one course is not supported, sorry

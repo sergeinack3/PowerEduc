@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Content type manager class
  *
  * @package    core_contentbank
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,13 +29,13 @@ use core\event\contentbank_content_deleted;
 use core\event\contentbank_content_viewed;
 use stored_file;
 use Exception;
-use moodle_url;
+use powereduc_url;
 
 /**
  * Content type manager class
  *
  * @package    core_contentbank
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 abstract class contenttype {
@@ -231,7 +231,7 @@ abstract class contenttype {
      * @return string           URL where to visualize the given content.
      */
     public function get_view_url(content $content): string {
-        return new moodle_url('/contentbank/view.php', ['id' => $content->get_id()]);
+        return new powereduc_url('/contentbank/view.php', ['id' => $content->get_id()]);
     }
 
     /**
@@ -259,7 +259,7 @@ abstract class contenttype {
         $downloadurl = '';
         $file = $content->get_file();
         if (!empty($file)) {
-            $url = \moodle_url::make_pluginfile_url(
+            $url = \powereduc_url::make_pluginfile_url(
                 $file->get_contextid(),
                 $file->get_component(),
                 $file->get_filearea(),
@@ -281,7 +281,7 @@ abstract class contenttype {
      */
     public function get_icon(content $content): string {
         global $OUTPUT;
-        return $OUTPUT->image_url('f/unknown-64', 'moodle')->out(false);
+        return $OUTPUT->image_url('f/unknown-64', 'powereduc')->out(false);
     }
 
     /**
@@ -292,7 +292,7 @@ abstract class contenttype {
     final public function can_access(): bool {
         $classname = 'contenttype/'.$this->get_plugin_name();
         $capability = $classname.":access";
-        $hascapabilities = has_capability('moodle/contentbank:access', $this->context)
+        $hascapabilities = has_capability('powereduc/contentbank:access', $this->context)
             && has_capability($capability, $this->context);
         return $hascapabilities && $this->is_access_allowed();
     }
@@ -322,7 +322,7 @@ abstract class contenttype {
 
         $classname = 'contenttype/'.$this->get_plugin_name();
         $uploadcap = $classname.':upload';
-        $hascapabilities = has_capability('moodle/contentbank:upload', $this->context)
+        $hascapabilities = has_capability('powereduc/contentbank:upload', $this->context)
             && has_capability($uploadcap, $this->context);
         return $hascapabilities && $this->is_upload_allowed();
     }
@@ -351,10 +351,10 @@ abstract class contenttype {
             return false;
         }
 
-        $hascapability = has_capability('moodle/contentbank:deleteanycontent', $this->context);
+        $hascapability = has_capability('powereduc/contentbank:deleteanycontent', $this->context);
         if ($content->get_content()->usercreated == $USER->id) {
             // This content has been created by the current user; check if she can delete her content.
-            $hascapability = $hascapability || has_capability('moodle/contentbank:deleteowncontent', $this->context);
+            $hascapability = $hascapability || has_capability('powereduc/contentbank:deleteowncontent', $this->context);
         }
 
         return $hascapability && $this->is_delete_allowed($content);
@@ -386,10 +386,10 @@ abstract class contenttype {
         }
 
         // Check main contentbank management permission.
-        $hascapability = has_capability('moodle/contentbank:manageanycontent', $this->context);
+        $hascapability = has_capability('powereduc/contentbank:manageanycontent', $this->context);
         if ($content->get_content()->usercreated == $USER->id) {
             // This content has been created by the current user; check if they can manage their content.
-            $hascapability = $hascapability || has_capability('moodle/contentbank:manageowncontent', $this->context);
+            $hascapability = $hascapability || has_capability('powereduc/contentbank:manageowncontent', $this->context);
         }
 
         return $hascapability && $this->is_manage_allowed($content);
@@ -430,7 +430,7 @@ abstract class contenttype {
         $classname = 'contenttype/'.$this->get_plugin_name();
 
         $editioncap = $classname.':useeditor';
-        $hascapabilities = has_all_capabilities(['moodle/contentbank:useeditor', $editioncap], $this->context);
+        $hascapabilities = has_all_capabilities(['powereduc/contentbank:useeditor', $editioncap], $this->context);
         return $hascapabilities && $this->is_edit_allowed($content);
     }
 
@@ -461,7 +461,7 @@ abstract class contenttype {
             return false;
         }
 
-        $hascapability = has_capability('moodle/contentbank:downloadcontent', $this->context);
+        $hascapability = has_capability('powereduc/contentbank:downloadcontent', $this->context);
         return $hascapability && $this->is_download_allowed($content);
     }
 

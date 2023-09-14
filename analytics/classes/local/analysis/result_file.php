@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -202,7 +202,7 @@ class result_file extends result {
         $metadata = array(
             'timesplitting' => $timesplitting->get_id(),
             'nfeatures' => count(current($data)) - 1,
-            'moodleversion' => $CFG->version,
+            'powereducversion' => $CFG->version,
             'targetcolumn' => $target->get_id()
         );
         if ($target->is_linear()) {

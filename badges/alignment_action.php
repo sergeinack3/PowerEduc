@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,10 +30,10 @@ $badgeid = required_param('id', PARAM_INT); // Badge ID.
 $action = optional_param('action', 'remove', PARAM_TEXT); // Action to perform.
 
 require_login();
-$return = new moodle_url('/badges/alignment.php', array('id' => $badgeid));
+$return = new powereduc_url('/badges/alignment.php', array('id' => $badgeid));
 $badge = new badge($badgeid);
 $context = $badge->get_context();
-require_capability('moodle/badges:configuredetails', $context);
+require_capability('powereduc/badges:configuredetails', $context);
 
 if ($action == 'remove') {
     require_sesskey();

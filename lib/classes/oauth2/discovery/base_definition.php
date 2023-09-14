@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core\oauth2\discovery;
 
 use curl;
 use stdClass;
-use moodle_exception;
+use powereduc_exception;
 use core\oauth2\issuer;
 use core\oauth2\endpoint;
 
@@ -27,8 +27,8 @@ use core\oauth2\endpoint;
  * This abstract class is called from core\oauth2\api when discovery points need to be updated.
  *
  * @package    core
- * @since      Moodle 3.11
- * @copyright  2021 Sara Arjona (sara@moodle.com)
+ * @since      PowerEduc 3.11
+ * @copyright  2021 Sara Arjona (sara@powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 abstract class base_definition {
@@ -115,17 +115,17 @@ abstract class base_definition {
         $curl = new curl();
         if (!$json = $curl->get($url)) {
             $msg = 'Could not discover end points for identity issuer: ' . $issuer->get('name') . " [URL: $url]";
-            throw new moodle_exception($msg);
+            throw new powereduc_exception($msg);
         }
 
         if ($msg = $curl->error) {
-            throw new moodle_exception('Could not discover service endpoints: ' . $msg);
+            throw new powereduc_exception('Could not discover service endpoints: ' . $msg);
         }
 
         $info = json_decode($json);
         if (empty($info)) {
             $msg = 'Could not discover end points for identity issuer: ' . $issuer->get('name') . " [URL: $url]";
-            throw new moodle_exception($msg);
+            throw new powereduc_exception($msg);
         }
 
         if ($creatediscoveryendpoint) {

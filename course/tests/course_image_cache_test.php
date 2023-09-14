@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -80,7 +80,7 @@ class course_image_cache_test extends \advanced_testcase {
      */
     protected function build_expected_course_image_url(\stdClass $course, string $filename): string {
         $contextid = context_course::instance($course->id)->id;
-        return 'https://www.example.com/moodle/pluginfile.php/' . $contextid. '/course/overviewfiles/' . $filename;
+        return 'https://www.example.com/powereduc/pluginfile.php/' . $contextid. '/course/overviewfiles/' . $filename;
     }
 
     /**

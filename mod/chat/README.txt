@@ -1,4 +1,4 @@
-Official Chat Module for Moodle
+Official Chat Module for PowerEduc
 ------------------------------
 
 The chat module now supports a backend daemon for
@@ -17,7 +17,7 @@ instructions:
    cd powereduc/mod/chat
    php chatd.php --start &
 
-4) Go to a chat room in Moodle and open it as normal.
+4) Go to a chat room in PowerEduc and open it as normal.
 
 ------
 

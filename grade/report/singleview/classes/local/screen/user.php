@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * The user screen.
  *
  * @package   gradereport_singleview
- * @copyright 2014 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2014 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -26,7 +26,7 @@ namespace gradereport_singleview\local\screen;
 
 use grade_seq;
 use gradereport_singleview;
-use moodle_url;
+use powereduc_url;
 use pix_icon;
 use html_writer;
 use gradereport_singleview\local\ui\range;
@@ -41,7 +41,7 @@ defined('POWEREDUC_INTERNAL') || die;
  * The user screen.
  *
  * @package   gradereport_singleview
- * @copyright 2014 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2014 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class user extends tablelike implements selectable_items {
@@ -167,7 +167,7 @@ class user extends tablelike implements selectable_items {
         }
         // Check both grade and grade item.
         if ($lockeditem || $lockeditemgrade) {
-             $lockicon = $OUTPUT->pix_icon('t/locked', 'grade is locked', 'moodle', ['class' => 'ml-3']);
+             $lockicon = $OUTPUT->pix_icon('t/locked', 'grade is locked', 'powereduc', ['class' => 'ml-3']);
         }
 
         // Create a fake gradetreeitem so we can call get_element_header().
@@ -253,7 +253,7 @@ class user extends tablelike implements selectable_items {
         global $OUTPUT;
 
         $menuitems = [];
-        $url = new moodle_url($this->format_link('grade', $item->id));
+        $url = new powereduc_url($this->format_link('grade', $item->id));
         $title = get_string('showallgrades', 'core_grades');
         $menuitems[] = new \action_menu_link_secondary($url, null, $title);
         $menu = new \action_menu($menuitems);
@@ -326,7 +326,7 @@ class user extends tablelike implements selectable_items {
 
         return $OUTPUT->paging_bar(
             count($this->items), $this->page, $this->perpage,
-            new moodle_url('/grade/report/singleview/index.php', [
+            new powereduc_url('/grade/report/singleview/index.php', [
                 'perpage' => $this->perpage,
                 'id' => $this->courseid,
                 'group' => $this->groupid,

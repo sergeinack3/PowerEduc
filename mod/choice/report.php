@@ -111,7 +111,7 @@
         $choicename = format_string($choice->name, true, array('context' => $context));
         $filename = clean_filename("$shortname " . strip_tags($choicename)) . '.ods';
     /// Creating a workbook
-        $workbook = new MoodleODSWorkbook("-");
+        $workbook = new PowerEducODSWorkbook("-");
     /// Send HTTP headers
         $workbook->send($filename);
     /// Creating the first worksheet
@@ -172,7 +172,7 @@
         $choicename = format_string($choice->name, true, array('context' => $context));
         $filename = clean_filename("$shortname " . strip_tags($choicename)) . '.xls';
     /// Creating a workbook
-        $workbook = new MoodleExcelWorkbook("-");
+        $workbook = new PowerEducExcelWorkbook("-");
     /// Send HTTP headers
         $workbook->send($filename);
     /// Creating the first worksheet

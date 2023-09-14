@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ $search = optional_param('search', '', PARAM_RAW);
 $title = get_string('templates', 'tool_templatelibrary');
 $pagetitle = get_string('searchtemplates', 'tool_templatelibrary');
 // Set up the page.
-$url = new moodle_url("/admin/tool/templatelibrary/index.php", array('component' => $component, 'search' => $search));
+$url = new powereduc_url("/admin/tool/templatelibrary/index.php", array('component' => $component, 'search' => $search));
 $PAGE->set_url($url);
 $PAGE->set_title($title);
 $PAGE->set_heading($title);

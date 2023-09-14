@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ $sectionnum = $section->section;
 
 require_login($course);
 $context = context_course::instance($course->id);
-require_capability('moodle/course:update', $context);
+require_capability('powereduc/course:update', $context);
 
 // Get section_info object with all availability options.
 $sectioninfo = get_fast_modinfo($course)->get_section_info($sectionnum);
@@ -70,7 +70,7 @@ if ($deletesection) {
             echo $OUTPUT->header();
             echo $OUTPUT->box_start('noticebox');
             $optionsyes = array('id' => $id, 'confirm' => 1, 'delete' => 1, 'sesskey' => sesskey());
-            $deleteurl = new moodle_url('/course/editsection.php', $optionsyes);
+            $deleteurl = new powereduc_url('/course/editsection.php', $optionsyes);
             $formcontinue = new single_button($deleteurl, get_string('delete'));
             $formcancel = new single_button($cancelurl, get_string('cancel'), 'get');
             echo $OUTPUT->confirm(get_string('confirmdeletesection', '',

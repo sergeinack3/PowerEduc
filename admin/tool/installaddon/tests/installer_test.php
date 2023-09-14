@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ require_once(__DIR__.'/fixtures/testable_installer.php');
  *
  * @package     tool_installaddon
  * @category    test
- * @copyright 2013 David Mudrak <david@moodle.com>
+ * @copyright 2013 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class installer_test extends \advanced_testcase {
@@ -129,7 +129,7 @@ class installer_test extends \advanced_testcase {
 $plugin->version  = 2014121300;
   $plugin->component=   "bar_bar_conan"  ; // Go Arnie go!'));
 
-        $versionphp = file_get_contents($fixtures.'/github/moodle-repository_mahara-master/version.php');
+        $versionphp = file_get_contents($fixtures.'/github/powereduc-repository_mahara-master/version.php');
         $this->assertEquals('repository_mahara', $installer->testable_detect_plugin_component_from_versionphp($versionphp));
 
         $versionphp = file_get_contents($fixtures.'/nocomponent/baz/version.php');

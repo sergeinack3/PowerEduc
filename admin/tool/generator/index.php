@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,4 +25,4 @@ require(__DIR__ . '/../../../config.php');
 
 // This index page was previously in use, for now we redirect to the make test
 // course page - but we might reinstate this page in the future.
-redirect(new moodle_url('/admin/tool/generator/maketestcourse.php'));
+redirect(new powereduc_url('/admin/tool/generator/maketestcourse.php'));

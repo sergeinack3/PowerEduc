@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Definition of a class to represent a grade item
@@ -471,7 +471,7 @@ class grade_item extends grade_object {
         $copy = (array) $this;
 
         if (empty($copy["id"])) {
-            throw new moodle_exception('invalidgradeitemid');
+            throw new powereduc_exception('invalidgradeitemid');
         }
 
         // Remove fields that will be either unique or automatically filled.
@@ -507,7 +507,7 @@ class grade_item extends grade_object {
         global $CFG, $DB;
 
         if (empty($this->courseid)) {
-            throw new \moodle_exception('cannotinsertgrade');
+            throw new \powereduc_exception('cannotinsertgrade');
         }
 
         // load scale if needed
@@ -1025,7 +1025,7 @@ class grade_item extends grade_object {
                 $this->scale->load_items();
             }
 
-            // Until scales are uniformly set to min=0 max=count(scaleitems)-1 throughout Moodle, we
+            // Until scales are uniformly set to min=0 max=count(scaleitems)-1 throughout PowerEduc, we
             // stay with the current min=1 max=count(scaleitems)
             $this->grademax = count($this->scale->scale_items);
             $this->grademin = 1;
@@ -1154,7 +1154,7 @@ class grade_item extends grade_object {
      */
     public function is_overridable_item() {
         if ($this->is_course_item() or $this->is_category_item()) {
-            $overridable = (bool) get_config('moodle', 'grade_overridecat');
+            $overridable = (bool) get_config('powereduc', 'grade_overridecat');
         } else {
             $overridable = false;
         }
@@ -1183,7 +1183,7 @@ class grade_item extends grade_object {
     /**
      * Returns true if the grade item is an aggreggated type grade.
      *
-     * @since  Moodle 2.8.7, 2.9.1
+     * @since  PowerEduc 2.8.7, 2.9.1
      * @return bool
      */
     public function is_aggregate_item() {
@@ -1531,7 +1531,7 @@ class grade_item extends grade_object {
      */
     public function set_parent($parentid, $updateaggregationfields = true) {
         if ($this->is_course_item() or $this->is_category_item()) {
-            throw new \moodle_exception('cannotsetparentforcatoritem');
+            throw new \powereduc_exception('cannotsetparentforcatoritem');
         }
 
         if ($this->categoryid == $parentid) {

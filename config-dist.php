@@ -10,9 +10,9 @@
 // NOTICE OF COPYRIGHT                                                   //
 //                                                                       //
 // Moodle - Modular Object-Oriented Dynamic Learning Environment         //
-//          http://moodle.org                                            //
+//          http://powereduc.org                                            //
 //                                                                       //
-// Copyright (C) 1999 onwards  Martin Dougiamas  http://moodle.com       //
+// Copyright (C) 1999 onwards  Martin Dougiamas  http://powereduc.com       //
 //                                                                       //
 // This program is free software; you can redistribute it and/or modify  //
 // it under the terms of the GNU General Public License as published by  //
@@ -41,7 +41,7 @@ $CFG = new stdClass();
 $CFG->dbtype    = 'pgsql';      // 'pgsql', 'mariadb', 'mysqli', 'auroramysql', 'sqlsrv' or 'oci'
 $CFG->dblibrary = 'native';     // 'native' only at the moment
 $CFG->dbhost    = 'localhost';  // eg 'localhost' or 'db.isp.com' or IP
-$CFG->dbname    = 'moodle';     // database name, eg moodle
+$CFG->dbname    = 'powereduc';     // database name, eg powereduc
 $CFG->dbuser    = 'username';   // your database username
 $CFG->dbpass    = 'password';   // your database password
 $CFG->prefix    = 'mdl_';       // prefix to use for all table names
@@ -115,10 +115,10 @@ $CFG->dboptions = array(
           'table2',          // is malfunctioning and you still want to use readonly feature.
       ],                     // Then one can exclude offending tables while investigating.
 
-    More info available in lib/dml/moodle_read_slave_trait.php where the feature is implemented.
+    More info available in lib/dml/powereduc_read_slave_trait.php where the feature is implemented.
     ]
      */
-// For all database config settings see https://docs.moodle.org/en/Database_settings
+// For all database config settings see https://docs.powereduc.org/en/Database_settings
 );
 
 
@@ -126,14 +126,14 @@ $CFG->dboptions = array(
 // 2. WEB SITE LOCATION
 //=========================================================================
 // Now you need to tell Moodle where it is located. Specify the full
-// web address to where moodle has been installed.  If your web site
+// web address to where powereduc has been installed.  If your web site
 // is accessible via multiple URLs then choose the most natural one
 // that your students would use.  Do not include a trailing slash
 //
 // If you need both intranet and Internet access please read
-// http://docs.moodle.org/en/masquerading
+// http://docs.powereduc.org/en/masquerading
 
-$CFG->wwwroot   = 'http://example.com/moodle';
+$CFG->wwwroot   = 'http://example.com/powereduc';
 
 
 //=========================================================================
@@ -147,9 +147,9 @@ $CFG->wwwroot   = 'http://example.com/moodle';
 // - On hosting systems you might need to make sure that your "group" has
 //   no permissions at all, but that "others" have full permissions.
 //
-// - On Windows systems you might specify something like 'c:\moodledata'
+// - On Windows systems you might specify something like 'c:\powereducdata'
 
-$CFG->dataroot  = '/home/example/moodledata';
+$CFG->dataroot  = '/home/example/powereducdata';
 
 
 //=========================================================================
@@ -176,7 +176,7 @@ $CFG->directorypermissions = 02777;
 // control panel or something.  Unfortunately this conflicts with the
 // standard location for the Moodle admin pages.  You can work around this
 // by renaming the admin directory in your installation, and putting that
-// new name here.  eg "moodleadmin".  This should fix all admin links in Moodle.
+// new name here.  eg "powereducadmin".  This should fix all admin links in Moodle.
 // After any change you need to visit your new admin directory
 // and purge all caches.
 
@@ -266,8 +266,8 @@ $CFG->admin = 'admin';
 // reason why you would need to change that. It just felt wrong to hard-code the
 // the class name. You are strongly advised not to use these to settings unless
 // you are absolutely sure you know what you are doing.
-//      $CFG->moodlepageclass = 'moodle_page';
-//      $CFG->moodlepageclassfile = "$CFG->dirroot/local/myplugin/mypageclass.php";
+//      $CFG->powereducpageclass = 'powereduc_page';
+//      $CFG->powereducpageclassfile = "$CFG->dirroot/local/myplugin/mypageclass.php";
 //      $CFG->blockmanagerclass = 'block_manager';
 //      $CFG->blockmanagerclassfile = "$CFG->dirroot/local/myplugin/myblockamanagerclass.php";
 //
@@ -284,10 +284,10 @@ $CFG->admin = 'admin';
 // in the following array setting:
 //     $CFG->xsendfilealiases = array(
 //         '/dataroot/' => $CFG->dataroot,
-//         '/cachedir/' => '/var/www/moodle/cache',    // for custom $CFG->cachedir locations
+//         '/cachedir/' => '/var/www/powereduc/cache',    // for custom $CFG->cachedir locations
 //         '/localcachedir/' => '/var/local/cache',    // for custom $CFG->localcachedir locations
-//         '/tempdir/'  => '/var/www/moodle/temp',     // for custom $CFG->tempdir locations
-//         '/filedir'   => '/var/www/moodle/filedir',  // for custom $CFG->filedir locations
+//         '/tempdir/'  => '/var/www/powereduc/temp',     // for custom $CFG->tempdir locations
+//         '/filedir'   => '/var/www/powereduc/filedir',  // for custom $CFG->filedir locations
 //     );
 //
 // YUI caching may be sometimes improved by slasharguments:
@@ -380,17 +380,17 @@ $CFG->admin = 'admin';
 // The handler must implement \core\output\url_rewriter.
 //      $CFG->urlrewriteclass = '\local_cleanurls\url_rewriter';
 //
-// Enabling this will allow custom scripts to replace existing moodle scripts.
+// Enabling this will allow custom scripts to replace existing powereduc scripts.
 // For example: if $CFG->customscripts/course/view.php exists then
 // it will be used instead of $CFG->wwwroot/course/view.php
 // At present this will only work for files that include config.php and are called
 // as part of the url (index.php is implied).
 // Some examples are:
-//      http://my.moodle.site/course/view.php
-//      http://my.moodle.site/index.php
-//      http://my.moodle.site/admin            (index.php implied)
+//      http://my.powereduc.site/course/view.php
+//      http://my.powereduc.site/index.php
+//      http://my.powereduc.site/admin            (index.php implied)
 // Custom scripts should not include config.php
-// Warning: Replacing standard moodle scripts may pose security risks and/or may not
+// Warning: Replacing standard powereduc scripts may pose security risks and/or may not
 // be compatible with upgrades. Use this option only if you are aware of the risks
 // involved.
 // Specify the full directory path to the custom scripts
@@ -445,9 +445,9 @@ $CFG->admin = 'admin';
 //     $CFG->apacheloguser = 3; // Log username.
 // To get the values logged in Apache's log, add to your httpd.conf
 // the following statements. In the General part put:
-//     LogFormat "%h %l %{POWEREDUCUSER}n %t \"%r\" %s %b \"%{Referer}i\" \"%{User-Agent}i\"" moodleformat
+//     LogFormat "%h %l %{POWEREDUCUSER}n %t \"%r\" %s %b \"%{Referer}i\" \"%{User-Agent}i\"" powereducformat
 // And in the part specific to your Moodle install / virtualhost:
-//     CustomLog "/your/path/to/log" moodleformat
+//     CustomLog "/your/path/to/log" powereducformat
 //
 // Alternatively for other webservers such as nginx, you can instead have the username sent via a http header
 // 'X-POWEREDUCUSER' which can be saved in the logfile and then stripped out before being sent to the browser:
@@ -485,8 +485,8 @@ $CFG->admin = 'admin';
 // Localcachedir is intended for server clusters, it does not have to be shared by cluster nodes.
 // The directories must not be accessible via web.
 //
-//     $CFG->tempdir = '/var/www/moodle/temp';        // Directory MUST BE SHARED by all cluster nodes.
-//     $CFG->cachedir = '/var/www/moodle/cache';      // Directory MUST BE SHARED by all cluster nodes, locking required.
+//     $CFG->tempdir = '/var/www/powereduc/temp';        // Directory MUST BE SHARED by all cluster nodes.
+//     $CFG->cachedir = '/var/www/powereduc/cache';      // Directory MUST BE SHARED by all cluster nodes, locking required.
 //     $CFG->localcachedir = '/var/local/cache';      // Intended for local node caching.
 //     $CFG->localrequestdir = '/tmp';                // Intended for local only temporary files. The defaults uses sys_get_temp_dir().
 //
@@ -494,7 +494,7 @@ $CFG->admin = 'admin';
 // for normal web servers. Server clusters MUST use shared filesystem for backuptempdir!
 // The directory must not be accessible via web.
 //
-//     $CFG->backuptempdir = '/var/www/moodle/backuptemp';  // Directory MUST BE SHARED by all cluster nodes.
+//     $CFG->backuptempdir = '/var/www/powereduc/backuptemp';  // Directory MUST BE SHARED by all cluster nodes.
 //
 // Some filesystems such as NFS may not support file locking operations.
 // Locking resolves race conditions and is strongly recommended for production servers.
@@ -522,7 +522,7 @@ $CFG->admin = 'admin';
 // file if you want to take full control. Either way it must be writable by the
 // webserver.
 //
-//     $CFG->altcacheconfigpath = '/var/www/shared/moodle.cache.config.php
+//     $CFG->altcacheconfigpath = '/var/www/shared/powereduc.cache.config.php
 //
 // Use the following flag to completely disable the Available update notifications
 // feature and hide it from the server administration UI.
@@ -566,7 +566,7 @@ $CFG->admin = 'admin';
 // config.php file
 //      $CFG->preventexecpath = true;
 //
-// Use the following flag to set userid for noreply user. If not set then moodle will
+// Use the following flag to set userid for noreply user. If not set then powereduc will
 // create dummy user and use -ve value as user id.
 //      $CFG->noreplyuserid = -10;
 //
@@ -677,7 +677,7 @@ $CFG->admin = 'admin';
 // There are times when a session lock is not required during a request. For a page/service to opt-in whether or not a
 // session lock is required this setting must first be set to 'true'.
 // This is an experimental issue. The session store can not be in the session, please
-// see https://docs.moodle.org/en/Session_handling#Read_only_sessions.
+// see https://docs.powereduc.org/en/Session_handling#Read_only_sessions.
 //
 //      $CFG->enable_read_only_sessions = true;
 //
@@ -777,10 +777,10 @@ $CFG->admin = 'admin';
 //   http://yuilibrary.com/yui/docs/api/classes/config.html#property_logInclude
 //   http://yuilibrary.com/yui/docs/api/classes/config.html#property_logExclude
 // $CFG->yuiloginclude = array(
-//     'moodle-course-categoryexpander' => true,
+//     'powereduc-course-categoryexpander' => true,
 // );
 // $CFG->yuilogexclude = array(
-//     'moodle-core-notification' => true,
+//     'powereduc-core-notification' => true,
 // );
 //
 // Set the minimum log level for YUI logging statements.
@@ -841,7 +841,7 @@ $CFG->admin = 'admin';
 // 9. PHPUNIT SUPPORT
 //=========================================================================
 // $CFG->phpunit_prefix = 'phpu_';
-// $CFG->phpunit_dataroot = '/home/example/phpu_moodledata';
+// $CFG->phpunit_dataroot = '/home/example/phpu_powereducdata';
 // $CFG->phpunit_directorypermissions = 02777; // optional
 // $CFG->phpunit_profilingenabled = true; // optional to profile PHPUnit runs.
 //
@@ -870,9 +870,9 @@ $CFG->admin = 'admin';
 //=========================================================================
 // Behat test site needs a unique www root, data directory and database prefix:
 //
-// $CFG->behat_wwwroot = 'http://127.0.0.1/moodle';
+// $CFG->behat_wwwroot = 'http://127.0.0.1/powereduc';
 // $CFG->behat_prefix = 'bht_';
-// $CFG->behat_dataroot = '/home/example/bht_moodledata';
+// $CFG->behat_dataroot = '/home/example/bht_powereducdata';
 // $CFG->behat_dbname = 'behat'; // optional
 // $CFG->behat_dbuser = 'username'; // optional
 // $CFG->behat_dbpass = 'password'; // optional
@@ -979,13 +979,13 @@ $CFG->admin = 'admin';
 //           'dbtype' => 'mysqli',
 //           'dblibrary' => 'native',
 //           'dbhost' => 'localhost',
-//           'dbname' => 'moodletest',
-//           'dbuser' => 'moodle',
-//           'dbpass' => 'moodle',
+//           'dbname' => 'powereductest',
+//           'dbuser' => 'powereduc',
+//           'dbpass' => 'powereduc',
 //           'behat_prefix' => 'mdl_',
 //           'wd_host' => 'http://127.0.0.1:4444/wd/hub',
-//           'behat_wwwroot' => 'http://127.0.0.1/moodle',
-//           'behat_dataroot' => '/home/example/bht_moodledata'
+//           'behat_wwwroot' => 'http://127.0.0.1/powereduc',
+//           'behat_dataroot' => '/home/example/bht_powereducdata'
 //       ),
 //   );
 //

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -44,11 +44,11 @@ class application_registration_repository_test extends \advanced_testcase {
         return application_registration::create(
             'Example LMS application',
             $uniqueid,
-            new \moodle_url($issuer),
+            new \powereduc_url($issuer),
             $clientid,
-            new \moodle_url('https://example.org/authrequesturl'),
-            new \moodle_url('https://example.org/jwksurl'),
-            new \moodle_url('https://example.org/accesstokenurl')
+            new \powereduc_url('https://example.org/authrequesturl'),
+            new \powereduc_url('https://example.org/jwksurl'),
+            new \powereduc_url('https://example.org/accesstokenurl')
         );
     }
 
@@ -147,7 +147,7 @@ class application_registration_repository_test extends \advanced_testcase {
                 'registrationdata' => [
                     'name' => 'My test platform',
                     'uniqueid' => 'acbhd4355',
-                    'platformid' => new \moodle_url('https://lms.example.com'),
+                    'platformid' => new \powereduc_url('https://lms.example.com'),
                     'clientid' => 'abc345',
                 ]
             ],
@@ -155,22 +155,22 @@ class application_registration_repository_test extends \advanced_testcase {
                 'registrationdata' => [
                     'name' => 'My test platform',
                     'uniqueid' => 'acbhd4355',
-                    'platformid' => new \moodle_url('https://lms.example.com'),
+                    'platformid' => new \powereduc_url('https://lms.example.com'),
                     'clientid' => 'abc345',
-                    'authenticationrequesturl' => new \moodle_url('https://lms.example.com/auth'),
-                    'jwksurl' => new \moodle_url('https://lms.example.com/jwks'),
-                    'accesstokenurl' => new \moodle_url('https://lms.example.com/token'),
+                    'authenticationrequesturl' => new \powereduc_url('https://lms.example.com/auth'),
+                    'jwksurl' => new \powereduc_url('https://lms.example.com/jwks'),
+                    'accesstokenurl' => new \powereduc_url('https://lms.example.com/token'),
                 ]
             ],
             'draft with all fields completed, marked complete' => [
                 'registrationdata' => [
                     'name' => 'My test platform',
                     'uniqueid' => 'acbhd4355',
-                    'platformid' => new \moodle_url('https://lms.example.com'),
+                    'platformid' => new \powereduc_url('https://lms.example.com'),
                     'clientid' => 'abc345',
-                    'authenticationrequesturl' => new \moodle_url('https://lms.example.com/auth'),
-                    'jwksurl' => new \moodle_url('https://lms.example.com/jwks'),
-                    'accesstokenurl' => new \moodle_url('https://lms.example.com/token'),
+                    'authenticationrequesturl' => new \powereduc_url('https://lms.example.com/auth'),
+                    'jwksurl' => new \powereduc_url('https://lms.example.com/jwks'),
+                    'accesstokenurl' => new \powereduc_url('https://lms.example.com/token'),
                     'setcomplete' => true,
                 ]
             ],
@@ -189,12 +189,12 @@ class application_registration_repository_test extends \advanced_testcase {
         // Modifying a draft registration.
         $draftreg = application_registration::create_draft('My test platform', 'bcvd34gs');
         $createddraft = $repository->save($draftreg);
-        $createddraft->set_platformid(new \moodle_url('https://lms.example.com'));
-        $createddraft->set_clientid(new \moodle_url('clientid_test_33333'));
+        $createddraft->set_platformid(new \powereduc_url('https://lms.example.com'));
+        $createddraft->set_clientid(new \powereduc_url('clientid_test_33333'));
         $createddraft->set_name('Something else');
-        $createddraft->set_jwksurl(new \moodle_url('https://lms.example.com/jwks'));
-        $createddraft->set_authenticationrequesturl(new \moodle_url('https://lms.example.com/auth'));
-        $createddraft->set_accesstokenurl(new \moodle_url('https://lms.example.com/token'));
+        $createddraft->set_jwksurl(new \powereduc_url('https://lms.example.com/jwks'));
+        $createddraft->set_authenticationrequesturl(new \powereduc_url('https://lms.example.com/auth'));
+        $createddraft->set_accesstokenurl(new \powereduc_url('https://lms.example.com/token'));
         $createddraft->complete_registration();
         $updateddraft = $repository->save($createddraft);
 
@@ -206,11 +206,11 @@ class application_registration_repository_test extends \advanced_testcase {
         $registration = application_registration::create(
             'My platform name',
             'a2c94a2c94',
-            new \moodle_url('https://updated-lms.example.org/'),
+            new \powereduc_url('https://updated-lms.example.org/'),
             'Updated-client-id',
-            new \moodle_url('https://updated-lms.example.org/auth'),
-            new \moodle_url('https://updated-lms.example.org/jwks'),
-            new \moodle_url('https://updated-lms.example.org/token'),
+            new \powereduc_url('https://updated-lms.example.org/auth'),
+            new \powereduc_url('https://updated-lms.example.org/jwks'),
+            new \powereduc_url('https://updated-lms.example.org/token'),
         );
         $createdregistration = $repository->save($registration);
         $createdregistration->set_name('Something else');

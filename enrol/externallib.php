@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -67,8 +67,8 @@ class core_enrol_external extends external_api {
                             'value' => new external_value(PARAM_RAW, 'option value')
                         )
                     ), 'Option names:
-                            * groupid (integer) return only users in this group id. Requires \'moodle/site:accessallgroups\' .
-                            * onlyactive (integer) only users with active enrolments. Requires \'moodle/course:enrolreview\' .
+                            * groupid (integer) return only users in this group id. Requires \'powereduc/site:accessallgroups\' .
+                            * onlyactive (integer) only users with active enrolments. Requires \'powereduc/course:enrolreview\' .
                             * userfields (\'string, string, ...\') return only the values of these user fields.
                             * limitfrom (integer) sql limit from.
                             * limitnumber (integer) max number of users per course and capability.', VALUE_DEFAULT, array())
@@ -130,7 +130,7 @@ class core_enrol_external extends external_api {
             $course = $DB->get_record('course', array('id'=>$courseid), '*', MUST_EXIST);
             $coursecontext = context_course::instance($courseid);
             if (!$coursecontext) {
-                throw new moodle_exception('cannotfindcourse', 'error', '', null,
+                throw new powereduc_exception('cannotfindcourse', 'error', '', null,
                         'The course id ' . $courseid . ' doesn\'t exist.');
             }
             if ($courseid == SITEID) {
@@ -144,22 +144,22 @@ class core_enrol_external extends external_api {
                 $exceptionparam = new stdClass();
                 $exceptionparam->message = $e->getMessage();
                 $exceptionparam->courseid = $params['courseid'];
-                throw new moodle_exception(get_string('errorcoursecontextnotvalid' , 'webservice', $exceptionparam));
+                throw new powereduc_exception(get_string('errorcoursecontextnotvalid' , 'webservice', $exceptionparam));
             }
 
             course_require_view_participants($context);
 
             // The accessallgroups capability is needed to use this option.
             if (!empty($groupid) && groups_is_member($groupid)) {
-                require_capability('moodle/site:accessallgroups', $coursecontext);
+                require_capability('powereduc/site:accessallgroups', $coursecontext);
             }
             // The course:enrolereview capability is needed to use this option.
             if ($onlyactive) {
-                require_capability('moodle/course:enrolreview', $coursecontext);
+                require_capability('powereduc/course:enrolreview', $coursecontext);
             }
 
             // To see the permissions of others role:review capability is required.
-            require_capability('moodle/role:review', $coursecontext);
+            require_capability('powereduc/role:review', $coursecontext);
             foreach ($coursecapability['capabilities'] as $capability) {
                 $courseusers['courseid'] = $courseid;
                 $courseusers['capability'] = $capability;
@@ -379,7 +379,7 @@ class core_enrol_external extends external_api {
             $hiddenfields = array_flip(explode(',', $CFG->hiddenuserfields));
             $canviewlastaccess = $sameuser || !isset($hiddenfields['lastaccess']);
             if (!$canviewlastaccess) {
-                $canviewlastaccess = has_capability('moodle/course:viewhiddenuserfields', $context);
+                $canviewlastaccess = has_capability('powereduc/course:viewhiddenuserfields', $context);
             }
 
             if ($canviewlastaccess && isset($user->lastcourseaccess[$course->id])) {
@@ -395,7 +395,7 @@ class core_enrol_external extends external_api {
             $courselist = new core_course_list_element($course);
             $overviewfiles = array();
             foreach ($courselist->get_course_overviewfiles() as $file) {
-                $fileurl = moodle_url::make_webservice_pluginfile_url($file->get_contextid(), $file->get_component(),
+                $fileurl = powereduc_url::make_webservice_pluginfile_url($file->get_contextid(), $file->get_component(),
                                                                         $file->get_filearea(), null, $file->get_filepath(),
                                                                         $file->get_filename())->out(false);
                 $overviewfiles[] = array(
@@ -544,9 +544,9 @@ class core_enrol_external extends external_api {
             $exceptionparam = new stdClass();
             $exceptionparam->message = $e->getMessage();
             $exceptionparam->courseid = $params['courseid'];
-            throw new moodle_exception('errorcoursecontextnotvalid' , 'webservice', '', $exceptionparam);
+            throw new powereduc_exception('errorcoursecontextnotvalid' , 'webservice', '', $exceptionparam);
         }
-        require_capability('moodle/course:enrolreview', $context);
+        require_capability('powereduc/course:enrolreview', $context);
 
         $course = $DB->get_record('course', array('id' => $params['courseid']));
         $manager = new course_enrolment_manager($PAGE, $course);
@@ -632,7 +632,7 @@ class core_enrol_external extends external_api {
      * @param int $page Page number
      * @param int $perpage Max per page
      * @return array An array of users
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function search_users(int $courseid, string $search, bool $searchanywhere, int $page, int $perpage): array {
         global $PAGE, $DB, $CFG;
@@ -657,7 +657,7 @@ class core_enrol_external extends external_api {
             $exceptionparam = new stdClass();
             $exceptionparam->message = $e->getMessage();
             $exceptionparam->courseid = $params['courseid'];
-            throw new moodle_exception('errorcoursecontextnotvalid' , 'webservice', '', $exceptionparam);
+            throw new powereduc_exception('errorcoursecontextnotvalid' , 'webservice', '', $exceptionparam);
         }
         course_require_view_participants($context);
 
@@ -711,17 +711,17 @@ class core_enrol_external extends external_api {
                             'value' => new external_value(PARAM_RAW, 'option value')
                         ]
                     ), 'Option names:
-                            * withcapability (string) return only users with this capability. This option requires \'moodle/role:review\' on the course context.
+                            * withcapability (string) return only users with this capability. This option requires \'powereduc/role:review\' on the course context.
                             * groupid (integer) return only users in this group id. If the course has groups enabled and this param
                                                 isn\'t defined, returns all the viewable users.
-                                                This option requires \'moodle/site:accessallgroups\' on the course context if the
+                                                This option requires \'powereduc/site:accessallgroups\' on the course context if the
                                                 user doesn\'t belong to the group.
                             * onlyactive (integer) return only users with active enrolments and matching time restrictions.
-                                                This option requires \'moodle/course:enrolreview\' on the course context.
+                                                This option requires \'powereduc/course:enrolreview\' on the course context.
                                                 Please note that this option can\'t
                                                 be used together with onlysuspended (only one can be active).
                             * onlysuspended (integer) return only suspended users. This option requires
-                                            \'moodle/course:enrolreview\' on the course context. Please note that this option can\'t
+                                            \'powereduc/course:enrolreview\' on the course context. Please note that this option can\'t
                                                 be used together with onlyactive (only one can be active).
                             * userfields (\'string, string, ...\') return only the values of these user fields.
                             * limitfrom (integer) sql limit from.
@@ -828,22 +828,22 @@ class core_enrol_external extends external_api {
             $exceptionparam = new stdClass();
             $exceptionparam->message = $e->getMessage();
             $exceptionparam->courseid = $params['courseid'];
-            throw new moodle_exception('errorcoursecontextnotvalid' , 'webservice', '', $exceptionparam);
+            throw new powereduc_exception('errorcoursecontextnotvalid' , 'webservice', '', $exceptionparam);
         }
 
         course_require_view_participants($context);
 
         // to overwrite this parameter, you need role:review capability
         if ($withcapability) {
-            require_capability('moodle/role:review', $coursecontext);
+            require_capability('powereduc/role:review', $coursecontext);
         }
         // need accessallgroups capability if you want to overwrite this option
         if (!empty($groupid) && !groups_is_member($groupid)) {
-            require_capability('moodle/site:accessallgroups', $coursecontext);
+            require_capability('powereduc/site:accessallgroups', $coursecontext);
         }
         // to overwrite this option, you need course:enrolereview permission
         if ($onlyactive || $onlysuspended) {
-            require_capability('moodle/course:enrolreview', $coursecontext);
+            require_capability('powereduc/course:enrolreview', $coursecontext);
         }
 
         list($enrolledsql, $enrolledparams) = get_enrolled_sql($coursecontext, $withcapability, $groupid, $onlyactive,
@@ -854,7 +854,7 @@ class core_enrol_external extends external_api {
 
         $groupjoin = '';
         if (empty($groupid) && groups_get_course_groupmode($course) == SEPARATEGROUPS &&
-                !has_capability('moodle/site:accessallgroups', $coursecontext)) {
+                !has_capability('powereduc/site:accessallgroups', $coursecontext)) {
             // Filter by groups the user can view.
             $usergroups = groups_get_user_groups($course->id);
             if (!empty($usergroups['0'])) {
@@ -987,7 +987,7 @@ class core_enrol_external extends external_api {
      *
      * @param int $courseid
      * @return array of course enrolment methods
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_course_enrolment_methods($courseid) {
         global $DB;
@@ -997,7 +997,7 @@ class core_enrol_external extends external_api {
 
         $course = $DB->get_record('course', array('id' => $params['courseid']), '*', MUST_EXIST);
         if (!core_course_category::can_view_course_info($course) && !can_access_course($course)) {
-            throw new moodle_exception('coursehidden');
+            throw new powereduc_exception('coursehidden');
         }
 
         $result = array();
@@ -1238,7 +1238,7 @@ class core_role_external extends external_api {
 
             // Ensure the current user is allowed to run this function in the enrolment context.
             self::validate_context($context);
-            require_capability('moodle/role:assign', $context);
+            require_capability('powereduc/role:assign', $context);
 
             // throw an exception if user is not able to assign the role in this context
             $roles = get_assignable_roles($context, ROLENAME_SHORT);
@@ -1305,7 +1305,7 @@ class core_role_external extends external_api {
             // Ensure the current user is allowed to run this function in the unassignment context
             $context = self::get_context_from_params($unassignment);
             self::validate_context($context);
-            require_capability('moodle/role:assign', $context);
+            require_capability('powereduc/role:assign', $context);
 
             // throw an exception if user is not able to unassign the role in this context
             $roles = get_assignable_roles($context, ROLENAME_SHORT);

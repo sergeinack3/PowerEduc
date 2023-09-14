@@ -35,9 +35,9 @@ abstract class base extends area_base {
      * Find recordset of the relevant areas.
      *
      * @param \core\event\base $event
-     * @return \moodle_recordset|null
+     * @return \powereduc_recordset|null
      */
-    public function find_relevant_areas(\core\event\base $event): ?\moodle_recordset {
+    public function find_relevant_areas(\core\event\base $event): ?\powereduc_recordset {
         global $DB;
         if (($event instanceof question_created) || ($event instanceof question_updated)) {
             $sql = "SELECT {$this->get_type()} AS type,
@@ -68,9 +68,9 @@ abstract class base extends area_base {
      * Find recordset of the course areas.
      *
      * @param int $courseid
-     * @return \moodle_recordset
+     * @return \powereduc_recordset
      */
-    public function find_course_areas(int $courseid): ?\moodle_recordset {
+    public function find_course_areas(int $courseid): ?\powereduc_recordset {
         global $DB;
         $coursecontext = \context_course::instance($courseid);
         $param = [
@@ -110,9 +110,9 @@ abstract class base extends area_base {
      * Return an array of area objects that contain content at the site and system levels only. This would be question content from
      * question categories at the system context only.
      *
-     * @return \moodle_recordset
+     * @return \powereduc_recordset
      */
-    public function find_system_areas(): ?\moodle_recordset {
+    public function find_system_areas(): ?\powereduc_recordset {
         global $DB;
         $params = [
             'syscontext' => CONTEXT_SYSTEM,
@@ -147,12 +147,12 @@ abstract class base extends area_base {
     }
 
     /**
-     * Returns the moodle_url of the page to edit the error.
+     * Returns the powereduc_url of the page to edit the error.
      *
      * @param \stdClass $componentinfo
-     * @return \moodle_url
+     * @return \powereduc_url
      */
-    public static function get_edit_url(\stdClass $componentinfo): \moodle_url {
+    public static function get_edit_url(\stdClass $componentinfo): \powereduc_url {
         $questionid = $componentinfo->itemid;
         // Question answers are editable on main question page.
         // Hence, use refid for these links.
@@ -161,7 +161,7 @@ abstract class base extends area_base {
         }
         // Default to SITEID if courseid is null, i.e. system or category level questions.
         $thiscourseid = ($componentinfo->courseid !== null) ? $componentinfo->courseid : SITEID;
-        return new \moodle_url('/question/bank/editquestion/question.php', ['courseid' => $thiscourseid, 'id' => $questionid]);
+        return new \powereduc_url('/question/bank/editquestion/question.php', ['courseid' => $thiscourseid, 'id' => $questionid]);
     }
 
     /**

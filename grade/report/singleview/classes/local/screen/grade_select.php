@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,8 +34,8 @@ class grade_select extends screen {
     public function html(): string {
         global $OUTPUT, $COURSE, $USER;
 
-        $userlink = new \moodle_url('/grade/report/singleview/index.php', ['id' => $COURSE->id, 'item' => 'user_select']);
-        $gradelink = new \moodle_url('/grade/report/singleview/index.php', ['id' => $COURSE->id, 'item' => 'grade_select']);
+        $userlink = new \powereduc_url('/grade/report/singleview/index.php', ['id' => $COURSE->id, 'item' => 'user_select']);
+        $gradelink = new \powereduc_url('/grade/report/singleview/index.php', ['id' => $COURSE->id, 'item' => 'grade_select']);
         $gpr = new \grade_plugin_return(['type' => 'report', 'plugin' => 'singleview', 'courseid' => $COURSE->id,
             'userid' => $USER->id]);
         $context = [

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Unit tests for lib/navigationlib.php
@@ -61,7 +61,7 @@ class navigationlib_test extends \advanced_testcase {
         $PAGE->set_course($SITE);
 
         $activeurl = $PAGE->url;
-        $inactiveurl = new \moodle_url('http://www.moodle.com/');
+        $inactiveurl = new \powereduc_url('http://www.powereduc.com/');
 
         navigation_node::override_active_url($PAGE->url);
 
@@ -90,7 +90,7 @@ class navigationlib_test extends \advanced_testcase {
             'shorttext' => 'A very silly extra long short text string, more than 25 characters',
             'key' => 'key',
             'type' => 'navigation_node::TYPE_COURSE',
-            'action' => new \moodle_url('http://www.moodle.org/'));
+            'action' => new \powereduc_url('http://www.powereduc.org/'));
 
         $node = new navigation_node($fakeproperties);
         $this->assertSame($fakeproperties['text'], $node->text);
@@ -104,10 +104,10 @@ class navigationlib_test extends \advanced_testcase {
         $this->setup_node();
 
         // Add a node with all args set.
-        $node1 = $this->node->add('test_add_1', 'http://www.moodle.org/', navigation_node::TYPE_COURSE, 'testadd1', 'key', new pix_icon('i/course', ''));
+        $node1 = $this->node->add('test_add_1', 'http://www.powereduc.org/', navigation_node::TYPE_COURSE, 'testadd1', 'key', new pix_icon('i/course', ''));
         // Add a node with the minimum args required.
         $node2 = $this->node->add('test_add_2', null, navigation_node::TYPE_CUSTOM, 'testadd2');
-        $node3 = $this->node->add(str_repeat('moodle ', 15), str_repeat('moodle', 15));
+        $node3 = $this->node->add(str_repeat('powereduc ', 15), str_repeat('powereduc', 15));
 
         $this->assertInstanceOf('navigation_node', $node1);
         $this->assertInstanceOf('navigation_node', $node2);
@@ -165,13 +165,13 @@ class navigationlib_test extends \advanced_testcase {
         $this->setup_node();
 
         // First test the string urls
-        // Demo1 -> action is http://www.moodle.org/, thus should be true.
+        // Demo1 -> action is http://www.powereduc.org/, thus should be true.
         $demo5 = $this->node->find('demo5', navigation_node::TYPE_COURSE);
         if ($this->assertInstanceOf('navigation_node', $demo5)) {
             $this->assertTrue($demo5->check_if_active());
         }
 
-        // Demo2 -> action is http://www.moodle.com/, thus should be false.
+        // Demo2 -> action is http://www.powereduc.com/, thus should be false.
         $demo2 = $this->node->get('demo2');
         if ($this->assertInstanceOf('navigation_node', $demo2)) {
             $this->assertFalse($demo2->check_if_active());
@@ -271,7 +271,7 @@ class navigationlib_test extends \advanced_testcase {
         $this->setup_node();
 
         $node1 = $this->node->add('active node 1', null, navigation_node::TYPE_CUSTOM, null, 'anode1');
-        $node2 = $this->node->add('active node 2', new \moodle_url($CFG->wwwroot), navigation_node::TYPE_COURSE, null, 'anode2');
+        $node2 = $this->node->add('active node 2', new \powereduc_url($CFG->wwwroot), navigation_node::TYPE_COURSE, null, 'anode2');
         $node1->make_active();
         $this->node->get('anode2')->make_active();
         $this->assertTrue($node1->isactive);
@@ -364,9 +364,9 @@ class navigationlib_test extends \advanced_testcase {
         $cat2 = $generator->create_category(array('parent' => $cat1->id));
         $course = $generator->create_course(array('category' => $cat2->id));
 
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_course($course);
-        $page->set_url(new \moodle_url('/course/view.php', array('id' => $course->id)));
+        $page->set_url(new \powereduc_url('/course/view.php', array('id' => $course->id)));
         $page->navbar->prepend('test 1');
         $page->navbar->prepend('test 2');
         $page->navbar->add('test 3');
@@ -395,7 +395,7 @@ class navigationlib_test extends \advanced_testcase {
      * @depends test_navbar_prepend_and_add
      * @param $node
      */
-    public function test_navbar_has_items(\moodle_page $page) {
+    public function test_navbar_has_items(\powereduc_page $page) {
         $this->resetAfterTest();
 
         $this->assertTrue($page->navbar->has_items());
@@ -440,9 +440,9 @@ class navigationlib_test extends \advanced_testcase {
         $cache = new navigation_cache('unittest_nav');
         $cache->anysetvariable = true;
 
-        $cache->set('software', 'Moodle');
+        $cache->set('software', 'PowerEduc');
         $this->assertTrue($cache->cached('software'));
-        $this->assertEquals($cache->software, 'Moodle');
+        $this->assertEquals($cache->software, 'PowerEduc');
     }
 
     public function test_setting___construct() {
@@ -638,14 +638,14 @@ class navigationlib_test extends \advanced_testcase {
         return [
             'The navigation node has an action link.' =>
                 [
-                    navigation_node::create('Node', new action_link(new \moodle_url('/'), '',
-                        new popup_action('click', new \moodle_url('/'))), navigation_node::TYPE_SETTING),
+                    navigation_node::create('Node', new action_link(new \powereduc_url('/'), '',
+                        new popup_action('click', new \powereduc_url('/'))), navigation_node::TYPE_SETTING),
                     true
                 ],
 
             'The navigation node does not have an action link.' =>
                 [
-                    navigation_node::create('Node', new \moodle_url('/'), navigation_node::TYPE_SETTING),
+                    navigation_node::create('Node', new \powereduc_url('/'), navigation_node::TYPE_SETTING),
                     false
                 ],
         ];
@@ -691,17 +691,17 @@ class navigationlib_test extends \advanced_testcase {
         return [
             'The navigation node has an action link with an action attached.' =>
                 [
-                    navigation_node::create('Node', new action_link(new \moodle_url('/'), '',
-                        new popup_action('click', new \moodle_url('/'))), navigation_node::TYPE_SETTING),
+                    navigation_node::create('Node', new action_link(new \powereduc_url('/'), '',
+                        new popup_action('click', new \powereduc_url('/'))), navigation_node::TYPE_SETTING),
                 ],
             'The navigation node has an action link without an action.' =>
                 [
-                    navigation_node::create('Node', new action_link(new \moodle_url('/'), '', null),
+                    navigation_node::create('Node', new action_link(new \powereduc_url('/'), '', null),
                         navigation_node::TYPE_SETTING),
                 ],
             'The navigation node does not have an action link.' =>
                 [
-                    navigation_node::create('Node', new \moodle_url('/'), navigation_node::TYPE_SETTING),
+                    navigation_node::create('Node', new \powereduc_url('/'), navigation_node::TYPE_SETTING),
                 ],
         ];
     }
@@ -714,7 +714,7 @@ class navigationlib_test extends \advanced_testcase {
  */
 class exposed_global_navigation extends global_navigation {
     protected $exposedkey = 'exposed_';
-    public function __construct(\moodle_page $page=null) {
+    public function __construct(\powereduc_page $page=null) {
         global $PAGE;
         if ($page === null) {
             $page = $PAGE;
@@ -772,7 +772,7 @@ class mock_initialise_global_navigation extends global_navigation {
  */
 class exposed_navbar extends navbar {
     protected $exposedkey = 'exposed_';
-    public function __construct(\moodle_page $page) {
+    public function __construct(\powereduc_page $page) {
         parent::__construct($page);
         $this->cache = new navigation_cache('unittest_nav');
     }
@@ -787,7 +787,7 @@ class exposed_navbar extends navbar {
     }
 }
 
-class navigation_exposed_moodle_page extends \moodle_page {
+class navigation_exposed_powereduc_page extends \powereduc_page {
     public function set_navigation(navigation_node $node) {
         $this->_navigation = $node;
     }

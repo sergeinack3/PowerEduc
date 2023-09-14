@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 namespace format_topics\output;
 
 use core_courseformat\output\section_renderer;
-use moodle_page;
+use powereduc_page;
 
 /**
  * Basic renderer for topics format.
@@ -30,16 +30,16 @@ class renderer extends section_renderer {
     /**
      * Constructor method, calls the parent constructor.
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @param string $target one of rendering target constants
      */
-    public function __construct(moodle_page $page, $target) {
+    public function __construct(powereduc_page $page, $target) {
         parent::__construct($page, $target);
 
         // Since format_topics_renderer::section_edit_control_items() only displays the 'Highlight' control
         // when editing mode is on we need to be sure that the link 'Turn editing mode on' is available for a user
         // who does not have any other managing capability.
-        $page->set_other_editing_capability('moodle/course:setcurrentsection');
+        $page->set_other_editing_capability('powereduc/course:setcurrentsection');
     }
 
     /**

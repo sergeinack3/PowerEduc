@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package     tool_policy
  * @category    output
- * @copyright   2018 Sara Arjona <sara@moodle.com>
+ * @copyright   2018 Sara Arjona <sara@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,7 +32,7 @@ use core\output\notification;
 use core\session\manager;
 use core_user;
 use html_writer;
-use moodle_url;
+use powereduc_url;
 use renderable;
 use renderer_base;
 use single_button;
@@ -43,7 +43,7 @@ use tool_policy\policy_version;
 /**
  * Represents a page for showing all the policy documents which a user has to agree to.
  *
- * @copyright 2018 Sara Arjona <sara@moodle.com>
+ * @copyright 2018 Sara Arjona <sara@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class page_agreedocs implements renderable, templatable {
@@ -223,7 +223,7 @@ class page_agreedocs implements renderable, templatable {
      * This function checks if the non-accepted policy docs have been shown and redirect to them.
      *
      * @param int $userid User identifier who wants to access to the consent page.
-     * @param moodle_url $returnurl URL to return after shown the policy docs.
+     * @param powereduc_url $returnurl URL to return after shown the policy docs.
      */
     protected function redirect_to_policies($userid, $returnurl = null) {
 
@@ -263,10 +263,10 @@ class page_agreedocs implements renderable, templatable {
             foreach ($allpolicies as $policy) {
                 if ($policy->agreementstyle == policy_version::AGREEMENTSTYLE_OWNPAGE) {
                     if (empty($returnurl)) {
-                        $returnurl = (new moodle_url('/admin/tool/policy/index.php'))->out_as_local_url(false);
+                        $returnurl = (new powereduc_url('/admin/tool/policy/index.php'))->out_as_local_url(false);
                     }
                     $urlparams = ['versionid' => $policy->id, 'returnurl' => $returnurl];
-                    redirect(new moodle_url('/admin/tool/policy/view.php', $urlparams));
+                    redirect(new powereduc_url('/admin/tool/policy/view.php', $urlparams));
                 }
             }
 
@@ -291,14 +291,14 @@ class page_agreedocs implements renderable, templatable {
                 $viewedpolicies[] = $policyversionid;
                 $cache->set($cachekey, $viewedpolicies);
                 if (empty($returnurl)) {
-                    $returnurl = new moodle_url('/admin/tool/policy/index.php');
+                    $returnurl = new powereduc_url('/admin/tool/policy/index.php');
                 }
                 $urlparams = ['versionid' => $policyversionid,
                               'returnurl' => $returnurl,
                               'numpolicy' => count($currentpolicyversionids) - count($pendingpolicies),
                               'totalpolicies' => count($currentpolicyversionids),
                 ];
-                redirect(new moodle_url('/admin/tool/policy/view.php', $urlparams));
+                redirect(new powereduc_url('/admin/tool/policy/view.php', $urlparams));
             }
         } else {
             // Update the policyagreed for the user to avoid infinite loop because there are no policies to-be-accepted.
@@ -319,18 +319,18 @@ class page_agreedocs implements renderable, templatable {
                 $returnurl = $SESSION->wantsurl;
                 unset($SESSION->wantsurl);
             } else {
-                $returnurl = new moodle_url('/admin/tool/policy/user.php');
+                $returnurl = new powereduc_url('/admin/tool/policy/user.php');
             }
         } else {
             // Non-authenticated user.
             $issignup = \cache::make('core', 'presignup')->get('tool_policy_issignup');
             if ($issignup) {
                 // User came here from signup page - redirect back there.
-                $returnurl = new moodle_url('/login/signup.php');
+                $returnurl = new powereduc_url('/login/signup.php');
                 \cache::make('core', 'presignup')->set('tool_policy_issignup', false);
             } else {
                 // Guests should not be on this page unless it's part of signup - redirect home.
-                $returnurl = new moodle_url('/');
+                $returnurl = new powereduc_url('/');
             }
         }
 
@@ -358,7 +358,7 @@ class page_agreedocs implements renderable, templatable {
         } else {
             // For new users, the behalfid parameter is ignored.
             if ($this->behalfid) {
-                redirect(new moodle_url('/admin/tool/policy/index.php'));
+                redirect(new powereduc_url('/admin/tool/policy/index.php'));
             }
         }
 
@@ -374,7 +374,7 @@ class page_agreedocs implements renderable, templatable {
         if ($this->isexistinguser && !empty($this->behalfid) && $this->behalfid != $USER->id) {
             $myparams['userid'] = $this->behalfid;
         }
-        $myurl = new moodle_url('/admin/tool/policy/index.php', $myparams);
+        $myurl = new powereduc_url('/admin/tool/policy/index.php', $myparams);
 
         // Redirect to policy docs before the consent page.
         $this->redirect_to_policies($userid, $myurl);
@@ -384,7 +384,7 @@ class page_agreedocs implements renderable, templatable {
         $PAGE->set_url($myurl);
         $PAGE->set_heading($SITE->fullname);
         $PAGE->set_title(get_string('policiesagreements', 'tool_policy'));
-        $PAGE->navbar->add(get_string('policiesagreements', 'tool_policy'), new moodle_url('/admin/tool/policy/index.php'));
+        $PAGE->navbar->add(get_string('policiesagreements', 'tool_policy'), new powereduc_url('/admin/tool/policy/index.php'));
     }
 
     /**
@@ -399,7 +399,7 @@ class page_agreedocs implements renderable, templatable {
         $lang = current_language();
         foreach ($this->policies as $policy) {
             // Get a link to display the full policy document.
-            $policy->url = new moodle_url('/admin/tool/policy/view.php',
+            $policy->url = new powereduc_url('/admin/tool/policy/view.php',
                 array('policyid' => $policy->policyid, 'returnurl' => qualified_me()));
             $policyattributes = array('data-action' => 'view',
                                       'data-versionid' => $policy->id,
@@ -458,8 +458,8 @@ class page_agreedocs implements renderable, templatable {
             $myparams['userid'] = $this->behalfid;
         }
         $data = (object) [
-            'pluginbaseurl' => (new moodle_url('/admin/tool/policy'))->out(false),
-            'myurl' => (new moodle_url('/admin/tool/policy/index.php', $myparams))->out(false),
+            'pluginbaseurl' => (new powereduc_url('/admin/tool/policy'))->out(false),
+            'myurl' => (new powereduc_url('/admin/tool/policy/index.php', $myparams))->out(false),
             'sesskey' => sesskey(),
         ];
 
@@ -488,8 +488,8 @@ class page_agreedocs implements renderable, templatable {
 
         // If viewing docs in behalf of other user, get his/her full name and profile link.
         if (!empty($this->behalfuser)) {
-            $userfullname = fullname($this->behalfuser, has_capability('moodle/site:viewfullnames', \context_system::instance()) ||
-                        has_capability('moodle/site:viewfullnames', \context_user::instance($this->behalfid)));
+            $userfullname = fullname($this->behalfuser, has_capability('powereduc/site:viewfullnames', \context_system::instance()) ||
+                        has_capability('powereduc/site:viewfullnames', \context_user::instance($this->behalfid)));
             $data->behalfuser = html_writer::link(\context_user::instance($this->behalfid)->get_url(), $userfullname);
         }
 

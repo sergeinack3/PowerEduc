@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/lib/formslib.php');
 
-class cohort_edit_form extends moodleform {
+class cohort_edit_form extends powereducform {
 
     /**
      * Define the cohort edit form
@@ -101,10 +101,10 @@ class cohort_edit_form extends moodleform {
     }
 
     protected function get_category_options($currentcontextid) {
-        $displaylist = core_course_category::make_categories_list('moodle/cohort:manage');
+        $displaylist = core_course_category::make_categories_list('powereduc/cohort:manage');
         $options = array();
         $syscontext = context_system::instance();
-        if (has_capability('moodle/cohort:manage', $syscontext)) {
+        if (has_capability('powereduc/cohort:manage', $syscontext)) {
             $options[$syscontext->id] = $syscontext->get_context_name();
         }
         foreach ($displaylist as $cid=>$name) {

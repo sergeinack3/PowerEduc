@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -70,12 +70,12 @@ switch ($context->contextlevel) {
     break;
 
     default:
-        throw new \moodle_exception('invalidcontext', 'tool_recyclebin');
+        throw new \powereduc_exception('invalidcontext', 'tool_recyclebin');
     break;
 }
 
 if (!$recyclebin::is_enabled()) {
-    throw new \moodle_exception('notenabled', 'tool_recyclebin');
+    throw new \powereduc_exception('notenabled', 'tool_recyclebin');
 }
 
 $PAGE->set_url('/admin/tool/recyclebin/index.php', array(
@@ -101,7 +101,7 @@ if (!empty($action)) {
                 $recyclebin->restore_item($item);
                 redirect($PAGE->url, get_string('alertrestored', 'tool_recyclebin', $item), 2);
             } else {
-                throw new \moodle_exception('nopermissions', 'error');
+                throw new \powereduc_exception('nopermissions', 'error');
             }
         break;
 
@@ -111,7 +111,7 @@ if (!empty($action)) {
                 $recyclebin->delete_item($item);
                 redirect($PAGE->url, get_string('alertdeleted', 'tool_recyclebin', $item), 2);
             } else {
-                throw new \moodle_exception('nopermissions', 'error');
+                throw new \powereduc_exception('nopermissions', 'error');
             }
         break;
 
@@ -196,7 +196,7 @@ foreach ($items as $item) {
 
     // Build restore link.
     if ($canrestore && ($context->contextlevel == CONTEXT_COURSECAT || isset($modules[$item->module]))) {
-        $restoreurl = new moodle_url($PAGE->url, array(
+        $restoreurl = new powereduc_url($PAGE->url, array(
             'contextid' => $contextid,
             'itemid' => $item->id,
             'action' => 'restore',
@@ -213,7 +213,7 @@ foreach ($items as $item) {
     // Build delete link.
     if ($recyclebin->can_delete()) {
         $showempty = true;
-        $delete = new moodle_url($PAGE->url, array(
+        $delete = new powereduc_url($PAGE->url, array(
             'contextid' => $contextid,
             'itemid' => $item->id,
             'action' => 'delete',
@@ -236,7 +236,7 @@ $table->finish_output();
 
 // Empty recyclebin link.
 if ($showempty) {
-    $emptylink = new moodle_url($PAGE->url, array(
+    $emptylink = new powereduc_url($PAGE->url, array(
         'contextid' => $contextid,
         'action' => 'empty',
         'sesskey' => sesskey()

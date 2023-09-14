@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,8 +26,8 @@ defined('POWEREDUC_INTERNAL') || die;
 
 // This tool's required capabilities.
 $capabilities = [
-    'moodle/cohort:view',
-    'moodle/role:manage'
+    'powereduc/cohort:view',
+    'powereduc/role:manage'
 ];
 
 // Check if the user has all of the required capabilities.
@@ -37,6 +37,6 @@ $hasaccess = has_all_capabilities($capabilities, $context);
 // Add this admin page only if the user has all of the required capabilities.
 if ($hasaccess) {
     $str = get_string('managecohortroles', 'tool_cohortroles');
-    $url = new moodle_url('/admin/tool/cohortroles/index.php');
+    $url = new powereduc_url('/admin/tool/cohortroles/index.php');
     $ADMIN->add('roles', new admin_externalpage('toolcohortroles', $str, $url, $capabilities));
 }

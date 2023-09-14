@@ -1,7 +1,7 @@
 /**
  * JavaScript for form editing grouping conditions.
  *
- * @module moodle-availability_grouping-form
+ * @module powereduc-availability_grouping-form
  */
 M.availability_grouping = M.availability_grouping || {};
 
@@ -34,7 +34,7 @@ M.availability_grouping.form.getNode = function(json) {
     var html = '<label><span class="pr-3">' + M.util.get_string('title', 'availability_grouping') + '</span> ' +
             '<span class="availability-group">' +
             '<select name="id" class="custom-select">' +
-            '<option value="choose">' + M.util.get_string('choosedots', 'moodle') + '</option>';
+            '<option value="choose">' + M.util.get_string('choosedots', 'powereduc') + '</option>';
     for (var i = 0; i < this.groupings.length; i++) {
         var grouping = this.groupings[i];
         // String has already been escaped using format_string.

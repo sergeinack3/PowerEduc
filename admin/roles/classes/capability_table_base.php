@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -78,8 +78,8 @@ abstract class core_role_capability_table_base {
                 'name' => 'rolescapfilter',
                 'fullpath' => '/admin/roles/module.js',
                 'strings' => array(
-                    array('filter', 'moodle'),
-                    array('clear', 'moodle'),                ),
+                    array('filter', 'powereduc'),
+                    array('clear', 'powereduc'),                ),
                 'requires' => array('node', 'cookie', 'escape')
             );
             $PAGE->requires->js_init_call('M.core_role.init_cap_table_filter', array($this->id, $this->context->id), false,

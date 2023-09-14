@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ require_once($CFG->libdir . '/tablelib.php');
 require_once($CFG->libdir . '/badgeslib.php');
 
 use html_writer;
-use moodle_url;
+use powereduc_url;
 use table_sql;
 
 /**
@@ -50,7 +50,7 @@ class external_backpacks_table extends table_sql {
 
         $this->context = \context_system::instance();
         // This object should not be used without the right permissions.
-        require_capability('moodle/badges:manageglobalsettings', $this->context);
+        require_capability('powereduc/badges:manageglobalsettings', $this->context);
 
         // Define columns in the table.
         $this->define_table_columns();

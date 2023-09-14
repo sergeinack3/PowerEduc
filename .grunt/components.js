@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@
 const componentData = {};
 
 /**
- * Load details of all moodle modules.
+ * Load details of all powereduc modules.
  *
  * @returns {object}
  */
@@ -44,7 +44,7 @@ const fetchComponentData = () => {
         // Fetch the component definiitions from the distributed JSON file.
         const components = JSON.parse(fs.readFileSync(`${gruntFilePath}/lib/components.json`));
 
-        // Build the list of moodle subsystems.
+        // Build the list of powereduc subsystems.
         componentData.subsystems.lib = 'core';
         componentData.pathList.push(process.cwd() + path.sep + 'lib');
         for (const [component, thisPath] of Object.entries(components.subsystems)) {

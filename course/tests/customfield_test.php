@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -88,7 +88,7 @@ class customfield_test extends \advanced_testcase {
      */
     protected function backup_course($courseid, $userid = 2) {
         $backuptempdir = make_backup_temp_directory('');
-        $packer = get_file_packer('application/vnd.moodle.backup');
+        $packer = get_file_packer('application/vnd.powereduc.backup');
 
         $bc = new \backup_controller(\backup::TYPE_1COURSE, $courseid, \backup::FORMAT_POWEREDUC, \backup::INTERACTIVE_NO,
             \backup::MODE_GENERAL, $userid);

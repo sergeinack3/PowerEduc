@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,8 +22,8 @@
 
 /**
  * This class will show all the reserved words in a format suitable to
- * be pasted to: http://docs.moodle.org/en/XMLDB_reserved_words and
- * http://docs.moodle.org/en/Database_reserved_words
+ * be pasted to: http://docs.powereduc.org/en/XMLDB_reserved_words and
+ * http://docs.powereduc.org/en/Database_reserved_words
  * Also, it introspects te DB looking for such words and informing about
  *
  * @package    tool_xmldb

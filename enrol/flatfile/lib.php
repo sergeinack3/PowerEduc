@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -164,7 +164,7 @@ class enrol_flatfile_plugin extends enrol_plugin {
             if ($log = $buffer->get_buffer()) {
                 $eventdata = new \core\message\message();
                 $eventdata->courseid          = SITEID;
-                $eventdata->modulename        = 'moodle';
+                $eventdata->modulename        = 'powereduc';
                 $eventdata->component         = 'enrol_flatfile';
                 $eventdata->name              = 'flatfile_enrolment';
                 $eventdata->userfrom          = get_admin();
@@ -319,7 +319,7 @@ class enrol_flatfile_plugin extends enrol_plugin {
         if (!unlink($filelocation)) {
             $eventdata = new \core\message\message();
             $eventdata->courseid          = SITEID;
-            $eventdata->modulename        = 'moodle';
+            $eventdata->modulename        = 'powereduc';
             $eventdata->component         = 'enrol_flatfile';
             $eventdata->name              = 'flatfile_enrolment';
             $eventdata->userfrom          = get_admin();
@@ -443,7 +443,7 @@ class enrol_flatfile_plugin extends enrol_plugin {
 
                 $eventdata = new \core\message\message();
                 $eventdata->courseid          = $course->id;
-                $eventdata->modulename        = 'moodle';
+                $eventdata->modulename        = 'powereduc';
                 $eventdata->component         = 'enrol_flatfile';
                 $eventdata->name              = 'flatfile_enrolment';
                 $eventdata->userfrom          = $this->get_enroller($course->id);
@@ -475,7 +475,7 @@ class enrol_flatfile_plugin extends enrol_plugin {
 
                 $eventdata = new \core\message\message();
                 $eventdata->courseid          = $course->id;
-                $eventdata->modulename        = 'moodle';
+                $eventdata->modulename        = 'powereduc';
                 $eventdata->component         = 'enrol_flatfile';
                 $eventdata->name              = 'flatfile_enrolment';
                 $eventdata->userfrom          = get_admin();
@@ -591,7 +591,7 @@ class enrol_flatfile_plugin extends enrol_plugin {
      *
      * Usually it is the first editing teacher - the person with "highest authority"
      * as defined by sort_by_roleassignment_authority() having 'enrol/flatfile:manage'
-     * or 'moodle/role:assign' capability.
+     * or 'powereduc/role:assign' capability.
      *
      * @param int $courseid enrolment instance id
      * @return stdClass user record
@@ -605,7 +605,7 @@ class enrol_flatfile_plugin extends enrol_plugin {
 
         $users = get_enrolled_users($context, 'enrol/flatfile:manage');
         if (!$users) {
-            $users = get_enrolled_users($context, 'moodle/role:assign');
+            $users = get_enrolled_users($context, 'powereduc/role:assign');
         }
 
         if ($users) {

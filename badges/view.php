@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Displays available badges to a user
@@ -36,11 +36,11 @@ $page       = optional_param('page', 0, PARAM_INT);
 require_login();
 
 if (empty($CFG->enablebadges)) {
-    throw new \moodle_exception('badgesdisabled', 'badges');
+    throw new \powereduc_exception('badgesdisabled', 'badges');
 }
 
 if (empty($CFG->badges_allowcoursebadges) && $courseid != 0) {
-    throw new \moodle_exception('coursebadgesdisabled', 'badges');
+    throw new \powereduc_exception('coursebadgesdisabled', 'badges');
 }
 
 if (!in_array($sortby, array('name', 'dateissued'))) {
@@ -79,7 +79,7 @@ if ($type == BADGE_TYPE_SITE) {
     $eventotherparams = array('badgetype' => BADGE_TYPE_COURSE, 'courseid' => $course->id);
 }
 
-require_capability('moodle/badges:viewbadges', $PAGE->context);
+require_capability('powereduc/badges:viewbadges', $PAGE->context);
 
 $PAGE->set_title($title);
 $output = $PAGE->get_renderer('core', 'badges');
@@ -91,13 +91,13 @@ if ($isfrontpage) {
 } else {
     $context = context_course::instance($courseid);
 }
-$canmanage = has_any_capability(array('moodle/badges:viewawarded',
-    'moodle/badges:createbadge',
-    'moodle/badges:awardbadge',
-    'moodle/badges:configurecriteria',
-    'moodle/badges:configuremessages',
-    'moodle/badges:configuredetails',
-    'moodle/badges:deletebadge'), $context);
+$canmanage = has_any_capability(array('powereduc/badges:viewawarded',
+    'powereduc/badges:createbadge',
+    'powereduc/badges:awardbadge',
+    'powereduc/badges:configurecriteria',
+    'powereduc/badges:configuremessages',
+    'powereduc/badges:configuredetails',
+    'powereduc/badges:deletebadge'), $context);
 
 if ($canmanage) {
     // Check there are non archived badges on the course.

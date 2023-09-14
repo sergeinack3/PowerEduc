@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -167,8 +167,8 @@ class tool_launch_service {
         // See: http://www.imsglobal.org/spec/lti-ags/v2p0#assignment-and-grade-service-claim.
         if ($launchdata->ags && (!empty($launchdata->ags['lineitems']) || !empty($launchdata->ags['lineitem']))) {
             $resourcelink->add_grade_service(
-                !empty($launchdata->ags['lineitems']) ? new \moodle_url($launchdata->ags['lineitems']) : null,
-                !empty($launchdata->ags['lineitem']) ? new \moodle_url($launchdata->ags['lineitem']) : null,
+                !empty($launchdata->ags['lineitems']) ? new \powereduc_url($launchdata->ags['lineitems']) : null,
+                !empty($launchdata->ags['lineitem']) ? new \powereduc_url($launchdata->ags['lineitem']) : null,
                 $launchdata->ags['scope']
             );
         }
@@ -176,7 +176,7 @@ class tool_launch_service {
         // NRPS.
         if ($launchdata->nrps) {
             $resourcelink->add_names_and_roles_service(
-                new \moodle_url($launchdata->nrps['context_memberships_url']),
+                new \powereduc_url($launchdata->nrps['context_memberships_url']),
                 $launchdata->nrps['service_versions']
             );
         }
@@ -186,7 +186,7 @@ class tool_launch_service {
     /**
      * Get an lti user instance from the launch data.
      *
-     * @param \stdClass $user the moodle user object.
+     * @param \stdClass $user the powereduc user object.
      * @param \stdClass $launchdata the launch data.
      * @param \stdClass $resource the resource to which the user belongs.
      * @param resource_link $resourcelink the resource_link from which the user originated.
@@ -308,32 +308,32 @@ class tool_launch_service {
      * @param \stdClass $user the Moodle user record, obtained via the auth_lti authentication process.
      * @param LtiMessageLaunch $launch the launch data.
      * @return array array containing [int $userid, \stdClass $resource]
-     * @throws \moodle_exception if launch problems are encountered.
+     * @throws \powereduc_exception if launch problems are encountered.
      */
     public function user_launches_tool(\stdClass $user, LtiMessageLaunch $launch): array {
 
         $launchdata = $this->get_launch_data($launch);
 
         if (!$registration = $this->registrationrepo->find_by_platform($launchdata->platform, $launchdata->clientid)) {
-            throw new \moodle_exception('ltiadvlauncherror:invalidregistration', 'enrol_lti', '',
+            throw new \powereduc_exception('ltiadvlauncherror:invalidregistration', 'enrol_lti', '',
                 [$launchdata->platform, $launchdata->clientid]);
         }
 
         if (!$deployment = $this->deploymentrepo->find_by_registration($registration->get_id(),
             $launchdata->deploymentid)) {
-            throw new \moodle_exception('ltiadvlauncherror:invaliddeployment', 'enrol_lti', '',
+            throw new \powereduc_exception('ltiadvlauncherror:invaliddeployment', 'enrol_lti', '',
                 [$launchdata->deploymentid]);
         }
 
         $resourceuuid = $launchdata->custom['id'] ?? null;
         if (empty($resourceuuid)) {
-            throw new \moodle_exception('ltiadvlauncherror:missingid', 'enrol_lti');
+            throw new \powereduc_exception('ltiadvlauncherror:missingid', 'enrol_lti');
         }
 
         $resource = array_values(helper::get_lti_tools(['uuid' => $resourceuuid]));
         $resource = $resource[0] ?? null;
         if (empty($resource) || $resource->status != ENROL_INSTANCE_ENABLED) {
-            throw new \moodle_exception('ltiadvlauncherror:invalidid', 'enrol_lti', '', $resourceuuid);
+            throw new \powereduc_exception('ltiadvlauncherror:invalidid', 'enrol_lti', '', $resourceuuid);
         }
 
         // Update the deployment with the legacy consumer_key information, allowing migration of users to take place in future
@@ -373,7 +373,7 @@ class tool_launch_service {
         // Enrol the user in the course with no role.
         $result = helper::enrol_user($resource, $ltiuser->get_localid());
         if ($result !== helper::ENROLMENT_SUCCESSFUL) {
-            throw new \moodle_exception($result, 'enrol_lti');
+            throw new \powereduc_exception($result, 'enrol_lti');
         }
 
         // Give the user the role in the given context.

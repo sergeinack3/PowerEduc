@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * Defines backup_xml_transformer class
  *
  * @package     core_backup
- * @subpackage  moodle2
+ * @subpackage  powereduc2
  * @category    backup
  * @copyright   2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -35,7 +35,7 @@ global $LINKS_ENCODERS_CACHE;
 $LINKS_ENCODERS_CACHE = array();
 
 /**
- * Class implementing the @xml_contenttransformed logic to be applied in moodle2 backups
+ * Class implementing the @xml_contenttransformed logic to be applied in powereduc2 backups
  *
  * TODO: Finish phpdocs
  */
@@ -179,7 +179,7 @@ class backup_xml_transformer extends xml_contenttransformer {
         // Add the course encoder
         $encoders['backup_course_task'] = 'encode_content_links';
 
-        // Add the module ones. Each module supporting moodle2 backups MUST have it
+        // Add the module ones. Each module supporting powereduc2 backups MUST have it
         $mods = core_component::get_plugin_list('mod');
         foreach ($mods as $mod => $moddir) {
             if (plugin_supports('mod', $mod, FEATURE_BACKUP_POWEREDUC2) && class_exists('backup_' . $mod . '_activity_task')) {

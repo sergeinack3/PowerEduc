@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ use external_single_structure;
 use external_value;
 use invalid_parameter_exception;
 use context_course;
-use moodle_exception;
+use powereduc_exception;
 
 /**
  * Web service function relating to add enrol meta instances
@@ -83,8 +83,8 @@ class add_instances extends external_api {
             $contextmeta = context_course::instance($instance['metacourseid'], IGNORE_MISSING);
             try {
                 self::validate_context($contextmeta);
-                require_all_capabilities(['moodle/course:enrolconfig', 'enrol/meta:config'], $contextmeta);
-            } catch (moodle_exception $e) {
+                require_all_capabilities(['powereduc/course:enrolconfig', 'enrol/meta:config'], $contextmeta);
+            } catch (powereduc_exception $e) {
                 throw new invalid_parameter_exception(get_string('wsinvalidmetacourse', 'enrol_meta', $instance['metacourseid']));
             }
 
@@ -99,10 +99,10 @@ class add_instances extends external_api {
             try {
                 self::validate_context($context);
                 if (!$courserecord->visible) {
-                    require_capability('moodle/course:viewhiddencourses', $context);
+                    require_capability('powereduc/course:viewhiddencourses', $context);
                 }
                 require_capability('enrol/meta:selectaslinked', $context);
-            } catch (moodle_exception $e) {
+            } catch (powereduc_exception $e) {
                 throw new invalid_parameter_exception(get_string('wsinvalidcourse', 'enrol_meta', $instance['courseid']));
             }
 
@@ -122,8 +122,8 @@ class add_instances extends external_api {
             // Check for permission to create group.
             if ($instance['creategroup']) {
                 try {
-                    require_capability('moodle/course:managegroups', $context);
-                } catch (moodle_exception $e) {
+                    require_capability('powereduc/course:managegroups', $context);
+                } catch (powereduc_exception $e) {
                     throw new invalid_parameter_exception(get_string('wscannotcreategroup', 'enrol_meta', $instance['courseid']));
                 }
             }

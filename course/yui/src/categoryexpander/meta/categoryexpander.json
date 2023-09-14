@@ -1,5 +1,5 @@
 {
-  "moodle-course-categoryexpander": {
+  "powereduc-course-categoryexpander": {
     "requires": [
         "node",
         "event-key"

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -41,8 +41,8 @@ use enrol_imsenterprise\imsenterprise_test;
 use external_api;
 use grade_item;
 use grading_manager;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use phpunit_util;
 use rating_manager;
 use restore_controller;
@@ -678,7 +678,7 @@ class courselib_test extends advanced_testcase {
         try {
             $created = create_course($course);
             $this->fail('Exception expected');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertSame(get_string('shortnametaken', 'error', $course->shortname), $e->getMessage());
         }
 
@@ -687,7 +687,7 @@ class courselib_test extends advanced_testcase {
         try {
             $created = create_course($course);
             $this->fail('Exception expected');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertSame(get_string('courseidnumbertaken', 'error', $course->idnumber), $e->getMessage());
         }
     }
@@ -760,7 +760,7 @@ class courselib_test extends advanced_testcase {
         try {
             update_course($created2);
             $this->fail('Expected exception when trying to update a course with duplicate idnumber');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertEquals(get_string('courseidnumbertaken', 'error', $created2->idnumber), $e->getMessage());
         }
 
@@ -770,7 +770,7 @@ class courselib_test extends advanced_testcase {
         try {
             update_course($created2);
             $this->fail('Expected exception when trying to update a course with a duplicate shortname');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertEquals(get_string('shortnametaken', 'error', $created2->shortname), $e->getMessage());
         }
     }
@@ -1168,7 +1168,7 @@ class courselib_test extends advanced_testcase {
 
         // Now let's revoke a capability from teacher to manage activity in section 1.
         $modulecontext = context_module::instance($assign1->cmid);
-        assign_capability('moodle/course:manageactivities', CAP_PROHIBIT, $roleids['editingteacher'],
+        assign_capability('powereduc/course:manageactivities', CAP_PROHIBIT, $roleids['editingteacher'],
             $modulecontext);
         $this->assertFalse(course_can_delete_section($courseweeks, 1));
         $this->assertTrue(course_can_delete_section($courseweeks, 2));
@@ -1938,7 +1938,7 @@ class courselib_test extends advanced_testcase {
         $this->assertEquals('course', $event->objecttable);
         $this->assertEquals($updatedcourse->id, $event->objectid);
         $this->assertEquals(context_course::instance($course->id), $event->get_context());
-        $url = new moodle_url('/course/edit.php', array('id' => $event->objectid));
+        $url = new powereduc_url('/course/edit.php', array('id' => $event->objectid));
         $this->assertEquals($url, $event->get_url());
         $this->assertEquals($updatedcourse, $event->get_record_snapshot('course', $event->objectid));
         $this->assertEquals('course_updated', $event->get_legacy_eventname());
@@ -2227,7 +2227,7 @@ class courselib_test extends advanced_testcase {
         $this->assertEquals($bc->get_courseid(), $event->objectid);
         $this->assertEquals(context_course::instance($bc->get_courseid())->id, $event->contextid);
 
-        $url = new moodle_url('/course/view.php', array('id' => $event->objectid));
+        $url = new powereduc_url('/course/view.php', array('id' => $event->objectid));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
 
@@ -2262,7 +2262,7 @@ class courselib_test extends advanced_testcase {
         $bc->execute_plan();
         $results = $bc->get_results();
         $file = $results['backup_destination'];
-        $fp = get_file_packer('application/vnd.moodle.backup');
+        $fp = get_file_packer('application/vnd.powereduc.backup');
         $filepath = $CFG->dataroot . '/temp/backup/test-restore-course-event';
         $file->extract_to_pathname($fp, $filepath);
         $bc->destroy();
@@ -2296,7 +2296,7 @@ class courselib_test extends advanced_testcase {
             'operation' => $rc->get_operation(),
             'samesite' => $rc->is_samesite()
         );
-        $url = new moodle_url('/course/view.php', array('id' => $event->objectid));
+        $url = new powereduc_url('/course/view.php', array('id' => $event->objectid));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventLegacyData($legacydata, $event);
         $this->assertEventContextNotUsed($event);
@@ -2352,7 +2352,7 @@ class courselib_test extends advanced_testcase {
         $this->assertEquals($section->section, $event->other['sectionnum']);
         $expecteddesc = "The user with id '{$event->userid}' updated section number '{$event->other['sectionnum']}' for the course with id '{$event->courseid}'";
         $this->assertEquals($expecteddesc, $event->get_description());
-        $url = new moodle_url('/course/editsection.php', array('id' => $event->objectid));
+        $url = new powereduc_url('/course/editsection.php', array('id' => $event->objectid));
         $this->assertEquals($url, $event->get_url());
         $this->assertEquals($section, $event->get_record_snapshot('course_sections', $event->objectid));
         $id = $section->id;
@@ -2544,7 +2544,7 @@ class courselib_test extends advanced_testcase {
                 $this->assertEquals($module->cmid, $event->objectid);
                 $this->assertEquals($USER->id, $event->userid);
                 $this->assertEquals('course_modules', $event->objecttable);
-                $url = new moodle_url('/mod/assign/view.php', array('id' => $module->cmid));
+                $url = new powereduc_url('/mod/assign/view.php', array('id' => $module->cmid));
                 $this->assertEquals($url, $event->get_url());
 
                 // Test legacy data.
@@ -2585,7 +2585,7 @@ class courselib_test extends advanced_testcase {
                 $this->assertEquals($newcm->id, $event->objectid);
                 $this->assertEquals($USER->id, $event->userid);
                 $this->assertEquals($course->id, $event->courseid);
-                $url = new moodle_url('/mod/assign/view.php', array('id' => $newcm->id));
+                $url = new powereduc_url('/mod/assign/view.php', array('id' => $newcm->id));
                 $this->assertEquals($url, $event->get_url());
             }
         }
@@ -2684,7 +2684,7 @@ class courselib_test extends advanced_testcase {
                 $this->assertEquals($cm->id, $event->objectid);
                 $this->assertEquals($USER->id, $event->userid);
                 $this->assertEquals('course_modules', $event->objecttable);
-                $url = new moodle_url('/mod/forum/view.php', array('id' => $cm->id));
+                $url = new powereduc_url('/mod/forum/view.php', array('id' => $cm->id));
                 $this->assertEquals($url, $event->get_url());
 
                 // Test legacy data.
@@ -2943,7 +2943,7 @@ class courselib_test extends advanced_testcase {
         $context = $category->get_context();
 
         list($user, $roleid) = $this->get_user_objects($generator, $context->id);
-        $caps = course_capability_assignment::allow('moodle/category:manage', $roleid, $context->id);
+        $caps = course_capability_assignment::allow('powereduc/category:manage', $roleid, $context->id);
 
         $courses = $category->get_courses();
         $this->assertIsArray($courses);
@@ -3110,7 +3110,7 @@ class courselib_test extends advanced_testcase {
             }
             if ($prop == 'name') {
                 // We expect ' (copy)' to be added to the original name since MDL-59227.
-                $value = get_string('duplicatedmodule', 'moodle', $value);
+                $value = get_string('duplicatedmodule', 'powereduc', $value);
             }
             $this->assertEquals($value, $newcm->$prop);
         }
@@ -3172,7 +3172,7 @@ class courselib_test extends advanced_testcase {
         try {
             core_external::update_inplace_editable('core_course', 'activityname', $forum->cmid, 'New forum name');
             $this->fail('Exception expected');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertEquals('Course or activity not accessible. (Not enrolled)',
                 $e->getMessage());
         }
@@ -3383,7 +3383,7 @@ class courselib_test extends advanced_testcase {
         $CFG->badges_allowcoursebadges = 0;
         $CFG->enableblogs = 0;
         // Disable view participants capability.
-        assign_capability('moodle/course:viewparticipants', CAP_PROHIBIT, $roleid, $context);
+        assign_capability('powereduc/course:viewparticipants', CAP_PROHIBIT, $roleid, $context);
 
         $navoptions = course_get_user_navigation_options($context);
         $this->assertFalse($navoptions->blogs);
@@ -3393,7 +3393,7 @@ class courselib_test extends advanced_testcase {
 
         // Re-enable some options to check badges are displayed as expected.
         $CFG->badges_allowcoursebadges = 1;
-        assign_capability('moodle/badges:createbadge', CAP_ALLOW, $roleid, $context);
+        assign_capability('powereduc/badges:createbadge', CAP_ALLOW, $roleid, $context);
 
         $navoptions = course_get_user_navigation_options($context);
         $this->assertTrue($navoptions->badges);
@@ -3501,7 +3501,7 @@ class courselib_test extends advanced_testcase {
         $course = get_course(SITEID);
         // Test update information on front page course.
         $course->category = 99;
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('invalidcourse', 'error'));
         update_course($course);
     }
@@ -3524,7 +3524,7 @@ class courselib_test extends advanced_testcase {
             if ($errorcode !== false) {
                 $this->fail('Expected exception with "' . $errorcode . '" error code in create_create');
             }
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             if ($errorcode === false) {
                 $this->fail('Got "' . $errorcode . '" exception error code and no exception was expected');
             }
@@ -4385,14 +4385,14 @@ class courselib_test extends advanced_testcase {
         $this->setUser($user);
 
         // Disable one of the capabilties.
-        assign_capability('moodle/course:viewparticipants', CAP_PROHIBIT, $roleid, $coursecontext);
+        assign_capability('powereduc/course:viewparticipants', CAP_PROHIBIT, $roleid, $coursecontext);
 
-        // Should still be able to view the page as they have the 'moodle/course:enrolreview' cap.
+        // Should still be able to view the page as they have the 'powereduc/course:enrolreview' cap.
         $this->assertTrue(course_can_view_participants($coursecontext));
     }
 
     /**
-     * Check the teacher can still view the participants page without the 'moodle/course:enrolreview' cap.
+     * Check the teacher can still view the participants page without the 'powereduc/course:enrolreview' cap.
      */
     public function test_course_can_view_participants_as_teacher_without_enrol_review_cap() {
         global $DB;
@@ -4409,9 +4409,9 @@ class courselib_test extends advanced_testcase {
         $this->setUser($user);
 
         // Disable one of the capabilties.
-        assign_capability('moodle/course:enrolreview', CAP_PROHIBIT, $roleid, $coursecontext);
+        assign_capability('powereduc/course:enrolreview', CAP_PROHIBIT, $roleid, $coursecontext);
 
-        // Should still be able to view the page as they have the 'moodle/course:viewparticipants' cap.
+        // Should still be able to view the page as they have the 'powereduc/course:viewparticipants' cap.
         $this->assertTrue(course_can_view_participants($coursecontext));
     }
 
@@ -4433,8 +4433,8 @@ class courselib_test extends advanced_testcase {
         $this->setUser($user);
 
         // Disable the capabilities.
-        assign_capability('moodle/course:viewparticipants', CAP_PROHIBIT, $roleid, $coursecontext);
-        assign_capability('moodle/course:enrolreview', CAP_PROHIBIT, $roleid, $coursecontext);
+        assign_capability('powereduc/course:viewparticipants', CAP_PROHIBIT, $roleid, $coursecontext);
+        assign_capability('powereduc/course:enrolreview', CAP_PROHIBIT, $roleid, $coursecontext);
 
         $this->assertFalse(course_can_view_participants($coursecontext));
     }
@@ -4487,39 +4487,39 @@ class courselib_test extends advanced_testcase {
 
         // The 'automated' backup area. Downloading from this area requires two capabilities.
         // If the user has only the 'backup:downloadfile' capability.
-        unassign_capability('moodle/restore:userinfo', $teacherrole->id, $context);
-        assign_capability('moodle/backup:downloadfile', CAP_ALLOW, $teacherrole->id, $context);
+        unassign_capability('powereduc/restore:userinfo', $teacherrole->id, $context);
+        assign_capability('powereduc/backup:downloadfile', CAP_ALLOW, $teacherrole->id, $context);
         $this->assertFalse(can_download_from_backup_filearea('automated', $context, $user));
 
         // If the user has only the 'restore:userinfo' capability.
-        unassign_capability('moodle/backup:downloadfile', $teacherrole->id, $context);
-        assign_capability('moodle/restore:userinfo', CAP_ALLOW, $teacherrole->id, $context);
+        unassign_capability('powereduc/backup:downloadfile', $teacherrole->id, $context);
+        assign_capability('powereduc/restore:userinfo', CAP_ALLOW, $teacherrole->id, $context);
         $this->assertFalse(can_download_from_backup_filearea('automated', $context, $user));
 
         // If the user has both capabilities.
-        assign_capability('moodle/backup:downloadfile', CAP_ALLOW, $teacherrole->id, $context);
-        assign_capability('moodle/restore:userinfo', CAP_ALLOW, $teacherrole->id, $context);
+        assign_capability('powereduc/backup:downloadfile', CAP_ALLOW, $teacherrole->id, $context);
+        assign_capability('powereduc/restore:userinfo', CAP_ALLOW, $teacherrole->id, $context);
         $this->assertTrue(can_download_from_backup_filearea('automated', $context, $user));
 
         // Is the user has neither of the capabilities.
-        unassign_capability('moodle/backup:downloadfile', $teacherrole->id, $context);
-        unassign_capability('moodle/restore:userinfo', $teacherrole->id, $context);
+        unassign_capability('powereduc/backup:downloadfile', $teacherrole->id, $context);
+        unassign_capability('powereduc/restore:userinfo', $teacherrole->id, $context);
         $this->assertFalse(can_download_from_backup_filearea('automated', $context, $user));
 
         // The 'course ' and 'backup' backup file areas. These are governed by the same download capability.
         // User has the capability.
-        unassign_capability('moodle/restore:userinfo', $teacherrole->id, $context);
-        assign_capability('moodle/backup:downloadfile', CAP_ALLOW, $teacherrole->id, $context);
+        unassign_capability('powereduc/restore:userinfo', $teacherrole->id, $context);
+        assign_capability('powereduc/backup:downloadfile', CAP_ALLOW, $teacherrole->id, $context);
         $this->assertTrue(can_download_from_backup_filearea('course', $context, $user));
         $this->assertTrue(can_download_from_backup_filearea('backup', $context, $user));
 
         // User doesn't have the capability.
-        unassign_capability('moodle/backup:downloadfile', $teacherrole->id, $context);
+        unassign_capability('powereduc/backup:downloadfile', $teacherrole->id, $context);
         $this->assertFalse(can_download_from_backup_filearea('course', $context, $user));
         $this->assertFalse(can_download_from_backup_filearea('backup', $context, $user));
 
         // A file area that doesn't exist. No permissions, regardless of capabilities.
-        assign_capability('moodle/backup:downloadfile', CAP_ALLOW, $teacherrole->id, $context);
+        assign_capability('powereduc/backup:downloadfile', CAP_ALLOW, $teacherrole->id, $context);
         $this->assertFalse(can_download_from_backup_filearea('testing', $context, $user));
     }
 
@@ -7185,7 +7185,7 @@ class courselib_test extends advanced_testcase {
 
         // Allow for the 'user' role the capability to request courses.
         $userroleid = $DB->get_field('role', 'id', ['shortname' => 'user']);
-        assign_capability('moodle/course:request', CAP_ALLOW, $userroleid,
+        assign_capability('powereduc/course:request', CAP_ALLOW, $userroleid,
             context_system::instance()->id);
         accesslib_clear_all_caches_for_unit_testing();
 
@@ -7207,7 +7207,7 @@ class courselib_test extends advanced_testcase {
 
         // Remove cap from cat2.
         $roleid = create_role('Test role', 'testrole', 'Test role description');
-        assign_capability('moodle/course:request', CAP_PROHIBIT, $roleid,
+        assign_capability('powereduc/course:request', CAP_PROHIBIT, $roleid,
             $context2->id, true);
         role_assign($roleid, $user->id, $context2->id);
         accesslib_clear_all_caches_for_unit_testing();
@@ -7250,7 +7250,7 @@ class courselib_test extends advanced_testcase {
         $this->setUser($user);
         // Add capability to approve courses.
         $roleid = create_role('Test role', 'testrole', 'Test role description');
-        assign_capability('moodle/site:approvecourse', CAP_ALLOW, $roleid,
+        assign_capability('powereduc/site:approvecourse', CAP_ALLOW, $roleid,
             context_system::instance()->id, true);
         role_assign($roleid, $user->id, context_coursecat::instance($cat2)->id);
         accesslib_clear_all_caches_for_unit_testing();

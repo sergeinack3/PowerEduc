@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Library functions for managing text filter plugins.
  *
  * @package   core
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -48,18 +48,18 @@ define('TEXTFILTER_EXCL_SEPARATOR', chr(0x1F) . '%' . chr(0x1F));
  *
  * This class is a singleton.
  *
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class filter_manager {
     /**
-     * @var moodle_text_filter[][] This list of active filters, by context, for filtering content.
+     * @var powereduc_text_filter[][] This list of active filters, by context, for filtering content.
      * An array contextid => ordered array of filter name => filter objects.
      */
     protected $textfilters = array();
 
     /**
-     * @var moodle_text_filter[][] This list of active filters, by context, for filtering strings.
+     * @var powereduc_text_filter[][] This list of active filters, by context, for filtering strings.
      * An array contextid => ordered array of filter name => filter objects.
      */
     protected $stringfilters = array();
@@ -140,7 +140,7 @@ class filter_manager {
      * @param string $filtername The filter name, for example 'tex'.
      * @param context $context context object.
      * @param array $localconfig array of local configuration variables for this filter.
-     * @return moodle_text_filter The filter, or null, if this type of filter is
+     * @return powereduc_text_filter The filter, or null, if this type of filter is
      *      not recognised or could not be created.
      */
     protected function make_filter_object($filtername, $context, $localconfig) {
@@ -162,7 +162,7 @@ class filter_manager {
     /**
      * Apply a list of filters to some content.
      * @param string $text
-     * @param moodle_text_filter[] $filterchain array filter name => filter object.
+     * @param powereduc_text_filter[] $filterchain array filter name => filter object.
      * @param array $options options passed to the filters.
      * @param array $skipfilters of filter names. Any filters that should not be applied to this text.
      * @return string $text
@@ -182,7 +182,7 @@ class filter_manager {
      * Get all the filters that apply to a given context for calls to format_text.
      *
      * @param context $context
-     * @return moodle_text_filter[] A text filter
+     * @return powereduc_text_filter[] A text filter
      */
     protected function get_text_filters($context) {
         if (!isset($this->textfilters[$context->id])) {
@@ -195,7 +195,7 @@ class filter_manager {
      * Get all the filters that apply to a given context for calls to format_string.
      *
      * @param context $context the context.
-     * @return moodle_text_filter[] A text filter
+     * @return powereduc_text_filter[] A text filter
      */
     protected function get_string_filters($context) {
         if (!isset($this->stringfilters[$context->id])) {
@@ -233,7 +233,7 @@ class filter_manager {
     }
 
     /**
-     * @deprecated Since Moodle 3.0 MDL-50491. This was used by the old text filtering system, but no more.
+     * @deprecated Since PowerEduc 3.0 MDL-50491. This was used by the old text filtering system, but no more.
      */
     public function text_filtering_hash() {
         throw new coding_exception('filter_manager::text_filtering_hash() can not be used any more');
@@ -251,9 +251,9 @@ class filter_manager {
      * are responsible of controlling the cardinality of the executions that may
      * be different depending of the stuff to prepare.
      *
-     * @param moodle_page $page the page we are going to add requirements to.
+     * @param powereduc_page $page the page we are going to add requirements to.
      * @param context $context the context which contents are going to be filtered.
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     public function setup_page_for_filters($page, $context) {
         $filters = $this->get_text_filters($context);
@@ -273,8 +273,8 @@ class filter_manager {
      *
      * This should only ever be called once per request.
      *
-     * @param moodle_page $page The page.
-     * @since Moodle 3.2
+     * @param powereduc_page $page The page.
+     * @since PowerEduc 3.2
      */
     public function setup_page_for_globally_available_filters($page) {
         $context = context_system::instance();
@@ -298,7 +298,7 @@ class filter_manager {
  * Filter manager subclass that does nothing. Having this simplifies the logic
  * of format_text, etc.
  *
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class null_filter_manager {
@@ -330,7 +330,7 @@ class null_filter_manager {
     /**
      * As for the equivalent {@link filter_manager} method.
      *
-     * @deprecated Since Moodle 3.0 MDL-50491.
+     * @deprecated Since PowerEduc 3.0 MDL-50491.
      */
     public function text_filtering_hash() {
         throw new coding_exception('filter_manager::text_filtering_hash() can not be used any more');
@@ -341,7 +341,7 @@ class null_filter_manager {
 /**
  * Filter manager subclass that tracks how much work it does.
  *
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class performance_measuring_filter_manager extends filter_manager {
@@ -401,10 +401,10 @@ class performance_measuring_filter_manager extends filter_manager {
  * Base class for text filters. You just need to override this class and
  * implement the filter method.
  *
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-abstract class moodle_text_filter {
+abstract class powereduc_text_filter {
     /** @var context The context we are in. */
     protected $context;
 
@@ -423,10 +423,10 @@ abstract class moodle_text_filter {
     }
 
     /**
-     * @deprecated Since Moodle 3.0 MDL-50491. This was used by the old text filtering system, but no more.
+     * @deprecated Since PowerEduc 3.0 MDL-50491. This was used by the old text filtering system, but no more.
      */
     public function hash() {
-        throw new coding_exception('moodle_text_filter::hash() can not be used any more');
+        throw new coding_exception('powereduc_text_filter::hash() can not be used any more');
     }
 
     /**
@@ -439,9 +439,9 @@ abstract class moodle_text_filter {
      * for each piece of text being filtered, so it is responsible
      * for controlling its own execution cardinality.
      *
-     * @param moodle_page $page the page we are going to add requirements to.
+     * @param powereduc_page $page the page we are going to add requirements to.
      * @param context $context the context which contents are going to be filtered.
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     public function setup($page, $context) {
         // Override me, if needed.
@@ -467,7 +467,7 @@ abstract class moodle_text_filter {
  * never use that. All that is supported is contructing new instances of this
  * class, and then passing an array of them to filter_phrases.
  *
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class filterobject {
@@ -555,7 +555,7 @@ function filter_get_name($filter) {
 }
 
 /**
- * Get the names of all the filters installed in this Moodle.
+ * Get the names of all the filters installed in this PowerEduc.
  *
  * @return array path => filter name from the appropriate lang file. e.g.
  * array('tex' => 'TeX Notation');
@@ -1026,7 +1026,7 @@ function filter_get_active_in_context($context) {
     $contextids = str_replace('/', ',', trim($context->path, '/'));
 
     // The following SQL is tricky. It is explained on
-    // http://docs.moodle.org/dev/Filter_enable/disable_by_context.
+    // http://docs.powereduc.org/dev/Filter_enable/disable_by_context.
     $sql = "SELECT active.filter, fc.name, fc.value
          FROM (SELECT f.filter, MAX(f.sortorder) AS sortorder
              FROM {filter_active} f

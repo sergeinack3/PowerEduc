@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -61,12 +61,12 @@ if (!empty($action)) {
 }
 
 /**
- * Helper function that generates a moodle_url object
+ * Helper function that generates a powereduc_url object
  * relevant to the repository
  */
 function repository_action_url($repository) {
     global $baseurl;
-    return new moodle_url($baseurl, array('sesskey'=>sesskey(), 'repos'=>$repository));
+    return new powereduc_url($baseurl, array('sesskey'=>sesskey(), 'repos'=>$repository));
 }
 
 if (($action == 'edit') || ($action == 'new')) {
@@ -152,7 +152,7 @@ if (($action == 'edit') || ($action == 'new')) {
             core_plugin_manager::reset_caches();
             redirect($baseurl);
         } else {
-            throw new \moodle_exception('instancenotsaved', 'repository', $baseurl);
+            throw new \powereduc_exception('instancenotsaved', 'repository', $baseurl);
         }
         exit;
     } else {
@@ -183,14 +183,14 @@ if (($action == 'edit') || ($action == 'new')) {
     }
 } else if ($action == 'show') {
     if (!confirm_sesskey()) {
-        throw new \moodle_exception('confirmsesskeybad', '', $baseurl);
+        throw new \powereduc_exception('confirmsesskeybad', '', $baseurl);
     }
     $class = \core_plugin_manager::resolve_plugininfo_class('repository');
     $class::enable_plugin($repository, 1);
     $return = true;
 } else if ($action == 'hide') {
     if (!confirm_sesskey()) {
-        throw new \moodle_exception('confirmsesskeybad', '', $baseurl);
+        throw new \powereduc_exception('confirmsesskeybad', '', $baseurl);
     }
     $class = \core_plugin_manager::resolve_plugininfo_class('repository');
     $class::enable_plugin($repository, 0);
@@ -200,7 +200,7 @@ if (($action == 'edit') || ($action == 'new')) {
     if ($sure) {
         $PAGE->set_pagetype('admin-repository-' . $repository);
         if (!confirm_sesskey()) {
-            throw new \moodle_exception('confirmsesskeybad', '', $baseurl);
+            throw new \powereduc_exception('confirmsesskeybad', '', $baseurl);
         }
 
         if ($repositorytype->delete($downloadcontents)) {
@@ -209,7 +209,7 @@ if (($action == 'edit') || ($action == 'new')) {
             core_plugin_manager::reset_caches();
             redirect($baseurl);
         } else {
-            throw new \moodle_exception('instancenotdeleted', 'repository', $baseurl);
+            throw new \powereduc_exception('instancenotdeleted', 'repository', $baseurl);
         }
         exit;
     } else {
@@ -220,14 +220,14 @@ if (($action == 'edit') || ($action == 'new')) {
         $output = $OUTPUT->box_start('generalbox', 'notice');
         $output .= html_writer::tag('p', $message);
 
-        $removeurl = new moodle_url($sesskeyurl);
+        $removeurl = new powereduc_url($sesskeyurl);
         $removeurl->params(array(
             'action' =>'delete',
             'repos' => $repository,
             'sure' => 'yes',
         ));
 
-        $removeanddownloadurl = new moodle_url($sesskeyurl);
+        $removeanddownloadurl = new powereduc_url($sesskeyurl);
         $removeanddownloadurl->params(array(
             'action' =>'delete',
             'repos'=> $repository,

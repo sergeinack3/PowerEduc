@@ -1,10 +1,10 @@
-YUI.add('moodle-course-dragdrop', function (Y, NAME) {
+YUI.add('powereduc-course-dragdrop', function (Y, NAME) {
 
 /* eslint-disable no-unused-vars */
 /**
  * Drag and Drop for course sections and course modules.
  *
- * @module moodle-course-dragdrop
+ * @module powereduc-course-dragdrop
  */
 
 var CSS = {
@@ -101,7 +101,7 @@ Y.extend(DRAGSECTION, M.core.dragdrop, {
                 var moveup = sectionnode.one('.' + CSS.RIGHT + ' a.' + CSS.MOVEUP);
 
                 // Add dragger icon
-                var title = M.util.get_string('movesection', 'moodle', sectionid);
+                var title = M.util.get_string('movesection', 'powereduc', sectionid);
                 var cssleft = sectionnode.one('.' + CSS.LEFT);
 
                 if ((movedown || moveup) && cssleft) {
@@ -343,11 +343,11 @@ Y.extend(DRAGRESOURCE, M.core.dragdrop, {
 
         this.samenodelabel = {
             identifier: 'afterresource',
-            component: 'moodle'
+            component: 'powereduc'
         };
         this.parentnodelabel = {
             identifier: 'totopofsection',
-            component: 'moodle'
+            component: 'powereduc'
         };
 
         // Go through all sections
@@ -433,7 +433,7 @@ Y.extend(DRAGRESOURCE, M.core.dragdrop, {
             var move = resourcesnode.one('a.' + CSS.EDITINGMOVE);
             if (move) {
                 var sr = move.getData('sectionreturn');
-                move.replace(this.get_drag_handle(M.util.get_string('movecoursemodule', 'moodle'),
+                move.replace(this.get_drag_handle(M.util.get_string('movecoursemodule', 'powereduc'),
                              CSS.EDITINGMOVE, CSS.ICONCLASS, true).setAttribute('data-sectionreturn', sr));
             }
         }, this);
@@ -563,9 +563,9 @@ M.course.init_resource_dragdrop = function(params) {
         "dom",
         "dd",
         "dd-scroll",
-        "moodle-core-dragdrop",
-        "moodle-core-notification",
-        "moodle-course-coursebase",
-        "moodle-course-util"
+        "powereduc-core-dragdrop",
+        "powereduc-core-notification",
+        "powereduc-course-coursebase",
+        "powereduc-course-util"
     ]
 });

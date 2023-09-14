@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ interface packable {
     /**
      * Exports the machine learning model.
      *
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @param  string $uniqueid  The model unique id
      * @param  string $modeldir  The directory that contains the trained model.
      * @return string            The path to the directory that contains the exported model.

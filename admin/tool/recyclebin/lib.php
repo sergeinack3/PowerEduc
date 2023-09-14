@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -50,7 +50,7 @@ function tool_recyclebin_extend_navigation_course($navigation, $course, $context
     $url = null;
     $settingnode = null;
 
-    $url = new moodle_url('/admin/tool/recyclebin/index.php', array(
+    $url = new powereduc_url('/admin/tool/recyclebin/index.php', array(
         'contextid' => $context->id
     ));
 
@@ -108,7 +108,7 @@ function tool_recyclebin_extend_navigation_category_settings($navigation, $conte
     $settingnode = null;
 
     // Add a link to the category recyclebin.
-    $url = new moodle_url('/admin/tool/recyclebin/index.php', array(
+    $url = new powereduc_url('/admin/tool/recyclebin/index.php', array(
         'contextid' => $context->id
     ));
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,17 +37,17 @@ require_once($CFG->dirroot . '/enrol/manual/classes/enrol_users_form.php');
 $id      = required_param('id', PARAM_INT); // Course id.
 $action  = required_param('action', PARAM_ALPHANUMEXT);
 
-$PAGE->set_url(new moodle_url('/enrol/ajax.php', array('id'=>$id, 'action'=>$action)));
+$PAGE->set_url(new powereduc_url('/enrol/ajax.php', array('id'=>$id, 'action'=>$action)));
 
 $course = $DB->get_record('course', array('id'=>$id), '*', MUST_EXIST);
 $context = context_course::instance($course->id, MUST_EXIST);
 
 if ($course->id == SITEID) {
-    throw new moodle_exception('invalidcourse');
+    throw new powereduc_exception('invalidcourse');
 }
 
 require_login($course);
-require_capability('moodle/course:enrolreview', $context);
+require_capability('powereduc/course:enrolreview', $context);
 require_sesskey();
 
 echo $OUTPUT->header(); // Send headers.
@@ -101,7 +101,7 @@ switch ($action) {
         if (empty($roleid)) {
             $roleid = null;
         } else {
-            if (!has_capability('moodle/role:assign', $context)) {
+            if (!has_capability('powereduc/role:assign', $context)) {
                 throw new enrol_ajax_exception('assignnotpermitted');
             }
             if (!array_key_exists($roleid, get_assignable_roles($context, ROLENAME_ALIAS, false))) {

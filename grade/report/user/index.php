@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * The gradebook user report
  *
  * @package   gradereport_user
- * @copyright 2007 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2007 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,7 +31,7 @@ $courseid = required_param('id', PARAM_INT);
 $userid   = optional_param('userid', null, PARAM_INT);
 $userview = optional_param('userview', 0, PARAM_INT);
 
-$PAGE->set_url(new moodle_url('/grade/report/user/index.php', ['id' => $courseid]));
+$PAGE->set_url(new powereduc_url('/grade/report/user/index.php', ['id' => $courseid]));
 
 if ($userview == 0) {
     $userview = get_user_preferences('gradereport_user_view_user', GRADE_REPORT_USER_VIEW_USER);
@@ -41,7 +41,7 @@ if ($userview == 0) {
 
 // Basic access checks.
 if (!$course = $DB->get_record('course', ['id' => $courseid])) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 require_login($course);
 $PAGE->set_pagelayout('report');
@@ -50,28 +50,28 @@ $context = context_course::instance($course->id);
 require_capability('gradereport/user:view', $context);
 
 if ($userid === 0) {
-    require_capability('moodle/grade:viewall', $context);
+    require_capability('powereduc/grade:viewall', $context);
 } else if ($userid) {
     if (!$DB->get_record('user', ['id' => $userid, 'deleted' => 0]) || isguestuser($userid)) {
-        throw new \moodle_exception('invaliduser');
+        throw new \powereduc_exception('invaliduser');
     }
 }
 
 $access = false;
-if (has_capability('moodle/grade:viewall', $context)) {
+if (has_capability('powereduc/grade:viewall', $context)) {
     // User can view all course grades.
     $access = true;
-} else if (($userid == $USER->id || is_null($userid)) && has_capability('moodle/grade:view', $context) && $course->showgrades) {
+} else if (($userid == $USER->id || is_null($userid)) && has_capability('powereduc/grade:view', $context) && $course->showgrades) {
     // User can view own grades.
     $access = true;
-} else if (has_capability('moodle/grade:viewall', context_user::instance($userid)) && $course->showgrades) {
+} else if (has_capability('powereduc/grade:viewall', context_user::instance($userid)) && $course->showgrades) {
     // User can view grades of this user, The user is an parent most probably.
     $access = true;
 }
 
 if (!$access) {
     // The user has no access to grades.
-    throw new \moodle_exception('nopermissiontoviewgrades', 'error',  $CFG->wwwroot.'/course/view.php?id='.$courseid);
+    throw new \powereduc_exception('nopermissiontoviewgrades', 'error',  $CFG->wwwroot.'/course/view.php?id='.$courseid);
 }
 
 // Initialise the grade tracking object.
@@ -89,7 +89,7 @@ grade_regrade_final_grades_if_required($course);
 $gradesrenderer = $PAGE->get_renderer('core_grades');
 
 // Teachers will see all student reports.
-if (has_capability('moodle/grade:viewall', $context)) {
+if (has_capability('powereduc/grade:viewall', $context)) {
     // Verify if we are using groups or not.
     $groupmode = groups_get_course_groupmode($course);
     $currentgroup = $gpr->groupid;
@@ -99,7 +99,7 @@ if (has_capability('moodle/grade:viewall', $context)) {
         $currentgroup = null;
     }
 
-    $isseparategroups = ($course->groupmode == SEPARATEGROUPS && !has_capability('moodle/site:accessallgroups', $context));
+    $isseparategroups = ($course->groupmode == SEPARATEGROUPS && !has_capability('powereduc/site:accessallgroups', $context));
 
     if ($isseparategroups && (!$currentgroup)) {
         // No separate group access, The user can view only themselves.
@@ -108,7 +108,7 @@ if (has_capability('moodle/grade:viewall', $context)) {
 
     $defaultgradeshowactiveenrol = !empty($CFG->grade_report_showonlyactiveenrol);
     $showonlyactiveenrol = get_user_preferences('grade_report_showonlyactiveenrol', $defaultgradeshowactiveenrol);
-    $showonlyactiveenrol = $showonlyactiveenrol || !has_capability('moodle/course:viewsuspendedusers', $context);
+    $showonlyactiveenrol = $showonlyactiveenrol || !has_capability('powereduc/course:viewsuspendedusers', $context);
 
     if ($userview == GRADE_REPORT_USER_VIEW_USER) {
         $viewasuser = true;

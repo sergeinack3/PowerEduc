@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -77,7 +77,7 @@ class data_registry_page implements renderable, templatable {
 
         $data = new stdClass();
         $defaultsbutton = new \action_link(
-            new \moodle_url('/admin/tool/dataprivacy/defaults.php'),
+            new \powereduc_url('/admin/tool/dataprivacy/defaults.php'),
             get_string('setdefaults', 'tool_dataprivacy'),
             null,
             ['class' => 'btn btn-primary']
@@ -88,11 +88,11 @@ class data_registry_page implements renderable, templatable {
         $actionmenu->set_menu_trigger(get_string('edit'), 'btn btn-primary');
         $actionmenu->set_owner_selector('dataregistry-actions');
 
-        $url = new \moodle_url('/admin/tool/dataprivacy/categories.php');
+        $url = new \powereduc_url('/admin/tool/dataprivacy/categories.php');
         $categories = new \action_menu_link_secondary($url, null, get_string('categories', 'tool_dataprivacy'));
         $actionmenu->add($categories);
 
-        $url = new \moodle_url('/admin/tool/dataprivacy/purposes.php');
+        $url = new \powereduc_url('/admin/tool/dataprivacy/purposes.php');
         $purposes = new \action_menu_link_secondary($url, null, get_string('purposes', 'tool_dataprivacy'));
         $actionmenu->add($purposes);
 

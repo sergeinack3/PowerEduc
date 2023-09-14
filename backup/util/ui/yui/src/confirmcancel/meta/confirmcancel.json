@@ -1,9 +1,9 @@
 {
-    "moodle-backup-confirmcancel": {
+    "powereduc-backup-confirmcancel": {
         "requires": [
             "node",
             "node-event-simulate",
-            "moodle-core-notification-confirm"
+            "powereduc-core-notification-confirm"
         ]
     }
 }

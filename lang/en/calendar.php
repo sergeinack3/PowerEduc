@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'calendar', language 'en', branch 'POWEREDUC_20_STABLE'
@@ -206,7 +206,7 @@ $string['pref_lookahead_help'] = 'This sets the (maximum) number of days in the 
 $string['pref_maxevents'] = 'Maximum upcoming events';
 $string['pref_maxevents_help'] = 'This sets the maximum number of upcoming events that can be displayed. If you pick a large number here it is possible that upcoming events displays will take up a lot of space on your screen.';
 $string['pref_persistflt'] = 'Remember filter settings';
-$string['pref_persistflt_help'] = 'If this is enabled, then Moodle will remember your last event filter settings and automatically restore them each time you login.';
+$string['pref_persistflt_help'] = 'If this is enabled, then PowerEduc will remember your last event filter settings and automatically restore them each time you login.';
 $string['pref_startwday'] = 'First day of week';
 $string['pref_startwday_help'] = 'Calendar weeks will be shown as starting on the day that you select here.';
 $string['pref_timeformat'] = 'Time display format';
@@ -284,7 +284,7 @@ $string['yesterday'] = 'Yesterday';
 $string['youcandeleteallrepeats'] = 'This event is part of a repeating event series. You can delete this event only, or all {$a} events in the series at once.';
 $string['yoursubscriptions'] = 'Imported calendars';
 
-// Deprecated since Moodle 4.0.
+// Deprecated since PowerEduc 4.0.
 $string['calendarurl'] = 'Calendar URL: {$a}';
 $string['importfrominstructions'] = 'Please provide either a URL to a remote calendar, or upload a file.';
 $string['monthlyview'] = 'Monthly view';

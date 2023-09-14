@@ -1,7 +1,7 @@
 {
-    "moodle-atto_strike-button": {
+    "powereduc-atto_strike-button": {
         "requires": [
-            "moodle-editor_atto-plugin"
+            "powereduc-editor_atto-plugin"
         ]
     }
 }

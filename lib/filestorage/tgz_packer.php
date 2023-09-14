@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Implementation of .tar.gz packer.
@@ -55,14 +55,14 @@ class tgz_packer extends file_packer {
     const DEFAULT_TIMESTAMP = 1356998400;
 
     /**
-     * @var string Name of special archive index file added by Moodle.
+     * @var string Name of special archive index file added by PowerEduc.
      */
     const ARCHIVE_INDEX_FILE = '.ARCHIVE_INDEX';
 
     /**
      * @var string Required text at start of archive index file before file count.
      */
-    const ARCHIVE_INDEX_COUNT_PREFIX = 'Moodle archive file index. Count: ';
+    const ARCHIVE_INDEX_COUNT_PREFIX = 'PowerEduc archive file index. Count: ';
 
     /**
      * @var bool If true, includes .ARCHIVE_INDEX file in root of tar file.
@@ -638,7 +638,7 @@ class tgz_packer extends file_packer {
      * @param bool $returnbool Whether to return a basic true/false indicating error state, or full per-file error
      * details.
      * @return array list of processed files (name=>true)
-     * @throws moodle_exception If error
+     * @throws powereduc_exception If error
      */
     public function extract_to_pathname($archivefile, $pathname,
             array $onlyfiles = null, file_progress $progress = null, $returnbool = false) {
@@ -659,7 +659,7 @@ class tgz_packer extends file_packer {
             } else {
                 return $result;
             }
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             if ($returnbool) {
                 return false;
             } else {
@@ -680,7 +680,7 @@ class tgz_packer extends file_packer {
      * @param int $userid user ID
      * @param file_progress $progress Progress indicator callback or null if not required
      * @return array list of processed files (name=>true)
-     * @throws moodle_exception If error
+     * @throws powereduc_exception If error
      */
     public function extract_to_storage($archivefile, $contextid,
             $component, $filearea, $itemid, $pathbase, $userid = null,

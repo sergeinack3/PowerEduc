@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Load template source strings.
  *
  * @package    core
  * @category   output
- * @copyright  2018 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2018 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,7 +32,7 @@ use \Mustache_Tokenizer;
 /**
  * Load template source strings.
  *
- * @copyright  2018 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2018 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mustache_template_source_loader {
@@ -76,7 +76,7 @@ class mustache_template_source_loader {
     /**
      * Load the template source from the component and template name.
      *
-     * @param string $component The moodle component (e.g. core_message)
+     * @param string $component The powereduc component (e.g. core_message)
      * @param string $name The template name (e.g. message_drawer)
      * @param string $themename The theme to load the template for (e.g. boost)
      * @param bool $includecomments If the comments should be stripped from the source before returning
@@ -132,13 +132,13 @@ class mustache_template_source_loader {
      *      ]
      * ]
      *
-     * @param string $templatecomponent The moodle component (e.g. core_message)
+     * @param string $templatecomponent The powereduc component (e.g. core_message)
      * @param string $templatename The template name (e.g. message_drawer)
      * @param string $themename The theme to load the template for (e.g. boost)
      * @param bool $includecomments If the comments should be stripped from the source before returning
      * @param array $seentemplates List of templates already processed / to be skipped.
      * @param array $seenstrings List of strings already processed / to be skipped.
-     * @param string|null $lang moodle translation language, null means use current.
+     * @param string|null $lang powereduc translation language, null means use current.
      * @return array
      */
     public function load_with_dependencies(

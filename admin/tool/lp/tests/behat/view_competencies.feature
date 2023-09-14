@@ -14,7 +14,7 @@ Feature: View competencies
       | teacher1 | editingteacher | System       |
     And the following "permission overrides" exist:
       | capability                 | permission | role           | contextlevel | reference |
-      | moodle/competency:planview | Allow      | editingteacher | System       |           |
+      | powereduc/competency:planview | Allow      | editingteacher | System       |           |
     And the following "courses" exist:
       | fullname | shortname |
       | Course 1 | C1        |

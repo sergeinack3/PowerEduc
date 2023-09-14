@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,13 +16,13 @@
 
 namespace core_grades\output;
 
-use moodle_url;
+use powereduc_url;
 
 /**
  * Renderable class for the action bar elements in the gradebook course outcomes page.
  *
  * @package    core_grades
- * @copyright  2021 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2021 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class course_outcomes_action_bar extends action_bar {
@@ -49,12 +49,12 @@ class course_outcomes_action_bar extends action_bar {
         $courseid = $this->context->instanceid;
         // Get the data used to output the general navigation selector.
         $generalnavselector = new general_action_bar($this->context,
-            new moodle_url('/grade/edit/outcome/course.php', ['id' => $courseid]), 'outcome', 'course');
+            new powereduc_url('/grade/edit/outcome/course.php', ['id' => $courseid]), 'outcome', 'course');
         $data = $generalnavselector->export_for_template($output);
 
-        if (has_capability('moodle/grade:manageoutcomes', $this->context)) {
+        if (has_capability('powereduc/grade:manageoutcomes', $this->context)) {
             // Add a button to the action bar with a link to the 'manage outcomes' page.
-            $manageoutcomeslink = new moodle_url('/grade/edit/outcome/index.php', ['id' => $courseid]);
+            $manageoutcomeslink = new powereduc_url('/grade/edit/outcome/index.php', ['id' => $courseid]);
             $manageoutcomesbutton = new \single_button($manageoutcomeslink, get_string('manageoutcomes', 'grades'),
                 'get', true);
             $data['manageoutcomesbutton'] = $manageoutcomesbutton->export_for_template($output);

@@ -16,5 +16,5 @@ Removed:
  * tests
 
 Added:
- * readme_moodle.txt
+ * readme_powereduc.txt
 

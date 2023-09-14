@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 namespace tool_langimport\output;
 
 use core_collator;
-use moodle_url;
+use powereduc_url;
 use renderable;
 use renderer_base;
 use stdClass;
@@ -45,13 +45,13 @@ class langimport_page implements renderable, templatable {
     /** @var array Array of languages that can be installed. */
     protected $availablelanguages;
 
-    /** @var moodle_url The URL to be used for uninstalling the selected existing language packs. */
+    /** @var powereduc_url The URL to be used for uninstalling the selected existing language packs. */
     protected $uninstallurl;
 
-    /** @var moodle_url The URL to be used for updating the installed language packs. */
+    /** @var powereduc_url The URL to be used for updating the installed language packs. */
     protected $updateurl;
 
-    /** @var moodle_url The URL to be used for installing the selected language packs to be installed. */
+    /** @var powereduc_url The URL to be used for installing the selected language packs to be installed. */
     protected $installurl;
 
 
@@ -60,9 +60,9 @@ class langimport_page implements renderable, templatable {
      *
      * @param array $installedlanguages Array of currently installed languages.
      * @param array $availablelanguages Array of languages that can be installed.
-     * @param moodle_url $uninstallurl The URL to be used for uninstalling the selected existing language packs.
-     * @param moodle_url $updateurl The URL to be used for updating the installed language packs.
-     * @param moodle_url $installurl The URL to be used for installing the selected language packs to be installed.
+     * @param powereduc_url $uninstallurl The URL to be used for uninstalling the selected existing language packs.
+     * @param powereduc_url $updateurl The URL to be used for updating the installed language packs.
+     * @param powereduc_url $installurl The URL to be used for installing the selected language packs to be installed.
      */
     public function __construct($installedlanguages, $availablelanguages, $uninstallurl, $updateurl, $installurl) {
         $this->installedlanguages = $installedlanguages;

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ $itemid        = required_param('itemid', PARAM_INT);        // item id
 $page          = optional_param('page', 0, PARAM_INT);   // active page
 $perpageurl    = optional_param('perpage', 0, PARAM_INT);
 
-$url = new moodle_url('/grade/report/grader/quickedit_item.php', array('id'=>$courseid, 'itemid'=>$itemid));
+$url = new powereduc_url('/grade/report/grader/quickedit_item.php', array('id'=>$courseid, 'itemid'=>$itemid));
 if ($page !== 0) {
     $url->param('page', $page);
 }
@@ -44,19 +44,19 @@ $PAGE->set_url($url);
 
 /// basic access checks
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 if (!$item = $DB->get_record('grade_items', array('id' => $itemid))) {
-    throw new \moodle_exception('noitemid', 'grades');
+    throw new \powereduc_exception('noitemid', 'grades');
 }
 
 require_login($course);
 $context = context_course::instance($course->id);
 
 require_capability('gradereport/grader:view', $context);
-require_capability('moodle/grade:viewall', $context);
-require_capability('moodle/grade:edit', $context);
+require_capability('powereduc/grade:viewall', $context);
+require_capability('powereduc/grade:edit', $context);
 
 /// return tracking object
 $gpr = new grade_plugin_return(array('type'=>'report', 'plugin'=>'grader', 'courseid'=>$courseid, 'page'=>$page));
@@ -71,7 +71,7 @@ $USER->grade_last_report[$course->id] = 'grader';
 $report = new grade_report_grader($courseid, $gpr, $context, $page);
 
 /// processing posted grades & feedback here
-if ($data = data_submitted() and confirm_sesskey() and has_capability('moodle/grade:edit', $context)) {
+if ($data = data_submitted() and confirm_sesskey() and has_capability('powereduc/grade:edit', $context)) {
     $warnings = $report->process_data($data);
 } else {
     $warnings = array();

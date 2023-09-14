@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Upgrade helper functions
  *
  * This file is used for special upgrade functions - for example groups and gradebook.
- * These functions must use SQL and database related functions only- no other Moodle API,
+ * These functions must use SQL and database related functions only- no other PowerEduc API,
  * because it might depend on db structures that are not yet present during upgrade.
  * (Do not use functions from accesslib.php, grades classes or group functions at all!)
  *
@@ -532,7 +532,7 @@ function upgrade_delete_orphaned_file_records() {
 }
 
 /**
- * Upgrade core licenses shipped with Moodle.
+ * Upgrade core licenses shipped with PowerEduc.
  */
 function upgrade_core_licenses() {
     global $CFG, $DB;
@@ -712,7 +712,7 @@ function upgrade_calendar_site_status(bool $output = true): bool {
         if ($needsfix) {
             mtrace("This site NEEDS to run the calendar events fix!");
             mtrace('');
-            mtrace("You can use this CLI tool or upgrade to a version of Moodle that includes");
+            mtrace("You can use this CLI tool or upgrade to a version of PowerEduc that includes");
             mtrace("the fix and will be executed as part of the normal upgrade procedure.");
             mtrace("The following versions or up are known candidates to upgrade to:");
             foreach ($fixsteps as $key => $value) {
@@ -959,7 +959,7 @@ function upgrade_calendar_events_mtrace(string $string, bool $output): void {
 function upgrade_calendar_events_get_teacherid(int $courseid): int {
 
     if ($context = context_course::instance($courseid, IGNORE_MISSING)) {
-        if ($havemanage = get_users_by_capability($context, 'moodle/course:manageactivities', 'u.id')) {
+        if ($havemanage = get_users_by_capability($context, 'powereduc/course:manageactivities', 'u.id')) {
             return array_keys($havemanage)[0];
         }
     }

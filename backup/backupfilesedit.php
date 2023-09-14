@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,8 +17,8 @@
 
 /**
  * Manage backup files
- * @package   moodlecore
- * @copyright 2010 Dongsheng Cai <dongsheng@moodle.com>
+ * @package   powereduccore
+ * @copyright 2010 Dongsheng Cai <dongsheng@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -38,12 +38,12 @@ $returnurl  = optional_param('returnurl', null, PARAM_LOCALURL);
 list($context, $course, $cm) = get_context_info_array($currentcontext);
 $filecontext = context::instance_by_id($contextid, IGNORE_MISSING);
 
-$url = new moodle_url('/backup/backupfilesedit.php', array('currentcontext'=>$currentcontext, 'contextid'=>$contextid, 'component'=>$component, 'filearea'=>$filearea));
+$url = new powereduc_url('/backup/backupfilesedit.php', array('currentcontext'=>$currentcontext, 'contextid'=>$contextid, 'component'=>$component, 'filearea'=>$filearea));
 
 require_login($course, false, $cm);
-require_capability('moodle/restore:uploadfile', $context);
+require_capability('powereduc/restore:uploadfile', $context);
 if ($filearea == 'automated' && !can_download_from_backup_filearea($filearea, $context)) {
-    throw new required_capability_exception($context, 'moodle/backup:downloadfile', 'nopermissions', '');
+    throw new required_capability_exception($context, 'powereduc/backup:downloadfile', 'nopermissions', '');
 }
 
 $PAGE->set_url($url);
@@ -64,7 +64,7 @@ if ($context->contextlevel == CONTEXT_COURSECAT) {
     $PAGE->set_heading($SITE->fullname);
 }
 // Set the restore course node active in the settings navigation block.
-navigation_node::override_active_url(new moodle_url('/backup/restorefile.php', ['contextid' => $contextid]));
+navigation_node::override_active_url(new powereduc_url('/backup/restorefile.php', ['contextid' => $contextid]));
 
 $title = get_string('managefiles', 'backup');
 $PAGE->navbar->add($title);

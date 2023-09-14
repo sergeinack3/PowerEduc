@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'mlbackend_python'
@@ -27,7 +27,7 @@ $string['errorserver'] = 'Server error {$a}';
 $string['host'] = 'Host';
 $string['hostdesc'] = 'Host';
 $string['packageinstalledshouldbe'] = 'The powereducmlbackend Python package should be updated. The required version is "{$a->required}" and the installed version is "{$a->installed}".';
-$string['packageinstalledtoohigh'] = 'The powereducmlbackend Python package is not compatible with this version of Moodle. The required version is "{$a->required}" or higher as long as it is API-compatible. The installed version "{$a->installed}" is too high.';
+$string['packageinstalledtoohigh'] = 'The powereducmlbackend Python package is not compatible with this version of PowerEduc. The required version is "{$a->required}" or higher as long as it is API-compatible. The installed version "{$a->installed}" is too high.';
 $string['pluginname'] = 'Python machine learning backend';
 $string['port'] = 'Port';
 $string['portdesc'] = 'Port';
@@ -36,9 +36,9 @@ $string['pythonpackagenotinstalled'] = 'The powereducmlbackend Python package is
 $string['pythonpathnotdefined'] = 'The path to your executable Python binary has not been defined. Please visit "{$a}" to set it.';
 $string['serversettingsinfo'] = 'If \'Use a server\' is enabled, the server settings will be displayed.';
 $string['username'] = 'Username';
-$string['usernamedesc'] = 'String of characters used as a username to communicate between the Moodle server and the Python server.';
+$string['usernamedesc'] = 'String of characters used as a username to communicate between the PowerEduc server and the Python server.';
 $string['password'] = 'Password';
-$string['passworddesc'] = 'String of characters used as a password to communicate between the Moodle server and the Python server.';
+$string['passworddesc'] = 'String of characters used as a password to communicate between the PowerEduc server and the Python server.';
 $string['secure'] = 'Use HTTPS';
 $string['securedesc'] = 'Whether to use HTTP or HTTPS.';
 $string['useserver'] = 'Use a server';

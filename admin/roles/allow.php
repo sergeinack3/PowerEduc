@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,14 +33,14 @@ $classformode = array(
     'view' => 'core_role_allow_view_page'
 );
 if (!isset($classformode[$mode])) {
-    throw new \moodle_exception('invalidmode', '', '', $mode);
+    throw new \powereduc_exception('invalidmode', '', '', $mode);
 }
 
-$baseurl = new moodle_url('/admin/roles/allow.php', array('mode'=>$mode));
+$baseurl = new powereduc_url('/admin/roles/allow.php', array('mode'=>$mode));
 admin_externalpage_setup('defineroles', '', array(), $baseurl);
 
 $syscontext = context_system::instance();
-require_capability('moodle/role:manage', $syscontext);
+require_capability('powereduc/role:manage', $syscontext);
 
 $controller = new $classformode[$mode]();
 

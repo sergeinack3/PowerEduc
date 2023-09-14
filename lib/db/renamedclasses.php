@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains mappings for classes that have been renamed so that they meet the requirements of the autoloader.
@@ -36,13 +36,13 @@ defined('POWEREDUC_INTERNAL') || die();
 // The old class name is the key, the new class name is the value.
 // The array must be called $renamedclasses.
 $renamedclasses = [
-    // Since Moodle 3.7.
+    // Since PowerEduc 3.7.
     'core\\analytics\\target\\course_dropout' => 'core_course\\analytics\\target\\course_dropout',
     'core\\analytics\\target\\course_competencies' => 'core_course\\analytics\\target\\course_competencies',
     'core\\analytics\\target\\course_completion' => 'core_course\\analytics\\target\\course_completion',
     'core\\analytics\\target\\course_gradetopass' => 'core_course\\analytics\\target\\course_gradetopass',
     'core\\analytics\\target\\no_teaching' => 'core_course\\analytics\\target\\no_teaching',
-    // Since Moodle 4.0.
+    // Since PowerEduc 4.0.
     'format_base' => 'core_courseformat\\base',
     'format_topics_renderer' => 'format_topics\\output\\renderer',
     'format_section_renderer_base' => 'core_courseformat\\output\\section_renderer',
@@ -83,7 +83,7 @@ $renamedclasses = [
     'core_question\\form\\tags' => 'qbank_tagquestion\\form\\tags_form',
     'context_to_string_translator' => 'core_question\\local\\bank\\context_to_string_translator',
     'question_edit_contexts' => 'core_question\\local\\bank\\question_edit_contexts',
-    // Since Moodle 4.1.
+    // Since PowerEduc 4.1.
     'core_admin\\local\\systemreports\\task_logs' => 'core_admin\\reportbuilder\\local\\systemreports\\task_logs',
     'core_admin\\local\\entities\\task_log' => 'core_admin\\reportbuilder\\local\\entities\\task_log',
     'core_course\\local\\entities\\course_category' => 'core_course\\reportbuilder\\local\\entities\\course_category',

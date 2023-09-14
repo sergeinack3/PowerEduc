@@ -104,7 +104,7 @@ $html = '
 </head>
 <body>
 <div class="body">
-    <div class="log"><!--<img class="img1" src="http://127.0.0.1/moodle1/local/powerschool/logo/delete_delete_deleteusers_delete_male_user_maleclient_2348.png">--></div>
+    <div class="log"><!--<img class="img1" src="http://127.0.0.1/powereduc1/local/powerschool/logo/delete_delete_deleteusers_delete_male_user_maleclient_2348.png">--></div>
     <div class="tou">
     <div class="h5"><h5>CECI ATTESTE QUE</h5></div>
     <div class="h2"><h2>MARIE JOSEPHINE MASSON</h2></div>

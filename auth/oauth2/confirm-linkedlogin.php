@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ $PAGE->set_url('/auth/oauth2/confirm-linkedlogin.php');
 $PAGE->set_context(context_system::instance());
 
 if (!\auth_oauth2\api::is_enabled()) {
-    throw new \moodle_exception('notenabled', 'auth_oauth2');
+    throw new \powereduc_exception('notenabled', 'auth_oauth2');
 }
 
 $confirmed = \auth_oauth2\api::confirm_link_login($userid, $username, $issuerid, $token);
@@ -45,7 +45,7 @@ if ($confirmed) {
     // The user has confirmed successfully, let's log them in.
 
     if (!$user = get_complete_user_data('id', $userid)) {
-        throw new \moodle_exception('cannotfinduser', '', '', $userid);
+        throw new \powereduc_exception('cannotfinduser', '', '', $userid);
     }
 
     if (!$user->suspended) {

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,8 +33,8 @@ require_once($CFG->dirroot.'/lib/badgeslib.php');
 use context_system;
 use context_course;
 use context_user;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use core_text;
 use award_criteria;
 use core_php_time_limit;
@@ -141,7 +141,7 @@ class badge {
         $data = $DB->get_record('badge', array('id' => $badgeid));
 
         if (empty($data)) {
-            throw new moodle_exception('error:nosuchbadge', 'badges', '', $badgeid);
+            throw new powereduc_exception('error:nosuchbadge', 'badges', '', $badgeid);
         }
 
         foreach ((array)$data as $field => $value) {
@@ -250,7 +250,7 @@ class badge {
             $event->trigger();
             return true;
         } else {
-            throw new moodle_exception('error:save', 'badges');
+            throw new powereduc_exception('error:save', 'badges');
             return false;
         }
     }
@@ -307,7 +307,7 @@ class badge {
 
             return $new;
         } else {
-            throw new moodle_exception('error:clone', 'badges');
+            throw new powereduc_exception('error:clone', 'badges');
             return false;
         }
     }
@@ -522,7 +522,7 @@ class badge {
                     list($earnedsql, $earnedparams) = $DB->get_in_or_equal($earned, SQL_PARAMS_NAMED, 'u', false);
                     $wheresql = ' WHERE u.id ' . $earnedsql;
                 }
-                list($enrolledsql, $enrolledparams) = get_enrolled_sql($this->get_context(), 'moodle/badges:earnbadge', 0, true);
+                list($enrolledsql, $enrolledparams) = get_enrolled_sql($this->get_context(), 'powereduc/badges:earnbadge', 0, true);
                 $sql = "SELECT DISTINCT u.id
                         FROM {user} u
                         {$extrajoin}
@@ -942,7 +942,7 @@ class badge {
             $issuer['url'] = $this->issuerurl;
             $issuer['email'] = $this->issuercontact;
             $issuer['@context'] = OPEN_BADGES_V2_CONTEXT;
-            $issueridurl = new moodle_url('/badges/issuer_json.php', array('id' => $this->id));
+            $issueridurl = new powereduc_url('/badges/issuer_json.php', array('id' => $this->id));
             $issuer['id'] = $issueridurl->out(false);
             $issuer['type'] = OPEN_BADGES_V2_TYPE_ISSUER;
         }

@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
  * Displays the list of found local plugins, their version (if found) and
  * a link to delete the local plugin.
  *
- * @see       http://docs.moodle.org/dev/Local_customisation
+ * @see       http://docs.powereduc.org/dev/Local_customisation
  * @package   admin
  * @copyright 2010 David Mudrak <david.mudrak@gmail.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

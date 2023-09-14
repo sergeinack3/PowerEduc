@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core
  * @since      Moodle 3.8
- * @copyright  2019 Carlos Escobedo <carlos@moodle.com>
+ * @copyright  2019 Carlos Escobedo <carlos@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,7 +31,7 @@ defined('POWEREDUC_INTERNAL') || die();
  *
  * @package    core_h5p
  * @since      Moodle 3.8
- * @copyright  2019 Carlos Escobedo <carlos@moodle.com>
+ * @copyright  2019 Carlos Escobedo <carlos@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class h5p_deleted extends \core\event\base {
@@ -79,7 +79,7 @@ class h5p_deleted extends \core\event\base {
     /**
      * Returns relevant URL.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_url() {
         // There is no url since the previous event already has the url where the h5p content has been displayed.

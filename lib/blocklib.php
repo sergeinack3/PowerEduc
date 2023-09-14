@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Block Class and Functions
@@ -56,9 +56,9 @@ define('BLOCK_ADDBLOCK_POSITION_CUSTOM', -1);
  *
  * @copyright 2009 Tim Hunt
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since     Moodle 2.0
+ * @since     PowerEduc 2.0
  */
-class block_not_on_page_exception extends moodle_exception {
+class block_not_on_page_exception extends powereduc_exception {
     /**
      * Constructor
      * @param int $instanceid the block instance id of the block that was looked for.
@@ -73,13 +73,13 @@ class block_not_on_page_exception extends moodle_exception {
 }
 
 /**
- * This class keeps track of the block that should appear on a moodle_page.
+ * This class keeps track of the block that should appear on a powereduc_page.
  *
  * The page to work with as passed to the constructor.
  *
  * @copyright 2009 Tim Hunt
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since     Moodle 2.0
+ * @since     PowerEduc 2.0
  */
 class block_manager {
     /**
@@ -91,8 +91,8 @@ class block_manager {
 /// Field declarations =========================================================
 
     /**
-     * the moodle_page we are managing blocks for.
-     * @var moodle_page
+     * the powereduc_page we are managing blocks for.
+     * @var powereduc_page
      */
     protected $page;
 
@@ -159,7 +159,7 @@ class block_manager {
 
     /**
      * Constructor.
-     * @param object $page the moodle_page object object we are managing the blocks for,
+     * @param object $page the powereduc_page object object we are managing the blocks for,
      * or a reasonable faxilimily. (See the comment at the top of this class
      * and {@link http://en.wikipedia.org/wiki/Duck_typing})
      */
@@ -327,7 +327,7 @@ class block_manager {
      *
      * @param renderer_base $output the rendered to use
      * @return array of block block_contents objects for all the blocks in all regions.
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function get_content_for_all_regions($output) {
         $contents = array();
@@ -348,7 +348,7 @@ class block_manager {
      * @return string URL for moving block $this->movingblock to this position.
      */
     protected function get_move_target_url($region, $weight) {
-        return new moodle_url($this->page->url, array('bui_moveid' => $this->movingblock,
+        return new powereduc_url($this->page->url, array('bui_moveid' => $this->movingblock,
                 'bui_newregion' => $region, 'bui_newweight' => $weight, 'sesskey' => sesskey()));
     }
 
@@ -455,7 +455,7 @@ class block_manager {
 
         $syscontext = context_system::instance();
 
-        require_capability('moodle/site:config', $syscontext);
+        require_capability('powereduc/site:config', $syscontext);
 
         $block = false;
         if (is_int($blockidorname)) {
@@ -481,7 +481,7 @@ class block_manager {
 
         $syscontext = context_system::instance();
 
-        require_capability('moodle/site:config', $syscontext);
+        require_capability('powereduc/site:config', $syscontext);
 
         $block = false;
         if (is_int($blockidorname)) {
@@ -1267,7 +1267,7 @@ class block_manager {
     public function ensure_content_created($region, $output) {
         $this->ensure_instances_exist($region);
 
-        if (!has_capability('moodle/block:view', $this->page->context) ) {
+        if (!has_capability('powereduc/block:view', $this->page->context) ) {
             $this->visibleblockcontent[$region] = [];
             return;
         }
@@ -1312,8 +1312,8 @@ class block_manager {
             // Move icon.
             $str = new lang_string('moveblock', 'block', $blocktitle);
             $controls[] = new action_menu_link_primary(
-                new moodle_url($actionurl, array('bui_moveid' => $block->instance->id)),
-                new pix_icon('t/move', $str, 'moodle', array('class' => 'iconsmall', 'title' => '')),
+                new powereduc_url($actionurl, array('bui_moveid' => $block->instance->id)),
+                new pix_icon('t/move', $str, 'powereduc', array('class' => 'iconsmall', 'title' => '')),
                 $str,
                 array('class' => 'editing_move')
             );
@@ -1323,17 +1323,17 @@ class block_manager {
         if ($this->page->user_can_edit_blocks() || $block->user_can_edit()) {
             // Edit config icon - always show - needed for positioning UI.
             $str = new lang_string('configureblock', 'block', $blocktitle);
-            $editactionurl = new moodle_url($actionurl, ['bui_editid' => $block->instance->id]);
+            $editactionurl = new powereduc_url($actionurl, ['bui_editid' => $block->instance->id]);
             $editactionurl->remove_params(['sesskey']);
 
             // Handle editing block on admin index page, prevent the page redirecting before block action can begin.
-            if ($editactionurl->compare(new moodle_url('/admin/index.php'), URL_MATCH_BASE)) {
+            if ($editactionurl->compare(new powereduc_url('/admin/index.php'), URL_MATCH_BASE)) {
                 $editactionurl->param('cache', 1);
             }
 
             $controls[] = new action_menu_link_secondary(
                 $editactionurl,
-                new pix_icon('t/edit', $str, 'moodle', array('class' => 'iconsmall', 'title' => '')),
+                new pix_icon('t/edit', $str, 'powereduc', array('class' => 'iconsmall', 'title' => '')),
                 $str,
                 array('class' => 'editing_edit')
             );
@@ -1344,13 +1344,13 @@ class block_manager {
             // Show/hide icon.
             if ($block->instance->visible) {
                 $str = new lang_string('hideblock', 'block', $blocktitle);
-                $url = new moodle_url($actionurl, array('bui_hideid' => $block->instance->id));
-                $icon = new pix_icon('t/hide', $str, 'moodle', array('class' => 'iconsmall', 'title' => ''));
+                $url = new powereduc_url($actionurl, array('bui_hideid' => $block->instance->id));
+                $icon = new pix_icon('t/hide', $str, 'powereduc', array('class' => 'iconsmall', 'title' => ''));
                 $attributes = array('class' => 'editing_hide');
             } else {
                 $str = new lang_string('showblock', 'block', $blocktitle);
-                $url = new moodle_url($actionurl, array('bui_showid' => $block->instance->id));
-                $icon = new pix_icon('t/show', $str, 'moodle', array('class' => 'iconsmall', 'title' => ''));
+                $url = new powereduc_url($actionurl, array('bui_showid' => $block->instance->id));
+                $icon = new pix_icon('t/show', $str, 'powereduc', array('class' => 'iconsmall', 'title' => ''));
                 $attributes = array('class' => 'editing_show');
             }
             $controls[] = new action_menu_link_secondary($url, $icon, $str, $attributes);
@@ -1358,36 +1358,36 @@ class block_manager {
 
         // Assign roles.
         if (get_assignable_roles($block->context, ROLENAME_SHORT)) {
-            $rolesurl = new moodle_url('/admin/roles/assign.php', array('contextid' => $block->context->id,
+            $rolesurl = new powereduc_url('/admin/roles/assign.php', array('contextid' => $block->context->id,
                 'returnurl' => $this->page->url->out_as_local_url()));
             $str = new lang_string('assignrolesinblock', 'block', $blocktitle);
             $controls[] = new action_menu_link_secondary(
                 $rolesurl,
-                new pix_icon('i/assignroles', $str, 'moodle', array('class' => 'iconsmall', 'title' => '')),
+                new pix_icon('i/assignroles', $str, 'powereduc', array('class' => 'iconsmall', 'title' => '')),
                 $str, array('class' => 'editing_assignroles')
             );
         }
 
         // Permissions.
-        if (has_capability('moodle/role:review', $block->context) or get_overridable_roles($block->context)) {
-            $rolesurl = new moodle_url('/admin/roles/permissions.php', array('contextid' => $block->context->id,
+        if (has_capability('powereduc/role:review', $block->context) or get_overridable_roles($block->context)) {
+            $rolesurl = new powereduc_url('/admin/roles/permissions.php', array('contextid' => $block->context->id,
                 'returnurl' => $this->page->url->out_as_local_url()));
             $str = get_string('permissions', 'role');
             $controls[] = new action_menu_link_secondary(
                 $rolesurl,
-                new pix_icon('i/permissions', $str, 'moodle', array('class' => 'iconsmall', 'title' => '')),
+                new pix_icon('i/permissions', $str, 'powereduc', array('class' => 'iconsmall', 'title' => '')),
                 $str, array('class' => 'editing_permissions')
             );
         }
 
         // Change permissions.
-        if (has_any_capability(array('moodle/role:safeoverride', 'moodle/role:override', 'moodle/role:assign'), $block->context)) {
-            $rolesurl = new moodle_url('/admin/roles/check.php', array('contextid' => $block->context->id,
+        if (has_any_capability(array('powereduc/role:safeoverride', 'powereduc/role:override', 'powereduc/role:assign'), $block->context)) {
+            $rolesurl = new powereduc_url('/admin/roles/check.php', array('contextid' => $block->context->id,
                 'returnurl' => $this->page->url->out_as_local_url()));
             $str = get_string('checkpermissions', 'role');
             $controls[] = new action_menu_link_secondary(
                 $rolesurl,
-                new pix_icon('i/checkpermissions', $str, 'moodle', array('class' => 'iconsmall', 'title' => '')),
+                new pix_icon('i/checkpermissions', $str, 'powereduc', array('class' => 'iconsmall', 'title' => '')),
                 $str, array('class' => 'editing_checkroles')
             );
         }
@@ -1395,15 +1395,15 @@ class block_manager {
         if ($this->user_can_delete_block($block)) {
             // Delete icon.
             $str = new lang_string('deleteblock', 'block', $blocktitle);
-            $deleteactionurl = new moodle_url($actionurl, ['bui_deleteid' => $block->instance->id]);
+            $deleteactionurl = new powereduc_url($actionurl, ['bui_deleteid' => $block->instance->id]);
             $deleteactionurl->remove_params(['sesskey']);
 
             // Handle deleting block on admin index page, prevent the page redirecting before block action can begin.
-            if ($deleteactionurl->compare(new moodle_url('/admin/index.php'), URL_MATCH_BASE)) {
+            if ($deleteactionurl->compare(new powereduc_url('/admin/index.php'), URL_MATCH_BASE)) {
                 $deleteactionurl->param('cache', 1);
             }
 
-            $deleteconfirmationurl = new moodle_url($actionurl, [
+            $deleteconfirmationurl = new powereduc_url($actionurl, [
                 'bui_deleteid' => $block->instance->id,
                 'bui_confirm' => 1,
                 'sesskey' => sesskey(),
@@ -1412,7 +1412,7 @@ class block_manager {
 
             $controls[] = new action_menu_link_secondary(
                 $deleteactionurl,
-                new pix_icon('t/delete', $str, 'moodle', array('class' => 'iconsmall', 'title' => '')),
+                new pix_icon('t/delete', $str, 'powereduc', array('class' => 'iconsmall', 'title' => '')),
                 $str,
                 [
                     'class' => 'editing_delete',
@@ -1427,7 +1427,7 @@ class block_manager {
             );
         }
 
-        if (!empty($CFG->contextlocking) && has_capability('moodle/site:managecontextlocks', $block->context)) {
+        if (!empty($CFG->contextlocking) && has_capability('powereduc/site:managecontextlocks', $block->context)) {
             $parentcontext = $block->context->get_parent_context();
             if (empty($parentcontext) || empty($parentcontext->locked)) {
                 if ($block->context->locked) {
@@ -1438,13 +1438,13 @@ class block_manager {
                     $lockstring = get_string('managecontextlock', 'admin');
                 }
                 $controls[] = new action_menu_link_secondary(
-                    new moodle_url(
+                    new powereduc_url(
                         '/admin/lock.php',
                         [
                             'id' => $block->context->id,
                         ]
                     ),
-                    new pix_icon($lockicon, $lockstring, 'moodle', array('class' => 'iconsmall', 'title' => '')),
+                    new pix_icon($lockicon, $lockstring, 'powereduc', array('class' => 'iconsmall', 'title' => '')),
                     $lockstring,
                     ['class' => 'editing_lock']
                 );
@@ -1496,14 +1496,14 @@ class block_manager {
         require_sesskey();
 
         if (!$this->page->user_can_edit_blocks()) {
-            throw new moodle_exception('nopermissions', '', $this->page->url->out(), get_string('addblock'));
+            throw new powereduc_exception('nopermissions', '', $this->page->url->out(), get_string('addblock'));
         }
 
         $addableblocks = $this->get_addable_blocks();
 
         if ($blocktype === '') {
             // Display add block selection.
-            $addpage = new moodle_page();
+            $addpage = new powereduc_page();
             $addpage->set_pagelayout('admin');
             $addpage->blocks->show_only_fake_blocks(true);
             $addpage->set_course($this->page->course);
@@ -1534,7 +1534,7 @@ class block_manager {
                 echo $OUTPUT->box(get_string('noblockstoaddhere'));
                 echo $OUTPUT->container($OUTPUT->action_link($addpage->url, get_string('back')), 'mx-3 mb-1');
             } else {
-                $url = new moodle_url($addpage->url, array('sesskey' => sesskey()));
+                $url = new powereduc_url($addpage->url, array('sesskey' => sesskey()));
                 echo $OUTPUT->render_from_template('core/add_block_body',
                     ['blocks' => array_values($addableblocks),
                      'url' => '?' . $url->get_query_string(false)]);
@@ -1547,7 +1547,7 @@ class block_manager {
         }
 
         if (!array_key_exists($blocktype, $addableblocks)) {
-            throw new moodle_exception('cannotaddthisblocktype', '', $this->page->url->out(), $blocktype);
+            throw new powereduc_exception('cannotaddthisblocktype', '', $this->page->url->out(), $blocktype);
         }
 
         $this->add_block_at_end_of_default_region($blocktype, $blockregion);
@@ -1574,11 +1574,11 @@ class block_manager {
 
         $block = $this->page->blocks->find_instance($blockid);
         if (!$this->user_can_delete_block($block)) {
-            throw new moodle_exception('nopermissions', '', $this->page->url->out(), get_string('deleteablock'));
+            throw new powereduc_exception('nopermissions', '', $this->page->url->out(), get_string('deleteablock'));
         }
 
         if (!$confirmdelete) {
-            $deletepage = new moodle_page();
+            $deletepage = new powereduc_page();
             $deletepage->set_pagelayout('admin');
             $deletepage->blocks->show_only_fake_blocks(true);
             $deletepage->set_course($this->page->course);
@@ -1595,7 +1595,7 @@ class block_manager {
             // At this point we are either going to redirect, or display the form, so
             // overwrite global $PAGE ready for this. (Formslib refers to it.)
             $PAGE = $deletepage;
-            //some functions like MoodleQuickForm::addHelpButton use $OUTPUT so we need to replace that too
+            //some functions like PowerEducQuickForm::addHelpButton use $OUTPUT so we need to replace that too
             $output = $deletepage->get_renderer('core');
             $OUTPUT = $output;
 
@@ -1629,8 +1629,8 @@ class block_manager {
             $PAGE->set_title($blocktitle . ': ' . $strdeletecheck);
             $PAGE->set_heading($site->fullname);
             echo $OUTPUT->header();
-            $confirmurl = new moodle_url($deletepage->url, array('sesskey' => sesskey(), 'bui_deleteid' => $block->instance->id, 'bui_confirm' => 1));
-            $cancelurl = new moodle_url($deletepage->url);
+            $confirmurl = new powereduc_url($deletepage->url, array('sesskey' => sesskey(), 'bui_deleteid' => $block->instance->id, 'bui_confirm' => 1));
+            $cancelurl = new powereduc_url($deletepage->url);
             $yesbutton = new single_button($confirmurl, get_string('yes'));
             $nobutton = new single_button($cancelurl, get_string('no'));
             echo $OUTPUT->confirm($message, $yesbutton, $nobutton);
@@ -1666,7 +1666,7 @@ class block_manager {
         $block = $this->page->blocks->find_instance($blockid);
 
         if (!$this->page->user_can_edit_blocks()) {
-            throw new moodle_exception('nopermissions', '', $this->page->url->out(), get_string('hideshowblocks'));
+            throw new powereduc_exception('nopermissions', '', $this->page->url->out(), get_string('hideshowblocks'));
         } else if (!$block->instance_can_be_hidden()) {
             return false;
         }
@@ -1723,10 +1723,10 @@ class block_manager {
         $block = $this->find_instance($blockid);
 
         if (!$block->user_can_edit() && !$this->page->user_can_edit_blocks()) {
-            throw new moodle_exception('nopermissions', '', $this->page->url->out(), get_string('editblock'));
+            throw new powereduc_exception('nopermissions', '', $this->page->url->out(), get_string('editblock'));
         }
 
-        $editpage = new moodle_page();
+        $editpage = new powereduc_page();
         $editpage->set_pagelayout('admin');
         $editpage->blocks->show_only_fake_blocks(true);
         $editpage->set_course($this->page->course);
@@ -1745,7 +1745,7 @@ class block_manager {
         // At this point we are either going to redirect, or display the form, so
         // overwrite global $PAGE ready for this. (Formslib refers to it.)
         $PAGE = $editpage;
-        //some functions like MoodleQuickForm::addHelpButton use $OUTPUT so we need to replace that to
+        //some functions like PowerEducQuickForm::addHelpButton use $OUTPUT so we need to replace that to
         $output = $editpage->get_renderer('core');
         $OUTPUT = $output;
 
@@ -1784,7 +1784,7 @@ class block_manager {
             $parentcontext = context::instance_by_id($data->bui_parentcontextid);
 
             // Updating stickiness and contexts.  See MDL-21375 for details.
-            if (has_capability('moodle/site:manageblocks', $parentcontext)) { // Check permissions in destination
+            if (has_capability('powereduc/site:manageblocks', $parentcontext)) { // Check permissions in destination
 
                 // Explicitly set the default context
                 $bi->parentcontextid = $parentcontext->id;
@@ -1886,13 +1886,13 @@ class block_manager {
             redirect($this->page->url);
 
         } else {
-            $strheading = get_string('blockconfiga', 'moodle', $block->get_title());
+            $strheading = get_string('blockconfiga', 'powereduc', $block->get_title());
             $editpage->set_title($strheading);
             $editpage->set_heading($strheading);
             $bits = explode('-', $this->page->pagetype);
             if ($bits[0] == 'tag' && !empty($this->page->subpage)) {
                 // better navbar for tag pages
-                $editpage->navbar->add(get_string('tags'), new moodle_url('/tag/'));
+                $editpage->navbar->add(get_string('tags'), new powereduc_url('/tag/'));
                 $tag = core_tag_tag::get($this->page->subpage);
                 // tag search page doesn't have subpageid
                 if ($tag) {
@@ -1926,7 +1926,7 @@ class block_manager {
         $block = $this->find_instance($blockid);
 
         if (!$this->page->user_can_edit_blocks()) {
-            throw new moodle_exception('nopermissions', '', $this->page->url->out(), get_string('editblock'));
+            throw new powereduc_exception('nopermissions', '', $this->page->url->out(), get_string('editblock'));
         }
 
         $newregion = optional_param('bui_newregion', '', PARAM_ALPHANUMEXT);
@@ -1939,7 +1939,7 @@ class block_manager {
         }
 
         if (!$this->is_known_region($newregion)) {
-            throw new moodle_exception('unknownblockregion', '', $this->page->url, $newregion);
+            throw new powereduc_exception('unknownblockregion', '', $this->page->url, $newregion);
         }
 
         // Move this block. This may involve moving other nearby blocks.
@@ -2082,7 +2082,7 @@ function block_instance_by_id($blockinstanceid) {
  *
  * @param string $blockname the name of the block.
  * @param $instance block_instances DB table row (optional).
- * @param moodle_page $page the page this block is appearing on.
+ * @param powereduc_page $page the page this block is appearing on.
  * @return block_base the requested block instance.
  */
 function block_instance($blockname, $instance = NULL, $page = NULL) {
@@ -2123,7 +2123,7 @@ function block_load_class($blockname) {
     $blockpath = $CFG->dirroot.'/blocks/'.$blockname.'/block_'.$blockname.'.php';
 
     if (file_exists($blockpath)) {
-        require_once($CFG->dirroot.'/blocks/moodleblock.class.php');
+        require_once($CFG->dirroot.'/blocks/powereducblock.class.php');
         include_once($blockpath);
     }else{
         //debugging("$blockname code does not exist in $blockpath", DEBUG_DEVELOPER);
@@ -2302,7 +2302,7 @@ function default_page_type_list($pagetype, $parentcontext = null, $currentcontex
 }
 
 /**
- * Generates the page type list for the my moodle page
+ * Generates the page type list for the my powereduc page
  *
  * @param string $pagetype
  * @param stdClass $parentcontext
@@ -2368,7 +2368,7 @@ function block_add_block_ui($page, $output) {
         $menu[$block->name] = $block->title;
     }
 
-    $actionurl = new moodle_url($page->url, array('sesskey'=>sesskey()));
+    $actionurl = new powereduc_url($page->url, array('sesskey'=>sesskey()));
     $select = new single_select($actionurl, 'bui_addblock', $menu, null, array(''=>get_string('adddots')), 'add_block');
     $select->set_label(get_string('addblock'), array('class'=>'accesshide'));
     $bc->content = $OUTPUT->render($select);
@@ -2525,7 +2525,7 @@ function blocks_delete_all_for_context($contextid) {
  *
  * @param object $instance a row from the block_instances, preferably LEFT JOINed with the
  *      block_positions table as return by block_manager.
- * @param moodle_page $page the back to set the visibility with respect to.
+ * @param powereduc_page $page the back to set the visibility with respect to.
  * @param integer $newvisibility 1 for visible, 0 for hidden.
  */
 function blocks_set_visibility($instance, $page, $newvisibility) {
@@ -2663,7 +2663,7 @@ function blocks_add_default_course_blocks($course) {
     } else {
         $pagetypepattern = 'course-view-*';
     }
-    $page = new moodle_page();
+    $page = new powereduc_page();
     $page->set_course($course);
     $page->blocks->add_blocks($blocknames, $pagetypepattern);
 }
@@ -2674,7 +2674,7 @@ function blocks_add_default_course_blocks($course) {
 function blocks_add_default_system_blocks() {
     global $DB;
 
-    $page = new moodle_page();
+    $page = new powereduc_page();
     $page->set_context(context_system::instance());
     // We don't add blocks required by the theme, they will be auto-created.
     $page->blocks->add_blocks(array(BLOCK_POS_LEFT => array('admin_bookmarks')), 'admin-*', null, null, 2);

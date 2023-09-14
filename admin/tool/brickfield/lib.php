@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ use tool_brickfield\registration;
  * @param stdClass $course The course to object for the report
  * @param context $context The context of the course
  * @throws coding_exception
- * @throws moodle_exception
+ * @throws powereduc_exception
  */
 function tool_brickfield_extend_navigation_course(\navigation_node $navigation, \stdClass $course, \context $context) {
     if (!accessibility::is_accessibility_enabled()) {
@@ -48,13 +48,13 @@ function tool_brickfield_extend_navigation_course(\navigation_node $navigation, 
     }
 
     // Display in the navigation if the user has site:config ability, or if the site is registered.
-    $enabled = has_capability('moodle/site:config', \context_system::instance());
+    $enabled = has_capability('powereduc/site:config', \context_system::instance());
     $enabled = $enabled || (new registration())->toolkit_is_active();
     if (!$enabled) {
         return;
     }
 
-    $url = new moodle_url(accessibility::get_plugin_url(), ['courseid' => $course->id]);
+    $url = new powereduc_url(accessibility::get_plugin_url(), ['courseid' => $course->id]);
     $navigation->add(
         get_string('pluginname', manager::PLUGINNAME),
         $url,

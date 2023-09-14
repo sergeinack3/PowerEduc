@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 /**
  * List of all resource type modules in course
  *
- * @package   moodlecore
+ * @package   powereduccore
  * @copyright 2009 Petr Skoda (http://skodak.org)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -92,7 +92,7 @@ foreach ($resources as $modname=>$instances) {
 }
 
 if (!$cms) {
-    notice(get_string('thereareno', 'moodle', $strresources), "$CFG->wwwroot/course/view.php?id=$course->id");
+    notice(get_string('thereareno', 'powereduc', $strresources), "$CFG->wwwroot/course/view.php?id=$course->id");
     exit;
 }
 
@@ -137,7 +137,7 @@ foreach ($cms as $cm) {
     }
 
     $class = $cm->visible ? '' : 'class="dimmed"'; // hidden modules are dimmed
-    $url = $cm->url ?: new moodle_url("/mod/{$cm->modname}/view.php", ['id' => $cm->id]);
+    $url = $cm->url ?: new powereduc_url("/mod/{$cm->modname}/view.php", ['id' => $cm->id]);
 
     $table->data[] = array (
         $printsection,

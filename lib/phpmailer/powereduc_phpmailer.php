@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Customised version of phpmailer for Moodle
+ * Customised version of phpmailer for PowerEduc
  *
  * @package    core
  * @author     Dan Poltawski <talktodan@gmail.com>
@@ -29,25 +29,25 @@ defined('POWEREDUC_INTERNAL') || die();
 // version of this file.
 
 /**
- * Moodle Customised version of the PHPMailer class
+ * PowerEduc Customised version of the PHPMailer class
  *
  * This class extends the stock PHPMailer class
  * in order to make sensible configuration choices,
- * and behave in a way which is friendly to moodle.
+ * and behave in a way which is friendly to powereduc.
  *
  * @copyright 2009 Dan Poltawski <talktodan@gmail.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since     Moodle 2.0
+ * @since     PowerEduc 2.0
  */
-class moodle_phpmailer extends \PHPMailer\PHPMailer\PHPMailer {
+class powereduc_phpmailer extends \PHPMailer\PHPMailer\PHPMailer {
 
     /**
      * Constructor - creates an instance of the PHPMailer class
-     * with Moodle defaults.
+     * with PowerEduc defaults.
      */
     public function __construct(){
         global $CFG;
-        $this->Version   = 'Moodle '.$CFG->version;         // mailer version
+        $this->Version   = 'PowerEduc '.$CFG->version;         // mailer version
         $this->CharSet   = 'UTF-8';
         // MDL-52637: Disable the automatic TLS encryption added in v5.2.10 (9da56fc1328a72aa124b35b738966315c41ef5c6).
         $this->SMTPAutoTLS = false;
@@ -71,7 +71,7 @@ class moodle_phpmailer extends \PHPMailer\PHPMailer\PHPMailer {
     /**
      * Extended AddCustomHeader function in order to stop duplicate
      * message-ids
-     * http://tracker.moodle.org/browse/MDL-3681
+     * http://tracker.powereduc.org/browse/MDL-3681
      */
     public function addCustomHeader($custom_header, $value = null) {
         if ($value === null and preg_match('/message-id:(.*)/i', $custom_header, $matches)) {
@@ -86,7 +86,7 @@ class moodle_phpmailer extends \PHPMailer\PHPMailer\PHPMailer {
     }
 
     /**
-     * Use internal moodles own core_text to encode mimeheaders.
+     * Use internal powereducs own core_text to encode mimeheaders.
      * Fall back to phpmailers inbuilt functions if not
      */
     public function encodeHeader($str, $position = 'text') {
@@ -108,7 +108,7 @@ class moodle_phpmailer extends \PHPMailer\PHPMailer\PHPMailer {
 
     /**
      * Replaced function to fix tz bug:
-     * http://tracker.moodle.org/browse/MDL-12596
+     * http://tracker.powereduc.org/browse/MDL-12596
      */
     public static function rfcDate() {
         $tz = date('Z');
@@ -153,7 +153,7 @@ class moodle_phpmailer extends \PHPMailer\PHPMailer\PHPMailer {
     private function process_oauth(): void {
         global $CFG;
 
-        require_once($CFG->libdir . '/phpmailer/moodle_phpmailer_oauth.php');
+        require_once($CFG->libdir . '/phpmailer/powereduc_phpmailer_oauth.php');
         if (!empty($CFG->smtpoauthservice)) {
             // Get the issuer.
             $issuer = \core\oauth2\api::get_issuer($CFG->smtpoauthservice);
@@ -161,7 +161,7 @@ class moodle_phpmailer extends \PHPMailer\PHPMailer\PHPMailer {
             if ($issuer && $issuer->get('enabled')) {
                 // Get the OAuth Client.
                 if ($oauthclient = \core\oauth2\api::get_system_oauth_client($issuer)) {
-                    $oauth = new moodle_phpmailer_oauth([
+                    $oauth = new powereduc_phpmailer_oauth([
                         'provider' => $oauthclient,
                         'clientId' => $oauthclient->get_clientid(),
                         'clientSecret' => $oauthclient->get_clientsecret(),

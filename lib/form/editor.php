@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -44,7 +44,7 @@ require_once('templatable_form_element.php');
  * @todo      MDL-29421 element Freezing
  * @todo      MDL-29426 ajax format conversion
  */
-class MoodleQuickForm_editor extends HTML_QuickForm_element implements templatable {
+class PowerEducQuickForm_editor extends HTML_QuickForm_element implements templatable {
     use templatable_form_element {
         export_for_template as export_for_template_base;
     }
@@ -108,9 +108,9 @@ class MoodleQuickForm_editor extends HTML_QuickForm_element implements templatab
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
-    public function MoodleQuickForm_editor($elementName=null, $elementLabel=null, $attributes=null, $options=null) {
+    public function PowerEducQuickForm_editor($elementName=null, $elementLabel=null, $attributes=null, $options=null) {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
         self::__construct($elementName, $elementLabel, $attributes, $options);
     }
@@ -276,10 +276,10 @@ class MoodleQuickForm_editor extends HTML_QuickForm_element implements templatab
     }
 
     /**
-     * @deprecated since Moodle 2.0
+     * @deprecated since PowerEduc 2.0
      */
     function setHelpButton($_helpbuttonargs, $function='_helpbutton') {
-        throw new coding_exception('setHelpButton() can not be used any more, please see MoodleQuickForm::addHelpButton().');
+        throw new coding_exception('setHelpButton() can not be used any more, please see PowerEducQuickForm::addHelpButton().');
     }
 
     /**
@@ -373,7 +373,7 @@ class MoodleQuickForm_editor extends HTML_QuickForm_element implements templatab
             $image_options->env = 'editor';
             $image_options->itemid = $draftitemid;
 
-            // moodlemedia plugin
+            // powereducmedia plugin
             $args->accepted_types = array('video', 'audio');
             $media_options = initialise_filepicker($args);
             $media_options->context = $ctx;
@@ -402,7 +402,7 @@ class MoodleQuickForm_editor extends HTML_QuickForm_element implements templatab
             $subtitle_options->env = 'editor';
             $subtitle_options->itemid = $draftitemid;
 
-            if (has_capability('moodle/h5p:deploy', $ctx)) {
+            if (has_capability('powereduc/h5p:deploy', $ctx)) {
                 // Only set H5P Plugin settings if the user can deploy new H5P content.
                 // H5P plugin.
                 $args->accepted_types = array('.h5p');
@@ -460,7 +460,7 @@ class MoodleQuickForm_editor extends HTML_QuickForm_element implements templatab
 
         $str .= $OUTPUT->render_from_template('core_form/editor_textarea', $context);
 
-        // during moodle installation, user area doesn't exist
+        // during powereduc installation, user area doesn't exist
         // so we need to disable filepicker here.
         if (!during_initial_install() && empty($CFG->adminsetuppending)) {
             // 0 means no files, -1 unlimited
@@ -469,7 +469,7 @@ class MoodleQuickForm_editor extends HTML_QuickForm_element implements templatab
                         'value' => $draftitemid));
 
                 // used by non js editor only
-                $editorurl = new moodle_url("$CFG->wwwroot/repository/draftfiles_manager.php", array(
+                $editorurl = new powereduc_url("$CFG->wwwroot/repository/draftfiles_manager.php", array(
                     'action'=>'browse',
                     'env'=>'editor',
                     'itemid'=>$draftitemid,

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Test specific features of the Postgres dml.
@@ -32,14 +32,14 @@
  * @copyright 2020 Ruslan Kabalin
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class pgsql_native_moodle_database_test extends advanced_testcase {
+class pgsql_native_powereduc_database_test extends advanced_testcase {
 
     /**
      * Setup before class.
      */
     public static function setUpBeforeClass(): void {
         global $CFG;
-        require_once($CFG->libdir.'/dml/pgsql_native_moodle_database.php');
+        require_once($CFG->libdir.'/dml/pgsql_native_powereduc_database.php');
     }
 
     /**
@@ -49,7 +49,7 @@ class pgsql_native_moodle_database_test extends advanced_testcase {
         global $DB;
         parent::setUp();
         // Skip tests if not using Postgres.
-        if (!($DB instanceof pgsql_native_moodle_database)) {
+        if (!($DB instanceof pgsql_native_powereduc_database)) {
             $this->markTestSkipped('Postgres-only test');
         }
     }

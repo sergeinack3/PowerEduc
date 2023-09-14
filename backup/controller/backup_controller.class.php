@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -60,7 +60,7 @@ class backup_controller extends base_controller {
     protected $courseid;
 
     /**
-     * Format of backup (moodle, imscc).
+     * Format of backup (powereduc, imscc).
      *
      * Should be one of the backup::FORMAT_ constants.
      * for example backup::FORMAT_POWEREDUC
@@ -125,7 +125,7 @@ class backup_controller extends base_controller {
     /** @var int Epoch time when we want the backup to be executed (requires cron to run). */
     protected $executiontime;
 
-    /** @var null Destination chain object (fs_moodle, fs_os, db, email...). */
+    /** @var null Destination chain object (fs_powereduc, fs_os, db, email...). */
     protected $destination;
 
     /** @var string Cache {@see \checksumable} results for lighter {@see \backup_controller::is_checksum_correct()} uses. */

@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage backup-dbops
  * @copyright  2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -225,7 +225,7 @@ abstract class backup_controller_dbops extends backup_dbops {
 
     /**
      * Given one activity task, return the activity information and related settings
-     * Used by get_moodle_backup_information()
+     * Used by get_powereduc_backup_information()
      */
     private static function get_activity_backup_information($task) {
 
@@ -261,7 +261,7 @@ abstract class backup_controller_dbops extends backup_dbops {
 
     /**
      * Given one section task, return the section information and related settings
-     * Used by get_moodle_backup_information()
+     * Used by get_powereduc_backup_information()
      */
     private static function get_section_backup_information($task) {
 
@@ -295,7 +295,7 @@ abstract class backup_controller_dbops extends backup_dbops {
 
     /**
      * Given one course task, return the course information and related settings
-     * Used by get_moodle_backup_information()
+     * Used by get_powereduc_backup_information()
      */
     private static function get_course_backup_information($task) {
 
@@ -328,7 +328,7 @@ abstract class backup_controller_dbops extends backup_dbops {
 
     /**
      * Given one root task, return the course information and related settings
-     * Used by get_moodle_backup_information()
+     * Used by get_powereduc_backup_information()
      */
     private static function get_root_backup_information($task) {
 
@@ -349,7 +349,7 @@ abstract class backup_controller_dbops extends backup_dbops {
     }
 
     /**
-     * Get details information for main moodle_backup.xml file, extracting it from
+     * Get details information for main powereduc_backup.xml file, extracting it from
      * the specified controller.
      *
      * If you specify the progress monitor, this will start a new progress section
@@ -358,12 +358,12 @@ abstract class backup_controller_dbops extends backup_dbops {
      * @param string $backupid Backup ID
      * @param \core\progress\base $progress Optional progress monitor
      */
-    public static function get_moodle_backup_information($backupid,
+    public static function get_powereduc_backup_information($backupid,
             \core\progress\base $progress = null) {
 
         // Start tracking progress if required (for load_controller).
         if ($progress) {
-            $progress->start_progress('get_moodle_backup_information', 2);
+            $progress->start_progress('get_powereduc_backup_information', 2);
         }
 
         $detailsinfo = array(); // Information details
@@ -397,7 +397,7 @@ abstract class backup_controller_dbops extends backup_dbops {
         // Get tasks and start nested progress.
         $tasks = $bc->get_plan()->get_tasks();
         if ($progress) {
-            $progress->start_progress('get_moodle_backup_information', count($tasks));
+            $progress->start_progress('get_powereduc_backup_information', count($tasks));
             $done = 1;
         }
 
@@ -480,7 +480,7 @@ abstract class backup_controller_dbops extends backup_dbops {
 
     /**
      * Given the backupid, determine whether this backup should include
-     * files from the moodle file storage system.
+     * files from the powereduc file storage system.
      *
      * @param string $backupid The ID of the backup.
      * @return int Indicates whether files should be included in backups.

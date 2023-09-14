@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ namespace tool_templatelibrary;
 use core_component;
 use core\output\mustache_template_finder;
 use coding_exception;
-use moodle_exception;
+use powereduc_exception;
 use required_capability_exception;
 use stdClass;
 

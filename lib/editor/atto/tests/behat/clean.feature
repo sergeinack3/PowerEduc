@@ -1,4 +1,4 @@
-@editor @editor_atto @atto @editor_moodleform
+@editor @editor_atto @atto @editor_powereducform
 Feature: Atto HTML cleanup.
   In order to test html cleaning functionality, I write in a HTML atto text field.
 

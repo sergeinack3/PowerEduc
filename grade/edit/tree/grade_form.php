@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * A moodleform to allow the editing of a user's grade for a particular activity
+ * A powereducform to allow the editing of a user's grade for a particular activity
  *
  * @package   core_grades
  * @copyright 2007 Petr Skoda
@@ -28,7 +28,7 @@ if (!defined('POWEREDUC_INTERNAL')) {
 
 require_once $CFG->libdir.'/formslib.php';
 
-class edit_grade_form extends moodleform {
+class edit_grade_form extends powereducform {
 
     function definition() {
         global $CFG, $COURSE, $DB;
@@ -160,11 +160,11 @@ class edit_grade_form extends moodleform {
         $itemname_el->setValue($itemname);
 
         // access control - disable not allowed elements
-        if (!has_capability('moodle/grade:manage', $context)) {
+        if (!has_capability('powereduc/grade:manage', $context)) {
             $mform->hardFreeze('excluded');
         }
 
-        if (!has_capability('moodle/grade:manage', $context) and !has_capability('moodle/grade:hide', $context)) {
+        if (!has_capability('powereduc/grade:manage', $context) and !has_capability('powereduc/grade:hide', $context)) {
             $mform->hardFreeze('hidden');
             $mform->hardFreeze('hiddenuntil');
         }
@@ -196,12 +196,12 @@ class edit_grade_form extends moodleform {
             }
 
             if (($old_grade_grade->locked or $old_grade_grade->locktime)
-              and (!has_capability('moodle/grade:manage', $context) and !has_capability('moodle/grade:unlock', $context))) {
+              and (!has_capability('powereduc/grade:manage', $context) and !has_capability('powereduc/grade:unlock', $context))) {
                 $mform->hardFreeze('locked');
                 $mform->hardFreeze('locktime');
 
             } else if ((!$old_grade_grade->locked and !$old_grade_grade->locktime)
-              and (!has_capability('moodle/grade:manage', $context) and !has_capability('moodle/grade:lock', $context))) {
+              and (!has_capability('powereduc/grade:manage', $context) and !has_capability('powereduc/grade:lock', $context))) {
                 $mform->hardFreeze('locked');
                 $mform->hardFreeze('locktime');
             }

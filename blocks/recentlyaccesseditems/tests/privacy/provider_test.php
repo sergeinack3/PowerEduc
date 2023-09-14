@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Block recentlyaccesseditems privacy provider tests.
  *
  * @package    block_recentlyaccesseditems
- * @copyright  2018 Michael Hawkins <michaelh@moodle.com>
+ * @copyright  2018 Michael Hawkins <michaelh@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.6
  */
@@ -34,7 +34,7 @@ use core_privacy\local\request\approved_userlist;
  * Block Recently accessed items privacy provider tests.
  *
  * @package    block_recentlyaccesseditems
- * @copyright  2018 Michael Hawkins <michaelh@moodle.com>
+ * @copyright  2018 Michael Hawkins <michaelh@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.6
  */

@@ -1,7 +1,7 @@
 {
-    "moodle-atto_subscript-button": {
+    "powereduc-atto_subscript-button": {
         "requires": [
-            "moodle-editor_atto-plugin"
+            "powereduc-editor_atto-plugin"
         ]
     }
 }

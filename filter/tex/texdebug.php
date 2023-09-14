@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
     require_once("../../config.php");
 
     if (!filter_is_enabled('tex')) {
-        throw new \moodle_exception('filternotenabled');
+        throw new \powereduc_exception('filternotenabled');
     }
 
     require_once($CFG->libdir.'/filelib.php');
@@ -40,7 +40,7 @@
     $texexp = optional_param('tex', '', PARAM_RAW);
 
     require_login();
-    require_capability('moodle/site:config', context_system::instance(), $USER->id); /// Required cap to run this. MDL-18552
+    require_capability('powereduc/site:config', context_system::instance(), $USER->id); /// Required cap to run this. MDL-18552
     if ($action || $texexp) {
         require_sesskey();
     }
@@ -305,8 +305,8 @@
         echo "It should display correctly as ";
         echo "<img src=\"$CFG->wwwroot/filter/tex/pix.php?file=$image\" align=\"absmiddle\"></p>\n";
         echo "<p>If neither equation image displays correctly, please seek ";
-        echo "further help at moodle.org at the ";
-        echo "<a href=\"http://moodle.org/mod/forum/view.php?id=752&loginguest=true\" target=\"_blank\">";
+        echo "further help at powereduc.org at the ";
+        echo "<a href=\"http://powereduc.org/mod/forum/view.php?id=752&loginguest=true\" target=\"_blank\">";
         echo "Mathematics Tools Forum</a></p>";
     }
 

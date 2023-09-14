@@ -1,4 +1,4 @@
-@editor @editor_tinymce @tinymce @editor_moodleform
+@editor @editor_tinymce @tinymce @editor_powereducform
 Feature: Tinymce with enable/disable function.
   In order to test enable/disable function
   I set default editor is Tinymce editor, and I create a sample page to test this feature.
@@ -31,9 +31,9 @@ Feature: Tinymce with enable/disable function.
     And the "class" attribute of "a#id_myeditor_numlist" "css_element" should contain "mceButtonDisabled"
     And the "class" attribute of "a#id_myeditor_link" "css_element" should contain "mceButtonDisabled"
     And the "class" attribute of "a#id_myeditor_unlink" "css_element" should contain "mceButtonDisabled"
-    And the "class" attribute of "a#id_myeditor_moodlenolink" "css_element" should contain "mceButtonDisabled"
+    And the "class" attribute of "a#id_myeditor_powereducnolink" "css_element" should contain "mceButtonDisabled"
     And the "class" attribute of "a#id_myeditor_image" "css_element" should contain "mceButtonDisabled"
-    And the "class" attribute of "a#id_myeditor_moodlemedia" "css_element" should contain "mceButtonDisabled"
+    And the "class" attribute of "a#id_myeditor_powereducmedia" "css_element" should contain "mceButtonDisabled"
     And I switch to "id_myeditor_ifr" iframe
     And the "contenteditable" attribute of "body" "css_element" should contain "false"
 
@@ -48,8 +48,8 @@ Feature: Tinymce with enable/disable function.
     And the "class" attribute of "a#id_myeditor_numlist" "css_element" should contain "mceButtonEnabled"
     And the "class" attribute of "a#id_myeditor_link" "css_element" should contain "mceButtonDisabled"
     And the "class" attribute of "a#id_myeditor_unlink" "css_element" should contain "mceButtonDisabled"
-    And the "class" attribute of "a#id_myeditor_moodlenolink" "css_element" should contain "mceButtonDisabled"
+    And the "class" attribute of "a#id_myeditor_powereducnolink" "css_element" should contain "mceButtonDisabled"
     And the "class" attribute of "a#id_myeditor_image" "css_element" should contain "mceButtonEnabled"
-    And the "class" attribute of "a#id_myeditor_moodlemedia" "css_element" should contain "mceButtonEnabled"
+    And the "class" attribute of "a#id_myeditor_powereducmedia" "css_element" should contain "mceButtonEnabled"
     And I switch to "id_myeditor_ifr" iframe
     And the "contenteditable" attribute of "body" "css_element" should contain "true"

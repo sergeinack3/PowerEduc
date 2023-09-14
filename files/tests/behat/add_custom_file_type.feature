@@ -20,12 +20,12 @@ Feature: Add a new custom file type
     And I press "Add a new file type"
     And I set the following fields to these values:
       | Extension | mdlr |
-      | MIME type | application/x-moodle-rules |
+      | MIME type | application/x-powereduc-rules |
       | File icon | document                       |
       | Description type | Custom description specified in this form |
       | Custom description | Moodle rules |
     And I press "Save changes"
-    And I should see "application/x-moodle-rules"
+    And I should see "application/x-powereduc-rules"
     And I log out
     And I log in as "teacher1"
     And I am on "Course 1" course homepage with editing mode on

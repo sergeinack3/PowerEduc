@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -701,7 +701,7 @@ class plugin_test extends \advanced_testcase {
         $expectedlegacyeventdata = $dbuserenrolled;
         $expectedlegacyeventdata->enrol = 'meta';
         $expectedlegacyeventdata->courseid = $course2->id;
-        $url = new \moodle_url('/enrol/editenrolment.php', array('ue' => $event->objectid));
+        $url = new \powereduc_url('/enrol/editenrolment.php', array('ue' => $event->objectid));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventLegacyData($expectedlegacyeventdata, $event);
         $this->assertEventContextNotUsed($event);
@@ -984,7 +984,7 @@ class plugin_test extends \advanced_testcase {
         $user = $this->getDataGenerator()->create_user();
         $teacherrole = $DB->get_record('role', array('shortname' => 'teacher'));
         role_assign($teacherrole->id, $user->id, $metacourse2context->id);
-        unassign_capability('moodle/course:viewhiddencourses', $teacherrole->id);
+        unassign_capability('powereduc/course:viewhiddencourses', $teacherrole->id);
         $this->setUser($user);
 
         // Use the same instance as before but set another data.
@@ -993,13 +993,13 @@ class plugin_test extends \advanced_testcase {
             'customint2' => 0
         ];
         $errors = $metaplugin->edit_instance_validation($data, [], $instance, $coursecontext);
-        $this->assertEquals('Sorry, but you do not currently have permissions to do that (moodle/course:viewhiddencourses).',
+        $this->assertEquals('Sorry, but you do not currently have permissions to do that (powereduc/course:viewhiddencourses).',
             $errors['customint1']);
 
         // Revert some changes from the last assertion to reuse the course.
         $metacourse2->visible = 1;
         $DB->update_record('course', $metacourse2);
-        assign_capability('moodle/course:viewhiddencourses', CAP_ALLOW,
+        assign_capability('powereduc/course:viewhiddencourses', CAP_ALLOW,
             $teacherrole->id, \context_course::instance($metacourse2->id));
 
         // Test with no 'enrol/meta:selectaslinked' capability.

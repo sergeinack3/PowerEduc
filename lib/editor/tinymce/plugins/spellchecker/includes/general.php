@@ -74,7 +74,7 @@ function info($msg) {
 	$log->info(implode(', ', $args));
 }
 
-function xx_error($msg) { // collides with our moodle error(), it does not look to be used at all
+function xx_error($msg) { // collides with our powereduc error(), it does not look to be used at all
 	$args = func_get_args();
 
 	$log = getLogger();

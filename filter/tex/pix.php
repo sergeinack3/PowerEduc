@@ -3,14 +3,14 @@
       // If not, it obtains the corresponding TeX expression from the cache_tex db table
       // and uses mimeTeX to create the image file
 
-// disable moodle specific debug messages and any errors in output
+// disable powereduc specific debug messages and any errors in output
 define('NO_DEBUG_DISPLAY', true);
 define('NO_POWEREDUC_COOKIES', true); // Because it interferes with caching
 
     require_once('../../config.php');
 
     if (!filter_is_enabled('tex')) {
-        throw new \moodle_exception('filternotenabled');
+        throw new \powereduc_exception('filternotenabled');
     }
 
     require_once($CFG->libdir.'/filelib.php');
@@ -28,7 +28,7 @@ define('NO_POWEREDUC_COOKIES', true); // Because it interferes with caching
         $image    = $args[0];
         $pathname = $CFG->dataroot.'/filter/tex/'.$image;
     } else {
-        throw new \moodle_exception('invalidarguments', 'error');
+        throw new \powereduc_exception('invalidarguments', 'error');
     }
 
     if (!file_exists($pathname)) {

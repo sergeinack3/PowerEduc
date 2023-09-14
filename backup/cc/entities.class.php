@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,10 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * @package   moodlecore
+ * @package   powereduccore
  * @subpackage backup-imscc
  * @copyright 2009 Mauro Rondinelli (mauro.rondinelli [AT] uvcms.com)
- * @copyright 2011 Darko Miletic (dmiletic@moodlerooms.com)
+ * @copyright 2011 Darko Miletic (dmiletic@powereducrooms.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -73,10 +73,10 @@ class entities {
 
         $resource = new DOMDocument();
 
-        cc2moodle::log_action('Load the XML resource file: '.$path_to_file);
+        cc2powereduc::log_action('Load the XML resource file: '.$path_to_file);
 
         if (!$resource->load($path_to_file)) {
-            cc2moodle::log_action('Cannot load the XML resource file: ' . $path_to_file, false);
+            cc2powereduc::log_action('Cannot load the XML resource file: ' . $path_to_file, false);
         }
 
         return $resource;
@@ -183,7 +183,7 @@ class entities {
 
     public function get_external_xml ($identifier) {
 
-        $xpath = cc2moodle::newx_path(cc2moodle::$manifest, cc2moodle::$namespaces);
+        $xpath = cc2powereduc::newx_path(cc2powereduc::$manifest, cc2powereduc::$namespaces);
 
         $files = $xpath->query('/imscc:manifest/imscc:resources/imscc:resource[@identifier="'.
             $identifier.'"]/imscc:file/@href');
@@ -203,12 +203,12 @@ class entities {
         if (!empty($files)) {
 
             foreach ($files as $file) {
-                $source = cc2moodle::$path_to_manifest_folder . DIRECTORY_SEPARATOR . $file;
+                $source = cc2powereduc::$path_to_manifest_folder . DIRECTORY_SEPARATOR . $file;
                 $destination = $destination_folder . DIRECTORY_SEPARATOR . $file;
 
                 $destination_directory = dirname($destination);
 
-                cc2moodle::log_action('Copy the file: ' . $source . ' to ' . $destination);
+                cc2powereduc::log_action('Copy the file: ' . $source . ' to ' . $destination);
 
                 if (!file_exists($destination_directory)) {
                     mkdir($destination_directory, $CFG->directorypermissions, true);
@@ -221,7 +221,7 @@ class entities {
 
                 if (!$copy_success) {
                     echo $OUTPUT->notification('WARNING: Cannot copy the file ' . $source . ' to ' . $destination);
-                    cc2moodle::log_action('Cannot copy the file ' . $source . ' to ' . $destination, false);
+                    cc2powereduc::log_action('Cannot copy the file ' . $source . ' to ' . $destination, false);
                 }
             }
         }
@@ -232,9 +232,9 @@ class entities {
 
         $all_files = array();
 
-        $xpath = cc2moodle::newx_path(cc2moodle::$manifest, cc2moodle::$namespaces);
+        $xpath = cc2powereduc::newx_path(cc2powereduc::$manifest, cc2powereduc::$namespaces);
 
-        foreach (cc2moodle::$restypes as $type) {
+        foreach (cc2powereduc::$restypes as $type) {
 
             $files = $xpath->query('/imscc:manifest/imscc:resources/imscc:resource[@type="' . $type . '"]/imscc:file/@href');
 
@@ -256,7 +256,7 @@ class entities {
         $labels = $xpath->query($xquery);
         if (!empty($labels) && ($labels->length > 0)) {
             $tname = 'course_files';
-            $dpath = cc2moodle::$path_to_manifest_folder . DIRECTORY_SEPARATOR . $tname;
+            $dpath = cc2powereduc::$path_to_manifest_folder . DIRECTORY_SEPARATOR . $tname;
             $rfpath = 'files.gif';
             $fpath = $dpath . DIRECTORY_SEPARATOR . $rfpath;
 
@@ -279,7 +279,7 @@ class entities {
         $files = $this->get_all_files();
 
         if (!empty($files)) {
-            $this->move_files($files, cc2moodle::$path_to_manifest_folder . DIRECTORY_SEPARATOR . 'course_files', true);
+            $this->move_files($files, cc2powereduc::$path_to_manifest_folder . DIRECTORY_SEPARATOR . 'course_files', true);
         }
 
     }

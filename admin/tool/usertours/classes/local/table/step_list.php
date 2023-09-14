@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -54,7 +54,7 @@ class step_list extends \flexible_table {
         parent::__construct('steps');
         $this->tourid = $tourid;
 
-        $baseurl = new \moodle_url('/tool/usertours/configure.php', array(
+        $baseurl = new \powereduc_url('/tool/usertours/configure.php', array(
                 'id' => $tourid,
             ));
         $this->define_baseurl($baseurl);
@@ -141,7 +141,7 @@ class step_list extends \flexible_table {
 
         $actions[] = helper::format_icon_link($step->get_edit_link(), 't/edit', get_string('edit'));
 
-        $actions[] = helper::format_icon_link($step->get_delete_link(), 't/delete', get_string('delete'), 'moodle', [
+        $actions[] = helper::format_icon_link($step->get_delete_link(), 't/delete', get_string('delete'), 'powereduc', [
             'data-action'   => 'delete',
             'data-id'       => $step->get_id(),
         ]);

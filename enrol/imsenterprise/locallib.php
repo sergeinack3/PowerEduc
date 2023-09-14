@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -109,7 +109,7 @@ class imsenterprise_roles {
 class imsenterprise_courses {
     /** @var array IMS group description names */
     private $imsnames;
-    /** @var array moodle course field names */
+    /** @var array powereduc course field names */
     private $courseattrs;
 
     /**

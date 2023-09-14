@@ -1,10 +1,10 @@
-YUI.add('moodle-course-util-section', function (Y, NAME) {
+YUI.add('powereduc-course-util-section', function (Y, NAME) {
 
 /**
  * A collection of utility classes for use with course sections.
  *
- * @module moodle-course-util
- * @submodule moodle-course-util-section
+ * @module powereduc-course-util
+ * @submodule powereduc-course-util-section
  */
 
 Y.namespace('Moodle.core_course.util.section');
@@ -42,4 +42,4 @@ Y.Moodle.core_course.util.section = {
 };
 
 
-}, '@VERSION@', {"requires": ["node", "moodle-course-util-base"]});
+}, '@VERSION@', {"requires": ["node", "powereduc-course-util-base"]});

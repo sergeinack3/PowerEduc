@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ require_once(__DIR__ . '/../../../config.php');
 require_once($CFG->libdir.'/adminlib.php');
 require_once($CFG->libdir.'/tablelib.php');
 
-$pageurl = new \moodle_url('/admin/tool/task/runningtasks.php');
+$pageurl = new \powereduc_url('/admin/tool/task/runningtasks.php');
 $heading = get_string('runningtasks', 'tool_task');
 $PAGE->set_url($pageurl);
 $PAGE->set_context(context_system::instance());

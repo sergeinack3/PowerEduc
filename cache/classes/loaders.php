@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -788,10 +788,10 @@ class cache implements cache_loader {
      *
      * <code>
      * // This code will add four entries to the cache, one for each url.
-     * $cache->set('main', 'http://moodle.org');
-     * $cache->set('docs', 'http://docs.moodle.org');
-     * $cache->set('tracker', 'http://tracker.moodle.org');
-     * $cache->set('qa', 'http://qa.moodle.net');
+     * $cache->set('main', 'http://powereduc.org');
+     * $cache->set('docs', 'http://docs.powereduc.org');
+     * $cache->set('tracker', 'http://tracker.powereduc.org');
+     * $cache->set('qa', 'http://qa.powereduc.net');
      * </code>
      *
      * @param string|int $key The key for the data being requested.
@@ -966,10 +966,10 @@ class cache implements cache_loader {
      * <code>
      * // This code will add four entries to the cache, one for each url.
      * $cache->set_many(array(
-     *     'main' => 'http://moodle.org',
-     *     'docs' => 'http://docs.moodle.org',
-     *     'tracker' => 'http://tracker.moodle.org',
-     *     'qa' => ''http://qa.moodle.net'
+     *     'main' => 'http://powereduc.org',
+     *     'docs' => 'http://docs.powereduc.org',
+     *     'tracker' => 'http://tracker.powereduc.org',
+     *     'qa' => ''http://qa.powereduc.net'
      * ));
      * </code>
      *
@@ -1761,10 +1761,10 @@ class cache_application extends cache implements cache_loader_with_locking {
      *
      * <code>
      * // This code will add four entries to the cache, one for each url.
-     * $cache->set('main', 'http://moodle.org');
-     * $cache->set('docs', 'http://docs.moodle.org');
-     * $cache->set('tracker', 'http://tracker.moodle.org');
-     * $cache->set('qa', 'http://qa.moodle.net');
+     * $cache->set('main', 'http://powereduc.org');
+     * $cache->set('docs', 'http://docs.powereduc.org');
+     * $cache->set('tracker', 'http://tracker.powereduc.org');
+     * $cache->set('qa', 'http://qa.powereduc.net');
      * </code>
      *
      * @param string|int $key The key for the data being requested.
@@ -1800,10 +1800,10 @@ class cache_application extends cache implements cache_loader_with_locking {
      * <code>
      * // This code will add four entries to the cache, one for each url.
      * $cache->set_many(array(
-     *     'main' => 'http://moodle.org',
-     *     'docs' => 'http://docs.moodle.org',
-     *     'tracker' => 'http://tracker.moodle.org',
-     *     'qa' => ''http://qa.moodle.net'
+     *     'main' => 'http://powereduc.org',
+     *     'docs' => 'http://docs.powereduc.org',
+     *     'tracker' => 'http://tracker.powereduc.org',
+     *     'qa' => ''http://qa.powereduc.net'
      * ));
      * </code>
      *
@@ -2136,10 +2136,10 @@ class cache_session extends cache {
      *
      * <code>
      * // This code will add four entries to the cache, one for each url.
-     * $cache->set('main', 'http://moodle.org');
-     * $cache->set('docs', 'http://docs.moodle.org');
-     * $cache->set('tracker', 'http://tracker.moodle.org');
-     * $cache->set('qa', 'http://qa.moodle.net');
+     * $cache->set('main', 'http://powereduc.org');
+     * $cache->set('docs', 'http://docs.powereduc.org');
+     * $cache->set('tracker', 'http://tracker.powereduc.org');
+     * $cache->set('qa', 'http://qa.powereduc.net');
      * </code>
      *
      * @param string|int $key The key for the data being requested.
@@ -2328,10 +2328,10 @@ class cache_session extends cache {
      * <code>
      * // This code will add four entries to the cache, one for each url.
      * $cache->set_many(array(
-     *     'main' => 'http://moodle.org',
-     *     'docs' => 'http://docs.moodle.org',
-     *     'tracker' => 'http://tracker.moodle.org',
-     *     'qa' => ''http://qa.moodle.net'
+     *     'main' => 'http://powereduc.org',
+     *     'docs' => 'http://docs.powereduc.org',
+     *     'tracker' => 'http://tracker.powereduc.org',
+     *     'qa' => ''http://qa.powereduc.net'
      * ));
      * </code>
      *

@@ -1,4 +1,4 @@
-Description of import of various jQuery libraries into Moodle:
+Description of import of various jQuery libraries into PowerEduc:
 
 1/ Download compressed and uncompressed jQuery JS from http://jquery.com/download/,
    copy the new version of the jquery-X.Y.Z.js and jquery-X.Y.Z.min.js files
@@ -24,5 +24,5 @@ Description of import of various jQuery libraries into Moodle:
 
 
 Note: jQuery.trim() function and :first pseudo-class are deprecated. We use String.prototype.trim() and .first()
-in Moodle code instead. Please note that in third party libraries there are still usages of jQuery.trim
+in PowerEduc code instead. Please note that in third party libraries there are still usages of jQuery.trim
 for example xhprof and jQuery UI.

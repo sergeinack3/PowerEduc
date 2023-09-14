@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -191,10 +191,10 @@ class tool_generator_course_backend extends tool_generator_backend {
                 array('shortname' => $shortname), IGNORE_MISSING);
         if ($fullname !== false) {
             // I wanted to throw an exception here but it is not possible to
-            // use strings from moodle.php in exceptions, and I didn't want
+            // use strings from powereduc.php in exceptions, and I didn't want
             // to duplicate the string in tool_generator, so I changed this to
             // not use exceptions.
-            return get_string('shortnametaken', 'moodle', $fullname);
+            return get_string('shortnametaken', 'powereduc', $fullname);
         }
         return '';
     }

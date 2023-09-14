@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Defines names of plugin types and some strings used at the plugin managment
  *
  * @package    core
  * @subpackage plugin
- * @copyright  2011 David Mudrak <david@moodle.com>
+ * @copyright  2011 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -54,7 +54,7 @@ $string['err_response_http_code'] = 'Unable to fetch available updates data - un
 $string['filterall'] = 'Show all';
 $string['filtercontribonly'] = 'Show additional plugins only';
 $string['filterupdatesonly'] = 'Show updateable only';
-$string['incompatibleversion'] = 'Incompatible Moodle version: {$a}';
+$string['incompatibleversion'] = 'Incompatible PowerEduc version: {$a}';
 $string['isenabled'] = 'Enabled?';
 $string['misdepinfoplugin'] = 'Plugin info';
 $string['misdepinfoversion'] = 'Version info';
@@ -62,14 +62,14 @@ $string['misdepsavail'] = 'Available missing dependencies';
 $string['misdepsunavail'] = 'Unavailable missing dependencies';
 $string['misdepsunavaillist'] = 'No version found to fulfill the dependency requirements: {$a}.';
 $string['misdepsunknownlist'] = 'Not in the Plugins directory: <strong>{$a}</strong>.';
-$string['moodlebranch'] = 'Moodle {$a->min} - {$a->max}';
-$string['moodleversion'] = 'Moodle {$a}';
+$string['powereducbranch'] = 'PowerEduc {$a->min} - {$a->max}';
+$string['powereducversion'] = 'PowerEduc {$a}';
 $string['noneinstalled'] = 'No plugins of this type are installed';
 $string['notes'] = 'Notes';
 $string['notdownloadable'] = 'Can not download the package';
 $string['notdownloadable_help'] = 'The ZIP package with the update cannot be downloaded automatically.';
 $string['notdownloadable_link'] = 'admin/mdeploy/notdownloadable';
-$string['notsupported'] = 'Plugin may not be compatible with Moodle version {$a}';
+$string['notsupported'] = 'Plugin may not be compatible with PowerEduc version {$a}';
 $string['notwritable'] = 'Plugin files not writable';
 $string['notwritable_help'] = 'Plugin files are not writable by the web server. The web server process must have write access to the plugin folder and all its contents. Write access to the root folder of the given plugin type may also be required.';
 $string['otherplugin'] = '{$a->component}';
@@ -86,7 +86,7 @@ $string['packagesvalidatingok'] = 'Validation successful, installation can conti
 $string['plugincheckall'] = 'All plugins';
 $string['plugincheckattention'] = 'Plugins requiring attention';
 $string['pluginchecknone'] = 'No plugins require your attention now';
-$string['pluginchecknotice'] = 'This page displays plugins that may require your attention during the upgrade, such as new plugins to be installed, plugins to be upgraded, missing plugins etc. Additional plugins are displayed if there is an available update for them. It is recommended that you check whether there are more recent versions of plugins available and update their source code before continuing with this Moodle upgrade.';
+$string['pluginchecknotice'] = 'This page displays plugins that may require your attention during the upgrade, such as new plugins to be installed, plugins to be upgraded, missing plugins etc. Additional plugins are displayed if there is an available update for them. It is recommended that you check whether there are more recent versions of plugins available and update their source code before continuing with this PowerEduc upgrade.';
 $string['plugindisable'] = 'Disable';
 $string['plugindisabled'] = 'Disabled';
 $string['pluginenable'] = 'Enable';
@@ -107,7 +107,7 @@ $string['status_new'] = 'To be installed';
 $string['status_nodb'] = 'No database';
 $string['status_upgrade'] = 'To be upgraded';
 $string['status_uptodate'] = 'Installed';
-$string['supportedmoodleversions'] = 'Supported Moodle versions';
+$string['supportedpowereducversions'] = 'Supported PowerEduc versions';
 $string['supportedconversions'] = 'Supported document conversions';
 $string['systemname'] = 'Identifier';
 $string['type_antivirus'] = 'Antivirus plugin';
@@ -198,12 +198,12 @@ $string['updateavailable'] = 'There is a new version {$a} available!';
 $string['updateavailable_moreinfo'] = 'More info...';
 $string['updateavailable_release'] = 'Release {$a}';
 $string['updatepluginconfirm'] = 'Plugin update confirmation';
-$string['updatepluginconfirminfo'] = 'You are about to install a new version of the plugin <strong>{$a->name}</strong>. A zip package with version {$a->version} of the plugin will be downloaded from <a href="{$a->url}">{$a->url}</a> and extracted to your Moodle installation so it can upgrade your installation.';
+$string['updatepluginconfirminfo'] = 'You are about to install a new version of the plugin <strong>{$a->name}</strong>. A zip package with version {$a->version} of the plugin will be downloaded from <a href="{$a->url}">{$a->url}</a> and extracted to your PowerEduc installation so it can upgrade your installation.';
 $string['updatepluginconfirmexternal'] = 'It appears that the current version of the plugin has been obtained via source code management system ({$a}) checkout. If you install this update, you will no longer be able to obtain plugin updates from the source code management system. Please ensure that you definitely want to update the plugin before continuing.';
-$string['updatepluginconfirmwarning'] = 'Please note that Moodle will not automatically make a backup of your database before the upgrade. We strongly recommend that you make a full snapshot backup now, to cope with the rare case that the new code has bugs that make your site unavailable or even corrupts your database. Proceed at your own risk.';
+$string['updatepluginconfirmwarning'] = 'Please note that PowerEduc will not automatically make a backup of your database before the upgrade. We strongly recommend that you make a full snapshot backup now, to cope with the rare case that the new code has bugs that make your site unavailable or even corrupts your database. Proceed at your own risk.';
 $string['uninstall'] = 'Uninstall';
-$string['uninstallconfirm'] = 'You are about to uninstall the plugin <em>{$a->name}</em>. This will completely delete everything in the database associated with this plugin, including its configuration, log records, user files managed by the plugin etc. There is no way back and Moodle itself does not create any recovery backup. Are you SURE you want to continue?';
-$string['uninstalldelete'] = 'All data associated with the plugin <em>{$a->name}</em> has been deleted from the database. To prevent the plugin re-installing itself, its folder <em>{$a->rootdir}</em> must be manually removed from your server now. Moodle itself cannot remove the folder due to write permissions.';
+$string['uninstallconfirm'] = 'You are about to uninstall the plugin <em>{$a->name}</em>. This will completely delete everything in the database associated with this plugin, including its configuration, log records, user files managed by the plugin etc. There is no way back and PowerEduc itself does not create any recovery backup. Are you SURE you want to continue?';
+$string['uninstalldelete'] = 'All data associated with the plugin <em>{$a->name}</em> has been deleted from the database. To prevent the plugin re-installing itself, its folder <em>{$a->rootdir}</em> must be manually removed from your server now. PowerEduc itself cannot remove the folder due to write permissions.';
 $string['uninstalldeleteconfirm'] = 'All data associated with the plugin <em>{$a->name}</em> has been deleted from the database. To prevent the plugin re-installing itself, its folder <em>{$a->rootdir}</em> must be removed from your server. Do you want to remove the plugin folder now?';
 $string['uninstalldeleteconfirmexternal'] = 'It appears that the current version of the plugin has been obtained via source code management system ({$a}) checkout. If you remove the plugin folder, you may lose important local modifications of the code. Please ensure that you definitely want to remove the plugin folder before continuing.';
 $string['uninstallextraconfirmblock'] = 'There are {$a->instances} instances of this block.';
@@ -239,7 +239,7 @@ $string['validationmsg_pathwritable'] = 'Write access check';
 $string['validationmsg_pluginversion'] = 'Plugin version';
 $string['validationmsg_pluginversiontoolow'] = 'A higher version of this plugin is already installed';
 $string['validationmsg_release'] = 'Plugin release';
-$string['validationmsg_requiresmoodle'] = 'Required Moodle version';
+$string['validationmsg_requirespowereduc'] = 'Required PowerEduc version';
 $string['validationmsg_rootdir'] = 'Name of the plugin to be installed';
 $string['validationmsg_rootdir_help'] = 'The name of the root directory in the ZIP package forms the name of the plugin to be installed. If the name is not correct, you may wish to rename the root directory in the ZIP prior to installing the plugin.';
 $string['validationmsg_rootdirinvalid'] = 'Invalid plugin name';

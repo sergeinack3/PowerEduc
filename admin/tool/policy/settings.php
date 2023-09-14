@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Plugin administration pages are defined here.
  *
  * @package     tool_policy
- * @copyright   2018 David Mudrák <david@moodle.com>
+ * @copyright   2018 David Mudrák <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -39,13 +39,13 @@ if ($hassiteconfig || has_any_capability($managecaps, context_system::instance()
     $ADMIN->add('privacy', new admin_externalpage(
         'tool_policy_managedocs',
         new lang_string('managepolicies', 'tool_policy'),
-        new moodle_url('/admin/tool/policy/managedocs.php'),
+        new powereduc_url('/admin/tool/policy/managedocs.php'),
         ['tool/policy:managedocs', 'tool/policy:viewacceptances']
     ));
     $ADMIN->add('privacy', new admin_externalpage(
         'tool_policy_acceptances',
         new lang_string('useracceptances', 'tool_policy'),
-        new moodle_url('/admin/tool/policy/acceptances.php'),
+        new powereduc_url('/admin/tool/policy/acceptances.php'),
         ['tool/policy:viewacceptances']
     ));
 }

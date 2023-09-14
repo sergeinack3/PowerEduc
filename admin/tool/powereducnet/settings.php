@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 /**
  * Puts the plugin actions into the admin settings tree.
  *
- * @package     tool_moodlenet
+ * @package     tool_powereducnet
  * @copyright   2020 Jake Dallimore <jrhdallimore@gmail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,26 +27,26 @@ defined('POWEREDUC_INTERNAL') || die();
 if ($hassiteconfig) {
     // Add an enable subsystem setting to the "Advanced features" settings page.
     $optionalsubsystems = $ADMIN->locate('optionalsubsystems');
-    $optionalsubsystems->add(new admin_setting_configcheckbox('tool_moodlenet/enablemoodlenet',
-        new lang_string('enablemoodlenet', 'tool_moodlenet'),
-        new lang_string('enablemoodlenet_desc', 'tool_moodlenet'),
+    $optionalsubsystems->add(new admin_setting_configcheckbox('tool_powereducnet/enablepowereducnet',
+        new lang_string('enablepowereducnet', 'tool_powereducnet'),
+        new lang_string('enablepowereducnet_desc', 'tool_powereducnet'),
         1, 1, 0)
     );
 
     // Create a MoodleNet category.
-    if (get_config('tool_moodlenet', 'enablemoodlenet')) {
-        $ADMIN->add('root', new admin_category('moodlenet', get_string('pluginname', 'tool_moodlenet')));
+    if (get_config('tool_powereducnet', 'enablepowereducnet')) {
+        $ADMIN->add('root', new admin_category('powereducnet', get_string('pluginname', 'tool_powereducnet')));
         // Our settings page.
-        $settings = new admin_settingpage('tool_moodlenet', get_string('moodlenetsettings', 'tool_moodlenet'));
-        $ADMIN->add('moodlenet', $settings);
+        $settings = new admin_settingpage('tool_powereducnet', get_string('powereducnetsettings', 'tool_powereducnet'));
+        $ADMIN->add('powereducnet', $settings);
 
-        $temp = new admin_setting_configtext('tool_moodlenet/defaultmoodlenetname',
-            get_string('defaultmoodlenetname', 'tool_moodlenet'), new lang_string('defaultmoodlenetname_desc', 'tool_moodlenet'),
-            new lang_string('defaultmoodlenetnamevalue', 'tool_moodlenet'));
+        $temp = new admin_setting_configtext('tool_powereducnet/defaultpowereducnetname',
+            get_string('defaultpowereducnetname', 'tool_powereducnet'), new lang_string('defaultpowereducnetname_desc', 'tool_powereducnet'),
+            new lang_string('defaultpowereducnetnamevalue', 'tool_powereducnet'));
         $settings->add($temp);
 
-        $temp = new admin_setting_configtext('tool_moodlenet/defaultmoodlenet', get_string('defaultmoodlenet', 'tool_moodlenet'),
-            new lang_string('defaultmoodlenet_desc', 'tool_moodlenet'), 'https://moodle.net');
+        $temp = new admin_setting_configtext('tool_powereducnet/defaultpowereducnet', get_string('defaultpowereducnet', 'tool_powereducnet'),
+            new lang_string('defaultpowereducnet_desc', 'tool_powereducnet'), 'https://powereduc.net');
         $settings->add($temp);
 
     }

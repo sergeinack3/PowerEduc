@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * User backpack settings page.
@@ -30,11 +30,11 @@ require_once($CFG->libdir . '/badgeslib.php');
 require_login();
 
 if (empty($CFG->enablebadges)) {
-    throw new \moodle_exception('badgesdisabled', 'badges');
+    throw new \powereduc_exception('badgesdisabled', 'badges');
 }
 
 $context = context_user::instance($USER->id);
-require_capability('moodle/badges:manageownbadges', $context);
+require_capability('powereduc/badges:manageownbadges', $context);
 
 $disconnect = optional_param('disconnect', false, PARAM_BOOL);
 
@@ -42,7 +42,7 @@ if (empty($CFG->badges_allowexternalbackpack)) {
     redirect($CFG->wwwroot);
 }
 
-$PAGE->set_url(new moodle_url('/badges/mybackpack.php'));
+$PAGE->set_url(new powereduc_url('/badges/mybackpack.php'));
 $PAGE->set_context($context);
 
 $title = get_string('backpackdetails', 'badges');
@@ -59,13 +59,13 @@ if ($disconnect && $backpack) {
     if ($sitebackpack->apiversion == OPEN_BADGES_V2P1) {
         $bp = new \core_badges\backpack_api2p1($sitebackpack);
         $bp->disconnect_backpack($backpack);
-        redirect(new moodle_url('/badges/mybackpack.php'), get_string('backpackdisconnected', 'badges'), null,
+        redirect(new powereduc_url('/badges/mybackpack.php'), get_string('backpackdisconnected', 'badges'), null,
             \core\output\notification::NOTIFY_SUCCESS);
     } else {
         // If backpack is connected, need to select collections.
         $bp = new \core_badges\backpack_api($sitebackpack, $backpack);
         $bp->disconnect_backpack($USER->id, $backpack->id);
-        redirect(new moodle_url('/badges/mybackpack.php'));
+        redirect(new powereduc_url('/badges/mybackpack.php'));
     }
 }
 $warning = '';
@@ -90,18 +90,18 @@ if ($backpack) {
     $params['email'] = $backpack->email;
     $params['selected'] = $bp->get_collection_record($backpack->id);
     $params['backpackweburl'] = $sitebackpack->backpackweburl;
-    $form = new \core_badges\form\collections(new moodle_url('/badges/mybackpack.php'), $params);
+    $form = new \core_badges\form\collections(new powereduc_url('/badges/mybackpack.php'), $params);
 
     if ($form->is_cancelled()) {
-        redirect(new moodle_url('/badges/mybadges.php'));
+        redirect(new powereduc_url('/badges/mybadges.php'));
     } else if ($data = $form->get_data()) {
         if (empty($data->group)) {
-            redirect(new moodle_url('/badges/mybadges.php'));
+            redirect(new powereduc_url('/badges/mybadges.php'));
         } else {
             $groups = array_filter($data->group);
         }
         $bp->set_backpack_collections($backpack->id, $groups);
-        redirect(new moodle_url('/badges/mybadges.php'));
+        redirect(new powereduc_url('/badges/mybadges.php'));
     }
 } else {
     // If backpack is not connected, need to connect first.
@@ -119,16 +119,16 @@ if ($backpack) {
     $params['backpackpassword'] = get_user_preferences('badges_email_verify_password');
     $params['backpackid'] = get_user_preferences('badges_email_verify_backpackid');
 
-    $form = new \core_badges\form\backpack(new moodle_url('/badges/mybackpack.php'), $params);
+    $form = new \core_badges\form\backpack(new powereduc_url('/badges/mybackpack.php'), $params);
     $data = $form->get_submitted_data();
     if ($form->is_cancelled()) {
-        redirect(new moodle_url('/badges/mybadges.php'));
+        redirect(new powereduc_url('/badges/mybadges.php'));
     } else if ($form->is_submitted()) {
         if (badges_open_badges_backpack_api($data->externalbackpackid) == OPEN_BADGES_V2P1) {
             // If backpack is version 2.1 to redirect on the backpack site to login.
             // User input username/email/password on the backpack site
             // After confirm the scopes.
-            redirect(new moodle_url('/badges/backpack-connect.php', ['backpackid' => $data->externalbackpackid]));
+            redirect(new powereduc_url('/badges/backpack-connect.php', ['backpackid' => $data->externalbackpackid]));
         } else if ($data = $form->get_data()) {
             // The form may have been submitted under one of the following circumstances:
             // 1. After clicking 'Connect to backpack'. We'll have $data->email.
@@ -137,15 +137,15 @@ if ($backpack) {
 
             if (isset($data->revertbutton)) {
                 badges_disconnect_user_backpack($USER->id);
-                redirect(new moodle_url('/badges/mybackpack.php'));
+                redirect(new powereduc_url('/badges/mybackpack.php'));
             } else if (isset($data->backpackemail)) {
                 if (badges_send_verification_email($data->backpackemail, $data->externalbackpackid, $data->password)) {
                     $a = get_user_preferences('badges_email_verify_backpackid');
-                    redirect(new moodle_url('/badges/mybackpack.php'),
+                    redirect(new powereduc_url('/badges/mybackpack.php'),
                         get_string('backpackemailverifypending', 'badges', $data->backpackemail),
                         null, \core\output\notification::NOTIFY_INFO);
                 } else {
-                    throw new \moodle_exception('backpackcannotsendverification', 'badges');
+                    throw new \powereduc_exception('backpackcannotsendverification', 'badges');
                 }
             }
         }

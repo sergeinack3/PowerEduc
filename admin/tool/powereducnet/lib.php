@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This page lists public api for tool_moodlenet plugin.
+ * This page lists public api for tool_powereducnet plugin.
  *
- * @package    tool_moodlenet
+ * @package    tool_powereducnet
  * @copyright  2020 Peter Dias
  * @license    http://www.gnu.org/copyleft/gpl.html GNU
  */
@@ -29,16 +29,16 @@ use \core_course\local\entity\activity_chooser_footer;
 /**
  * The default endpoint to MoodleNet.
  */
-define('POWEREDUCNET_DEFAULT_ENDPOINT', "lms/moodle/search");
+define('POWEREDUCNET_DEFAULT_ENDPOINT', "lms/powereduc/search");
 
 /**
- * Generate the endpoint url to the user's moodlenet site.
+ * Generate the endpoint url to the user's powereducnet site.
  *
- * @param string $profileurl The user's moodlenet profile page
- * @param int $course The moodle course the mnet resource will be added to
+ * @param string $profileurl The user's powereducnet profile page
+ * @param int $course The powereduc course the mnet resource will be added to
  * @param int $section The section of the course will be added to. Defaults to the 0th element.
  * @return string the resulting endpoint
- * @throws moodle_exception
+ * @throws powereduc_exception
  */
 function generate_mnet_endpoint(string $profileurl, int $course, int $section = 0) {
     global $CFG;
@@ -50,7 +50,7 @@ function generate_mnet_endpoint(string $profileurl, int $course, int $section = 
         'course' => $course,
         'section' => $section
     ];
-    $endpoint = new moodle_url(POWEREDUCNET_DEFAULT_ENDPOINT, $params);
+    $endpoint = new powereduc_url(POWEREDUCNET_DEFAULT_ENDPOINT, $params);
     return (isset($parsedurl['scheme']) ? $domain : "https://$domain")."/{$endpoint->out(false)}";
 }
 
@@ -61,16 +61,16 @@ function generate_mnet_endpoint(string $profileurl, int $course, int $section = 
  * @param int $sectionid The section the user is currently in and wants to add resources to
  * @return activity_chooser_footer
  * @throws dml_exception
- * @throws moodle_exception
+ * @throws powereduc_exception
  */
-function tool_moodlenet_custom_chooser_footer(int $courseid, int $sectionid): activity_chooser_footer {
+function tool_powereducnet_custom_chooser_footer(int $courseid, int $sectionid): activity_chooser_footer {
     global $CFG, $USER, $OUTPUT;
-    $defaultlink = get_config('tool_moodlenet', 'defaultmoodlenet');
-    $enabled = get_config('tool_moodlenet', 'enablemoodlenet');
+    $defaultlink = get_config('tool_powereducnet', 'defaultpowereducnet');
+    $enabled = get_config('tool_powereducnet', 'enablepowereducnet');
 
     $advanced = false;
     // We are in the MoodleNet lib. It is safe assume we have our own functions here.
-    $mnetprofile = \tool_moodlenet\profile_manager::get_moodlenet_user_profile($USER->id);
+    $mnetprofile = \tool_powereducnet\profile_manager::get_powereducnet_user_profile($USER->id);
     if ($mnetprofile !== null) {
         $advanced = $mnetprofile->get_domain() ?? false;
     }
@@ -80,24 +80,24 @@ function tool_moodlenet_custom_chooser_footer(int $courseid, int $sectionid): ac
         $advanced = generate_mnet_endpoint($advanced, $courseid, $sectionid);
     }
 
-    $renderedfooter = $OUTPUT->render_from_template('tool_moodlenet/chooser_footer', (object)[
+    $renderedfooter = $OUTPUT->render_from_template('tool_powereducnet/chooser_footer', (object)[
         'enabled' => (bool)$enabled,
         'generic' => $defaultlink,
         'advanced' => $advanced,
         'courseID' => $courseid,
         'sectionID' => $sectionid,
-        'img' => $OUTPUT->image_url('MoodleNet', 'tool_moodlenet')->out(false),
+        'img' => $OUTPUT->image_url('MoodleNet', 'tool_powereducnet')->out(false),
     ]);
 
-    $renderedcarousel = $OUTPUT->render_from_template('tool_moodlenet/chooser_moodlenet', (object)[
-        'buttonName' => get_config('tool_moodlenet', 'defaultmoodlenetname'),
+    $renderedcarousel = $OUTPUT->render_from_template('tool_powereducnet/chooser_powereducnet', (object)[
+        'buttonName' => get_config('tool_powereducnet', 'defaultpowereducnetname'),
         'generic' => $defaultlink,
         'courseID' => $courseid,
         'sectionID' => $sectionid,
-        'img' => $OUTPUT->image_url('MoodleNet', 'tool_moodlenet')->out(false),
+        'img' => $OUTPUT->image_url('MoodleNet', 'tool_powereducnet')->out(false),
     ]);
     return new activity_chooser_footer(
-        'tool_moodlenet/instance_form',
+        'tool_powereducnet/instance_form',
         $renderedfooter,
         $renderedcarousel
     );

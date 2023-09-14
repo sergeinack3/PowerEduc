@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -186,7 +186,7 @@ module.exports = grunt => {
             dist: {
                 files: [{
                     expand: true,
-                    src: grunt.moodleEnv.files ? grunt.moodleEnv.files : grunt.moodleEnv.amdSrc,
+                    src: grunt.powereducEnv.files ? grunt.powereducEnv.files : grunt.powereducEnv.amdSrc,
                     rename: babelRename
                 }],
             },
@@ -196,7 +196,7 @@ module.exports = grunt => {
     grunt.config.merge({
         watch: {
             amd: {
-                files: grunt.moodleEnv.inComponent
+                files: grunt.powereducEnv.inComponent
                     ? ['amd/src/*.js', 'amd/src/**/*.js']
                     : ['**/amd/src/**/*.js'],
                 tasks: ['amd']
@@ -205,7 +205,7 @@ module.exports = grunt => {
     });
 
     // Add the 'js' task as a startup task.
-    grunt.moodleEnv.startupTasks.push('js');
+    grunt.powereducEnv.startupTasks.push('js');
 
     // On watch, we dynamically modify config to build only affected files. This
     // method is slightly complicated to deal with multiple changed files at once (copied

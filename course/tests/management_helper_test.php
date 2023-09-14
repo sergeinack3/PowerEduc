@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,14 +35,14 @@ require_once($CFG->dirroot.'/course/tests/fixtures/course_capability_assignment.
  */
 class management_helper_test extends \advanced_testcase {
 
-    /** Category management capability: moodle/category:manage */
-    const CATEGORY_MANAGE = 'moodle/category:manage';
-    /** View hidden category capability: moodle/category:viewhiddencategories */
-    const CATEGORY_VIEWHIDDEN = 'moodle/category:viewhiddencategories';
-    /** View course capability: moodle/course:visibility */
-    const COURSE_VIEW = 'moodle/course:visibility';
-    /** View hidden course capability: moodle/course:viewhiddencourses */
-    const COURSE_VIEWHIDDEN = 'moodle/course:viewhiddencourses';
+    /** Category management capability: powereduc/category:manage */
+    const CATEGORY_MANAGE = 'powereduc/category:manage';
+    /** View hidden category capability: powereduc/category:viewhiddencategories */
+    const CATEGORY_VIEWHIDDEN = 'powereduc/category:viewhiddencategories';
+    /** View course capability: powereduc/course:visibility */
+    const COURSE_VIEW = 'powereduc/course:visibility';
+    /** View hidden course capability: powereduc/course:viewhiddencourses */
+    const COURSE_VIEWHIDDEN = 'powereduc/course:viewhiddencourses';
 
     /**
      * Returns a user object and its assigned new role.
@@ -73,8 +73,8 @@ class management_helper_test extends \advanced_testcase {
      *   - action_category_hide
      *   - action_category_show
      *
-     * In order to show/hide the user must have moodle/category:manage on the parent context.
-     * In order to view hidden categories the user must have moodle/category:viewhiddencategories
+     * In order to show/hide the user must have powereduc/category:manage on the parent context.
+     * In order to view hidden categories the user must have powereduc/category:viewhiddencategories
      */
     public function test_action_category_hide_and_show() {
         global $DB;
@@ -145,7 +145,7 @@ class management_helper_test extends \advanced_testcase {
         try {
             \core_course\management\helper::action_category_hide($category);
             $this->fail('Expected exception did not occur when trying to hide a category without permission.');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             // The category must still be visible.
             $cat = core_course_category::get($category->id);
             $subcat = core_course_category::get($subcategory->id);
@@ -176,7 +176,7 @@ class management_helper_test extends \advanced_testcase {
         try {
             \core_course\management\helper::action_category_show($category);
             $this->fail('Expected exception did not occur when trying to show a category without permission.');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             // The category must still be hidden.
             $cat = core_course_category::get($category->id);
             $subcat = core_course_category::get($subcategory->id);
@@ -223,7 +223,7 @@ class management_helper_test extends \advanced_testcase {
         try {
             \core_course\management\helper::action_category_hide($category);
             $this->fail('Expected exception did not occur when trying to hide a category without permission.');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             // The category must still be visible.
             $this->assertEquals(1, core_course_category::get($category->id)->visible);
         }
@@ -303,7 +303,7 @@ class management_helper_test extends \advanced_testcase {
         try {
             \core_course\management\helper::action_category_hide_by_id($category->id);
             $this->fail('Expected exception did not occur when trying to hide a category without permission.');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             // The category must still be visible.
             $cat = core_course_category::get($category->id);
             $subcat = core_course_category::get($subcategory->id);
@@ -333,7 +333,7 @@ class management_helper_test extends \advanced_testcase {
         try {
             \core_course\management\helper::action_category_show_by_id($category->id);
             $this->fail('Expected exception did not occur when trying to show a category without permission.');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             // The category must still be hidden.
             $cat = core_course_category::get($category->id);
             $subcat = core_course_category::get($subcategory->id);
@@ -380,7 +380,7 @@ class management_helper_test extends \advanced_testcase {
         try {
             \core_course\management\helper::action_category_hide_by_id($category->id);
             $this->fail('Expected exception did not occur when trying to hide a category without permission.');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             // The category must still be visible.
             $this->assertEquals(1, core_course_category::get($category->id)->visible);
         }
@@ -456,7 +456,7 @@ class management_helper_test extends \advanced_testcase {
         try {
             \core_course\management\helper::action_category_move_courses_into($cat2, $sub2, array($course4->id));
             $this->fail('Moved a course from a category it wasn\'t within');
-        } catch (\moodle_exception $exception) {
+        } catch (\powereduc_exception $exception) {
             // Check that everything is as it was.
             $this->assertEquals(1, $cat1->get_courses_count());
             $this->assertEquals(0, $cat2->get_courses_count());
@@ -468,7 +468,7 @@ class management_helper_test extends \advanced_testcase {
         try {
             \core_course\management\helper::action_category_move_courses_into($cat2, $sub2, array($course4->id, $course1->id));
             $this->fail('Moved a course from a category it wasn\'t within');
-        } catch (\moodle_exception $exception) {
+        } catch (\powereduc_exception $exception) {
             // Check that everything is as it was. Nothing should have been moved.
             $this->assertEquals(1, $cat1->get_courses_count());
             $this->assertEquals(0, $cat2->get_courses_count());
@@ -494,7 +494,7 @@ class management_helper_test extends \advanced_testcase {
         try {
             \core_course\management\helper::action_category_move_courses_into($sub1, $sub2, array($course2->id));
             $this->fail('Invalid move of course between categories, action can\'t be undone.');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertEquals(get_string('cannotmovecourses', 'error'), $ex->getMessage());
         }
         // Nothing should have changed.
@@ -509,7 +509,7 @@ class management_helper_test extends \advanced_testcase {
         try {
             \core_course\management\helper::action_category_move_courses_into($sub2, $cat2, array($course4->id));
             $this->fail('Invalid move of course between categories, action can\'t be undone.');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertEquals(get_string('cannotmovecourses', 'error'), $ex->getMessage());
         }
         // Nothing should have changed.
@@ -636,7 +636,7 @@ class management_helper_test extends \advanced_testcase {
         course_capability_assignment::prevent(self::CATEGORY_MANAGE, $roleid, $parent->get_context()->id);
         try {
             \core_course\management\helper::action_category_change_sortorder_up_one($cat1);
-        } catch (\moodle_exception $exception) {
+        } catch (\powereduc_exception $exception) {
             // Check everything is still where it should be.
             $this->assertEquals(
                 array('Three', 'One', 'Two'),
@@ -645,7 +645,7 @@ class management_helper_test extends \advanced_testcase {
         }
         try {
             \core_course\management\helper::action_category_change_sortorder_down_one($cat3);
-        } catch (\moodle_exception $exception) {
+        } catch (\powereduc_exception $exception) {
             // Check everything is still where it should be.
             $this->assertEquals(
                 array('Three', 'One', 'Two'),
@@ -744,7 +744,7 @@ class management_helper_test extends \advanced_testcase {
         try {
             \core_course\management\helper::action_category_resort_courses($category, 'shortname');
             $this->fail('Courses sorted without having the required permission.');
-        } catch (\moodle_exception $exception) {
+        } catch (\powereduc_exception $exception) {
             // Check its the right exception.
             $this->assertEquals('core_course_category::can_resort', $exception->debuginfo);
             // Test things are as they were before.
@@ -839,7 +839,7 @@ class management_helper_test extends \advanced_testcase {
         try {
             \core_course\management\helper::action_category_resort_subcategories($parent, 'idnumber');
             $this->fail('Categories sorted without having the required permission.');
-        } catch (\moodle_exception $exception) {
+        } catch (\powereduc_exception $exception) {
             // Check its the right exception.
             $this->assertEquals('core_course_category::can_resort', $exception->debuginfo);
             // Test things are as they were before.
@@ -910,7 +910,7 @@ class management_helper_test extends \advanced_testcase {
 
         try {
             \core_course\management\helper::action_course_show($course);
-        } catch (\moodle_exception $exception) {
+        } catch (\powereduc_exception $exception) {
             $this->assertEquals('core_course_list_element::can_change_visbility', $exception->debuginfo);
         }
     }
@@ -974,7 +974,7 @@ class management_helper_test extends \advanced_testcase {
 
         try {
             \core_course\management\helper::action_course_show_by_record($course);
-        } catch (\moodle_exception $exception) {
+        } catch (\powereduc_exception $exception) {
             $this->assertEquals('core_course_list_element::can_change_visbility', $exception->debuginfo);
         }
     }
@@ -1079,7 +1079,7 @@ class management_helper_test extends \advanced_testcase {
             \core_course\management\helper::action_course_change_sortorder_down_one(
                 new core_course_list_element(get_course($course2->id)), $category);
             $this->fail('Course moved without having the required permissions.');
-        } catch (\moodle_exception $exception) {
+        } catch (\powereduc_exception $exception) {
             // Check nothing has changed.
             $courses = $category->get_courses();
             $this->assertIsArray($courses);
@@ -1096,7 +1096,7 @@ class management_helper_test extends \advanced_testcase {
         global $PAGE;
         $this->resetAfterTest(true);
 
-        $PAGE->set_url(new \moodle_url('/course/management.php'));
+        $PAGE->set_url(new \powereduc_url('/course/management.php'));
 
         $generator = $this->getDataGenerator();
         $category = $generator->create_category();
@@ -1105,9 +1105,9 @@ class management_helper_test extends \advanced_testcase {
         course_capability_assignment::allow(array(
             self::CATEGORY_MANAGE,
             self::CATEGORY_VIEWHIDDEN,
-            'moodle/role:assign',
-            'moodle/cohort:view',
-            'moodle/filter:manage'
+            'powereduc/role:assign',
+            'powereduc/cohort:view',
+            'powereduc/filter:manage'
         ), $roleid, $context->id);
 
         $actions = \core_course\management\helper::get_category_listitem_actions($category);
@@ -1138,11 +1138,11 @@ class management_helper_test extends \advanced_testcase {
         course_capability_assignment::allow(array(
             self::COURSE_VIEW,
             self::COURSE_VIEWHIDDEN,
-            'moodle/course:update',
-            'moodle/course:enrolreview',
-            'moodle/course:delete',
-            'moodle/backup:backupcourse',
-            'moodle/restore:restorecourse'
+            'powereduc/course:update',
+            'powereduc/course:enrolreview',
+            'powereduc/course:delete',
+            'powereduc/backup:backupcourse',
+            'powereduc/restore:restorecourse'
         ), $roleid, $context->id);
 
         $actions = \core_course\management\helper::get_course_detail_actions(new core_course_list_element($course));
@@ -1171,12 +1171,12 @@ class management_helper_test extends \advanced_testcase {
         course_capability_assignment::allow(array(
             self::COURSE_VIEW,
             self::COURSE_VIEWHIDDEN,
-            'moodle/course:update',
-            'moodle/course:enrolreview',
-            'moodle/course:delete',
-            'moodle/backup:backupcourse',
-            'moodle/restore:restorecourse',
-            'moodle/site:accessallgroups'
+            'powereduc/course:update',
+            'powereduc/course:enrolreview',
+            'powereduc/course:delete',
+            'powereduc/backup:backupcourse',
+            'powereduc/restore:restorecourse',
+            'powereduc/site:accessallgroups'
         ), $roleid, $context->id);
 
         $details = \core_course\management\helper::get_course_detail_array(new core_course_list_element($course));
@@ -1275,7 +1275,7 @@ class management_helper_test extends \advanced_testcase {
         try {
             \core_course\management\helper::move_courses_into_category($sub2->id, array($course2->id));
             $this->fail('Invalid move of course between categories, action can\'t be undone.');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertEquals(get_string('cannotmovecourses', 'error'), $ex->getMessage());
         }
         // Nothing should have changed.
@@ -1290,7 +1290,7 @@ class management_helper_test extends \advanced_testcase {
         try {
             \core_course\management\helper::move_courses_into_category($cat2->id, array($course4->id));
             $this->fail('Invalid move of course between categories, action can\'t be undone.');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertEquals(get_string('cannotmovecourses', 'error'), $ex->getMessage());
         }
         // Nothing should have changed.

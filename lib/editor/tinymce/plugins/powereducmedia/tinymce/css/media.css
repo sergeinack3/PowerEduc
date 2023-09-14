@@ -7,7 +7,7 @@
     width: 100px;
 }
 
-.moodlebutton {
+.powereducbutton {
     font-size: 1.5em;
     font-weight: bold;
     padding: 3px 3px 3px 1.5em;
@@ -16,7 +16,7 @@
     background: url(search.png) .2em .3em no-repeat;
 }
 
-.moodlebutton:hover {
+.powereducbutton:hover {
     background: #ccc;
 }
 

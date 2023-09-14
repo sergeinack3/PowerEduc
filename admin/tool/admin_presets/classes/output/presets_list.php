@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * tool_admin_presets specific renderers
  *
  * @package   tool_admin_presets
- * @copyright  2021 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2021 Amaia Anabitarte <amaia@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace tool_admin_presets\output;
@@ -31,7 +31,7 @@ use stdClass;
 /**
  * Class containing data for admin_presets tool
  *
- * @copyright  2021 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2021 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class presets_list implements renderable, templatable {
@@ -78,7 +78,7 @@ class presets_list implements renderable, templatable {
             $data = [
                 'name' => format_text($preset->name, FORMAT_PLAIN),
                 'description' => format_text($preset->comments, FORMAT_HTML),
-                'release' => format_text($preset->moodlerelease, FORMAT_PLAIN),
+                'release' => format_text($preset->powereducrelease, FORMAT_PLAIN),
                 'author' => format_text($preset->author, FORMAT_PLAIN),
                 'site' => format_text(clean_text($preset->site, PARAM_URL), FORMAT_PLAIN),
                 'timecreated' => userdate($preset->timecreated),
@@ -91,12 +91,12 @@ class presets_list implements renderable, templatable {
                 $actionsmenu->set_menu_trigger(get_string('actions'));
                 $actionsmenu->set_owner_selector('preset-actions-' . $preset->id);
 
-                $loadlink = new \moodle_url('/admin/tool/admin_presets/index.php', ['action' => 'load', 'id' => $preset->id]);
+                $loadlink = new \powereduc_url('/admin/tool/admin_presets/index.php', ['action' => 'load', 'id' => $preset->id]);
                 $actionsmenu->add(new \action_menu_link_secondary(
                     $loadlink, new \pix_icon('t/play', ''),
                     get_string('applyaction', 'tool_admin_presets')
                 ));
-                $downloadlink = new \moodle_url('/admin/tool/admin_presets/index.php',
+                $downloadlink = new \powereduc_url('/admin/tool/admin_presets/index.php',
                     ['action' => 'export', 'mode' => 'download_xml', 'sesskey' => sesskey(), 'id' => $preset->id]
                 );
                 $actionsmenu->add(new \action_menu_link_secondary(
@@ -107,7 +107,7 @@ class presets_list implements renderable, templatable {
 
                 // Delete button won't be displayed for the pre-installed core "Starter" and "Full" presets.
                 if ($preset->iscore == manager::NONCORE_PRESET) {
-                    $deletelink = new \moodle_url('/admin/tool/admin_presets/index.php',
+                    $deletelink = new \powereduc_url('/admin/tool/admin_presets/index.php',
                     ['action' => 'delete', 'id' => $preset->id]
                     );
                     $actionsmenu->add(new \action_menu_link_secondary(
@@ -120,7 +120,7 @@ class presets_list implements renderable, templatable {
                 // Look for preset applications.
                 if ($DB->get_records('adminpresets_app', ['adminpresetid' => $preset->id])) {
                     $params = ['action' => 'rollback', 'id' => $preset->id];
-                    $rollbacklink = new \moodle_url('/admin/tool/admin_presets/index.php', $params);
+                    $rollbacklink = new \powereduc_url('/admin/tool/admin_presets/index.php', $params);
                     $actionsmenu->add(new \action_menu_link_secondary(
                         $rollbacklink,
                         new \pix_icon('i/reload', ''),

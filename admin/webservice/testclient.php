@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * Web service test client.
  *
  * @package   webservice
- * @copyright 2009 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2009 Moodle Pty Ltd (http://powereduc.com)
  * @author    Petr Skoda (skodak)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -38,7 +38,7 @@ $PAGE->navbar->ignore_active(true);
 $PAGE->navbar->add(get_string('administrationsite'));
 $PAGE->navbar->add(get_string('development', 'admin'));
 $PAGE->navbar->add(get_string('testclient', 'webservice'),
-        new moodle_url('/' . $CFG->admin . '/webservice/testclient.php'));
+        new powereduc_url('/' . $CFG->admin . '/webservice/testclient.php'));
 if (!empty($function)) {
     $PAGE->navbar->add($function);
 }
@@ -92,7 +92,7 @@ if (!$function or !$protocol) {
     echo $OUTPUT->header();
     echo $OUTPUT->heading(get_string('testclient', 'webservice'));
     echo $OUTPUT->box_start();
-    $url = new moodle_url('/' . $CFG->admin . '/settings.php?section=debugging');
+    $url = new powereduc_url('/' . $CFG->admin . '/settings.php?section=debugging');
     $atag =html_writer::start_tag('a', array('href' => $url)).get_string('debug', 'admin').html_writer::end_tag('a');
     $descparams = new stdClass();
     $descparams->atag = $atag;

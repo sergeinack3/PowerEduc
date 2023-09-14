@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -134,7 +134,7 @@ class frontend extends \core_availability\frontend {
                 // In Gregorian calendar mode only, we support a date selector popup, reusing
                 // code from form to ensure consistency.
                 if ($calendartype->get_name() === 'gregorian' && self::DATE_SELECTOR_SUPPORTED) {
-                    $image = $OUTPUT->pix_icon('i/calendar', get_string('calendar', 'calendar'), 'moodle');
+                    $image = $OUTPUT->pix_icon('i/calendar', get_string('calendar', 'calendar'), 'powereduc');
                     $html .= ' ' . \html_writer::link('#', $image, array('name' => 'x[calendar]'));
                     form_init_date_js();
                 }

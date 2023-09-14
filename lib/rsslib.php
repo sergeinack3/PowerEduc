@@ -1,26 +1,26 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains all the common stuff to be used in RSS System
  *
  * @package    core_rss
  * @category   rss
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -84,7 +84,7 @@ function rss_get_url($contextid, $userid, $componentname, $additionalargs) {
     }
     $usertoken = rss_get_token($userid);
     $url = '/rss/file.php';
-    return moodle_url::make_file_url($url, '/'.$contextid.'/'.$usertoken.'/'.$componentname.'/'.$additionalargs.'/rss.xml');
+    return powereduc_url::make_file_url($url, '/'.$contextid.'/'.$usertoken.'/'.$componentname.'/'.$additionalargs.'/rss.xml');
 }
 
 /**
@@ -266,7 +266,7 @@ function rss_standard_header($title = NULL, $link = NULL, $description = NULL) {
         $result .= rss_full_tag('title', 2, false, strip_tags($title));
         $result .= rss_full_tag('link', 2, false, $link);
         $result .= rss_full_tag('description', 2, false, $description);
-        $result .= rss_full_tag('generator', 2, false, 'Moodle');
+        $result .= rss_full_tag('generator', 2, false, 'PowerEduc');
         if (!empty($USER->lang)) {
             $result .= rss_full_tag('language', 2, false, substr($USER->lang,0,2));
         }
@@ -285,7 +285,7 @@ function rss_standard_header($title = NULL, $link = NULL, $description = NULL) {
         //write the info
         $result .= rss_start_tag('image', 2, true);
         $result .= rss_full_tag('url', 3, false, $rsspix);
-        $result .= rss_full_tag('title', 3, false, 'moodle');
+        $result .= rss_full_tag('title', 3, false, 'powereduc');
         $result .= rss_full_tag('link', 3, false, $CFG->wwwroot);
         $result .= rss_full_tag('width', 3, false, '140');
         $result .= rss_full_tag('height', 3, false, '35');
@@ -341,7 +341,7 @@ function rss_add_items($items) {
             if (isset($item->author) && !empty($item->author)) {
                 //$result .= rss_full_tag('author',3,false,$item->author);
                 //We put it in the description instead because it's more important
-                //for moodle than most other feeds, and most rss software seems to ignore
+                //for powereduc than most other feeds, and most rss software seems to ignore
                 //the author field ...
                 $item->description = get_string('byname','',$item->author).'. &nbsp;<p>'.$item->description.'</p>';
             }

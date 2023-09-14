@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Library of functions for gradebook - both public and internal
  *
  * @package   core_grades
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -376,7 +376,7 @@ function grade_needs_regrade_progress_bar($courseid) {
  *
  * @param stdClass $course The course to regrade
  * @param callable $callback A function to call if regrading took place
- * @return moodle_url The URL to redirect to if redirecting
+ * @return powereduc_url The URL to redirect to if redirecting
  */
 function grade_regrade_final_grades_if_required($course, callable $callback = null) {
     global $PAGE, $OUTPUT;
@@ -386,7 +386,7 @@ function grade_regrade_final_grades_if_required($course, callable $callback = nu
     }
 
     if (grade_needs_regrade_progress_bar($course->id)) {
-        if ($PAGE->state !== moodle_page::STATE_IN_BODY) {
+        if ($PAGE->state !== powereduc_page::STATE_IN_BODY) {
             $PAGE->set_heading($course->fullname);
             echo $OUTPUT->header();
         }
@@ -663,7 +663,7 @@ function grade_get_grades($courseid, $itemtype, $itemmodule, $iteminstance, $use
 
 
 ///////////////////////////////////////////////////////////////////
-///// Internal API: used by gradebook plugins and Moodle core /////
+///// Internal API: used by gradebook plugins and PowerEduc core /////
 ///////////////////////////////////////////////////////////////////
 
 /**
@@ -1152,7 +1152,7 @@ function grade_regrade_final_grades($courseid, $userid=null, $updated_item=null,
     if ($userid) {
         // one raw grade updated for one user
         if (empty($updated_item)) {
-            throw new \moodle_exception("cannotbenull", 'debug', '', "updated_item");
+            throw new \powereduc_exception("cannotbenull", 'debug', '', "updated_item");
         }
         if ($course_item->needsupdate) {
             $updated_item->force_regrading();
@@ -1352,7 +1352,7 @@ function grade_grab_course_grades($courseid, $modname=null, $userid=0) {
     }
 
     if (!$mods = core_component::get_plugin_list('mod') ) {
-        throw new \moodle_exception('nomodules', 'debug');
+        throw new \powereduc_exception('nomodules', 'debug');
     }
 
     foreach ($mods as $mod => $fullmod) {
@@ -1620,7 +1620,7 @@ function grade_floats_different(?float $f1, ?float $f2): bool {
  * Do not use rounding for 10,5 at the database level as the results may be
  * different from php round() function.
  *
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @param float|null $f1 Float one to compare
  * @param float|null $f2 Float two to compare
  * @return bool True if the values should be considered as the same grades

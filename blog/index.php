@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -90,7 +90,7 @@ if ($CFG->bloglevel == BLOG_GLOBAL_LEVEL) {
     require_login();
     if (isguestuser()) {
         // They must have entered the url manually.
-        throw new \moodle_exception('noguest');
+        throw new \powereduc_exception('noguest');
     }
 
 } else if ($CFG->bloglevel == BLOG_USER_LEVEL) {
@@ -99,11 +99,11 @@ if ($CFG->bloglevel == BLOG_GLOBAL_LEVEL) {
 
 } else {
     // Weird!
-    throw new \moodle_exception('blogdisable', 'blog');
+    throw new \powereduc_exception('blogdisable', 'blog');
 }
 
 if (empty($CFG->enableblogs)) {
-    throw new \moodle_exception('blogdisable', 'blog');
+    throw new \powereduc_exception('blogdisable', 'blog');
 }
 
 list($courseid, $userid) = blog_validate_access($courseid, $modid, $groupid, $entryid, $userid);
@@ -134,7 +134,7 @@ if ($CFG->enablerssfeeds) {
     $rsstitle = $blogheaders['heading'];
 
     // Check we haven't started output by outputting an error message.
-    if ($PAGE->state == moodle_page::STATE_BEFORE_HEADER) {
+    if ($PAGE->state == powereduc_page::STATE_BEFORE_HEADER) {
         blog_rss_add_http_header($rsscontext, $rsstitle, $filtertype, $thingid, $tagid);
     }
 }
@@ -145,7 +145,7 @@ if ($usernode && $courseid != SITEID) {
     if ($courseblogsnode) {
         $courseblogsnode->remove();
     }
-    $blogurl = new moodle_url($PAGE->url);
+    $blogurl = new powereduc_url($PAGE->url);
     $blognode = $usernode->add(get_string('blogscourse', 'blog'), $blogurl);
     $blognode->make_active();
 }
@@ -155,7 +155,7 @@ if ($courseid != SITEID) {
     echo $OUTPUT->header();
 
     if (!empty($user)) {
-        $backurl = new moodle_url('/user/view.php', ['id' => $user->id, 'course' => $courseid]);
+        $backurl = new powereduc_url('/user/view.php', ['id' => $user->id, 'course' => $courseid]);
         echo $OUTPUT->single_button($backurl, get_string('back'), 'get', ['class' => 'mb-3']);
 
         $headerinfo = array('heading' => fullname($user), 'user' => $user);

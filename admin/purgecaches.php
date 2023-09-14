@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ require_once($CFG->libdir.'/adminlib.php');
 
 $confirm = optional_param('confirm', 0, PARAM_BOOL);
 $returnurl = optional_param('returnurl', '/admin/purgecaches.php', PARAM_LOCALURL);
-$returnurl = new moodle_url($returnurl);
+$returnurl = new powereduc_url($returnurl);
 
 admin_externalpage_setup('purgecaches');
 

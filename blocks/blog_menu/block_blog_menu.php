@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -97,10 +97,10 @@ class block_blog_menu extends block_base {
         $this->content->text = html_writer::alist($menulist, array('class'=>'list'));
 
         // Prepare the footer for this block
-        if (has_capability('moodle/blog:search', context_system::instance())) {
+        if (has_capability('powereduc/blog:search', context_system::instance())) {
 
             $data = [
-                'action' => new moodle_url('/blog/index.php'),
+                'action' => new powereduc_url('/blog/index.php'),
                 'inputname' => 'search',
                 'searchstring' => get_string('search', 'admin'),
                 'extraclasses' => 'mt-3'
@@ -127,10 +127,10 @@ class block_blog_menu extends block_base {
     /**
      * This block shouldn't be added to a page if the blogs advanced feature is disabled.
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @return bool
      */
-    public function can_block_be_added(moodle_page $page): bool {
+    public function can_block_be_added(powereduc_page $page): bool {
         global $CFG;
 
         return $CFG->enableblogs;

@@ -1,7 +1,7 @@
 /**
  * JavaScript for form editing profile conditions.
  *
- * @module moodle-availability_profile-form
+ * @module powereduc-availability_profile-form
  */
 M.availability_profile = M.availability_profile || {};
 
@@ -36,7 +36,7 @@ M.availability_profile.form.getNode = function(json) {
     var html = '<span class="availability-group"><label><span class="pr-3">' +
             M.util.get_string('conditiontitle', 'availability_profile') + '</span> ' +
             '<select name="field" class="custom-select">' +
-            '<option value="choose">' + M.util.get_string('choosedots', 'moodle') + '</option>';
+            '<option value="choose">' + M.util.get_string('choosedots', 'powereduc') + '</option>';
     var fieldInfo;
     for (var i = 0; i < this.standardFields.length; i++) {
         fieldInfo = this.standardFields[i];

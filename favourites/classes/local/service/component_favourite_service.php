@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -49,11 +49,11 @@ class component_favourite_service {
      *
      * @param string $component The frankenstyle name of the component to which this service operations are scoped.
      * @param \core_favourites\local\repository\favourite_repository_interface $repository a favourites repository.
-     * @throws \moodle_exception if the component name is invalid.
+     * @throws \powereduc_exception if the component name is invalid.
      */
     public function __construct(string $component, favourite_repository_interface $repository) {
         if (!in_array($component, \core_component::get_component_names())) {
-            throw new \moodle_exception("Invalid component name '$component'");
+            throw new \powereduc_exception("Invalid component name '$component'");
         }
         $this->repo = $repository;
         $this->component = $component;

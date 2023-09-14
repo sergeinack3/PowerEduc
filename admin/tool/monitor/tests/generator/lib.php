@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    tool_monitor
  * @category   test
- * @copyright  2014 onwards Simey Lameze <simey@moodle.com>
+ * @copyright  2014 onwards Simey Lameze <simey@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,7 +31,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * @since       Moodle 2.8
  * @package     tool_monitor
  * @category    test
- * @copyright   2014 onwards Simey Lameze <simey@moodle.com>
+ * @copyright   2014 onwards Simey Lameze <simey@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class tool_monitor_generator extends testing_module_generator {

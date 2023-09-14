@@ -1,23 +1,23 @@
 {{!
-    This file is part of Moodle - http://moodle.org/
+    This file is part of PowerEduc - http://powereduc.org/
 
-    Moodle is free software: you can redistribute it and/or modify
+    PowerEduc is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Moodle is distributed in the hope that it will be useful,
+    PowerEduc is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+    along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
     @template core/infected_file_email
 
-    Moodle template for infected files emails.
+    PowerEduc template for infected files emails.
 
     Context variables required for this template:
     * report - Hyperlink to the report page,
@@ -38,7 +38,7 @@
     Example context (json):
     {
         "header": "Infected file detected",
-        "report": "http://example.moodle/report/infectedfiles/index.php",
+        "report": "http://example.powereduc/report/infectedfiles/index.php",
         "scanner": "antivirus_clamav",
         "filename": "virus.txt",
         "filesize": 100,
@@ -47,7 +47,7 @@
         "author": "Example User (exampleuser)",
         "ipaddress": "192.168.0.1",
         "geoinfo": "Brisbane, Australia",
-        "referer": "http://example.moodle/user/files.php",
+        "referer": "http://example.powereduc/user/files.php",
         "date": "28/05/20, 11:19",
         "notice": "Clamav scanning has tried 1 time(s). ClamAV has failed to run.",
         "additionalinfo": "Here is the output from ClamAV: /tmp/phpElIcr2: Not a regular file ERROR"

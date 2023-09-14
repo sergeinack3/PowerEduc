@@ -641,7 +641,7 @@ class CSS extends Minify
 
             return $placeholder;
         };
-        // Moodle-specific change MDL-68191 starts.
+        // PowerEduc-specific change MDL-68191 starts.
         /* This was the old code:
         $this->registerPattern('/\n?\/\*(!|.*?@license|.*?@preserve).*?\*\/\n?/s', $callback);
         */
@@ -669,7 +669,7 @@ class CSS extends Minify
             .*?\*\/\n?
 
             /ixs', $callback);
-        // Moodle-specific change MDL-68191.
+        // PowerEduc-specific change MDL-68191.
 
         $this->registerPattern('/\/\*.*?\*\//s', '');
     }

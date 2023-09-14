@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -748,7 +748,7 @@ class sync_test extends \advanced_testcase {
         // Check default number of sections matches with the created course sections.
 
         $recordcourse1 = $DB->get_record('course', $course1);
-        $courseconfig = get_config('moodlecourse');
+        $courseconfig = get_config('powereduccourse');
         $numsections = $DB->count_records('course_sections', array('course' => $recordcourse1->id));
         // To compare numsections we have to add topic 0 to default numsections.
         $this->assertEquals(($courseconfig->numsections + 1), $numsections);

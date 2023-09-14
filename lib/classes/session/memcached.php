@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Memcached based session handler.
@@ -160,7 +160,7 @@ class memcached extends handler {
             // With default memcached.ini configs (5, 1s, 2s) the result is only 5 attempts to lock over 9 sec.
             // To mimic the behavior of the 2.2.x module so we get more attempts and much more frequently, config both
             // sleep values to the old default value of 150 msec (making it constant) and calculate number of retries
-            // using the existing Moodle config $CFG->session_memcached_acquire_lock_timeout.
+            // using the existing PowerEduc config $CFG->session_memcached_acquire_lock_timeout.
             // Doing this so admins configure session lock attempt timeout in familiar terms, and more straight-forward
             // to detect if lock attempt timeout has occurred in start().
             // If _min and _max values are not equal, the actual lock acquire timeout will not be the expected

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Contains class containing the internal calendar API.
  *
  * @package    core_calendar
- * @copyright  2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2017 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,7 +36,7 @@ use core_calendar\local\event\exceptions\limit_invalid_parameter_exception;
  * This should not be used outside of core_calendar.
  *
  * @package    core_calendar
- * @copyright  2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2017 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class api {
@@ -122,7 +122,7 @@ class api {
      * @param \stdClass|null $user The user id or false for $USER
      * @param string|null $searchvalue The value a user wishes to search against
      * @return array A list of action_event_interface objects
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public static function get_action_events_by_timesort(
         $timesortfrom = null,
@@ -140,11 +140,11 @@ class api {
         }
 
         if (is_null($timesortfrom) && is_null($timesortto)) {
-            throw new \moodle_exception("Must provide a timesort to and/or from value");
+            throw new \powereduc_exception("Must provide a timesort to and/or from value");
         }
 
         if ($limitnum < 1 || $limitnum > 50) {
-            throw new \moodle_exception("Limit must be between 1 and 50 (inclusive)");
+            throw new \powereduc_exception("Limit must be between 1 and 50 (inclusive)");
         }
 
         \core_calendar\local\event\container::set_requesting_user($user->id);
@@ -294,15 +294,15 @@ class api {
         // If the callback returns false for either value it means that
         // there is no valid time start range.
         if ($min === false || $max === false) {
-            throw new \moodle_exception('The start day of this event can not be modified');
+            throw new \powereduc_exception('The start day of this event can not be modified');
         }
 
         if ($min && $starttimestamp < $min[0]) {
-            throw new \moodle_exception($min[1]);
+            throw new \powereduc_exception($min[1]);
         }
 
         if ($max && $starttimestamp > $max[0]) {
-            throw new \moodle_exception($max[1]);
+            throw new \powereduc_exception($max[1]);
         }
 
         // This function does our capability checks.

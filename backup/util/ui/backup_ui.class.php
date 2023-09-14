@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -184,7 +184,7 @@ class backup_ui extends base_ui {
                     $params = array();
                 }
                 $params = array_merge($params, array('backup' => $this->get_backupid(), 'stage' => $stage));
-                $item['link'] = new moodle_url($PAGE->url, $params);
+                $item['link'] = new powereduc_url($PAGE->url, $params);
             }
             array_unshift($items, $item);
             $stage = floor($stage / 2);

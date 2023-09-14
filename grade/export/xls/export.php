@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,14 +23,14 @@ $id                = required_param('id', PARAM_INT); // course id
 $PAGE->set_url('/grade/export/xls/export.php', array('id'=>$id));
 
 if (!$course = $DB->get_record('course', array('id'=>$id))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 require_login($course);
 $context = context_course::instance($id);
 $groupid = groups_get_course_group($course, true);
 
-require_capability('moodle/grade:export', $context);
+require_capability('powereduc/grade:export', $context);
 require_capability('gradeexport/xls:view', $context);
 
 // We need to call this method here before any print otherwise the menu won't display.
@@ -43,9 +43,9 @@ if (!empty($CFG->gradepublishing) && !empty($key)) {
         false, false, true, null, null, null, $actionbar);
 }
 
-if (groups_get_course_groupmode($COURSE) == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $context)) {
+if (groups_get_course_groupmode($COURSE) == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $context)) {
     if (!groups_is_member($groupid, $USER->id)) {
-        throw new \moodle_exception('cannotaccessgroup', 'grades');
+        throw new \powereduc_exception('cannotaccessgroup', 'grades');
     }
 }
 $mform = new grade_export_form(null, array('publishing' => true, 'simpleui' => true, 'multipledisplaytypes' => true));

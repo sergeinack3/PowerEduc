@@ -1,4 +1,4 @@
-Description of Html2Text v4.3.1 library import into Moodle
+Description of Html2Text v4.3.1 library import into PowerEduc
 
 Please note that we override some mb_* functions in Html2Text's namespace at
 run time. Until Html2Text adds some sort of fallback for the mb_* functions

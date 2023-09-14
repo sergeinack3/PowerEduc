@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 /**
  * Test output mail configuration page
  *
- * @copyright 2019 Victor Deniz <victor@moodle.com>, based on Michael Milette <michael.milette@tngconsulting.ca> code
+ * @copyright 2019 Victor Deniz <victor@powereduc.com>, based on Michael Milette <michael.milette@tngconsulting.ca> code
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,8 +28,8 @@ require_once($CFG->libdir.'/adminlib.php');
 admin_externalpage_setup('testoutgoingmailconf');
 
 $headingtitle = get_string('testoutgoingmailconf', 'admin');
-$homeurl = new moodle_url('/admin/category.php', array('category' => 'email'));
-$returnurl = new moodle_url('/admin/testoutgoingconf.php');
+$homeurl = new powereduc_url('/admin/category.php', array('category' => 'email'));
+$returnurl = new powereduc_url('/admin/testoutgoingconf.php');
 
 $form = new core_admin\form\testoutgoingmailconf_form(null, ['returnurl' => $returnurl]);
 if ($form->is_cancelled()) {

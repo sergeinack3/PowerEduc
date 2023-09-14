@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Test case for sqlsrv dml support.
@@ -25,12 +25,12 @@
 
 namespace core;
 
-use sqlsrv_native_moodle_database;
+use sqlsrv_native_powereduc_database;
 
 defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
-require_once($CFG->dirroot.'/lib/dml/sqlsrv_native_moodle_database.php');
+require_once($CFG->dirroot.'/lib/dml/sqlsrv_native_powereduc_database.php');
 
 /**
  * Test case for sqlsrv dml support.
@@ -40,7 +40,7 @@ require_once($CFG->dirroot.'/lib/dml/sqlsrv_native_moodle_database.php');
  * @copyright  2017 John Okely
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class sqlsrv_native_moodle_database_test extends \advanced_testcase {
+class sqlsrv_native_powereduc_database_test extends \advanced_testcase {
 
     public function setUp(): void {
         parent::setUp();
@@ -120,7 +120,7 @@ class sqlsrv_native_moodle_database_test extends \advanced_testcase {
      * @dataProvider add_no_lock_to_temp_tables_provider
      */
     public function test_add_no_lock_to_temp_tables($input, $expected) {
-        $sqlsrv = new sqlsrv_native_moodle_database();
+        $sqlsrv = new sqlsrv_native_powereduc_database();
 
         $reflector = new \ReflectionObject($sqlsrv);
 
@@ -145,7 +145,7 @@ class sqlsrv_native_moodle_database_test extends \advanced_testcase {
      * @return array data for test_has_query_order_by
      */
     public function has_query_order_by_provider() {
-        // Fixtures taken from https://docs.moodle.org/en/ad-hoc_contributed_reports.
+        // Fixtures taken from https://docs.powereduc.org/en/ad-hoc_contributed_reports.
 
         return [
             'User with language => FALSE' => [
@@ -180,7 +180,7 @@ EOT
                 ,
                 'expectedresult' => false
             ],
-            'ROW_NUMBER() OVER (ORDER BY ...) => FALSE (https://github.com/jleyva/moodle-block_configurablereports/issues/120)' => [
+            'ROW_NUMBER() OVER (ORDER BY ...) => FALSE (https://github.com/jleyva/powereduc-block_configurablereports/issues/120)' => [
                 'sql' => <<<EOT
 SELECT COUNT(*) AS 'Users who have logged in today'
   FROM (
@@ -251,7 +251,7 @@ EOT
         $this->assertSame($expectedmainquery, $mainquery);
 
         // The has_query_order_by static method is protected. Use Reflection to call the method.
-        $method = new \ReflectionMethod('sqlsrv_native_moodle_database', 'has_query_order_by');
+        $method = new \ReflectionMethod('sqlsrv_native_powereduc_database', 'has_query_order_by');
         $method->setAccessible(true);
         $result = $method->invoke(null, $sql);
         $this->assertSame($expectedresult, $result);

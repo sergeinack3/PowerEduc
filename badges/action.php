@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -38,13 +38,13 @@ require_login();
 
 $badge = new badge($badgeid);
 $context = $badge->get_context();
-$navurl = new moodle_url('/badges/index.php', array('type' => $badge->type));
+$navurl = new powereduc_url('/badges/index.php', array('type' => $badge->type));
 
 if ($badge->type == BADGE_TYPE_COURSE) {
     require_login($badge->courseid);
     $course = get_course($badge->courseid);
     $heading = format_string($course->fullname, true, ['context' => $context]);
-    $navurl = new moodle_url('/badges/index.php', array('type' => $badge->type, 'id' => $badge->courseid));
+    $navurl = new powereduc_url('/badges/index.php', array('type' => $badge->type, 'id' => $badge->courseid));
     $PAGE->set_pagelayout('standard');
     navigation_node::override_active_url($navurl);
 } else {
@@ -57,26 +57,26 @@ $PAGE->set_context($context);
 $PAGE->set_url('/badges/action.php', array('id' => $badge->id));
 
 if ($return !== 0) {
-    $returnurl = new moodle_url($return);
+    $returnurl = new powereduc_url($return);
 } else {
-    $returnurl = new moodle_url('/badges/overview.php', array('id' => $badge->id));
+    $returnurl = new powereduc_url('/badges/overview.php', array('id' => $badge->id));
 }
 $returnurl->remove_params('awards');
 
 if ($copy) {
     require_sesskey();
-    require_capability('moodle/badges:createbadge', $context);
+    require_capability('powereduc/badges:createbadge', $context);
 
     $cloneid = $badge->make_clone();
     // If a user can edit badge details, they will be redirected to the edit page.
-    if (has_capability('moodle/badges:configuredetails', $context)) {
-        redirect(new moodle_url('/badges/edit.php', array('id' => $cloneid, 'action' => 'badge')));
+    if (has_capability('powereduc/badges:configuredetails', $context)) {
+        redirect(new powereduc_url('/badges/edit.php', array('id' => $cloneid, 'action' => 'badge')));
     }
-    redirect(new moodle_url('/badges/overview.php', array('id' => $cloneid)));
+    redirect(new powereduc_url('/badges/overview.php', array('id' => $cloneid)));
 }
 
 if ($activate) {
-    require_capability('moodle/badges:configurecriteria', $context);
+    require_capability('powereduc/badges:configurecriteria', $context);
 
     $PAGE->url->param('activate', 1);
     $status = ($badge->status == BADGE_STATUS_INACTIVE) ? BADGE_STATUS_ACTIVE : BADGE_STATUS_ACTIVE_LOCKED;
@@ -115,7 +115,7 @@ if ($activate) {
     echo $OUTPUT->heading($strheading);
 
     $params = array('id' => $badge->id, 'activate' => 1, 'sesskey' => sesskey(), 'confirm' => 1, 'return' => $return);
-    $url = new moodle_url('/badges/action.php', $params);
+    $url = new powereduc_url('/badges/action.php', $params);
 
     if (!$badge->has_criteria()) {
         redirect($returnurl, get_string('error:cannotact', 'badges') . get_string('nocriteria', 'badges'), null, \core\output\notification::NOTIFY_ERROR);
@@ -129,7 +129,7 @@ if ($activate) {
 
 if ($deactivate) {
     require_sesskey();
-    require_capability('moodle/badges:configurecriteria', $context);
+    require_capability('powereduc/badges:configurecriteria', $context);
 
     $status = ($badge->status == BADGE_STATUS_ACTIVE) ? BADGE_STATUS_INACTIVE : BADGE_STATUS_INACTIVE_LOCKED;
     $badge->set_status($status);

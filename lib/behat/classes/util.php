@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Utils for behat-related stuff
@@ -99,7 +99,7 @@ class behat_util extends testing_util {
 
         // Update admin user info.
         $user = $DB->get_record('user', array('username' => 'admin'));
-        $user->email = 'moodle@example.com';
+        $user->email = 'powereduc@example.com';
         $user->firstname = 'Admin';
         $user->lastname = 'User';
         $user->city = 'Perth';
@@ -201,7 +201,7 @@ class behat_util extends testing_util {
             remove_dir($CFG->behat_dataroot, false);
         } else {
             // It should never come here.
-            throw new moodle_exception("Behat dataroot should not be same as parent behat data root.");
+            throw new powereduc_exception("Behat dataroot should not be same as parent behat data root.");
         }
     }
 
@@ -281,7 +281,7 @@ class behat_util extends testing_util {
      * the test environment and updating the available
      * features and steps definitions.
      *
-     * Stores a file in dataroot/behat to allow Moodle to switch
+     * Stores a file in dataroot/behat to allow PowerEduc to switch
      * to the test environment when using cli-server.
      * @param bool $themesuitewithallfeatures List themes to include core features.
      * @param string $tags comma separated tag, which will be given preference while distributing features in parallel run.
@@ -304,7 +304,7 @@ class behat_util extends testing_util {
         // Check that test environment is correctly set up.
         self::test_environment_problem();
 
-        // Updates all the Moodle features and steps definitions.
+        // Updates all the PowerEduc features and steps definitions.
         behat_config_manager::update_config_file('', true, $tags, $themesuitewithallfeatures, $parallelruns, $run);
 
         if (self::is_test_mode_enabled()) {

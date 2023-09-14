@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Strings for component 'auth_cas', language 'en'.
  *
  * @package   auth_cas
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -59,7 +59,7 @@ $string['auth_cas_language'] = 'Select language for authentication pages';
 $string['auth_cas_language_key'] = 'Language';
 $string['auth_cas_logincas'] = 'Secure connection access';
 $string['auth_cas_logout_return_url_key'] = 'Alternative logout return URL';
-$string['auth_cas_logout_return_url'] = 'Provide the URL that CAS users shall be redirected to after logging out.<br />If left empty, users will be redirected to the location that moodle will redirect users to';
+$string['auth_cas_logout_return_url'] = 'Provide the URL that CAS users shall be redirected to after logging out.<br />If left empty, users will be redirected to the location that powereduc will redirect users to';
 $string['auth_cas_logoutcas'] = 'Select \'yes\' if you want to logout from CAS when you disconnect from Moodle';
 $string['auth_cas_logoutcas_key'] = 'CAS logout option';
 $string['auth_cas_multiauth'] = 'Select \'yes\' if you want to have multi-authentication (CAS + other authentication)';

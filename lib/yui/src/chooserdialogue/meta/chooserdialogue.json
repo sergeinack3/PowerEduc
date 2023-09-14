@@ -1,9 +1,9 @@
 {
-  "moodle-core-chooserdialogue": {
+  "powereduc-core-chooserdialogue": {
     "requires": [
         "base",
         "panel",
-        "moodle-core-notification"
+        "powereduc-core-notification"
     ]
   }
 }

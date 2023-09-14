@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -131,7 +131,7 @@ class block_navigation_renderer extends plugin_renderer_base {
                 $link->text = $icon.html_writer::span($link->text, 'item-content-wrap');
                 $link->attributes = array_merge($link->attributes, $attributes);
                 $content = $this->output->render($link);
-            } else if ($item->action instanceof moodle_url) {
+            } else if ($item->action instanceof powereduc_url) {
                 $content = html_writer::link($item->action, $content, $attributes);
             }
 

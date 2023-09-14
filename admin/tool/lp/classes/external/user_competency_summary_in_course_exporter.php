@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ use core_course\external\course_summary_exporter;
 use context_course;
 use renderer_base;
 use stdClass;
-use moodle_url;
+use powereduc_url;
 
 /**
  * Class for exporting user competency data with additional related data in a plan.
@@ -112,7 +112,7 @@ class user_competency_summary_in_course_exporter extends \core\external\exporter
             $exportedplans[] = $planexporter->export($output);
         }
         $result->plans = $exportedplans;
-        $result->pluginbaseurl = (new moodle_url('/admin/tool/lp'))->out(true);
+        $result->pluginbaseurl = (new powereduc_url('/admin/tool/lp'))->out(true);
 
         return (array) $result;
     }

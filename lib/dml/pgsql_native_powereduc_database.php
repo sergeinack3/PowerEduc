@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Native pgsql class representing moodle database interface.
+ * Native pgsql class representing powereduc database interface.
  *
  * @package    core_dml
  * @copyright  2008 Petr Skoda (http://skodak.org)
@@ -24,20 +24,20 @@
 
 defined('POWEREDUC_INTERNAL') || die();
 
-require_once(__DIR__.'/moodle_database.php');
-require_once(__DIR__.'/moodle_read_slave_trait.php');
-require_once(__DIR__.'/pgsql_native_moodle_recordset.php');
-require_once(__DIR__.'/pgsql_native_moodle_temptables.php');
+require_once(__DIR__.'/powereduc_database.php');
+require_once(__DIR__.'/powereduc_read_slave_trait.php');
+require_once(__DIR__.'/pgsql_native_powereduc_recordset.php');
+require_once(__DIR__.'/pgsql_native_powereduc_temptables.php');
 
 /**
- * Native pgsql class representing moodle database interface.
+ * Native pgsql class representing powereduc database interface.
  *
  * @package    core_dml
  * @copyright  2008 Petr Skoda (http://skodak.org)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class pgsql_native_moodle_database extends moodle_database {
-    use moodle_read_slave_trait {
+class pgsql_native_powereduc_database extends powereduc_database {
+    use powereduc_read_slave_trait {
         select_db_handle as read_slave_select_db_handle;
         can_use_readonly as read_slave_can_use_readonly;
         query_start as read_slave_query_start;
@@ -127,7 +127,7 @@ class pgsql_native_moodle_database extends moodle_database {
      * @param string $dbuser The database username.
      * @param string $dbpass The database username's password.
      * @param string $dbname The name of the database being connected to.
-     * @param mixed $prefix string means moodle db prefix, false used for external databases where prefix not used
+     * @param mixed $prefix string means powereduc db prefix, false used for external databases where prefix not used
      * @param array $dboptions driver specific options
      * @return bool true
      * @throws dml_connection_exception if error
@@ -238,7 +238,7 @@ class pgsql_native_moodle_database extends moodle_database {
         }
 
         // Connection stabilised and configured, going to instantiate the temptables controller
-        $this->temptables = new pgsql_native_moodle_temptables($this);
+        $this->temptables = new pgsql_native_powereduc_temptables($this);
 
         return true;
     }
@@ -345,14 +345,14 @@ class pgsql_native_moodle_database extends moodle_database {
                         [SQL_QUERY_AUX, SQL_QUERY_AUX_READONLY, SQL_QUERY_SELECT],
                         true
                     )) {
-                $res = @pg_query($this->pgsql, "RELEASE SAVEPOINT moodle_pg_savepoint; SAVEPOINT moodle_pg_savepoint");
+                $res = @pg_query($this->pgsql, "RELEASE SAVEPOINT powereduc_pg_savepoint; SAVEPOINT powereduc_pg_savepoint");
                 if ($res) {
                     pg_free_result($res);
                 }
             }
         } catch (Exception $e) {
             if ($this->savepointpresent) {
-                $res = @pg_query($this->pgsql, "ROLLBACK TO SAVEPOINT moodle_pg_savepoint; SAVEPOINT moodle_pg_savepoint");
+                $res = @pg_query($this->pgsql, "ROLLBACK TO SAVEPOINT powereduc_pg_savepoint; SAVEPOINT powereduc_pg_savepoint");
                 if ($res) {
                     pg_free_result($res);
                 }
@@ -433,7 +433,7 @@ class pgsql_native_moodle_database extends moodle_database {
     /**
      * Constructs 'IN()' or '=' sql fragment
      *
-     * Method overriding {@see moodle_database::get_in_or_equal} to be able to use
+     * Method overriding {@see powereduc_database::get_in_or_equal} to be able to use
      * more than 65535 elements in $items array.
      *
      * @param mixed $items A single value or array of values for the expression.
@@ -838,7 +838,7 @@ class pgsql_native_moodle_database extends moodle_database {
         list($sql, $params, $type) = $this->fix_sql_params($sql, $params);
 
         if (strpos($sql, ';') !== false) {
-            throw new coding_exception('moodle_database::execute() Multiple sql statements found or bound parameters not used properly in query!');
+            throw new coding_exception('powereduc_database::execute() Multiple sql statements found or bound parameters not used properly in query!');
         }
 
         $this->query_start($sql, $params, SQL_QUERY_UPDATE);
@@ -850,7 +850,7 @@ class pgsql_native_moodle_database extends moodle_database {
     }
 
     /**
-     * Get a number of records as a moodle_recordset using a SQL statement.
+     * Get a number of records as a powereduc_recordset using a SQL statement.
      *
      * Since this method is a little less readable, use of it should be restricted to
      * code where it's possible there might be large datasets being returned.  For known
@@ -863,7 +863,7 @@ class pgsql_native_moodle_database extends moodle_database {
      * @param array $params array of sql parameters
      * @param int $limitfrom return a subset of records, starting at this point (optional, required if $limitnum is set).
      * @param int $limitnum return a subset comprising this many records (optional, required if $limitfrom is set).
-     * @return moodle_recordset instance
+     * @return powereduc_recordset instance
      * @throws dml_exception A DML specific exception is thrown for any errors.
      */
     public function get_recordset_sql($sql, array $params=null, $limitfrom=0, $limitnum=0) {
@@ -905,7 +905,7 @@ class pgsql_native_moodle_database extends moodle_database {
             $result = null;
         }
 
-        return new pgsql_native_moodle_recordset($result, $this, $cursorname);
+        return new pgsql_native_powereduc_recordset($result, $this, $cursorname);
     }
 
     /**
@@ -1101,7 +1101,7 @@ class pgsql_native_moodle_database extends moodle_database {
 
         if ($customsequence) {
             if (!isset($params['id'])) {
-                throw new coding_exception('moodle_database::insert_record_raw() id field must be specified if custom sequences used.');
+                throw new coding_exception('powereduc_database::insert_record_raw() id field must be specified if custom sequences used.');
             }
             $returnid = false;
         } else {
@@ -1114,7 +1114,7 @@ class pgsql_native_moodle_database extends moodle_database {
         }
 
         if (empty($params)) {
-            throw new coding_exception('moodle_database::insert_record_raw() no fields found.');
+            throw new coding_exception('powereduc_database::insert_record_raw() no fields found.');
         }
 
         $fields = implode(',', array_keys($params));
@@ -1190,7 +1190,7 @@ class pgsql_native_moodle_database extends moodle_database {
      * This method is intended for inserting of large number of small objects,
      * do not use for huge objects with text or binary fields.
      *
-     * @since Moodle 2.7
+     * @since PowerEduc 2.7
      *
      * @param string $table  The database table to be inserted into
      * @param array|Traversable $dataobjects list of objects to be inserted, must be compatible with foreach
@@ -1314,13 +1314,13 @@ class pgsql_native_moodle_database extends moodle_database {
         $params = (array)$params;
 
         if (!isset($params['id'])) {
-            throw new coding_exception('moodle_database::update_record_raw() id field must be specified.');
+            throw new coding_exception('powereduc_database::update_record_raw() id field must be specified.');
         }
         $id = $params['id'];
         unset($params['id']);
 
         if (empty($params)) {
-            throw new coding_exception('moodle_database::update_record_raw() no fields found.');
+            throw new coding_exception('powereduc_database::update_record_raw() no fields found.');
         }
 
         $i = 1;
@@ -1553,7 +1553,7 @@ class pgsql_native_moodle_database extends moodle_database {
     /**
      * Does this driver support tool_replace?
      *
-     * @since Moodle 2.6.1
+     * @since PowerEduc 2.6.1
      * @return bool
      */
     public function replace_all_text_supported() {
@@ -1572,7 +1572,7 @@ class pgsql_native_moodle_database extends moodle_database {
      */
     public function get_session_lock($rowid, $timeout) {
         // NOTE: there is a potential locking problem for database running
-        //       multiple instances of moodle, we could try to use pg_advisory_lock(int, int),
+        //       multiple instances of powereduc, we could try to use pg_advisory_lock(int, int),
         //       luckily there is not a big chance that they would collide
         if (!$this->session_lock_supported()) {
             return;
@@ -1647,7 +1647,7 @@ class pgsql_native_moodle_database extends moodle_database {
      */
     protected function begin_transaction() {
         $this->savepointpresent = true;
-        $sql = "BEGIN ISOLATION LEVEL READ COMMITTED; SAVEPOINT moodle_pg_savepoint";
+        $sql = "BEGIN ISOLATION LEVEL READ COMMITTED; SAVEPOINT powereduc_pg_savepoint";
         $this->query_start($sql, null, SQL_QUERY_AUX);
         $result = pg_query($this->pgsql, $sql);
         $this->query_end($result);
@@ -1662,7 +1662,7 @@ class pgsql_native_moodle_database extends moodle_database {
      */
     protected function commit_transaction() {
         $this->savepointpresent = false;
-        $sql = "RELEASE SAVEPOINT moodle_pg_savepoint; COMMIT";
+        $sql = "RELEASE SAVEPOINT powereduc_pg_savepoint; COMMIT";
         $this->query_start($sql, null, SQL_QUERY_AUX);
         $result = pg_query($this->pgsql, $sql);
         $this->query_end($result);
@@ -1677,7 +1677,7 @@ class pgsql_native_moodle_database extends moodle_database {
      */
     protected function rollback_transaction() {
         $this->savepointpresent = false;
-        $sql = "RELEASE SAVEPOINT moodle_pg_savepoint; ROLLBACK";
+        $sql = "RELEASE SAVEPOINT powereduc_pg_savepoint; ROLLBACK";
         $this->query_start($sql, null, SQL_QUERY_AUX);
         $result = pg_query($this->pgsql, $sql);
         $this->query_end($result);

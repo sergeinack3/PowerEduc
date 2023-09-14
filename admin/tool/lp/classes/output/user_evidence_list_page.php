@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ use templatable;
 use renderer_base;
 use stdClass;
 use single_button;
-use moodle_url;
+use powereduc_url;
 use core_competency\api;
 use tool_lp\external\user_evidence_summary_exporter;
 use core_competency\user_evidence;
@@ -71,7 +71,7 @@ class user_evidence_list_page implements renderable, templatable {
 
         if ($this->canmanage) {
             $addevidence = new single_button(
-               new moodle_url('/admin/tool/lp/user_evidence_edit.php', array('userid' => $userid)),
+               new powereduc_url('/admin/tool/lp/user_evidence_edit.php', array('userid' => $userid)),
                get_string('addnewuserevidence', 'tool_lp'), 'get'
             );
             $this->navigation[] = $addevidence;
@@ -87,7 +87,7 @@ class user_evidence_list_page implements renderable, templatable {
     public function export_for_template(renderer_base $output) {
         $data = new stdClass();
         $data->userid = $this->userid;
-        $data->pluginbaseurl = (new moodle_url('/admin/tool/lp'))->out(true);
+        $data->pluginbaseurl = (new powereduc_url('/admin/tool/lp'))->out(true);
         $data->canmanage = $this->canmanage;
 
         $data->evidence = array();

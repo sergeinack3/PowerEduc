@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -43,11 +43,11 @@ foreach (core_component::get_plugin_list('availability') as $plugin => $plugindi
 core_collator::asort($plugins);
 
 // Do plugin actions.
-$pageurl = new moodle_url('/' . $CFG->admin . '/tool/availabilityconditions/');
+$pageurl = new powereduc_url('/' . $CFG->admin . '/tool/availabilityconditions/');
 if (($plugin = optional_param('plugin', '', PARAM_PLUGIN))) {
     require_sesskey();
     if (!array_key_exists($plugin, $plugins)) {
-        throw new \moodle_exception('invalidcomponent', 'error', $pageurl);
+        throw new \powereduc_exception('invalidcomponent', 'error', $pageurl);
     }
     $action = required_param('action', PARAM_ALPHA);
     switch ($action) {
@@ -104,7 +104,7 @@ foreach ($plugins as $plugin => $name) {
     // Make enable control. This is a POST request (using a form control rather
     // than just a link) because it makes a database change.
     $params = array('sesskey' => sesskey(), 'plugin' => $plugin, 'action' => $enabledaction);
-    $url = new moodle_url('/' . $CFG->admin . '/tool/availabilityconditions/', $params);
+    $url = new powereduc_url('/' . $CFG->admin . '/tool/availabilityconditions/', $params);
     $enablecontrol = html_writer::link($url, $OUTPUT->pix_icon('t/' . $enabledaction, $enabledstr));
 
     $table->add_data([$name, $version, $enablecontrol], $class);

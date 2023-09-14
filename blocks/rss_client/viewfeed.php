@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,11 +23,11 @@
  */
 
 require_once(__DIR__ . '/../../config.php');
-require_once($CFG->libdir .'/simplepie/moodle_simplepie.php');
+require_once($CFG->libdir .'/simplepie/powereduc_simplepie.php');
 
 require_login();
 if (isguestuser()) {
-    throw new \moodle_exception('guestsarenotallowed');
+    throw new \powereduc_exception('guestsarenotallowed');
 }
 
 $returnurl = optional_param('returnurl', '', PARAM_LOCALURL);
@@ -58,11 +58,11 @@ $PAGE->set_pagelayout('popup');
 
 $rssrecord = $DB->get_record('block_rss_client', array('id' => $rssid), '*', MUST_EXIST);
 
-$rss = new moodle_simplepie($rssrecord->url);
+$rss = new powereduc_simplepie($rssrecord->url);
 
 if ($rss->error()) {
     debugging($rss->error());
-    throw new \moodle_exception('errorfetchingrssfeed');
+    throw new \powereduc_exception('errorfetchingrssfeed');
 }
 
 $strviewfeed = get_string('viewfeed', 'block_rss_client');
@@ -70,7 +70,7 @@ $strviewfeed = get_string('viewfeed', 'block_rss_client');
 $PAGE->set_title($strviewfeed);
 $PAGE->set_heading($strviewfeed);
 
-$managefeeds = new moodle_url('/blocks/rss_client/managefeeds.php', $urlparams);
+$managefeeds = new powereduc_url('/blocks/rss_client/managefeeds.php', $urlparams);
 $PAGE->navbar->add(get_string('blocks'));
 $PAGE->navbar->add(get_string('pluginname', 'block_rss_client'));
 $PAGE->navbar->add(get_string('managefeeds', 'block_rss_client'), $managefeeds);

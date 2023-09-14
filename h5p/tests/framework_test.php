@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core_h5p
  * @category   test
- * @copyright  2019 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2019 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -34,7 +34,7 @@ use Moodle\H5PDisplayOptionBehaviour;
  * Test class covering the H5PFrameworkInterface interface implementation.
  *
  * @package    core_h5p
- * @copyright  2019 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2019 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @runTestsInSeparateProcesses
  */
@@ -845,7 +845,7 @@ class framework_test extends \advanced_testcase {
         $this->framework->set_file($file);
         $mayupdatelib = $this->framework->mayUpdateLibraries();
         $this->assertFalse($mayupdatelib);
-        assign_capability('moodle/h5p:updatelibraries', CAP_ALLOW, $studentrole->id, $contextlabel);
+        assign_capability('powereduc/h5p:updatelibraries', CAP_ALLOW, $studentrole->id, $contextlabel);
         $mayupdatelib = $this->framework->mayUpdateLibraries();
         $this->assertTrue($mayupdatelib);
         $file = helper::create_fake_stored_file_from_path($path, $user->id, $contextsys);

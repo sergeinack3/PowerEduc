@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file is serving optimised JS and WASM for ogv.js.
@@ -119,7 +119,7 @@ function media_videojs_ogvloader_is_wasm_file(string $filename): bool {
 }
 
 /**
- * Add Moodle module name to the Javascript module if necessary
+ * Add PowerEduc module name to the Javascript module if necessary
  *
  * @param bool $iswasm Whether the file is Web Assembly or not
  * @param string $content File content
@@ -128,7 +128,7 @@ function media_videojs_ogvloader_is_wasm_file(string $filename): bool {
 function media_videojs_ogvloader_add_module_module_name_if_necessary(bool $iswasm, string $content): string {
     if (!$iswasm && preg_match('/define\(\s*(\[|function)/', $content)) {
         // If the JavaScript module has been defined without specifying a name then we'll
-        // add the Moodle module name now.
+        // add the PowerEduc module name now.
         $replace = 'define(\'media_videojs/video-lazy\', ';
         $search = 'define(';
         // Replace only the first occurrence.

@@ -7,7 +7,7 @@ Feature: Delete a blog entry
   Background:
     Given the following "users" exist:
       | username | firstname | lastname | email |
-      | testuser | Test | User | moodle@example.com |
+      | testuser | Test | User | powereduc@example.com |
     And the following "core_blog > entries" exist:
       | subject       | body                     | user     |
       | Blog post one | User 1 blog post content | testuser |

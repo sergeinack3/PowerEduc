@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Contains the default activity list from a section.
  *
  * @package   core_courseformat
- * @copyright 2020 Ferran Recio <ferran@moodle.com>
+ * @copyright 2020 Ferran Recio <ferran@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -41,7 +41,7 @@ use stdClass;
  * Base class to render a course module inside a course format.
  *
  * @package   core_courseformat
- * @copyright 2020 Ferran Recio <ferran@moodle.com>
+ * @copyright 2020 Ferran Recio <ferran@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class cm implements named_templatable, renderable {
@@ -309,7 +309,7 @@ class cm implements named_templatable, renderable {
             $info = new info_module($mod);
             $conditionalhidden = !$info->is_available_for_all();
             $accessiblebutdim = (!$mod->visible || $conditionalhidden) &&
-                has_capability('moodle/course:viewhiddenactivities', $mod->context);
+                has_capability('powereduc/course:viewhiddenactivities', $mod->context);
             if ($accessiblebutdim && $conditionalhidden) {
                 $linkclasses .= ' conditionalhidden';
                 $textclasses .= ' conditionalhidden';

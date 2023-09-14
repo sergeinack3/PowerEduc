@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -96,7 +96,7 @@ class renderer extends \plugin_renderer_base {
     /**
      * Html to add a link to go to the rule manager page.
      *
-     * @param moodle_url $ruleurl The url of the rule manager page.
+     * @param powereduc_url $ruleurl The url of the rule manager page.
      *
      * @return string html for the link to the rule manager page.
      */

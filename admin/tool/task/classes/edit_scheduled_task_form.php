@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Form for scheduled tasks admin pages.
  *
  * @package    tool_task
- * @copyright  2013 Damyon Wiese <damyon@moodle.com>
+ * @copyright  2013 Damyon Wiese <damyon@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,10 +29,10 @@ require_once($CFG->libdir.'/formslib.php');
 /**
  * Edit scheduled task form.
  *
- * @copyright  2013 Damyon Wiese <damyon@moodle.com>
+ * @copyright  2013 Damyon Wiese <damyon@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class tool_task_edit_scheduled_task_form extends moodleform {
+class tool_task_edit_scheduled_task_form extends powereducform {
     public function definition() {
         global $PAGE;
 

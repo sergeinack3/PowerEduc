@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -79,7 +79,7 @@ class edit_key_save extends XMLDBAction {
         // Do the job, setting result as needed
 
         if (!data_submitted()) { // Basic prevention
-            throw new \moodle_exception('wrongcall', 'error');
+            throw new \powereduc_exception('wrongcall', 'error');
         }
 
         // Get parameters

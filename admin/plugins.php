@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  *
  * @package    core
  * @subpackage admin
- * @copyright  2011 David Mudrak <david@moodle.com>
+ * @copyright  2011 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -48,7 +48,7 @@ $syscontext = context_system::instance();
 
 // URL params we want to maintain on redirects.
 $pageparams = array('updatesonly' => $updatesonly, 'contribonly' => $contribonly);
-$pageurl = new moodle_url('/admin/plugins.php', $pageparams);
+$pageurl = new powereduc_url('/admin/plugins.php', $pageparams);
 
 $pluginman = core_plugin_manager::instance();
 
@@ -72,7 +72,7 @@ if ($uninstall) {
 
     // Make sure we know the plugin.
     if (is_null($pluginfo)) {
-        throw new moodle_exception('err_uninstalling_unknown_plugin', 'core_plugin', '', array('plugin' => $uninstall),
+        throw new powereduc_exception('err_uninstalling_unknown_plugin', 'core_plugin', '', array('plugin' => $uninstall),
             'core_plugin_manager::get_plugin_info() returned null for the plugin to be uninstalled');
     }
 
@@ -81,13 +81,13 @@ if ($uninstall) {
     $PAGE->navbar->add(get_string('uninstalling', 'core_plugin', array('name' => $pluginname)));
 
     if (!$pluginman->can_uninstall_plugin($pluginfo->component)) {
-        throw new moodle_exception('err_cannot_uninstall_plugin', 'core_plugin', '',
+        throw new powereduc_exception('err_cannot_uninstall_plugin', 'core_plugin', '',
             array('plugin' => $pluginfo->component),
             'core_plugin_manager::can_uninstall_plugin() returned false');
     }
 
     if (!$confirmed) {
-        $continueurl = new moodle_url($PAGE->url, array('uninstall' => $pluginfo->component, 'sesskey' => sesskey(), 'confirm' => 1, 'return'=>$return));
+        $continueurl = new powereduc_url($PAGE->url, array('uninstall' => $pluginfo->component, 'sesskey' => sesskey(), 'confirm' => 1, 'return'=>$return));
         $cancelurl = $pluginfo->get_return_url_after_uninstall($return);
         echo $output->plugin_uninstall_confirm_page($pluginman, $pluginfo, $continueurl, $cancelurl);
         exit();
@@ -100,7 +100,7 @@ if ($uninstall) {
         $progress->finished();
 
         if ($pluginman->is_plugin_folder_removable($pluginfo->component)) {
-            $continueurl = new moodle_url($PAGE->url, array('delete' => $pluginfo->component, 'sesskey' => sesskey(), 'confirm' => 1));
+            $continueurl = new powereduc_url($PAGE->url, array('delete' => $pluginfo->component, 'sesskey' => sesskey(), 'confirm' => 1));
             echo $output->plugin_uninstall_results_removable_page($pluginman, $pluginfo, $progress, $continueurl);
             // Reset op code caches.
             if (function_exists('opcache_reset')) {
@@ -134,7 +134,7 @@ if ($delete and $confirmed) {
 
     // Make sure we know the plugin.
     if (is_null($pluginfo)) {
-        throw new moodle_exception('err_removing_unknown_plugin', 'core_plugin', '', array('plugin' => $delete),
+        throw new powereduc_exception('err_removing_unknown_plugin', 'core_plugin', '', array('plugin' => $delete),
             'core_plugin_manager::get_plugin_info() returned null for the plugin to be deleted');
     }
 
@@ -144,23 +144,23 @@ if ($delete and $confirmed) {
 
     // Make sure it is not installed.
     if (!is_null($pluginfo->versiondb)) {
-        throw new moodle_exception('err_removing_installed_plugin', 'core_plugin', '',
+        throw new powereduc_exception('err_removing_installed_plugin', 'core_plugin', '',
             array('plugin' => $pluginfo->component, 'versiondb' => $pluginfo->versiondb),
             'core_plugin_manager::get_plugin_info() returned not-null versiondb for the plugin to be deleted');
     }
 
     // Make sure the folder is within Moodle installation tree.
     if (strpos($pluginfo->rootdir, $CFG->dirroot) !== 0) {
-        throw new moodle_exception('err_unexpected_plugin_rootdir', 'core_plugin', '',
+        throw new powereduc_exception('err_unexpected_plugin_rootdir', 'core_plugin', '',
             array('plugin' => $pluginfo->component, 'rootdir' => $pluginfo->rootdir, 'dirroot' => $CFG->dirroot),
-            'plugin root folder not in the moodle dirroot');
+            'plugin root folder not in the powereduc dirroot');
     }
 
     // So long, and thanks for all the bugs.
     $pluginman->remove_plugin_folder($pluginfo);
 
     // We need to execute upgrade to make sure everything including caches is up to date.
-    redirect(new moodle_url('/admin/index.php'));
+    redirect(new powereduc_url('/admin/index.php'));
 }
 
 // Install all avilable updates.
@@ -176,7 +176,7 @@ if ($installupdatex) {
     $installable = $pluginman->filter_installable($pluginman->available_updates());
     upgrade_install_plugins($installable, $confirminstallupdate,
         get_string('updateavailableinstallallhead', 'core_admin'),
-        new moodle_url($PAGE->url, array('installupdatex' => 1, 'confirminstallupdate' => 1))
+        new powereduc_url($PAGE->url, array('installupdatex' => 1, 'confirminstallupdate' => 1))
     );
 }
 
@@ -194,7 +194,7 @@ if ($installupdate and $installupdateversion) {
         $installable = array($pluginman->get_remote_plugin_info($installupdate, $installupdateversion, true));
         upgrade_install_plugins($installable, $confirminstallupdate,
             get_string('updateavailableinstallallhead', 'core_admin'),
-            new moodle_url($PAGE->url, array('installupdate' => $installupdate,
+            new powereduc_url($PAGE->url, array('installupdate' => $installupdate,
                 'installupdateversion' => $installupdateversion, 'confirminstallupdate' => 1)
             )
         );

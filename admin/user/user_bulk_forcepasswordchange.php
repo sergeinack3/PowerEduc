@@ -10,7 +10,7 @@ require_once($CFG->libdir.'/adminlib.php');
 $confirm = optional_param('confirm', 0, PARAM_BOOL);
 
 admin_externalpage_setup('userbulk');
-require_capability('moodle/user:update', context_system::instance());
+require_capability('powereduc/user:update', context_system::instance());
 
 $return = $CFG->wwwroot.'/'.$CFG->admin.'/user/user_bulk.php';
 
@@ -62,8 +62,8 @@ if ($confirm and confirm_sesskey()) {
         $usernames .= ', ...';
     }
     echo $OUTPUT->heading(get_string('confirmation', 'admin'));
-    $formcontinue = new single_button(new moodle_url('/admin/user/user_bulk_forcepasswordchange.php', array('confirm' => 1)), get_string('yes'));
-    $formcancel = new single_button(new moodle_url('/admin/user/user_bulk.php'), get_string('no'), 'get');
+    $formcontinue = new single_button(new powereduc_url('/admin/user/user_bulk_forcepasswordchange.php', array('confirm' => 1)), get_string('yes'));
+    $formcancel = new single_button(new powereduc_url('/admin/user/user_bulk.php'), get_string('no'), 'get');
     echo $OUTPUT->confirm(get_string('forcepasswordchangecheckfull', '', $usernames), $formcontinue, $formcancel);
 }
 

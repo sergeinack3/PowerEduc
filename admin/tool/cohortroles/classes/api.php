@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ class api {
     /**
      * Create a cohort role assignment from a record containing all the data for the class.
      *
-     * Requires moodle/role:manage capability at the system context.
+     * Requires powereduc/role:manage capability at the system context.
      *
      * @param stdClass $record Record containing all the data for an instance of the class.
      * @return competency
@@ -48,7 +48,7 @@ class api {
         $context = context_system::instance();
 
         // First we do a permissions check.
-        require_capability('moodle/role:manage', $context);
+        require_capability('powereduc/role:manage', $context);
 
         // Validate before we check for existing records.
         if (!$cohortroleassignment->is_valid()) {
@@ -68,7 +68,7 @@ class api {
     /**
      * Delete a cohort role assignment by id.
      *
-     * Requires moodle/role:manage capability at the system context.
+     * Requires powereduc/role:manage capability at the system context.
      *
      * @param int $id The record to delete. This will also remove this role from the user for all users in the system.
      * @return boolean
@@ -78,7 +78,7 @@ class api {
         $context = context_system::instance();
 
         // First we do a permissions check.
-        require_capability('moodle/role:manage', $context);
+        require_capability('powereduc/role:manage', $context);
 
         // OK - all set.
         return $cohortroleassignment->delete();
@@ -87,7 +87,7 @@ class api {
     /**
      * Perform a search based on the provided filters and return a paginated list of records.
      *
-     * Requires moodle/role:manage capability at the system context.
+     * Requires powereduc/role:manage capability at the system context.
      *
      * @param string $sort The column to sort on
      * @param string $order ('ASC' or 'DESC')
@@ -99,7 +99,7 @@ class api {
         $context = context_system::instance();
 
         // First we do a permissions check.
-        require_capability('moodle/role:manage', $context);
+        require_capability('powereduc/role:manage', $context);
 
         // OK - all set.
         return cohort_role_assignment::get_records(array(), $sort, $order, $skip, $limit);
@@ -108,7 +108,7 @@ class api {
     /**
      * Perform a search based on the provided filters and return a paginated list of records.
      *
-     * Requires moodle/role:manage capability at system context.
+     * Requires powereduc/role:manage capability at system context.
      *
      * @return int
      */
@@ -116,7 +116,7 @@ class api {
         $context = context_system::instance();
 
         // First we do a permissions check.
-        require_capability('moodle/role:manage', $context);
+        require_capability('powereduc/role:manage', $context);
 
         // OK - all set.
         return cohort_role_assignment::count_records();
@@ -127,7 +127,7 @@ class api {
      *
      * Slow. Should only be called from a background task.
      *
-     * Requires moodle/role:manage capability at the system context.
+     * Requires powereduc/role:manage capability at the system context.
      *
      * @return array('rolesadded' => array of (useridassignedto, useridassignedover, roleid),
      *               'rolesremoved' => array of (useridassignedto, useridassignedover, roleid))
@@ -138,7 +138,7 @@ class api {
         $context = context_system::instance();
 
         // First we do a permissions check.
-        require_capability('moodle/role:manage', $context);
+        require_capability('powereduc/role:manage', $context);
 
         // Ok ready to go.
         $rolesadded = array();

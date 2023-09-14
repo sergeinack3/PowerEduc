@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -127,7 +127,7 @@ class external_test extends \advanced_testcase {
         // Set current entry global.
         $DB->set_field('post', 'publishstate', 'public', array('id' => $this->postid));
 
-        $this->expectException('\moodle_exception');
+        $this->expectException('\powereduc_exception');
         \core_blog\external::get_entries();
     }
 
@@ -449,7 +449,7 @@ class external_test extends \advanced_testcase {
         $result = \external_api::clean_returnvalue(\core_blog\external::get_entries_returns(), $result);
         $this->assertCount(1, $result['entries']);
         // Non-existent entry.
-        $this->expectException('\moodle_exception');
+        $this->expectException('\powereduc_exception');
         $result = \core_blog\external::get_entries(array(array('name' => 'entryid', 'value' => -1)));
     }
 
@@ -522,7 +522,7 @@ class external_test extends \advanced_testcase {
         $this->assertCount(1, $result['entries']);
         // Non-existent group.
         $anotheruser = $this->getDataGenerator()->create_user();
-        $this->expectException('\moodle_exception');
+        $this->expectException('\powereduc_exception');
         \core_blog\external::get_entries(array(array('name' => 'groupid', 'value' => -1)));
     }
 
@@ -558,7 +558,7 @@ class external_test extends \advanced_testcase {
     public function test_get_entries_filtering_by_invalid_filter() {
         $this->setAdminUser();
         // Filter by incorrect filter.
-        $this->expectException('\moodle_exception');
+        $this->expectException('\powereduc_exception');
         $result = \core_blog\external::get_entries(array(array('name' => 'zzZZzz', 'value' => 'wwWWww')));
     }
 
@@ -571,7 +571,7 @@ class external_test extends \advanced_testcase {
         $this->setAdminUser();
         $CFG->enableblogs = 0;
         // Filter by incorrect filter.
-        $this->expectException('\moodle_exception');
+        $this->expectException('\powereduc_exception');
         $result = \core_blog\external::get_entries(array(array('name' => 'zzZZzz', 'value' => 'wwWWww')));
     }
 

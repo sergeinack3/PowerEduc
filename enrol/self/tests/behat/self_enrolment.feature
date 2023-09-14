@@ -45,12 +45,12 @@ Feature: Users can auto-enrol themself in courses where self enrolment is allowe
     Given I log in as "teacher1"
     When I add "Self enrolment" enrolment method in "Course 1" with:
       | Custom instance name | Test student enrolment |
-      | Enrolment key | moodle_rules |
+      | Enrolment key | powereduc_rules |
     And I log out
     And I log in as "student1"
     And I am on "Course 1" course homepage
     And I set the following fields to these values:
-      | Enrolment key | moodle_rules |
+      | Enrolment key | powereduc_rules |
     And I press "Enrol me"
     Then I should see "Topic 1"
     And I should not see "Enrolment options"
@@ -65,7 +65,7 @@ Feature: Users can auto-enrol themself in courses where self enrolment is allowe
     Given I log in as "teacher1"
     When I add "Self enrolment" enrolment method in "Course 1" with:
       | Custom instance name | Test student enrolment |
-      | Enrolment key | moodle_rules |
+      | Enrolment key | powereduc_rules |
       | Use group enrolment keys | Yes |
     And I am on the "Course 1" "groups" page
     And I press "Create group"

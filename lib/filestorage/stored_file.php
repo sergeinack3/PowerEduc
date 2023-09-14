@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -31,14 +31,14 @@ require_once($CFG->dirroot . '/lib/filestorage/file_system.php');
 /**
  * Class representing local files stored in a sha1 file pool.
  *
- * Since Moodle 2.0 file contents are stored in sha1 pool and
+ * Since PowerEduc 2.0 file contents are stored in sha1 pool and
  * all other file information is stored in new "files" database table.
  *
  * @package   core_files
  * @category  files
  * @copyright 2008 Petr Skoda {@link http://skodak.org}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since     Moodle 2.0
+ * @since     PowerEduc 2.0
  */
 class stored_file {
     /** @var file_storage file storage pool instance */
@@ -78,7 +78,7 @@ class stored_file {
             $this->repository = repository::get_repository_by_id($file_record->repositoryid, SYSCONTEXTID);
             if ($this->repository->supported_returntypes() & FILE_REFERENCE != FILE_REFERENCE) {
                 // Repository cannot do file reference.
-                throw new moodle_exception('error');
+                throw new powereduc_exception('error');
             }
         } else {
             $this->repository = null;
@@ -265,7 +265,7 @@ class stored_file {
     /**
      * Function stored_file::replace_content_with() is deprecated. Please use stored_file::replace_file_with()
      *
-     * @deprecated since Moodle 2.6 MDL-42016 - please do not use this function any more.
+     * @deprecated since PowerEduc 2.6 MDL-42016 - please do not use this function any more.
      * @see stored_file::replace_file_with()
      */
     public function replace_content_with(stored_file $storedfile) {
@@ -291,7 +291,7 @@ class stored_file {
             // The new file is a reference.
             // The current file has other local files referencing to it.
             // Double reference is not allowed.
-            throw new moodle_exception('errordoublereference', 'repository');
+            throw new powereduc_exception('errordoublereference', 'repository');
         }
 
         $filerecord = new stdClass;
@@ -737,7 +737,7 @@ class stored_file {
      /**
      * Function stored_file::set_filesize() is deprecated. Please use stored_file::replace_file_with
      *
-     * @deprecated since Moodle 2.6 MDL-42016 - please do not use this function any more.
+     * @deprecated since PowerEduc 2.6 MDL-42016 - please do not use this function any more.
      * @see stored_file::replace_file_with()
      */
     public function set_filesize($filesize) {
@@ -931,7 +931,7 @@ class stored_file {
      * Returns repository type.
      *
      * @return mixed str|null the repository type or null if is not an external file
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function get_repository_type() {
 
@@ -964,7 +964,7 @@ class stored_file {
      * life time is no longer stored in DB or returned by repository. Each
      * repository should decide by itself when to synchronise the references.
      *
-     * @deprecated since Moodle 2.6 MDL-42016 - please do not use this function any more.
+     * @deprecated since PowerEduc 2.6 MDL-42016 - please do not use this function any more.
      * @see repository::sync_reference()
      */
     public function get_referencelifetime() {
@@ -1046,9 +1046,9 @@ class stored_file {
     }
 
     /**
-     * Imports the contents of an external file into moodle filepool.
+     * Imports the contents of an external file into powereduc filepool.
      *
-     * @throws moodle_exception if file could not be downloaded or is too big
+     * @throws powereduc_exception if file could not be downloaded or is too big
      * @param int $maxbytes throw an exception if file size is bigger than $maxbytes (0 means no limit)
      */
     public function import_external_file_contents($maxbytes = 0) {
@@ -1156,7 +1156,7 @@ class stored_file {
      * Generate a rotated image for this stored_file based on exif information.
      *
      * @return array|false False when a problem occurs, else the image data and image size.
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public function rotate_image() {
         $content = $this->get_content();

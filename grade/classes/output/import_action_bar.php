@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,13 +16,13 @@
 
 namespace core_grades\output;
 
-use moodle_url;
+use powereduc_url;
 
 /**
  * Renderable class for the action bar elements in the gradebook import pages.
  *
  * @package    core_grades
- * @copyright  2021 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2021 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class import_action_bar extends action_bar {
@@ -67,7 +67,7 @@ class import_action_bar extends action_bar {
         $courseid = $this->context->instanceid;
         // Get the data used to output the general navigation selector.
         $generalnavselector = new general_action_bar($this->context,
-            new moodle_url('/grade/import/index.php', ['id' => $courseid]), 'import', $this->activeplugin);
+            new powereduc_url('/grade/import/index.php', ['id' => $courseid]), 'import', $this->activeplugin);
         $data = $generalnavselector->export_for_template($output);
 
         // Get all grades import plugins. If there isn't any available import plugins there is no need to create and

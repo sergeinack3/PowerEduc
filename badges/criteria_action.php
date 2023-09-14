@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,10 +35,10 @@ $confirm = optional_param('confirm', 0, PARAM_BOOL);
 
 require_login();
 
-$return = new moodle_url('/badges/criteria.php', array('id' => $badgeid));
+$return = new powereduc_url('/badges/criteria.php', array('id' => $badgeid));
 $badge = new badge($badgeid);
 $context = $badge->get_context();
-$navurl = new moodle_url('/badges/index.php', array('type' => $badge->type));
+$navurl = new powereduc_url('/badges/index.php', array('type' => $badge->type));
 
 // Make sure that no actions available for locked or active badges.
 if ($badge->is_active() || $badge->is_locked()) {
@@ -47,7 +47,7 @@ if ($badge->is_active() || $badge->is_locked()) {
 
 if ($badge->type == BADGE_TYPE_COURSE) {
     require_login($badge->courseid);
-    $navurl = new moodle_url('/badges/index.php', array('type' => $badge->type, 'id' => $badge->courseid));
+    $navurl = new powereduc_url('/badges/index.php', array('type' => $badge->type, 'id' => $badge->courseid));
     $PAGE->set_pagelayout('standard');
     navigation_node::override_active_url($navurl);
 } else {
@@ -60,7 +60,7 @@ $PAGE->set_url('/badges/criteria_action.php');
 $PAGE->set_heading($badge->name);
 $PAGE->set_title($badge->name);
 
-if ($delete && has_capability('moodle/badges:configurecriteria', $context)) {
+if ($delete && has_capability('powereduc/badges:configurecriteria', $context)) {
     if ($type == BADGE_CRITERIA_TYPE_OVERALL) {
         redirect($return, get_string('error:cannotdeletecriterion', 'badges'));
     }
@@ -70,7 +70,7 @@ if ($delete && has_capability('moodle/badges:configurecriteria', $context)) {
         $strdeletecheckfull = get_string('delcritconfirm', 'badges');
 
         echo $OUTPUT->header();
-        $formcontinue = new single_button(new moodle_url('/badges/criteria_action.php', $optionsyes), get_string('yes'));
+        $formcontinue = new single_button(new powereduc_url('/badges/criteria_action.php', $optionsyes), get_string('yes'));
         $formcancel = new single_button($return, get_string('no'), 'get');
         echo $OUTPUT->confirm($strdeletecheckfull, $formcontinue, $formcancel);
         echo $OUTPUT->footer();

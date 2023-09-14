@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 
 namespace tool_admin_presets\local\action;
 
-use moodle_exception;
+use powereduc_exception;
 use stdClass;
 use tool_admin_presets\form\continue_form;
 use tool_admin_presets\form\load_form;
@@ -40,14 +40,14 @@ class load extends base {
 
         confirm_sesskey();
 
-        $url = new \moodle_url('/admin/tool/admin_presets/index.php', ['action' => 'load', 'mode' => 'execute']);
-        $this->moodleform = new load_form($url);
+        $url = new \powereduc_url('/admin/tool/admin_presets/index.php', ['action' => 'load', 'mode' => 'execute']);
+        $this->powereducform = new load_form($url);
 
-        if ($this->moodleform->is_cancelled()) {
-            redirect(new \moodle_url('/admin/tool/admin_presets/index.php?action=base'));
+        if ($this->powereducform->is_cancelled()) {
+            redirect(new \powereduc_url('/admin/tool/admin_presets/index.php?action=base'));
         }
 
-        if ($this->moodleform->is_submitted() && $this->moodleform->is_validated() && ($this->moodleform->get_data())) {
+        if ($this->powereducform->is_submitted() && $this->powereducform->is_validated() && ($this->powereducform->get_data())) {
             // Apply preset settings and set plugins visibility.
             [$applied, $skipped] = $this->manager->apply_preset($this->id);
 
@@ -81,8 +81,8 @@ class load extends base {
             $application->skippedchanges = $skippeddata;
 
             $this->outputs = $OUTPUT->render_from_template('tool_admin_presets/settings_application', $application);
-            $url = new \moodle_url('/admin/tool/admin_presets/index.php');
-            $this->moodleform = new continue_form($url);
+            $url = new \powereduc_url('/admin/tool/admin_presets/index.php');
+            $this->powereducform = new continue_form($url);
         }
     }
 
@@ -120,7 +120,7 @@ class load extends base {
         // Preset data.
         if (!$preset = $DB->get_record('adminpresets', ['id' => $data->id])) {
             if ($raiseexception) {
-                throw new moodle_exception('errornopreset', 'core_adminpresets');
+                throw new powereduc_exception('errornopreset', 'core_adminpresets');
             } else {
                 $this->outputs = get_string('errornopreset', 'core_adminpresets');
                 return;
@@ -154,13 +154,13 @@ class load extends base {
                 $applieddata->message = get_string('nosettingswillbeapplied', 'tool_admin_presets');
 
                 // Only display the Continue button.
-                $url = new \moodle_url('/admin/tool/admin_presets/index.php');
-                $this->moodleform = new continue_form($url);
+                $url = new \powereduc_url('/admin/tool/admin_presets/index.php');
+                $this->powereducform = new continue_form($url);
             } else {
                 // Display the form to apply the preset.
-                $url = new \moodle_url('/admin/tool/admin_presets/index.php', ['action' => 'load', 'mode' => 'execute']);
-                $this->moodleform = new load_form($url);
-                $this->moodleform->set_data($data);
+                $url = new \powereduc_url('/admin/tool/admin_presets/index.php', ['action' => 'load', 'mode' => 'execute']);
+                $this->powereducform = new load_form($url);
+                $this->powereducform->set_data($data);
             }
         }
 

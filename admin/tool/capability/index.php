@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ $contextid = optional_param('context', $systemcontext->id, PARAM_INT);
 // Check permissions.
 list($context, $course, $cm) = get_context_info_array($contextid);
 require_login($course, false, $cm);
-require_capability('moodle/role:manage', $context);
+require_capability('powereduc/role:manage', $context);
 
 // Print the header.
 admin_externalpage_setup('toolcapability');
@@ -56,7 +56,7 @@ $form = new tool_capability_settings_form(null, array(
     'roles' => $rolechoices
 ));
 $PAGE->requires->yui_module(
-    'moodle-tool_capability-search',
+    'powereduc-tool_capability-search',
     'M.tool_capability.init_capability_search',
     array(array('strsearch' => get_string('search')))
 );

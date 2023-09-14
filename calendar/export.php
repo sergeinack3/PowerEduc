@@ -10,13 +10,13 @@
 //                                                                         //
 // Designed by:                                                            //
 //     Avgoustos Tsinakos (tsinakos@teikav.edu.gr)                         //
-//     Jon Papaioannou (pj@moodle.org)                                     //
+//     Jon Papaioannou (pj@powereduc.org)                                     //
 //                                                                         //
 // Programming and development:                                            //
-//     Jon Papaioannou (pj@moodle.org)                                     //
+//     Jon Papaioannou (pj@powereduc.org)                                     //
 //                                                                         //
 // For bugs, suggestions, etc contact:                                     //
-//     Jon Papaioannou (pj@moodle.org)                                     //
+//     Jon Papaioannou (pj@powereduc.org)                                     //
 //                                                                         //
 // The current module was developed at the University of Macedonia         //
 // (www.uom.gr) under the funding of the Greek School Network (www.sch.gr) //
@@ -41,7 +41,7 @@
 /**
  * This file is part of the User section Moodle
  *
- * @copyright 2003-2004 Jon Papaioannou (pj@moodle.org)
+ * @copyright 2003-2004 Jon Papaioannou (pj@powereduc.org)
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v2 or later
  * @package calendar
  */
@@ -77,8 +77,8 @@ if (!empty($day) && !empty($mon) && !empty($year)) {
     $time = time();
 }
 
-$url = new moodle_url('/calendar/export.php', array('time' => $time));
-$managesubscriptionsurl = new moodle_url('/calendar/managesubscriptions.php');
+$url = new powereduc_url('/calendar/export.php', array('time' => $time));
+$managesubscriptionsurl = new powereduc_url('/calendar/managesubscriptions.php');
 
 if ($courseid != SITEID && !empty($courseid)) {
     // Course ID must be valid and existing.
@@ -87,10 +87,10 @@ if ($courseid != SITEID && !empty($courseid)) {
     $url->param('course', $course->id);
     $managesubscriptionsurl->param('course', $course->id);
 
-    navigation_node::override_active_url(new moodle_url('/course/view.php', ['id' => $course->id]));
+    navigation_node::override_active_url(new powereduc_url('/course/view.php', ['id' => $course->id]));
     $PAGE->navbar->add(
         get_string('calendar', 'calendar'),
-        new moodle_url('/calendar/view.php', ['view' => 'month', 'course' => $course->id])
+        new powereduc_url('/calendar/view.php', ['view' => 'month', 'course' => $course->id])
     );
 } else {
     $course = get_site();
@@ -99,14 +99,14 @@ if ($courseid != SITEID && !empty($courseid)) {
     if (!empty($categoryid)) {
         $managesubscriptionsurl->param('category', $categoryid);
 
-        navigation_node::override_active_url(new moodle_url('/course/index.php', ['categoryid' => $categoryid]));
+        navigation_node::override_active_url(new powereduc_url('/course/index.php', ['categoryid' => $categoryid]));
         $PAGE->set_category_by_id($categoryid);
         $PAGE->navbar->add(
             get_string('calendar', 'calendar'),
-            new moodle_url('/calendar/view.php', ['view' => 'month', 'category' => $categoryid])
+            new powereduc_url('/calendar/view.php', ['view' => 'month', 'category' => $categoryid])
         );
     } else {
-        $PAGE->navbar->add(get_string('calendar', 'calendar'), new moodle_url('/calendar/view.php', ['view' => 'month']));
+        $PAGE->navbar->add(get_string('calendar', 'calendar'), new powereduc_url('/calendar/view.php', ['view' => 'month']));
     }
 }
 require_login($course, false);
@@ -166,7 +166,7 @@ if ($data = $exportform->get_data()) {
     $params['preset_what'] = $data->events['exportevents'];
     $params['preset_time'] = $data->period['timeperiod'];
 
-    $link = new moodle_url('/calendar/export_execute.php', $params);
+    $link = new powereduc_url('/calendar/export_execute.php', $params);
     if (!empty($data->generateurl)) {
         $exporturlcontext = ['calendarexporturl' => $link->out(false)];
         $exporturl = $OUTPUT->render_from_template('core_calendar/export_calendar_url', $exporturlcontext);

@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Classes representing HTML elements, used by $OUTPUT methods
  *
- * Please see http://docs.powereduc.org/en/Developement:How_Moodle_outputs_HTML
+ * Please see http://docs.powereduc.org/en/Developement:How_PowerEduc_outputs_HTML
  * for an overview.
  *
  * @package core
@@ -66,7 +66,7 @@ interface templatable {
  *
  * @copyright 2010 Dongsheng Cai
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -248,7 +248,7 @@ class user_picture implements renderable {
      * @param string $idalias alias of id field
      * @param string $fieldprefix prefix to add to all columns in their aliases, does not apply to 'id'
      * @return string
-     * @deprecated since Moodle 3.11 MDL-45242
+     * @deprecated since PowerEduc 3.11 MDL-45242
      * @see \core_user\fields
      */
     public static function fields($tableprefix = '', array $extrafields = NULL, $idalias = 'id', $fieldprefix = '') {
@@ -431,7 +431,7 @@ class user_picture implements renderable {
  *
  * @copyright 2010 Petr Skoda (info@skodak.org)
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -617,7 +617,7 @@ class pix_icon_fontawesome extends pix_icon_font {
  *
  * @copyright 2010 Petr Skoda
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -757,7 +757,7 @@ class image_icon extends pix_icon {
  *
  * @copyright 2010 David Mudrak
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -783,7 +783,7 @@ class pix_emoticon extends pix_icon implements renderable {
  *
  * @copyright 2009 Petr Skoda
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -947,7 +947,7 @@ class single_button implements renderable {
  *
  * @copyright 2009 Petr Skoda
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -1066,7 +1066,7 @@ class single_select implements renderable, templatable {
     /**
      * Adds help icon.
      *
-     * @deprecated since Moodle 2.0
+     * @deprecated since PowerEduc 2.0
      */
     public function set_old_help_icon($helppage, $title, $component = 'powereduc') {
         throw new coding_exception('set_old_help_icon() can not be used any more, please see set_help_icon().');
@@ -1218,7 +1218,7 @@ class single_select implements renderable, templatable {
  *
  * @copyright 2009 Petr Skoda
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -1306,7 +1306,7 @@ class url_select implements renderable, templatable {
     /**
      * Adds help icon.
      *
-     * @deprecated since Moodle 2.0
+     * @deprecated since PowerEduc 2.0
      */
     public function set_old_help_icon($helppage, $title, $component = 'powereduc') {
         throw new coding_exception('set_old_help_icon() can not be used any more, please see set_help_icon().');
@@ -1485,7 +1485,7 @@ class url_select implements renderable, templatable {
  *
  * @copyright 2010 Petr Skoda
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -1626,7 +1626,7 @@ class action_link implements renderable {
  *
  * @copyright 2009 Tim Hunt, 2010 Petr Skoda
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -2470,7 +2470,7 @@ class html_writer {
  *
  * @copyright 2010 Petr Skoda
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -2607,7 +2607,7 @@ class js_writer {
  *
  * @copyright 2009 David Mudrak <david.mudrak@gmail.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -2703,26 +2703,26 @@ class html_table {
     public $data = [];
 
     /**
-     * @deprecated since Moodle 2.0. Styling should be in the CSS.
+     * @deprecated since PowerEduc 2.0. Styling should be in the CSS.
      * @var string Width of the table, percentage of the page preferred.
      */
     public $width = null;
 
     /**
-     * @deprecated since Moodle 2.0. Styling should be in the CSS.
+     * @deprecated since PowerEduc 2.0. Styling should be in the CSS.
      * @var string Alignment for the whole table. Can be 'right', 'left' or 'center' (default).
      */
     public $tablealign = null;
 
     /**
-     * @deprecated since Moodle 2.0. Styling should be in the CSS.
+     * @deprecated since PowerEduc 2.0. Styling should be in the CSS.
      * @var int Padding on each cell, in pixels
      */
     public $cellpadding = null;
 
     /**
      * @var int Spacing between cells, in pixels
-     * @deprecated since Moodle 2.0. Styling should be in the CSS.
+     * @deprecated since PowerEduc 2.0. Styling should be in the CSS.
      */
     public $cellspacing = null;
 
@@ -2754,7 +2754,7 @@ class html_table {
      * Consider describing the structure of the table in a "caption" element or in a "figure" element containing the table;
      * or, simplify the structure of the table so that no description is needed.
      *
-     * @deprecated since Moodle 3.9.
+     * @deprecated since PowerEduc 3.9.
      */
     public $summary;
 
@@ -2791,7 +2791,7 @@ class html_table {
  *
  * @copyright 2009 Nicolas Connault
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -2839,7 +2839,7 @@ class html_table_row {
  *
  * @copyright 2009 Nicolas Connault
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -2906,7 +2906,7 @@ class html_table_cell {
  *
  * @copyright 2009 Nicolas Connault
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -3146,7 +3146,7 @@ class paging_bar implements renderable, templatable {
  *
  * @copyright 2017 Ilya Tregubov
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 3.3
+ * @since PowerEduc 3.3
  * @package core
  * @category output
  */
@@ -3272,7 +3272,7 @@ class initials_bar implements renderable, templatable {
  *
  * @copyright 2009 Tim Hunt
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -3415,7 +3415,7 @@ class block_contents {
  *
  * @copyright 2009 Tim Hunt
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -3443,7 +3443,7 @@ class block_move_target {
  *
  * @copyright 2010 Sam Hemelryk
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -3694,7 +3694,7 @@ class custom_menu_item implements renderable, templatable {
  *
  * @copyright 2010 Sam Hemelryk
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -4041,7 +4041,7 @@ class context_header implements renderable {
             if (!isset($button['image'])) {
                 $this->additionalbuttons[$buttontype]['formattedimage'] = $button['title'];
             } else {
-                // Check to see if this is an internal Moodle icon.
+                // Check to see if this is an internal PowerEduc icon.
                 $internalimage = $page->theme->resolve_image_location('t/' . $button['image'], 'powereduc');
                 if ($internalimage) {
                     $this->additionalbuttons[$buttontype]['formattedimage'] = 't/' . $button['image'];
@@ -4078,7 +4078,7 @@ class context_header implements renderable {
  *
  * @copyright 2013 Marina Glancy
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.5
+ * @since PowerEduc 2.5
  * @package core
  * @category output
  */
@@ -4459,7 +4459,7 @@ class action_menu implements renderable, templatable {
     /**
      * Sets the alignment of the dialogue in relation to button used to toggle it.
      *
-     * @deprecated since Moodle 4.0
+     * @deprecated since PowerEduc 4.0
      *
      * @param int $dialogue One of action_menu::TL, action_menu::TR, action_menu::BL, action_menu::BR.
      * @param int $button One of action_menu::TL, action_menu::TR, action_menu::BL, action_menu::BR.
@@ -4526,7 +4526,7 @@ class action_menu implements renderable, templatable {
      *
      * By not displaying the menu enhanced all items will be displayed in a single row.
      *
-     * @deprecated since Moodle 3.2
+     * @deprecated since PowerEduc 3.2
      */
     public function do_not_enhance() {
         debugging('The method action_menu::do_not_enhance() is deprecated, use a list of action_icon instead.', DEBUG_DEVELOPER);

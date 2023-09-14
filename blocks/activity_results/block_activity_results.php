@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -236,7 +236,7 @@ class block_activity_results extends block_base {
         if (!empty($this->config->usegroups)) {
             $groupmode = groups_get_activity_groupmode($cm);
 
-            if ($groupmode == SEPARATEGROUPS && has_capability('moodle/site:accessallgroups', $context)) {
+            if ($groupmode == SEPARATEGROUPS && has_capability('powereduc/site:accessallgroups', $context)) {
                 // If you have the ability to see all groups then lets show them.
                 $groupmode = VISIBLEGROUPS;
             }
@@ -331,7 +331,7 @@ class block_activity_results extends block_base {
                 $this->content->text .= $this->activity_link($activity, $cm);
 
                 if ($nameformat == B_ACTIVITYRESULTS_NAME_FORMAT_FULL) {
-                    if (has_capability('moodle/course:managegroups', $context)) {
+                    if (has_capability('powereduc/course:managegroups', $context)) {
                         $grouplink = $CFG->wwwroot.'/group/overview.php?id='.$courseid.'&amp;group=';
                     } else if (course_can_view_participants($context)) {
                         $grouplink = $CFG->wwwroot.'/user/index.php?id='.$courseid.'&amp;group=';
@@ -555,8 +555,8 @@ class block_activity_results extends block_base {
                             break;
                             default:
                             case B_ACTIVITYRESULTS_NAME_FORMAT_FULL:
-                                if (has_capability('moodle/user:viewdetails', $context)) {
-                                    $thisname = html_writer::link(new moodle_url('/user/view.php',
+                                if (has_capability('powereduc/user:viewdetails', $context)) {
+                                    $thisname = html_writer::link(new powereduc_url('/user/view.php',
                                         array('id' => $userid, 'course' => $courseid)), fullname($users[$userid]));
                                 } else {
                                     $thisname = fullname($users[$userid]);
@@ -621,8 +621,8 @@ class block_activity_results extends block_base {
                             break;
                             default:
                             case B_ACTIVITYRESULTS_NAME_FORMAT_FULL:
-                                if (has_capability('moodle/user:viewdetails', $context)) {
-                                    $thisname = html_writer::link(new moodle_url('/user/view.php',
+                                if (has_capability('powereduc/user:viewdetails', $context)) {
+                                    $thisname = html_writer::link(new powereduc_url('/user/view.php',
                                         array('id' => $userid, 'course' => $courseid)), fullname($users[$userid]));
                                 } else {
                                     $thisname = fullname($users[$userid]);
@@ -697,7 +697,7 @@ class block_activity_results extends block_base {
     private function activity_link($activity, $cm) {
 
         $o = html_writer::start_tag('h5');
-        $o .= html_writer::link(new moodle_url('/mod/'.$activity->itemmodule.'/view.php',
+        $o .= html_writer::link(new powereduc_url('/mod/'.$activity->itemmodule.'/view.php',
         array('id' => $cm->id)), format_string(($activity->itemname), true, ['context' => context_module::instance($cm->id)]));
         $o .= html_writer::end_tag('h5');
         return $o;

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -275,7 +275,7 @@ class user {
      */
     public function set_country(string $countrycode): void {
         global $CFG;
-        require_once($CFG->libdir . '/moodlelib.php');
+        require_once($CFG->libdir . '/powereduclib.php');
         $validcountrycodes = array_merge([''], array_keys(get_string_manager()->get_list_of_countries(true)));
         if (!in_array($countrycode, $validcountrycodes)) {
             throw new \coding_exception("Invalid country code '$countrycode'.");

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,13 +16,13 @@
 
 namespace core_grades\output;
 
-use moodle_url;
+use powereduc_url;
 
 /**
  * Renderable class for the action bar elements in the gradebook exports key manager page.
  *
  * @package    core_grades
- * @copyright  2021 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2021 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class export_key_manager_action_bar extends action_bar {
@@ -52,7 +52,7 @@ class export_key_manager_action_bar extends action_bar {
         $data = $exportnavselectors->export_for_template($output);
 
         // Add a button to the action bar with a link to the 'add user key' page.
-        $adduserkeylink = new moodle_url('/grade/export/key.php', ['courseid' => $courseid]);
+        $adduserkeylink = new powereduc_url('/grade/export/key.php', ['courseid' => $courseid]);
         $adduserkeybutton = new \single_button($adduserkeylink, get_string('adduserkey', 'userkey'),
             'get', true);
         $data['adduserkeybutton'] = $adduserkeybutton->export_for_template($output);

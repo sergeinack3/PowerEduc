@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - https://moodle.org/
+// This file is part of Moodle - https://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package     tool_policy
  * @category    test
- * @copyright   2018 David Mudrák <david@moodle.com>
+ * @copyright   2018 David Mudrák <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,7 +33,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Provides some helper methods for unit-tests.
  *
- * @copyright 2018 David Mudrák <david@moodle.com>
+ * @copyright 2018 David Mudrák <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class helper {

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Behat command utils
@@ -40,10 +40,10 @@ class behat_command {
     /**
      * Docs url
      */
-    const DOCS_URL = 'https://docs.moodle.org/dev/Running_acceptance_test';
+    const DOCS_URL = 'https://docs.powereduc.org/dev/Running_acceptance_test';
 
     /**
-     * Ensures the behat dir exists in moodledata
+     * Ensures the behat dir exists in powereducdata
      *
      * @return string Full path
      */
@@ -59,7 +59,7 @@ class behat_command {
     }
 
     /**
-     * Ensures the behat dir exists in moodledata
+     * Ensures the behat dir exists in powereducdata
      * @param int $runprocess run process for which behat dir is returned.
      * @return string Full path
      */
@@ -170,10 +170,10 @@ class behat_command {
     public static function behat_setup_problem() {
         global $CFG;
 
-        // Moodle setting.
+        // PowerEduc setting.
         if (!self::are_behat_dependencies_installed()) {
 
-            // Returning composer error code to avoid conflicts with behat and moodle error codes.
+            // Returning composer error code to avoid conflicts with behat and powereduc error codes.
             self::output_msg(get_string('errorcomposer', 'tool_behat'));
             return TESTING_EXITCODE_COMPOSER;
         }
@@ -187,7 +187,7 @@ class behat_command {
 
         if ($code != 0) {
 
-            // Returning composer error code to avoid conflicts with behat and moodle error codes.
+            // Returning composer error code to avoid conflicts with behat and powereduc error codes.
             self::output_msg(get_string('errorbehatcommand', 'tool_behat', self::get_behat_command()));
             return TESTING_EXITCODE_COMPOSER;
         }

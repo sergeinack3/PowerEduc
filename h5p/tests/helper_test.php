@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core_h5p
  * @category   test
- * @copyright  2019 Sara Arjona <sara@moodle.com>
+ * @copyright  2019 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,7 +33,7 @@ use advanced_testcase;
  * Test class covering the H5P helper.
  *
  * @package    core_h5p
- * @copyright  2019 Sara Arjona <sara@moodle.com>
+ * @copyright  2019 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class helper_test extends \advanced_testcase {
@@ -353,7 +353,7 @@ class helper_test extends \advanced_testcase {
         $this->assertEquals($deployedfile['fileurl'], $helperfile['fileurl']);
 
         // Test scenario 2: Get export information from correct filename and url.
-        $url = \moodle_url::make_pluginfile_url(
+        $url = \powereduc_url::make_pluginfile_url(
             $syscontext->id,
             file_storage::COMPONENT,
             'unittest',

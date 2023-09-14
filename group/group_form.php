@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -34,7 +34,7 @@ require_once($CFG->dirroot.'/lib/formslib.php');
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @package   core_group
  */
-class group_form extends moodleform {
+class group_form extends powereducform {
 
     /**
      * Definition of the form
@@ -55,7 +55,7 @@ class group_form extends moodleform {
         $mform->addElement('text','idnumber', get_string('idnumbergroup'), 'maxlength="100" size="10"');
         $mform->addHelpButton('idnumber', 'idnumbergroup');
         $mform->setType('idnumber', PARAM_RAW);
-        if (!has_capability('moodle/course:changeidnumber', $coursecontext)) {
+        if (!has_capability('powereduc/course:changeidnumber', $coursecontext)) {
             $mform->hardFreeze('idnumber');
         }
 

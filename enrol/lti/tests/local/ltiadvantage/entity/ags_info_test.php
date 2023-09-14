@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -62,8 +62,8 @@ class ags_info_test extends \advanced_testcase {
         return [
             'Both lineitems and lineitem URL provided with full list of valid scopes' => [
                 'args' => [
-                    'lineitemsurl' => new \moodle_url('https://platform.example.org/10/lineitems'),
-                    'lineitemurl' => new \moodle_url('https://platform.example.org/10/lineitems/4/lineitem'),
+                    'lineitemsurl' => new \powereduc_url('https://platform.example.org/10/lineitems'),
+                    'lineitemurl' => new \powereduc_url('https://platform.example.org/10/lineitems/4/lineitem'),
                     'scopes' => [
                         'https://purl.imsglobal.org/spec/lti-ags/scope/lineitem',
                         'https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly',
@@ -83,8 +83,8 @@ class ags_info_test extends \advanced_testcase {
             ],
             'Both lineitems and lineitem URL provided with lineitem scopes only' => [
                 'args' => [
-                    'lineitemsurl' => new \moodle_url('https://platform.example.org/10/lineitems'),
-                    'lineitemurl' => new \moodle_url('https://platform.example.org/10/lineitems/4/lineitem'),
+                    'lineitemsurl' => new \powereduc_url('https://platform.example.org/10/lineitems'),
+                    'lineitemurl' => new \powereduc_url('https://platform.example.org/10/lineitems/4/lineitem'),
                     'scopes' => [
                         'https://purl.imsglobal.org/spec/lti-ags/scope/lineitem',
                         'https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly',
@@ -102,8 +102,8 @@ class ags_info_test extends \advanced_testcase {
             ],
             'Both lineitems and lineitem URL provided with score scope only' => [
                 'args' => [
-                    'lineitemsurl' => new \moodle_url('https://platform.example.org/10/lineitems'),
-                    'lineitemurl' => new \moodle_url('https://platform.example.org/10/lineitems/4/lineitem'),
+                    'lineitemsurl' => new \powereduc_url('https://platform.example.org/10/lineitems'),
+                    'lineitemurl' => new \powereduc_url('https://platform.example.org/10/lineitems/4/lineitem'),
                     'scopes' => [
                         'https://purl.imsglobal.org/spec/lti-ags/scope/score'
                     ]
@@ -117,8 +117,8 @@ class ags_info_test extends \advanced_testcase {
             ],
             'Both lineitems and lineitem URL provided with result scope only' => [
                 'args' => [
-                    'lineitemsurl' => new \moodle_url('https://platform.example.org/10/lineitems'),
-                    'lineitemurl' => new \moodle_url('https://platform.example.org/10/lineitems/4/lineitem'),
+                    'lineitemsurl' => new \powereduc_url('https://platform.example.org/10/lineitems'),
+                    'lineitemurl' => new \powereduc_url('https://platform.example.org/10/lineitems/4/lineitem'),
                     'scopes' => [
                         'https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly'
                     ]
@@ -132,8 +132,8 @@ class ags_info_test extends \advanced_testcase {
             ],
             'Both lineitems and lineitem URL provided with no scopes' => [
                 'args' => [
-                    'lineitemsurl' => new \moodle_url('https://platform.example.org/10/lineitems'),
-                    'lineitemurl' => new \moodle_url('https://platform.example.org/10/lineitems/4/lineitem'),
+                    'lineitemsurl' => new \powereduc_url('https://platform.example.org/10/lineitems'),
+                    'lineitemurl' => new \powereduc_url('https://platform.example.org/10/lineitems/4/lineitem'),
                     'scopes' => []
                 ],
                 'expectations' => [
@@ -145,7 +145,7 @@ class ags_info_test extends \advanced_testcase {
             ],
             'Just lineitems URL, no lineitem URL, with full list of valid scopes' => [
                 'args' => [
-                    'lineitemsurl' => new \moodle_url('https://platform.example.org/10/lineitems'),
+                    'lineitemsurl' => new \powereduc_url('https://platform.example.org/10/lineitems'),
                     'lineitemurl' => null,
                     'scopes' => [
                         'https://purl.imsglobal.org/spec/lti-ags/scope/lineitem',
@@ -166,7 +166,7 @@ class ags_info_test extends \advanced_testcase {
             ],
             'Just lineitems URL, no lineitem URL, with lineitems scopes only' => [
                 'args' => [
-                    'lineitemsurl' => new \moodle_url('https://platform.example.org/10/lineitems'),
+                    'lineitemsurl' => new \powereduc_url('https://platform.example.org/10/lineitems'),
                     'lineitemurl' => null,
                     'scopes' => [
                         'https://purl.imsglobal.org/spec/lti-ags/scope/lineitem',
@@ -185,7 +185,7 @@ class ags_info_test extends \advanced_testcase {
             ],
             'Just lineitems URL, no lineitem URL, with score scope only' => [
                 'args' => [
-                    'lineitemsurl' => new \moodle_url('https://platform.example.org/10/lineitems'),
+                    'lineitemsurl' => new \powereduc_url('https://platform.example.org/10/lineitems'),
                     'lineitemurl' => null,
                     'scopes' => [
                         'https://purl.imsglobal.org/spec/lti-ags/scope/score'
@@ -200,7 +200,7 @@ class ags_info_test extends \advanced_testcase {
             ],
             'Just lineitems URL, no lineitem URL, with result scope only' => [
                 'args' => [
-                    'lineitemsurl' => new \moodle_url('https://platform.example.org/10/lineitems'),
+                    'lineitemsurl' => new \powereduc_url('https://platform.example.org/10/lineitems'),
                     'lineitemurl' => null,
                     'scopes' => [
                         'https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly'
@@ -215,7 +215,7 @@ class ags_info_test extends \advanced_testcase {
             ],
             'Just lineitems URL, no lineitem URL, with no scopes' => [
                 'args' => [
-                    'lineitemsurl' => new \moodle_url('https://platform.example.org/10/lineitems'),
+                    'lineitemsurl' => new \powereduc_url('https://platform.example.org/10/lineitems'),
                     'lineitemurl' => null,
                     'scopes' => []
                 ],
@@ -228,8 +228,8 @@ class ags_info_test extends \advanced_testcase {
             ],
             'Both lineitems and lineitem URL provided with non-string scope' => [
                 'args' => [
-                    'lineitemsurl' => new \moodle_url('https://platform.example.org/10/lineitems'),
-                    'lineitemurl' => new \moodle_url('https://platform.example.org/10/lineitems/4/lineitem'),
+                    'lineitemsurl' => new \powereduc_url('https://platform.example.org/10/lineitems'),
+                    'lineitemurl' => new \powereduc_url('https://platform.example.org/10/lineitems/4/lineitem'),
                     'scopes' => [
                         'https://purl.imsglobal.org/spec/lti-ags/scope/lineitem',
                         'https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly',
@@ -246,8 +246,8 @@ class ags_info_test extends \advanced_testcase {
             ],
             'Both lineitems and lineitem URL provided with unsupported scopes' => [
                 'args' => [
-                    'lineitemsurl' => new \moodle_url('https://platform.example.org/10/lineitems'),
-                    'lineitemurl' => new \moodle_url('https://platform.example.org/10/lineitems/4/lineitem'),
+                    'lineitemsurl' => new \powereduc_url('https://platform.example.org/10/lineitems'),
+                    'lineitemurl' => new \powereduc_url('https://platform.example.org/10/lineitems/4/lineitem'),
                     'scopes' => [
                         'https://purl.imsglobal.org/spec/lti-ags/scope/lineitem',
                         'https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly',
@@ -274,8 +274,8 @@ class ags_info_test extends \advanced_testcase {
             ],
             'Both lineitems and lineitem URL provided with invalid scope types' => [
                 'args' => [
-                    'lineitemsurl' => new \moodle_url('https://platform.example.org/10/lineitems'),
-                    'lineitemurl' => new \moodle_url('https://platform.example.org/10/lineitems/4/lineitem'),
+                    'lineitemsurl' => new \powereduc_url('https://platform.example.org/10/lineitems'),
+                    'lineitemurl' => new \powereduc_url('https://platform.example.org/10/lineitems/4/lineitem'),
                     'scopes' => [
                         12
                     ]
@@ -289,7 +289,7 @@ class ags_info_test extends \advanced_testcase {
             'Claim contains a single lineitem URL only with valid scopes' => [
                 'args' => [
                     'lineitemsurl' => null,
-                    'lineitemurl' => new \moodle_url('https://platform.example.org/10/lineitems/4/lineitem'),
+                    'lineitemurl' => new \powereduc_url('https://platform.example.org/10/lineitems/4/lineitem'),
                     'scopes' => [
                         'https://purl.imsglobal.org/spec/lti-ags/scope/score'
                     ]

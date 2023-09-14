@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -37,7 +37,7 @@ require_once($CFG->libdir . '/form/autocomplete.php');
  * @copyright 2009 Tim Hunt
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class MoodleQuickForm_tags extends MoodleQuickForm_autocomplete {
+class PowerEducQuickForm_tags extends PowerEducQuickForm_autocomplete {
     /**
      * Inidcates that the user should be the usual interface, with the official
      * tags listed seprately, and a text box where they can type anything.
@@ -150,16 +150,16 @@ class MoodleQuickForm_tags extends MoodleQuickForm_autocomplete {
                 return false;
             }
         }
-        // Backward compatibility with code developed before Moodle 3.0 where itemtype/component were not specified.
+        // Backward compatibility with code developed before PowerEduc 3.0 where itemtype/component were not specified.
         return true;
     }
 
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
-    public function MoodleQuickForm_tags($elementName = null, $elementLabel = null, $options = array(), $attributes = null) {
+    public function PowerEducQuickForm_tags($elementName = null, $elementLabel = null, $options = array(), $attributes = null) {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
         self::__construct($elementName, $elementLabel, $options, $attributes);
     }
@@ -197,8 +197,8 @@ class MoodleQuickForm_tags extends MoodleQuickForm_autocomplete {
         global $OUTPUT;
 
         $managelink = '';
-        if (has_capability('moodle/tag:manage', context_system::instance()) && $this->showstandard) {
-            $url = new moodle_url('/tag/manage.php', array('tc' => $this->get_tag_collection()));
+        if (has_capability('powereduc/tag:manage', context_system::instance()) && $this->showstandard) {
+            $url = new powereduc_url('/tag/manage.php', array('tc' => $this->get_tag_collection()));
             $managelink = ' ' . $OUTPUT->action_link($url, get_string('managestandardtags', 'tag'));
         }
 
@@ -264,8 +264,8 @@ class MoodleQuickForm_tags extends MoodleQuickForm_autocomplete {
     public function export_for_template(renderer_base $output) {
 
         $context = parent::export_for_template($output);
-        if (has_capability('moodle/tag:manage', context_system::instance()) && $this->showstandard) {
-            $url = new moodle_url('/tag/manage.php', array('tc' => $this->get_tag_collection()));
+        if (has_capability('powereduc/tag:manage', context_system::instance()) && $this->showstandard) {
+            $url = new powereduc_url('/tag/manage.php', array('tc' => $this->get_tag_collection()));
             $context['managestandardtagsurl'] = $url->out(false);
         }
 

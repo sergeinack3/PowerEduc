@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 
 /**
  * Comment Helper
- * @author Dongsheng Cai <dongsheng@moodle.com>
+ * @author Dongsheng Cai <dongsheng@powereduc.com>
  */
 M.core_comment = {
     /**
@@ -70,7 +70,7 @@ M.core_comment = {
                 var ta = Y.one('#dlg-content-'+this.client_id);
                 var scope = this;
                 var value = ta.get('value');
-                if (value && value != M.util.get_string('addcomment', 'moodle')) {
+                if (value && value != M.util.get_string('addcomment', 'powereduc')) {
                     ta.set('disabled', true);
                     ta.setStyles({
                         'backgroundImage': 'url(' + M.util.image_url('i/loading_small', 'core') + ')',
@@ -97,7 +97,7 @@ M.core_comment = {
                             var ids = result.ids;
                             var linkText = Y.one('#comment-link-text-' + cid);
                             if (linkText) {
-                                linkText.set('innerHTML', M.util.get_string('commentscount', 'moodle', obj.count));
+                                linkText.set('innerHTML', M.util.get_string('commentscount', 'powereduc', obj.count));
                             }
                             for(var i in ids) {
                                 var attributes = {
@@ -196,7 +196,7 @@ M.core_comment = {
                             user: list[i].fullname,
                             time: list[i].time
                         };
-                        var deleteStr = Y.Escape.html(M.util.get_string('deletecommentbyon', 'moodle', tokens));
+                        var deleteStr = Y.Escape.html(M.util.get_string('deletecommentbyon', 'powereduc', tokens));
                         list[i].content = '<div class="comment-delete">' +
                             '<a href="#" role="button" id ="comment-delete-' + this.client_id + '-' + list[i].id + '"' +
                             '   title="' + deleteStr + '">' +
@@ -227,7 +227,7 @@ M.core_comment = {
                     callback: function(id, ret, args) {
                         var linkText = Y.one('#comment-link-text-' + scope.client_id);
                         if (ret.count && linkText) {
-                            linkText.set('innerHTML', M.util.get_string('commentscount', 'moodle', ret.count));
+                            linkText.set('innerHTML', M.util.get_string('commentscount', 'powereduc', ret.count));
                         }
                         var container = Y.one('#comment-list-'+scope.client_id);
                         var pagination = Y.one('#comment-pagination-'+scope.client_id);
@@ -239,7 +239,7 @@ M.core_comment = {
                         }
                         if (ret.error == 'require_login') {
                             var result = {};
-                            result.html = M.util.get_string('commentsrequirelogin', 'moodle');
+                            result.html = M.util.get_string('commentsrequirelogin', 'powereduc');
                         } else {
                             var result = scope.render(ret.list);
                         }
@@ -263,7 +263,7 @@ M.core_comment = {
                     var linkText = Y.one('#comment-link-text-' + cid),
                         comments = Y.all('#comment-list-' + cid + ' li');
                     if (linkText && comments) {
-                        linkText.set('innerHTML', M.util.get_string('commentscount', 'moodle', comments.size()));
+                        linkText.set('innerHTML', M.util.get_string('commentscount', 'powereduc', comments.size()));
                     }
                 }
                 this.request({
@@ -420,13 +420,13 @@ M.core_comment = {
                     return false;
                 }
                 if (focus) {
-                    if (t.get('value') == M.util.get_string('addcomment', 'moodle')) {
+                    if (t.get('value') == M.util.get_string('addcomment', 'powereduc')) {
                         t.set('value', '');
                         t.setStyle('color', 'black');
                     }
                 }else{
                     if (t.get('value') == '') {
-                        t.set('value', M.util.get_string('addcomment', 'moodle'));
+                        t.set('value', M.util.get_string('addcomment', 'powereduc'));
                         t.setStyle('color','grey');
                         t.set('rows', 2);
                     }

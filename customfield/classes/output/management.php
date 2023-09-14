@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Customfield component output.
  *
  * @package   core_customfield
- * @copyright 2018 David Matamoros <davidmc@moodle.com>
+ * @copyright 2018 David Matamoros <davidmc@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -35,7 +35,7 @@ defined('POWEREDUC_INTERNAL') || die;
  * Class management
  *
  * @package core_customfield
- * @copyright 2018 David Matamoros <davidmc@moodle.com>
+ * @copyright 2018 David Matamoros <davidmc@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class management implements renderable, templatable {
@@ -103,7 +103,7 @@ class management implements renderable, templatable {
             $menu->set_menu_trigger(get_string('createnewcustomfield', 'core_customfield'));
 
             foreach ($fieldtypes as $type => $fieldname) {
-                $action = new \action_menu_link_secondary(new \moodle_url('#'), null, $fieldname,
+                $action = new \action_menu_link_secondary(new \powereduc_url('#'), null, $fieldname,
                     ['data-role' => 'addfield', 'data-categoryid' => $category->get('id'), 'data-type' => $type,
                         'data-typename' => $fieldname]);
                 $menu->add($action);

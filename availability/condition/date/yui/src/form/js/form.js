@@ -1,7 +1,7 @@
 /**
  * JavaScript for form editing date conditions.
  *
- * @module moodle-availability_date-form
+ * @module powereduc-availability_date-form
  */
 M.availability_date = M.availability_date || {};
 

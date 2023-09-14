@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,8 +26,8 @@ namespace fileconverter_googledrive;
 defined('POWEREDUC_INTERNAL') || die();
 
 use stored_file;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use \core_files\conversion;
 
 /**
@@ -142,7 +142,7 @@ class converter implements \core_files\converter_interface {
         $fileid = $result->id;
         // Now export it again.
         $params = ['mimeType' => $exportformat];
-        $sourceurl = new moodle_url('https://www.googleapis.com/drive/v3/files/' . $fileid . '/export', $params);
+        $sourceurl = new powereduc_url('https://www.googleapis.com/drive/v3/files/' . $fileid . '/export', $params);
         $source = $sourceurl->out(false);
 
         $tmp = make_request_directory();

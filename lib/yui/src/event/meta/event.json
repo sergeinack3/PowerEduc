@@ -1,5 +1,5 @@
 {
-    "moodle-core-event": {
+    "powereduc-core-event": {
         "requires": [
             "event-custom"
         ]

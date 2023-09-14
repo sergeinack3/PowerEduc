@@ -23,12 +23,12 @@ Feature: Render H5P content using filters
       | private_files | System       | 1         | my-index        | side-post     |
     And the "displayh5p" filter is "on"
     And the following config values are set as admin:
-      | allowedsources | https://moodle.h5p.com/content/[id]/embed | filter_displayh5p |
+      | allowedsources | https://powereduc.h5p.com/content/[id]/embed | filter_displayh5p |
 
   @javascript @external
   Scenario: Render an external H5P content URL.
     Given I am on the PageName1 "page activity editing" page logged in as teacher1
-    And I set the field "Page content" to "<div>Go for it</div>https://moodle.h5p.com/content/1290772960722742119/embed"
+    And I set the field "Page content" to "<div>Go for it</div>https://powereduc.h5p.com/content/1290772960722742119/embed"
     When I click on "Save and display" "button"
     And I wait until the page is ready
     And I switch to "h5p-iframe" class iframe
@@ -38,7 +38,7 @@ Feature: Render H5P content using filters
   Scenario: Add an external H5P content URL in a link with the URL. Should be rendered.
     Given I am on the PageName1 "page activity editing" page logged in as teacher1
 #   This content won't be displayed, so this scenario shouldn't be labeled as external.
-    And I set the field "Page content" to "<a href='https://moodle.h5p.com/content/1290772960722742119/embed'>https://moodle.h5p.com/content/1290772960722742119/embed</a>"
+    And I set the field "Page content" to "<a href='https://powereduc.h5p.com/content/1290772960722742119/embed'>https://powereduc.h5p.com/content/1290772960722742119/embed</a>"
     When I click on "Save and display" "button"
     And I wait until the page is ready
     And I switch to "h5p-iframe" class iframe
@@ -47,7 +47,7 @@ Feature: Render H5P content using filters
   Scenario: Add an external H5P content URL in a link with text. Shouldn't be rendered.
     Given I am on the PageName1 "page activity editing" page logged in as teacher1
 #   This content won't be displayed, so this scenario shouldn't be labeled as external.
-    And I set the field "Page content" to "<a href='https://moodle.h5p.com/content/1290772960722742119/embed'>Here you are the content</a>"
+    And I set the field "Page content" to "<a href='https://powereduc.h5p.com/content/1290772960722742119/embed'>Here you are the content</a>"
     When I click on "Save and display" "button"
     And I wait until the page is ready
     Then ".h5p-iframe" "css_element" should not exist

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    enrol_meta
  * @category   test
- * @copyright  2018 Carlos Escobedo <carlos@moodle.com>
+ * @copyright  2018 Carlos Escobedo <carlos@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace enrol_meta\privacy;
@@ -33,7 +33,7 @@ use enrol_meta\privacy\provider;
 /**
  * Unit tests for the enrol_meta implementation of the privacy API.
  *
- * @copyright  2018 Carlos Escobedo <carlos@moodle.com>
+ * @copyright  2018 Carlos Escobedo <carlos@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider_test extends \core_privacy\tests\provider_testcase {

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
@@ -76,7 +76,7 @@ class external_externallib_test extends externallib_advanced_testcase {
         $this->assertSame($corestring, $returnedstring);
 
         // String with two parameter but one is invalid (not named).
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $returnedstring = \core_external::get_string('addservice', 'webservice', null,
                 array(array('value' => $service->name),
                       array('name' => 'id', 'value' => $service->id)));
@@ -88,7 +88,7 @@ class external_externallib_test extends externallib_advanced_testcase {
     public function test_get_string_containing_html() {
         $result = \core_external::get_string('registrationinfo');
         $actual = \external_api::clean_returnvalue(\core_external::get_string_returns(), $result);
-        $expected = get_string('registrationinfo', 'moodle');
+        $expected = get_string('registrationinfo', 'powereduc');
         $this->assertSame($expected, $actual);
     }
 
@@ -96,9 +96,9 @@ class external_externallib_test extends externallib_advanced_testcase {
      * Test get_string with arguments containing HTML.
      */
     public function test_get_string_with_args_containing_html() {
-        $result = \core_external::get_string('added', 'moodle', null, [['value' => '<strong>Test</strong>']]);
+        $result = \core_external::get_string('added', 'powereduc', null, [['value' => '<strong>Test</strong>']]);
         $actual = \external_api::clean_returnvalue(\core_external::get_string_returns(), $result);
-        $expected = get_string('added', 'moodle', '<strong>Test</strong>');
+        $expected = get_string('added', 'powereduc', '<strong>Test</strong>');
         $this->assertSame($expected, $actual);
     }
 
@@ -144,8 +144,8 @@ class external_externallib_test extends externallib_advanced_testcase {
     public function test_get_strings_containing_html() {
         $result = \core_external::get_strings([['stringid' => 'registrationinfo'], ['stringid' => 'loginaspasswordexplain']]);
         $actual = \external_api::clean_returnvalue(\core_external::get_strings_returns(), $result);
-        $this->assertSame(get_string('registrationinfo', 'moodle'), $actual[0]['string']);
-        $this->assertSame(get_string('loginaspasswordexplain', 'moodle'), $actual[1]['string']);
+        $this->assertSame(get_string('registrationinfo', 'powereduc'), $actual[0]['string']);
+        $this->assertSame(get_string('loginaspasswordexplain', 'powereduc'), $actual[1]['string']);
     }
 
     /**
@@ -157,8 +157,8 @@ class external_externallib_test extends externallib_advanced_testcase {
             ['stringid' => 'loggedinas', 'stringparams' => [['value' => '<strong>Test</strong>']]]]
         );
         $actual = \external_api::clean_returnvalue(\core_external::get_strings_returns(), $result);
-        $this->assertSame(get_string('added', 'moodle', '<strong>Test</strong>'), $actual[0]['string']);
-        $this->assertSame(get_string('loggedinas', 'moodle', '<strong>Test</strong>'), $actual[1]['string']);
+        $this->assertSame(get_string('added', 'powereduc', '<strong>Test</strong>'), $actual[0]['string']);
+        $this->assertSame(get_string('loggedinas', 'powereduc', '<strong>Test</strong>'), $actual[1]['string']);
     }
 
     /**
@@ -193,7 +193,7 @@ class external_externallib_test extends externallib_advanced_testcase {
         try {
             \core_external::update_inplace_editable('tool_log', 'itemtype', 1, 'newvalue');
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('Error calling update processor', $e->getMessage());
         }
 

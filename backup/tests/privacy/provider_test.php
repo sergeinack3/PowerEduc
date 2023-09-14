@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Privacy provider tests.
  *
  * @package    core_backup
- * @copyright  2018 Mark Nelson <markn@moodle.com>
+ * @copyright  2018 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace core_backup\privacy;
@@ -31,7 +31,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Privacy provider tests class.
  *
- * @copyright  2018 Mark Nelson <markn@moodle.com>
+ * @copyright  2018 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider_test extends \core_privacy\tests\provider_testcase {
@@ -53,7 +53,7 @@ class provider_test extends \core_privacy\tests\provider_testcase {
             'operation' => 'restore',
             'type' => 'course',
             'itemid' => $course->id,
-            'format' => 'moodle2',
+            'format' => 'powereduc2',
             'interactive' => 1,
             'purpose' => 10,
             'userid' => $user->id,
@@ -91,7 +91,7 @@ class provider_test extends \core_privacy\tests\provider_testcase {
             'operation' => 'restore',
             'type' => 'course',
             'itemid' => $course->id,
-            'format' => 'moodle2',
+            'format' => 'powereduc2',
             'interactive' => 1,
             'purpose' => 10,
             'userid' => $user1->id,
@@ -112,7 +112,7 @@ class provider_test extends \core_privacy\tests\provider_testcase {
             'operation' => 'restore',
             'type' => 'course',
             'itemid' => $course->id,
-            'format' => 'moodle2',
+            'format' => 'powereduc2',
             'interactive' => 1,
             'purpose' => 10,
             'userid' => $user2->id,
@@ -132,7 +132,7 @@ class provider_test extends \core_privacy\tests\provider_testcase {
             'operation' => 'backup',
             'type' => 'course',
             'itemid' => $course->id,
-            'format' => 'moodle2',
+            'format' => 'powereduc2',
             'interactive' => 1,
             'purpose' => 10,
             'userid' => $user1->id,
@@ -181,7 +181,7 @@ class provider_test extends \core_privacy\tests\provider_testcase {
             'operation' => 'restore',
             'type' => 'course',
             'itemid' => $course->id,
-            'format' => 'moodle2',
+            'format' => 'powereduc2',
             'interactive' => 1,
             'purpose' => 10,
             'userid' => $user1->id,
@@ -202,7 +202,7 @@ class provider_test extends \core_privacy\tests\provider_testcase {
             'operation' => 'restore',
             'type' => 'course',
             'itemid' => $course->id,
-            'format' => 'moodle2',
+            'format' => 'powereduc2',
             'interactive' => 1,
             'purpose' => 10,
             'userid' => $user2->id,
@@ -246,7 +246,7 @@ class provider_test extends \core_privacy\tests\provider_testcase {
             'operation' => 'restore',
             'type' => 'course',
             'itemid' => $course->id,
-            'format' => 'moodle2',
+            'format' => 'powereduc2',
             'interactive' => 1,
             'purpose' => 10,
             'userid' => $user1->id,
@@ -267,7 +267,7 @@ class provider_test extends \core_privacy\tests\provider_testcase {
             'operation' => 'restore',
             'type' => 'course',
             'itemid' => $course->id,
-            'format' => 'moodle2',
+            'format' => 'powereduc2',
             'interactive' => 1,
             'purpose' => 10,
             'userid' => $user2->id,
@@ -332,7 +332,7 @@ class provider_test extends \core_privacy\tests\provider_testcase {
             'operation' => 'restore',
             'type' => 'course',
             'itemid' => $course->id,
-            'format' => 'moodle2',
+            'format' => 'powereduc2',
             'interactive' => 1,
             'purpose' => 10,
             'userid' => $user->id,
@@ -361,7 +361,7 @@ class provider_test extends \core_privacy\tests\provider_testcase {
             'operation' => 'restore',
             'type' => 'activity',
             'itemid' => $activity->cmid,
-            'format' => 'moodle2',
+            'format' => 'powereduc2',
             'interactive' => 1,
             'purpose' => 10,
             'userid' => $user2->id,
@@ -423,7 +423,7 @@ class provider_test extends \core_privacy\tests\provider_testcase {
             'operation' => 'restore',
             'type' => 'course',
             'itemid' => $course1->id,
-            'format' => 'moodle2',
+            'format' => 'powereduc2',
             'interactive' => 1,
             'purpose' => 10,
             'userid' => $user1->id,
@@ -443,7 +443,7 @@ class provider_test extends \core_privacy\tests\provider_testcase {
             'operation' => 'backup',
             'type' => 'course',
             'itemid' => $course1->id,
-            'format' => 'moodle2',
+            'format' => 'powereduc2',
             'interactive' => 1,
             'purpose' => 10,
             'userid' => $user2->id,
@@ -463,7 +463,7 @@ class provider_test extends \core_privacy\tests\provider_testcase {
             'operation' => 'restore',
             'type' => 'activity',
             'itemid' => $activity->cmid,
-            'format' => 'moodle2',
+            'format' => 'powereduc2',
             'interactive' => 1,
             'purpose' => 10,
             'userid' => $user3->id,

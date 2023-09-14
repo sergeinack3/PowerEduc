@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -178,7 +178,7 @@ function build_mnet_logs_array($hostid, $course, $user=0, $date=0, $order="l.tim
 
     /// If the group mode is separate, and this user does not have editing privileges,
     /// then only the user's group can be viewed.
-    //if ($course->groupmode == SEPARATEGROUPS and !has_capability('moodle/course:managegroups', context_course::instance($course->id))) {
+    //if ($course->groupmode == SEPARATEGROUPS and !has_capability('powereduc/course:managegroups', context_course::instance($course->id))) {
     //    $groupid = get_current_group($course->id);
     //}
     /// If this course doesn't have groups, no groupid can be specified.
@@ -494,13 +494,13 @@ function print_course_request_buttons($context) {
         if ($context instanceof context_coursecat) {
             $params['category'] = $context->instanceid;
         }
-        echo $OUTPUT->single_button(new moodle_url('/course/request.php', $params),
+        echo $OUTPUT->single_button(new powereduc_url('/course/request.php', $params),
             get_string('requestcourse'), 'get');
     }
     /// Print a button to manage pending requests
-    if (has_capability('moodle/site:approvecourse', $context)) {
+    if (has_capability('powereduc/site:approvecourse', $context)) {
         $disabled = !$DB->record_exists('course_request', array());
-        echo $OUTPUT->single_button(new moodle_url('/course/pending.php'), get_string('coursespending'), 'get', array('disabled' => $disabled));
+        echo $OUTPUT->single_button(new powereduc_url('/course/pending.php'), get_string('coursespending'), 'get', array('disabled' => $disabled));
     }
 }
 
@@ -512,7 +512,7 @@ function print_course_request_buttons($context) {
  */
 function can_edit_in_category($categoryid = 0) {
     $context = get_category_or_system_context($categoryid);
-    return has_any_capability(array('moodle/category:manage', 'moodle/course:create'), $context);
+    return has_any_capability(array('powereduc/category:manage', 'powereduc/course:create'), $context);
 }
 
 /// MODULE FUNCTIONS /////////////////////////////////////////////////////////////////
@@ -802,7 +802,7 @@ function set_coursemodule_name($id, $name) {
         return false;
     }
     if (\core_text::strlen($module->name) > 255) {
-        throw new \moodle_exception('maximumchars', 'moodle', '', 255);
+        throw new \powereduc_exception('maximumchars', 'powereduc', '', 255);
     }
 
     $module->timemodified = time();
@@ -832,7 +832,7 @@ function set_coursemodule_name($id, $name) {
  *
  * @param int $cmid the course module id
  * @param bool $async whether or not to try to delete the module using an adhoc task. Async also depends on a plugin hook.
- * @throws moodle_exception
+ * @throws powereduc_exception
  * @since Moodle 2.5
  */
 function course_delete_module($cmid, $async = false) {
@@ -875,7 +875,7 @@ function course_delete_module($cmid, $async = false) {
     if (file_exists($modlib)) {
         require_once($modlib);
     } else {
-        throw new moodle_exception('cannotdeletemodulemissinglib', '', '', null,
+        throw new powereduc_exception('cannotdeletemodulemissinglib', '', '', null,
             "Cannot delete this module as the file mod/$modulename/lib.php is missing.");
     }
 
@@ -883,7 +883,7 @@ function course_delete_module($cmid, $async = false) {
 
     // Ensure the delete_instance function exists for this module.
     if (!function_exists($deleteinstancefunction)) {
-        throw new moodle_exception('cannotdeletemodulemissingfunc', '', '', null,
+        throw new powereduc_exception('cannotdeletemodulemissingfunc', '', '', null,
             "Cannot delete this module as the function {$modulename}_delete_instance is missing in mod/$modulename/lib.php.");
     }
 
@@ -898,7 +898,7 @@ function course_delete_module($cmid, $async = false) {
 
     // Call the delete_instance function, if it returns false throw an exception.
     if (!$deleteinstancefunction($cm->instance)) {
-        throw new moodle_exception('cannotdeletemoduleinstance', '', '', null,
+        throw new powereduc_exception('cannotdeletemoduleinstance', '', '', null,
             "Cannot delete the module $modulename (instance).");
     }
 
@@ -953,7 +953,7 @@ function course_delete_module($cmid, $async = false) {
 
     // Delete module from that section.
     if (!delete_mod_from_section($cm->id, $cm->section)) {
-        throw new moodle_exception('cannotdeletemodulefromsection', '', '', null,
+        throw new powereduc_exception('cannotdeletemodulefromsection', '', '', null,
             "Cannot delete the module $modulename (instance) from section.");
     }
 
@@ -981,7 +981,7 @@ function course_delete_module($cmid, $async = false) {
  *
  * @param int $cmid the course module id.
  * @return bool whether the module was successfully scheduled for deletion.
- * @throws \moodle_exception
+ * @throws \powereduc_exception
  */
 function course_module_flag_for_async_deletion($cmid) {
     global $CFG, $DB, $USER;
@@ -1008,7 +1008,7 @@ function course_module_flag_for_async_deletion($cmid) {
     if (file_exists($modlib)) {
         require_once($modlib);
     } else {
-        throw new \moodle_exception('cannotdeletemodulemissinglib', '', '', null,
+        throw new \powereduc_exception('cannotdeletemodulemissinglib', '', '', null,
             "Cannot delete this module as the file mod/$modulename/lib.php is missing.");
     }
 
@@ -1016,7 +1016,7 @@ function course_module_flag_for_async_deletion($cmid) {
 
     // Ensure the delete_instance function exists for this module.
     if (!function_exists($deleteinstancefunction)) {
-        throw new \moodle_exception('cannotdeletemodulemissingfunc', '', '', null,
+        throw new \powereduc_exception('cannotdeletemodulemissingfunc', '', '', null,
             "Cannot delete this module as the function {$modulename}_delete_instance is missing in mod/$modulename/lib.php.");
     }
 
@@ -1424,7 +1424,7 @@ function course_update_section($course, $section, $data) {
     $data = array_diff_key((array)$data, array('id', 'course', 'section', 'sequence'));
     $changevisibility = (array_key_exists('visible', $data) && (bool)$data['visible'] != (bool)$section->visible);
     if (array_key_exists('name', $data) && \core_text::strlen($data['name']) > 255) {
-        throw new moodle_exception('maximumchars', 'moodle', '', 255);
+        throw new powereduc_exception('maximumchars', 'powereduc', '', 255);
     }
 
     // Update record in the DB and course format options.
@@ -1496,14 +1496,14 @@ function course_can_delete_section($course, $section) {
     }
     // Make sure user has capability to update course and move sections.
     $context = context_course::instance(is_object($course) ? $course->id : $course);
-    if (!has_all_capabilities(array('moodle/course:movesections', 'moodle/course:update'), $context)) {
+    if (!has_all_capabilities(array('powereduc/course:movesections', 'powereduc/course:update'), $context)) {
         return false;
     }
     // Make sure user has capability to delete each activity in this section.
     $modinfo = get_fast_modinfo($course);
     if (!empty($modinfo->sections[$section])) {
         foreach ($modinfo->sections[$section] as $cmid) {
-            if (!has_capability('moodle/course:manageactivities', context_module::instance($cmid))) {
+            if (!has_capability('powereduc/course:manageactivities', context_module::instance($cmid))) {
                 return false;
             }
         }
@@ -1645,26 +1645,26 @@ function course_get_cm_edit_actions(cm_info $mod, $indent = -1, $sr = null) {
     $courseformat = course_get_format($mod->get_course());
     $usecomponents = $courseformat->supports_components();
 
-    $editcaps = array('moodle/course:manageactivities', 'moodle/course:activityvisibility', 'moodle/role:assign');
-    $dupecaps = array('moodle/backup:backuptargetimport', 'moodle/restore:restoretargetimport');
+    $editcaps = array('powereduc/course:manageactivities', 'powereduc/course:activityvisibility', 'powereduc/role:assign');
+    $dupecaps = array('powereduc/backup:backuptargetimport', 'powereduc/restore:restoretargetimport');
 
     // No permission to edit anything.
     if (!has_any_capability($editcaps, $modcontext) and !has_all_capabilities($dupecaps, $coursecontext)) {
         return array();
     }
 
-    $hasmanageactivities = has_capability('moodle/course:manageactivities', $modcontext);
+    $hasmanageactivities = has_capability('powereduc/course:manageactivities', $modcontext);
 
     if (!isset($str)) {
         $str = get_strings(array('delete', 'move', 'moveright', 'moveleft',
-            'editsettings', 'duplicate', 'modhide', 'makeavailable', 'makeunavailable', 'modshow'), 'moodle');
+            'editsettings', 'duplicate', 'modhide', 'makeavailable', 'makeunavailable', 'modshow'), 'powereduc');
         $str->assign         = get_string('assignroles', 'role');
-        $str->groupsnone     = get_string('clicktochangeinbrackets', 'moodle', get_string("groupsnone"));
-        $str->groupsseparate = get_string('clicktochangeinbrackets', 'moodle', get_string("groupsseparate"));
-        $str->groupsvisible  = get_string('clicktochangeinbrackets', 'moodle', get_string("groupsvisible"));
+        $str->groupsnone     = get_string('clicktochangeinbrackets', 'powereduc', get_string("groupsnone"));
+        $str->groupsseparate = get_string('clicktochangeinbrackets', 'powereduc', get_string("groupsseparate"));
+        $str->groupsvisible  = get_string('clicktochangeinbrackets', 'powereduc', get_string("groupsvisible"));
     }
 
-    $baseurl = new moodle_url('/course/mod.php', array('sesskey' => sesskey()));
+    $baseurl = new powereduc_url('/course/mod.php', array('sesskey' => sesskey()));
 
     if ($sr !== null) {
         $baseurl->param('sr', $sr);
@@ -1674,8 +1674,8 @@ function course_get_cm_edit_actions(cm_info $mod, $indent = -1, $sr = null) {
     // Update.
     if ($hasmanageactivities) {
         $actions['update'] = new action_menu_link_secondary(
-            new moodle_url($baseurl, array('update' => $mod->id)),
-            new pix_icon('t/edit', '', 'moodle', array('class' => 'iconsmall')),
+            new powereduc_url($baseurl, array('update' => $mod->id)),
+            new pix_icon('t/edit', '', 'powereduc', array('class' => 'iconsmall')),
             $str->editsettings,
             array('class' => 'editing_update', 'data-action' => 'update')
         );
@@ -1684,11 +1684,11 @@ function course_get_cm_edit_actions(cm_info $mod, $indent = -1, $sr = null) {
     // Move (only for component compatible formats).
     if ($usecomponents) {
         $actions['move'] = new action_menu_link_secondary(
-            new moodle_url($baseurl, [
+            new powereduc_url($baseurl, [
                 'sesskey' => sesskey(),
                 'copy' => $mod->id,
             ]),
-            new pix_icon('i/dragdrop', '', 'moodle', ['class' => 'iconsmall']),
+            new pix_icon('i/dragdrop', '', 'powereduc', ['class' => 'iconsmall']),
             $str->move,
             [
                 'class' => 'editing_movecm',
@@ -1717,8 +1717,8 @@ function course_get_cm_edit_actions(cm_info $mod, $indent = -1, $sr = null) {
             $enabledclass = '';
         }
         $actions['moveright'] = new action_menu_link_secondary(
-            new moodle_url($baseurl, array('id' => $mod->id, 'indent' => '1')),
-            new pix_icon($rightarrow, '', 'moodle', array('class' => 'iconsmall')),
+            new powereduc_url($baseurl, array('id' => $mod->id, 'indent' => '1')),
+            new pix_icon($rightarrow, '', 'powereduc', array('class' => 'iconsmall')),
             $str->moveright,
             array('class' => 'editing_moveright ' . $enabledclass, 'data-action' => 'moveright',
                 'data-keepopen' => true, 'data-sectionreturn' => $sr)
@@ -1730,8 +1730,8 @@ function course_get_cm_edit_actions(cm_info $mod, $indent = -1, $sr = null) {
             $enabledclass = '';
         }
         $actions['moveleft'] = new action_menu_link_secondary(
-            new moodle_url($baseurl, array('id' => $mod->id, 'indent' => '-1')),
-            new pix_icon($leftarrow, '', 'moodle', array('class' => 'iconsmall')),
+            new powereduc_url($baseurl, array('id' => $mod->id, 'indent' => '-1')),
+            new pix_icon($leftarrow, '', 'powereduc', array('class' => 'iconsmall')),
             $str->moveleft,
             array('class' => 'editing_moveleft ' . $enabledclass, 'data-action' => 'moveleft',
                 'data-keepopen' => true, 'data-sectionreturn' => $sr)
@@ -1740,7 +1740,7 @@ function course_get_cm_edit_actions(cm_info $mod, $indent = -1, $sr = null) {
     }
 
     // Hide/Show/Available/Unavailable.
-    if (has_capability('moodle/course:activityvisibility', $modcontext)) {
+    if (has_capability('powereduc/course:activityvisibility', $modcontext)) {
         $allowstealth = !empty($CFG->allowstealth) && $courseformat->allow_stealth_module_visibility($mod, $mod->get_section_info());
 
         $sectionvisible = $mod->get_section_info()->visible;
@@ -1753,8 +1753,8 @@ function course_get_cm_edit_actions(cm_info $mod, $indent = -1, $sr = null) {
         $stealth = $mod->visible && (!$mod->visibleoncoursepage || !$sectionvisible);
         if ($displayedoncoursepage) {
             $actions['hide'] = new action_menu_link_secondary(
-                new moodle_url($baseurl, array('hide' => $mod->id)),
-                new pix_icon('t/hide', '', 'moodle', array('class' => 'iconsmall')),
+                new powereduc_url($baseurl, array('hide' => $mod->id)),
+                new pix_icon('t/hide', '', 'powereduc', array('class' => 'iconsmall')),
                 $str->modhide,
                 [
                     'class' => 'editing_hide',
@@ -1765,8 +1765,8 @@ function course_get_cm_edit_actions(cm_info $mod, $indent = -1, $sr = null) {
         } else if (!$displayedoncoursepage && $sectionvisible) {
             // Offer to "show" only if the section is visible.
             $actions['show'] = new action_menu_link_secondary(
-                new moodle_url($baseurl, array('show' => $mod->id)),
-                new pix_icon('t/show', '', 'moodle', array('class' => 'iconsmall')),
+                new powereduc_url($baseurl, array('show' => $mod->id)),
+                new pix_icon('t/show', '', 'powereduc', array('class' => 'iconsmall')),
                 $str->modshow,
                 [
                     'class' => 'editing_show',
@@ -1779,8 +1779,8 @@ function course_get_cm_edit_actions(cm_info $mod, $indent = -1, $sr = null) {
         if ($stealth) {
             // When making the "stealth" module unavailable we perform the same action as hiding the visible module.
             $actions['hide'] = new action_menu_link_secondary(
-                new moodle_url($baseurl, array('hide' => $mod->id)),
-                new pix_icon('t/unblock', '', 'moodle', array('class' => 'iconsmall')),
+                new powereduc_url($baseurl, array('hide' => $mod->id)),
+                new pix_icon('t/unblock', '', 'powereduc', array('class' => 'iconsmall')),
                 $str->makeunavailable,
                 [
                     'class' => 'editing_makeunavailable',
@@ -1798,8 +1798,8 @@ function course_get_cm_edit_actions(cm_info $mod, $indent = -1, $sr = null) {
                 $action = 'cm' . ucfirst($action);
             }
             $actions[$action] = new action_menu_link_secondary(
-                new moodle_url($baseurl, array('stealth' => $mod->id)),
-                new pix_icon('t/block', '', 'moodle', array('class' => 'iconsmall')),
+                new powereduc_url($baseurl, array('stealth' => $mod->id)),
+                new pix_icon('t/block', '', 'powereduc', array('class' => 'iconsmall')),
                 $str->makeavailable,
                 [
                     'class' => 'editing_makeavailable',
@@ -1816,18 +1816,18 @@ function course_get_cm_edit_actions(cm_info $mod, $indent = -1, $sr = null) {
             plugin_supports('mod', $mod->modname, FEATURE_BACKUP_POWEREDUC2) &&
             course_allowed_module($mod->get_course(), $mod->modname)) {
         $actions['duplicate'] = new action_menu_link_secondary(
-            new moodle_url($baseurl, array('duplicate' => $mod->id)),
-            new pix_icon('t/copy', '', 'moodle', array('class' => 'iconsmall')),
+            new powereduc_url($baseurl, array('duplicate' => $mod->id)),
+            new pix_icon('t/copy', '', 'powereduc', array('class' => 'iconsmall')),
             $str->duplicate,
             array('class' => 'editing_duplicate', 'data-action' => 'duplicate', 'data-sectionreturn' => $sr)
         );
     }
 
     // Assign.
-    if (has_capability('moodle/role:assign', $modcontext)){
+    if (has_capability('powereduc/role:assign', $modcontext)){
         $actions['assign'] = new action_menu_link_secondary(
-            new moodle_url('/admin/roles/assign.php', array('contextid' => $modcontext->id)),
-            new pix_icon('t/assignroles', '', 'moodle', array('class' => 'iconsmall')),
+            new powereduc_url('/admin/roles/assign.php', array('contextid' => $modcontext->id)),
+            new pix_icon('t/assignroles', '', 'powereduc', array('class' => 'iconsmall')),
             $str->assign,
             array('class' => 'editing_assign', 'data-action' => 'assignroles', 'data-sectionreturn' => $sr)
         );
@@ -1836,8 +1836,8 @@ function course_get_cm_edit_actions(cm_info $mod, $indent = -1, $sr = null) {
     // Delete.
     if ($hasmanageactivities) {
         $actions['delete'] = new action_menu_link_secondary(
-            new moodle_url($baseurl, array('delete' => $mod->id)),
-            new pix_icon('t/delete', '', 'moodle', array('class' => 'iconsmall')),
+            new powereduc_url($baseurl, array('delete' => $mod->id)),
+            new pix_icon('t/delete', '', 'powereduc', array('class' => 'iconsmall')),
             $str->delete,
             array('class' => 'editing_delete', 'data-action' => 'delete', 'data-sectionreturn' => $sr)
         );
@@ -1860,14 +1860,14 @@ function course_get_cm_move(cm_info $mod, $sr = null) {
     static $baseurl;
 
     $modcontext = context_module::instance($mod->id);
-    $hasmanageactivities = has_capability('moodle/course:manageactivities', $modcontext);
+    $hasmanageactivities = has_capability('powereduc/course:manageactivities', $modcontext);
 
     if (!isset($str)) {
         $str = get_strings(array('move'));
     }
 
     if (!isset($baseurl)) {
-        $baseurl = new moodle_url('/course/mod.php', array('sesskey' => sesskey()));
+        $baseurl = new powereduc_url('/course/mod.php', array('sesskey' => sesskey()));
 
         if ($sr !== null) {
             $baseurl->param('sr', $sr);
@@ -1890,8 +1890,8 @@ function course_get_cm_move(cm_info $mod, $sr = null) {
             'aria-label' => $str->move,
         ];
         return html_writer::link(
-            new moodle_url($baseurl, ['copy' => $mod->id]),
-            $OUTPUT->pix_icon($pixicon, '', 'moodle', ['class' => 'iconsmall']),
+            new powereduc_url($baseurl, ['copy' => $mod->id]),
+            $OUTPUT->pix_icon($pixicon, '', 'powereduc', ['class' => 'iconsmall']),
             $attributes
         );
     }
@@ -2064,12 +2064,12 @@ function can_delete_course($courseid) {
 
     $context = context_course::instance($courseid);
 
-    if (has_capability('moodle/course:delete', $context)) {
+    if (has_capability('powereduc/course:delete', $context)) {
         return true;
     }
 
     // hack: now try to find out if creator created this course recently (1 day)
-    if (!has_capability('moodle/course:create', $context)) {
+    if (!has_capability('powereduc/course:create', $context)) {
         return false;
     }
 
@@ -2184,14 +2184,14 @@ function create_course($data, $editoroptions = NULL,$idcy=NULL,$idsp=NULL,$idfi=
     // Check if the shortname already exists.
     if (!empty($data->shortname)) {
         if ($DB->record_exists('course', array('shortname' => $data->shortname))) {
-            throw new moodle_exception('shortnametaken', '', '', $data->shortname);
+            throw new powereduc_exception('shortnametaken', '', '', $data->shortname);
         }
     }
 
     // Check if the idnumber already exists.
     if (!empty($data->idnumber)) {
         if ($DB->record_exists('course', array('idnumber' => $data->idnumber))) {
-            throw new moodle_exception('courseidnumbertaken', '', '', $data->idnumber);
+            throw new powereduc_exception('courseidnumbertaken', '', '', $data->idnumber);
         }
     }
 
@@ -2201,7 +2201,7 @@ function create_course($data, $editoroptions = NULL,$idcy=NULL,$idsp=NULL,$idfi=
     }
 
     if ($errorcode = course_validate_dates((array)$data)) {
-        throw new moodle_exception($errorcode);
+        throw new powereduc_exception($errorcode);
     }
 
     // Check if timecreated is given.
@@ -2218,7 +2218,7 @@ function create_course($data, $editoroptions = NULL,$idcy=NULL,$idsp=NULL,$idfi=
     }
 
     // Get default completion settings as a fallback in case the enablecompletion field is not set.
-    $courseconfig = get_config('moodlecourse');
+    $courseconfig = get_config('powereduccourse');
     $defaultcompletion = !empty($CFG->enablecompletion) ? $courseconfig->enablecompletion : COMPLETION_DISABLED;
     $enablecompletion = $data->enablecompletion ?? $defaultcompletion;
     // Unset showcompletionconditions when completion tracking is not enabled for the course.
@@ -2339,7 +2339,7 @@ function update_course($data, $editoroptions = NULL) {
 
     // Prevent changes on front page course.
     if ($data->id == SITEID) {
-        throw new moodle_exception('invalidcourse', 'error');
+        throw new powereduc_exception('invalidcourse', 'error');
     }
 
     $oldcourse = course_get_format($data->id)->get_course();
@@ -2380,19 +2380,19 @@ function update_course($data, $editoroptions = NULL) {
     // Check we don't have a duplicate shortname.
     if (!empty($data->shortname) && $oldcourse->shortname != $data->shortname) {
         if ($DB->record_exists_sql('SELECT id from {course} WHERE shortname = ? AND id <> ?', array($data->shortname, $data->id))) {
-            throw new moodle_exception('shortnametaken', '', '', $data->shortname);
+            throw new powereduc_exception('shortnametaken', '', '', $data->shortname);
         }
     }
 
     // Check we don't have a duplicate idnumber.
     if (!empty($data->idnumber) && $oldcourse->idnumber != $data->idnumber) {
         if ($DB->record_exists_sql('SELECT id from {course} WHERE idnumber = ? AND id <> ?', array($data->idnumber, $data->id))) {
-            throw new moodle_exception('courseidnumbertaken', '', '', $data->idnumber);
+            throw new powereduc_exception('courseidnumbertaken', '', '', $data->idnumber);
         }
     }
 
     if ($errorcode = course_validate_dates((array)$data)) {
-        throw new moodle_exception($errorcode);
+        throw new powereduc_exception($errorcode);
     }
 
     if (!isset($data->category) or empty($data->category)) {
@@ -2685,7 +2685,7 @@ class course_request {
         $request = new course_request($data);
 
         // Notify the admin if required.
-        if ($users = get_users_from_config($CFG->courserequestnotify, 'moodle/site:approvecourse')) {
+        if ($users = get_users_from_config($CFG->courserequestnotify, 'powereduc/site:approvecourse')) {
 
             $a = new stdClass;
             $a->link = "$CFG->wwwroot/course/pending.php";
@@ -2734,7 +2734,7 @@ class course_request {
         }
         if (empty($properties->requester)) {
             if (!($this->properties = $DB->get_record('course_request', array('id' => $properties->id)))) {
-                throw new \moodle_exception('unknowncourserequest');
+                throw new \powereduc_exception('unknowncourserequest');
             }
         } else {
             $this->properties = $properties;
@@ -2814,7 +2814,7 @@ class course_request {
      * Checks user capability to approve a requested course
      *
      * If course was requested without category for some reason (might happen if $CFG->defaultrequestcategory is
-     * misconfigured), we check capabilities 'moodle/site:approvecourse' and 'moodle/course:changecategory'.
+     * misconfigured), we check capabilities 'powereduc/site:approvecourse' and 'powereduc/course:changecategory'.
      *
      * @return bool
      */
@@ -2827,20 +2827,20 @@ class course_request {
             $category = core_course_category::get($CFG->defaultrequestcategory, IGNORE_MISSING);
         }
         if ($category) {
-            return has_capability('moodle/site:approvecourse', $category->get_context());
+            return has_capability('powereduc/site:approvecourse', $category->get_context());
         }
 
         // We can not determine the context where the course should be created. The approver should have
         // both capabilities to approve courses and change course category in the system context.
-        return has_all_capabilities(['moodle/site:approvecourse', 'moodle/course:changecategory'], context_system::instance());
+        return has_all_capabilities(['powereduc/site:approvecourse', 'powereduc/course:changecategory'], context_system::instance());
     }
 
     /**
      * Returns the category where this course request should be created
      *
      * Note that we don't check here that user has a capability to view
-     * hidden categories if he has capabilities 'moodle/site:approvecourse' and
-     * 'moodle/course:changecategory'
+     * hidden categories if he has capabilities 'powereduc/site:approvecourse' and
+     * 'powereduc/course:changecategory'
      *
      * @return core_course_category
      */
@@ -2872,7 +2872,7 @@ class course_request {
 
         $user = $DB->get_record('user', array('id' => $this->properties->requester, 'deleted'=>0), '*', MUST_EXIST);
 
-        $courseconfig = get_config('moodlecourse');
+        $courseconfig = get_config('powereduccourse');
 
         // Transfer appropriate settings
         $data = clone($this->properties);
@@ -2917,7 +2917,7 @@ class course_request {
         }
 
         // enrol the requester as teacher if necessary
-        if (!empty($CFG->creatornewroleid) and !is_viewing($context, $user, 'moodle/role:assign') and !is_enrolled($context, $user, 'moodle/role:assign')) {
+        if (!empty($CFG->creatornewroleid) and !is_viewing($context, $user, 'powereduc/role:assign') and !is_enrolled($context, $user, 'powereduc/role:assign')) {
             enrol_try_internal_enrol($course->id, $user->id, $CFG->creatornewroleid);
         }
 
@@ -2926,7 +2926,7 @@ class course_request {
         $a = new stdClass();
         $a->name = format_string($course->fullname, true, array('context' => context_course::instance($course->id)));
         $a->url = $CFG->wwwroot.'/course/view.php?id=' . $course->id;
-        $this->notify($user, $USER, 'courserequestapproved', get_string('courseapprovedsubject'), get_string('courseapprovedemail2', 'moodle', $a), $course->id);
+        $this->notify($user, $USER, 'courserequestapproved', get_string('courseapprovedsubject'), get_string('courseapprovedemail2', 'powereduc', $a), $course->id);
 
         return $course->id;
     }
@@ -2942,7 +2942,7 @@ class course_request {
     public function reject($notice) {
         global $USER, $DB;
         $user = $DB->get_record('user', array('id' => $this->properties->requester), '*', MUST_EXIST);
-        $this->notify($user, $USER, 'courserequestrejected', get_string('courserejectsubject'), get_string('courserejectemail', 'moodle', $notice));
+        $this->notify($user, $USER, 'courserequestrejected', get_string('courserejectsubject'), get_string('courserejectemail', 'powereduc', $notice));
         $this->delete();
     }
 
@@ -2967,7 +2967,7 @@ class course_request {
     protected function notify($touser, $fromuser, $name, $subject, $message, $courseid = null) {
         $eventdata = new \core\message\message();
         $eventdata->courseid          = empty($courseid) ? SITEID : $courseid;
-        $eventdata->component         = 'moodle';
+        $eventdata->component         = 'powereduc';
         $eventdata->name              = $name;
         $eventdata->userfrom          = $fromuser;
         $eventdata->userto            = $touser;
@@ -2991,17 +2991,17 @@ class course_request {
         if (empty($CFG->enablecourserequests)) {
             return false;
         }
-        if (has_capability('moodle/course:create', $context)) {
+        if (has_capability('powereduc/course:create', $context)) {
             return false;
         }
 
         if ($context instanceof context_system) {
             $defaultcontext = context_coursecat::instance($CFG->defaultrequestcategory, IGNORE_MISSING);
             return $defaultcontext &&
-                has_capability('moodle/course:request', $defaultcontext);
+                has_capability('powereduc/course:request', $defaultcontext);
         } else if ($context instanceof context_coursecat) {
             if (!$CFG->lockrequestcategory || $CFG->defaultrequestcategory == $context->instanceid) {
-                return has_capability('moodle/course:request', $context);
+                return has_capability('powereduc/course:request', $context);
             }
         }
         return false;
@@ -3113,14 +3113,14 @@ function include_course_ajax($course, $usedmodules = array(), $enabledmodules = 
             $config->pageparams = array();
         }
 
-        $PAGE->requires->yui_module('moodle-course-dragdrop', 'M.course.init_section_dragdrop',
+        $PAGE->requires->yui_module('powereduc-course-dragdrop', 'M.course.init_section_dragdrop',
             array(array(
                 'courseid' => $course->id,
                 'ajaxurl' => $config->sectionurl,
                 'config' => $config,
             )), null, true);
 
-        $PAGE->requires->yui_module('moodle-course-dragdrop', 'M.course.init_resource_dragdrop',
+        $PAGE->requires->yui_module('powereduc-course-dragdrop', 'M.course.init_resource_dragdrop',
             array(array(
                 'courseid' => $course->id,
                 'ajaxurl' => $config->resourceurl,
@@ -3154,7 +3154,7 @@ function include_course_ajax($course, $usedmodules = array(), $enabledmodules = 
             'afterresource',
             'aftersection',
             'totopofsection',
-        ), 'moodle');
+        ), 'powereduc');
 
     // Include section-specific strings for formats which support sections.
     if (course_format_uses_sections($course->format)) {
@@ -3243,7 +3243,7 @@ function get_sorted_course_formats($enabledonly = false) {
  * @param array $options options for view URL. At the moment core uses:
  *     'navigation' (bool) if true and section has no separate page, the function returns null
  *     'sr' (int) used by multipage formats to specify to which section to return
- * @return moodle_url The url of course
+ * @return powereduc_url The url of course
  */
 function course_get_url($courseorid, $section = null, $options = array()) {
     return course_get_format($courseorid)->get_view_url($section, $options);
@@ -3258,7 +3258,7 @@ function course_get_url($courseorid, $section = null, $options = array()) {
  *
  * @param object $module
  * @return object the created module info
- * @throws moodle_exception if user is not allowed to perform the action or module is not allowed in this course
+ * @throws powereduc_exception if user is not allowed to perform the action or module is not allowed in this course
  */
 function create_module($moduleinfo) {
     global $DB, $CFG;
@@ -3272,7 +3272,7 @@ function create_module($moduleinfo) {
     }
     foreach($mandatoryfields as $mandatoryfield) {
         if (!isset($moduleinfo->{$mandatoryfield})) {
-            throw new moodle_exception('createmodulemissingattribut', '', '', $mandatoryfield);
+            throw new powereduc_exception('createmodulemissingattribut', '', '', $mandatoryfield);
         }
     }
 
@@ -3296,7 +3296,7 @@ function create_module($moduleinfo) {
  *
  * @param object $module
  * @return object the updated module info
- * @throws moodle_exception if current user is not allowed to update the module
+ * @throws powereduc_exception if current user is not allowed to update the module
  */
 function update_module($moduleinfo) {
     global $DB, $CFG;
@@ -3332,7 +3332,7 @@ function update_module($moduleinfo) {
  * @param object $course The course
  * @param object $cm The course module to duplicate
  * @param int $sr The section to link back to (used for creating the links)
- * @throws moodle_exception if the plugin doesn't support duplication
+ * @throws powereduc_exception if the plugin doesn't support duplication
  * @return Object containing:
  * - fullcontent: The HTML markup for the created CM
  * - cmid: The CMID of the newly created CM
@@ -3371,7 +3371,7 @@ function mod_duplicate_activity($course, $cm, $sr = null) {
  *
  * @throws Exception
  * @throws coding_exception
- * @throws moodle_exception
+ * @throws powereduc_exception
  * @throws restore_controller_exception
  *
  * @return cm_info|null cminfo object if we sucessfully duplicated the mod and found the new cm.
@@ -3387,7 +3387,7 @@ function duplicate_module($course, $cm) {
     $a->modname = format_string($cm->name);
 
     if (!plugin_supports('mod', $cm->modname, FEATURE_BACKUP_POWEREDUC2)) {
-        throw new moodle_exception('duplicatenosupport', 'error', '', $a);
+        throw new powereduc_exception('duplicatenosupport', 'error', '', $a);
     }
 
     // Backup the activity.
@@ -3454,7 +3454,7 @@ function duplicate_module($course, $cm) {
         $newcm = get_coursemodule_from_id($cm->modname, $newcmid, $cm->course);
         // Add ' (copy)' to duplicates. Note we don't cleanup or validate lengths here. It comes
         // from original name that was valid, so the copy should be too.
-        $newname = get_string('duplicatedmodule', 'moodle', $newcm->name);
+        $newname = get_string('duplicatedmodule', 'powereduc', $newcm->name);
         $DB->set_field($cm->modname, 'name', $newname, ['id' => $newcm->instance]);
 
         $section = $DB->get_record('course_sections', array('id' => $cm->section, 'course' => $cm->course));
@@ -3916,17 +3916,17 @@ function course_get_user_navigation_options($context, $course = null) {
     $options->blogs = !empty($CFG->enableblogs) &&
                         ($CFG->bloglevel == BLOG_GLOBAL_LEVEL ||
                         ($CFG->bloglevel == BLOG_SITE_LEVEL and ($isloggedin and !$isguestuser)))
-                        && has_capability('moodle/blog:view', $sitecontext);
+                        && has_capability('powereduc/blog:view', $sitecontext);
 
-    $options->notes = !empty($CFG->enablenotes) && has_any_capability(array('moodle/notes:manage', 'moodle/notes:view'), $context);
+    $options->notes = !empty($CFG->enablenotes) && has_any_capability(array('powereduc/notes:manage', 'powereduc/notes:view'), $context);
 
     // Frontpage settings?
     if ($isfrontpage) {
         // We are on the front page, so make sure we use the proper capability (site:viewparticipants).
         $options->participants = course_can_view_participants($sitecontext);
-        $options->badges = !empty($CFG->enablebadges) && has_capability('moodle/badges:viewbadges', $sitecontext);
+        $options->badges = !empty($CFG->enablebadges) && has_capability('powereduc/badges:viewbadges', $sitecontext);
         $options->tags = !empty($CFG->usetags) && $isloggedin;
-        $options->search = !empty($CFG->enableglobalsearch) && has_capability('moodle/search:query', $sitecontext);
+        $options->search = !empty($CFG->enableglobalsearch) && has_capability('powereduc/search:query', $sitecontext);
     } else {
         // We are in a course, so make sure we use the proper capability (course:viewparticipants).
         $options->participants = course_can_view_participants($context);
@@ -3935,12 +3935,12 @@ function course_get_user_navigation_options($context, $course = null) {
         // at least, one available badge.
         if (!empty($CFG->enablebadges) && !empty($CFG->badges_allowcoursebadges)) {
             $canmanage = has_any_capability([
-                    'moodle/badges:createbadge',
-                    'moodle/badges:awardbadge',
-                    'moodle/badges:configurecriteria',
-                    'moodle/badges:configuremessages',
-                    'moodle/badges:configuredetails',
-                    'moodle/badges:deletebadge',
+                    'powereduc/badges:createbadge',
+                    'powereduc/badges:awardbadge',
+                    'powereduc/badges:configurecriteria',
+                    'powereduc/badges:configuremessages',
+                    'powereduc/badges:configuredetails',
+                    'powereduc/badges:deletebadge',
                 ],
                 $context
             );
@@ -3948,7 +3948,7 @@ function course_get_user_navigation_options($context, $course = null) {
             $canview = false;
             if (!$canmanage) {
                 // This only needs to be calculated if the user can't manage badges (to improve performance).
-                $canview = has_capability('moodle/badges:viewbadges', $context);
+                $canview = has_capability('powereduc/badges:viewbadges', $context);
                 if ($canview) {
                     require_once($CFG->dirroot.'/lib/badgeslib.php');
                     if (is_null($course)) {
@@ -3964,7 +3964,7 @@ function course_get_user_navigation_options($context, $course = null) {
         // Add view grade report is permitted.
         $grades = false;
 
-        if (has_capability('moodle/grade:viewall', $context)) {
+        if (has_capability('powereduc/grade:viewall', $context)) {
             $grades = true;
         } else if (!empty($course->showgrades)) {
             $reports = core_component::get_plugin_list('gradereport');
@@ -3983,7 +3983,7 @@ function course_get_user_navigation_options($context, $course = null) {
     }
 
     if (\core_competency\api::is_enabled()) {
-        $capabilities = array('moodle/competency:coursecompetencyview', 'moodle/competency:coursecompetencymanage');
+        $capabilities = array('powereduc/competency:coursecompetencyview', 'powereduc/competency:coursecompetencymanage');
         $options->competencies = has_any_capability($capabilities, $context);
     }
     return $options;
@@ -4004,25 +4004,25 @@ function course_get_user_administration_options($course, $context) {
     $completionenabled = $CFG->enablecompletion && $course->enablecompletion;
     $hascompletionoptions = count(core_completion\manager::get_available_completion_options($course->id)) > 0;
     $options = new stdClass;
-    $options->update = has_capability('moodle/course:update', $context);
+    $options->update = has_capability('powereduc/course:update', $context);
     $options->editcompletion = $CFG->enablecompletion && $course->enablecompletion &&
         ($options->update || $hascompletionoptions);
-    $options->filters = has_capability('moodle/filter:manage', $context) &&
+    $options->filters = has_capability('powereduc/filter:manage', $context) &&
                         count(filter_get_available_in_context($context)) > 0;
-    $options->reports = has_capability('moodle/site:viewreports', $context);
-    $options->backup = has_capability('moodle/backup:backupcourse', $context);
-    $options->restore = has_capability('moodle/restore:restorecourse', $context);
+    $options->reports = has_capability('powereduc/site:viewreports', $context);
+    $options->backup = has_capability('powereduc/backup:backupcourse', $context);
+    $options->restore = has_capability('powereduc/restore:restorecourse', $context);
     $options->copy = \core_course\management\helper::can_copy_course($course->id);
-    $options->files = ($course->legacyfiles == 2 && has_capability('moodle/course:managefiles', $context));
+    $options->files = ($course->legacyfiles == 2 && has_capability('powereduc/course:managefiles', $context));
 
     if (!$isfrontpage) {
-        $options->tags = has_capability('moodle/course:tag', $context);
-        $options->gradebook = has_capability('moodle/grade:manage', $context);
-        $options->outcomes = !empty($CFG->enableoutcomes) && has_capability('moodle/course:update', $context);
+        $options->tags = has_capability('powereduc/course:tag', $context);
+        $options->gradebook = has_capability('powereduc/grade:manage', $context);
+        $options->outcomes = !empty($CFG->enableoutcomes) && has_capability('powereduc/course:update', $context);
         $options->badges = !empty($CFG->enablebadges);
-        $options->import = has_capability('moodle/restore:restoretargetimport', $context);
-        $options->reset = has_capability('moodle/course:reset', $context);
-        $options->roles = has_capability('moodle/role:switchroles', $context);
+        $options->import = has_capability('powereduc/restore:restoretargetimport', $context);
+        $options->reset = has_capability('powereduc/course:reset', $context);
+        $options->roles = has_capability('powereduc/role:switchroles', $context);
     } else {
         // Set default options to false.
         $listofoptions = array('tags', 'gradebook', 'outcomes', 'badges', 'import', 'publish', 'reset', 'roles', 'grades');
@@ -4360,7 +4360,7 @@ function course_filter_courses_by_timeline_classification(
                 COURSE_TIMELINE_FUTURE, COURSE_TIMELINE_HIDDEN, COURSE_TIMELINE_SEARCH])) {
         $message = 'Classification must be one of COURSE_TIMELINE_ALLINCLUDINGHIDDEN, COURSE_TIMELINE_ALL, COURSE_TIMELINE_PAST, '
             . 'COURSE_TIMELINE_INPROGRESS, COURSE_TIMELINE_SEARCH or COURSE_TIMELINE_FUTURE';
-        throw new moodle_exception($message);
+        throw new powereduc_exception($message);
     }
 
     $filteredcourses = [];
@@ -4658,12 +4658,12 @@ function course_check_module_updates_since($cm, $from, $fileareas = array(), $fi
  * @return bool
  */
 function course_can_view_participants($context) {
-    $viewparticipantscap = 'moodle/course:viewparticipants';
+    $viewparticipantscap = 'powereduc/course:viewparticipants';
     if ($context->contextlevel == CONTEXT_SYSTEM) {
-        $viewparticipantscap = 'moodle/site:viewparticipants';
+        $viewparticipantscap = 'powereduc/site:viewparticipants';
     }
 
-    return has_any_capability([$viewparticipantscap, 'moodle/course:enrolreview'], $context);
+    return has_any_capability([$viewparticipantscap, 'powereduc/course:enrolreview'], $context);
 }
 
 /**
@@ -4674,9 +4674,9 @@ function course_can_view_participants($context) {
  */
 function course_require_view_participants($context) {
     if (!course_can_view_participants($context)) {
-        $viewparticipantscap = 'moodle/course:viewparticipants';
+        $viewparticipantscap = 'powereduc/course:viewparticipants';
         if ($context->contextlevel == CONTEXT_SYSTEM) {
-            $viewparticipantscap = 'moodle/site:viewparticipants';
+            $viewparticipantscap = 'powereduc/site:viewparticipants';
         }
         throw new required_capability_exception($context, $viewparticipantscap, 'nopermissions', '');
     }
@@ -4695,14 +4695,14 @@ function can_download_from_backup_filearea($filearea, \context $context, stdClas
     switch ($filearea) {
         case 'course':
         case 'backup':
-            $candownload = has_capability('moodle/backup:downloadfile', $context, $user);
+            $candownload = has_capability('powereduc/backup:downloadfile', $context, $user);
             break;
         case 'automated':
             // Given the automated backups may contain userinfo, we restrict access such that only users who are able to
             // restore with userinfo are able to download the file. Users can't create these backups, so checking 'backup:userinfo'
             // doesn't make sense here.
-            $candownload = has_capability('moodle/backup:downloadfile', $context, $user) &&
-                           has_capability('moodle/restore:userinfo', $context, $user);
+            $candownload = has_capability('powereduc/backup:downloadfile', $context, $user) &&
+                           has_capability('powereduc/restore:userinfo', $context, $user);
             break;
         default:
             break;
@@ -4843,7 +4843,7 @@ function course_get_recent_courses(int $userid = null, int $limit = 0, int $offs
             $context = context_course::instance($course->id, IGNORE_MISSING);
             // If last access was a hidden field, a user requesting info about another user would need permission to view hidden
             // fields.
-            return has_capability('moodle/course:viewhiddenuserfields', $context);
+            return has_capability('powereduc/course:viewhiddenuserfields', $context);
         });
     }
 

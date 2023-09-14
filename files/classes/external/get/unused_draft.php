@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core_files
  * @since      Moodle 3.11
- * @copyright  2020 Juan Leyva <juan@moodle.com>
+ * @copyright  2020 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -42,7 +42,7 @@ use context_user;
 /**
  * Generate a new draft itemid for the current user.
  *
- * @copyright  2020 Juan Leyva <juan@moodle.com>
+ * @copyright  2020 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class unused_draft extends external_api {

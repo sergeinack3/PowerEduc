@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Self completion block.
  *
  * @package   block_selfcompletion
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -54,7 +54,7 @@ class block_selfcompletion extends block_base {
         $this->content = new stdClass;
 
         // Can edit settings?
-        $can_edit = has_capability('moodle/course:update', context_course::instance($this->page->course->id));
+        $can_edit = has_capability('powereduc/course:update', context_course::instance($this->page->course->id));
 
         // Get course completion data
         $info = new completion_info($this->page->course);

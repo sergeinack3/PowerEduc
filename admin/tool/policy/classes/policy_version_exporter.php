@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Provides the {@link tool_policy\policy_version_exporter} class.
  *
  * @package   tool_policy
- * @copyright 2018 David Mudrak <david@moodle.com>
+ * @copyright 2018 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,7 +36,7 @@ use tool_policy\api;
  * Note we cannot use the persistent_exporter as our super class because we want to add some properties not present in
  * the persistent (e.g. acceptancescount).
  *
- * @copyright 2018 David Mudrak <david@moodle.com>
+ * @copyright 2018 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class policy_version_exporter extends exporter {
@@ -126,7 +126,7 @@ class policy_version_exporter extends exporter {
         ];
 
         $othervalues['acceptancescounttext'] = get_string('useracceptancecount', 'tool_policy', $a);
-        $acceptancesurl = new \moodle_url('/admin/tool/policy/acceptances.php', ['policyid' => $this->data->policyid]);
+        $acceptancesurl = new \powereduc_url('/admin/tool/policy/acceptances.php', ['policyid' => $this->data->policyid]);
         if ($this->data->status != policy_version::STATUS_ACTIVE) {
             $acceptancesurl->param('versionid', $this->data->id);
         }

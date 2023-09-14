@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -125,15 +125,15 @@ class insights_generator {
      *
      * @param  \context    $context
      * @param  \stdClass   $user
-     * @param  \moodle_url $insighturl    The insight URL
+     * @param  \powereduc_url $insighturl    The insight URL
      * @param  string      $fullmessage
      * @param  string      $fullmessagehtml
      * @return null
      */
-    private function notification(\context $context, \stdClass $user, \moodle_url $insighturl, string $fullmessage, string $fullmessagehtml) {
+    private function notification(\context $context, \stdClass $user, \powereduc_url $insighturl, string $fullmessage, string $fullmessagehtml) {
 
         $message = new \core\message\message();
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = 'insights';
 
         $message->userfrom = \core_user::get_support_user();
@@ -181,7 +181,7 @@ class insights_generator {
      * @param  \core_analytics\prediction   $prediction
      * @param  \context                     $context
      * @param  \stdClass                    $user
-     * @return array Three items array with formats [\moodle_url, string, string]
+     * @return array Three items array with formats [\powereduc_url, string, string]
      */
     private function prediction_info(\core_analytics\prediction $prediction, \context $context, \stdClass $user) {
         global $OUTPUT;
@@ -207,7 +207,7 @@ class insights_generator {
             if (!$action->get_url()->get_param('forwardurl')) {
 
                 $params = ['actionvisiblename' => $action->get_text(), 'target' => '_blank'];
-                $actiondoneurl = new \moodle_url('/report/insights/done.php', $params);
+                $actiondoneurl = new \powereduc_url('/report/insights/done.php', $params);
                 // Set the forward url to the 'done' script.
                 $action->get_url()->param('forwardurl', $actiondoneurl->out(false));
             }

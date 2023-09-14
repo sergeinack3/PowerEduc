@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,19 +35,19 @@ class application_registration {
     /** @var string the name of the application being registered. */
     private $name;
 
-    /** @var \moodle_url the issuer identifying the platform, as provided by the platform. */
+    /** @var \powereduc_url the issuer identifying the platform, as provided by the platform. */
     private $platformid;
 
     /** @var string the client id as provided by the platform. */
     private $clientid;
 
-    /** @var \moodle_url the authentication request URL, as provided by the platform. */
+    /** @var \powereduc_url the authentication request URL, as provided by the platform. */
     private $authenticationrequesturl;
 
-    /** @var \moodle_url the certificate URL, as provided by the platform. */
+    /** @var \powereduc_url the certificate URL, as provided by the platform. */
     private $jwksurl;
 
-    /** @var \moodle_url the access token URL, as provided by the platform. */
+    /** @var \powereduc_url the access token URL, as provided by the platform. */
     private $accesstokenurl;
 
     /** @var string a unique identifier used by the registration in the initiate_login_uri to act as registration identifier.*/
@@ -67,15 +67,15 @@ class application_registration {
      *
      * @param string $name the descriptor for this application registration.
      * @param string $uniqueid a unique identifier for the registration used in place of client_id in the login URI.
-     * @param \moodle_url|null $platformid the URL of application
+     * @param \powereduc_url|null $platformid the URL of application
      * @param string|null $clientid unique id for the client on the application
-     * @param \moodle_url|null $authenticationrequesturl URL to send OIDC Auth requests to.
-     * @param \moodle_url|null $jwksurl URL to use to get public keys from the application.
-     * @param \moodle_url|null $accesstokenurl URL to use to get an access token from the application, used in service calls.
+     * @param \powereduc_url|null $authenticationrequesturl URL to send OIDC Auth requests to.
+     * @param \powereduc_url|null $jwksurl URL to use to get public keys from the application.
+     * @param \powereduc_url|null $accesstokenurl URL to use to get an access token from the application, used in service calls.
      * @param int|null $id the id of the object instance, if being created from an existing store item.
      */
-    private function __construct(string $name, string $uniqueid, ?\moodle_url $platformid, ?string $clientid,
-            ?\moodle_url $authenticationrequesturl, ?\moodle_url $jwksurl, ?\moodle_url $accesstokenurl, int $id = null) {
+    private function __construct(string $name, string $uniqueid, ?\powereduc_url $platformid, ?string $clientid,
+            ?\powereduc_url $authenticationrequesturl, ?\powereduc_url $jwksurl, ?\powereduc_url $accesstokenurl, int $id = null) {
 
         if (empty($name)) {
             throw new \coding_exception("Invalid 'name' arg. Cannot be an empty string.");
@@ -104,17 +104,17 @@ class application_registration {
      *
      * @param string $name the descriptor for this application registration.
      * @param string $uniqueid a unique identifier for the registration used in place of client_id in the login URI.
-     * @param \moodle_url $platformid the URL of application
+     * @param \powereduc_url $platformid the URL of application
      * @param string $clientid unique id for the client on the application
-     * @param \moodle_url $authenticationrequesturl URL to send OIDC Auth requests to.
-     * @param \moodle_url $jwksurl URL to use to get public keys from the application.
-     * @param \moodle_url $accesstokenurl URL to use to get an access token from the application, used in service calls.
+     * @param \powereduc_url $authenticationrequesturl URL to send OIDC Auth requests to.
+     * @param \powereduc_url $jwksurl URL to use to get public keys from the application.
+     * @param \powereduc_url $accesstokenurl URL to use to get an access token from the application, used in service calls.
      * @param int|null $id the id of the object instance, if being created from an existing store item.
      * @return application_registration the application_registration instance.
      * @throws \coding_exception if an invalid clientid is provided.
      */
-    public static function create(string $name, string $uniqueid, \moodle_url $platformid, string $clientid,
-            \moodle_url $authenticationrequesturl, \moodle_url $jwksurl, \moodle_url $accesstokenurl,
+    public static function create(string $name, string $uniqueid, \powereduc_url $platformid, string $clientid,
+            \powereduc_url $authenticationrequesturl, \powereduc_url $jwksurl, \powereduc_url $accesstokenurl,
             int $id = null): application_registration {
 
         if (empty($clientid)) {
@@ -181,18 +181,18 @@ class application_registration {
     /**
      * Get the platform id.
      *
-     * @return \moodle_url|null the platformid/issuer URL.
+     * @return \powereduc_url|null the platformid/issuer URL.
      */
-    public function get_platformid(): ?\moodle_url {
+    public function get_platformid(): ?\powereduc_url {
         return $this->platformid;
     }
 
     /**
      * Sets the platformid/issuer for this registration.
      *
-     * @param \moodle_url $platformid the platform id / iss to set.
+     * @param \powereduc_url $platformid the platform id / iss to set.
      */
-    public function set_platformid(\moodle_url $platformid): void {
+    public function set_platformid(\powereduc_url $platformid): void {
         $this->platformid = $platformid;
     }
 
@@ -221,54 +221,54 @@ class application_registration {
     /**
      * Get the authentication request URL.
      *
-     * @return \moodle_url|null the authentication request URL.
+     * @return \powereduc_url|null the authentication request URL.
      */
-    public function get_authenticationrequesturl(): ?\moodle_url {
+    public function get_authenticationrequesturl(): ?\powereduc_url {
         return $this->authenticationrequesturl;
     }
 
     /**
      * Sets the authentication request URL for this registration.
      *
-     * @param \moodle_url $authenticationrequesturl the authentication request URL.
+     * @param \powereduc_url $authenticationrequesturl the authentication request URL.
      */
-    public function set_authenticationrequesturl(\moodle_url $authenticationrequesturl): void {
+    public function set_authenticationrequesturl(\powereduc_url $authenticationrequesturl): void {
         $this->authenticationrequesturl = $authenticationrequesturl;
     }
 
     /**
      * Get the JWKS URL.
      *
-     * @return \moodle_url|null the JWKS URL.
+     * @return \powereduc_url|null the JWKS URL.
      */
-    public function get_jwksurl(): ?\moodle_url {
+    public function get_jwksurl(): ?\powereduc_url {
         return $this->jwksurl;
     }
 
     /**
      * Sets the JWKS URL for this registration.
      *
-     * @param \moodle_url $jwksurl the JWKS URL.
+     * @param \powereduc_url $jwksurl the JWKS URL.
      */
-    public function set_jwksurl(\moodle_url $jwksurl): void {
+    public function set_jwksurl(\powereduc_url $jwksurl): void {
         $this->jwksurl = $jwksurl;
     }
 
     /**
      * Get the access token URL.
      *
-     * @return \moodle_url|null the access token URL.
+     * @return \powereduc_url|null the access token URL.
      */
-    public function get_accesstokenurl(): ?\moodle_url {
+    public function get_accesstokenurl(): ?\powereduc_url {
         return $this->accesstokenurl;
     }
 
     /**
      * Sets the access token URL for this registration.
      *
-     * @param \moodle_url $accesstokenurl the access token URL.
+     * @param \powereduc_url $accesstokenurl the access token URL.
      */
-    public function set_accesstokenurl(\moodle_url $accesstokenurl): void {
+    public function set_accesstokenurl(\powereduc_url $accesstokenurl): void {
         $this->accesstokenurl = $accesstokenurl;
     }
 

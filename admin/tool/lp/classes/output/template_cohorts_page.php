@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,9 +37,9 @@ class template_cohorts_page implements \renderable {
     /**
      * Constructor.
      * @param \core_competency\template $template
-     * @param \moodle_url $url
+     * @param \powereduc_url $url
      */
-    public function __construct(\core_competency\template $template, \moodle_url $url) {
+    public function __construct(\core_competency\template $template, \powereduc_url $url) {
         $this->template = $template;
         $this->url = $url;
         $this->table = new template_cohorts_table('tplcohorts', $template);

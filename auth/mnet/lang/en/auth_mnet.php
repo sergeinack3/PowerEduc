@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Strings for component 'auth_mnet', language 'en'.
  *
  * @package   auth_mnet
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -37,7 +37,7 @@ $string['sso_sp_description'] = 'Publish  this service to allow authenticated us
 $string['sso_sp_name'] = 'SSO (Service Provider)';
 $string['pluginname'] = 'MNet authentication';
 $string['privacy:metadata:external:mahara'] = 'This plugin can send data externally to a linked Mahara application.';
-$string['privacy:metadata:external:moodle'] = 'This plugin can send data externally to a linked Moodle application.';
+$string['privacy:metadata:external:powereduc'] = 'This plugin can send data externally to a linked Moodle application.';
 $string['privacy:metadata:mnet_external:address'] = 'The address of the user.';
 $string['privacy:metadata:mnet_external:alternatename'] = 'An alternative name for the user.';
 $string['privacy:metadata:mnet_external:autosubscribe'] = 'A preference as to if the user should be auto-subscribed to forums the user posts in.';

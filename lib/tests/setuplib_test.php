@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
@@ -27,12 +27,12 @@ namespace core;
 class setuplib_test extends \advanced_testcase {
 
     /**
-     * Test get_docs_url_standard in the normal case when we should link to Moodle docs.
+     * Test get_docs_url_standard in the normal case when we should link to PowerEduc docs.
      */
     public function test_get_docs_url_standard() {
         global $CFG;
         if (empty($CFG->docroot)) {
-            $docroot = 'http://docs.moodle.org/';
+            $docroot = 'http://docs.powereduc.org/';
         } else {
             $docroot = $CFG->docroot;
         }
@@ -46,7 +46,7 @@ class setuplib_test extends \advanced_testcase {
      * Test get_docs_url_standard in the special case of an absolute HTTP URL.
      */
     public function test_get_docs_url_http() {
-        $url = 'http://moodle.org/';
+        $url = 'http://powereduc.org/';
         $this->assertEquals($url, get_docs_url($url));
     }
 
@@ -54,7 +54,7 @@ class setuplib_test extends \advanced_testcase {
      * Test get_docs_url_standard in the special case of an absolute HTTPS URL.
      */
     public function test_get_docs_url_https() {
-        $url = 'https://moodle.org/';
+        $url = 'https://powereduc.org/';
         $this->assertEquals($url, get_docs_url($url));
     }
 
@@ -84,7 +84,7 @@ class setuplib_test extends \advanced_testcase {
                 $expected .= "[$cfgname] ";
             }
         }
-        $exception     = new \moodle_exception('generalexceptionmessage', 'error', '', $fixture, $fixture);
+        $exception     = new \powereduc_exception('generalexceptionmessage', 'error', '', $fixture, $fixture);
         $exceptioninfo = get_exception_info($exception);
 
         $this->assertStringContainsString($expected, $exceptioninfo->message,
@@ -364,45 +364,45 @@ class setuplib_test extends \advanced_testcase {
 
         // Simple local URL.
         $url = $CFG->wwwroot . '/something/here?really=yes';
-        $exception = new \moodle_exception('none', 'error', $url);
+        $exception = new \powereduc_exception('none', 'error', $url);
         $infos = $this->get_exception_info($exception);
         $this->assertSame($url, $infos->link);
 
         // Relative local URL.
         $url = '/something/here?really=yes';
-        $exception = new \moodle_exception('none', 'error', $url);
+        $exception = new \powereduc_exception('none', 'error', $url);
         $infos = $this->get_exception_info($exception);
         $this->assertSame($CFG->wwwroot . '/', $infos->link);
 
         // HTTPS URL when login HTTPS is not enabled (default) and site is HTTP.
         $CFG->wwwroot = str_replace('https:', 'http:', $CFG->wwwroot);
         $url = $httpswwwroot . '/something/here?really=yes';
-        $exception = new \moodle_exception('none', 'error', $url);
+        $exception = new \powereduc_exception('none', 'error', $url);
         $infos = $this->get_exception_info($exception);
         $this->assertSame($CFG->wwwroot . '/', $infos->link);
 
         // HTTPS URL when login HTTPS is not enabled and site is HTTPS.
         $CFG->wwwroot = str_replace('http:', 'https:', $CFG->wwwroot);
         $url = $httpswwwroot . '/something/here?really=yes';
-        $exception = new \moodle_exception('none', 'error', $url);
+        $exception = new \powereduc_exception('none', 'error', $url);
         $infos = $this->get_exception_info($exception);
         $this->assertSame($url, $infos->link);
 
         // External HTTP URL.
-        $url = 'http://moodle.org/something/here?really=yes';
-        $exception = new \moodle_exception('none', 'error', $url);
+        $url = 'http://powereduc.org/something/here?really=yes';
+        $exception = new \powereduc_exception('none', 'error', $url);
         $infos = $this->get_exception_info($exception);
         $this->assertSame($CFG->wwwroot . '/', $infos->link);
 
         // External HTTPS URL.
-        $url = 'https://moodle.org/something/here?really=yes';
-        $exception = new \moodle_exception('none', 'error', $url);
+        $url = 'https://powereduc.org/something/here?really=yes';
+        $exception = new \powereduc_exception('none', 'error', $url);
         $infos = $this->get_exception_info($exception);
         $this->assertSame($CFG->wwwroot . '/', $infos->link);
 
         // External URL containing local URL.
-        $url = 'http://moodle.org/something/here?' . $CFG->wwwroot;
-        $exception = new \moodle_exception('none', 'error', $url);
+        $url = 'http://powereduc.org/something/here?' . $CFG->wwwroot;
+        $exception = new \powereduc_exception('none', 'error', $url);
         $infos = $this->get_exception_info($exception);
         $this->assertSame($CFG->wwwroot . '/', $infos->link);
     }
@@ -416,7 +416,7 @@ class setuplib_test extends \advanced_testcase {
     public function get_exception_info($ex) {
         try {
             throw $ex;
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             return get_exception_info($e);
         }
     }

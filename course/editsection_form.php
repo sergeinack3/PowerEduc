@@ -14,7 +14,7 @@ require_once($CFG->libdir.'/gradelib.php');
  *
  * Course format plugins may specify different editing form to use
  */
-class editsection_form extends moodleform {
+class editsection_form extends powereducform {
 
     function definition() {
 
@@ -64,7 +64,7 @@ class editsection_form extends moodleform {
 
             // Availability field. This is just a textarea; the user interface
             // interaction is all implemented in JavaScript. The field is named
-            // availabilityconditionsjson for consistency with moodleform_mod.
+            // availabilityconditionsjson for consistency with powereducform_mod.
             $mform->addElement('textarea', 'availabilityconditionsjson',
                     get_string('accessrestrictions', 'availability'));
             \core_availability\frontend::include_all_javascript($course, null,

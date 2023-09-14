@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core\navigation\views;
 
 use booktool_print\output\renderer;
 use navigation_node;
 use ReflectionMethod;
-use moodle_url;
+use powereduc_url;
 
 /**
  * Class core_secondary_testcase
@@ -104,9 +104,9 @@ class secondary_test extends \advanced_testcase {
                 $pagecourse = $this->getDataGenerator()->create_course(['format' => $courseformat]);
                 $contextrecord = \context_course::instance($pagecourse->id, MUST_EXIST);
                 if ($courseformat === 'singleactivity') {
-                    $pageurl = new \moodle_url('/course/edit.php', ['id' => $pagecourse->id]);
+                    $pageurl = new \powereduc_url('/course/edit.php', ['id' => $pagecourse->id]);
                 } else {
-                    $pageurl = new \moodle_url('/course/view.php', ['id' => $pagecourse->id]);
+                    $pageurl = new \powereduc_url('/course/view.php', ['id' => $pagecourse->id]);
                 }
                 break;
             case 'module':
@@ -114,13 +114,13 @@ class secondary_test extends \advanced_testcase {
                 $assign = $this->getDataGenerator()->create_module('assign', ['course' => $pagecourse->id]);
                 $cm = get_coursemodule_from_id('assign', $assign->cmid);
                 $contextrecord = \context_module::instance($cm->id);
-                $pageurl = new \moodle_url('/mod/assign/view.php', ['id' => $cm->id]);
+                $pageurl = new \powereduc_url('/mod/assign/view.php', ['id' => $cm->id]);
                 $PAGE->set_cm($cm);
                 break;
             case 'system':
                 $contextrecord = \context_system::instance();
                 $PAGE->set_pagelayout('admin');
-                $pageurl = new \moodle_url('/admin/index.php');
+                $pageurl = new \powereduc_url('/admin/index.php');
 
         }
         $PAGE->set_url($pageurl);
@@ -175,10 +175,10 @@ class secondary_test extends \advanced_testcase {
 
         // If seturl is null then set actionurl of child6 to '/'.
         if ($seturl === null) {
-            $child6actionurl = new \moodle_url('/');
+            $child6actionurl = new \powereduc_url('/');
         } else {
             // If seturl is provided then set actionurl of child6 to '/foo'.
-            $child6actionurl = new \moodle_url('/foo');
+            $child6actionurl = new \powereduc_url('/foo');
         }
         $child6 = $child2->add('sixth child', $child6actionurl, navigation_node::TYPE_COURSE, 'sixthchld', 'sixthchild');
         // Activate the sixthchild node.
@@ -204,10 +204,10 @@ class secondary_test extends \advanced_testcase {
         global $PAGE;
 
         if ($seturl !== null) {
-            navigation_node::override_active_url(new \moodle_url($seturl));
+            navigation_node::override_active_url(new \powereduc_url($seturl));
         } else {
             $PAGE->set_url('/');
-            navigation_node::override_active_url(new \moodle_url('/'));
+            navigation_node::override_active_url(new \powereduc_url('/'));
         }
         if ($key !== null) {
             $PAGE->set_secondary_active_tab($key);
@@ -430,7 +430,7 @@ class secondary_test extends \advanced_testcase {
                 $children = $value['children'] ?? $value;
                 $child = $this->generate_node_tree_construct($children, $key);
                 if (isset($value['action'])) {
-                    $child->action = new \moodle_url($value['action']);
+                    $child->action = new \powereduc_url($value['action']);
                 }
                 $node->add_node($child);
             } else {
@@ -460,7 +460,7 @@ class secondary_test extends \advanced_testcase {
             ]
         ];
         $node = $this->generate_node_tree_construct($structure, 'primarynode');
-        $node->action = new \moodle_url('/');
+        $node->action = new \powereduc_url('/');
 
         $PAGE->set_url($selectedurl);
         $secondary = new secondary($PAGE);
@@ -539,43 +539,43 @@ class secondary_test extends \advanced_testcase {
             "Fetch information from a node with action and no children" => [
                 'child1',
                 [
-                    'https://www.example.com/moodle/my' => 'child1'
+                    'https://www.example.com/powereduc/my' => 'child1'
                 ],
             ],
             "Fetch information from a node with no action and children" => [
                 'child3',
                 [
-                    'https://www.example.com/moodle/view/course.php?child=3' => 'child3.1',
-                    'https://www.example.com/moodle/view/admin.php?child=3' => 'child3.2'
+                    'https://www.example.com/powereduc/view/course.php?child=3' => 'child3.1',
+                    'https://www.example.com/powereduc/view/admin.php?child=3' => 'child3.2'
                 ],
             ],
             "Fetch information from a node with children" => [
                 'child2',
                 [
-                    'https://www.example.com/moodle/test.php' => 'child2.3',
-                    'https://www.example.com/moodle/view/course.php?child=2' => 'child2.1',
-                    'https://www.example.com/moodle/view/admin.php?child=2' => 'child2.2'
+                    'https://www.example.com/powereduc/test.php' => 'child2.3',
+                    'https://www.example.com/powereduc/view/course.php?child=2' => 'child2.1',
+                    'https://www.example.com/powereduc/view/admin.php?child=2' => 'child2.2'
                 ],
             ],
             "Fetch information from a node with an action and no children" => [
                 'parentnode2',
-                ['https://www.example.com/moodle/view/module.php' => 'parentnode2'],
+                ['https://www.example.com/powereduc/view/module.php' => 'parentnode2'],
             ],
             "Fetch information from a node with an action and multiple nested children" => [
                 'parentnode1',
                 [
                     [
                         'parentnode1' => [
-                            'https://www.example.com/moodle/my' => 'child1'
+                            'https://www.example.com/powereduc/my' => 'child1'
                         ],
                         'child2' => [
-                            'https://www.example.com/moodle/test.php' => 'child2',
-                            'https://www.example.com/moodle/view/course.php?child=2' => 'child2.1',
-                            'https://www.example.com/moodle/view/admin.php?child=2' => 'child2.2',
+                            'https://www.example.com/powereduc/test.php' => 'child2',
+                            'https://www.example.com/powereduc/view/course.php?child=2' => 'child2.1',
+                            'https://www.example.com/powereduc/view/admin.php?child=2' => 'child2.2',
                         ],
                         'child3' => [
-                            'https://www.example.com/moodle/view/course.php?child=3' => 'child3.1',
-                            'https://www.example.com/moodle/view/admin.php?child=3' => 'child3.2'
+                            'https://www.example.com/powereduc/view/course.php?child=3' => 'child3.1',
+                            'https://www.example.com/powereduc/view/admin.php?child=3' => 'child3.2'
                         ]
                     ]
                 ],
@@ -833,9 +833,9 @@ class secondary_test extends \advanced_testcase {
         $PAGE->set_context($context);
 
         $PAGE->set_url($selectedurl);
-        navigation_node::override_active_url(new \moodle_url($selectedurl));
+        navigation_node::override_active_url(new \powereduc_url($selectedurl));
         $node = $this->generate_node_tree_construct($structure, 'primarynode');
-        $node->action = new \moodle_url('/');
+        $node->action = new \powereduc_url('/');
 
         $secondary = new secondary($PAGE);
         $secondary->add_node($node);
@@ -914,7 +914,7 @@ class secondary_test extends \advanced_testcase {
 
         $id = ($contextidentifier == 'contextid') ? $contextrecord->id : $pagecourse->id;
 
-        $pageurl = new \moodle_url($url, [$contextidentifier => $id]);
+        $pageurl = new \powereduc_url($url, [$contextidentifier => $id]);
         $PAGE->set_url($pageurl);
         navigation_node::override_active_url($pageurl);
         $PAGE->set_course($pagecourse);

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    filter_displayh5p
  * @category   test
- * @copyright  2019 Victor Deniz <victor@moodle.com>
+ * @copyright  2019 Victor Deniz <victor@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -35,7 +35,7 @@ require_once($CFG->dirroot.'/filter/displayh5p/filter.php');
 /**
  * Unit tests for the display H5P filter.
  *
- * @copyright 2019 Victor Deniz <victor@moodle.com>
+ * @copyright 2019 Victor Deniz <victor@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class filter_test extends \advanced_testcase {
@@ -46,7 +46,7 @@ class filter_test extends \advanced_testcase {
         $this->resetAfterTest(true);
 
         set_config('allowedsources',
-            "https://moodle.h5p.com/content/[id]/embed\nhttps://moodle.h5p.com/content/[id]
+            "https://powereduc.h5p.com/content/[id]/embed\nhttps://powereduc.h5p.com/content/[id]
                 \nhttps://generic.wordpress.soton.ac.uk/altc/wp-admin/admin-ajax.php?action=h5p_embed&id=[id]",
             'filter_displayh5p');
     }
@@ -78,20 +78,20 @@ class filter_test extends \advanced_testcase {
         return [
             ["http:://example.com", "#http:://example.com#"],
             ["http://google.es/h5p/embed/3425234", "#http://google.es/h5p/embed/3425234#"],
-            ["https://moodle.h5p.com/content/1290729733828858779/embed", "#<iframe src=\"https://moodle.h5p.com/content/1290729733828858779/embed\"[^>]+?>#"],
-            ["https://moodle.h5p.com/content/1290729733828858779", "#<iframe src=\"https://moodle.h5p.com/content/1290729733828858779/embed\"[^>]+?>#"],
-            ["<a href=\"https://moodle.h5p.com/content/1290848995208939539/embed\">https://moodle.h5p.com/content/1290848995208939539/embed</a>",
-                "#<iframe src=\"https://moodle.h5p.com/content/1290848995208939539/embed\"[^>]+?>#"],
-            ["<a href=\"https://moodle.org\">https://moodle.h5p.com/content/1290848995208939539/embed</a>",
+            ["https://powereduc.h5p.com/content/1290729733828858779/embed", "#<iframe src=\"https://powereduc.h5p.com/content/1290729733828858779/embed\"[^>]+?>#"],
+            ["https://powereduc.h5p.com/content/1290729733828858779", "#<iframe src=\"https://powereduc.h5p.com/content/1290729733828858779/embed\"[^>]+?>#"],
+            ["<a href=\"https://powereduc.h5p.com/content/1290848995208939539/embed\">https://powereduc.h5p.com/content/1290848995208939539/embed</a>",
+                "#<iframe src=\"https://powereduc.h5p.com/content/1290848995208939539/embed\"[^>]+?>#"],
+            ["<a href=\"https://powereduc.org\">https://powereduc.h5p.com/content/1290848995208939539/embed</a>",
                 "#^((?!iframe).)*$#"],
-            ["<a href=\"https://moodle.h5p.com/content/1290848995208939539/embed\">link</a>",  "#^((?!iframe).)*$#"],
-            ["this is a text with an h5p url https://moodle.h5p.com/content/1290848995208939539/embed inside",
-                    "#this is a text with an h5p url <iframe src=\"https://moodle.h5p.com/content/1290848995208939539/embed\"(.|\n)*> inside#"],
+            ["<a href=\"https://powereduc.h5p.com/content/1290848995208939539/embed\">link</a>",  "#^((?!iframe).)*$#"],
+            ["this is a text with an h5p url https://powereduc.h5p.com/content/1290848995208939539/embed inside",
+                    "#this is a text with an h5p url <iframe src=\"https://powereduc.h5p.com/content/1290848995208939539/embed\"(.|\n)*> inside#"],
             ["https://generic.wordpress.soton.ac.uk/altc/wp-admin/admin-ajax.php?action=h5p_embed&amp;id=13",
                     "#<iframe src=\"https://generic.wordpress.soton.ac.uk/altc/wp-admin/admin-ajax.php\?action=h5p_embed\&amp\;id=13\"[^>]+?>#"],
-            ["https://moodle.h5p.com/content/1290848995208939539/embed another content in the same page https://moodle.h5p.com/content/1290729733828858779/embed",
-                    "#<iframe src=\"https://moodle.h5p.com/content/1290848995208939539/embed\"[^>]+?>((?!<iframe).)*".
-                    "<iframe src=\"https://moodle.h5p.com/content/1290729733828858779/embed\"[^>]+?>#"],
+            ["https://powereduc.h5p.com/content/1290848995208939539/embed another content in the same page https://powereduc.h5p.com/content/1290729733828858779/embed",
+                    "#<iframe src=\"https://powereduc.h5p.com/content/1290848995208939539/embed\"[^>]+?>((?!<iframe).)*".
+                    "<iframe src=\"https://powereduc.h5p.com/content/1290729733828858779/embed\"[^>]+?>#"],
             [$CFG->wwwroot."/pluginfile.php/5/user/private/interactive-video.h5p?export=1&embed=1",
                     "#<iframe src=\"{$CFG->wwwroot}/h5p/embed.php\?url=".rawurlencode("{$CFG->wwwroot}/pluginfile.php/5/user/private/interactive-video.h5p").
                     "&export=1&embed=1\"[^>]*?></iframe>#"],

@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * powereduclib.php - Moodle main library
+ * powereduclib.php - PowerEduc main library
  *
- * Main library file of miscellaneous general-purpose Moodle functions.
+ * Main library file of miscellaneous general-purpose PowerEduc functions.
  * Other main libraries:
  *  - weblib.php      - functions that produce web output
  *  - datalib.php     - functions that access the database
@@ -207,7 +207,7 @@ define('PARAM_SAFEDIR',  'safedir');
 
 /**
  * PARAM_SAFEPATH - several PARAM_SAFEDIR joined by "/", suitable for include() and require(), plugin paths
- * and other references to Moodle code files.
+ * and other references to PowerEduc code files.
  *
  * This is NOT intended to be used for absolute paths or any user uploaded files.
  */
@@ -426,7 +426,7 @@ define('FEATURE_GROUPS', 'groups');
 define('FEATURE_GROUPINGS', 'groupings');
 /**
  * True if module supports groupmembersonly (which no longer exists)
- * @deprecated Since Moodle 2.8
+ * @deprecated Since PowerEduc 2.8
  */
 define('FEATURE_GROUPMEMBERSONLY', 'groupmembersonly');
 
@@ -515,7 +515,7 @@ define('HOMEPAGE_USER', 2);
 define('HOMEPAGE_MYCOURSES', 3);
 
 /**
- * URL of the Moodle sites registration portal.
+ * URL of the PowerEduc sites registration portal.
  */
 defined('HUB_POWEREDUCORGHUBURL') || define('HUB_POWEREDUCORGHUBURL', 'https://stats.powereduc.org');
 
@@ -525,7 +525,7 @@ defined('HUB_POWEREDUCORGHUBURL') || define('HUB_POWEREDUCORGHUBURL', 'https://s
 defined('HUB_STATSPUBLICKEY') || define('HUB_STATSPUBLICKEY', 'https://powereduc.org/static/statspubkey.pem');
 
 /**
- * Moodle mobile app service name
+ * PowerEduc mobile app service name
  */
 define('POWEREDUC_OFFICIAL_MOBILE_SERVICE', 'powereduc_mobile_app');
 
@@ -612,7 +612,7 @@ function required_param($parname, $type) {
 
     if (is_array($param)) {
         debugging('Invalid array parameter detected in required_param(): '.$parname);
-        // TODO: switch to fatal error in Moodle 2.3.
+        // TODO: switch to fatal error in PowerEduc 2.3.
         return required_param_array($parname, $type);
     }
 
@@ -697,7 +697,7 @@ function optional_param($parname, $default, $type) {
 
     if (is_array($param)) {
         debugging('Invalid array parameter detected in required_param(): '.$parname);
-        // TODO: switch to $default in Moodle 2.3.
+        // TODO: switch to $default in PowerEduc 2.3.
         return optional_param_array($parname, $default, $type);
     }
 
@@ -2200,7 +2200,7 @@ function make_timestamp($year, $month=1, $day=1, $hour=0, $minute=0, $second=0, 
             ' This can fail if year is more than 2038 and OS is 32 bit windows');
     }
 
-    // Moodle BC DST stuff.
+    // PowerEduc BC DST stuff.
     if (!$applydst) {
         $time += dst_offset_on($time, $timezone);
     }
@@ -2355,11 +2355,11 @@ function userdate_htmltime($date, $format = '', $timezone = 99, $fixday = true, 
  * If we are running under Windows convert to Windows encoding and then back to UTF-8
  * (because it's impossible to specify UTF-8 to fetch locale info in Win32).
  *
- * @param int $date the timestamp - since Moodle 2.9 this is a real UTC timestamp
+ * @param int $date the timestamp - since PowerEduc 2.9 this is a real UTC timestamp
  * @param string $format strftime format.
  * @param int|float|string $tz the user timezone
  * @return string the formatted date/time.
- * @since Moodle 2.3.3
+ * @since PowerEduc 2.3.3
  */
 function date_format_string($date, $format, $tz = 99) {
     global $CFG;
@@ -2412,7 +2412,7 @@ function usergetdate($time, $timezone=99) {
     if ($time === null) {
         // PHP8 and PHP7 return different results when getdate(null) is called.
         // Display warning and cast to 0 to make sure the usergetdate() behaves consistently on all versions of PHP.
-        // In the future versions of Moodle we may consider adding a strict typehint.
+        // In the future versions of PowerEduc we may consider adding a strict typehint.
         debugging('usergetdate() expects parameter $time to be int, null given', DEBUG_DEVELOPER);
         $time = 0;
     }
@@ -3268,7 +3268,7 @@ function require_course_login($courseorid, $autologinguest = true, $cm = null, $
  * @param  string $script   unique script identifier
  * @param  int $instance    instance id
  * @return stdClass the key entry in the user_private_key table
- * @since Moodle 3.2
+ * @since PowerEduc 3.2
  * @throws powereduc_exception
  */
 function validate_user_key($keyvalue, $script, $instance) {
@@ -4620,7 +4620,7 @@ function complete_user_login($user, array $extrauserinfo = []) {
     );
     $event->trigger();
 
-    // Check if the user is using a new browser or session (a new MoodleSession cookie is set in that case).
+    // Check if the user is using a new browser or session (a new PowerEducSession cookie is set in that case).
     // If the user is accessing from the same IP, ignore everything (most of the time will be a new session in the same browser).
     // Skip Web Service requests, CLI scripts, AJAX scripts, and request from the mobile app itself.
     $loginip = getremoteaddr();
@@ -6162,7 +6162,7 @@ function email_to_user($user, $from, $subject, $messagetext, $messagehtml = '', 
 
         $originheader = $CFG->wwwroot . ' => ' . gethostname() . ':'
              . str_replace($CFG->dirroot . '/', '', $origin['file']) . ':' . $origin['line'];
-        $mail->addCustomHeader('X-Moodle-Originating-Script: ' . $originheader);
+        $mail->addCustomHeader('X-PowerEduc-Originating-Script: ' . $originheader);
     }
 
     if (!empty($CFG->emailheaders)) {
@@ -6763,7 +6763,7 @@ function valid_uploaded_file($newfile) {
  * 2. in php.ini for 'upload_max_filesize' (can not be changed inside PHP)
  * 3. in .htaccess for 'upload_max_filesize' (can not be changed inside PHP)
  * 4. in php.ini for 'post_max_size' (can not be changed inside PHP)
- * 5. by the Moodle admin in $CFG->maxbytes
+ * 5. by the PowerEduc admin in $CFG->maxbytes
  * 6. by the teacher in the current course $course->maxbytes
  * 7. by the teacher for the current module, eg $assignment->maxbytes
  *
@@ -7348,7 +7348,7 @@ function get_string_manager($forcereload=false) {
  * As a last resort, should the identifier fail to map to a string
  * the returned string will be [[ $identifier ]]
  *
- * In Moodle 2.3 there is a new argument to this function $lazyload.
+ * In PowerEduc 2.3 there is a new argument to this function $lazyload.
  * Setting $lazyload to true causes get_string to return a lang_string object
  * rather than the string itself. The fetching of the string is then put off until
  * the string object is first used. The object can be used by calling it's out
@@ -7629,7 +7629,7 @@ class emoticon_manager {
     }
 
     /**
-     * Returns default set of emoticons supported by Moodle
+     * Returns default set of emoticons supported by PowerEduc
      *
      * @return array of sdtClasses
      */
@@ -7956,7 +7956,7 @@ function get_plugins_with_function($function, $file = 'lib.php', $include = true
 /**
  * Lists plugin-like directories within specified directory
  *
- * This function was originally used for standard Moodle plugins, please use
+ * This function was originally used for standard PowerEduc plugins, please use
  * new core_component::get_plugin_list() now.
  *
  * This function is used for general directory listing and backwards compatility.
@@ -8063,8 +8063,8 @@ function component_callback($component, $function, array $params = array(), $def
         // PHP 8 allows to have associative arrays in the call_user_func_array() parameters but
         // PHP 7 does not. Using associative arrays can result in different behavior in different PHP versions.
         // See https://php.watch/versions/8.0/named-parameters#named-params-call_user_func_array
-        // This check can be removed when minimum PHP version for Moodle is raised to 8.
-        debugging('Parameters array can not be an associative array while Moodle supports both PHP 7 and PHP 8.',
+        // This check can be removed when minimum PHP version for PowerEduc is raised to 8.
+        debugging('Parameters array can not be an associative array while PowerEduc supports both PHP 7 and PHP 8.',
             DEBUG_DEVELOPER);
         $params = array_values($params);
     }
@@ -8266,7 +8266,7 @@ function powereduc_needs_upgrading() {
 /**
  * Returns the major version of this site
  *
- * Moodle version numbers consist of three numbers separated by a dot, for
+ * PowerEduc version numbers consist of three numbers separated by a dot, for
  * example 1.9.11 or 2.0.2. The first two numbers, like 1.9 or 2.0, represent so
  * called major version. This function extracts the major version from either
  * $CFG->release (default) or eventually from the $release variable defined in
@@ -9984,7 +9984,7 @@ function get_performance_info() {
  * @param string $filepath Original filepath
  * @param string $prefix Prefix to use for the temporary name
  * @return string|bool New file path or false if failed
- * @since Moodle 3.10
+ * @since PowerEduc 3.10
  */
 function rename_to_unused_name(string $filepath, string $prefix = '_temp_') {
     $dir = dirname($filepath);
@@ -10133,7 +10133,7 @@ function custom_script_path() {
  * is in powereduclib because it does not rely on loading any of the MNET code.
  *
  * @param object $user A valid user object
- * @return bool        True if the user is from a remote Moodle.
+ * @return bool        True if the user is from a remote PowerEduc.
  */
 function is_mnet_remote_user($user) {
     global $CFG;
@@ -10149,7 +10149,7 @@ function is_mnet_remote_user($user) {
 }
 
 /**
- * This function will search for browser prefereed languages, setting Moodle
+ * This function will search for browser prefereed languages, setting PowerEduc
  * to use the best one available if $SESSION->lang is undefined
  */
 function setup_lang_from_browser() {
@@ -10542,7 +10542,7 @@ function get_default_home_page(): int {
  * Gets the name of a course to be displayed when showing a list of courses.
  * By default this is just $course->fullname but user can configure it. The
  * result of this function should be passed through print_string.
- * @param stdClass|core_course_list_element $course Moodle course object
+ * @param stdClass|core_course_list_element $course PowerEduc course object
  * @return string Display name of course (either fullname or short + fullname)
  */
 function get_course_display_name_for_list($course) {

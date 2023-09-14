@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'repository', language 'en', branch 'POWEREDUC_20_STABLE'
@@ -63,19 +63,19 @@ $string['cannotunzipquotaexceeded'] = 'Cannot unzip this file because the maximu
 $string['cleancache'] = 'Clean my cache files';
 $string['close'] = 'Close';
 $string['commonrepositorysettings'] = 'Common repository settings';
-$string['configallowexternallinks'] = 'This option enables all users to choose whether or not external media is copied into Moodle or not. If this is off then media is always copied into Moodle (this is usually best for overall data integrity and security).  If this is on then users can choose each time they add media to a text.';
+$string['configallowexternallinks'] = 'This option enables all users to choose whether or not external media is copied into PowerEduc or not. If this is off then media is always copied into PowerEduc (this is usually best for overall data integrity and security).  If this is on then users can choose each time they add media to a text.';
 $string['configcacheexpire'] = 'The amount of time that file listings are cached locally (in seconds) when browsing external repositories.';
-$string['configgetfiletimeout'] = 'Timeout in seconds for downloading an external file into Moodle.';
+$string['configgetfiletimeout'] = 'Timeout in seconds for downloading an external file into PowerEduc.';
 $string['configsaved'] = 'Configuration saved!';
 $string['configsyncfiletimeout'] = 'Timeout in seconds for synchronising the external file size.';
 $string['configsyncimagetimeout'] = 'Timeout in seconds for downloading an image file from external repository during synchronisation.';
-$string['confirmdelete'] = 'Are you sure you want to delete the repository {$a}? If you choose "Continue and download", file references to external contents will be downloaded to Moodle. This could take a long time to process.';
+$string['confirmdelete'] = 'Are you sure you want to delete the repository {$a}? If you choose "Continue and download", file references to external contents will be downloaded to PowerEduc. This could take a long time to process.';
 $string['confirmdeletefile'] = 'Are you sure you want to delete this file?';
 $string['confirmdeleteselectedfile'] = 'Are you sure you want to delete the selected {$a} file(s)?';
 $string['confirmrenamefile'] = 'Are you sure you want to rename/move this file?';
 $string['confirmdeletefilewithhref'] = 'Are you sure you want to delete this file? There are {$a} links to this file. If you proceed then locations which currently link to the file will be automatically updated to use a copy of the file instead.';
 $string['confirmdeletefolder'] = 'Are you sure you want to delete this folder? All files and subfolders will be deleted.';
-$string['confirmremove'] = 'Are you sure you want to remove this repository plugin, its options and <strong>all of its instances</strong> - {$a}? If you choose "Continue and download", file references to external contents will be downloaded to Moodle. This could take a long time to process.';
+$string['confirmremove'] = 'Are you sure you want to remove this repository plugin, its options and <strong>all of its instances</strong> - {$a}? If you choose "Continue and download", file references to external contents will be downloaded to PowerEduc. This could take a long time to process.';
 $string['confirmrenamefolder'] = 'Are you sure you want to move/rename this folder? Any locations which currently link to files in this folder will be automatically updated to use copies of the file instead.';
 $string['continueuninstall'] = 'Continue';
 $string['continueuninstallanddownload'] = 'Continue and download';

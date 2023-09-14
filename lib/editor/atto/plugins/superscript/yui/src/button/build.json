@@ -1,7 +1,7 @@
 {
-    "name": "moodle-atto_superscript-button",
+    "name": "powereduc-atto_superscript-button",
     "builds": {
-        "moodle-atto_superscript-button": {
+        "powereduc-atto_superscript-button": {
             "jsfiles": [
                 "button.js"
             ]

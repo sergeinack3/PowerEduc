@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * Display H5P filter
  *
  * @package    filter_displayh5p
- * @copyright  2019 Victor Deniz <victor@moodle.com>
+ * @copyright  2019 Victor Deniz <victor@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,10 +31,10 @@ use core_h5p\local\library\autoloader;
  * This filter will replace any occurrence of H5P URLs with the corresponding H5P content embed code
  *
  * @package    filter_displayh5p
- * @copyright  2019 Victor Deniz <victor@moodle.com>
+ * @copyright  2019 Victor Deniz <victor@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class filter_displayh5p extends moodle_text_filter {
+class filter_displayh5p extends powereduc_text_filter {
 
     /**
      * @var boolean $loadresizerjs This is whether to request the resize.js script.
@@ -152,7 +152,7 @@ class filter_displayh5p extends moodle_text_filter {
                     // The Edit button placeholder has been added only if the file can be edited.
                     if ($h5pcontent->replacementcallbackdata['canbeedited']) {
                         // If the content was originally a link, ignore it (it won't have the placeholder).
-                        $matchurl = new \moodle_url($matches[0]);
+                        $matchurl = new \powereduc_url($matches[0]);
                         if (strpos($matchurl->get_path(), 'h5p/embed.php') !== false) {
                             return $matches[0];
                         }

@@ -1,9 +1,9 @@
-YUI.add('moodle-availability_group-form', function (Y, NAME) {
+YUI.add('powereduc-availability_group-form', function (Y, NAME) {
 
 /**
  * JavaScript for form editing group conditions.
  *
- * @module moodle-availability_group-form
+ * @module powereduc-availability_group-form
  */
 M.availability_group = M.availability_group || {};
 
@@ -36,7 +36,7 @@ M.availability_group.form.getNode = function(json) {
     var html = '<label><span class="pr-3">' + M.util.get_string('title', 'availability_group') + '</span> ' +
             '<span class="availability-group">' +
             '<select name="id" class="custom-select">' +
-            '<option value="choose">' + M.util.get_string('choosedots', 'moodle') + '</option>' +
+            '<option value="choose">' + M.util.get_string('choosedots', 'powereduc') + '</option>' +
             '<option value="any">' + M.util.get_string('anygroup', 'availability_group') + '</option>';
     for (var i = 0; i < this.groups.length; i++) {
         var group = this.groups[i];
@@ -89,4 +89,4 @@ M.availability_group.form.fillErrors = function(errors, node) {
 };
 
 
-}, '@VERSION@', {"requires": ["base", "node", "event", "moodle-core_availability-form"]});
+}, '@VERSION@', {"requires": ["base", "node", "event", "powereduc-core_availability-form"]});

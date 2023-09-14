@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package moodlecore
+ * @package powereduccore
  * @subpackage backup-plan
  * @copyright 2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -272,7 +272,7 @@ abstract class base_task implements checksumable, executable, loggable {
 /*
  * Exception class used by all the @base_task stuff
  */
-class base_task_exception extends moodle_exception {
+class base_task_exception extends powereduc_exception {
 
     public function __construct($errorcode, $a=NULL, $debuginfo=null) {
         parent::__construct($errorcode, '', '', $a, $debuginfo);

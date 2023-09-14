@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * setup.php - Sets up sessions, connects to databases and so on
@@ -28,7 +28,7 @@
  */
 
 /**
- * Holds the core settings that affect how Moodle works. Some of its fields
+ * Holds the core settings that affect how PowerEduc works. Some of its fields
  * are set in config.php, and the rest are loaded from the config table.
  *
  * Some typical settings in the $CFG global:
@@ -253,7 +253,7 @@ ini_set('serialize_precision', 17); // Make float serialization consistent on al
 // and in some cases you also need to set custom default exception handler
 if (!defined('NO_DEBUG_DISPLAY')) {
     if (defined('AJAX_SCRIPT') and AJAX_SCRIPT) {
-        // Moodle AJAX scripts are expected to return json data, any PHP notices or errors break it badly,
+        // PowerEduc AJAX scripts are expected to return json data, any PHP notices or errors break it badly,
         // developers simply must learn to watch error log.
         define('NO_DEBUG_DISPLAY', true);
     } else {
@@ -287,7 +287,7 @@ if (!defined('MDL_PERF_TEST')) {
     }
 }
 
-// When set to true MUC (Moodle caching) will be disabled as much as possible.
+// When set to true MUC (PowerEduc caching) will be disabled as much as possible.
 // A special cache factory will be used to handle this situation and will use special "disabled" equivalents objects.
 // This ensure we don't attempt to read or create the config file, don't use stores, don't provide persistence or
 // storage of any kind.
@@ -295,7 +295,7 @@ if (!defined('CACHE_DISABLE_ALL')) {
     define('CACHE_DISABLE_ALL', false);
 }
 
-// When set to true MUC (Moodle caching) will not use any of the defined or default stores.
+// When set to true MUC (PowerEduc caching) will not use any of the defined or default stores.
 // The Cache API will continue to function however this will force the use of the cachestore_dummy so all requests
 // will be interacting with a static property and will never go to the proper cache stores.
 // Useful if you need to avoid the stores for one reason or another.
@@ -337,8 +337,8 @@ if (!defined('WS_SERVER')) {
 // Detect CLI maintenance mode - this is useful when you need to mess with database, such as during upgrades
 if (file_exists("$CFG->dataroot/climaintenance.html")) {
     if (!CLI_SCRIPT) {
-        header($_SERVER['SERVER_PROTOCOL'] . ' 503 Moodle under maintenance');
-        header('Status: 503 Moodle under maintenance');
+        header($_SERVER['SERVER_PROTOCOL'] . ' 503 PowerEduc under maintenance');
+        header('Status: 503 PowerEduc under maintenance');
         header('Retry-After: 300');
         header('Content-type: text/html; charset=utf-8');
         header('X-UA-Compatible: IE=edge');
@@ -366,7 +366,7 @@ if (file_exists("$CFG->dataroot/climaintenance.html")) {
 if (version_compare(PHP_VERSION, '5.6.5') < 0) {
     $phpversion = PHP_VERSION;
     // Do NOT localise - lang strings would not work here and we CAN NOT move it to later place.
-    echo "Moodle 3.2 or later requires at least PHP 5.6.5 (currently using version $phpversion).\n";
+    echo "PowerEduc 3.2 or later requires at least PHP 5.6.5 (currently using version $phpversion).\n";
     echo "Some servers may have multiple PHP versions installed, are you using the correct executable?\n";
     exit(1);
 }
@@ -412,7 +412,7 @@ if (isset($CFG->debug)) {
 $CFG->debugdeveloper = (($CFG->debug & (E_ALL | E_STRICT)) === (E_ALL | E_STRICT)); // DEBUG_DEVELOPER is not available yet.
 
 if (!defined('POWEREDUC_INTERNAL')) { // Necessary because cli installer has to define it earlier.
-    /** Used by library scripts to check they are being called by Moodle. */
+    /** Used by library scripts to check they are being called by PowerEduc. */
     define('POWEREDUC_INTERNAL', true);
 }
 
@@ -425,7 +425,7 @@ if (defined('ABORT_AFTER_CONFIG')) {
         // hide debugging if not enabled in config.php - we do not want to disclose sensitive info
         error_reporting($CFG->debug);
         if (NO_DEBUG_DISPLAY) {
-            // Some parts of Moodle cannot display errors and debug at all.
+            // Some parts of PowerEduc cannot display errors and debug at all.
             ini_set('display_errors', '0');
             ini_set('log_errors', '1');
         } else if (empty($CFG->debugdisplay)) {
@@ -453,7 +453,7 @@ if (!empty($CFG->earlyprofilingenabled)) {
 global $DB;
 
 /**
- * Moodle's wrapper round PHP's $_SESSION.
+ * PowerEduc's wrapper round PHP's $_SESSION.
  *
  * @global object $SESSION
  * @name $SESSION
@@ -699,11 +699,11 @@ $CFG->debugdeveloper = (($CFG->debug & DEBUG_DEVELOPER) === DEBUG_DEVELOPER);
 if (ini_get_bool('display_errors')) {
     define('WARN_DISPLAY_ERRORS_ENABLED', true);
 }
-// If we want to display Moodle errors, then try and set PHP errors to match.
+// If we want to display PowerEduc errors, then try and set PHP errors to match.
 if (!isset($CFG->debugdisplay)) {
     // Keep it "as is" during installation.
 } else if (NO_DEBUG_DISPLAY) {
-    // Some parts of Moodle cannot display errors and debug at all.
+    // Some parts of PowerEduc cannot display errors and debug at all.
     ini_set('display_errors', '0');
     ini_set('log_errors', '1');
 } else if (empty($CFG->debugdisplay)) {

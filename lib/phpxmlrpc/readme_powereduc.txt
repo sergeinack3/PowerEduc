@@ -1,4 +1,4 @@
-Description of XMLRPC for PHP library import into Moodle.
+Description of XMLRPC for PHP library import into PowerEduc.
 
 Source: https://github.com/gggeek/phpxmlrpc
 
@@ -19,4 +19,4 @@ To update:
 Current version imported: 4.8.1 (c74cc31)
 
 Local changes:
- * readme_moodle.txt - this file ;-)
+ * readme_powereduc.txt - this file ;-)

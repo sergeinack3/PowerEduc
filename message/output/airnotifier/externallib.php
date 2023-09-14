@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * External functions
@@ -21,7 +21,7 @@
  * @category   external
  * @copyright  2012 Jerome Mouneyrac <jerome@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.7
+ * @since PowerEduc 2.7
  */
 
 defined('POWEREDUC_INTERNAL') || die;
@@ -35,14 +35,14 @@ require_once("$CFG->libdir/externallib.php");
  * @category   external
  * @copyright  2012 Jerome Mouneyrac <jerome@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.7
+ * @since PowerEduc 2.7
  */
 class message_airnotifier_external extends external_api {
 
     /**
      * Returns description of method parameters
      *
-     * @since Moodle 2.7
+     * @since PowerEduc 2.7
      */
     public static function is_system_configured_parameters() {
         return new external_function_parameters(
@@ -53,7 +53,7 @@ class message_airnotifier_external extends external_api {
     /**
      * Tests whether the airnotifier settings have been configured
      *
-     * @since Moodle 2.7
+     * @since PowerEduc 2.7
      */
     public static function is_system_configured() {
         global $DB;
@@ -73,7 +73,7 @@ class message_airnotifier_external extends external_api {
      * Returns description of method result value
      *
      * @return external_single_structure
-     * @since Moodle 2.7
+     * @since PowerEduc 2.7
      */
     public static function is_system_configured_returns() {
         return new external_value( PARAM_INT, '0 if the system is not configured, 1 otherwise');
@@ -82,7 +82,7 @@ class message_airnotifier_external extends external_api {
     /**
      * Returns description of method parameters
      *
-     * @since Moodle 2.7
+     * @since PowerEduc 2.7
      */
     public static function are_notification_preferences_configured_parameters() {
         return new external_function_parameters(
@@ -96,7 +96,7 @@ class message_airnotifier_external extends external_api {
      * Check if the users have notification preferences configured for the airnotifier plugin
      *
      * @param array $userids Array of user ids
-     * @since Moodle 2.7
+     * @since PowerEduc 2.7
      */
     public static function are_notification_preferences_configured($userids) {
         global $CFG, $USER, $DB;
@@ -189,7 +189,7 @@ class message_airnotifier_external extends external_api {
      * Returns description of method result value
      *
      * @return external_single_structure
-     * @since Moodle 2.7
+     * @since PowerEduc 2.7
      */
     public static function are_notification_preferences_configured_returns() {
         return new external_single_structure(
@@ -211,7 +211,7 @@ class message_airnotifier_external extends external_api {
     /**
      * Returns description of method parameters
      *
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_user_devices_parameters() {
         return new external_function_parameters(
@@ -223,13 +223,13 @@ class message_airnotifier_external extends external_api {
     }
 
     /**
-     * Return the list of mobile devices that are registered in Moodle for the given user.
+     * Return the list of mobile devices that are registered in PowerEduc for the given user.
      *
      * @param  string  $appid  app unique id (usually a reversed domain)
      * @param  integer $userid the user id, 0 for current user
      * @return array warnings and devices
      * @throws powereduc_exception
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_user_devices($appid, $userid = 0) {
         global $USER;
@@ -291,7 +291,7 @@ class message_airnotifier_external extends external_api {
      * Returns description of method result value
      *
      * @return external_single_structure
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_user_devices_returns() {
         return new external_single_structure(
@@ -322,7 +322,7 @@ class message_airnotifier_external extends external_api {
     /**
      * Returns description of method parameters
      *
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function enable_device_parameters() {
         return new external_function_parameters(
@@ -340,7 +340,7 @@ class message_airnotifier_external extends external_api {
      * @param  bool $enable whether to enable the device
      * @return array warnings and success status
      * @throws powereduc_exception
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function enable_device($deviceid, $enable) {
         global $USER;
@@ -371,7 +371,7 @@ class message_airnotifier_external extends external_api {
      * Returns description of method result value
      *
      * @return external_single_structure
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function enable_device_returns() {
         return new external_single_structure(

@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,13 +23,13 @@
  * The goal is that we can quickly gut all AMD modules into bare JS files and use ES6 guidelines.
  * Till then this will have to do.
  *
- * @module     tool_moodlenet/instance_form
+ * @module     tool_powereducnet/instance_form
  * @copyright  2020 Mathew May <mathew.solutions>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-define(['tool_moodlenet/validator',
-        'tool_moodlenet/selectors',
+define(['tool_powereducnet/validator',
+        'tool_powereducnet/selectors',
         'core/loadingicon',
         'core/templates',
         'core/notification',
@@ -122,7 +122,7 @@ define(['tool_moodlenet/validator',
         // Trigger the transition between 'pages'.
         carousel.carousel(2);
         // eslint-disable-next-line max-len
-        modal.setFooter(Templates.render('tool_moodlenet/chooser_footer_close_mnet', {}));
+        modal.setFooter(Templates.render('tool_powereducnet/chooser_footer_close_mnet', {}));
     };
 
     /**
@@ -150,7 +150,7 @@ define(['tool_moodlenet/validator',
         if (e.target.matches(Selectors.action.showMoodleNet) || e.target.closest(Selectors.action.showMoodleNet)) {
             e.preventDefault();
             const carousel = $(modal.getBody()[0].querySelector(Selectors.region.carousel));
-            const showMoodleNet = carousel.find(Selectors.region.moodleNet)[0];
+            const showMoodleNet = carousel.find(Selectors.region.powereducNet)[0];
 
             chooserNavigateToMnet(showMoodleNet, footerData, carousel, modal);
         }

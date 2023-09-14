@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ use external_multiple_structure;
 use external_warnings;
 use context_system;
 use context_course;
-use moodle_exception;
+use powereduc_exception;
 use core_blog\external\post_exporter;
 
 /**
@@ -59,7 +59,7 @@ class external extends external_api {
         global $CFG;
 
         if (empty($CFG->enableblogs)) {
-            throw new moodle_exception('blogdisable', 'blog');
+            throw new powereduc_exception('blogdisable', 'blog');
         }
 
         // Init filters.
@@ -87,7 +87,7 @@ class external extends external_api {
         foreach ($rawwsfilters as $filter) {
             $name = trim($filter['name']);
             if (!isset($filterstype[$name])) {
-                throw new moodle_exception('errorinvalidparam', 'webservice', '', $name);
+                throw new powereduc_exception('errorinvalidparam', 'webservice', '', $name);
             }
             $filters[$name] = clean_param($filter['value'], $filterstype[$name]);
         }

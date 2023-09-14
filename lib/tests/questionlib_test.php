@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
@@ -246,7 +246,7 @@ class questionlib_test extends \advanced_testcase {
         $bc->execute_plan();
         $results = $bc->get_results();
         $file = $results['backup_destination'];
-        $fp = get_file_packer('application/vnd.moodle.backup');
+        $fp = get_file_packer('application/vnd.powereduc.backup');
         $filepath = $CFG->dataroot . '/temp/backup/test-restore-course';
         $file->extract_to_pathname($fp, $filepath);
         $bc->destroy();
@@ -506,7 +506,7 @@ class questionlib_test extends \advanced_testcase {
 
         list($category, $course, $quiz, $qcat, $questions) = $this->setup_quiz_and_questions();
 
-        // Moodle doesn't allow you to enter a name longer than 255 characters.
+        // PowerEduc doesn't allow you to enter a name longer than 255 characters.
         $quiz->name = shorten_text(str_repeat('123456789 ', 26), 255);
 
         $DB->update_record('quiz', $quiz);
@@ -1513,7 +1513,7 @@ class questionlib_test extends \advanced_testcase {
         return [
             'Unrelated capability which is present' => [
                 'capabilities' => [
-                    'moodle/question:config' => CAP_ALLOW,
+                    'powereduc/question:config' => CAP_ALLOW,
                 ],
                 'testcapability' => 'config',
                 'isowner' => true,
@@ -1521,7 +1521,7 @@ class questionlib_test extends \advanced_testcase {
             ],
             'Unrelated capability which is present (not owner)' => [
                 'capabilities' => [
-                    'moodle/question:config' => CAP_ALLOW,
+                    'powereduc/question:config' => CAP_ALLOW,
                 ],
                 'testcapability' => 'config',
                 'isowner' => false,
@@ -1543,7 +1543,7 @@ class questionlib_test extends \advanced_testcase {
             ],
             'Unrelated capability which is prevented' => [
                 'capabilities' => [
-                    'moodle/question:config' => CAP_PREVENT,
+                    'powereduc/question:config' => CAP_PREVENT,
                 ],
                 'testcapability' => 'config',
                 'isowner' => true,
@@ -1551,7 +1551,7 @@ class questionlib_test extends \advanced_testcase {
             ],
             'Unrelated capability which is prevented (not owner)' => [
                 'capabilities' => [
-                    'moodle/question:config' => CAP_PREVENT,
+                    'powereduc/question:config' => CAP_PREVENT,
                 ],
                 'testcapability' => 'config',
                 'isowner' => false,
@@ -1573,7 +1573,7 @@ class questionlib_test extends \advanced_testcase {
             ],
             'Related capability which is allowed at all, unset at mine' => [
                 'capabilities' => [
-                    'moodle/question:editall' => CAP_ALLOW,
+                    'powereduc/question:editall' => CAP_ALLOW,
                 ],
                 'testcapability' => 'edit',
                 'isowner' => true,
@@ -1581,7 +1581,7 @@ class questionlib_test extends \advanced_testcase {
             ],
             'Related capability which is allowed at all, unset at mine (not owner)' => [
                 'capabilities' => [
-                    'moodle/question:editall' => CAP_ALLOW,
+                    'powereduc/question:editall' => CAP_ALLOW,
                 ],
                 'testcapability' => 'edit',
                 'isowner' => false,
@@ -1589,8 +1589,8 @@ class questionlib_test extends \advanced_testcase {
             ],
             'Related capability which is allowed at all, prevented at mine' => [
                 'capabilities' => [
-                    'moodle/question:editall' => CAP_ALLOW,
-                    'moodle/question:editmine' => CAP_PREVENT,
+                    'powereduc/question:editall' => CAP_ALLOW,
+                    'powereduc/question:editmine' => CAP_PREVENT,
                 ],
                 'testcapability' => 'edit',
                 'isowner' => true,
@@ -1598,8 +1598,8 @@ class questionlib_test extends \advanced_testcase {
             ],
             'Related capability which is allowed at all, prevented at mine (not owner)' => [
                 'capabilities' => [
-                    'moodle/question:editall' => CAP_ALLOW,
-                    'moodle/question:editmine' => CAP_PREVENT,
+                    'powereduc/question:editall' => CAP_ALLOW,
+                    'powereduc/question:editmine' => CAP_PREVENT,
                 ],
                 'testcapability' => 'edit',
                 'isowner' => false,
@@ -1607,8 +1607,8 @@ class questionlib_test extends \advanced_testcase {
             ],
             'Related capability which is unset all, allowed at mine' => [
                 'capabilities' => [
-                    'moodle/question:editall' => CAP_PREVENT,
-                    'moodle/question:editmine' => CAP_ALLOW,
+                    'powereduc/question:editall' => CAP_PREVENT,
+                    'powereduc/question:editmine' => CAP_ALLOW,
                 ],
                 'testcapability' => 'edit',
                 'isowner' => true,
@@ -1616,8 +1616,8 @@ class questionlib_test extends \advanced_testcase {
             ],
             'Related capability which is unset all, allowed at mine (not owner)' => [
                 'capabilities' => [
-                    'moodle/question:editall' => CAP_PREVENT,
-                    'moodle/question:editmine' => CAP_ALLOW,
+                    'powereduc/question:editall' => CAP_PREVENT,
+                    'powereduc/question:editmine' => CAP_ALLOW,
                 ],
                 'testcapability' => 'edit',
                 'isowner' => false,

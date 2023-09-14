@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ require_once("lib.php");
 $id   = required_param('id', PARAM_INT);               // course id
 $scaleid  = optional_param('scaleid', 0, PARAM_INT);   // scale id (show only this one)
 
-$url = new moodle_url('/course/scales.php', array('id'=>$id));
+$url = new powereduc_url('/course/scales.php', array('id'=>$id));
 if ($scaleid !== 0) {
     $url->param('scaleid', $scaleid);
 }
@@ -48,7 +48,7 @@ if ($course = $DB->get_record('course', array('id'=>$id))) {
 }
 
 $PAGE->set_context($context);
-require_capability('moodle/course:viewscales', $context);
+require_capability('powereduc/course:viewscales', $context);
 
 $strscales = get_string("scales");
 $strcustomscales = get_string("scalescustom");
@@ -88,7 +88,7 @@ $systemcontext = context_system::instance();
 if ($scales = $DB->get_records("scale", array("courseid"=>$course->id), "name ASC")) {
     echo $OUTPUT->heading($strcustomscales);
 
-    if (has_capability('moodle/course:managescales', $context)) {
+    if (has_capability('powereduc/course:managescales', $context)) {
         echo "<p align=\"center\">(";
         print_string('scalestip2');
         echo ")</p>";
@@ -112,7 +112,7 @@ if ($scales = $DB->get_records("scale", array("courseid"=>$course->id), "name AS
     }
 
 } else {
-    if (has_capability('moodle/course:managescales', $context)) {
+    if (has_capability('powereduc/course:managescales', $context)) {
         echo "<p align=\"center\">(";
         print_string("scalestip2");
         echo ")</p>";

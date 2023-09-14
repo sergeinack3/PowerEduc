@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -76,7 +76,7 @@ abstract class binary extends discrete {
         } else if ($value == 1) {
             return get_string('yes');
         } else {
-            throw new \moodle_exception('errorpredictionformat', 'analytics');
+            throw new \powereduc_exception('errorpredictionformat', 'analytics');
         }
     }
 
@@ -95,7 +95,7 @@ abstract class binary extends discrete {
         } else if ($value == 1) {
             return self::OUTCOME_OK;
         } else {
-            throw new \moodle_exception('errorpredictionformat', 'analytics');
+            throw new \powereduc_exception('errorpredictionformat', 'analytics');
         }
     }
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -97,14 +97,14 @@ class externallib_test extends externallib_advanced_testcase {
                 ),
             ),
 
-            'Course with separate groups, default behavior (not filtering but having moodle/site:accessallgroups)' =>
+            'Course with separate groups, default behavior (not filtering but having powereduc/site:accessallgroups)' =>
             array(
                 'settings' => array(
                     'coursegroupmode' => VISIBLEGROUPS,
                     'withcapability' => null,
                     'groupid' => null,
                     'onlyactive' => false,
-                    'allowedcaps' => array('moodle/site:accessallgroups'),
+                    'allowedcaps' => array('powereduc/site:accessallgroups'),
                 ),
                 'results' => array( // Everybody can view everybody.
                     'user0' => array('canview' => array('user0', 'user1', 'user2', 'user2su', 'user31', 'user32', 'userall')),
@@ -115,7 +115,7 @@ class externallib_test extends externallib_advanced_testcase {
                 ),
             ),
 
-            'Course with separate groups, filtering onlyactive (missing moodle/course:enrolreview)' =>
+            'Course with separate groups, filtering onlyactive (missing powereduc/course:enrolreview)' =>
             array(
                 'settings' => array(
                     'coursegroupmode' => SEPARATEGROUPS,
@@ -134,14 +134,14 @@ class externallib_test extends externallib_advanced_testcase {
                 ),
             ),
 
-            'Course with separate groups, filtering onlyactive (having moodle/course:enrolreview)' =>
+            'Course with separate groups, filtering onlyactive (having powereduc/course:enrolreview)' =>
             array(
                 'settings' => array(
                     'coursegroupmode' => SEPARATEGROUPS,
                     'withcapability' => null,
                     'groupid' => null,
                     'onlyactive' => true,
-                    'allowedcaps' => array('moodle/course:enrolreview'),
+                    'allowedcaps' => array('powereduc/course:enrolreview'),
                 ),
                 'results' => array( // Suspended are not returned.
                     'user2' => array('canview' => array('user2', 'userall')),
@@ -150,7 +150,7 @@ class externallib_test extends externallib_advanced_testcase {
                 ),
             ),
 
-            'Course with separate groups, filtering by groupid (not having moodle/site:accessallgroups)' =>
+            'Course with separate groups, filtering by groupid (not having powereduc/site:accessallgroups)' =>
             array(
                 'settings' => array(
                     'coursegroupmode' => SEPARATEGROUPS,
@@ -171,16 +171,16 @@ class externallib_test extends externallib_advanced_testcase {
                 ),
             ),
 
-            'Course with separate groups, filtering by groupid (having moodle/site:accessallgroups)' =>
+            'Course with separate groups, filtering by groupid (having powereduc/site:accessallgroups)' =>
             array(
                 'settings' => array(
                     'coursegroupmode' => SEPARATEGROUPS,
                     'withcapability' => null,
                     'groupid' => 'group2',
                     'onlyactive' => false,
-                    'allowedcaps' => array('moodle/site:accessallgroups'),
+                    'allowedcaps' => array('powereduc/site:accessallgroups'),
                 ),
-                'results' => array( // All users with 'moodle/site:accessallgroups' can view group 2
+                'results' => array( // All users with 'powereduc/site:accessallgroups' can view group 2
                     'user0' => array('canview' => array('user2', 'user2su', 'userall')),
                     'user1' => array('canview' => array('user2', 'user2su', 'userall')),
                     'user2' => array('canview' => array('user2', 'user2su', 'userall')),
@@ -188,16 +188,16 @@ class externallib_test extends externallib_advanced_testcase {
                 ),
             ),
 
-            'Course with separate groups, filtering by withcapability (not having moodle/role:review)' =>
+            'Course with separate groups, filtering by withcapability (not having powereduc/role:review)' =>
             array(
                 'settings' => array(
                     'coursegroupmode' => SEPARATEGROUPS,
-                    'withcapability' => 'moodle/course:bulkmessaging',
+                    'withcapability' => 'powereduc/course:bulkmessaging',
                     'groupid' => null,
                     'onlyactive' => false,
                     'allowedcaps' => array(),
                 ),
-                'results' => array( // No user has 'moodle/role:review' so exception.
+                'results' => array( // No user has 'powereduc/role:review' so exception.
                     'user0' => array('exception' => array(
                         'type' => 'required_capability_exception',
                         'message' => 'Review permissions for others')),
@@ -213,16 +213,16 @@ class externallib_test extends externallib_advanced_testcase {
                 ),
             ),
 
-            'Course with separate groups, filtering by withcapability (having moodle/role:review)' =>
+            'Course with separate groups, filtering by withcapability (having powereduc/role:review)' =>
             array(
                 'settings' => array(
                     'coursegroupmode' => SEPARATEGROUPS,
-                    'withcapability' => 'moodle/course:bulkmessaging',
+                    'withcapability' => 'powereduc/course:bulkmessaging',
                     'groupid' => null,
                     'onlyactive' => false,
-                    'allowedcaps' => array('moodle/role:review'),
+                    'allowedcaps' => array('powereduc/role:review'),
                 ),
-                'results' => array( // No user has withcapability, but all have 'moodle/role:review'. Empties.
+                'results' => array( // No user has withcapability, but all have 'powereduc/role:review'. Empties.
                     'user0' => array('canview' => array()),
                     'user1' => array('canview' => array()),
                     'user2' => array('canview' => array()),
@@ -230,16 +230,16 @@ class externallib_test extends externallib_advanced_testcase {
                 ),
             ),
 
-            'Course with separate groups, filtering by withcapability (having moodle/role:review)' =>
+            'Course with separate groups, filtering by withcapability (having powereduc/role:review)' =>
             array(
                 'settings' => array(
                     'coursegroupmode' => SEPARATEGROUPS,
-                    'withcapability' => 'moodle/course:bulkmessaging',
+                    'withcapability' => 'powereduc/course:bulkmessaging',
                     'groupid' => null,
                     'onlyactive' => false,
-                    'allowedcaps' => array('moodle/role:review', 'moodle/course:bulkmessaging'),
+                    'allowedcaps' => array('powereduc/role:review', 'powereduc/course:bulkmessaging'),
                 ),
-                'results' => array( // Users (previous) have withcapability, and all have 'moodle/role:review'.
+                'results' => array( // Users (previous) have withcapability, and all have 'powereduc/role:review'.
                     'user0' => array('canview' => array()),
                     'user1' => array('canview' => array('user1')),
                     'user2' => array('canview' => array('user2')),
@@ -390,8 +390,8 @@ class externallib_test extends externallib_advanced_testcase {
         // Create a role to add the allowedcaps. Users will have this role assigned.
         $roleid = $this->getDataGenerator()->create_role();
         // Allow the specified capabilities.
-        assign_capability('moodle/course:enrolreview', CAP_ALLOW, $roleid, $coursecontext);
-        assign_capability('moodle/user:viewalldetails', CAP_ALLOW, $roleid, $coursecontext);
+        assign_capability('powereduc/course:enrolreview', CAP_ALLOW, $roleid, $coursecontext);
+        assign_capability('powereduc/user:viewalldetails', CAP_ALLOW, $roleid, $coursecontext);
 
         // Switch to the user and assign the role.
         $this->setUser($user0);
@@ -644,7 +644,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Prohibit the capability for viewing course participants.
         $studentrole = $DB->get_field('role', 'id', ['shortname' => 'student']);
-        assign_capability('moodle/course:viewparticipants', CAP_PROHIBIT, $studentrole, $context->id);
+        assign_capability('powereduc/course:viewparticipants', CAP_PROHIBIT, $studentrole, $context->id);
 
         $courses = core_enrol_external::clean_returnvalue(
             core_enrol_external::get_users_courses_returns(),
@@ -822,7 +822,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->setUser($user);
         try {
             core_enrol_external::get_course_enrolment_methods($course2->id);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('coursehidden', $e->errorcode);
         }
     }
@@ -843,7 +843,7 @@ class externallib_test extends externallib_advanced_testcase {
         // Set the required capabilities by the external function.
         $return->context = \context_course::instance($return->course->id);
         $return->roleid = $this->assignUserCapability($capability, $return->context->id);
-        $this->assignUserCapability('moodle/user:viewdetails', $return->context->id, $return->roleid);
+        $this->assignUserCapability('powereduc/user:viewdetails', $return->context->id, $return->roleid);
 
         // Enrol the users in the course.
         $this->getDataGenerator()->enrol_user($return->user1->id, $return->course->id, $return->roleid, 'manual');
@@ -858,7 +858,7 @@ class externallib_test extends externallib_advanced_testcase {
      * parameters.
      */
     public function test_get_enrolled_users_without_parameters() {
-        $capability = 'moodle/course:viewparticipants';
+        $capability = 'powereduc/course:viewparticipants';
         $data = $this->get_enrolled_users_setup($capability);
 
         // Call the external function.
@@ -876,7 +876,7 @@ class externallib_test extends externallib_advanced_testcase {
      * Test get_enrolled_users from core_enrol_external with some parameters set.
      */
     public function test_get_enrolled_users_with_parameters() {
-        $capability = 'moodle/course:viewparticipants';
+        $capability = 'powereduc/course:viewparticipants';
         $data = $this->get_enrolled_users_setup($capability);
 
         // Call the function with some parameters set.
@@ -902,7 +902,7 @@ class externallib_test extends externallib_advanced_testcase {
      */
     public function test_get_enrolled_users_including_lastcourseaccess() {
         global $DB;
-        $capability = 'moodle/course:viewparticipants';
+        $capability = 'powereduc/course:viewparticipants';
         $data = $this->get_enrolled_users_setup($capability);
 
         // Call the external function.
@@ -941,12 +941,12 @@ class externallib_test extends externallib_advanced_testcase {
      * viewparticipants removed.
      */
     public function test_get_enrolled_users_without_capability() {
-        $capability = 'moodle/course:viewparticipants';
+        $capability = 'powereduc/course:viewparticipants';
         $data = $this->get_enrolled_users_setup($capability);
 
         // Call without required capability.
         $this->unassignUserCapability($capability, $data->context->id, $data->roleid);
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $categories = core_enrol_external::get_enrolled_users($data->course->id);
     }
 
@@ -993,7 +993,7 @@ class externallib_test extends externallib_advanced_testcase {
      * Test get_enrolled_users_with_capability without additional paramaters.
      */
     public function test_get_enrolled_users_with_capability_without_parameters() {
-        $capability = 'moodle/course:viewparticipants';
+        $capability = 'powereduc/course:viewparticipants';
         $data = $this->get_enrolled_users_with_capability_setup($capability);
 
         $result = core_enrol_external::get_enrolled_users_with_capability(
@@ -1022,7 +1022,7 @@ class externallib_test extends externallib_advanced_testcase {
      * Test get_enrolled_users_with_capability
      */
     public function test_get_enrolled_users_with_capability_with_parameters () {
-        $capability = 'moodle/course:viewparticipants';
+        $capability = 'powereduc/course:viewparticipants';
         $data = $this->get_enrolled_users_with_capability_setup($capability);
 
         $result = core_enrol_external::get_enrolled_users_with_capability(
@@ -1056,7 +1056,7 @@ class externallib_test extends externallib_advanced_testcase {
      */
     public function test_get_enrolled_users_with_capability_including_lastcourseaccess() {
         global $DB;
-        $capability = 'moodle/course:viewparticipants';
+        $capability = 'powereduc/course:viewparticipants';
         $data = $this->get_enrolled_users_with_capability_setup($capability);
 
         $parameters = array(
@@ -1366,7 +1366,7 @@ class externallib_test extends externallib_advanced_testcase {
         $result = core_enrol_external::search_users($course1->id, 'user', true, 0, 30);
         $this->assertCount(4, $result);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         // Search for users in a course without any enrolled users, shouldn't return anything.
         $result = core_enrol_external::search_users($course2->id, 'user', true, 0, 30);
         $this->assertCount(0, $result);
@@ -1392,7 +1392,7 @@ class externallib_test extends externallib_advanced_testcase {
         $result = core_enrol_external::search_users($course1->id, 'user', true, 0, 30);
         $this->assertCount(4, $result);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         // Search for users in a course without any enrolled users, shouldn't return anything.
         $result = core_enrol_external::search_users($course2->id, 'user', true, 0, 30);
         $this->assertCount(0, $result);

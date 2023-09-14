@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,14 +27,14 @@ use tool_brickfield\local\areas\module_area_base;
  */
 abstract class base extends module_area_base {
     /**
-     * Returns the moodle_url of the page to edit the error.
+     * Returns the powereduc_url of the page to edit the error.
      * @param \stdClass $componentinfo
-     * @return \moodle_url
+     * @return \powereduc_url
      */
-    public static function get_edit_url(\stdClass $componentinfo): \moodle_url {
+    public static function get_edit_url(\stdClass $componentinfo): \powereduc_url {
         if (!empty($componentinfo->refid)) {
             $pageid = ($componentinfo->tablename == "lesson_answers") ? $componentinfo->refid : $componentinfo->itemid;
-            return new \moodle_url('/mod/lesson/editpage.php',
+            return new \powereduc_url('/mod/lesson/editpage.php',
                 ['id' => $componentinfo->cmid, 'pageid' => $pageid, 'edit' => 1, 'sesskey' => sesskey()]);
         } else {
             return parent::get_edit_url($componentinfo);

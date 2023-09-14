@@ -107,9 +107,9 @@ Feature: Perform basic calendar functionality
     And I create a calendar event with form data:
       | Type of event | site               |
       | Event title   | Important webinar  |
-      | Location      | https://moodle.org |
+      | Location      | https://powereduc.org |
     When I click on "Important webinar" "link"
-    Then "https://moodle.org" "link" should exist in the "Important webinar" "dialogue"
+    Then "https://powereduc.org" "link" should exist in the "Important webinar" "dialogue"
 
   @javascript
   Scenario: Delete an event
@@ -241,7 +241,7 @@ Feature: Perform basic calendar functionality
   Scenario: "Student 2" has "manageentries" capability assigned but it's not enrolled in any course.
     Given the following "permission overrides" exist:
       | capability                    | permission | role    | contextlevel | reference |
-      | moodle/calendar:manageentries | Allow      | student | System       |           |
+      | powereduc/calendar:manageentries | Allow      | student | System       |           |
     And I log in as "student2"
     And I am viewing site calendar
     When I click on "New event" "button"
@@ -252,7 +252,7 @@ Feature: Perform basic calendar functionality
   Scenario: "Student 1" has "manageentries" capability assigned and it's enrolled in a course.
     Given the following "permission overrides" exist:
       | capability                    | permission | role    | contextlevel | reference |
-      | moodle/calendar:manageentries | Allow      | student | System       |           |
+      | powereduc/calendar:manageentries | Allow      | student | System       |           |
     And I log in as "student1"
     And I am viewing site calendar
     When I click on "New event" "button"

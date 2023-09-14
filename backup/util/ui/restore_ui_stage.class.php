@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@
  * This class should be extended by all restore stages (a requirement of many restore ui functions).
  * Each stage must then define two abstract methods
  *  - process : To process the stage
- *  - initialise_stage_form : To get a restore_moodleform instance for the stage
+ *  - initialise_stage_form : To get a restore_powereducform instance for the stage
  *
  * @package   core_backup
  * @copyright 2010 Sam Hemelryk
@@ -183,7 +183,7 @@ abstract class restore_ui_independent_stage {
             $item = array('text' => strlen(decbin($stage)).'. '.get_string('restorestage'.$stage, 'backup'), 'class' => join(' ', $classes));
             if ($stage < $currentstage && $currentstage < restore_ui::STAGE_COMPLETE) {
                 // By default you can't go back to independent stages, if that changes in the future uncomment the next line.
-                // $item['link'] = new moodle_url($PAGE->url, array('restore' => $this->get_restoreid(), 'stage' => $stage));
+                // $item['link'] = new powereduc_url($PAGE->url, array('restore' => $this->get_restoreid(), 'stage' => $stage));
             }
             array_unshift($items, $item);
             $stage = floor($stage / 2);
@@ -321,7 +321,7 @@ class restore_ui_stage_confirm extends restore_ui_independent_stage implements f
         $this->filepath = restore_controller::get_tempdir_name($this->contextid, $USER->id);
         $backuptempdir = make_backup_temp_directory('', false);
 
-        $fb = get_file_packer('application/vnd.moodle.backup');
+        $fb = get_file_packer('application/vnd.powereduc.backup');
         $result = $fb->extract_to_pathname($source,
                 $backuptempdir . '/' . $this->filepath . '/', null, $this);
 
@@ -361,8 +361,8 @@ class restore_ui_stage_confirm extends restore_ui_independent_stage implements f
      */
     public function display(core_backup_renderer $renderer) {
 
-        $prevstageurl = new moodle_url('/backup/restorefile.php', array('contextid' => $this->contextid));
-        $nextstageurl = new moodle_url('/backup/restore.php', array(
+        $prevstageurl = new powereduc_url('/backup/restorefile.php', array('contextid' => $this->contextid));
+        $nextstageurl = new powereduc_url('/backup/restore.php', array(
             'contextid' => $this->contextid,
             'filepath'  => $this->filepath,
             'stage'     => restore_ui::STAGE_DESTINATION));
@@ -459,7 +459,7 @@ class restore_ui_stage_destination extends restore_ui_independent_stage {
         global $PAGE;
         $this->contextid = $contextid;
         $this->filepath = required_param('filepath', PARAM_ALPHANUM);
-        $url = new moodle_url($PAGE->url, array(
+        $url = new powereduc_url($PAGE->url, array(
             'filepath' => $this->filepath,
             'contextid' => $this->contextid,
             'stage' => restore_ui::STAGE_DESTINATION));
@@ -522,13 +522,13 @@ class restore_ui_stage_destination extends restore_ui_independent_stage {
             $wholecourse = true;
         }
 
-        $nextstageurl = new moodle_url('/backup/restore.php', array(
+        $nextstageurl = new powereduc_url('/backup/restore.php', array(
             'contextid' => $this->contextid,
             'filepath'  => $this->filepath,
             'stage'     => restore_ui::STAGE_SETTINGS));
         $context = context::instance_by_id($this->contextid);
 
-        if ($context->contextlevel == CONTEXT_COURSE and has_capability('moodle/restore:restorecourse', $context)) {
+        if ($context->contextlevel == CONTEXT_COURSE and has_capability('powereduc/restore:restorecourse', $context)) {
             $currentcourse = $context->instanceid;
         } else {
             $currentcourse = false;
@@ -604,10 +604,10 @@ class restore_ui_stage_settings extends restore_ui_stage {
     /**
      * Process the settings stage.
      *
-     * @param base_moodleform $form
+     * @param base_powereducform $form
      * @return bool|int
      */
-    public function process(base_moodleform $form = null) {
+    public function process(base_powereducform $form = null) {
         $form = $this->initialise_stage_form();
 
         if ($form->is_cancelled()) {
@@ -645,7 +645,7 @@ class restore_ui_stage_settings extends restore_ui_stage {
     /**
      * Initialise the stage form.
      *
-     * @return backup_moodleform|base_moodleform|restore_settings_form
+     * @return backup_powereducform|base_powereducform|restore_settings_form
      * @throws coding_exception
      */
     protected function initialise_stage_form() {
@@ -716,10 +716,10 @@ class restore_ui_stage_schema extends restore_ui_stage {
     /**
      * Processes the schema stage
      *
-     * @param base_moodleform $form
+     * @param base_powereducform $form
      * @return int The number of changes the user made
      */
-    public function process(base_moodleform $form = null) {
+    public function process(base_powereducform $form = null) {
         $form = $this->initialise_stage_form();
         // Check it wasn't cancelled.
         if ($form->is_cancelled()) {
@@ -864,10 +864,10 @@ class restore_ui_stage_review extends restore_ui_stage {
     /**
      * Processes the confirmation stage
      *
-     * @param base_moodleform $form
+     * @param base_powereducform $form
      * @return int The number of changes the user made
      */
-    public function process(base_moodleform $form = null) {
+    public function process(base_powereducform $form = null) {
         $form = $this->initialise_stage_form();
         // Check it hasn't been cancelled.
         if ($form->is_cancelled()) {
@@ -975,11 +975,11 @@ class restore_ui_stage_process extends restore_ui_stage {
      * we return true which will lead to execution of the restore and the loading
      * of the completed stage.
      *
-     * @param base_moodleform $form
+     * @param base_powereducform $form
      */
-    public function process(base_moodleform $form = null) {
+    public function process(base_powereducform $form = null) {
         if (optional_param('cancel', false, PARAM_BOOL)) {
-            redirect(new moodle_url('/course/view.php', array('id' => $this->get_ui()->get_controller()->get_courseid())));
+            redirect(new powereduc_url('/course/view.php', array('id' => $this->get_ui()->get_controller()->get_courseid())));
         }
 
         // First decide whether a substage is needed.
@@ -1036,7 +1036,7 @@ class restore_ui_stage_process extends restore_ui_stage {
 
         $html = '';
         $haserrors = false;
-        $url = new moodle_url($PAGE->url, array(
+        $url = new powereduc_url($PAGE->url, array(
             'restore'   => $this->get_uniqueid(),
             'stage'     => restore_ui::STAGE_PROCESS,
             'substage'  => $this->substage,

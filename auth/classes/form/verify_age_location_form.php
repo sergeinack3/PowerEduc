@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Age and location verification mform.
  *
  * @package     core_auth
- * @copyright   2018 Mihail Geshoski <mihail@moodle.com>
+ * @copyright   2018 Mihail Geshoski <mihail@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,15 +28,15 @@ defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir.'/formslib.php');
 
-use moodleform;
+use powereducform;
 
 /**
  * Age and location verification mform class.
  *
- * @copyright 2018 Mihail Geshoski <mihail@moodle.com>
+ * @copyright 2018 Mihail Geshoski <mihail@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class verify_age_location_form extends moodleform {
+class verify_age_location_form extends powereducform {
     /**
      * Defines the form fields.
      */

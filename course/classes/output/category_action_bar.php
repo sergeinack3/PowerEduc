@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,8 +19,8 @@ namespace core_course\output;
 use context_coursecat;
 use core_course_category;
 use course_request;
-use moodle_page;
-use moodle_url;
+use powereduc_page;
+use powereduc_url;
 
 /**
  * Class responsible for generating the action bar (tertiary nav) elements in an individual category page
@@ -37,12 +37,12 @@ class category_action_bar extends manage_categories_action_bar {
     /**
      * Constructor category_action_bar
      *
-     * @param moodle_page $page The page object
+     * @param powereduc_page $page The page object
      * @param object $category
      * @param object|null $course The course that we are generating the nav for
      * @param string|null $searchvalue
      */
-    public function __construct(moodle_page $page, object $category, ?object $course = null, ?string $searchvalue = null) {
+    public function __construct(powereduc_page $page, object $category, ?object $course = null, ?string $searchvalue = null) {
         $this->category = $category;
         parent::__construct($page, 'courses', $course, $searchvalue);
     }
@@ -58,10 +58,10 @@ class category_action_bar extends manage_categories_action_bar {
             $categories = core_course_category::make_categories_list();
             if (count($categories) > 1) {
                 foreach ($categories as $id => $cat) {
-                    $url = new moodle_url($this->page->url, ['categoryid' => $id]);
+                    $url = new powereduc_url($this->page->url, ['categoryid' => $id]);
                     $options[$url->out()] = $cat;
                 }
-                $currenturl = new moodle_url($this->page->url, ['categoryid' => $this->category->id]);
+                $currenturl = new powereduc_url($this->page->url, ['categoryid' => $this->category->id]);
                 $select = new \url_select($options, $currenturl, null);
                 $select->set_label(get_string('categories'), ['class' => 'sr-only']);
                 $select->class .= ' text-truncate w-100';
@@ -87,14 +87,14 @@ class category_action_bar extends manage_categories_action_bar {
         global $CFG, $DB;
         if ($this->category->is_uservisible()) {
             $context = get_category_or_system_context($this->category->id);
-            if (has_capability('moodle/course:create', $context)) {
+            if (has_capability('powereduc/course:create', $context)) {
                 $params = [
                     'category' => $this->category->id ?: $CFG->defaultrequestcategory,
                     'returnto' => $this->category->id ? 'category' : 'topcat'
                 ];
 
                 $options[0] = [
-                    'url' => new moodle_url('/course/edit.php', $params),
+                    'url' => new powereduc_url('/course/edit.php', $params),
                     'string' => get_string('addnewcourse')
                 ];
             }
@@ -108,17 +108,17 @@ class category_action_bar extends manage_categories_action_bar {
                     }
 
                     $options[3] = [
-                        'url' => new moodle_url('/course/request.php', $params),
+                        'url' => new powereduc_url('/course/request.php', $params),
                         'string' => get_string('requestcourse')
                     ];
                 }
 
                 // Display the manage pending requests option.
-                if (has_capability('moodle/site:approvecourse', $context)) {
+                if (has_capability('powereduc/site:approvecourse', $context)) {
                     $disabled = !$DB->record_exists('course_request', array());
                     if (!$disabled) {
                         $options[4] = [
-                            'url' => new moodle_url('/course/pending.php'),
+                            'url' => new powereduc_url('/course/pending.php'),
                             'string' => get_string('coursespending')
                         ];
                     }
@@ -129,12 +129,12 @@ class category_action_bar extends manage_categories_action_bar {
         if ($this->category->can_create_course() || $this->category->has_manage_capability()) {
             // Add 'Manage' button if user has permissions to edit this category.
             $options[2] = [
-                'url' => new moodle_url('/course/management.php', ['categoryid' => $this->category->id]),
+                'url' => new powereduc_url('/course/management.php', ['categoryid' => $this->category->id]),
                 'string' => get_string('managecourses')
             ];
 
             if ($this->category->has_manage_capability()) {
-                $addsubcaturl = new moodle_url('/course/editcategory.php', array('parent' => $this->category->id));
+                $addsubcaturl = new powereduc_url('/course/editcategory.php', array('parent' => $this->category->id));
                 $options[1] = [
                     'url' => $addsubcaturl,
                     'string' => get_string('addsubcategory')

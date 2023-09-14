@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 namespace mod_bigbluebuttonbn\form;
 
 use context;
@@ -22,7 +22,7 @@ use mod_bigbluebuttonbn\local\exceptions\bigbluebutton_exception;
 use mod_bigbluebuttonbn\task\send_guest_emails;
 use powereduc_exception;
 use powereduc_url;
-use MoodleQuickForm;
+use PowerEducQuickForm;
 
 /**
  * Popup form to add new guests to a meeting and show/copy credential to access the guest login page.
@@ -156,12 +156,12 @@ class guest_add extends dynamic_form {
     /**
      * Add meeting links element. Helper for this form and the mod_form (module form)
      *
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      * @return void
      */
-    public static function add_meeting_links_elements(MoodleQuickForm &$mform): void {
+    public static function add_meeting_links_elements(PowerEducQuickForm &$mform): void {
         global $CFG;
-        MoodleQuickForm::registerElementType('text_with_copy',
+        PowerEducQuickForm::registerElementType('text_with_copy',
             "$CFG->dirroot/mod/bigbluebuttonbn/classes/form/text_with_copy_element.php",
             text_with_copy_element::class);
         $mform->addElement('text_with_copy', 'guestjoinurl',

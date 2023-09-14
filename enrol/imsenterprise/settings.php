@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -150,7 +150,7 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configcheckbox('enrol_imsenterprise/imscapitafix',
         get_string('usecapitafix', 'enrol_imsenterprise'), get_string('usecapitafix_desc', 'enrol_imsenterprise'), 0));
 
-    $importurl = new moodle_url('/enrol/imsenterprise/importnow.php', array('sesskey' => sesskey()));
+    $importurl = new powereduc_url('/enrol/imsenterprise/importnow.php', array('sesskey' => sesskey()));
     $importnowstring = get_string('aftersaving...', 'enrol_imsenterprise').' ';
     $importnowstring .= html_writer::link($importurl, get_string('doitnow', 'enrol_imsenterprise'));
     $settings->add(new admin_setting_heading('enrol_imsenterprise_doitnowmessage', '', $importnowstring));

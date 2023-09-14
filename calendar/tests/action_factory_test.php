@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ class action_factory_test extends \advanced_testcase {
         $factory = new action_factory();
         $instance = $factory->create_instance(
             'test',
-            new \moodle_url('http://example.com'),
+            new \powereduc_url('http://example.com'),
             1729,
             true
         );

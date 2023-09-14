@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
@@ -31,7 +31,7 @@ require_once(__DIR__.'/fixtures/testable_update_api.php');
  *
  * @package   core
  * @category  test
- * @copyright 2015 David Mudrak <david@moodle.com>
+ * @copyright 2015 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class update_api_test extends \advanced_testcase {
@@ -115,7 +115,7 @@ class update_api_test extends \advanced_testcase {
 
         $client = \core\update\testable_api::client();
 
-        $json = '{"id":127,"name":"Course contents","component":"block_course_contents","source":"https:\/\/github.com\/mudrd8mz\/moodle-block_course_contents","doc":"http:\/\/docs.moodle.org\/20\/en\/Course_contents_block","bugs":"https:\/\/github.com\/mudrd8mz\/moodle-block_course_contents\/issues","discussion":null,"version":{"id":8100,"version":"2015030300","release":"3.0","maturity":200,"downloadurl":"https:\/\/moodle.org\/plugins\/download.php\/8100\/block_course_contents_moodle29_2015030300.zip","downloadmd5":"8d8ae64822f38d278420776f8b42eaa5","vcssystem":"git","vcssystemother":null,"vcsrepositoryurl":"https:\/\/github.com\/mudrd8mz\/moodle-block_course_contents","vcsbranch":"master","vcstag":"v3.0","supportedmoodles":[{"version":2014041100,"release":"2.7"},{"version":2014101000,"release":"2.8"},{"version":2015041700,"release":"2.9"}]}}';
+        $json = '{"id":127,"name":"Course contents","component":"block_course_contents","source":"https:\/\/github.com\/mudrd8mz\/powereduc-block_course_contents","doc":"http:\/\/docs.powereduc.org\/20\/en\/Course_contents_block","bugs":"https:\/\/github.com\/mudrd8mz\/powereduc-block_course_contents\/issues","discussion":null,"version":{"id":8100,"version":"2015030300","release":"3.0","maturity":200,"downloadurl":"https:\/\/powereduc.org\/plugins\/download.php\/8100\/block_course_contents_powereduc29_2015030300.zip","downloadmd5":"8d8ae64822f38d278420776f8b42eaa5","vcssystem":"git","vcssystemother":null,"vcsrepositoryurl":"https:\/\/github.com\/mudrd8mz\/powereduc-block_course_contents","vcsbranch":"master","vcstag":"v3.0","supportedpowereducs":[{"version":2014041100,"release":"2.7"},{"version":2014101000,"release":"2.8"},{"version":2015041700,"release":"2.9"}]}}';
 
         $data = json_decode($json);
         $this->assertInstanceOf('\core\update\remote_info', $client->validate_pluginfo_format($data));
@@ -140,7 +140,7 @@ class update_api_test extends \advanced_testcase {
 
         // Download URL may be http:// or https:// only.
         $data = json_decode($json);
-        $data->version->downloadurl = 'ftp://archive.moodle.org/block_course_contents/2014041100.zip';
+        $data->version->downloadurl = 'ftp://archive.powereduc.org/block_course_contents/2014041100.zip';
         $this->assertFalse($client->validate_pluginfo_format($data));
     }
 }

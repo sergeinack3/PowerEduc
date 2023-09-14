@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * xAPI LRS IRI values generator.
  *
  * @package    core_xapi
- * @since      Moodle 3.9
+ * @since      PowerEduc 3.9
  * @copyright  2020 Ferran Recio
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -26,13 +26,13 @@ namespace core_xapi;
 defined('POWEREDUC_INTERNAL') || die();
 
 use stdClass;
-use moodle_url;
+use powereduc_url;
 
 /**
- * Class to translate Moodle objects to xAPI elements.
+ * Class to translate PowerEduc objects to xAPI elements.
  *
  * @copyright  2020 Ferran Recio
- * @since      Moodle 3.9
+ * @since      PowerEduc 3.9
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class iri {
@@ -55,7 +55,7 @@ class iri {
         if (empty($type)) {
             $type = 'element';
         }
-        return (new moodle_url("/xapi/$type/$value"))->out(false);
+        return (new powereduc_url("/xapi/$type/$value"))->out(false);
     }
 
     /**
@@ -73,7 +73,7 @@ class iri {
         if (empty($type)) {
             $type = 'element';
         }
-        $xapibase = (new moodle_url("/xapi/$type/"))->out(false);
+        $xapibase = (new powereduc_url("/xapi/$type/"))->out(false);
         if (strpos($value, $xapibase) === 0) {
             return substr($value, strlen($xapibase));
         }
@@ -87,7 +87,7 @@ class iri {
      * @return bool if the $value could be an IRI.
      */
     public static function check(string $value): bool {
-        $iri = new moodle_url($value);
+        $iri = new powereduc_url($value);
         return in_array($iri->get_scheme(), ['http', 'https']);
     }
 }

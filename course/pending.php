@@ -5,7 +5,7 @@
 // NOTICE OF COPYRIGHT                                                   //
 //                                                                       //
 // Moodle - Modular Object-Oriented Dynamic Learning Environment         //
-//          http://moodle.org                                            //
+//          http://powereduc.org                                            //
 //                                                                       //
 // Copyright (C) 1999 onwards Martin Dougiamas  http://dougiamas.com     //
 //                                                                       //
@@ -40,18 +40,18 @@ $reject = optional_param('reject', 0, PARAM_INT);
 
 $baseurl = $CFG->wwwroot . '/course/pending.php';
 $context = context_system::instance();
-if (has_capability('moodle/site:approvecourse', $context)) {
+if (has_capability('powereduc/site:approvecourse', $context)) {
     // Similar to course management capabilities, if user has approve capability in system context
     // we add the link to the admin menu. Otherwise we check if user has capability anywhere.
     admin_externalpage_setup('coursespending');
 } else {
     require_login(null, false);
-    $categories = core_course_category::make_categories_list('moodle/site:approvecourse');
+    $categories = core_course_category::make_categories_list('powereduc/site:approvecourse');
     if (!$categories) {
-        require_capability('moodle/site:approvecourse', $context);
+        require_capability('powereduc/site:approvecourse', $context);
     }
     $PAGE->set_context($context);
-    $PAGE->set_url(new moodle_url('/course/pending.php'));
+    $PAGE->set_url(new powereduc_url('/course/pending.php'));
 }
 
 /// Process approval of a course.
@@ -61,13 +61,13 @@ if (!empty($approve) and confirm_sesskey()) {
     $courseid = $course->approve();
 
     if ($courseid !== false) {
-        if (has_capability('moodle/course:update', context_course::instance($courseid))) {
-            redirect(new moodle_url('/course/edit.php', ['id' => $courseid, 'returnto' => 'pending']));
+        if (has_capability('powereduc/course:update', context_course::instance($courseid))) {
+            redirect(new powereduc_url('/course/edit.php', ['id' => $courseid, 'returnto' => 'pending']));
         } else {
-            redirect(new moodle_url('/course/view.php', ['id' => $courseid]));
+            redirect(new powereduc_url('/course/view.php', ['id' => $courseid]));
         }
     } else {
-        throw new \moodle_exception('courseapprovedfailed');
+        throw new \powereduc_exception('courseapprovedfailed');
     }
 }
 
@@ -144,8 +144,8 @@ if (empty($pending)) {
         $row[] = format_text($course->summary, $course->summaryformat);
         $row[] = $category->get_formatted_name();
         $row[] = format_string($course->reason);
-        $row[] = $OUTPUT->single_button(new moodle_url($baseurl, array('approve' => $course->id, 'sesskey' => sesskey())), get_string('approve'), 'get') .
-                 $OUTPUT->single_button(new moodle_url($baseurl, array('reject' => $course->id)), get_string('rejectdots'), 'get');
+        $row[] = $OUTPUT->single_button(new powereduc_url($baseurl, array('approve' => $course->id, 'sesskey' => sesskey())), get_string('approve'), 'get') .
+                 $OUTPUT->single_button(new powereduc_url($baseurl, array('reject' => $course->id)), get_string('rejectdots'), 'get');
 
     /// Add the row to the table.
         $table->data[] = $row;

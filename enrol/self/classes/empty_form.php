@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir.'/formslib.php');
 
-class enrol_self_empty_form extends moodleform {
+class enrol_self_empty_form extends powereducform {
 
     /**
      * Form definition.

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -99,7 +99,7 @@ class lib_test extends \advanced_testcase {
         $this->assertEquals('cohort', $event->objecttable);
         $this->assertEquals($id, $event->objectid);
         $this->assertEquals($cohort->contextid, $event->contextid);
-        $url = new \moodle_url('/cohort/index.php', array('contextid' => $event->contextid));
+        $url = new \powereduc_url('/cohort/index.php', array('contextid' => $event->contextid));
         $this->assertEquals($url, $event->get_url());
         $this->assertEquals($cohort, $event->get_record_snapshot('cohort', $id));
         $this->assertEventLegacyData($cohort, $event);
@@ -176,7 +176,7 @@ class lib_test extends \advanced_testcase {
         $this->assertEquals('cohort', $event->objecttable);
         $this->assertEquals($updatedcohort->id, $event->objectid);
         $this->assertEquals($updatedcohort->contextid, $event->contextid);
-        $url = new \moodle_url('/cohort/edit.php', array('id' => $event->objectid));
+        $url = new \powereduc_url('/cohort/edit.php', array('id' => $event->objectid));
         $this->assertEquals($url, $event->get_url());
         $this->assertEquals($cohort, $event->get_record_snapshot('cohort', $id));
         $this->assertEventLegacyData($cohort, $event);
@@ -216,7 +216,7 @@ class lib_test extends \advanced_testcase {
         $this->assertInstanceOf('\core\event\cohort_deleted', $event);
         $this->assertEquals('cohort', $event->objecttable);
         $this->assertEquals($cohort->id, $event->objectid);
-        $url = new \moodle_url('/cohort/index.php', array('contextid' => $event->contextid));
+        $url = new \powereduc_url('/cohort/index.php', array('contextid' => $event->contextid));
         $this->assertEquals($url, $event->get_url());
         $this->assertEquals($cohort, $event->get_record_snapshot('cohort', $cohort->id));
         $this->assertEventLegacyData($cohort, $event);
@@ -277,7 +277,7 @@ class lib_test extends \advanced_testcase {
         $this->assertEquals($cohort->id, $event->objectid);
         $this->assertEquals($user->id, $event->relateduserid);
         $this->assertEquals($USER->id, $event->userid);
-        $url = new \moodle_url('/cohort/assign.php', array('id' => $event->objectid));
+        $url = new \powereduc_url('/cohort/assign.php', array('id' => $event->objectid));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventLegacyData((object) array('cohortid' => $cohort->id, 'userid' => $user->id), $event);
         $this->assertEventContextNotUsed($event);
@@ -323,7 +323,7 @@ class lib_test extends \advanced_testcase {
         $this->assertEquals($cohort->id, $event->objectid);
         $this->assertEquals($user->id, $event->relateduserid);
         $this->assertEquals($USER->id, $event->userid);
-        $url = new \moodle_url('/cohort/assign.php', array('id' => $event->objectid));
+        $url = new \powereduc_url('/cohort/assign.php', array('id' => $event->objectid));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventLegacyData((object) array('cohortid' => $cohort->id, 'userid' => $user->id), $event);
         $this->assertEventContextNotUsed($event);
@@ -445,9 +445,9 @@ class lib_test extends \advanced_testcase {
 
         // Get list of all cohorts as manager who has capability everywhere except category2.
         $context2 = \context_coursecat::instance($category2->id);
-        role_change_permission($managerrole->id, $context2, 'moodle/cohort:view', CAP_PROHIBIT);
-        role_change_permission($managerrole->id, $context2, 'moodle/cohort:manage', CAP_PROHIBIT);
-        $this->assertFalse(has_any_capability(array('moodle/cohort:view', 'moodle/cohort:manage'), $context2));
+        role_change_permission($managerrole->id, $context2, 'powereduc/cohort:view', CAP_PROHIBIT);
+        role_change_permission($managerrole->id, $context2, 'powereduc/cohort:manage', CAP_PROHIBIT);
+        $this->assertFalse(has_any_capability(array('powereduc/cohort:view', 'powereduc/cohort:manage'), $context2));
 
         $result = cohort_get_all_cohorts(0, 100, '');
         $this->assertEquals(3, $result['totalcohorts']);

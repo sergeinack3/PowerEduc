@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core\navigation\views;
 
@@ -438,7 +438,7 @@ class secondary extends view {
         // Add the respective first node, provided there are other nodes included.
         if (!empty($nodekeys = $rootnode->children->get_key_list())) {
             $rootnode->add_node(
-                navigation_node::create($firstnodeidentifier, new \moodle_url('/course/view.php', ['id' => $course->id]),
+                navigation_node::create($firstnodeidentifier, new \powereduc_url('/course/view.php', ['id' => $course->id]),
                     self::TYPE_COURSE, null, 'coursehome'), reset($nodekeys)
             );
         }
@@ -565,7 +565,7 @@ class secondary extends view {
      * - The 'Restore' node in the overflow has a key of 'restore' and will only match 'backup/restorefile.php' by default (the
      * main restore landing page).
      * - The backup/restore.php page calls:
-     * $PAGE->secondarynav->set_overflow_selected_node(new moodle_url('restore');
+     * $PAGE->secondarynav->set_overflow_selected_node(new powereduc_url('restore');
      * and when the page is loaded, the 'Restore' node be presented as the selected node.
      *
      * @param string $nodekey The string key of the overflow node to match.
@@ -712,7 +712,7 @@ class secondary extends view {
         $nodes = $this->get_default_module_mapping();
 
         if ($mainnode) {
-            $url = new \moodle_url('/mod/' . $settingsnav->get_page()->activityname . '/view.php',
+            $url = new \powereduc_url('/mod/' . $settingsnav->get_page()->activityname . '/view.php',
                 ['id' => $settingsnav->get_page()->cm->id]);
             $setactive = $url->compare($settingsnav->get_page()->url, URL_MATCH_BASE);
             $node = $rootnode->add(get_string('modulename', $settingsnav->get_page()->activityname), $url,
@@ -739,7 +739,7 @@ class secondary extends view {
         $nodes = $this->get_default_category_mapping();
 
         if ($mainnode) {
-            $url = new \moodle_url('/course/index.php', ['categoryid' => $this->context->instanceid]);
+            $url = new \powereduc_url('/course/index.php', ['categoryid' => $this->context->instanceid]);
             $this->add(get_string('category'), $url, self::TYPE_CONTAINER, null, 'categorymain');
 
             // Add the initial nodes.
@@ -764,14 +764,14 @@ class secondary extends view {
         // anchors and page reload doesn't happen. On every nested admin settings page, the secondary nav needs to
         // exist as links with anchors appended in order to redirect back to the admin search page and the corresponding
         // tab. Note this value refers to being present on the page itself, before a search has been performed.
-        $isadminsearchpage = $PAGE->url->compare(new \moodle_url('/admin/search.php', ['query' => '']), URL_MATCH_PARAMS);
+        $isadminsearchpage = $PAGE->url->compare(new \powereduc_url('/admin/search.php', ['query' => '']), URL_MATCH_PARAMS);
         if ($node) {
             $siteadminnode = $this->add(get_string('general'), "#link$node->key", null, null, 'siteadminnode');
             if ($isadminsearchpage) {
                 $siteadminnode->action = false;
                 $siteadminnode->tab = "#link$node->key";
             } else {
-                $siteadminnode->action = new \moodle_url("/admin/search.php", [], "link$node->key");
+                $siteadminnode->action = new \powereduc_url("/admin/search.php", [], "link$node->key");
             }
             foreach ($node->children as $child) {
                 if ($child->display && !$child->is_short_branch()) {
@@ -780,7 +780,7 @@ class secondary extends view {
                         $child->action = false;
                         $child->tab = "#link$child->key";
                     } else {
-                        $child->action = new \moodle_url("/admin/search.php", [], "link$child->key");
+                        $child->action = new \powereduc_url("/admin/search.php", [], "link$child->key");
                     }
                     $this->add_node(clone $child);
                 } else {
@@ -1116,9 +1116,9 @@ class secondary extends view {
             if (!$module) {
                 return;
             }
-            $page = new \moodle_page();
+            $page = new \powereduc_page();
             $page->set_cm($module, $course);
-            $page->set_url(new \moodle_url('/mod/' . $page->activityname . '/view.php', ['id' => $page->cm->id]));
+            $page->set_url(new \powereduc_url('/mod/' . $page->activityname . '/view.php', ['id' => $page->cm->id]));
         }
 
         $this->load_module_navigation($page->settingsnav, $activitysecondarynode);
@@ -1133,7 +1133,7 @@ class secondary extends view {
                 $this->page->set_secondary_active_tab($activitysecondarynode->key);
             }
         } else { // Otherwise, add the 'View activity' node to the secondary navigation.
-            $viewactivityurl = new \moodle_url('/mod/' . $page->activityname . '/view.php', ['id' => $page->cm->id]);
+            $viewactivityurl = new \powereduc_url('/mod/' . $page->activityname . '/view.php', ['id' => $page->cm->id]);
             $this->add(get_string('modulename', $page->activityname), $viewactivityurl, null, null, 'modulepage');
             if ($this->context instanceof \context_module) {
                 $this->page->set_secondary_active_tab('modulepage');

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@ class tool_uploadcourse_step2_form extends tool_uploadcourse_base_form {
 
         $mform   = $this->_form;
         $data    = $this->_customdata['data'];
-        $courseconfig = get_config('moodlecourse');
+        $courseconfig = get_config('powereduccourse');
 
         // Import options.
         $this->add_import_options();
@@ -82,7 +82,7 @@ class tool_uploadcourse_step2_form extends tool_uploadcourse_base_form {
         $mform->addElement('header', 'defaultheader', get_string('defaultvalues', 'tool_uploadcourse'));
         $mform->setExpanded('defaultheader', true);
 
-        $displaylist = core_course_category::make_categories_list('moodle/course:create');
+        $displaylist = core_course_category::make_categories_list('powereduc/course:create');
         $mform->addElement('autocomplete', 'defaults[category]', get_string('coursecategory'), $displaylist);
         $mform->addRule('defaults[category]', null, 'required', null, 'client');
         $mform->addHelpButton('defaults[category]', 'coursecategory');
@@ -95,7 +95,7 @@ class tool_uploadcourse_step2_form extends tool_uploadcourse_base_form {
         $mform->setDefault('defaults[visible]', $courseconfig->visible);
 
         if ($CFG->downloadcoursecontentallowed &&
-                has_capability('moodle/course:configuredownloadcontent', context::instance_by_id($contextid))) {
+                has_capability('powereduc/course:configuredownloadcontent', context::instance_by_id($contextid))) {
 
             $downloadchoices = [
                 DOWNLOAD_COURSE_CONTENT_DISABLED => get_string('no'),
@@ -237,12 +237,12 @@ class tool_uploadcourse_step2_form extends tool_uploadcourse_base_form {
         $mform = $this->_form;
 
         // The default end date depends on the course format.
-        $format = course_get_format((object)array('format' => get_config('moodlecourse', 'format')));
+        $format = course_get_format((object)array('format' => get_config('powereduccourse', 'format')));
 
         // Check if course end date form field should be enabled by default.
         // If a default date is provided to the form element, it is magically enabled by default in the
         // MoodleQuickForm_date_time_selector class, otherwise it's disabled by default.
-        if (get_config('moodlecourse', 'courseenddateenabled')) {
+        if (get_config('powereduccourse', 'courseenddateenabled')) {
             $enddate = $format->get_default_course_enddate($mform, array('startdate' => 'defaults[startdate]'));
             $mform->setDefault('defaults[enddate]', $enddate);
         }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Contains event class for displaying the day view.
  *
  * @package   core_calendar
- * @copyright 2017 Simey Lameze <simey@moodle.com>
+ * @copyright 2017 Simey Lameze <simey@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,14 +28,14 @@ defined('POWEREDUC_INTERNAL') || die();
 
 use core\external\exporter;
 use renderer_base;
-use moodle_url;
+use powereduc_url;
 use \core_calendar\local\event\container;
 
 /**
  * Class for displaying the day view.
  *
  * @package   core_calendar
- * @copyright 2017 Simey Lameze <simey@moodle.com>
+ * @copyright 2017 Simey Lameze <simey@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class calendar_day_exporter extends exporter {
@@ -45,7 +45,7 @@ class calendar_day_exporter extends exporter {
     protected $calendar;
 
     /**
-     * @var moodle_url $url The URL for the day view page.
+     * @var powereduc_url $url The URL for the day view page.
      */
     protected $url;
 
@@ -141,7 +141,7 @@ class calendar_day_exporter extends exporter {
         $timestamp = $this->calendar->time;
 
         $cache = $this->related['cache'];
-        $url = new moodle_url('/calendar/view.php', [
+        $url = new powereduc_url('/calendar/view.php', [
             'view' => 'day',
             'time' => $timestamp,
         ]);
@@ -189,10 +189,10 @@ class calendar_day_exporter extends exporter {
         $nextperiod = $this->get_next_day_data();
         $date = $this->related['type']->timestamp_to_date_array($this->calendar->time);
 
-        $nextperiodlink = new moodle_url($this->url);
+        $nextperiodlink = new powereduc_url($this->url);
         $nextperiodlink->param('time', $nextperiod[0]);
 
-        $previousperiodlink = new moodle_url($this->url);
+        $previousperiodlink = new powereduc_url($this->url);
         $previousperiodlink->param('time', $previousperiod[0]);
 
         $days = calendar_get_days();

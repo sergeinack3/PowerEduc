@@ -1,6 +1,6 @@
 @core @core_course
 Feature: Test category management actions
-  As a moodle admin
+  As a powereduc admin
   Test we can create a category
   Test we can create a sub category
   Test we can edit a category
@@ -121,8 +121,8 @@ Feature: Test category management actions
       | manager | manager | System |
     And the following "permission overrides" exist:
       | capability | permission | role | contextlevel | reference |
-      | moodle/course:delete | Prevent | manager | Course | C1 |
-      | moodle/course:create | Prevent | manager | System |    |
+      | powereduc/course:delete | Prevent | manager | Course | C1 |
+      | powereduc/course:create | Prevent | manager | System |    |
 
     When I log in as "manager"
     And I go to the courses management page
@@ -148,8 +148,8 @@ Feature: Test category management actions
       | manager | manager | System |
     And the following "permission overrides" exist:
       | capability | permission | role | contextlevel | reference |
-      | moodle/course:delete | Allow | manager | Course | C1 |
-      | moodle/course:create | Prevent | manager | System |    |
+      | powereduc/course:delete | Allow | manager | Course | C1 |
+      | powereduc/course:create | Prevent | manager | System |    |
 
     When I log in as "manager"
     And I go to the courses management page
@@ -180,8 +180,8 @@ Feature: Test category management actions
       | manager | manager | System |
     And the following "permission overrides" exist:
       | capability | permission | role | contextlevel | reference |
-      | moodle/course:delete | Prevent | manager | Course | C1 |
-      | moodle/course:create | Allow | manager | System |    |
+      | powereduc/course:delete | Prevent | manager | Course | C1 |
+      | powereduc/course:create | Allow | manager | System |    |
 
     When I log in as "manager"
     And I go to the courses management page
@@ -215,9 +215,9 @@ Feature: Test category management actions
       | manager | manager | System |
     And the following "permission overrides" exist:
       | capability | permission | role | contextlevel | reference |
-      | moodle/course:delete | Allow | manager | Course | C1 |
-      | moodle/course:create | Allow | manager | System |    |
-      | moodle/course:create | Prevent | manager | Category | CAT2  |
+      | powereduc/course:delete | Allow | manager | Course | C1 |
+      | powereduc/course:create | Allow | manager | System |    |
+      | powereduc/course:create | Prevent | manager | Category | CAT2  |
 
     When I log in as "manager"
     And I go to the courses management page

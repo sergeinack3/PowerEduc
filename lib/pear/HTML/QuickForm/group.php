@@ -109,7 +109,7 @@ class HTML_QuickForm_group extends HTML_QuickForm_element
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
     public function HTML_QuickForm_group($elementName=null, $elementLabel=null, $elements=null, $separator=null, $appendName = true) {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);

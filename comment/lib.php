@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 defined('POWEREDUC_INTERNAL') || die();
 
 /**
- * Comment is helper class to add/delete comments anywhere in moodle
+ * Comment is helper class to add/delete comments anywhere in powereduc
  *
  * @package   core
  * @category  comment
@@ -135,7 +135,7 @@ class comment {
             $this->contextid = $options->contextid;
             $this->context = context::instance_by_id($this->contextid);
         } else {
-            throw new \moodle_exception('invalidcontext');
+            throw new \powereduc_exception('invalidcontext');
         }
 
         if (!empty($options->component)) {
@@ -241,10 +241,10 @@ class comment {
     /**
      * Receive nonjs comment parameters
      *
-     * @param moodle_page $page The page object to initialise comments within
+     * @param powereduc_page $page The page object to initialise comments within
      *                          If not provided the global $PAGE is used
      */
-    public static function init(moodle_page $page = null) {
+    public static function init(powereduc_page $page = null) {
         global $PAGE;
 
         if (empty($page)) {
@@ -265,7 +265,7 @@ class comment {
                 'commentsrequirelogin',
                 'deletecommentbyon'
             ),
-            'moodle'
+            'powereduc'
         );
     }
 
@@ -312,8 +312,8 @@ class comment {
      * function named $pluginname_check_comment_post must be implemented
      */
     private function check_permissions() {
-        $this->postcap = has_capability('moodle/comment:post', $this->context);
-        $this->viewcap = has_capability('moodle/comment:view', $this->context);
+        $this->postcap = has_capability('powereduc/comment:post', $this->context);
+        $this->viewcap = has_capability('powereduc/comment:view', $this->context);
         if (!empty($this->plugintype)) {
             $permissions = plugin_callback($this->plugintype, $this->pluginname, 'comment', 'permissions', array($this->comment_param), array('post'=>false, 'view'=>false));
             $this->postcap = $this->postcap && $permissions['post'];
@@ -324,17 +324,17 @@ class comment {
     /**
      * Gets a link for this page that will work with JS disabled.
      *
-     * @global moodle_page $PAGE
-     * @param moodle_page $page
-     * @return moodle_url
+     * @global powereduc_page $PAGE
+     * @param powereduc_page $page
+     * @return powereduc_url
      */
-    public function get_nojslink(moodle_page $page = null) {
+    public function get_nojslink(powereduc_page $page = null) {
         if ($page === null) {
             global $PAGE;
             $page = $PAGE;
         }
 
-        $link = new moodle_url($page->url, array(
+        $link = new powereduc_url($page->url, array(
             'nonjscomment'    => true,
             'comment_itemid'  => $this->itemid,
             'comment_context' => $this->context->id,
@@ -396,10 +396,10 @@ class comment {
     /**
      * Initialises the JavaScript that enchances the comment API.
      *
-     * @param moodle_page $page The moodle page object that the JavaScript should be
+     * @param powereduc_page $page The powereduc page object that the JavaScript should be
      *                          initialised for.
      */
-    public function initialise_javascript(moodle_page $page) {
+    public function initialise_javascript(powereduc_page $page) {
 
         $options = new stdClass;
         $options->client_id   = $this->cid;
@@ -582,7 +582,7 @@ class comment {
             $c->format      = $u->cformat;
             $c->timecreated = $u->ctimecreated;
             $c->strftimeformat = get_string('strftimerecentfull', 'langconfig');
-            $url = new moodle_url('/user/view.php', array('id'=>$u->id, 'course'=>$this->courseid));
+            $url = new powereduc_url('/user/view.php', array('id'=>$u->id, 'course'=>$this->courseid));
             $c->profileurl = $url->out(false); // URL should not be escaped just yet.
             $c->fullname = fullname($u);
             $c->time = userdate($c->timecreated, $c->strftimeformat);
@@ -598,7 +598,7 @@ class comment {
         $rs->close();
 
         if (!empty($this->plugintype)) {
-            // moodle module will filter comments
+            // powereduc module will filter comments
             $comments = plugin_callback($this->plugintype, $this->pluginname, 'comment', 'display', array($comments, $this->comment_param), $comments);
         }
 
@@ -627,7 +627,7 @@ class comment {
     /**
      * Returns the number of comments associated with the details of this object
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @return int
      */
     public function count() {
@@ -688,7 +688,7 @@ class comment {
     /**
      * Add a new comment
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @param string $content
      * @param int $format
      * @return stdClass
@@ -717,7 +717,7 @@ class comment {
             $newcmt->id = $cmt_id;
             $newcmt->strftimeformat = get_string('strftimerecentfull', 'langconfig');
             $newcmt->fullname = fullname($USER);
-            $url = new moodle_url('/user/view.php', array('id' => $USER->id, 'course' => $this->courseid));
+            $url = new powereduc_url('/user/view.php', array('id' => $USER->id, 'course' => $this->courseid));
             $newcmt->profileurl = $url->out();
             $formatoptions = array('overflowdiv' => true, 'blanktarget' => true);
             $newcmt->content = format_text($newcmt->content, $newcmt->format, $formatoptions);
@@ -879,7 +879,7 @@ class comment {
         }
         if ($nonjs && $this->can_post()) {
             // Form to add comments
-            $html .= html_writer::start_tag('form', array('method' => 'post', 'action' => new moodle_url('/comment/comment_post.php')));
+            $html .= html_writer::start_tag('form', array('method' => 'post', 'action' => new powereduc_url('/comment/comment_post.php')));
             // Comment parameters
             $html .= html_writer::empty_tag('input', array('type' => 'hidden', 'name' => 'contextid', 'value' => $this->contextid));
             $html .= html_writer::empty_tag('input', array('type' => 'hidden', 'name' => 'action',    'value' => 'add'));
@@ -925,7 +925,7 @@ class comment {
         $replacements = array();
 
         if (!empty($cmt->delete) && empty($nonjs)) {
-            $strdelete = get_string('deletecommentbyon', 'moodle', (object)['user' => $cmt->fullname, 'time' => $cmt->time]);
+            $strdelete = get_string('deletecommentbyon', 'powereduc', (object)['user' => $cmt->fullname, 'time' => $cmt->time]);
             $deletelink  = html_writer::start_tag('div', array('class'=>'comment-delete'));
             $deletelink .= html_writer::start_tag('a', array('href' => '#', 'id' => 'comment-delete-'.$this->cid.'-'.$cmt->id,
                 'class' => 'icon-no-margin', 'title' => $strdelete));
@@ -1007,7 +1007,7 @@ class comment {
             $comment = $DB->get_record('comments', array('id' => $commentid), 'id, userid', MUST_EXIST);
         }
 
-        $hascapability = has_capability('moodle/comment:delete', $this->context);
+        $hascapability = has_capability('powereduc/comment:delete', $this->context);
         $owncomment = $USER->id == $comment->userid;
 
         return ($hascapability || ($owncomment && $this->can_post()));
@@ -1174,5 +1174,5 @@ class comment {
  * @copyright 2010 Dongsheng Cai {@link http://dongsheng.org}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class comment_exception extends moodle_exception {
+class comment_exception extends powereduc_exception {
 }

@@ -1,6 +1,6 @@
 @tool @tool_behat
 Feature: Edit capabilities
-  In order to extend and restrict moodle features
+  In order to extend and restrict powereduc features
   As an admin or a teacher
   I need to allow/deny the existing capabilities at different levels
 
@@ -24,14 +24,14 @@ Feature: Edit capabilities
     And I set the following system permissions of "Teacher" role:
       | capability | permission |
       | block/mnet_hosts:myaddinstance | Allow |
-      | moodle/site:messageanyuser | Inherit |
-      | moodle/grade:managesharedforms | Prevent |
-      | moodle/course:request | Prohibit |
+      | powereduc/site:messageanyuser | Inherit |
+      | powereduc/grade:managesharedforms | Prevent |
+      | powereduc/course:request | Prohibit |
     When I follow "Edit Teacher role"
     Then "block/mnet_hosts:myaddinstance" capability has "Allow" permission
-    And "moodle/site:messageanyuser" capability has "Not set" permission
-    And "moodle/grade:managesharedforms" capability has "Prevent" permission
-    And "moodle/course:request" capability has "Prohibit" permission
+    And "powereduc/site:messageanyuser" capability has "Not set" permission
+    And "powereduc/grade:managesharedforms" capability has "Prevent" permission
+    And "powereduc/course:request" capability has "Prohibit" permission
 
   Scenario: Course capabilities overrides
     Given I log in as "teacher1"

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@ namespace gradereport_singleview\report;
 
 use context_course;
 use grade_report;
-use moodle_url;
+use powereduc_url;
 use renderer_base;
 use stdClass;
 
@@ -30,7 +30,7 @@ require_once($CFG->dirroot . '/grade/report/lib.php');
  * This class is the main class that must be implemented by a grade report plugin.
  *
  * @package   gradereport_singleview
- * @copyright 2014 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2014 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class singleview extends grade_report {
@@ -55,7 +55,7 @@ class singleview extends grade_report {
      * @return array|object List of warnings
      */
     public function process_data($data) {
-        if (has_capability('moodle/grade:edit', $this->context)) {
+        if (has_capability('powereduc/grade:edit', $this->context)) {
             return $this->screen->process($data);
         }
     }
@@ -93,9 +93,9 @@ class singleview extends grade_report {
 
         $idparams = ['id' => $courseid];
 
-        $this->baseurl = new moodle_url($base, $idparams);
+        $this->baseurl = new powereduc_url($base, $idparams);
 
-        $this->pbarurl = new moodle_url($base, $idparams + [
+        $this->pbarurl = new powereduc_url($base, $idparams + [
                 'item' => $itemtype,
                 'itemid' => $itemid
             ]);
@@ -136,10 +136,10 @@ class singleview extends grade_report {
      * so all reports would automatically use it.
      *
      * @param stdClass $course
-     * @param moodle_url $urlroot
+     * @param powereduc_url $urlroot
      * @return string
      */
-    protected static function groups_course_menu(stdClass $course, moodle_url $urlroot) {
+    protected static function groups_course_menu(stdClass $course, powereduc_url $urlroot) {
         global $PAGE;
 
         $renderer = $PAGE->get_renderer('core_grades');
@@ -188,7 +188,7 @@ class singleview extends grade_report {
         $menu->set_menu_trigger(get_string('actions'), 'text-dark');
 
         foreach ($options as $type => $option) {
-            $action = new \action_menu_link_secondary(new \moodle_url('#'), null, $option,
+            $action = new \action_menu_link_secondary(new \powereduc_url('#'), null, $option,
                 ['data-action' => $type, 'data-role' => 'bulkaction']);
             $menu->add($action);
         }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -85,7 +85,7 @@ class tool_filetypes_renderer extends plugin_renderer_base {
                 $row->cells[] = new html_table_cell($icon . ' ' . html_writer::span(s($extension)));
 
                 // Reset URL and button if needed.
-                $reverturl = new \moodle_url('/admin/tool/filetypes/revert.php',
+                $reverturl = new \powereduc_url('/admin/tool/filetypes/revert.php',
                         array('extension' => $extension));
                 $revertbutton = html_writer::link($reverturl, $this->pix_icon('t/restore',
                         get_string('revert', 'tool_filetypes', s($extension))));
@@ -113,11 +113,11 @@ class tool_filetypes_renderer extends plugin_renderer_base {
                     if (!$restricted) {
                         // Edit icons. For accessibility, the name of these links should
                         // be different for each row, so we have to include the extension.
-                        $editurl = new \moodle_url('/admin/tool/filetypes/edit.php',
+                        $editurl = new \powereduc_url('/admin/tool/filetypes/edit.php',
                                 array('oldextension' => $extension));
                         $editbutton = html_writer::link($editurl, $this->pix_icon('t/edit',
-                                get_string('edita', 'moodle', s($extension))));
-                        $deleteurl = new \moodle_url('/admin/tool/filetypes/delete.php',
+                                get_string('edita', 'powereduc', s($extension))));
+                        $deleteurl = new \powereduc_url('/admin/tool/filetypes/delete.php',
                                 array('extension' => $extension));
                         $deletebutton = html_writer::link($deleteurl, $this->pix_icon('t/delete',
                                 get_string('deletea', 'tool_filetypes', s($extension))));
@@ -171,7 +171,7 @@ class tool_filetypes_renderer extends plugin_renderer_base {
         }
         // Displaying the 'Add' button.
         if (!$restricted) {
-            $out .= $this->single_button(new moodle_url('/admin/tool/filetypes/edit.php',
+            $out .= $this->single_button(new powereduc_url('/admin/tool/filetypes/edit.php',
                     array('name' => 'add')), get_string('addfiletypes', 'tool_filetypes'), 'get');
         }
         return $out;

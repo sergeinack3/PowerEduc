@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,21 +17,21 @@
 /**
  * Moodle net user profile class.
  *
- * @package    tool_moodlenet
- * @copyright  2020 Adrian Greeve <adrian@moodle.com>
+ * @package    tool_powereducnet
+ * @copyright  2020 Adrian Greeve <adrian@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace tool_moodlenet;
+namespace tool_powereducnet;
 
 /**
- * A class to represent the moodlenet profile.
+ * A class to represent the powereducnet profile.
  *
- * @package    tool_moodlenet
- * @copyright  2020 Adrian Greeve <adrian@moodle.com>
+ * @package    tool_powereducnet
+ * @copyright  2020 Adrian Greeve <adrian@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class moodlenet_user_profile {
+class powereducnet_user_profile {
 
     /** @var string $profile The full profile name. */
     protected $profile;
@@ -48,7 +48,7 @@ class moodlenet_user_profile {
     /**
      * Constructor method.
      *
-     * @param string $userprofile The moodle net user profile string.
+     * @param string $userprofile The powereduc net user profile string.
      * @param int $userid The user ID that this profile belongs to.
      */
     public function __construct(string $userprofile, int $userid) {
@@ -65,14 +65,14 @@ class moodlenet_user_profile {
             $this->username = $explodedprofile[1];
             $this->domain = $explodedprofile[2];
         } else {
-            throw new \moodle_exception('invalidmoodlenetprofile', 'tool_moodlenet');
+            throw new \powereduc_exception('invalidpowereducnetprofile', 'tool_powereducnet');
         }
     }
 
     /**
-     * Get the full moodle net profile.
+     * Get the full powereduc net profile.
      *
-     * @return string The moodle net profile.
+     * @return string The powereduc net profile.
      */
     public function get_profile_name(): string {
         return $this->profile;

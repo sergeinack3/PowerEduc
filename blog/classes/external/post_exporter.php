@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Class for exporting a blog post (entry).
  *
  * @package    core_blog
- * @copyright  2018 Juan Leyva <juan@moodle.com>
+ * @copyright  2018 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace core_blog\external;
@@ -34,7 +34,7 @@ use core_tag\external\tag_item_exporter;
 /**
  * Class for exporting a blog post (entry).
  *
- * @copyright  2018 Juan Leyva <juan@moodle.com>
+ * @copyright  2018 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class post_exporter extends exporter {

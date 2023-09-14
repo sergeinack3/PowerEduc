@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -58,7 +58,7 @@ $layout = optional_param('layout', 'admin', PARAM_ALPHA);
 if ($courseid != 0) {
     // If accessing a course, check that the user has capability to use toolkit at course level.
     if (!$course = $DB->get_record('course', ['id' => $courseid], '*')) {
-        throw new moodle_exception('invalidcourseid', manager::PLUGINNAME);
+        throw new powereduc_exception('invalidcourseid', manager::PLUGINNAME);
     }
     require_login($course);
     $context = context_course::instance($courseid);
@@ -91,7 +91,7 @@ if ($action == 'requestanalysis') {
         if ($courseid == SITEID) {
             redirect(accessibility::get_plugin_url());
         } else {
-            redirect(new \moodle_url('/course/view.php', ['id' => $courseid]), analysis::redirect_message());
+            redirect(new \powereduc_url('/course/view.php', ['id' => $courseid]), analysis::redirect_message());
         }
     }
 }
@@ -101,13 +101,13 @@ $tools = tool::build_all_accessibilitytools();
 if (isset($tools[$tab])) {
     $tool = $tools[$tab];
 } else {
-    throw new moodle_exception('invalidaccessibilitytool', manager::PLUGINNAME);
+    throw new powereduc_exception('invalidaccessibilitytool', manager::PLUGINNAME);
 }
 
 $perpagedefault = $config->perpage;
 $perpage = optional_param('perpage', $perpagedefault, PARAM_INT);
-$navurl = new moodle_url(accessibility::get_plugin_url(), ['courseid' => $courseid]);
-$url = new moodle_url($navurl, ['tab' => $tab, 'perpage' => $perpage]);
+$navurl = new powereduc_url(accessibility::get_plugin_url(), ['courseid' => $courseid]);
+$url = new powereduc_url($navurl, ['tab' => $tab, 'perpage' => $perpage]);
 
 $tool->set_filter(new filter($courseid, $categoryid, $tab, $page, $perpage, $url, $target));
 

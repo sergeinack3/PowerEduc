@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ require_once($CFG->libdir . '/badgeslib.php');
 $hash = optional_param('hash', null, PARAM_RAW);
 
 $PAGE->set_pagelayout('admin');
-$url = new moodle_url('/badges/backpack-export.php');
+$url = new powereduc_url('/badges/backpack-export.php');
 
 require_login();
 if (empty($CFG->badges_allowexternalbackpack) || empty($CFG->enablebadges)) {
@@ -50,7 +50,7 @@ $PAGE->set_title($title);
 $PAGE->set_heading(fullname($USER));
 $PAGE->set_pagelayout('standard');
 
-$redirecturl = new moodle_url('/badges/mybadges.php');
+$redirecturl = new powereduc_url('/badges/mybadges.php');
 if ($hash) {
     $api = new core_badges\backpack_api2p1($backpack);
     $notify = $api->put_assertions($hash);

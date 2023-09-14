@@ -2,7 +2,7 @@
 
 ///////////////////////////////////////////////////////////////////////////
 //                                                                       //
-// This file is part of Moodle - http://moodle.org/                      //
+// This file is part of Moodle - http://powereduc.org/                      //
 // Moodle - Modular Object-Oriented Dynamic Learning Environment         //
 //                                                                       //
 // Moodle is free software: you can redistribute it and/or modify        //
@@ -21,7 +21,7 @@
 ///////////////////////////////////////////////////////////////////////////
 
 /**
- * @package    moodle
+ * @package    powereduc
  * @subpackage registration
  * @author     Jerome Mouneyrac <jerome@mouneyrac.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
@@ -43,22 +43,22 @@ $hubname = optional_param('hubname', '', PARAM_TEXT);
 $token = optional_param('token', '', PARAM_TEXT);
 $error = optional_param('error', '', PARAM_ALPHANUM);
 
-admin_externalpage_setup('registrationmoodleorg');
+admin_externalpage_setup('registrationpowereducorg');
 
 if (parse_url($url, PHP_URL_HOST) !== parse_url(HUB_POWEREDUCORGHUBURL, PHP_URL_HOST)) {
     // Allow other plugins to confirm registration on custom hubs. Plugins implementing this
-    // callback need to redirect or exit. See https://docs.moodle.org/en/Hub_registration .
+    // callback need to redirect or exit. See https://docs.powereduc.org/en/Hub_registration .
     $callbacks = get_plugins_with_function('hub_registration');
     foreach ($callbacks as $plugintype => $plugins) {
         foreach ($plugins as $plugin => $callback) {
             $callback('confirm');
         }
     }
-    throw new moodle_exception('errorotherhubsnotsupported', 'hub');
+    throw new powereduc_exception('errorotherhubsnotsupported', 'hub');
 }
 
 if (!empty($error) and $error == 'urlalreadyexist') {
-    throw new moodle_exception('urlalreadyregistered', 'hub',
+    throw new powereduc_exception('urlalreadyregistered', 'hub',
             $CFG->wwwroot . '/' . $CFG->admin . '/registration/index.php');
 }
 
@@ -74,7 +74,7 @@ echo $OUTPUT->notification(get_string('registrationconfirmedon', 'hub'), 'notify
 // Display continue button.
 $returnurl = !empty($SESSION->registrationredirect) ? clean_param($SESSION->registrationredirect, PARAM_LOCALURL) : null;
 unset($SESSION->registrationredirect);
-$continueurl = new moodle_url($returnurl ?: '/admin/registration/index.php');
+$continueurl = new powereduc_url($returnurl ?: '/admin/registration/index.php');
 $continuebutton = $OUTPUT->render(new single_button($continueurl, get_string('continue')));
 $continuebutton = html_writer::tag('div', $continuebutton, array('class' => 'mdl-align'));
 echo $continuebutton;

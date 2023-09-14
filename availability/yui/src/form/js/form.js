@@ -13,7 +13,7 @@
  * can be updated to the form field by calling the 'update' method, which
  * this code and the plugins call if any HTML control changes.
  *
- * @module moodle-core_availability-form
+ * @module powereduc-core_availability-form
  */
 M.core_availability = M.core_availability || {};
 
@@ -91,10 +91,10 @@ M.core_availability.form = {
         this.field.setAttribute('aria-hidden', 'true');
         // The fcontainer class here is inappropriate, but is necessary
         // because otherwise it is impossible to make Behat work correctly on
-        // these controls as Behat incorrectly decides they're a moodleform
-        // textarea. IMO Behat should not know about moodleforms at all and
+        // these controls as Behat incorrectly decides they're a powereducform
+        // textarea. IMO Behat should not know about powereducforms at all and
         // should look purely at HTML elements on the page, but until it is
-        // fixed to do this or fixed in some other way to only detect moodleform
+        // fixed to do this or fixed in some other way to only detect powereducform
         // elements that specifically match what those elements should look like,
         // then there is no good solution.
         this.mainDiv = Y.Node.create('<div class="availability-field fcontainer"></div>');
@@ -381,7 +381,7 @@ M.core_availability.List = function(json, root, parentRoot) {
             '<option value="|">' + M.util.get_string('listheader_multi_or', 'availability') + '</option></select></label> ' +
             M.util.get_string('listheader_multi_after', 'availability') + '</span></div>' +
             '<div class="availability-children"></div>' +
-            '<div class="availability-none"><span class="px-3">' + M.util.get_string('none', 'moodle') + '</span></div>' +
+            '<div class="availability-none"><span class="px-3">' + M.util.get_string('none', 'powereduc') + '</span></div>' +
             '<div class="clearfix mt-1"></div>' +
             '<div class="availability-button"></div></div><div class="clearfix"></div></div>');
     if (!root) {
@@ -680,7 +680,7 @@ M.core_availability.List.prototype.clickAdd = function() {
     var content = Y.Node.create('<div>' +
             '<ul class="list-unstyled container-fluid"></ul>' +
             '<div class="availability-buttons mdl-align">' +
-            '<button type="button" class="btn btn-secondary">' + M.util.get_string('cancel', 'moodle') +
+            '<button type="button" class="btn btn-secondary">' + M.util.get_string('cancel', 'powereduc') +
             '</button></div></div>');
     var cancel = content.one('button');
 
@@ -1154,9 +1154,9 @@ M.core_availability.EyeIcon.prototype.isHidden = function() {
  */
 M.core_availability.DeleteIcon = function(toDelete) {
     this.span = Y.Node.create('<a class="d-inline-block col-form-label availability-delete px-3" href="#" title="' +
-            M.util.get_string('delete', 'moodle') + '" role="button">');
+            M.util.get_string('delete', 'powereduc') + '" role="button">');
     var img = Y.Node.create('<img src="' + M.util.image_url('t/delete', 'core') +
-            '" alt="' + M.util.get_string('delete', 'moodle') + '" />');
+            '" alt="' + M.util.get_string('delete', 'powereduc') + '" />');
     this.span.appendChild(img);
     var click = function(e) {
         e.preventDefault();

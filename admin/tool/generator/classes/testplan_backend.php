@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ class tool_generator_testplan_backend extends tool_generator_backend {
     /**
      * @var The URL to the repository of the external project.
      */
-    protected static $repourl = 'https://github.com/moodlehq/moodle-performance-comparison';
+    protected static $repourl = 'https://github.com/powereduchq/powereduc-performance-comparison';
 
     /**
      * @var Number of users depending on the selected size.
@@ -72,7 +72,7 @@ class tool_generator_testplan_backend extends tool_generator_backend {
     }
 
     /**
-     * Getter for moodle-performance-comparison project URL.
+     * Getter for powereduc-performance-comparison project URL.
      *
      * @return string
      */
@@ -186,7 +186,7 @@ class tool_generator_testplan_backend extends tool_generator_backend {
         $planusers = self::$users[$size] ?? 0;
         $users = get_enrolled_users($coursecontext, '', 0, 'u.id, u.username, u.auth', 'u.username ASC', 0, $planusers);
         if (!$users) {
-            throw new \moodle_exception('coursewithoutusers', 'tool_generator');
+            throw new \powereduc_exception('coursewithoutusers', 'tool_generator');
         }
 
         $lines = array();
@@ -196,7 +196,7 @@ class tool_generator_testplan_backend extends tool_generator_backend {
             if ($updateuserspassword) {
                 $userauth = get_auth_plugin($user->auth);
                 if (!$userauth->user_update_password($user, $CFG->tool_generator_users_password)) {
-                    throw new \moodle_exception('errorpasswordupdate', 'auth');
+                    throw new \powereduc_exception('errorpasswordupdate', 'auth');
                 }
             }
 
@@ -249,19 +249,19 @@ class tool_generator_testplan_backend extends tool_generator_backend {
 
         // Getting the first page module instance.
         if (!$pages = $courseinfo->get_instances_of('page')) {
-            throw new \moodle_exception('error_nopageinstances', 'tool_generator');
+            throw new \powereduc_exception('error_nopageinstances', 'tool_generator');
         }
         $data->pageid = reset($pages)->id;
 
         // Getting the first forum module instance and it's first discussion and reply as well.
         if (!$forums = $courseinfo->get_instances_of('forum')) {
-            throw new \moodle_exception('error_noforuminstances', 'tool_generator');
+            throw new \powereduc_exception('error_noforuminstances', 'tool_generator');
         }
         $forum = reset($forums);
 
         // Getting the first discussion (and reply).
         if (!$discussions = forum_get_discussions($forum, 'd.timemodified ASC', false, -1, 1)) {
-            throw new \moodle_exception('error_noforumdiscussions', 'tool_generator');
+            throw new \powereduc_exception('error_noforumdiscussions', 'tool_generator');
         }
         $discussion = reset($discussions);
 

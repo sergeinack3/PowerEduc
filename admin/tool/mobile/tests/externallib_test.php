@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -294,7 +294,7 @@ class externallib_test extends externallib_advanced_testcase {
         // Now, try with an invalid private token.
         set_user_preference('tool_mobile_autologin_request_last', time() - HOURSECS, $USER);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('invalidprivatetoken', 'tool_mobile'));
         $result = external::get_autologin_key(random_string('64'));
     }
@@ -315,7 +315,7 @@ class externallib_test extends externallib_advanced_testcase {
         $CFG->enablemobilewebservice = 0;
 
         $this->setAdminUser();
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('enablewsdescription', 'webservice'));
         $result = external::get_autologin_key('');
     }
@@ -336,7 +336,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->resetAfterTest(true);
         $this->setAdminUser();
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('httpsrequired', 'tool_mobile'));
         $result = external::get_autologin_key('');
     }
@@ -354,7 +354,7 @@ class externallib_test extends externallib_advanced_testcase {
         \core_useragent::instance(true, 'Mozilla/5.0 (Linux; Android 7.1.1; Moto G Play Build/NPIS26.48-43-2; wv) ' .
             'AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/71.0.3578.99 Mobile Safari/537.36 MoodleMobile');
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('autologinnotallowedtoadmins', 'tool_mobile'));
         $result = external::get_autologin_key('');
     }
@@ -397,7 +397,7 @@ class externallib_test extends externallib_advanced_testcase {
         $result = \external_api::clean_returnvalue(external::get_autologin_key_returns(), $result);
 
         // We just requested one token, we must wait.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('autologinkeygenerationlockout', 'tool_mobile'));
         $result = external::get_autologin_key($token->privatetoken);
     }
@@ -411,7 +411,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->resetAfterTest(true);
         $this->setAdminUser();
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('apprequired', 'tool_mobile'));
         $result = external::get_autologin_key('');
     }
@@ -465,7 +465,7 @@ class externallib_test extends externallib_advanced_testcase {
      */
     public function test_get_content_invalid_component() {
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $result = external::get_content('tool_mobile\hack', 'test_view');
     }
 
@@ -474,7 +474,7 @@ class externallib_test extends externallib_advanced_testcase {
      */
     public function test_get_content_non_existent_component() {
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $result = external::get_content('tool_blahblahblah', 'test_view');
     }
 
@@ -652,7 +652,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals($token->privatetoken, $result['privatetoken']);
 
         // Now, try with an invalid key.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('invalidkey', 'error'));
         $result = external::get_tokens_for_qr_login(random_string('64'), $user->id);
     }
@@ -691,7 +691,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals($token->privatetoken, $result['privatetoken']);
 
         // Now, try with an invalid key.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('invalidkey', 'error'));
         $result = external::get_tokens_for_qr_login(random_string('64'), $user->id);
     }
@@ -722,7 +722,7 @@ class externallib_test extends externallib_advanced_testcase {
         \core_useragent::instance(true, 'Mozilla/5.0 (Linux; Android 7.1.1; Moto G Play Build/NPIS26.48-43-2; wv) ' .
                 'AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/71.0.3578.99 Mobile Safari/537.36 MoodleMobile');
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('ipmismatch', 'error'));
         $result = external::get_tokens_for_qr_login($qrloginkey, $USER->id);
     }
@@ -760,7 +760,7 @@ class externallib_test extends externallib_advanced_testcase {
         $CFG->enablemobilewebservice = 0;
 
         $this->setAdminUser();
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('enablewsdescription', 'webservice'));
         $result = external::get_tokens_for_qr_login('', $user->id);
     }
@@ -781,7 +781,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->resetAfterTest(true);
         $this->setAdminUser();
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('httpsrequired', 'tool_mobile'));
         $result = external::get_tokens_for_qr_login('', $USER->id);
     }
@@ -799,7 +799,7 @@ class externallib_test extends externallib_advanced_testcase {
         \core_useragent::instance(true, 'Mozilla/5.0 (Linux; Android 7.1.1; Moto G Play Build/NPIS26.48-43-2; wv) ' .
             'AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/71.0.3578.99 Mobile Safari/537.36 MoodleMobile');
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('autologinnotallowedtoadmins', 'tool_mobile'));
         $result = external::get_tokens_for_qr_login('', $USER->id);
     }
@@ -813,7 +813,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->resetAfterTest(true);
         $this->setAdminUser();
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('apprequired', 'tool_mobile'));
         $result = external::get_tokens_for_qr_login('', $USER->id);
     }

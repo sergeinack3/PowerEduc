@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -97,7 +97,7 @@ class async_restore_test extends \advanced_testcase {
         $backupdir = "restore_" . uniqid();
         $path = $CFG->tempdir . DIRECTORY_SEPARATOR . "backup" . DIRECTORY_SEPARATOR . $backupdir;
 
-        $fp = get_file_packer('application/vnd.moodle.backup');
+        $fp = get_file_packer('application/vnd.powereduc.backup');
         $fp->extract_to_pathname($backupfile, $path);
 
         // Create restore controller.
@@ -198,7 +198,7 @@ class async_restore_test extends \advanced_testcase {
         $backupdir = "restore_" . uniqid();
         $path = $CFG->tempdir . DIRECTORY_SEPARATOR . "backup" . DIRECTORY_SEPARATOR . $backupdir;
 
-        $fp = get_file_packer('application/vnd.moodle.backup');
+        $fp = get_file_packer('application/vnd.powereduc.backup');
         $fp->extract_to_pathname($backupfile, $path);
 
         // Create restore controller.

@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contentbank content viewed event.
  *
  * @package    core
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -34,8 +34,8 @@ namespace core\event;
  * }
  *
  * @package    core
- * @since      Moodle 3.9
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @since      PowerEduc 3.9
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class contentbank_content_viewed extends base {
@@ -52,7 +52,7 @@ class contentbank_content_viewed extends base {
     /**
      * Creates an event from content bank content object
      *
-     * @since Moodle 3.9
+     * @since PowerEduc 3.9
      * @param \stdClass $record Data to create the event
      * @return contentbank_content_viewed
      */
@@ -108,10 +108,10 @@ class contentbank_content_viewed extends base {
     /**
      * Returns relevant URL.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_url() {
-        $url = new \moodle_url('/contentbank/view.php');
+        $url = new \powereduc_url('/contentbank/view.php');
         $url->param('id', $this->objectid);
         return $url;
     }

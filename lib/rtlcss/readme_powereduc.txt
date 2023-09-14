@@ -1,9 +1,9 @@
 RTLCSS
 ------
 
-Downloaded from: https://github.com/moodlehq/rtlcss-php
+Downloaded from: https://github.com/powereduchq/rtlcss-php
 
 Import procedure:
 
-- Copy all the files from the folder 'src/MoodleHQ/RTLCSS/' in this directory.
+- Copy all the files from the folder 'src/PowerEducHQ/RTLCSS/' in this directory.
 - Copy the license file.

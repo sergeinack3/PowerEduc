@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Components (core subsystems + plugins) related code.
@@ -93,7 +93,7 @@ class core_component {
         'MaxMind' => 'lib/maxmind/MaxMind',
         'GeoIp2' => 'lib/maxmind/GeoIp2',
         'Sabberworm\\CSS' => 'lib/php-css-parser',
-        'MoodleHQ\\RTLCSS' => 'lib/rtlcss',
+        'PowerEducHQ\\RTLCSS' => 'lib/rtlcss',
         'ScssPhp\\ScssPhp' => 'lib/scssphp',
         'Box\\Spout' => 'lib/spout/src/Spout',
         'MatthiasMullie\\Minify' => 'lib/minify/matthiasmullie-minify/src/',
@@ -877,7 +877,7 @@ $cache = '.var_export($cache, true).';
      *
      * e.g. get_component_classes_in_namespace('mod_forum', 'event')
      *
-     * @param string|null $component A valid moodle component (frankenstyle) or null if searching all components
+     * @param string|null $component A valid powereduc component (frankenstyle) or null if searching all components
      * @param string $namespace Namespace from the component name or empty string if all $component classes.
      * @return array The full class name as key and the class path as value, empty array if $component is `null`
      * and $namespace is empty.
@@ -1002,7 +1002,7 @@ $cache = '.var_export($cache, true).';
      * @return array two-items list of [(string)type, (string|null)name]
      */
     public static function normalize_component($component) {
-        if ($component === 'moodle' or $component === 'core' or $component === '') {
+        if ($component === 'powereduc' or $component === 'core' or $component === '') {
             return array('core', null);
         }
 
@@ -1019,7 +1019,7 @@ $cache = '.var_export($cache, true).';
 
         } else {
             list($type, $plugin) = explode('_', $component, 2);
-            if ($type === 'moodle') {
+            if ($type === 'powereduc') {
                 $type = 'core';
             }
             // Any unknown type must be a subplugin.
@@ -1031,7 +1031,7 @@ $cache = '.var_export($cache, true).';
     /**
      * Return exact absolute path to a plugin directory.
      *
-     * @param string $component name such as 'moodle', 'mod_forum'
+     * @param string $component name such as 'powereduc', 'mod_forum'
      * @return string full path to component directory; NULL if not found
      */
     public static function get_component_directory($component) {

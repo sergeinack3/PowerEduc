@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,14 +17,14 @@
  * Class for exporting the data needed to render a recent accessed item.
  *
  * @package    block_recentlyaccesseditems
- * @copyright  2018 Victor Deniz <victor@moodle.com>
+ * @copyright  2018 Victor Deniz <victor@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace block_recentlyaccesseditems\external;
 defined('POWEREDUC_INTERNAL') || die();
 
 use renderer_base;
-use moodle_url;
+use powereduc_url;
 
 /**
  * Class for exporting the data needed to render a recent accessed item.
@@ -53,9 +53,9 @@ class recentlyaccesseditems_item_exporter extends \core\external\exporter {
         require_once($CFG->libdir.'/modinfolib.php');
 
         return array(
-            'viewurl' => (new moodle_url('/mod/'.$this->data->modname.'/view.php',
+            'viewurl' => (new powereduc_url('/mod/'.$this->data->modname.'/view.php',
                 array('id' => $this->data->cmid)))->out(false),
-            'courseviewurl' => (new moodle_url('/course/view.php', array('id' => $this->data->courseid)))->out(false),
+            'courseviewurl' => (new powereduc_url('/course/view.php', array('id' => $this->data->courseid)))->out(false),
             'icon' => \html_writer::img(
                 get_fast_modinfo($this->data->courseid)->cms[$this->data->cmid]->get_icon_url(),
                 get_string('pluginname', $this->data->modname),

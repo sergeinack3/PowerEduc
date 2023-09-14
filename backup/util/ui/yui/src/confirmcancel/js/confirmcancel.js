@@ -1,7 +1,7 @@
 /**
  * Add a confirmation dialogue when cancelling a backup.
  *
- * @module moodle-backup-confirmcancel
+ * @module powereduc-backup-confirmcancel
  */
 
 /**

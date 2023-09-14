@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -13,8 +13,8 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-// phpcs:disable moodle.Files.RequireLogin.Missing
-// phpcs:disable moodle.PHP.ForbiddenFunctions.Found
+// phpcs:disable powereduc.Files.RequireLogin.Missing
+// phpcs:disable powereduc.PHP.ForbiddenFunctions.Found
 
 /**
  * Login end point for Behat tests only.
@@ -30,7 +30,7 @@ require_once("{$CFG->dirroot}/login/lib.php");
 
 $behatrunning = defined('BEHAT_SITE_RUNNING') && BEHAT_SITE_RUNNING;
 if (!$behatrunning) {
-    redirect(new moodle_url('/'));
+    redirect(new powereduc_url('/'));
 }
 
 $username = required_param('username', PARAM_ALPHANUMEXT);
@@ -39,9 +39,9 @@ $wantsurl = optional_param('wantsurl', null, PARAM_URL);
 if (isloggedin()) {
     // If the user is already logged in, log them out and redirect them back to login again.
     require_logout();
-    redirect(new moodle_url('/auth/tests/behat/login.php', [
+    redirect(new powereduc_url('/auth/tests/behat/login.php', [
         'username' => $username,
-        'wantsurl' => (new moodle_url($wantsurl))->out(false),
+        'wantsurl' => (new powereduc_url($wantsurl))->out(false),
     ]));
 }
 
@@ -76,7 +76,7 @@ if ($failurereason) {
     // Note: Do not throw an exception here as we sometimes test that login does not work.
     // Exceptions are automatic failures in Behat.
     \core\notification::add($reason, \core\notification::ERROR);
-    redirect(new moodle_url('/'));
+    redirect(new powereduc_url('/'));
 }
 
 if (!complete_user_login($user)) {
@@ -86,4 +86,4 @@ if (!complete_user_login($user)) {
 if (empty($wantsurl)) {
     $wantsurl = core_login_get_return_url();
 }
-redirect(new moodle_url($wantsurl));
+redirect(new powereduc_url($wantsurl));

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle Course Rollover Plugin
+// This file is part of PowerEduc Course Rollover Plugin
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package     local_powerschool
@@ -36,12 +36,12 @@ require_login();
 $context = context_system::instance();
 // require_capability('local/message:managemessages', $context);
 
-$PAGE->set_url(new moodle_url('/local/powerschool/indexprogramme.php'));
+$PAGE->set_url(new powereduc_url('/local/powerschool/indexprogramme.php'));
 $PAGE->set_context(\context_system::instance());
 $PAGE->set_title('indexprogramme de Cours');
 $PAGE->set_heading('indexprogramme de Cours');
 
-$PAGE->navbar->add(get_string('programme', 'local_powerschool'),  new moodle_url('/local/powerschool/programme.php'));
+$PAGE->navbar->add(get_string('programme', 'local_powerschool'),  new powereduc_url('/local/powerschool/programme.php'));
 $PAGE->navbar->add(get_string('indexprogramme', 'local_powerschool'), $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
@@ -111,26 +111,26 @@ $datecours= strtotime($datesea["day"]."-".$datesea["month"]."-".$datesea["year"]
 
 // $templatecontext = (object)[
 //     'indexprogramme' => array_values($indexprogrammes),
-//     'indexprogrammeedit' => new moodle_url('/local/powerschool/indexprogrammeedit.php'),
-//     'indexprogrammesupp'=> new moodle_url('/local/powerschool/indexprogramme.php'),
-//     'affecter' => new moodle_url('/local/powerschool/affecter.php'),
+//     'indexprogrammeedit' => new powereduc_url('/local/powerschool/indexprogrammeedit.php'),
+//     'indexprogrammesupp'=> new powereduc_url('/local/powerschool/indexprogramme.php'),
+//     'affecter' => new powereduc_url('/local/powerschool/affecter.php'),
 // ];
 
 $menu = (object)[
-    'annee' => new moodle_url('/local/powerschool/anneescolaire.php'),
-    'campus' => new moodle_url('/local/powerschool/campus.php'),
-    'semestre' => new moodle_url('/local/powerschool/semestre.php'),
-    'salle' => new moodle_url('/local/powerschool/salle.php'),
-    'filiere' => new moodle_url('/local/powerschool/filiere.php'),
-    'cycle' => new moodle_url('/local/powerschool/cycle.php'),
-    'modepayement' => new moodle_url('/local/powerschool/modepayement.php'),
-    'matiere' => new moodle_url('/local/powerschool/matiere.php'),
-    'seance' => new moodle_url('/local/powerschool/seance.php'),
-    'inscription' => new moodle_url('/local/powerschool/inscription.php'),
-    'enseigner' => new moodle_url('/local/powerschool/enseigner.php'),
-    'paiement' => new moodle_url('/local/powerschool/paiement.php'),
-    'indexprogramme' => new moodle_url('/local/powerschool/indexprogramme.php'),
-    'programme' => new moodle_url('/local/powerschool/programme.php'),
+    'annee' => new powereduc_url('/local/powerschool/anneescolaire.php'),
+    'campus' => new powereduc_url('/local/powerschool/campus.php'),
+    'semestre' => new powereduc_url('/local/powerschool/semestre.php'),
+    'salle' => new powereduc_url('/local/powerschool/salle.php'),
+    'filiere' => new powereduc_url('/local/powerschool/filiere.php'),
+    'cycle' => new powereduc_url('/local/powerschool/cycle.php'),
+    'modepayement' => new powereduc_url('/local/powerschool/modepayement.php'),
+    'matiere' => new powereduc_url('/local/powerschool/matiere.php'),
+    'seance' => new powereduc_url('/local/powerschool/seance.php'),
+    'inscription' => new powereduc_url('/local/powerschool/inscription.php'),
+    'enseigner' => new powereduc_url('/local/powerschool/enseigner.php'),
+    'paiement' => new powereduc_url('/local/powerschool/paiement.php'),
+    'indexprogramme' => new powereduc_url('/local/powerschool/indexprogramme.php'),
+    'programme' => new powereduc_url('/local/powerschool/programme.php'),
 ];
 
 $sqllu = "SELECT fullname,DATE_FORMAT(FROM_UNIXTIME(p.datecours),'%D %b %Y') as datec,heuredebutcours,heurefincours FROM {course} c, {semestre} s,{specialite} sp,{cycle} cy,{salle} sa, {programme} p
@@ -262,7 +262,7 @@ echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
 
 // echo '<i href="/powereduc03/local/powerschool/programme.php" class="fa fa-arrow-left fa-2x"style="color: #1D7DC2;"> </i> ';
 
-// echo ' <a type="button" class="btn btn-info" href="/moodle1/local/powerschool/programme.php"> <i class="fa fa-arrow-left "> </i> </a>';
+// echo ' <a type="button" class="btn btn-info" href="/powereduc1/local/powerschool/programme.php"> <i class="fa fa-arrow-left "> </i> </a>';
 
 
 // echo ' <a href="/powereduc03/local/powerschool/programme.php> 
@@ -276,8 +276,8 @@ $mform->display();
 echo '<div class="d-flex flex-row align-items-center justify-content-between mx-sm-5">
             <h1>'.$getMonth. '</h1>
         <div>  
-                <a href="/moodle1/local/powerschool/indexprogramme.php?mois='.$month->previousmonth()->month.'&annee='.$month->previousmonth()->year.'&semestre='.$semestre.'&idca='.$_GET["idca"].'&idsp='.$_GET["idsp"].'&idcy='.$_GET["idcy"].'&idsa='.$_GET["idsa"].'" class="btn btn-primary"> &lt;</a>
-                <a href="/moodle1/local/powerschool/indexprogramme.php?mois='.$month->nextmonth()->month.'&annee='.$month->nextmonth()->year.'&semestre='.$semestre.'&idca='.$_GET["idca"].'&idsp='.$_GET["idsp"].'&idcy='.$_GET["idcy"].'&idsa='.$_GET["idsa"].'" class="btn btn-primary">&gt;</a>
+                <a href="/powereduc1/local/powerschool/indexprogramme.php?mois='.$month->previousmonth()->month.'&annee='.$month->previousmonth()->year.'&semestre='.$semestre.'&idca='.$_GET["idca"].'&idsp='.$_GET["idsp"].'&idcy='.$_GET["idcy"].'&idsa='.$_GET["idsa"].'" class="btn btn-primary"> &lt;</a>
+                <a href="/powereduc1/local/powerschool/indexprogramme.php?mois='.$month->nextmonth()->month.'&annee='.$month->nextmonth()->year.'&semestre='.$semestre.'&idca='.$_GET["idca"].'&idsp='.$_GET["idsp"].'&idcy='.$_GET["idcy"].'&idsa='.$_GET["idsa"].'" class="btn btn-primary">&gt;</a>
         </div>
      </div>';
 
@@ -309,7 +309,7 @@ for($i = 0 ; $i < $getWeeks; $i++){
         $heuredebut = $event->heuredebutcours;
         $heurefin = $event->heurefincours;
         echo '<div>'
-        .$heuredebut.'h -'.$heurefin.'h :   '.'<a href="/moodle1/local/powerschool/programmeedit.php?id='.$event->id.'&idca='.$_GET["idca"].'">'.$eventday.' '.$specialitecy.' '.$salle.'</a>
+        .$heuredebut.'h -'.$heurefin.'h :   '.'<a href="/powereduc1/local/powerschool/programmeedit.php?id='.$event->id.'&idca='.$_GET["idca"].'">'.$eventday.' '.$specialitecy.' '.$salle.'</a>
         </div>';
       }
        '</td>';

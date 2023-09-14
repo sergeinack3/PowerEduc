@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ class prediction_action extends action {
      *
      * @param string $actionname They should match a-zA-Z_0-9-, as we apply a PARAM_ALPHANUMEXT filter
      * @param \core_analytics\prediction $prediction
-     * @param \moodle_url $actionurl The final URL where the user should be forwarded.
+     * @param \powereduc_url $actionurl The final URL where the user should be forwarded.
      * @param \pix_icon $icon Link icon
      * @param string $text Link text
      * @param bool $primary Primary button or secondary.
@@ -48,7 +48,7 @@ class prediction_action extends action {
      * @param string|false $type
      * @return void
      */
-    public function __construct($actionname, \core_analytics\prediction $prediction, \moodle_url $actionurl, \pix_icon $icon,
+    public function __construct($actionname, \core_analytics\prediction $prediction, \powereduc_url $actionurl, \pix_icon $icon,
                                 $text, $primary = false, $attributes = array(), $type = false) {
 
         $this->actionname = $actionname;
@@ -70,16 +70,16 @@ class prediction_action extends action {
      *
      * Note that it is the caller responsibility to check that the provided actionname is valid for the prediction target.
      *
-     * @param  \moodle_url $actionurl
+     * @param  \powereduc_url $actionurl
      * @param  string      $actionname
      * @param  int         $predictionid
-     * @return \moodle_url
+     * @return \powereduc_url
      */
-    public static function transform_to_forward_url(\moodle_url $actionurl, string $actionname, int $predictionid): \moodle_url {
+    public static function transform_to_forward_url(\powereduc_url $actionurl, string $actionname, int $predictionid): \powereduc_url {
 
         // We want to track how effective are our suggested actions, we pass users through a script that will log these actions.
         $params = ['action' => $actionname, 'predictionid' => $predictionid,
             'forwardurl' => $actionurl->out(false)];
-        return new \moodle_url('/report/insights/action.php', $params);
+        return new \powereduc_url('/report/insights/action.php', $params);
     }
 }

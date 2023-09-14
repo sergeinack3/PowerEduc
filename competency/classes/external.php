@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -4235,7 +4235,7 @@ class external extends external_api {
      *
      * @param int $id the template id
      * @return array of warnings and status result
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function template_viewed($id) {
         $params = self::validate_parameters(self::view_book_parameters(), array(
@@ -4288,7 +4288,7 @@ class external extends external_api {
      *
      * @param int $courseid the course id
      * @param stdClass $settings The list of settings (currently only pushratingstouserplans).
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function update_course_competency_settings($courseid, $settings) {
         $params = self::validate_parameters(self::update_course_competency_settings_parameters(), array(

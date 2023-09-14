@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Moodle - Modular Object-Oriented Dynamic Learning Environment
- *          http://moodle.org
+ * PowerEduc - Modular Object-Oriented Dynamic Learning Environment
+ *          http://powereduc.org
  * Copyright (C) 1999 onwards Martin Dougiamas  http://dougiamas.com
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,12 +18,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package    moodle
+ * @package    powereduc
  * @subpackage lib
  * @author     Dan Poltawski <talktodan@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
- * Customised version of SimplePie for Moodle
+ * Customised version of SimplePie for PowerEduc
  */
 
 require_once($CFG->libdir.'/filelib.php');
@@ -34,40 +34,40 @@ require_once($CFG->libdir.'/filelib.php');
 require_once($CFG->libdir.'/simplepie/autoloader.php');
 
 /**
- * Moodle Customised version of the SimplePie class
+ * PowerEduc Customised version of the SimplePie class
  *
  * This class extends the stock SimplePie class
  * in order to make sensible configuration choices,
- * such as using the Moodle cache directory and
+ * such as using the PowerEduc cache directory and
  * curl functions/proxy config for making http
- * requests in line with moodle configuration.
+ * requests in line with powereduc configuration.
  *
  * @copyright 2009 Dan Poltawski <talktodan@gmail.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since     Moodle 2.0
+ * @since     PowerEduc 2.0
  */
-class moodle_simplepie extends SimplePie {
+class powereduc_simplepie extends SimplePie {
     /**
      * Constructor - creates an instance of the SimplePie class
-     * with Moodle defaults.
+     * with PowerEduc defaults.
      *
      * @param string $feedurl optional URL of the feed
      * @param int $timeout how many seconds requests should wait for server response
      */
     public function __construct($feedurl = null, $timeout = 2) {
-        $cachedir = moodle_simplepie::get_cache_directory();
+        $cachedir = powereduc_simplepie::get_cache_directory();
         check_dir_exists($cachedir);
 
         parent::__construct();
 
-        // Use the Moodle class for http requests
-        $this->set_file_class('moodle_simplepie_file');
+        // Use the PowerEduc class for http requests
+        $this->set_file_class('powereduc_simplepie_file');
 
         // Use html purifier for text cleaning.
-        $this->set_sanitize_class('moodle_simplepie_sanitize');
-        $this->sanitize = new moodle_simplepie_sanitize();
+        $this->set_sanitize_class('powereduc_simplepie_sanitize');
+        $this->sanitize = new powereduc_simplepie_sanitize();
 
-        // Match moodle encoding
+        // Match powereduc encoding
         $this->set_output_encoding('UTF-8');
 
         // default to a short timeout as most operations will be interactive
@@ -102,25 +102,25 @@ class moodle_simplepie extends SimplePie {
      */
     public static function reset_cache() {
 
-        $cachedir = moodle_simplepie::get_cache_directory();
+        $cachedir = powereduc_simplepie::get_cache_directory();
 
         return remove_dir($cachedir);
     }
 }
 
 /**
- * Moodle Customised version of the SimplePie_File class
+ * PowerEduc Customised version of the SimplePie_File class
  *
  * This class extends the stock SimplePie class
- * in order to utilise Moodles own curl class for making
- * http requests. By using the moodle curl class
+ * in order to utilise PowerEducs own curl class for making
+ * http requests. By using the powereduc curl class
  * we ensure that the correct proxy configuration is used.
  */
-class moodle_simplepie_file extends SimplePie_File {
+class powereduc_simplepie_file extends SimplePie_File {
 
     /**
      * The constructor is a copy of the stock simplepie File class which has
-     * been modified to add in use the Moodle curl class rather than php curl
+     * been modified to add in use the PowerEduc curl class rather than php curl
      * functions.
      */
     public function __construct($url, $timeout = 10, $redirects = 5, $headers = null, $useragent = null, $force_fsockopen = false) {
@@ -173,7 +173,7 @@ class moodle_simplepie_file extends SimplePie_File {
 /**
  * Customised feed sanitization using HTMLPurifier.
  */
-class moodle_simplepie_sanitize extends SimplePie_Sanitize {
+class powereduc_simplepie_sanitize extends SimplePie_Sanitize {
     public function sanitize($data, $type, $base = '') {
         $data = trim($data);
 

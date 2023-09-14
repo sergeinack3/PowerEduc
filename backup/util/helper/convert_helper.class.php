@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  *
  * @package    core
  * @subpackage backup-convert
- * @copyright  2011 Mark Nielsen <mark@moodlerooms.com>
+ * @copyright  2011 Mark Nielsen <mark@powereducrooms.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -125,18 +125,18 @@ abstract class convert_helper {
     }
 
     /**
-     * Detects if the given folder contains an unpacked moodle2 backup
+     * Detects if the given folder contains an unpacked powereduc2 backup
      *
      * @param string $tempdir the name of the backup directory
-     * @return boolean true if moodle2 format detected, false otherwise
+     * @return boolean true if powereduc2 format detected, false otherwise
      */
-    public static function detect_moodle2_format($tempdir) {
+    public static function detect_powereduc2_format($tempdir) {
         $dirpath = make_backup_temp_directory($tempdir, false);
         if (!is_dir($dirpath)) {
             throw new convert_helper_exception('tmp_backup_directory_not_found', $dirpath);
         }
 
-        $filepath = $dirpath . '/moodle_backup.xml';
+        $filepath = $dirpath . '/powereduc_backup.xml';
         if (!file_exists($filepath)) {
             return false;
         }
@@ -147,7 +147,7 @@ abstract class convert_helper {
 
         // Look for expected XML elements (case-insensitive to account for encoding attribute).
         if (stripos($firstchars, '<?xml version="1.0" encoding="UTF-8"?>') !== false &&
-            strpos($firstchars, '<moodle_backup>') !== false &&
+            strpos($firstchars, '<powereduc_backup>') !== false &&
             strpos($firstchars, '<information>') !== false) {
 
                 return true;
@@ -157,7 +157,7 @@ abstract class convert_helper {
     }
 
     /**
-     * Converts the given directory with the backup into moodle2 format
+     * Converts the given directory with the backup into powereduc2 format
      *
      * @param string $tempdir The directory to convert
      * @param string $format The current format, if already detected
@@ -165,7 +165,7 @@ abstract class convert_helper {
      * @throws convert_helper_exception
      * @return bool false if unable to find the conversion path, true otherwise
      */
-    public static function to_moodle2_format($tempdir, $format = null, $logger = null) {
+    public static function to_powereduc2_format($tempdir, $format = null, $logger = null) {
 
         if (is_null($format)) {
             $format = backup_general_helper::detect_backup_format($tempdir);
@@ -197,7 +197,7 @@ abstract class convert_helper {
 
         if ($logger instanceof base_logger) {
             backup_helper::log('conversion path established', backup::LOG_INFO,
-                implode(' => ', array_merge($path, array('moodle2'))), 0, false, $logger);
+                implode(' => ', array_merge($path, array('powereduc2'))), 0, false, $logger);
         }
 
         foreach ($path as $name) {
@@ -208,8 +208,8 @@ abstract class convert_helper {
             $converter->convert();
         }
 
-        // make sure we ended with moodle2 format
-        if (!self::detect_moodle2_format($tempdir)) {
+        // make sure we ended with powereduc2 format
+        if (!self::detect_powereduc2_format($tempdir)) {
             throw new convert_helper_exception('conversion_failed');
         }
 
@@ -233,14 +233,14 @@ abstract class convert_helper {
      *
      * Given the source format and the list of available converters and their properties,
      * this methods picks the most effective way how to convert the source format into
-     * the target moodle2 format. The method returns a list of converters that should be
+     * the target powereduc2 format. The method returns a list of converters that should be
      * called, in order.
      *
      * This implementation uses Dijkstra's algorithm to find the shortest way through
      * the oriented graph.
      *
      * @see http://en.wikipedia.org/wiki/Dijkstra's_algorithm
-     * @author David Mudrak <david@moodle.com>
+     * @author David Mudrak <david@powereduc.com>
      * @param string $format the source backup format, one of backup::FORMAT_xxx
      * @param array $descriptions list of {@link base_converter::description()} indexed by the converter name
      * @return array ordered list of converter names to call (may be empty if not reachable)
@@ -370,9 +370,9 @@ abstract class convert_helper {
 /**
  * General convert_helper related exception
  *
- * @author David Mudrak <david@moodle.com>
+ * @author David Mudrak <david@powereduc.com>
  */
-class convert_helper_exception extends moodle_exception {
+class convert_helper_exception extends powereduc_exception {
 
     /**
      * Constructor

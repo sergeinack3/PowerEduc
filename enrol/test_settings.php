@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,10 +32,10 @@ if (!core_component::is_valid_plugin_name('enrol', $enrol)) {
     $enrol = '';
 }
 
-navigation_node::override_active_url(new moodle_url('/admin/settings.php', array('section'=>'manageenrols')));
+navigation_node::override_active_url(new powereduc_url('/admin/settings.php', array('section'=>'manageenrols')));
 admin_externalpage_setup('enroltestsettings');
 
-$returnurl = new moodle_url('/admin/settings.php', array('section'=>'manageenrols'));
+$returnurl = new powereduc_url('/admin/settings.php', array('section'=>'manageenrols'));
 
 echo $OUTPUT->header();
 
@@ -56,7 +56,7 @@ if (!$enrol) {
 
     echo $OUTPUT->heading(get_string('testsettings', 'core_enrol'));
 
-    $url = new moodle_url('/enrol/test_settings.php', array('sesskey'=>sesskey()));
+    $url = new powereduc_url('/enrol/test_settings.php', array('sesskey'=>sesskey()));
     echo $OUTPUT->single_select($url, 'enrol', $options);
 
     echo $OUTPUT->footer();

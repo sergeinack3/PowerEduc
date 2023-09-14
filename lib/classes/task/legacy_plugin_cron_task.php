@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Scheduled task class.
@@ -27,8 +27,8 @@ namespace core\task;
  * Simple task to run cron for all plugins.
  * Note - this is only for plugins using the legacy cron method,
  * plugins can also now just add their own scheduled tasks which is the preferred method.
- * @deprecated since Moodle 3.9 MDL-52846. Please use new task API.
- * @todo MDL-61165 This will be deleted in Moodle 4.1
+ * @deprecated since PowerEduc 3.9 MDL-52846. Please use new task API.
+ * @todo MDL-61165 This will be deleted in PowerEduc 4.1
  */
 class legacy_plugin_cron_task extends scheduled_task {
 
@@ -117,7 +117,7 @@ class legacy_plugin_cron_task extends scheduled_task {
         mtrace("Starting blocks");
         if ($blocks = $DB->get_records_select("block", "cron > 0 AND ((? - lastcron) > cron) AND visible = 1", array($timenow))) {
             // We will need the base class.
-            require_once($CFG->dirroot.'/blocks/moodleblock.class.php');
+            require_once($CFG->dirroot.'/blocks/powereducblock.class.php');
             foreach ($blocks as $block) {
                 $blockfile = $CFG->dirroot.'/blocks/'.$block->name.'/block_'.$block->name.'.php';
                 if (file_exists($blockfile)) {

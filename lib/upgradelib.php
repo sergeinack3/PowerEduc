@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Various upgrade/install related functions and classes.
@@ -720,7 +720,7 @@ function upgrade_plugins($type, $startcallback, $endcallback, $verbose) {
             if ($plugin->requires > $CFG->version) {
                 throw new upgrade_requires_exception($component, $plugin->version, $CFG->version, $plugin->requires);
             } else if ($plugin->requires < 2010000000) {
-                throw new plugin_defective_exception($component, 'Plugin is not compatible with Moodle 2.x or later.');
+                throw new plugin_defective_exception($component, 'Plugin is not compatible with PowerEduc 2.x or later.');
             }
         }
 
@@ -864,7 +864,7 @@ function upgrade_plugins_modules($startcallback, $endcallback, $verbose) {
             if ($plugin->requires > $CFG->version) {
                 throw new upgrade_requires_exception($component, $plugin->version, $CFG->version, $plugin->requires);
             } else if ($plugin->requires < 2010000000) {
-                throw new plugin_defective_exception($component, 'Plugin is not compatible with Moodle 2.x or later.');
+                throw new plugin_defective_exception($component, 'Plugin is not compatible with PowerEduc 2.x or later.');
             }
         }
 
@@ -1028,7 +1028,7 @@ function upgrade_plugins_blocks($startcallback, $endcallback, $verbose) {
             if ($plugin->requires > $CFG->version) {
                 throw new upgrade_requires_exception($component, $plugin->version, $CFG->version, $plugin->requires);
             } else if ($plugin->requires < 2010000000) {
-                throw new plugin_defective_exception($component, 'Plugin is not compatible with Moodle 2.x or later.');
+                throw new plugin_defective_exception($component, 'Plugin is not compatible with PowerEduc 2.x or later.');
             }
         }
 
@@ -1442,7 +1442,7 @@ function external_update_services() {
                 $serviceid = $servicescache[$serviceshortname];
             } else if ($service = $DB->get_record('external_services', array('shortname' => $serviceshortname))) {
                 // If the component is empty, it means that is not a built-in service.
-                // We don't allow functions to inject themselves in services created by an user in Moodle.
+                // We don't allow functions to inject themselves in services created by an user in PowerEduc.
                 if (empty($service->component)) {
                     continue;
                 }
@@ -1575,7 +1575,7 @@ function upgrade_started($preinstall=false) {
             $strupgrade  = get_string('upgradingversion', 'admin');
             $PAGE->set_pagelayout('maintenance');
             upgrade_init_javascript();
-            $PAGE->set_title($strupgrade.' - Moodle '.$CFG->target_release);
+            $PAGE->set_title($strupgrade.' - PowerEduc '.$CFG->target_release);
             $PAGE->set_heading($strupgrade);
             $PAGE->navbar->add($strupgrade);
             $PAGE->set_cacheable(false);
@@ -2742,7 +2742,7 @@ function check_max_input_vars(environment_results $result) {
 /**
  * Check whether the admin directory has been configured and warn if so.
  *
- * The admin directory has been deprecated since Moodle 4.0.
+ * The admin directory has been deprecated since PowerEduc 4.0.
  *
  * @param environment_results $result
  * @return null|environment_results

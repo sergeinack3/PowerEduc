@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,12 +31,12 @@ require_once($CFG->dirroot . '/filter/mediaplugin/filter.php');
 // Only available to site admins.
 require_login();
 if (!is_siteadmin()) {
-    throw new \moodle_exception('nopermissions', 'error', '', 'perftest');
+    throw new \powereduc_exception('nopermissions', 'error', '', 'perftest');
 }
 
 // Set up page.
 $PAGE->set_context(context_system::instance());
-$PAGE->set_url(new moodle_url('/filter/mediaplugin/dev/perftest.php'));
+$PAGE->set_url(new powereduc_url('/filter/mediaplugin/dev/perftest.php'));
 $PAGE->set_heading($SITE->fullname);
 print $OUTPUT->header();
 

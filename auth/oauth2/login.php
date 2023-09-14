@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,24 +25,24 @@
 require_once('../../config.php');
 
 $issuerid = required_param('id', PARAM_INT);
-$wantsurl = new moodle_url(optional_param('wantsurl', '', PARAM_URL));
+$wantsurl = new powereduc_url(optional_param('wantsurl', '', PARAM_URL));
 
 $PAGE->set_context(context_system::instance());
-$PAGE->set_url(new moodle_url('/auth/oauth2/login.php', ['id' => $issuerid]));
+$PAGE->set_url(new powereduc_url('/auth/oauth2/login.php', ['id' => $issuerid]));
 
 require_sesskey();
 
 if (!\auth_oauth2\api::is_enabled()) {
-    throw new \moodle_exception('notenabled', 'auth_oauth2');
+    throw new \powereduc_exception('notenabled', 'auth_oauth2');
 }
 
 $issuer = new \core\oauth2\issuer($issuerid);
 if (!$issuer->is_available_for_login()) {
-    throw new \moodle_exception('issuernologin', 'auth_oauth2');
+    throw new \powereduc_exception('issuernologin', 'auth_oauth2');
 }
 
 $returnparams = ['wantsurl' => $wantsurl, 'sesskey' => sesskey(), 'id' => $issuerid];
-$returnurl = new moodle_url('/auth/oauth2/login.php', $returnparams);
+$returnurl = new powereduc_url('/auth/oauth2/login.php', $returnparams);
 
 $client = \core\oauth2\api::get_user_oauth_client($issuer, $returnurl);
 
@@ -54,6 +54,6 @@ if ($client) {
     $auth = new \auth_oauth2\auth();
     $auth->complete_login($client, $wantsurl);
 } else {
-    throw new moodle_exception('Could not get an OAuth client.');
+    throw new powereduc_exception('Could not get an OAuth client.');
 }
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -127,7 +127,7 @@ class grade_report_grader extends grade_report {
         global $CFG;
         parent::__construct($courseid, $gpr, $context, $page);
 
-        $this->canviewhidden = has_capability('moodle/grade:viewhidden', context_course::instance($this->course->id));
+        $this->canviewhidden = has_capability('powereduc/grade:viewhidden', context_course::instance($this->course->id));
 
         // load collapsed settings for this report
         $this->collapsed = static::get_collapsed_preferences($this->course->id);
@@ -151,20 +151,20 @@ class grade_report_grader extends grade_report {
 
         // base url for sorting by first/last name
 
-        $this->baseurl = new moodle_url('index.php', array('id' => $this->courseid));
+        $this->baseurl = new powereduc_url('index.php', array('id' => $this->courseid));
 
         $studentsperpage = $this->get_students_per_page();
         if (!empty($this->page) && !empty($studentsperpage)) {
             $this->baseurl->params(array('perpage' => $studentsperpage, 'page' => $this->page));
         }
 
-        $this->pbarurl = new moodle_url('/grade/report/grader/index.php', array('id' => $this->courseid));
+        $this->pbarurl = new powereduc_url('/grade/report/grader/index.php', array('id' => $this->courseid));
 
         $this->setup_groups();
         $this->setup_users();
         $this->setup_sortitemid();
 
-        $this->overridecat = (bool)get_config('moodle', 'grade_overridecat');
+        $this->overridecat = (bool)get_config('powereduc', 'grade_overridecat');
     }
 
     /**
@@ -179,7 +179,7 @@ class grade_report_grader extends grade_report {
 
         $separategroups = false;
         $mygroups       = array();
-        if ($this->groupmode == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $this->context)) {
+        if ($this->groupmode == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $this->context)) {
             $separategroups = true;
             $mygroups = groups_get_user_groups($this->course->id);
             $mygroups = $mygroups[0]; // ignore groupings
@@ -190,7 +190,7 @@ class grade_report_grader extends grade_report {
                 array_unshift($mygroups, $this->currentgroup);
             }
         }
-        $viewfullnames = has_capability('moodle/site:viewfullnames', $this->context);
+        $viewfullnames = has_capability('powereduc/site:viewfullnames', $this->context);
 
         // always initialize all arrays
         $queue = array();
@@ -257,7 +257,7 @@ class grade_report_grader extends grade_report {
                     }
 
                     if (!$gradeitem = grade_item::fetch(array('id'=>$itemid, 'courseid'=>$this->courseid))) {
-                        throw new \moodle_exception('invalidgradeitemid');
+                        throw new \powereduc_exception('invalidgradeitemid');
                     }
 
                     // Pre-process grade
@@ -421,7 +421,7 @@ class grade_report_grader extends grade_report {
         $coursecontext = $this->context->get_course_context(true);
         $defaultgradeshowactiveenrol = !empty($CFG->grade_report_showonlyactiveenrol);
         $showonlyactiveenrol = get_user_preferences('grade_report_showonlyactiveenrol', $defaultgradeshowactiveenrol);
-        $showonlyactiveenrol = $showonlyactiveenrol || !has_capability('moodle/course:viewsuspendedusers', $coursecontext);
+        $showonlyactiveenrol = $showonlyactiveenrol || !has_capability('powereduc/course:viewsuspendedusers', $coursecontext);
 
         // Limit to users with an active enrollment.
         list($enrolledsql, $enrolledparams) = get_enrolled_sql($this->context, '', 0, $showonlyactiveenrol);
@@ -637,11 +637,11 @@ class grade_report_grader extends grade_report {
             $canseeuserreport = has_capability('gradereport/'.$CFG->grade_profilereport.':view', $this->context);
         }
         if (get_capability_info('gradereport/singleview:view')) {
-            $canseesingleview = has_all_capabilities(array('gradereport/singleview:view', 'moodle/grade:viewall',
-            'moodle/grade:edit'), $this->context);
+            $canseesingleview = has_all_capabilities(array('gradereport/singleview:view', 'powereduc/grade:viewall',
+            'powereduc/grade:edit'), $this->context);
         }
         $hasuserreportcell = $canseeuserreport || $canseesingleview;
-        $viewfullnames = has_capability('moodle/site:viewfullnames', $this->context);
+        $viewfullnames = has_capability('powereduc/site:viewfullnames', $this->context);
 
         $strfeedback  = $this->get_lang_string("feedback");
 
@@ -722,7 +722,7 @@ class grade_report_grader extends grade_report {
 
             $fullname = fullname($user, $viewfullnames);
             $usercell->text = html_writer::link(
-                    new moodle_url('/user/view.php', ['id' => $user->id, 'course' => $this->course->id]),
+                    new powereduc_url('/user/view.php', ['id' => $user->id, 'course' => $this->course->id]),
                     $usercell->text . $fullname,
                     ['class' => 'username']
             );
@@ -751,7 +751,7 @@ class grade_report_grader extends grade_report {
                 $a = new stdClass();
                 $a->user = $fullname;
                 $strgradesforuser = get_string('gradesforuser', 'grades', $a);
-                $url = new moodle_url('/grade/report/'.$CFG->grade_profilereport.'/index.php',
+                $url = new powereduc_url('/grade/report/'.$CFG->grade_profilereport.'/index.php',
                         ['userid' => $user->id, 'id' => $this->course->id]);
                 $userreportcell->text .= $OUTPUT->action_icon($url, new pix_icon('t/grades', ''), null,
                         ['title' => $strgradesforuser, 'aria-label' => $strgradesforuser]);
@@ -759,7 +759,7 @@ class grade_report_grader extends grade_report {
 
             if ($canseesingleview) {
                 $strsingleview = get_string('singleview', 'grades', $fullname);
-                $url = new moodle_url('/grade/report/singleview/index.php',
+                $url = new powereduc_url('/grade/report/singleview/index.php',
                         ['id' => $this->course->id, 'itemid' => $user->id, 'item' => 'user']);
                 $singleview = $OUTPUT->action_icon($url, new pix_icon('t/editstring', ''), null,
                         ['title' => $strsingleview, 'aria-label' => $strsingleview]);
@@ -830,7 +830,7 @@ class grade_report_grader extends grade_report {
         $strexcludedgrades = get_string('excluded', 'grades');
         $strerror = get_string('error');
 
-        $viewfullnames = has_capability('moodle/site:viewfullnames', $this->context);
+        $viewfullnames = has_capability('powereduc/site:viewfullnames', $this->context);
 
         foreach ($this->gtree->get_levels() as $key => $row) {
             $headingrow = new html_table_row();
@@ -913,11 +913,11 @@ class grade_report_grader extends grade_report {
 
                     // FIXME: MDL-52678 This is extremely hacky we should have an API for inserting grade column links.
                     if (get_capability_info('gradereport/singleview:view')) {
-                        if (has_all_capabilities(array('gradereport/singleview:view', 'moodle/grade:viewall',
-                            'moodle/grade:edit'), $this->context)) {
+                        if (has_all_capabilities(array('gradereport/singleview:view', 'powereduc/grade:viewall',
+                            'powereduc/grade:edit'), $this->context)) {
 
                             $strsingleview = get_string('singleview', 'grades', $element['object']->get_name());
-                            $url = new moodle_url('/grade/report/singleview/index.php', array(
+                            $url = new powereduc_url('/grade/report/singleview/index.php', array(
                                 'id' => $this->course->id,
                                 'item' => 'grade',
                                 'itemid' => $element['object']->id));
@@ -1024,7 +1024,7 @@ class grade_report_grader extends grade_report {
                 }
 
                 // MDL-11274
-                // Hide grades in the grader report if the current grader doesn't have 'moodle/grade:viewhidden'
+                // Hide grades in the grader report if the current grader doesn't have 'powereduc/grade:viewhidden'
                 if (!$this->canviewhidden and $grade->is_hidden()) {
                     if (!empty($CFG->grade_hiddenasdate) and $grade->get_datesubmitted() and !$item->is_category_item() and !$item->is_course_item()) {
                         // the problem here is that we do not have the time when grade value was modified, 'timemodified' is general modification date for grade_grades records
@@ -1492,7 +1492,7 @@ class grade_report_grader extends grade_report {
             $coursecontext = $this->context->get_course_context(true);
             $defaultgradeshowactiveenrol = !empty($CFG->grade_report_showonlyactiveenrol);
             $showonlyactiveenrol = get_user_preferences('grade_report_showonlyactiveenrol', $defaultgradeshowactiveenrol);
-            $showonlyactiveenrol = $showonlyactiveenrol || !has_capability('moodle/course:viewsuspendedusers', $coursecontext);
+            $showonlyactiveenrol = $showonlyactiveenrol || !has_capability('powereduc/course:viewsuspendedusers', $coursecontext);
             list($enrolledsql, $enrolledparams) = get_enrolled_sql($this->context, '', 0, $showonlyactiveenrol);
 
             // We want to query both the current context and parent contexts.
@@ -1639,7 +1639,7 @@ class grade_report_grader extends grade_report {
             $strswitchplus  = $this->get_lang_string('gradesonly', 'grades');
             $strswitchwhole = $this->get_lang_string('fullmode', 'grades');
 
-            $url = new moodle_url($this->gpr->get_return_url(null, array('target' => $element['eid'], 'sesskey' => sesskey())));
+            $url = new powereduc_url($this->gpr->get_return_url(null, array('target' => $element['eid'], 'sesskey' => sesskey())));
 
             if (in_array($element['object']->id, $this->collapsed['aggregatesonly'])) {
                 $url->param('action', 'switch_plus');
@@ -1710,7 +1710,7 @@ class grade_report_grader extends grade_report {
         $showhideicon        = '';
         $lockunlockicon      = '';
 
-        if (has_capability('moodle/grade:manage', $this->context)) {
+        if (has_capability('powereduc/grade:manage', $this->context)) {
             if ($this->get_pref('showcalculations')) {
                 $editcalculationicon = $this->gtree->get_calculation_icon($element, $this->gpr);
             }
@@ -1946,7 +1946,7 @@ class grade_report_grader extends grade_report {
 
         // Sourced from tablelib.php
         // Check the full name display for sortable fields.
-        if (has_capability('moodle/site:viewfullnames', $this->context)) {
+        if (has_capability('powereduc/site:viewfullnames', $this->context)) {
             $nameformat = $CFG->alternativefullnameformat;
         } else {
             $nameformat = $CFG->fullnamedisplay;
@@ -1961,7 +1961,7 @@ class grade_report_grader extends grade_report {
         if (!empty($requirednames)) {
             foreach ($requirednames as $name) {
                 $arrows['studentname'] .= html_writer::link(
-                    new moodle_url($this->baseurl, array('sortitemid' => $name)), $this->get_lang_string($name)
+                    new powereduc_url($this->baseurl, array('sortitemid' => $name)), $this->get_lang_string($name)
                 );
                 if ($this->sortitemid == $name) {
                     $arrows['studentname'] .= $this->sortorder == 'ASC' ? $iconasc : $icondesc;
@@ -1973,7 +1973,7 @@ class grade_report_grader extends grade_report {
         }
 
         foreach ($extrafields as $field) {
-            $fieldlink = html_writer::link(new moodle_url($this->baseurl,
+            $fieldlink = html_writer::link(new powereduc_url($this->baseurl,
                     array('sortitemid' => $field)), \core_user\fields::get_display_name($field));
             $arrows[$field] = $fieldlink;
 

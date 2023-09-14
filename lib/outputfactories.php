@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Interface and classes for creating appropriate renderers for various parts of Moodle.
+ * Interface and classes for creating appropriate renderers for various parts of PowerEduc.
  *
- * Please see http://docs.powereduc.org/en/Developement:How_Moodle_outputs_HTML
+ * Please see http://docs.powereduc.org/en/Developement:How_PowerEduc_outputs_HTML
  * for an overview.
  *
  * @copyright 2009 Tim Hunt
@@ -51,7 +51,7 @@ define('RENDERER_TARGET_HTMLEMAIL', 'htmlemail');
 
 /**
  * A renderer factory is just responsible for creating an appropriate renderer
- * for any given part of Moodle.
+ * for any given part of PowerEduc.
  *
  * Which renderer factory to use is chose by the current theme, and an instance
  * if created automatically when the theme is set up.
@@ -61,17 +61,17 @@ define('RENDERER_TARGET_HTMLEMAIL', 'htmlemail');
  *
  * @copyright 2009 Tim Hunt
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
 interface renderer_factory {
 
     /**
-     * Return the renderer for a particular part of Moodle.
+     * Return the renderer for a particular part of PowerEduc.
      *
      * The renderer interfaces are defined by classes called {plugin}_renderer
-     * where {plugin} is the name of the component. The renderers for core Moodle are
+     * where {plugin} is the name of the component. The renderers for core PowerEduc are
      * defined in lib/renderer.php. For plugins, they will be defined in a file
      * called renderer.php inside the plugin.
      *
@@ -107,7 +107,7 @@ interface renderer_factory {
  *
  * @copyright 2009 Tim Hunt
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -279,13 +279,13 @@ abstract class renderer_factory_base implements renderer_factory {
 }
 
 /**
- * This is the default renderer factory for Moodle.
+ * This is the default renderer factory for PowerEduc.
  *
  * It simply returns an instance of the appropriate standard renderer class.
  *
  * @copyright 2009 Tim Hunt
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -355,7 +355,7 @@ class standard_renderer_factory extends renderer_factory_base {
  *
  * @copyright 2009 Tim Hunt
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */

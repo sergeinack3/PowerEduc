@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Contains the default section course format output class.
  *
  * @package   core_courseformat
- * @copyright 2020 Ferran Recio <ferran@moodle.com>
+ * @copyright 2020 Ferran Recio <ferran@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,7 +27,7 @@ namespace core_courseformat\output\local\content;
 use core\output\named_templatable;
 use core_courseformat\base as course_format;
 use core_courseformat\output\local\courseformat_named_templatable;
-use moodle_url;
+use powereduc_url;
 use renderable;
 use stdClass;
 
@@ -35,7 +35,7 @@ use stdClass;
  * Base class to render a course add section buttons.
  *
  * @package   core_courseformat
- * @copyright 2020 Ferran Recio <ferran@moodle.com>
+ * @copyright 2020 Ferran Recio <ferran@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class addsection implements named_templatable, renderable {
@@ -63,7 +63,7 @@ class addsection implements named_templatable, renderable {
     public function export_for_template(\renderer_base $output): stdClass {
 
         // If no editor must be displayed, just return an empty structure.
-        if (!$this->format->show_editor(['moodle/course:update'])) {
+        if (!$this->format->show_editor(['powereduc/course:update'])) {
             return new stdClass();
         }
 
@@ -109,7 +109,7 @@ class addsection implements named_templatable, renderable {
 
         if ($lastsection < $maxsections) {
             $data->increase = (object) [
-                'url' => new moodle_url(
+                'url' => new powereduc_url(
                     '/course/changenumsections.php',
                     ['courseid' => $course->id, 'increase' => true, 'sesskey' => sesskey()]
                 ),
@@ -118,7 +118,7 @@ class addsection implements named_templatable, renderable {
 
         if ($course->numsections > 0) {
             $data->decrease = (object) [
-                'url' => new moodle_url(
+                'url' => new powereduc_url(
                     '/course/changenumsections.php',
                     ['courseid' => $course->id, 'increase' => false, 'sesskey' => sesskey()]
                 ),
@@ -133,7 +133,7 @@ class addsection implements named_templatable, renderable {
      * Current course format does not have 'numsections' option but it has multiple sections suppport.
      * Display the "Add section" link that will insert a section in the end.
      * Note to course format developers: inserting sections in the other positions should check both
-     * capabilities 'moodle/course:update' and 'moodle/course:movesections'.
+     * capabilities 'powereduc/course:update' and 'powereduc/course:movesections'.
      *
      * @param \renderer_base $output typically, the renderer that's calling this function
      * @param int $lastsection the last section number
@@ -159,7 +159,7 @@ class addsection implements named_templatable, renderable {
         }
 
         $data->addsections = (object) [
-            'url' => new moodle_url('/course/changenumsections.php', $params),
+            'url' => new powereduc_url('/course/changenumsections.php', $params),
             'title' => $addstring,
             'newsection' => $maxsections - $lastsection,
         ];

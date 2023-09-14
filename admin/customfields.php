@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,13 +35,13 @@ $PAGE->set_context($syscontext);
 require_admin();
 require_sesskey();
 
-$return = new moodle_url('/admin/settings.php', array('section' => 'managecustomfields'));
+$return = new powereduc_url('/admin/settings.php', array('section' => 'managecustomfields'));
 
 $customfieldplugins = core_plugin_manager::instance()->get_plugins_of_type('customfield');
 $sortorder = array_flip(array_keys($customfieldplugins));
 
 if (!isset($customfieldplugins[$customfieldname])) {
-    throw new \moodle_exception('customfieldnotfound', 'error', $return, $customfieldname);
+    throw new \powereduc_exception('customfieldnotfound', 'error', $return, $customfieldname);
 }
 
 switch ($action) {

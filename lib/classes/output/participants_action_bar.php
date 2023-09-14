@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core\output;
 
 use context_course;
-use moodle_page;
+use powereduc_page;
 use navigation_node;
-use moodle_url;
+use powereduc_url;
 
 /**
  * Class responsible for generating the action bar (tertiary nav) elements in the participants page and related pages.
@@ -31,7 +31,7 @@ use moodle_url;
 class participants_action_bar implements \renderable {
     /** @var object $course The course we are dealing with. */
     private $course;
-    /** @var moodle_page $page The current page. */
+    /** @var powereduc_page $page The current page. */
     private $page;
     /** @var navigation_node $node The settings node for the participants page. */
     private $node;
@@ -41,10 +41,10 @@ class participants_action_bar implements \renderable {
     /**
      * Constructor participants_action_bar
      * @param object $course The course that we are generating the nav for
-     * @param moodle_page $page The page object
+     * @param powereduc_page $page The page object
      * @param string|null $renderedcontent Any additional rendered content/actions to be displayed in line with the nav
      */
-    public function __construct(object $course, moodle_page $page, ?string $renderedcontent) {
+    public function __construct(object $course, powereduc_page $page, ?string $renderedcontent) {
         $this->course = $course;
         $this->page = $page;
         $node = 'users';
@@ -103,7 +103,7 @@ class participants_action_bar implements \renderable {
             $coursecontext = context_course::instance($this->course->id);
             $canviewparticipants = course_can_view_participants($coursecontext);
             if ($canviewparticipants) {
-                $participantsurl = (new moodle_url('/user/index.php', ['id' => $this->course->id]))->out();
+                $participantsurl = (new powereduc_url('/user/index.php', ['id' => $this->course->id]))->out();
                 $formattedcontent[] = [
                     $enrolmentsheading => [
                         $participantsurl => get_string('enrolledusers', 'enrol'),
@@ -127,8 +127,8 @@ class participants_action_bar implements \renderable {
                     if ($key === 'groups') {
                         $params = ['id' => $this->course->id];
                         $items += [
-                            (new moodle_url('/group/groupings.php', $params))->out() => get_string('groupings', 'group'),
-                            (new moodle_url('/group/overview.php', $params))->out() => get_string('overview', 'group')
+                            (new powereduc_url('/group/groupings.php', $params))->out() => get_string('groupings', 'group'),
+                            (new powereduc_url('/group/overview.php', $params))->out() => get_string('overview', 'group')
                         ];
                     }
                 }
@@ -182,7 +182,7 @@ class participants_action_bar implements \renderable {
         foreach ($urlcontent as $key => $value) {
             if (is_array($value) && $activeitem = $this->find_active_page($value, $strictness)) {
                 return $activeitem;
-            } else if ($this->page->url->compare(new moodle_url($key), $strictness)) {
+            } else if ($this->page->url->compare(new powereduc_url($key), $strictness)) {
                 return $key;
             }
         }

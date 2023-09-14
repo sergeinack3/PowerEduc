@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ use context_system;
 use stdClass;
 use renderable;
 use core_badges\badge;
-use moodle_url;
+use powereduc_url;
 use renderer_base;
 
 /**
@@ -209,7 +209,7 @@ class issued_badge implements renderable {
             $data->relatedbadges = [];
             foreach ($relatedbadges as $related) {
                 if (isloggedin() && ($context instanceof context_course && !is_guest($context))) {
-                    $related->url = (new moodle_url('/badges/overview.php', ['id' => $related->id]))->out(false);
+                    $related->url = (new powereduc_url('/badges/overview.php', ['id' => $related->id]))->out(false);
                 }
                 $data->relatedbadges[] = (array)$related;
             }
@@ -228,15 +228,15 @@ class issued_badge implements renderable {
 
         // Buttons to display.
         if ($USER->id == $this->recipient->id && !empty($CFG->enablebadges)) {
-            $data->downloadurl = (new moodle_url('/badges/badge.php', ['hash' => $this->hash, 'bake' => true]))->out(false);
+            $data->downloadurl = (new powereduc_url('/badges/badge.php', ['hash' => $this->hash, 'bake' => true]))->out(false);
 
             if (!empty($CFG->badges_allowexternalbackpack) && ($expiration > $now)
                 && $userbackpack = badges_get_user_backpack($USER->id)) {
 
                 if (badges_open_badges_backpack_api($userbackpack->id) == OPEN_BADGES_V2P1) {
-                    $addtobackpackurl = new moodle_url('/badges/backpack-export.php', ['hash' => $this->hash]);
+                    $addtobackpackurl = new powereduc_url('/badges/backpack-export.php', ['hash' => $this->hash]);
                 } else {
-                    $addtobackpackurl = new moodle_url('/badges/backpack-add.php', ['hash' => $this->hash]);
+                    $addtobackpackurl = new powereduc_url('/badges/backpack-add.php', ['hash' => $this->hash]);
                 }
                 $data->addtobackpackurl = $addtobackpackurl->out(false);
             }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Contains unit tests for core_completion/cm_completion_details.
  *
  * @package   core_completion
- * @copyright 2021 Jun Pataleta <jun@moodle.com>
+ * @copyright 2021 Jun Pataleta <jun@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -39,7 +39,7 @@ require_once($CFG->libdir . '/completionlib.php');
  * Class for unit testing core_completion/cm_completion_details.
  *
  * @package   core_completion
- * @copyright 2021 Jun Pataleta <jun@moodle.com>
+ * @copyright 2021 Jun Pataleta <jun@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class cm_completion_details_test extends advanced_testcase {

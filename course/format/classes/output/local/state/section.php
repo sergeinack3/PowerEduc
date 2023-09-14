@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ use context_course;
  * Contains the ajax update section structure.
  *
  * @package   core_course
- * @copyright 2021 Ferran Recio <ferran@moodle.com>
+ * @copyright 2021 Ferran Recio <ferran@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class section implements renderable {
@@ -125,7 +125,7 @@ class section implements renderable {
             return !empty($section->availableinfo);
         }
         // Course editors can see all restrictions if the section is visible.
-        if (has_capability('moodle/course:viewhiddensections', $context)) {
+        if (has_capability('powereduc/course:viewhiddensections', $context)) {
             $ci = new info_section($section);
             return !empty($ci->get_full_information());
         }

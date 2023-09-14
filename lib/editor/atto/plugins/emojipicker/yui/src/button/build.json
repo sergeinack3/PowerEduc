@@ -1,7 +1,7 @@
 {
-  "name": "moodle-atto_emojipicker-button",
+  "name": "powereduc-atto_emojipicker-button",
   "builds": {
-    "moodle-atto_emojipicker-button": {
+    "powereduc-atto_emojipicker-button": {
       "jsfiles": [
         "button.js"
       ]

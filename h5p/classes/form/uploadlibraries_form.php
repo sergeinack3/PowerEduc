@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Upload an h5p content to update the content libraries.
  *
  * @package    core_h5p
- * @copyright  2019 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2019 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,10 +29,10 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Upload a zip or h5p content to update the content libraries.
  *
- * @copyright  2019 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2019 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class uploadlibraries_form extends \moodleform {
+class uploadlibraries_form extends \powereducform {
     /**
      * Form definition.
      */

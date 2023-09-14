@@ -1,7 +1,7 @@
 {
-    "moodle-atto_clear-button": {
+    "powereduc-atto_clear-button": {
         "requires": [
-            "moodle-editor_atto-plugin"
+            "powereduc-editor_atto-plugin"
         ]
     }
 }

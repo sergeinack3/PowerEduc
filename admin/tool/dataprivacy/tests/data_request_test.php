@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -159,7 +159,7 @@ class data_request_test extends data_privacy_testcase {
         $uut = new \tool_dataprivacy\data_request();
         $uut->set('status', $status);
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $this->expectExceptionMessage(get_string('cannotreset', 'tool_dataprivacy'));
 
         $uut->resubmit_request();

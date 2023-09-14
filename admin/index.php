@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ if (!file_exists('../config.php')) {
 
 // Check that PHP is of a sufficient version as soon as possible.
 require_once(__DIR__.'/../lib/phpminimumversionlib.php');
-moodle_require_minimum_php_version();
+powereduc_require_minimum_php_version();
 
 // make sure iconv is available and actually works
 if (!function_exists('iconv')) {
@@ -117,7 +117,7 @@ $confirmplugins = optional_param('confirmplugincheck', 0, PARAM_BOOL); // Plugin
 $showallplugins = optional_param('showallplugins', 0, PARAM_BOOL); // Show all plugins on the plugins check page?
 $agreelicense = optional_param('agreelicense', 0, PARAM_BOOL); // GPL license confirmed for installation?
 $fetchupdates = optional_param('fetchupdates', 0, PARAM_BOOL); // Should check for available updates?
-$newaddonreq = optional_param('installaddonrequest', null, PARAM_RAW); // Plugin installation requested at moodle.org/plugins.
+$newaddonreq = optional_param('installaddonrequest', null, PARAM_RAW); // Plugin installation requested at powereduc.org/plugins.
 $upgradekeyhash = optional_param('upgradekeyhash', null, PARAM_ALPHANUM); // Hash of provided upgrade key.
 $installdep = optional_param('installdep', null, PARAM_COMPONENT); // Install given missing dependency (required plugin).
 $installdepx = optional_param('installdepx', false, PARAM_BOOL); // Install all missing dependencies.
@@ -146,7 +146,7 @@ if (!empty($CFG->disableupdateautodeploy)) {
 }
 
 // Set up PAGE.
-$url = new moodle_url('/admin/index.php');
+$url = new powereduc_url('/admin/index.php');
 $url->param('cache', $cache);
 if (isset($upgradekeyhash)) {
     $url->param('upgradekeyhash', $upgradekeyhash);
@@ -154,9 +154,9 @@ if (isset($upgradekeyhash)) {
 $PAGE->set_url($url);
 unset($url);
 
-// Are we returning from an add-on installation request at moodle.org/plugins?
+// Are we returning from an add-on installation request at powereduc.org/plugins?
 if ($newaddonreq and !$cache and empty($CFG->disableupdateautodeploy)) {
-    $target = new moodle_url('/admin/tool/installaddon/index.php', array(
+    $target = new powereduc_url('/admin/tool/installaddon/index.php', array(
         'installaddonrequest' => $newaddonreq,
         'confirm' => 0));
     if (!isloggedin() or isguestuser()) {
@@ -169,22 +169,22 @@ if ($newaddonreq and !$cache and empty($CFG->disableupdateautodeploy)) {
 
 $PAGE->set_pagelayout('admin'); // Set a default pagelayout
 
-$documentationlink = '<a href="http://docs.moodle.org/en/Installation">Installation docs</a>';
+$documentationlink = '<a href="http://docs.powereduc.org/en/Installation">Installation docs</a>';
 
 // Check some PHP server settings
 
 if (ini_get_bool('session.auto_start')) {
-    throw new \moodle_exception('phpvaroff', 'debug', '',
+    throw new \powereduc_exception('phpvaroff', 'debug', '',
         (object)array('name' => 'session.auto_start', 'link' => $documentationlink));
 }
 
 if (!ini_get_bool('file_uploads')) {
-    throw new \moodle_exception('phpvaron', 'debug', '',
+    throw new \powereduc_exception('phpvaron', 'debug', '',
         (object)array('name' => 'file_uploads', 'link' => $documentationlink));
 }
 
 if (is_float_problem()) {
-    throw new \moodle_exception('phpfloatproblem', 'admin', '', $documentationlink);
+    throw new \powereduc_exception('phpfloatproblem', 'admin', '', $documentationlink);
 }
 
 // Set some necessary variables during set-up to avoid PHP warnings later on this page
@@ -205,7 +205,7 @@ require("$CFG->dirroot/version.php");       // defines $version, $release, $bran
 $CFG->target_release = $release;            // used during installation and upgrades
 
 if (!$version or !$release) {
-    throw new \moodle_exception('withoutversion', 'debug'); // Without version, stop.
+    throw new \powereduc_exception('withoutversion', 'debug'); // Without version, stop.
 }
 
 if (!core_tables_exist()) {
@@ -213,7 +213,7 @@ if (!core_tables_exist()) {
     $PAGE->set_popup_notification_allowed(false);
 
     // fake some settings
-    $CFG->docroot = 'http://docs.moodle.org';
+    $CFG->docroot = 'http://docs.powereduc.org';
 
     $strinstallation = get_string('installation', 'install');
 
@@ -234,7 +234,7 @@ if (!core_tables_exist()) {
     }
     if (empty($confirmrelease)) {
         require_once($CFG->libdir.'/environmentlib.php');
-        list($envstatus, $environmentresults) = check_moodle_environment(normalize_version($release), ENV_SELECT_RELEASE);
+        list($envstatus, $environmentresults) = check_powereduc_environment(normalize_version($release), ENV_SELECT_RELEASE);
         $strcurrentrelease = get_string('currentrelease');
 
         $PAGE->navbar->add($strcurrentrelease);
@@ -255,7 +255,7 @@ if (!core_tables_exist()) {
         $PAGE->set_heading($strinstallation . ' - Moodle ' . $CFG->target_release);
 
         $output = $PAGE->get_renderer('core', 'admin');
-        $url = new moodle_url($PAGE->url, array('agreelicense' => 1, 'confirmrelease' => 1, 'lang' => $CFG->lang));
+        $url = new powereduc_url($PAGE->url, array('agreelicense' => 1, 'confirmrelease' => 1, 'lang' => $CFG->lang));
         echo $output->unsatisfied_dependencies_page($version, $failed, $url);
         die();
     }
@@ -277,7 +277,7 @@ if (!core_tables_exist()) {
     if (!$DB->setup_is_unicodedb()) {
         if (!$DB->change_db_encoding()) {
             // If could not convert successfully, throw error, and prevent installation
-            throw new \moodle_exception('unicoderequired', 'admin');
+            throw new \powereduc_exception('unicoderequired', 'admin');
         }
     }
 
@@ -299,18 +299,18 @@ $stradministration = get_string('administration');
 $PAGE->set_context(context_system::instance());
 
 if (empty($CFG->version)) {
-    throw new \moodle_exception('missingconfigversion', 'debug');
+    throw new \powereduc_exception('missingconfigversion', 'debug');
 }
 
 // Detect config cache inconsistency, this happens when you switch branches on dev servers.
 if ($CFG->version != $DB->get_field('config', 'value', array('name'=>'version'))) {
     purge_all_caches();
-    redirect(new moodle_url($PAGE->url), 'Config cache inconsistency detected, resetting caches...');
+    redirect(new powereduc_url($PAGE->url), 'Config cache inconsistency detected, resetting caches...');
 }
 
 if (!$cache and $version > $CFG->version) {  // upgrade
 
-    $PAGE->set_url(new moodle_url($PAGE->url, array(
+    $PAGE->set_url(new powereduc_url($PAGE->url, array(
         'confirmupgrade' => $confirmupgrade,
         'confirmrelease' => $confirmrelease,
         'confirmplugincheck' => $confirmplugins,
@@ -368,7 +368,7 @@ if (!$cache and $version > $CFG->version) {  // upgrade
 
     } else if (empty($confirmrelease)) {
         require_once($CFG->libdir.'/environmentlib.php');
-        list($envstatus, $environmentresults) = check_moodle_environment($release, ENV_SELECT_RELEASE);
+        list($envstatus, $environmentresults) = check_powereduc_environment($release, ENV_SELECT_RELEASE);
         $strcurrentrelease = get_string('currentrelease');
 
         $PAGE->navbar->add($strcurrentrelease);
@@ -410,7 +410,7 @@ if (!$cache and $version > $CFG->version) {  // upgrade
                     }
                     redirect($PAGE->url);
                 } else {
-                    $continue = new moodle_url($PAGE->url, array('abortinstallx' => $abortinstallx, 'confirmabortinstall' => 1));
+                    $continue = new powereduc_url($PAGE->url, array('abortinstallx' => $abortinstallx, 'confirmabortinstall' => 1));
                     echo $output->upgrade_confirm_abort_install_page($abortables, $continue);
                     die();
                 }
@@ -425,7 +425,7 @@ if (!$cache and $version > $CFG->version) {  // upgrade
                 $pluginman->cancel_plugin_installation($abortinstall);
                 redirect($PAGE->url);
             } else {
-                $continue = new moodle_url($PAGE->url, array('abortinstall' => $abortinstall, 'confirmabortinstall' => 1));
+                $continue = new powereduc_url($PAGE->url, array('abortinstall' => $abortinstall, 'confirmabortinstall' => 1));
                 $abortable = $pluginman->get_plugin_info($abortinstall);
                 if ($pluginman->can_cancel_plugin_installation($abortable)) {
                     echo $output->upgrade_confirm_abort_install_page(array($abortable), $continue);
@@ -442,7 +442,7 @@ if (!$cache and $version > $CFG->version) {  // upgrade
             if ($restorable) {
                 upgrade_install_plugins($restorable, $confirmabortupgrade,
                     get_string('cancelupgradehead', 'core_plugin'),
-                    new moodle_url($PAGE->url, array('abortupgradex' => 1, 'confirmabortupgrade' => 1))
+                    new powereduc_url($PAGE->url, array('abortupgradex' => 1, 'confirmabortupgrade' => 1))
                 );
             }
             redirect($PAGE->url);
@@ -456,7 +456,7 @@ if (!$cache and $version > $CFG->version) {  // upgrade
                 $restorable = array($restorable[$abortupgrade]);
                 upgrade_install_plugins($restorable, $confirmabortupgrade,
                     get_string('cancelupgradehead', 'core_plugin'),
-                    new moodle_url($PAGE->url, array('abortupgrade' => $abortupgrade, 'confirmabortupgrade' => 1))
+                    new powereduc_url($PAGE->url, array('abortupgrade' => $abortupgrade, 'confirmabortupgrade' => 1))
                 );
             }
             redirect($PAGE->url);
@@ -468,7 +468,7 @@ if (!$cache and $version > $CFG->version) {  // upgrade
             $installable = $pluginman->filter_installable($pluginman->missing_dependencies(true));
             upgrade_install_plugins($installable, $confirminstalldep,
                 get_string('dependencyinstallhead', 'core_plugin'),
-                new moodle_url($PAGE->url, array('installdepx' => 1, 'confirminstalldep' => 1))
+                new powereduc_url($PAGE->url, array('installdepx' => 1, 'confirminstalldep' => 1))
             );
         }
 
@@ -480,7 +480,7 @@ if (!$cache and $version > $CFG->version) {  // upgrade
                 $installable = array($installable[$installdep]);
                 upgrade_install_plugins($installable, $confirminstalldep,
                     get_string('dependencyinstallhead', 'core_plugin'),
-                    new moodle_url($PAGE->url, array('installdep' => $installdep, 'confirminstalldep' => 1))
+                    new powereduc_url($PAGE->url, array('installdep' => $installdep, 'confirminstalldep' => 1))
                 );
             }
         }
@@ -491,7 +491,7 @@ if (!$cache and $version > $CFG->version) {  // upgrade
             $installable = $pluginman->filter_installable($pluginman->available_updates());
             upgrade_install_plugins($installable, $confirminstallupdate,
                 get_string('updateavailableinstallallhead', 'core_admin'),
-                new moodle_url($PAGE->url, array('installupdatex' => 1, 'confirminstallupdate' => 1))
+                new powereduc_url($PAGE->url, array('installupdatex' => 1, 'confirminstallupdate' => 1))
             );
         }
 
@@ -502,7 +502,7 @@ if (!$cache and $version > $CFG->version) {  // upgrade
                 $installable = array($pluginman->get_remote_plugin_info($installupdate, $installupdateversion, true));
                 upgrade_install_plugins($installable, $confirminstallupdate,
                     get_string('updateavailableinstallallhead', 'core_admin'),
-                    new moodle_url($PAGE->url, array('installupdate' => $installupdate,
+                    new powereduc_url($PAGE->url, array('installupdate' => $installupdate,
                         'installupdateversion' => $installupdateversion, 'confirminstallupdate' => 1)
                     )
                 );
@@ -510,14 +510,14 @@ if (!$cache and $version > $CFG->version) {  // upgrade
         }
 
         echo $output->upgrade_plugin_check_page(core_plugin_manager::instance(), \core\update\checker::instance(),
-                $version, $showallplugins, $PAGE->url, new moodle_url($PAGE->url, array('confirmplugincheck' => 1)));
+                $version, $showallplugins, $PAGE->url, new powereduc_url($PAGE->url, array('confirmplugincheck' => 1)));
         die();
 
     } else {
         // Always verify plugin dependencies!
         $failed = array();
         if (!core_plugin_manager::instance()->all_plugins_ok($version, $failed, $CFG->branch)) {
-            echo $output->unsatisfied_dependencies_page($version, $failed, new moodle_url($PAGE->url,
+            echo $output->unsatisfied_dependencies_page($version, $failed, new powereduc_url($PAGE->url,
                 array('confirmplugincheck' => 0)));
             die();
         }
@@ -528,7 +528,7 @@ if (!$cache and $version > $CFG->version) {  // upgrade
     }
 } else if ($version < $CFG->version) {
     // better stop here, we can not continue with plugin upgrades or anything else
-    throw new moodle_exception('downgradedcore', 'error', new moodle_url('/admin/'));
+    throw new powereduc_exception('downgradedcore', 'error', new powereduc_url('/admin/'));
 }
 
 // Updated human-readable release version if necessary
@@ -540,9 +540,9 @@ if (!$cache and $branch <> $CFG->branch) {  // Update the branch
     set_config('branch', $branch);
 }
 
-if (!$cache and moodle_needs_upgrading()) {
+if (!$cache and powereduc_needs_upgrading()) {
 
-    $PAGE->set_url(new moodle_url($PAGE->url, array(
+    $PAGE->set_url(new powereduc_url($PAGE->url, array(
         'confirmrelease' => $confirmrelease,
         'confirmplugincheck' => $confirmplugins,
     )));
@@ -558,7 +558,7 @@ if (!$cache and moodle_needs_upgrading()) {
         if (empty($confirmrelease)) {
             require_once($CFG->libdir . '/environmentlib.php');
 
-            list($envstatus, $environmentresults) = check_moodle_environment($release, ENV_SELECT_RELEASE);
+            list($envstatus, $environmentresults) = check_powereduc_environment($release, ENV_SELECT_RELEASE);
             $strcurrentrelease = get_string('currentrelease');
 
             $PAGE->navbar->add($strcurrentrelease);
@@ -598,7 +598,7 @@ if (!$cache and moodle_needs_upgrading()) {
                         }
                         redirect($PAGE->url);
                     } else {
-                        $continue = new moodle_url($PAGE->url, array('abortinstallx' => $abortinstallx,
+                        $continue = new powereduc_url($PAGE->url, array('abortinstallx' => $abortinstallx,
                             'confirmabortinstall' => 1));
                         echo $output->upgrade_confirm_abort_install_page($abortables, $continue);
                         die();
@@ -614,7 +614,7 @@ if (!$cache and moodle_needs_upgrading()) {
                     $pluginman->cancel_plugin_installation($abortinstall);
                     redirect($PAGE->url);
                 } else {
-                    $continue = new moodle_url($PAGE->url, array('abortinstall' => $abortinstall, 'confirmabortinstall' => 1));
+                    $continue = new powereduc_url($PAGE->url, array('abortinstall' => $abortinstall, 'confirmabortinstall' => 1));
                     $abortable = $pluginman->get_plugin_info($abortinstall);
                     if ($pluginman->can_cancel_plugin_installation($abortable)) {
                         echo $output->upgrade_confirm_abort_install_page(array($abortable), $continue);
@@ -631,7 +631,7 @@ if (!$cache and moodle_needs_upgrading()) {
                 if ($restorable) {
                     upgrade_install_plugins($restorable, $confirmabortupgrade,
                         get_string('cancelupgradehead', 'core_plugin'),
-                        new moodle_url($PAGE->url, array('abortupgradex' => 1, 'confirmabortupgrade' => 1))
+                        new powereduc_url($PAGE->url, array('abortupgradex' => 1, 'confirmabortupgrade' => 1))
                     );
                 }
                 redirect($PAGE->url);
@@ -645,7 +645,7 @@ if (!$cache and moodle_needs_upgrading()) {
                     $restorable = array($restorable[$abortupgrade]);
                     upgrade_install_plugins($restorable, $confirmabortupgrade,
                         get_string('cancelupgradehead', 'core_plugin'),
-                        new moodle_url($PAGE->url, array('abortupgrade' => $abortupgrade, 'confirmabortupgrade' => 1))
+                        new powereduc_url($PAGE->url, array('abortupgrade' => $abortupgrade, 'confirmabortupgrade' => 1))
                     );
                 }
                 redirect($PAGE->url);
@@ -657,7 +657,7 @@ if (!$cache and moodle_needs_upgrading()) {
                 $installable = $pluginman->filter_installable($pluginman->missing_dependencies(true));
                 upgrade_install_plugins($installable, $confirminstalldep,
                     get_string('dependencyinstallhead', 'core_plugin'),
-                    new moodle_url($PAGE->url, array('installdepx' => 1, 'confirminstalldep' => 1))
+                    new powereduc_url($PAGE->url, array('installdepx' => 1, 'confirminstalldep' => 1))
                 );
             }
 
@@ -669,7 +669,7 @@ if (!$cache and moodle_needs_upgrading()) {
                     $installable = array($installable[$installdep]);
                     upgrade_install_plugins($installable, $confirminstalldep,
                         get_string('dependencyinstallhead', 'core_plugin'),
-                        new moodle_url($PAGE->url, array('installdep' => $installdep, 'confirminstalldep' => 1))
+                        new powereduc_url($PAGE->url, array('installdep' => $installdep, 'confirminstalldep' => 1))
                     );
                 }
             }
@@ -680,7 +680,7 @@ if (!$cache and moodle_needs_upgrading()) {
                 $installable = $pluginman->filter_installable($pluginman->available_updates());
                 upgrade_install_plugins($installable, $confirminstallupdate,
                     get_string('updateavailableinstallallhead', 'core_admin'),
-                    new moodle_url($PAGE->url, array('installupdatex' => 1, 'confirminstallupdate' => 1))
+                    new powereduc_url($PAGE->url, array('installupdatex' => 1, 'confirminstallupdate' => 1))
                 );
             }
 
@@ -691,7 +691,7 @@ if (!$cache and moodle_needs_upgrading()) {
                     $installable = array($pluginman->get_remote_plugin_info($installupdate, $installupdateversion, true));
                     upgrade_install_plugins($installable, $confirminstallupdate,
                         get_string('updateavailableinstallallhead', 'core_admin'),
-                        new moodle_url($PAGE->url, array('installupdate' => $installupdate,
+                        new powereduc_url($PAGE->url, array('installupdate' => $installupdate,
                             'installupdateversion' => $installupdateversion, 'confirminstallupdate' => 1)
                         )
                     );
@@ -701,8 +701,8 @@ if (!$cache and moodle_needs_upgrading()) {
             // Show plugins info.
             echo $output->upgrade_plugin_check_page($pluginman, \core\update\checker::instance(),
                     $version, $showallplugins,
-                    new moodle_url($PAGE->url),
-                    new moodle_url($PAGE->url, array('confirmplugincheck' => 1, 'cache' => 0)));
+                    new powereduc_url($PAGE->url),
+                    new powereduc_url($PAGE->url, array('confirmplugincheck' => 1, 'cache' => 0)));
             die();
         }
 
@@ -710,7 +710,7 @@ if (!$cache and moodle_needs_upgrading()) {
         $failed = array();
         if (!$pluginman->all_plugins_ok($version, $failed, $CFG->branch)) {
             $output = $PAGE->get_renderer('core', 'admin');
-            echo $output->unsatisfied_dependencies_page($version, $failed, new moodle_url($PAGE->url,
+            echo $output->unsatisfied_dependencies_page($version, $failed, new powereduc_url($PAGE->url,
                 array('confirmplugincheck' => 0)));
             die();
         }
@@ -750,7 +750,7 @@ if (during_initial_install()) {
             redirect("index.php?sessionstarted=1&sessionverify=1&lang=$CFG->lang");
         } else {
             if (empty($SESSION->sessionverify)) {
-                throw new \moodle_exception('installsessionerror', 'admin', "index.php?sessionstarted=1&lang=$CFG->lang");
+                throw new \powereduc_exception('installsessionerror', 'admin', "index.php?sessionstarted=1&lang=$CFG->lang");
             }
             unset($SESSION->sessionverify);
         }
@@ -767,7 +767,7 @@ if (during_initial_install()) {
     if ($adminuser->password === 'adminsetuppending') {
         // prevent installation hijacking
         if ($adminuser->lastip !== getremoteaddr()) {
-            throw new \moodle_exception('installhijacked', 'admin');
+            throw new \powereduc_exception('installhijacked', 'admin');
         }
         // login user and let him set password and admin details
         $adminuser->newadminuser = 1;
@@ -783,33 +783,33 @@ if (during_initial_install()) {
     upgrade_finished('upgradesettings.php');
 }
 
-if (has_capability('moodle/site:config', context_system::instance())) {
+if (has_capability('powereduc/site:config', context_system::instance())) {
     if ($fetchupdates) {
         require_sesskey();
         $updateschecker = \core\update\checker::instance();
         if ($updateschecker->enabled()) {
             $updateschecker->fetch();
         }
-        redirect(new moodle_url('/admin/index.php', array('cache' => 0)));
+        redirect(new powereduc_url('/admin/index.php', array('cache' => 0)));
     }
 }
 
 // Now we can be sure everything was upgraded and caches work fine,
 // redirect if necessary to make sure caching is enabled.
 if (!$cache) {
-    redirect(new moodle_url('/admin/index.php', array('cache' => 1)));
+    redirect(new powereduc_url('/admin/index.php', array('cache' => 1)));
 }
 
 // Check for valid admin user - no guest autologin
 require_login(0, false);
 if (isguestuser()) {
     // Login as real user!
-    $SESSION->wantsurl = (string)new moodle_url('/admin/index.php');
+    $SESSION->wantsurl = (string)new powereduc_url('/admin/index.php');
     redirect(get_login_url());
 }
 $context = context_system::instance();
 
-if (!has_capability('moodle/site:config', $context)) {
+if (!has_capability('powereduc/site:config', $context)) {
     // Do not throw exception display an empty page with administration menu if visible for current user.
     $PAGE->set_title($SITE->fullname);
     $PAGE->set_heading($SITE->fullname);
@@ -916,7 +916,7 @@ if (empty($CFG->disabledevlibdirscheck) && (is_dir($CFG->dirroot.'/vendor') || i
 // Check if the site is being foced onto ssl.
 $overridetossl = !empty($CFG->overridetossl);
 
-// Check if moodle campaign content setting is enabled or not.
+// Check if powereduc campaign content setting is enabled or not.
 $showcampaigncontent = !isset($CFG->showcampaigncontent) || $CFG->showcampaigncontent;
 
 // Encourage admins to enable the user feedback feature if it is not enabled already.

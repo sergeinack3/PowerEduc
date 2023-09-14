@@ -1,7 +1,7 @@
 {
-    "name": "moodle-core-widget-focusafterclose",
+    "name": "powereduc-core-widget-focusafterclose",
     "builds": {
-        "moodle-core-widget-focusafterclose": {
+        "powereduc-core-widget-focusafterclose": {
             "jsfiles": [
                 "focusafter.js"
             ]

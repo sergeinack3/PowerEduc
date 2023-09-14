@@ -1,7 +1,7 @@
 {
-    "name": "moodle-core-dragdrop",
+    "name": "powereduc-core-dragdrop",
     "builds": {
-        "moodle-core-dragdrop": {
+        "powereduc-core-dragdrop": {
             "jsfiles": [
                 "dragdrop.js"
             ]

@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ $courseid = optional_param('course', 0, PARAM_INT);
 $PAGE->set_url('/calendar/delete.php', array('id'=>$eventid));
 
 if(!$site = get_site()) {
-    redirect(new moodle_url('/admin/index.php'));
+    redirect(new powereduc_url('/admin/index.php'));
 }
 
 $event = calendar_event::load($eventid);
@@ -60,7 +60,7 @@ if (!$course) {
 $title = get_string('deleteevent', 'calendar');
 // Check the user has the required capabilities to delete an event
 if (!calendar_delete_event_allowed($event)) {
-    throw new \moodle_exception('nopermissions', 'error', $PAGE->url, $title);
+    throw new \powereduc_exception('nopermissions', 'error', $PAGE->url, $title);
 }
 
 // Count the repeats, do we need to consider the possibility of deleting repeats
@@ -68,14 +68,14 @@ $event->timedurationuntil = $event->timestart + $event->timeduration;
 $event->count_repeats();
 
 // Is used several times, and sometimes with modification if required
-$viewcalendarurl = new moodle_url(CALENDAR_URL.'view.php', array('view'=>'upcoming'));
+$viewcalendarurl = new powereduc_url(CALENDAR_URL.'view.php', array('view'=>'upcoming'));
 $viewcalendarurl->param('time', $event->timestart, '%Y');
 
 // If confirm is set (PARAM_BOOL) then we have confirmation of initention to delete
 if ($confirm) {
     // Confirm the session key to stop CSRF
     if (!confirm_sesskey()) {
-        throw new \moodle_exception('confirmsesskeybad');
+        throw new \powereduc_exception('confirmsesskeybad');
     }
     // Delete the event and possibly repeats
     $event->delete($repeats);
@@ -101,7 +101,7 @@ echo $OUTPUT->header();
 echo $OUTPUT->box_start('eventlist');
 
 // Delete this event button is always shown
-$url = new moodle_url(CALENDAR_URL.'delete.php', array('id'=>$event->id, 'confirm'=>true));
+$url = new powereduc_url(CALENDAR_URL.'delete.php', array('id'=>$event->id, 'confirm'=>true));
 $buttons = $OUTPUT->single_button($url, get_string('delete'));
 
 // And add the cancel button.
@@ -113,7 +113,7 @@ echo html_writer::tag('p', get_string('confirmeventdelete', 'calendar', format_s
 
 // If there are repeated events then add a Delete Repeated button.
 if (!empty($event->eventrepeats) && $event->eventrepeats > 0) {
-    $url = new moodle_url(CALENDAR_URL.'delete.php', array('id'=>$event->repeatid, 'confirm'=>true, 'repeats'=>true));
+    $url = new powereduc_url(CALENDAR_URL.'delete.php', array('id'=>$event->repeatid, 'confirm'=>true, 'repeats'=>true));
     $buttons .= $OUTPUT->single_button($url, get_string('deleteall'));
     echo html_writer::tag('p', get_string('youcandeleteallrepeats', 'calendar', $event->eventrepeats));
 }

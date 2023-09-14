@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Redirects the user to a default grades import plugin page.
  *
  * @package    core_grades
- * @copyright  2021 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2021 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,20 +27,20 @@ require_once(__DIR__ . '/../../config.php');
 // Course ID.
 $courseid = required_param('id', PARAM_INT);
 
-$PAGE->set_url(new moodle_url('/grade/import/index.php', ['id' => $courseid]));
+$PAGE->set_url(new powereduc_url('/grade/import/index.php', ['id' => $courseid]));
 
 // Basic access checks.
 if (!$course = $DB->get_record('course', ['id' => $courseid])) {
-    throw new moodle_exception('invalidcourseid', 'error');
+    throw new powereduc_exception('invalidcourseid', 'error');
 }
 require_login($course);
 $context = context_course::instance($courseid);
-require_capability('moodle/grade:import', $context);
+require_capability('powereduc/grade:import', $context);
 
 $importplugins = core_component::get_plugin_list('gradeimport');
 if (!empty($importplugins)) {
     $importplugin = array_key_first($importplugins);
-    $url = new moodle_url("/grade/import/{$importplugin}/index.php", ['id' => $courseid]);
+    $url = new powereduc_url("/grade/import/{$importplugin}/index.php", ['id' => $courseid]);
     redirect($url);
 }
 

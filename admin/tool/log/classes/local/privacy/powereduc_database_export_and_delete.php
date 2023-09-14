@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ use core_privacy\local\request\writer;
  *
  * This trait expects the following methods to be present in the object:
  *
- * - public static function get_database_and_table(): [moodle_database|null, string|null]
+ * - public static function get_database_and_table(): [powereduc_database|null, string|null]
  * - public static function get_export_subcontext(): []
  *
  * @package    tool_log
@@ -46,7 +46,7 @@ use core_privacy\local\request\writer;
  * @author     Frédéric Massart <fred@branchup.tech>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-trait moodle_database_export_and_delete {
+trait powereduc_database_export_and_delete {
 
     /**
      * Export all user data for the specified user, in the specified contexts.

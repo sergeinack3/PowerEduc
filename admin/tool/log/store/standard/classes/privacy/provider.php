@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ class provider implements
     \tool_log\local\privacy\logstore_provider,
     \tool_log\local\privacy\logstore_userlist_provider {
 
-    use \tool_log\local\privacy\moodle_database_export_and_delete;
+    use \tool_log\local\privacy\powereduc_database_export_and_delete;
 
     /**
      * Returns metadata.
@@ -106,7 +106,7 @@ class provider implements
     /**
      * Get the database object.
      *
-     * @return array Containing moodle_database, string, or null values.
+     * @return array Containing powereduc_database, string, or null values.
      */
     protected static function get_database_and_table() {
         global $DB;

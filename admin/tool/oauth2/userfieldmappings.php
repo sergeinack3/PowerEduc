@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * OAuth 2 Endpoint Configuration page.
  *
  * @package    tool_oauth2
- * @copyright  2017 Damyon Wiese <damyon@moodle.com>
+ * @copyright  2017 Damyon Wiese <damyon@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -45,9 +45,9 @@ $mform = null;
 
 $issuer = \core\oauth2\api::get_issuer($issuerid);
 if (!$issuer) {
-    throw new \moodle_exception('invaliddata');
+    throw new \powereduc_exception('invaliddata');
 }
-$PAGE->navbar->override_active_url(new moodle_url('/admin/tool/oauth2/issuers.php'), true);
+$PAGE->navbar->override_active_url(new powereduc_url('/admin/tool/oauth2/issuers.php'), true);
 
 if (!empty($userfieldmappingid)) {
     $userfieldmapping = \core\oauth2\api::get_user_field_mapping($userfieldmappingid);
@@ -64,7 +64,7 @@ if ($action == 'edit') {
 }
 
 if ($mform && $mform->is_cancelled()) {
-    redirect(new moodle_url('/admin/tool/oauth2/userfieldmappings.php', ['issuerid' => $issuerid]));
+    redirect(new powereduc_url('/admin/tool/oauth2/userfieldmappings.php', ['issuerid' => $issuerid]));
 } else if ($action == 'edit') {
 
     if ($data = $mform->get_data()) {
@@ -100,8 +100,8 @@ if ($mform && $mform->is_cancelled()) {
             'sesskey' => sesskey(),
             'confirm' => true
         ];
-        $continueurl = new moodle_url('/admin/tool/oauth2/userfieldmappings.php', $continueparams);
-        $cancelurl = new moodle_url('/admin/tool/oauth2/userfieldmappings.php');
+        $continueurl = new powereduc_url('/admin/tool/oauth2/userfieldmappings.php', $continueparams);
+        $cancelurl = new powereduc_url('/admin/tool/oauth2/userfieldmappings.php');
         echo $OUTPUT->header();
         $str = get_string('deleteuserfieldmappingconfirm', 'tool_oauth2', s($issuer->get('name')));
         echo $OUTPUT->confirm($str, $continueurl, $cancelurl);
@@ -118,7 +118,7 @@ if ($mform && $mform->is_cancelled()) {
     $userfieldmappings = core\oauth2\api::get_user_field_mappings($issuer);
     echo $renderer->user_field_mappings_table($userfieldmappings, $issuerid);
 
-    $addurl = new moodle_url('/admin/tool/oauth2/userfieldmappings.php', ['action' => 'edit', 'issuerid' => $issuerid]);
+    $addurl = new powereduc_url('/admin/tool/oauth2/userfieldmappings.php', ['action' => 'edit', 'issuerid' => $issuerid]);
     echo $renderer->single_button($addurl, get_string('createnewuserfieldmapping', 'tool_oauth2', s($issuer->get('name'))));
     echo $OUTPUT->footer();
 }

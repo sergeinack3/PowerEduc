@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -115,7 +115,7 @@ if ($version < $CFG->version) {
 $oldversion = "$CFG->release ($CFG->version)";
 $newversion = "$release ($version)";
 
-if (!moodle_needs_upgrading()) {
+if (!powereduc_needs_upgrading()) {
     cli_error(get_string('cliupgradenoneed', 'core_admin', $newversion), 0);
 }
 
@@ -124,7 +124,7 @@ if ($options['is-pending']) {
 }
 
 // Test environment first.
-list($envstatus, $environment_results) = check_moodle_environment(normalize_version($release), ENV_SELECT_RELEASE);
+list($envstatus, $environment_results) = check_powereduc_environment(normalize_version($release), ENV_SELECT_RELEASE);
 if (!$envstatus) {
     $errors = environment_get_errors($environment_results);
     cli_heading(get_string('environment', 'admin'));

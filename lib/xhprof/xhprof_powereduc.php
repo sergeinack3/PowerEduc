@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package    core
@@ -26,7 +26,7 @@ defined('POWEREDUC_INTERNAL') || die();
 // Need some stuff from xhprof.
 require_once($CFG->libdir . '/xhprof/xhprof_lib/utils/xhprof_lib.php');
 require_once($CFG->libdir . '/xhprof/xhprof_lib/utils/xhprof_runs.php');
-// Need some stuff from moodle.
+// Need some stuff from powereduc.
 require_once($CFG->libdir . '/tablelib.php');
 require_once($CFG->libdir . '/setuplib.php');
 require_once($CFG->libdir . '/filelib.php');
@@ -229,7 +229,7 @@ function profiling_stop() {
 
     // We only save the run after ensuring the DB table exists
     // (this prevents problems with profiling runs enabled in
-    // config.php before Moodle is installed. Rare but...
+    // config.php before PowerEduc is installed. Rare but...
     $tables = $DB->get_tables();
     if (!in_array('profiling', $tables)) {
         return false;
@@ -253,7 +253,7 @@ function profiling_stop() {
         }
     }
 
-    $run = new moodle_xhprofrun();
+    $run = new powereduc_xhprofrun();
     $run->prepare_run($script);
     $runid = $run->save_run($data, null);
     profiling_is_saved(true);
@@ -506,23 +506,23 @@ function profiling_get_difference($number1, $number2, $units = '', $factor = 1, 
 }
 
 /**
- * Export profiling runs to a .mpr (moodle profile runs) file.
+ * Export profiling runs to a .mpr (powereduc profile runs) file.
  *
  * This function gets an array of profiling runs (array of runids) and
  * saves a .mpr file into destination for ulterior handling.
  *
  * Format of .mpr files:
  *   mpr files are simple zip packages containing these files:
- *     - moodle_profiling_runs.xml: Metadata about the information
+ *     - powereduc_profiling_runs.xml: Metadata about the information
  *         exported. Contains some header information (version and
- *         release of moodle, database, git hash - if available, date
+ *         release of powereduc, database, git hash - if available, date
  *         of export...) and a list of all the runids included in the
  *         export.
  *    - runid.xml: One file per each run detailed in the main file,
  *        containing the raw dump of the given runid in the profiling table.
  *
  * Possible improvement: Start storing some extra information in the
- * profiling table for each run (moodle version, database, git hash...).
+ * profiling table for each run (powereduc version, database, git hash...).
  *
  * @param array $runids list of runids to be exported.
  * @param string $file filesystem fullpath to destination .mpr file.
@@ -567,7 +567,7 @@ function profiling_export_runs(array $runids, $file) {
 }
 
 /**
- * Import a .mpr (moodle profile runs) file into moodle.
+ * Import a .mpr (powereduc profile runs) file into powereduc.
  *
  * See {@link profiling_export_runs()} for more details about the
  * implementation of .mpr files.
@@ -586,12 +586,12 @@ function profiling_import_runs($file, $commentprefix = '') {
 
     // Unzip the file into temp directory.
     $tmpdir = dirname($file) . '/' . time() . '_' . random_string(4);
-    $fp = get_file_packer('application/vnd.moodle.profiling');
+    $fp = get_file_packer('application/vnd.powereduc.profiling');
     $status = $fp->extract_to_pathname($file, $tmpdir);
 
     // Look for master file and verify its format.
     if ($status) {
-        $mfile = $tmpdir . '/moodle_profiling_runs.xml';
+        $mfile = $tmpdir . '/powereduc_profiling_runs.xml';
         if (!file_exists($mfile) or !is_readable($mfile)) {
             $status = false;
         } else {
@@ -675,7 +675,7 @@ function profiling_export_generate(array $runids, $tmpdir) {
         $CFG->version = $version;
     }
 
-    // Calculate the header information to be sent to moodle_profiling_runs.xml.
+    // Calculate the header information to be sent to powereduc_profiling_runs.xml.
     $release = $CFG->release;
     $version = $CFG->version;
     $dbtype = $CFG->dbtype;
@@ -683,12 +683,12 @@ function profiling_export_generate(array $runids, $tmpdir) {
     $date = time();
 
     // Create the xml output and writer for the main file.
-    $mainxo = new file_xml_output($tmpdir . '/moodle_profiling_runs.xml');
+    $mainxo = new file_xml_output($tmpdir . '/powereduc_profiling_runs.xml');
     $mainxw = new xml_writer($mainxo);
 
     // Output begins.
     $mainxw->start();
-    $mainxw->begin_tag('moodle_profiling_runs');
+    $mainxw->begin_tag('powereduc_profiling_runs');
 
     // Send header information.
     $mainxw->begin_tag('info');
@@ -714,7 +714,7 @@ function profiling_export_generate(array $runids, $tmpdir) {
         $runxo = new file_xml_output($tmpdir . '/' . $attributes['ref']);
         $runxw = new xml_writer($runxo);
         $runxw->start();
-        $runxw->begin_tag('moodle_profiling_run');
+        $runxw->begin_tag('powereduc_profiling_run');
         $runxw->full_tag('id', $run->id);
         $runxw->full_tag('runid', $run->runid);
         $runxw->full_tag('url', $run->url);
@@ -726,11 +726,11 @@ function profiling_export_generate(array $runids, $tmpdir) {
         $runxw->full_tag('totalcalls', $run->totalcalls);
         $runxw->full_tag('totalmemory', $run->totalmemory);
         $runxw->full_tag('data', $run->data);
-        $runxw->end_tag('moodle_profiling_run');
+        $runxw->end_tag('powereduc_profiling_run');
         $runxw->stop();
     }
     $mainxw->end_tag('runs');
-    $mainxw->end_tag('moodle_profiling_runs');
+    $mainxw->end_tag('powereduc_profiling_runs');
     $mainxw->stop();
 
     return true;
@@ -772,7 +772,7 @@ function profiling_get_import_main_schema() {
     $schema = <<<EOS
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-  <xs:element name="moodle_profiling_runs">
+  <xs:element name="powereduc_profiling_runs">
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="info"/>
@@ -818,7 +818,7 @@ EOS;
 function profiling_get_import_run_schema() {
     $schema = <<<EOS
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-  <xs:element name="moodle_profiling_run">
+  <xs:element name="powereduc_profiling_run">
     <xs:complexType>
       <xs:sequence>
         <xs:element type="xs:int" name="id"/>
@@ -849,7 +849,7 @@ EOS;
  * save_run() we'll be implementing some more in order to keep all the
  * rest of information in our runs properly handled.
  */
-class moodle_xhprofrun implements iXHProfRuns {
+class powereduc_xhprofrun implements iXHProfRuns {
 
     protected $runid = null;
     protected $url = null;
@@ -1001,7 +1001,7 @@ class xhprof_table_sql extends table_sql {
         global $OUTPUT;
 
         // Build the link to latest run for the script
-        $scripturl = new moodle_url('/admin/tool/profiling/index.php', array('script' => $row->url, 'listurl' => $row->url));
+        $scripturl = new powereduc_url('/admin/tool/profiling/index.php', array('script' => $row->url, 'listurl' => $row->url));
         $scriptaction = $OUTPUT->action_link($scripturl, $row->url);
 
         // Decide, based on $this->listurlmode which actions to show
@@ -1010,7 +1010,7 @@ class xhprof_table_sql extends table_sql {
         } else {
             // Build link icon to script details (pix + url + actionlink)
             $detailsimg = $OUTPUT->pix_icon('t/right', get_string('profilingfocusscript', 'tool_profiling', $row->url));
-            $detailsurl = new moodle_url('/admin/tool/profiling/index.php', array('listurl' => $row->url));
+            $detailsurl = new powereduc_url('/admin/tool/profiling/index.php', array('listurl' => $row->url));
             $detailsaction = $OUTPUT->action_link($detailsurl, $detailsimg);
         }
 
@@ -1023,7 +1023,7 @@ class xhprof_table_sql extends table_sql {
     protected function col_timecreated($row) {
         global $OUTPUT;
         $fdate = userdate($row->timecreated, '%d %b %Y, %H:%M');
-        $url = new moodle_url('/admin/tool/profiling/index.php', array('runid' => $row->runid, 'listurl' => $row->url));
+        $url = new powereduc_url('/admin/tool/profiling/index.php', array('runid' => $row->runid, 'listurl' => $row->url));
         return $OUTPUT->action_link($url, $fdate);
     }
 

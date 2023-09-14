@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
@@ -30,13 +30,13 @@ class notification_test extends \advanced_testcase {
      * Setup required for all notification tests.
      *
      * This includes emptying the list of notifications on the session, resetting any session which exists, and setting
-     * up a new \moodle_page object.
+     * up a new \powereduc_page object.
      */
     public function setUp(): void {
         global $PAGE, $SESSION;
 
         parent::setUp();
-        $PAGE = new \moodle_page();
+        $PAGE = new \powereduc_page();
         \core\session\manager::init_empty_session();
         $SESSION->notifications = [];
     }
@@ -45,7 +45,7 @@ class notification_test extends \advanced_testcase {
      * Tear down required for all notification tests.
      *
      * This includes emptying the list of notifications on the session, resetting any session which exists, and setting
-     * up a new \moodle_page object.
+     * up a new \powereduc_page object.
      */
     public function tearDown(): void {
         global $PAGE, $SESSION;
@@ -65,16 +65,16 @@ class notification_test extends \advanced_testcase {
         \core\notification::add('Example before header', \core\notification::INFO);
         $this->assertCount(1, $SESSION->notifications);
 
-        $PAGE->set_state(\moodle_page::STATE_PRINTING_HEADER);
+        $PAGE->set_state(\powereduc_page::STATE_PRINTING_HEADER);
         \core\notification::add('Example during header', \core\notification::INFO);
         $this->assertCount(2, $SESSION->notifications);
 
-        $PAGE->set_state(\moodle_page::STATE_IN_BODY);
+        $PAGE->set_state(\powereduc_page::STATE_IN_BODY);
         \core\notification::add('Example in body', \core\notification::INFO);
         $this->expectOutputRegex('/Example in body/');
         $this->assertCount(2, $SESSION->notifications);
 
-        $PAGE->set_state(\moodle_page::STATE_DONE);
+        $PAGE->set_state(\powereduc_page::STATE_DONE);
         \core\notification::add('Example after page', \core\notification::INFO);
         $this->assertCount(2, $SESSION->notifications);
         $this->expectOutputRegex('/Example after page/');

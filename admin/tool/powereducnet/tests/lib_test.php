@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,21 +15,21 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Unit tests for tool_moodlenet lib
+ * Unit tests for tool_powereducnet lib
  *
- * @package    tool_moodlenet
+ * @package    tool_powereducnet
  * @copyright  2020 Peter Dias
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace tool_moodlenet;
+namespace tool_powereducnet;
 
 defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
-require_once($CFG->dirroot . '/admin/tool/moodlenet/lib.php');
+require_once($CFG->dirroot . '/admin/tool/powereducnet/lib.php');
 
 /**
- * Test moodlenet functions
+ * Test powereducnet functions
  */
 class lib_test extends \advanced_testcase {
 

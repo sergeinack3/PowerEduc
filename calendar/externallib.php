@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -92,7 +92,7 @@ class core_calendar_external extends external_api {
 
             // Let's check if the user is allowed to delete an event.
             if (!calendar_delete_event_allowed($eventobj)) {
-                throw new moodle_exception('nopermissions', 'error', '', get_string('deleteevent', 'calendar'));
+                throw new powereduc_exception('nopermissions', 'error', '', get_string('deleteevent', 'calendar'));
             }
             // Time to do the magic.
             $eventobj->delete($event['repeat']);
@@ -178,7 +178,7 @@ class core_calendar_external extends external_api {
         // Parameter validation.
         $params = self::validate_parameters(self::get_calendar_events_parameters(), array('events' => $events, 'options' => $options));
         $funcparam = array('courses' => array(), 'groups' => array(), 'categories' => array());
-        $hassystemcap = has_capability('moodle/calendar:manageentries', context_system::instance());
+        $hassystemcap = has_capability('powereduc/calendar:manageentries', context_system::instance());
         $warnings = array();
         $coursecategories = array();
 
@@ -245,7 +245,7 @@ class core_calendar_external extends external_api {
                     array_merge($params['events']['categoryids'], array_keys($coursecategories)));
                 foreach ($catobjs as $catobj) {
                     if (isset($coursecategories[$catobj->id]) ||
-                            has_capability('moodle/category:manage', $catobj->get_context())) {
+                            has_capability('powereduc/category:manage', $catobj->get_context())) {
                         // If the user has access to a course in this category or can manage the category,
                         // then they can see all parent categories too.
                         $categories[$catobj->id] = true;
@@ -269,7 +269,7 @@ class core_calendar_external extends external_api {
                     $categories = [];
                     foreach (\core_course_category::get_all() as $category) {
                         if (isset($coursecategories[$category->id]) ||
-                                has_capability('moodle/category:manage', $category->get_context(), $USER, false)) {
+                                has_capability('powereduc/category:manage', $category->get_context(), $USER, false)) {
                             // If the user has access to a course in this category or can manage the category,
                             // then they can see all parent categories too.
                             $categories[$category->id] = true;
@@ -451,8 +451,8 @@ class core_calendar_external extends external_api {
         $context = \context_user::instance($user->id);
         self::validate_context($context);
 
-        if ($params['userid'] && $USER->id !== $params['userid'] && !has_capability('moodle/calendar:manageentries', $context)) {
-            throw new \required_capability_exception($context, 'moodle/calendar:manageentries', 'nopermission', '');
+        if ($params['userid'] && $USER->id !== $params['userid'] && !has_capability('powereduc/calendar:manageentries', $context)) {
+            throw new \required_capability_exception($context, 'powereduc/calendar:manageentries', 'nopermission', '');
         }
 
         if (empty($params['aftereventid'])) {
@@ -698,7 +698,7 @@ class core_calendar_external extends external_api {
      * @param array $events A list of events to create.
      * @return array array of events created.
      * @since Moodle 2.5
-     * @throws moodle_exception if user doesnt have the permission to create events.
+     * @throws powereduc_exception if user doesnt have the permission to create events.
      */
     public static function create_calendar_events($events) {
         global $DB, $USER;
@@ -818,7 +818,7 @@ class core_calendar_external extends external_api {
         if ($event = $eventvault->get_event_by_id($params['eventid'])) {
             $mapper = event_container::get_event_mapper();
             if (!calendar_view_event_allowed($mapper->from_event_to_legacy_event($event))) {
-                throw new moodle_exception('nopermissiontoviewcalendar', 'error');
+                throw new powereduc_exception('nopermissiontoviewcalendar', 'error');
             }
         }
 
@@ -826,7 +826,7 @@ class core_calendar_external extends external_api {
             // We can't return a warning in this case because the event is not optional.
             // We don't know the context for the event and it's not worth loading it.
             $syscontext = context_system::instance();
-            throw new \required_capability_exception($syscontext, 'moodle/course:view', 'nopermissions', 'error');
+            throw new \required_capability_exception($syscontext, 'powereduc/course:view', 'nopermissions', 'error');
         }
 
         $cache = new events_related_objects_cache([$event]);
@@ -874,7 +874,7 @@ class core_calendar_external extends external_api {
      *
      * @param string $formdata The event form data in a URI encoded param string
      * @return array The created or modified event
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function submit_create_update_form($formdata) {
         global $USER, $PAGE, $CFG;
@@ -934,7 +934,7 @@ class core_calendar_external extends external_api {
             }
 
             if (!calendar_edit_event_allowed($legacyevent, true)) {
-                throw new \moodle_exception('nopermissiontoupdatecalendar');
+                throw new \powereduc_exception('nopermissiontoupdatecalendar');
             }
 
             $legacyevent->update($properties);
@@ -1186,13 +1186,13 @@ class core_calendar_external extends external_api {
         $event = $vault->get_event_by_id($eventid);
 
         if (!$event) {
-            throw new \moodle_exception('Unable to find event with id ' . $eventid);
+            throw new \powereduc_exception('Unable to find event with id ' . $eventid);
         }
 
         $legacyevent = $mapper->from_event_to_legacy_event($event);
 
         if (!calendar_edit_event_allowed($legacyevent, true)) {
-            throw new \moodle_exception('nopermissiontoupdatecalendar');
+            throw new \powereduc_exception('nopermissiontoupdatecalendar');
         }
 
         self::validate_context($legacyevent->context);
@@ -1296,7 +1296,7 @@ class core_calendar_external extends external_api {
      *
      * @param int $courseid Course to check, empty for site.
      * @return array The access information
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since  Moodle 3.7
      */
     public static function get_calendar_access_information($courseid = 0) {
@@ -1312,9 +1312,9 @@ class core_calendar_external extends external_api {
         self::validate_context($context);
 
         return [
-            'canmanageentries' => has_capability('moodle/calendar:manageentries', $context),
-            'canmanageownentries' => has_capability('moodle/calendar:manageownentries', $context),
-            'canmanagegroupentries' => has_capability('moodle/calendar:managegroupentries', $context),
+            'canmanageentries' => has_capability('powereduc/calendar:manageentries', $context),
+            'canmanageownentries' => has_capability('powereduc/calendar:manageownentries', $context),
+            'canmanagegroupentries' => has_capability('powereduc/calendar:managegroupentries', $context),
             'warnings' => [],
         ];
     }
@@ -1356,7 +1356,7 @@ class core_calendar_external extends external_api {
      *
      * @param int $courseid Course to check, empty for site.
      * @return array The types allowed
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since  Moodle 3.7
      */
     public static function get_allowed_event_types($courseid = 0) {
@@ -1404,7 +1404,7 @@ class core_calendar_external extends external_api {
      *           ['year' => a, 'month' => b, 'day' => c,
      *            'hour' => d (optional), 'minute' => e (optional), 'key' => 'x' (optional)]
      * @return  array Provided array of dates converted to unix timestamps
-     * @throws moodle_exception If one or more of the dates provided does not convert to a valid timestamp.
+     * @throws powereduc_exception If one or more of the dates provided does not convert to a valid timestamp.
      */
     public static function get_timestamps($datetimes) {
         $params = self::validate_parameters(self::get_timestamps_parameters(), ['data' => $datetimes]);
@@ -1426,7 +1426,7 @@ class core_calendar_external extends external_api {
                 ];
 
             } catch (Exception $e) {
-                throw new moodle_exception('One or more of the dates provided were invalid');
+                throw new powereduc_exception('One or more of the dates provided were invalid');
             }
         }
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ require_once("$CFG->libdir/filterlib.php");
  *
  * @package    filter_displayh5p
  * @category   test
- * @copyright 2019 Carlos Escobedo <carlos@moodle.com>
+ * @copyright 2019 Carlos Escobedo <carlos@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class upgradelib_test extends \advanced_testcase {

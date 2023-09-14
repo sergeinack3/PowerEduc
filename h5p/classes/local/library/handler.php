@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Base class for library handlers.
  *
  * @package    core_h5p
- * @copyright  2019 Sara Arjona <sara@moodle.com>
+ * @copyright  2019 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,7 +33,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * PLUGINNAME\local\library\handler that extends \core_h5p\local\library\handler.
  *
  * @package    core_h5p
- * @copyright  2019 Sara Arjona <sara@moodle.com>
+ * @copyright  2019 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 abstract class handler {
@@ -108,10 +108,10 @@ abstract class handler {
      *
      * @param string $filepath The path within the h5p root
      * @param array $params these params override current params or add new
-     * @return null|\moodle_url
+     * @return null|\powereduc_url
      */
-    public static function get_h5p_core_library_url(?string $filepath = null, ?array $params = null): ?\moodle_url {
-        return new \moodle_url(static::get_h5p_core_library_base($filepath), $params);
+    public static function get_h5p_core_library_url(?string $filepath = null, ?array $params = null): ?\powereduc_url {
+        return new \powereduc_url(static::get_h5p_core_library_base($filepath), $params);
     }
 
     /**
@@ -119,10 +119,10 @@ abstract class handler {
      *
      * @param string $filepath The path within the h5p root.
      * @param array $params These params override current params or add new.
-     * @return null|\moodle_url The moodle_url to a file in the H5P Editor library.
+     * @return null|\powereduc_url The powereduc_url to a file in the H5P Editor library.
      */
-    public static function get_h5p_editor_library_url(?string $filepath = null, ?array $params = null): ?\moodle_url {
-        return new \moodle_url(static::get_h5p_editor_library_base($filepath), $params);
+    public static function get_h5p_editor_library_url(?string $filepath = null, ?array $params = null): ?\powereduc_url {
+        return new \powereduc_url(static::get_h5p_editor_library_base($filepath), $params);
     }
 
     /**
@@ -141,12 +141,12 @@ abstract class handler {
         // - However, in Moodle, they have '_' instead of '-'. For instance: es_mx.
         $language = str_replace('-', '_', $language);
         if (get_string_manager()->string_exists($identifier, $component)) {
-            $defaultmoodlelang = 'en';
+            $defaultpowereduclang = 'en';
             // In Moodle, all the English strings always will exist because they have to be declared in order to let users
             // to translate them. That's why, this method will only replace existing key if the value is different from
             // the English version and the current language is not English.
             $string = new \lang_string($identifier, $component);
-            if ($language === $defaultmoodlelang || $string->out($language) !== $string->out($defaultmoodlelang)) {
+            if ($language === $defaultpowereduclang || $string->out($language) !== $string->out($defaultpowereduclang)) {
                 $value = $string->out($language);
             }
         }

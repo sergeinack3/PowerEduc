@@ -1,7 +1,7 @@
 {
-  "name": "moodle-backup-backupselectall",
+  "name": "powereduc-backup-backupselectall",
   "builds": {
-    "moodle-backup-backupselectall": {
+    "powereduc-backup-backupselectall": {
       "jsfiles": [
         "backupselectall.js"
       ]

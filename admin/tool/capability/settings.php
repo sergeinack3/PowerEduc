@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,5 +28,5 @@ $ADMIN->add('roles', new admin_externalpage(
     'toolcapability',
     get_string('pluginname', 'tool_capability'),
     "$CFG->wwwroot/$CFG->admin/tool/capability/index.php",
-    'moodle/role:manage'
+    'powereduc/role:manage'
 ));

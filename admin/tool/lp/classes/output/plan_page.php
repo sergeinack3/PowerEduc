@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ defined('POWEREDUC_INTERNAL') || die();
 use renderable;
 use templatable;
 use stdClass;
-use moodle_url;
+use powereduc_url;
 use core_competency\api;
 use core_competency\external\performance_helper;
 use core_competency\plan;
@@ -68,7 +68,7 @@ class plan_page implements renderable, templatable {
         $data = new stdClass();
         $data->plan = $planexporter->export($output);
         $data->competencies = array();
-        $data->pluginbaseurl = (new moodle_url('/admin/tool/lp'))->out(false);
+        $data->pluginbaseurl = (new powereduc_url('/admin/tool/lp'))->out(false);
         $data->contextid = $this->plan->get_context()->id;
 
         if ($data->plan->iscompleted) {

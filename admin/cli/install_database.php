@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -50,9 +50,9 @@ Site defaults may be changed via local/defaults.php.
 
 Options:
 --lang=CODE           Installation and default site language. Default is en.
---adminuser=USERNAME  Username for the moodle admin account. Default is admin.
---adminpass=PASSWORD  Password for the moodle admin account.
---adminemail=STRING   Email address for the moodle admin account.
+--adminuser=USERNAME  Username for the powereduc admin account. Default is admin.
+--adminpass=PASSWORD  Password for the powereduc admin account.
+--adminemail=STRING   Email address for the powereduc admin account.
 --agree-license       Indicates agreement with software license.
 --fullname=STRING     Name of the site
 --shortname=STRING    Name of the site
@@ -65,7 +65,7 @@ Example:
 
 // Check that PHP is of a sufficient version as soon as possible.
 require_once(__DIR__.'/../../lib/phpminimumversionlib.php');
-moodle_require_minimum_php_version();
+powereduc_require_minimum_php_version();
 
 // Nothing to do if config.php does not exist
 $configfile = __DIR__.'/../../config.php';
@@ -165,7 +165,7 @@ require("$CFG->dirroot/version.php");
 
 // Test environment first.
 require_once($CFG->libdir . '/environmentlib.php');
-list($envstatus, $environment_results) = check_moodle_environment(normalize_version($release), ENV_SELECT_RELEASE);
+list($envstatus, $environment_results) = check_powereduc_environment(normalize_version($release), ENV_SELECT_RELEASE);
 if (!$envstatus) {
     $errors = environment_get_errors($environment_results);
     cli_heading(get_string('environment', 'admin'));

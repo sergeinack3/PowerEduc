@@ -31,7 +31,7 @@ class mnet_peer {
     var $last_log_id        = 0;
     var $force_theme        = 0;
     var $theme              = '';
-    var $applicationid      = 1; // Default of 1 == Moodle
+    var $applicationid      = 1; // Default of 1 == PowerEduc
     var $keypair            = array();
     var $error              = array();
     var $bootstrapped       = false; // set when the object is populated

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -46,10 +46,10 @@ $idtoken = optional_param('id_token', null, PARAM_RAW);
 $launchid = optional_param('launchid', null, PARAM_RAW);
 
 if (!is_enabled_auth('lti')) {
-    throw new moodle_exception('pluginnotenabled', 'auth', '', get_string('pluginname', 'auth_lti'));
+    throw new powereduc_exception('pluginnotenabled', 'auth', '', get_string('pluginname', 'auth_lti'));
 }
 if (!enrol_is_enabled('lti')) {
-    throw new moodle_exception('enrolisdisabled', 'enrol_lti');
+    throw new powereduc_exception('enrolisdisabled', 'enrol_lti');
 }
 if (empty($idtoken) && empty($launchid)) {
     throw new coding_exception('Error: launch requires id_token');
@@ -68,7 +68,7 @@ if ($launchid) {
     $messagelaunch = LtiMessageLaunch::fromCache($launchid, $issdb, $sesscache, $serviceconnector);
 }
 if (empty($messagelaunch)) {
-    throw new moodle_exception('Bad launch. Deep linking launch data could not be found');
+    throw new powereduc_exception('Bad launch. Deep linking launch data could not be found');
 }
 
 // Authenticate the instructor.
@@ -76,14 +76,14 @@ if (empty($messagelaunch)) {
 $auth = get_auth_plugin('lti');
 $auth->complete_login(
     $messagelaunch->getLaunchData(),
-    new moodle_url('/enrol/lti/launch_deeplink.php', ['launchid' => $messagelaunch->getLaunchId()]),
+    new powereduc_url('/enrol/lti/launch_deeplink.php', ['launchid' => $messagelaunch->getLaunchId()]),
     auth_plugin_lti::PROVISIONING_MODE_PROMPT_EXISTING_ONLY
 );
 
 require_login(null, false);
 global $USER, $CFG;
 $PAGE->set_context(context_system::instance());
-$url = new moodle_url('/enrol/lti/launch_deeplink.php');
+$url = new powereduc_url('/enrol/lti/launch_deeplink.php');
 $PAGE->set_url($url);
 $PAGE->set_pagelayout('popup');
 $PAGE->set_title(get_string('opentool', 'enrol_lti'));

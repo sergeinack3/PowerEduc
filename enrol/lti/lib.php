@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * LTI enrolment plugin main library file.
  *
  * @package enrol_lti
- * @copyright 2016 Mark Nelson <markn@moodle.com>
+ * @copyright 2016 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,7 +32,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * LTI enrolment plugin class.
  *
  * @package enrol_lti
- * @copyright 2016 Mark Nelson <markn@moodle.com>
+ * @copyright 2016 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class enrol_lti_plugin extends enrol_plugin {
@@ -45,7 +45,7 @@ class enrol_lti_plugin extends enrol_plugin {
      */
     public function can_add_instance($courseid) {
         $context = context_course::instance($courseid, MUST_EXIST);
-        return has_capability('moodle/course:enrolconfig', $context) && has_capability('enrol/lti:config', $context);
+        return has_capability('powereduc/course:enrolconfig', $context) && has_capability('enrol/lti:config', $context);
     }
 
     /**
@@ -417,9 +417,9 @@ class enrol_lti_plugin extends enrol_plugin {
 
         if (!empty($data['requirecompletion'])) {
             $completion = new completion_info($COURSE);
-            $moodlecontext = $DB->get_record('context', array('id' => $data['contextid']));
-            if ($moodlecontext->contextlevel == CONTEXT_MODULE) {
-                $cm = get_coursemodule_from_id(false, $moodlecontext->instanceid, 0, false, MUST_EXIST);
+            $powereduccontext = $DB->get_record('context', array('id' => $data['contextid']));
+            if ($powereduccontext->contextlevel == CONTEXT_MODULE) {
+                $cm = get_coursemodule_from_id(false, $powereduccontext->instanceid, 0, false, MUST_EXIST);
             } else {
                 $cm = null;
             }
@@ -461,7 +461,7 @@ function enrol_lti_extend_navigation_course($navigation, $course, $context) {
         // Check that they can add an instance.
         $ltiplugin = enrol_get_plugin('lti');
         if ($ltiplugin->can_add_instance($course->id)) {
-            $url = new moodle_url('/enrol/lti/index.php', ['courseid' => $course->id]);
+            $url = new powereduc_url('/enrol/lti/index.php', ['courseid' => $course->id]);
             $settingsnode = navigation_node::create(get_string('sharedexternaltools', 'enrol_lti'), $url,
                 navigation_node::TYPE_SETTING, null, 'publishedtools', new pix_icon('i/settings', ''));
             $navigation->add_node($settingsnode);

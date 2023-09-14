@@ -1,10 +1,10 @@
-Description of TinyMCE library integration in Moodle
+Description of TinyMCE library integration in PowerEduc
 =========================================================================================
 
 Copyright: (c) 2004-2012, Moxiecode Systems AB, All rights reserved.
 License: GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
 
-Moodle maintainer: Petr Skoda (skodak)
+PowerEduc maintainer: Petr Skoda (skodak)
 
 =========================================================================================
 Upgrade procedure:
@@ -20,10 +20,10 @@ Changes:
 - lib/editor/tinymce/tiny_mce/3.5.11/plugins/fullscreen/editor_plugin_src.js:31-33 - Added checks to see if required functions exist.
   After these changes you need to use uglifier to compress the js into lib/editor/tinymce/tiny_mce/3.5.11/plugins/fullscreen/editor_plugin.js
   (I used "uglifyjs editor_plugin_src.js -c -m -v -o editor_plugin.js")
-- lib/editor/tinymce/tiny_mce/3.5.11/themes/advanced/skins/moodle/content.css:54-57 and lib/editor/tinymce/tiny_mce/3.5.11/themes/advanced/skins/moodle/dialog.css:119 - Added styles to let SVG icons have 16px height and 16px width.
+- lib/editor/tinymce/tiny_mce/3.5.11/themes/advanced/skins/powereduc/content.css:54-57 and lib/editor/tinymce/tiny_mce/3.5.11/themes/advanced/skins/powereduc/dialog.css:119 - Added styles to let SVG icons have 16px height and 16px width.
 
-Copy the moodle skin to the new version:
-lib/editor/tinymce/tiny_mce/3.5.10/theme/advanced/skins/moodle/
+Copy the powereduc skin to the new version:
+lib/editor/tinymce/tiny_mce/3.5.10/theme/advanced/skins/powereduc/
 
 TODO:
  * create some new automated script that sends other languages from upstream into AMOS

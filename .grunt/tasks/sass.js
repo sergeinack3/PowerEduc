@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,8 +27,8 @@ module.exports = grunt => {
         sass: {
             dist: {
                 files: {
-                    "theme/boost/style/moodle.css": "theme/boost/scss/preset/default.scss",
-                    "theme/classic/style/moodle.css": "theme/classic/scss/classicgrunt.scss"
+                    "theme/boost/style/powereduc.css": "theme/boost/scss/preset/default.scss",
+                    "theme/classic/style/powereduc.css": "theme/classic/scss/classicgrunt.scss"
                 }
             },
             options: {

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ abstract class base_controller extends backup implements loggable {
     protected $progress;
 
     /**
-     * @var base_logger Logging chain object (moodle, inline, fs, db, syslog)
+     * @var base_logger Logging chain object (powereduc, inline, fs, db, syslog)
      */
     protected $logger;
 

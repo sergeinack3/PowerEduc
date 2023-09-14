@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -47,11 +47,11 @@ class enrol_lti_generator extends component_generator_base {
             $registration = application_registration::create(
                 $data['name'],
                 $uniqueid,
-                new moodle_url($data['platformid']),
+                new powereduc_url($data['platformid']),
                 $data['clientid'],
-                new moodle_url($data['authrequesturl']),
-                new moodle_url($data['jwksurl']),
-                new moodle_url($data['accesstokenurl'])
+                new powereduc_url($data['authrequesturl']),
+                new powereduc_url($data['jwksurl']),
+                new powereduc_url($data['accesstokenurl'])
             );
         }
 

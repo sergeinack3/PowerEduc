@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -106,7 +106,7 @@ class external_test extends externallib_advanced_testcase {
         $this->assertEquals('alreadyconfirmed', $result['warnings'][0]['warningcode']);
 
         // Try to use an invalid secret.
-        $this->expectException('\moodle_exception');
+        $this->expectException('\powereduc_exception');
         $this->expectExceptionMessage(get_string('invalidconfirmdata', 'error'));
         $result = core_auth_external::confirm_user($username, 'zzZZzz');
     }
@@ -181,7 +181,7 @@ class external_test extends externallib_advanced_testcase {
         $this->assertEmpty($result['warnings']);
 
         $_SERVER['HTTP_USER_AGENT'] = 'no browser'; // Hack around missing user agent in CLI scripts.
-        $this->expectException('\moodle_exception');
+        $this->expectException('\powereduc_exception');
         $this->expectExceptionMessage('error/invalidlogin');
         $result = core_auth_external::resend_confirmation_email('abc', $password);
     }
@@ -204,7 +204,7 @@ class external_test extends externallib_advanced_testcase {
         $this->assertEmpty($result['warnings']);
 
         $_SERVER['HTTP_USER_AGENT'] = 'no browser'; // Hack around missing user agent in CLI scripts.
-        $this->expectException('\moodle_exception');
+        $this->expectException('\powereduc_exception');
         $this->expectExceptionMessage('error/invalidlogin');
         $result = core_auth_external::resend_confirmation_email($username, 'abc');
     }
@@ -233,7 +233,7 @@ class external_test extends externallib_advanced_testcase {
         $result = \external_api::clean_returnvalue(core_auth_external::confirm_user_returns(), $result);
         $this->assertTrue($result['success']);
 
-        $this->expectException('\moodle_exception');
+        $this->expectException('\powereduc_exception');
         $this->expectExceptionMessage('error/alreadyconfirmed');
         core_auth_external::resend_confirmation_email($username, $password);
     }

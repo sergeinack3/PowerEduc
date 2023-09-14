@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -136,8 +136,8 @@ class file_info_context_user extends file_info {
     protected function get_area_user_profile($itemid, $filepath, $filename) {
         global $CFG;
 
-        $readaccess = has_capability('moodle/user:update', $this->context);
-        $writeaccess = has_capability('moodle/user:viewalldetails', $this->context);
+        $readaccess = has_capability('powereduc/user:update', $this->context);
+        $writeaccess = has_capability('powereduc/user:viewalldetails', $this->context);
 
         if (!$readaccess and !$writeaccess) {
             // the idea here is that only admins should be able to list/modify files in user profile, the rest has to use profile page

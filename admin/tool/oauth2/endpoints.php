@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * OAuth 2 Endpoing Configuration page.
  *
  * @package    tool_oauth2
- * @copyright  2017 Damyon Wiese <damyon@moodle.com>
+ * @copyright  2017 Damyon Wiese <damyon@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -45,9 +45,9 @@ $mform = null;
 
 $issuer = \core\oauth2\api::get_issuer($issuerid);
 if (!$issuer) {
-    throw new \moodle_exception('invaliddata');
+    throw new \powereduc_exception('invaliddata');
 }
-$PAGE->navbar->override_active_url(new moodle_url('/admin/tool/oauth2/issuers.php'), true);
+$PAGE->navbar->override_active_url(new powereduc_url('/admin/tool/oauth2/issuers.php'), true);
 
 if (!empty($endpointid)) {
     $endpoint = \core\oauth2\api::get_endpoint($endpointid);
@@ -65,7 +65,7 @@ if ($action == 'edit') {
 }
 
 if ($mform && $mform->is_cancelled()) {
-    redirect(new moodle_url('/admin/tool/oauth2/endpoints.php', ['issuerid' => $issuerid]));
+    redirect(new powereduc_url('/admin/tool/oauth2/endpoints.php', ['issuerid' => $issuerid]));
 } else if ($action == 'edit') {
 
     if ($data = $mform->get_data()) {
@@ -102,8 +102,8 @@ if ($mform && $mform->is_cancelled()) {
             'sesskey' => sesskey(),
             'confirm' => true
         ];
-        $continueurl = new moodle_url('/admin/tool/oauth2/endpoints.php', $continueparams);
-        $cancelurl = new moodle_url('/admin/tool/oauth2/endpoints.php');
+        $continueurl = new powereduc_url('/admin/tool/oauth2/endpoints.php', $continueparams);
+        $cancelurl = new powereduc_url('/admin/tool/oauth2/endpoints.php');
         echo $OUTPUT->header();
         $strparams = [ 'issuer' => s($issuer->get('name')), 'endpoint' => s($endpoint->get('name')) ];
         echo $OUTPUT->confirm(get_string('deleteendpointconfirm', 'tool_oauth2', $strparams), $continueurl, $cancelurl);
@@ -120,7 +120,7 @@ if ($mform && $mform->is_cancelled()) {
     $endpoints = core\oauth2\api::get_endpoints($issuer);
     echo $renderer->endpoints_table($endpoints, $issuerid);
 
-    $addurl = new moodle_url('/admin/tool/oauth2/endpoints.php', ['action' => 'edit', 'issuerid' => $issuerid]);
+    $addurl = new powereduc_url('/admin/tool/oauth2/endpoints.php', ['action' => 'edit', 'issuerid' => $issuerid]);
     echo $renderer->single_button($addurl, get_string('createnewendpoint', 'tool_oauth2', s($issuer->get('name'))));
     echo $OUTPUT->footer();
 }

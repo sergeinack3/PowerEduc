@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ if ($hassiteconfig || has_any_capability($capabilities, context_system::instance
         new admin_externalpage(
             'tool_usertours/tours',
             get_string('usertours', 'tool_usertours'),
-            new moodle_url('/admin/tool/usertours/configure.php'),
+            new powereduc_url('/admin/tool/usertours/configure.php'),
             'tool/usertours:managetours'
         )
     );

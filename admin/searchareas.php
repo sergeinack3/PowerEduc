@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Manage global search areas.
  *
  * @package   core_search
- * @copyright 2016 Dan Poltawski <dan@moodle.com>
+ * @copyright 2016 Dan Poltawski <dan@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once(__DIR__ . '/../config.php');
@@ -45,7 +45,7 @@ if ($action) {
     if ($areaid) {
         $area = \core_search\manager::get_search_area($areaid);
         if ($area === false) {
-            throw new moodle_exception('invalidrequest');
+            throw new powereduc_exception('invalidrequest');
         }
     }
 
@@ -73,8 +73,8 @@ if ($action) {
                 if ($areaid) {
                     $actionparams['areaid'] = $areaid;
                 }
-                $actionurl = new moodle_url('/admin/searchareas.php', $actionparams);
-                $cancelurl = new moodle_url('/admin/searchareas.php');
+                $actionurl = new powereduc_url('/admin/searchareas.php', $actionparams);
+                $cancelurl = new powereduc_url('/admin/searchareas.php');
                 echo $OUTPUT->header();
                 echo $OUTPUT->confirm(get_string('confirm_' . $action, 'search', $a),
                     new single_button($actionurl, get_string('continue'), 'post', true),
@@ -107,7 +107,7 @@ if ($action) {
                 }
 
                 // Redirect back to the main page after taking action.
-                redirect(new moodle_url('/admin/searchareas.php'));
+                redirect(new powereduc_url('/admin/searchareas.php'));
             }
         }
     } else if (in_array($action, ['enable', 'disable'])) {
@@ -127,10 +127,10 @@ if ($action) {
                 break;
         }
 
-        redirect(new moodle_url('/admin/searchareas.php'));
+        redirect(new powereduc_url('/admin/searchareas.php'));
     } else {
         // Invalid action.
-        throw new moodle_exception('invalidaction');
+        throw new powereduc_exception('invalidaction');
     }
 }
 
@@ -140,7 +140,7 @@ if (isset($searchmanager) && $indexingenabled) {
     \core\notification::info(get_string('indexinginfo', 'admin'));
 } else if (isset($searchmanager)) {
     $params = (object) [
-        'url' => (new moodle_url("/admin/settings.php?section=manageglobalsearch#admin-searchindexwhendisabled"))->out(false)
+        'url' => (new powereduc_url("/admin/settings.php?section=manageglobalsearch#admin-searchindexwhendisabled"))->out(false)
     ];
     \core\notification::error(get_string('indexwhendisabledfullnotice', 'search', $params));
 } else {
@@ -179,7 +179,7 @@ foreach ($searchareas as $area) {
 
     if ($area->is_enabled()) {
         $columns[] = $OUTPUT->action_icon(admin_searcharea_action_url('disable', $areaid),
-            new pix_icon('t/hide', get_string('disable'), 'moodle', array('title' => '', 'class' => 'iconsmall')),
+            new pix_icon('t/hide', get_string('disable'), 'powereduc', array('title' => '', 'class' => 'iconsmall')),
             null, array('title' => get_string('disable')));
 
         if ($areasconfig && $indexingenabled) {
@@ -205,7 +205,7 @@ foreach ($searchareas as $area) {
                     get_string('deleteindex', 'search', $accesshide));
             if ($area->supports_get_document_recordset()) {
                 $actions[] = $OUTPUT->pix_icon('i/reload', '') . html_writer::link(
-                        new moodle_url('searchreindex.php', ['areaid' => $areaid]),
+                        new powereduc_url('searchreindex.php', ['areaid' => $areaid]),
                         get_string('gradualreindex', 'search', $accesshide));
             }
             $columns[] = html_writer::alist($actions, ['class' => 'unstyled list-unstyled']);
@@ -222,7 +222,7 @@ foreach ($searchareas as $area) {
 
     } else {
         $columns[] = $OUTPUT->action_icon(admin_searcharea_action_url('enable', $areaid),
-            new pix_icon('t/show', get_string('enable'), 'moodle', array('title' => '', 'class' => 'iconsmall')),
+            new pix_icon('t/show', get_string('enable'), 'powereduc', array('title' => '', 'class' => 'iconsmall')),
                 null, array('title' => get_string('enable')));
 
         $blankrow = new html_table_cell(get_string('searchareadisabled', 'admin'));
@@ -256,7 +256,7 @@ echo $OUTPUT->footer();
  *
  * @param string $action
  * @param string $areaid
- * @return moodle_url
+ * @return powereduc_url
  */
 function admin_searcharea_action_url($action, $areaid = false) {
     $params = array('action' => $action);
@@ -266,5 +266,5 @@ function admin_searcharea_action_url($action, $areaid = false) {
     if ($action === 'disable' || $action === 'enable') {
         $params['sesskey'] = sesskey();
     }
-    return new moodle_url('/admin/searchareas.php', $params);
+    return new powereduc_url('/admin/searchareas.php', $params);
 }

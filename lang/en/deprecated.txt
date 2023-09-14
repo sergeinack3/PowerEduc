@@ -12,7 +12,7 @@ filetypesnotwhitelisted,core_form
 modeloutputdirinfo,core_analytics
 backpackneedsupdate,core_badges
 hidepicture,core_group
-hidepicture,core_moodle
+hidepicture,core_powereduc
 sitebackpack,core_badges
 sitebackpack_help,core_badges
 usernameoridnousererror,core_webservice

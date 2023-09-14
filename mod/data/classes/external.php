@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Database module external API
@@ -21,7 +21,7 @@
  * @category   external
  * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 2.9
+ * @since      PowerEduc 2.9
  */
 
 defined('POWEREDUC_INTERNAL') || die;
@@ -42,7 +42,7 @@ use mod_data\manager;
  * @category   external
  * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 2.9
+ * @since      PowerEduc 2.9
  */
 class mod_data_external extends external_api {
 
@@ -50,7 +50,7 @@ class mod_data_external extends external_api {
      * Describes the parameters for get_databases_by_courses.
      *
      * @return external_function_parameters
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function get_databases_by_courses_parameters() {
         return new external_function_parameters (
@@ -69,7 +69,7 @@ class mod_data_external extends external_api {
      *
      * @param array $courseids the course ids
      * @return array the database details
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function get_databases_by_courses($courseids = array()) {
         global $PAGE;
@@ -142,7 +142,7 @@ class mod_data_external extends external_api {
      * Describes the get_databases_by_courses return value.
      *
      * @return external_single_structure
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function get_databases_by_courses_returns() {
 
@@ -161,7 +161,7 @@ class mod_data_external extends external_api {
      *
      * @param int $databaseid database instance id
      * @return array array containing the database object, course, context and course module objects
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     protected static function validate_database($databaseid) {
         global $DB;
@@ -181,7 +181,7 @@ class mod_data_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function view_database_parameters() {
         return new external_function_parameters(
@@ -196,7 +196,7 @@ class mod_data_external extends external_api {
      *
      * @param int $databaseid the data instance id
      * @return array of warnings and status result
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @throws powereduc_exception
      */
     public static function view_database($databaseid) {
@@ -221,7 +221,7 @@ class mod_data_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function view_database_returns() {
         return new external_single_structure(
@@ -236,7 +236,7 @@ class mod_data_external extends external_api {
      * Returns description of method parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_data_access_information_parameters() {
         return new external_function_parameters(
@@ -254,7 +254,7 @@ class mod_data_external extends external_api {
      * @param int $databaseid the database instance id
      * @param int $groupid (optional) group id, 0 means that the function will determine the user group
      * @return array of warnings and access information
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @throws powereduc_exception
      */
     public static function get_data_access_information($databaseid, $groupid = 0) {
@@ -308,7 +308,7 @@ class mod_data_external extends external_api {
      * Returns description of method result value.
      *
      * @return external_description
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_data_access_information_returns() {
         return new external_single_structure(
@@ -331,7 +331,7 @@ class mod_data_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_entries_parameters() {
         return new external_function_parameters(
@@ -368,7 +368,7 @@ class mod_data_external extends external_api {
      * @param int $page             page of records to return
      * @param int $perpage          number of records to return per page
      * @return array of warnings and the entries
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @throws powereduc_exception
      */
     public static function get_entries($databaseid, $groupid = 0, $returncontents = false, $sort = null, $order = null,
@@ -462,7 +462,7 @@ class mod_data_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_entries_returns() {
         return new external_single_structure(
@@ -483,7 +483,7 @@ class mod_data_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_entry_parameters() {
         return new external_function_parameters(
@@ -500,7 +500,7 @@ class mod_data_external extends external_api {
      * @param int $entryid          the record entry id id
      * @param bool $returncontents  whether to return the entries contents or not
      * @return array of warnings and the entries
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @throws powereduc_exception
      */
     public static function get_entry($entryid, $returncontents = false) {
@@ -558,7 +558,7 @@ class mod_data_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_entry_returns() {
         return new external_single_structure(
@@ -575,7 +575,7 @@ class mod_data_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_fields_parameters() {
         return new external_function_parameters(
@@ -590,7 +590,7 @@ class mod_data_external extends external_api {
      *
      * @param int $databaseid the database id
      * @return array of warnings and the fields
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @throws powereduc_exception
      */
     public static function get_fields($databaseid) {
@@ -632,7 +632,7 @@ class mod_data_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_fields_returns() {
         return new external_single_structure(
@@ -649,7 +649,7 @@ class mod_data_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function search_entries_parameters() {
         return new external_function_parameters(
@@ -696,7 +696,7 @@ class mod_data_external extends external_api {
      * @param int $page             page of records to return
      * @param int $perpage          number of records to return per page
      * @return array of warnings and the entries
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @throws powereduc_exception
      */
     public static function search_entries($databaseid, $groupid = 0, $returncontents = false, $search = '', $advsearch = [],
@@ -797,7 +797,7 @@ class mod_data_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function search_entries_returns() {
         return new external_single_structure(
@@ -819,7 +819,7 @@ class mod_data_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function approve_entry_parameters() {
         return new external_function_parameters(
@@ -837,7 +837,7 @@ class mod_data_external extends external_api {
      * @param int $entryid          the record entry id id
      * @param bool $approve         whether to approve (true) or unapprove the entry
      * @return array of warnings and the entries
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @throws powereduc_exception
      */
     public static function approve_entry($entryid, $approve = true) {
@@ -867,7 +867,7 @@ class mod_data_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function approve_entry_returns() {
         return new external_single_structure(
@@ -882,7 +882,7 @@ class mod_data_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function delete_entry_parameters() {
         return new external_function_parameters(
@@ -897,7 +897,7 @@ class mod_data_external extends external_api {
      *
      * @param int $entryid the record entry id
      * @return array of warnings success status
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @throws powereduc_exception
      */
     public static function delete_entry($entryid) {
@@ -927,7 +927,7 @@ class mod_data_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function delete_entry_returns() {
         return new external_single_structure(
@@ -942,7 +942,7 @@ class mod_data_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function add_entry_parameters() {
         return new external_function_parameters(
@@ -970,7 +970,7 @@ class mod_data_external extends external_api {
      * @param int $groupid (optional) group id, 0 means that the function will determine the user group
      * @param array $data the fields data to be created
      * @return array of warnings and status result
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @throws powereduc_exception
      */
     public static function add_entry($databaseid, $groupid, $data) {
@@ -1049,7 +1049,7 @@ class mod_data_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function add_entry_returns() {
         return new external_single_structure(
@@ -1075,7 +1075,7 @@ class mod_data_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function update_entry_parameters() {
         return new external_function_parameters(
@@ -1100,7 +1100,7 @@ class mod_data_external extends external_api {
      * @param int $entryid the data instance id
      * @param array $data the fields data to be created
      * @return array of warnings and status result
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @throws powereduc_exception
      */
     public static function update_entry($entryid, $data) {
@@ -1163,7 +1163,7 @@ class mod_data_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function update_entry_returns() {
         return new external_single_structure(

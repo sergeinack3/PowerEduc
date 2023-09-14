@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,13 +29,13 @@ core_php_time_limit::raise();
 
 $courseid      = required_param('id', PARAM_INT);
 
-$PAGE->set_url(new moodle_url('/grade/report/grader/preferences.php', array('id'=>$courseid)));
+$PAGE->set_url(new powereduc_url('/grade/report/grader/preferences.php', array('id'=>$courseid)));
 $PAGE->set_pagelayout('admin');
 
 /// Make sure they can even access this course
 
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 require_login($course);
@@ -65,7 +65,7 @@ if ($data = $mform->get_data()) {
 print_grade_page_head($courseid, 'settings', 'grader', get_string('preferences', 'gradereport_grader'));
 
 // If USER has admin capability, print a link to the site config page for this report
-if (has_capability('moodle/site:config', $systemcontext)) {
+if (has_capability('powereduc/site:config', $systemcontext)) {
     echo '<div id="siteconfiglink"><a href="'.$CFG->wwwroot.'/'.$CFG->admin.'/settings.php?section=gradereportgrader">';
     echo get_string('changereportdefaults', 'grades');
     echo "</a></div>\n";

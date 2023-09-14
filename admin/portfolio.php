@@ -42,12 +42,12 @@ $configstr  = get_string('manageportfolios', 'portfolio');
 $return = true; // direct back to the main page
 
 /**
- * Helper function that generates a moodle_url object
+ * Helper function that generates a powereduc_url object
  * relevant to the portfolio
  */
 function portfolio_action_url($portfolio) {
     global $baseurl;
-    return new moodle_url($baseurl, array('sesskey'=>sesskey(), 'pf'=>$portfolio));
+    return new powereduc_url($baseurl, array('sesskey'=>sesskey(), 'pf'=>$portfolio));
 }
 
 if (($action == 'edit') || ($action == 'new')) {
@@ -116,13 +116,13 @@ if (($action == 'edit') || ($action == 'new')) {
     $instance = portfolio_instance($portfolio);
     if ($sure) {
         if (!confirm_sesskey()) {
-            throw new \moodle_exception('confirmsesskeybad', '', $baseurl);
+            throw new \powereduc_exception('confirmsesskeybad', '', $baseurl);
         }
         if ($instance->delete()) {
             $deletedstr = get_string('instancedeleted', 'portfolio');
             redirect($baseurl, $deletedstr, 1);
         } else {
-            throw new \moodle_exception('instancenotdeleted', 'portfolio', $baseurl);
+            throw new \powereduc_exception('instancenotdeleted', 'portfolio', $baseurl);
         }
         exit;
     } else {

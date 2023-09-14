@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -191,7 +191,7 @@ echo $OUTPUT->heading(get_string('storeperformance', 'cache', $count));
 $possiblecounts = array(1, 10, 100, 500, 1000, 5000, 10000, 50000, 100000);
 $links = array();
 foreach ($possiblecounts as $pcount) {
-    $links[] = html_writer::link(new moodle_url($PAGE->url, array('count' => $pcount)), $pcount);
+    $links[] = html_writer::link(new powereduc_url($PAGE->url, array('count' => $pcount)), $pcount);
 }
 echo $OUTPUT->box_start('generalbox performance-test-counts');
 echo get_string('requestcount', 'cache', join(', ', $links));

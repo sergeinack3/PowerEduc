@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Module generator base class.
@@ -258,7 +258,7 @@ abstract class testing_module_generator extends component_generator_base {
             $record->tags = preg_split('/\s*,\s*/', trim($record->tags), -1, PREG_SPLIT_NO_EMPTY);
         }
 
-        // Before Moodle 2.6 it was possible to create a module with completion tracking when
+        // Before PowerEduc 2.6 it was possible to create a module with completion tracking when
         // it is not setup for course and/or site-wide. Display debugging message so it is
         // easier to trace an error in unittests.
         if ($record->completion && empty($CFG->enablecompletion)) {

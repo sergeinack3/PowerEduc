@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Defines the capabilities used by the user upload admin tool
  *
  * @package    tool_uploaduser
- * @copyright  2013 Dan Poltawski <dan@moodle.com>
+ * @copyright  2013 Dan Poltawski <dan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -34,6 +34,6 @@ $capabilities = array(
         'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' =>  'moodle/site:uploadusers',
+        'clonepermissionsfrom' =>  'powereduc/site:uploadusers',
     ),
 );

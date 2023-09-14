@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Content API File Area definition.
@@ -30,12 +30,12 @@ use core\content\export\exporters\component_exporter;
 use core\content\export\exporters\abstract_mod_exporter;
 use core\content\export\zipwriter;
 use core_component;
-use moodle_url;
+use powereduc_url;
 use stdClass;
 use stored_file;
 
 /**
- * The Content API allows all parts of Moodle to determine details about content within a component, or plugintype.
+ * The Content API allows all parts of PowerEduc to determine details about content within a component, or plugintype.
  *
  * This includes the description of files.
  *
@@ -58,7 +58,7 @@ class content {
 
         if ($currentcontext->contextlevel == CONTEXT_COURSE) {
             if ($CFG->downloadcoursecontentallowed &&
-                    has_capability('moodle/course:downloadcoursecontent', $currentcontext, $user)) {
+                    has_capability('powereduc/course:downloadcoursecontent', $currentcontext, $user)) {
 
                 $courseinfo = get_fast_modinfo($currentcontext->instanceid)->get_course();
 
@@ -66,7 +66,7 @@ class content {
                 if (isset($courseinfo->downloadcontent) && $courseinfo->downloadcontent != DOWNLOAD_COURSE_CONTENT_SITE_DEFAULT) {
                     $canexport = $courseinfo->downloadcontent;
                 } else {
-                    $canexport = get_config('moodlecourse')->downloadcontentsitedefault;
+                    $canexport = get_config('powereduccourse')->downloadcontentsitedefault;
                 }
 
             }

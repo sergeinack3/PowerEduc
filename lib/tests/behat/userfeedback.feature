@@ -1,8 +1,8 @@
 @core
 Feature: Gathering user feedback
-  In order to facilitate data collection from as broad a sample of Moodle users as possible
-  As Moodle HQ
-  We should add a link within Moodle to a permanent URL on which surveys will be placed
+  In order to facilitate data collection from as broad a sample of PowerEduc users as possible
+  As PowerEduc HQ
+  We should add a link within PowerEduc to a permanent URL on which surveys will be placed
 
   Scenario: Users should see a feedback link on footer when the feature is enabled
     Given the following config values are set as admin:

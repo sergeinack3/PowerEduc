@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ namespace core_course\external;
 defined('POWEREDUC_INTERNAL') || die();
 
 use renderer_base;
-use moodle_url;
+use powereduc_url;
 
 /**
  * Class for exporting a course summary from an stdClass.
@@ -68,7 +68,7 @@ class course_summary_exporter extends \core\external\exporter {
         $coursecategory = \core_course_category::get($this->data->category, MUST_EXIST, true);
         return array(
             'fullnamedisplay' => get_course_display_name_for_list($this->data),
-            'viewurl' => (new moodle_url('/course/view.php', array('id' => $this->data->id)))->out(false),
+            'viewurl' => (new powereduc_url('/course/view.php', array('id' => $this->data->id)))->out(false),
             'courseimage' => $courseimage,
             'progress' => $progress,
             'hasprogress' => $hasprogress,

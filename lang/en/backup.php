@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the strings used by backup
@@ -39,7 +39,7 @@ $string['asyncmessagebodydetail'] = 'Message to send when an asynchronous backup
 $string['asyncmessagebodydefault'] = 'Your {operation} (ID: {backupid}) has completed successfully. You can access it here: <a href="{link}">{link}</a>.';
 $string['asyncmessagesubject'] = 'Subject';
 $string['asyncmessagesubjectdetail'] = 'Message subject';
-$string['asyncmessagesubjectdefault'] = 'Moodle {operation} completed successfully';
+$string['asyncmessagesubjectdefault'] = 'PowerEduc {operation} completed successfully';
 $string['asyncnowait'] = 'You don\'t need to wait here, as the process will continue in the background.';
 $string['asyncprocesspending'] = 'Process pending';
 $string['asyncrestorecomplete'] = 'The restore process has completed';
@@ -76,10 +76,10 @@ $string['backupcoursesection'] = 'Section: {$a}';
 $string['backupcoursesections'] = 'Course sections';
 $string['backupdate'] = 'Date taken';
 $string['backupdetails'] = 'Backup details';
-$string['backupdetailsnonstandardinfo'] = 'The selected file is not a standard Moodle backup file. The restore process will try to convert the backup file into the standard format and then restore it.';
+$string['backupdetailsnonstandardinfo'] = 'The selected file is not a standard PowerEduc backup file. The restore process will try to convert the backup file into the standard format and then restore it.';
 $string['backupformat'] = 'Format';
-$string['backupformatmoodle1'] = 'Moodle 1';
-$string['backupformatmoodle2'] = 'Moodle 2';
+$string['backupformatpowereduc1'] = 'PowerEduc 1';
+$string['backupformatpowereduc2'] = 'PowerEduc 2';
 $string['backupformatimscc1'] = 'IMS Common Cartridge 1.0';
 $string['backupformatimscc11'] = 'IMS Common Cartridge 1.1';
 $string['backupformatunknown'] = 'Unknown format';
@@ -117,9 +117,9 @@ $string['choosefilefromautomatedbackup_help'] = 'Contains automatically generate
 $string['config_keep_groups_and_groupings'] = 'By default keep current groups and groupings.';
 $string['config_keep_roles_and_enrolments'] = 'By default keep current roles and enrolments.';
 $string['config_overwrite_conf'] = 'Allows user to overwrite the current course configuration';
-$string['config_overwrite_course_fullname'] = 'By default overwrite course full name with the one from the backup file. This requires "Overwrite course configuration" to be checked and current user to have the capability to change course full name (moodle/course:changefullname)';
-$string['config_overwrite_course_shortname'] = 'By default overwrite course short name with the one from the backup file. This requires "Overwrite course configuration" to be checked and current user to have the capability to change course short name (moodle/course:changeshortname)';
-$string['config_overwrite_course_startdate'] = 'By default overwrite course start date with the one from the backup file. This requires "Overwrite course configuration" to be checked and current user to have the capability to roll course dates on restore (moodle/restore:rolldates)';
+$string['config_overwrite_course_fullname'] = 'By default overwrite course full name with the one from the backup file. This requires "Overwrite course configuration" to be checked and current user to have the capability to change course full name (powereduc/course:changefullname)';
+$string['config_overwrite_course_shortname'] = 'By default overwrite course short name with the one from the backup file. This requires "Overwrite course configuration" to be checked and current user to have the capability to change course short name (powereduc/course:changeshortname)';
+$string['config_overwrite_course_startdate'] = 'By default overwrite course start date with the one from the backup file. This requires "Overwrite course configuration" to be checked and current user to have the capability to roll course dates on restore (powereduc/restore:rolldates)';
 $string['configgeneralactivities'] = 'Sets the default for including activities in a backup.';
 $string['configgeneralbadges'] = 'Sets the default for including badges in a backup.';
 $string['configgeneralanonymize'] = 'If enabled all information pertaining to users will be anonymised by default.';
@@ -138,7 +138,7 @@ $string['configgeneralroleassignments'] = 'If enabled by default roles assignmen
 $string['configgeneralpermissions'] = 'If enabled the role permissions will be imported. This may override existing permissions for enrolled users.';
 $string['configgeneraluserscompletion'] = 'If enabled user completion information will be included in backups by default.';
 $string['configgeneralusers'] = 'Sets the default for whether to include users in backups.';
-$string['configlegacyfiles'] = 'Sets the default for including legacy course files in a backup. Legacy course files are from versions of Moodle prior to 2.0.';
+$string['configlegacyfiles'] = 'Sets the default for including legacy course files in a backup. Legacy course files are from versions of PowerEduc prior to 2.0.';
 $string['configloglifetime'] = 'This specifies the length of time you want to keep backup logs information. Logs that are older than this age are automatically deleted. It is recommended to keep this value small, because backup logged information can be huge.';
 $string['configrestoreactivities'] = 'Sets the default for restoring activities.';
 $string['configrestorebadges'] = 'Sets the default for restoring badges.';
@@ -199,9 +199,9 @@ $string['errorcopyingbackupfile'] = "Failed to copy the backup file to the tempo
 $string['errorfilenamerequired'] = 'You must enter a valid filename for this backup';
 $string['errorfilenametoolong'] = 'The filename must be less than 255 characters in length.';
 $string['errorfilenamemustbezip'] = 'The filename you enter must be a ZIP file and have the .mbz extension';
-$string['errorminbackup20version'] = 'This backup file has been created with one development version of Moodle backup ({$a->backup}). Minimum required is {$a->min}. Cannot be restored.';
+$string['errorminbackup20version'] = 'This backup file has been created with one development version of PowerEduc backup ({$a->backup}). Minimum required is {$a->min}. Cannot be restored.';
 $string['errorinvalidformat'] = 'Unknown backup format';
-$string['errorinvalidformatinfo'] = 'The selected file is not a valid Moodle backup file and can\'t be restored.';
+$string['errorinvalidformatinfo'] = 'The selected file is not a valid PowerEduc backup file and can\'t be restored.';
 $string['errorrestorefrontpagebackup'] = 'You can only restore site home backups on the site home';
 $string['executionsuccess'] = 'The backup file was successfully created.';
 $string['extractingbackupfileto'] = 'Extracting backup file to: {$a}';
@@ -209,7 +209,7 @@ $string['failed'] = 'Backup failed';
 $string['filename'] = 'Filename';
 $string['filealiasesrestorefailures'] = 'Aliases restore failures';
 $string['filealiasesrestorefailuresinfo'] = 'Some aliases included in the backup file could not be restored. The following list contains their expected location and the source file they were referring to at the original site.';
-$string['filealiasesrestorefailures_help'] = 'Aliases are symbolic links to other files, including those stored in external repositories. In some cases, Moodle cannot restore them - for example when restoring the backup at another site or when the referenced file does not exist.
+$string['filealiasesrestorefailures_help'] = 'Aliases are symbolic links to other files, including those stored in external repositories. In some cases, PowerEduc cannot restore them - for example when restoring the backup at another site or when the referenced file does not exist.
 
 More details and the actual reason of the failure can be found in the restore log file.';
 $string['filealiasesrestorefailures_link'] = 'restore/filealiases';
@@ -281,7 +281,7 @@ $string['managefiles'] = 'Manage backup files';
 $string['keptroles'] = 'Include role enrolments';
 $string['keptroles_help'] = 'Users with the selected roles will be enrolled into the new course. No user data will be copied unless \'Include user data\' is enabled.';
 $string['missingfilesinpool'] = 'Some files could not be saved during the backup, and so it will not be possible to restore them.';
-$string['moodleversion'] = 'Moodle version';
+$string['powereducversion'] = 'PowerEduc version';
 $string['moreresults'] = 'There are too many results, enter a more specific search.';
 $string['nomatchingcourses'] = 'There are no courses to display';
 $string['norestoreoptions'] = 'There are no categories or existing courses you can restore to.';

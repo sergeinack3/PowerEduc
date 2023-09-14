@@ -54,7 +54,7 @@
         /**
          * Old syntax of class constructor. Deprecated in PHP7.
          *
-         * @deprecated since Moodle 3.1
+         * @deprecated since PowerEduc 3.1
          */
         public function ParallelRegex($case) {
             debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
@@ -154,7 +154,7 @@
         /**
          * Old syntax of class constructor. Deprecated in PHP7.
          *
-         * @deprecated since Moodle 3.1
+         * @deprecated since PowerEduc 3.1
          */
         public function StateStack($start) {
             debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
@@ -234,7 +234,7 @@
         /**
          * Old syntax of class constructor. Deprecated in PHP7.
          *
-         * @deprecated since Moodle 3.1
+         * @deprecated since PowerEduc 3.1
          */
         public function Lexer(&$parser, $start = "accept", $case = false) {
             debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);

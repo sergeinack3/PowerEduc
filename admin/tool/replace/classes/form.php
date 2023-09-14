@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ require_once("$CFG->libdir/formslib.php");
 /**
  * Site wide search-replace form.
  */
-class tool_replace_form extends moodleform {
+class tool_replace_form extends powereducform {
     function definition() {
         global $CFG, $DB;
 

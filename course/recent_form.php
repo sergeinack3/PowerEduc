@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ if (!defined('POWEREDUC_INTERNAL')) {
 require_once($CFG->dirroot . '/course/lib.php');
 require_once($CFG->libdir.'/formslib.php');
 
-class recent_form extends moodleform {
+class recent_form extends powereducform {
     function definition() {
         global $CFG, $COURSE, $USER;
 
@@ -41,7 +41,7 @@ class recent_form extends moodleform {
         $mform->addElement('header', 'filters', get_string('managefilters')); //TODO: add better string
 
         $groupoptions = array();
-        if (groups_get_course_groupmode($COURSE) == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $context)) {
+        if (groups_get_course_groupmode($COURSE) == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $context)) {
             // limited group access
             $groups = groups_get_user_groups($COURSE->id);
             $allgroups = groups_get_all_groups($COURSE->id);
@@ -52,7 +52,7 @@ class recent_form extends moodleform {
             }
         } else {
             $groupoptions = array('0'=>get_string('allgroups'));
-            if (has_capability('moodle/site:accessallgroups', $context)) {
+            if (has_capability('powereduc/site:accessallgroups', $context)) {
                 // user can see all groups
                 $allgroups = groups_get_all_groups($COURSE->id);
             } else {
@@ -71,7 +71,7 @@ class recent_form extends moodleform {
         }
 
         if ($viewparticipants) {
-            $viewfullnames = has_capability('moodle/site:viewfullnames', context_course::instance($COURSE->id));
+            $viewfullnames = has_capability('powereduc/site:viewfullnames', context_course::instance($COURSE->id));
 
             $options = array();
             $options[0] = get_string('allparticipants');

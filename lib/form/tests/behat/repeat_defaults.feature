@@ -1,5 +1,5 @@
 @core_form
-Feature: Repeated elements in moodleforms
+Feature: Repeated elements in powereducforms
 
   Scenario: Clicking button to add repeat elements creates repeat elements with the correct default values
     Given I log in as "admin"

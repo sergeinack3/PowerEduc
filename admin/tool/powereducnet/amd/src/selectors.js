@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 /**
  * Define all of the selectors we will be using within MoodleNet plugin.
  *
- * @module     tool_moodlenet/selectors
+ * @module     tool_powereducnet/selectors
  * @copyright  2020 Mathew May <mathew.solutions>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,20 +25,20 @@ define([], function() {
         action: {
             browse: '[data-action="browse"]',
             submit: '[data-action="submit"]',
-            showMoodleNet: '[data-action="show-moodlenet"]',
+            showMoodleNet: '[data-action="show-powereducnet"]',
             closeOption: '[data-action="close-chooser-option-summary"]',
         },
         region: {
             clearIcon: '[data-region="clear-icon"]',
             courses: '[data-region="mnet-courses"]',
-            instancePage: '[data-region="moodle-net"]',
+            instancePage: '[data-region="powereduc-net"]',
             searchInput: '[data-region="search-input"]',
             searchIcon: '[data-region="search-icon"]',
-            selectPage: '[data-region="moodle-net-select"]',
+            selectPage: '[data-region="powereduc-net-select"]',
             spinner: '[data-region="spinner"]',
             validationArea: '[data-region="validation-area"]',
             carousel: '[data-region="carousel"]',
-            moodleNet: '[data-region="pluginCarousel"]',
+            powereducNet: '[data-region="pluginCarousel"]',
         },
     };
 });

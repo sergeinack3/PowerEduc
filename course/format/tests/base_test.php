@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -97,11 +97,11 @@ class base_test extends advanced_testcase {
 
         // Remove the ignoreavailabilityrestrictions from the teacher role.
         role_change_permission($roleids['teacher'], context_system::instance(0),
-                'moodle/course:ignoreavailabilityrestrictions', CAP_PREVENT);
+                'powereduc/course:ignoreavailabilityrestrictions', CAP_PREVENT);
 
         // Allow the courseoverview role to ingore available restriction.
         role_change_permission($roleids['courseoverview'], context_system::instance(0),
-                'moodle/course:ignoreavailabilityrestrictions', CAP_ALLOW);
+                'powereduc/course:ignoreavailabilityrestrictions', CAP_ALLOW);
 
         // Make sure that initially both sections and both modules are available and visible for a student.
         $modinfostudent = get_fast_modinfo($course1, $student->id);
@@ -423,7 +423,7 @@ class base_test extends advanced_testcase {
  *
  * A test class that simulates a course format that doesn't define 'news_items' in default blocks.
  *
- * @copyright 2016 Jun Pataleta <jun@moodle.com>
+ * @copyright 2016 Jun Pataleta <jun@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class format_testformat extends core_courseformat\base {
@@ -445,7 +445,7 @@ class format_testformat extends core_courseformat\base {
  *
  * A test class that simulates old course formats that define 'news_items' in default blocks.
  *
- * @copyright 2016 Jun Pataleta <jun@moodle.com>
+ * @copyright 2016 Jun Pataleta <jun@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class format_testlegacy extends core_courseformat\base {

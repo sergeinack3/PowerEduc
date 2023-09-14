@@ -1,7 +1,7 @@
 {
-  "name": "moodle-atto_charmap-button",
+  "name": "powereduc-atto_charmap-button",
   "builds": {
-    "moodle-atto_charmap-button": {
+    "powereduc-atto_charmap-button": {
       "jsfiles": [
         "button.js"
       ]

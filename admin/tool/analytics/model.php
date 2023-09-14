@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -40,9 +40,9 @@ if (!\core_analytics\manager::is_analytics_enabled()) {
     exit(0);
 }
 
-$returnurl = new \moodle_url('/admin/tool/analytics/index.php');
+$returnurl = new \powereduc_url('/admin/tool/analytics/index.php');
 $params = array('id' => $id, 'action' => $action);
-$url = new \moodle_url('/admin/tool/analytics/model.php', $params);
+$url = new \powereduc_url('/admin/tool/analytics/model.php', $params);
 
 switch ($action) {
 
@@ -83,7 +83,7 @@ switch ($action) {
         $title = get_string('invalidanalysables', 'tool_analytics');
         break;
     default:
-        throw new moodle_exception('errorunknownaction', 'analytics');
+        throw new powereduc_exception('errorunknownaction', 'analytics');
 }
 
 \tool_analytics\output\helper::set_navbar($title, $url);
@@ -186,11 +186,11 @@ switch ($action) {
         confirm_sesskey();
 
         if ($model->is_static()) {
-            throw new moodle_exception('errornostaticevaluate', 'tool_analytics');
+            throw new powereduc_exception('errornostaticevaluate', 'tool_analytics');
         }
 
         if ($onlycli) {
-            throw new moodle_exception('erroronlycli', 'tool_analytics');
+            throw new powereduc_exception('erroronlycli', 'tool_analytics');
         }
 
         // Web interface is used by people who can not use CLI nor code stuff, always use
@@ -229,7 +229,7 @@ switch ($action) {
         confirm_sesskey();
 
         if ($onlycli) {
-            throw new moodle_exception('erroronlycli', 'tool_analytics');
+            throw new powereduc_exception('erroronlycli', 'tool_analytics');
         }
 
         $trainresults = $model->train();
@@ -258,7 +258,7 @@ switch ($action) {
         echo $OUTPUT->header();
 
         if ($model->is_static()) {
-            throw new moodle_exception('errornostaticlog', 'tool_analytics');
+            throw new powereduc_exception('errornostaticlog', 'tool_analytics');
         }
 
         $renderer = $PAGE->get_renderer('tool_analytics');
@@ -269,7 +269,7 @@ switch ($action) {
     case 'exportdata':
 
         if ($model->is_static() || !$model->is_trained()) {
-            throw new moodle_exception('errornoexport', 'tool_analytics');
+            throw new powereduc_exception('errornoexport', 'tool_analytics');
         }
 
         $file = $model->get_training_data();

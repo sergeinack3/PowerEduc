@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -240,10 +240,10 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
      * @param bool $alwaysreturnhidden set to true if you want an object to be
      *     returned even if this category is not visible to the current user
      *     (category is hidden and user does not have
-     *     'moodle/category:viewhiddencategories' capability). Use with care!
+     *     'powereduc/category:viewhiddencategories' capability). Use with care!
      * @param int|stdClass $user The user id or object. By default (null) checks the visibility to the current user.
      * @return null|self
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get($id, $strictness = MUST_EXIST, $alwaysreturnhidden = false, $user = null) {
         if (!$id) {
@@ -252,7 +252,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
                 return self::top();
             }
             if ($strictness == MUST_EXIST) {
-                throw new moodle_exception('cannotviewcategory');
+                throw new powereduc_exception('cannotviewcategory');
             }
             return null;
         }
@@ -272,13 +272,13 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
         if (!$coursecat) {
             // Course category not found.
             if ($strictness == MUST_EXIST) {
-                throw new moodle_exception('unknowncategory');
+                throw new powereduc_exception('unknowncategory');
             }
             $coursecat = null;
         } else if (!$alwaysreturnhidden && !$coursecat->is_uservisible($user)) {
             // Course category is found but user can not access it.
             if ($strictness == MUST_EXIST) {
-                throw new moodle_exception('cannotviewcategory');
+                throw new powereduc_exception('cannotviewcategory');
             }
             $coursecat = null;
         }
@@ -322,7 +322,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
         }
         if (count($children) > 1) {
             // User has access to more than one category on the top level. Return the top as "user top category".
-            // In this case user actually may not have capability 'moodle/category:viewcourselist' on the top level.
+            // In this case user actually may not have capability 'powereduc/category:viewcourselist' on the top level.
             return self::top();
         }
         // User can not access any categories on the top level.
@@ -449,7 +449,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
      *    form data and file_postupdate_standard_editor() is being called to
      *    process images in description.
      * @return core_course_category
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function create($data, $editoroptions = null) {
         global $DB, $CFG;
@@ -466,20 +466,20 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
         }
 
         if (empty($data->name)) {
-            throw new moodle_exception('categorynamerequired');
+            throw new powereduc_exception('categorynamerequired');
         }
         if (core_text::strlen($data->name) > 255) {
-            throw new moodle_exception('categorytoolong');
+            throw new powereduc_exception('categorytoolong');
         }
         $newcategory->name = $data->name;
 
         // Validate and set idnumber.
         if (isset($data->idnumber)) {
             if (core_text::strlen($data->idnumber) > 100) {
-                throw new moodle_exception('idnumbertoolong');
+                throw new powereduc_exception('idnumbertoolong');
             }
             if (strval($data->idnumber) !== '' && $DB->record_exists('course_categories', array('idnumber' => $data->idnumber))) {
-                throw new moodle_exception('categoryidnumbertaken');
+                throw new powereduc_exception('categoryidnumbertaken');
             }
             $newcategory->idnumber = $data->idnumber;
         }
@@ -561,7 +561,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
      * @param array $editoroptions if specified, the data is considered to be
      *    form data and file_postupdate_standard_editor() is being called to
      *    process images in description.
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function update($data, $editoroptions = null) {
         global $DB, $CFG;
@@ -582,22 +582,22 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
         }
 
         if (isset($data->name) && empty($data->name)) {
-            throw new moodle_exception('categorynamerequired');
+            throw new powereduc_exception('categorynamerequired');
         }
 
         if (!empty($data->name) && $data->name !== $this->name) {
             if (core_text::strlen($data->name) > 255) {
-                throw new moodle_exception('categorytoolong');
+                throw new powereduc_exception('categorytoolong');
             }
             $newcategory->name = $data->name;
         }
 
         if (isset($data->idnumber) && $data->idnumber !== $this->idnumber) {
             if (core_text::strlen($data->idnumber) > 100) {
-                throw new moodle_exception('idnumbertoolong');
+                throw new powereduc_exception('idnumbertoolong');
             }
             if (strval($data->idnumber) !== '' && $DB->record_exists('course_categories', array('idnumber' => $data->idnumber))) {
-                throw new moodle_exception('categoryidnumbertaken');
+                throw new powereduc_exception('categoryidnumbertaken');
             }
             $newcategory->idnumber = $data->idnumber;
         }
@@ -671,13 +671,13 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
      */
     public static function can_view_category($category, $user = null) {
         if (!$category->id) {
-            return has_capability('moodle/category:viewcourselist', context_system::instance(), $user);
+            return has_capability('powereduc/category:viewcourselist', context_system::instance(), $user);
         }
         $context = context_coursecat::instance($category->id);
-        if (!$category->visible && !has_capability('moodle/category:viewhiddencategories', $context, $user)) {
+        if (!$category->visible && !has_capability('powereduc/category:viewhiddencategories', $context, $user)) {
             return false;
         }
-        return has_capability('moodle/category:viewcourselist', $context, $user);
+        return has_capability('powereduc/category:viewcourselist', $context, $user);
     }
 
     /**
@@ -694,13 +694,13 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
         }
         if (!$course->visible) {
             $coursecontext = context_course::instance($course->id);
-            if (!has_capability('moodle/course:viewhiddencourses', $coursecontext, $user)) {
+            if (!has_capability('powereduc/course:viewhiddencourses', $coursecontext, $user)) {
                 return false;
             }
         }
         $categorycontext = isset($course->category) ? context_coursecat::instance($course->category) :
             context_course::instance($course->id)->get_parent_context();
-        return has_capability('moodle/category:viewcourselist', $categorycontext, $user);
+        return has_capability('powereduc/category:viewcourselist', $categorycontext, $user);
     }
 
     /**
@@ -753,7 +753,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
      * @return array|null The tree as an array, or null if rebuilding the tree failed due to a lock timeout.
      * @throws coding_exception
      * @throws dml_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     private static function get_cached_cat_tree() : ?array {
         $coursecattreecache = cache::make('core', 'coursecattree');
@@ -791,7 +791,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
      * @return array
      * @throws coding_exception
      * @throws dml_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     private static function rebuild_coursecattree_cache_contents() : array {
         global $DB;
@@ -821,7 +821,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
         $rs->close();
         if (!$count) {
             // No categories found.
-            // This may happen after upgrade of a very old moodle version.
+            // This may happen after upgrade of a very old powereduc version.
             // In new versions the default category is created on install.
             $defcoursecat = self::create(array('name' => get_string('defaultcategoryname')));
             set_config('defaultrequestcategory', $defcoursecat->id);
@@ -1154,8 +1154,8 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
      * @param string $whereclause
      * @param array $params
      * @param array $options may indicate that summary needs to be retrieved
-     * @param bool $checkvisibility if true, capability 'moodle/course:viewhiddencourses' will be checked
-     *     on not visible courses and 'moodle/category:viewcourselist' on all courses
+     * @param bool $checkvisibility if true, capability 'powereduc/course:viewhiddencourses' will be checked
+     *     on not visible courses and 'powereduc/category:viewcourselist' on all courses
      * @return array array of stdClass objects
      */
     protected static function get_course_records($whereclause, $params, $options, $checkvisibility = false) {
@@ -1418,7 +1418,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
      * @return bool
      */
     public static function has_manage_capability_on_any() {
-        return self::has_capability_on_any('moodle/category:manage');
+        return self::has_capability_on_any('powereduc/category:manage');
     }
 
     /**
@@ -1541,10 +1541,10 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
     /**
      * Get the link used to view this course category.
      *
-     * @return  \moodle_url
+     * @return  \powereduc_url
      */
     public function get_view_link() {
-        return new \moodle_url('/course/index.php', [
+        return new \powereduc_url('/course/index.php', [
             'categoryid' => $this->id,
         ]);
     }
@@ -1913,7 +1913,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
      * Returns true if user can delete current category and all its contents
      *
      * To be able to delete course category the user must have permission
-     * 'moodle/category:manage' in ALL child course categories AND
+     * 'powereduc/category:manage' in ALL child course categories AND
      * be able to delete all courses
      *
      * @return bool
@@ -1940,8 +1940,8 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
         foreach ($childcategories as $childcat) {
             context_helper::preload_from_record($childcat);
             $childcontext = context_coursecat::instance($childcat->id);
-            if ((!$childcat->visible && !has_capability('moodle/category:viewhiddencategories', $childcontext)) ||
-                    !has_capability('moodle/category:manage', $childcontext)) {
+            if ((!$childcat->visible && !has_capability('powereduc/category:viewhiddencategories', $childcontext)) ||
+                    !has_capability('powereduc/category:manage', $childcontext)) {
                 return false;
             }
         }
@@ -1981,7 +1981,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
      *
      * @param boolean $showfeedback display some notices
      * @return array return deleted courses
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function delete_full($showfeedback = true) {
         global $CFG, $DB;
@@ -2011,7 +2011,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
         if ($courses = $DB->get_records('course', array('category' => $this->id), 'sortorder ASC')) {
             foreach ($courses as $course) {
                 if (!delete_course($course, false)) {
-                    throw new moodle_exception('cannotdeletecategorycourse', '', '', $course->shortname);
+                    throw new powereduc_exception('cannotdeletecategorycourse', '', '', $course->shortname);
                 }
                 $deletedcourses[] = $course;
             }
@@ -2024,10 +2024,10 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
         grade_course_category_delete($this->id, 0, $showfeedback);
         $cb = new \core_contentbank\contentbank();
         if (!$cb->delete_contents($this->get_context())) {
-            throw new moodle_exception('errordeletingcontentfromcategory', 'contentbank', '', $this->get_formatted_name());
+            throw new powereduc_exception('errordeletingcontentfromcategory', 'contentbank', '', $this->get_formatted_name());
         }
         if (!question_delete_course_category($this, null)) {
-            throw new moodle_exception('cannotdeletecategoryquestions', '', '', $this->get_formatted_name());
+            throw new powereduc_exception('cannotdeletecategoryquestions', '', '', $this->get_formatted_name());
         }
 
         // Delete all events in the category.
@@ -2073,7 +2073,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
         require_once($CFG->libdir . '/questionlib.php');
         $context = $this->get_context();
         if (!$this->is_uservisible() ||
-                !has_capability('moodle/category:manage', $context)) {
+                !has_capability('powereduc/category:manage', $context)) {
             // User is not able to manage current category, he is not able to delete it.
             // No possible target categories.
             return array();
@@ -2082,11 +2082,11 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
         $testcaps = array();
         // If this category has courses in it, user must have 'course:create' capability in target category.
         if ($this->has_courses()) {
-            $testcaps[] = 'moodle/course:create';
+            $testcaps[] = 'powereduc/course:create';
         }
         // If this category has subcategories or questions, user must have 'category:manage' capability in target category.
         if ($this->has_children() || question_context_has_any_questions($context)) {
-            $testcaps[] = 'moodle/category:manage';
+            $testcaps[] = 'powereduc/category:manage';
         }
         if (!empty($testcaps)) {
             // Return list of categories excluding this one and it's children.
@@ -2115,11 +2115,11 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
         $testcaps = array();
         // If this category has courses in it, user must have 'course:create' capability in target category.
         if ($this->has_courses()) {
-            $testcaps[] = 'moodle/course:create';
+            $testcaps[] = 'powereduc/course:create';
         }
         // If this category has subcategories or questions, user must have 'category:manage' capability in target category.
         if ($this->has_children() || question_context_has_any_questions($this->get_context())) {
-            $testcaps[] = 'moodle/category:manage';
+            $testcaps[] = 'powereduc/category:manage';
         }
         if (!empty($testcaps) && !has_all_capabilities($testcaps, context_coursecat::instance($newcatid))) {
             // No sufficient capabilities to perform this task.
@@ -2263,7 +2263,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
      * @return bool
      */
     public function can_change_parent($newparentcat) {
-        if (!has_capability('moodle/category:manage', $this->get_context())) {
+        if (!has_capability('powereduc/category:manage', $this->get_context())) {
             return false;
         }
         if (is_object($newparentcat)) {
@@ -2279,9 +2279,9 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
             return false;
         }
         if ($newparentcat->id) {
-            return has_capability('moodle/category:manage', context_coursecat::instance($newparentcat->id));
+            return has_capability('powereduc/category:manage', context_coursecat::instance($newparentcat->id));
         } else {
-            return has_capability('moodle/category:manage', context_system::instance());
+            return has_capability('powereduc/category:manage', context_system::instance());
         }
     }
 
@@ -2294,7 +2294,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
      * @see core_course_category::update()
      *
      * @param core_course_category $newparentcat
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function change_parent_raw(core_course_category $newparentcat) {
         global $DB;
@@ -2308,7 +2308,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
         } else {
             if ($newparentcat->id == $this->id || in_array($this->id, $newparentcat->get_parents())) {
                 // Can not move to itself or it's own child.
-                throw new moodle_exception('cannotmovecategory');
+                throw new powereduc_exception('cannotmovecategory');
             }
             $DB->set_field('course_categories', 'parent', $newparentcat->id, array('id' => $this->id));
             $newparent = context_coursecat::instance($newparentcat->id);
@@ -2777,7 +2777,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
         if (!$this->is_uservisible()) {
             return false;
         }
-        return has_capability('moodle/category:manage', $this->get_context());
+        return has_capability('powereduc/category:manage', $this->get_context());
     }
 
     /**
@@ -2788,7 +2788,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
     public function has_contentbank() {
         $cb = new \core_contentbank\contentbank();
         return ($cb->is_context_allowed($this->get_context()) &&
-            has_capability('moodle/contentbank:access', $this->get_context()));
+            has_capability('powereduc/contentbank:access', $this->get_context()));
     }
 
     /**
@@ -2838,7 +2838,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
      * @return bool
      */
     public function can_create_course() {
-        return $this->is_uservisible() && has_capability('moodle/course:create', $this->get_context());
+        return $this->is_uservisible() && has_capability('powereduc/course:create', $this->get_context());
     }
 
     /**
@@ -2854,7 +2854,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
      * @return bool
      */
     public function can_review_roles() {
-        return $this->is_uservisible() && has_capability('moodle/role:assign', $this->get_context());
+        return $this->is_uservisible() && has_capability('powereduc/role:assign', $this->get_context());
     }
 
     /**
@@ -2864,10 +2864,10 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
     public function can_review_permissions() {
         return $this->is_uservisible() &&
         has_any_capability(array(
-            'moodle/role:assign',
-            'moodle/role:safeoverride',
-            'moodle/role:override',
-            'moodle/role:assign'
+            'powereduc/role:assign',
+            'powereduc/role:safeoverride',
+            'powereduc/role:override',
+            'powereduc/role:assign'
         ), $this->get_context());
     }
 
@@ -2877,7 +2877,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
      */
     public function can_review_cohorts() {
         return $this->is_uservisible() &&
-            has_any_capability(array('moodle/cohort:view', 'moodle/cohort:manage'), $this->get_context());
+            has_any_capability(array('powereduc/cohort:view', 'powereduc/cohort:manage'), $this->get_context());
     }
 
     /**
@@ -2886,7 +2886,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
      */
     public function can_review_filters() {
         return $this->is_uservisible() &&
-                has_capability('moodle/filter:manage', $this->get_context()) &&
+                has_capability('powereduc/filter:manage', $this->get_context()) &&
                 count(filter_get_available_in_context($this->get_context())) > 0;
     }
 
@@ -2919,7 +2919,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
      * @return bool
      */
     public function can_restore_courses_into() {
-        return $this->is_uservisible() && has_capability('moodle/restore:restorecourse', $this->get_context());
+        return $this->is_uservisible() && has_capability('powereduc/restore:restorecourse', $this->get_context());
     }
 
     /**
@@ -3143,7 +3143,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
             return false;
         }
         $context = context_system::instance();
-        if (!has_capability('moodle/site:approvecourse', $context)) {
+        if (!has_capability('powereduc/site:approvecourse', $context)) {
             return false;
         }
         if (!$DB->record_exists('course_request', array())) {

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Unit tests for /lib/componentlib.class.php.
@@ -65,7 +65,7 @@ class componentlib_test extends \advanced_testcase {
         $this->assertSame(COMPONENT_INSTALLED, $status);
         $this->assertSame('9e94f74b3efb1ff6cf075dc6b2abf15c', $ci->get_component_md5());
 
-        // It's already installed, so Moodle should detect it's up to date.
+        // It's already installed, so PowerEduc should detect it's up to date.
         $this->assertSame(COMPONENT_UPTODATE, $ci->need_upgrade());
         $status = $ci->install();
         $this->assertSame(COMPONENT_UPTODATE, $status);
@@ -121,7 +121,7 @@ class componentlib_test extends \advanced_testcase {
         try {
             $installer->run();
             $this->fail('lang_installer_exception exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('lang_installer_exception', $e);
         }
     }
@@ -132,7 +132,7 @@ class componentlib_test extends \advanced_testcase {
  * Testable lang_installer subclass that does not actually install anything
  * and provides access to the protected methods of the parent class
  *
- * @copyright 2011 David Mudrak <david@moodle.com>
+ * @copyright 2011 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class testable_lang_installer extends lang_installer {

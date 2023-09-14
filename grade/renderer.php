@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ use core_message\api;
  * Renderer class for the grade pages.
  *
  * @package    core_grades
- * @copyright  2021 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2021 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core_grades_renderer extends plugin_renderer_base {
@@ -66,7 +66,7 @@ class core_grades_renderer extends plugin_renderer_base {
 
         $context = context_course::instance($course->id);
 
-        if ($groupmode == VISIBLEGROUPS || has_capability('moodle/site:accessallgroups', $context)) {
+        if ($groupmode == VISIBLEGROUPS || has_capability('powereduc/site:accessallgroups', $context)) {
             $allowedgroups = groups_get_all_groups($course->id, 0, $course->defaultgroupingid);
         } else {
             $allowedgroups = groups_get_all_groups($course->id, $USER->id, $course->defaultgroupingid);
@@ -97,7 +97,7 @@ class core_grades_renderer extends plugin_renderer_base {
         global $USER;
 
         $headingdata = [
-            'userprofileurl' => (new moodle_url('/user/view.php', ['id' => $user->id, 'course' => $courseid]))->out(false),
+            'userprofileurl' => (new powereduc_url('/user/view.php', ['id' => $user->id, 'course' => $courseid]))->out(false),
             'name' => fullname($user),
             'image' => $this->user_picture($user, ['size' => 50, 'link' => false])
         ];
@@ -111,7 +111,7 @@ class core_grades_renderer extends plugin_renderer_base {
 
             $headingdata['buttons'][] = [
                 'title' => get_string('message', 'message'),
-                'url' => (new moodle_url('/message/index.php', ['id' => $user->id]))->out(false),
+                'url' => (new powereduc_url('/message/index.php', ['id' => $user->id]))->out(false),
                 'icon' => ['name' => 't/message', 'component' => 'core'],
                 'linkattributes' => $messagelinkattributes
             ];
@@ -135,7 +135,7 @@ class core_grades_renderer extends plugin_renderer_base {
 
                 $headingdata['buttons'][] = [
                     'title' => get_string($contacttitle, 'message'),
-                    'url' => (new moodle_url('/message/index.php', ['user1' => $USER->id, 'user2' => $user->id,
+                    'url' => (new powereduc_url('/message/index.php', ['user1' => $USER->id, 'user2' => $user->id,
                         $contacturlaction => $user->id, 'sesskey' => sesskey()]))->out(false),
                     'icon' => ['name' => $contacticon, 'component' => 'core'],
                     'linkattributes' => $togglecontactlinkattributes

@@ -1,7 +1,7 @@
 {
-  "name": "moodle-editor_atto-rangy",
+  "name": "powereduc-editor_atto-rangy",
   "builds": {
-    "moodle-editor_atto-rangy": {
+    "powereduc-editor_atto-rangy": {
       "prependfiles": [
         "rangy-core.js",
         "rangy-selectionsaverestore.js",

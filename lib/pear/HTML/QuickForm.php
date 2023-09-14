@@ -296,7 +296,7 @@ class HTML_QuickForm extends HTML_Common {
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
     public function HTML_QuickForm($formName='', $method='post', $action='', $target='', $attributes=null, $trackSubmit = false) {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
@@ -537,11 +537,11 @@ class HTML_QuickForm extends HTML_Common {
     function &createElement($elementType)
     {
         if (!isset($this) || !($this instanceof HTML_QuickForm)) {
-            // Several form elements in Moodle core before 3.2 were calling this method
+            // Several form elements in PowerEduc core before 3.2 were calling this method
             // statically suppressing PHP notices. This debugging message should notify
             // developers who copied such code and did not test their plugins on PHP 7.1.
             // Example of fixing group form elements can be found in commit
-            // https://github.com/moodle/moodle/commit/721e2def56a48fab4f8d3ec7847af5cd03f5ec79
+            // https://github.com/powereduc/powereduc/commit/721e2def56a48fab4f8d3ec7847af5cd03f5ec79
             debugging('Function createElement() can not be called statically, ' .
                     'this will no longer work in PHP 7.1',
                     DEBUG_DEVELOPER);
@@ -575,7 +575,7 @@ class HTML_QuickForm extends HTML_Common {
         $className = $GLOBALS['HTML_QUICKFORM_ELEMENT_TYPES'][$type][1];
         $includeFile = $GLOBALS['HTML_QUICKFORM_ELEMENT_TYPES'][$type][0];
         include_once($includeFile);
-        $elementObject = new $className(); //Moodle: PHP 5.3 compatibility
+        $elementObject = new $className(); //PowerEduc: PHP 5.3 compatibility
         for ($i = 0; $i < 5; $i++) {
             if (!isset($args[$i])) {
                 $args[$i] = null;
@@ -1658,7 +1658,7 @@ class HTML_QuickForm extends HTML_Common {
     {
         if (!isset($GLOBALS['_HTML_QuickForm_default_renderer'])) {
             include_once('HTML/QuickForm/Renderer/Default.php');
-            $GLOBALS['_HTML_QuickForm_default_renderer'] = new HTML_QuickForm_Renderer_Default(); //Moodle: PHP 5.3 compatibility
+            $GLOBALS['_HTML_QuickForm_default_renderer'] = new HTML_QuickForm_Renderer_Default(); //PowerEduc: PHP 5.3 compatibility
         }
         return $GLOBALS['_HTML_QuickForm_default_renderer'];
     } // end func defaultRenderer
@@ -1815,7 +1815,7 @@ class HTML_QuickForm extends HTML_Common {
     function toArray($collectHidden = false)
     {
         include_once 'HTML/QuickForm/Renderer/Array.php';
-        $renderer = new HTML_QuickForm_Renderer_Array($collectHidden); //Moodle: PHP 5.3 compatibility
+        $renderer = new HTML_QuickForm_Renderer_Array($collectHidden); //PowerEduc: PHP 5.3 compatibility
         $this->accept($renderer);
         return $renderer->toArray();
      } // end func toArray
@@ -2006,7 +2006,7 @@ class HTML_QuickForm_Error extends PEAR_Error {
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
     public function HTML_QuickForm_Error($code = QUICKFORM_ERROR, $mode = PEAR_ERROR_RETURN,
                          $level = E_USER_NOTICE, $debuginfo = null) {

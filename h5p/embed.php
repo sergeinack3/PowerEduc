@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Render H5P content from an H5P file.
  *
  * @package    core_h5p
- * @copyright  2019 Sara Arjona <sara@moodle.com>
+ * @copyright  2019 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -38,7 +38,7 @@ $preventredirect = optional_param('preventredirect', true, PARAM_BOOL);
 
 $component = optional_param('component', '', PARAM_COMPONENT);
 
-$PAGE->set_url(new \moodle_url('/h5p/embed.php', array('url' => $url)));
+$PAGE->set_url(new \powereduc_url('/h5p/embed.php', array('url' => $url)));
 try {
     $h5pplayer = new \core_h5p\player($url, $config, $preventredirect, $component);
     $messages = $h5pplayer->get_messages();
@@ -60,7 +60,7 @@ if (empty($messages->error) && empty($messages->exception)) {
     $PAGE->set_pagelayout('embedded');
 
     // Load the embed.js to allow communication with the parent window.
-    $PAGE->requires->js(new moodle_url('/h5p/js/embed.js'));
+    $PAGE->requires->js(new powereduc_url('/h5p/js/embed.js'));
 
     // Add H5P assets to the page.
     $h5pplayer->add_assets_to_page();
@@ -71,7 +71,7 @@ if (empty($messages->error) && empty($messages->exception)) {
     // Check if some error has been raised when adding assets to the page. If that's the case, display them above the H5P content.
     $messages = $h5pplayer->get_messages();
     if (!empty($messages->exception) || !empty($messages->error)) {
-        $messages->h5picon = new \moodle_url('/h5p/pix/icon.svg');
+        $messages->h5picon = new \powereduc_url('/h5p/pix/icon.svg');
         echo $OUTPUT->render_from_template('core_h5p/h5perror', $messages);
     }
 
@@ -88,12 +88,12 @@ if (empty($messages->error) && empty($messages->exception)) {
     $PAGE->set_pagelayout('embedded');
 
     // Load the embed.js to allow communication with the parent window.
-    $PAGE->requires->js(new moodle_url('/h5p/js/embed.js'));
+    $PAGE->requires->js(new powereduc_url('/h5p/js/embed.js'));
 
     echo $OUTPUT->header();
 
     // Print all the errors.
-    $messages->h5picon = new \moodle_url('/h5p/pix/icon.svg');
+    $messages->h5picon = new \powereduc_url('/h5p/pix/icon.svg');
     echo $OUTPUT->render_from_template('core_h5p/h5perror', $messages);
 }
 

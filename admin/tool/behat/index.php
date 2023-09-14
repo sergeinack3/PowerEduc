@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@ $steps = tool_behat::stepsdefinitions($type, $component, $filter);
 // Form.
 $componentswithsteps = array('' => get_string('allavailablesteps', 'tool_behat'));
 
-// Complete the components list with the moodle steps definitions.
+// Complete the components list with the powereduc steps definitions.
 $behatconfig = new behat_config_util();
 $components = $behatconfig->get_components_contexts();
 if ($components) {

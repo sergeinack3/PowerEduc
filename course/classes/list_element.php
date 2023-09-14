@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -162,7 +162,7 @@ class core_course_list_element implements IteratorAggregate {
 
             $context = context_course::instance($this->id);
 
-            $canviewfullnames = has_capability('moodle/site:viewfullnames', $context);
+            $canviewfullnames = has_capability('powereduc/site:viewfullnames', $context);
 
             $displayall = get_config('core', 'coursecontactduplicates');
 
@@ -389,7 +389,7 @@ class core_course_list_element implements IteratorAggregate {
      * @return bool
      */
     public function can_edit() {
-        return has_capability('moodle/course:update', $this->get_context());
+        return has_capability('powereduc/course:update', $this->get_context());
     }
 
     /**
@@ -403,7 +403,7 @@ class core_course_list_element implements IteratorAggregate {
      */
     public function can_change_visibility() {
         // You must be able to both hide a course and view the hidden course.
-        return has_all_capabilities(array('moodle/course:visibility', 'moodle/course:viewhiddencourses'),
+        return has_all_capabilities(array('powereduc/course:visibility', 'powereduc/course:viewhiddencourses'),
             $this->get_context());
     }
 
@@ -425,7 +425,7 @@ class core_course_list_element implements IteratorAggregate {
      * @return bool
      */
     public function can_review_enrolments() {
-        return has_capability('moodle/course:enrolreview', $this->get_context());
+        return has_capability('powereduc/course:enrolreview', $this->get_context());
     }
 
     /**
@@ -451,7 +451,7 @@ class core_course_list_element implements IteratorAggregate {
      * @return bool
      */
     public function can_backup() {
-        return has_capability('moodle/backup:backupcourse', $this->get_context());
+        return has_capability('powereduc/backup:backupcourse', $this->get_context());
     }
 
     /**
@@ -464,6 +464,6 @@ class core_course_list_element implements IteratorAggregate {
      * @return bool
      */
     public function can_restore() {
-        return has_capability('moodle/restore:restorecourse', $this->get_context());
+        return has_capability('powereduc/restore:restorecourse', $this->get_context());
     }
 }

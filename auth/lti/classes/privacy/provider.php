@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ use core_privacy\local\request\writer;
 /**
  * Privacy Subsystem for auth_lti implementing null_provider.
  *
- * @copyright  2018 Carlos Escobedo <carlos@moodle.com>
+ * @copyright  2018 Carlos Escobedo <carlos@powereduc.com>
  * @package    auth_lti
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

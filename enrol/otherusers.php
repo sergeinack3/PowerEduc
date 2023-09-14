@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ $course = $DB->get_record('course', array('id'=>$id), '*', MUST_EXIST);
 $context = context_course::instance($course->id, MUST_EXIST);
 
 require_login($course);
-require_capability('moodle/course:reviewotherusers', $context);
+require_capability('powereduc/course:reviewotherusers', $context);
 
 if ($course->id == SITEID) {
     redirect("$CFG->wwwroot/");
@@ -46,7 +46,7 @@ $PAGE->set_pagelayout('admin');
 $manager = new course_enrolment_manager($PAGE, $course, $filter);
 $table = new course_enrolment_other_users_table($manager, $PAGE);
 $PAGE->set_url('/enrol/otherusers.php', $manager->get_url_params()+$table->get_url_params());
-navigation_node::override_active_url(new moodle_url('/enrol/otherusers.php', array('id' => $id)));
+navigation_node::override_active_url(new powereduc_url('/enrol/otherusers.php', array('id' => $id)));
 
 $userdetails = array (
     'picture' => false,
@@ -67,7 +67,7 @@ $fields = array(
 );
 
 // Remove hidden fields if the user has no access
-if (!has_capability('moodle/course:viewhiddenuserfields', $context)) {
+if (!has_capability('powereduc/course:viewhiddenuserfields', $context)) {
     $hiddenfields = array_flip(explode(',', $CFG->hiddenuserfields));
     if (isset($hiddenfields['lastaccess'])) {
         unset($fields['lastaccess']);
@@ -79,7 +79,7 @@ $table->set_fields($fields, $OUTPUT);
 //$users = $manager->get_other_users($table->sort, $table->sortdirection, $table->page, $table->perpage);
 
 $renderer = $PAGE->get_renderer('core_enrol');
-$canassign = has_capability('moodle/role:assign', $manager->get_context());
+$canassign = has_capability('powereduc/role:assign', $manager->get_context());
 $users = $manager->get_other_users_for_display($renderer, $PAGE->url, $table->sort, $table->sortdirection, $table->page, $table->perpage);
 $assignableroles = $manager->get_assignable_roles(true);
 foreach ($users as $userid=>&$user) {

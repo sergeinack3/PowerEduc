@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ $course = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
 /// Make sure they can even access this course
 require_login($course);
 $context = context_course::instance($course->id);
-require_capability('moodle/course:update', $context);
+require_capability('powereduc/course:update', $context);
 
 /// return tracking object
 $gpr = new grade_plugin_return(array('type'=>'edit', 'plugin'=>'outcomes', 'courseid'=>$courseid));
@@ -105,7 +105,7 @@ foreach ($standardoutcomes as $oid=>$outcome) {
 
 /// form processing
 if ($data = data_submitted() and confirm_sesskey()) {
-    require_capability('moodle/grade:manageoutcomes', $context);
+    require_capability('powereduc/grade:manageoutcomes', $context);
     if (!empty($data->add) && !empty($data->addoutcomes)) {
     /// add all selected to course list
         foreach ($data->addoutcomes as $add) {

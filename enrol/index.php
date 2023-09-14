@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -48,8 +48,8 @@ if ($course->id == SITEID) {
     redirect("$CFG->wwwroot/");
 }
 
-if (!$course->visible && !has_capability('moodle/course:viewhiddencourses', context_course::instance($course->id))) {
-    throw new \moodle_exception('coursehidden');
+if (!$course->visible && !has_capability('powereduc/course:viewhiddencourses', context_course::instance($course->id))) {
+    throw new \powereduc_exception('coursehidden');
 }
 
 $PAGE->set_course($course);
@@ -60,12 +60,12 @@ $PAGE->add_body_class('limitedwidth');
 
 // do not allow enrols when in login-as session
 if (\core\session\manager::is_loggedinas() and $USER->loginascontext->contextlevel == CONTEXT_COURSE) {
-    throw new \moodle_exception('loginasnoenrol', '', $CFG->wwwroot.'/course/view.php?id='.$USER->loginascontext->instanceid);
+    throw new \powereduc_exception('loginasnoenrol', '', $CFG->wwwroot.'/course/view.php?id='.$USER->loginascontext->instanceid);
 }
 
 // Check if user has access to the category where the course is located.
 if (!core_course_category::can_view_course_info($course) && !is_enrolled($context, $USER, '', true)) {
-    throw new \moodle_exception('coursehidden', '', $CFG->wwwroot . '/');
+    throw new \powereduc_exception('coursehidden', '', $CFG->wwwroot . '/');
 }
 
 // get all enrol forms available in this course
@@ -117,7 +117,7 @@ if (!$forms) {
     } else {
         $url = get_local_referer(false);
         if (empty($url)) {
-            $url = new moodle_url('/index.php');
+            $url = new powereduc_url('/index.php');
         }
         notice(get_string('notenrollable', 'enrol'), $url);
     }

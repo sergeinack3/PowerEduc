@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -58,7 +58,7 @@ class behat_tool_dataprivacy extends behat_base {
     );
 
     /**
-     * Creates the specified element. More info about available elements in http://docs.moodle.org/dev/Acceptance_testing#Fixtures.
+     * Creates the specified element. More info about available elements in http://docs.powereduc.org/dev/Acceptance_testing#Fixtures.
      *
      * @Given /^the following data privacy "(?P<element_string>(?:[^"]|\\")*)" exist:$/
      *

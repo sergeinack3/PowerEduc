@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -71,7 +71,7 @@ $string['oldvalue'] = 'Old value';
 $string['pluginname'] = 'Site admin presets';
 $string['presetapplicationslisttable'] = 'Site admin preset applications table';
 $string['presetslisttable'] = 'Site admin presets table';
-$string['presetmoodlerelease'] = 'Moodle release';
+$string['presetpowereducrelease'] = 'Moodle release';
 $string['presetname'] = 'Preset name';
 $string['privacy:metadata'] = 'The Site admin presets tool does not store any personal data.';
 $string['renamepreset'] = 'Name (optional)';

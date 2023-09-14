@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,8 +16,8 @@
 
 namespace core_course\output;
 
-use moodle_page;
-use moodle_url;
+use powereduc_page;
+use powereduc_url;
 
 /**
  * Class responsible for generating the action bar (tertiary nav) elements in the category management page
@@ -29,7 +29,7 @@ use moodle_url;
 class manage_categories_action_bar implements \renderable {
     /** @var object $course The course we are dealing with. */
     protected $course;
-    /** @var moodle_page $page The current page. */
+    /** @var powereduc_page $page The current page. */
     protected $page;
     /** @var string|null $viewmode The viewmode of the underlying page - Course and categories, categories or courses */
     protected $viewmode;
@@ -41,12 +41,12 @@ class manage_categories_action_bar implements \renderable {
     /**
      * Constructor for the manage_categories_action_bar
      *
-     * @param moodle_page $page The page object
+     * @param powereduc_page $page The page object
      * @param string $viewmode The type of page we are viewing.
      * @param object|null $course The course that we are generating the nav for
      * @param string|null $searchvalue The search value if applicable
      */
-    public function __construct(moodle_page $page, string $viewmode, ?object $course, ?string $searchvalue) {
+    public function __construct(powereduc_page $page, string $viewmode, ?object $course, ?string $searchvalue) {
         $this->course = $course;
         $this->page = $page;
         $this->viewmode = $viewmode;
@@ -72,7 +72,7 @@ class manage_categories_action_bar implements \renderable {
         $activeurl = null;
         $content = [];
         foreach ($modes as $mode => $description) {
-            $url = new moodle_url($this->page->url, ['view' => $mode]);
+            $url = new powereduc_url($this->page->url, ['view' => $mode]);
             $content[$url->out()] = $description;
             if ($this->viewmode == $mode) {
                 $activeurl = $url->out();
@@ -103,10 +103,10 @@ class manage_categories_action_bar implements \renderable {
      */
     protected function get_category_select(\renderer_base $output): ?object {
         if (!$this->searchvalue && $this->viewmode === 'courses') {
-            $categories = \core_course_category::make_categories_list(array('moodle/category:manage', 'moodle/course:create'));
+            $categories = \core_course_category::make_categories_list(array('powereduc/category:manage', 'powereduc/course:create'));
             $currentcat = $this->page->url->param('categoryid');
             foreach ($categories as $id => $cat) {
-                $url = new moodle_url($this->page->url, ['categoryid' => $id]);
+                $url = new powereduc_url($this->page->url, ['categoryid' => $id]);
                 if ($id == $currentcat) {
                     $currenturl = $url->out();
                 }
@@ -134,10 +134,10 @@ class manage_categories_action_bar implements \renderable {
             'searchstring' => get_string('searchcourses'),
             'query' => $this->searchvalue
         ];
-        if (\core_course_category::has_capability_on_any(['moodle/category:manage', 'moodle/course:create'])) {
-            $searchform['action'] = new moodle_url('/course/management.php');
+        if (\core_course_category::has_capability_on_any(['powereduc/category:manage', 'powereduc/course:create'])) {
+            $searchform['action'] = new powereduc_url('/course/management.php');
         } else {
-            $searchform['action'] = new moodle_url('/course/search.php');
+            $searchform['action'] = new powereduc_url('/course/search.php');
         }
         return $searchform;
     }

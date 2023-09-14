@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -715,10 +715,10 @@ class cachestore_redis extends cache_store implements cache_is_key_aware, cache_
      * Sets form data from a configuration array.
      *
      * @see cache_is_configurable
-     * @param moodleform $editform
+     * @param powereducform $editform
      * @param array $config
      */
-    public static function config_set_edit_form_data(moodleform $editform, array $config) {
+    public static function config_set_edit_form_data(powereducform $editform, array $config) {
         $data = array();
         $data['server'] = $config['server'];
         $data['prefix'] = !empty($config['prefix']) ? $config['prefix'] : '';
@@ -776,7 +776,7 @@ class cachestore_redis extends cache_store implements cache_is_key_aware, cache_
         global $DB;
 
         if (!self::are_requirements_met() || !self::ready_to_be_used_for_testing()) {
-            throw new moodle_exception('TEST_CACHESTORE_REDIS_TESTSERVERS not configured, unable to create test configuration');
+            throw new powereduc_exception('TEST_CACHESTORE_REDIS_TESTSERVERS not configured, unable to create test configuration');
         }
 
         return ['server' => TEST_CACHESTORE_REDIS_TESTSERVERS,

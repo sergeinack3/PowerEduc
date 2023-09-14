@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ require_once($CFG->libdir . '/filelib.php');
 use cache;
 use coding_exception;
 use context_system;
-use moodle_url;
+use powereduc_url;
 use core_badges\backpack_api2p1_mapping;
 use core_badges\oauth2\client;
 use curl;
@@ -203,7 +203,7 @@ class backpack_api2p1 {
      *
      * @param string $hash of badge issued.
      * @return array
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @throws coding_exception
      */
     public function put_assertions($hash) {
@@ -213,9 +213,9 @@ class backpack_api2p1 {
         }
 
         $issuer = new \core\oauth2\issuer($this->externalbackpack->oauth2_issuerid);
-        $client = new client($issuer, new moodle_url('/badges/mybadges.php'), '', $this->externalbackpack);
+        $client = new client($issuer, new powereduc_url('/badges/mybadges.php'), '', $this->externalbackpack);
         if (!$client->is_logged_in()) {
-            $redirecturl = new moodle_url('/badges/mybadges.php', ['error' => 'backpackexporterror']);
+            $redirecturl = new powereduc_url('/badges/mybadges.php', ['error' => 'backpackexporterror']);
             redirect($redirecturl);
         }
 

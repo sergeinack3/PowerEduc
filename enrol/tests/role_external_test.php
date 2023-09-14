@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -54,8 +54,8 @@ class role_external_test extends \externallib_advanced_testcase {
 
         // Set the required capabilities by the external function.
         $context = \context_course::instance($course->id);
-        $roleid = $this->assignUserCapability('moodle/role:assign', $context->id);
-        $this->assignUserCapability('moodle/course:view', $context->id, $roleid);
+        $roleid = $this->assignUserCapability('powereduc/role:assign', $context->id);
+        $this->assignUserCapability('powereduc/course:view', $context->id, $roleid);
 
         // Add manager role to $USER.
         // So $USER is allowed to assign 'manager', 'editingteacher', 'teacher' and 'student'.
@@ -85,8 +85,8 @@ class role_external_test extends \externallib_advanced_testcase {
         $this->assertEquals(count($users), 1);
 
         // Call without required capability.
-        $this->unassignUserCapability('moodle/role:assign', $context->id, $roleid);
-        $this->expectException('moodle_exception');
+        $this->unassignUserCapability('powereduc/role:assign', $context->id, $roleid);
+        $this->expectException('powereduc_exception');
         $categories = \core_role_external::assign_roles(
             array('roleid' => 3, 'userid' => $USER->id, 'contextid' => $context->id));
     }
@@ -103,8 +103,8 @@ class role_external_test extends \externallib_advanced_testcase {
 
         // Set the required capabilities by the external function.
         $context = \context_course::instance($course->id);
-        $roleid = $this->assignUserCapability('moodle/role:assign', $context->id);
-        $this->assignUserCapability('moodle/course:view', $context->id, $roleid);
+        $roleid = $this->assignUserCapability('powereduc/role:assign', $context->id);
+        $this->assignUserCapability('powereduc/course:view', $context->id, $roleid);
 
         // Add manager role to $USER.
         // So $USER is allowed to assign 'manager', 'editingteacher', 'teacher' and 'student'.
@@ -139,8 +139,8 @@ class role_external_test extends \externallib_advanced_testcase {
         $this->assertEquals(count($users), 0);
 
         // Call without required capability.
-        $this->unassignUserCapability('moodle/role:assign', $context->id, $roleid);
-        $this->expectException('moodle_exception');
+        $this->unassignUserCapability('powereduc/role:assign', $context->id, $roleid);
+        $this->expectException('powereduc_exception');
         $categories = \core_role_external::unassign_roles(
             array('roleid' => 3, 'userid' => $USER->id, 'contextid' => $context->id));
     }

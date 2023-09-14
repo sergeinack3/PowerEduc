@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ $returnurl = optional_param('returnurl', null, PARAM_LOCALURL);
 
 list($context, $course, $cm) = get_context_info_array($contextid);
 
-$url = new moodle_url('/admin/roles/assign.php', array('contextid' => $contextid));
+$url = new powereduc_url('/admin/roles/assign.php', array('contextid' => $contextid));
 
 if ($course) {
     $isfrontpage = ($course->id == SITEID);
@@ -52,10 +52,10 @@ if ($course) {
 
 // Security.
 require_login($course, false, $cm);
-require_capability('moodle/role:assign', $context);
+require_capability('powereduc/role:assign', $context);
 
 navigation_node::override_active_url($url);
-$pageurl = new moodle_url($url);
+$pageurl = new powereduc_url($url);
 if ($returnurl) {
     $pageurl->param('returnurl', $returnurl);
 }
@@ -75,7 +75,7 @@ if ($roleid && !isset($assignableroles[$roleid])) {
     $a = new stdClass;
     $a->roleid = $roleid;
     $a->context = $contextname;
-    throw new \moodle_exception('cannotassignrolehere', '', $context->get_url(), $a);
+    throw new \powereduc_exception('cannotassignrolehere', '', $context->get_url(), $a);
 }
 
 // Work out an appropriate page title.
@@ -160,7 +160,7 @@ switch ($context->contextlevel) {
         admin_externalpage_setup('assignroles', '', array('contextid' => $contextid, 'roleid' => $roleid));
         break;
     case CONTEXT_USER:
-        $fullname = fullname($user, has_capability('moodle/site:viewfullnames', $context));
+        $fullname = fullname($user, has_capability('powereduc/site:viewfullnames', $context));
         $PAGE->set_heading($fullname);
         $showroles = 1;
         break;
@@ -197,10 +197,10 @@ if ($roleid) {
     $backurl = $pageurl;
 } else if ($context->contextlevel == CONTEXT_COURSE && !$isfrontpage) {
     // Return to the intermediary page when within the course context.
-    $backurl = new moodle_url('/enrol/otherusers.php', ['id' => $course->id]);
+    $backurl = new powereduc_url('/enrol/otherusers.php', ['id' => $course->id]);
 } else if ($returnurl) {
     // Factor in for $returnurl being passed.
-    $backurl = new moodle_url($returnurl);
+    $backurl = new powereduc_url($returnurl);
 }
 
 if ($backurl) {
@@ -223,7 +223,7 @@ if ($roleid) {
     }
 
     // Print the form.
-    $assignurl = new moodle_url($PAGE->url, array('roleid'=>$roleid));
+    $assignurl = new powereduc_url($PAGE->url, array('roleid'=>$roleid));
 ?>
 <form id="assignform" method="post" action="<?php echo $assignurl ?>"><div>
   <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
@@ -310,7 +310,7 @@ if ($roleid) {
                 $showroleholders = true;
             }
         } else if ($assigncounts[$roleid] > MAX_USERS_TO_LIST_PER_ROLE) {
-            $assignurl = new moodle_url($PAGE->url, array('roleid'=>$roleid));
+            $assignurl = new powereduc_url($PAGE->url, array('roleid'=>$roleid));
             $roleholdernames[$roleid] = '<a href="'.$assignurl.'">'.$strmorethanmax.'</a>';
         } else {
             $roleholdernames[$roleid] = '';
@@ -330,7 +330,7 @@ if ($roleid) {
 
     foreach ($assignableroles as $roleid => $rolename) {
         $description = format_string($DB->get_field('role', 'description', array('id'=>$roleid)));
-        $assignurl = new moodle_url($PAGE->url, array('roleid'=>$roleid));
+        $assignurl = new powereduc_url($PAGE->url, array('roleid'=>$roleid));
         $row = array('<a href="'.$assignurl.'">'.$rolename.'</a>',
                 $description, $assigncounts[$roleid]);
         if ($showroleholders) {

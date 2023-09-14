@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -56,7 +56,7 @@ abstract class action {
     protected $actionname = null;
 
     /**
-     * @var \moodle_url
+     * @var \powereduc_url
      */
     protected $url = null;
 
@@ -82,7 +82,7 @@ abstract class action {
     /**
      * Returns the url to the action.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_url() {
         return $this->url;

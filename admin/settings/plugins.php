@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -124,7 +124,7 @@ if ($hassiteconfig) {
     $temp->add($setting);
     $ADMIN->add('authsettings', $temp);
 
-    $temp = new admin_externalpage('authtestsettings', get_string('testsettings', 'core_auth'), new moodle_url("/auth/test_settings.php"), 'moodle/site:config', true);
+    $temp = new admin_externalpage('authtestsettings', get_string('testsettings', 'core_auth'), new powereduc_url("/auth/test_settings.php"), 'powereduc/site:config', true);
     $ADMIN->add('authsettings', $temp);
 
     $plugins = core_plugin_manager::instance()->get_plugins_of_type('auth');
@@ -140,7 +140,7 @@ if ($hassiteconfig) {
     $temp->add(new admin_setting_manageenrols());
     $ADMIN->add('enrolments', $temp);
 
-    $temp = new admin_externalpage('enroltestsettings', get_string('testsettings', 'core_enrol'), new moodle_url("/enrol/test_settings.php"), 'moodle/site:config', true);
+    $temp = new admin_externalpage('enroltestsettings', get_string('testsettings', 'core_enrol'), new powereduc_url("/enrol/test_settings.php"), 'powereduc/site:config', true);
     $ADMIN->add('enrolments', $temp);
 
     $plugins = core_plugin_manager::instance()->get_plugins_of_type('enrol');
@@ -191,7 +191,7 @@ if ($hassiteconfig) {
     );
 
     // Threshold for check displayed on the /report/status/index.php page.
-    $url = new moodle_url('/report/status/index.php');
+    $url = new powereduc_url('/report/status/index.php');
     $link = html_writer::link($url, get_string('pluginname', 'report_status'));
     $temp->add(
         new admin_setting_configduration(
@@ -311,7 +311,7 @@ if ($hassiteconfig) {
         'managepaymentgatewayspostfix',
         '',
         new lang_string('gotopaymentaccounts', 'payment',
-            html_writer::link(new moodle_url('/payment/accounts.php'), get_string('paymentaccounts', 'payment')))
+            html_writer::link(new powereduc_url('/payment/accounts.php'), get_string('paymentaccounts', 'payment')))
     ));
     $ADMIN->add('paymentgateways', $temp);
 
@@ -376,9 +376,9 @@ if ($hassiteconfig) {
         50, PARAM_INT, 3));
 
     $ADMIN->add('portfoliosettings', $temp);
-    $ADMIN->add('portfoliosettings', new admin_externalpage('portfolionew', new lang_string('addnewportfolio', 'portfolio'), $url, 'moodle/site:config', true));
-    $ADMIN->add('portfoliosettings', new admin_externalpage('portfoliodelete', new lang_string('deleteportfolio', 'portfolio'), $url, 'moodle/site:config', true));
-    $ADMIN->add('portfoliosettings', new admin_externalpage('portfoliocontroller', new lang_string('manageportfolios', 'portfolio'), $url, 'moodle/site:config', true));
+    $ADMIN->add('portfoliosettings', new admin_externalpage('portfolionew', new lang_string('addnewportfolio', 'portfolio'), $url, 'powereduc/site:config', true));
+    $ADMIN->add('portfoliosettings', new admin_externalpage('portfoliodelete', new lang_string('deleteportfolio', 'portfolio'), $url, 'powereduc/site:config', true));
+    $ADMIN->add('portfoliosettings', new admin_externalpage('portfoliocontroller', new lang_string('manageportfolios', 'portfolio'), $url, 'powereduc/site:config', true));
 
     foreach (portfolio_instances(false, false) as $portfolio) {
         require_once($CFG->dirroot . '/portfolio/' . $portfolio->get('plugin') . '/lib.php');
@@ -389,7 +389,7 @@ if ($hassiteconfig) {
                 'portfoliosettings' . $portfolio->get('id'),
                 $portfolio->get('name'),
                 $url . '?action=edit&pf=' . $portfolio->get('id'),
-                'moodle/site:config'
+                'powereduc/site:config'
             )
         );
     }
@@ -416,15 +416,15 @@ if ($hassiteconfig) {
     $temp->add(new admin_setting_configcheckbox('legacyfilesaddallowed', new lang_string('legacyfilesaddallowed', 'admin'), new lang_string('legacyfilesaddallowed_help', 'admin'), 1));
     $ADMIN->add('repositorysettings', $temp);
     $ADMIN->add('repositorysettings', new admin_externalpage('repositorynew',
-        new lang_string('addplugin', 'repository'), $url, 'moodle/site:config', true));
+        new lang_string('addplugin', 'repository'), $url, 'powereduc/site:config', true));
     $ADMIN->add('repositorysettings', new admin_externalpage('repositorydelete',
-        new lang_string('deleterepository', 'repository'), $url, 'moodle/site:config', true));
+        new lang_string('deleterepository', 'repository'), $url, 'powereduc/site:config', true));
     $ADMIN->add('repositorysettings', new admin_externalpage('repositorycontroller',
-        new lang_string('manage', 'repository'), $url, 'moodle/site:config', true));
+        new lang_string('manage', 'repository'), $url, 'powereduc/site:config', true));
     $ADMIN->add('repositorysettings', new admin_externalpage('repositoryinstancenew',
-        new lang_string('createrepository', 'repository'), $url, 'moodle/site:config', true));
+        new lang_string('createrepository', 'repository'), $url, 'powereduc/site:config', true));
     $ADMIN->add('repositorysettings', new admin_externalpage('repositoryinstanceedit',
-        new lang_string('editrepositoryinstance', 'repository'), $url, 'moodle/site:config', true));
+        new lang_string('editrepositoryinstance', 'repository'), $url, 'powereduc/site:config', true));
     $plugins = core_plugin_manager::instance()->get_plugins_of_type('repository');
     core_collator::asort_objects_by_property($plugins, 'displayname');
     foreach ($plugins as $plugin) {
@@ -434,7 +434,7 @@ if ($hassiteconfig) {
 }
 
 // Question bank settings.
-if ($hassiteconfig || has_capability('moodle/question:config', $systemcontext)) {
+if ($hassiteconfig || has_capability('powereduc/question:config', $systemcontext)) {
     $ADMIN->add('modules', new admin_category('qbanksettings',
             new lang_string('type_qbank_plural', 'plugin')));
     $temp = new admin_settingpage('manageqbanks', new lang_string('manageqbanks', 'admin'));
@@ -449,7 +449,7 @@ if ($hassiteconfig || has_capability('moodle/question:config', $systemcontext)) 
 }
 
 // Question type settings
-if ($hassiteconfig || has_capability('moodle/question:config', $systemcontext)) {
+if ($hassiteconfig || has_capability('powereduc/question:config', $systemcontext)) {
 
     // Question behaviour settings.
     $ADMIN->add('modules', new admin_category('qbehavioursettings', new lang_string('questionbehaviours', 'admin')));
@@ -462,7 +462,7 @@ if ($hassiteconfig || has_capability('moodle/question:config', $systemcontext)) 
     // Question preview defaults.
     $settings = new admin_settingpage('qdefaultsetting',
             get_string('questionpreviewdefaults', 'question'),
-            'moodle/question:config');
+            'powereduc/question:config');
     $ADMIN->add('qtypesettings', $settings);
 
     $settings->add(new admin_setting_heading('qdefaultsetting_preview_options',
@@ -530,7 +530,7 @@ if ($hassiteconfig && !empty($CFG->enableplagiarism)) {
 
 // Comments report, note this page is really just a means to delete comments so check that.
 $ADMIN->add('reports', new admin_externalpage('comments', new lang_string('comments'), $CFG->wwwroot . '/comment/index.php',
-    'moodle/comment:delete'));
+    'powereduc/comment:delete'));
 
 // Course reports settings
 if ($hassiteconfig) {
@@ -539,7 +539,7 @@ if ($hassiteconfig) {
         $file = $CFG->dirroot . '/course/report/' . $report . '/settings.php';
         if (file_exists($file)) {
             $settings = new admin_settingpage('coursereport' . $report,
-                    new lang_string('pluginname', 'coursereport_' . $report), 'moodle/site:config');
+                    new lang_string('pluginname', 'coursereport_' . $report), 'powereduc/site:config');
             // settings.php may create a subcategory or unset the settings completely
             include($file);
             if ($settings) {
@@ -563,7 +563,7 @@ foreach (core_component::get_plugin_list('report') as $report => $plugindir) {
     $settings_path = "$plugindir/settings.php";
     if (file_exists($settings_path)) {
         $settings = new admin_settingpage('report' . $report,
-                new lang_string('pluginname', 'report_' . $report), 'moodle/site:config');
+                new lang_string('pluginname', 'report_' . $report), 'powereduc/site:config');
         include($settings_path);
         if ($settings) {
             $pages[] = $settings;
@@ -590,7 +590,7 @@ if ($hassiteconfig) {
         $settingspath = "$plugindir/settings.php";
         if (file_exists($settingspath)) {
             $settings = new admin_settingpage('search' . $engine,
-                    new lang_string('pluginname', 'search_' . $engine), 'moodle/site:config');
+                    new lang_string('pluginname', 'search_' . $engine), 'powereduc/site:config');
             include($settingspath);
             if ($settings) {
                 $pages[] = $settings;
@@ -712,7 +712,7 @@ if ($hassiteconfig) {
 
     $ADMIN->add('searchplugins', $temp);
     $ADMIN->add('searchplugins', new admin_externalpage('searchareas', new lang_string('searchareas', 'admin'),
-        new moodle_url('/admin/searchareas.php')));
+        new powereduc_url('/admin/searchareas.php')));
 
     core_collator::asort_objects_by_property($pages, 'visiblename');
     foreach ($pages as $page) {
@@ -747,7 +747,7 @@ if ($hassiteconfig) {
     foreach (core_component::get_plugin_list('cachestore') as $plugin => $path) {
         $settingspath = $path.'/settings.php';
         if (file_exists($settingspath)) {
-            $settings = new admin_settingpage('cachestore_'.$plugin.'_settings', new lang_string('pluginname', 'cachestore_'.$plugin), 'moodle/site:config');
+            $settings = new admin_settingpage('cachestore_'.$plugin.'_settings', new lang_string('pluginname', 'cachestore_'.$plugin), 'powereduc/site:config');
             include($settingspath);
             $ADMIN->add('cachestores', $settings);
         }

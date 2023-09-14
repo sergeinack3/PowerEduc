@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ use renderable;
 use templatable;
 use renderer_base;
 use stdClass;
-use moodle_url;
+use powereduc_url;
 use context_system;
 use context_course;
 use core_competency\api;
@@ -104,9 +104,9 @@ class course_competencies_page implements renderable, templatable {
             }
         }
 
-        $this->canmanagecoursecompetencies = has_capability('moodle/competency:coursecompetencymanage', $this->context);
-        $this->canconfigurecoursecompetencies = has_capability('moodle/competency:coursecompetencyconfigure', $this->context);
-        $this->cangradecompetencies = has_capability('moodle/competency:competencygrade', $this->context);
+        $this->canmanagecoursecompetencies = has_capability('powereduc/competency:coursecompetencymanage', $this->context);
+        $this->canconfigurecoursecompetencies = has_capability('powereduc/competency:coursecompetencyconfigure', $this->context);
+        $this->cangradecompetencies = has_capability('powereduc/competency:competencygrade', $this->context);
         $this->coursecompetencysettings = api::read_course_competency_settings($courseid);
         $this->coursecompetencystatistics = new course_competency_statistics($courseid);
 
@@ -115,9 +115,9 @@ class course_competencies_page implements renderable, templatable {
         $this->canmanagecompetencyframeworks = false;
         $contexts = array_reverse($this->context->get_parent_contexts(true));
         foreach ($contexts as $context) {
-            $canmanage = has_capability('moodle/competency:competencymanage', $context);
+            $canmanage = has_capability('powereduc/competency:competencymanage', $context);
             if ($canmanage) {
-                $this->manageurl = new moodle_url('/admin/tool/lp/competencyframeworks.php',
+                $this->manageurl = new powereduc_url('/admin/tool/lp/competencyframeworks.php',
                     array('pagecontextid' => $context->id));
                 $this->canmanagecompetencyframeworks = true;
                 break;
@@ -139,9 +139,9 @@ class course_competencies_page implements renderable, templatable {
         $data->moduleid = $this->moduleid;
         $data->pagecontextid = $this->context->id;
         $data->competencies = array();
-        $data->pluginbaseurl = (new moodle_url('/admin/tool/lp'))->out(true);
+        $data->pluginbaseurl = (new powereduc_url('/admin/tool/lp'))->out(true);
 
-        $gradable = is_enrolled($this->context, $USER, 'moodle/competency:coursecompetencygradable');
+        $gradable = is_enrolled($this->context, $USER, 'powereduc/competency:coursecompetencygradable');
         if ($gradable) {
             $usercompetencycourses = api::list_user_competencies_in_course($this->courseid, $USER->id);
             $data->gradableuserid = $USER->id;

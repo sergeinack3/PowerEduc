@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * Defines restore_plan_builder class
  *
  * @package     core_backup
- * @subpackage  moodle2
+ * @subpackage  powereduc2
  * @category    backup
  * @copyright   2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -27,45 +27,45 @@
 
 defined('POWEREDUC_INTERNAL') || die();
 
-require_once($CFG->dirroot . '/backup/moodle2/restore_root_task.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_course_task.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_section_task.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_activity_task.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_final_task.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_block_task.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_default_block_task.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_qbank_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_qtype_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_qtype_extrafields_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_format_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_local_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_theme_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_report_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_coursereport_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_plagiarism_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_gradingform_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_enrol_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/backup_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/backup_qbank_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/backup_qtype_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/backup_qtype_extrafields_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/backup_format_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/backup_local_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/backup_theme_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/backup_report_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/backup_coursereport_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/backup_plagiarism_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/backup_gradingform_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/backup_enrol_plugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_subplugin.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_settingslib.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_stepslib.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_root_task.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_course_task.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_section_task.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_activity_task.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_final_task.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_block_task.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_default_block_task.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_qbank_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_qtype_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_qtype_extrafields_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_format_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_local_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_theme_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_report_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_coursereport_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_plagiarism_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_gradingform_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_enrol_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/backup_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/backup_qbank_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/backup_qtype_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/backup_qtype_extrafields_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/backup_format_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/backup_local_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/backup_theme_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/backup_report_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/backup_coursereport_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/backup_plagiarism_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/backup_gradingform_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/backup_enrol_plugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_subplugin.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_settingslib.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_stepslib.php');
 
-// Load all the activity tasks for moodle2 format
+// Load all the activity tasks for powereduc2 format
 $mods = core_component::get_plugin_list('mod');
 foreach ($mods as $mod => $moddir) {
-    $taskpath = $moddir . '/backup/moodle2/restore_' . $mod . '_activity_task.class.php';
+    $taskpath = $moddir . '/backup/powereduc2/restore_' . $mod . '_activity_task.class.php';
     if (plugin_supports('mod', $mod, FEATURE_BACKUP_POWEREDUC2)) {
         if (file_exists($taskpath)) {
             require_once($taskpath);
@@ -73,10 +73,10 @@ foreach ($mods as $mod => $moddir) {
     }
 }
 
-// Load all the block tasks for moodle2 format
+// Load all the block tasks for powereduc2 format
 $blocks = core_component::get_plugin_list('block');
 foreach ($blocks as $block => $blockdir) {
-    $taskpath = $blockdir . '/backup/moodle2/restore_' . $block . '_block_task.class.php';
+    $taskpath = $blockdir . '/backup/powereduc2/restore_' . $block . '_block_task.class.php';
     if (file_exists($taskpath)) {
         require_once($taskpath);
     }

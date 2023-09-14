@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -117,7 +117,7 @@ class block_blog_tags extends block_base {
 
         // admins should be able to read all tags
         $type = '';
-        if (!has_capability('moodle/user:readuserblogs', context_system::instance())) {
+        if (!has_capability('powereduc/user:readuserblogs', context_system::instance())) {
             $type = " AND (p.publishstate = 'site' or p.publishstate='public')";
         }
 
@@ -178,7 +178,7 @@ class block_blog_tags extends block_base {
         /// Accessibility: markup as a list.
             $this->content->text .= "\n<ul class='inline-list'>\n";
             foreach ($etags as $tag) {
-                $blogurl = new moodle_url('/blog/index.php');
+                $blogurl = new powereduc_url('/blog/index.php');
 
                 switch ($CFG->bloglevel) {
                     case BLOG_USER_LEVEL:
@@ -226,10 +226,10 @@ class block_blog_tags extends block_base {
     /**
      * This block shouldn't be added to a page if the blogs and the tags advanced features are disabled.
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @return bool
      */
-    public function can_block_be_added(moodle_page $page): bool {
+    public function can_block_be_added(powereduc_page $page): bool {
         global $CFG;
 
         return $CFG->enableblogs && $CFG->usetags;

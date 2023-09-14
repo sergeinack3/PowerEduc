@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ namespace tool_lp\external;
 defined('POWEREDUC_INTERNAL') || die();
 
 use renderer_base;
-use moodle_url;
+use powereduc_url;
 
 /**
  * Class for exporting competency_path data.
@@ -121,7 +121,7 @@ class competency_path_exporter extends \core\external\exporter {
             ]
         );
         $result->framework = $exporter->export($output);
-        $result->pluginbaseurl = (new moodle_url('/admin/tool/lp'))->out(true);
+        $result->pluginbaseurl = (new powereduc_url('/admin/tool/lp'))->out(true);
         $result->pagecontextid = $this->related['context']->id;
         return (array) $result;
     }

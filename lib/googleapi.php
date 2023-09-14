@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Simple implementation of some Google API functions for Moodle.
+ * Simple implementation of some Google API functions for PowerEduc.
  *
  * @package   core
  * @copyright Dan Poltawski <talktodan@gmail.com>
@@ -86,7 +86,7 @@ class google_docs {
         $content = $this->googleoauth->get($url);
         try {
             if (strpos($content, '<?xml') !== 0) {
-                throw new moodle_exception('invalidxmlresponse');
+                throw new powereduc_exception('invalidxmlresponse');
             }
             $xml = new SimpleXMLElement($content);
         } catch (Exception $e) {
@@ -154,13 +154,13 @@ class google_docs {
         $this->googleoauth->post(self::UPLOAD_URL);
 
         if ($this->googleoauth->info['http_code'] !== 200) {
-            throw new moodle_exception('Cantpostupload');
+            throw new powereduc_exception('Cantpostupload');
         }
 
         // Now we http PUT the file in the location returned.
         $location = $this->googleoauth->response['Location'];
         if (empty($location)) {
-            throw new moodle_exception('Nouploadlocation');
+            throw new powereduc_exception('Nouploadlocation');
         }
 
         // Reset the curl object for actually sending the file.
@@ -203,10 +203,10 @@ class google_docs {
             if (isset($info['http_code']) && $info['http_code'] == 200) {
                 return array('path'=>$path, 'url'=>$url);
             } else {
-                throw new moodle_exception('cannotdownload', 'repository');
+                throw new powereduc_exception('cannotdownload', 'repository');
             }
         } else {
-            throw new moodle_exception('errorwhiledownload', 'repository', '', $result);
+            throw new powereduc_exception('errorwhiledownload', 'repository', '', $result);
         }
     }
 }

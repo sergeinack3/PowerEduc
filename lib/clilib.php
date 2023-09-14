@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Command line utility functions and classes
@@ -24,7 +24,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// NOTE: no POWEREDUC_INTERNAL test here, sometimes we use this before requiring Moodle libs!
+// NOTE: no POWEREDUC_INTERNAL test here, sometimes we use this before requiring PowerEduc libs!
 
 /**
  * Write a text to the given stream
@@ -218,7 +218,7 @@ function cli_error($text, $errorcode=1) {
 }
 
 /**
- * Print an ASCII version of the Moodle logo.
+ * Print an ASCII version of the PowerEduc logo.
  *
  * @param int $padding left padding of the logo
  * @param bool $return should we print directly (false) or return the string (true)

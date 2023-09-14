@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Class representing an action a user should take.
  *
  * @package    core_calendar
- * @copyright  2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2017 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,7 +31,7 @@ use core_calendar\local\event\entities\action_interface;
 /**
  * Class representing an action a user should take
  *
- * @copyright  2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2017 Ryan Wyllie <ryan@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class action implements action_interface {
@@ -41,7 +41,7 @@ class action implements action_interface {
     protected $name;
 
     /**
-     * @var \moodle_url $url The action's URL.
+     * @var \powereduc_url $url The action's URL.
      */
     protected $url;
 
@@ -59,13 +59,13 @@ class action implements action_interface {
      * Constructor.
      *
      * @param string      $name       The action's name.
-     * @param \moodle_url $url        The action's URL.
+     * @param \powereduc_url $url        The action's URL.
      * @param int         $itemcount  How many items there are to action.
      * @param bool        $actionable Whether or not the event is currently actionable.
      */
     public function __construct(
         $name,
-        \moodle_url $url,
+        \powereduc_url $url,
         $itemcount,
         $actionable
     ) {

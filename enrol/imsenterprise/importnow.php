@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  */
 require(__DIR__.'/../../config.php');
 require_login(0, false);
-require_capability('moodle/site:config', context_system::instance());
+require_capability('powereduc/site:config', context_system::instance());
 require_sesskey();
 
 $site = get_site();
@@ -38,7 +38,7 @@ $PAGE->navbar->add(get_string('administrationsite'));
 $PAGE->navbar->add(get_string('plugins', 'admin'));
 $PAGE->navbar->add(get_string('enrolments', 'enrol'));
 $PAGE->navbar->add(get_string('pluginname', 'enrol_imsenterprise'),
-    new moodle_url('/admin/settings.php', array('section' => 'enrolsettingsimsenterprise')));
+    new powereduc_url('/admin/settings.php', array('section' => 'enrolsettingsimsenterprise')));
 $PAGE->navbar->add(get_string('importimsfile', 'enrol_imsenterprise'));
 $PAGE->navigation->clear_cache();
 

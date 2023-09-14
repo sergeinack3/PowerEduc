@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@ if ($hassiteconfig) {
     ));
 }
 
-$moodleurl = accessibility::get_plugin_url();
+$powereducurl = accessibility::get_plugin_url();
 if ($hassiteconfig) {
     $ADMIN->add(
         'tools',
@@ -59,7 +59,7 @@ if ($hassiteconfig) {
             'tool_brickfield_activation',
             get_string('activationform', manager::PLUGINNAME),
             manager::registration_url(),
-            'moodle/site:config'
+            'powereduc/site:config'
         )
     );
 
@@ -100,13 +100,13 @@ if ($hassiteconfig) {
 
     $ADMIN->add('brickfieldfolder', new admin_externalpage('tool_brickfield_tool',
         get_string('tools', manager::PLUGINNAME),
-        $moodleurl,
+        $powereducurl,
         accessibility::get_capability_name('viewsystemtools')
     ));
 }
 
 // Add the reports link if the toolkit is enabled, and is either registered, or the user has the ability to register it.
-$showreports = has_capability('moodle/site:config', \context_system::instance());
+$showreports = has_capability('powereduc/site:config', \context_system::instance());
 $showreports = $showreports || (new registration())->toolkit_is_active();
 
 // Create a link to the main page in the reports menu.
@@ -115,7 +115,7 @@ $ADMIN->add(
     new admin_externalpage(
         'tool_brickfield_reports',
         get_string('pluginname', manager::PLUGINNAME),
-        $moodleurl,
+        $powereducurl,
         accessibility::get_capability_name('viewsystemtools'),
         $accessibilitydisabled || !$showreports
     )

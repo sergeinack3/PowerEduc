@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -36,23 +36,23 @@ $revoke = optional_param('revoke', false, PARAM_BOOL);
 require_login();
 
 if (empty($CFG->enablebadges)) {
-    throw new \moodle_exception('badgesdisabled', 'badges');
+    throw new \powereduc_exception('badgesdisabled', 'badges');
 }
 
 $badge = new badge($badgeid);
 $context = $badge->get_context();
 $isadmin = is_siteadmin($USER);
 
-$navurl = new moodle_url('/badges/index.php', array('type' => $badge->type));
+$navurl = new powereduc_url('/badges/index.php', array('type' => $badge->type));
 
 if ($badge->type == BADGE_TYPE_COURSE) {
     if (empty($CFG->badges_allowcoursebadges)) {
-        throw new \moodle_exception('coursebadgesdisabled', 'badges');
+        throw new \powereduc_exception('coursebadgesdisabled', 'badges');
     }
     require_login($badge->courseid);
     $course = get_course($badge->courseid);
     $heading = format_string($course->fullname, true, ['context' => $context]);
-    $navurl = new moodle_url('/badges/index.php', array('type' => $badge->type, 'id' => $badge->courseid));
+    $navurl = new powereduc_url('/badges/index.php', array('type' => $badge->type, 'id' => $badge->courseid));
     $PAGE->set_pagelayout('standard');
     navigation_node::override_active_url($navurl);
 } else {
@@ -61,16 +61,16 @@ if ($badge->type == BADGE_TYPE_COURSE) {
     navigation_node::override_active_url($navurl, true);
 }
 
-require_capability('moodle/badges:awardbadge', $context);
+require_capability('powereduc/badges:awardbadge', $context);
 
-$url = new moodle_url('/badges/award.php', array('id' => $badgeid, 'role' => $role));
+$url = new powereduc_url('/badges/award.php', array('id' => $badgeid, 'role' => $role));
 $PAGE->set_url($url);
 $PAGE->set_context($context);
 
 // Set up navigation and breadcrumbs.
 $strrecipients = get_string('recipients', 'badges');
-$PAGE->navbar->add($badge->name, new moodle_url('overview.php', array('id' => $badge->id)))
-    ->add($strrecipients, new moodle_url('recipients.php', array('id' => $badge->id)))
+$PAGE->navbar->add($badge->name, new powereduc_url('overview.php', array('id' => $badge->id)))
+    ->add($strrecipients, new powereduc_url('recipients.php', array('id' => $badge->id)))
     ->add(get_string('award', 'badges'));
 $PAGE->set_title($strrecipients);
 $PAGE->set_heading($heading);
@@ -82,7 +82,7 @@ if (!$badge->is_active()) {
     die();
 }
 
-$returnurl = new moodle_url('recipients.php', array('id' => $badge->id));
+$returnurl = new powereduc_url('recipients.php', array('id' => $badge->id));
 $returnlink = html_writer::link($returnurl, $strrecipients);
 $actionbar = new \core_badges\output\standard_action_bar($PAGE, $badge->type, false, false, $returnurl);
 $output = $PAGE->get_renderer('core', 'badges');
@@ -104,7 +104,7 @@ $currentgroup = groups_get_course_group($COURSE, true); // Get active group.
 
 // Check groupmode (SEPARATEGROUPS), currentgroup and capability (or admin).
 if ($groupmode == SEPARATEGROUPS && empty($currentgroup) &&
-    !has_capability('moodle/site:accessallgroups', $context) && !is_siteadmin() ) {
+    !has_capability('powereduc/site:accessallgroups', $context) && !is_siteadmin() ) {
     echo $OUTPUT->header();
     echo $OUTPUT->heading(get_string("notingroup"));
     echo $OUTPUT->footer();
@@ -132,18 +132,18 @@ if (count($acceptedroles) > 1) {
             $select[$p->id] = role_get_name($p);
         }
         if (!$role) {
-            $pageurl = new moodle_url('/badges/award.php', array('id' => $badgeid));
+            $pageurl = new powereduc_url('/badges/award.php', array('id' => $badgeid));
             echo $OUTPUT->header();
             echo $tertiarynav;
-            echo $OUTPUT->box($OUTPUT->single_select(new moodle_url($pageurl), 'role', $select, '', array('' => 'choosedots'),
+            echo $OUTPUT->box($OUTPUT->single_select(new powereduc_url($pageurl), 'role', $select, '', array('' => 'choosedots'),
                 null, array('label' => get_string('selectaward', 'badges'))));
             echo $OUTPUT->footer();
             die();
         } else {
-            $pageurl = new moodle_url('/badges/award.php', array('id' => $badgeid));
+            $pageurl = new powereduc_url('/badges/award.php', array('id' => $badgeid));
             $issuerrole = new stdClass();
             $issuerrole->roleid = $role;
-            $roleselect = $OUTPUT->single_select(new moodle_url($pageurl), 'role', $select, $role, null, null,
+            $roleselect = $OUTPUT->single_select(new powereduc_url($pageurl), 'role', $select, $role, null, null,
                 array('label' => get_string('selectaward', 'badges')));
         }
     } else {
@@ -179,7 +179,7 @@ $existingselector = new badge_existing_users_selector('existingrecipients', $opt
 $recipientselector = new badge_potential_users_selector('potentialrecipients', $options);
 $recipientselector->set_existing_recipients($existingselector->find_users(''));
 
-if ($award && data_submitted() && has_capability('moodle/badges:awardbadge', $context)) {
+if ($award && data_submitted() && has_capability('powereduc/badges:awardbadge', $context)) {
     require_sesskey();
     $users = $recipientselector->get_selected_users();
     foreach ($users as $user) {
@@ -197,7 +197,7 @@ if ($award && data_submitted() && has_capability('moodle/badges:awardbadge', $co
     $recipientselector->invalidate_selected_users();
     $existingselector->invalidate_selected_users();
     $recipientselector->set_existing_recipients($existingselector->find_users(''));
-} else if ($revoke && data_submitted() && has_capability('moodle/badges:revokebadge', $context)) {
+} else if ($revoke && data_submitted() && has_capability('powereduc/badges:revokebadge', $context)) {
     require_sesskey();
     $users = $existingselector->get_selected_users();
 

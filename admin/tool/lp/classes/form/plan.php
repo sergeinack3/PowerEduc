@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -79,7 +79,7 @@ class plan extends persistent {
             // There is only one status to select from.
             $mform->addElement('static', 'staticstatus', get_string('status', 'tool_lp'), current($status));
         } else {
-            throw new required_capability_exception($context, 'moodle/competency:planmanage', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:planmanage', 'nopermissions', '');
         }
 
         // Disable short forms.

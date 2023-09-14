@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core\output;
 
@@ -76,9 +76,9 @@ class language_menu_test extends \advanced_testcase {
                 // We need to manually generate the url key and its value in the expected item array as this cannot
                 // be done in the data provider due to the change of the state of $PAGE.
                 if ($expecteditem['isactive']) {
-                    $expecteditem['url'] = new \moodle_url('#');
+                    $expecteditem['url'] = new \powereduc_url('#');
                 } else {
-                    $expecteditem['url'] = new \moodle_url($PAGE->url, ['lang' => $lang]);
+                    $expecteditem['url'] = new \powereduc_url($PAGE->url, ['lang' => $lang]);
                     // When the language menu item is not the current language, it will contain the lang attribute.
                     $expecteditem['attributes'][] = [
                         'key' => 'lang',

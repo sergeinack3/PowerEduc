@@ -1,7 +1,7 @@
 {
-    "name": "moodle-editor_atto-editor",
+    "name": "powereduc-editor_atto-editor",
     "builds": {
-        "moodle-editor_atto-editor": {
+        "powereduc-editor_atto-editor": {
             "jsfiles": [
                 "editor.js",
                 "notify.js",
@@ -17,14 +17,14 @@
                 "filepicker.js"
             ]
         },
-        "moodle-editor_atto-plugin": {
+        "powereduc-editor_atto-plugin": {
             "jsfiles": [
                 "editor-plugin.js",
                 "editor-plugin-buttons.js",
                 "editor-plugin-dialogue.js"
             ]
         },
-        "moodle-editor_atto-menu": {
+        "powereduc-editor_atto-menu": {
             "jsfiles": [
                 "menu.js"
             ]

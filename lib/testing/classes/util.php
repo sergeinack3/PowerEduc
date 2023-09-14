@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Testing util classes
@@ -838,7 +838,7 @@ abstract class testing_util {
         // All developers have to understand English, do not localise!
         $env = self::get_environment();
 
-        $output .= "Moodle ".$env['moodleversion'];
+        $output .= "PowerEduc ".$env['powereducversion'];
         if ($hash = self::get_git_hash()) {
             $output .= ", $hash";
         }
@@ -858,7 +858,7 @@ abstract class testing_util {
     }
 
     /**
-     * Try to get current git hash of the Moodle in $CFG->dirroot.
+     * Try to get current git hash of the PowerEduc in $CFG->dirroot.
      * @return string null if unknown, sha1 hash if known
      */
     public static function get_git_hash() {
@@ -1099,7 +1099,7 @@ abstract class testing_util {
     /**
      * Return list of environment versions on which tests will run.
      * Environment includes:
-     * - moodleversion
+     * - powereducversion
      * - phpversion
      * - dbtype
      * - dbversion
@@ -1112,10 +1112,10 @@ abstract class testing_util {
 
         $env = array();
 
-        // Add moodle version.
+        // Add powereduc version.
         $release = null;
         require("$CFG->dirroot/version.php");
-        $env['moodleversion'] = $release;
+        $env['powereducversion'] = $release;
 
         // Add php version.
         $phpversion = phpversion();

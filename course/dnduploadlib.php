@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -53,21 +53,21 @@ function dndupload_add_to_course($course, $modnames) {
         'name' => 'coursedndupload',
         'fullpath' => '/course/dndupload.js',
         'strings' => array(
-            array('addfilehere', 'moodle'),
-            array('dndworkingfiletextlink', 'moodle'),
-            array('dndworkingfilelink', 'moodle'),
-            array('dndworkingfiletext', 'moodle'),
-            array('dndworkingfile', 'moodle'),
-            array('dndworkingtextlink', 'moodle'),
-            array('dndworkingtext', 'moodle'),
-            array('dndworkinglink', 'moodle'),
-            array('namedfiletoolarge', 'moodle'),
-            array('actionchoice', 'moodle'),
-            array('servererror', 'moodle'),
-            array('filereaderror', 'moodle'),
-            array('upload', 'moodle'),
-            array('cancel', 'moodle'),
-            array('changesmadereallygoaway', 'moodle')
+            array('addfilehere', 'powereduc'),
+            array('dndworkingfiletextlink', 'powereduc'),
+            array('dndworkingfilelink', 'powereduc'),
+            array('dndworkingfiletext', 'powereduc'),
+            array('dndworkingfile', 'powereduc'),
+            array('dndworkingtextlink', 'powereduc'),
+            array('dndworkingtext', 'powereduc'),
+            array('dndworkinglink', 'powereduc'),
+            array('namedfiletoolarge', 'powereduc'),
+            array('actionchoice', 'powereduc'),
+            array('servererror', 'powereduc'),
+            array('filereaderror', 'powereduc'),
+            array('upload', 'powereduc'),
+            array('cancel', 'powereduc'),
+            array('changesmadereallygoaway', 'powereduc')
         ),
         'requires' => array('node', 'event', 'json', 'anim')
     );
@@ -119,12 +119,12 @@ class dndupload_handler {
         // Add some default types to handle.
         // Note: 'Files' type is hard-coded into the Javascript as this needs to be ...
         // ... treated a little differently.
-        $this->register_type('url', array('url', 'text/uri-list', 'text/x-moz-url'), get_string('addlinkhere', 'moodle'),
-                        get_string('nameforlink', 'moodle'), get_string('whatforlink', 'moodle'), 10);
-        $this->register_type('text/html', array('text/html'), get_string('addpagehere', 'moodle'),
-                        get_string('nameforpage', 'moodle'), get_string('whatforpage', 'moodle'), 20);
-        $this->register_type('text', array('text', 'text/plain'), get_string('addpagehere', 'moodle'),
-                        get_string('nameforpage', 'moodle'), get_string('whatforpage', 'moodle'), 30);
+        $this->register_type('url', array('url', 'text/uri-list', 'text/x-moz-url'), get_string('addlinkhere', 'powereduc'),
+                        get_string('nameforlink', 'powereduc'), get_string('whatforlink', 'powereduc'), 10);
+        $this->register_type('text/html', array('text/html'), get_string('addpagehere', 'powereduc'),
+                        get_string('nameforpage', 'powereduc'), get_string('whatforpage', 'powereduc'), 20);
+        $this->register_type('text', array('text', 'text/plain'), get_string('addpagehere', 'powereduc'),
+                        get_string('nameforpage', 'powereduc'), get_string('whatforpage', 'powereduc'), 30);
 
         $this->context = context_course::instance($course->id);
 
@@ -455,16 +455,16 @@ class dndupload_ajax_processor {
      * @param string $content optional the content of the upload (for non-file uploads)
      */
     public function process($displayname = null, $content = null) {
-        require_capability('moodle/course:manageactivities', $this->context);
+        require_capability('powereduc/course:manageactivities', $this->context);
 
         if ($this->is_file_upload()) {
-            require_capability('moodle/course:managefiles', $this->context);
+            require_capability('powereduc/course:managefiles', $this->context);
             if ($content != null) {
-                throw new moodle_exception('fileuploadwithcontent', 'moodle');
+                throw new powereduc_exception('fileuploadwithcontent', 'powereduc');
             }
         } else {
             if (empty($content)) {
-                throw new moodle_exception('dnduploadwithoutcontent', 'moodle');
+                throw new powereduc_exception('dnduploadwithoutcontent', 'powereduc');
             }
         }
 
@@ -492,7 +492,7 @@ class dndupload_ajax_processor {
         $types = $this->dnduploadhandler->get_handled_file_types($this->module->name);
         $repo = repository::get_instances(array('type' => 'upload', 'currentcontext' => $this->context));
         if (empty($repo)) {
-            throw new moodle_exception('errornouploadrepo', 'moodle');
+            throw new powereduc_exception('errornouploadrepo', 'powereduc');
         }
         $repo = reset($repo); // Get the first (and only) upload repo.
         $details = $repo->process_upload(null, $maxbytes, $types, '/', $draftitemid);
@@ -524,7 +524,7 @@ class dndupload_ajax_processor {
         // Check this plugin is registered to handle this type of upload
         if (!$this->dnduploadhandler->has_type_handler($this->module->name, $this->type)) {
             $info = (object)array('modname' => $this->module->name, 'type' => $this->type);
-            throw new moodle_exception('moddoesnotsupporttype', 'moodle', $info);
+            throw new powereduc_exception('moddoesnotsupporttype', 'powereduc', $info);
         }
 
         // Create a course module to hold the new instance.
@@ -607,7 +607,7 @@ class dndupload_ajax_processor {
         if (!$instanceid) {
             // Something has gone wrong - undo everything we can.
             course_delete_module($this->cm->id);
-            throw new moodle_exception('errorcreatingactivity', 'moodle', '', $this->module->name);
+            throw new powereduc_exception('errorcreatingactivity', 'powereduc', '', $this->module->name);
         }
 
         // Note the section visibility
@@ -631,7 +631,7 @@ class dndupload_ajax_processor {
         if (!isset($info->cms[$this->cm->id])) {
             // The course module has not been properly created in the course - undo everything.
             course_delete_module($this->cm->id);
-            throw new moodle_exception('errorcreatingactivity', 'moodle', '', $this->module->name);
+            throw new powereduc_exception('errorcreatingactivity', 'powereduc', '', $this->module->name);
         }
         $mod = $info->get_cm($this->cm->id);
 

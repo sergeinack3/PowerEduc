@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Atto text editor integration version file.
  *
  * @package    atto_h5p
- * @copyright  2019 Bas Brands <bas@moodle.com>
+ * @copyright  2019 Bas Brands <bas@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -40,7 +40,7 @@ function atto_h5p_params_for_js($elementid, $options, $fpoptions) {
     }
 
     $addembed = has_capability('atto/h5p:addembed', $context);
-    $upload = has_capability('moodle/h5p:deploy', $context);
+    $upload = has_capability('powereduc/h5p:deploy', $context);
 
     $allowedmethods = 'none';
     if ($addembed && $upload) {
@@ -80,6 +80,6 @@ function atto_h5p_strings_for_js() {
     );
 
     $PAGE->requires->strings_for_js($strings, 'atto_h5p');
-    $PAGE->requires->strings_for_js(['expand', 'collapse'], 'moodle');
+    $PAGE->requires->strings_for_js(['expand', 'collapse'], 'powereduc');
     $PAGE->requires->js(autoloader::get_h5p_core_library_url('js/h5p-resizer.js'));
 }

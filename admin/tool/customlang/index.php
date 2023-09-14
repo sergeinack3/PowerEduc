@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    tool
  * @subpackage customlang
- * @copyright  2010 David Mudrak <david@moodle.com>
+ * @copyright  2010 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -47,7 +47,7 @@ if ($action === 'checkout') {
     require_sesskey();
     require_capability('tool/customlang:edit', context_system::instance());
     if (empty($lng)) {
-        throw new \moodle_exception('missingparameter');
+        throw new \powereduc_exception('missingparameter');
     }
 
     $PAGE->set_cacheable(false);    // progress bar is used here
@@ -62,7 +62,7 @@ if ($action === 'checkout') {
     raise_memory_limit(MEMORY_EXTRA);
     tool_customlang_utils::checkout($lng, $progressbar);
 
-    echo $output->continue_button(new moodle_url("/admin/tool/customlang/{$next}.php", array('lng' => $lng)), 'get');
+    echo $output->continue_button(new powereduc_url("/admin/tool/customlang/{$next}.php", array('lng' => $lng)), 'get');
     echo $output->footer();
     exit;
 }
@@ -70,7 +70,7 @@ if ($action === 'checkin') {
     require_sesskey();
     require_capability('tool/customlang:edit', context_system::instance());
     if (empty($lng)) {
-        throw new \moodle_exception('missingparameter');
+        throw new \powereduc_exception('missingparameter');
     }
 
     if (!$confirm) {
@@ -82,11 +82,11 @@ if ($action === 'checkin') {
         if ($numofmodified != 0) {
             echo $output->heading(get_string('modifiednum', 'tool_customlang', $numofmodified), 3);
             echo $output->confirm(get_string('confirmcheckin', 'tool_customlang'),
-                                  new moodle_url($PAGE->url, array('action'=>'checkin', 'lng'=>$lng, 'confirm'=>1)),
-                                  new moodle_url($PAGE->url, array('lng'=>$lng)));
+                                  new powereduc_url($PAGE->url, array('action'=>'checkin', 'lng'=>$lng, 'confirm'=>1)),
+                                  new powereduc_url($PAGE->url, array('lng'=>$lng)));
         } else {
             echo $output->heading(get_string('modifiedno', 'tool_customlang', $numofmodified), 3);
-            echo $output->continue_button(new moodle_url($PAGE->url, array('lng' => $lng)));
+            echo $output->continue_button(new powereduc_url($PAGE->url, array('lng' => $lng)));
         }
         echo $output->footer();
         die();
@@ -124,19 +124,19 @@ $menu = array();
 if (has_capability('tool/customlang:edit', context_system::instance())) {
     $menu['checkout'] = array(
         'title'     => get_string('checkout', 'tool_customlang'),
-        'url'       => new moodle_url($PAGE->url, array('action' => 'checkout', 'lng' => $lng)),
+        'url'       => new powereduc_url($PAGE->url, array('action' => 'checkout', 'lng' => $lng)),
         'method'    => 'post',
     );
     if ($numofmodified != 0) {
         $menu['checkin'] = array(
             'title'     => get_string('checkin', 'tool_customlang'),
-            'url'       => new moodle_url($PAGE->url, array('action' => 'checkin', 'lng' => $lng)),
+            'url'       => new powereduc_url($PAGE->url, array('action' => 'checkin', 'lng' => $lng)),
             'method'    => 'post',
         );
     }
     $menu['import'] = array(
         'title'     => get_string('import', 'tool_customlang'),
-        'url'       => new moodle_url($PAGE->url, ['action' => 'checkout', 'lng' => $lng, 'next' => 'import']),
+        'url'       => new powereduc_url($PAGE->url, ['action' => 'checkout', 'lng' => $lng, 'next' => 'import']),
         'method'    => 'post',
     );
 }
@@ -145,7 +145,7 @@ if (has_capability('tool/customlang:export', context_system::instance())) {
     if (check_dir_exists(dirname($langdir)) && count(glob("$langdir/*"))) {
         $menu['export'] = [
             'title'     => get_string('export', 'tool_customlang'),
-            'url'       => new moodle_url("/admin/tool/customlang/export.php", ['lng' => $lng]),
+            'url'       => new powereduc_url("/admin/tool/customlang/export.php", ['lng' => $lng]),
             'method'    => 'post',
         ];
     }

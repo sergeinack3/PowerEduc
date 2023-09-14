@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ use external_function_parameters;
 use external_value;
 use external_single_structure;
 use external_multiple_structure;
-use moodle_url;
+use powereduc_url;
 use core_user;
 
 defined('POWEREDUC_INTERNAL') || die;
@@ -32,7 +32,7 @@ require_once($CFG->dirroot.'/grade/lib.php');
  * Get the enrolled users within and map some fields to the returned array of user objects.
  *
  * @package    core_grades
- * @copyright  2022 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2022 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 4.1
  */
@@ -62,7 +62,7 @@ class get_enrolled_users_for_search_widget extends external_api {
      * @return array Users and warnings to pass back to the calling widget.
      * @throws coding_exception
      * @throws invalid_parameter_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @throws restricted_context_exception
      */
     public static function execute(int $courseid, string $actionbaseurl, ?int $groupid = 0): array {
@@ -81,13 +81,13 @@ class get_enrolled_users_for_search_widget extends external_api {
         $coursecontext = \context_course::instance($params['courseid']);
         parent::validate_context($coursecontext);
 
-        require_capability('moodle/course:viewparticipants', $coursecontext);
+        require_capability('powereduc/course:viewparticipants', $coursecontext);
 
         $course = $DB->get_record('course', ['id' => $params['courseid']]);
         // Create a graded_users_iterator because it will properly check the groups etc.
         $defaultgradeshowactiveenrol = !empty($CFG->grade_report_showonlyactiveenrol);
         $showonlyactiveenrol = get_user_preferences('grade_report_showonlyactiveenrol', $defaultgradeshowactiveenrol);
-        $showonlyactiveenrol = $showonlyactiveenrol || !has_capability('moodle/course:viewsuspendedusers', $coursecontext);
+        $showonlyactiveenrol = $showonlyactiveenrol || !has_capability('powereduc/course:viewsuspendedusers', $coursecontext);
 
         $gui = new \graded_users_iterator($course, null, $params['groupid']);
         $gui->require_active_enrolment($showonlyactiveenrol);
@@ -100,7 +100,7 @@ class get_enrolled_users_for_search_widget extends external_api {
             $user = new \stdClass();
             $user->fullname = fullname($guiuser);
             $user->id = $guiuser->id;
-            $user->url = (new moodle_url($actionbaseurl, ['id' => $courseid, 'userid' => $guiuser->id]))->out(false);
+            $user->url = (new powereduc_url($actionbaseurl, ['id' => $courseid, 'userid' => $guiuser->id]))->out(false);
             $userpicture = new \user_picture($guiuser);
             $userpicture->size = 1;
             $user->profileimage = $userpicture->get_url($PAGE)->out(false);

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * class block_recent_activity
  *
  * @package    block_recent_activity
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,7 +28,7 @@ require_once($CFG->dirroot.'/course/lib.php');
  * class block_recent_activity
  *
  * @package    block_recent_activity
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_recent_activity extends block_base {
@@ -200,7 +200,7 @@ class block_recent_activity extends block_base {
      */
     protected function get_modules_recent_activity() {
         $context = context_course::instance($this->page->course->id);
-        $viewfullnames = has_capability('moodle/site:viewfullnames', $context);
+        $viewfullnames = has_capability('powereduc/site:viewfullnames', $context);
         $hascontent = false;
 
         $modinfo = get_fast_modinfo($this->page->course);

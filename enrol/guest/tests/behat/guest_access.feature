@@ -42,13 +42,13 @@ Feature: Guest users can auto-enrol themself in courses where guest access is al
     Given I click on "Edit" "link" in the "Guest access" "table_row"
     And I set the following fields to these values:
       | Allow guest access | Yes |
-      | Password | moodle_rules |
+      | Password | powereduc_rules |
     And I press "Save changes"
     And I log out
     And I log in as "student1"
     When I am on "Course 1" course homepage
     Then I should see "Guest access"
     And I set the following fields to these values:
-      | Password | moodle_rules |
+      | Password | powereduc_rules |
     And I press "Submit"
     And I should see "Test forum name"

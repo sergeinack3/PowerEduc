@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Provides the class that defines the form for the H5P authoring tool.
  *
  * @package    contenttype_h5p
- * @copyright  2020 Victor Deniz <victor@moodle.com>
+ * @copyright  2020 Victor Deniz <victor@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,7 +36,7 @@ use stdClass;
 /**
  * Defines the form for editing an H5P content.
  *
- * @copyright 2020 Victor Deniz <victor@moodle.com>
+ * @copyright 2020 Victor Deniz <victor@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class editor extends edit_content {
@@ -63,8 +63,8 @@ class editor extends edit_content {
         $library = optional_param('library', null, PARAM_TEXT);
 
         if (empty($id) && empty($library)) {
-            $returnurl = new \moodle_url('/contentbank/index.php', ['contextid' => $this->_customdata['contextid']]);
-            throw new \moodle_exception('invalidcontentid', 'error', $returnurl);
+            $returnurl = new \powereduc_url('/contentbank/index.php', ['contextid' => $this->_customdata['contextid']]);
+            throw new \powereduc_exception('invalidcontentid', 'error', $returnurl);
         }
 
         $this->h5peditor = new h5peditor();

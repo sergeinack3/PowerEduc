@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ use context_course;
  */
 class accessibility_review_test extends advanced_testcase {
     public static function setUpBeforeClass(): void {
-        require_once(__DIR__ . '/../../moodleblock.class.php');
+        require_once(__DIR__ . '/../../powereducblock.class.php');
         require_once(__DIR__ . '/../block_accessreview.php');
     }
 
@@ -109,7 +109,7 @@ class accessibility_review_test extends advanced_testcase {
 
         // Create a course and prepare the page where the block will be added.
         $course = $this->getDataGenerator()->create_course();
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context(context_course::instance($course->id));
         $page->set_pagelayout('course');
 

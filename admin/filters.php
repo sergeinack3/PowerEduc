@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -107,7 +107,7 @@ switch ($action) {
 
 // Return.
 if ($action) {
-    redirect(new moodle_url('/admin/filters.php'));
+    redirect(new powereduc_url('/admin/filters.php'));
 }
 
 // Print the page heading.
@@ -162,13 +162,13 @@ die;
  *
  * @param string $filterpath which filter to get the URL for.
  * @param string $action which action to get the URL for.
- * @return moodle_url|null the requested URL.
+ * @return powereduc_url|null the requested URL.
  */
-function filters_action_url(string $filterpath, string $action): ?moodle_url {
+function filters_action_url(string $filterpath, string $action): ?powereduc_url {
     if ($action === 'delete') {
         return core_plugin_manager::instance()->get_uninstall_url('filter_'.$filterpath, 'manage');
     }
-    return new moodle_url('/admin/filters.php',
+    return new powereduc_url('/admin/filters.php',
             ['sesskey' => sesskey(), 'filterpath' => $filterpath, 'action' => $action]);
 }
 
@@ -245,7 +245,7 @@ function get_table_row(\core\plugininfo\filter $plugininfo, stdClass $state,
 
     // Settings link, if required.
     if ($active and filter_has_global_settings($filter)) {
-        $row[] = html_writer::link(new moodle_url('/admin/settings.php',
+        $row[] = html_writer::link(new powereduc_url('/admin/settings.php',
                 ['section' => 'filtersetting'.$filter]), get_string('settings'));
     } else {
         $row[] = '';

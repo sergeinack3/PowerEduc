@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,13 +16,13 @@
 
 namespace core_grades\output;
 
-use moodle_url;
+use powereduc_url;
 
 /**
  * Renderable class for the action bar elements in the gradebook scales page.
  *
  * @package    core_grades
- * @copyright  2021 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2021 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class scales_action_bar extends action_bar {
@@ -50,11 +50,11 @@ class scales_action_bar extends action_bar {
             $courseid = $this->context->instanceid;
             // Get the data used to output the general navigation selector.
             $generalnavselector = new general_action_bar($this->context,
-                new moodle_url('/grade/edit/scale/index.php', ['id' => $courseid]), 'scale', 'scale');
+                new powereduc_url('/grade/edit/scale/index.php', ['id' => $courseid]), 'scale', 'scale');
             $data = $generalnavselector->export_for_template($output);
         }
         // Add a button to the action bar with a link to the 'add new scale' page.
-        $addnewscalelink = new moodle_url('/grade/edit/scale/edit.php', ['courseid' => $courseid]);
+        $addnewscalelink = new powereduc_url('/grade/edit/scale/edit.php', ['courseid' => $courseid]);
         $addnewscalebutton = new \single_button($addnewscalelink, get_string('scalescustomcreate'),
             'get', true);
         $data['addnewscalebutton'] = $addnewscalebutton->export_for_template($output);

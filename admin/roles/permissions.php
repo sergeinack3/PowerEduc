@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ $returnurl  = optional_param('returnurl', null, PARAM_LOCALURL);
 
 list($context, $course, $cm) = get_context_info_array($contextid);
 
-$url = new moodle_url('/admin/roles/permissions.php', array('contextid' => $contextid));
+$url = new powereduc_url('/admin/roles/permissions.php', array('contextid' => $contextid));
 
 if ($course) {
     $isfrontpage = ($course->id == SITEID);
@@ -55,10 +55,10 @@ if ($course) {
 
 // Security first.
 require_login($course, false, $cm);
-require_capability('moodle/role:review', $context);
+require_capability('powereduc/role:review', $context);
 
 navigation_node::override_active_url($url);
-$pageurl = new moodle_url($url);
+$pageurl = new powereduc_url($url);
 if ($returnurl) {
     $pageurl->param('returnurl', $returnurl);
 }
@@ -82,8 +82,8 @@ if ($capability) {
     $capability = $DB->get_record('capabilities', array('name'=>$capability), '*', MUST_EXIST);
 }
 
-$allowoverrides     = has_capability('moodle/role:override', $context);
-$allowsafeoverrides = has_capability('moodle/role:safeoverride', $context);
+$allowoverrides     = has_capability('powereduc/role:override', $context);
+$allowsafeoverrides = has_capability('powereduc/role:safeoverride', $context);
 
 $contextname = $context->get_context_name();
 $title = get_string('permissionsincontext', 'core_role', $contextname);
@@ -100,10 +100,10 @@ $PAGE->set_title($title);
 $PAGE->activityheader->disable();
 switch ($context->contextlevel) {
     case CONTEXT_SYSTEM:
-        throw new \moodle_exception('cannotoverridebaserole', 'error');
+        throw new \powereduc_exception('cannotoverridebaserole', 'error');
         break;
     case CONTEXT_USER:
-        $fullname = fullname($user, has_capability('moodle/site:viewfullnames', $context));
+        $fullname = fullname($user, has_capability('powereduc/site:viewfullnames', $context));
         $PAGE->set_heading($fullname);
         $showroles = 1;
         break;
@@ -140,7 +140,7 @@ if ($capability && ($allowoverrides || ($allowsafeoverrides && is_safe_capabilit
             } else {
                 $a = (object)array('cap'=>get_capability_docs_link($capability)." ($capability->name)", 'role'=>$overridableroles[$roleid], 'context'=>$contextname);
                 $message = get_string('confirmroleprevent', 'core_role', $a);
-                $continueurl = new moodle_url($PAGE->url,
+                $continueurl = new powereduc_url($PAGE->url,
                     array('contextid'=>$context->id, 'roleid'=>$roleid, 'capability'=>$capability->name, 'prevent'=>1, 'sesskey'=>sesskey(), 'confirm'=>1));
             }
         }
@@ -152,7 +152,7 @@ if ($capability && ($allowoverrides || ($allowsafeoverrides && is_safe_capabilit
             } else {
                 $a = (object)array('cap'=>get_capability_docs_link($capability)." ($capability->name)", 'role'=>$overridableroles[$roleid], 'context'=>$contextname);
                 $message = get_string('confirmroleunprohibit', 'core_role', $a);
-                $continueurl = new moodle_url($PAGE->url,
+                $continueurl = new powereduc_url($PAGE->url,
                     array('contextid'=>$context->id, 'roleid'=>$roleid, 'capability'=>$capability->name, 'unprohibit'=>1, 'sesskey'=>sesskey(), 'confirm'=>1));
             }
         }
@@ -213,7 +213,7 @@ if (in_array($context->contextlevel, [CONTEXT_COURSE, CONTEXT_MODULE, CONTEXT_CO
 
 echo $OUTPUT->heading($title);
 
-$adminurl = new moodle_url('/admin/');
+$adminurl = new powereduc_url('/admin/');
 $arguments = array('contextid' => $contextid,
                 'contextname' => $contextname,
                 'adminurl' => $adminurl->out());
@@ -226,7 +226,7 @@ $table = new core_role_permissions_table($context, $contextname, $allowoverrides
 echo $OUTPUT->box_start('generalbox capbox');
 // Print link to advanced override page.
 if ($overridableroles) {
-    $overrideurl = new moodle_url('/admin/roles/override.php', array('contextid' => $context->id));
+    $overrideurl = new powereduc_url('/admin/roles/override.php', array('contextid' => $context->id));
     $select = new single_select($overrideurl, 'roleid', $nameswithcounts);
     $select->label = get_string('advancedoverride', 'core_role');
     echo html_writer::tag('div', $OUTPUT->render($select), array('class'=>'advancedoverride'));
@@ -238,7 +238,7 @@ echo $OUTPUT->box_end();
 if ($context->contextlevel > CONTEXT_USER) {
 
     if ($returnurl) {
-        $url = new moodle_url($returnurl);
+        $url = new powereduc_url($returnurl);
     } else {
         $url = $context->get_url();
     }

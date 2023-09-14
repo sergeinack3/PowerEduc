@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -134,10 +134,10 @@ class block_settings extends block_base {
         $this->content = new stdClass();
         $this->content->text = $renderer->settings_tree($this->page->settingsnav);
 
-        // only do search if you have moodle/site:config
+        // only do search if you have powereduc/site:config
         if (!empty($this->content->text)) {
-            if (has_capability('moodle/site:config',context_system::instance()) ) {
-                $this->content->footer = $renderer->search_form(new moodle_url("$CFG->wwwroot/$CFG->admin/search.php"), optional_param('query', '', PARAM_RAW));
+            if (has_capability('powereduc/site:config',context_system::instance()) ) {
+                $this->content->footer = $renderer->search_form(new powereduc_url("$CFG->wwwroot/$CFG->admin/search.php"), optional_param('query', '', PARAM_RAW));
             } else {
                 $this->content->footer = '';
             }

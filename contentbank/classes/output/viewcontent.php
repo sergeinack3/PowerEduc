@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Class containing data for a content view.
  *
  * @package    core_contentbank
- * @copyright  2020 Victor Deniz <victor@moodle.com>
+ * @copyright  2020 Victor Deniz <victor@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -26,7 +26,7 @@ namespace core_contentbank\output;
 
 use core_contentbank\content;
 use core_contentbank\contenttype;
-use moodle_url;
+use powereduc_url;
 use renderable;
 use renderer_base;
 use stdClass;
@@ -35,7 +35,7 @@ use templatable;
 /**
  * Class containing data for the content view.
  *
- * @copyright  2020 Victor Deniz <victor@moodle.com>
+ * @copyright  2020 Victor Deniz <victor@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class viewcontent implements renderable, templatable {
@@ -64,7 +64,7 @@ class viewcontent implements renderable, templatable {
      * Get the content of the "More" dropdown in the tertiary navigation
      *
      * @return array|null The options to be displayed in a dropdown in the tertiary navigation
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     protected function get_edit_actions_dropdown(): ?array {
         global $PAGE;
@@ -81,8 +81,8 @@ class viewcontent implements renderable, templatable {
                     $newvisibility = content::VISIBILITY_UNLISTED;
                     break;
                 default:
-                    $url = new \moodle_url('/contentbank/index.php', ['contextid' => $this->content->get_contextid()]);
-                    throw new moodle_exception('contentvisibilitynotfound', 'error', $url, $this->content->get_visibility());
+                    $url = new \powereduc_url('/contentbank/index.php', ['contextid' => $this->content->get_contextid()]);
+                    throw new powereduc_exception('contentvisibilitynotfound', 'error', $url, $this->content->get_visibility());
             }
 
             if ($visibilitylabel) {
@@ -117,7 +117,7 @@ class viewcontent implements renderable, templatable {
         }
 
         if ($this->contenttype->can_download($this->content)) {
-            $url = new moodle_url($this->contenttype->get_download_url($this->content));
+            $url = new powereduc_url($this->contenttype->get_download_url($this->content));
             $options[get_string('download')] = [
                 'url' => $url->out()
             ];
@@ -176,11 +176,11 @@ class viewcontent implements renderable, templatable {
                 'plugin' => $this->contenttype->get_plugin_name(),
                 'id' => $this->content->get_id()
             ];
-            $editcontenturl = new moodle_url('/contentbank/edit.php', $urlparams);
+            $editcontenturl = new powereduc_url('/contentbank/edit.php', $urlparams);
             $data->editcontenturl = $editcontenturl->out(false);
         }
 
-        $closeurl = new moodle_url('/contentbank/index.php', ['contextid' => $this->content->get_contextid()]);
+        $closeurl = new powereduc_url('/contentbank/index.php', ['contextid' => $this->content->get_contextid()]);
         $data->closeurl = $closeurl->out(false);
         $data->actionmenu = $this->get_edit_actions_dropdown();
         $data->heading = $this->content->get_name();

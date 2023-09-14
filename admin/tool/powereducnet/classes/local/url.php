@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,11 +16,11 @@
 /**
  * Contains the url class, providing a representation of a url and operations on its component parts.
  *
- * @package tool_moodlenet
+ * @package tool_powereducnet
  * @copyright 2020 Jake Dallimore <jrhdallimore@gmail.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace tool_moodlenet\local;
+namespace tool_powereducnet\local;
 
 /**
  * The url class, providing a representation of a url and operations on its component parts.

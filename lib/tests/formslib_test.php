@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Unit tests for /lib/formslib.php.
@@ -27,10 +27,10 @@ namespace core;
 
 use HTML_QuickForm_Rule_Range;
 use powereducform;
-use MoodleQuickForm_radio;
-use MoodleQuickForm_Rule_Required;
-use MoodleQuickForm_select;
-use MoodleQuickForm_text;
+use PowerEducQuickForm_radio;
+use PowerEducQuickForm_Rule_Required;
+use PowerEducQuickForm_select;
+use PowerEducQuickForm_text;
 
 defined('POWEREDUC_INTERNAL') || die();
 
@@ -58,7 +58,7 @@ class formslib_test extends \advanced_testcase {
             $strictformsrequired = $CFG->strictformsrequired;
         }
 
-        $rule = new MoodleQuickForm_Rule_Required();
+        $rule = new PowerEducQuickForm_Rule_Required();
 
         // First run the tests with strictformsrequired off.
         $CFG->strictformsrequired = false;
@@ -225,40 +225,40 @@ class formslib_test extends \advanced_testcase {
     }
 
     public function test_generate_id_select() {
-        $el = new MoodleQuickForm_select('choose_one', 'Choose one',
+        $el = new PowerEducQuickForm_select('choose_one', 'Choose one',
             array(1 => 'One', '2' => 'Two'));
         $el->_generateId();
         $this->assertSame('id_choose_one', $el->getAttribute('id'));
     }
 
     public function test_generate_id_like_repeat() {
-        $el = new MoodleQuickForm_text('text[7]', 'Type something');
+        $el = new PowerEducQuickForm_text('text[7]', 'Type something');
         $el->_generateId();
         $this->assertSame('id_text_7', $el->getAttribute('id'));
     }
 
     public function test_can_manually_set_id() {
-        $el = new MoodleQuickForm_text('elementname', 'Type something',
+        $el = new PowerEducQuickForm_text('elementname', 'Type something',
             array('id' => 'customelementid'));
         $el->_generateId();
         $this->assertSame('customelementid', $el->getAttribute('id'));
     }
 
     public function test_generate_id_radio() {
-        $el = new MoodleQuickForm_radio('radio', 'Label', 'Choice label', 'choice_value');
+        $el = new PowerEducQuickForm_radio('radio', 'Label', 'Choice label', 'choice_value');
         $el->_generateId();
         $this->assertSame('id_radio_choice_value', $el->getAttribute('id'));
     }
 
     public function test_radio_can_manually_set_id() {
-        $el = new MoodleQuickForm_radio('radio2', 'Label', 'Choice label', 'choice_value',
+        $el = new PowerEducQuickForm_radio('radio2', 'Label', 'Choice label', 'choice_value',
             array('id' => 'customelementid2'));
         $el->_generateId();
         $this->assertSame('customelementid2', $el->getAttribute('id'));
     }
 
     public function test_generate_id_radio_like_repeat() {
-        $el = new MoodleQuickForm_radio('repeatradio[2]', 'Label', 'Choice label', 'val');
+        $el = new PowerEducQuickForm_radio('repeatradio[2]', 'Label', 'Choice label', 'val');
         $el->_generateId();
         $this->assertSame('id_repeatradio_2_val', $el->getAttribute('id'));
     }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ defined('POWEREDUC_INTERNAL') || die();
 
 require_once("$CFG->libdir/formslib.php");
 
-class enrol_users_assign_form extends moodleform {
+class enrol_users_assign_form extends powereducform {
     function definition() {
         global $CFG, $DB;
 
@@ -77,7 +77,7 @@ class enrol_users_assign_form extends moodleform {
     }
 }
 
-class enrol_users_addmember_form extends moodleform {
+class enrol_users_addmember_form extends powereducform {
     function definition() {
         global $CFG, $DB;
 
@@ -136,7 +136,7 @@ class enrol_users_addmember_form extends moodleform {
 /**
  * Form that lets users filter the enrolled user list.
  */
-class enrol_users_filter_form extends moodleform {
+class enrol_users_filter_form extends powereducform {
     function definition() {
         global $CFG, $DB;
 

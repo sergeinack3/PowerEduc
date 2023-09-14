@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ $PAGE->set_url('/course/changenumsections.php', array('courseid' => $courseid));
 
 // Authorisation checks.
 require_login($course);
-require_capability('moodle/course:update', context_course::instance($course->id));
+require_capability('powereduc/course:update', context_course::instance($course->id));
 require_sesskey();
 
 $desirednumsections = 0;
@@ -59,7 +59,7 @@ if (isset($courseformatoptions['numsections']) && $increase !== null) {
 
 if ($desirednumsections > $maxsections) {
     // Increase in number of sections is not allowed.
-    \core\notification::warning(get_string('maxsectionslimit', 'moodle', $maxsections));
+    \core\notification::warning(get_string('maxsectionslimit', 'powereduc', $maxsections));
     $increase = null;
     $insertsection = null;
     $numsections = 0;
@@ -93,7 +93,7 @@ if (isset($courseformatoptions['numsections']) && $increase !== null) {
 } else if (course_get_format($course)->uses_sections() && $insertsection !== null) {
     if ($insertsection) {
         // Inserting sections at any position except in the very end requires capability to move sections.
-        require_capability('moodle/course:movesections', context_course::instance($course->id));
+        require_capability('powereduc/course:movesections', context_course::instance($course->id));
     }
     $sections = [];
     for ($i = 0; $i < max($numsections, 1); $i ++) {

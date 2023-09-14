@@ -1,4 +1,4 @@
-Instructions to import ZipStream into Moodle:
+Instructions to import ZipStream into PowerEduc:
 
 1/ Download from https://github.com/maennchen/ZipStream-PHP/releases/
 

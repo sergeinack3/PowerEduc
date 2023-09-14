@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ $contextid = optional_param('contextid', SYSCONTEXTID, PARAM_INT);
 $action    = optional_param('action', '', PARAM_ALPHA);
 
 if (empty($CFG->usecomments)) {
-    throw new comment_exception('commentsnotenabled', 'moodle');
+    throw new comment_exception('commentsnotenabled', 'powereduc');
 }
 
 list($context, $course, $cm) = get_context_info_array($contextid);

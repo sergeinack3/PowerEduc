@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ $courseid = required_param('id', PARAM_INT);                   // course id
 $PAGE->set_url('/grade/report/outcomes/index.php', array('id'=>$courseid));
 
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 require_login($course);
@@ -53,7 +53,7 @@ $outcomes = grade_outcome::fetch_all_available($courseid);
 // Will exclude grades of suspended users if required.
 $defaultgradeshowactiveenrol = !empty($CFG->grade_report_showonlyactiveenrol);
 $showonlyactiveenrol = get_user_preferences('grade_report_showonlyactiveenrol', $defaultgradeshowactiveenrol);
-$showonlyactiveenrol = $showonlyactiveenrol || !has_capability('moodle/course:viewsuspendedusers', $context);
+$showonlyactiveenrol = $showonlyactiveenrol || !has_capability('powereduc/course:viewsuspendedusers', $context);
 if ($showonlyactiveenrol) {
     $suspendedusers = get_suspended_userids($context);
 }

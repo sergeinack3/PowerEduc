@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  *
  * @package     tool_installaddon
  * @subpackage  ajax
- * @copyright   2013 David Mudrak <david@moodle.com>
+ * @copyright   2013 David Mudrak <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,7 +31,7 @@ require_once($CFG->libdir.'/adminlib.php');
 
 require_login(null, false);
 
-if (!has_capability('moodle/site:config', context_system::instance())) {
+if (!has_capability('powereduc/site:config', context_system::instance())) {
     header('HTTP/1.1 403 Forbidden');
     die();
 }

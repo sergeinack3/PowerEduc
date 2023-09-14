@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ class import_ui extends backup_ui {
     /**
      * Customises the backup progress bar
      *
-     * @global moodle_page $PAGE
+     * @global powereduc_page $PAGE
      * @return array[] An array of arrays
      */
     public function get_progress_bar() {
@@ -64,7 +64,7 @@ class import_ui extends backup_ui {
                 'class' => join(' ', $classes)
             );
             if ($stage < $currentstage && $currentstage < self::STAGE_COMPLETE && (!self::$skipcurrentstage || $stage * 2 != $currentstage)) {
-                $item['link'] = new moodle_url(
+                $item['link'] = new powereduc_url(
                     $PAGE->url,
                     $this->stage->get_params() + array('backup' => $this->get_backupid(), 'stage' => $stage)
                 );
@@ -72,7 +72,7 @@ class import_ui extends backup_ui {
             array_unshift($items, $item);
             $stage = floor($stage / 2);
         }
-        $selectorlink = new moodle_url($PAGE->url, $this->stage->get_params());
+        $selectorlink = new powereduc_url($PAGE->url, $this->stage->get_params());
         $selectorlink->remove_params('importid');
 
         $classes = ["backup_stage"];
@@ -158,9 +158,9 @@ class import_ui_stage_precheck extends backup_ui_stage {
     /**
      * Processes the precheck/selection import stage
      *
-     * @param base_moodleform|null $form
+     * @param base_powereducform|null $form
      */
-    public function process(base_moodleform $form = null) {
+    public function process(base_powereducform $form = null) {
         // Dummy functions. We don't have to do anything here.
         return;
     }
@@ -175,9 +175,9 @@ class import_ui_stage_precheck extends backup_ui_stage {
     }
 
     /**
-     * Initialises the backup_moodleform instance for this stage
+     * Initialises the backup_powereducform instance for this stage
      *
-     * @return backup_moodleform|void
+     * @return backup_powereducform|void
      */
     public function initialise_stage_form() {
         // Dummy functions. We don't have to do anything here.
@@ -206,8 +206,8 @@ class import_ui_stage_schema extends backup_ui_stage_schema {}
 class import_ui_stage_confirmation extends backup_ui_stage_confirmation {
 
     /**
-     * Initialises the stages moodleform
-     * @return moodleform
+     * Initialises the stages powereducform
+     * @return powereducform
      */
     protected function initialise_stage_form() {
         $form = parent::initialise_stage_form();
@@ -240,7 +240,7 @@ class import_ui_stage_confirmation extends backup_ui_stage_confirmation {
             }
         }
 
-        // A nasty hack follows to work around the sad fact that moodle quickforms
+        // A nasty hack follows to work around the sad fact that powereduc quickforms
         // do not allow to actually return the HTML content, just to echo it.
         flush();
         ob_start();
@@ -274,6 +274,6 @@ class import_course_search extends restore_course_search {
      * This will typically call $this->require_capability().
      */
     protected function setup_restrictions() {
-        $this->require_capability('moodle/backup:backuptargetimport');
+        $this->require_capability('powereduc/backup:backuptargetimport');
     }
 }

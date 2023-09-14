@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package moodlecore
+ * @package powereduccore
  * @subpackage backup-plan
  * @copyright 2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -71,7 +71,7 @@ class restore_plan extends base_plan implements loggable {
     }
 
     public function build() {
-        restore_plan_builder::build_plan($this->controller); // We are moodle2 always, go straight to builder
+        restore_plan_builder::build_plan($this->controller); // We are powereduc2 always, go straight to builder
         $this->built = true;
     }
 

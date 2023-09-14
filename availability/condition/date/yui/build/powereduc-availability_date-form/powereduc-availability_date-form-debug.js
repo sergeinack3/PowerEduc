@@ -1,9 +1,9 @@
-YUI.add('moodle-availability_date-form', function (Y, NAME) {
+YUI.add('powereduc-availability_date-form', function (Y, NAME) {
 
 /**
  * JavaScript for form editing date conditions.
  *
- * @module moodle-availability_date-form
+ * @module powereduc-availability_date-form
  */
 M.availability_date = M.availability_date || {};
 
@@ -222,4 +222,4 @@ M.availability_date.form.fillErrors = function(errors, node) {
 };
 
 
-}, '@VERSION@', {"requires": ["base", "node", "event", "io", "moodle-core_availability-form"]});
+}, '@VERSION@', {"requires": ["base", "node", "event", "io", "powereduc-core_availability-form"]});

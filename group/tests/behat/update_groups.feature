@@ -63,11 +63,11 @@ Feature: Automatic updating of groups and groupings
     And the field "idnumber" matches value "An ID (updated)"
 
   @javascript @skip_chrome_zerosize
-  Scenario: Update groups and groupings with ID numbers without the 'moodle/course:changeidnumber' capability
+  Scenario: Update groups and groupings with ID numbers without the 'powereduc/course:changeidnumber' capability
     Given I log out
     And I log in as "admin"
     And I set the following system permissions of "Teacher" role:
-      | moodle/course:changeidnumber | Prevent |
+      | powereduc/course:changeidnumber | Prevent |
     And I log out
     And I log in as "teacher1"
     And I am on the "Course 1" "groups" page

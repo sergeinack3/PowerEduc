@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ use external_single_structure;
 use external_value;
 use external_warnings;
 use invalid_parameter_exception;
-use moodle_exception;
+use powereduc_exception;
 use required_capability_exception;
 use restricted_context_exception;
 use tool_dataprivacy\external\category_exporter;
@@ -168,7 +168,7 @@ class external extends external_api {
      * @throws invalid_persistent_exception
      * @throws restricted_context_exception
      * @throws dml_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function contact_dpo($message) {
         global $USER;
@@ -260,7 +260,7 @@ class external extends external_api {
      * @throws invalid_persistent_exception
      * @throws restricted_context_exception
      * @throws dml_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function mark_complete($requestid) {
         global $USER;
@@ -324,7 +324,7 @@ class external extends external_api {
      * @throws dml_exception
      * @throws invalid_parameter_exception
      * @throws restricted_context_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_data_request($requestid) {
         global $PAGE;
@@ -386,7 +386,7 @@ class external extends external_api {
      * @throws dml_exception
      * @throws invalid_parameter_exception
      * @throws restricted_context_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function approve_data_request($requestid) {
         $warnings = [];
@@ -460,7 +460,7 @@ class external extends external_api {
      * @throws dml_exception
      * @throws invalid_parameter_exception
      * @throws restricted_context_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function bulk_approve_data_requests($requestids) {
         $warnings = [];
@@ -537,7 +537,7 @@ class external extends external_api {
      * @throws dml_exception
      * @throws invalid_parameter_exception
      * @throws restricted_context_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function deny_data_request($requestid) {
         $warnings = [];
@@ -611,7 +611,7 @@ class external extends external_api {
      * @throws dml_exception
      * @throws invalid_parameter_exception
      * @throws restricted_context_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function bulk_deny_data_requests($requestids) {
         $warnings = [];
@@ -803,7 +803,7 @@ class external extends external_api {
             $purpose = api::create_purpose($validateddata);
             $validationerrors = false;
         } else if ($errors = $mform->is_validated()) {
-            throw new moodle_exception('generalerror');
+            throw new powereduc_exception('generalerror');
         }
 
         $exporter = new purpose_exporter($purpose, ['context' => \context_system::instance()]);
@@ -926,7 +926,7 @@ class external extends external_api {
             $category = api::create_category($validateddata);
             $validationerrors = false;
         } else if ($errors = $mform->is_validated()) {
-            throw new moodle_exception('generalerror');
+            throw new powereduc_exception('generalerror');
         }
 
         $exporter = new category_exporter($category, ['context' => \context_system::instance()]);
@@ -1119,7 +1119,7 @@ class external extends external_api {
             $context = api::set_context_instance($validateddata);
         } else if ($errors = $mform->is_validated()) {
             $warnings[] = json_encode($errors);
-            throw new moodle_exception('generalerror');
+            throw new powereduc_exception('generalerror');
         }
 
         if ($context) {
@@ -1190,7 +1190,7 @@ class external extends external_api {
                 $branches = data_registry_page::get_blocks_branch($context);
                 break;
             default:
-                throw new \moodle_exception('Unsupported element provided.');
+                throw new \powereduc_exception('Unsupported element provided.');
         }
 
         return [

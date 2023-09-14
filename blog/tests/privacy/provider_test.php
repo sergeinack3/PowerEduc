@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -576,7 +576,7 @@ class provider_test extends provider_testcase {
         $e6->add_association($cm1actx->id);
 
         // External blogs.
-        $ex1 = $this->create_external_blog(['userid' => $u1->id, 'url' => 'https://moodle.org', 'name' => 'Moodle RSS']);
+        $ex1 = $this->create_external_blog(['userid' => $u1->id, 'url' => 'https://powereduc.org', 'name' => 'Moodle RSS']);
         $ex2 = $this->create_external_blog(['userid' => $u1->id, 'url' => 'https://example.com', 'name' => 'Example']);
         $ex3 = $this->create_external_blog(['userid' => $u2->id, 'url' => 'https://example.com', 'name' => 'Ignore me']);
 
@@ -789,8 +789,8 @@ class provider_test extends provider_testcase {
         $u1ctx = \context_user::instance($u1->id);
         $u2ctx = \context_user::instance($u2->id);
 
-        $post = $this->create_external_blog(['userid' => $u1->id, 'url' => 'https://moodle.org', 'name' => 'Moodle RSS']);
-        $post2 = $this->create_external_blog(['userid' => $u2->id, 'url' => 'https://moodle.com', 'name' => 'Some other thing']);
+        $post = $this->create_external_blog(['userid' => $u1->id, 'url' => 'https://powereduc.org', 'name' => 'Moodle RSS']);
+        $post2 = $this->create_external_blog(['userid' => $u2->id, 'url' => 'https://powereduc.com', 'name' => 'Some other thing']);
 
         // Check that we have two external blogs created.
         $this->assertCount(2, $DB->get_records('blog_external'));

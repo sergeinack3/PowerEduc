@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ use core\task\adhoc_task;
  * Class handling course content updates notifications.
  *
  * @package core_course
- * @copyright 2021 Juan Leyva <juan@moodle.com>
+ * @copyright 2021 Juan Leyva <juan@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class content_notification_task extends adhoc_task {
@@ -82,12 +82,12 @@ class content_notification_task extends adhoc_task {
             $modnames = get_module_types_names();
             $a = [
                 'coursename' => get_course_display_name_for_list($course),
-                'courselink' => (new \moodle_url('/course/view.php', ['id' => $course->id]))->out(false),
+                'courselink' => (new \powereduc_url('/course/view.php', ['id' => $course->id]))->out(false),
                 'modulename' => format_string($cm->name, $modcontext->id),
                 'moduletypename' => $modnames[$cm->modname],
-                'link' => (new \moodle_url('/mod/' . $cm->modname . '/view.php', ['id' => $cm->id]))->out(false),
+                'link' => (new \powereduc_url('/mod/' . $cm->modname . '/view.php', ['id' => $cm->id]))->out(false),
                 'notificationpreferenceslink' =>
-                    (new \moodle_url('/message/notificationpreferences.php', ['userid' => $user->id]))->out(false),
+                    (new \powereduc_url('/message/notificationpreferences.php', ['userid' => $user->id]))->out(false),
             ];
 
             if ($isupdate) {
@@ -101,7 +101,7 @@ class content_notification_task extends adhoc_task {
             // Send notification.
             $eventdata = new \core\message\message();
             $eventdata->courseid = $course->id;
-            $eventdata->component = 'moodle';
+            $eventdata->component = 'powereduc';
             $eventdata->name = 'coursecontentupdated';
             $eventdata->userfrom = $userfrom;
             $eventdata->userto = $user;
@@ -109,7 +109,7 @@ class content_notification_task extends adhoc_task {
             $eventdata->fullmessageformat = FORMAT_HTML;
             $eventdata->fullmessagehtml = $messagebody;
             $eventdata->smallmessage = strip_tags($eventdata->fullmessagehtml);
-            $eventdata->contexturl = (new \moodle_url('/mod/' . $cm->modname . '/view.php', ['id' => $cm->id]))->out(false);
+            $eventdata->contexturl = (new \powereduc_url('/mod/' . $cm->modname . '/view.php', ['id' => $cm->id]))->out(false);
             $eventdata->contexturlname = $cm->name;
             $eventdata->notification = 1;
 

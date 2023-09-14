@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for plugin 'media_videojs'
@@ -40,7 +40,7 @@ $string['videoextensions'] = 'Video file extensions';
 $string['videocssclass'] = 'CSS class for video';
 $string['youtube'] = 'YouTube videos';
 
-// Deprecated since Moodle 4.0.
+// Deprecated since PowerEduc 4.0.
 $string['configrtmp'] = 'If enabled, links that start with rtmp:// will be handled by the plugin, irrespective of whether the extension is enabled in the Video file extensions (videoextensions) setting. Flash fallback must be enabled for RTMP to work.';
 $string['configuseflash'] = 'Use Flash player if video format is not natively supported by the browser and/or natively by the VideoJS player. If enabled, VideoJS will be engaged for any file extension from the above list without browser check. Please note that Flash is not available in mobile browsers and discouraged in many desktop ones.';
 $string['rtmp'] = 'RTMP streams';

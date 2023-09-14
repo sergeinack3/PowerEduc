@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -41,9 +41,9 @@ class external_backpacks_page implements \renderable {
 
     /**
      * Constructor.
-     * @param \moodle_url $url
+     * @param \powereduc_url $url
      */
-    public function __construct(\moodle_url $url) {
+    public function __construct(\powereduc_url $url) {
         $this->url = $url;
 
         $this->backpacks = badges_get_site_backpacks();

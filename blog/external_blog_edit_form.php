@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 /**
  * Moodleform for the user interface for managing external blog links.
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage blog
  * @copyright  2009 Nicolas Connault
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -30,7 +30,7 @@ if (!defined('POWEREDUC_INTERNAL')) {
 
 require_once($CFG->libdir.'/formslib.php');
 
-class blog_edit_external_form extends moodleform {
+class blog_edit_external_form extends powereducform {
     public function definition() {
         global $CFG;
 
@@ -48,7 +48,7 @@ class blog_edit_external_form extends moodleform {
         $mform->addElement('textarea', 'description', get_string('description', 'blog'), array('cols' => 50, 'rows' => 7));
         $mform->addHelpButton('description', 'description', 'blog');
 
-        // To filter external blogs by their tags we do not need to check if tags in moodle are enabled.
+        // To filter external blogs by their tags we do not need to check if tags in powereduc are enabled.
         $mform->addElement('text', 'filtertags', get_string('filtertags', 'blog'), array('size' => 50));
         $mform->setType('filtertags', PARAM_TAGLIST);
         $mform->addHelpButton('filtertags', 'filtertags', 'blog');
@@ -76,9 +76,9 @@ class blog_edit_external_form extends moodleform {
 
         $errors = parent::validation($data, $files);
 
-        require_once($CFG->libdir . '/simplepie/moodle_simplepie.php');
+        require_once($CFG->libdir . '/simplepie/powereduc_simplepie.php');
 
-        $rss = new moodle_simplepie();
+        $rss = new powereduc_simplepie();
         $rssfile = $rss->registry->create('File', array($data['url']));
         $filetest = $rss->registry->create('Locator', array($rssfile));
 
@@ -103,7 +103,7 @@ class blog_edit_external_form extends moodleform {
         $url = $mform->getElementValue('url');
 
         if (empty($name) || empty($description)) {
-            $rss = new moodle_simplepie($url);
+            $rss = new powereduc_simplepie($url);
 
             if (empty($name) && $rss->get_title()) {
                 $mform->setDefault('name', $rss->get_title());

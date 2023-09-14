@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,14 +23,14 @@
  */
 
 /**
- * An abstract moodleform class specially designed for the restore forms.
+ * An abstract powereducform class specially designed for the restore forms.
  *
  * @abstract Marked abstract here because some idiot forgot to mark it abstract in code!
  * @package   core_backup
  * @copyright 2010 Sam Hemelryk
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class restore_moodleform extends base_moodleform {
+class restore_powereducform extends base_powereducform {
     /**
      * Constructor.
      *
@@ -57,7 +57,7 @@ class restore_moodleform extends base_moodleform {
  * @copyright 2010 Sam Hemelryk
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class restore_settings_form extends restore_moodleform {}
+class restore_settings_form extends restore_powereducform {}
 
 /**
  * Restore schema review form.
@@ -66,7 +66,7 @@ class restore_settings_form extends restore_moodleform {}
  * @copyright 2010 Sam Hemelryk
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class restore_schema_form extends restore_moodleform {}
+class restore_schema_form extends restore_powereducform {}
 
 /**
  * Restore complete process review form.
@@ -75,4 +75,4 @@ class restore_schema_form extends restore_moodleform {}
  * @copyright 2010 Sam Hemelryk
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class restore_review_form extends restore_moodleform {};
+class restore_review_form extends restore_powereducform {};

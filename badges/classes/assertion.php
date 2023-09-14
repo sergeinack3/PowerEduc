@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -45,7 +45,7 @@ class core_badges_assertion {
     /** @var object Issued badge information from database */
     private $_data;
 
-    /** @var moodle_url Issued badge url */
+    /** @var powereduc_url Issued badge url */
     private $_url;
 
     /** @var int $obversion to control version JSON-LD. */
@@ -80,9 +80,9 @@ class core_badges_assertion {
             array('hash' => $hash), IGNORE_MISSING);
 
         if ($this->_data) {
-            $this->_url = new moodle_url('/badges/badge.php', array('hash' => $this->_data->uniquehash));
+            $this->_url = new powereduc_url('/badges/badge.php', array('hash' => $this->_data->uniquehash));
         } else {
-            $this->_url = new moodle_url('/badges/badge.php');
+            $this->_url = new powereduc_url('/badges/badge.php');
         }
         $this->_obversion = $obversion;
     }
@@ -126,12 +126,12 @@ class core_badges_assertion {
         if ($this->_data) {
             $hash = $this->_data->uniquehash;
             $email = empty($this->_data->backpackemail) ? $this->_data->email : $this->_data->backpackemail;
-            $assertionurl = new moodle_url('/badges/assertion.php', array('b' => $hash, 'obversion' => $this->_obversion));
+            $assertionurl = new powereduc_url('/badges/assertion.php', array('b' => $hash, 'obversion' => $this->_obversion));
 
             if ($this->_obversion >= OPEN_BADGES_V2) {
-                $classurl = new moodle_url('/badges/badge_json.php', array('id' => $this->get_badge_id()));
+                $classurl = new powereduc_url('/badges/badge_json.php', array('id' => $this->get_badge_id()));
             } else {
-                $classurl = new moodle_url('/badges/assertion.php', array('b' => $hash, 'action' => 1));
+                $classurl = new powereduc_url('/badges/assertion.php', array('b' => $hash, 'action' => 1));
             }
 
             // Required.
@@ -198,11 +198,11 @@ class core_badges_assertion {
             $class['image'] = 'data:image/png;base64,' . $imagedata;
 
             $params = ['id' => $this->get_badge_id()];
-            $badgeurl = new moodle_url('/badges/badgeclass.php', $params);
+            $badgeurl = new powereduc_url('/badges/badgeclass.php', $params);
             $class['criteria'] = $badgeurl->out(false); // Currently badge URL.
             if ($issued) {
                 $params = ['id' => $this->get_badge_id(), 'obversion' => $this->_obversion];
-                $issuerurl = new moodle_url('/badges/issuer_json.php', $params);
+                $issuerurl = new powereduc_url('/badges/issuer_json.php', $params);
                 $class['issuer'] = $issuerurl->out(false);
             }
             $this->embed_data_badge_version2($class, OPEN_BADGES_V2_TYPE_BADGE);
@@ -253,7 +253,7 @@ class core_badges_assertion {
         $relatedbadges = $badge->get_related_badges(true);
         if ($relatedbadges) {
             foreach ($relatedbadges as $rb) {
-                $url = new moodle_url('/badges/badge_json.php', array('id' => $rb->id));
+                $url = new powereduc_url('/badges/badge_json.php', array('id' => $rb->id));
                 $arraybadges[] = array(
                     'id'        => $url->out(false),
                     'version'   => $rb->version,
@@ -285,7 +285,7 @@ class core_badges_assertion {
         $badge = new badge($this->_data->id);
         $narrative = $badge->markdown_badge_criteria();
         $params = ['id' => $this->get_badge_id()];
-        $badgeurl = new moodle_url('/badges/badgeclass.php', $params);
+        $badgeurl = new powereduc_url('/badges/badgeclass.php', $params);
         if (!empty($narrative)) {
             $criteria = [];
             $criteria['id'] = $badgeurl->out(false);
@@ -339,12 +339,12 @@ class core_badges_assertion {
             }
 
             $hash = $this->_data->uniquehash;
-            $assertionsurl = new moodle_url('/badges/assertion.php', array('b' => $hash, 'obversion' => $this->_obversion));
-            $classurl = new moodle_url(
+            $assertionsurl = new powereduc_url('/badges/assertion.php', array('b' => $hash, 'obversion' => $this->_obversion));
+            $classurl = new powereduc_url(
                 '/badges/badge_json.php',
                 array('id' => $this->get_badge_id())
             );
-            $issuerurl = new moodle_url('/badges/issuer_json.php', ['id' => $this->get_badge_id()]);
+            $issuerurl = new powereduc_url('/badges/issuer_json.php', ['id' => $this->get_badge_id()]);
             // For assertion.
             if ($type == OPEN_BADGES_V2_TYPE_ASSERTION) {
                 $json['@context'] = OPEN_BADGES_V2_CONTEXT;
@@ -370,7 +370,7 @@ class core_badges_assertion {
                     $json['related'] = $relatedbadges;
                 }
                 if ($endorsement = $this->get_endorsement()) {
-                    $endorsementurl = new moodle_url('/badges/endorsement_json.php', array('id' => $this->_data->id));
+                    $endorsementurl = new powereduc_url('/badges/endorsement_json.php', array('id' => $this->_data->id));
                     $json['endorsement'] = $endorsementurl->out(false);
                 }
                 if ($alignments = $this->get_alignments()) {

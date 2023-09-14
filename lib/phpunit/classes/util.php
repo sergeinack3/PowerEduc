@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Utility class.
@@ -342,7 +342,7 @@ class phpunit_util extends testing_util {
     }
 
     /**
-     * Print some Moodle related info to console.
+     * Print some PowerEduc related info to console.
      * @internal
      * @static
      * @return void
@@ -454,9 +454,9 @@ class phpunit_util extends testing_util {
         if ($DB->get_tables()) {
             list($errorcode, $message) = self::testing_ready_problem();
             if ($errorcode) {
-                phpunit_bootstrap_error(PHPUNIT_EXITCODE_REINSTALL, 'Database tables already present, Moodle PHPUnit test environment can not be initialised');
+                phpunit_bootstrap_error(PHPUNIT_EXITCODE_REINSTALL, 'Database tables already present, PowerEduc PHPUnit test environment can not be initialised');
             } else {
-                phpunit_bootstrap_error(0, 'Moodle PHPUnit test environment is already initialised');
+                phpunit_bootstrap_error(0, 'PowerEduc PHPUnit test environment is already initialised');
             }
         }
 

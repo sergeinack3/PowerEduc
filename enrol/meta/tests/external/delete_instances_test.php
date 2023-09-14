@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -58,7 +58,7 @@ class delete_instances_test extends \externallib_advanced_testcase {
         try {
             delete_instances::execute([['metacourseid' => 1000, 'courseid' => $course->id]]);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertStringContainsString(get_string('wsinvalidmetacourse', 'enrol_meta', 1000), $e->getMessage());
         }
 
@@ -66,7 +66,7 @@ class delete_instances_test extends \externallib_advanced_testcase {
         try {
             delete_instances::execute([['metacourseid' => $course->id, 'courseid' => 1000]]);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertStringContainsString(get_string('wsinvalidcourse', 'enrol_meta', 1000), $e->getMessage());
         }
     }
@@ -84,15 +84,15 @@ class delete_instances_test extends \externallib_advanced_testcase {
         try {
             delete_instances::execute([['metacourseid' => $metacourse->id, 'courseid' => $course->id]]);
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertStringContainsString(get_string('wsinvalidmetacourse', 'enrol_meta', $metacourse->id), $e->getMessage());
         }
 
         // Add rights for metacourse.
         $metacontext = \context_course::instance($metacourse->id);
         $roleid = $this->assignUserCapability('enrol/meta:config', $metacontext->id);
-        $this->assignUserCapability('moodle/course:view', $metacontext->id, $roleid);
-        $this->assignUserCapability('moodle/course:enrolconfig', $metacontext->id, $roleid);
+        $this->assignUserCapability('powereduc/course:view', $metacontext->id, $roleid);
+        $this->assignUserCapability('powereduc/course:enrolconfig', $metacontext->id, $roleid);
 
         $result = delete_instances::execute([['metacourseid' => $metacourse->id, 'courseid' => $course->id]]);
         $this->assertNotEmpty($result);

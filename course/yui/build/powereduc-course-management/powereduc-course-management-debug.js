@@ -1,4 +1,4 @@
-YUI.add('moodle-course-management', function (Y, NAME) {
+YUI.add('powereduc-course-management', function (Y, NAME) {
 
 var Category;
 var Console;
@@ -8,7 +8,7 @@ var Item;
 /**
  * Provides drop down menus for list of action links.
  *
- * @module moodle-course-management
+ * @module powereduc-course-management
  */
 
 /**
@@ -24,7 +24,7 @@ var Item;
 Console = function() {
     Console.superclass.constructor.apply(this, arguments);
 };
-Console.NAME = 'moodle-course-management';
+Console.NAME = 'powereduc-course-management';
 Console.CSS_PREFIX = 'management';
 Console.ATTRS = {
     /**
@@ -214,7 +214,7 @@ Console.prototype = {
      * @method initializer
      */
     initializer: function() {
-        Y.log('Initialising course category management console', 'info', 'moodle-course-management');
+        Y.log('Initialising course category management console', 'info', 'powereduc-course-management');
         this.set('element', 'coursecat-management');
         var element = this.get('element'),
             categorylisting = element.one('#category-listing'),
@@ -284,9 +284,9 @@ Console.prototype = {
             this.get('categorylisting').delegate('click', this.handleCategoryDelegation, 'input[name="bcat[]"]', this);
             this.get('categorylisting').delegate('change', this.handleBulkSortByaction, '#menuselectsortby', this);
             this.categoriesinit = true;
-            Y.log(count + ' categories being managed', 'info', 'moodle-course-management');
+            Y.log(count + ' categories being managed', 'info', 'powereduc-course-management');
         } else {
-            Y.log(count + ' new categories being managed', 'info', 'moodle-course-management');
+            Y.log(count + ' new categories being managed', 'info', 'powereduc-course-management');
         }
     },
 
@@ -320,7 +320,7 @@ Console.prototype = {
         }, this);
         listing.delegate('click', this.handleCourseDelegation, 'a[data-action]', this);
         listing.delegate('click', this.handleCourseDelegation, 'input[name="bc[]"]', this);
-        Y.log(count + ' courses being managed', 'info', 'moodle-course-management');
+        Y.log(count + ' courses being managed', 'info', 'powereduc-course-management');
     },
 
     /**
@@ -349,7 +349,7 @@ Console.prototype = {
         if (course) {
             course.handle(action, e);
         } else {
-            Y.log('Course with ID ' + courseid + ' could not be found for delegation', 'error', 'moodle-course-management');
+            Y.log('Course with ID ' + courseid + ' could not be found for delegation', 'error', 'powereduc-course-management');
         }
     },
 
@@ -368,7 +368,7 @@ Console.prototype = {
         if (category) {
             category.handle(action, e);
         } else {
-            Y.log('Could not find category to delegate to.', 'error', 'moodle-course-management');
+            Y.log('Could not find category to delegate to.', 'error', 'powereduc-course-management');
         }
     },
 
@@ -563,7 +563,7 @@ Console.prototype = {
         args.sesskey = M.cfg.sesskey;
         if (callback === null) {
             callback = function() {
-                Y.log("'Action '" + action + "' completed", 'debug', 'moodle-course-management');
+                Y.log("'Action '" + action + "' completed", 'debug', 'powereduc-course-management');
             };
         }
         io.send(this.get('ajaxurl'), {
@@ -604,7 +604,7 @@ M.course.management.init = function(config) {
 DragDrop = function(config) {
     Console.superclass.constructor.apply(this, [config]);
 };
-DragDrop.NAME = 'moodle-course-management-dd';
+DragDrop.NAME = 'powereduc-course-management-dd';
 DragDrop.CSS_PREFIX = 'management-dd';
 DragDrop.ATTRS = {
     /**
@@ -838,7 +838,7 @@ DragDrop.prototype = {
             previousid;
 
         if (!drag.test('.listitem-course')) {
-            Y.log('It was not a course being dragged.', 'warn', 'moodle-course-management');
+            Y.log('It was not a course being dragged.', 'warn', 'powereduc-course-management');
             return false;
         }
         courseid = drag.getData('id');
@@ -861,7 +861,7 @@ DragDrop.prototype = {
                 course.moveAfter(aftercourseid, previousid);
             }
         } else {
-            Y.log('Course dropped over unhandled target.', 'info', 'moodle-course-management');
+            Y.log('Course dropped over unhandled target.', 'info', 'powereduc-course-management');
         }
     }
 };
@@ -877,7 +877,7 @@ Y.extend(DragDrop, Y.Base, DragDrop.prototype);
 Item = function() {
     Item.superclass.constructor.apply(this, arguments);
 };
-Item.NAME = 'moodle-course-management-item';
+Item.NAME = 'powereduc-course-management-item';
 Item.CSS_PREFIX = 'management-item';
 Item.ATTRS = {
     /**
@@ -962,7 +962,7 @@ Item.prototype = {
             tmpnode,
             outcome = this.checkAjaxResponse(transactionid, response, args);
         if (outcome === false) {
-            Y.log('AJAX request to move ' + this.get('itemname') + ' up failed by outcome.', 'warn', 'moodle-course-management');
+            Y.log('AJAX request to move ' + this.get('itemname') + ' up failed by outcome.', 'warn', 'powereduc-course-management');
             return false;
         }
         node = this.get('node');
@@ -1002,12 +1002,12 @@ Item.prototype = {
                 }
             }
             this.updated(true);
-            Y.log('Success: ' + this.get('itemname') + ' moved up by AJAX.', 'info', 'moodle-course-management');
+            Y.log('Success: ' + this.get('itemname') + ' moved up by AJAX.', 'info', 'powereduc-course-management');
         } else {
             // Aha it succeeded but this is the top item in the list. Pagination is in play!
             // Refresh to update the state of things.
             Y.log(this.get('itemname') + ' cannot be moved up as its the top item on this page.',
-                    'info', 'moodle-course-management');
+                    'info', 'powereduc-course-management');
             window.location.reload();
         }
     },
@@ -1031,7 +1031,7 @@ Item.prototype = {
             tmpnode,
             outcome = this.checkAjaxResponse(transactionid, response, args);
         if (outcome === false) {
-            Y.log('AJAX request to move ' + this.get('itemname') + ' down failed by outcome.', 'warn', 'moodle-course-management');
+            Y.log('AJAX request to move ' + this.get('itemname') + ' down failed by outcome.', 'warn', 'powereduc-course-management');
             return false;
         }
         node = this.get('node');
@@ -1071,12 +1071,12 @@ Item.prototype = {
                 }
             }
             this.updated(true);
-            Y.log('Success: ' + this.get('itemname') + ' moved down by AJAX.', 'info', 'moodle-course-management');
+            Y.log('Success: ' + this.get('itemname') + ' moved down by AJAX.', 'info', 'powereduc-course-management');
         } else {
             // Aha it succeeded but this is the bottom item in the list. Pagination is in play!
             // Refresh to update the state of things.
             Y.log(this.get('itemname') + ' cannot be moved down as its the top item on this page.',
-                    'info', 'moodle-course-management');
+                    'info', 'powereduc-course-management');
             window.location.reload();
         }
     },
@@ -1094,7 +1094,7 @@ Item.prototype = {
         var outcome = this.checkAjaxResponse(transactionid, response, args),
             hidebtn;
         if (outcome === false) {
-            Y.log('AJAX request to show ' + this.get('itemname') + ' by outcome.', 'warn', 'moodle-course-management');
+            Y.log('AJAX request to show ' + this.get('itemname') + ' by outcome.', 'warn', 'powereduc-course-management');
             return false;
         }
 
@@ -1104,7 +1104,7 @@ Item.prototype = {
             hidebtn.focus();
         }
         this.updated();
-        Y.log('Success: ' + this.get('itemname') + ' made visible by AJAX.', 'info', 'moodle-course-management');
+        Y.log('Success: ' + this.get('itemname') + ' made visible by AJAX.', 'info', 'powereduc-course-management');
     },
 
     /**
@@ -1113,7 +1113,7 @@ Item.prototype = {
      */
     markVisible: function() {
         this.get('node').setAttribute('data-visible', '1');
-        Y.log('Marked ' + this.get('itemname') + ' as visible', 'info', 'moodle-course-management');
+        Y.log('Marked ' + this.get('itemname') + ' as visible', 'info', 'powereduc-course-management');
         return true;
     },
 
@@ -1130,7 +1130,7 @@ Item.prototype = {
         var outcome = this.checkAjaxResponse(transactionid, response, args),
             showbtn;
         if (outcome === false) {
-            Y.log('AJAX request to hide ' + this.get('itemname') + ' by outcome.', 'warn', 'moodle-course-management');
+            Y.log('AJAX request to hide ' + this.get('itemname') + ' by outcome.', 'warn', 'powereduc-course-management');
             return false;
         }
         this.markHidden();
@@ -1139,7 +1139,7 @@ Item.prototype = {
             showbtn.focus();
         }
         this.updated();
-        Y.log('Success: ' + this.get('itemname') + ' made hidden by AJAX.', 'info', 'moodle-course-management');
+        Y.log('Success: ' + this.get('itemname') + ' made hidden by AJAX.', 'info', 'powereduc-course-management');
     },
 
     /**
@@ -1148,7 +1148,7 @@ Item.prototype = {
      */
     markHidden: function() {
         this.get('node').setAttribute('data-visible', '0');
-        Y.log('Marked ' + this.get('itemname') + ' as hidden', 'info', 'moodle-course-management');
+        Y.log('Marked ' + this.get('itemname') + ' as hidden', 'info', 'powereduc-course-management');
         return true;
     },
 
@@ -1193,7 +1193,7 @@ Y.extend(Item, Y.Base, Item.prototype);
 Category = function() {
     Category.superclass.constructor.apply(this, arguments);
 };
-Category.NAME = 'moodle-course-management-category';
+Category.NAME = 'powereduc-course-management-category';
 Category.CSS_PREFIX = 'management-category';
 Category.ATTRS = {
     /**
@@ -1335,7 +1335,7 @@ Category.prototype = {
                 }
                 break;
             default:
-                Y.log('Invalid AJAX action requested of managed category.', 'warn', 'moodle-course-management');
+                Y.log('Invalid AJAX action requested of managed category.', 'warn', 'powereduc-course-management');
                 return false;
         }
     },
@@ -1350,7 +1350,7 @@ Category.prototype = {
             ul = node.one('ul[role=group]');
         node.removeClass('collapsed').setAttribute('aria-expanded', 'true');
         action.setAttribute('data-action', 'collapse').setAttrs({
-            title: M.util.get_string('collapsecategory', 'moodle', this.getName())
+            title: M.util.get_string('collapsecategory', 'powereduc', this.getName())
         });
 
         require(['core/str', 'core/templates', 'core/notification'], function(Str, Templates, Notification) {
@@ -1380,7 +1380,7 @@ Category.prototype = {
             ul = node.one('ul[role=group]');
         node.addClass('collapsed').setAttribute('aria-expanded', 'false');
         action.setAttribute('data-action', 'expand').setAttrs({
-            title: M.util.get_string('expandcategory', 'moodle', this.getName())
+            title: M.util.get_string('expandcategory', 'powereduc', this.getName())
         });
 
         require(['core/str', 'core/templates', 'core/notification'], function(Str, Templates, Notification) {
@@ -1417,10 +1417,10 @@ Category.prototype = {
             ul,
             actionnode;
         if (outcome === false) {
-            Y.log('AJAX failed to load sub categories for ' + this.get('itemname'), 'warn', 'moodle-course-management');
+            Y.log('AJAX failed to load sub categories for ' + this.get('itemname'), 'warn', 'powereduc-course-management');
             return false;
         }
-        Y.log('AJAX loaded subcategories for ' + this.get('itemname'), 'info', 'moodle-course-management');
+        Y.log('AJAX loaded subcategories for ' + this.get('itemname'), 'info', 'powereduc-course-management');
         node.append(outcome.html);
         managementconsole.initialiseCategories(node);
         if (M.core && M.core.actionmenu && M.core.actionmenu.newDOMNode) {
@@ -1442,15 +1442,15 @@ Category.prototype = {
      */
     moveCourseTo: function(course) {
         var self = this;
-        Y.use('moodle-core-notification-confirm', function() {
+        Y.use('powereduc-core-notification-confirm', function() {
             var confirm = new M.core.confirm({
-                title: M.util.get_string('confirm', 'moodle'),
-                question: M.util.get_string('confirmcoursemove', 'moodle', {
+                title: M.util.get_string('confirm', 'powereduc'),
+                question: M.util.get_string('confirmcoursemove', 'powereduc', {
                     course: course.getName(),
                     category: self.getName()
                 }),
-                yesLabel: M.util.get_string('move', 'moodle'),
-                noLabel: M.util.get_string('cancel', 'moodle')
+                yesLabel: M.util.get_string('move', 'powereduc'),
+                noLabel: M.util.get_string('cancel', 'powereduc')
             });
             confirm.on('complete-yes', function() {
                 confirm.hide();
@@ -1480,16 +1480,16 @@ Category.prototype = {
             course,
             totals;
         if (outcome === false) {
-            Y.log('AJAX failed to move courses into this category: ' + this.get('itemname'), 'warn', 'moodle-course-management');
+            Y.log('AJAX failed to move courses into this category: ' + this.get('itemname'), 'warn', 'powereduc-course-management');
             return false;
         }
         course = managementconsole.getCourseById(args.courseid);
         if (!course) {
-            Y.log('Course was moved but the course listing could not be found to reflect this', 'warn', 'moodle-course-management');
+            Y.log('Course was moved but the course listing could not be found to reflect this', 'warn', 'powereduc-course-management');
             return false;
         }
         Y.log('Moved the course (' + course.getName() + ') into this category (' + this.getName() + ')',
-            'debug', 'moodle-course-management');
+            'debug', 'powereduc-course-management');
         this.highlight();
         if (course) {
             if (outcome.paginationtotals) {
@@ -1532,7 +1532,7 @@ Category.prototype = {
         var outcome = this.checkAjaxResponse(transactionid, response, args),
             hidebtn;
         if (outcome === false) {
-            Y.log('AJAX request to show ' + this.get('itemname') + ' by outcome.', 'warn', 'moodle-course-management');
+            Y.log('AJAX request to show ' + this.get('itemname') + ' by outcome.', 'warn', 'powereduc-course-management');
             return false;
         }
 
@@ -1548,7 +1548,7 @@ Category.prototype = {
             this.updateCourseVisiblity(outcome.coursevisibility);
         }
         this.updated();
-        Y.log('Success: category made visible by AJAX.', 'info', 'moodle-course-management');
+        Y.log('Success: category made visible by AJAX.', 'info', 'powereduc-course-management');
     },
 
     /**
@@ -1564,7 +1564,7 @@ Category.prototype = {
         var outcome = this.checkAjaxResponse(transactionid, response, args),
             showbtn;
         if (outcome === false) {
-            Y.log('AJAX request to hide ' + this.get('itemname') + ' by outcome.', 'warn', 'moodle-course-management');
+            Y.log('AJAX request to hide ' + this.get('itemname') + ' by outcome.', 'warn', 'powereduc-course-management');
             return false;
         }
         this.markHidden();
@@ -1579,7 +1579,7 @@ Category.prototype = {
             this.updateCourseVisiblity(outcome.coursevisibility);
         }
         this.updated();
-        Y.log('Success: ' + this.get('itemname') + ' made hidden by AJAX.', 'info', 'moodle-course-management');
+        Y.log('Success: ' + this.get('itemname') + ' made hidden by AJAX.', 'info', 'powereduc-course-management');
     },
 
     /**
@@ -1592,7 +1592,7 @@ Category.prototype = {
         var managementconsole = this.get('console'),
             key,
             course;
-        Y.log('Changing categories course visibility', 'info', 'moodle-course-management');
+        Y.log('Changing categories course visibility', 'info', 'powereduc-course-management');
         try {
             for (key in courses) {
                 if (typeof courses[key] === 'object') {
@@ -1607,7 +1607,7 @@ Category.prototype = {
                 }
             }
         } catch (err) {
-            Y.log('Error trying to update course visibility: ' + err.message, 'warn', 'moodle-course-management');
+            Y.log('Error trying to update course visibility: ' + err.message, 'warn', 'powereduc-course-management');
         }
         return this;
     },
@@ -1622,7 +1622,7 @@ Category.prototype = {
         var managementconsole = this.get('console'),
             key,
             category;
-        Y.log('Changing categories subcategory visibility', 'info', 'moodle-course-management');
+        Y.log('Changing categories subcategory visibility', 'info', 'powereduc-course-management');
         try {
             for (key in categories) {
                 if (typeof categories[key] === 'object') {
@@ -1637,7 +1637,7 @@ Category.prototype = {
                 }
             }
         } catch (err) {
-            Y.log('Error trying to update category visibility: ' + err.message, 'warn', 'moodle-course-management');
+            Y.log('Error trying to update category visibility: ' + err.message, 'warn', 'powereduc-course-management');
         }
         return this;
     }
@@ -1654,7 +1654,7 @@ Y.extend(Category, Item, Category.prototype);
 Course = function() {
     Course.superclass.constructor.apply(this, arguments);
 };
-Course.NAME = 'moodle-course-management-course';
+Course.NAME = 'powereduc-course-management-course';
 Course.CSS_PREFIX = 'management-course';
 Course.ATTRS = {
 
@@ -1767,7 +1767,7 @@ Course.prototype = {
                 }
                 break;
             default:
-                Y.log('Invalid AJAX action requested of managed course.', 'warn', 'moodle-course-management');
+                Y.log('Invalid AJAX action requested of managed course.', 'warn', 'powereduc-course-management');
                 return false;
         }
     },
@@ -1814,7 +1814,7 @@ Course.prototype = {
             previous;
         if (outcome === false) {
             previous = node.ancestor('ul').one('li[data-id=' + args.previous + ']');
-            Y.log('AJAX failed to move this course after the requested course', 'warn', 'moodle-course-management');
+            Y.log('AJAX failed to move this course after the requested course', 'warn', 'powereduc-course-management');
             if (previous) {
                 // After the last previous.
                 previous.insertAfter(node, 'after');
@@ -1824,7 +1824,7 @@ Course.prototype = {
             }
             return false;
         }
-        Y.log('AJAX successfully moved course (' + this.getName() + ')', 'info', 'moodle-course-management');
+        Y.log('AJAX successfully moved course (' + this.getName() + ')', 'info', 'powereduc-course-management');
         this.highlight();
     }
 };
@@ -1836,7 +1836,7 @@ Y.extend(Course, Item, Course.prototype);
         "base",
         "node",
         "io-base",
-        "moodle-core-notification-exception",
+        "powereduc-core-notification-exception",
         "json-parse",
         "dd-constrain",
         "dd-proxy",

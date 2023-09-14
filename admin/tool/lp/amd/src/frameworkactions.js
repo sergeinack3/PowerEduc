@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * Competency frameworks actions via ajax.
  *
  * @module     tool_lp/frameworkactions
- * @copyright  2015 Damyon Wiese <damyon@moodle.com>
+ * @copyright  2015 Damyon Wiese <damyon@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 define(['jquery', 'core/templates', 'core/ajax', 'core/notification', 'core/str'], function($, templates, ajax, notification, str) {
@@ -101,7 +101,7 @@ define(['jquery', 'core/templates', 'core/ajax', 'core/notification', 'core/str'
                 req[0].done(function(framework) {
                     str.get_strings([
                         {key: 'frameworkcannotbedeleted', component: 'tool_lp', param: framework.shortname},
-                        {key: 'cancel', component: 'moodle'}
+                        {key: 'cancel', component: 'powereduc'}
                     ]).done(function(strings) {
                         notification.alert(
                             null,
@@ -131,10 +131,10 @@ define(['jquery', 'core/templates', 'core/ajax', 'core/notification', 'core/str'
 
         requests[0].done(function(framework) {
             str.get_strings([
-                {key: 'confirm', component: 'moodle'},
+                {key: 'confirm', component: 'powereduc'},
                 {key: 'deletecompetencyframework', component: 'tool_lp', param: framework.shortname},
-                {key: 'delete', component: 'moodle'},
-                {key: 'cancel', component: 'moodle'}
+                {key: 'delete', component: 'powereduc'},
+                {key: 'cancel', component: 'powereduc'}
             ]).done(function(strings) {
                 notification.confirm(
                     strings[0], // Confirm.

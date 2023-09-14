@@ -61,4 +61,4 @@ Feature: Backup Moodle courses
   Scenario: Backup a course using the one click backup button
     When I perform a quick backup of course "Course 2"
     Then I should see "Course backup area"
-    And I should see "backup-moodle2-course-"
+    And I should see "backup-powereduc2-course-"

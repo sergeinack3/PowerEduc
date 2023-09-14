@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -54,11 +54,11 @@ class chaptertitle extends area_base {
     /**
      * Find recordset of the relevant areas.
      * @param \core\event\base $event
-     * @return \moodle_recordset|null
+     * @return \powereduc_recordset|null
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    public function find_relevant_areas(\core\event\base $event): ?\moodle_recordset {
+    public function find_relevant_areas(\core\event\base $event): ?\powereduc_recordset {
         if ($event->eventname == '\mod_book\event\chapter_updated' || $event->eventname == '\mod_book\event\chapter_created') {
             return $this->find_areas(['contextid' => $event->contextid, 'objectid' => $event->objectid]);
         }
@@ -68,22 +68,22 @@ class chaptertitle extends area_base {
     /**
      * Find recordset of the course areas.
      * @param int $courseid
-     * @return \moodle_recordset
+     * @return \powereduc_recordset
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    public function find_course_areas(int $courseid): ?\moodle_recordset {
+    public function find_course_areas(int $courseid): ?\powereduc_recordset {
         return $this->find_areas(['courseid' => $courseid]);
     }
 
     /**
      * Find recordset of areas.
      * @param array $params
-     * @return \moodle_recordset
+     * @return \powereduc_recordset
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    protected function find_areas(array $params = []): \moodle_recordset {
+    protected function find_areas(array $params = []): \powereduc_recordset {
         global $DB;
 
         $where = [];

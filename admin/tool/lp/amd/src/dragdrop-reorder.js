@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * Drag and drop reorder via HTML5.
  *
  * @module     tool_lp/dragdrop-reorder
- * @copyright  2015 Damyon Wiese <damyon@moodle.com>
+ * @copyright  2015 Damyon Wiese <damyon@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 define(['core/str', 'core/yui'], function(str, Y) {
@@ -66,11 +66,11 @@ define(['core/str', 'core/yui'], function(str, Y) {
             // Here we are wrapping YUI. This allows us to start transitioning, but
             // wait for a good alternative without having inconsistent UIs.
             str.get_strings([
-                {key: 'emptydragdropregion', component: 'moodle'},
-                {key: 'movecontent', component: 'moodle'},
-                {key: 'tocontent', component: 'moodle'},
+                {key: 'emptydragdropregion', component: 'powereduc'},
+                {key: 'movecontent', component: 'powereduc'},
+                {key: 'tocontent', component: 'powereduc'},
             ]).done(function() {
-                Y.use('moodle-tool_lp-dragdrop-reorder', function() {
+                Y.use('powereduc-tool_lp-dragdrop-reorder', function() {
 
                     var context = {
                         callback: callback

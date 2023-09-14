@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ defined('POWEREDUC_INTERNAL') || die();
 require_once($CFG->libdir . '/tablelib.php');
 
 use html_writer;
-use moodle_url;
+use powereduc_url;
 use table_sql;
 use core_competency\template;
 
@@ -61,7 +61,7 @@ class template_cohorts_table extends table_sql {
 
          // This object should not be used without the right permissions.
         if (!$template->can_read()) {
-            throw new \required_capability_exception($template->get_context(), 'moodle/competency:templateview',
+            throw new \required_capability_exception($template->get_context(), 'powereduc/competency:templateview',
                 'nopermissions', '');
         }
 
@@ -86,7 +86,7 @@ class template_cohorts_table extends table_sql {
         global $OUTPUT;
 
         $action = new \confirm_action(get_string('areyousure'));
-        $url = new moodle_url($this->baseurl);
+        $url = new powereduc_url($this->baseurl);
         $url->params(array('removecohort' => $row->id, 'sesskey' => sesskey()));
         $actionlink = $OUTPUT->action_link($url, '', $action, null, new \pix_icon('t/delete',
             get_string('stopsyncingcohort', 'tool_lp')));

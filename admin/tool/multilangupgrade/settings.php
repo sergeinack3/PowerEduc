@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,5 +27,5 @@ defined('POWEREDUC_INTERNAL') || die;
 
 if ($hassiteconfig) {
     // Hidden multilang upgrade page - show in settings root to get more attention.
-    $ADMIN->add('root', new admin_externalpage('toolmultilangupgrade', get_string('pluginname', 'tool_multilangupgrade'), $CFG->wwwroot.'/'.$CFG->admin.'/tool/multilangupgrade/index.php', 'moodle/site:config', !empty($CFG->filter_multilang_converted)));
+    $ADMIN->add('root', new admin_externalpage('toolmultilangupgrade', get_string('pluginname', 'tool_multilangupgrade'), $CFG->wwwroot.'/'.$CFG->admin.'/tool/multilangupgrade/index.php', 'powereduc/site:config', !empty($CFG->filter_multilang_converted)));
 }

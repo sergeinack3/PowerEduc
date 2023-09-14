@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ admin_externalpage_setup('tooluploadcourse');
 $importid         = optional_param('importid', '', PARAM_INT);
 $previewrows = optional_param('previewrows', 10, PARAM_INT);
 
-$returnurl = new moodle_url('/admin/tool/uploadcourse/index.php');
+$returnurl = new powereduc_url('/admin/tool/uploadcourse/index.php');
 
 if (empty($importid)) {
     $mform1 = new tool_uploadcourse_step1_form();
@@ -42,9 +42,9 @@ if (empty($importid)) {
         $readcount = $cir->load_csv_content($content, $form1data->encoding, $form1data->delimiter_name);
         unset($content);
         if ($readcount === false) {
-            throw new \moodle_exception('csvfileerror', 'tool_uploadcourse', $returnurl, $cir->get_error());
+            throw new \powereduc_exception('csvfileerror', 'tool_uploadcourse', $returnurl, $cir->get_error());
         } else if ($readcount == 0) {
-            throw new \moodle_exception('csvemptyfile', 'error', $returnurl, $cir->get_error());
+            throw new \powereduc_exception('csvemptyfile', 'error', $returnurl, $cir->get_error());
         }
     } else {
         echo $OUTPUT->header();

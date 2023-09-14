@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -120,39 +120,39 @@ class external_test extends externallib_advanced_testcase {
         $authrole = $DB->get_record('role', array('id' => $CFG->defaultuserroleid));
 
         // Reset all default authenticated users permissions.
-        unassign_capability('moodle/competency:competencygrade', $authrole->id);
-        unassign_capability('moodle/competency:competencymanage', $authrole->id);
-        unassign_capability('moodle/competency:competencyview', $authrole->id);
-        unassign_capability('moodle/competency:planmanage', $authrole->id);
-        unassign_capability('moodle/competency:planmanagedraft', $authrole->id);
-        unassign_capability('moodle/competency:planmanageown', $authrole->id);
-        unassign_capability('moodle/competency:planview', $authrole->id);
-        unassign_capability('moodle/competency:planviewdraft', $authrole->id);
-        unassign_capability('moodle/competency:planviewown', $authrole->id);
-        unassign_capability('moodle/competency:planviewowndraft', $authrole->id);
-        unassign_capability('moodle/competency:templatemanage', $authrole->id);
-        unassign_capability('moodle/competency:templateview', $authrole->id);
-        unassign_capability('moodle/cohort:manage', $authrole->id);
-        unassign_capability('moodle/competency:coursecompetencyconfigure', $authrole->id);
+        unassign_capability('powereduc/competency:competencygrade', $authrole->id);
+        unassign_capability('powereduc/competency:competencymanage', $authrole->id);
+        unassign_capability('powereduc/competency:competencyview', $authrole->id);
+        unassign_capability('powereduc/competency:planmanage', $authrole->id);
+        unassign_capability('powereduc/competency:planmanagedraft', $authrole->id);
+        unassign_capability('powereduc/competency:planmanageown', $authrole->id);
+        unassign_capability('powereduc/competency:planview', $authrole->id);
+        unassign_capability('powereduc/competency:planviewdraft', $authrole->id);
+        unassign_capability('powereduc/competency:planviewown', $authrole->id);
+        unassign_capability('powereduc/competency:planviewowndraft', $authrole->id);
+        unassign_capability('powereduc/competency:templatemanage', $authrole->id);
+        unassign_capability('powereduc/competency:templateview', $authrole->id);
+        unassign_capability('powereduc/cohort:manage', $authrole->id);
+        unassign_capability('powereduc/competency:coursecompetencyconfigure', $authrole->id);
 
         // Creating specific roles.
         $this->creatorrole = create_role('Creator role', 'creatorrole', 'learning plan creator role description');
         $this->userrole = create_role('User role', 'userrole', 'learning plan user role description');
 
-        assign_capability('moodle/competency:competencymanage', CAP_ALLOW, $this->creatorrole, $syscontext->id);
-        assign_capability('moodle/competency:coursecompetencyconfigure', CAP_ALLOW, $this->creatorrole, $syscontext->id);
-        assign_capability('moodle/competency:competencyview', CAP_ALLOW, $this->userrole, $syscontext->id);
-        assign_capability('moodle/competency:planmanage', CAP_ALLOW, $this->creatorrole, $syscontext->id);
-        assign_capability('moodle/competency:planmanagedraft', CAP_ALLOW, $this->creatorrole, $syscontext->id);
-        assign_capability('moodle/competency:planmanageown', CAP_ALLOW, $this->creatorrole, $syscontext->id);
-        assign_capability('moodle/competency:planview', CAP_ALLOW, $this->creatorrole, $syscontext->id);
-        assign_capability('moodle/competency:planviewdraft', CAP_ALLOW, $this->creatorrole, $syscontext->id);
-        assign_capability('moodle/competency:templatemanage', CAP_ALLOW, $this->creatorrole, $syscontext->id);
-        assign_capability('moodle/competency:competencygrade', CAP_ALLOW, $this->creatorrole, $syscontext->id);
-        assign_capability('moodle/cohort:manage', CAP_ALLOW, $this->creatorrole, $syscontext->id);
-        assign_capability('moodle/competency:templateview', CAP_ALLOW, $this->userrole, $syscontext->id);
-        assign_capability('moodle/competency:planviewown', CAP_ALLOW, $this->userrole, $syscontext->id);
-        assign_capability('moodle/competency:planviewowndraft', CAP_ALLOW, $this->userrole, $syscontext->id);
+        assign_capability('powereduc/competency:competencymanage', CAP_ALLOW, $this->creatorrole, $syscontext->id);
+        assign_capability('powereduc/competency:coursecompetencyconfigure', CAP_ALLOW, $this->creatorrole, $syscontext->id);
+        assign_capability('powereduc/competency:competencyview', CAP_ALLOW, $this->userrole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanage', CAP_ALLOW, $this->creatorrole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanagedraft', CAP_ALLOW, $this->creatorrole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanageown', CAP_ALLOW, $this->creatorrole, $syscontext->id);
+        assign_capability('powereduc/competency:planview', CAP_ALLOW, $this->creatorrole, $syscontext->id);
+        assign_capability('powereduc/competency:planviewdraft', CAP_ALLOW, $this->creatorrole, $syscontext->id);
+        assign_capability('powereduc/competency:templatemanage', CAP_ALLOW, $this->creatorrole, $syscontext->id);
+        assign_capability('powereduc/competency:competencygrade', CAP_ALLOW, $this->creatorrole, $syscontext->id);
+        assign_capability('powereduc/cohort:manage', CAP_ALLOW, $this->creatorrole, $syscontext->id);
+        assign_capability('powereduc/competency:templateview', CAP_ALLOW, $this->userrole, $syscontext->id);
+        assign_capability('powereduc/competency:planviewown', CAP_ALLOW, $this->userrole, $syscontext->id);
+        assign_capability('powereduc/competency:planviewowndraft', CAP_ALLOW, $this->userrole, $syscontext->id);
 
         role_assign($this->creatorrole, $creator->id, $syscontext->id);
         role_assign($this->creatorrole, $catcreator->id, $catcontext->id);
@@ -1187,11 +1187,11 @@ class external_test extends externallib_advanced_testcase {
         try {
             $plan1 = $this->create_plan(2, $this->user->id, 0, plan::STATUS_DRAFT, 0);
             $this->fail('Exception expected due to not permissions to create draft plans');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('nopermissions', $e->errorcode);
         }
 
-        assign_capability('moodle/competency:planmanageowndraft', CAP_ALLOW, $this->userrole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanageowndraft', CAP_ALLOW, $this->userrole, $syscontext->id);
         accesslib_clear_all_caches_for_unit_testing();
 
         $this->setUser($this->user);
@@ -1206,7 +1206,7 @@ class external_test extends externallib_advanced_testcase {
         try {
             $plan3 = $this->create_plan(4, $this->user->id, 0, plan::STATUS_ACTIVE, 0);
             $this->fail('Exception expected due to not permissions to create active plans');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('nopermissions', $e->errorcode);
         }
         try {
@@ -1216,7 +1216,7 @@ class external_test extends externallib_advanced_testcase {
             $this->assertTrue(true);
         }
 
-        assign_capability('moodle/competency:planmanageown', CAP_ALLOW, $this->userrole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanageown', CAP_ALLOW, $this->userrole, $syscontext->id);
         accesslib_clear_all_caches_for_unit_testing();
 
         $plan3 = $this->create_plan(4, $this->user->id, 0, plan::STATUS_ACTIVE, 0);
@@ -1229,12 +1229,12 @@ class external_test extends externallib_advanced_testcase {
 
         try {
             $plan0 = $this->update_plan($plan0->id, 1, $this->user->id, 0, plan::STATUS_ACTIVE, 0);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('nopermissions', $e->errorcode);
         }
 
-        unassign_capability('moodle/competency:planmanageown', $this->userrole, $syscontext->id);
-        unassign_capability('moodle/competency:planmanageowndraft', $this->userrole, $syscontext->id);
+        unassign_capability('powereduc/competency:planmanageown', $this->userrole, $syscontext->id);
+        unassign_capability('powereduc/competency:planmanageowndraft', $this->userrole, $syscontext->id);
         accesslib_clear_all_caches_for_unit_testing();
 
         try {
@@ -1256,8 +1256,8 @@ class external_test extends externallib_advanced_testcase {
 
         $this->setUser($this->user);
 
-        assign_capability('moodle/competency:planmanageowndraft', CAP_ALLOW, $this->userrole, $syscontext->id);
-        assign_capability('moodle/competency:planmanageown', CAP_ALLOW, $this->userrole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanageowndraft', CAP_ALLOW, $this->userrole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanageown', CAP_ALLOW, $this->userrole, $syscontext->id);
         accesslib_clear_all_caches_for_unit_testing();
 
         $this->setUser($this->user);
@@ -1278,8 +1278,8 @@ class external_test extends externallib_advanced_testcase {
 
         $this->setUser($this->user);
 
-        assign_capability('moodle/competency:planmanageowndraft', CAP_ALLOW, $this->userrole, $syscontext->id);
-        assign_capability('moodle/competency:planmanageown', CAP_ALLOW, $this->userrole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanageowndraft', CAP_ALLOW, $this->userrole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanageown', CAP_ALLOW, $this->userrole, $syscontext->id);
         accesslib_clear_all_caches_for_unit_testing();
 
         $this->setUser($this->user);
@@ -1345,9 +1345,9 @@ class external_test extends externallib_advanced_testcase {
         $plan1->commentarea['canview'] = true;
 
         // Prevent the user from seeing their own non-draft plans.
-        assign_capability('moodle/competency:plancommentown', CAP_PROHIBIT, $this->userrole, $syscontext->id, true);
-        assign_capability('moodle/competency:planviewown', CAP_PROHIBIT, $this->userrole, $syscontext->id, true);
-        assign_capability('moodle/competency:planviewowndraft', CAP_ALLOW, $this->userrole, $syscontext->id, true);
+        assign_capability('powereduc/competency:plancommentown', CAP_PROHIBIT, $this->userrole, $syscontext->id, true);
+        assign_capability('powereduc/competency:planviewown', CAP_PROHIBIT, $this->userrole, $syscontext->id, true);
+        assign_capability('powereduc/competency:planviewowndraft', CAP_ALLOW, $this->userrole, $syscontext->id, true);
         accesslib_clear_all_caches_for_unit_testing();
 
         $this->assertEquals((array)$plan1, external::read_plan($plan1->id));
@@ -1355,20 +1355,20 @@ class external_test extends externallib_advanced_testcase {
         try {
             external::read_plan($plan2->id);
             $this->fail('Exception expected due to not permissions to read plan');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('nopermissions', $e->errorcode);
         }
         try {
             external::read_plan($plan3->id);
             $this->fail('Exception expected due to not permissions to read plan');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('nopermissions', $e->errorcode);
         }
 
         // Allow user to see their plan.
-        assign_capability('moodle/competency:plancommentown', CAP_ALLOW, $this->userrole, $syscontext->id, true);
-        assign_capability('moodle/competency:planviewown', CAP_ALLOW, $this->userrole, $syscontext->id, true);
-        assign_capability('moodle/competency:planmanageowndraft', CAP_PROHIBIT, $this->userrole, $syscontext->id, true);
+        assign_capability('powereduc/competency:plancommentown', CAP_ALLOW, $this->userrole, $syscontext->id, true);
+        assign_capability('powereduc/competency:planviewown', CAP_ALLOW, $this->userrole, $syscontext->id, true);
+        assign_capability('powereduc/competency:planmanageowndraft', CAP_PROHIBIT, $this->userrole, $syscontext->id, true);
         accesslib_clear_all_caches_for_unit_testing();
 
         $plan1->commentarea['canpost'] = true;
@@ -1386,9 +1386,9 @@ class external_test extends externallib_advanced_testcase {
         $this->assertEquals((array)$plan3, external::read_plan($plan3->id));
 
         // Allow use to manage their own draft plan.
-        assign_capability('moodle/competency:planviewown', CAP_PROHIBIT, $this->userrole, $syscontext->id, true);
-        assign_capability('moodle/competency:planmanageown', CAP_PROHIBIT, $this->userrole, $syscontext->id, true);
-        assign_capability('moodle/competency:planmanageowndraft', CAP_ALLOW, $this->userrole, $syscontext->id, true);
+        assign_capability('powereduc/competency:planviewown', CAP_PROHIBIT, $this->userrole, $syscontext->id, true);
+        assign_capability('powereduc/competency:planmanageown', CAP_PROHIBIT, $this->userrole, $syscontext->id, true);
+        assign_capability('powereduc/competency:planmanageowndraft', CAP_ALLOW, $this->userrole, $syscontext->id, true);
         accesslib_clear_all_caches_for_unit_testing();
 
         $plan1->canmanage = true;
@@ -1399,20 +1399,20 @@ class external_test extends externallib_advanced_testcase {
         try {
             external::read_plan($plan2->id);
             $this->fail('Exception expected due to not permissions to read plan');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('nopermissions', $e->errorcode);
         }
         try {
             external::read_plan($plan3->id);
             $this->fail('Exception expected due to not permissions to read plan');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('nopermissions', $e->errorcode);
         }
 
         // Allow use to manage their plan.
-        assign_capability('moodle/competency:planviewown', CAP_PROHIBIT, $this->userrole, $syscontext->id, true);
-        assign_capability('moodle/competency:planmanageowndraft', CAP_PROHIBIT, $this->userrole, $syscontext->id, true);
-        assign_capability('moodle/competency:planmanageown', CAP_ALLOW, $this->userrole, $syscontext->id, true);
+        assign_capability('powereduc/competency:planviewown', CAP_PROHIBIT, $this->userrole, $syscontext->id, true);
+        assign_capability('powereduc/competency:planmanageowndraft', CAP_PROHIBIT, $this->userrole, $syscontext->id, true);
+        assign_capability('powereduc/competency:planmanageown', CAP_ALLOW, $this->userrole, $syscontext->id, true);
         accesslib_clear_all_caches_for_unit_testing();
 
         $plan1->canmanage = false;
@@ -1449,13 +1449,13 @@ class external_test extends externallib_advanced_testcase {
 
         $this->assertTrue(external::delete_plan($plan1->id));
 
-        unassign_capability('moodle/competency:planmanage', $this->creatorrole, $syscontext->id);
+        unassign_capability('powereduc/competency:planmanage', $this->creatorrole, $syscontext->id);
         accesslib_clear_all_caches_for_unit_testing();
 
         try {
             external::delete_plan($plan2->id);
             $this->fail('Exception expected due to not permissions to manage plans');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('nopermissions', $e->errorcode);
         }
 
@@ -1465,11 +1465,11 @@ class external_test extends externallib_advanced_testcase {
         try {
             external::delete_plan($plan2->id);
             $this->fail('Exception expected due to not permissions to manage plans');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('nopermissions', $e->errorcode);
         }
 
-        assign_capability('moodle/competency:planmanageown', CAP_ALLOW, $this->userrole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanageown', CAP_ALLOW, $this->userrole, $syscontext->id);
         accesslib_clear_all_caches_for_unit_testing();
 
         $this->assertTrue(external::delete_plan($plan2->id));
@@ -1478,7 +1478,7 @@ class external_test extends externallib_advanced_testcase {
         try {
             external::delete_plan($plan3->id);
             $this->fail('Exception expected due to not permissions to manage plans');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('nopermissions', $e->errorcode);
         }
 
@@ -1611,14 +1611,14 @@ class external_test extends externallib_advanced_testcase {
         $this->assertEquals(1, external::count_competencies_in_template($template->id));
 
         // Unassign capability.
-        unassign_capability('moodle/competency:templatemanage', $this->creatorrole, $syscontext->id);
+        unassign_capability('powereduc/competency:templatemanage', $this->creatorrole, $syscontext->id);
         accesslib_clear_all_caches_for_unit_testing();
 
         // Check we can not add the competency now.
         try {
             external::add_competency_to_template($template->id, $competency->id);
             $this->fail('Exception expected due to not permissions to manage template competencies');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('nopermissions', $e->errorcode);
         }
     }
@@ -1648,14 +1648,14 @@ class external_test extends externallib_advanced_testcase {
         $this->assertEquals(0, external::count_competencies_in_template($template->id));
 
         // Unassign capability.
-        unassign_capability('moodle/competency:templatemanage', $this->creatorrole, $syscontext->id);
+        unassign_capability('powereduc/competency:templatemanage', $this->creatorrole, $syscontext->id);
         accesslib_clear_all_caches_for_unit_testing();
 
         // Check we can not remove the competency now.
         try {
             external::add_competency_to_template($template->id, $competency->get('id'));
             $this->fail('Exception expected due to not permissions to manage template competencies');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('nopermissions', $e->errorcode);
         }
     }
@@ -1876,10 +1876,10 @@ class external_test extends externallib_advanced_testcase {
         $cattemplate = $this->create_template(2, false);
 
         // User without permissions to read in system.
-        assign_capability('moodle/competency:templateview', CAP_PROHIBIT, $this->userrole, $syscontextid, true);
+        assign_capability('powereduc/competency:templateview', CAP_PROHIBIT, $this->userrole, $syscontextid, true);
         accesslib_clear_all_caches_for_unit_testing();
         $this->setUser($this->user);
-        $this->assertFalse(has_capability('moodle/competency:templateview', \context_system::instance()));
+        $this->assertFalse(has_capability('powereduc/competency:templateview', \context_system::instance()));
         try {
             external::read_template($systemplate->id);
             $this->fail('Invalid permissions');
@@ -1894,11 +1894,11 @@ class external_test extends externallib_advanced_testcase {
         }
 
         // User with permissions to read in a category.
-        assign_capability('moodle/competency:templateview', CAP_PREVENT, $this->userrole, $syscontextid, true);
-        assign_capability('moodle/competency:templateview', CAP_ALLOW, $this->userrole, $catcontextid, true);
+        assign_capability('powereduc/competency:templateview', CAP_PREVENT, $this->userrole, $syscontextid, true);
+        assign_capability('powereduc/competency:templateview', CAP_ALLOW, $this->userrole, $catcontextid, true);
         accesslib_clear_all_caches_for_unit_testing();
-        $this->assertFalse(has_capability('moodle/competency:templateview', \context_system::instance()));
-        $this->assertTrue(has_capability('moodle/competency:templateview', \context_coursecat::instance($this->category->id)));
+        $this->assertFalse(has_capability('powereduc/competency:templateview', \context_system::instance()));
+        $this->assertTrue(has_capability('powereduc/competency:templateview', \context_coursecat::instance($this->category->id)));
         try {
             external::read_template($systemplate->id);
             $this->fail('Invalid permissions');
@@ -1917,9 +1917,9 @@ class external_test extends externallib_advanced_testcase {
         $this->assertEquals(userdate(0), $result['duedateformatted']);
 
         // User with permissions to read in the system.
-        assign_capability('moodle/competency:templateview', CAP_ALLOW, $this->userrole, $syscontextid, true);
+        assign_capability('powereduc/competency:templateview', CAP_ALLOW, $this->userrole, $syscontextid, true);
         accesslib_clear_all_caches_for_unit_testing();
-        $this->assertTrue(has_capability('moodle/competency:templateview', \context_system::instance()));
+        $this->assertTrue(has_capability('powereduc/competency:templateview', \context_system::instance()));
         $result = external::read_template($systemplate->id);
         $result = \external_api::clean_returnvalue(external::read_template_returns(), $result);
         $this->assertEquals($systemplate->id, $result['id']);
@@ -2096,7 +2096,7 @@ class external_test extends externallib_advanced_testcase {
 
         // User without permission.
         $this->setUser($this->user);
-        assign_capability('moodle/competency:templateview', CAP_PROHIBIT, $this->userrole, $syscontextid, true);
+        assign_capability('powereduc/competency:templateview', CAP_PROHIBIT, $this->userrole, $syscontextid, true);
         accesslib_clear_all_caches_for_unit_testing();
         try {
             external::list_templates('id', 'ASC', 0, 10, array('contextid' => $syscontextid), 'children', false);
@@ -2106,8 +2106,8 @@ class external_test extends externallib_advanced_testcase {
         }
 
         // User with category permissions.
-        assign_capability('moodle/competency:templateview', CAP_PREVENT, $this->userrole, $syscontextid, true);
-        assign_capability('moodle/competency:templateview', CAP_ALLOW, $this->userrole, $catcontextid, true);
+        assign_capability('powereduc/competency:templateview', CAP_PREVENT, $this->userrole, $syscontextid, true);
+        assign_capability('powereduc/competency:templateview', CAP_ALLOW, $this->userrole, $catcontextid, true);
         accesslib_clear_all_caches_for_unit_testing();
         $result = external::list_templates('id', 'ASC', 0, 10, array('contextid' => $syscontextid), 'children', false);
         $result = \external_api::clean_returnvalue(external::list_templates_returns(), $result);
@@ -2116,7 +2116,7 @@ class external_test extends externallib_advanced_testcase {
         $this->assertEquals($cat2->id, $result[1]['id']);
 
         // User with system permissions.
-        assign_capability('moodle/competency:templateview', CAP_ALLOW, $this->userrole, $syscontextid, true);
+        assign_capability('powereduc/competency:templateview', CAP_ALLOW, $this->userrole, $syscontextid, true);
         accesslib_clear_all_caches_for_unit_testing();
         $result = external::list_templates('id', 'DESC', 0, 3, array('contextid' => $catcontextid), 'parents', false);
         $result = \external_api::clean_returnvalue(external::list_templates_returns(), $result);
@@ -2187,7 +2187,7 @@ class external_test extends externallib_advanced_testcase {
 
         // User without permission.
         $this->setUser($this->user);
-        assign_capability('moodle/competency:templateview', CAP_PROHIBIT, $this->userrole, $syscontextid, true);
+        assign_capability('powereduc/competency:templateview', CAP_PROHIBIT, $this->userrole, $syscontextid, true);
         accesslib_clear_all_caches_for_unit_testing();
         try {
             external::count_templates(array('contextid' => $syscontextid), 'children');
@@ -2197,15 +2197,15 @@ class external_test extends externallib_advanced_testcase {
         }
 
         // User with category permissions.
-        assign_capability('moodle/competency:templateview', CAP_PREVENT, $this->userrole, $syscontextid, true);
-        assign_capability('moodle/competency:templateview', CAP_ALLOW, $this->userrole, $catcontextid, true);
+        assign_capability('powereduc/competency:templateview', CAP_PREVENT, $this->userrole, $syscontextid, true);
+        assign_capability('powereduc/competency:templateview', CAP_ALLOW, $this->userrole, $catcontextid, true);
         accesslib_clear_all_caches_for_unit_testing();
         $result = external::count_templates(array('contextid' => $syscontextid), 'children');
         $result = \external_api::clean_returnvalue(external::count_templates_returns(), $result);
         $this->assertEquals(3, $result);
 
         // User with system permissions.
-        assign_capability('moodle/competency:templateview', CAP_ALLOW, $this->userrole, $syscontextid, true);
+        assign_capability('powereduc/competency:templateview', CAP_ALLOW, $this->userrole, $syscontextid, true);
         accesslib_clear_all_caches_for_unit_testing();
         $result = external::count_templates(array('contextid' => $catcontextid), 'parents');
         $result = \external_api::clean_returnvalue(external::count_templates_returns(), $result);
@@ -2298,7 +2298,7 @@ class external_test extends externallib_advanced_testcase {
         try {
             external::add_related_competency($competency1->get('id'), $competency3->get('id'));
             $this->fail('Exception expected due to not permissions to manage template competencies');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('nopermissions', $e->errorcode);
         }
 
@@ -2388,8 +2388,8 @@ class external_test extends externallib_advanced_testcase {
             'shortname' => 'manage'
         ));
 
-        assign_capability('moodle/competency:planmanage', CAP_ALLOW, $managerole, $syscontext->id);
-        assign_capability('moodle/competency:planview', CAP_ALLOW, $managerole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanage', CAP_ALLOW, $managerole, $syscontext->id);
+        assign_capability('powereduc/competency:planview', CAP_ALLOW, $managerole, $syscontext->id);
 
         $dg->role_assign($managerole, $usermanage->id, $syscontext->id);
 
@@ -2450,8 +2450,8 @@ class external_test extends externallib_advanced_testcase {
             'shortname' => 'manage'
         ));
 
-        assign_capability('moodle/competency:planmanage', CAP_ALLOW, $managerole, $syscontext->id);
-        assign_capability('moodle/competency:planview', CAP_ALLOW, $managerole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanage', CAP_ALLOW, $managerole, $syscontext->id);
+        assign_capability('powereduc/competency:planview', CAP_ALLOW, $managerole, $syscontext->id);
 
         $dg->role_assign($managerole, $usermanage->id, $syscontext->id);
 
@@ -2495,8 +2495,8 @@ class external_test extends externallib_advanced_testcase {
             'shortname' => 'manage'
         ));
 
-        assign_capability('moodle/competency:planmanage', CAP_ALLOW, $managerole, $syscontext->id);
-        assign_capability('moodle/competency:planview', CAP_ALLOW, $managerole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanage', CAP_ALLOW, $managerole, $syscontext->id);
+        assign_capability('powereduc/competency:planview', CAP_ALLOW, $managerole, $syscontext->id);
 
         $dg->role_assign($managerole, $usermanage->id, $syscontext->id);
 
@@ -2765,9 +2765,9 @@ class external_test extends externallib_advanced_testcase {
         $compmanager = $this->getDataGenerator()->create_user();
         $compnoob = $this->getDataGenerator()->create_user();
 
-        assign_capability('moodle/competency:coursecompetencyconfigure', CAP_ALLOW, $roleid, $context->id, true);
-        assign_capability('moodle/competency:coursecompetencyview', CAP_ALLOW, $roleid, $context->id, true);
-        assign_capability('moodle/competency:coursecompetencyview', CAP_ALLOW, $noobroleid, $context->id, true);
+        assign_capability('powereduc/competency:coursecompetencyconfigure', CAP_ALLOW, $roleid, $context->id, true);
+        assign_capability('powereduc/competency:coursecompetencyview', CAP_ALLOW, $roleid, $context->id, true);
+        assign_capability('powereduc/competency:coursecompetencyview', CAP_ALLOW, $noobroleid, $context->id, true);
 
         role_assign($roleid, $compmanager->id, $context->id);
         role_assign($noobroleid, $compnoob->id, $context->id);

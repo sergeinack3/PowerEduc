@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -184,7 +184,7 @@ class edit_xml_file extends XMLDBAction {
                     foreach ($tables as $table) {
                         // Drag element for sortorder.
                         $move = html_writer::span($OUTPUT->render_from_template('core/drag_handle',
-                            ['movetitle' => get_string('movecontent', 'moodle', $table->getName())]), '',
+                            ['movetitle' => get_string('movecontent', 'powereduc', $table->getName())]), '',
                             ['data-action' => 'move_updown_table', 'data-dir' => str_replace($CFG->dirroot, '', $dirpath),
                                 'data-table' => $table->getName()]);
                         // The table name (link to edit table)

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -96,7 +96,7 @@ class digital_consent_test extends \advanced_testcase {
             'AT14',
         ]);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('agedigitalconsentmapinvalidcomma', 'error', 'AT14'));
 
         \core_auth\digital_consent::parse_age_digital_consent_map($agedigitalconsentmap);
@@ -110,7 +110,7 @@ class digital_consent_test extends \advanced_testcase {
             'AT, 14'
         ]);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('agedigitalconsentmapinvaliddefault', 'error'));
 
         \core_auth\digital_consent::parse_age_digital_consent_map($agedigitalconsentmap);
@@ -124,7 +124,7 @@ class digital_consent_test extends \advanced_testcase {
             'TEST, 14'
         ]);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('agedigitalconsentmapinvalidcountry', 'error', 'TEST'));
 
         \core_auth\digital_consent::parse_age_digital_consent_map($agedigitalconsentmap);
@@ -138,7 +138,7 @@ class digital_consent_test extends \advanced_testcase {
             'AT, ten'
         ]);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('agedigitalconsentmapinvalidage', 'error', 'ten'));
 
         \core_auth\digital_consent::parse_age_digital_consent_map($agedigitalconsentmap);
@@ -152,7 +152,7 @@ class digital_consent_test extends \advanced_testcase {
             'AT, '
         ]);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('agedigitalconsentmapinvalidage', 'error', ''));
 
         \core_auth\digital_consent::parse_age_digital_consent_map($agedigitalconsentmap);
@@ -166,7 +166,7 @@ class digital_consent_test extends \advanced_testcase {
             ', 12'
         ]);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('agedigitalconsentmapinvalidcountry', 'error', ''));
 
         \core_auth\digital_consent::parse_age_digital_consent_map($agedigitalconsentmap);

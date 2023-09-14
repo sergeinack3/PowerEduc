@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -180,9 +180,9 @@ class user_evidence extends persistent {
         global $USER;
         $context = context_user::instance($evidenceuserid);
 
-        $capabilities = array('moodle/competency:userevidencemanage');
+        $capabilities = array('powereduc/competency:userevidencemanage');
         if ($context->instanceid == $USER->id) {
-            $capabilities[] = 'moodle/competency:userevidencemanageown';
+            $capabilities[] = 'powereduc/competency:userevidencemanageown';
         }
 
         return has_any_capability($capabilities, $context);
@@ -197,7 +197,7 @@ class user_evidence extends persistent {
     public static function can_read_user($evidenceuserid) {
         $context = context_user::instance($evidenceuserid);
 
-        $capabilities = array('moodle/competency:userevidenceview');
+        $capabilities = array('powereduc/competency:userevidenceview');
 
         return has_any_capability($capabilities, $context) || self::can_manage_user($evidenceuserid);
     }

@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the base classes that are extended to create portfolio export functionality.
  *
- * For places in moodle that want to
- * add export functionality to subclass from {@link http://docs.moodle.org/dev/Adding_a_Portfolio_Button_to_a_page}
+ * For places in powereduc that want to
+ * add export functionality to subclass from {@link http://docs.powereduc.org/dev/Adding_a_Portfolio_Button_to_a_page}
  *
  * @package core_portfolio
  * @copyright 2008 Penny Leach <penny@catalyst.net.nz>, Martin Dougiamas
@@ -30,7 +30,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Base class for callers
  *
- * @link See http://docs.moodle.org/dev/Adding_a_Portfolio_Button_to_a_page
+ * @link See http://docs.powereduc.org/dev/Adding_a_Portfolio_Button_to_a_page
  * @see also portfolio_module_caller_base
  *
  * @package core_portfolio
@@ -87,7 +87,7 @@ abstract class portfolio_caller_base {
      * If this caller wants any additional config items,
      * they should be defined here.
      *
-     * @param moodleform $mform passed by reference, add elements to it.
+     * @param powereducform $mform passed by reference, add elements to it.
      * @param portfolio_plugin_base $instance subclass of portfolio_plugin_base
      */
     public function export_config_form(&$mform, $instance) {}
@@ -104,7 +104,7 @@ abstract class portfolio_caller_base {
     }
 
     /**
-     * Just like the moodle form validation function,
+     * Just like the powereduc form validation function,
      * this is passed in the data array from the form
      * and if a non empty array is returned, form processing will stop.
      *
@@ -192,7 +192,7 @@ abstract class portfolio_caller_base {
      * @param string $field property's name
      * @param mixed $value property's value
      * @return bool
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public final function set($field, &$value) {
         if (property_exists($this, $field)) {
@@ -480,7 +480,7 @@ abstract class portfolio_caller_base {
     /**
      * Return the context for this export. used for $PAGE->set_context
      *
-     * @param moodle_page $PAGE global page object
+     * @param powereduc_page $PAGE global page object
      */
     public abstract function set_context($PAGE);
 }
@@ -491,7 +491,7 @@ abstract class portfolio_caller_base {
  * This just implements a few of the abstract functions
  * from portfolio_caller_base so that caller authors
  * don't need to.
- * {@link http://docs.moodle.org/dev/Adding_a_Portfolio_Button_to_a_page}
+ * {@link http://docs.powereduc.org/dev/Adding_a_Portfolio_Button_to_a_page}
  * @see also portfolio_caller_base
  *
  * @package core_portfolio
@@ -568,7 +568,7 @@ abstract class portfolio_module_caller_base extends portfolio_caller_base {
     /**
      * Overridden to return the course module context
      *
-     * @param moodle_page $PAGE global PAGE
+     * @param powereduc_page $PAGE global PAGE
      */
     public function set_context($PAGE) {
         $PAGE->set_cm($this->cm);

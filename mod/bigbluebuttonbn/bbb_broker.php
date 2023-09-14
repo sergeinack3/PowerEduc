@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Intermediator for handling requests from the BigBlueButton server.
@@ -25,7 +25,7 @@
  */
 
 // We should not have any require login or POWEREDUC_INTERNAL Check in this file.
-// phpcs:disable powereduc.Files.MoodleInternal.MoodleInternalGlobalState,powereduc.Files.RequireLogin.Missing
+// phpcs:disable powereduc.Files.PowerEducInternal.PowerEducInternalGlobalState,powereduc.Files.RequireLogin.Missing
 require(__DIR__ . '/../../config.php');
 
 use Firebase\JWT\Key;
@@ -61,7 +61,7 @@ try {
             broker::process_recording_ready($instance, $params);
             return;
         case 'meeting_events':
-            // When meeting_events callback is implemented by BigBlueButton, Moodle receives a POST request
+            // When meeting_events callback is implemented by BigBlueButton, PowerEduc receives a POST request
             // which is processed in the function using super globals.
             broker::process_meeting_events($instance);
             return;

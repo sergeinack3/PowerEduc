@@ -4,9 +4,9 @@
 .data-registry > .top-nav > * {
     margin-right: 0.5rem;
 }
-/*Extra attribute selection to have preference over bs2's .moodle-actionmenu[data-enhance] */
+/*Extra attribute selection to have preference over bs2's .powereduc-actionmenu[data-enhance] */
 .data-registry > .top-nav > .singlebutton,
-.data-registry > .top-nav > .moodle-actionmenu[data-owner='dataregistry-actions'] {
+.data-registry > .top-nav > .powereduc-actionmenu[data-owner='dataregistry-actions'] {
     display: inline-block;
 }
 
@@ -15,7 +15,7 @@
     overflow-y: scroll;
 }
 
-[data-region="data-requests-table"] .moodle-actionmenu {
+[data-region="data-requests-table"] .powereduc-actionmenu {
     min-width: 150px;
 }
 

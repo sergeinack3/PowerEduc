@@ -1,5 +1,5 @@
 {
-  "moodle-backup-backupselectall": {
+  "powereduc-backup-backupselectall": {
     "requires": [
         "node",
         "event",

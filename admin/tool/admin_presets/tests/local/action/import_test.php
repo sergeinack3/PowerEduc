@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ use core_adminpresets\manager;
  *
  * @package    tool_admin_presets
  * @category   test
- * @copyright  2021 Sara Arjona (sara@moodle.com)
+ * @copyright  2021 Sara Arjona (sara@powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @coversDefaultClass \tool_admin_presets\local\action\import
  */
@@ -84,11 +84,11 @@ class import_test extends \advanced_testcase {
             $action->execute();
         } catch (\exception $e) {
             // If import action was successfull, redirect should be called so we will encounter an
-            // 'unsupported redirect error' moodle_exception.
+            // 'unsupported redirect error' powereduc_exception.
             if ($expectedexception) {
                 $this->assertInstanceOf($expectedexception, $e);
             } else {
-                $this->assertInstanceOf(\moodle_exception::class, $e);
+                $this->assertInstanceOf(\powereduc_exception::class, $e);
             }
         } finally {
             if ($expecteddebugging) {
@@ -104,7 +104,7 @@ class import_test extends \advanced_testcase {
                 $this->assertArrayHasKey($presetid, $presets);
                 $preset = $presets[$presetid];
                 $this->assertEquals($expectedpresetname, $preset->name);
-                $this->assertEquals('http://demo.moodle', $preset->site);
+                $this->assertEquals('http://demo.powereduc', $preset->site);
                 $this->assertEquals('Ada Lovelace', $preset->author);
                 $this->assertEquals(manager::NONCORE_PRESET, $preset->iscore);
 

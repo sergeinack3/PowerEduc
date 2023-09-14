@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -58,7 +58,7 @@ if ($returnurl) {
     $urlparams['returnurl'] = $returnurl;
     $extraparams = '&returnurl=' . $returnurl;
 }
-$baseurl = new moodle_url('/blocks/rss_client/managefeeds.php', $urlparams);
+$baseurl = new powereduc_url('/blocks/rss_client/managefeeds.php', $urlparams);
 $PAGE->set_url($baseurl);
 
 // Process any actions
@@ -82,7 +82,7 @@ $PAGE->set_pagelayout('standard');
 $PAGE->set_title($strmanage);
 $PAGE->set_heading($strmanage);
 
-$managefeeds = new moodle_url('/blocks/rss_client/managefeeds.php', $urlparams);
+$managefeeds = new powereduc_url('/blocks/rss_client/managefeeds.php', $urlparams);
 $PAGE->navbar->add(get_string('blocks'));
 $PAGE->navbar->add(get_string('pluginname', 'block_rss_client'));
 $PAGE->navbar->add(get_string('managefeeds', 'block_rss_client'), $managefeeds);
@@ -91,7 +91,7 @@ echo $OUTPUT->header();
 $table = new flexible_table('rss-display-feeds');
 
 $table->define_columns(array('feed', 'actions'));
-$table->define_headers(array(get_string('feed', 'block_rss_client'), get_string('actions', 'moodle')));
+$table->define_headers(array(get_string('feed', 'block_rss_client'), get_string('actions', 'powereduc')));
 $table->define_baseurl($baseurl);
 
 $table->set_attribute('cellspacing', '0');
@@ -122,10 +122,10 @@ foreach($feeds as $feed) {
         $feedinfo .= $OUTPUT->render($notification);
     }
 
-    $editurl = new moodle_url('/blocks/rss_client/editfeed.php?rssid=' . $feed->id . $extraparams);
+    $editurl = new powereduc_url('/blocks/rss_client/editfeed.php?rssid=' . $feed->id . $extraparams);
     $editaction = $OUTPUT->action_icon($editurl, new pix_icon('t/edit', get_string('edit')));
 
-    $deleteurl = new moodle_url('/blocks/rss_client/managefeeds.php?deleterssid=' . $feed->id . '&sesskey=' . sesskey() . $extraparams);
+    $deleteurl = new powereduc_url('/blocks/rss_client/managefeeds.php?deleterssid=' . $feed->id . '&sesskey=' . sesskey() . $extraparams);
     $deleteicon = new pix_icon('t/delete', get_string('delete'));
     $deleteaction = $OUTPUT->action_icon($deleteurl, $deleteicon, new confirm_action(get_string('deletefeedconfirm', 'block_rss_client')));
 

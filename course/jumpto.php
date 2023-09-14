@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,11 +31,11 @@ $jump = required_param('jump', PARAM_RAW);
 $PAGE->set_url('/course/jumpto.php');
 
 if (!confirm_sesskey()) {
-    throw new \moodle_exception('confirmsesskeybad');
+    throw new \powereduc_exception('confirmsesskeybad');
 }
 
 if (strpos($jump, '/') === 0 || strpos($jump, $CFG->wwwroot) === 0) {
-    redirect(new moodle_url($jump));
+    redirect(new powereduc_url($jump));
 } else {
-    throw new \moodle_exception('error');
+    throw new \powereduc_exception('error');
 }

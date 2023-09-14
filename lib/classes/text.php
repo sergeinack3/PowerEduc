@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Defines string apis
@@ -27,7 +27,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * defines string api's for manipulating strings
  *
- * This class is used to manipulate strings under Moodle 1.6 an later. As
+ * This class is used to manipulate strings under PowerEduc 1.6 an later. As
  * utf-8 text become mandatory a pool of safe functions under this encoding
  * become necessary. The name of the methods is exactly the
  * same than their PHP originals.
@@ -37,7 +37,7 @@ defined('POWEREDUC_INTERNAL') || die();
  *
  * @package   core
  * @category  string
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core_text {
@@ -77,8 +77,8 @@ class core_text {
     /**
      * Reset internal textlib caches.
      * @static
-     * @deprecated since Moodle 4.0. See MDL-53544.
-     * @todo To be removed in Moodle 4.4 - MDL-71748
+     * @deprecated since PowerEduc 4.0. See MDL-53544.
+     * @todo To be removed in PowerEduc 4.4 - MDL-71748
      */
     public static function reset_caches() {
         debugging("reset_caches() is deprecated. Typo3 has been removed and caches aren't used anymore.", DEBUG_DEVELOPER);
@@ -196,7 +196,7 @@ class core_text {
      * @param string $string String to truncate
      * @param int $bytes Maximum length of bytes in the result
      * @return string Portion of string specified by $bytes
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function str_max_bytes($string, $bytes) {
         return mb_strcut($string ?? '', 0, $bytes, 'UTF-8');
@@ -210,7 +210,7 @@ class core_text {
      * @param string $needle The string to find in haystack.
      * @param boolean $part If true, returns the portion before needle, else return the portion after (including needle).
      * @return string|false False when not found.
-     * @since Moodle 2.4.6, 2.5.2, 2.6
+     * @since PowerEduc 2.4.6, 2.5.2, 2.6
      */
     public static function strrchr($haystack, $needle, $part = false) {
         if (is_null($haystack)) {
@@ -564,7 +564,7 @@ class core_text {
      *
      * @param string $value Input string
      * @return string Cleaned string value
-     * @since Moodle 3.5
+     * @since PowerEduc 3.5
      */
     public static function remove_unicode_non_characters($value) {
         // Set up list of all Unicode non-characters for fast replacing.

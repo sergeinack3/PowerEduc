@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,8 +30,8 @@ use context_system;
 use core\message\message;
 use core\task\adhoc_task;
 use core_user;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use tool_dataprivacy\api;
 use tool_dataprivacy\data_request;
 
@@ -53,7 +53,7 @@ class process_data_request_task extends adhoc_task {
      * Run the task to initiate the data request process.
      *
      * @throws coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function execute() {
         global $CFG, $PAGE, $SITE;
@@ -183,14 +183,14 @@ class process_data_request_task extends adhoc_task {
                 $typetext = get_string('requesttypeexport', 'tool_dataprivacy');
                 // We want to notify the user in Moodle about the processing results.
                 $message->notification = 1;
-                $datarequestsurl = new moodle_url('/admin/tool/dataprivacy/mydatarequests.php');
+                $datarequestsurl = new powereduc_url('/admin/tool/dataprivacy/mydatarequests.php');
                 $message->contexturl = $datarequestsurl;
                 $message->contexturlname = get_string('datarequests', 'tool_dataprivacy');
                 // Message to the recipient.
                 $messagetextdata['message'] = get_string('resultdownloadready', 'tool_dataprivacy',
                     format_string($SITE->fullname, true, ['context' => context_system::instance()]));
                 // Prepare download link.
-                $downloadurl = moodle_url::make_pluginfile_url($usercontext->id, 'tool_dataprivacy', 'export', $thing->get_itemid(),
+                $downloadurl = powereduc_url::make_pluginfile_url($usercontext->id, 'tool_dataprivacy', 'export', $thing->get_itemid(),
                     $thing->get_filepath(), $thing->get_filename(), true);
                 $downloadlink = new action_link($downloadurl, get_string('download', 'tool_dataprivacy'));
                 $messagetextdata['downloadlink'] = $downloadlink->export_for_template($output);
@@ -206,7 +206,7 @@ class process_data_request_task extends adhoc_task {
                 $emailonly = true;
                 break;
             default:
-                throw new moodle_exception('errorinvalidrequesttype', 'tool_dataprivacy');
+                throw new powereduc_exception('errorinvalidrequesttype', 'tool_dataprivacy');
         }
 
         $subject = get_string('datarequestemailsubject', 'tool_dataprivacy', $typetext);
@@ -256,7 +256,7 @@ class process_data_request_task extends adhoc_task {
                             api::can_create_data_request_for_user($request->userid, $request->requestedby);
                     break;
                 default:
-                    throw new moodle_exception('errorinvalidrequesttype', 'tool_dataprivacy');
+                    throw new powereduc_exception('errorinvalidrequesttype', 'tool_dataprivacy');
             }
 
             // Ensure the requester has the capability to make data requests for this user.

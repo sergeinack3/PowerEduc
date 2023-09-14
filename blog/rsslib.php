@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -163,7 +163,7 @@ function blog_rss_get_feed($context, $args) {
     }
 
     $sitecontext = context_system::instance();
-    if (!has_capability('moodle/blog:view', $sitecontext)) {
+    if (!has_capability('powereduc/blog:view', $sitecontext)) {
         return null;
     }
 

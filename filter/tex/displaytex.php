@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ define('NO_POWEREDUC_COOKIES', true); // Because it interferes with caching
 require('../../config.php');
 
 if (!filter_is_enabled('tex') and !filter_is_enabled('algebra')) {
-    throw new \moodle_exception('filternotenabled');
+    throw new \powereduc_exception('filternotenabled');
 }
 
 $texexp = optional_param('texexp', '', PARAM_RAW);

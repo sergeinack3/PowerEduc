@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains class mod_feedback\output\summary
@@ -49,7 +49,7 @@ class summary implements renderable, templatable {
     /**
      * Constructor.
      *
-     * @todo MDL-71494 Final deprecation of the $extradetails parameter in Moodle 4.3
+     * @todo MDL-71494 Final deprecation of the $extradetails parameter in PowerEduc 4.3
      * @param mod_feedback_structure $feedbackstructure
      * @param int $mygroupid currently selected group
      * @param bool|null $extradetails Deprecated

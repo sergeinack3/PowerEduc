@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -108,7 +108,7 @@ class imsenterprise_unenrol_test extends \advanced_testcase {
                 $xmlcontent .= (!empty($course->imsfull) ? '<full>'.$course->imsfull.'</full>' : '');
                 $xmlcontent .= '</description>';
 
-                // The orgunit tag value is used by moodle as category name.
+                // The orgunit tag value is used by powereduc as category name.
                 $xmlcontent .= '<org>';
 
                 // Optional category name.
@@ -196,7 +196,7 @@ class imsenterprise_unenrol_test extends \advanced_testcase {
                 'recstatus' => enrol_imsenterprise_plugin::IMSENTERPRISE_ADD,
                 'idnumber' => $usernumber,
                 'username' => 'UID' .$usernumber,
-                'email' => 'user' . $usernumber . '@moodle.org',
+                'email' => 'user' . $usernumber . '@powereduc.org',
                 'firstname' => 'User' . $usernumber . ' firstname',
                 'lastname' => 'User' . $usernumber . ' lastname'
             ];

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Database activity renderer.
@@ -35,8 +35,8 @@ class mod_data_renderer extends plugin_renderer_base {
      * @param stdClass $datamodule  Database module to import to.
      * @param data_preset_importer $importer Importer instance to use for the importing.
      * @return string
-     * @deprecated since Moodle 4.1 MDL-75140 - please do not use this class any more.
-     * @todo MDL-75189 Final deprecation in Moodle 4.5.
+     * @deprecated since PowerEduc 4.1 MDL-75140 - please do not use this class any more.
+     * @todo MDL-75189 Final deprecation in PowerEduc 4.5.
      */
     public function import_setting_mappings($datamodule, data_preset_importer $importer) {
         debugging('import_setting_mappings is deprecated. Please use importing_preset instead', DEBUG_DEVELOPER);

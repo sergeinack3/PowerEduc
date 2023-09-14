@@ -29,7 +29,7 @@ Course cards should always show
 {
     "courses": [
         {
-            "viewurl": "https://moodlesite/course/view.php?id=2",
+            "viewurl": "https://powereducsite/course/view.php?id=2",
             "courseimage": "https://placekitten.com/300/500",
             "fullname": "Mathematics Year One",
             "isfavourite": true,
@@ -67,7 +67,7 @@ The example below show a deck of cards as used on the starred courses block
 {
     "courses": [
         {
-            "viewurl": "https://moodlesite/course/view.php?id=2",
+            "viewurl": "https://powereducsite/course/view.php?id=2",
             "courseimage": "https://placekitten.com/300/500",
             "fullname": "Mathematics Year One",
             "isfavourite": true,
@@ -76,7 +76,7 @@ The example below show a deck of cards as used on the starred courses block
             "visible": true
         },
         {
-            "viewurl": "https://moodlesite/course/view.php?id=3",
+            "viewurl": "https://powereducsite/course/view.php?id=3",
             "courseimage": "https://placekitten.com/330/500",
             "fullname": "Health and Safety",
             "isfavourite": false,
@@ -85,7 +85,7 @@ The example below show a deck of cards as used on the starred courses block
             "visible": true
         },
         {
-            "viewurl": "https://moodlesite/course/view.php?id=4",
+            "viewurl": "https://powereducsite/course/view.php?id=4",
             "courseimage": "https://placekitten.com/360/500",
             "fullname": "French Advanced",
             "isfavourite": false,
@@ -94,7 +94,7 @@ The example below show a deck of cards as used on the starred courses block
             "visible": true
         },
         {
-            "viewurl": "https://moodlesite/course/view.php?id=4",
+            "viewurl": "https://powereducsite/course/view.php?id=4",
             "courseimage": "https://placekitten.com/360/400",
             "fullname": "French Year one",
             "isfavourite": false,
@@ -118,15 +118,15 @@ Cards usually don't really look great without images. That's why we show a place
 {{< example show_markup="false">}}
 <div class="card-deck">
 {{< root.inline >}}
-{{- $pl1 := readFile "admin/tool/componentlibrary/content/static/moodle/components/coursecards/placeholder-1.txt" -}}
-{{- $pl2 := readFile "admin/tool/componentlibrary/content/static/moodle/components/coursecards/placeholder-2.txt" -}}
-{{- $pl3 := readFile "admin/tool/componentlibrary/content/static/moodle/components/coursecards/placeholder-3.txt" -}}
-{{- $pl4 := readFile "admin/tool/componentlibrary/content/static/moodle/components/coursecards/placeholder-4.txt" -}}
-{{- $pl5 := readFile "admin/tool/componentlibrary/content/static/moodle/components/coursecards/placeholder-5.txt" -}}
-{{- $pl6 := readFile "admin/tool/componentlibrary/content/static/moodle/components/coursecards/placeholder-6.txt" -}}
-{{- $pl7 := readFile "admin/tool/componentlibrary/content/static/moodle/components/coursecards/placeholder-7.txt" -}}
-{{- $pl8 := readFile "admin/tool/componentlibrary/content/static/moodle/components/coursecards/placeholder-8.txt" -}}
-{{- $pl9 := readFile "admin/tool/componentlibrary/content/static/moodle/components/coursecards/placeholder-9.txt" -}}
+{{- $pl1 := readFile "admin/tool/componentlibrary/content/static/powereduc/components/coursecards/placeholder-1.txt" -}}
+{{- $pl2 := readFile "admin/tool/componentlibrary/content/static/powereduc/components/coursecards/placeholder-2.txt" -}}
+{{- $pl3 := readFile "admin/tool/componentlibrary/content/static/powereduc/components/coursecards/placeholder-3.txt" -}}
+{{- $pl4 := readFile "admin/tool/componentlibrary/content/static/powereduc/components/coursecards/placeholder-4.txt" -}}
+{{- $pl5 := readFile "admin/tool/componentlibrary/content/static/powereduc/components/coursecards/placeholder-5.txt" -}}
+{{- $pl6 := readFile "admin/tool/componentlibrary/content/static/powereduc/components/coursecards/placeholder-6.txt" -}}
+{{- $pl7 := readFile "admin/tool/componentlibrary/content/static/powereduc/components/coursecards/placeholder-7.txt" -}}
+{{- $pl8 := readFile "admin/tool/componentlibrary/content/static/powereduc/components/coursecards/placeholder-8.txt" -}}
+{{- $pl9 := readFile "admin/tool/componentlibrary/content/static/powereduc/components/coursecards/placeholder-9.txt" -}}
 
   <div class="card mb-2 justify-content-center align-items-center d-flex text-center" style="flex: 0 0 20%; height: 150px; background-image: url('{{- $pl1 -}}')">
   </div>

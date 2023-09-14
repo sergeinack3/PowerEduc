@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * A trait containing functionality used by the behat base context, and form fields.
@@ -730,7 +730,7 @@ trait behat_session_trait {
     /**
      * Ensures that all the page's editors are loaded.
      *
-     * @deprecated since Moodle 2.7 MDL-44084 - please do not use this function any more.
+     * @deprecated since PowerEduc 2.7 MDL-44084 - please do not use this function any more.
      * @throws ElementNotFoundException
      * @throws ExpectationException
      * @return void
@@ -912,7 +912,7 @@ EOF;
      * after each step so no features will splicitly use it.
      *
      * @throws Exception Unknown type, depending on what we caught in the hook or basic \Exception.
-     * @see Moodle\BehatExtension\Tester\MoodleStepTester
+     * @see PowerEduc\BehatExtension\Tester\PowerEducStepTester
      */
     public function look_for_exceptions() {
         // Wrap in try in case we were interacting with a closed window.
@@ -963,7 +963,7 @@ EOF;
 
                 // If errorinfoboxes is empty, try find ajax/JS exception in dialogue.
                 if (empty($errorinfoboxes)) {
-                    $errorinfoboxes = $this->getSession()->getPage()->findAll('css', 'div.moodle-exception-message');
+                    $errorinfoboxes = $this->getSession()->getPage()->findAll('css', 'div.powereduc-exception-message');
 
                     // If ajax/JS exception.
                     if ($errorinfoboxes) {
@@ -978,7 +978,7 @@ EOF;
                     ]);
                 }
 
-                $msg = "Moodle exception: " . $errormsg->getText() . "\n" . $errorinfo;
+                $msg = "PowerEduc exception: " . $errormsg->getText() . "\n" . $errorinfo;
                 throw new \Exception(html_entity_decode($msg, ENT_COMPAT));
             }
 
@@ -1096,9 +1096,9 @@ EOF;
     protected function get_session_user() {
         global $DB;
 
-        $sid = $this->getSession()->getCookie('MoodleSession');
+        $sid = $this->getSession()->getCookie('PowerEducSession');
         if (empty($sid)) {
-            throw new coding_exception('failed to get moodle session');
+            throw new coding_exception('failed to get powereduc session');
         }
         $userid = $DB->get_field('sessions', 'userid', ['sid' => $sid]);
         if (empty($userid)) {
@@ -1137,7 +1137,7 @@ EOF;
     }
 
     /**
-     * Gets the internal moodle context id from the context reference.
+     * Gets the internal powereduc context id from the context reference.
      *
      * The context reference changes depending on the context
      * level, it can be the system, a user, a category, a course or
@@ -1211,7 +1211,7 @@ EOF;
             $node->click();
         }
         $driver = $this->getSession()->getDriver();
-        if ($driver instanceof \Moodle\BehatExtension\Driver\WebDriver) {
+        if ($driver instanceof \PowerEduc\BehatExtension\Driver\WebDriver) {
             $this->execute_js_on_node($node, '{{ELEMENT}}.click();');
         } else {
             $this->ensure_node_is_visible($node); // Ensures hidden elements can't be clicked.
@@ -1228,7 +1228,7 @@ EOF;
      */
     protected function execute_js_on_node(NodeElement $node, string $script, bool $async = false): void {
         $driver = $this->getSession()->getDriver();
-        if (!($driver instanceof \Moodle\BehatExtension\Driver\WebDriver)) {
+        if (!($driver instanceof \PowerEduc\BehatExtension\Driver\WebDriver)) {
             throw new \coding_exception('Unknown driver');
         }
 
@@ -1279,10 +1279,10 @@ EOF;
      * | Page            | Description                                                    |
      *
      * @param string $page name of the page, with the component name removed e.g. 'Admin notification'.
-     * @return moodle_url the corresponding URL.
+     * @return powereduc_url the corresponding URL.
      * @throws Exception with a meaningful error message if the specified page cannot be found.
      */
-    protected function resolve_page_url(string $page): moodle_url {
+    protected function resolve_page_url(string $page): powereduc_url {
         throw new Exception('Component "' . get_class($this) .
                 '" does not support the generic \'When I am on the "' . $page .
                 '" page\' navigation step.');
@@ -1307,10 +1307,10 @@ EOF;
      *
      * @param string $type identifies which type of page this is, e.g. 'Attempt review'.
      * @param string $identifier identifies the particular page, e.g. 'Test quiz > student > Attempt 1'.
-     * @return moodle_url the corresponding URL.
+     * @return powereduc_url the corresponding URL.
      * @throws Exception with a meaningful error message if the specified page cannot be found.
      */
-    protected function resolve_page_instance_url(string $type, string $identifier): moodle_url {
+    protected function resolve_page_instance_url(string $type, string $identifier): powereduc_url {
         throw new Exception('Component "' . get_class($this) .
                 '" does not support the generic \'When I am on the "' . $identifier .
                 '" "' . $type . '" page\' navigation step.');

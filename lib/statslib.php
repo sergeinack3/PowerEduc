@@ -1,24 +1,24 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package    core
  * @subpackage stats
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -1345,46 +1345,46 @@ function stats_get_time_options($now,$lastweekend,$lastmonthend,$earliestday,$ea
     $timeoptions = array();
 
     if ($now - (60*60*24*7) >= $earliestday) {
-        $timeoptions[STATS_TIME_LASTWEEK] = get_string('numweeks','moodle',1);
+        $timeoptions[STATS_TIME_LASTWEEK] = get_string('numweeks','powereduc',1);
     }
     if ($now - (60*60*24*14) >= $earliestday) {
-        $timeoptions[STATS_TIME_LAST2WEEKS] = get_string('numweeks','moodle',2);
+        $timeoptions[STATS_TIME_LAST2WEEKS] = get_string('numweeks','powereduc',2);
     }
     if ($now - (60*60*24*21) >= $earliestday) {
-        $timeoptions[STATS_TIME_LAST3WEEKS] = get_string('numweeks','moodle',3);
+        $timeoptions[STATS_TIME_LAST3WEEKS] = get_string('numweeks','powereduc',3);
     }
     if ($now - (60*60*24*28) >= $earliestday) {
-        $timeoptions[STATS_TIME_LAST4WEEKS] = get_string('numweeks','moodle',4);// show dailies up to (including) here.
+        $timeoptions[STATS_TIME_LAST4WEEKS] = get_string('numweeks','powereduc',4);// show dailies up to (including) here.
     }
     if ($lastweekend - (60*60*24*56) >= $earliestweek) {
-        $timeoptions[STATS_TIME_LAST2MONTHS] = get_string('nummonths','moodle',2);
+        $timeoptions[STATS_TIME_LAST2MONTHS] = get_string('nummonths','powereduc',2);
     }
     if ($lastweekend - (60*60*24*84) >= $earliestweek) {
-        $timeoptions[STATS_TIME_LAST3MONTHS] = get_string('nummonths','moodle',3);
+        $timeoptions[STATS_TIME_LAST3MONTHS] = get_string('nummonths','powereduc',3);
     }
     if ($lastweekend - (60*60*24*112) >= $earliestweek) {
-        $timeoptions[STATS_TIME_LAST4MONTHS] = get_string('nummonths','moodle',4);
+        $timeoptions[STATS_TIME_LAST4MONTHS] = get_string('nummonths','powereduc',4);
     }
     if ($lastweekend - (60*60*24*140) >= $earliestweek) {
-        $timeoptions[STATS_TIME_LAST5MONTHS] = get_string('nummonths','moodle',5);
+        $timeoptions[STATS_TIME_LAST5MONTHS] = get_string('nummonths','powereduc',5);
     }
     if ($lastweekend - (60*60*24*168) >= $earliestweek) {
-        $timeoptions[STATS_TIME_LAST6MONTHS] = get_string('nummonths','moodle',6); // show weeklies up to (including) here
+        $timeoptions[STATS_TIME_LAST6MONTHS] = get_string('nummonths','powereduc',6); // show weeklies up to (including) here
     }
     if (strtotime('-7 months',$lastmonthend) >= $earliestmonth) {
-        $timeoptions[STATS_TIME_LAST7MONTHS] = get_string('nummonths','moodle',7);
+        $timeoptions[STATS_TIME_LAST7MONTHS] = get_string('nummonths','powereduc',7);
     }
     if (strtotime('-8 months',$lastmonthend) >= $earliestmonth) {
-        $timeoptions[STATS_TIME_LAST8MONTHS] = get_string('nummonths','moodle',8);
+        $timeoptions[STATS_TIME_LAST8MONTHS] = get_string('nummonths','powereduc',8);
     }
     if (strtotime('-9 months',$lastmonthend) >= $earliestmonth) {
-        $timeoptions[STATS_TIME_LAST9MONTHS] = get_string('nummonths','moodle',9);
+        $timeoptions[STATS_TIME_LAST9MONTHS] = get_string('nummonths','powereduc',9);
     }
     if (strtotime('-10 months',$lastmonthend) >= $earliestmonth) {
-        $timeoptions[STATS_TIME_LAST10MONTHS] = get_string('nummonths','moodle',10);
+        $timeoptions[STATS_TIME_LAST10MONTHS] = get_string('nummonths','powereduc',10);
     }
     if (strtotime('-11 months',$lastmonthend) >= $earliestmonth) {
-        $timeoptions[STATS_TIME_LAST11MONTHS] = get_string('nummonths','moodle',11);
+        $timeoptions[STATS_TIME_LAST11MONTHS] = get_string('nummonths','powereduc',11);
     }
     if (strtotime('-1 year',$lastmonthend) >= $earliestmonth) {
         $timeoptions[STATS_TIME_LASTYEAR] = get_string('lastyear');
@@ -1393,7 +1393,7 @@ function stats_get_time_options($now,$lastweekend,$lastmonthend,$earliestday,$ea
     $years = (int)date('y', $now) - (int)date('y', $earliestmonth);
     if ($years > 1) {
         for($i = 2; $i <= $years; $i++) {
-            $timeoptions[$i*12+20] = get_string('numyears', 'moodle', $i);
+            $timeoptions[$i*12+20] = get_string('numyears', 'powereduc', $i);
         }
     }
 

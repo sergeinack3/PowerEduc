@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -90,7 +90,7 @@ class enrol_cohort_plugin extends enrol_plugin {
         global $CFG;
         require_once($CFG->dirroot . '/cohort/lib.php');
         $coursecontext = context_course::instance($courseid);
-        if (!has_capability('moodle/course:enrolconfig', $coursecontext) or !has_capability('enrol/cohort:config', $coursecontext)) {
+        if (!has_capability('powereduc/course:enrolconfig', $coursecontext) or !has_capability('enrol/cohort:config', $coursecontext)) {
             return false;
         }
         return cohort_get_available_cohorts($coursecontext, 0, 0, 1) ? true : false;
@@ -116,7 +116,7 @@ class enrol_cohort_plugin extends enrol_plugin {
                 if (!empty($fields['customint2']) && $fields['customint2'] == COHORT_CREATE_GROUP) {
                     // Create a new group for the cohort if requested.
                     $context = context_course::instance($course->id);
-                    require_capability('moodle/course:managegroups', $context);
+                    require_capability('powereduc/course:managegroups', $context);
                     $groupid = enrol_cohort_create_new_group($course->id, $cid);
                     $fields2['customint2'] = $groupid;
                 }
@@ -155,7 +155,7 @@ class enrol_cohort_plugin extends enrol_plugin {
         }
         // Create a new group for the cohort if requested.
         if ($data->customint2 == COHORT_CREATE_GROUP) {
-            require_capability('moodle/course:managegroups', $context);
+            require_capability('powereduc/course:managegroups', $context);
             $groupid = enrol_cohort_create_new_group($instance->courseid, $data->customint1);
             $data->customint2 = $groupid;
         }
@@ -397,7 +397,7 @@ class enrol_cohort_plugin extends enrol_plugin {
      */
     protected function get_group_options($coursecontext) {
         $groups = array(0 => get_string('none'));
-        if (has_capability('moodle/course:managegroups', $coursecontext)) {
+        if (has_capability('powereduc/course:managegroups', $coursecontext)) {
             $groups[COHORT_CREATE_GROUP] = get_string('creategroup', 'enrol_cohort');
         }
 

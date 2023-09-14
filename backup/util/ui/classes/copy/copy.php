@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
  * and sets up the course copy process.
  *
  * @package    core_backup
- * @copyright  2020 onward The Moodle Users Association <https://moodleassociation.org/>
+ * @copyright  2020 onward The Moodle Users Association <https://powereducassociation.org/>
  * @author     Matt Porritt <mattp@catalyst-au.net>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @deprecated since Moodle 4.1. Use copy_helper instead
@@ -42,7 +42,7 @@ require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
  * and sets up the course copy process.
  *
  * @package    core_backup
- * @copyright  2020 onward The Moodle Users Association <https://moodleassociation.org/>
+ * @copyright  2020 onward The Moodle Users Association <https://powereducassociation.org/>
  * @author     Matt Porritt <mattp@catalyst-au.net>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @deprecated since Moodle 4.1 MDL-74548 - please use copy_helper instead
@@ -117,7 +117,7 @@ class copy {
      *
      * @param \stdClass $formdata Data from the validated course copy form.
      * @return \stdClass $copydata Data required for course copy operations.
-     * @throws \moodle_exception If one of the required copy fields is missing
+     * @throws \powereduc_exception If one of the required copy fields is missing
      */
     private function get_copy_data(\stdClass $formdata): \stdClass {
         $copydata = new \stdClass();
@@ -126,7 +126,7 @@ class copy {
             if (isset($formdata->{$field})) {
                 $copydata->{$field} = $formdata->{$field};
             } else {
-                throw new \moodle_exception('copyfieldnotfound', 'backup', '', null, $field);
+                throw new \powereduc_exception('copyfieldnotfound', 'backup', '', null, $field);
             }
         }
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -179,7 +179,7 @@ class course_competency extends persistent {
                 $strname = 'complete';
                 break;
             default:
-                throw new \moodle_exception('errorcoursecompetencyrule', 'core_competency', '', $ruleoutcome);
+                throw new \powereduc_exception('errorcoursecompetencyrule', 'core_competency', '', $ruleoutcome);
                 break;
         }
 

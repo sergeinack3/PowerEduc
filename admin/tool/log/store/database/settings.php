@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,9 +25,9 @@
 defined('POWEREDUC_INTERNAL') || die();
 
 if ($hassiteconfig) {
-    $testurl = new moodle_url('/admin/tool/log/store/database/test_settings.php', array('sesskey' => sesskey()));
+    $testurl = new powereduc_url('/admin/tool/log/store/database/test_settings.php', array('sesskey' => sesskey()));
     $test = new admin_externalpage('logstoredbtestsettings', get_string('testsettings', 'logstore_database'),
-        $testurl, 'moodle/site:config', true);
+        $testurl, 'powereduc/site:config', true);
     $ADMIN->add('logging', $test);
 
     $drivers = \logstore_database\helper::get_drivers();

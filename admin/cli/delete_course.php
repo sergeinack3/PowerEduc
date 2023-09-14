@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -88,7 +88,7 @@ if (CLI_MAINTENANCE) {
     cli_error('CLI maintenance mode active, CLI execution suspended');
 }
 
-if (moodle_needs_upgrading()) {
+if (powereduc_needs_upgrading()) {
     cli_error('Moodle upgrade pending, CLI execution suspended');
 }
 

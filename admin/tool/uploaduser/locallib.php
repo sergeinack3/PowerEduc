@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -183,21 +183,21 @@ class uu_progress_tracker {
  * @param csv_import_reader $cir
  * @param array $stdfields standard user fields
  * @param array $profilefields custom profile fields
- * @param moodle_url $returnurl return url in case of any error
+ * @param powereduc_url $returnurl return url in case of any error
  * @return array list of fields
  */
-function uu_validate_user_upload_columns(csv_import_reader $cir, $stdfields, $profilefields, moodle_url $returnurl) {
+function uu_validate_user_upload_columns(csv_import_reader $cir, $stdfields, $profilefields, powereduc_url $returnurl) {
     $columns = $cir->get_columns();
 
     if (empty($columns)) {
         $cir->close();
         $cir->cleanup();
-        throw new \moodle_exception('cannotreadtmpfile', 'error', $returnurl);
+        throw new \powereduc_exception('cannotreadtmpfile', 'error', $returnurl);
     }
     if (count($columns) < 2) {
         $cir->close();
         $cir->cleanup();
-        throw new \moodle_exception('csvfewcolumns', 'error', $returnurl);
+        throw new \powereduc_exception('csvfewcolumns', 'error', $returnurl);
     }
 
     // test columns
@@ -240,12 +240,12 @@ function uu_validate_user_upload_columns(csv_import_reader $cir, $stdfields, $pr
         } else {
             $cir->close();
             $cir->cleanup();
-            throw new \moodle_exception('invalidfieldname', 'error', $returnurl, $field);
+            throw new \powereduc_exception('invalidfieldname', 'error', $returnurl, $field);
         }
         if (in_array($newfield, $processed)) {
             $cir->close();
             $cir->cleanup();
-            throw new \moodle_exception('duplicatefieldname', 'error', $returnurl, $newfield);
+            throw new \powereduc_exception('duplicatefieldname', 'error', $returnurl, $newfield);
         }
         $processed[$key] = $newfield;
     }

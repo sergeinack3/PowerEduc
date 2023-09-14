@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -167,7 +167,7 @@ class processor_test extends \advanced_testcase {
         $cir->init();
 
         $options = array('mode' => tool_uploadcourse_processor::MODE_CREATE_NEW);
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $p = new tool_uploadcourse_processor($cir, $options, array());
     }
 
@@ -185,7 +185,7 @@ class processor_test extends \advanced_testcase {
         $cir->init();
 
         $options = array('mode' => tool_uploadcourse_processor::MODE_CREATE_NEW);
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $p = new tool_uploadcourse_processor($cir, $options, array());
     }
 

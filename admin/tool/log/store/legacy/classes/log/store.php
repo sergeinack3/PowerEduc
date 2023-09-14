@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -115,7 +115,7 @@ class store implements \tool_log\log\store, \core\log\sql_reader {
         try {
             // A custom report + on the fly SQL rewriting = a possible exception.
             $records = $DB->get_recordset_select('log', $selectwhere, $params, $sort, '*', $limitfrom, $limitnum);
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             debugging("error converting legacy event data " . $ex->getMessage() . $ex->debuginfo, DEBUG_DEVELOPER);
             return array();
         }
@@ -148,7 +148,7 @@ class store implements \tool_log\log\store, \core\log\sql_reader {
 
         try {
             return $DB->record_exists_select('log', $selectwhere, $params);
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             debugging("error converting legacy event data " . $ex->getMessage() . $ex->debuginfo, DEBUG_DEVELOPER);
             return false;
         }
@@ -159,7 +159,7 @@ class store implements \tool_log\log\store, \core\log\sql_reader {
      * @deprecated since Moodle 3.6 MDL-52953 - Please use supported log stores such as "standard" or "external" instead.
      * @todo MDL-52805 This will be removed in Moodle 3.10
      *
-     * Note that the traversable object contains a moodle_recordset, so
+     * Note that the traversable object contains a powereduc_recordset, so
      * remember that is important that you call close() once you finish
      * using it.
      *
@@ -180,7 +180,7 @@ class store implements \tool_log\log\store, \core\log\sql_reader {
 
         try {
             $recordset = $DB->get_recordset_select('log', $selectwhere, $params, $sort, '*', $limitfrom, $limitnum);
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             debugging("error converting legacy event data " . $ex->getMessage() . $ex->debuginfo, DEBUG_DEVELOPER);
             return new \EmptyIterator;
         }
@@ -216,7 +216,7 @@ class store implements \tool_log\log\store, \core\log\sql_reader {
 
         try {
             return $DB->count_records_select('log', $selectwhere, $params);
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             debugging("error converting legacy event data " . $ex->getMessage() . $ex->debuginfo, DEBUG_DEVELOPER);
             return 0;
         }
@@ -330,7 +330,7 @@ class store implements \tool_log\log\store, \core\log\sql_reader {
                 // Function email_to_user is not usable because email_to_user tries to write to the logs table,
                 // and this will get caught in an infinite loop, if disk is full.
                 $site = get_site();
-                $subject = 'Insert into log failed at your moodle site ' . $site->fullname;
+                $subject = 'Insert into log failed at your powereduc site ' . $site->fullname;
                 $message = "Insert into log table failed at " . date('l dS \of F Y h:i:s A') .
                     ".\n It is possible that your disk is full.\n\n";
                 $message .= "The failed query parameters are:\n\n" . var_export($log, true);

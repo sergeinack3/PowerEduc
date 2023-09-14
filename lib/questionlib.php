@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Code for handling and processing questions.
@@ -113,7 +113,7 @@ function question_save_qtype_order($neworder, $config = null): void {
  * Check if the question is used.
  *
  * @param array $questionids of question ids.
- * @return boolean whether any of these questions are being used by any part of Moodle.
+ * @return boolean whether any of these questions are being used by any part of PowerEduc.
  */
 function questions_in_use($questionids): bool {
 
@@ -278,7 +278,7 @@ function question_category_delete_safe($category): void {
 }
 
 /**
- * Tests whether any question in a category is used by any part of Moodle.
+ * Tests whether any question in a category is used by any part of PowerEduc.
  *
  * @param integer $categoryid a question category id.
  * @param boolean $recursive whether to check child categories too.
@@ -560,7 +560,7 @@ function question_delete_activity($cm, $notused = false): bool {
  *
  * @param stdClass[] $questions The list of question being moved (must include
  *                              the id and contextid)
- * @param context $newcontext The Moodle context the questions are being moved to
+ * @param context $newcontext The PowerEduc context the questions are being moved to
  */
 function question_move_question_tags_to_new_context(array $questions, context $newcontext): void {
     // If the questions are moving to a new course/activity context then we need to
@@ -2085,7 +2085,7 @@ function is_latest(string $version, string $questionbankentryid) : bool {
     return false;
 }
 
-// Deprecated functions from Moodle 4.0.
+// Deprecated functions from PowerEduc 4.0.
 
 /**
  * Generate the URL for starting a new preview of a given question with the given options.
@@ -2098,9 +2098,9 @@ function is_latest(string $version, string $questionbankentryid) : bool {
  * @param object $context context to run the preview in (affects things like
  *      filter settings, theme, lang, etc.) Defaults to $PAGE->context.
  * @return powereduc_url the URL.
- * @deprecated since Moodle 4.0
+ * @deprecated since PowerEduc 4.0
  * @see qbank_previewquestion\helper::question_preview_url()
- * @todo Final deprecation on Moodle 4.4 MDL-72438
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
  */
 function question_preview_url($questionid, $preferredbehaviour = null,
                               $maxmark = null, $displayoptions = null, $variant = null, $context = null) {
@@ -2115,9 +2115,9 @@ function question_preview_url($questionid, $preferredbehaviour = null,
  * Popup params for the question preview.
  *
  * @return array that can be passed as $params to the {@see popup_action()} constructor.
- * @deprecated since Moodle 4.0
+ * @deprecated since PowerEduc 4.0
  * @see qbank_previewquestion\previewquestion_helper::question_preview_popup_params()
- * @todo Final deprecation on Moodle 4.4 MDL-72438
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
  */
 function question_preview_popup_params() {
     debugging('Function question_preview_popup_params() has been deprecated and moved to qbank_previewquestion plugin,
@@ -2134,8 +2134,8 @@ function question_preview_popup_params() {
  *
  * @param object $question
  * @return string A unique version stamp
- * @deprecated since Moodle 4.0
- * @todo Final deprecation on Moodle 4.4 MDL-72438
+ * @deprecated since PowerEduc 4.0
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
  */
 function question_hash($question) {
     debugging('Function question_hash() has been deprecated without replacement.', DEBUG_DEVELOPER);
@@ -2152,9 +2152,9 @@ function question_hash($question) {
  * @param string $withcontexts
  * @param string $filename
  * @return powereduc_url export file url
- * @deprecated since Moodle 4.0 MDL-71573
+ * @deprecated since PowerEduc 4.0 MDL-71573
  * @see qbank_exportquestions\exportquestions_helper
- * @todo Final deprecation on Moodle 4.4 MDL-72438
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
  */
 function question_make_export_url($contextid, $categoryid, $format, $withcategories,
                                   $withcontexts, $filename) {
@@ -2172,9 +2172,9 @@ function question_make_export_url($contextid, $categoryid, $format, $withcategor
  *      question_bank::load_question_data() or question_bank::make_question().
  *      (Only ->id and ->contextid are used.)
  * @return powereduc_url the requested URL.
- * @deprecated since Moodle 4.0
+ * @deprecated since PowerEduc 4.0
  * @see \qbank_exporttoxml\helper::question_get_export_single_question_url()
- * @todo Final deprecation on Moodle 4.4 MDL-72438
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
  */
 function question_get_export_single_question_url($question) {
     debugging('Function question_get_export_single_question_url() has been deprecated and moved to qbank_exporttoxml plugin,
@@ -2199,9 +2199,9 @@ function question_get_export_single_question_url($question) {
  * - random questions
  *
  * @param int $categoryid The category ID.
- * @deprecated since Moodle 4.0 MDL-71585
+ * @deprecated since PowerEduc 4.0 MDL-71585
  * @see qbank_managecategories\helper
- * @todo Final deprecation on Moodle 4.4 MDL-72438
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
  */
 function question_remove_stale_questions_from_category($categoryid) {
     debugging('Function question_remove_stale_questions_from_category()
@@ -2225,9 +2225,9 @@ function question_remove_stale_questions_from_category($categoryid) {
  * @param int $depth the indent depth. Used in recursive calls.
  * @param int $nochildrenof
  * @return array a new array of categories, in the right order for the tree.
- * @deprecated since Moodle 4.0 MDL-71585
+ * @deprecated since PowerEduc 4.0 MDL-71585
  * @see qbank_managecategories\helper
- * @todo Final deprecation on Moodle 4.4 MDL-72438
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
  */
 function flatten_category_tree(&$categories, $id, $depth = 0, $nochildrenof = -1) {
     debugging('Function flatten_category_tree() has been deprecated and moved to qbank_managecategories plugin,
@@ -2241,9 +2241,9 @@ function flatten_category_tree(&$categories, $id, $depth = 0, $nochildrenof = -1
  * @param array $categories An array of category objects, for example from the.
  * @param int $nochildrenof
  * @return array The formatted list of categories.
- * @deprecated since Moodle 4.0 MDL-71585
+ * @deprecated since PowerEduc 4.0 MDL-71585
  * @see qbank_managecategories\helper
- * @todo Final deprecation on Moodle 4.4 MDL-72438
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
  */
 function add_indented_names($categories, $nochildrenof = -1) {
     debugging('Function add_indented_names() has been deprecated and moved to qbank_managecategories plugin,
@@ -2262,9 +2262,9 @@ function add_indented_names($categories, $nochildrenof = -1) {
  * @param integer $selected optionally, the id of a category to be selected by
  *      default in the dropdown.
  * @param int $nochildrenof
- * @deprecated since Moodle 4.0 MDL-71585
+ * @deprecated since PowerEduc 4.0 MDL-71585
  * @see qbank_managecategories\helper
- * @todo Final deprecation on Moodle 4.4 MDL-72438
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
  */
 function question_category_select_menu($contexts, $top = false, $currentcat = 0,
                                        $selected = "", $nochildrenof = -1) {
@@ -2281,9 +2281,9 @@ function question_category_select_menu($contexts, $top = false, $currentcat = 0,
  * @param string $sortorder used as the ORDER BY clause in the select statement.
  * @param bool $top Whether to return the top categories or not.
  * @return array of category objects.
- * @deprecated since Moodle 4.0 MDL-71585
+ * @deprecated since PowerEduc 4.0 MDL-71585
  * @see qbank_managecategories\helper
- * @todo Final deprecation on Moodle 4.4 MDL-72438
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
  */
 function get_categories_for_contexts($contexts, $sortorder = 'parent, sortorder, name ASC', $top = false) {
     debugging('Function get_categories_for_contexts() has been deprecated and moved to qbank_managecategories plugin,
@@ -2301,9 +2301,9 @@ function get_categories_for_contexts($contexts, $sortorder = 'parent, sortorder,
  * @param int $nochildrenof
  * @param boolean $escapecontextnames Whether the returned name of the thing is to be HTML escaped or not.
  * @return array
- * @deprecated since Moodle 4.0 MDL-71585
+ * @deprecated since PowerEduc 4.0 MDL-71585
  * @see qbank_managecategories\helper
- * @todo Final deprecation on Moodle 4.4 MDL-72438
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
  */
 function question_category_options($contexts, $top = false, $currentcat = 0,
                                    $popupform = false, $nochildrenof = -1, $escapecontextnames = true) {
@@ -2318,9 +2318,9 @@ function question_category_options($contexts, $top = false, $currentcat = 0,
  *
  * @param array $categories The list of categories.
  * @return array
- * @deprecated since Moodle 4.0 MDL-71585
+ * @deprecated since PowerEduc 4.0 MDL-71585
  * @see qbank_managecategories\helper
- * @todo Final deprecation on Moodle 4.4 MDL-72438
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
  */
 function question_add_context_in_key($categories) {
     debugging('Function question_add_context_in_key() has been deprecated and moved to qbank_managecategories plugin,
@@ -2334,9 +2334,9 @@ function question_add_context_in_key($categories) {
  * @param array $categories An array of question categories.
  * @param boolean $escape Whether the returned name of the thing is to be HTML escaped or not.
  * @return array The same question category list given to the function, with the top category names being translated.
- * @deprecated since Moodle 4.0 MDL-71585
+ * @deprecated since PowerEduc 4.0 MDL-71585
  * @see qbank_managecategories\helper
- * @todo Final deprecation on Moodle 4.4 MDL-72438
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
  */
 function question_fix_top_names($categories, $escape = true) {
     debugging('Function question_fix_top_names() has been deprecated and moved to qbank_managecategories plugin,

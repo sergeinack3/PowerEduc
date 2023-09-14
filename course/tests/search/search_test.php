@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -179,10 +179,10 @@ class search_test extends \advanced_testcase {
     /**
      * Utility function to convert recordset to array of IDs for testing.
      *
-     * @param moodle_recordset $rs Recordset to convert (and close)
+     * @param powereduc_recordset $rs Recordset to convert (and close)
      * @return array Array of IDs from records indexed by number (0, 1, 2, ...)
      */
-    protected static function recordset_to_ids(\moodle_recordset $rs) {
+    protected static function recordset_to_ids(\powereduc_recordset $rs) {
         $results = [];
         foreach ($rs as $rec) {
             $results[] = $rec->id;
@@ -574,7 +574,7 @@ class search_test extends \advanced_testcase {
 
         // Prevent users viewing course lists.
         $userrole = $DB->get_field('role', 'id', ['shortname' => 'user'], MUST_EXIST);
-        assign_capability('moodle/category:viewcourselist', CAP_PREVENT, $userrole, \context_system::instance()->id, true);
+        assign_capability('powereduc/category:viewcourselist', CAP_PREVENT, $userrole, \context_system::instance()->id, true);
 
         // The following assertions check whether each user can view the indexed customfield data record.
         $course1data = \core_customfield\data::get_record([
@@ -625,7 +625,7 @@ class search_test extends \advanced_testcase {
         $result = $searcharea->get_doc_icon($document);
 
         $this->assertEquals('i/course', $result->get_name());
-        $this->assertEquals('moodle', $result->get_component());
+        $this->assertEquals('powereduc', $result->get_component());
     }
 
     /**
@@ -641,7 +641,7 @@ class search_test extends \advanced_testcase {
         $result = $searcharea->get_doc_icon($document);
 
         $this->assertEquals('i/section', $result->get_name());
-        $this->assertEquals('moodle', $result->get_component());
+        $this->assertEquals('powereduc', $result->get_component());
     }
 
     /**

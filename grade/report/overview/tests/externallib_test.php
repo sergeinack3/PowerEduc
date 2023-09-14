@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ require_once($CFG->dirroot . '/webservice/tests/helpers.php');
  *
  * @package    gradereport_overview
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class externallib_test extends externallib_advanced_testcase {
@@ -221,7 +221,7 @@ class externallib_test extends externallib_advanced_testcase {
     public function test_view_grade_report_permissions() {
         $this->setUser($this->student2);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $studentgrade = gradereport_overview_external::view_grade_report($this->course1->id, $this->student1->id);
     }
 }

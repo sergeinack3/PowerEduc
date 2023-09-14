@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package moodlecore
+ * @package powereduccore
  * @subpackage backup-plan
  * @copyright 2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -152,7 +152,7 @@ abstract class backup_structure_step extends backup_step {
         $pluginsdirs = core_component::get_plugin_list($plugintype);
         foreach ($pluginsdirs as $name => $plugindir) {
             $classname = 'backup_' . $plugintype . '_' . $name . '_plugin';
-            $backupfile = $plugindir . '/backup/moodle2/' . $classname . '.class.php';
+            $backupfile = $plugindir . '/backup/powereduc2/' . $classname . '.class.php';
             if (file_exists($backupfile)) {
                 require_once($backupfile);
                 $backupplugin = new $classname($plugintype, $name, $optigroup, $this);
@@ -223,7 +223,7 @@ abstract class backup_structure_step extends backup_step {
         // class for shared stuff.
         $parentclass = 'backup_' . $plugintype . '_' . $pluginname . '_' . $subplugintype . '_subplugin';
         $parentfile = core_component::get_component_directory($plugintype . '_' . $pluginname) .
-            '/backup/moodle2/' . $parentclass . '.class.php';
+            '/backup/powereduc2/' . $parentclass . '.class.php';
         if (file_exists($parentfile)) {
             require_once($parentfile);
         }
@@ -232,7 +232,7 @@ abstract class backup_structure_step extends backup_step {
         $subpluginsdirs = core_component::get_plugin_list($subplugintype);
         foreach ($subpluginsdirs as $name => $subpluginsdir) {
             $classname = 'backup_' . $subplugintype . '_' . $name . '_subplugin';
-            $backupfile = $subpluginsdir . '/backup/moodle2/' . $classname . '.class.php';
+            $backupfile = $subpluginsdir . '/backup/powereduc2/' . $classname . '.class.php';
             if (file_exists($backupfile)) {
                 require_once($backupfile);
                 $backupsubplugin = new $classname($subplugintype, $name, $optigroup, $this);

@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * The core_xapi statement validation and tansformation.
  *
  * @package    core_xapi
- * @since      Moodle 3.9
+ * @since      PowerEduc 3.9
  * @copyright  2020 Ferran Recio
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -67,7 +67,7 @@ abstract class handler {
     }
 
     /**
-     * Convert a statement object into a Moodle xAPI Event.
+     * Convert a statement object into a PowerEduc xAPI Event.
      *
      * If a statement is accepted by validate_statement the component must provide a event
      * to handle that statement, otherwise the statement will be rejected.
@@ -75,7 +75,7 @@ abstract class handler {
      * Note: this method must be overridden by the plugins which want to use xAPI.
      *
      * @param statement $statement
-     * @return \core\event\base|null a Moodle event to trigger
+     * @return \core\event\base|null a PowerEduc event to trigger
      */
     abstract public function statement_to_event(statement $statement): ?\core\event\base;
 

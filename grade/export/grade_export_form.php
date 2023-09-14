@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ if (!defined('POWEREDUC_INTERNAL')) {
 
 require_once $CFG->libdir.'/formslib.php';
 
-class grade_export_form extends moodleform {
+class grade_export_form extends powereducform {
     function definition() {
         global $CFG, $COURSE, $USER, $DB;
 
@@ -52,7 +52,7 @@ class grade_export_form extends moodleform {
 
         if ($grade_items = $gseq->items) {
             $needs_multiselect = false;
-            $canviewhidden = has_capability('moodle/grade:viewhidden', context_course::instance($COURSE->id));
+            $canviewhidden = has_capability('powereduc/grade:viewhidden', context_course::instance($COURSE->id));
 
             foreach ($grade_items as $grade_item) {
                 // Is the grade_item hidden? If so, can the user see hidden grade_items?
@@ -85,7 +85,7 @@ class grade_export_form extends moodleform {
         $exportfeedback = isset($CFG->grade_export_exportfeedback) ? $CFG->grade_export_exportfeedback : 0;
         $mform->setDefault('export_feedback', $exportfeedback);
         $coursecontext = context_course::instance($COURSE->id);
-        if (has_capability('moodle/course:viewsuspendedusers', $coursecontext)) {
+        if (has_capability('powereduc/course:viewsuspendedusers', $coursecontext)) {
             $mform->addElement('advcheckbox', 'export_onlyactive', get_string('exportonlyactive', 'grades'));
             $mform->setType('export_onlyactive', PARAM_BOOL);
             $mform->setDefault('export_onlyactive', 1);

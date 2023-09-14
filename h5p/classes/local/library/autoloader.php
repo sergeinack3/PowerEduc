@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * H5P autoloader management class.
  *
  * @package    core_h5p
- * @copyright  2019 Sara Arjona <sara@moodle.com>
+ * @copyright  2019 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,7 +28,7 @@ namespace core_h5p\local\library;
  * H5P autoloader management class.
  *
  * @package    core_h5p
- * @copyright  2019 Sara Arjona <sara@moodle.com>
+ * @copyright  2019 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class autoloader {
@@ -86,7 +86,7 @@ class autoloader {
      * Returns the current H5P library handler class.
      *
      * @return string H5P library handler class
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public static function get_handler_classname(): string {
         global $CFG;
@@ -102,7 +102,7 @@ class autoloader {
         $defaulthandler = self::get_default_handler();
         if (empty($defaulthandler)) {
             // If there is no default handler, throw an exception.
-            throw new \moodle_exception('noh5plibhandlerdefined', 'core_h5p');
+            throw new \powereduc_exception('noh5plibhandlerdefined', 'core_h5p');
         }
 
         return $defaulthandler;
@@ -122,9 +122,9 @@ class autoloader {
      *
      * @param string $filepath The path within the h5p root
      * @param array $params these params override current params or add new
-     * @return null|moodle_url
+     * @return null|powereduc_url
      */
-    public static function get_h5p_core_library_url(?string $filepath = null, ?array $params = null): ?\moodle_url {
+    public static function get_h5p_core_library_url(?string $filepath = null, ?array $params = null): ?\powereduc_url {
         return component_class_callback(self::get_handler_classname(), 'get_h5p_core_library_url', [$filepath, $params]);
     }
 
@@ -133,9 +133,9 @@ class autoloader {
      *
      * @param string $filepath The path within the h5p root.
      * @param array $params These params override current params or add new.
-     * @return null|\moodle_url The moodle_url instance to a file in the H5P Editor library.
+     * @return null|\powereduc_url The powereduc_url instance to a file in the H5P Editor library.
      */
-    public static function get_h5p_editor_library_url(?string $filepath = null, ?array $params = null): ?\moodle_url {
+    public static function get_h5p_editor_library_url(?string $filepath = null, ?array $params = null): ?\powereduc_url {
         return component_class_callback(self::get_handler_classname(), 'get_h5p_editor_library_url', [$filepath, $params]);
     }
 

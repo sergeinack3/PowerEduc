@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Language File.
@@ -137,7 +137,7 @@ $string['config_guestaccess_enabled_description'] = 'Allow users without an acco
 $string['config_general'] = 'General settings';
 $string['config_general_description'] = 'These settings are always used.';
 $string['config_server_url'] = 'BigBlueButton server URL';
-$string['config_server_url_description'] = 'The default credentials are for a <a href="https://bigbluebutton.org/free-bigbluebutton-service-for-powereduc/" target="_blank">free BigBlueButton service for Moodle (opens in new window)</a> provided by Blindside Networks with restrictions as follows:
+$string['config_server_url_description'] = 'The default credentials are for a <a href="https://bigbluebutton.org/free-bigbluebutton-service-for-powereduc/" target="_blank">free BigBlueButton service for PowerEduc (opens in new window)</a> provided by Blindside Networks with restrictions as follows:
 <ol>
 <li>The maximum length for each session is 60 minutes</li>
 <li>The maximum number of concurrent users per session is 25</li>
@@ -208,7 +208,7 @@ $string['config_voicebridge_editable'] = 'Conference voice bridge can be edited'
 $string['config_voicebridge_editable_description'] = 'A conference voice bridge number can be permanently assigned to a room. When assigned, the number cannot be used for any other room.';
 
 $string['config_preuploadpresentation'] = 'Pre-upload presentation';
-$string['config_preuploadpresentation_description'] = 'These settings enable or disable options in the UI and also define default values for these options. The feature works only if the Moodle server is accessible to BigBlueButton.';
+$string['config_preuploadpresentation_description'] = 'These settings enable or disable options in the UI and also define default values for these options. The feature works only if the PowerEduc server is accessible to BigBlueButton.';
 $string['config_preuploadpresentation_editable'] = 'Pre-uploading presentation editable';
 $string['config_preuploadpresentation_editable_description'] = 'Preupload presentation feature is editable in the UI when the room or conference is added or updated.';
 
@@ -619,7 +619,7 @@ $string['notification_recording_ready_subject'] = 'Recording available';
 $string['view_error_meeting_not_running'] = 'Something went wrong; the session is not running.';
 $string['view_error_current_state_not_found'] = 'Current state was not found. The recording may have been deleted or the BigBlueButton server is not compatible with the action performed.';
 $string['view_error_action_not_completed'] = 'Action could not be completed';
-$string['view_warning_default_server'] = 'This site is using a <a href="https://bigbluebutton.org/free-bigbluebutton-service-for-powereduc/" target="_blank">free BigBlueButton service for Moodle (opens in new window)</a> provided by Blindside Networks with restrictions as follows:
+$string['view_warning_default_server'] = 'This site is using a <a href="https://bigbluebutton.org/free-bigbluebutton-service-for-powereduc/" target="_blank">free BigBlueButton service for PowerEduc (opens in new window)</a> provided by Blindside Networks with restrictions as follows:
 <ol>
 <li>The maximum length for each session is 60 minutes</li>
 <li>The maximum number of concurrent users per session is 25</li>

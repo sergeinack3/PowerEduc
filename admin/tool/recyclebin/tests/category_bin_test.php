@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -177,7 +177,7 @@ class category_bin_test extends \advanced_testcase {
      */
     public function recycle_bin_settings_provider() {
         return [
-            'backup/backup_auto_storage moodle' => [[
+            'backup/backup_auto_storage powereduc' => [[
                 (object)['plugin' => 'backup', 'name' => 'backup_auto_storage', 'value' => 0],
             ]],
 
@@ -191,7 +191,7 @@ class category_bin_test extends \advanced_testcase {
                 (object)['plugin' => 'backup', 'name' => 'backup_auto_destination', 'value' => true],
             ]],
 
-            'restore/restore_general_users moodle' => [[
+            'restore/restore_general_users powereduc' => [[
                 (object)['plugin' => 'restore', 'name' => 'restore_general_users', 'value' => 0],
                 (object)['plugin' => 'restore', 'name' => 'restore_general_groups', 'value' => 0],
             ]],

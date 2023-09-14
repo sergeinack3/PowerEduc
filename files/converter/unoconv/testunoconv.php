@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,11 +26,11 @@ require_once($CFG->libdir . '/filelib.php');
 
 $sendpdf = optional_param('sendpdf', 0, PARAM_BOOL);
 
-$PAGE->set_url(new moodle_url('/files/converter/unoconv/testunoconv.php'));
+$PAGE->set_url(new powereduc_url('/files/converter/unoconv/testunoconv.php'));
 $PAGE->set_context(context_system::instance());
 
 require_login();
-require_capability('moodle/site:config', context_system::instance());
+require_capability('powereduc/site:config', context_system::instance());
 
 $strheading = get_string('test_unoconv', 'fileconverter_unoconv');
 $PAGE->navbar->add(get_string('administrationsite'));
@@ -38,7 +38,7 @@ $PAGE->navbar->add(get_string('plugins', 'admin'));
 $PAGE->navbar->add(get_string('assignmentplugins', 'mod_assign'));
 $PAGE->navbar->add(get_string('feedbackplugins', 'mod_assign'));
 $PAGE->navbar->add(get_string('pluginname', 'fileconverter_unoconv'),
-        new moodle_url('/admin/settings.php', array('section' => 'fileconverterunoconv')));
+        new powereduc_url('/admin/settings.php', array('section' => 'fileconverterunoconv')));
 $PAGE->navbar->add($strheading);
 $PAGE->set_heading($strheading);
 $PAGE->set_title($strheading);
@@ -56,7 +56,7 @@ $result = \fileconverter_unoconv\converter::test_unoconv_path();
 switch ($result->status) {
     case \fileconverter_unoconv\converter::UNOCONVPATH_OK:
         $msg = $OUTPUT->notification(get_string('test_unoconvok', 'fileconverter_unoconv'), 'success');
-        $pdflink = new moodle_url($PAGE->url, array('sendpdf' => 1, 'sesskey' => sesskey()));
+        $pdflink = new powereduc_url($PAGE->url, array('sendpdf' => 1, 'sesskey' => sesskey()));
         $msg .= html_writer::link($pdflink, get_string('test_unoconvdownload', 'fileconverter_unoconv'));
         $msg .= html_writer::empty_tag('br');
         break;
@@ -65,7 +65,7 @@ switch ($result->status) {
         $msg = $OUTPUT->notification(get_string("test_unoconv{$result->status}", 'fileconverter_unoconv'), 'warning');
         break;
 }
-$returl = new moodle_url('/admin/settings.php', array('section' => 'fileconverterunoconv'));
+$returl = new powereduc_url('/admin/settings.php', array('section' => 'fileconverterunoconv'));
 $msg .= $OUTPUT->continue_button($returl);
 
 echo $OUTPUT->header();

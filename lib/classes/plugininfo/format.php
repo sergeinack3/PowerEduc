@@ -1,29 +1,29 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Defines classes used for plugin info.
  *
  * @package    core
- * @copyright  2011 David Mudrak <david@moodle.com>
+ * @copyright  2011 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace core\plugininfo;
 
-use moodle_url, part_of_admin_tree, admin_settingpage, core_plugin_manager;
+use powereduc_url, part_of_admin_tree, admin_settingpage, core_plugin_manager;
 
 defined('POWEREDUC_INTERNAL') || die();
 
@@ -73,9 +73,9 @@ class format extends base {
         $disabled = !$enabled;
         // Only set value if there is no config setting or if the value is different from the previous one.
         if ($oldvalue == false && $disabled) {
-            if (get_config('moodlecourse', 'format') === $pluginname) {
+            if (get_config('powereduccourse', 'format') === $pluginname) {
                 // The default course format can't be disabled.
-                throw new \moodle_exception('cannotdisableformat', 'error');
+                throw new \powereduc_exception('cannotdisableformat', 'error');
             }
             set_config('disabled', $disabled, $plugin);
             $haschanged = true;
@@ -133,7 +133,7 @@ class format extends base {
 
         $section = $this->get_settings_section_name();
 
-        $settings = new admin_settingpage($section, $this->displayname, 'moodle/site:config', $this->is_enabled() === false);
+        $settings = new admin_settingpage($section, $this->displayname, 'powereduc/site:config', $this->is_enabled() === false);
         include($this->full_path('settings.php')); // This may also set $settings to null.
 
         if ($settings) {
@@ -142,7 +142,7 @@ class format extends base {
     }
 
     public function is_uninstall_allowed() {
-        if ($this->name !== get_config('moodlecourse', 'format') && $this->name !== 'site') {
+        if ($this->name !== get_config('powereduccourse', 'format') && $this->name !== 'site') {
             return true;
         } else {
             return false;
@@ -151,10 +151,10 @@ class format extends base {
 
     /**
      * Return URL used for management of plugins of this type.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function get_manage_url() {
-        return new moodle_url('/admin/settings.php', array('section'=>'manageformats'));
+        return new powereduc_url('/admin/settings.php', array('section'=>'manageformats'));
     }
 
     public function get_uninstall_extra_warning() {
@@ -166,7 +166,7 @@ class format extends base {
             return '';
         }
 
-        $defaultformat = $this->pluginman->plugin_name('format_'.get_config('moodlecourse', 'format'));
+        $defaultformat = $this->pluginman->plugin_name('format_'.get_config('powereduccourse', 'format'));
         $message = get_string(
             'formatuninstallwithcourses', 'core_admin',
             (object)array('count' => $coursecount, 'format' => $this->displayname,
@@ -186,7 +186,7 @@ class format extends base {
     public function uninstall_cleanup() {
         global $DB;
 
-        if (($defaultformat = get_config('moodlecourse', 'format')) && $defaultformat !== $this->name) {
+        if (($defaultformat = get_config('powereduccourse', 'format')) && $defaultformat !== $this->name) {
             $courses = $DB->get_records('course', array('format' => $this->name), 'id');
             $data = (object)array('id' => null, 'format' => $defaultformat);
             foreach ($courses as $record) {

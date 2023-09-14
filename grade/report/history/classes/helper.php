@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -62,7 +62,7 @@ class helper {
         $PAGE->requires->strings_for_js(array(
             'noresults',
             'search'
-        ), 'moodle');
+        ), 'powereduc');
 
         $arguments = array(
             'courseid'            => $courseid,
@@ -73,7 +73,7 @@ class helper {
 
         // Load the yui module.
         $PAGE->requires->yui_module(
-            'moodle-gradereport_history-userselector',
+            'powereduc-gradereport_history-userselector',
             'Y.M.gradereport_history.UserSelector.init',
             array($arguments)
         );
@@ -159,8 +159,8 @@ class helper {
         $groupmode = groups_get_course_groupmode(get_course($courseid));
 
         // We're only interested in separate groups mode because it's the only group mode that requires the user to be a member of
-        // specific group(s), except when they have the 'moodle/site:accessallgroups' capability.
-        if ($groupmode == SEPARATEGROUPS && !has_capability('moodle/site:accessallgroups', $context)) {
+        // specific group(s), except when they have the 'powereduc/site:accessallgroups' capability.
+        if ($groupmode == SEPARATEGROUPS && !has_capability('powereduc/site:accessallgroups', $context)) {
             // Fetch the groups that the user can see.
             $groups = groups_get_all_groups($courseid, $USER->id, 0, 'g.id');
             // Add join condition to include users that only belong to the same group as the user.
@@ -196,7 +196,7 @@ class helper {
         $groupjoinsql = $groupwheresql = '';
         $inparams = [];
         $groupmode = groups_get_course_groupmode(get_course($courseid));
-        if ($groupmode == SEPARATEGROUPS && !has_capability('moodle/site:accessallgroups', \context_course::instance($courseid))) {
+        if ($groupmode == SEPARATEGROUPS && !has_capability('powereduc/site:accessallgroups', \context_course::instance($courseid))) {
             // Fetch the groups that the user can see.
             $groups = groups_get_all_groups($courseid, $USER->id, 0, 'g.id');
             // Add join condition to include users that only belong to the same group as the user.

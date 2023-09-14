@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * A moodleform to allow the editing of a calculated grade item
+ * A powereducform to allow the editing of a calculated grade item
  *
  * @package   core_grades
  * @copyright 2007 Petr Skoda
@@ -28,7 +28,7 @@ if (!defined('POWEREDUC_INTERNAL')) {
 
 require_once $CFG->libdir.'/formslib.php';
 
-class edit_calculation_form extends moodleform {
+class edit_calculation_form extends powereducform {
     public $available;
     public $noidnumbers;
 

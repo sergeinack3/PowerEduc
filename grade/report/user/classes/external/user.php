@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ use external_value;
 use external_warnings;
 use grade_plugin_return;
 use graded_users_iterator;
-use moodle_exception;
+use powereduc_exception;
 use stdClass;
 use gradereport_user\report\user as user_report;
 
@@ -41,7 +41,7 @@ require_once($CFG->dirroot.'/grade/lib.php');
  * External grade report API implementation
  *
  * @package    gradereport_user
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @category   external
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -85,35 +85,35 @@ class user extends external_api {
         $user = null;
 
         if (empty($userid)) {
-            require_capability('moodle/grade:viewall', $context);
+            require_capability('powereduc/grade:viewall', $context);
         } else {
             $user = core_user::get_user($userid, '*', MUST_EXIST);
             core_user::require_active_user($user);
             // Check if we can view the user group (if any).
             // When userid == 0, we are retrieving all the users, we'll check then if a groupid is required.
             if (!groups_user_groups_visible($course, $user->id)) {
-                throw new moodle_exception('notingroup');
+                throw new powereduc_exception('notingroup');
             }
         }
 
         $access = false;
 
-        if (has_capability('moodle/grade:viewall', $context)) {
+        if (has_capability('powereduc/grade:viewall', $context)) {
             // Can view all course grades.
             $access = true;
-        } else if ($userid == $USER->id && has_capability('moodle/grade:view', $context) && $course->showgrades) {
+        } else if ($userid == $USER->id && has_capability('powereduc/grade:view', $context) && $course->showgrades) {
             // View own grades.
             $access = true;
         }
 
         if (!$access) {
-            throw new moodle_exception('nopermissiontoviewgrades', 'error');
+            throw new powereduc_exception('nopermissiontoviewgrades', 'error');
         }
 
         if (!empty($groupid)) {
             // Determine is the group is visible to user.
             if (!groups_group_visible($groupid, $course)) {
-                throw new moodle_exception('notingroup');
+                throw new powereduc_exception('notingroup');
             }
         } else {
             // Check to see if groups are being used here.
@@ -121,7 +121,7 @@ class user extends external_api {
                 $groupid = groups_get_course_group($course);
                 // Determine is the group is visible to user (this is particullary for the group 0).
                 if (!groups_group_visible($groupid, $course)) {
-                    throw new moodle_exception('notingroup');
+                    throw new powereduc_exception('notingroup');
                 }
             } else {
                 $groupid = 0;
@@ -196,7 +196,7 @@ class user extends external_api {
         } else {
             $defaultgradeshowactiveenrol = !empty($CFG->grade_report_showonlyactiveenrol);
             $showonlyactiveenrol = get_user_preferences('grade_report_showonlyactiveenrol', $defaultgradeshowactiveenrol);
-            $showonlyactiveenrol = $showonlyactiveenrol || !has_capability('moodle/course:viewsuspendedusers', $context);
+            $showonlyactiveenrol = $showonlyactiveenrol || !has_capability('powereduc/course:viewsuspendedusers', $context);
 
             $gui = new graded_users_iterator($course, null, $groupid);
             $gui->require_active_enrolment($showonlyactiveenrol);
@@ -377,7 +377,7 @@ class user extends external_api {
      * @param int $userid id of the user the report belongs to
      * @return array of warnings and status result
      * @since Moodle 2.9
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function view_grade_report(int $courseid, int $userid = 0): array {
         global $CFG, $USER;
@@ -407,16 +407,16 @@ class user extends external_api {
 
         $access = false;
 
-        if (has_capability('moodle/grade:viewall', $context)) {
+        if (has_capability('powereduc/grade:viewall', $context)) {
             // Can view all course grades (any user).
             $access = true;
-        } else if ($userid == $USER->id && has_capability('moodle/grade:view', $context) && $course->showgrades) {
+        } else if ($userid == $USER->id && has_capability('powereduc/grade:view', $context) && $course->showgrades) {
             // View own grades.
             $access = true;
         }
 
         if (!$access) {
-            throw new moodle_exception('nopermissiontoviewgrades', 'error');
+            throw new powereduc_exception('nopermissiontoviewgrades', 'error');
         }
 
         // Create a report instance. We don't need the gpr second parameter.

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package     tool_customlang
  * @category    output
- * @copyright   2019 Bas Brands <bas@moodle.com>
+ * @copyright   2019 Bas Brands <bas@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,7 +31,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Renderer for the customlang tool.
  *
- * @copyright 2019 Bas Brands <bas@moodle.com>
+ * @copyright 2019 Bas Brands <bas@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class renderer extends \plugin_renderer_base {

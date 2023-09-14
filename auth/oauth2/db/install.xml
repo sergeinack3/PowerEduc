@@ -12,8 +12,8 @@
         <FIELD NAME="usermodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="The user account this oauth login is linked to."/>
         <FIELD NAME="issuerid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="username" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="The external username to map to this moodle account"/>
-        <FIELD NAME="email" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="The external email to map to this moodle account"/>
+        <FIELD NAME="username" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="The external username to map to this powereduc account"/>
+        <FIELD NAME="email" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="The external email to map to this powereduc account"/>
         <FIELD NAME="confirmtoken" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" COMMENT="If this is not empty - the user has not confirmed their email to create the link."/>
         <FIELD NAME="confirmtokenexpires" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
       </FIELDS>

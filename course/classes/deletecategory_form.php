@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,12 +28,12 @@ require_once($CFG->libdir . '/formslib.php');
 require_once($CFG->libdir . '/questionlib.php');
 
 /**
- * Delete category moodleform.
+ * Delete category powereducform.
  * @package core_course
  * @copyright 2002 onwards Martin Dougiamas (http://dougiamas.com)
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class core_course_deletecategory_form extends moodleform {
+class core_course_deletecategory_form extends powereducform {
 
     /**
      * The core_course_category object for that category being deleted.
@@ -67,7 +67,7 @@ class core_course_deletecategory_form extends moodleform {
             $options[1] = get_string('deleteallcannotundo');
         }
         if (empty($options)) {
-            throw new \moodle_exception('youcannotdeletecategory', 'error', 'index.php', $categoryname);
+            throw new \powereduc_exception('youcannotdeletecategory', 'error', 'index.php', $categoryname);
         }
 
         // Now build the form.
@@ -127,7 +127,7 @@ class core_course_deletecategory_form extends moodleform {
     }
 
     /**
-     * Perform some extra moodle validation.
+     * Perform some extra powereduc validation.
      *
      * @param array $data
      * @param array $files

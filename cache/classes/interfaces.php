@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -98,10 +98,10 @@ interface cache_loader {
      *
      * <code>
      * // This code will add four entries to the cache, one for each url.
-     * $cache->set('main', 'http://moodle.org');
-     * $cache->set('docs', 'http://docs.moodle.org');
-     * $cache->set('tracker', 'http://tracker.moodle.org');
-     * $cache->set('qa', 'http://qa.moodle.net');
+     * $cache->set('main', 'http://powereduc.org');
+     * $cache->set('docs', 'http://docs.powereduc.org');
+     * $cache->set('tracker', 'http://tracker.powereduc.org');
+     * $cache->set('qa', 'http://qa.powereduc.net');
      * </code>
      *
      * @param string|int $key The key for the data being requested.
@@ -145,10 +145,10 @@ interface cache_loader {
      * <code>
      * // This code will add four entries to the cache, one for each url.
      * $cache->set_many(array(
-     *     'main' => 'http://moodle.org',
-     *     'docs' => 'http://docs.moodle.org',
-     *     'tracker' => 'http://tracker.moodle.org',
-     *     'qa' => ''http://qa.moodle.net'
+     *     'main' => 'http://powereduc.org',
+     *     'docs' => 'http://docs.powereduc.org',
+     *     'tracker' => 'http://tracker.powereduc.org',
+     *     'qa' => ''http://qa.powereduc.net'
      * ));
      * </code>
      *
@@ -436,10 +436,10 @@ interface cache_is_configurable {
     /**
      * Allows the cache store to set its data against the edit form before it is shown to the user.
      *
-     * @param moodleform $editform
+     * @param powereducform $editform
      * @param array $config
      */
-    public static function config_set_edit_form_data(moodleform $editform, array $config);
+    public static function config_set_edit_form_data(powereducform $editform, array $config);
 }
 
 /**

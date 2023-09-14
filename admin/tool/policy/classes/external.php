@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Class containing the external API functions functions for the Policy tool.
  *
  * @package    tool_policy
- * @copyright  2018 Sara Arjona (sara@moodle.com)
+ * @copyright  2018 Sara Arjona (sara@powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -38,7 +38,7 @@ use external_single_structure;
 use external_value;
 use external_warnings;
 use invalid_parameter_exception;
-use moodle_exception;
+use powereduc_exception;
 use restricted_context_exception;
 use tool_policy\api;
 use tool_policy\form\accept_policy;
@@ -48,7 +48,7 @@ use tool_policy\form\accept_policy;
  *
  * The external API for the Policy tool.
  *
- * @copyright   2018 Sara Arjona (sara@moodle.com)
+ * @copyright   2018 Sara Arjona (sara@powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class external extends external_api {
@@ -76,7 +76,7 @@ class external extends external_api {
      * @throws dml_exception
      * @throws invalid_parameter_exception
      * @throws restricted_context_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_policy_version($versionid, $behalfid = null) {
         global $PAGE;
@@ -116,7 +116,7 @@ class external extends external_api {
                 );
                 $result['policy'] = $policy;
             }
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $warnings[] = [
                 'item' => $versionid,
                 'warningcode' => 'errorpolicyversionnotfound',

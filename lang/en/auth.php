@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'auth', language 'en', branch 'POWEREDUC_20_STABLE'
@@ -32,10 +32,10 @@ $string['auth_fieldlock'] = 'Lock value';
 $string['auth_fieldlockfield'] = 'Lock value ({$a})';
 $string['auth_fieldlock_expl'] = '<p>Lock value: If enabled, users will not be able to edit the field. Use this option if you are maintaining this data in the external auth system. </p>';
 $string['auth_fieldlocks'] = 'Lock user fields';
-$string['auth_fieldlocks_help'] = '<p>You can lock user data fields. This is useful for sites where the user data is maintained by the administrators manually by editing user records or uploading using the \'Upload users\' facility. If you are locking fields that are required by Moodle, make sure that you provide that data when creating user accounts or the accounts will be unusable.</p><p>Consider setting the lock mode to \'Unlocked if empty\' to avoid this problem.</p>';
+$string['auth_fieldlocks_help'] = '<p>You can lock user data fields. This is useful for sites where the user data is maintained by the administrators manually by editing user records or uploading using the \'Upload users\' facility. If you are locking fields that are required by PowerEduc, make sure that you provide that data when creating user accounts or the accounts will be unusable.</p><p>Consider setting the lock mode to \'Unlocked if empty\' to avoid this problem.</p>';
 $string['auth_fieldmapping'] = 'Data mapping ({$a})';
 $string['auth_changepasswordhelp'] = 'Change password help';
-$string['auth_changepasswordhelp_expl'] = 'Display lost password help to users who have lost their {$a} password. This will be displayed either as well as or instead of the <strong>Change Password URL</strong> or Internal Moodle password change.';
+$string['auth_changepasswordhelp_expl'] = 'Display lost password help to users who have lost their {$a} password. This will be displayed either as well as or instead of the <strong>Change Password URL</strong> or Internal PowerEduc password change.';
 $string['auth_changepasswordurl'] = 'Change password URL';
 $string['auth_changepasswordurl_expl'] = 'Specify the url to send users who have lost their {$a} password. Set <strong>Use standard Change Password page</strong> to <strong>No</strong>.';
 $string['auth_changingemailaddress'] = 'You have requested a change of email address, from {$a->oldemail} to {$a->newemail}. For security reasons, we are sending you an email message at the new address to confirm that it belongs to you. Your email address will be updated as soon as you open the URL sent to you in that message.';
@@ -94,9 +94,9 @@ $string['eventuserloggedin'] = 'User has logged in';
 $string['eventuserloggedinas'] = 'User logged in as another user';
 $string['eventuserloginfailed'] = 'User login failed';
 $string['forcechangepassword'] = 'Force change password';
-$string['forcechangepasswordfirst_help'] = 'Force users to change password on their first login to Moodle.';
-$string['forcechangepassword_help'] = 'Force users to change password on their next login to Moodle.';
-$string['forgottenpassword'] = 'If you enter a URL here, it will be used as the lost password recovery page for this site. This is intended for sites where passwords are handled entirely outside of Moodle. Leave this blank to use the default password recovery.';
+$string['forcechangepasswordfirst_help'] = 'Force users to change password on their first login to PowerEduc.';
+$string['forcechangepassword_help'] = 'Force users to change password on their next login to PowerEduc.';
+$string['forgottenpassword'] = 'If you enter a URL here, it will be used as the lost password recovery page for this site. This is intended for sites where passwords are handled entirely outside of PowerEduc. Leave this blank to use the default password recovery.';
 $string['forgottenpasswordurl'] = 'Forgotten password URL';
 $string['getrecaptchaapi'] = 'To use reCAPTCHA you must get an API key from <a href=\'https://www.google.com/recaptcha/admin\'>https://www.google.com/recaptcha/admin</a>';
 $string['guestloginbutton'] = 'Guest login button';
@@ -124,7 +124,7 @@ $string['allowaccountssameemail'] = 'Allow accounts with same email';
 $string['allowaccountssameemail_desc'] = 'If enabled, more than one user account can share the same email address. This may result in security or privacy issues, for example with the password change confirmation email.';
 $string['md5'] = 'MD5 hash';
 $string['nopasswordchange'] = 'Password can not be changed';
-$string['nopasswordchangeforced'] = 'You cannot proceed without changing your password, however there is no available page for changing it. Please contact your Moodle Administrator.';
+$string['nopasswordchangeforced'] = 'You cannot proceed without changing your password, however there is no available page for changing it. Please contact your PowerEduc Administrator.';
 $string['noprofileedit'] = 'Profile can not be edited';
 $string['ntlmsso_attempting'] = 'Attempting Single Sign On via NTLM...';
 $string['ntlmsso_failed'] = 'Auto-login failed, try the normal login page...';
@@ -154,7 +154,7 @@ $string['settingmigrationmismatch'] = 'Values mismatch detected while correcting
 $string['sha1'] = 'SHA-1 hash';
 $string['showguestlogin'] = 'You can hide or show the guest login button on the login page.';
 $string['stdchangepassword'] = 'Use standard page for changing password';
-$string['stdchangepassword_expl'] = 'If the external authentication system allows password changes through Moodle, switch this to Yes. This setting overrides \'Change Password URL\'.';
+$string['stdchangepassword_expl'] = 'If the external authentication system allows password changes through PowerEduc, switch this to Yes. This setting overrides \'Change Password URL\'.';
 $string['stdchangepassword_explldap'] = 'NOTE: It is recommended that you use LDAP over an SSL encrypted tunnel (ldaps://) if the LDAP server is remote.';
 $string['suspended'] = 'Suspended account';
 $string['suspended_help'] = 'Suspended user accounts cannot log in or use web services, and any outgoing messages are discarded.';

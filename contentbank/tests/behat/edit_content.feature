@@ -99,7 +99,7 @@ Feature: Content bank use editor feature
     And "[data-action=Add-content]" "css_element" should exist
     When the following "permission overrides" exist:
       | capability                       | permission | role           | contextlevel | reference |
-      | moodle/contentbank:useeditor     | Prohibit   | editingteacher | System       |           |
+      | powereduc/contentbank:useeditor     | Prohibit   | editingteacher | System       |           |
     And I reload the page
     Then "[data-action=Add-content]" "css_element" should not exist
 

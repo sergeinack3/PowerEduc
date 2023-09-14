@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Customfield catecory controller class
  *
  * @package   core_customfield
- * @copyright 2018 Toni Barbera <toni@moodle.com>
+ * @copyright 2018 Toni Barbera <toni@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ defined('POWEREDUC_INTERNAL') || die;
  * Class category
  *
  * @package core_customfield
- * @copyright 2018 Toni Barbera <toni@moodle.com>
+ * @copyright 2018 Toni Barbera <toni@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class category_controller {
@@ -74,7 +74,7 @@ class category_controller {
      * @param \stdClass|null $record
      * @param handler|null $handler
      * @return category_controller
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @throws \coding_exception
      */
     public static function create(int $id, \stdClass $record = null, handler $handler = null) : category_controller {
@@ -86,7 +86,7 @@ class category_controller {
         }
         if ($id) {
             if (!$record = $DB->get_record(category::TABLE, array('id' => $id), '*', IGNORE_MISSING)) {
-                throw new \moodle_exception('categorynotfound', 'core_customfield');
+                throw new \powereduc_exception('categorynotfound', 'core_customfield');
             }
         }
         if (empty($record->component)) {

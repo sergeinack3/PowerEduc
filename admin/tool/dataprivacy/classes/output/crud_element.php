@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@ abstract class crud_element {
      */
     protected final function get_navigation() {
         $back = new \action_link(
-            new \moodle_url('/admin/tool/dataprivacy/dataregistry.php'),
+            new \powereduc_url('/admin/tool/dataprivacy/dataregistry.php'),
             get_string('back'),
             null,
             ['class' => 'btn btn-primary']
@@ -72,14 +72,14 @@ abstract class crud_element {
         $actionmenu->set_menu_trigger(get_string('actions'));
         $actionmenu->set_owner_selector($elementname . '-' . $exported->id . '-actions');
 
-        $url = new \moodle_url('/admin/tool/dataprivacy/edit' . $elementname . '.php',
+        $url = new \powereduc_url('/admin/tool/dataprivacy/edit' . $elementname . '.php',
             ['id' => $exported->id]);
         $link = new \action_menu_link_secondary($url, new \pix_icon('t/edit',
             get_string('edit')), get_string('edit'));
         $actionmenu->add($link);
 
         if (!$persistent->is_used()) {
-            $url = new \moodle_url('#');
+            $url = new \powereduc_url('#');
             $attrs = ['data-id' => $exported->id, 'data-action' => 'delete' . $elementname, 'data-name' => $exported->name];
             $link = new \action_menu_link_secondary($url, new \pix_icon('t/delete',
                 get_string('delete')), get_string('delete'), $attrs);

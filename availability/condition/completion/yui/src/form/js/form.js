@@ -1,7 +1,7 @@
 /**
  * JavaScript for form editing completion conditions.
  *
- * @module moodle-availability_completion-form
+ * @module powereduc-availability_completion-form
  */
 M.availability_completion = M.availability_completion || {};
 
@@ -27,7 +27,7 @@ M.availability_completion.form.getNode = function(json) {
                ' <span class="availability-group form-group"><label>' +
             '<span class="accesshide">' + M.util.get_string('label_cm', 'availability_completion') + ' </span>' +
             '<select class="custom-select" name="cm" title="' + M.util.get_string('label_cm', 'availability_completion') + '">' +
-            '<option value="0">' + M.util.get_string('choosedots', 'moodle') + '</option>';
+            '<option value="0">' + M.util.get_string('choosedots', 'powereduc') + '</option>';
     for (var i = 0; i < this.cms.length; i++) {
         var cm = this.cms[i];
         // String has already been escaped using format_string.

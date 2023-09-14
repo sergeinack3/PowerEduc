@@ -69,7 +69,7 @@ Y.extend(DRAGSECTION, M.core.dragdrop, {
                 var moveup = sectionnode.one('.' + CSS.RIGHT + ' a.' + CSS.MOVEUP);
 
                 // Add dragger icon
-                var title = M.util.get_string('movesection', 'moodle', sectionid);
+                var title = M.util.get_string('movesection', 'powereduc', sectionid);
                 var cssleft = sectionnode.one('.' + CSS.LEFT);
 
                 if ((movedown || moveup) && cssleft) {
@@ -167,11 +167,11 @@ Y.extend(DRAGSECTION, M.core.dragdrop, {
             loopend = dropnodeindex;
 
         if (dragnodeid === dropnodeindex) {
-            Y.log("Skipping move - same location moving " + dragnodeid + " to " + dropnodeindex, 'debug', 'moodle-course-dragdrop');
+            Y.log("Skipping move - same location moving " + dragnodeid + " to " + dropnodeindex, 'debug', 'powereduc-course-dragdrop');
             return;
         }
 
-        Y.log("Moving from position " + dragnodeid + " to position " + dropnodeindex, 'debug', 'moodle-course-dragdrop');
+        Y.log("Moving from position " + dragnodeid + " to position " + dropnodeindex, 'debug', 'powereduc-course-dragdrop');
 
         if (loopstart > loopend) {
             // If we're going up, we need to swap the loop order

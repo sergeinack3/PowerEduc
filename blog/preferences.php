@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 /**
  * Form page for blog preferences
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage blog
  * @copyright  2009 Nicolas Connault
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -35,7 +35,7 @@ $userid   = optional_param('userid', null, PARAM_INT);
 $tagid    = optional_param('tagid', null, PARAM_INT);
 $groupid      = optional_param('groupid', null, PARAM_INT);
 
-$url = new moodle_url('/blog/preferences.php');
+$url = new powereduc_url('/blog/preferences.php');
 if ($courseid !== SITEID) {
     $url->param('courseid', $courseid);
 }
@@ -61,15 +61,15 @@ $PAGE->set_context($usercontext);
 require_login($courseid);
 
 if (empty($CFG->enableblogs)) {
-    throw new \moodle_exception('blogdisable', 'blog');
+    throw new \powereduc_exception('blogdisable', 'blog');
 }
 
 if (isguestuser()) {
-    throw new \moodle_exception('noguest');
+    throw new \powereduc_exception('noguest');
 }
 
 // The preference is site wide not blog specific. Hence user should have permissions in site level.
-require_capability('moodle/blog:view', $sitecontext);
+require_capability('powereduc/blog:view', $sitecontext);
 
 // If data submitted, then process and store.
 
@@ -80,7 +80,7 @@ if (!$mform->is_cancelled() && $data = $mform->get_data()) {
     $pagesize = $data->pagesize;
 
     if ($pagesize < 1) {
-        throw new \moodle_exception('invalidpagesize');
+        throw new \powereduc_exception('invalidpagesize');
     }
     useredit_update_user_preference(['id' => $USER->id,
         'preference_blogpagesize' => $pagesize]);

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ require_once($CFG->dirroot . '/my/lib.php');
  *
  * @package    core_block
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.0
  */
@@ -50,7 +50,7 @@ class externallib_test extends externallib_advanced_testcase {
         $studentrole = $DB->get_record('role', array('shortname' => 'student'));
         $this->getDataGenerator()->enrol_user($user->id, $course->id, $studentrole->id);
 
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context(\context_course::instance($course->id));
         $page->set_pagelayout('course');
         $course->format = course_get_format($course)->get_format();
@@ -80,7 +80,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         $user = $this->getDataGenerator()->create_user();
 
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context(\context_course::instance(SITEID));
         $page->set_pagelayout('frontpage');
         $page->set_pagetype('site-index');
@@ -152,7 +152,7 @@ class externallib_test extends externallib_advanced_testcase {
         $title = 'Some course info';
         $body = 'Some course info<br /><p>Some contents</p>';
         $bodyformat = FORMAT_POWEREDUC;
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context($coursecontext);
         $page->set_pagelayout('course');
         $course->format = course_get_format($course)->get_format();
@@ -163,7 +163,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         $this->setUser($user);
         // Re-create the page.
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context($coursecontext);
         $page->set_pagelayout('course');
         $course->format = course_get_format($course)->get_format();
@@ -256,7 +256,7 @@ class externallib_test extends externallib_advanced_testcase {
         $title = 'My block $$(a+b)=2$$';
         $body = 'My block contents $$(a+b)=2$$';
         $bodyformat = FORMAT_POWEREDUC;
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context($coursecontext);
         $page->set_pagelayout('course');
         $course->format = course_get_format($course)->get_format();
@@ -267,7 +267,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         $this->setUser($user);
         // Re-create the page.
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context($coursecontext);
         $page->set_pagelayout('course');
         $course->format = course_get_format($course)->get_format();
@@ -377,10 +377,10 @@ class externallib_test extends externallib_advanced_testcase {
         );
 
         // Now, add a sticky block.
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context(\context_system::instance());
         $page->set_pagetype('my-index');
-        $page->set_url(new \moodle_url('/'));
+        $page->set_url(new \powereduc_url('/'));
         $page->blocks->add_region('side-pre');
         $page->blocks->load_blocks();
         $page->blocks->add_block('myprofile', 'side-pre', 0, true, '*');
@@ -426,7 +426,7 @@ class externallib_test extends externallib_advanced_testcase {
         );
 
         // Add a custom block.
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context(\context_user::instance($user->id));
         $page->set_pagelayout('mydashboard');
         $page->set_pagetype('my-index');
@@ -468,7 +468,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         $this->setUser($user1);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_block_external::get_dashboard_blocks($user2->id);
     }
 
@@ -533,7 +533,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         $this->setUser($user);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         // Check for the default blocks with a fake page, no need to assign as it'll throw.
         core_block_external::get_dashboard_blocks($user->id, false, 'fakepage');
 

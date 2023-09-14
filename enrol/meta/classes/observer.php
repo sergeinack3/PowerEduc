@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Event observer for meta enrolment plugin.
  *
  * @package    enrol_meta
- * @copyright  2013 Rajesh Taneja <rajesh@moodle.com>
+ * @copyright  2013 Rajesh Taneja <rajesh@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ require_once($CFG->dirroot.'/enrol/meta/locallib.php');
  * Event observer for enrol_meta.
  *
  * @package    enrol_meta
- * @copyright  2013 Rajesh Taneja <rajesh@moodle.com>
+ * @copyright  2013 Rajesh Taneja <rajesh@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class enrol_meta_observer extends enrol_meta_handler {

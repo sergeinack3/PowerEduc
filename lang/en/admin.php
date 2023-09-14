@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'admin', language 'en', branch 'POWEREDUC_20_STABLE'
@@ -166,7 +166,7 @@ $string['configallowobjectembed'] = 'As a default security measure, normal users
 $string['configallowoverride'] = 'You can allow people with the roles on the left side to override some of the column roles';
 $string['configallowoverride2'] = 'For each role in the left column, select which roles that they can set overrides for.<br />Users must also have either the capability powereduc/role:override or powereduc/role:safeoverride.';
 $string['configallowswitch'] = 'For each role in the left column, select which roles they can switch to.<br />Users must also have the capability powereduc/role:switchroles.';
-$string['configallowthemechangeonurl'] = 'If enabled, the theme can be changed by adding either:<br />?theme=themename to any Moodle URL (eg: mypowereducsite.com/?theme=afterburner ) or <br />&theme=themename to any internal Moodle URL (eg: mypowereducsite.com/course/view.php?id=2&theme=afterburner ).';
+$string['configallowthemechangeonurl'] = 'If enabled, the theme can be changed by adding either:<br />?theme=themename to any PowerEduc URL (eg: mypowereducsite.com/?theme=afterburner ) or <br />&theme=themename to any internal PowerEduc URL (eg: mypowereducsite.com/course/view.php?id=2&theme=afterburner ).';
 $string['configallowuserblockhiding'] = 'Do you want to allow users to hide/show side blocks throughout this site?  This feature uses Javascript and cookies to remember the state of each collapsible block, and only affects the user\'s own view.';
 $string['configallowusermailcharset'] = 'If enabled, users can choose an email charset in their messaging preferences.';
 $string['configallowuserswitchrolestheycantassign'] = 'By default, powereduc/role:assign is required for users to switch roles. Enabling this setting removes this requirement, and results in the roles available in the "Switch role to" dropdown menu being determined by settings in the "Allow role assignments" table only.
@@ -225,8 +225,8 @@ $string['configdisableuserimages'] = 'Disable the ability for users to change us
 $string['configdisplayloginfailures'] = 'This will display information to users about previous failed logins.';
 $string['configdndallowtextandlinks'] = 'Enable or disable the dragging and dropping of text and links onto a course page, alongside the dragging and dropping of files. Note that the dragging of text into Firefox or between different browsers is unreliable and may result in no data being uploaded, or corrupted text being uploaded.';
 $string['configdoclang'] = 'This language will be used in links for the documentation pages.';
-$string['configdocroot'] = 'Defines the path to Moodle Docs for providing context-specific documentation via \'Help and documentation\' links in the footer of each page. If the field is left blank, links will not be displayed.';
-$string['configdoctonewwindow'] = 'If enabled, then links to Moodle Docs will be shown in a new window.';
+$string['configdocroot'] = 'Defines the path to PowerEduc Docs for providing context-specific documentation via \'Help and documentation\' links in the footer of each page. If the field is left blank, links will not be displayed.';
+$string['configdoctonewwindow'] = 'If enabled, then links to PowerEduc Docs will be shown in a new window.';
 $string['configeditordictionary'] = 'This value will be used if aspell doesn\'t have dictionary for users own language.';
 $string['configeditorfontlist'] = 'Select the fonts that should appear in the editor\'s drop-down list.';
 $string['configemailchangeconfirmation'] = 'Require an email confirmation step when users change their email address in their profile.';
@@ -237,13 +237,13 @@ $string['configemaildkimselector'] = 'The DKIM selector is arbitrary and your DN
 $string['configenablecalendarexport'] = 'Enable exporting or subscribing to calendars.';
 $string['configenablecomments'] = 'Enable comments';
 $string['configenablecourserequests'] = 'If enabled, users with the capability to request new courses (powereduc/course:request) will have the option to request a course. This capability is not allowed for any of the default roles. It may be applied in the system or category context.';
-$string['configenablemobilewebservice'] = 'Enable mobile service for the official Moodle app or other app requesting it. For more information, read the {$a}';
+$string['configenablemobilewebservice'] = 'Enable mobile service for the official PowerEduc app or other app requesting it. For more information, read the {$a}';
 $string['configenablerssfeeds'] = 'If enabled, RSS feeds are generated by various features across the site, such as blogs, forums, database activities and glossaries. Note that RSS feeds also need to be enabled for the particular activity modules.';
 $string['configenablerssfeedsdisabled'] = 'It is not available because RSS feeds are disabled in all the Site. To enable them, go to the Variables settings under Admin Configuration.';
 $string['configenablerssfeedsdisabled2'] = 'RSS feeds are currently disabled at site level. They may be enabled in Advanced features in the Site administration.';
-$string['configenablestats'] = 'If you choose \'yes\' here, Moodle\'s cronjob will process the logs and gather some statistics.  Depending on the amount of traffic on your site, this can take awhile. If you enable this, you will be able to see some interesting graphs and statistics about each of your courses, or on a sitewide basis.';
-$string['configenabletrusttext'] = 'By default Moodle will always thoroughly clean text that comes from users to remove any possible bad scripts, media etc that could be a security risk.  The Trusted Content system is a way of giving particular users that you trust the ability to include these advanced features in their content without interference.  To enable this system, you need to first enable this setting, and then grant the Trusted Content permission to a specific Moodle role.  Texts created or uploaded by such users will be marked as trusted and will not be cleaned before display.';
-$string['configenablewebservices'] = 'Web services enable other systems, such as the Moodle app, to log in to the site and perform operations. For extra security, the setting should be disabled if you are not using the app, or an external tool/service that requires integration via web services.';
+$string['configenablestats'] = 'If you choose \'yes\' here, PowerEduc\'s cronjob will process the logs and gather some statistics.  Depending on the amount of traffic on your site, this can take awhile. If you enable this, you will be able to see some interesting graphs and statistics about each of your courses, or on a sitewide basis.';
+$string['configenabletrusttext'] = 'By default PowerEduc will always thoroughly clean text that comes from users to remove any possible bad scripts, media etc that could be a security risk.  The Trusted Content system is a way of giving particular users that you trust the ability to include these advanced features in their content without interference.  To enable this system, you need to first enable this setting, and then grant the Trusted Content permission to a specific PowerEduc role.  Texts created or uploaded by such users will be marked as trusted and will not be cleaned before display.';
+$string['configenablewebservices'] = 'Web services enable other systems, such as the PowerEduc app, to log in to the site and perform operations. For extra security, the setting should be disabled if you are not using the app, or an external tool/service that requires integration via web services.';
 $string['configenablewsdocumentation'] = 'Enable auto-generation of web services documentation. A user can access to his own documentation on his security keys page {$a}. It displays the documentation for the enabled protocols only.';
 $string['configerrorlevel'] = 'Choose the amount of PHP warnings that you want to be displayed.  Normal is usually the best choice.';
 $string['configexportlookahead'] = 'Days to look ahead during export';
@@ -264,19 +264,19 @@ $string['configfrontpageloggedin'] = 'The items selected above will be displayed
 $string['configfullnamedisplay'] = 'This defines how names are shown when they are displayed in full. The default value, "language", leaves it to the string "fullnamedisplay" in the current language pack to decide. Some languages have different name display conventions.
 
 For most mono-lingual sites the most efficient setting is "firstname lastname", but you may choose to hide surnames altogether. Placeholders that can be used are: firstname, lastname, firstnamephonetic, lastnamephonetic, middlename, and alternatename.';
-$string['configgeoipfile'] = 'Location of GeoLite2 City binary data file. This file is not part of Moodle distribution and must be obtained separately from <a href="https://www.maxmind.com/">MaxMind</a>. You can either buy a commercial version or use the free version. You\'ll need to register to download the City database file, which you can do at <a href="https://dev.maxmind.com/geoip/geoip2/geolite2/" >https://dev.maxmind.com/geoip/geoip2/geolite2/</a>. Once you\'ve registered and downloaded the file, extract it into "{$a}" directory on your server.';
+$string['configgeoipfile'] = 'Location of GeoLite2 City binary data file. This file is not part of PowerEduc distribution and must be obtained separately from <a href="https://www.maxmind.com/">MaxMind</a>. You can either buy a commercial version or use the free version. You\'ll need to register to download the City database file, which you can do at <a href="https://dev.maxmind.com/geoip/geoip2/geolite2/" >https://dev.maxmind.com/geoip/geoip2/geolite2/</a>. Once you\'ve registered and downloaded the file, extract it into "{$a}" directory on your server.';
 $string['configgetremoteaddrconf'] = 'If your server is behind a reverse proxy, you can use this setting to specify which HTTP headers can be trusted to contain the remote IP address. The headers are read in order, using the first one that is available.';
 $string['configgradebookroles'] = 'This setting allows you to control who appears on the gradebook.  Users need to have at least one of these roles in a course to be shown in the gradebook for that course.';
 $string['configgradeexport'] = 'Choose which gradebook export formats are your primary methods for exporting grades.  Chosen plugins will then set and use a "last exported" field for every grade.  For example, this might result in exported records being identified as being "new" or "updated".  If you are not sure about this then leave everything unchecked.';
 $string['confighiddenuserfields'] = 'Select which user information fields you wish to hide from other users other than course teachers/admins. This will increase student privacy. Hold CTRL key to select multiple fields.';
 $string['configidnumber'] = 'This option specifies whether (a) Users are not be asked for an ID number at all, (b) Users are asked for an ID number but can leave it blank or (c) Users are asked for an ID Number and cannot leave it blank. If given the User\'s ID number is displayed in their Profile.';
-$string['configintro'] = 'On this page you can specify a number of configuration variables that help make Moodle work properly on your server.  Don\'t worry too much about it - the defaults will usually work fine and you can always come back to this page later and change these settings.';
+$string['configintro'] = 'On this page you can specify a number of configuration variables that help make PowerEduc work properly on your server.  Don\'t worry too much about it - the defaults will usually work fine and you can always come back to this page later and change these settings.';
 $string['configintroadmin'] = 'On this page you should configure your main administrator account which will have complete control over the site. Make sure you give it a secure username and password as well as a valid email address.  You can create more admin accounts later on.';
 $string['configintrosite'] = 'This page allows you to configure the site home and name of this new site.  You can come back here later to change these settings any time using the Administration menus.';
 $string['configiplookup'] = 'When you click on an IP address (such as 34.12.222.93), such as in the logs, you are shown a map with a best guess of where that IP is located.  There are different plugins for this that you can choose from, each has benefits and disadvantages.';
 $string['configkeeptagnamecase'] = 'Check this if you want tag names to keep the original casing as entered by users who created them';
 $string['configlang'] = 'Choose a default language for the whole site. Users can override this setting using the language menu or the setting in their personal profile.';
-$string['configlangstringcache'] = 'Caches all the language strings into compiled files in the data directory.  If you are translating Moodle or changing strings in the Moodle source code then you may want to switch this off.  Otherwise leave it on to see performance benefits.';
+$string['configlangstringcache'] = 'Caches all the language strings into compiled files in the data directory.  If you are translating PowerEduc or changing strings in the PowerEduc source code then you may want to switch this off.  Otherwise leave it on to see performance benefits.';
 $string['configlanglist'] = 'If left blank, all languages installed on the site will be displayed in the language menu. Alternatively, the language menu may be shortened by entering a list of language codes separated by commas e.g. en,de,fr. If desired, a different name for the language than the language pack name may be specified using the format: language code|language name e.g. en_kids|English,de_kids|Deutsch.';
 $string['configlangmenu'] = 'Choose whether or not you want to display the general-purpose language menu on the home page, login page etc.  This does not affect the user\'s ability to set the preferred language in their own profile.';
 $string['configlatinexcelexport'] = 'Choose the encoding for Excel exports.';
@@ -328,9 +328,9 @@ $string['configproxypassword'] = 'Password needed to access internet through pro
 $string['configproxyport'] = 'If this server needs to use a proxy computer, then provide the proxy port here.';
 $string['configproxytype'] = 'Type of web proxy (PHP5 and cURL extension required for SOCKS5 support).';
 $string['configproxyuser'] = 'Username needed to access internet through proxy if required, empty if none (PHP cURL extension required).';
-$string['configproxyfixunsafe_help'] = 'This attempts to fix internal calls which do not go through the proxy by adding the MoodleBot User Agent and using the proxy.';
+$string['configproxyfixunsafe_help'] = 'This attempts to fix internal calls which do not go through the proxy by adding the PowerEducBot User Agent and using the proxy.';
 $string['configproxylogunsafe_help'] = 'This attempts to log internal calls which do not go through the proxy and should.';
-$string['configrecaptchaprivatekey'] = 'String of characters (secret key) used to communicate between your Moodle server and the recaptcha server. ReCAPTCHA keys can be obtained from <a target="_blank" href="https://www.google.com/recaptcha">Google reCAPTCHA</a>.';
+$string['configrecaptchaprivatekey'] = 'String of characters (secret key) used to communicate between your PowerEduc server and the recaptcha server. ReCAPTCHA keys can be obtained from <a target="_blank" href="https://www.google.com/recaptcha">Google reCAPTCHA</a>.';
 $string['configrecaptchapublickey'] = 'String of characters (site key) used to display the reCAPTCHA element in the signup form and site support form. ReCAPTCHA keys can be obtained from <a target="_blank" href="https://www.google.com/recaptcha">Google reCAPTCHA</a>.';
 $string['configrequestedstudentname'] = 'Word for student used in requested courses';
 $string['configrequestedstudentsname'] = 'Word for students used in requested courses';
@@ -347,10 +347,10 @@ $string['configsectionrequestedcourse'] = 'Course requests';
 $string['configsectionsecurity'] = 'Security';
 $string['configsectionstats'] = 'Statistics';
 $string['configsectionuser'] = 'User';
-$string['configsecureforms'] = 'Moodle can use an additional level of security when accepting data from web forms. If this is enabled, then the browser\'s HTTP_REFERER variable is checked against the current form address.  In a very few cases this can cause problems if the user is using a firewall (eg Zonealarm) configured to strip HTTP_REFERER from their web traffic.  Symptoms are getting \'stuck\' on a form. If your users are having problems with the login page (for example) you might want to disable this setting, although it might leave your site more open to brute-force password attacks.  If in doubt, leave this set to \'Yes\'.';
-$string['configsessioncookie'] = 'This setting customises the name of the cookie used for Moodle sessions.  This is optional, and only useful to avoid cookies being confused when there is more than one copy of Moodle running within the same web site.';
-$string['configsessioncookiedomain'] = 'This allows you to change the domain that the Moodle cookies are available from. This is useful for Moodle customisations (e.g. authentication or enrolment plugins) that need to share Moodle session information with a web application on another subdomain. <strong>WARNING: it is strongly recommended to leave this setting at the default (empty) - an incorrect value will prevent all logins to the site.</strong>';
-$string['configsessioncookiepath'] = 'If you need to change where browsers send the Moodle cookies, you can change this setting to specify a subdirectory of your web site.  Otherwise the default \'/\' should be fine.';
+$string['configsecureforms'] = 'PowerEduc can use an additional level of security when accepting data from web forms. If this is enabled, then the browser\'s HTTP_REFERER variable is checked against the current form address.  In a very few cases this can cause problems if the user is using a firewall (eg Zonealarm) configured to strip HTTP_REFERER from their web traffic.  Symptoms are getting \'stuck\' on a form. If your users are having problems with the login page (for example) you might want to disable this setting, although it might leave your site more open to brute-force password attacks.  If in doubt, leave this set to \'Yes\'.';
+$string['configsessioncookie'] = 'This setting customises the name of the cookie used for PowerEduc sessions.  This is optional, and only useful to avoid cookies being confused when there is more than one copy of PowerEduc running within the same web site.';
+$string['configsessioncookiedomain'] = 'This allows you to change the domain that the PowerEduc cookies are available from. This is useful for PowerEduc customisations (e.g. authentication or enrolment plugins) that need to share PowerEduc session information with a web application on another subdomain. <strong>WARNING: it is strongly recommended to leave this setting at the default (empty) - an incorrect value will prevent all logins to the site.</strong>';
+$string['configsessioncookiepath'] = 'If you need to change where browsers send the PowerEduc cookies, you can change this setting to specify a subdirectory of your web site.  Otherwise the default \'/\' should be fine.';
 $string['configsessiontimeout'] = 'If people logged in to this site are idle for a long time (without loading pages) then they are automatically logged out (their session is ended).  This variable specifies how long this time should be.';
 $string['configsessiontimeoutwarning'] = 'If people logged in to this site are idle for a long time (without loading pages) then they are warned about their session is about to end.  This variable specifies how long this time should be.';
 $string['configsessiontimeoutwarningcheck'] = 'Session timeout warning must be less than session timeout';
@@ -362,11 +362,11 @@ $string['configsitedefaultlicensehelp'] = 'The default licence for publishing co
 $string['configsitemailcharset'] = 'This setting specifies the default charset for all emails sent from the site.';
 $string['configsitemaxcategorydepth'] = 'Maximum category depth';
 $string['configsitemaxcategorydepthhelp'] = 'This specifies the maximum depth of child categories expanded when displaying categories or combo list. Deeper level categories will appear as links and user can expand them with AJAX request.';
-$string['configslasharguments'] = '\'Slash arguments\' (using <em>PATH_INFO</em>) is required for SCORM packages and multiple-file resources to display correctly. If your web server doesn\'t support \'slash arguments\' and you are unable to configure it, this setting can be disabled, though it will result in things not working.<br />Note: The use of \'slash arguments\' will be required in future versions of Moodle.';
-$string['configsmartpix'] = 'With this on, icons are served through a PHP script that searches the current theme, then all parent themes, then the Moodle /pix folder. This reduces the need to duplicate image files within themes, but has a slight performance cost.';
+$string['configslasharguments'] = '\'Slash arguments\' (using <em>PATH_INFO</em>) is required for SCORM packages and multiple-file resources to display correctly. If your web server doesn\'t support \'slash arguments\' and you are unable to configure it, this setting can be disabled, though it will result in things not working.<br />Note: The use of \'slash arguments\' will be required in future versions of PowerEduc.';
+$string['configsmartpix'] = 'With this on, icons are served through a PHP script that searches the current theme, then all parent themes, then the PowerEduc /pix folder. This reduces the need to duplicate image files within themes, but has a slight performance cost.';
 $string['configsmtpauthtype'] = 'This sets the authentication type to use on SMTP server.';
 $string['configsmtpoauthservice'] = 'Select the OAuth 2 service that is configured to talk to the SMTP server. If the service doesn\'t exist yet, you will need to create it. Note that you need to set the SMTP Auth Type to XOAUTH2.';
-$string['configsmtphosts'] = 'Give the full name of one or more local SMTP servers that Moodle should use to send mail (eg \'mail.a.com\' or \'mail.a.com;mail.b.com\'). To specify a non-default port (i.e other than port 25), you can use the [server]:[port] syntax (eg \'mail.a.com:587\'). For secure connections, port 465 is usually used with SSL, port 587 is usually used with TLS, specify security protocol below if required. If you leave this field blank, Moodle will use the PHP default method of sending mail.';
+$string['configsmtphosts'] = 'Give the full name of one or more local SMTP servers that PowerEduc should use to send mail (eg \'mail.a.com\' or \'mail.a.com;mail.b.com\'). To specify a non-default port (i.e other than port 25), you can use the [server]:[port] syntax (eg \'mail.a.com:587\'). For secure connections, port 465 is usually used with SSL, port 587 is usually used with TLS, specify security protocol below if required. If you leave this field blank, PowerEduc will use the PHP default method of sending mail.';
 $string['configsmtpmaxbulk'] = 'Maximum number of messages sent per SMTP session. Grouping messages may speed up the sending of emails. Values lower than 2 force creation of new SMTP session for each email.';
 $string['configsmtpsecure'] = 'If SMTP server requires secure connection, specify the correct protocol type.';
 $string['configsmtpuser'] = 'If you have specified an SMTP server above, and the server requires authentication, then enter the username and password here.';
@@ -376,7 +376,7 @@ $string['configstatsmaxruntime'] = 'Stats processing can be quite intensive, so 
 $string['configstatsmaxruntime2'] = 'Stats processing can be quite intensive, specify maximum time allowed for gathering of one day of statistics. Maximum number of days processed in one cron execution is 31.';
 $string['configstatsmaxruntime3'] = 'This specifies the maximum time allowed to calculate the statistics for one day, bearing in mind that statistics processing can put a big load on the server. The maximum number of days processed in one cron can be specified below.';
 $string['configstatsruntimedays'] = 'This specifies the maximum number of days processed in each statistics execution. Once the statistics are up-to-date, only one day will be processed, so adjust this value depending of your server load, reducing it if shorter cron executions are needed.';
-$string['configstatsruntimestart'] = 'What time should the cronjob that does the statistics processing start? Specifying different times is recommended if there are multiple Moodle sites on one server.';
+$string['configstatsruntimestart'] = 'What time should the cronjob that does the statistics processing start? Specifying different times is recommended if there are multiple PowerEduc sites on one server.';
 $string['configstatsuserthreshold'] = 'This setting specifies the minimum number of enrolled users for a course to be included in statistics calculations.';
 $string['configstrictformsrequired'] = 'If enabled, users are prevented from entering a space or line break only in required fields in forms.';
 $string['configstripalltitletags'] = 'Uncheck this setting to allow HTML tags in activity and resource names.';
@@ -449,14 +449,14 @@ $string['cronwarning'] = 'The <a href="{$a->url}">admin/cron.php script</a> has 
 $string['cronwarningcli'] = 'The <code>admin/cli/cron.php</code> script has not been run for {$a->actual} and should run every {$a->expected}.';
 $string['cronwarningnever'] = 'The <code>admin/cli/cron.php</code> script has never been run and should run every {$a->expected}.';
 $string['cronwarningneverweb'] = 'The <a href="{$a->url}">admin/cron.php script</a> has never been run and should run every {$a->expected}.';
-$string['ctyperequired'] = 'The ctype PHP extension is now required by Moodle, in order to improve site performance and to offer multilingual compatibility.';
+$string['ctyperequired'] = 'The ctype PHP extension is now required by PowerEduc, in order to improve site performance and to offer multilingual compatibility.';
 $string['curlsecurityallowedport'] = 'cURL allowed ports list';
 $string['curlsecurityallowedportsyntax'] = 'List of port numbers that cURL can connect to. Valid entries are integer numbers only. Put each entry on a new line. If left empty, then all ports are allowed. If set, in almost all cases, both 443 and 80 should be specified for cURL to connect to standard HTTPS and HTTP ports.';
 $string['curlsecurityblockedhosts'] = 'cURL blocked hosts list';
 $string['curlsecurityblockedhostssyntax'] = 'Put each entry on a new line. Valid entries are either full IPv4 or IPv6 addresses (such as 192.168.10.1, 0:0:0:0:0:0:0:1, ::1, fe80::) which match a single host; or CIDR notation (such as 231.54.211.0/20 or fe80::/64); or a range of IP addresses (such as 231.3.56.10-20 or fe80::1111-bbbb) where the range applies to the last group of the address; or domain names (such as localhost or example.com); or wildcard domain names (such as *.example.com or *.sub.example.com). Blank lines are not allowed.';
 $string['curlsecurityurlblocked'] = 'The URL is blocked.';
 $string['curlcache'] = 'cURL cache TTL';
-$string['curlrequired'] = 'The cURL PHP extension is now required by Moodle, in order to communicate with Moodle repositories.';
+$string['curlrequired'] = 'The cURL PHP extension is now required by PowerEduc, in order to communicate with PowerEduc repositories.';
 $string['curltimeoutkbitrate'] = 'Bitrate to use when calculating cURL timeouts (Kbps)';
 $string['curltimeoutkbitrate_help'] = 'This setting is used to calculate an appropriate timeout during large cURL requests. As part of this calculation an HTTP HEAD request is made to determine the size of the content. Setting this to 0 disables this request from being made.';
 $string['currenttheme'] = 'Current theme';
@@ -470,7 +470,7 @@ $string['datarootsecuritywarning'] = 'Your site configuration might not be secur
 $string['dbsessions'] = 'Use database for session information';
 $string['debug'] = 'Debug messages';
 $string['debugall'] = 'ALL: Show all reasonable PHP debug messages';
-$string['debugdeveloper'] = 'DEVELOPER: extra Moodle debug messages for developers';
+$string['debugdeveloper'] = 'DEVELOPER: extra PowerEduc debug messages for developers';
 $string['debugdisplay'] = 'Display debug messages';
 $string['debugging'] = 'Debugging';
 $string['debugminimal'] = 'MINIMAL: Show only fatal errors';
@@ -500,7 +500,7 @@ $string['denyemailaddresses'] = 'Denied email domains';
 $string['devlibdirpresent'] = 'Directories with development libraries, especially <em>/vendor</em> and <em>/node_modules</em>, should not be present on public sites. See the <a href="{$a->moreinfourl}">security overview report</a> for more details.';
 $string['development'] = 'Development';
 $string['devicedetectregex'] = 'Device detection regular expressions';
-$string['devicedetectregex_desc'] = '<p>By default, Moodle can detect devices of the type default (desktop PCs, laptops, etc), mobile (phones and small hand held devices), tablet (iPads, Android tablets) and legacy (Internet Explorer 6 users).  The theme selector can be used to apply separate themes to all of these.  This setting allows regular expressions that allow the detection of extra device types (these take precedence over the default types).</p>
+$string['devicedetectregex_desc'] = '<p>By default, PowerEduc can detect devices of the type default (desktop PCs, laptops, etc), mobile (phones and small hand held devices), tablet (iPads, Android tablets) and legacy (Internet Explorer 6 users).  The theme selector can be used to apply separate themes to all of these.  This setting allows regular expressions that allow the detection of extra device types (these take precedence over the default types).</p>
 <p>For example, you could enter the regular expression \'/(MIDP-1.0|Maemo|Windows CE)/\' to detect some commonly used feature phones add the return value \'featurephone\'.  This adds \'featurephone\' on the theme selector that would allow you to add a theme that would be used on these devices.  Other phones would still use the theme selected for the mobile device type.</p>';
 $string['devicedetectregexexpression'] = 'Regular expression';
 $string['devicedetectregexvalue'] = 'Return value';
@@ -520,10 +520,10 @@ $string['divertallemailsto'] = 'Divert all emails';
 $string['divertallemailsto_desc'] = 'If set then all emails will be diverted to this single email address instead.';
 $string['dndallowtextandlinks'] = 'Drag and drop upload of text/links';
 $string['doclang'] = 'Language for docs';
-$string['docroot'] = 'Moodle Docs document root';
+$string['docroot'] = 'PowerEduc Docs document root';
 $string['doctonewwindow'] = 'Open in new window';
 $string['doesnotfit'] = 'Email display settings';
-$string['doesnotfitdetail'] = 'Display settings for email leaving Moodle.';
+$string['doesnotfitdetail'] = 'Display settings for email leaving PowerEduc.';
 $string['download'] = 'Download';
 $string['downloadcoursecontentallowed'] = 'Download course content feature available';
 $string['downloadcoursecontentallowed_desc'] = 'Whether the download course content feature is available to courses. When available, course content downloads can be enabled/disabled using the "Enable download course content" setting within the course edit menu (the default for this can be set in <a href={$a} target="_blank">Course default settings</a>).';
@@ -574,7 +574,7 @@ $string['enabledevicedetection'] = 'Enable device detection';
 $string['enableglobalsearch'] = 'Enable global search';
 $string['enableglobalsearch_desc'] = 'If enabled, data will be indexed and synchronised by a scheduled task.';
 $string['enablegravatar'] = 'Enable Gravatar';
-$string['enablegravatar_help'] = 'When enabled Moodle will attempt to fetch a user profile picture from Gravatar if the user has not uploaded an image.';
+$string['enablegravatar_help'] = 'When enabled PowerEduc will attempt to fetch a user profile picture from Gravatar if the user has not uploaded an image.';
 $string['enablemobilewebservice'] = 'Enable web services for mobile devices';
 $string['enablerecordcache'] = 'Enable record cache';
 $string['enablerssfeeds'] = 'Enable RSS feeds';
@@ -582,7 +582,7 @@ $string['enablesearchareas'] = 'Enable search areas';
 $string['enablestats'] = 'Enable statistics';
 $string['enabletrusttext'] = 'Enable trusted content';
 $string['enableuserfeedback'] = 'Enable feedback about this software';
-$string['enableuserfeedback_desc'] = 'If enabled, a \'Give feedback about this software\' link is displayed in the footer for users to give feedback about the Moodle software to Moodle HQ. If the \'Next feedback reminder\' option is set, the user is also shown a reminder on the Dashboard at the specified interval. Setting \'Next feedback reminder\' to \'Never\' disables the Dashboard reminder, while leaving the \'Give feedback about this software\' link in the footer.';
+$string['enableuserfeedback_desc'] = 'If enabled, a \'Give feedback about this software\' link is displayed in the footer for users to give feedback about the PowerEduc software to PowerEduc HQ. If the \'Next feedback reminder\' option is set, the user is also shown a reminder on the Dashboard at the specified interval. Setting \'Next feedback reminder\' to \'Never\' disables the Dashboard reminder, while leaving the \'Give feedback about this software\' link in the footer.';
 $string['enablewebservices'] = 'Enable web services';
 $string['enablewsdocumentation'] = 'Web services documentation';
 $string['encryptedpassword_set'] = '(Set and encrypted)';
@@ -593,8 +593,8 @@ $string['enrolinstancedefaults'] = 'Enrolment instance defaults';
 $string['enrolinstancedefaults_desc'] = 'Default enrolment settings in new courses.';
 $string['enrolmultipleusers'] = 'Enrol the users';
 $string['environment'] = 'Environment';
-$string['environmenterrortodo'] = 'You must solve all the environmental problems (errors) found above before proceeding to install this Moodle version!';
-$string['environmenterrorupgrade'] = 'Warning: you should solve all the environmental problems (errors) found above before proceeding to upgrade this Moodle version!  Upgrading without fixing these requirements could cause problems such as data loss.  Are you sure you want to continue with the upgrade?';
+$string['environmenterrortodo'] = 'You must solve all the environmental problems (errors) found above before proceeding to install this PowerEduc version!';
+$string['environmenterrorupgrade'] = 'Warning: you should solve all the environmental problems (errors) found above before proceeding to upgrade this PowerEduc version!  Upgrading without fixing these requirements could cause problems such as data loss.  Are you sure you want to continue with the upgrade?';
 $string['environmentmustfixsetting'] = 'PHP setting must be changed.';
 $string['environmentok'] = 'Your server environment meets all minimum requirements.';
 $string['environmentrecommendcustomcheck'] = 'if this test fails, it indicates a potential problem';
@@ -618,9 +618,9 @@ $string['experimental'] = 'Experimental';
 $string['experimentalsettings'] = 'Experimental settings';
 $string['extendedusernamechars'] = 'Allow extended characters in usernames';
 $string['extramemorylimit'] = 'Extra PHP memory limit';
-$string['fatalsessionautostart'] = '<p>Serious configuration error detected, please notify server administrator.</p><p> To operate properly, Moodle requires that administrator changes PHP settings.</p><p><code>session.auto_start</code> must be set to <code>off</code>.</p><p>This setting is controlled by editing <code>php.ini</code>, Apache/IIS <br />configuration or <code>.htaccess</code> file on the server.</p>';
+$string['fatalsessionautostart'] = '<p>Serious configuration error detected, please notify server administrator.</p><p> To operate properly, PowerEduc requires that administrator changes PHP settings.</p><p><code>session.auto_start</code> must be set to <code>off</code>.</p><p>This setting is controlled by editing <code>php.ini</code>, Apache/IIS <br />configuration or <code>.htaccess</code> file on the server.</p>';
 $string['favicon'] = 'Favicon';
-$string['favicon_desc'] = 'The favicon is displayed next to the page title in the browser tab. A Moodle favicon is displayed if a custom favicon is not provided.';
+$string['favicon_desc'] = 'The favicon is displayed next to the page title in the browser tab. A PowerEduc favicon is displayed if a custom favicon is not provided.';
 $string['feedbacksettings'] = 'Feedback settings';
 $string['filescleanupperiod'] = 'Clean up trash pool files';
 $string['filescleanupperiod_help'] = 'How often trash pool files are deleted. These are files that are associated with a context that no longer exists, for example when a course is deleted. Please note: This setting can result in missing files in a course which is backed up, deleted and then restored if the setting \'Include files\' (backup_auto_files) in \'Automated backup settings\' is disabled.';
@@ -657,7 +657,7 @@ $string['frontpageroles'] = 'Site home roles';
 $string['frontpagesettings'] = 'Site home settings';
 $string['fullnamedisplay'] = 'Full name format';
 $string['fullnamedisplayprivate'] = 'Full name format - private';
-$string['gdrequired'] = 'The GD extension is now required by Moodle for image conversion.';
+$string['gdrequired'] = 'The GD extension is now required by PowerEduc for image conversion.';
 $string['generalsettings'] = 'General settings';
 $string['geoipfile'] = 'GeoLite2 City MaxMind DB';
 $string['getremoteaddrconf'] = 'Logged IP address source';
@@ -671,7 +671,7 @@ $string['gotofirst'] = 'Go to first missing string';
 $string['gradebook'] = 'Gradebook';
 $string['gradebookroles'] = 'Graded roles';
 $string['gravatardefaulturl'] = 'Gravatar default image URL';
-$string['gravatardefaulturl_help'] = 'Gravatar needs a default image to display if it is unable to find a picture for a given user. Provide a full URL for an image. If you leave this setting empty, Moodle will attempt to use the most appropriate default image for the page you are viewing. Note also that Gravatar has a number of codes which can be used to <a href="https://en.gravatar.com/site/implement/images/#default-image">generate default images</a>.';
+$string['gravatardefaulturl_help'] = 'Gravatar needs a default image to display if it is unable to find a picture for a given user. Provide a full URL for an image. If you leave this setting empty, PowerEduc will attempt to use the most appropriate default image for the page you are viewing. Note also that Gravatar has a number of codes which can be used to <a href="https://en.gravatar.com/site/implement/images/#default-image">generate default images</a>.';
 $string['gradeexport'] = 'Primary grade export methods';
 $string['guestroleid'] = 'Role for guest';
 $string['guestroleid_help'] = 'This role is automatically assigned to the guest user. It is also temporarily assigned to not enrolled users that enter the course via guest enrolment plugin.';
@@ -724,11 +724,11 @@ $string['ipblocker'] = 'IP blocker';
 $string['ipblockersyntax'] = 'Put every entry on one line. Valid entries are either full IP address (such as <b>192.168.10.1</b>) which matches a single host; or partial address (such as <b>192.168</b>) which matches any address starting with those numbers; or CIDR notation (such as <b>231.54.211.0/20</b>); or a range of IP addresses (such as <b>231.3.56.10-20</b>) where the range applies to the last part of the address. Text domain names (like \'example.com\') are not supported. Blank lines, and text following a "#" character are ignored.';
 $string['iplookup'] = 'IP address lookup';
 $string['iplookupgeoplugin'] = 'The <a href="https://www.geoplugin.com">geoPlugin</a> service is currently being used to look up geographical information. For more accurate results we recommend installing a local copy of the MaxMind GeoLite database.';
-$string['iplookupinfo'] = 'By default Moodle uses the free online NetGeo (The Internet Geographic Database) server to lookup location of IP addresses, unfortunately this database is not maintained anymore and may return <em>wildly incorrect</em> data.
+$string['iplookupinfo'] = 'By default PowerEduc uses the free online NetGeo (The Internet Geographic Database) server to lookup location of IP addresses, unfortunately this database is not maintained anymore and may return <em>wildly incorrect</em> data.
 It is recommended to install local copy of free GeoLite2 City database from MaxMind.<br />
 IP address location is displayed on simple map or using Google Maps. Please note that you need to have a Google account and apply for free Google Maps API key to enable interactive maps.';
 $string['iplookupmaxmindnote'] = 'This product includes GeoLite2 data created by MaxMind, available from <a href="https://www.maxmind.com">https://www.maxmind.com</a>.';
-$string['iscustomadminwarnings'] = 'It has been detected that your site is using a custom admin directory. This feature is no longer supported and will be removed after Moodle 4.2.';
+$string['iscustomadminwarnings'] = 'It has been detected that your site is using a custom admin directory. This feature is no longer supported and will be removed after PowerEduc 4.2.';
 $string['ishttpswarning'] = 'It has been detected that your site is not secured using HTTPS. It is strongly recommended to migrate your site to HTTPS for increased security and improved integration with other systems.';
 $string['keeptagnamecase'] = 'Keep tag name casing';
 $string['lang'] = 'Default language';
@@ -738,7 +738,7 @@ $string['langlist'] = 'Languages on language menu';
 $string['langmenu'] = 'Display language menu';
 $string['langmenuinsecurelayout'] = 'Display language menu in secure layout';
 $string['langmenuinsecurelayout_desc'] = 'If enabled, a user will be able to change their language when attempting a quiz or other activity using secure layout.';
-$string['langpackwillbeupdated'] = 'NOTE: Moodle will try to download updates for your language packs during the upgrade.';
+$string['langpackwillbeupdated'] = 'NOTE: PowerEduc will try to download updates for your language packs during the upgrade.';
 $string['langstringcache'] = 'Cache all language strings';
 $string['languagesettings'] = 'Language settings';
 $string['latinexcelexport'] = 'Excel encoding';
@@ -819,10 +819,10 @@ $string['maturity150'] = 'Release candidate';
 $string['maturity200'] = 'Stable version';
 $string['maturityallowunstable'] = 'Hint: You may want to run this script with --allow-unstable option';
 $string['maturitycoreinfo'] = 'Your site is currently running unstable "{$a}" development code.';
-$string['maturitycorewarning'] = 'The version of Moodle that you are about to install or upgrade to contains
+$string['maturitycorewarning'] = 'The version of PowerEduc that you are about to install or upgrade to contains
 unstable "{$a}" development code that is not suitable for use on most production
 sites. If this is not what you wanted then you should make sure you are updating
-from a STABLE branch of the Moodle code. See Moodle Docs for more details.';
+from a STABLE branch of the PowerEduc code. See PowerEduc Docs for more details.';
 $string['maxbytes'] = 'Maximum uploaded file size';
 $string['maxconsecutiveidentchars'] = 'Consecutive identical characters';
 $string['maxsizeperdownloadcoursefile'] = 'Maximum size per file';
@@ -860,12 +860,12 @@ $string['minpasswordnonalphanum'] = 'Non-alphanumeric characters';
 $string['minpasswordupper'] = 'Uppercase letters';
 $string['misc'] = 'Miscellaneous';
 $string['mlbackendsettings'] = 'Machine learning backend settings';
-$string['mnetrestore_extusers'] = '<strong>Note:</strong> This backup file contains remote Moodle Network user accounts which will be restored as part of the process.';
-$string['mnetrestore_extusers_admin'] = '<strong>Note:</strong> This backup file seems to come from a different Moodle installation and contains remote Moodle Network user accounts. The restore process will try to match the Moodle Network hosts for all created users. Those not matching will be automatically switched to internal authentication (instead of mnet one). The restore log will inform you about that.';
-$string['mnetrestore_extusers_mismatch'] = '<strong>Note:</strong> This backup file apparently originates from a different Moodle installation and contains remote Moodle Network user accounts that may fail to restore. This operation is unsupported. If you are certain that it was created on this Moodle installation, or you can ensure that all the needed Moodle Network Hosts are configured, you may want to still try the restore.';
-$string['mnetrestore_extusers_noadmin'] = '<strong>Note:</strong> This backup file seems to come from a different Moodle installation and contains remote Moodle Network user accounts. You are not allowed to execute this type of restore. Contact the administrator of the site or, alternatively, restore this course without any user information (modules, files...)';
-$string['mnetrestore_extusers_switchuserauth'] = 'Remote Moodle Network user {$a->username} (coming from {$a->mnethosturl}) switched to local {$a->auth} authenticated user.';
-$string['mobilenotconfiguredwarning'] = 'The Moodle app is not enabled.';
+$string['mnetrestore_extusers'] = '<strong>Note:</strong> This backup file contains remote PowerEduc Network user accounts which will be restored as part of the process.';
+$string['mnetrestore_extusers_admin'] = '<strong>Note:</strong> This backup file seems to come from a different PowerEduc installation and contains remote PowerEduc Network user accounts. The restore process will try to match the PowerEduc Network hosts for all created users. Those not matching will be automatically switched to internal authentication (instead of mnet one). The restore log will inform you about that.';
+$string['mnetrestore_extusers_mismatch'] = '<strong>Note:</strong> This backup file apparently originates from a different PowerEduc installation and contains remote PowerEduc Network user accounts that may fail to restore. This operation is unsupported. If you are certain that it was created on this PowerEduc installation, or you can ensure that all the needed PowerEduc Network Hosts are configured, you may want to still try the restore.';
+$string['mnetrestore_extusers_noadmin'] = '<strong>Note:</strong> This backup file seems to come from a different PowerEduc installation and contains remote PowerEduc Network user accounts. You are not allowed to execute this type of restore. Contact the administrator of the site or, alternatively, restore this course without any user information (modules, files...)';
+$string['mnetrestore_extusers_switchuserauth'] = 'Remote PowerEduc Network user {$a->username} (coming from {$a->mnethosturl}) switched to local {$a->auth} authenticated user.';
+$string['mobilenotconfiguredwarning'] = 'The PowerEduc app is not enabled.';
 $string['modeditdefaults'] = 'Default values for activity settings';
 $string['modsettings'] = 'Manage activities';
 $string['modulesecurity'] = 'Module security';
@@ -874,7 +874,7 @@ $string['mycourses'] = 'My courses';
 $string['mycoursesperpage'] = 'Number of courses';
 $string['mydashboard'] = 'System default dashboard';
 $string['mypowereduc'] = 'Dashboard';
-$string['mypowereducredirect'] = 'Force users to use My Moodle';
+$string['mypowereducredirect'] = 'Force users to use My PowerEduc';
 $string['mypage'] = 'Default Dashboard page';
 $string['myprofile'] = 'Default profile page';
 $string['mypagelocked'] = 'Lock default page';
@@ -899,7 +899,7 @@ $string['neverdeleteruns'] = 'Never delete runs';
 $string['newestdocindexed'] = 'Newest document indexed';
 $string['nobookmarksforuser'] = 'You do not have any bookmarks.';
 $string['nodatabase'] = 'No database';
-$string['nohttpsformobilewarning'] = 'It is recommended to enable HTTPS with a valid certificate. The Moodle app will always try to use a secured connection first.';
+$string['nohttpsformobilewarning'] = 'It is recommended to enable HTTPS with a valid certificate. The PowerEduc app will always try to use a secured connection first.';
 $string['nomissingstrings'] = 'No missing strings';
 $string['none'] = 'None';
 $string['nonewsettings'] = 'No new settings were added during this upgrade.';
@@ -907,21 +907,21 @@ $string['nonexistentbookmark'] = 'The bookmark you requested does not exist.';
 $string['nosupportedlogstore'] = 'No supported logstore found';
 $string['noteunneededblocks'] = 'Note: Blocks set to show will not be listed in the \'Add a block\' menu in a course if they are specified in the theme setting \'Unneeded blocks\'.';
 $string['maxtimelimit'] = 'Maximum time limit';
-$string['maxtimelimit_desc'] = 'To restrict the maximum PHP execution time that Moodle will allow without any output being displayed, enter a value in seconds here. 0 means that Moodle default restrictions are used. If you have a front-end server with its own time limit, set this value lower to receive PHP errors in logs. Does not apply to CLI scripts.';
-$string['powereducapp'] = 'Moodle app';
-$string['powereducapp_help'] = '<p>The free Moodle app enables users to access their courses on mobile devices. Additional app features are available with a Pro or Premium app plan.</p>
-<a href="https://powereduc.com/mobile-app">Get the Moodle app</a><br />
-<a href="https://apps.powereduc.com">Moodle Apps Portal</a>';
-$string['powereducbrandedapp'] = 'Branded Moodle app';
-$string['powereducbrandedapp_help'] = '<p>The Branded Moodle app has all the functionality of our free mobile app for Moodle combined with your own custom branding.</p>
-<a href="https://powereduc.com/branded-app">About the Branded Moodle app</a>';
-$string['powereducbrandedappreference'] = 'Alternatively, get a <a href="https://powereduc.com/branded-app/">Branded Moodle app</a> with your own custom branding.';
-$string['powereducpartners'] = 'Moodle Partners';
-$string['powereducpartners_help'] = '<p>Moodle Partners are services providers that are certified by Moodle HQ to provide high quality Moodle services for your organisation\'s online learning environment.</p>
+$string['maxtimelimit_desc'] = 'To restrict the maximum PHP execution time that PowerEduc will allow without any output being displayed, enter a value in seconds here. 0 means that PowerEduc default restrictions are used. If you have a front-end server with its own time limit, set this value lower to receive PHP errors in logs. Does not apply to CLI scripts.';
+$string['powereducapp'] = 'PowerEduc app';
+$string['powereducapp_help'] = '<p>The free PowerEduc app enables users to access their courses on mobile devices. Additional app features are available with a Pro or Premium app plan.</p>
+<a href="https://powereduc.com/mobile-app">Get the PowerEduc app</a><br />
+<a href="https://apps.powereduc.com">PowerEduc Apps Portal</a>';
+$string['powereducbrandedapp'] = 'Branded PowerEduc app';
+$string['powereducbrandedapp_help'] = '<p>The Branded PowerEduc app has all the functionality of our free mobile app for PowerEduc combined with your own custom branding.</p>
+<a href="https://powereduc.com/branded-app">About the Branded PowerEduc app</a>';
+$string['powereducbrandedappreference'] = 'Alternatively, get a <a href="https://powereduc.com/branded-app/">Branded PowerEduc app</a> with your own custom branding.';
+$string['powereducpartners'] = 'PowerEduc Partners';
+$string['powereducpartners_help'] = '<p>PowerEduc Partners are services providers that are certified by PowerEduc HQ to provide high quality PowerEduc services for your organisation\'s online learning environment.</p>
 <a href="https://powereduc.com/about-partners/">About our Partners</a><br />
 <a href="https://powereduc.com/partners">Find a Partner</a>';
-$string['powereducservices'] = 'Moodle services';
-$string['powereducservices_help'] = 'Make sure you get the best from your Moodle learning environment by using these Moodle services:';
+$string['powereducservices'] = 'PowerEduc services';
+$string['powereducservices_help'] = 'Make sure you get the best from your PowerEduc learning environment by using these PowerEduc services:';
 $string['noreplyaddress'] = 'No-reply address';
 $string['noreplydomain'] = 'No-reply and domain';
 $string['noreplydomaindetail'] = 'Settings for No-reply and configured domains';
@@ -937,8 +937,8 @@ $string['oauthrefreshtokenexpired'] = 'The refresh token for one of the OAuth se
 $string['oauthrefreshtokenexpiredshort'] = 'OAuth refresh token expired for {$a->issuer} on your site {$a->siteurl}.';
 $string['onlynoreply'] = 'Only when from a no-reply address';
 $string['opcacherecommended'] = 'PHP opcode caching improves performance and lowers memory requirements, OPcache extension is recommended and fully supported.';
-$string['opensslrecommended'] = 'Installing the optional OpenSSL library is highly recommended -- it enables Moodle Networking functionality.';
-$string['opensslrequired'] = 'The OpenSSL PHP extension is now required by Moodle to provide stronger cryptographic services.';
+$string['opensslrecommended'] = 'Installing the optional OpenSSL library is highly recommended -- it enables PowerEduc Networking functionality.';
+$string['opensslrequired'] = 'The OpenSSL PHP extension is now required by PowerEduc to provide stronger cryptographic services.';
 $string['opentowebcrawlers'] = 'Open to search engines';
 $string['optionalmaintenancemessage'] = 'Optional maintenance message';
 $string['order1'] = 'First';
@@ -974,7 +974,7 @@ $string['pathtopsqlinvalid'] = 'Invalid path to psql - either wrong path or not 
 $string['pathtopython'] = 'Path to Python';
 $string['pathtopythondesc'] = 'Path to your executable Python binary (both Python 2 and Python 3 are acceptable).';
 $string['pathtosassc'] = 'Path to SassC';
-$string['pathtosassc_help'] = 'Specifying the location of the SassC binary will switch the SASS compiler from Moodle\'s PHP implementation to SassC. See https://github.com/sass/sassc for more information.';
+$string['pathtosassc_help'] = 'Specifying the location of the SassC binary will switch the SASS compiler from PowerEduc\'s PHP implementation to SassC. See https://github.com/sass/sassc for more information.';
 $string['pcreunicodewarning'] = 'It is strongly recommended to use PCRE PHP extension that is compatible with Unicode characters.';
 $string['perfdebug'] = 'Performance info';
 $string['performance'] = 'Performance';
@@ -989,7 +989,7 @@ $string['plugin'] = 'Plugin';
 $string['plugins'] = 'Plugins';
 $string['pluginscheck'] = 'Plugin dependencies check';
 $string['pluginscheckfailed'] = 'Dependencies check failed for {$a->pluginslist}';
-$string['pluginschecktodo'] = 'You must solve all the plugin requirements before proceeding to install this Moodle version!';
+$string['pluginschecktodo'] = 'You must solve all the plugin requirements before proceeding to install this PowerEduc version!';
 $string['pluginsoverview'] = 'Plugins overview';
 $string['pluginsoverviewsee'] = 'See <a href="{$a->url}">plugins overview</a> page for more details.';
 $string['policysettings'] = 'Policy settings';
@@ -1055,7 +1055,7 @@ $string['profilevisibleprivate'] = 'Visible to user';
 $string['profilevisibleteachers'] = 'Visible to user, teachers and admins';
 $string['profiling'] = 'Profiling';
 $string['profilingallowall'] = 'Continuous profiling';
-$string['profilingallowall_help'] = 'If you enable this setting, then, at any moment, you can use the PROFILEALL parameter anywhere (PGC) to enable profiling for all the executed scripts along the Moodle session life. Analogously, you can use the PROFILEALLSTOP parameter to stop it.';
+$string['profilingallowall_help'] = 'If you enable this setting, then, at any moment, you can use the PROFILEALL parameter anywhere (PGC) to enable profiling for all the executed scripts along the PowerEduc session life. Analogously, you can use the PROFILEALLSTOP parameter to stop it.';
 $string['profilingallowme'] = 'Selective profiling';
 $string['profilingallowme_help'] = 'If you enable this setting, then, selectively, you can use the PROFILEME parameter anywhere (PGC) and profiling for that script will happen. Analogously, you can use the DONTPROFILEME parameter to prevent profiling to happen';
 $string['profilingautofrec'] = 'Automatic profiling';
@@ -1088,7 +1088,7 @@ $string['questioncwqpfscheck'] = 'One or more random questions in a quiz are set
 $string['questioncwqpfsok'] = 'Good. There are no \'random\' questions in your quizzes that are set up to select questions from a mixture of shared and unshared question categories.';
 $string['questiontype'] = 'Question type';
 $string['questiontypes'] = 'Question types';
-$string['quizattemptsupgradedmessage'] = 'In Moodle 2.1 there was a major upgrade to questions. It was possible to delay parts of the database upgrade to be run later. Before upgrading to Moodle 2.7, this upgrade must be completed.';
+$string['quizattemptsupgradedmessage'] = 'In PowerEduc 2.1 there was a major upgrade to questions. It was possible to delay parts of the database upgrade to be run later. Before upgrading to PowerEduc 2.7, this upgrade must be completed.';
 $string['recaptchaprivatekey'] = 'ReCAPTCHA secret key';
 $string['recaptchapublickey'] = 'ReCAPTCHA site key';
 $string['register'] = 'Register your site';
@@ -1097,10 +1097,10 @@ $string['registration_help'] = 'By registering:
 
 * You will receive security alerts
 * You can activate mobile app push notifications from your site
-* You are contributing to our Moodle statistics of the worldwide community';
+* You are contributing to our PowerEduc statistics of the worldwide community';
 $string['registrationwarning'] = 'Your site is not yet registered.';
 $string['registrationwarningcontactadmin'] = 'Your site is not yet registered. Please notify your administrator.';
-$string['releasenoteslink'] = 'For information about this version of Moodle, please see the online <a target="_blank" href="{$a}">Release Notes</a>';
+$string['releasenoteslink'] = 'For information about this version of PowerEduc, please see the online <a target="_blank" href="{$a}">Release Notes</a>';
 $string['rememberuserlicensepref'] = 'Remember user licence preference';
 $string['rememberuserlicensepref_help'] = 'If enabled, the last licence selected by the user is preselected when uploading a file in the file picker. Otherwise, the default site licence is preselected.';
 $string['rememberusername'] = 'Remember username';
@@ -1113,7 +1113,7 @@ $string['requiremodintro_desc'] = 'If enabled, users will be forced to enter a d
 $string['required'] = 'Required';
 $string['requires'] = 'Requires';
 $string['purgecaches'] = 'Purge all caches';
-$string['purgecachesconfirm'] = 'Moodle can cache themes, javascript, language strings, filtered text, rss feeds and many other pieces of calculated data.  Purging these caches will delete that data from the server and force browsers to refetch data, so that you can be sure you are seeing the most up-to-date values produced by the current code.  There is no danger in purging caches, but your site may appear slower for a while until the server and clients calculate new information and cache it.';
+$string['purgecachesconfirm'] = 'PowerEduc can cache themes, javascript, language strings, filtered text, rss feeds and many other pieces of calculated data.  Purging these caches will delete that data from the server and force browsers to refetch data, so that you can be sure you are seeing the most up-to-date values produced by the current code.  There is no danger in purging caches, but your site may appear slower for a while until the server and clients calculate new information and cache it.';
 $string['purgecachesfinished'] = 'All caches were purged.';
 $string['purgecachesnoneselected'] = 'Select one or more caches to purge';
 $string['purgecachespage'] = 'Purge caches';
@@ -1216,7 +1216,7 @@ $string['selecttheme'] = 'Select theme for {$a} device';
 $string['server'] = 'Server';
 $string['serverchecks'] = 'Server checks';
 $string['serverlimit'] = 'Server limit';
-$string['sessionautostartwarning'] = '<p>Serious configuration error detected, please notify server administrator.</p><p> To operate properly, Moodle requires that administrator changes PHP settings.</p><p><code>session.auto_start</code> must be set to <code>off</code>.</p><p>This setting is controlled by editing <code>php.ini</code>, Apache/IIS <br />configuration or <code>.htaccess</code> file on the server.</p>';
+$string['sessionautostartwarning'] = '<p>Serious configuration error detected, please notify server administrator.</p><p> To operate properly, PowerEduc requires that administrator changes PHP settings.</p><p><code>session.auto_start</code> must be set to <code>off</code>.</p><p>This setting is controlled by editing <code>php.ini</code>, Apache/IIS <br />configuration or <code>.htaccess</code> file on the server.</p>';
 $string['sessioncookie'] = 'Cookie prefix';
 $string['sessioncookiedomain'] = 'Cookie domain';
 $string['sessioncookiepath'] = 'Cookie path';
@@ -1228,7 +1228,7 @@ $string['settingfileuploads'] = 'File uploading is required for normal operation
 $string['settingmaxinputvars'] = 'PHP setting max_input_vars is recommended to be at least 5000.';
 $string['settingmaxinputvarsrequired'] = 'PHP setting max_input_vars must be at least 5000.';
 $string['settingmemorylimit'] = 'Insufficient memory detected, please set higher memory limit in PHP settings.';
-$string['settingsafemode'] = 'Moodle is not fully compatible with safe mode, please ask server administrator to turn it off. Running Moodle under safe mode is not supported, please expect various problems if you do so.';
+$string['settingsafemode'] = 'PowerEduc is not fully compatible with safe mode, please ask server administrator to turn it off. Running PowerEduc under safe mode is not supported, please expect various problems if you do so.';
 $string['setupsearchengine'] = 'Setup search engine';
 $string['showcommentscount'] = 'Show comments count';
 $string['showdetails'] = 'Show details';
@@ -1236,7 +1236,7 @@ $string['showuseridentity'] = 'Show user identity';
 $string['showuseridentity_desc'] = 'When selecting or searching for users, and when displaying lists of users, these fields may be shown in addition to their full name. The fields are only shown to users who have the powereduc/site:viewuseridentity capability; by default, teachers and managers. (This option makes most sense if you choose one or two fields that are mandatory at your institution.)
 
 Fields marked * are custom user profile fields. You can select these fields, but there are currently some screens on which they will not appear.';
-$string['simplexmlrequired'] = 'The SimpleXML PHP extension is now required by Moodle.';
+$string['simplexmlrequired'] = 'The SimpleXML PHP extension is now required by PowerEduc.';
 $string['sitemenubar'] = 'Site navigation';
 $string['sitemailcharset'] = 'Character set';
 $string['sitemaintenance'] = 'The site is undergoing maintenance and is currently not available';
@@ -1276,7 +1276,7 @@ $string['sort_shortname'] = 'Course short name';
 $string['sort_sortorder'] = 'Sort order';
 $string['spellengine'] = 'Spell engine';
 $string['spelllanguagelist'] = 'Spell language list';
-$string['splrequired'] = 'The SPL PHP extension is now required by Moodle.';
+$string['splrequired'] = 'The SPL PHP extension is now required by PowerEduc.';
 $string['stats'] = 'Statistics';
 $string['statsfirstrun'] = 'Maximum processing interval';
 $string['statsmaxruntime'] = 'Maximum runtime';
@@ -1287,7 +1287,7 @@ $string['statsuserthreshold'] = 'User threshold';
 $string['stickyblocks'] = 'Sticky blocks';
 $string['stickyblockscourseview'] = 'Course page';
 $string['stickyblocksduplicatenotice'] = 'If any block you add here is already present in a particular page, it will result in a duplicate.<br />Only the pinned block will be non-editable, the duplicate will still be editable.';
-$string['stickyblocksmypowereduc'] = 'My Moodle';
+$string['stickyblocksmypowereduc'] = 'My PowerEduc';
 $string['stickyblockspagetype'] = 'Page type to configure';
 $string['strictformsrequired'] = 'Strict validation of required fields';
 $string['stripalltitletags'] = 'Remove HTML tags from all activity names';
@@ -1393,7 +1393,7 @@ $string['testoutgoingmailconf_errorcommunications'] = 'Your site couldn\'t commu
 $string['testoutgoingmailconf_message'] = 'This is a test message to confirm that you have successfully configured your site\'s outgoing mail.  Sent: {$a}';
 $string['testoutgoingmailconf_fromemail'] = 'From username or email address';
 $string['testoutgoingmailconf_fromemail_help'] = 'This field emulates sending the message from that user, but the From header used in the real email sent will depend on other settings such as allowedemaildomains';
-$string['testoutgoingmailconf_fromemail_invalid'] = 'Invalid From username or email. Must be a valid email format or an existing username in Moodle.';
+$string['testoutgoingmailconf_fromemail_invalid'] = 'Invalid From username or email. Must be a valid email format or an existing username in PowerEduc.';
 $string['testoutgoingmailconf_sendtest'] = 'Send a test message';
 $string['testoutgoingmailconf_sentmail'] = 'This site has successfully sent a test message to the mail server.<br />From: {$a->fromemail}<br />To: {$a->toemail}';
 $string['testoutgoingmailconf_subject'] = '{$a->site}: test message. {$a->additional} Sent: {$a->time}';
@@ -1421,7 +1421,7 @@ $string['timezoneserver'] = 'Server timezone ({$a})';
 $string['tlswarning'] = 'No PHP/cURL extension with TLSv1.2 support has been detected. Some services may not work. It is strongly recommended to upgrade your TLS libraries.';
 $string['tokenduration'] = 'User created token duration';
 $string['tokenduration_desc'] = 'Length of time for which a web services token created by a user (for example via the mobile app) is valid.';
-$string['tokenizerrecommended'] = 'Installing the optional PHP Tokenizer extension is recommended -- it improves Moodle Networking functionality.';
+$string['tokenizerrecommended'] = 'Installing the optional PHP Tokenizer extension is recommended -- it improves PowerEduc Networking functionality.';
 $string['tools'] = 'Admin tools';
 $string['toolsmanage'] = 'Manage admin tools';
 $string['unattendedoperation'] = 'Unattended operation';
@@ -1446,59 +1446,59 @@ $string['unsupportedphpversion80'] = 'PHP version 8.0 is not supported.';
 $string['unsuspenduser'] = 'Activate user account';
 $string['updateaccounts'] = 'Update existing accounts';
 $string['updatecomponent'] = 'Update component';
-$string['updateavailable'] = 'There is a newer Moodle version available!';
+$string['updateavailable'] = 'There is a newer PowerEduc version available!';
 $string['updateavailabledetailslink'] = 'See {$a->url} for more details';
 $string['updateavailableforplugin'] = 'There is a newer version for some of your plugins available!';
 $string['updateavailable_moreinfo'] = 'More info...';
-$string['updateavailable_release'] = 'Moodle {$a}';
+$string['updateavailable_release'] = 'PowerEduc {$a}';
 $string['updateavailable_version'] = 'Version {$a}';
 $string['updateavailableinstall'] = 'Install this update';
 $string['updateavailableinstallall'] = 'Install available updates ({$a})';
 $string['updateavailableinstallallhead'] = 'Installing available updates';
-$string['updateavailablenot'] = 'Your Moodle code is up-to-date!';
+$string['updateavailablenot'] = 'Your PowerEduc code is up-to-date!';
 $string['updateavailablerecommendation'] = 'It is strongly recommended that you update your site to the latest version to obtain all recent security and bug fixes.';
 $string['updatenotifications'] = 'Update notifications';
-$string['updatenotificationfooter'] = 'Your Moodle site {$a->siteurl} is configured to automatically check for available updates. You are receiving this message as the administrator of the site. You can disable automatic checks for available updates in Site administration / Server / Update notifications or customise the delivery of this message via your preferences page.';
-$string['updatenotificationsubject'] = 'Moodle updates are available ({$a->siteurl})';
+$string['updatenotificationfooter'] = 'Your PowerEduc site {$a->siteurl} is configured to automatically check for available updates. You are receiving this message as the administrator of the site. You can disable automatic checks for available updates in Site administration / Server / Update notifications or customise the delivery of this message via your preferences page.';
+$string['updatenotificationsubject'] = 'PowerEduc updates are available ({$a->siteurl})';
 $string['updateautocheck'] = 'Automatically check for available updates';
-$string['updateautocheck_desc'] = 'If enabled, your site will automatically check for available updates for both Moodle code and all additional plugins. If there is a new update available, a notification will be sent to site admins.';
+$string['updateautocheck_desc'] = 'If enabled, your site will automatically check for available updates for both PowerEduc code and all additional plugins. If there is a new update available, a notification will be sent to site admins.';
 $string['updateminmaturity'] = 'Required code maturity';
 $string['updateminmaturity_desc'] = 'Notify about available updates only if the available code has the selected maturity level at least. Updates for plugins that do not declare their code maturity level are always reported regardless this setting.';
 $string['updatenotifybuilds'] = 'Notify about new builds';
-$string['updatenotifybuilds_desc'] = 'If enabled, the available update for Moodle code is also reported when a new build for the current version is available. Builds are continuous improvements of a given Moodle version. They are generally released every week. If disabled, the available update will be reported only when there is a higher version of Moodle released. Checks for plugins are not affected by this setting.';
-$string['upgradestart'] = 'Upgrade Moodle database now';
+$string['updatenotifybuilds_desc'] = 'If enabled, the available update for PowerEduc code is also reported when a new build for the current version is available. Builds are continuous improvements of a given PowerEduc version. They are generally released every week. If disabled, the available update will be reported only when there is a higher version of PowerEduc released. Checks for plugins are not affected by this setting.';
+$string['upgradestart'] = 'Upgrade PowerEduc database now';
 $string['upgradepluginsfirst'] = 'It is recommended to install all available updates first';
 $string['upgradepluginsinfo'] = 'Updating plugins';
-$string['upgradepluginsinfo_help'] = 'There are available updates for some of your plugins. You should install them all prior to upgrading Moodle database. If your site does not support automatic updates deployment, you have to download and install new plugin versions at your server manually.';
+$string['upgradepluginsinfo_help'] = 'There are available updates for some of your plugins. You should install them all prior to upgrading PowerEduc database. If your site does not support automatic updates deployment, you have to download and install new plugin versions at your server manually.';
 $string['upgradepluginsinfo_link'] = 'admin/upgradepluginsinfo';
 $string['upgradeerror'] = 'Unknown error upgrading {$a->plugin} to version {$a->version}. Cannot continue.';
-$string['upgradeforumread'] = 'A new feature has been added in Moodle 1.5 to track read/unread forum posts.<br />To use this functionality you need to <a href="{$a}">update your tables</a>.';
-$string['upgradeforumreadinfo'] = 'A new feature has been added in Moodle 1.5 to track read/unread forum posts.  To use this functionality you need to update your tables with all the tracking information for existing posts.  Depending on the size of your site this can take a long time (hours) and can be quite taxing on the database, so it\'s best to do it during a quiet period.  However, your site will continue functioning during this upgrade and users won\'t be affected.  Once you start this process you should let it finish (keep your browser window open).  However, if you stop the process by closing the window: don\'t worry, you can start over.<br /><br />Do you want to start the upgrading process now?';
+$string['upgradeforumread'] = 'A new feature has been added in PowerEduc 1.5 to track read/unread forum posts.<br />To use this functionality you need to <a href="{$a}">update your tables</a>.';
+$string['upgradeforumreadinfo'] = 'A new feature has been added in PowerEduc 1.5 to track read/unread forum posts.  To use this functionality you need to update your tables with all the tracking information for existing posts.  Depending on the size of your site this can take a long time (hours) and can be quite taxing on the database, so it\'s best to do it during a quiet period.  However, your site will continue functioning during this upgrade and users won\'t be affected.  Once you start this process you should let it finish (keep your browser window open).  However, if you stop the process by closing the window: don\'t worry, you can start over.<br /><br />Do you want to start the upgrading process now?';
 $string['upgradekeyreq'] = 'Upgrade key required';
 $string['upgradekeyset'] = 'Upgrade key (leave empty to not set it)';
 $string['upgradelogs'] = 'For full functionality, your old logs need to be upgraded.  <a href="{$a}">More information</a>';
 $string['upgradelogsinfo'] = 'Some changes have recently been made in the way logs are stored.  To be able to view all of your old logs on a per-activity basis, your old logs need to be upgraded.  Depending on your site this can take a long time (eg several hours) and can be quite taxing on the database for large sites.  Once you start this process you should let it finish (by keeping the browser window open).  Don\'t worry - your site will work fine for other people while the logs are being upgraded.<br /><br />Do you want to upgrade your logs now?';
 $string['upgradesettings'] = 'New settings';
-$string['upgradesettingsintro'] = 'The settings shown below were added during your last Moodle upgrade. Make any changes necessary to the defaults and then click the \'Save changes\' button at the bottom of this page.';
-$string['upgradestalefiles'] = 'Mixed Moodle versions detected, upgrade cannot continue';
-$string['upgradestalefilesinfo'] = 'The Moodle update process has been paused because PHP scripts from at least two major versions of Moodle have been detected in the Moodle directory.
+$string['upgradesettingsintro'] = 'The settings shown below were added during your last PowerEduc upgrade. Make any changes necessary to the defaults and then click the \'Save changes\' button at the bottom of this page.';
+$string['upgradestalefiles'] = 'Mixed PowerEduc versions detected, upgrade cannot continue';
+$string['upgradestalefilesinfo'] = 'The PowerEduc update process has been paused because PHP scripts from at least two major versions of PowerEduc have been detected in the PowerEduc directory.
 
-This can cause significant problems later, so in order to continue you must ensure that the Moodle directory contains only files for a single version of Moodle.
+This can cause significant problems later, so in order to continue you must ensure that the PowerEduc directory contains only files for a single version of PowerEduc.
 
-The recommended way to clean your Moodle directory is as follows:
+The recommended way to clean your PowerEduc directory is as follows:
 
-* rename the current Moodle directory to "powereduc_old"
-* create a new Moodle directory containing only files from either a standard Moodle package download, or from the Moodle Git repository
-* move the original config.php file and any non-standard plugins from the "powereduc_old" directory to the new Moodle directory
+* rename the current PowerEduc directory to "powereduc_old"
+* create a new PowerEduc directory containing only files from either a standard PowerEduc package download, or from the PowerEduc Git repository
+* move the original config.php file and any non-standard plugins from the "powereduc_old" directory to the new PowerEduc directory
 
-When you have a clean Moodle directory, refresh this page to resume the Moodle update process.
+When you have a clean PowerEduc directory, refresh this page to resume the PowerEduc update process.
 
-This warning is often caused by unzipping a standard Moodle package over a previous version of Moodle. While this is OK for minor upgrades, it is strongly discouraged for major Moodle upgrades.
+This warning is often caused by unzipping a standard PowerEduc package over a previous version of PowerEduc. While this is OK for minor upgrades, it is strongly discouraged for major PowerEduc upgrades.
 
 This warning can also be caused by an incomplete checkout or update operation from the Git repository, in which case you may just have to wait for the operation to complete, or perhaps run the appropriate clean-up command and retry the operation.
 
 You can find more information in upgrade documentation at <a href="{$a}">{$a}</a>.';
-$string['upgradesure'] = '<p>Your Moodle files have been changed, and you are about to automatically upgrade your server to this version:</p>
+$string['upgradesure'] = '<p>Your PowerEduc files have been changed, and you are about to automatically upgrade your server to this version:</p>
 <p><strong>{$a}</strong></p>
 <p>Once you do this you can not go back again. Please note that this process can take a long time.</p>
 <p>Are you sure you want to upgrade this server to this version?</p>';
@@ -1513,9 +1513,9 @@ $string['user'] = 'User';
 $string['userbulk'] = 'Bulk user actions';
 $string['userbulkdownload'] = 'Export users as';
 $string['userfeedbackafterupgrade'] = 'After every major upgrade';
-$string['userfeedbackencouragement'] = '<p>In Moodle 3.9 onwards, a new feature is included which gives users the option to provide feedback about Moodle software to Moodle HQ via an external survey site hosted by Moodle HQ. No user-identifying information is forwarded to the survey site.</p>
-<p>Moodle HQ strives to be open and transparent about its data collection practices. Thus, we want to make sure that you are aware and in control of this functionality.</p>
-<p>Feedback from users will greatly assist Moodle HQ in improving the Moodle software. To enable this feature, please go to <a href="{$a}">Feedback settings</a>.</p>';
+$string['userfeedbackencouragement'] = '<p>In PowerEduc 3.9 onwards, a new feature is included which gives users the option to provide feedback about PowerEduc software to PowerEduc HQ via an external survey site hosted by PowerEduc HQ. No user-identifying information is forwarded to the survey site.</p>
+<p>PowerEduc HQ strives to be open and transparent about its data collection practices. Thus, we want to make sure that you are aware and in control of this functionality.</p>
+<p>Feedback from users will greatly assist PowerEduc HQ in improving the PowerEduc software. To enable this feature, please go to <a href="{$a}">Feedback settings</a>.</p>';
 $string['userfeedbacknextreminder'] = 'Next feedback reminder';
 $string['userfeedbacknextreminder_desc'] = 'When should we ask the user to give feedback again?';
 $string['userfeedbackperiodically'] = 'Periodically';
@@ -1542,10 +1542,10 @@ $string['verifychangedemail'] = 'Restrict domains when changing email';
 $string['warningcurrentsetting'] = 'Invalid current value: {$a}';
 $string['warningiconvbuggy'] = 'Your version of the iconv library does not support the //IGNORE modifier. You should install the mbstring extension which can be used instead for cleaning strings containing invalid UTF-8 characters.';
 $string['webproxy'] = 'Web proxy';
-$string['webproxyinfo'] = 'Fill in the following options if your Moodle server cannot access the internet directly. Internet access is required for the download of environment data, language packs, RSS feeds, timezones, etc.<br /><em>The PHP cURL extension is highly recommended.</em>';
+$string['webproxyinfo'] = 'Fill in the following options if your PowerEduc server cannot access the internet directly. Internet access is required for the download of environment data, language packs, RSS feeds, timezones, etc.<br /><em>The PHP cURL extension is highly recommended.</em>';
 $string['xmlrpcwebserviceenabled'] = 'It has been detected that the XML-RPC Web Service protocol is enabled on your site. This feature relies on the PHP XML-RPC extension which is no longer maintained by PHP.';
 $string['yuicomboloading'] = 'YUI combo loading';
-$string['ziprequired'] = 'The Zip PHP extension is now required by Moodle, info-ZIP binaries or PclZip library are not used anymore.';
+$string['ziprequired'] = 'The Zip PHP extension is now required by PowerEduc, info-ZIP binaries or PclZip library are not used anymore.';
 $string['manageqbanks'] = 'Manage question bank plugins';
 
 
@@ -1558,16 +1558,16 @@ $string['cachesessionhelp'] = 'User specific cache that expires when the user\'s
 $string['cacheapplication'] = 'Application cache';
 $string['cacheapplicationhelp'] = 'Cached items are shared among all users and expire by a determined time to live (ttl).';
 
-// Deprecated since Moodle 3.11.
+// Deprecated since PowerEduc 3.11.
 $string['configenableactivitychooser'] = 'The activity chooser is a dialog box with a short description of each activity and resource. If disabled, separate resource and activity drop-down menus are provided instead.';
 $string['enableactivitychooser'] = 'Enable activity chooser';
 $string['configmodchooserdefault'] = 'Should the activity chooser be presented to users by default?';
 $string['modchooserdefault'] = 'Activity chooser default';
 
-// Deprecated since Moodle 4.0.
+// Deprecated since PowerEduc 4.0.
 $string['coursepage'] = 'Course page';
 $string['mediapluginswf'] = 'Enable .swf filter';
 $string['mediapluginswfnote'] = 'As a default security measure, normal users should not be allowed to embed swf flash files.';
 
-// Deprecated since Moodle 4.1.
+// Deprecated since PowerEduc 4.1.
 $string['multilangforceold'] = 'Force old multilang syntax: &lt;span&gt; without the class="multilang" and &lt;lang&gt;';

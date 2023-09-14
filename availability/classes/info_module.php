@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -110,7 +110,7 @@ class info_module extends info {
     }
 
     protected function get_view_hidden_capability() {
-        return 'moodle/course:ignoreavailabilityrestrictions';
+        return 'powereduc/course:ignoreavailabilityrestrictions';
     }
 
     public function get_user_list_sql($onlyactive = true) {
@@ -161,7 +161,7 @@ class info_module extends info {
      * @param int $userid User id (0 = current user)
      * @param bool $checkcourse If true, checks whether the user has course access
      * @return bool True if the activity is visible to the specified user
-     * @throws \moodle_exception If the cmid doesn't exist
+     * @throws \powereduc_exception If the cmid doesn't exist
      */
     public static function is_user_visible($cmorid, $userid = 0, $checkcourse = true) {
         global $USER, $DB, $CFG;
@@ -196,7 +196,7 @@ class info_module extends info {
         if ($checkcourse) {
             $coursecontext = \context_course::instance($cm->course);
             if (!is_enrolled($coursecontext, $userid, '', true) &&
-                    !has_capability('moodle/course:view', $coursecontext, $userid)) {
+                    !has_capability('powereduc/course:view', $coursecontext, $userid)) {
                 return false;
             }
         }

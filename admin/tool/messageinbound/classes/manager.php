@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -144,7 +144,7 @@ class manager {
 
         } catch (\Horde_Imap_Client_Exception $e) {
             $message = $e->getMessage();
-            throw new \moodle_exception('imapconnectfailure', 'tool_messageinbound', '', null, $message);
+            throw new \powereduc_exception('imapconnectfailure', 'tool_messageinbound', '', null, $message);
         }
     }
 
@@ -1025,7 +1025,7 @@ class manager {
         $messageparams = new \stdClass();
         $messageparams->html    = $message->html;
         $messageparams->plain   = $message->plain;
-        $messagepreferencesurl = new \moodle_url("/message/notificationpreferences.php", array('id' => $USER->id));
+        $messagepreferencesurl = new \powereduc_url("/message/notificationpreferences.php", array('id' => $USER->id));
         $messageparams->messagepreferencesurl = $messagepreferencesurl->out();
         $htmlmessage = get_string('messageprocessingsuccesshtml', 'tool_messageinbound', $messageparams);
         $plainmessage = get_string('messageprocessingsuccess', 'tool_messageinbound', $messageparams);

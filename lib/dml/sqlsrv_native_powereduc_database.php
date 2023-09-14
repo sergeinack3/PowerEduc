@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 2 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Native sqlsrv class representing moodle database interface.
+ * Native sqlsrv class representing powereduc database interface.
  *
  * @package    core_dml
  * @copyright  2009 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
@@ -24,22 +24,22 @@
 
 defined('POWEREDUC_INTERNAL') || die();
 
-require_once(__DIR__.'/moodle_database.php');
-require_once(__DIR__.'/sqlsrv_native_moodle_recordset.php');
-require_once(__DIR__.'/sqlsrv_native_moodle_temptables.php');
+require_once(__DIR__.'/powereduc_database.php');
+require_once(__DIR__.'/sqlsrv_native_powereduc_recordset.php');
+require_once(__DIR__.'/sqlsrv_native_powereduc_temptables.php');
 
 /**
- * Native sqlsrv class representing moodle database interface.
+ * Native sqlsrv class representing powereduc database interface.
  *
  * @package    core_dml
  * @copyright  2009 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v2 or later
  */
-class sqlsrv_native_moodle_database extends moodle_database {
+class sqlsrv_native_powereduc_database extends powereduc_database {
 
     protected $sqlsrv = null;
     protected $last_error_reporting; // To handle SQL*Server-Native driver default verbosity
-    protected $temptables; // Control existing temptables (sqlsrv_moodle_temptables object)
+    protected $temptables; // Control existing temptables (sqlsrv_powereduc_temptables object)
     protected $collation;  // current DB collation cache
     /**
      * Does the used db version support ANSI way of limiting (2012 and higher)
@@ -76,7 +76,7 @@ class sqlsrv_native_moodle_database extends moodle_database {
     ];
 
     /**
-     * Constructor - instantiates the database, specifying if it's external (connect to other systems) or no (Moodle DB)
+     * Constructor - instantiates the database, specifying if it's external (connect to other systems) or no (PowerEduc DB)
      *              note this has effect to decide if prefix checks must be performed or no
      * @param bool true means external database used
      */
@@ -182,7 +182,7 @@ class sqlsrv_native_moodle_database extends moodle_database {
      * @param string $dbuser The database username.
      * @param string $dbpass The database username's password.
      * @param string $dbname The name of the database being connected to.
-     * @param mixed $prefix string|bool The moodle db table name's prefix. false is used for external databases where prefix not used
+     * @param mixed $prefix string|bool The powereduc db table name's prefix. false is used for external databases where prefix not used
      * @param array $dboptions driver specific options
      * @return bool true
      * @throws dml_connection_exception if error
@@ -284,7 +284,7 @@ class sqlsrv_native_moodle_database extends moodle_database {
         $this->query_log_allow();
 
         // Connection established and configured, going to instantiate the temptables controller
-        $this->temptables = new sqlsrv_native_moodle_temptables($this);
+        $this->temptables = new sqlsrv_native_powereduc_temptables($this);
 
         return true;
     }
@@ -588,7 +588,7 @@ class sqlsrv_native_moodle_database extends moodle_database {
             $info = new stdClass();
             $info->name = $rawcolumn->name;
             $info->type = $rawcolumn->type;
-            $info->meta_type = $this->sqlsrvtype2moodletype($info->type);
+            $info->meta_type = $this->sqlsrvtype2powereductype($info->type);
 
             // Prepare auto_increment info
             $info->auto_increment = $rawcolumn->auto_increment ? true : false;
@@ -679,12 +679,12 @@ class sqlsrv_native_moodle_database extends moodle_database {
     }
 
     /**
-     * Provides mapping between sqlsrv native data types and moodle_database - database_column_info - ones)
+     * Provides mapping between sqlsrv native data types and powereduc_database - database_column_info - ones)
      *
      * @param string $sqlsrv_type native sqlsrv data type
      * @return string 1-char database_column_info data type
      */
-    private function sqlsrvtype2moodletype($sqlsrv_type) {
+    private function sqlsrvtype2powereductype($sqlsrv_type) {
         $type = null;
 
         switch (strtoupper($sqlsrv_type)) {
@@ -815,7 +815,7 @@ class sqlsrv_native_moodle_database extends moodle_database {
      */
     public function execute($sql, array $params = null) {
         if (strpos($sql, ';') !== false) {
-            throw new coding_exception('moodle_database::execute() Multiple sql statements found or bound parameters not used properly in query!');
+            throw new coding_exception('powereduc_database::execute() Multiple sql statements found or bound parameters not used properly in query!');
         }
         $this->do_query($sql, $params, SQL_QUERY_UPDATE);
         return true;
@@ -846,7 +846,7 @@ class sqlsrv_native_moodle_database extends moodle_database {
     }
 
     /**
-     * Get a number of records as a moodle_recordset using a SQL statement.
+     * Get a number of records as a powereduc_recordset using a SQL statement.
      *
      * Since this method is a little less readable, use of it should be restricted to
      * code where it's possible there might be large datasets being returned.  For known
@@ -859,7 +859,7 @@ class sqlsrv_native_moodle_database extends moodle_database {
      * @param array $params array of sql parameters
      * @param int $limitfrom return a subset of records, starting at this point (optional, required if $limitnum is set).
      * @param int $limitnum return a subset comprising this many records (optional, required if $limitfrom is set).
-     * @return moodle_recordset instance
+     * @return powereduc_recordset instance
      * @throws dml_exception A DML specific exception is thrown for any errors.
      */
     public function get_recordset_sql($sql, array $params = null, $limitfrom = 0, $limitnum = 0) {
@@ -937,10 +937,10 @@ class sqlsrv_native_moodle_database extends moodle_database {
      * Create a record set and initialize with first row
      *
      * @param mixed $result
-     * @return sqlsrv_native_moodle_recordset
+     * @return sqlsrv_native_powereduc_recordset
      */
     protected function create_recordset($result) {
-        $rs = new sqlsrv_native_moodle_recordset($result, $this);
+        $rs = new sqlsrv_native_powereduc_recordset($result, $this);
         $this->recordsets[] = $rs;
         return $rs;
     }
@@ -948,9 +948,9 @@ class sqlsrv_native_moodle_database extends moodle_database {
     /**
      * Do not use outside of recordset class.
      * @internal
-     * @param sqlsrv_native_moodle_recordset $rs
+     * @param sqlsrv_native_powereduc_recordset $rs
      */
-    public function recordset_closed(sqlsrv_native_moodle_recordset $rs) {
+    public function recordset_closed(sqlsrv_native_powereduc_recordset $rs) {
         if ($key = array_search($rs, $this->recordsets, true)) {
             unset($this->recordsets[$key]);
         }
@@ -1034,7 +1034,7 @@ class sqlsrv_native_moodle_database extends moodle_database {
 
         if ($customsequence) {
             if (!isset($params['id'])) {
-                throw new coding_exception('moodle_database::insert_record_raw() id field must be specified if custom sequences used.');
+                throw new coding_exception('powereduc_database::insert_record_raw() id field must be specified if custom sequences used.');
             }
 
             $returnid = false;
@@ -1055,7 +1055,7 @@ class sqlsrv_native_moodle_database extends moodle_database {
         }
 
         if (empty($params)) {
-            throw new coding_exception('moodle_database::insert_record_raw() no fields found.');
+            throw new coding_exception('powereduc_database::insert_record_raw() no fields found.');
         }
         $fields = implode(',', array_keys($params));
         $qms = array_fill(0, count($params), '?');
@@ -1191,13 +1191,13 @@ class sqlsrv_native_moodle_database extends moodle_database {
         $params = (array)$params;
 
         if (!isset($params['id'])) {
-            throw new coding_exception('moodle_database::update_record_raw() id field must be specified.');
+            throw new coding_exception('powereduc_database::update_record_raw() id field must be specified.');
         }
         $id = $params['id'];
         unset($params['id']);
 
         if (empty($params)) {
-            throw new coding_exception('moodle_database::update_record_raw() no fields found.');
+            throw new coding_exception('powereduc_database::update_record_raw() no fields found.');
         }
 
         $sets = array ();
@@ -1502,7 +1502,7 @@ class sqlsrv_native_moodle_database extends moodle_database {
      */
     public function sql_substr($expr, $start, $length = false) {
         if (count(func_get_args()) < 2) {
-            throw new coding_exception('moodle_database::sql_substr() requires at least two parameters',
+            throw new coding_exception('powereduc_database::sql_substr() requires at least two parameters',
                 'Originally this function was only returning name of SQL substring function, it now requires all parameters.');
         }
 
@@ -1516,7 +1516,7 @@ class sqlsrv_native_moodle_database extends moodle_database {
     /**
      * Does this driver support tool_replace?
      *
-     * @since Moodle 2.6.1
+     * @since PowerEduc 2.6.1
      * @return bool
      */
     public function replace_all_text_supported() {

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ namespace block_myoverview;
  *
  * @package    block_myoverview
  * @category   test
- * @copyright  2019 Juan Leyva <juan@moodle.com>
+ * @copyright  2019 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class myoverview_test extends \advanced_testcase {
@@ -58,7 +58,7 @@ class myoverview_test extends \advanced_testcase {
         $context = \context_user::instance($user->id);
 
         if (!$currentpage = my_get_page($user->id, MY_PAGE_PUBLIC, MY_PAGE_COURSES)) {
-            throw new \moodle_exception('mymoodlesetup');
+            throw new \powereduc_exception('mypowereducsetup');
         }
 
         $PAGE->set_url('/my/courses.php');    // Need this because some internal API calls require the $PAGE url to be set.

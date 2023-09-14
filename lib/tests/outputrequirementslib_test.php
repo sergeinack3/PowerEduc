@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
@@ -34,32 +34,32 @@ class outputrequirementslib_test extends \advanced_testcase {
     public function test_string_for_js() {
         $this->resetAfterTest();
 
-        $page = new \moodle_page();
-        $page->requires->string_for_js('course', 'moodle', 1);
-        $page->requires->string_for_js('course', 'moodle', 1);
+        $page = new \powereduc_page();
+        $page->requires->string_for_js('course', 'powereduc', 1);
+        $page->requires->string_for_js('course', 'powereduc', 1);
         $this->expectException('coding_exception');
-        $page->requires->string_for_js('course', 'moodle', 2);
+        $page->requires->string_for_js('course', 'powereduc', 2);
 
         // Note: we can not switch languages in phpunit yet,
         //       it would be nice to test that the strings are actually fetched in the footer.
     }
 
     public function test_one_time_output_normal_case() {
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $this->assertTrue($page->requires->should_create_one_time_item_now('test_item'));
         $this->assertFalse($page->requires->should_create_one_time_item_now('test_item'));
     }
 
     public function test_one_time_output_repeat_output_throws() {
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->requires->set_one_time_item_created('test_item');
         $this->expectException('coding_exception');
         $page->requires->set_one_time_item_created('test_item');
     }
 
     public function test_one_time_output_different_pages_independent() {
-        $firstpage = new \moodle_page();
-        $secondpage = new \moodle_page();
+        $firstpage = new \powereduc_page();
+        $secondpage = new \powereduc_page();
         $this->assertTrue($firstpage->requires->should_create_one_time_item_now('test_item'));
         $this->assertTrue($secondpage->requires->should_create_one_time_item_now('test_item'));
     }
@@ -77,7 +77,7 @@ class outputrequirementslib_test extends \advanced_testcase {
         // With slasharguments on.
         $CFG->slasharguments = 1;
 
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $requirements = $page->requires;
         // Assert successful method call.
         $this->assertTrue($requirements->jquery_plugin('jquery'));
@@ -92,7 +92,7 @@ class outputrequirementslib_test extends \advanced_testcase {
         // With slasharguments off.
         $CFG->slasharguments = 0;
 
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $requirements = $page->requires;
         // Assert successful method call.
         $this->assertTrue($requirements->jquery_plugin('jquery'));
@@ -109,7 +109,7 @@ class outputrequirementslib_test extends \advanced_testcase {
      */
     public function test_js_call_amd() {
 
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
 
         // Load an AMD module without a function call.
         $page->requires->js_call_amd('theme_foobar/lightbox');

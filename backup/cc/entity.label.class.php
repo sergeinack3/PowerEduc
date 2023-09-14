@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * @package   moodlecore
+ * @package   powereduccore
  * @subpackage backup-imscc
  * @copyright 2009 Mauro Rondinelli (mauro.rondinelli [AT] uvcms.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,14 +26,14 @@ class cc_label extends entities {
 
     public function generate_node () {
 
-        cc2moodle::log_action('Creating Labels mods');
+        cc2powereduc::log_action('Creating Labels mods');
 
         $response = '';
 
-        $sheet_mod_label = cc2moodle::loadsheet(SHEET_COURSE_SECTIONS_SECTION_MODS_MOD_LABEL);
+        $sheet_mod_label = cc2powereduc::loadsheet(SHEET_COURSE_SECTIONS_SECTION_MODS_MOD_LABEL);
 
-        if (!empty(cc2moodle::$instances['instances'][POWEREDUC_TYPE_LABEL])) {
-            foreach (cc2moodle::$instances['instances'][POWEREDUC_TYPE_LABEL] as $instance) {
+        if (!empty(cc2powereduc::$instances['instances'][POWEREDUC_TYPE_LABEL])) {
+            foreach (cc2powereduc::$instances['instances'][POWEREDUC_TYPE_LABEL] as $instance) {
                 $response .= $this->create_node_course_modules_mod_label($sheet_mod_label, $instance);
             }
         }

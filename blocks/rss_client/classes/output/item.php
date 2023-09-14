@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -47,7 +47,7 @@ class item implements \renderable, \templatable {
     /**
      * The link to the item
      *
-     * @var \moodle_url
+     * @var \powereduc_url
      */
     protected $link;
 
@@ -68,7 +68,7 @@ class item implements \renderable, \templatable {
     /**
      * The item's permalink
      *
-     * @var \moodle_url
+     * @var \powereduc_url
      */
     protected $permalink;
 
@@ -90,14 +90,14 @@ class item implements \renderable, \templatable {
      * Contructor
      *
      * @param string $id The id of the RSS item
-     * @param \moodle_url $link The URL of the RSS item
+     * @param \powereduc_url $link The URL of the RSS item
      * @param string $title The title pf the RSS item
      * @param string $description The description of the RSS item
-     * @param \moodle_url $permalink The permalink of the RSS item
+     * @param \powereduc_url $permalink The permalink of the RSS item
      * @param int $timestamp The Unix timestamp that represents the published date
      * @param boolean $showdescription Whether or not to show the description
      */
-    public function __construct($id, \moodle_url $link, $title, $description, \moodle_url $permalink, $timestamp,
+    public function __construct($id, \powereduc_url $link, $title, $description, \powereduc_url $permalink, $timestamp,
             $showdescription = true) {
         $this->id               = $id;
         $this->link             = $link;
@@ -161,10 +161,10 @@ class item implements \renderable, \templatable {
     /**
      * Set link
      *
-     * @param \moodle_url $link
+     * @param \powereduc_url $link
      * @return \block_rss_client\output\item
      */
-    public function set_link(\moodle_url $link) {
+    public function set_link(\powereduc_url $link) {
         $this->link = $link;
 
         return $this;
@@ -173,7 +173,7 @@ class item implements \renderable, \templatable {
     /**
      * Get link
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_link() {
         return $this->link;

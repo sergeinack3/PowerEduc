@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -102,7 +102,7 @@ $usersfile = tool_generator_testplan_backend::create_users_file($courseid, !empt
 $testplanfile = tool_generator_testplan_backend::create_testplan_file($courseid, $size);
 
 // One file path per line so other CLI scripts can easily parse the output.
-echo moodle_url::make_pluginfile_url(
+echo powereduc_url::make_pluginfile_url(
         $testplanfile->get_contextid(),
         $testplanfile->get_component(),
         $testplanfile->get_filearea(),
@@ -111,7 +111,7 @@ echo moodle_url::make_pluginfile_url(
         $testplanfile->get_filename()
     ) .
     PHP_EOL .
-    moodle_url::make_pluginfile_url(
+    powereduc_url::make_pluginfile_url(
         $usersfile->get_contextid(),
         $usersfile->get_component(),
         $usersfile->get_filearea(),

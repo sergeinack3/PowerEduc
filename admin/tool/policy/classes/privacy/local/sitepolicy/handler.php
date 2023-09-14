@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Site policy handler class.
  *
  * @package    tool_policy
- * @copyright  2018 Sara Arjona <sara@moodle.com>
+ * @copyright  2018 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,7 +33,7 @@ use tool_policy\policy_version;
  * Class implementation for a site policy handler.
  *
  * @package    tool_policy
- * @copyright  2018 Sara Arjona <sara@moodle.com>
+ * @copyright  2018 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class handler extends \core_privacy\local\sitepolicy\handler {
@@ -45,12 +45,12 @@ class handler extends \core_privacy\local\sitepolicy\handler {
      * allow user to view policies and accept them.
      *
      * @param bool $forguests
-     * @return moodle_url|null (returns null if site policy is not defined)
+     * @return powereduc_url|null (returns null if site policy is not defined)
      */
     public static function get_redirect_url($forguests = false) {
         // There is no redirect for guests, policies are shown in the popup, only return redirect url for the logged in users.
         if (!$forguests && api::get_current_versions_ids(policy_version::AUDIENCE_LOGGEDIN)) {
-            return new \moodle_url('/admin/tool/policy/index.php');
+            return new \powereduc_url('/admin/tool/policy/index.php');
         }
         return null;
     }
@@ -62,11 +62,11 @@ class handler extends \core_privacy\local\sitepolicy\handler {
      * the "Accept" button and call {@link self::accept()} on completion.
      *
      * @param bool $forguests
-     * @return moodle_url|null
+     * @return powereduc_url|null
      */
     public static function get_embed_url($forguests = false) {
         if (api::get_current_versions_ids($forguests ? policy_version::AUDIENCE_GUESTS : policy_version::AUDIENCE_LOGGEDIN)) {
-            return new \moodle_url('/admin/tool/policy/viewall.php');
+            return new \powereduc_url('/admin/tool/policy/viewall.php');
         }
         return null;
     }

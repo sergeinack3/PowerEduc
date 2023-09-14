@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -87,7 +87,7 @@ class enrol_manual_external extends external_api {
         // Retrieve the manual enrolment plugin.
         $enrol = enrol_get_plugin('manual');
         if (empty($enrol)) {
-            throw new moodle_exception('manualpluginnotinstalled', 'enrol_manual');
+            throw new powereduc_exception('manualpluginnotinstalled', 'enrol_manual');
         }
 
         foreach ($params['enrolments'] as $enrolment) {
@@ -105,7 +105,7 @@ class enrol_manual_external extends external_api {
                 $errorparams->roleid = $enrolment['roleid'];
                 $errorparams->courseid = $enrolment['courseid'];
                 $errorparams->userid = $enrolment['userid'];
-                throw new moodle_exception('wsusercannotassign', 'enrol_manual', '', $errorparams);
+                throw new powereduc_exception('wsusercannotassign', 'enrol_manual', '', $errorparams);
             }
 
             // Check manual enrolment plugin instance is enabled/exist.
@@ -120,7 +120,7 @@ class enrol_manual_external extends external_api {
             if (empty($instance)) {
               $errorparams = new stdClass();
               $errorparams->courseid = $enrolment['courseid'];
-              throw new moodle_exception('wsnoinstance', 'enrol_manual', $errorparams);
+              throw new powereduc_exception('wsnoinstance', 'enrol_manual', $errorparams);
             }
 
             // Check that the plugin accept enrolment (it should always the case, it's hard coded in the plugin).
@@ -129,7 +129,7 @@ class enrol_manual_external extends external_api {
                 $errorparams->roleid = $enrolment['roleid'];
                 $errorparams->courseid = $enrolment['courseid'];
                 $errorparams->userid = $enrolment['userid'];
-                throw new moodle_exception('wscannotenrol', 'enrol_manual', '', $errorparams);
+                throw new powereduc_exception('wscannotenrol', 'enrol_manual', '', $errorparams);
             }
 
             // Finally proceed the enrolment.
@@ -182,7 +182,7 @@ class enrol_manual_external extends external_api {
      * @throws coding_exception
      * @throws dml_transaction_exception
      * @throws invalid_parameter_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @throws required_capability_exception
      * @throws restricted_context_exception
      */
@@ -193,7 +193,7 @@ class enrol_manual_external extends external_api {
         $transaction = $DB->start_delegated_transaction(); // Rollback all enrolment if an error occurs.
         $enrol = enrol_get_plugin('manual');
         if (empty($enrol)) {
-            throw new moodle_exception('manualpluginnotinstalled', 'enrol_manual');
+            throw new powereduc_exception('manualpluginnotinstalled', 'enrol_manual');
         }
 
         foreach ($params['enrolments'] as $enrolment) {
@@ -202,14 +202,14 @@ class enrol_manual_external extends external_api {
             require_capability('enrol/manual:unenrol', $context);
             $instance = $DB->get_record('enrol', array('courseid' => $enrolment['courseid'], 'enrol' => 'manual'));
             if (!$instance) {
-                throw new moodle_exception('wsnoinstance', 'enrol_manual', $enrolment);
+                throw new powereduc_exception('wsnoinstance', 'enrol_manual', $enrolment);
             }
             $user = $DB->get_record('user', array('id' => $enrolment['userid']));
             if (!$user) {
                 throw new invalid_parameter_exception('User id not exist: '.$enrolment['userid']);
             }
             if (!$enrol->allow_unenrol($instance)) {
-                throw new moodle_exception('wscannotunenrol', 'enrol_manual', '', $enrolment);
+                throw new powereduc_exception('wscannotunenrol', 'enrol_manual', '', $enrolment);
             }
             $enrol->unenrol_user($instance, $enrolment['userid']);
         }

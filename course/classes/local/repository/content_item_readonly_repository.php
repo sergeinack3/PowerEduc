@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -137,7 +137,7 @@ class content_item_readonly_repository implements content_item_readonly_reposito
                 $mod->id,
                 $mod->name,
                 new lang_string_title("modulename", $mod->name),
-                new \moodle_url(''), // No course scope, so just an empty link.
+                new \powereduc_url(''), // No course scope, so just an empty link.
                 $OUTPUT->pix_icon('monologo', '', $mod->name, ['class' => 'icon activityicon']),
                 $help,
                 $archetype,
@@ -199,7 +199,7 @@ class content_item_readonly_repository implements content_item_readonly_reposito
                 $mod->id,
                 $mod->name,
                 new lang_string_title("modulename", $mod->name),
-                new \moodle_url('/course/mod.php', ['id' => $course->id, 'add' => $mod->name]),
+                new \powereduc_url('/course/mod.php', ['id' => $course->id, 'add' => $mod->name]),
                 $OUTPUT->pix_icon('monologo', '', $mod->name, ['class' => 'icon activityicon']),
                 $help,
                 $archetype,

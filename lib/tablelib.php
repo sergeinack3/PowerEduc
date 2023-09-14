@@ -1,24 +1,24 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package    core
  * @subpackage lib
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -54,8 +54,8 @@ define('TABLE_SHOW_ALL_PAGE_SIZE', 5000);
 use core_table\local\filter\filterset;
 
 /**
- * @package   moodlecore
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @package   powereduccore
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class flexible_table {
@@ -453,10 +453,10 @@ class flexible_table {
 
     /**
      * Sets $this->baseurl.
-     * @param moodle_url|string $url the url with params needed to call up this page
+     * @param powereduc_url|string $url the url with params needed to call up this page
      */
     function define_baseurl($url) {
-        $this->baseurl = new moodle_url($url);
+        $this->baseurl = new powereduc_url($url);
     }
 
     /**
@@ -856,16 +856,16 @@ class flexible_table {
     function col_fullname($row) {
         global $COURSE;
 
-        $name = fullname($row, has_capability('moodle/site:viewfullnames', $this->get_context()));
+        $name = fullname($row, has_capability('powereduc/site:viewfullnames', $this->get_context()));
         if ($this->download) {
             return $name;
         }
 
         $userid = $row->{$this->useridfield};
         if ($COURSE->id == SITEID) {
-            $profileurl = new moodle_url('/user/profile.php', array('id' => $userid));
+            $profileurl = new powereduc_url('/user/profile.php', array('id' => $userid));
         } else {
-            $profileurl = new moodle_url('/user/view.php',
+            $profileurl = new powereduc_url('/user/view.php',
                     array('id' => $userid, 'course' => $COURSE->id));
         }
         return html_writer::link($profileurl, $name);
@@ -959,7 +959,7 @@ class flexible_table {
      * @param string $title the name to put in front of this initial bar.
      * @param string $urlvar URL parameter name for this initial.
      *
-     * @deprecated since Moodle 3.3
+     * @deprecated since PowerEduc 3.3
      */
     protected function print_one_initials_bar($alpha, $current, $class, $title, $urlvar) {
 
@@ -1287,7 +1287,7 @@ class flexible_table {
 
                     if (array_search($column, $this->userfullnamecolumns) !== false) {
                         // Check the full name display for sortable fields.
-                        if (has_capability('moodle/site:viewfullnames', $this->get_context())) {
+                        if (has_capability('powereduc/site:viewfullnames', $this->get_context())) {
                             $nameformat = $CFG->alternativefullnameformat;
                         } else {
                             $nameformat = $CFG->fullnamedisplay;
@@ -1773,7 +1773,7 @@ class flexible_table {
         if (is_a($this, \core_table\dynamic::class)) {
             $output = '';
 
-            $perpageurl = new moodle_url($PAGE->url);
+            $perpageurl = new powereduc_url($PAGE->url);
 
             // Generate "Show all/Show per page" link.
             if ($this->pagesize == TABLE_SHOW_ALL_PAGE_SIZE && $this->totalrows > $this->get_default_per_page()) {
@@ -1959,8 +1959,8 @@ class flexible_table {
 
 
 /**
- * @package   moodlecore
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @package   powereduccore
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class table_sql extends flexible_table {
@@ -2024,7 +2024,7 @@ class table_sql extends flexible_table {
      */
     public function close_recordset() {
         if ($this->rawdata && ($this->rawdata instanceof \core\dml\recordset_walk ||
-                $this->rawdata instanceof moodle_recordset)) {
+                $this->rawdata instanceof powereduc_recordset)) {
             $this->rawdata->close();
             $this->rawdata = null;
         }
@@ -2145,8 +2145,8 @@ class table_sql extends flexible_table {
 
 
 /**
- * @package   moodlecore
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @package   powereduccore
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class table_default_export_format_parent {
@@ -2174,7 +2174,7 @@ class table_default_export_format_parent {
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
     public function table_default_export_format_parent(&$table) {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);

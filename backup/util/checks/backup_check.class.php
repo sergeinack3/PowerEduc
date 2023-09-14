@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage backup-factories
  * @copyright  2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -44,7 +44,7 @@ abstract class backup_check {
             throw new backup_controller_exception('backup_check_unsupported_type', $type);
         }
 
-        require_once($CFG->dirroot . '/backup/moodle2/backup_plan_builder.class.php');
+        require_once($CFG->dirroot . '/backup/powereduc2/backup_plan_builder.class.php');
     }
 
     public static function check_id($type, $id) {
@@ -110,16 +110,16 @@ abstract class backup_check {
         switch ($type) {
             case backup::TYPE_1COURSE :
                 $DB->get_record('course', array('id' => $id), '*', MUST_EXIST); // course exists
-                $typecapstocheck['moodle/backup:backupcourse'] = $coursectx;
+                $typecapstocheck['powereduc/backup:backupcourse'] = $coursectx;
                 break;
             case backup::TYPE_1SECTION :
                 $DB->get_record('course_sections', array('course' => $courseid, 'id' => $id), '*', MUST_EXIST); // sec exists
-                $typecapstocheck['moodle/backup:backupsection'] = $coursectx;
+                $typecapstocheck['powereduc/backup:backupsection'] = $coursectx;
                 break;
             case backup::TYPE_1ACTIVITY :
                 get_coursemodule_from_id(null, $id, $courseid, false, MUST_EXIST); // cm exists
                 $modulectx = context_module::instance($id);
-                $typecapstocheck['moodle/backup:backupactivity'] = $modulectx;
+                $typecapstocheck['powereduc/backup:backupactivity'] = $modulectx;
                 break;
             default :
                 throw new backup_controller_exception('backup_unknown_backup_type', $type);
@@ -129,11 +129,11 @@ abstract class backup_check {
         // other modes will perform common checks only (backupxxxx capabilities in $typecapstocheck)
         switch ($mode) {
             case backup::MODE_IMPORT:
-                if (!has_capability('moodle/backup:backuptargetimport', $coursectx, $userid)) {
+                if (!has_capability('powereduc/backup:backuptargetimport', $coursectx, $userid)) {
                     $a = new stdclass();
                     $a->userid = $userid;
                     $a->courseid = $courseid;
-                    $a->capability = 'moodle/backup:backuptargetimport';
+                    $a->capability = 'powereduc/backup:backuptargetimport';
                     throw new backup_controller_exception('backup_user_missing_capability', $a);
                 }
                 break;
@@ -151,12 +151,12 @@ abstract class backup_check {
                 }
         }
 
-        // Now, enforce 'moodle/backup:userinfo' to 'users' setting, applying changes if allowed,
+        // Now, enforce 'powereduc/backup:userinfo' to 'users' setting, applying changes if allowed,
         // else throwing exception
         $userssetting = $backup_controller->get_plan()->get_setting('users');
         $prevvalue    = $userssetting->get_value();
         $prevstatus   = $userssetting->get_status();
-        $hasusercap   = has_capability('moodle/backup:userinfo', $coursectx, $userid);
+        $hasusercap   = has_capability('powereduc/backup:userinfo', $coursectx, $userid);
 
         // If setting is enabled but user lacks permission
         if (!$hasusercap) { // If user has not the capability
@@ -165,7 +165,7 @@ abstract class backup_check {
                 $a = new stdclass();
                 $a->setting = 'users';
                 $a->value = $prevvalue;
-                $a->capability = 'moodle/backup:userinfo';
+                $a->capability = 'powereduc/backup:userinfo';
                 throw new backup_controller_exception('backup_setting_value_wrong_for_capability', $a);
 
             } else { // Can apply changes
@@ -179,12 +179,12 @@ abstract class backup_check {
             }
         }
 
-        // Now, enforce 'moodle/backup:anonymise' to 'anonymise' setting, applying changes if allowed,
+        // Now, enforce 'powereduc/backup:anonymise' to 'anonymise' setting, applying changes if allowed,
         // else throwing exception
         $anonsetting = $backup_controller->get_plan()->get_setting('anonymize');
         $prevvalue   = $anonsetting->get_value();
         $prevstatus  = $anonsetting->get_status();
-        $hasanoncap  = has_capability('moodle/backup:anonymise', $coursectx, $userid);
+        $hasanoncap  = has_capability('powereduc/backup:anonymise', $coursectx, $userid);
 
         // If setting is enabled but user lacks permission
         if (!$hasanoncap) { // If user has not the capability
@@ -193,7 +193,7 @@ abstract class backup_check {
                 $a = new stdclass();
                 $a->setting = 'anonymize';
                 $a->value = $prevvalue;
-                $a->capability = 'moodle/backup:anonymise';
+                $a->capability = 'powereduc/backup:anonymise';
                 throw new backup_controller_exception('backup_setting_value_wrong_for_capability', $a);
 
             } else { // Can apply changes
@@ -219,7 +219,7 @@ abstract class backup_check {
         // not apply to the import facility, where the activities must be always enabled
         // to be able to pick them
         if ($mode != backup::MODE_IMPORT) {
-            $hasconfigcap = has_capability('moodle/backup:configure', $coursectx, $userid);
+            $hasconfigcap = has_capability('powereduc/backup:configure', $coursectx, $userid);
             if (!$hasconfigcap) {
                 $settings = $backup_controller->get_plan()->get_settings();
                 foreach ($settings as $setting) {

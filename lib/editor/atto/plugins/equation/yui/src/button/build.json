@@ -1,7 +1,7 @@
 {
-  "name": "moodle-atto_equation-button",
+  "name": "powereduc-atto_equation-button",
   "builds": {
-    "moodle-atto_equation-button": {
+    "powereduc-atto_equation-button": {
       "jsfiles": [
         "button.js"
       ]

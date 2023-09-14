@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * specific data.  Each module must be modified to take advantage of this new feature.
  * The feature will also reset the start date of the course if necessary.
  *
- * @copyright Mark Flach and moodle.com
+ * @copyright Mark Flach and powereduc.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @package course
  */
@@ -33,14 +33,14 @@ require_once('reset_form.php');
 $id = required_param('id', PARAM_INT);
 
 if (!$course = $DB->get_record('course', array('id'=>$id))) {
-    throw new \moodle_exception("invalidcourseid");
+    throw new \powereduc_exception("invalidcourseid");
 }
 
 $PAGE->set_url('/course/reset.php', array('id'=>$id));
 $PAGE->set_pagelayout('admin');
 
 require_login($course);
-require_capability('moodle/course:reset', context_course::instance($course->id));
+require_capability('powereduc/course:reset', context_course::instance($course->id));
 
 $strreset       = get_string('reset');
 $strresetcourse = get_string('resetcourse');

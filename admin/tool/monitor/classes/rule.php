@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -95,13 +95,13 @@ class rule {
      *
      * @param int $courseid course id
      *
-     * @return \single_select|\moodle_url|string
+     * @return \single_select|\powereduc_url|string
      * @throws \coding_exception
      */
     public function get_subscribe_options($courseid) {
         global $CFG;
 
-        $url = new \moodle_url($CFG->wwwroot. '/admin/tool/monitor/index.php', array(
+        $url = new \powereduc_url($CFG->wwwroot. '/admin/tool/monitor/index.php', array(
             'courseid' => $courseid,
             'ruleid' => $this->id,
             'action' => 'subscribe',

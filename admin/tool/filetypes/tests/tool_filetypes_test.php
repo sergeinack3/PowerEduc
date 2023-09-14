@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ class tool_filetypes_test extends advanced_testcase {
      * Tests is_extension_invalid() function.
      */
     public function test_is_extension_invalid() {
-        // The pdf file extension already exists in default moodle minetypes.
+        // The pdf file extension already exists in default powereduc minetypes.
         $this->assertTrue(utils::is_extension_invalid('pdf'));
 
         // The frog extension does not.

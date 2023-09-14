@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -40,11 +40,11 @@ function tool_lp_extend_navigation_user($navigation, $user, $usercontext, $cours
 
     if (\core_competency\plan::can_read_user($user->id)) {
         $node = $navigation->add(get_string('learningplans', 'tool_lp'),
-            new moodle_url('/admin/tool/lp/plans.php', array('userid' => $user->id)));
+            new powereduc_url('/admin/tool/lp/plans.php', array('userid' => $user->id)));
 
         if (\core_competency\user_evidence::can_read_user($user->id)) {
             $node->add(get_string('userevidence', 'tool_lp'),
-                new moodle_url('/admin/tool/lp/user_evidence_list.php', array('userid' => $user->id)));
+                new powereduc_url('/admin/tool/lp/user_evidence_list.php', array('userid' => $user->id)));
         }
     }
 
@@ -67,7 +67,7 @@ function tool_lp_myprofile_navigation(core_user\output\myprofile\tree $tree, $us
         return false;
     }
 
-    $url = new moodle_url('/admin/tool/lp/plans.php', array('userid' => $user->id));
+    $url = new powereduc_url('/admin/tool/lp/plans.php', array('userid' => $user->id));
     $node = new core_user\output\myprofile\node('miscellaneous', 'learningplans',
                                                 get_string('learningplans', 'tool_lp'), null, $url);
     $tree->add_node($node);
@@ -96,7 +96,7 @@ function tool_lp_extend_navigation_category_settings($navigation, $coursecategor
     // The link to the learning plan page.
     if ($templatereadcapability) {
         $title = get_string('templates', 'tool_lp');
-        $path = new moodle_url("/admin/tool/lp/learningplans.php", array('pagecontextid' => $coursecategorycontext->id));
+        $path = new powereduc_url("/admin/tool/lp/learningplans.php", array('pagecontextid' => $coursecategorycontext->id));
         $settingsnode = navigation_node::create($title,
                                                 $path,
                                                 navigation_node::TYPE_SETTING,
@@ -112,7 +112,7 @@ function tool_lp_extend_navigation_category_settings($navigation, $coursecategor
     // The link to the competency frameworks page.
     if ($competencyreadcapability) {
         $title = get_string('competencyframeworks', 'tool_lp');
-        $path = new moodle_url("/admin/tool/lp/competencyframeworks.php", array('pagecontextid' => $coursecategorycontext->id));
+        $path = new powereduc_url("/admin/tool/lp/competencyframeworks.php", array('pagecontextid' => $coursecategorycontext->id));
         $settingsnode = navigation_node::create($title,
                                                 $path,
                                                 navigation_node::TYPE_SETTING,
@@ -127,9 +127,9 @@ function tool_lp_extend_navigation_category_settings($navigation, $coursecategor
 }
 
 /**
- * Inject the competencies elements into all moodle module settings forms.
+ * Inject the competencies elements into all powereduc module settings forms.
  *
- * @param moodleform $formwrapper The moodle quickforms wrapper object.
+ * @param powereducform $formwrapper The powereduc quickforms wrapper object.
  * @param MoodleQuickForm $mform The actual form object (required to modify the form).
  */
 function tool_lp_coursemodule_standard_elements($formwrapper, $mform) {
@@ -137,7 +137,7 @@ function tool_lp_coursemodule_standard_elements($formwrapper, $mform) {
 
     if (!get_config('core_competency', 'enabled')) {
         return;
-    } else if (!has_capability('moodle/competency:coursecompetencymanage', $formwrapper->get_context())) {
+    } else if (!has_capability('powereduc/competency:coursecompetencymanage', $formwrapper->get_context())) {
         return;
     }
 
@@ -273,7 +273,7 @@ function tool_lp_competency_picker($mform, $courseid, $context, $elementname) {
     }
 
     if ($courseid == SITEID) {
-        if (!has_capability('moodle/competency:competencymanage', $context)) {
+        if (!has_capability('powereduc/competency:competencymanage', $context)) {
             return;
         }
 
@@ -282,7 +282,7 @@ function tool_lp_competency_picker($mform, $courseid, $context, $elementname) {
                                              'tool_lp_site_competencies_form_element');
         $mform->addElement('site_competencies', $elementname);
     } else {
-        if (!has_capability('moodle/competency:coursecompetencymanage', $context)) {
+        if (!has_capability('powereduc/competency:coursecompetencymanage', $context)) {
             return;
         }
 

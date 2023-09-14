@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * This file gives information about Moodle Services
  *
  * @package    core
- * @copyright  2018 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2018 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,26 +27,26 @@ defined('POWEREDUC_INTERNAL') || die();
 if ($hassiteconfig) {
 
     // Create Moodle Services information.
-    $moodleservices->add(new admin_setting_heading('moodleservicesintro', '',
-        new lang_string('moodleservices_help', 'admin')));
+    $powereducservices->add(new admin_setting_heading('powereducservicesintro', '',
+        new lang_string('powereducservices_help', 'admin')));
 
     // Moodle Partners information.
     if (empty($CFG->disableserviceads_partner)) {
-        $moodleservices->add(new admin_setting_heading('moodlepartners',
-            new lang_string('moodlepartners', 'admin'),
-            new lang_string('moodlepartners_help', 'admin')));
+        $powereducservices->add(new admin_setting_heading('powereducpartners',
+            new lang_string('powereducpartners', 'admin'),
+            new lang_string('powereducpartners_help', 'admin')));
     }
 
     // Moodle app information.
-    $moodleservices->add(new admin_setting_heading('moodleapp',
-        new lang_string('moodleapp', 'admin'),
-        new lang_string('moodleapp_help', 'admin')));
+    $powereducservices->add(new admin_setting_heading('powereducapp',
+        new lang_string('powereducapp', 'admin'),
+        new lang_string('powereducapp_help', 'admin')));
 
     // Branded Moodle app information.
     if (empty($CFG->disableserviceads_branded)) {
-        $moodleservices->add(new admin_setting_heading('moodlebrandedapp',
-            new lang_string('moodlebrandedapp', 'admin'),
-            new lang_string('moodlebrandedapp_help', 'admin')));
+        $powereducservices->add(new admin_setting_heading('powereducbrandedapp',
+            new lang_string('powereducbrandedapp', 'admin'),
+            new lang_string('powereducbrandedapp_help', 'admin')));
     }
 }
 

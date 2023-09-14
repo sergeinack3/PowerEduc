@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,8 +33,8 @@ use core_privacy\local\request\approved_contextlist;
 use core_privacy\local\request\contextlist_collection;
 use core_user;
 use dml_exception;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use required_capability_exception;
 use stdClass;
 use tool_dataprivacy\external\data_request_exporter;
@@ -620,7 +620,7 @@ class api {
      * @throws dml_exception
      * @throws invalid_persistent_exception
      * @throws required_capability_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function approve_data_request($requestid) {
         global $USER;
@@ -634,7 +634,7 @@ class api {
         // Check if request is already awaiting for approval.
         $request = new data_request($requestid);
         if ($request->get('status') != self::DATAREQUEST_STATUS_AWAITING_APPROVAL) {
-            throw new moodle_exception('errorrequestnotwaitingforapproval', 'tool_dataprivacy');
+            throw new powereduc_exception('errorrequestnotwaitingforapproval', 'tool_dataprivacy');
         }
 
         // Check if current user has permission to approve delete data request.
@@ -665,7 +665,7 @@ class api {
      * @throws dml_exception
      * @throws invalid_persistent_exception
      * @throws required_capability_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function deny_data_request($requestid) {
         global $USER;
@@ -678,7 +678,7 @@ class api {
         // Check if request is already awaiting for approval.
         $request = new data_request($requestid);
         if ($request->get('status') != self::DATAREQUEST_STATUS_AWAITING_APPROVAL) {
-            throw new moodle_exception('errorrequestnotwaitingforapproval', 'tool_dataprivacy');
+            throw new powereduc_exception('errorrequestnotwaitingforapproval', 'tool_dataprivacy');
         }
 
         // Check if current user has permission to reject delete data request.
@@ -698,7 +698,7 @@ class api {
      * @param data_request $request The data request
      * @return int|false
      * @throws coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function notify_dpo($dpo, data_request $request) {
         global $PAGE, $SITE;
@@ -715,7 +715,7 @@ class api {
         $subject = get_string('datarequestemailsubject', 'tool_dataprivacy', $typetext);
 
         $requestedby = $requestdata->requestedbyuser;
-        $datarequestsurl = new moodle_url('/admin/tool/dataprivacy/datarequests.php');
+        $datarequestsurl = new powereduc_url('/admin/tool/dataprivacy/datarequests.php');
         $message = new message();
         $message->courseid          = $SITE->id;
         $message->component         = 'tool_dataprivacy';
@@ -735,7 +735,7 @@ class api {
             'requesttype' => $typetext,
             'requestdate' => userdate($requestdata->timecreated),
             'requestorigin' => format_string($SITE->fullname, true, ['context' => context_system::instance()]),
-            'requestoriginurl' => new moodle_url('/'),
+            'requestoriginurl' => new powereduc_url('/'),
             'requestcomments' => $requestdata->messagehtml,
             'datarequestsurl' => $datarequestsurl
         ];
@@ -883,7 +883,7 @@ class api {
      * @throws coding_exception
      */
     public static function get_download_link(\context_user $usercontext, $requestid) {
-        $downloadurl = moodle_url::make_pluginfile_url($usercontext->id,
+        $downloadurl = powereduc_url::make_pluginfile_url($usercontext->id,
                 'tool_dataprivacy', 'export', $requestid, '/', 'export.zip', true);
         $downloadtext = get_string('download', 'tool_dataprivacy');
         return new \action_menu_link_secondary($downloadurl, null, $downloadtext);
@@ -930,7 +930,7 @@ class api {
     public static function delete_purpose($id) {
         $purpose = new purpose($id);
         if ($purpose->is_used()) {
-            throw new \moodle_exception('Purpose with id ' . $id . ' can not be deleted because it is used.');
+            throw new \powereduc_exception('Purpose with id ' . $id . ' can not be deleted because it is used.');
         }
         return $purpose->delete();
     }
@@ -981,7 +981,7 @@ class api {
     public static function delete_category($id) {
         $category = new category($id);
         if ($category->is_used()) {
-            throw new \moodle_exception('Category with id ' . $id . ' can not be deleted because it is used.');
+            throw new \powereduc_exception('Category with id ' . $id . ' can not be deleted because it is used.');
         }
         return $category->delete();
     }
@@ -1300,11 +1300,11 @@ class api {
     public static function format_retention_period(\DateInterval $interval) : string {
         // It is one or another.
         if ($interval->y) {
-            $formattedtime = get_string('numyears', 'moodle', $interval->format('%y'));
+            $formattedtime = get_string('numyears', 'powereduc', $interval->format('%y'));
         } else if ($interval->m) {
-            $formattedtime = get_string('nummonths', 'moodle', $interval->format('%m'));
+            $formattedtime = get_string('nummonths', 'powereduc', $interval->format('%m'));
         } else if ($interval->d) {
-            $formattedtime = get_string('numdays', 'moodle', $interval->format('%d'));
+            $formattedtime = get_string('numdays', 'powereduc', $interval->format('%d'));
         } else {
             $formattedtime = get_string('retentionperiodzero', 'tool_dataprivacy');
         }

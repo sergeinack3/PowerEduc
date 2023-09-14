@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Generic temptables object store
@@ -39,18 +39,18 @@
 
 defined('POWEREDUC_INTERNAL') || die();
 
-class moodle_temptables {
+class powereduc_temptables {
 
     /** @var circular reference, to be able to use DB facilities here if needed */
     protected $mdb;
     /** @var prefix to be used for all the DB objects */
     protected $prefix;
-    /** @var simple array of moodle, not prefixed 'tablename' => DB, final (prefixed) 'tablename' */
+    /** @var simple array of powereduc, not prefixed 'tablename' => DB, final (prefixed) 'tablename' */
     protected $temptables;
 
     /**
-     * Creates new moodle_temptables instance
-     * @param moodle_database $mdb An instance of moodle_database.
+     * Creates new powereduc_temptables instance
+     * @param powereduc_database $mdb An instance of powereduc_database.
      */
     public function __construct($mdb) {
         $this->mdb        = $mdb;
@@ -61,8 +61,8 @@ class moodle_temptables {
     /**
      * Add one temptable to the store
      *
-     * Given one moodle temptable name (without prefix), add it to the store, with the
-     * key being the original moodle name and the value being the real db temptable name
+     * Given one powereduc temptable name (without prefix), add it to the store, with the
+     * key being the original powereduc name and the value being the real db temptable name
      * already prefixed
      *
      * Override and use this *only* if the database requires modification in the table name.

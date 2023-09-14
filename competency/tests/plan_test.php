@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -40,8 +40,8 @@ class plan_test extends \advanced_testcase {
         $u2context = \context_user::instance($u2->id);
         $u3context = \context_user::instance($u3->id);
 
-        assign_capability('moodle/competency:planmanage', CAP_ALLOW, $manage, $syscontext->id);
-        assign_capability('moodle/competency:planmanageown', CAP_ALLOW, $manageown, $u2context->id);
+        assign_capability('powereduc/competency:planmanage', CAP_ALLOW, $manage, $syscontext->id);
+        assign_capability('powereduc/competency:planmanageown', CAP_ALLOW, $manageown, $u2context->id);
 
         role_assign($manage, $u1->id, $syscontext->id);
         role_assign($manageown, $u2->id, $syscontext->id);
@@ -85,10 +85,10 @@ class plan_test extends \advanced_testcase {
         $u4context = \context_user::instance($u4->id);
         $u5context = \context_user::instance($u5->id);
 
-        assign_capability('moodle/competency:planmanage', CAP_ALLOW, $manage, $syscontext->id);
-        assign_capability('moodle/competency:planmanageown', CAP_ALLOW, $manageown, $syscontext->id);
-        assign_capability('moodle/competency:planmanagedraft', CAP_ALLOW, $managedraft, $syscontext->id);
-        assign_capability('moodle/competency:planmanageowndraft', CAP_ALLOW, $manageowndraft, $syscontext->id);
+        assign_capability('powereduc/competency:planmanage', CAP_ALLOW, $manage, $syscontext->id);
+        assign_capability('powereduc/competency:planmanageown', CAP_ALLOW, $manageown, $syscontext->id);
+        assign_capability('powereduc/competency:planmanagedraft', CAP_ALLOW, $managedraft, $syscontext->id);
+        assign_capability('powereduc/competency:planmanageowndraft', CAP_ALLOW, $manageowndraft, $syscontext->id);
 
         role_assign($manage, $u1->id, $syscontext->id);
         role_assign($manageown, $u2->id, $syscontext->id);
@@ -148,8 +148,8 @@ class plan_test extends \advanced_testcase {
         $u2context = \context_user::instance($u2->id);
         $u3context = \context_user::instance($u3->id);
 
-        assign_capability('moodle/competency:planview', CAP_ALLOW, $read, $syscontext->id);
-        assign_capability('moodle/competency:planviewown', CAP_ALLOW, $readown, $u2context->id);
+        assign_capability('powereduc/competency:planview', CAP_ALLOW, $read, $syscontext->id);
+        assign_capability('powereduc/competency:planviewown', CAP_ALLOW, $readown, $u2context->id);
 
         role_assign($read, $u1->id, $syscontext->id);
         role_assign($readown, $u2->id, $syscontext->id);
@@ -193,11 +193,11 @@ class plan_test extends \advanced_testcase {
         $u4context = \context_user::instance($u4->id);
         $u5context = \context_user::instance($u5->id);
 
-        assign_capability('moodle/competency:planview', CAP_ALLOW, $read, $syscontext->id);
-        assign_capability('moodle/competency:planviewown', CAP_ALLOW, $readown, $syscontext->id);
-        assign_capability('moodle/competency:planviewdraft', CAP_ALLOW, $readdraft, $syscontext->id);
-        assign_capability('moodle/competency:planviewowndraft', CAP_ALLOW, $readowndraft, $syscontext->id);
-        assign_capability('moodle/competency:planviewown', CAP_PROHIBIT, $readowndraft, $syscontext->id);
+        assign_capability('powereduc/competency:planview', CAP_ALLOW, $read, $syscontext->id);
+        assign_capability('powereduc/competency:planviewown', CAP_ALLOW, $readown, $syscontext->id);
+        assign_capability('powereduc/competency:planviewdraft', CAP_ALLOW, $readdraft, $syscontext->id);
+        assign_capability('powereduc/competency:planviewowndraft', CAP_ALLOW, $readowndraft, $syscontext->id);
+        assign_capability('powereduc/competency:planviewown', CAP_PROHIBIT, $readowndraft, $syscontext->id);
 
         role_assign($read, $u1->id, $syscontext->id);
         role_assign($readown, $u2->id, $syscontext->id);

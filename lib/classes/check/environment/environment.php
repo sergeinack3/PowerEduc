@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Environment check
@@ -55,7 +55,7 @@ class environment extends check {
      */
     public function get_action_link(): ?\action_link {
         return new \action_link(
-            new \moodle_url('/admin/environment.php'),
+            new \powereduc_url('/admin/environment.php'),
             get_string('environment', 'admin'));
     }
 
@@ -67,7 +67,7 @@ class environment extends check {
         global $CFG;
 
         require_once($CFG->libdir.'/environmentlib.php');
-        list($status, $details) = check_moodle_environment($CFG->release, ENV_SELECT_NEWER);
+        list($status, $details) = check_powereduc_environment($CFG->release, ENV_SELECT_NEWER);
 
         if ($status) {
             $summary = get_string('environmentok', 'admin');

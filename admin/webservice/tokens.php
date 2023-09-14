@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - https://moodle.org/
+// This file is part of Moodle - https://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ admin_externalpage_setup('webservicetokens');
 
 $PAGE->set_primary_active_tab('siteadminnode');
 $PAGE->navbar->add(get_string('managetokens', 'webservice'),
-    new moodle_url('/admin/webservice/tokens.php'));
+    new powereduc_url('/admin/webservice/tokens.php'));
 
 if ($action === 'create') {
     $PAGE->navbar->add(get_string('createtoken', 'webservice'), $PAGE->url);
@@ -91,7 +91,7 @@ if ($action === 'delete') {
     $token = $webservicemanager->get_token_by_id_with_details($tokenid);
 
     if ($token->creatorid != $USER->id) {
-        require_capability('moodle/webservice:managealltokens', context_system::instance());
+        require_capability('powereduc/webservice:managealltokens', context_system::instance());
     }
 
     if ($confirm && confirm_sesskey()) {
@@ -106,7 +106,7 @@ if ($action === 'delete') {
             'user' => $token->firstname . ' ' . $token->lastname,
             'service' => $token->name,
         ]),
-        new single_button(new moodle_url('/admin/webservice/tokens.php', [
+        new single_button(new powereduc_url('/admin/webservice/tokens.php', [
             'tokenid' => $token->id,
             'action' => 'delete',
             'confirm' => 1,
@@ -142,7 +142,7 @@ if ($filter->is_submitted()) {
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('managetokens', 'core_webservice'));
 
-echo html_writer::div($OUTPUT->render(new single_button(new moodle_url($PAGE->url, ['action' => 'create']),
+echo html_writer::div($OUTPUT->render(new single_button(new powereduc_url($PAGE->url, ['action' => 'create']),
     get_string('createtoken', 'core_webservice'), 'get', true)), 'my-3');
 
 $filter->display();
@@ -150,7 +150,7 @@ $filter->display();
 $table = new \core_webservice\token_table('webservicetokens', $filterdata);
 
 // In order to not lose the filter form values by clicking the table control links, make them part of the table's baseurl.
-$baseurl = new moodle_url($PAGE->url, ['ftoken' => $filterdata->token]);
+$baseurl = new powereduc_url($PAGE->url, ['ftoken' => $filterdata->token]);
 
 foreach ($filterdata->users as $i => $userid) {
     $baseurl->param("fusers[{$i}]", $userid);

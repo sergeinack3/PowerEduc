@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,10 +31,10 @@ interface action_factory_interface {
      * Creates an instance of an action.
      *
      * @param string      $name       The action's name.
-     * @param \moodle_url $url        The action's URL.
+     * @param \powereduc_url $url        The action's URL.
      * @param int         $itemcount  The number of items needing action.
      * @param bool        $actionable The action's actionability.
      * @return \core_calendar\local\event\entities\action_interface The action.
      */
-    public function create_instance($name, \moodle_url $url, $itemcount, $actionable);
+    public function create_instance($name, \powereduc_url $url, $itemcount, $actionable);
 }

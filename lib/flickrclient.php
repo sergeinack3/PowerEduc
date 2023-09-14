@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Provides {@link flickr_client} class.
  *
  * @package     core
- * @copyright   2017 David Mudrák <david@moodle.com>
+ * @copyright   2017 David Mudrák <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,9 +27,9 @@ defined('POWEREDUC_INTERNAL') || die();
 require_once($CFG->libdir.'/oauthlib.php');
 
 /**
- * Simple Flickr API client implementing the features needed by Moodle
+ * Simple Flickr API client implementing the features needed by PowerEduc
  *
- * @copyright 2017 David Mudrak <david@moodle.com>
+ * @copyright 2017 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class flickr_client extends oauth_helper {
@@ -57,7 +57,7 @@ class flickr_client extends oauth_helper {
      *
      * @param string $consumerkey
      * @param string $consumersecret
-     * @param moodle_url|string $callbackurl
+     * @param powereduc_url|string $callbackurl
      */
     public function __construct($consumerkey, $consumersecret, $callbackurl = '') {
         parent::__construct([
@@ -73,16 +73,16 @@ class flickr_client extends oauth_helper {
 
     /**
      * Return User-Agent string suitable for calls to Flickr endpoint, avoiding problems caused by the string returned by
-     * the {@see core_useragent::get_moodlebot_useragent} helper, which is often rejected due to presence of "Bot" within
+     * the {@see core_useragent::get_powereducbot_useragent} helper, which is often rejected due to presence of "Bot" within
      *
      * @return string
      */
     public static function user_agent(): string {
         global $CFG;
 
-        $version = moodle_major_version();
+        $version = powereduc_major_version();
 
-        return "MoodleSite/{$version} (+{$CFG->wwwroot})";
+        return "PowerEducSite/{$version} (+{$CFG->wwwroot})";
     }
 
     /**
@@ -154,7 +154,7 @@ class flickr_client extends oauth_helper {
         $response = json_decode($rawresponse);
 
         if (!is_object($response) || !isset($response->stat)) {
-            throw new moodle_exception('flickr_api_call_failed', 'core_error', '', $rawresponse);
+            throw new powereduc_exception('flickr_api_call_failed', 'core_error', '', $rawresponse);
         }
 
         if ($response->stat === 'ok') {
@@ -165,7 +165,7 @@ class flickr_client extends oauth_helper {
             return false;
 
         } else {
-            throw new moodle_exception('flickr_api_call_failed', 'core_error', '', $response);
+            throw new powereduc_exception('flickr_api_call_failed', 'core_error', '', $response);
         }
 
         return $response;
@@ -212,7 +212,7 @@ class flickr_client extends oauth_helper {
     }
 
     /**
-     * Upload a photo from Moodle file pool to Flickr.
+     * Upload a photo from PowerEduc file pool to Flickr.
      *
      * Optional meta information are title, description, tags, is_public,
      * is_friend, is_family, safety_level, content_type and hidden.
@@ -222,7 +222,7 @@ class flickr_client extends oauth_helper {
      * photo ID which we need to add the photo to a photoset (album)
      * eventually.
      *
-     * @param stored_file $photo stored in Moodle file pool
+     * @param stored_file $photo stored in PowerEduc file pool
      * @param array $meta optional meta information
      * @return int|bool photo id, false on authentication failure
      */
@@ -261,12 +261,12 @@ class flickr_client extends oauth_helper {
                 return false;
 
             } else {
-                throw new moodle_exception('flickr_upload_failed', 'core_error', '',
+                throw new powereduc_exception('flickr_upload_failed', 'core_error', '',
                     ['code' => (int)$xml->err['code'], 'message' => (string)$xml->err['msg']]);
             }
 
         } else {
-            throw new moodle_exception('flickr_upload_error', 'core_error', '', null, $response);
+            throw new powereduc_exception('flickr_upload_error', 'core_error', '', null, $response);
         }
     }
 

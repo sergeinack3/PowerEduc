@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@
                            $CFG->wwwroot.'/grade/edit/letter/index.php?id='.$COURSE->id,
                            get_string('letters', 'grades'));
 
-    if (has_capability('moodle/grade:manageletters', $context)) {
+    if (has_capability('powereduc/grade:manageletters', $context)) {
         $row[] = new tabobject('lettersedit',
                                $CFG->wwwroot.'/grade/edit/letter/edit.php?id='.$context->id,
                                get_string('edit'));

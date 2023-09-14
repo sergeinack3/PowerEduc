@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains class mod_feedback_completion
@@ -108,7 +108,7 @@ class mod_feedback_completion extends mod_feedback_structure {
      * Check if the feedback was just completed.
      *
      * @return bool true if the feedback was just completed.
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function just_completed() {
         return $this->justcompleted;
@@ -118,7 +118,7 @@ class mod_feedback_completion extends mod_feedback_structure {
      * Return the jumpto property.
      *
      * @return int the next page to jump.
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function get_jumpto() {
         return $this->jumpto;
@@ -233,7 +233,7 @@ class mod_feedback_completion extends mod_feedback_structure {
      * Retrieves responses from an unfinished attempt.
      *
      * @return array the responses (from the feedback_valuetmp table)
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function get_unfinished_responses() {
         global $DB;
@@ -270,7 +270,7 @@ class mod_feedback_completion extends mod_feedback_structure {
      * Retrieves responses from an finished attempt.
      *
      * @return array the responses (from the feedback_value table)
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function get_finished_responses() {
         global $DB;
@@ -671,7 +671,7 @@ class mod_feedback_completion extends mod_feedback_structure {
     /**
      * Trigger module viewed event.
      *
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public function trigger_module_viewed() {
         $event = \mod_feedback\event\course_module_viewed::create_from_record($this->feedback, $this->cm, $this->cm->get_course());
@@ -681,7 +681,7 @@ class mod_feedback_completion extends mod_feedback_structure {
     /**
      * Mark activity viewed for completion-tracking.
      *
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public function set_module_viewed() {
         global $CFG;
@@ -699,7 +699,7 @@ class mod_feedback_completion extends mod_feedback_structure {
      * @param  int $gopage         the current page
      * @param  int $gopreviouspage if the user chose to go to the previous page
      * @return string the url to redirect the user (if any)
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function process_page($gopage, $gopreviouspage = false) {
         global $CFG, $PAGE, $SESSION;
@@ -750,7 +750,7 @@ class mod_feedback_completion extends mod_feedback_structure {
      * Render the form with the questions.
      *
      * @return string the form rendered
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public function render_items() {
         global $SESSION;

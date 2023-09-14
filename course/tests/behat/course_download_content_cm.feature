@@ -57,7 +57,7 @@ Feature: Activities content download can be controlled
     And I log in as "admin"
     When I set the following system permissions of "Manager" role:
       | capability                             | permission |
-      | moodle/course:configuredownloadcontent | Prohibit   |
+      | powereduc/course:configuredownloadcontent | Prohibit   |
     And I log out
     And I log in as "manager1"
     And I am on the Folder1 "Folder Activity editing" page

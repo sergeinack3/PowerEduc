@@ -1,7 +1,7 @@
 {
-    "moodle-atto_underline-button": {
+    "powereduc-atto_underline-button": {
         "requires": [
-            "moodle-editor_atto-plugin"
+            "powereduc-editor_atto-plugin"
         ]
     }
 }

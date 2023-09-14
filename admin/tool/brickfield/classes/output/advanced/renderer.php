@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ class renderer extends \tool_brickfield\output\renderer {
      * @param \stdClass $data Report data.
      * @param filter $filter Display filters.
      * @return String HTML showing charts.
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public function display(\stdClass $data, filter $filter): string {
         return $this->render_from_template(manager::PLUGINNAME . '/advanced', $data);

@@ -23,7 +23,7 @@ Default search input.
 </div>
 {{< mustache template="core/search_input" >}}
     {
-        "action": "https://moodle.local/admin/search.php",
+        "action": "https://powereduc.local/admin/search.php",
         "extraclasses": "my-2",
         "inputname": "search",
         "inform": false,
@@ -41,7 +41,7 @@ Emphasized search input using .btn-primary
 </div>
 {{< mustache template="core/search_input" >}}
     {
-        "action": "https://moodle.local/admin/search.php",
+        "action": "https://powereduc.local/admin/search.php",
         "extraclasses": "my-2",
         "uniqid": "Unique string",
         "inputname": "search",
@@ -99,7 +99,7 @@ This search option is used when the search imput immediately triggers updating d
 
 {{< mustache template="core/search_input_navbar" >}}
     {
-        "action": "https://moodle.local/admin/search.php",
+        "action": "https://powereduc.local/admin/search.php",
         "inputname": "search",
         "searchstring": "Search",
         "hiddenfields": [

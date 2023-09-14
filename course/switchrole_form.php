@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ require_once($CFG->libdir.'/formslib.php');
 /**
  * Defines the course completion settings form.
  */
-class switchrole_form extends moodleform {
+class switchrole_form extends powereducform {
 
     /**
      * Determine whether the user is assuming another role

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,14 +28,14 @@ require_once($CFG->libdir.'/adminlib.php');
 $pagecontextid = required_param('pagecontextid', PARAM_INT);
 $context = context::instance_by_id($pagecontextid);
 
-$url = new moodle_url("/admin/tool/lp/competencyframeworks.php");
+$url = new powereduc_url("/admin/tool/lp/competencyframeworks.php");
 $url->param('pagecontextid', $pagecontextid);
 
 require_login(null, false);
 \core_competency\api::require_enabled();
 
 if (!\core_competency\competency_framework::can_read_context($context)) {
-    throw new required_capability_exception($context, 'moodle/competency:competencyview', 'nopermissions', '');
+    throw new required_capability_exception($context, 'powereduc/competency:competencyview', 'nopermissions', '');
 }
 
 $title = get_string('competencies', 'core_competency');

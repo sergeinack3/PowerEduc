@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -178,7 +178,7 @@ M.course_dndupload = {
         if (handlelink) {
             $msgident += 'link';
         }
-        div.setContent(M.util.get_string($msgident, 'moodle'));
+        div.setContent(M.util.get_string($msgident, 'powereduc'));
 
         styletop = div.getStyle('top') || '0px';
         styletopunit = styletop.replace(/^\d+/, '');
@@ -351,7 +351,7 @@ M.course_dndupload = {
                 }
                 return {
                     realtype: 'Files',
-                    addmessage: M.util.get_string('addfilehere', 'moodle'),
+                    addmessage: M.util.get_string('addfilehere', 'powereduc'),
                     namemessage: null, // Should not be asked for anyway
                     type: 'Files'
                 };
@@ -637,7 +637,7 @@ M.course_dndupload = {
         preview.div.appendChild(document.createTextNode(' '));
         preview.iconSpan.className = 'fa fa-arrow-circle-o-down';
         preview.nameSpan.className = 'instancename';
-        preview.nameSpan.innerHTML = M.util.get_string('addfilehere', 'moodle');
+        preview.nameSpan.innerHTML = M.util.get_string('addfilehere', 'powereduc');
         preview.div.appendChild(preview.iconSpan);
         preview.div.appendChild(preview.nameSpan);
 
@@ -748,7 +748,7 @@ M.course_dndupload = {
         } else {
             sel = handlers[0].module;
         }
-        content += '<p>'+M.util.get_string('actionchoice', 'moodle', file.name)+'</p>';
+        content += '<p>'+M.util.get_string('actionchoice', 'powereduc', file.name)+'</p>';
         content += '<div id="dndupload_handlers'+uploadid+'">';
         for (var i=0; i<handlers.length; i++) {
             var id = 'dndupload_handler'+uploadid+handlers[i].module;
@@ -784,7 +784,7 @@ M.course_dndupload = {
 
         // Add the submit/cancel buttons to the bottom of the dialog.
         panel.addButton({
-            label: M.util.get_string('upload', 'moodle'),
+            label: M.util.get_string('upload', 'powereduc'),
             action: function(e) {
                 e.preventDefault();
                 // Find out which module was selected
@@ -807,7 +807,7 @@ M.course_dndupload = {
             section: Y.WidgetStdMod.FOOTER
         });
         panel.addButton({
-            label: M.util.get_string('cancel', 'moodle'),
+            label: M.util.get_string('cancel', 'powereduc'),
             action: function(e) {
                 e.preventDefault();
                 panel.hide();
@@ -854,7 +854,7 @@ M.course_dndupload = {
         var self = this;
 
         if (this.maxbytes > 0 && file.size > this.maxbytes) {
-            new M.core.alert({message: M.util.get_string('namedfiletoolarge', 'moodle', {filename: file.name})});
+            new M.core.alert({message: M.util.get_string('namedfiletoolarge', 'powereduc', {filename: file.name})});
             return;
         }
 
@@ -905,7 +905,7 @@ M.course_dndupload = {
                         }
                     }
                 } else {
-                    new M.core.alert({message: M.util.get_string('servererror', 'moodle')});
+                    new M.core.alert({message: M.util.get_string('servererror', 'powereduc')});
                 }
                 // Trigger form upload complete events.
                 require(['core_form/events'], function(FormEvent) {
@@ -921,7 +921,7 @@ M.course_dndupload = {
         } catch (e) {
             // Edge throws an error at this point if we try to upload a folder.
             resel.parent.removeChild(resel.li);
-            new M.core.alert({message: M.util.get_string('filereaderror', 'moodle', file.name)});
+            new M.core.alert({message: M.util.get_string('filereaderror', 'powereduc', file.name)});
             return;
         }
         formData.append('sesskey', M.cfg.sesskey);
@@ -940,7 +940,7 @@ M.course_dndupload = {
         reader.onerror = function() {
             // Unable to read the file (it is probably a folder) - display an error message.
             resel.parent.removeChild(resel.li);
-            new M.core.alert({message: M.util.get_string('filereaderror', 'moodle', file.name)});
+            new M.core.alert({message: M.util.get_string('filereaderror', 'powereduc', file.name)});
         };
         if (file.size > 0) {
             // If this is a non-empty file, try reading the first few bytes.
@@ -1067,13 +1067,13 @@ M.course_dndupload = {
 
         // Add the submit/cancel buttons to the bottom of the dialog.
         panel.addButton({
-            label: M.util.get_string('upload', 'moodle'),
+            label: M.util.get_string('upload', 'powereduc'),
             action: submit,
             section: Y.WidgetStdMod.FOOTER,
             name: 'submit'
         });
         panel.addButton({
-            label: M.util.get_string('cancel', 'moodle'),
+            label: M.util.get_string('cancel', 'powereduc'),
             action: function(e) {
                 e.preventDefault();
                 panel.hide();
@@ -1177,7 +1177,7 @@ M.course_dndupload = {
                     require(['core_form/events'], function(FormEvent) {
                         FormEvent.notifyUploadCompleted(section.get('id'));
                     });
-                    new M.core.alert({message: M.util.get_string('servererror', 'moodle')});
+                    new M.core.alert({message: M.util.get_string('servererror', 'powereduc')});
                 }
                 // Trigger form upload complete events.
                 require(['core_form/events'], function(FormEvent) {
@@ -1209,7 +1209,7 @@ M.course_dndupload = {
      */
     add_editing: function(elementid) {
         var node = Y.one('#' + elementid);
-        YUI().use('moodle-course-coursebase', function(Y) {
+        YUI().use('powereduc-course-coursebase', function(Y) {
             Y.log("Invoking setup_for_resource", 'debug', 'coursedndupload');
             M.course.coursebase.invoke_function('setup_for_resource', node);
         });

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -89,7 +89,7 @@ class export_test extends \advanced_testcase {
             'Has server based video with text and more (HTML)' => [
                 '<p>See <video src="@@PLUGINFILE@@/test.img">@@PLUGINFILE@@/test.img</video> for <em>reference</em></p>',
                 FORMAT_HTML,
-                "See https://www.example.com/moodle/pluginfile.php/$contextid/grade/feedback/$gradeid/test.img for reference"
+                "See https://www.example.com/powereduc/pluginfile.php/$contextid/grade/feedback/$gradeid/test.img for reference"
             ],
             'Multiple videos (HTML)' => [
                 '<p>See <video src="@@PLUGINFILE@@/test.img">video of a duck</video> and '.

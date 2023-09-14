@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -66,10 +66,10 @@ class helper {
      * @param   int     $stepid     The step ID.
      * @param   int     $targettype The type of step.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function get_edit_step_link($tourid, $stepid = null, $targettype = null) {
-        $link = new \moodle_url('/admin/tool/usertours/configure.php');
+        $link = new \powereduc_url('/admin/tool/usertours/configure.php');
 
         if ($stepid) {
             $link->param('action', manager::ACTION_EDITSTEP);
@@ -88,10 +88,10 @@ class helper {
      * @param   int     $tourid     The tour ID.
      * @param   int     $direction  The direction to move in
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function get_move_tour_link($tourid, $direction = self::MOVE_DOWN) {
-        $link = new \moodle_url('/admin/tool/usertours/configure.php');
+        $link = new \powereduc_url('/admin/tool/usertours/configure.php');
 
         $link->param('action', manager::ACTION_MOVETOUR);
         $link->param('id', $tourid);
@@ -107,10 +107,10 @@ class helper {
      * @param   int     $stepid     The step ID.
      * @param   int     $direction  The direction to move in
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function get_move_step_link($stepid, $direction = self::MOVE_DOWN) {
-        $link = new \moodle_url('/admin/tool/usertours/configure.php');
+        $link = new \powereduc_url('/admin/tool/usertours/configure.php');
 
         $link->param('action', manager::ACTION_MOVESTEP);
         $link->param('id', $stepid);
@@ -126,10 +126,10 @@ class helper {
      * @param   int         $tourid     The ID of the tour to attach this step to.
      * @param   int         $targettype The type of target.
      *
-     * @return  moodle_url              The required URL.
+     * @return  powereduc_url              The required URL.
      */
     public static function get_new_step_link($tourid, $targettype = null) {
-        $link = new \moodle_url('/admin/tool/usertours/configure.php');
+        $link = new \powereduc_url('/admin/tool/usertours/configure.php');
         $link->param('action', manager::ACTION_NEWSTEP);
         $link->param('tourid', $tourid);
         $link->param('targettype', $targettype);
@@ -141,10 +141,10 @@ class helper {
      * Get the link used to view the tour.
      *
      * @param   int         $tourid     The ID of the tour to display.
-     * @return  moodle_url              The URL.
+     * @return  powereduc_url              The URL.
      */
     public static function get_view_tour_link($tourid) {
-        return new \moodle_url('/admin/tool/usertours/configure.php', [
+        return new \powereduc_url('/admin/tool/usertours/configure.php', [
                 'id'        => $tourid,
                 'action'    => manager::ACTION_VIEWTOUR,
             ]);
@@ -154,10 +154,10 @@ class helper {
      * Get the link used to reset the tour state for all users.
      *
      * @param   int         $tourid     The ID of the tour to display.
-     * @return  moodle_url              The URL.
+     * @return  powereduc_url              The URL.
      */
     public static function get_reset_tour_for_all_link($tourid) {
-        return new \moodle_url('/admin/tool/usertours/configure.php', [
+        return new \powereduc_url('/admin/tool/usertours/configure.php', [
                 'id'        => $tourid,
                 'action'    => manager::ACTION_RESETFORALL,
                 'sesskey'   => sesskey(),
@@ -168,10 +168,10 @@ class helper {
      * Get the link used to edit the tour.
      *
      * @param   int         $tourid     The ID of the tour to edit.
-     * @return  moodle_url              The URL.
+     * @return  powereduc_url              The URL.
      */
     public static function get_edit_tour_link($tourid = null) {
-        $link = new \moodle_url('/admin/tool/usertours/configure.php');
+        $link = new \powereduc_url('/admin/tool/usertours/configure.php');
 
         if ($tourid) {
             $link->param('action', manager::ACTION_EDITTOUR);
@@ -186,10 +186,10 @@ class helper {
     /**
      * Get the link used to import the tour.
      *
-     * @return  moodle_url              The URL.
+     * @return  powereduc_url              The URL.
      */
     public static function get_import_tour_link() {
-        $link = new \moodle_url('/admin/tool/usertours/configure.php', [
+        $link = new \powereduc_url('/admin/tool/usertours/configure.php', [
                 'action'    => manager::ACTION_IMPORTTOUR,
             ]);
 
@@ -200,10 +200,10 @@ class helper {
      * Get the link used to export the tour.
      *
      * @param   int         $tourid     The ID of the tour to export.
-     * @return  moodle_url              The URL.
+     * @return  powereduc_url              The URL.
      */
     public static function get_export_tour_link($tourid) {
-        $link = new \moodle_url('/admin/tool/usertours/configure.php', [
+        $link = new \powereduc_url('/admin/tool/usertours/configure.php', [
                 'action'    => manager::ACTION_EXPORTTOUR,
                 'id'        => $tourid,
             ]);
@@ -215,10 +215,10 @@ class helper {
      * Get the link used to duplicate the tour.
      *
      * @param   int         $tourid     The ID of the tour to duplicate.
-     * @return  moodle_url              The URL.
+     * @return  powereduc_url              The URL.
      */
     public static function get_duplicate_tour_link($tourid) {
-        $link = new \moodle_url('/admin/tool/usertours/configure.php', [
+        $link = new \powereduc_url('/admin/tool/usertours/configure.php', [
                 'action'    => manager::ACTION_DUPLICATETOUR,
                 'id'        => $tourid,
         ]);
@@ -230,10 +230,10 @@ class helper {
      * Get the link used to delete the tour.
      *
      * @param   int         $tourid     The ID of the tour to delete.
-     * @return  moodle_url              The URL.
+     * @return  powereduc_url              The URL.
      */
     public static function get_delete_tour_link($tourid) {
-        return new \moodle_url('/admin/tool/usertours/configure.php', [
+        return new \powereduc_url('/admin/tool/usertours/configure.php', [
                 'id'        => $tourid,
                 'action'    => manager::ACTION_DELETETOUR,
                 'sesskey'   => sesskey(),
@@ -243,10 +243,10 @@ class helper {
     /**
      * Get the link for listing tours.
      *
-     * @return  moodle_url              The URL.
+     * @return  powereduc_url              The URL.
      */
     public static function get_list_tour_link() {
-        $link = new \moodle_url('/admin/tool/usertours/configure.php');
+        $link = new \powereduc_url('/admin/tool/usertours/configure.php');
         $link->param('action', manager::ACTION_LISTTOURS);
 
         return $link;
@@ -262,7 +262,7 @@ class helper {
      * @param   array       $options        Display options.
      * @return  string
      */
-    public static function format_icon_link($url, $icon, $alt, $iconcomponent = 'moodle', $options = array()) {
+    public static function format_icon_link($url, $icon, $alt, $iconcomponent = 'powereduc', $options = array()) {
         global $OUTPUT;
 
         return $OUTPUT->action_icon(
@@ -295,10 +295,10 @@ class helper {
      * Get the link for deleting steps.
      *
      * @param   int         $stepid     The ID of the step to display.
-     * @return  moodle_url              The URL.
+     * @return  powereduc_url              The URL.
      */
     public static function get_delete_step_link($stepid) {
-        return new \moodle_url('/admin/tool/usertours/configure.php', [
+        return new \powereduc_url('/admin/tool/usertours/configure.php', [
                 'action'    => manager::ACTION_DELETESTEP,
                 'id'        => $stepid,
                 'sesskey'   => sesskey(),
@@ -368,7 +368,7 @@ class helper {
                 'tourenabled',
                 $tour->get_id(),
                 true,
-                $OUTPUT->pix_icon($icon, $alt, 'moodle', [
+                $OUTPUT->pix_icon($icon, $alt, 'powereduc', [
                         'title' => $alt,
                     ]),
                 $value
@@ -605,7 +605,7 @@ class helper {
         $content = trim($content);
 
         if (preg_match(static::LANG_STRING_REGEX, $content, $matches)) {
-            if ($matches[2] === 'moodle') {
+            if ($matches[2] === 'powereduc') {
                 $matches[2] = 'core';
             }
 

@@ -1,8 +1,8 @@
 {
-    "moodle-atto_equation-button": {
+    "powereduc-atto_equation-button": {
         "requires": [
-            "moodle-editor_atto-plugin",
-            "moodle-core-event",
+            "powereduc-editor_atto-plugin",
+            "powereduc-core-event",
             "io",
             "event-valuechange",
             "tabview",

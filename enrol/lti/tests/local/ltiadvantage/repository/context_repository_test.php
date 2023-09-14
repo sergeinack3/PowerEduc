@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -36,11 +36,11 @@ class context_repository_test extends \advanced_testcase {
         $registration = application_registration::create(
             'Test',
             'a2c94a2c94',
-            new \moodle_url('http://lms.example.org'),
+            new \powereduc_url('http://lms.example.org'),
             'clientid_123',
-            new \moodle_url('https://example.org/authrequesturl'),
-            new \moodle_url('https://example.org/jwksurl'),
-            new \moodle_url('https://example.org/accesstokenurl')
+            new \powereduc_url('https://example.org/authrequesturl'),
+            new \powereduc_url('https://example.org/jwksurl'),
+            new \powereduc_url('https://example.org/accesstokenurl')
         );
         $registrationrepo = new application_registration_repository();
         $createdregistration = $registrationrepo->save($registration);

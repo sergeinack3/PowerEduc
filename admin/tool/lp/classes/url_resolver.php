@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 namespace tool_lp;
 defined('POWEREDUC_INTERNAL') || die();
 
-use moodle_url;
+use powereduc_url;
 
 /**
  * URL resolver class.
@@ -41,10 +41,10 @@ class url_resolver {
      *
      * @param int $competencyid The competency ID.
      * @param int $pagecontextid The ID of the context we are in.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function competency($competencyid, $pagecontextid) {
-        return new moodle_url('/admin/tool/lp/editcompetency.php', array(
+        return new powereduc_url('/admin/tool/lp/editcompetency.php', array(
             'id' => $competencyid,
             'pagecontextid' => $pagecontextid
         ));
@@ -55,10 +55,10 @@ class url_resolver {
      *
      * @param int $frameworkid The framework ID.
      * @param int $pagecontextid The ID of the context we are in.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function framework($frameworkid, $pagecontextid) {
-        return new moodle_url('/admin/tool/lp/competencies.php', array(
+        return new powereduc_url('/admin/tool/lp/competencies.php', array(
             'competencyframeworkid' => $frameworkid,
             'pagecontextid' => $pagecontextid
         ));
@@ -68,30 +68,30 @@ class url_resolver {
      * The URL where the frameworks can be found.
      *
      * @param int $pagecontextid The ID of the context that we are browsing.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function frameworks($pagecontextid) {
-        return new moodle_url('/admin/tool/lp/competencyframeworks.php', array('pagecontextid' => $pagecontextid));
+        return new powereduc_url('/admin/tool/lp/competencyframeworks.php', array('pagecontextid' => $pagecontextid));
     }
 
     /**
      * The URL where the plan can be found.
      *
      * @param int $planid The plan ID.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function plan($planid) {
-        return new moodle_url('/admin/tool/lp/plan.php', array('id' => $planid));
+        return new powereduc_url('/admin/tool/lp/plan.php', array('id' => $planid));
     }
 
     /**
      * The URL where the plans of a user can be found.
      *
      * @param int $userid The user ID.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function plans($userid) {
-        return new moodle_url('/admin/tool/lp/plans.php', array('userid' => $userid));
+        return new powereduc_url('/admin/tool/lp/plans.php', array('userid' => $userid));
     }
 
     /**
@@ -99,10 +99,10 @@ class url_resolver {
      *
      * @param int $templateid The template ID.
      * @param int $pagecontextid The ID of the context we are in.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function template($templateid, $pagecontextid) {
-        return new moodle_url('/admin/tool/lp/templatecompetencies.php', array(
+        return new powereduc_url('/admin/tool/lp/templatecompetencies.php', array(
             'templateid' => $templateid,
             'pagecontextid' => $pagecontextid
         ));
@@ -112,20 +112,20 @@ class url_resolver {
      * The URL where the templates can be found.
      *
      * @param int $pagecontextid The ID of the context that we are browsing.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function templates($pagecontextid) {
-        return new moodle_url('/admin/tool/lp/learningplans.php', array('pagecontextid' => $pagecontextid));
+        return new powereduc_url('/admin/tool/lp/learningplans.php', array('pagecontextid' => $pagecontextid));
     }
 
     /**
      * The URL where the user competency can be found.
      *
      * @param int $usercompetencyid The user competency ID
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function user_competency($usercompetencyid) {
-        return new moodle_url('/admin/tool/lp/user_competency.php', array('id' => $usercompetencyid));
+        return new powereduc_url('/admin/tool/lp/user_competency.php', array('id' => $usercompetencyid));
     }
 
     /**
@@ -134,10 +134,10 @@ class url_resolver {
      * @param int $userid The user ID
      * @param int $competencyid The competency ID.
      * @param int $courseid The course ID.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function user_competency_in_course($userid, $competencyid, $courseid) {
-        return new moodle_url('/admin/tool/lp/user_competency_in_course.php', array(
+        return new powereduc_url('/admin/tool/lp/user_competency_in_course.php', array(
             'userid' => $userid,
             'competencyid' => $competencyid,
             'courseid' => $courseid
@@ -150,10 +150,10 @@ class url_resolver {
      * @param int $userid The user ID
      * @param int $competencyid The competency ID.
      * @param int $planid The plan ID.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function user_competency_in_plan($userid, $competencyid, $planid) {
-        return new moodle_url('/admin/tool/lp/user_competency_in_plan.php', array(
+        return new powereduc_url('/admin/tool/lp/user_competency_in_plan.php', array(
             'userid' => $userid,
             'competencyid' => $competencyid,
             'planid' => $planid
@@ -164,10 +164,10 @@ class url_resolver {
      * The URL where the user evidence (of prior learning) can be found.
      *
      * @param int $userevidenceid The user evidence ID
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function user_evidence($userevidenceid) {
-        return new moodle_url('/admin/tool/lp/user_evidence.php', array('id' => $userevidenceid));
+        return new powereduc_url('/admin/tool/lp/user_evidence.php', array('id' => $userevidenceid));
     }
 
 }

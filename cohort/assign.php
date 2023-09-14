@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,16 +33,16 @@ require_login();
 $cohort = $DB->get_record('cohort', array('id'=>$id), '*', MUST_EXIST);
 $context = context::instance_by_id($cohort->contextid, MUST_EXIST);
 
-require_capability('moodle/cohort:assign', $context);
+require_capability('powereduc/cohort:assign', $context);
 
 $PAGE->set_context($context);
 $PAGE->set_url('/cohort/assign.php', array('id'=>$id));
 $PAGE->set_pagelayout('admin');
 
 if ($returnurl) {
-    $returnurl = new moodle_url($returnurl);
+    $returnurl = new powereduc_url($returnurl);
 } else {
-    $returnurl = new moodle_url('/cohort/index.php', array('contextid' => $cohort->contextid));
+    $returnurl = new powereduc_url('/cohort/index.php', array('contextid' => $cohort->contextid));
 }
 
 if (!empty($cohort->component)) {
@@ -56,9 +56,9 @@ if (optional_param('cancel', false, PARAM_BOOL)) {
 
 if ($context->contextlevel == CONTEXT_COURSECAT) {
     $category = $DB->get_record('course_categories', array('id'=>$context->instanceid), '*', MUST_EXIST);
-    navigation_node::override_active_url(new moodle_url('/cohort/index.php', array('contextid'=>$cohort->contextid)));
+    navigation_node::override_active_url(new powereduc_url('/cohort/index.php', array('contextid'=>$cohort->contextid)));
 } else {
-    navigation_node::override_active_url(new moodle_url('/cohort/index.php', array()));
+    navigation_node::override_active_url(new powereduc_url('/cohort/index.php', array()));
 }
 $PAGE->navbar->add(get_string('assign', 'cohort'));
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Course format featuring social forum.
  *
  * @package   format_social
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -46,11 +46,11 @@ if (trim($forum->intro) != '') {
     ];
     $introcontent = format_module_intro('forum', $forum, $coursemodule->id);
 
-    if ($PAGE->user_is_editing() && has_capability('moodle/course:update', $modcontext)) {
+    if ($PAGE->user_is_editing() && has_capability('powereduc/course:update', $modcontext)) {
         $streditsummary  = get_string('editsummary');
         $introcontent .= html_writer::start_div('editinglink');
         $introcontent .= html_writer::link(
-            new moodle_url('/course/modedit.php', [
+            new powereduc_url('/course/modedit.php', [
                 'update' => $coursemodule->id,
                 'sesskey' => sesskey(),
             ]),

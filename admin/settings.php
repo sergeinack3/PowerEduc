@@ -20,16 +20,16 @@ $adminroot = admin_get_root(); // need all settings
 $settingspage = $adminroot->locate($section, true);
 
 if (empty($settingspage) or !($settingspage instanceof admin_settingpage)) {
-    if (moodle_needs_upgrading()) {
-        redirect(new moodle_url('/admin/index.php'));
+    if (powereduc_needs_upgrading()) {
+        redirect(new powereduc_url('/admin/index.php'));
     } else {
-        throw new \moodle_exception('sectionerror', 'admin', "$CFG->wwwroot/$CFG->admin/");
+        throw new \powereduc_exception('sectionerror', 'admin', "$CFG->wwwroot/$CFG->admin/");
     }
     die;
 }
 
 if (!($settingspage->check_access())) {
-    throw new \moodle_exception('accessdenied', 'admin');
+    throw new \powereduc_exception('accessdenied', 'admin');
     die;
 }
 
@@ -39,12 +39,12 @@ if ($settingspage->context && !$settingspage->context instanceof \context_system
     $PAGE->set_context($settingspage->context);
 }
 
-$hassiteconfig = has_capability('moodle/site:config', context_system::instance());
+$hassiteconfig = has_capability('powereduc/site:config', context_system::instance());
 // Display the admin search input element in the page header if the user has the capability to change the site
 // configuration and the current page context is system.
 if ($hassiteconfig && $PAGE->context instanceof \context_system) {
     $PAGE->add_header_action($OUTPUT->render_from_template('core_admin/header_search_input', [
-        'action' => new moodle_url('/admin/search.php'),
+        'action' => new powereduc_url('/admin/search.php'),
     ]));
 }
 

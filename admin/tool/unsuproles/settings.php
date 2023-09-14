@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,5 +26,5 @@
 defined('POWEREDUC_INTERNAL') || die;
 
 if ($hassiteconfig) {
-    $ADMIN->add('roles', new admin_externalpage('toolunsuproles', get_string('pluginname', 'tool_unsuproles'), "$CFG->wwwroot/$CFG->admin/tool/unsuproles/index.php", array('moodle/site:config', 'moodle/role:assign')));
+    $ADMIN->add('roles', new admin_externalpage('toolunsuproles', get_string('pluginname', 'tool_unsuproles'), "$CFG->wwwroot/$CFG->admin/tool/unsuproles/index.php", array('powereduc/site:config', 'powereduc/role:assign')));
 }

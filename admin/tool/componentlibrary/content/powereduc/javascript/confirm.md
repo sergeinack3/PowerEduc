@@ -27,7 +27,7 @@ to the target element:
 data-confirmation-question-str='["areyousure"]' data-confirmation-yes-button-str='["delete", "core"]'>Show confirmation modal</button>
 {{< /highlight >}}
 
-You can also use it on PHP, you just need to set the attributes parameter to any moodle output component that takes attributes:
+You can also use it on PHP, you just need to set the attributes parameter to any powereduc output component that takes attributes:
 {{< php >}}
 echo $OUTPUT->single_button('#', get_string('delete'), 'get', [
     'data-confirmation' => 'modal',
@@ -100,5 +100,5 @@ data-confirmation-toast-confirmation-str='["deleteblockinprogress", "block", "On
 {{< example >}}
 <button type="button" class="btn btn-primary" data-confirmation="modal" data-confirmation-title-str='["delete", "core"]'
 data-confirmation-question-str='["areyousure"]' data-confirmation-yes-button-str='["delete", "core"]'
-data-confirmation-destination="http://moodle.com">Show confirmation modal</button>
+data-confirmation-destination="http://powereduc.com">Show confirmation modal</button>
 {{< /example >}}

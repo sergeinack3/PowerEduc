@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Renderers for the import of CSV files into the gradebook.
  *
  * @package   gradeimport_csv
- * @copyright 2014 Adrian Greeve <adrian@moodle.com>
+ * @copyright 2014 Adrian Greeve <adrian@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,7 +28,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * Renderers for the import of CSV files into the gradebook.
  *
  * @package   gradeimport_csv
- * @copyright 2014 Adrian Greeve <adrian@moodle.com>
+ * @copyright 2014 Adrian Greeve <adrian@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class gradeimport_csv_renderer extends plugin_renderer_base {

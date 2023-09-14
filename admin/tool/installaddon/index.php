@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * The main screen of the tool.
  *
  * @package     tool_installaddon
- * @copyright   2013 David Mudrak <david@moodle.com>
+ * @copyright   2013 David Mudrak <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -58,13 +58,13 @@ if ($installremote and $installremoteversion) {
         $installable = array($pluginman->get_remote_plugin_info($installremote, $installremoteversion, true));
         upgrade_install_plugins($installable, $installremoteconfirm,
             get_string('installfromrepo', 'tool_installaddon'),
-            new moodle_url($PAGE->url, array('installremote' => $installremote,
+            new powereduc_url($PAGE->url, array('installremote' => $installremote,
                 'installremoteversion' => $installremoteversion, 'installremoteconfirm' => 1)
             )
         );
     }
     // We should never get here.
-    throw new moodle_exception('installing_non_installable_component', 'tool_installaddon');
+    throw new powereduc_exception('installing_non_installable_component', 'tool_installaddon');
 }
 
 // Handle installation of a plugin from the ZIP file.
@@ -84,7 +84,7 @@ if ($installzipcomponent and $installzipstorage) {
         'zipfilepath' => make_temp_directory('tool_installaddon').'/'.$installzipstorage.'/plugin.zip',
     ));
     upgrade_install_plugins($installable, $installzipconfirm, get_string('installfromzip', 'tool_installaddon'),
-        new moodle_url($installer->index_url(), array('installzipcomponent' => $installzipcomponent,
+        new powereduc_url($installer->index_url(), array('installzipcomponent' => $installzipcomponent,
             'installzipstorage' => $installzipstorage, 'installzipconfirm' => 1)
         )
     );

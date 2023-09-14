@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,18 +17,18 @@
 /**
  * Profile manager class
  *
- * @package    tool_moodlenet
- * @copyright  2020 Adrian Greeve <adrian@moodle.com>
+ * @package    tool_powereducnet
+ * @copyright  2020 Adrian Greeve <adrian@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace tool_moodlenet;
+namespace tool_powereducnet;
 
 /**
- * Class for handling interaction with the moodlenet profile.
+ * Class for handling interaction with the powereducnet profile.
  *
- * @package    tool_moodlenet
- * @copyright  2020 Adrian Greeve <adrian@moodle.com>
+ * @package    tool_powereducnet
+ * @copyright  2020 Adrian Greeve <adrian@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class profile_manager {
@@ -37,17 +37,17 @@ class profile_manager {
      * Get the mnet profile for a user.
      *
      * @param  int $userid The ID for the user to get the profile form
-     * @return moodlenet_user_profile or null.
+     * @return powereducnet_user_profile or null.
      */
-    public static function get_moodlenet_user_profile(int $userid): ?moodlenet_user_profile {
+    public static function get_powereducnet_user_profile(int $userid): ?powereducnet_user_profile {
         global $CFG;
         // Check for official profile.
         if (self::official_profile_exists()) {
-            $user = \core_user::get_user($userid, 'moodlenetprofile');
+            $user = \core_user::get_user($userid, 'powereducnetprofile');
             try {
-                $userprofile = $user->moodlenetprofile ? $user->moodlenetprofile : '';
-                return (isset($user)) ? new moodlenet_user_profile(s($userprofile), $userid) : null;
-            } catch (\moodle_exception $e) {
+                $userprofile = $user->powereducnetprofile ? $user->powereducnetprofile : '';
+                return (isset($user)) ? new powereducnet_user_profile(s($userprofile), $userid) : null;
+            } catch (\powereduc_exception $e) {
                 // If an exception is thrown, means there isn't a valid profile set. No need to log exception.
                 return null;
             }
@@ -59,8 +59,8 @@ class profile_manager {
             if ($field->get_category_name() == self::get_category_name()
                     && $field->inputname == 'profile_field_mnetprofile') {
                 try {
-                    return new moodlenet_user_profile(s($field->display_data()), $userid);
-                } catch (\moodle_exception $e) {
+                    return new powereducnet_user_profile(s($field->display_data()), $userid);
+                } catch (\powereduc_exception $e) {
                     // If an exception is thrown, means there isn't a valid profile set. No need to log exception.
                     return null;
                 }
@@ -70,17 +70,17 @@ class profile_manager {
     }
 
     /**
-     * Save the moodlenet profile.
+     * Save the powereducnet profile.
      *
-     * @param moodlenet_user_profile $moodlenetprofile The moodlenet profile to save.
+     * @param powereducnet_user_profile $powereducnetprofile The powereducnet profile to save.
      */
-    public static function save_moodlenet_user_profile(moodlenet_user_profile $moodlenetprofile): void {
+    public static function save_powereducnet_user_profile(powereducnet_user_profile $powereducnetprofile): void {
         global $CFG, $DB;
         // Do some cursory checks first to see if saving is possible.
         if (self::official_profile_exists()) {
             // All good. Let's save.
-            $user = \core_user::get_user($moodlenetprofile->get_userid());
-            $user->moodlenetprofile = $moodlenetprofile->get_profile_name();
+            $user = \core_user::get_user($powereducnetprofile->get_userid());
+            $user->powereducnetprofile = $powereducnetprofile->get_profile_name();
 
             require_once($CFG->dirroot . '/user/lib.php');
 
@@ -91,15 +91,15 @@ class profile_manager {
         $fielddata = self::validate_and_fix_missing_profile_items($fielddata);
         // Everything should be back to normal. Let's save.
         require_once($CFG->dirroot . '/user/profile/lib.php');
-        \profile_save_custom_fields($moodlenetprofile->get_userid(),
-                [$fielddata->shortname => $moodlenetprofile->get_profile_name()]);
+        \profile_save_custom_fields($powereducnetprofile->get_userid(),
+                [$fielddata->shortname => $powereducnetprofile->get_profile_name()]);
     }
 
     /**
      * Checks to see if the required user profile fields and categories are in place. If not it regenerates them.
      *
-     * @param  stdClass $fielddata The moodlenet profile field.
-     * @return stdClass The same moodlenet profile field, with any necessary updates made.
+     * @param  stdClass $fielddata The powereducnet profile field.
+     * @return stdClass The same powereducnet profile field, with any necessary updates made.
      */
     private static function validate_and_fix_missing_profile_items(\stdClass $fielddata): \stdClass {
         global $DB;
@@ -129,7 +129,7 @@ class profile_manager {
     /**
      * Returns the user profile field table object.
      *
-     * @return stdClass the moodlenet profile table object. False if no record found.
+     * @return stdClass the powereducnet profile table object. False if no record found.
      */
     private static function get_user_profile_field(): \stdClass {
         global $DB;
@@ -166,7 +166,7 @@ class profile_manager {
         global $DB;
 
         $usertablecolumns = $DB->get_columns('user', false);
-        if (isset($usertablecolumns['moodlenetprofile'])) {
+        if (isset($usertablecolumns['powereducnetprofile'])) {
             return true;
         }
         return false;
@@ -175,14 +175,14 @@ class profile_manager {
     /**
      * Gets the category name that is set for this site.
      *
-     * @return string The category used to hold the moodle net profile field.
+     * @return string The category used to hold the powereduc net profile field.
      */
     public static function get_category_name(): string {
-        return get_config('tool_moodlenet', 'profile_category');
+        return get_config('tool_powereducnet', 'profile_category');
     }
 
     /**
-     * Sets the a unique category to hold the moodle net user profile.
+     * Sets the a unique category to hold the powereduc net user profile.
      *
      * @param string $categoryname The base category name to use.
      * @return string The actual name of the category to use.
@@ -201,7 +201,7 @@ class profile_manager {
                 $i++;
                 $attemptname = $categoryname . $i;
             } else {
-                set_config('profile_category', $attemptname, 'tool_moodlenet');
+                set_config('profile_category', $attemptname, 'tool_powereducnet');
                 $foundcategoryname = true;
             }
         } while (!$foundcategoryname);
@@ -218,7 +218,7 @@ class profile_manager {
         // No nice API to do this, so direct DB calls it is.
         $data = new \stdClass();
         $data->sortorder = $DB->count_records('user_info_category') + 1;
-        $data->name = self::set_category_name(get_string('pluginname', 'tool_moodlenet'));
+        $data->name = self::set_category_name(get_string('pluginname', 'tool_powereducnet'));
         $data->id = $DB->insert_record('user_info_category', $data, true);
 
         $createdcategory = $DB->get_record('user_info_category', array('id' => $data->id));
@@ -227,7 +227,7 @@ class profile_manager {
     }
 
     /**
-     * Sets a unique name to be used for the moodle net profile.
+     * Sets a unique name to be used for the powereduc net profile.
      *
      * @param string $fieldname The base fieldname to use.
      * @return string The actual profile field name.
@@ -246,7 +246,7 @@ class profile_manager {
                 $i++;
                 $attemptname = $fieldname . $i;
             } else {
-                set_config('profile_field_name', $attemptname, 'tool_moodlenet');
+                set_config('profile_field_name', $attemptname, 'tool_powereducnet');
                 $foundfieldname = true;
             }
         } while (!$foundfieldname);
@@ -254,17 +254,17 @@ class profile_manager {
     }
 
     /**
-     * Gets the unique profile field used to hold the moodle net profile.
+     * Gets the unique profile field used to hold the powereduc net profile.
      *
      * @return string The profile field name being used on this site.
      */
     public static function get_profile_field_name(): string {
-        return get_config('tool_moodlenet', 'profile_field_name');
+        return get_config('tool_powereducnet', 'profile_field_name');
     }
 
 
     /**
-     * Create a user profile field to hold the moodlenet profile information.
+     * Create a user profile field to hold the powereducnet profile information.
      *
      * @param  int $categoryid The category to put this field into.
      */
@@ -274,13 +274,13 @@ class profile_manager {
         require_once($CFG->dirroot . '/user/profile/definelib.php');
         require_once($CFG->dirroot . '/user/profile/field/text/define.class.php');
 
-        // Add our moodlenet profile field.
+        // Add our powereducnet profile field.
         $profileclass = new \profile_define_text();
         $data = (object) [
             'shortname' => self::set_profile_field_name('mnetprofile'),
-            'name' => get_string('mnetprofile', 'tool_moodlenet'),
+            'name' => get_string('mnetprofile', 'tool_powereducnet'),
             'datatype' => 'text',
-            'description' => get_string('mnetprofiledesc', 'tool_moodlenet'),
+            'description' => get_string('mnetprofiledesc', 'tool_powereducnet'),
             'descriptionformat' => 1,
             'categoryid' => $categoryid,
             'signup' => 1,
@@ -293,14 +293,14 @@ class profile_manager {
     }
 
     /**
-     * Given our $moodlenetprofile let's cURL the domains' WebFinger endpoint
+     * Given our $powereducnetprofile let's cURL the domains' WebFinger endpoint
      *
-     * @param moodlenet_user_profile $moodlenetprofile The moodlenet profile to get info from.
+     * @param powereducnet_user_profile $powereducnetprofile The powereducnet profile to get info from.
      * @return array [bool, text, raw]
      */
-    public static function get_moodlenet_profile_link(moodlenet_user_profile $moodlenetprofile): array {
-        $domain = $moodlenetprofile->get_domain();
-        $username = $moodlenetprofile->get_username();
+    public static function get_powereducnet_profile_link(powereducnet_user_profile $powereducnetprofile): array {
+        $domain = $powereducnetprofile->get_domain();
+        $username = $powereducnetprofile->get_username();
 
         // Assumption: All MoodleNet instance's will contain a WebFinger validation script.
         $url = "https://".$domain."/.well-known/webfinger?resource=acct:".$username."@".$domain;
@@ -320,13 +320,13 @@ class profile_manager {
                     // User not found.
                     return [
                         'result' => false,
-                        'message' => get_string('profilevalidationfail', 'tool_moodlenet'),
+                        'message' => get_string('profilevalidationfail', 'tool_powereducnet'),
                     ];
                 } else {
                     // There was some other error that was not a missing account.
                     return [
                         'result' => false,
-                        'message' => get_string('profilevalidationerror', 'tool_moodlenet'),
+                        'message' => get_string('profilevalidationerror', 'tool_powereducnet'),
                     ];
                 }
             }
@@ -335,14 +335,14 @@ class profile_manager {
             $data = json_decode($content);
             return [
                 'result' => true,
-                'message' => get_string('profilevalidationpass', 'tool_moodlenet'),
+                'message' => get_string('profilevalidationpass', 'tool_powereducnet'),
                 'domain' => $data->aliases[0]
             ];
         } else {
             // There was some failure in curl so report it back.
             return [
                 'result' => false,
-                'message' => get_string('profilevalidationerror', 'tool_moodlenet'),
+                'message' => get_string('profilevalidationerror', 'tool_powereducnet'),
             ];
         }
     }

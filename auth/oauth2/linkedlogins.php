@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * OAuth 2 Linked login configuration page.
  *
  * @package    auth_oauth2
- * @copyright  2017 Damyon Wiese <damyon@moodle.com>
+ * @copyright  2017 Damyon Wiese <damyon@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,7 +36,7 @@ $PAGE->set_heading($strheading);
 require_login();
 
 if (!\auth_oauth2\api::is_enabled()) {
-    throw new \moodle_exception('notenabled', 'auth_oauth2');
+    throw new \powereduc_exception('notenabled', 'auth_oauth2');
 }
 
 $action = optional_param('action', '', PARAM_ALPHAEXT);
@@ -46,12 +46,12 @@ if ($action == 'new') {
     $issuer = \core\oauth2\api::get_issuer($issuerid);
 
     if (!$issuer->is_available_for_login()) {
-        throw new \moodle_exception('issuernologin', 'auth_oauth2');
+        throw new \powereduc_exception('issuernologin', 'auth_oauth2');
     }
 
     // We do a login dance with this issuer.
     $addparams = ['action' => 'new', 'issuerid' => $issuerid, 'sesskey' => sesskey()];
-    $addurl = new moodle_url('/auth/oauth2/linkedlogins.php', $addparams);
+    $addurl = new powereduc_url('/auth/oauth2/linkedlogins.php', $addparams);
     $client = \core\oauth2\api::get_user_oauth_client($issuer, $addurl);
 
     if (optional_param('logout', false, PARAM_BOOL)) {
@@ -100,14 +100,14 @@ foreach ($issuers as $issuer) {
     $anyshowinloginpage = true;
 
     $addparams = ['action' => 'new', 'issuerid' => $issuer->get('id'), 'sesskey' => sesskey(), 'logout' => true];
-    $addurl = new moodle_url('/auth/oauth2/linkedlogins.php', $addparams);
+    $addurl = new powereduc_url('/auth/oauth2/linkedlogins.php', $addparams);
     $issuerbuttons[$issuer->get('id')] = $renderer->single_button($addurl, get_string('createnewlinkedlogin', 'auth_oauth2',
         s($issuer->get_display_name())));
 }
 
 if (!$anyshowinloginpage) {
     // Just a notification that we can't make it.
-    $preferencesurl = new moodle_url('/user/preferences.php');
+    $preferencesurl = new powereduc_url('/user/preferences.php');
     redirect($preferencesurl, get_string('noissuersavailable', 'auth_oauth2'), null, \core\output\notification::NOTIFY_WARNING);
 }
 

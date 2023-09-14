@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Capability definitions for Moodle core.
+ * Capability definitions for PowerEduc core.
  *
  * The capabilities are loaded into the database table when the module is
  * installed or updated. Whenever the capability definitions are updated,
@@ -33,18 +33,18 @@
  *
  * component_name should be the same as the directory name of the mod or block.
  *
- * Core moodle capabilities are defined thus:
- *    moodle/<capabilityclass>:<capabilityname>
+ * Core powereduc capabilities are defined thus:
+ *    powereduc/<capabilityclass>:<capabilityname>
  *
  * Examples: mod/forum:viewpost
  *           block/recent_activity:view
- *           moodle/site:deleteuser
+ *           powereduc/site:deleteuser
  *
  * The variable name for the capability definitions array is $capabilities
  *
  * For more information, take a look to the documentation available:
- *     - Access API: {@link http://docs.moodle.org/dev/Access_API}
- *     - Upgrade API: {@link http://docs.moodle.org/dev/Upgrade_API}
+ *     - Access API: {@link http://docs.powereduc.org/dev/Access_API}
+ *     - Upgrade API: {@link http://docs.powereduc.org/dev/Upgrade_API}
  *
  * @package   core_access
  * @category  access
@@ -55,7 +55,7 @@
 defined('POWEREDUC_INTERNAL') || die();
 
 $capabilities = array(
-    'moodle/site:config' => array(
+    'powereduc/site:config' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL | RISK_XSS | RISK_CONFIG | RISK_DATALOSS,
 
@@ -64,7 +64,7 @@ $capabilities = array(
         'archetypes' => array(
         )
     ),
-    'moodle/site:configview' => array(
+    'powereduc/site:configview' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
@@ -73,7 +73,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/site:readallmessages' => array(
+    'powereduc/site:readallmessages' => array(
 
         'riskbitmask' => RISK_PERSONAL,
 
@@ -85,7 +85,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/site:manageallmessaging' => array(
+    'powereduc/site:manageallmessaging' => array(
 
         'riskbitmask' => RISK_PERSONAL,
 
@@ -96,7 +96,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/site:deleteanymessage' => array(
+    'powereduc/site:deleteanymessage' => array(
 
         'riskbitmask' => RISK_DATALOSS,
 
@@ -107,7 +107,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/site:sendmessage' => array(
+    'powereduc/site:sendmessage' => array(
 
         'riskbitmask' => RISK_SPAM,
 
@@ -119,7 +119,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/site:senderrormessage' => [
+    'powereduc/site:senderrormessage' => [
         'riskbitmask' => RISK_SPAM,
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
@@ -128,7 +128,7 @@ $capabilities = array(
         )
     ],
 
-    'moodle/site:deleteownmessage' => array(
+    'powereduc/site:deleteownmessage' => array(
 
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
@@ -137,7 +137,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/site:approvecourse' => array(
+    'powereduc/site:approvecourse' => array(
 
         'riskbitmask' => RISK_XSS,
 
@@ -148,7 +148,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/backup:backupcourse' => array(
+    'powereduc/backup:backupcourse' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL | RISK_XSS,
 
@@ -159,10 +159,10 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         ),
 
-        'clonepermissionsfrom' =>  'moodle/site:backup'
+        'clonepermissionsfrom' =>  'powereduc/site:backup'
     ),
 
-    'moodle/backup:backupsection' => array(
+    'powereduc/backup:backupsection' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL | RISK_XSS,
 
@@ -173,10 +173,10 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         ),
 
-        'clonepermissionsfrom' =>  'moodle/backup:backupcourse'
+        'clonepermissionsfrom' =>  'powereduc/backup:backupcourse'
     ),
 
-    'moodle/backup:backupactivity' => array(
+    'powereduc/backup:backupactivity' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL | RISK_XSS,
 
@@ -187,10 +187,10 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         ),
 
-        'clonepermissionsfrom' =>  'moodle/backup:backupcourse'
+        'clonepermissionsfrom' =>  'powereduc/backup:backupcourse'
     ),
 
-    'moodle/backup:backuptargetimport' => array(
+    'powereduc/backup:backuptargetimport' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL | RISK_XSS,
 
@@ -201,10 +201,10 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         ),
 
-        'clonepermissionsfrom' =>  'moodle/backup:backupcourse'
+        'clonepermissionsfrom' =>  'powereduc/backup:backupcourse'
     ),
 
-    'moodle/backup:downloadfile' => array(
+    'powereduc/backup:downloadfile' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL | RISK_XSS,
 
@@ -215,10 +215,10 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         ),
 
-        'clonepermissionsfrom' =>  'moodle/site:backupdownload'
+        'clonepermissionsfrom' =>  'powereduc/site:backupdownload'
     ),
 
-    'moodle/backup:configure' => array(
+    'powereduc/backup:configure' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL | RISK_XSS,
 
@@ -230,7 +230,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/backup:userinfo' => array(
+    'powereduc/backup:userinfo' => array(
 
         'riskbitmask' => RISK_PERSONAL,
 
@@ -241,7 +241,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/backup:anonymise' => array(
+    'powereduc/backup:anonymise' => array(
 
         'riskbitmask' => RISK_PERSONAL,
 
@@ -252,7 +252,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/restore:restorecourse' => array(
+    'powereduc/restore:restorecourse' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL | RISK_XSS,
 
@@ -263,10 +263,10 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         ),
 
-        'clonepermissionsfrom' =>  'moodle/site:restore'
+        'clonepermissionsfrom' =>  'powereduc/site:restore'
     ),
 
-    'moodle/restore:restoresection' => array(
+    'powereduc/restore:restoresection' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL | RISK_XSS,
 
@@ -277,10 +277,10 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         ),
 
-        'clonepermissionsfrom' =>  'moodle/restore:restorecourse'
+        'clonepermissionsfrom' =>  'powereduc/restore:restorecourse'
     ),
 
-    'moodle/restore:restoreactivity' => array(
+    'powereduc/restore:restoreactivity' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL | RISK_XSS,
 
@@ -291,10 +291,10 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         ),
 
-        'clonepermissionsfrom' =>  'moodle/restore:restorecourse'
+        'clonepermissionsfrom' =>  'powereduc/restore:restorecourse'
     ),
 
-    'moodle/restore:viewautomatedfilearea' => array(
+    'powereduc/restore:viewautomatedfilearea' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL | RISK_XSS,
 
@@ -306,7 +306,7 @@ $capabilities = array(
         ),
     ),
 
-    'moodle/restore:restoretargetimport' => array(
+    'powereduc/restore:restoretargetimport' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL | RISK_XSS,
 
@@ -317,10 +317,10 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         ),
 
-        'clonepermissionsfrom' =>  'moodle/site:import'
+        'clonepermissionsfrom' =>  'powereduc/site:import'
     ),
 
-    'moodle/restore:uploadfile' => array(
+    'powereduc/restore:uploadfile' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL | RISK_XSS,
 
@@ -331,10 +331,10 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         ),
 
-        'clonepermissionsfrom' =>  'moodle/site:backupupload'
+        'clonepermissionsfrom' =>  'powereduc/site:backupupload'
     ),
 
-    'moodle/restore:configure' => array(
+    'powereduc/restore:configure' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL | RISK_XSS,
 
@@ -346,7 +346,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/restore:rolldates' => array(
+    'powereduc/restore:rolldates' => array(
 
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -356,7 +356,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/restore:userinfo' => array(
+    'powereduc/restore:userinfo' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL | RISK_XSS | RISK_CONFIG,
 
@@ -367,7 +367,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/restore:createuser' => array(
+    'powereduc/restore:createuser' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL,
 
@@ -378,7 +378,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/site:manageblocks' => array(
+    'powereduc/site:manageblocks' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_XSS,
 
@@ -390,7 +390,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/site:accessallgroups' => array(
+    'powereduc/site:accessallgroups' => array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_MODULE,
@@ -400,7 +400,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/site:viewanonymousevents' => array(
+    'powereduc/site:viewanonymousevents' => array(
 
         'riskbitmask' => RISK_PERSONAL,
 
@@ -411,7 +411,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/site:viewfullnames' => array(
+    'powereduc/site:viewfullnames' => array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_MODULE,
@@ -425,7 +425,7 @@ $capabilities = array(
     // In reports that give lists of users, extra information about each user's
     // identity (the fields configured in site option showuseridentity) will be
     // displayed to users who have this capability.
-    'moodle/site:viewuseridentity' => array(
+    'powereduc/site:viewuseridentity' => array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_MODULE,
@@ -436,7 +436,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/site:viewreports' => array(
+    'powereduc/site:viewreports' => array(
 
         'riskbitmask' => RISK_PERSONAL,
 
@@ -449,7 +449,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/site:trustcontent' => array(
+    'powereduc/site:trustcontent' => array(
 
         'riskbitmask' => RISK_XSS,
 
@@ -461,7 +461,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/site:uploadusers' => array(
+    'powereduc/site:uploadusers' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL,
 
@@ -473,7 +473,7 @@ $capabilities = array(
     ),
 
     // Permission to manage filter setting overrides in subcontexts.
-    'moodle/filter:manage' => array(
+    'powereduc/filter:manage' => array(
 
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -483,7 +483,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/user:create' => array(
+    'powereduc/user:create' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL,
 
@@ -494,7 +494,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/user:delete' => array(
+    'powereduc/user:delete' => array(
 
         'riskbitmask' => RISK_PERSONAL | RISK_DATALOSS,
 
@@ -505,7 +505,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/user:update' => array(
+    'powereduc/user:update' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL,
 
@@ -516,7 +516,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/user:viewdetails' => array(
+    'powereduc/user:viewdetails' => array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
@@ -529,27 +529,27 @@ $capabilities = array(
         )
     ),
 
-    'moodle/user:viewalldetails' => array(
+    'powereduc/user:viewalldetails' => array(
         'riskbitmask' => RISK_PERSONAL,
         'captype' => 'read',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/user:update'
+        'clonepermissionsfrom' => 'powereduc/user:update'
     ),
 
-    'moodle/user:viewlastip' => array(
+    'powereduc/user:viewlastip' => array(
         'riskbitmask' => RISK_PERSONAL,
         'captype' => 'read',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/user:update'
+        'clonepermissionsfrom' => 'powereduc/user:update'
     ),
 
-    'moodle/user:viewhiddendetails' => array(
+    'powereduc/user:viewhiddendetails' => array(
 
         'riskbitmask' => RISK_PERSONAL,
 
@@ -562,7 +562,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/user:loginas' => array(
+    'powereduc/user:loginas' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL | RISK_XSS | RISK_CONFIG,
 
@@ -574,7 +574,7 @@ $capabilities = array(
     ),
 
     // can the user manage the system default profile page?
-    'moodle/user:managesyspages' => array(
+    'powereduc/user:managesyspages' => array(
 
         'riskbitmap' => RISK_SPAM | RISK_PERSONAL | RISK_CONFIG,
 
@@ -586,7 +586,7 @@ $capabilities = array(
     ),
 
     // can the user manage another user's profile page?
-    'moodle/user:manageblocks' => array(
+    'powereduc/user:manageblocks' => array(
 
         'riskbitmap' => RISK_SPAM | RISK_PERSONAL,
 
@@ -595,7 +595,7 @@ $capabilities = array(
     ),
 
     // can the user manage their own profile page?
-    'moodle/user:manageownblocks' => array(
+    'powereduc/user:manageownblocks' => array(
 
         'riskbitmap' => RISK_SPAM | RISK_PERSONAL,
 
@@ -607,7 +607,7 @@ $capabilities = array(
     ),
 
     // can the user manage their own files?
-    'moodle/user:manageownfiles' => array(
+    'powereduc/user:manageownfiles' => array(
 
         'riskbitmap' => RISK_SPAM | RISK_PERSONAL,
 
@@ -620,15 +620,15 @@ $capabilities = array(
 
     // Can the user ignore the setting userquota?
     // The permissions are cloned from ignorefilesizelimits as it was partly used for that purpose.
-    'moodle/user:ignoreuserquota' => array(
+    'powereduc/user:ignoreuserquota' => array(
         'riskbitmap' => RISK_SPAM,
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
-        'clonepermissionsfrom' => 'moodle/course:ignorefilesizelimits'
+        'clonepermissionsfrom' => 'powereduc/course:ignorefilesizelimits'
     ),
 
     // can the user manage the system default dashboard page?
-    'moodle/my:configsyspages' => array(
+    'powereduc/my:configsyspages' => array(
 
         'riskbitmap' => RISK_SPAM | RISK_PERSONAL | RISK_CONFIG,
 
@@ -639,7 +639,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/role:assign' => array(
+    'powereduc/role:assign' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL | RISK_XSS,
 
@@ -651,7 +651,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/role:review' => array(
+    'powereduc/role:review' => array(
 
         'riskbitmask' => RISK_PERSONAL,
 
@@ -665,7 +665,7 @@ $capabilities = array(
     ),
 
     // The ability to override the permissions for any capability.
-    'moodle/role:override' => array(
+    'powereduc/role:override' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL | RISK_XSS,
 
@@ -677,8 +677,8 @@ $capabilities = array(
     ),
 
     // The ability to override the permissions for 'safe' capabilities (those without risks).
-    // If a user has moodle/role:override then you should not check this capability.
-    'moodle/role:safeoverride' => array(
+    // If a user has powereduc/role:override then you should not check this capability.
+    'powereduc/role:safeoverride' => array(
 
         'riskbitmask' => RISK_SPAM,
 
@@ -689,7 +689,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/role:manage' => array(
+    'powereduc/role:manage' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL | RISK_XSS,
 
@@ -700,7 +700,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/role:switchroles' => array(
+    'powereduc/role:switchroles' => array(
 
         'riskbitmask' => RISK_XSS | RISK_PERSONAL,
 
@@ -714,9 +714,9 @@ $capabilities = array(
 
     // Create, update and delete course categories. (Deleting a course category
     // does not let you delete the courses it contains, unless you also have
-    // moodle/course: delete.) Creating and deleting requires this permission in
+    // powereduc/course: delete.) Creating and deleting requires this permission in
     // the parent category.
-    'moodle/category:manage' => array(
+    'powereduc/category:manage' => array(
 
         'riskbitmask' => RISK_XSS,
 
@@ -725,10 +725,10 @@ $capabilities = array(
         'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/category:update'
+        'clonepermissionsfrom' => 'powereduc/category:update'
     ),
 
-    'moodle/category:viewcourselist' => array(
+    'powereduc/category:viewcourselist' => array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSECAT,
@@ -738,7 +738,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/category:viewhiddencategories' => array(
+    'powereduc/category:viewhiddencategories' => array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSECAT,
@@ -746,12 +746,12 @@ $capabilities = array(
             'coursecreator' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/category:visibility'
+        'clonepermissionsfrom' => 'powereduc/category:visibility'
     ),
 
     // create, delete, move cohorts in system and course categories,
     // (cohorts with component !== null can be only moved)
-    'moodle/cohort:manage' => array(
+    'powereduc/cohort:manage' => array(
 
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
@@ -761,7 +761,7 @@ $capabilities = array(
     ),
 
     // add and remove cohort members (only for cohorts where component !== null)
-    'moodle/cohort:assign' => array(
+    'powereduc/cohort:assign' => array(
 
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
@@ -771,7 +771,7 @@ $capabilities = array(
     ),
 
     // View visible and hidden cohorts defined in the current context.
-    'moodle/cohort:view' => array(
+    'powereduc/cohort:view' => array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
@@ -781,7 +781,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:create' => array(
+    'powereduc/course:create' => array(
 
         'riskbitmask' => RISK_XSS,
 
@@ -793,7 +793,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:creategroupconversations' => array(
+    'powereduc/course:creategroupconversations' => array(
         'riskbitmask' => RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -803,12 +803,12 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:request' => array(
+    'powereduc/course:request' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
     ),
 
-    'moodle/course:delete' => array(
+    'powereduc/course:delete' => array(
 
         'riskbitmask' => RISK_DATALOSS,
 
@@ -819,7 +819,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:update' => array(
+    'powereduc/course:update' => array(
 
         'riskbitmask' => RISK_XSS,
 
@@ -831,7 +831,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:view' => array(
+    'powereduc/course:view' => array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
@@ -841,7 +841,7 @@ $capabilities = array(
     ),
 
     /* review course enrolments - no group restrictions, it is really full access to all participants info*/
-    'moodle/course:enrolreview' => array(
+    'powereduc/course:enrolreview' => array(
 
         'riskbitmask' => RISK_PERSONAL,
 
@@ -854,7 +854,7 @@ $capabilities = array(
     ),
 
     /* add, remove, hide enrol instances in courses */
-    'moodle/course:enrolconfig' => array(
+    'powereduc/course:enrolconfig' => array(
 
         'riskbitmask' => RISK_PERSONAL,
 
@@ -866,7 +866,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:reviewotherusers' => array(
+    'powereduc/course:reviewotherusers' => array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
@@ -874,10 +874,10 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW,
         ),
-        'clonepermissionsfrom' => 'moodle/role:assign'
+        'clonepermissionsfrom' => 'powereduc/role:assign'
     ),
 
-    'moodle/course:bulkmessaging' => array(
+    'powereduc/course:bulkmessaging' => array(
 
         'riskbitmask' => RISK_SPAM,
 
@@ -890,7 +890,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:viewhiddenuserfields' => array(
+    'powereduc/course:viewhiddenuserfields' => array(
 
         'riskbitmask' => RISK_PERSONAL,
 
@@ -903,7 +903,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:viewhiddencourses' => array(
+    'powereduc/course:viewhiddencourses' => array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
@@ -915,7 +915,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:visibility' => array(
+    'powereduc/course:visibility' => array(
 
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -925,7 +925,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:managefiles' => array(
+    'powereduc/course:managefiles' => array(
 
         'riskbitmask' => RISK_XSS,
 
@@ -937,7 +937,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:ignoreavailabilityrestrictions' => array(
+    'powereduc/course:ignoreavailabilityrestrictions' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_MODULE,
         'archetypes' => array(
@@ -946,10 +946,10 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW,
             'teacher' => CAP_ALLOW,
         ),
-        'clonepermissionsfrom' => 'moodle/course:viewhiddenactivities'
+        'clonepermissionsfrom' => 'powereduc/course:viewhiddenactivities'
     ),
 
-    'moodle/course:ignorefilesizelimits' => array(
+    'powereduc/course:ignorefilesizelimits' => array(
 
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -957,7 +957,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:manageactivities' => array(
+    'powereduc/course:manageactivities' => array(
 
         'riskbitmask' => RISK_XSS,
 
@@ -969,7 +969,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:activityvisibility' => array(
+    'powereduc/course:activityvisibility' => array(
 
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,
@@ -979,7 +979,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:viewhiddenactivities' => array(
+    'powereduc/course:viewhiddenactivities' => array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_MODULE,
@@ -990,7 +990,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:viewparticipants' => array(
+    'powereduc/course:viewparticipants' => array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
@@ -1002,7 +1002,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:changefullname' => array(
+    'powereduc/course:changefullname' => array(
 
         'riskbitmask' => RISK_XSS,
 
@@ -1012,10 +1012,10 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
+        'clonepermissionsfrom' => 'powereduc/course:update'
     ),
 
-    'moodle/course:changeshortname' => array(
+    'powereduc/course:changeshortname' => array(
 
         'riskbitmask' => RISK_XSS,
 
@@ -1025,10 +1025,10 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
+        'clonepermissionsfrom' => 'powereduc/course:update'
     ),
 
-    'moodle/course:changelockedcustomfields' => array(
+    'powereduc/course:changelockedcustomfields' => array(
 
         'riskbitmask' => RISK_SPAM,
 
@@ -1039,26 +1039,26 @@ $capabilities = array(
         ),
     ),
 
-    'moodle/course:configurecustomfields' => array(
+    'powereduc/course:configurecustomfields' => array(
 
         'riskbitmask' => RISK_SPAM,
 
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
-        'clonepermissionsfrom' => 'moodle/site:config'
+        'clonepermissionsfrom' => 'powereduc/site:config'
     ),
 
-    'moodle/course:renameroles' => array(
+    'powereduc/course:renameroles' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
+        'clonepermissionsfrom' => 'powereduc/course:update'
     ),
 
-    'moodle/course:changeidnumber' => array(
+    'powereduc/course:changeidnumber' => array(
 
         'riskbitmask' => RISK_XSS,
 
@@ -1068,9 +1068,9 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
+        'clonepermissionsfrom' => 'powereduc/course:update'
     ),
-    'moodle/course:changecategory' => array(
+    'powereduc/course:changecategory' => array(
         'riskbitmask' => RISK_XSS,
 
         'captype' => 'write',
@@ -1079,10 +1079,10 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
+        'clonepermissionsfrom' => 'powereduc/course:update'
     ),
 
-    'moodle/course:changesummary' => array(
+    'powereduc/course:changesummary' => array(
         'riskbitmask' => RISK_XSS,
 
         'captype' => 'write',
@@ -1091,22 +1091,22 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
+        'clonepermissionsfrom' => 'powereduc/course:update'
     ),
 
     // Ability to set a forced language for a course or activity.
-    'moodle/course:setforcedlanguage' => array(
+    'powereduc/course:setforcedlanguage' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
+        'clonepermissionsfrom' => 'powereduc/course:update'
     ),
 
 
-    'moodle/site:viewparticipants' => array(
+    'powereduc/site:viewparticipants' => array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
@@ -1115,7 +1115,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:isincompletionreports' => array(
+    'powereduc/course:isincompletionreports' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
@@ -1123,7 +1123,7 @@ $capabilities = array(
         ),
     ),
 
-    'moodle/course:viewscales' => array(
+    'powereduc/course:viewscales' => array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
@@ -1135,7 +1135,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:managescales' => array(
+    'powereduc/course:managescales' => array(
 
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -1145,7 +1145,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:managegroups' => array(
+    'powereduc/course:managegroups' => array(
         'riskbitmask' => RISK_XSS,
 
         'captype' => 'write',
@@ -1156,7 +1156,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:reset' => array(
+    'powereduc/course:reset' => array(
 
         'riskbitmask' => RISK_DATALOSS,
 
@@ -1168,7 +1168,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:viewsuspendedusers' => array(
+    'powereduc/course:viewsuspendedusers' => array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
@@ -1178,7 +1178,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:tag' => array(
+    'powereduc/course:tag' => array(
         'riskbitmask' => RISK_SPAM,
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -1186,10 +1186,10 @@ $capabilities = array(
             'manager' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
+        'clonepermissionsfrom' => 'powereduc/course:update'
     ),
 
-    'moodle/blog:view' => array(
+    'powereduc/blog:view' => array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
@@ -1203,7 +1203,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/blog:search' => array(
+    'powereduc/blog:search' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
@@ -1216,7 +1216,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/blog:viewdrafts' => array(
+    'powereduc/blog:viewdrafts' => array(
 
         'riskbitmask' => RISK_PERSONAL,
         'captype' => 'read',
@@ -1226,7 +1226,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/blog:create' => array( // works in CONTEXT_SYSTEM only
+    'powereduc/blog:create' => array( // works in CONTEXT_SYSTEM only
 
         'riskbitmask' => RISK_SPAM,
 
@@ -1238,7 +1238,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/blog:manageentries' => array(
+    'powereduc/blog:manageentries' => array(
 
         'riskbitmask' => RISK_SPAM,
 
@@ -1251,7 +1251,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/blog:manageexternal' => array(
+    'powereduc/blog:manageexternal' => array(
 
         'riskbitmask' => RISK_SPAM,
 
@@ -1266,7 +1266,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/calendar:manageownentries' => array( // works in CONTEXT_SYSTEM only
+    'powereduc/calendar:manageownentries' => array( // works in CONTEXT_SYSTEM only
 
         'riskbitmask' => RISK_SPAM,
 
@@ -1278,7 +1278,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/calendar:managegroupentries' => array(
+    'powereduc/calendar:managegroupentries' => array(
 
         'riskbitmask' => RISK_SPAM,
 
@@ -1291,7 +1291,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/calendar:manageentries' => array(
+    'powereduc/calendar:manageentries' => array(
 
         'riskbitmask' => RISK_SPAM,
 
@@ -1304,7 +1304,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/user:editprofile' => array(
+    'powereduc/user:editprofile' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL,
 
@@ -1315,7 +1315,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/user:editownprofile' => array(
+    'powereduc/user:editownprofile' => array(
 
         'riskbitmask' => RISK_SPAM,
 
@@ -1328,7 +1328,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/user:changeownpassword' => array(
+    'powereduc/user:changeownpassword' => array(
 
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
@@ -1341,7 +1341,7 @@ $capabilities = array(
 
     // The next 3 might make no sense for some roles, e.g teacher, etc.
     // since the next level up is site. These are more for the parent role
-    'moodle/user:readuserposts' => array(
+    'powereduc/user:readuserposts' => array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_USER,
@@ -1353,7 +1353,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/user:readuserblogs' => array(
+    'powereduc/user:readuserblogs' => array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_USER,
@@ -1366,7 +1366,7 @@ $capabilities = array(
     ),
 
     // designed for parent role - not used in legacy roles
-    'moodle/user:viewuseractivitiesreport' => array(
+    'powereduc/user:viewuseractivitiesreport' => array(
         'riskbitmask' => RISK_PERSONAL,
 
         'captype' => 'read',
@@ -1376,7 +1376,7 @@ $capabilities = array(
     ),
 
     //capabilities designed for the new message system configuration
-    'moodle/user:editmessageprofile' => array(
+    'powereduc/user:editmessageprofile' => array(
 
          'riskbitmask' => RISK_SPAM,
 
@@ -1387,7 +1387,7 @@ $capabilities = array(
          )
      ),
 
-     'moodle/user:editownmessageprofile' => array(
+     'powereduc/user:editownmessageprofile' => array(
 
          'captype' => 'write',
          'contextlevel' => CONTEXT_SYSTEM,
@@ -1398,7 +1398,7 @@ $capabilities = array(
          )
      ),
 
-    'moodle/question:managecategory' => array(
+    'powereduc/question:managecategory' => array(
         'riskbitmask' => RISK_SPAM | RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -1408,8 +1408,8 @@ $capabilities = array(
         )
     ),
 
-    //new in moodle 1.9
-    'moodle/question:add' => array(
+    //new in powereduc 1.9
+    'powereduc/question:add' => array(
         'riskbitmask' => RISK_SPAM | RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -1417,9 +1417,9 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' =>  'moodle/question:manage'
+        'clonepermissionsfrom' =>  'powereduc/question:manage'
     ),
-    'moodle/question:editmine' => array(
+    'powereduc/question:editmine' => array(
         'riskbitmask' => RISK_SPAM | RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -1427,9 +1427,9 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' =>  'moodle/question:manage'
+        'clonepermissionsfrom' =>  'powereduc/question:manage'
     ),
-    'moodle/question:editall' => array(
+    'powereduc/question:editall' => array(
         'riskbitmask' => RISK_SPAM | RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -1437,66 +1437,66 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' =>  'moodle/question:manage'
+        'clonepermissionsfrom' =>  'powereduc/question:manage'
     ),
-    'moodle/question:viewmine' => array(
+    'powereduc/question:viewmine' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' =>  'moodle/question:manage'
+        'clonepermissionsfrom' =>  'powereduc/question:manage'
     ),
-    'moodle/question:viewall' => array(
+    'powereduc/question:viewall' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' =>  'moodle/question:manage'
+        'clonepermissionsfrom' =>  'powereduc/question:manage'
     ),
-    'moodle/question:usemine' => array(
+    'powereduc/question:usemine' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' =>  'moodle/question:manage'
+        'clonepermissionsfrom' =>  'powereduc/question:manage'
     ),
-    'moodle/question:useall' => array(
+    'powereduc/question:useall' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' =>  'moodle/question:manage'
+        'clonepermissionsfrom' =>  'powereduc/question:manage'
     ),
-    'moodle/question:movemine' => array(
+    'powereduc/question:movemine' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' =>  'moodle/question:manage'
+        'clonepermissionsfrom' =>  'powereduc/question:manage'
     ),
-    'moodle/question:moveall' => array(
+    'powereduc/question:moveall' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' =>  'moodle/question:manage'
+        'clonepermissionsfrom' =>  'powereduc/question:manage'
     ),
-    //END new in moodle 1.9
+    //END new in powereduc 1.9
 
     // Configure the installed question types.
-    'moodle/question:config' => array(
+    'powereduc/question:config' => array(
         'riskbitmask' => RISK_CONFIG,
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
@@ -1506,7 +1506,7 @@ $capabilities = array(
     ),
 
     // While attempting questions, the ability to flag particular questions for later reference.
-    'moodle/question:flag' => array(
+    'powereduc/question:flag' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
@@ -1518,28 +1518,28 @@ $capabilities = array(
     ),
 
     // Controls whether the user can tag his own questions.
-    'moodle/question:tagmine' => array(
+    'powereduc/question:tagmine' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/question:editmine'
+        'clonepermissionsfrom' => 'powereduc/question:editmine'
     ),
 
     // Controls whether the user can tag all questions.
-    'moodle/question:tagall' => array(
+    'powereduc/question:tagall' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/question:editall'
+        'clonepermissionsfrom' => 'powereduc/question:editall'
     ),
 
-    'moodle/site:doclinks' => array(
+    'powereduc/site:doclinks' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
@@ -1549,7 +1549,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:sectionvisibility' => array(
+    'powereduc/course:sectionvisibility' => array(
 
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -1559,7 +1559,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:useremail' => array(
+    'powereduc/course:useremail' => array(
 
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -1569,7 +1569,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:viewhiddensections' => array(
+    'powereduc/course:viewhiddensections' => array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
@@ -1579,7 +1579,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:setcurrentsection' => array(
+    'powereduc/course:setcurrentsection' => array(
 
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -1589,7 +1589,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/course:movesections' => array(
+    'powereduc/course:movesections' => array(
 
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -1597,10 +1597,10 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/course:update'
+        'clonepermissionsfrom' => 'powereduc/course:update'
     ),
 
-    'moodle/site:mnetlogintoremote' => array(
+    'powereduc/site:mnetlogintoremote' => array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
@@ -1608,7 +1608,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/grade:viewall' => array(
+    'powereduc/grade:viewall' => array(
         'riskbitmask' => RISK_PERSONAL,
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE, // and CONTEXT_USER
@@ -1617,10 +1617,10 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/course:viewcoursegrades'
+        'clonepermissionsfrom' => 'powereduc/course:viewcoursegrades'
     ),
 
-    'moodle/grade:view' => array(
+    'powereduc/grade:view' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
@@ -1628,7 +1628,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/grade:viewhidden' => array(
+    'powereduc/grade:viewhidden' => array(
         'riskbitmask' => RISK_PERSONAL,
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
@@ -1637,10 +1637,10 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/course:viewcoursegrades'
+        'clonepermissionsfrom' => 'powereduc/course:viewcoursegrades'
     ),
 
-    'moodle/grade:import' => array(
+    'powereduc/grade:import' => array(
         'riskbitmask' => RISK_PERSONAL | RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -1648,10 +1648,10 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/course:managegrades'
+        'clonepermissionsfrom' => 'powereduc/course:managegrades'
     ),
 
-    'moodle/grade:export' => array(
+    'powereduc/grade:export' => array(
         'riskbitmask' => RISK_PERSONAL,
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
@@ -1660,10 +1660,10 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/course:managegrades'
+        'clonepermissionsfrom' => 'powereduc/course:managegrades'
     ),
 
-    'moodle/grade:manage' => array(
+    'powereduc/grade:manage' => array(
         'riskbitmask' => RISK_PERSONAL | RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -1671,10 +1671,10 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/course:managegrades'
+        'clonepermissionsfrom' => 'powereduc/course:managegrades'
     ),
 
-    'moodle/grade:edit' => array(
+    'powereduc/grade:edit' => array(
         'riskbitmask' => RISK_PERSONAL | RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -1682,12 +1682,12 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/course:managegrades'
+        'clonepermissionsfrom' => 'powereduc/course:managegrades'
     ),
 
     // ability to define advanced grading forms in activities either from scratch
     // or from a shared template
-    'moodle/grade:managegradingforms' => array(
+    'powereduc/grade:managegradingforms' => array(
         'riskbitmask' => RISK_PERSONAL | RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -1695,12 +1695,12 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/course:managegrades'
+        'clonepermissionsfrom' => 'powereduc/course:managegrades'
     ),
 
     // ability to save a grading form as a new shared template and eventually edit
     // and remove own templates (templates originally shared by that user)
-    'moodle/grade:sharegradingforms' => array(
+    'powereduc/grade:sharegradingforms' => array(
         'riskbitmask' => RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
@@ -1711,7 +1711,7 @@ $capabilities = array(
 
     // ability to edit and remove any shared template, even those originally shared
     // by other users
-    'moodle/grade:managesharedforms' => array(
+    'powereduc/grade:managesharedforms' => array(
         'riskbitmask' => RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
@@ -1720,27 +1720,27 @@ $capabilities = array(
         ),
     ),
 
-    'moodle/grade:manageoutcomes' => array(
+    'powereduc/grade:manageoutcomes' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/course:managegrades'
+        'clonepermissionsfrom' => 'powereduc/course:managegrades'
     ),
 
-    'moodle/grade:manageletters' => array(
+    'powereduc/grade:manageletters' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/course:managegrades'
+        'clonepermissionsfrom' => 'powereduc/course:managegrades'
     ),
 
-    'moodle/grade:hide' => array(
+    'powereduc/grade:hide' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
@@ -1749,7 +1749,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/grade:lock' => array(
+    'powereduc/grade:lock' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
@@ -1758,7 +1758,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/grade:unlock' => array(
+    'powereduc/grade:unlock' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
@@ -1767,7 +1767,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/my:manageblocks' => array(
+    'powereduc/my:manageblocks' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
@@ -1775,7 +1775,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/notes:view' => array(
+    'powereduc/notes:view' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
@@ -1785,7 +1785,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/notes:manage' => array(
+    'powereduc/notes:manage' => array(
         'riskbitmask' => RISK_SPAM,
 
         'captype' => 'write',
@@ -1797,7 +1797,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/tag:manage' => array(
+    'powereduc/tag:manage' => array(
         'riskbitmask' => RISK_SPAM,
 
         'captype' => 'write',
@@ -1807,7 +1807,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/tag:edit' => array(
+    'powereduc/tag:edit' => array(
         'riskbitmask' => RISK_SPAM,
 
         'captype' => 'write',
@@ -1817,7 +1817,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/tag:flag' => array(
+    'powereduc/tag:flag' => array(
         'riskbitmask' => RISK_SPAM,
 
         'captype' => 'write',
@@ -1827,7 +1827,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/tag:editblocks' => array(
+    'powereduc/tag:editblocks' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
@@ -1837,7 +1837,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/block:view' => array(
+    'powereduc/block:view' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_BLOCK,
         'archetypes' => array(
@@ -1849,7 +1849,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/block:edit' => array(
+    'powereduc/block:edit' => array(
         'riskbitmask' => RISK_SPAM | RISK_XSS,
 
         'captype' => 'write',
@@ -1860,7 +1860,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/portfolio:export' => array(
+    'powereduc/portfolio:export' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
@@ -1870,7 +1870,7 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW,
         )
     ),
-    'moodle/comment:view' => array(
+    'powereduc/comment:view' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
@@ -1883,7 +1883,7 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         )
     ),
-    'moodle/comment:post' => array(
+    'powereduc/comment:post' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL,
         'captype' => 'write',
@@ -1896,7 +1896,7 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         )
     ),
-    'moodle/comment:delete' => array(
+    'powereduc/comment:delete' => array(
 
         'riskbitmask' => RISK_DATALOSS,
         'captype' => 'write',
@@ -1906,7 +1906,7 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         )
     ),
-    'moodle/webservice:createtoken' => array(
+    'powereduc/webservice:createtoken' => array(
 
         'riskbitmask' => RISK_CONFIG | RISK_DATALOSS | RISK_SPAM | RISK_PERSONAL | RISK_XSS,
         'captype' => 'write',
@@ -1915,14 +1915,14 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         )
     ),
-    'moodle/webservice:managealltokens' => array(
+    'powereduc/webservice:managealltokens' => array(
 
         'riskbitmask' => RISK_CONFIG | RISK_DATALOSS | RISK_PERSONAL,
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array()
     ),
-    'moodle/webservice:createmobiletoken' => array(
+    'powereduc/webservice:createmobiletoken' => array(
 
         'riskbitmask' => RISK_SPAM | RISK_PERSONAL,
         'captype' => 'write',
@@ -1931,7 +1931,7 @@ $capabilities = array(
             'user' => CAP_ALLOW
         )
     ),
-    'moodle/rating:view' => array(
+    'powereduc/rating:view' => array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
@@ -1943,7 +1943,7 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         )
     ),
-    'moodle/rating:viewany' => array(
+    'powereduc/rating:viewany' => array(
 
         'riskbitmask' => RISK_PERSONAL,
         'captype' => 'read',
@@ -1956,7 +1956,7 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         )
     ),
-    'moodle/rating:viewall' => array(
+    'powereduc/rating:viewall' => array(
 
         'riskbitmask' => RISK_PERSONAL,
         'captype' => 'read',
@@ -1969,7 +1969,7 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         )
     ),
-    'moodle/rating:rate' => array(
+    'powereduc/rating:rate' => array(
 
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -1981,7 +1981,7 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         )
     ),
-    'moodle/course:markcomplete' => array(
+    'powereduc/course:markcomplete' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
@@ -1990,7 +1990,7 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         )
     ),
-    'moodle/course:overridecompletion' => array(
+    'powereduc/course:overridecompletion' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
@@ -2001,7 +2001,7 @@ $capabilities = array(
     ),
 
     // Badges.
-    'moodle/badges:manageglobalsettings' => array(
+    'powereduc/badges:manageglobalsettings' => array(
         'riskbitmask'  => RISK_DATALOSS | RISK_CONFIG,
         'captype'      => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
@@ -2011,7 +2011,7 @@ $capabilities = array(
     ),
 
     // View available badges without earning them.
-    'moodle/badges:viewbadges' => array(
+    'powereduc/badges:viewbadges' => array(
         'captype'       => 'read',
         'contextlevel'  => CONTEXT_COURSE,
         'archetypes'    => array(
@@ -2020,7 +2020,7 @@ $capabilities = array(
     ),
 
     // Manage badges on own private badges page.
-    'moodle/badges:manageownbadges' => array(
+    'powereduc/badges:manageownbadges' => array(
         'riskbitmap'    => RISK_SPAM,
         'captype'       => 'write',
         'contextlevel'  => CONTEXT_USER,
@@ -2030,7 +2030,7 @@ $capabilities = array(
     ),
 
     // View public badges in other users' profiles.
-    'moodle/badges:viewotherbadges' => array(
+    'powereduc/badges:viewotherbadges' => array(
         'riskbitmap'    => RISK_PERSONAL,
         'captype'       => 'read',
         'contextlevel'  => CONTEXT_USER,
@@ -2040,7 +2040,7 @@ $capabilities = array(
     ),
 
     // Earn badge.
-    'moodle/badges:earnbadge' => array(
+    'powereduc/badges:earnbadge' => array(
         'captype'       => 'write',
         'contextlevel'  => CONTEXT_COURSE,
         'archetypes'    => array(
@@ -2049,7 +2049,7 @@ $capabilities = array(
     ),
 
     // Create/duplicate badges.
-    'moodle/badges:createbadge' => array(
+    'powereduc/badges:createbadge' => array(
         'riskbitmask'  => RISK_SPAM,
         'captype'      => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -2060,7 +2060,7 @@ $capabilities = array(
     ),
 
     // Delete badges.
-    'moodle/badges:deletebadge' => array(
+    'powereduc/badges:deletebadge' => array(
         'riskbitmask'  => RISK_DATALOSS,
         'captype'      => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -2071,7 +2071,7 @@ $capabilities = array(
     ),
 
     // Set up/edit badge details.
-    'moodle/badges:configuredetails' => array(
+    'powereduc/badges:configuredetails' => array(
         'riskbitmask'  => RISK_SPAM,
         'captype'      => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -2082,7 +2082,7 @@ $capabilities = array(
     ),
 
     // Set up/edit criteria of earning a badge.
-    'moodle/badges:configurecriteria' => array(
+    'powereduc/badges:configurecriteria' => array(
         'riskbitmask'  => RISK_XSS,
         'captype'      => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -2093,7 +2093,7 @@ $capabilities = array(
     ),
 
     // Configure badge messages.
-    'moodle/badges:configuremessages' => array(
+    'powereduc/badges:configuremessages' => array(
         'riskbitmask'  => RISK_SPAM,
         'captype'      => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -2104,7 +2104,7 @@ $capabilities = array(
     ),
 
     // Award badge to a user.
-    'moodle/badges:awardbadge' => array(
+    'powereduc/badges:awardbadge' => array(
         'riskbitmask'  => RISK_SPAM,
         'captype'      => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -2116,7 +2116,7 @@ $capabilities = array(
     ),
 
     // Revoke badge from a user.
-    'moodle/badges:revokebadge' => array(
+    'powereduc/badges:revokebadge' => array(
         'riskbitmask'  => RISK_SPAM,
         'captype'      => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -2128,7 +2128,7 @@ $capabilities = array(
     ),
 
     // View users who earned a specific badge without being able to award a badge.
-    'moodle/badges:viewawarded' => array(
+    'powereduc/badges:viewawarded' => array(
         'riskbitmask'  => RISK_PERSONAL,
         'captype'      => 'read',
         'contextlevel' => CONTEXT_COURSE,
@@ -2139,7 +2139,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/site:forcelanguage' => array(
+    'powereduc/site:forcelanguage' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
@@ -2147,7 +2147,7 @@ $capabilities = array(
     ),
 
     // Perform site-wide search queries through the search API.
-    'moodle/search:query' => array(
+    'powereduc/search:query' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
@@ -2161,21 +2161,21 @@ $capabilities = array(
     ),
 
     // Competencies.
-    'moodle/competency:competencymanage' => array(
+    'powereduc/competency:competencymanage' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
         'archetypes' => array(
             'manager' => CAP_ALLOW
         )
     ),
-    'moodle/competency:competencyview' => array(
+    'powereduc/competency:competencyview' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSECAT,
         'archetypes' => array(
             'user' => CAP_ALLOW
         ),
     ),
-    'moodle/competency:competencygrade' => array(
+    'powereduc/competency:competencygrade' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE, // And CONTEXT_USER.
         'archetypes' => array(
@@ -2185,7 +2185,7 @@ $capabilities = array(
         ),
     ),
     // Course competencies.
-    'moodle/competency:coursecompetencymanage' => array(
+    'powereduc/competency:coursecompetencymanage' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
@@ -2193,22 +2193,22 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         ),
     ),
-    'moodle/competency:coursecompetencyconfigure' => array(
+    'powereduc/competency:coursecompetencyconfigure' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,
         'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
     ),
-    'moodle/competency:coursecompetencygradable' => array(
+    'powereduc/competency:coursecompetencygradable' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
             'student' => CAP_ALLOW
         ),
-        'clonepermissionsfrom' => 'moodle/course:isincompletionreports'
+        'clonepermissionsfrom' => 'powereduc/course:isincompletionreports'
     ),
-    'moodle/competency:coursecompetencyview' => array(
+    'powereduc/competency:coursecompetencyview' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
@@ -2216,96 +2216,96 @@ $capabilities = array(
         ),
     ),
     // Evidence.
-    'moodle/competency:evidencedelete' => array(
+    'powereduc/competency:evidencedelete' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
         ),
-        'clonepermissionsfrom' => 'moodle/site:config'
+        'clonepermissionsfrom' => 'powereduc/site:config'
     ),
     // User plans.
-    'moodle/competency:planmanage' => array(
+    'powereduc/competency:planmanage' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
     ),
-    'moodle/competency:planmanagedraft' => array(
+    'powereduc/competency:planmanagedraft' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
     ),
-    'moodle/competency:planmanageown' => array(
+    'powereduc/competency:planmanageown' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
         ),
     ),
-    'moodle/competency:planmanageowndraft' => array(
+    'powereduc/competency:planmanageowndraft' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
         ),
     ),
-    'moodle/competency:planview' => array(
+    'powereduc/competency:planview' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
     ),
-    'moodle/competency:planviewdraft' => array(
+    'powereduc/competency:planviewdraft' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
     ),
-    'moodle/competency:planviewown' => array(
+    'powereduc/competency:planviewown' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
             'user' => CAP_ALLOW
         ),
     ),
-    'moodle/competency:planviewowndraft' => array(
+    'powereduc/competency:planviewowndraft' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
         ),
     ),
-    'moodle/competency:planrequestreview' => array(
+    'powereduc/competency:planrequestreview' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
             'manager' => CAP_ALLOW
         )
     ),
-    'moodle/competency:planrequestreviewown' => array(
+    'powereduc/competency:planrequestreviewown' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
             'user' => CAP_ALLOW
         )
     ),
-    'moodle/competency:planreview' => array(
+    'powereduc/competency:planreview' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
     ),
-    'moodle/competency:plancomment' => array(
+    'powereduc/competency:plancomment' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
     ),
-    'moodle/competency:plancommentown' => array(
+    'powereduc/competency:plancommentown' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
@@ -2313,7 +2313,7 @@ $capabilities = array(
         ),
     ),
     // User competencies.
-    'moodle/competency:usercompetencyview' => array(
+    'powereduc/competency:usercompetencyview' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_USER,     // And CONTEXT_COURSE.
         'archetypes' => array(
@@ -2322,35 +2322,35 @@ $capabilities = array(
             'teacher' => CAP_ALLOW
         )
     ),
-    'moodle/competency:usercompetencyrequestreview' => array(
+    'powereduc/competency:usercompetencyrequestreview' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
             'manager' => CAP_ALLOW
         )
     ),
-    'moodle/competency:usercompetencyrequestreviewown' => array(
+    'powereduc/competency:usercompetencyrequestreviewown' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
             'user' => CAP_ALLOW
         )
     ),
-    'moodle/competency:usercompetencyreview' => array(
+    'powereduc/competency:usercompetencyreview' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
     ),
-    'moodle/competency:usercompetencycomment' => array(
+    'powereduc/competency:usercompetencycomment' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
     ),
-    'moodle/competency:usercompetencycommentown' => array(
+    'powereduc/competency:usercompetencycommentown' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
@@ -2358,14 +2358,14 @@ $capabilities = array(
         ),
     ),
     // Template.
-    'moodle/competency:templatemanage' => array(
+    'powereduc/competency:templatemanage' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSECAT,
         'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
     ),
-    'moodle/analytics:listinsights' => array(
+    'powereduc/analytics:listinsights' => array(
         'riskbitmask' => RISK_PERSONAL,
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
@@ -2375,7 +2375,7 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         )
     ),
-    'moodle/analytics:managemodels' => array(
+    'powereduc/analytics:managemodels' => array(
         'riskbitmask' => RISK_CONFIG,
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
@@ -2383,7 +2383,7 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         ),
     ),
-    'moodle/competency:templateview' => array(
+    'powereduc/competency:templateview' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSECAT,
         'archetypes' => array(
@@ -2391,35 +2391,35 @@ $capabilities = array(
         ),
     ),
     // User evidence.
-    'moodle/competency:userevidencemanage' => array(
+    'powereduc/competency:userevidencemanage' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
     ),
-    'moodle/competency:userevidencemanageown' => array(
+    'powereduc/competency:userevidencemanageown' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
             'user' => CAP_ALLOW
         ),
     ),
-    'moodle/competency:userevidenceview' => array(
+    'powereduc/competency:userevidenceview' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_USER,
         'archetypes' => array(
             'manager' => CAP_ALLOW
         ),
     ),
-    'moodle/site:maintenanceaccess' => array(
+    'powereduc/site:maintenanceaccess' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
         )
     ),
     // Allow message any user, regardlesss of the privacy preferences for messaging.
-    'moodle/site:messageanyuser' => array(
+    'powereduc/site:messageanyuser' => array(
         'riskbitmask' => RISK_SPAM,
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
@@ -2431,7 +2431,7 @@ $capabilities = array(
     ),
 
     // Context locking/unlocking.
-    'moodle/site:managecontextlocks' => [
+    'powereduc/site:managecontextlocks' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,
         'archetypes' => [
@@ -2439,7 +2439,7 @@ $capabilities = array(
     ],
 
     // Manual completion toggling.
-    'moodle/course:togglecompletion' => [
+    'powereduc/course:togglecompletion' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,
         'archetypes' => [
@@ -2447,7 +2447,7 @@ $capabilities = array(
         ],
     ],
 
-    'moodle/analytics:listowninsights' => array(
+    'powereduc/analytics:listowninsights' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
@@ -2456,7 +2456,7 @@ $capabilities = array(
     ),
 
     // Set display option buttons to an H5P content.
-    'moodle/h5p:setdisplayoptions' => array(
+    'powereduc/h5p:setdisplayoptions' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,
         'archetypes' => array(
@@ -2465,7 +2465,7 @@ $capabilities = array(
     ),
 
     // Allow to deploy H5P content.
-    'moodle/h5p:deploy' => array(
+    'powereduc/h5p:deploy' => array(
         'riskbitmask' => RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,
@@ -2476,7 +2476,7 @@ $capabilities = array(
     ),
 
     // Allow to update H5P content-type libraries.
-    'moodle/h5p:updatelibraries' => [
+    'powereduc/h5p:updatelibraries' => [
         'riskbitmask' => RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,
@@ -2486,7 +2486,7 @@ $capabilities = array(
     ],
 
     // Allow users to recommend activities in the activity chooser.
-    'moodle/course:recommendactivity' => [
+    'powereduc/course:recommendactivity' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [
@@ -2495,7 +2495,7 @@ $capabilities = array(
     ],
 
     // Content bank capabilities.
-    'moodle/contentbank:access' => array(
+    'powereduc/contentbank:access' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
@@ -2505,7 +2505,7 @@ $capabilities = array(
         )
     ),
 
-    'moodle/contentbank:upload' => array(
+    'powereduc/contentbank:upload' => array(
         'riskbitmask' => RISK_SPAM,
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -2517,7 +2517,7 @@ $capabilities = array(
     ),
 
     // Delete any content from the content bank.
-    'moodle/contentbank:deleteanycontent' => [
+    'powereduc/contentbank:deleteanycontent' => [
         'riskbitmask' => RISK_DATALOSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -2528,7 +2528,7 @@ $capabilities = array(
     ],
 
     // Delete content created by yourself.
-    'moodle/contentbank:deleteowncontent' => [
+    'powereduc/contentbank:deleteowncontent' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => [
@@ -2537,7 +2537,7 @@ $capabilities = array(
     ],
 
     // Manage (rename, move, publish, share, etc.) any content from the content bank.
-    'moodle/contentbank:manageanycontent' => [
+    'powereduc/contentbank:manageanycontent' => [
         'riskbitmask' => RISK_DATALOSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -2548,7 +2548,7 @@ $capabilities = array(
     ],
 
     // Manage (rename, move, publish, share, etc.) content created by yourself.
-    'moodle/contentbank:manageowncontent' => [
+    'powereduc/contentbank:manageowncontent' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
@@ -2559,7 +2559,7 @@ $capabilities = array(
     ],
 
     // Allow users to create/edit content within the content bank.
-    'moodle/contentbank:useeditor' => [
+    'powereduc/contentbank:useeditor' => [
         'riskbitmask' => RISK_SPAM,
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -2571,7 +2571,7 @@ $capabilities = array(
     ],
 
     // Allow users to download content.
-    'moodle/contentbank:downloadcontent' => [
+    'powereduc/contentbank:downloadcontent' => [
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => [
@@ -2582,7 +2582,7 @@ $capabilities = array(
     ],
 
     // Allow users to download course content.
-    'moodle/course:downloadcoursecontent' => [
+    'powereduc/course:downloadcoursecontent' => [
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
@@ -2594,7 +2594,7 @@ $capabilities = array(
     ],
 
     // Allow users to configure download course content functionality within a course, if the feature is available.
-    'moodle/course:configuredownloadcontent' => [
+    'powereduc/course:configuredownloadcontent' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
@@ -2604,7 +2604,7 @@ $capabilities = array(
     ],
 
     // Allow to manage payment accounts.
-    'moodle/payment:manageaccounts' => [
+    'powereduc/payment:manageaccounts' => [
         'captype' => 'write',
         'riskbitmask' => RISK_PERSONAL | RISK_CONFIG | RISK_DATALOSS,
         'contextlevel' => CONTEXT_COURSE,
@@ -2612,7 +2612,7 @@ $capabilities = array(
     ],
 
     // Allow to view payments.
-    'moodle/payment:viewpayments' => [
+    'powereduc/payment:viewpayments' => [
         'captype' => 'read',
         'riskbitmask' => RISK_PERSONAL,
         'contextlevel' => CONTEXT_COURSE,
@@ -2620,7 +2620,7 @@ $capabilities = array(
     ],
 
     // Allow users to view hidden content.
-    'moodle/contentbank:viewunlistedcontent' => [
+    'powereduc/contentbank:viewunlistedcontent' => [
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => [
@@ -2630,7 +2630,7 @@ $capabilities = array(
     ],
 
     // Allow users to view custom reports.
-    'moodle/reportbuilder:view' => [
+    'powereduc/reportbuilder:view' => [
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [
@@ -2639,7 +2639,7 @@ $capabilities = array(
     ],
 
     // Allow users to create/edit their own custom reports.
-    'moodle/reportbuilder:edit' => [
+    'powereduc/reportbuilder:edit' => [
         'captype' => 'write',
         'riskbitmap' => RISK_PERSONAL,
         'contextlevel' => CONTEXT_SYSTEM,
@@ -2649,7 +2649,7 @@ $capabilities = array(
     ],
 
     // Allow users to create/edit all custom reports.
-    'moodle/reportbuilder:editall' => [
+    'powereduc/reportbuilder:editall' => [
         'captype' => 'write',
         'riskbitmap' => RISK_PERSONAL,
         'contextlevel' => CONTEXT_SYSTEM,
@@ -2657,7 +2657,7 @@ $capabilities = array(
     ],
 
     // Allow users to schedule reports as other users.
-    'moodle/reportbuilder:scheduleviewas' => [
+    'powereduc/reportbuilder:scheduleviewas' => [
         'captype' => 'read',
         'riskbitmap' => RISK_PERSONAL,
         'contextlevel' => CONTEXT_SYSTEM,

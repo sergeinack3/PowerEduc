@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,11 +33,11 @@ class renderer extends \plugin_renderer_base {
      * @return string the html.
      */
     public function render_account_binding_options_page(int $provisioningmode): string {
-        $formaction = new \moodle_url('/auth/lti/login.php');
+        $formaction = new \powereduc_url('/auth/lti/login.php');
         $notification = new notification(get_string('firstlaunchnotice', 'auth_lti'), \core\notification::INFO, false);
         $noauthnotice = new notification(get_string('firstlaunchnoauthnotice', 'auth_lti', get_docs_url('Publish_as_LTI_tool')),
             \core\notification::WARNING, false);
-        $cancreateaccounts = !get_config('moodle', 'authpreventaccountcreation');
+        $cancreateaccounts = !get_config('powereduc', 'authpreventaccountcreation');
         if ($provisioningmode == \auth_plugin_lti::PROVISIONING_MODE_PROMPT_EXISTING_ONLY) {
             $cancreateaccounts = false;
         }
@@ -74,10 +74,10 @@ class renderer extends \plugin_renderer_base {
      * or deeplink launch endpoint but could be any calling code in LTI which wants to use the account binding workflow.
      *
      * @param notification $notification the notification containing the message describing the binding success.
-     * @param \moodle_url $returnurl the URL to return to when the user clicks continue on the rendered page.
+     * @param \powereduc_url $returnurl the URL to return to when the user clicks continue on the rendered page.
      * @return string the rendered HTML
      */
-    public function render_account_binding_complete(notification $notification, \moodle_url $returnurl): string {
+    public function render_account_binding_complete(notification $notification, \powereduc_url $returnurl): string {
         $context = (object) [
             'notification' => $notification->export_for_template($this),
             'returnurl' => $returnurl->out()

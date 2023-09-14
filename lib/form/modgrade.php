@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -43,7 +43,7 @@ require_once($CFG->dirroot.'/lib/grade/grade_scale.php');
  * @copyright 2006 Jamie Pratt <me@jamiep.org>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class MoodleQuickForm_modgrade extends MoodleQuickForm_group {
+class PowerEducQuickForm_modgrade extends PowerEducQuickForm_group {
 
     /** @var boolean $isupdate Is this an add or an update ? */
     public $isupdate = false;
@@ -66,13 +66,13 @@ class MoodleQuickForm_modgrade extends MoodleQuickForm_group {
     /** @var boolean $useratings Set to true if the activity is using ratings, false otherwise */
     public $useratings = false;
 
-    /** @var MoodleQuickForm_select $gradetypeformelement */
+    /** @var PowerEducQuickForm_select $gradetypeformelement */
     private $gradetypeformelement;
 
-    /** @var MoodleQuickForm_select $scaleformelement */
+    /** @var PowerEducQuickForm_select $scaleformelement */
     private $scaleformelement;
 
-    /** @var MoodleQuickForm_text $maxgradeformelement */
+    /** @var PowerEducQuickForm_text $maxgradeformelement */
     private $maxgradeformelement;
 
     /**
@@ -122,9 +122,9 @@ class MoodleQuickForm_modgrade extends MoodleQuickForm_group {
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
-    public function MoodleQuickForm_modgrade($elementname = null, $elementlabel = null, $options = array(), $attributes = null) {
+    public function PowerEducQuickForm_modgrade($elementname = null, $elementlabel = null, $options = array(), $attributes = null) {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
         self::__construct($elementname, $elementlabel, $options, $attributes);
     }
@@ -353,11 +353,11 @@ class MoodleQuickForm_modgrade extends MoodleQuickForm_group {
      *
      * @param string $event Name of event
      * @param mixed $arg event arguments
-     * @param moodleform $caller calling object
+     * @param powereducform $caller calling object
      * @return mixed
      */
     public function onQuickFormEvent($event, $arg, &$caller) {
-        $this->setMoodleForm($caller);
+        $this->setPowerEducForm($caller);
         switch ($event) {
             case 'createElement':
                 // The first argument is the name.

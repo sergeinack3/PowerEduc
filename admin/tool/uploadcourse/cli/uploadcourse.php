@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ require(__DIR__ . '/../../../../config.php');
 require_once($CFG->libdir . '/clilib.php');
 require_once($CFG->libdir . '/csvlib.class.php');
 
-$courseconfig = get_config('moodlecourse');
+$courseconfig = get_config('powereduccourse');
 
 // Now get cli options.
 list($options, $unrecognized) = cli_get_params(array(
@@ -155,7 +155,7 @@ if (!isset($encodings[$options['encoding']])) {
 $defaults = array();
 $defaults['category'] = $options['category'];
 $defaults['startdate'] = time() + 3600 * 24;
-$defaults['enddate'] = $defaults['startdate'] + intval(get_config('moodlecourse', 'courseduration'));
+$defaults['enddate'] = $defaults['startdate'] + intval(get_config('powereduccourse', 'courseduration'));
 $defaults['newsitems'] = $courseconfig->newsitems;
 $defaults['showgrades'] = $courseconfig->showgrades;
 $defaults['showreports'] = $courseconfig->showreports;
@@ -193,9 +193,9 @@ $cir = new csv_import_reader($importid, 'uploadcourse');
 $readcount = $cir->load_csv_content($content, $options['encoding'], $options['delimiter']);
 unset($content);
 if ($readcount === false) {
-    throw new \moodle_exception('csvfileerror', 'tool_uploadcourse', '', $cir->get_error());
+    throw new \powereduc_exception('csvfileerror', 'tool_uploadcourse', '', $cir->get_error());
 } else if ($readcount == 0) {
-    throw new \moodle_exception('csvemptyfile', 'error', '', $cir->get_error());
+    throw new \powereduc_exception('csvemptyfile', 'error', '', $cir->get_error());
 }
 $processor = new tool_uploadcourse_processor($cir, $processoroptions, $defaults);
 $processor->execute(new tool_uploadcourse_tracker(tool_uploadcourse_tracker::OUTPUT_PLAIN));

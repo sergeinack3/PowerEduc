@@ -15,7 +15,7 @@ Feature: Add URL to main menu block
       | course      | Acceptance test site  |
       | name        | reference link        |
       | intro       | mooooooooodle         |
-      | externalurl | http://www.moodle.com |
+      | externalurl | http://www.powereduc.com |
       | section     | 0                     |
     When I am on the "reference link" "url activity editing" page
     And I expand all fieldsets
@@ -45,7 +45,7 @@ Feature: Add URL to main menu block
       | course      | Acceptance test site  |
       | name        | reference link        |
       | intro       | mooooooooodle         |
-      | externalurl | http://www.moodle.com |
+      | externalurl | http://www.powereduc.com |
       | section     | 0                     |
     And I am on the "reference link" "url activity editing" page
     And I expand all fieldsets
@@ -79,7 +79,7 @@ Feature: Add URL to main menu block
       | course      | Acceptance test site  |
       | name        | reference link        |
       | intro       | mooooooooodle         |
-      | externalurl | http://www.moodle.com |
+      | externalurl | http://www.powereduc.com |
       | section     | 0                     |
     And I am on the "reference link" "url activity editing" page
     And I expand all fieldsets
@@ -113,7 +113,7 @@ Feature: Add URL to main menu block
       | course          | C1                    |
       | name            | reference link        |
       | intro           | mooooooooodle         |
-      | externalurl     | http://www.moodle.com |
+      | externalurl     | http://www.powereduc.com |
       | section         | 0                     |
       | showdescription | 1                     |
     And I am on the "reference link" "url activity editing" page

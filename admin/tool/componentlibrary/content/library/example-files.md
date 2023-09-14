@@ -22,7 +22,7 @@ componentlibrary
      └── formfields.php
 ```
 
-This can be embedded in the component's documentation page via iframe. For example in `componentlibrary/content/moodle/form-elements.md`:
+This can be embedded in the component's documentation page via iframe. For example in `componentlibrary/content/powereduc/form-elements.md`:
 
 ```
 <iframe src="../../../../examples/formfields.php" style="overflow:hidden;height:4000px;width:100%;border:0" title="Moodle form fields"></iframe>

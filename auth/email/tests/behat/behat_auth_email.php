@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -45,7 +45,7 @@ class behat_auth_email extends behat_base {
     public function i_confirm_email_for($username) {
         global $DB;
         $secret = $DB->get_field('user', 'secret', ['username' => $username], MUST_EXIST);
-        $confirmationurl = new moodle_url('/login/confirm.php');
+        $confirmationurl = new powereduc_url('/login/confirm.php');
         $confirmationpath = $confirmationurl->out_as_local_url(false);
         $url = $confirmationpath .  '?' . 'data='. $secret .'/'. $username;
 

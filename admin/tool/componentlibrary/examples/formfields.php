@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  * A sample form with most of the available form elements.
  *
  * @package    tool_componentlibrary
- * @copyright  2021 Bas Brands <bas@moodle.com>
+ * @copyright  2021 Bas Brands <bas@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,20 +28,20 @@ require_once(__DIR__ . '/../../../../config.php');
 require_once($CFG->dirroot.'/lib/formslib.php');
 
 require_login();
-require_capability('moodle/site:configview', context_system::instance());
+require_capability('powereduc/site:configview', context_system::instance());
 
 $repeatcount = optional_param('test_repeat', 1, PARAM_INT);
 
 $PAGE->set_pagelayout('embedded');
 
-$url = new moodle_url('/admin/tool/componentlibrary/examples/formfields.php');
+$url = new powereduc_url('/admin/tool/componentlibrary/examples/formfields.php');
 
 $toggles  = (object)[];
 $toggles->defaulturl = $url;
-$toggles->helpurl = new moodle_url('/admin/tool/componentlibrary/examples/formfields.php', ['help' => 1]);
-$toggles->requiredurl = new moodle_url('/admin/tool/componentlibrary/examples/formfields.php', ['required' => 1]);
-$toggles->bothurl = new moodle_url('/admin/tool/componentlibrary/examples/formfields.php', ['help' => 1, 'required' => 1]);
-$toggles->mixedurl = new moodle_url('/admin/tool/componentlibrary/examples/formfields.php',
+$toggles->helpurl = new powereduc_url('/admin/tool/componentlibrary/examples/formfields.php', ['help' => 1]);
+$toggles->requiredurl = new powereduc_url('/admin/tool/componentlibrary/examples/formfields.php', ['required' => 1]);
+$toggles->bothurl = new powereduc_url('/admin/tool/componentlibrary/examples/formfields.php', ['help' => 1, 'required' => 1]);
+$toggles->mixedurl = new powereduc_url('/admin/tool/componentlibrary/examples/formfields.php',
     ['help' => 1, 'required' => 1, 'mixed' => 1]);
 
 $PAGE->set_url($url);

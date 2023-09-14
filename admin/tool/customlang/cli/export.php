@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ require_once("$CFG->dirroot/$CFG->admin/tool/customlang/locallib.php");
 
 $usage = <<<EOF
 "Export custom language files to a target folder.
-Useful for uploading custom langstrings to AMOS or importing or syncing them to other moodle instances.
+Useful for uploading custom langstrings to AMOS or importing or syncing them to other powereduc instances.
 
 Options:
 -l, --lang              Comma seperated language ids to export, default: all
@@ -45,8 +45,8 @@ Examples:
 Export all custom language files to the default folder:
 \$ sudo -u www-data /usr/bin/php admin/tool/customlang/cli/export.php
 
-Export just the english files of moodle core and the activity 'quiz' in a subfolder in my home folder:
-\$ sudo -u www-data /usr/bin/php admin/tool/customlang/cli/export.php --lang='en' --components='moodle,quiz' --target='~/customdir'
+Export just the english files of powereduc core and the activity 'quiz' in a subfolder in my home folder:
+\$ sudo -u www-data /usr/bin/php admin/tool/customlang/cli/export.php --lang='en' --components='powereduc,quiz' --target='~/customdir'
 
 EOF;
 

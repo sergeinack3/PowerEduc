@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ defined('POWEREDUC_INTERNAL') || die();
 use context;
 use context_course;
 use context_module;
-use moodle_url;
+use powereduc_url;
 use renderable;
 use templatable;
 use stdClass;
@@ -147,7 +147,7 @@ class migrate_framework_results implements renderable, templatable {
             $data->errors[] = $error;
         }
 
-        $data->pluginbaseurl = (new moodle_url('/admin/tool/lpmigrate'))->out(false);
+        $data->pluginbaseurl = (new powereduc_url('/admin/tool/lpmigrate'))->out(false);
         $data->frameworksurl = url::frameworks($this->pagecontext->id)->out(false);
 
         return $data;

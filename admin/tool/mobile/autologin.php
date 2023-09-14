@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ if (isloggedin() and !isguestuser()) {
     if ($USER->id == $userid) {
         redirect($urltogo);
     } else {
-        throw new moodle_exception('alreadyloggedin', 'error', '', format_string(fullname($USER)));
+        throw new powereduc_exception('alreadyloggedin', 'error', '', format_string(fullname($USER)));
     }
 }
 
@@ -51,7 +51,7 @@ delete_user_key('tool_mobile', $userid);
 
 // Double check key belong to user.
 if ($key->userid != $userid) {
-    throw new moodle_exception('invalidkey');
+    throw new powereduc_exception('invalidkey');
 }
 
 // Key validated, now require an active user: not guest, not suspended.
@@ -60,7 +60,7 @@ core_user::require_active_user($user, true, true);
 
 // Do the user log-in.
 if (!$user = get_complete_user_data('id', $user->id)) {
-    throw new moodle_exception('cannotfinduser', '', '', $user->id);
+    throw new powereduc_exception('cannotfinduser', '', '', $user->id);
 }
 
 complete_user_login($user);

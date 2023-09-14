@@ -1,20 +1,20 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Moodle\BehatExtension\ServiceContainer;
+namespace PowerEduc\BehatExtension\ServiceContainer;
 
 use Behat\Behat\Definition\ServiceContainer\DefinitionExtension;
 use Behat\Behat\EventDispatcher\ServiceContainer\EventDispatcherExtension;
@@ -27,8 +27,8 @@ use Behat\Testwork\ServiceContainer\ExtensionManager;
 use Behat\Testwork\ServiceContainer\ServiceProcessor;
 use Behat\Testwork\Specification\ServiceContainer\SpecificationExtension;
 use Behat\Testwork\Suite\ServiceContainer\SuiteExtension;
-use Moodle\BehatExtension\Driver\WebDriverFactory;
-use Moodle\BehatExtension\Output\Formatter\MoodleProgressFormatterFactory;
+use PowerEduc\BehatExtension\Driver\WebDriverFactory;
+use PowerEduc\BehatExtension\Output\Formatter\PowerEducProgressFormatterFactory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -36,20 +36,20 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
-// phpcs:disable moodle.NamingConventions.ValidFunctionName.LowercaseMethod
+// phpcs:disable powereduc.NamingConventions.ValidFunctionName.LowercaseMethod
 
 /**
- * Behat extension for moodle
+ * Behat extension for powereduc
  *
- * Provides multiple features directory loading (Gherkin\Loader\MoodleFeaturesSuiteLoader
+ * Provides multiple features directory loading (Gherkin\Loader\PowerEducFeaturesSuiteLoader
  *
  * @package core
- * @copyright 2016 Rajesh Taneja <rajesh@moodle.com>
+ * @copyright 2016 Rajesh Taneja <rajesh@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class BehatExtension implements ExtensionInterface {
     /** @var string Extension configuration ID */
-    const POWEREDUC_ID = 'moodle';
+    const POWEREDUC_ID = 'powereduc';
 
     /** @var string Gherkin ID */
     const GHERKIN_ID = 'gherkin';
@@ -67,7 +67,7 @@ class BehatExtension implements ExtensionInterface {
     }
 
     /**
-     * Loads moodle specific configuration.
+     * Loads powereduc specific configuration.
      *
      * @param ContainerBuilder $container ContainerBuilder instance
      * @param array            $config    Extension configuration hash (from behat.yml)
@@ -77,11 +77,11 @@ class BehatExtension implements ExtensionInterface {
         $loader->load('core.xml');
 
         // Getting the extension parameters.
-        $container->setParameter('behat.moodle.parameters', $config);
+        $container->setParameter('behat.powereduc.parameters', $config);
 
-        // Load moodle progress formatter.
-        $moodleprogressformatter = new MoodleProgressFormatterFactory();
-        $moodleprogressformatter->buildFormatter($container);
+        // Load powereduc progress formatter.
+        $powereducprogressformatter = new PowerEducProgressFormatterFactory();
+        $powereducprogressformatter->buildFormatter($container);
 
         // Load custom step tester event dispatcher.
         $this->loadEventDispatchingStepTester($container);
@@ -90,13 +90,13 @@ class BehatExtension implements ExtensionInterface {
         $this->loadChainedStepTester($container);
 
         // Load step count formatter.
-        $this->loadMoodleListFormatter($container);
+        $this->loadPowerEducListFormatter($container);
 
         // Load step count formatter.
-        $this->loadMoodleStepcountFormatter($container);
+        $this->loadPowerEducStepcountFormatter($container);
 
         // Load screenshot formatter.
-        $this->loadMoodleScreenshotFormatter($container);
+        $this->loadPowerEducScreenshotFormatter($container);
 
         // Load namespace alias.
         $this->alias_old_namespaces();
@@ -107,52 +107,52 @@ class BehatExtension implements ExtensionInterface {
     }
 
     /**
-     * Loads moodle List formatter.
+     * Loads powereduc List formatter.
      *
      * @param ContainerBuilder $container
      */
-    protected function loadMoodleListFormatter(ContainerBuilder $container) {
-        $definition = new Definition('Moodle\BehatExtension\Output\Formatter\MoodleListFormatter', [
-            'moodle_list',
+    protected function loadPowerEducListFormatter(ContainerBuilder $container) {
+        $definition = new Definition('PowerEduc\BehatExtension\Output\Formatter\PowerEducListFormatter', [
+            'powereduc_list',
             'List all scenarios. Use with --dry-run',
             ['stepcount' => false],
             $this->createOutputPrinterDefinition()
         ]);
         $definition->addTag(OutputExtension::FORMATTER_TAG, ['priority' => 101]);
-        $container->setDefinition(OutputExtension::FORMATTER_TAG . '.moodle_list', $definition);
+        $container->setDefinition(OutputExtension::FORMATTER_TAG . '.powereduc_list', $definition);
     }
 
     /**
-     * Loads moodle Step count formatter.
+     * Loads powereduc Step count formatter.
      *
      * @param ContainerBuilder $container
      */
-    protected function loadMoodleStepcountFormatter(ContainerBuilder $container) {
-        $definition = new Definition('Moodle\BehatExtension\Output\Formatter\MoodleStepcountFormatter', [
-            'moodle_stepcount',
+    protected function loadPowerEducStepcountFormatter(ContainerBuilder $container) {
+        $definition = new Definition('PowerEduc\BehatExtension\Output\Formatter\PowerEducStepcountFormatter', [
+            'powereduc_stepcount',
             'Count steps in feature files. Use with --dry-run',
             ['stepcount' => false],
             $this->createOutputPrinterDefinition()
         ]);
         $definition->addTag(OutputExtension::FORMATTER_TAG, ['priority' => 101]);
-        $container->setDefinition(OutputExtension::FORMATTER_TAG . '.moodle_stepcount', $definition);
+        $container->setDefinition(OutputExtension::FORMATTER_TAG . '.powereduc_stepcount', $definition);
     }
 
     /**
-     * Loads moodle screenshot formatter.
+     * Loads powereduc screenshot formatter.
      *
      * @param ContainerBuilder $container
      */
-    protected function loadMoodleScreenshotFormatter(ContainerBuilder $container) {
-        $definition = new Definition('Moodle\BehatExtension\Output\Formatter\MoodleScreenshotFormatter', [
-            'moodle_screenshot',
+    protected function loadPowerEducScreenshotFormatter(ContainerBuilder $container) {
+        $definition = new Definition('PowerEduc\BehatExtension\Output\Formatter\PowerEducScreenshotFormatter', [
+            'powereduc_screenshot',
             // phpcs:ignore Generic.Files.LineLength.TooLong
             'Take screenshot of all steps. Use --format-settings \'{"formats": "html,image"}\' to get specific o/p type',
             ['formats' => 'html,image'],
             $this->createOutputPrinterDefinition()
         ]);
         $definition->addTag(OutputExtension::FORMATTER_TAG, ['priority' => 102]);
-        $container->setDefinition(OutputExtension::FORMATTER_TAG . '.moodle_screenshot', $definition);
+        $container->setDefinition(OutputExtension::FORMATTER_TAG . '.powereduc_screenshot', $definition);
     }
 
     /**
@@ -173,7 +173,7 @@ class BehatExtension implements ExtensionInterface {
      * @param null|string      $cachepath
      */
     protected function loadSkipPassedController(ContainerBuilder $container, $cachepath) {
-        $definition = new Definition('Moodle\BehatExtension\Tester\Cli\SkipPassedController', [
+        $definition = new Definition('PowerEduc\BehatExtension\Tester\Cli\SkipPassedController', [
             new Reference(EventDispatcherExtension::DISPATCHER_ID),
             $cachepath,
             $container->getParameter('paths.base')
@@ -188,7 +188,7 @@ class BehatExtension implements ExtensionInterface {
      * @param ContainerBuilder $container
      */
     private function loadFilesystemSkipPassedScenariosListLocator(ContainerBuilder $container) {
-        $definition = new Definition('Moodle\BehatExtension\Locator\FilesystemSkipPassedListLocator', [
+        $definition = new Definition('PowerEduc\BehatExtension\Locator\FilesystemSkipPassedListLocator', [
             new Reference(self::GHERKIN_ID)
         ]);
         $definition->addTag(SpecificationExtension::LOCATOR_TAG, ['priority' => 50]);
@@ -204,7 +204,7 @@ class BehatExtension implements ExtensionInterface {
      * @param ContainerBuilder $container
      */
     private function loadDefinitionPrinters(ContainerBuilder $container) {
-        $definition = new Definition('Moodle\BehatExtension\Definition\Printer\ConsoleDefinitionInformationPrinter', [
+        $definition = new Definition('PowerEduc\BehatExtension\Definition\Printer\ConsoleDefinitionInformationPrinter', [
             new Reference(CliExtension::OUTPUT_ID),
             new Reference(DefinitionExtension::PATTERN_TRANSFORMER_ID),
             new Reference(DefinitionExtension::DEFINITION_TRANSLATOR_ID),
@@ -220,7 +220,7 @@ class BehatExtension implements ExtensionInterface {
      * @param ContainerBuilder $container
      */
     private function loadController(ContainerBuilder $container) {
-        $definition = new Definition('Moodle\BehatExtension\Definition\Cli\AvailableDefinitionsController', [
+        $definition = new Definition('PowerEduc\BehatExtension\Definition\Cli\AvailableDefinitionsController', [
             new Reference(SuiteExtension::REGISTRY_ID),
             new Reference(DefinitionExtension::WRITER_ID),
             new Reference('definition.list_printer'),
@@ -237,7 +237,7 @@ class BehatExtension implements ExtensionInterface {
      */
     protected function loadChainedStepTester(ContainerBuilder $container) {
         // Chained steps.
-        $definition = new Definition('Moodle\BehatExtension\EventDispatcher\Tester\ChainedStepTester', [
+        $definition = new Definition('PowerEduc\BehatExtension\EventDispatcher\Tester\ChainedStepTester', [
             new Reference(TesterExtension::STEP_TESTER_ID),
         ]);
         $definition->addTag(TesterExtension::STEP_TESTER_WRAPPER_TAG, ['priority' => 100]);
@@ -250,7 +250,7 @@ class BehatExtension implements ExtensionInterface {
      * @param ContainerBuilder $container
      */
     protected function loadEventDispatchingStepTester(ContainerBuilder $container) {
-        $definition = new Definition('Moodle\BehatExtension\EventDispatcher\Tester\MoodleEventDispatchingStepTester', [
+        $definition = new Definition('PowerEduc\BehatExtension\EventDispatcher\Tester\PowerEducEventDispatchingStepTester', [
             new Reference(TesterExtension::STEP_TESTER_ID),
             new Reference(EventDispatcherExtension::DISPATCHER_ID)
         ]);
@@ -274,7 +274,7 @@ class BehatExtension implements ExtensionInterface {
                 ->useAttributeAsKey('key')
                 ->prototype('variable')->end()
                 ->end()
-            ->scalarNode('moodledirroot')
+            ->scalarNode('powereducdirroot')
                 ->defaultNull()
                 ->end()
                 ->scalarNode('passed_cache')
@@ -330,8 +330,8 @@ class BehatExtension implements ExtensionInterface {
      * Alias old namespace of given. when and then for BC.
      */
     private function alias_old_namespaces() {
-        class_alias('Moodle\\BehatExtension\\Context\\Step\\Given', 'Behat\\Behat\\Context\\Step\\Given', true);
-        class_alias('Moodle\\BehatExtension\\Context\\Step\\When', 'Behat\\Behat\\Context\\Step\\When', true);
-        class_alias('Moodle\\BehatExtension\\Context\\Step\\Then', 'Behat\\Behat\\Context\\Step\\Then', true);
+        class_alias('PowerEduc\\BehatExtension\\Context\\Step\\Given', 'Behat\\Behat\\Context\\Step\\Given', true);
+        class_alias('PowerEduc\\BehatExtension\\Context\\Step\\When', 'Behat\\Behat\\Context\\Step\\When', true);
+        class_alias('PowerEduc\\BehatExtension\\Context\\Step\\Then', 'Behat\\Behat\\Context\\Step\\Then', true);
     }
 }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ $problem = '';
 if ($data = $form->get_data()) {
     // Connect to the other database.
     list($dbtype, $dblibrary) = explode('/', $data->driver);
-    $targetdb = moodle_database::get_driver_instance($dbtype, $dblibrary);
+    $targetdb = powereduc_database::get_driver_instance($dbtype, $dblibrary);
     $dboptions = array();
     if ($data->dbport) {
         $dboptions['dbport'] = $data->dbport;
@@ -51,7 +51,7 @@ if ($data = $form->get_data()) {
         if ($targetdb->get_tables()) {
             $problem .= get_string('targetdatabasenotempty', 'tool_dbtransfer');
         }
-    } catch (moodle_exception $e) {
+    } catch (powereduc_exception $e) {
         $problem .= get_string('notargetconectexception', 'tool_dbtransfer').'<br />'.$e->debuginfo;
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package moodlecore
+ * @package powereduccore
  * @subpackage backup-includes
  * @copyright 2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -39,7 +39,7 @@ require_once($CFG->dirroot . '/backup/util/helper/backup_anonymizer_helper.class
 require_once($CFG->dirroot . '/backup/util/helper/backup_file_manager.class.php');
 require_once($CFG->dirroot . '/backup/util/helper/copy_helper.class.php');
 require_once($CFG->dirroot . '/backup/util/helper/restore_prechecks_helper.class.php');
-require_once($CFG->dirroot . '/backup/util/helper/restore_moodlexml_parser_processor.class.php');
+require_once($CFG->dirroot . '/backup/util/helper/restore_powereducxml_parser_processor.class.php');
 require_once($CFG->dirroot . '/backup/util/helper/restore_inforef_parser_processor.class.php');
 require_once($CFG->dirroot . '/backup/util/helper/restore_users_parser_processor.class.php');
 require_once($CFG->dirroot . '/backup/util/helper/restore_roles_parser_processor.class.php');
@@ -82,21 +82,21 @@ require_once($CFG->dirroot . '/backup/util/plan/base_step.class.php');
 require_once($CFG->dirroot . '/backup/util/plan/restore_step.class.php');
 require_once($CFG->dirroot . '/backup/util/plan/restore_structure_step.class.php');
 require_once($CFG->dirroot . '/backup/util/plan/restore_execution_step.class.php');
-require_once($CFG->dirroot . '/backup/moodle2/restore_plan_builder.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/restore_plan_builder.class.php');
 require_once($CFG->dirroot . '/backup/controller/base_controller.class.php');
 require_once($CFG->dirroot . '/backup/controller/restore_controller.class.php');
-require_once($CFG->dirroot . '/backup/util/ui/base_moodleform.class.php');
+require_once($CFG->dirroot . '/backup/util/ui/base_powereducform.class.php');
 require_once($CFG->dirroot . '/backup/util/ui/base_ui.class.php');
 require_once($CFG->dirroot . '/backup/util/ui/base_ui_stage.class.php');
 require_once($CFG->dirroot . '/backup/util/ui/backup_ui_setting.class.php');
 require_once($CFG->dirroot . '/backup/util/ui/restore_ui_stage.class.php');
 require_once($CFG->dirroot . '/backup/util/ui/restore_ui.class.php');
-require_once($CFG->dirroot . '/backup/util/ui/restore_moodleform.class.php');
+require_once($CFG->dirroot . '/backup/util/ui/restore_powereducform.class.php');
 require_once($CFG->dirroot . '/backup/util/ui/restore_ui_components.php');
 
-// And some moodle stuff too
+// And some powereduc stuff too
 require_once($CFG->dirroot . '/tag/lib.php');
 require_once($CFG->dirroot . '/lib/gradelib.php');
 require_once($CFG->dirroot . '/lib//questionlib.php');
 require_once($CFG->dirroot . '/course/lib.php');
-require_once ($CFG->dirroot . '/blocks/moodleblock.class.php');
+require_once ($CFG->dirroot . '/blocks/powereducblock.class.php');

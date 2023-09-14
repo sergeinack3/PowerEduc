@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * AMD code for the frequently used comments chooser for the marking guide grading form.
  *
  * @module     gradingform_guide/comment_chooser
- * @copyright  2015 Jun Pataleta <jun@moodle.com>
+ * @copyright  2015 Jun Pataleta <jun@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 define(['jquery', 'core/templates', 'core/notification', 'core/yui'], function($, templates, notification) {
@@ -48,7 +48,7 @@ define(['jquery', 'core/templates', 'core/notification', 'core/yui'], function($
             function displayChooserDialog(compiledSource, comments) {
                 var titleLabel = '<label>' + M.util.get_string('insertcomment', 'gradingform_guide') + '</label>';
                 var cancelButtonId = 'comment-chooser-' + criterionId + '-cancel';
-                var cancelButton = '<button id="' + cancelButtonId + '">' + M.util.get_string('cancel', 'moodle') + '</button>';
+                var cancelButton = '<button id="' + cancelButtonId + '">' + M.util.get_string('cancel', 'powereduc') + '</button>';
 
                 // Set dialog's body content.
                 var chooserDialog = new M.core.dialogue({

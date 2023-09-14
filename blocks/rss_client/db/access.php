@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * RSS client block caps.
  *
  * @package    block_rss_client
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,7 +33,7 @@ $capabilities = array(
             'user' => CAP_ALLOW
         ),
 
-        'clonepermissionsfrom' => 'moodle/my:manageblocks'
+        'clonepermissionsfrom' => 'powereduc/my:manageblocks'
     ),
 
     'block/rss_client:addinstance' => array(
@@ -46,7 +46,7 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         ),
 
-        'clonepermissionsfrom' => 'moodle/site:manageblocks'
+        'clonepermissionsfrom' => 'powereduc/site:manageblocks'
     ),
 
     'block/rss_client:manageownfeeds' => array(

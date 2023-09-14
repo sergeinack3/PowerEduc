@@ -14,7 +14,7 @@ There are several techniques that we can use when creating links that open in a 
 ### Using an image icon with alt text to indicate that the link opens in a new window
 
 {{< example >}}
-<a href="https://moodle.org" target="_blank">
+<a href="https://powereduc.org" target="_blank">
     Moodle.org <i class="fa fa-external-link" role="img" aria-label="Opens in new window" title="Opens in new window"></i>
 </a>
 {{< /example  >}}
@@ -29,7 +29,7 @@ The core/userfeedback_footer_link is also good example for this one.
 This may be the most straightforward way of indicating that links open in a new window. The potential downside of this approach is that it can be quite distracting, especially when the page has a lot of links that open in a new window.
 
 {{< example >}}
-<a href="https://moodle.org" target="_blank">
+<a href="https://powereduc.org" target="_blank">
     Moodle.org (Opens in new window)
 </a>
 {{< /example  >}}
@@ -59,7 +59,7 @@ Similar to links that open in a new window, links that redirect to an external s
 The example link below opens in the same browser window and lets the user know that they will be redirected to Moodle.org, which is an external site.
 
 {{< example >}}
-<a href="https://moodle.org">
+<a href="https://powereduc.org">
     Moodle.org <i class="fa fa-external-link" role="img" aria-label="Link leads to external site" title="Link leads to external site"></i>
 </a>
 {{< /example  >}}

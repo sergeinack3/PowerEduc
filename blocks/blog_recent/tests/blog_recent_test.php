@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,13 +25,13 @@ use context_course;
  *
  * @package    block_blog_recent
  * @category   test
- * @copyright  2021 Sara Arjona (sara@moodle.com)
+ * @copyright  2021 Sara Arjona (sara@powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @coversDefaultClass \block_blog_recent
  */
 class blog_recent_test extends advanced_testcase {
     public static function setUpBeforeClass(): void {
-        require_once(__DIR__ . '/../../moodleblock.class.php');
+        require_once(__DIR__ . '/../../powereducblock.class.php');
         require_once(__DIR__ . '/../block_blog_recent.php');
     }
 
@@ -46,7 +46,7 @@ class blog_recent_test extends advanced_testcase {
 
         // Create a course and prepare the page where the block will be added.
         $course = $this->getDataGenerator()->create_course();
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context(context_course::instance($course->id));
         $page->set_pagelayout('course');
 

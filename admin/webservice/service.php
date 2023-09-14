@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * Web services admin UI
  *
  * @package   webservice
- * @copyright 2009 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2009 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once('../../config.php');
@@ -37,7 +37,7 @@ if ($node && $newnode) {
     $newnode->make_active();
 }
 $PAGE->navbar->add(get_string('externalservices', 'webservice'),
-    new moodle_url('/admin/settings.php', ['section' => 'externalservices']));
+    new powereduc_url('/admin/settings.php', ['section' => 'externalservices']));
 
 $PAGE->set_primary_active_tab('siteadminnode');
 
@@ -91,7 +91,7 @@ if ($mform->is_cancelled()) {
         $event->trigger();
 
         //redirect to the 'add functions to service' page
-        $addfunctionpage = new moodle_url(
+        $addfunctionpage = new powereduc_url(
                         $CFG->wwwroot . '/' . $CFG->admin . '/webservice/service_functions.php',
                         array('id' => $servicedata->id));
         $returnurl = $addfunctionpage->out(false);

@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * Defines backup_root_task class
  *
  * @package     core_backup
- * @subpackage  moodle2
+ * @subpackage  powereduc2
  * @category    backup
  * @copyright   2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -39,7 +39,7 @@ class backup_root_task extends backup_task {
      */
     public function build() {
 
-        // Add all the steps needed to prepare any moodle2 backup to work
+        // Add all the steps needed to prepare any powereduc2 backup to work
         $this->add_step(new create_and_clean_temp_stuff('create_and_clean_temp_stuff'));
 
         $this->built = true;

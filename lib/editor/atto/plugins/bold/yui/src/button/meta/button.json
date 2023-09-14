@@ -1,7 +1,7 @@
 {
-    "moodle-atto_bold-button": {
+    "powereduc-atto_bold-button": {
         "requires": [
-            "moodle-editor_atto-plugin"
+            "powereduc-editor_atto-plugin"
         ]
     }
 }

@@ -26,8 +26,8 @@
     $sitecontext = context_system::instance();
     $site = get_site();
 
-    if (!has_capability('moodle/user:update', $sitecontext) and !has_capability('moodle/user:delete', $sitecontext)) {
-        throw new \moodle_exception('nopermissions', 'error', '', 'edit/delete users');
+    if (!has_capability('powereduc/user:update', $sitecontext) and !has_capability('powereduc/user:delete', $sitecontext)) {
+        throw new \powereduc_exception('nopermissions', 'error', '', 'edit/delete users');
     }
 
     $stredit   = get_string('edit');
@@ -40,7 +40,7 @@
     $strconfirm = get_string('confirm');
     $strresendemail = get_string('resendemail');
 
-    $returnurl = new moodle_url('/admin/user.php', array('sort' => $sort, 'dir' => $dir, 'perpage' => $perpage, 'page'=>$page));
+    $returnurl = new powereduc_url('/admin/user.php', array('sort' => $sort, 'dir' => $dir, 'perpage' => $perpage, 'page'=>$page));
 
     $PAGE->set_primary_active_tab('siteadminnode');
     $PAGE->navbar->add(get_string('userlist', 'admin'), $PAGE->url);
@@ -48,9 +48,9 @@
     // The $user variable is also used outside of these if statements.
     $user = null;
     if ($confirmuser and confirm_sesskey()) {
-        require_capability('moodle/user:update', $sitecontext);
+        require_capability('powereduc/user:update', $sitecontext);
         if (!$user = $DB->get_record('user', array('id'=>$confirmuser, 'mnethostid'=>$CFG->mnet_localhost_id))) {
-            throw new \moodle_exception('nousers');
+            throw new \powereduc_exception('nousers');
         }
 
         $auth = get_auth_plugin($user->auth);
@@ -66,12 +66,12 @@
 
     } else if ($resendemail && confirm_sesskey()) {
         if (!$user = $DB->get_record('user', ['id' => $resendemail, 'mnethostid' => $CFG->mnet_localhost_id, 'deleted' => 0])) {
-            throw new \moodle_exception('nousers');
+            throw new \powereduc_exception('nousers');
         }
 
         // Prevent spamming users who are already confirmed.
         if ($user->confirmed) {
-            throw new \moodle_exception('alreadyconfirmed', 'moodle');
+            throw new \powereduc_exception('alreadyconfirmed', 'powereduc');
         }
 
         $returnmsg = get_string('emailconfirmsentsuccess');
@@ -83,15 +83,15 @@
 
         redirect($returnurl, $returnmsg, null, $messagetype);
     } else if ($delete and confirm_sesskey()) {              // Delete a selected user, after confirmation
-        require_capability('moodle/user:delete', $sitecontext);
+        require_capability('powereduc/user:delete', $sitecontext);
 
         $user = $DB->get_record('user', array('id'=>$delete, 'mnethostid'=>$CFG->mnet_localhost_id), '*', MUST_EXIST);
 
         if ($user->deleted) {
-            throw new \moodle_exception('usernotdeleteddeleted', 'error');
+            throw new \powereduc_exception('usernotdeleteddeleted', 'error');
         }
         if (is_siteadmin($user->id)) {
-            throw new \moodle_exception('useradminodelete', 'error');
+            throw new \powereduc_exception('useradminodelete', 'error');
         }
 
         if ($confirm != md5($delete)) {
@@ -100,7 +100,7 @@
             echo $OUTPUT->heading(get_string('deleteuser', 'admin'));
 
             $optionsyes = array('delete'=>$delete, 'confirm'=>md5($delete), 'sesskey'=>sesskey());
-            $deleteurl = new moodle_url($returnurl, $optionsyes);
+            $deleteurl = new powereduc_url($returnurl, $optionsyes);
             $deletebutton = new single_button($deleteurl, get_string('delete'), 'post');
 
             echo $OUTPUT->confirm(get_string('deletecheckfull', '', "'$fullname'"), $deletebutton, $returnurl);
@@ -117,18 +117,18 @@
             }
         }
     } else if ($acl and confirm_sesskey()) {
-        if (!has_capability('moodle/user:update', $sitecontext)) {
-            throw new \moodle_exception('nopermissions', 'error', '', 'modify the NMET access control list');
+        if (!has_capability('powereduc/user:update', $sitecontext)) {
+            throw new \powereduc_exception('nopermissions', 'error', '', 'modify the NMET access control list');
         }
         if (!$user = $DB->get_record('user', array('id'=>$acl))) {
-            throw new \moodle_exception('nousers', 'error');
+            throw new \powereduc_exception('nousers', 'error');
         }
         if (!is_mnet_remote_user($user)) {
-            throw new \moodle_exception('usermustbemnet', 'error');
+            throw new \powereduc_exception('usermustbemnet', 'error');
         }
         $accessctrl = strtolower(required_param('accessctrl', PARAM_ALPHA));
         if ($accessctrl != 'allow' and $accessctrl != 'deny') {
-            throw new \moodle_exception('invalidaccessparameter', 'error');
+            throw new \powereduc_exception('invalidaccessparameter', 'error');
         }
         $aclrecord = $DB->get_record('mnet_sso_access_control', array('username'=>$user->username, 'mnet_host_id'=>$user->mnethostid));
         if (empty($aclrecord)) {
@@ -145,7 +145,7 @@
         redirect($returnurl);
 
     } else if ($suspend and confirm_sesskey()) {
-        require_capability('moodle/user:update', $sitecontext);
+        require_capability('powereduc/user:update', $sitecontext);
 
         if ($user = $DB->get_record('user', array('id'=>$suspend, 'mnethostid'=>$CFG->mnet_localhost_id, 'deleted'=>0))) {
             if (!is_siteadmin($user) and $USER->id != $user->id and $user->suspended != 1) {
@@ -158,7 +158,7 @@
         redirect($returnurl);
 
     } else if ($unsuspend and confirm_sesskey()) {
-        require_capability('moodle/user:update', $sitecontext);
+        require_capability('powereduc/user:update', $sitecontext);
 
         if ($user = $DB->get_record('user', array('id'=>$unsuspend, 'mnethostid'=>$CFG->mnet_localhost_id, 'deleted'=>0))) {
             if ($user->suspended != 0) {
@@ -169,7 +169,7 @@
         redirect($returnurl);
 
     } else if ($unlock and confirm_sesskey()) {
-        require_capability('moodle/user:update', $sitecontext);
+        require_capability('powereduc/user:update', $sitecontext);
 
         if ($user = $DB->get_record('user', array('id'=>$unlock, 'mnethostid'=>$CFG->mnet_localhost_id, 'deleted'=>0))) {
             login_unlock_account($user);
@@ -259,7 +259,7 @@
 
     $strall = get_string('all');
 
-    $baseurl = new moodle_url('/admin/user.php', array('sort' => $sort, 'dir' => $dir, 'perpage' => $perpage));
+    $baseurl = new powereduc_url('/admin/user.php', array('sort' => $sort, 'dir' => $dir, 'perpage' => $perpage));
     echo $OUTPUT->paging_bar($usercount, $page, $perpage, $baseurl);
 
     flush();
@@ -322,17 +322,17 @@
             $lastcolumn = '';
 
             // delete button
-            if (has_capability('moodle/user:delete', $sitecontext)) {
+            if (has_capability('powereduc/user:delete', $sitecontext)) {
                 if (is_mnet_remote_user($user) or $user->id == $USER->id or is_siteadmin($user)) {
                     // no deleting of self, mnet accounts or admins allowed
                 } else {
-                    $url = new moodle_url($returnurl, array('delete'=>$user->id, 'sesskey'=>sesskey()));
+                    $url = new powereduc_url($returnurl, array('delete'=>$user->id, 'sesskey'=>sesskey()));
                     $buttons[] = html_writer::link($url, $OUTPUT->pix_icon('t/delete', $strdelete));
                 }
             }
 
             // suspend button
-            if (has_capability('moodle/user:update', $sitecontext)) {
+            if (has_capability('powereduc/user:update', $sitecontext)) {
                 if (is_mnet_remote_user($user)) {
                     // mnet users have special access control, they can not be deleted the standard way or suspended
                     $accessctrl = 'allow';
@@ -344,29 +344,29 @@
 
                 } else {
                     if ($user->suspended) {
-                        $url = new moodle_url($returnurl, array('unsuspend'=>$user->id, 'sesskey'=>sesskey()));
+                        $url = new powereduc_url($returnurl, array('unsuspend'=>$user->id, 'sesskey'=>sesskey()));
                         $buttons[] = html_writer::link($url, $OUTPUT->pix_icon('t/show', $strunsuspend));
                     } else {
                         if ($user->id == $USER->id or is_siteadmin($user)) {
                             // no suspending of admins or self!
                         } else {
-                            $url = new moodle_url($returnurl, array('suspend'=>$user->id, 'sesskey'=>sesskey()));
+                            $url = new powereduc_url($returnurl, array('suspend'=>$user->id, 'sesskey'=>sesskey()));
                             $buttons[] = html_writer::link($url, $OUTPUT->pix_icon('t/hide', $strsuspend));
                         }
                     }
 
                     if (login_is_lockedout($user)) {
-                        $url = new moodle_url($returnurl, array('unlock'=>$user->id, 'sesskey'=>sesskey()));
+                        $url = new powereduc_url($returnurl, array('unlock'=>$user->id, 'sesskey'=>sesskey()));
                         $buttons[] = html_writer::link($url, $OUTPUT->pix_icon('t/unlock', $strunlock));
                     }
                 }
             }
 
             // edit button
-            if (has_capability('moodle/user:update', $sitecontext)) {
+            if (has_capability('powereduc/user:update', $sitecontext)) {
                 // prevent editing of admins by non-admins
                 if (is_siteadmin($USER) or !is_siteadmin($user)) {
-                    $url = new moodle_url('/user/editadvanced.php', array('id'=>$user->id, 'course'=>$site->id));
+                    $url = new powereduc_url('/user/editadvanced.php', array('id'=>$user->id, 'course'=>$site->id));
                     $buttons[] = html_writer::link($url, $OUTPUT->pix_icon('t/edit', $stredit));
                 }
             }
@@ -381,13 +381,13 @@
                 }
 
             } else if ($user->confirmed == 0) {
-                if (has_capability('moodle/user:update', $sitecontext)) {
-                    $lastcolumn = html_writer::link(new moodle_url($returnurl, array('confirmuser'=>$user->id, 'sesskey'=>sesskey())), $strconfirm);
+                if (has_capability('powereduc/user:update', $sitecontext)) {
+                    $lastcolumn = html_writer::link(new powereduc_url($returnurl, array('confirmuser'=>$user->id, 'sesskey'=>sesskey())), $strconfirm);
                 } else {
                     $lastcolumn = "<span class=\"dimmed_text\">".get_string('confirm')."</span>";
                 }
 
-                $lastcolumn .= ' | ' . html_writer::link(new moodle_url($returnurl,
+                $lastcolumn .= ' | ' . html_writer::link(new powereduc_url($returnurl,
                     [
                         'resendemail' => $user->id,
                         'sesskey' => sesskey()
@@ -431,8 +431,8 @@
         echo html_writer::end_tag('div');
         echo $OUTPUT->paging_bar($usercount, $page, $perpage, $baseurl);
     }
-    if (has_capability('moodle/user:create', $sitecontext)) {
-        $url = new moodle_url('/user/editadvanced.php', array('id' => -1));
+    if (has_capability('powereduc/user:create', $sitecontext)) {
+        $url = new powereduc_url('/user/editadvanced.php', array('id' => -1));
         echo $OUTPUT->single_button($url, get_string('addnewuser'), 'get');
     }
 

@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Multiple plugin authentication Support library
@@ -105,7 +105,7 @@ class auth_plugin_base {
     var $userfields = \core_user::AUTHSYNCFIELDS;
 
     /**
-     * Moodle custom fields to sync with.
+     * PowerEduc custom fields to sync with.
      * @var array()
      */
     var $customfields = null;
@@ -194,7 +194,7 @@ class auth_plugin_base {
     /**
      * Returns true if this authentication plugin is "internal".
      *
-     * Internal plugins use password hashes from Moodle user table for authentication.
+     * Internal plugins use password hashes from PowerEduc user table for authentication.
      *
      * @return bool
      */
@@ -234,7 +234,7 @@ class auth_plugin_base {
     /**
      * Updates the user's password.
      *
-     * In previous versions of Moodle, the function
+     * In previous versions of PowerEduc, the function
      * auth_user_update_password accepted a username as the first parameter. The
      * revised function expects a user object.
      *
@@ -396,7 +396,7 @@ class auth_plugin_base {
      * @param object $config
      * @param object $err
      * @param array $user_fields
-     * @deprecated since Moodle 3.3
+     * @deprecated since PowerEduc 3.3
      */
     function config_form($config, $err, $user_fields) {
         debugging('Use of config.html files have been deprecated, please update your code to use the admin settings API.');
@@ -408,7 +408,7 @@ class auth_plugin_base {
      * do stuff before it is inserted in config_plugin
      * @param object object with submitted configuration settings (without system magic quotes)
      * @param array $err array of error messages
-     * @deprecated since Moodle 3.3
+     * @deprecated since PowerEduc 3.3
      */
      function validate_form($form, &$err) {
         debugging('Use of config.html files have been deprecated, please update your code to use the admin settings API.');
@@ -419,7 +419,7 @@ class auth_plugin_base {
      * Processes and stores configuration data for this authentication plugin.
      *
      * @param object object with submitted configuration settings (without system magic quotes)
-     * @deprecated since Moodle 3.3
+     * @deprecated since PowerEduc 3.3
      */
     function process_config($config) {
         debugging('Use of config.html files have been deprecated, please update your code to use the admin settings API.');
@@ -562,7 +562,7 @@ class auth_plugin_base {
      * authentication method manually is allowed.
      *
      * @return bool
-     * @since Moodle 2.6
+     * @since PowerEduc 2.6
      */
     function can_be_manually_set() {
         // Override if needed.
@@ -582,7 +582,7 @@ class auth_plugin_base {
      *
      * - url => (powereduc_url|string) URL of the page to send the user to for authentication
      * - name => (string) Human readable name of the IdP
-     * - iconurl => (powereduc_url|string) URL of the icon representing the IdP (since Moodle 3.3)
+     * - iconurl => (powereduc_url|string) URL of the icon representing the IdP (since PowerEduc 3.3)
      *
      * For legacy reasons, pre-3.3 plugins can provide the icon via the key:
      *
@@ -1043,7 +1043,7 @@ function signup_captcha_enabled() {
  * @param  array $data  the sign-up data
  * @param  array $files files among the data
  * @return array list of errors, being the key the data element name and the value the error itself
- * @since Moodle 3.2
+ * @since PowerEduc 3.2
  */
 function signup_validate_data($data, $files) {
     global $CFG, $DB;
@@ -1075,7 +1075,7 @@ function signup_validate_data($data, $files) {
         $errors['email'] = get_string('invalidemail');
 
     } else if (empty($CFG->allowaccountssameemail)) {
-        // Emails in Moodle as case-insensitive and accents-sensitive. Such a combination can lead to very slow queries
+        // Emails in PowerEduc as case-insensitive and accents-sensitive. Such a combination can lead to very slow queries
         // on some DBs such as MySQL. So we first get the list of candidate users in a subselect via more effective
         // accent-insensitive query that can make use of the index and only then we search within that limited subset.
         $sql = "SELECT 'x'
@@ -1137,7 +1137,7 @@ function signup_validate_data($data, $files) {
  *
  * @param  stdClass $user the new user object
  * @return stdClass the user filled
- * @since Moodle 3.2
+ * @since PowerEduc 3.2
  */
 function signup_setup_new_user($user) {
     global $CFG;
@@ -1161,7 +1161,7 @@ function signup_setup_new_user($user) {
  * Check if user confirmation is enabled on this site and return the auth plugin handling registration if enabled.
  *
  * @return stdClass the current auth plugin handling user registration or false if registration not enabled
- * @since Moodle 3.2
+ * @since PowerEduc 3.2
  */
 function signup_get_user_confirmation_authplugin() {
     global $CFG;
@@ -1181,7 +1181,7 @@ function signup_get_user_confirmation_authplugin() {
  * Check if sign-up is enabled in the site. If is enabled, the function will return the authplugin instance.
  *
  * @return mixed false if sign-up is not enabled, the authplugin instance otherwise.
- * @since  Moodle 3.2
+ * @since  PowerEduc 3.2
  */
 function signup_is_enabled() {
     global $CFG;
@@ -1197,14 +1197,14 @@ function signup_is_enabled() {
 
 /**
  * Helper function used to print locking for auth plugins on admin pages.
- * @param stdclass $settings Moodle admin settings instance
+ * @param stdclass $settings PowerEduc admin settings instance
  * @param string $auth authentication plugin shortname
  * @param array $userfields user profile fields
  * @param string $helptext help text to be displayed at top of form
  * @param boolean $mapremotefields Map fields or lock only.
  * @param boolean $updateremotefields Allow remote updates
  * @param array $customfields list of custom profile fields
- * @since Moodle 3.3
+ * @since PowerEduc 3.3
  */
 function display_auth_lock_options($settings, $auth, $userfields, $helptext, $mapremotefields, $updateremotefields, $customfields = array()) {
     global $CFG;

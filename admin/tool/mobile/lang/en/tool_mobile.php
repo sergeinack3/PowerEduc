@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -100,7 +100,7 @@ $string['mobilecssurl'] = 'CSS';
 $string['mobilefeatures'] = 'Mobile features';
 $string['mobilenotificationsdisabledwarning'] = 'Mobile notifications are not enabled. They should be enabled in Notification settings.';
 $string['mobilesettings'] = 'Mobile settings';
-$string['moodleappsportalfeatureswarning'] = 'Please note that some features may be restricted depending on your Moodle app subscription. For details, visit the <a href="{$a}" target="_blank">Moodle Apps Portal</a>.';
+$string['powereducappsportalfeatureswarning'] = 'Please note that some features may be restricted depending on your Moodle app subscription. For details, visit the <a href="{$a}" target="_blank">Moodle Apps Portal</a>.';
 $string['notifications'] = 'Notifications';
 $string['notificationsactivedevices'] = 'Active devices';
 $string['notificationsignorednotifications'] = 'Notifications not sent';
@@ -145,7 +145,7 @@ $string['subscriptionregister'] = 'For details of the various app plans, and to 
 $string['subscriptionsseemore'] = 'Note: The information displayed is not updated in real time. You may need to log out and log in again to see updates. For information on upgrading your app plan, please log in to the <a href="{$a}" target="_blank">Moodle Apps Portal</a>.';
 $string['typeoflogin'] = 'Type of login';
 $string['typeoflogin_desc'] = 'If the site uses a SSO authentication method, then select via a browser window or via an embedded browser. An embedded browser provides a better user experience, though it doesn\'t work with all SSO plugins.';
-$string['getmoodleonyourmobile'] = 'Get the mobile app';
+$string['getpowereduconyourmobile'] = 'Get the mobile app';
 $string['privacy:metadata:preference:tool_mobile_autologin_request_last'] = 'The date of the last auto-login key request. Between each request 6 minutes are required.';
 $string['privacy:metadata:core_userkey'] = 'User\'s keys used to create auto-login key for the current user.';
 $string['responsivemainmenuitems'] = 'Responsive menu items';

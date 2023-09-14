@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -227,7 +227,7 @@ class logger_test extends \basic_testcase {
      * test database_logger class
      */
     function test_database_logger() {
-        // Instantiate with date and level output (and with specs from the global moodle "log" table so checks will pass
+        // Instantiate with date and level output (and with specs from the global powereduc "log" table so checks will pass
         $now = time();
         $datecol = 'time';
         $levelcol = 'action';
@@ -258,7 +258,7 @@ class logger_test extends \basic_testcase {
         @remove_dir(dirname($file));
         // Recreate test dir
         if (!check_dir_exists(dirname($file), true, true)) {
-            throw new \moodle_exception('error_creating_temp_dir', 'error', dirname($file));
+            throw new \powereduc_exception('error_creating_temp_dir', 'error', dirname($file));
         }
 
         // Instantiate with date and level output, and also use the depth option

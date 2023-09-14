@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,12 +33,12 @@ require_login();
 
 $id = optional_param('id', 0, PARAM_INT);
 
-$url = new moodle_url('/course/editcategory.php');
+$url = new powereduc_url('/course/editcategory.php');
 if ($id) {
     $coursecat = core_course_category::get($id, MUST_EXIST, true);
     $category = $coursecat->get_db_record();
     $context = context_coursecat::instance($id);
-    navigation_node::override_active_url(new moodle_url('/course/index.php', ['categoryid' => $category->id]));
+    navigation_node::override_active_url(new powereduc_url('/course/index.php', ['categoryid' => $category->id]));
     $PAGE->navbar->add(get_string('settings'));
     $PAGE->set_primary_active_tab('home');
     $PAGE->set_secondary_active_tab('edit');
@@ -56,12 +56,12 @@ if ($id) {
     if ($parent) {
         $parentcategory = $DB->get_record('course_categories', array('id' => $parent), '*', MUST_EXIST);
         $context = context_coursecat::instance($parent);
-        navigation_node::override_active_url(new moodle_url('/course/index.php', ['categoryid' => $parent]));
+        navigation_node::override_active_url(new powereduc_url('/course/index.php', ['categoryid' => $parent]));
         $fullname = format_string($parentcategory->name, true, ['context' => $context->id]);
         $title = "$fullname: $strtitle";
-        $managementurl = new moodle_url('/course/management.php');
+        $managementurl = new powereduc_url('/course/management.php');
         // These are the caps required in order to see the management interface.
-        $managementcaps = array('moodle/category:manage', 'moodle/course:create');
+        $managementcaps = array('powereduc/category:manage', 'powereduc/course:create');
         if (!has_any_capability($managementcaps, context_system::instance())) {
             // If the user doesn't have either manage caps then they can only manage within the given category.
             $managementurl->param('categoryid', $parent);
@@ -82,7 +82,7 @@ if ($id) {
     $itemid = null; // Set this explicitly, so files for parent category should not get loaded in draft area.
 }
 
-require_capability('moodle/category:manage', $context);
+require_capability('powereduc/category:manage', $context);
 
 $PAGE->set_context($context);
 $PAGE->set_url($url);
@@ -107,12 +107,12 @@ $mform->set_data(file_prepare_standard_editor(
     $itemid
 ));
 
-$manageurl = new moodle_url('/course/management.php');
-$campusurl = new moodle_url('/local/powerschool/campus.php');
-$filiereurl = new moodle_url('/local/powerschool/filiere.php');
-$specialiteurl = new moodle_url('/local/powerschool/specialite.php');
-$cycleurl = new moodle_url('/local/powerschool/coursspecialite.php');
-$semestreurl = new moodle_url('/local/powerschool/courssemestre.php');
+$manageurl = new powereduc_url('/course/management.php');
+$campusurl = new powereduc_url('/local/powerschool/campus.php');
+$filiereurl = new powereduc_url('/local/powerschool/filiere.php');
+$specialiteurl = new powereduc_url('/local/powerschool/specialite.php');
+$cycleurl = new powereduc_url('/local/powerschool/coursspecialite.php');
+$semestreurl = new powereduc_url('/local/powerschool/courssemestre.php');
 if ($mform->is_cancelled()) {
     if ($id) {
         $manageurl->param('categoryid', $id);
@@ -123,7 +123,7 @@ if ($mform->is_cancelled()) {
 } else if ($data = $mform->get_data()) {
     if (isset($coursecat)) {
         if ((int)$data->parent !== (int)$coursecat->parent && !$coursecat->can_change_parent($data->parent)) {
-            throw new \moodle_exception('cannotmovecategory');
+            throw new \powereduc_exception('cannotmovecategory');
         }
         $coursecat->update($data, $mform->get_description_editor_options());
     } else {

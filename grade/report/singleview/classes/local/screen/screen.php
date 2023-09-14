@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,14 +18,14 @@
  * Abstract class used as a base for the 3 screens.
  *
  * @package   gradereport_singleview
- * @copyright 2014 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2014 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace gradereport_singleview\local\screen;
 
 use context_course;
-use moodle_url;
+use powereduc_url;
 use html_writer;
 use grade_structure;
 use grade_grade;
@@ -38,7 +38,7 @@ defined('POWEREDUC_INTERNAL') || die;
  * Abstract class used as a base for the 3 screens.
  *
  * @package   gradereport_singleview
- * @copyright 2014 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2014 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 abstract class screen {
@@ -145,7 +145,7 @@ abstract class screen {
      * @return string The link
      */
     public function format_link(string $screen, int $itemid, bool $display = null): string {
-        $url = new moodle_url('/grade/report/singleview/index.php', [
+        $url = new powereduc_url('/grade/report/singleview/index.php', [
             'id' => $this->courseid,
             'item' => $screen,
             'itemid' => $itemid,
@@ -327,7 +327,7 @@ abstract class screen {
 
             // If the user submits Exclude grade elements without the proper.
             // permissions then we should refuse to update.
-            if ($matches[1] === 'exclude' && !has_capability('moodle/grade:manage', $this->context)){
+            if ($matches[1] === 'exclude' && !has_capability('powereduc/grade:manage', $this->context)){
                 $warnings[] = get_string('nopermissions', 'error', get_string('grade:manage', 'role'));
                 continue;
             }
@@ -401,7 +401,7 @@ abstract class screen {
         // Create a graded_users_iterator because it will properly check the groups etc.
         $defaultgradeshowactiveenrol = !empty($CFG->grade_report_showonlyactiveenrol);
         $showonlyactiveenrol = get_user_preferences('grade_report_showonlyactiveenrol', $defaultgradeshowactiveenrol);
-        $showonlyactiveenrol = $showonlyactiveenrol || !has_capability('moodle/course:viewsuspendedusers', $this->context);
+        $showonlyactiveenrol = $showonlyactiveenrol || !has_capability('powereduc/course:viewsuspendedusers', $this->context);
 
         require_once($CFG->dirroot.'/grade/lib.php');
         $gui = new \graded_users_iterator($this->course, null, $this->groupid);
@@ -426,7 +426,7 @@ abstract class screen {
 
         $options = array_combine(self::$validperpage, self::$validperpage);
 
-        $url = new moodle_url($PAGE->url);
+        $url = new powereduc_url($PAGE->url);
         $url->remove_params(['page', 'perpage']);
 
         $out = '';

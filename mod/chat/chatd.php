@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Chat daemon
@@ -43,7 +43,7 @@ define('CHAT_SIDEKICK_MESSAGE',     0x22);
 define('CHAT_SIDEKICK_BEEP',        0x23);
 
 $phpversion = phpversion();
-echo 'Moodle chat daemon v1.0 on PHP '.$phpversion."\n\n";
+echo 'PowerEduc chat daemon v1.0 on PHP '.$phpversion."\n\n";
 
 // Set up all the variables we need.
 
@@ -365,7 +365,7 @@ EOD;
                 $header  = "HTTP/1.1 200 OK\n";
                 $header .= "Connection: close\n";
                 $header .= "Date: ".date('r')."\n";
-                $header .= "Server: Moodle\n";
+                $header .= "Server: PowerEduc\n";
                 $header .= "Content-Type: text/html; charset=utf-8\n";
                 $header .= "Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT\n";
                 $header .= "Cache-Control: no-cache, must-revalidate\n";
@@ -385,7 +385,7 @@ EOD;
                 $header  = "HTTP/1.1 200 OK\n";
                 $header .= "Connection: close\n";
                 $header .= "Date: ".date('r')."\n";
-                $header .= "Server: Moodle\n";
+                $header .= "Server: PowerEduc\n";
                 $header .= "Content-Type: text/html; charset=utf-8\n";
                 $header .= "Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT\n";
                 $header .= "Cache-Control: no-cache, must-revalidate\n";
@@ -463,7 +463,7 @@ EOD;
                 $header  = "HTTP/1.1 200 OK\n";
                 $header .= "Connection: close\n";
                 $header .= "Date: ".date('r')."\n";
-                $header .= "Server: Moodle\n";
+                $header .= "Server: PowerEduc\n";
                 $header .= "Content-Type: text/html; charset=utf-8\n";
                 $header .= "Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT\n";
                 $header .= "Cache-Control: no-cache, must-revalidate\n";
@@ -546,7 +546,7 @@ EOD;
         $header  = "HTTP/1.1 200 OK\n";
         $header .= "Connection: close\n";
         $header .= "Date: ".date('r')."\n";
-        $header .= "Server: Moodle\n";
+        $header .= "Server: PowerEduc\n";
         $header .= "Content-Type: text/html; charset=utf-8\n";
         $header .= "Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT\n";
         $header .= "Cache-Control: no-cache, must-revalidate\n";
@@ -922,7 +922,7 @@ if (strpos($commandline, '-') === false) {
 
 if (!$daemon->query_start()) {
     // For some reason we didn't start, so print out some info.
-    echo 'Starts the Moodle chat socket server on port '.$CFG->chat_serverport;
+    echo 'Starts the PowerEduc chat socket server on port '.$CFG->chat_serverport;
     echo "\n\n";
     echo "Usage: chatd.php [parameters]\n\n";
     echo "Parameters:\n";
@@ -942,7 +942,7 @@ if (!function_exists('socket_set_option')) {
 
 $daemon->init_sockets();
 
-$daemon->trace('Started Moodle chatd on port '.$CFG->chat_serverport.', listening socket '.$daemon->listen_socket, E_USER_WARNING);
+$daemon->trace('Started PowerEduc chatd on port '.$CFG->chat_serverport.', listening socket '.$daemon->listen_socket, E_USER_WARNING);
 
 // Clear the decks of old stuff.
 $DB->delete_records('chat_users', array('version' => 'sockets'));

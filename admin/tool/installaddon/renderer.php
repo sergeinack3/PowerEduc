@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  *
  * @package     tool_installaddon
  * @category    output
- * @copyright   2013 David Mudrak <david@moodle.com>
+ * @copyright   2013 David Mudrak <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,7 +29,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Implements the plugin renderer
  *
- * @copyright 2013 David Mudrak <david@moodle.com>
+ * @copyright 2013 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class tool_installaddon_renderer extends plugin_renderer_base {
@@ -62,8 +62,8 @@ class tool_installaddon_renderer extends plugin_renderer_base {
             throw new coding_exception('Installer instance has not been set.');
         }
 
-        $permcheckurl = new moodle_url('/admin/tool/installaddon/permcheck.php');
-        $this->page->requires->yui_module('moodle-tool_installaddon-permcheck', 'M.tool_installaddon.permcheck.init',
+        $permcheckurl = new powereduc_url('/admin/tool/installaddon/permcheck.php');
+        $this->page->requires->yui_module('powereduc-tool_installaddon-permcheck', 'M.tool_installaddon.permcheck.init',
             array(array('permcheckurl' => $permcheckurl->out())));
         $this->page->requires->strings_for_js(
             array('permcheckprogress', 'permcheckresultno', 'permcheckresultyes', 'permcheckerror', 'permcheckrepeat'),
@@ -81,10 +81,10 @@ class tool_installaddon_renderer extends plugin_renderer_base {
     /**
      * Inform the user that the ZIP is not a valid plugin package file.
      *
-     * @param moodle_url $continueurl
+     * @param powereduc_url $continueurl
      * @return string
      */
-    public function zip_not_valid_plugin_package_page(moodle_url $continueurl) {
+    public function zip_not_valid_plugin_package_page(powereduc_url $continueurl) {
 
         $out = $this->output->header();
         $out .= $this->output->heading(get_string('installfromzip', 'tool_installaddon'));
@@ -98,10 +98,10 @@ class tool_installaddon_renderer extends plugin_renderer_base {
     /**
      * Inform the user about invalid remote installation request.
      *
-     * @param moodle_url $continueurl
+     * @param powereduc_url $continueurl
      * @return string
      */
-    public function remote_request_invalid_page(moodle_url $continueurl) {
+    public function remote_request_invalid_page(powereduc_url $continueurl) {
 
         $out = $this->output->header();
         $out .= $this->output->heading(get_string('installfromrepo', 'tool_installaddon'));
@@ -116,10 +116,10 @@ class tool_installaddon_renderer extends plugin_renderer_base {
      * Inform the user that such plugin is already installed
      *
      * @param stdClass $data decoded request data
-     * @param moodle_url $continueurl
+     * @param powereduc_url $continueurl
      * @return string
      */
-    public function remote_request_alreadyinstalled_page(stdClass $data, moodle_url $continueurl) {
+    public function remote_request_alreadyinstalled_page(stdClass $data, powereduc_url $continueurl) {
 
         $out = $this->output->header();
         $out .= $this->output->heading(get_string('installfromrepo', 'tool_installaddon'));
@@ -134,11 +134,11 @@ class tool_installaddon_renderer extends plugin_renderer_base {
      * Let the user confirm the remote installation request.
      *
      * @param stdClass $data decoded request data
-     * @param moodle_url $continueurl
-     * @param moodle_url $cancelurl
+     * @param powereduc_url $continueurl
+     * @param powereduc_url $cancelurl
      * @return string
      */
-    public function remote_request_confirm_page(stdClass $data, moodle_url $continueurl, moodle_url $cancelurl) {
+    public function remote_request_confirm_page(stdClass $data, powereduc_url $continueurl, powereduc_url $cancelurl) {
 
         $out = $this->output->header();
         $out .= $this->output->heading(get_string('installfromrepo', 'tool_installaddon'));
@@ -153,11 +153,11 @@ class tool_installaddon_renderer extends plugin_renderer_base {
      *
      * @param stdClass $data decoded request data
      * @param string $plugintypepath full path to the plugin type location
-     * @param moodle_url $continueurl to repeat the write permission check
-     * @param moodle_url $cancelurl to cancel the installation
+     * @param powereduc_url $continueurl to repeat the write permission check
+     * @param powereduc_url $cancelurl to cancel the installation
      * @return string
      */
-    public function remote_request_permcheck_page(stdClass $data, $plugintypepath, moodle_url $continueurl, moodle_url $cancelurl) {
+    public function remote_request_permcheck_page(stdClass $data, $plugintypepath, powereduc_url $continueurl, powereduc_url $cancelurl) {
 
         $data->typepath = $plugintypepath;
 
@@ -173,10 +173,10 @@ class tool_installaddon_renderer extends plugin_renderer_base {
      * Inform the user that the requested remote plugin is not installable.
      *
      * @param stdClass $data decoded request data with ->reason property added
-     * @param moodle_url $continueurl
+     * @param powereduc_url $continueurl
      * @return string
      */
-    public function remote_request_non_installable_page(stdClass $data, moodle_url $continueurl) {
+    public function remote_request_non_installable_page(stdClass $data, powereduc_url $continueurl) {
 
         $out = $this->output->header();
         $out .= $this->output->heading(get_string('installfromrepo', 'tool_installaddon'));

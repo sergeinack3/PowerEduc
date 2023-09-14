@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * CLI sync for full category enrol synchronisation.
  *
  * Sample execution:
- * $ sudo -u www-data /usr/bin/php /var/www/moodle/enrol/category/cli/sync.php
+ * $ sudo -u www-data /usr/bin/php /var/www/powereduc/enrol/category/cli/sync.php
  *
  * Notes:
  *   - it is required to use the web server account when executing PHP CLI scripts

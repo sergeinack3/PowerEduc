@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -72,7 +72,7 @@ $appregservice = new application_registration_service(
 $appregrepo = new application_registration_repository();
 $draftreg = $appregrepo->find_by_uniqueid($token);
 if (is_null($draftreg) || $draftreg->is_complete()) {
-    throw new moodle_exception('invalidexpiredregistrationurl', 'enrol_lti');
+    throw new powereduc_exception('invalidexpiredregistrationurl', 'enrol_lti');
 }
 
 // Get the OpenID config from the platform.
@@ -84,7 +84,7 @@ if ($errno !== 0) {
 }
 $openidconfig = json_decode($openidconfig);
 if (json_last_error() !== JSON_ERROR_NONE) {
-    throw new moodle_exception('ltiadvdynregerror:invalidopenidconfigjson', 'enrol_lti');
+    throw new powereduc_exception('ltiadvdynregerror:invalidopenidconfigjson', 'enrol_lti');
 }
 
 $regendpoint = $openidconfig->registration_endpoint ?? null;
@@ -113,9 +113,9 @@ $regrequest = (object) [
         $CFG->wwwroot . '/enrol/lti/launch_deeplink.php',
     ],
      // TODO: Consider whether to support client_name#ja syntax for multi language support - see MDL-73109.
-    'client_name' => get_string('moodle', 'enrol_lti'),
+    'client_name' => get_string('powereduc', 'enrol_lti'),
     'jwks_uri' => $CFG->wwwroot . '/enrol/lti/jwks.php',
-    'logo_uri' => $OUTPUT->image_url('moodlelogo')->out(false),
+    'logo_uri' => $OUTPUT->image_url('powereduclogo')->out(false),
     'token_endpoint_auth_method' => 'private_key_jwt',
     'scope' => implode(" ", $scopes),
     'https://purl.imsglobal.org/spec/lti-tool-configuration' => [
@@ -170,16 +170,16 @@ if ($regresponse) {
         $toolconfig = $regresponse->{'https://purl.imsglobal.org/spec/lti-tool-configuration'};
 
         if ($appregrepo->find_by_platform($openidconfig->issuer, $regresponse->client_id)) {
-            throw new moodle_exception('existingregistrationerror', 'enrol_lti');
+            throw new powereduc_exception('existingregistrationerror', 'enrol_lti');
         }
 
         // Registration of the tool on the platform was successful.
         // Now update the platform details in the registration and mark it complete.
-        $draftreg->set_accesstokenurl(new moodle_url($openidconfig->token_endpoint));
-        $draftreg->set_authenticationrequesturl(new moodle_url($openidconfig->authorization_endpoint));
+        $draftreg->set_accesstokenurl(new powereduc_url($openidconfig->token_endpoint));
+        $draftreg->set_authenticationrequesturl(new powereduc_url($openidconfig->authorization_endpoint));
         $draftreg->set_clientid($regresponse->client_id);
-        $draftreg->set_jwksurl(new moodle_url($openidconfig->jwks_uri));
-        $draftreg->set_platformid(new moodle_url($openidconfig->issuer));
+        $draftreg->set_jwksurl(new powereduc_url($openidconfig->jwks_uri));
+        $draftreg->set_platformid(new powereduc_url($openidconfig->issuer));
         $draftreg->complete_registration();
         $appreg = $appregrepo->save($draftreg);
 

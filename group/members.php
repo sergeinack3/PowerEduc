@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -39,7 +39,7 @@ $PAGE->set_pagelayout('admin');
 
 require_login($course);
 $context = context_course::instance($course->id);
-require_capability('moodle/course:managegroups', $context);
+require_capability('powereduc/course:managegroups', $context);
 
 $returnurl = $CFG->wwwroot.'/group/index.php?id='.$course->id.'&group='.$group->id;
 
@@ -55,7 +55,7 @@ if (optional_param('add', false, PARAM_BOOL) && confirm_sesskey()) {
     if (!empty($userstoadd)) {
         foreach ($userstoadd as $user) {
             if (!groups_add_member($groupid, $user->id)) {
-                throw new \moodle_exception('erroraddremoveuser', 'group', $returnurl);
+                throw new \powereduc_exception('erroraddremoveuser', 'group', $returnurl);
             }
             $groupmembersselector->invalidate_selected_users();
             $potentialmembersselector->invalidate_selected_users();
@@ -68,11 +68,11 @@ if (optional_param('remove', false, PARAM_BOOL) && confirm_sesskey()) {
     if (!empty($userstoremove)) {
         foreach ($userstoremove as $user) {
             if (!groups_remove_member_allowed($groupid, $user->id)) {
-                throw new \moodle_exception('errorremovenotpermitted', 'group', $returnurl,
+                throw new \powereduc_exception('errorremovenotpermitted', 'group', $returnurl,
                         $user->fullname);
             }
             if (!groups_remove_member($groupid, $user->id)) {
-                throw new \moodle_exception('erroraddremoveuser', 'group', $returnurl);
+                throw new \powereduc_exception('erroraddremoveuser', 'group', $returnurl);
             }
             $groupmembersselector->invalidate_selected_users();
             $potentialmembersselector->invalidate_selected_users();
@@ -89,8 +89,8 @@ $strusergroupmembership = get_string('usergroupmembership', 'group');
 $groupname = format_string($group->name);
 
 $PAGE->requires->js('/group/clientlib.js');
-$PAGE->navbar->add($strparticipants, new moodle_url('/user/index.php', array('id'=>$course->id)));
-$PAGE->navbar->add($strgroups, new moodle_url('/group/index.php', array('id'=>$course->id)));
+$PAGE->navbar->add($strparticipants, new powereduc_url('/user/index.php', array('id'=>$course->id)));
+$PAGE->navbar->add($strgroups, new powereduc_url('/group/index.php', array('id'=>$course->id)));
 $PAGE->navbar->add($stradduserstogroup);
 
 /// Print header

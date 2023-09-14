@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -36,8 +36,8 @@ use external_single_structure;
 use external_multiple_structure;
 use external_warnings;
 use context_system;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use core_text;
 use core_user;
 use coding_exception;
@@ -291,7 +291,7 @@ class external extends external_api {
         // We must toletare these two exceptions: forcepasswordchangenotice and usernotfullysetup.
         try {
             self::validate_context($context);
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             if ($e->errorcode != 'usernotfullysetup' && $e->errorcode != 'forcepasswordchangenotice') {
                 // In case we receive a different exception, throw it.
                 throw $e;
@@ -301,13 +301,13 @@ class external extends external_api {
         // Only requests from the Moodle mobile or desktop app. This enhances security to avoid any type of XSS attack.
         // This code goes intentionally here and not inside the check_autologin_prerequisites() function because it
         // is used by other PHP scripts that can be opened in any browser.
-        if (!\core_useragent::is_moodle_app()) {
-            throw new moodle_exception('apprequired', 'tool_mobile');
+        if (!\core_useragent::is_powereduc_app()) {
+            throw new powereduc_exception('apprequired', 'tool_mobile');
         }
         api::check_autologin_prerequisites($USER->id);
 
         if (isset($_GET['privatetoken']) or empty($privatetoken)) {
-            throw new moodle_exception('invalidprivatetoken', 'tool_mobile');
+            throw new powereduc_exception('invalidprivatetoken', 'tool_mobile');
         }
 
         // Check the request counter, we must limit the number of times the privatetoken is sent.
@@ -319,7 +319,7 @@ class external extends external_api {
         $timenow = time();
         if ($timenow - $last < $mintimereq) {
             $minutes = $mintimereq / MINSECS;
-            throw new moodle_exception('autologinkeygenerationlockout', 'tool_mobile', $minutes);
+            throw new powereduc_exception('autologinkeygenerationlockout', 'tool_mobile', $minutes);
         }
         set_user_preference('tool_mobile_autologin_request_last', $timenow, $USER);
 
@@ -332,12 +332,12 @@ class external extends external_api {
             'privatetoken' => $privatetoken,
         );
         if (!$token = $DB->get_record('external_tokens', $conditions)) {
-            throw new moodle_exception('invalidprivatetoken', 'tool_mobile');
+            throw new powereduc_exception('invalidprivatetoken', 'tool_mobile');
         }
 
         $result = array();
         $result['key'] = api::get_autologin_key();
-        $autologinurl = new moodle_url("/$CFG->admin/tool/mobile/autologin.php");
+        $autologinurl = new powereduc_url("/$CFG->admin/tool/mobile/autologin.php");
         $result['autologinurl'] = $autologinurl->out(false);
         $result['warnings'] = array();
         return $result;
@@ -637,14 +637,14 @@ class external extends external_api {
 
         $qrcodetype = get_config('tool_mobile', 'qrcodetype');
         if ($qrcodetype != api::QR_CODE_LOGIN) {
-            throw new moodle_exception('qrcodedisabled', 'tool_mobile');
+            throw new powereduc_exception('qrcodedisabled', 'tool_mobile');
         }
 
         // Only requests from the Moodle mobile or desktop app. This enhances security to avoid any type of XSS attack.
         // This code goes intentionally here and not inside the check_autologin_prerequisites() function because it
         // is used by other PHP scripts that can be opened in any browser.
-        if (!\core_useragent::is_moodle_app()) {
-            throw new moodle_exception('apprequired', 'tool_mobile');
+        if (!\core_useragent::is_powereduc_app()) {
+            throw new powereduc_exception('apprequired', 'tool_mobile');
         }
         api::check_autologin_prerequisites($params['userid']);  // Checks https, avoid site admins using this...
 
@@ -654,7 +654,7 @@ class external extends external_api {
 
         // Double check key belong to user.
         if ($key->userid != $params['userid']) {
-            throw new moodle_exception('invalidkey');
+            throw new powereduc_exception('invalidkey');
         }
 
         // Key validated, check user.
@@ -668,7 +668,7 @@ class external extends external_api {
         $service = $DB->get_record('external_services', ['shortname' => POWEREDUC_OFFICIAL_MOBILE_SERVICE, 'enabled' => 1]);
         if (empty($service)) {
             // will throw exception if no token found
-            throw new moodle_exception('servicenotavailable', 'webservice');
+            throw new powereduc_exception('servicenotavailable', 'webservice');
         }
 
         // Get an existing token or create a new one.

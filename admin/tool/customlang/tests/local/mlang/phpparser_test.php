@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 namespace tool_customlang\local\mlang;
 
 use advanced_testcase;
-use moodle_exception;
+use powereduc_exception;
 
 /**
  * PHP lang parser test class.
@@ -62,7 +62,7 @@ class phpparser_test extends advanced_testcase {
         $instance = phpparser::get_instance();
 
         if ($exception) {
-            $this->expectException(moodle_exception::class);
+            $this->expectException(powereduc_exception::class);
         }
 
         $strings = $instance->parse($phpcode);

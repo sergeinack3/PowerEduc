@@ -2,12 +2,12 @@
 /**
  * RTLCSS.
  *
- * @package   MoodleHQ\RTLCSS
+ * @package   PowerEducHQ\RTLCSS
  * @copyright 2016 Frédéric Massart - FMCorz.net
  * @license   https://opensource.org/licenses/MIT MIT
  */
 
-namespace MoodleHQ\RTLCSS;
+namespace PowerEducHQ\RTLCSS;
 
 use Sabberworm\CSS\CSSList\CSSList;
 use Sabberworm\CSS\CSSList\Document;
@@ -26,7 +26,7 @@ use Sabberworm\CSS\Value\ValueList;
 /**
  * RTLCSS Class.
  *
- * @package   MoodleHQ\RTLCSS
+ * @package   PowerEducHQ\RTLCSS
  * @copyright 2016 Frédéric Massart - FMCorz.net
  * @license   https://opensource.org/licenses/MIT MIT
  */

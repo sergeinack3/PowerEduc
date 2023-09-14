@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -1050,7 +1050,7 @@ class imsenterprise_test extends \advanced_testcase {
       <full>'.$course->imsfull.'</full>';
                 }
 
-                // The orgunit tag value is used by moodle as category name.
+                // The orgunit tag value is used by powereduc as category name.
                 $xmlcontent .= '
     </description>
     <org>';

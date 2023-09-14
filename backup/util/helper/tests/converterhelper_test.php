@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -82,13 +82,13 @@ class converterhelper_test extends \basic_testcase {
 
         // two alternatives
         $descriptions = array(
-            // standard moodle 1.9 -> 2.x converter
-            'moodle1' => array(
+            // standard powereduc 1.9 -> 2.x converter
+            'powereduc1' => array(
                 'from'  => backup::FORMAT_POWEREDUC1,
                 'to'    => backup::FORMAT_POWEREDUC,
                 'cost'  => 10,
             ),
-            // alternative moodle 1.9 -> 2.x converter
+            // alternative powereduc 1.9 -> 2.x converter
             'alternative' => array(
                 'from'  => backup::FORMAT_POWEREDUC1,
                 'to'    => backup::FORMAT_POWEREDUC,
@@ -100,13 +100,13 @@ class converterhelper_test extends \basic_testcase {
 
         // complex case
         $descriptions = array(
-            // standard moodle 1.9 -> 2.x converter
-            'moodle1' => array(
+            // standard powereduc 1.9 -> 2.x converter
+            'powereduc1' => array(
                 'from'  => backup::FORMAT_POWEREDUC1,
                 'to'    => backup::FORMAT_POWEREDUC,
                 'cost'  => 10,
             ),
-            // alternative moodle 1.9 -> 2.x converter
+            // alternative powereduc 1.9 -> 2.x converter
             'alternative' => array(
                 'from'  => backup::FORMAT_POWEREDUC1,
                 'to'    => backup::FORMAT_POWEREDUC,
@@ -118,7 +118,7 @@ class converterhelper_test extends \basic_testcase {
                 'to'    => 'CFv1',
                 'cost'  => 2,
             ),
-            // custom converter from custom 'CFv1' format -> moodle 2.0 format
+            // custom converter from custom 'CFv1' format -> powereduc 2.0 format
             'cc2' => array(
                 'from'  => 'CFv1',
                 'to'    => backup::FORMAT_POWEREDUC,
@@ -130,7 +130,7 @@ class converterhelper_test extends \basic_testcase {
                 'to'    => 'CFv2',
                 'cost'  => 2,
             ),
-            // custom converter from CFv2 -> moodle 2.0 format
+            // custom converter from CFv2 -> powereduc 2.0 format
             'cc4' => array(
                 'from'  => 'CFv2',
                 'to'    => backup::FORMAT_POWEREDUC,

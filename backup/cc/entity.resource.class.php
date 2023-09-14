@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,10 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * @package   moodlecore
+ * @package   powereduccore
  * @subpackage backup-imscc
  * @copyright 2009 Mauro Rondinelli (mauro.rondinelli [AT] uvcms.com)
- * @copyright 2011 Darko Miletic (dmiletic@moodlerooms.com)
+ * @copyright 2011 Darko Miletic (dmiletic@powereducrooms.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,13 +27,13 @@ class cc_resource extends entities {
 
     public function generate_node () {
 
-        cc2moodle::log_action('Creating Resource mods');
+        cc2powereduc::log_action('Creating Resource mods');
 
         $response = '';
-        $sheet_mod_resource = cc2moodle::loadsheet(SHEET_COURSE_SECTIONS_SECTION_MODS_MOD_RESOURCE);
+        $sheet_mod_resource = cc2powereduc::loadsheet(SHEET_COURSE_SECTIONS_SECTION_MODS_MOD_RESOURCE);
 
-        if (!empty(cc2moodle::$instances['instances'][POWEREDUC_TYPE_RESOURCE])) {
-            foreach (cc2moodle::$instances['instances'][POWEREDUC_TYPE_RESOURCE] as $instance) {
+        if (!empty(cc2powereduc::$instances['instances'][POWEREDUC_TYPE_RESOURCE])) {
+            foreach (cc2powereduc::$instances['instances'][POWEREDUC_TYPE_RESOURCE] as $instance) {
                 $response .= $this->create_node_course_modules_mod_resource($sheet_mod_resource, $instance);
             }
         }
@@ -50,9 +50,9 @@ class cc_resource extends entities {
         $link = '';
         $mod_alltext = '';
         $mod_summary = '';
-        $xpath = cc2moodle::newx_path(cc2moodle::$manifest, cc2moodle::$namespaces);
+        $xpath = cc2powereduc::newx_path(cc2powereduc::$manifest, cc2powereduc::$namespaces);
 
-        if ($instance['common_cartriedge_type'] == cc2moodle::CC_TYPE_WEBCONTENT || $instance['common_cartriedge_type'] == cc2moodle::CC_TYPE_ASSOCIATED_CONTENT) {
+        if ($instance['common_cartriedge_type'] == cc2powereduc::CC_TYPE_WEBCONTENT || $instance['common_cartriedge_type'] == cc2powereduc::CC_TYPE_ASSOCIATED_CONTENT) {
             $resource = $xpath->query('/imscc:manifest/imscc:resources/imscc:resource[@identifier="' . $instance['resource_indentifier'] . '"]/@href');
             $resource = !empty($resource->item(0)->nodeValue) ? $resource->item(0)->nodeValue : '';
 
@@ -70,16 +70,16 @@ class cc_resource extends entities {
             }
         }
 
-        if ($instance['common_cartriedge_type'] == cc2moodle::CC_TYPE_WEBLINK) {
+        if ($instance['common_cartriedge_type'] == cc2powereduc::CC_TYPE_WEBLINK) {
 
             $external_resource = $xpath->query('/imscc:manifest/imscc:resources/imscc:resource[@identifier="' . $instance['resource_indentifier'] . '"]/imscc:file/@href')->item(0)->nodeValue;
 
             if ($external_resource) {
 
-                $resource = $this->load_xml_resource(cc2moodle::$path_to_manifest_folder . DIRECTORY_SEPARATOR . $external_resource);
+                $resource = $this->load_xml_resource(cc2powereduc::$path_to_manifest_folder . DIRECTORY_SEPARATOR . $external_resource);
 
                 if (!empty($resource)) {
-                    $xpath = cc2moodle::newx_path($resource, cc2moodle::getresourcens());
+                    $xpath = cc2powereduc::newx_path($resource, cc2powereduc::getresourcens());
                     $resource = $xpath->query('//url/@href');
                     if ($resource->length > 0) {
                         $rawlink = $resource->item(0)->nodeValue;
@@ -111,12 +111,12 @@ class cc_resource extends entities {
         $mod_options   = 'objectframe';
         $mod_reference = $link;
         //detected if we are dealing with html file
-        if (!empty($link) && ($instance['common_cartriedge_type'] == cc2moodle::CC_TYPE_WEBCONTENT)) {
+        if (!empty($link) && ($instance['common_cartriedge_type'] == cc2powereduc::CC_TYPE_WEBCONTENT)) {
             $ext = strtolower(pathinfo($link, PATHINFO_EXTENSION));
             if (in_array($ext, array('html', 'htm', 'xhtml'))) {
                 $mod_type = 'html';
                 //extract the content of the file
-                $rootpath = realpath(cc112moodle::$path_to_manifest_folder);
+                $rootpath = realpath(cc112powereduc::$path_to_manifest_folder);
                 $htmlpath = realpath($rootpath . DIRECTORY_SEPARATOR . $link);
                 $dirpath  = dirname($htmlpath);
                 if (file_exists($htmlpath)) {

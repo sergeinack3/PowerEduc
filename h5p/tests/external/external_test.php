@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core_h5p
  * @category   external
- * @copyright  2019 Carlos Escobedo <carlos@moodle.com>
+ * @copyright  2019 Carlos Escobedo <carlos@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.8
  */
@@ -44,7 +44,7 @@ use core_h5p\local\library\autoloader;
  *
  * @package    core_h5p
  * @category   external
- * @copyright  2019 Carlos Escobedo <carlos@moodle.com>
+ * @copyright  2019 Carlos Escobedo <carlos@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.8
  */
@@ -75,7 +75,7 @@ class external_test extends externallib_advanced_testcase {
             $generator::PLUGINFILE);
 
         // Make the URL to pass to the WS.
-        $url  = \moodle_url::make_pluginfile_url(
+        $url  = \powereduc_url::make_pluginfile_url(
             $syscontext->id,
             \core_h5p\file_storage::COMPONENT,
             \core_h5p\file_storage::EXPORT_FILEAREA,
@@ -114,7 +114,7 @@ class external_test extends externallib_advanced_testcase {
         // Expected result: Just 1 record on warnings and none on files.
         $this->assertCount(0, $result['files']);
         $this->assertCount(1, $result['warnings']);
-        // Check the warnings to be sure that h5pinvalidurl is the message by moodle_exception.
+        // Check the warnings to be sure that h5pinvalidurl is the message by powereduc_exception.
         $this->assertEquals($urlempty, $result['warnings'][0]['item']);
         $this->assertEquals(get_string('h5pinvalidurl', 'core_h5p'), $result['warnings'][0]['message']);
 
@@ -125,7 +125,7 @@ class external_test extends externallib_advanced_testcase {
         // Expected result: Just 1 record on warnings and none on files.
         $this->assertCount(0, $result['files']);
         $this->assertCount(1, $result['warnings']);
-        // Check the warnings to be sure that h5pinvalidurl is the message by moodle_exception.
+        // Check the warnings to be sure that h5pinvalidurl is the message by powereduc_exception.
         $this->assertEquals($urlnonlocal, $result['warnings'][0]['item']);
         $this->assertEquals(get_string('h5pinvalidurl', 'core_h5p'), $result['warnings'][0]['message']);
     }
@@ -139,7 +139,7 @@ class external_test extends externallib_advanced_testcase {
 
         // Create a valid url with an h5pfile which doesn't exist in DB.
         $syscontext = \context_system::instance();
-        $filenotfoundurl  = \moodle_url::make_pluginfile_url(
+        $filenotfoundurl  = \powereduc_url::make_pluginfile_url(
             $syscontext->id,
             \core_h5p\file_storage::COMPONENT,
             'unittest',
@@ -178,7 +178,7 @@ class external_test extends externallib_advanced_testcase {
             \core_h5p\file_storage::EXPORT_FILEAREA);
 
         // Make the URL to pass to the WS.
-        $url  = \moodle_url::make_webservice_pluginfile_url(
+        $url  = \powereduc_url::make_webservice_pluginfile_url(
             $syscontext->id,
             \core_h5p\file_storage::COMPONENT,
             \core_h5p\file_storage::EXPORT_FILEAREA,
@@ -221,7 +221,7 @@ class external_test extends externallib_advanced_testcase {
             $generator::TOKENPLUGINFILE);
 
         // Make the URL to pass to the WS.
-        $url  = \moodle_url::make_pluginfile_url(
+        $url  = \powereduc_url::make_pluginfile_url(
             $syscontext->id,
             \core_h5p\file_storage::COMPONENT,
             \core_h5p\file_storage::EXPORT_FILEAREA,

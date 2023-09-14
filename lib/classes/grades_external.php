@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Core grades external functions
@@ -20,7 +20,7 @@
  * @package    core_grades
  * @copyright  2012 Andrew Davis
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.7
+ * @since PowerEduc 2.7
  */
 
 defined('POWEREDUC_INTERNAL') || die;
@@ -38,7 +38,7 @@ class core_grades_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.7
+     * @since PowerEduc 2.7
      */
     public static function update_grades_parameters() {
         return new external_function_parameters(
@@ -97,7 +97,7 @@ class core_grades_external extends external_api {
      * @param  array  $grades      Array of grades
      * @param  array  $itemdetails Array of item details
      * @return int                  A status flag
-     * @since Moodle 2.7
+     * @since PowerEduc 2.7
      */
     public static function update_grades($source, $courseid, $component, $activityid,
         $itemnumber, $grades = array(), $itemdetails = array()) {
@@ -119,7 +119,7 @@ class core_grades_external extends external_api {
         list($itemtype, $itemmodule) = normalize_component($params['component']);
 
         if (! $cm = get_coursemodule_from_id($itemmodule, $activityid)) {
-            throw new moodle_exception('invalidcoursemodule');
+            throw new powereduc_exception('invalidcoursemodule');
         }
         $iteminstance = $cm->instance;
 
@@ -131,7 +131,7 @@ class core_grades_external extends external_api {
             $exceptionparam = new stdClass();
             $exceptionparam->message = $e->getMessage();
             $exceptionparam->courseid = $params['courseid'];
-            throw new moodle_exception('errorcoursecontextnotvalid' , 'webservice', '', $exceptionparam);
+            throw new powereduc_exception('errorcoursecontextnotvalid' , 'webservice', '', $exceptionparam);
         }
 
         $hidinggrades = false;
@@ -151,18 +151,18 @@ class core_grades_external extends external_api {
             }
         }
 
-        if ($editinggradeitem && !has_capability('moodle/grade:manage', $coursecontext)) {
-            throw new moodle_exception('nopermissiontoviewgrades', 'error', '', null,
-                'moodle/grade:manage required to edit grade information');
+        if ($editinggradeitem && !has_capability('powereduc/grade:manage', $coursecontext)) {
+            throw new powereduc_exception('nopermissiontoviewgrades', 'error', '', null,
+                'powereduc/grade:manage required to edit grade information');
         }
-        if ($hidinggrades && !has_capability('moodle/grade:hide', $coursecontext) &&
-            !has_capability('moodle/grade:hide', $coursecontext)) {
-            throw new moodle_exception('nopermissiontoviewgrades', 'error', '', null,
-                'moodle/grade:hide required to hide grade items');
+        if ($hidinggrades && !has_capability('powereduc/grade:hide', $coursecontext) &&
+            !has_capability('powereduc/grade:hide', $coursecontext)) {
+            throw new powereduc_exception('nopermissiontoviewgrades', 'error', '', null,
+                'powereduc/grade:hide required to hide grade items');
         }
-        if ($editinggrades && !has_capability('moodle/grade:edit', $coursecontext)) {
-            throw new moodle_exception('nopermissiontoviewgrades', 'error', '', null,
-                'moodle/grade:edit required to edit grades');
+        if ($editinggrades && !has_capability('powereduc/grade:edit', $coursecontext)) {
+            throw new powereduc_exception('nopermissiontoviewgrades', 'error', '', null,
+                'powereduc/grade:edit required to edit grades');
         }
 
         return grade_update($params['source'], $params['courseid'], $itemtype,
@@ -173,7 +173,7 @@ class core_grades_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.7
+     * @since PowerEduc 2.7
      */
     public static function update_grades_returns() {
         return new external_value(
@@ -186,12 +186,12 @@ class core_grades_external extends external_api {
     /**
      * Returns description of method parameters
      *
-     * @deprecated since Moodle 3.11 MDL-71031 - please do not use this function any more.
-     * @todo MDL-71325 This will be deleted in Moodle 4.3.
+     * @deprecated since PowerEduc 3.11 MDL-71031 - please do not use this function any more.
+     * @todo MDL-71325 This will be deleted in PowerEduc 4.3.
      * @see core_grades\external\create_gradecategories::create_gradecategories()
      *
      * @return external_function_parameters
-     * @since Moodle 3.10
+     * @since PowerEduc 3.10
      */
     public static function create_gradecategory_parameters() {
         return new external_function_parameters(
@@ -226,8 +226,8 @@ class core_grades_external extends external_api {
     /**
      * Creates a gradecategory inside of the specified course.
      *
-     * @deprecated since Moodle 3.11 MDL-71031 - please do not use this function any more.
-     * @todo MDL-71325 This will be deleted in Moodle 4.3.
+     * @deprecated since PowerEduc 3.11 MDL-71031 - please do not use this function any more.
+     * @todo MDL-71325 This will be deleted in PowerEduc 4.3.
      * @see core_grades\external\create_gradecategories::create_gradecategories()
      *
      * @param int $courseid the courseid to create the gradecategory in.
@@ -250,7 +250,7 @@ class core_grades_external extends external_api {
         // Check that the context and permissions are OK.
         $context = context_course::instance($courseid);
         self::validate_context($context);
-        require_capability('moodle/grade:manage', $context);
+        require_capability('powereduc/grade:manage', $context);
 
         $categories = [];
         $categories[] = ['fullname' => $fullname, 'options' => $options];
@@ -264,12 +264,12 @@ class core_grades_external extends external_api {
     /**
      * Returns description of method result value
      *
-     * @deprecated since Moodle 3.11 MDL-71031 - please do not use this function any more.
-     * @todo MDL-71325 This will be deleted in Moodle 4.3.
+     * @deprecated since PowerEduc 3.11 MDL-71031 - please do not use this function any more.
+     * @todo MDL-71325 This will be deleted in PowerEduc 4.3.
      * @see core_grades\external\create_gradecategories::create_gradecategories()
      *
      * @return external_description
-     * @since Moodle 3.10
+     * @since PowerEduc 3.10
      */
     public static function create_gradecategory_returns() {
         return new external_single_structure([
@@ -280,7 +280,7 @@ class core_grades_external extends external_api {
 
     /**
      * Marking the method as deprecated. See MDL-71031 for details.
-     * @since Moodle 3.11
+     * @since PowerEduc 3.11
      * @return bool
      */
     public static function create_gradecategory_is_deprecated() {

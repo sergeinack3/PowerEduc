@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    filter_mediaplugin
  * @category   phpunit
- * @copyright  2011 Rossiani Wijaya <rwijaya@moodle.com>
+ * @copyright  2011 Rossiani Wijaya <rwijaya@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -43,38 +43,38 @@ class filter_test extends \advanced_testcase {
 
         $filterplugin = new filter_mediaplugin(null, array());
 
-        $longurl = '<a href="http://moodle/.mp4">my test file</a>';
+        $longurl = '<a href="http://powereduc/.mp4">my test file</a>';
         $longhref = '';
 
         do {
             $longhref .= 'a';
         } while(strlen($longhref) + strlen($longurl) < 4095);
 
-        $longurl = '<a href="http://moodle/' . $longhref . '.mp4">my test file</a>';
+        $longurl = '<a href="http://powereduc/' . $longhref . '.mp4">my test file</a>';
 
         $validtexts = array (
-            '<a href="http://moodle.org/testfile/test.mp3">test mp3</a>',
-            '<a href="http://moodle.org/testfile/test.ogg">test ogg</a>',
-            '<a id="movie player" class="center" href="http://moodle.org/testfile/test.mp4">test mp4</a>',
-            '<a href="http://moodle.org/testfile/test.webm">test</a>',
+            '<a href="http://powereduc.org/testfile/test.mp3">test mp3</a>',
+            '<a href="http://powereduc.org/testfile/test.ogg">test ogg</a>',
+            '<a id="movie player" class="center" href="http://powereduc.org/testfile/test.mp4">test mp4</a>',
+            '<a href="http://powereduc.org/testfile/test.webm">test</a>',
             '<a href="http://www.youtube.com/watch?v=JghQgA2HMX8" class="href=css">test file</a>',
             '<a href="http://www.youtube-nocookie.com/watch?v=JghQgA2HMX8" class="href=css">test file</a>',
             '<a href="http://youtu.be/JghQgA2HMX8" class="href=css">test file</a>',
             '<a href="http://y2u.be/JghQgA2HMX8" class="href=css">test file</a>',
             '<a class="youtube" href="http://www.youtube.com/watch?v=JghQgA2HMX8">test file</a>',
             '<a class="hrefcss" href="http://www.youtube.com/watch?v=JghQgA2HMX8">test file</a>',
-            '<a  class="content"     href="http://moodle.org/testfile/test.ogg">test ogg</a>',
-            '<a     id="audio"      href="http://moodle.org/testfile/test.mp3">test mp3</a>',
-            '<a  href="http://moodle.org/testfile/test.mp3">test mp3</a>',
-            '<a     href="http://moodle.org/testfile/test.mp3">test mp3</a>',
+            '<a  class="content"     href="http://powereduc.org/testfile/test.ogg">test ogg</a>',
+            '<a     id="audio"      href="http://powereduc.org/testfile/test.mp3">test mp3</a>',
+            '<a  href="http://powereduc.org/testfile/test.mp3">test mp3</a>',
+            '<a     href="http://powereduc.org/testfile/test.mp3">test mp3</a>',
             '<a     href="http://www.youtube.com/watch?v=JghQgA2HMX8?d=200x200">youtube\'s</a>',
             '<a
-                            href="http://moodle.org/testfile/test.mp3">
+                            href="http://powereduc.org/testfile/test.mp3">
                             test mp3</a>',
             '<a                         class="content"
 
 
-                            href="http://moodle.org/testfile/test.wav">test wav
+                            href="http://powereduc.org/testfile/test.wav">test wav
                                     </a>',
             '<a             href="http://www.youtube.com/watch?v=JghQgA2HMX8?d=200x200"     >youtube\'s</a>',
             // Test a long URL under 4096 characters.
@@ -101,21 +101,21 @@ class filter_test extends \advanced_testcase {
         $validpaddedurl = str_pad($validpaddedurl, 6000 + (strlen($validpaddedurl) - strlen($originalurl)), 'z');
 
         $invalidtexts = array(
-            '<a class="_blanktarget">href="http://moodle.org/testfile/test.mp3"</a>',
+            '<a class="_blanktarget">href="http://powereduc.org/testfile/test.mp3"</a>',
             '<a>test test</a>',
             '<a >test test</a>',
             '<a     >test test</a>',
             '<a >test test</a>',
-            '<ahref="http://moodle.org/testfile/test.mp3">sample</a>',
+            '<ahref="http://powereduc.org/testfile/test.mp3">sample</a>',
             '<a href="" test></a>',
-            '<a href="http://www.moodle.com/path/to?#param=29">test</a>',
-            '<a href="http://moodle.org/testfile/test.mp3">test mp3',
-            '<a href="http://moodle.org/testfile/test.mp3"test</a>',
-            '<a href="http://moodle.org/testfile/">test</a>',
-            '<href="http://moodle.org/testfile/test.avi">test</a>',
-            '<abbr href="http://moodle.org/testfile/test.mp3">test mp3</abbr>',
-            '<ahref="http://moodle.org/testfile/test.mp3">test mp3</a>',
-            '<aclass="content" href="http://moodle.org/testfile/test.mp3">test mp3</a>',
+            '<a href="http://www.powereduc.com/path/to?#param=29">test</a>',
+            '<a href="http://powereduc.org/testfile/test.mp3">test mp3',
+            '<a href="http://powereduc.org/testfile/test.mp3"test</a>',
+            '<a href="http://powereduc.org/testfile/">test</a>',
+            '<href="http://powereduc.org/testfile/test.avi">test</a>',
+            '<abbr href="http://powereduc.org/testfile/test.mp3">test mp3</abbr>',
+            '<ahref="http://powereduc.org/testfile/test.mp3">test mp3</a>',
+            '<aclass="content" href="http://powereduc.org/testfile/test.mp3">test mp3</a>',
             // Test a long URL over 4096 characters.
             $longurl
         );
@@ -128,7 +128,7 @@ class filter_test extends \advanced_testcase {
         }
 
         // Valid mediaurl followed by a longurl.
-        $precededlongurl = '<a href="http://moodle.org/testfile/test.mp3">test.mp3</a>'. $longurl;
+        $precededlongurl = '<a href="http://powereduc.org/testfile/test.mp3">test.mp3</a>'. $longurl;
         $filter = $filterplugin->filter($precededlongurl);
         $this->assertEquals(1, substr_count($filter, '</audio>'));
         $this->assertStringContainsString($longurl, $filter);

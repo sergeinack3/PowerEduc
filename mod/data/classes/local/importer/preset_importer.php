@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_data\local\importer;
 
@@ -73,11 +73,11 @@ abstract class preset_importer {
     }
 
     /**
-     * Retreive the contents of a file. That file may either be in a conventional directory of the Moodle file storage
+     * Retreive the contents of a file. That file may either be in a conventional directory of the PowerEduc file storage
      *
      * @param \file_storage|null $filestorage . Should be null if using a conventional directory
      * @param \stored_file|null $fileobj the directory to look in. null if using a conventional directory
-     * @param string|null $dir the directory to look in. null if using the Moodle file storage
+     * @param string|null $dir the directory to look in. null if using the PowerEduc file storage
      * @param string $filename the name of the file we want
      * @return string|null the contents of the file or null if the file doesn't exist.
      */
@@ -132,7 +132,7 @@ abstract class preset_importer {
         $fs = null;
         $fileobj = null;
         if (!preset::is_directory_a_preset($this->directory)) {
-            // Maybe the user requested a preset stored in the Moodle file storage.
+            // Maybe the user requested a preset stored in the PowerEduc file storage.
 
             $fs = get_file_storage();
             $files = $fs->get_area_files(DATA_PRESET_CONTEXT, DATA_PRESET_COMPONENT, DATA_PRESET_FILEAREA);

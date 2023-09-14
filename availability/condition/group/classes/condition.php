@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -69,7 +69,7 @@ class condition extends \core_availability\condition {
         $course = $info->get_course();
         $context = \context_course::instance($course->id);
         $allow = true;
-        if (!has_capability('moodle/site:accessallgroups', $context, $userid)) {
+        if (!has_capability('powereduc/site:accessallgroups', $context, $userid)) {
             // Get all groups the user belongs to.
             $groups = $info->get_modinfo()->get_groups();
             if ($this->groupid) {
@@ -213,7 +213,7 @@ class condition extends \core_availability\condition {
         }
 
         // List users who have access all groups.
-        $aagusers = $checker->get_users_by_capability('moodle/site:accessallgroups');
+        $aagusers = $checker->get_users_by_capability('powereduc/site:accessallgroups');
 
         // Filter the user list.
         $result = array();
@@ -258,7 +258,7 @@ class condition extends \core_availability\condition {
 
         // Get enrolled users with access all groups. These always are allowed.
         list($aagsql, $aagparams) = get_enrolled_sql(
-                $info->get_context(), 'moodle/site:accessallgroups', 0, $onlyactive);
+                $info->get_context(), 'powereduc/site:accessallgroups', 0, $onlyactive);
 
         // Get all enrolled users.
         list ($enrolsql, $enrolparams) =

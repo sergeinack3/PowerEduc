@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 // NOTE: no POWEREDUC_INTERNAL test here, this file may be required by behat before including /config.php.
 
@@ -21,7 +21,7 @@ require_once(__DIR__ . '/behat_base.php');
 /**
  * Base class for steps definitions classes that contain deprecated steps.
  *
- * To be extended by the deprecated steps definitions of the different Moodle components and add-ons.
+ * To be extended by the deprecated steps definitions of the different PowerEduc components and add-ons.
  * For example, deprecated core steps can be found in lib/tests/behat/behat_deprecated.php ,
  * deprecated steps for mod_forum would be in mod/forum/tests/behat/behat_mod_forum_deprecated.php etc.
  *

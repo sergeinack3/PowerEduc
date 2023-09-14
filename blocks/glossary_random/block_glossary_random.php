@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Glossary Random block.
  *
  * @package   block_glossary_random
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -241,11 +241,11 @@ class block_glossary_random extends block_base {
             // Show glossary if visible and place links in footer.
             $this->content->text = $this->config->cache;
             if (has_capability('mod/glossary:write', context_module::instance($cm->id))) {
-                $this->content->footer = html_writer::link(new moodle_url('/mod/glossary/edit.php', ['cmid' => $cm->id]),
+                $this->content->footer = html_writer::link(new powereduc_url('/mod/glossary/edit.php', ['cmid' => $cm->id]),
                     format_string($this->config->addentry)) . '<br/>';
             }
 
-            $this->content->footer .= html_writer::link(new moodle_url('/mod/glossary/view.php', ['id' => $cm->id]),
+            $this->content->footer .= html_writer::link(new powereduc_url('/mod/glossary/view.php', ['id' => $cm->id]),
                 format_string($this->config->viewglossary));
         } else {
             // Otherwise just place some text, no link.
@@ -274,10 +274,10 @@ class block_glossary_random extends block_base {
     /**
      * This block shouldn't be added to a page if the glossary module is disabled.
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @return bool
      */
-    public function can_block_be_added(moodle_page $page): bool {
+    public function can_block_be_added(powereduc_page $page): bool {
         $pluginclass = \core_plugin_manager::resolve_plugininfo_class('mod');
         return $pluginclass::get_enabled_plugin('glossary');
     }

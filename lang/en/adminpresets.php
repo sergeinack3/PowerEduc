@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Core admin presets component to load some settings/plugins.
@@ -38,9 +38,9 @@ $string['markedasnonforced'] = 'not marked as forced';
 $string['markedasnonlocked'] = 'not marked as locked';
 $string['privacy:metadata:adminpresets'] = 'The list of configuration presets.';
 $string['privacy:metadata:adminpresets:comments'] = 'The description of the preset.';
-$string['privacy:metadata:adminpresets:powereducrelease'] = 'The Moodle release version that the preset is based on.';
+$string['privacy:metadata:adminpresets:powereducrelease'] = 'The PowerEduc release version that the preset is based on.';
 $string['privacy:metadata:adminpresets:name'] = 'The name of the preset.';
-$string['privacy:metadata:adminpresets:site'] = 'The Moodle site where this preset was created.';
+$string['privacy:metadata:adminpresets:site'] = 'The PowerEduc site where this preset was created.';
 $string['privacy:metadata:adminpresets:timecreated'] = 'The time that the change was made.';
 $string['privacy:metadata:adminpresets:userid'] = 'The user who create the preset.';
 $string['privacy:metadata:adminpresets_app'] = 'The configuration presets that have been applied.';
@@ -51,5 +51,5 @@ $string['sensiblesettings'] = 'Settings with passwords';
 $string['sensiblesettingstext'] = 'Settings with passwords or other sensitive information can be excluded when creating a site admin preset. Enter additional settings with format SETTINGNAME@@PLUGINNAME separated by commas.';
 $string['siteadminpresetspluginname'] = 'Site admin presets';
 $string['starterpreset'] = 'Starter';
-$string['starterpresetdescription'] = 'Moodle with all of the most popular features, including Assignment, Feedback, Forum, H5P, Quiz and Completion tracking.';
+$string['starterpresetdescription'] = 'PowerEduc with all of the most popular features, including Assignment, Feedback, Forum, H5P, Quiz and Completion tracking.';
 $string['wrongid'] = 'Wrong ID';

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -57,11 +57,11 @@ class search_content_test extends \advanced_testcase {
      * Constructs a page object for the test course.
      *
      * @param \stdClass $course Moodle course object
-     * @return \moodle_page Page object representing course view
+     * @return \powereduc_page Page object representing course view
      */
     protected static function construct_page($course) {
         $context = \context_course::instance($course->id);
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context($context);
         $page->set_course($course);
         $page->set_pagelayout('standard');
@@ -154,7 +154,7 @@ class search_content_test extends \advanced_testcase {
             $this->assertEquals(\core_search\manager::NO_OWNER_ID, $doc->get('owneruserid'));
 
             // Also check getting the doc url and context url.
-            $url = new \moodle_url('/course/view.php', ['id' => $course->id], 'inst' . $record->id);
+            $url = new \powereduc_url('/course/view.php', ['id' => $course->id], 'inst' . $record->id);
             $this->assertTrue($url->compare($area->get_doc_url($doc)));
             $this->assertTrue($url->compare($area->get_context_url($doc)));
         }

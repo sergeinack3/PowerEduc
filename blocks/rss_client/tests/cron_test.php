@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 namespace block_rss_client;
 
 defined('POWEREDUC_INTERNAL') || die();
-require_once(__DIR__ . '/../../moodleblock.class.php');
+require_once(__DIR__ . '/../../powereducblock.class.php');
 require_once(__DIR__ . '/../block_rss_client.php');
 
 /**
@@ -97,7 +97,7 @@ class cron_test extends \advanced_testcase {
         global $DB, $CFG;
         $this->resetAfterTest();
 
-        require_once("{$CFG->libdir}/simplepie/moodle_simplepie.php");
+        require_once("{$CFG->libdir}/simplepie/powereduc_simplepie.php");
 
         $time = time();
         // A record that has failed before.
@@ -118,7 +118,7 @@ class cron_test extends \advanced_testcase {
             ->onlyMethods(['fetch_feed'])
             ->getMock();
 
-        $piemock = $this->getMockBuilder(\moodle_simplepie::class)
+        $piemock = $this->getMockBuilder(\powereduc_simplepie::class)
             ->onlyMethods(['error'])
             ->getMock();
 

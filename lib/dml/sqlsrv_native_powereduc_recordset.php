@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 2 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * sqlsrv specific recordset.
@@ -24,9 +24,9 @@
 
 defined('POWEREDUC_INTERNAL') || die();
 
-require_once(__DIR__.'/moodle_recordset.php');
+require_once(__DIR__.'/powereduc_recordset.php');
 
-class sqlsrv_native_moodle_recordset extends moodle_recordset {
+class sqlsrv_native_powereduc_recordset extends powereduc_recordset {
 
     protected $rsrc;
     protected $current;
@@ -34,10 +34,10 @@ class sqlsrv_native_moodle_recordset extends moodle_recordset {
     /** @var array recordset buffer */
     protected $buffer = null;
 
-    /** @var sqlsrv_native_moodle_database */
+    /** @var sqlsrv_native_powereduc_database */
     protected $db;
 
-    public function __construct($rsrc, sqlsrv_native_moodle_database $db) {
+    public function __construct($rsrc, sqlsrv_native_powereduc_database $db) {
         $this->rsrc    = $rsrc;
         $this->current = $this->fetch_next();
         $this->db      = $db;
@@ -93,7 +93,7 @@ class sqlsrv_native_moodle_recordset extends moodle_recordset {
 
         unset($row['sqlsrvrownumber']);
         $row = array_change_key_case($row, CASE_LOWER);
-        // Moodle expects everything from DB as strings.
+        // PowerEduc expects everything from DB as strings.
         foreach ($row as $k=>$v) {
             if (is_null($v)) {
                 continue;

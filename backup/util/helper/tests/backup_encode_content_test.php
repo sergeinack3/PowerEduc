@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,12 +22,12 @@ defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
-require_once($CFG->dirroot . '/backup/moodle2/backup_course_task.class.php');
+require_once($CFG->dirroot . '/backup/powereduc2/backup_course_task.class.php');
 
 /**
  * Tests for encoding content links in backup_course_task.
  *
- * The code that this tests is actually in backup/moodle2/backup_course_task.class.php,
+ * The code that this tests is actually in backup/powereduc2/backup_course_task.class.php,
  * but there is no place for unit tests near there, and perhaps one day it will
  * be refactored so it becomes more generic.
  *
@@ -43,8 +43,8 @@ class backup_encode_content_test extends \basic_testcase {
      */
     public function test_course_encode_content_links() {
         global $CFG;
-        $httpsroot = "https://moodle.org";
-        $httproot = "http://moodle.org";
+        $httpsroot = "https://powereduc.org";
+        $httproot = "http://powereduc.org";
         $oldroot = $CFG->wwwroot;
 
         // HTTPS root and links of both types in content.

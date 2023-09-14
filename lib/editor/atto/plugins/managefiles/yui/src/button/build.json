@@ -1,7 +1,7 @@
 {
-    "name": "moodle-atto_managefiles-button",
+    "name": "powereduc-atto_managefiles-button",
     "builds": {
-        "moodle-atto_managefiles-button": {
+        "powereduc-atto_managefiles-button": {
             "jsfiles": [
                 "button.js"
             ]

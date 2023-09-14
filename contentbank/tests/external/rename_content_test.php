@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core_contentbank
  * @category   external
- * @copyright  2020 Sara Arjona <sara@moodle.com>
+ * @copyright  2020 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.9
  */
@@ -39,7 +39,7 @@ use external_api;
  * Core content bank external functions tests.
  *
  * @package    core_contentbank
- * @copyright  2020 Sara Arjona <sara@moodle.com>
+ * @copyright  2020 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @coversDefaultClass \core_contentbank\external\rename_content
  */
@@ -54,7 +54,7 @@ class rename_content_test extends \externallib_advanced_testcase {
         return [
             'Standard name' => ['New name', 'New name', true],
             'Name with digits' => ['Today is 17/04/2017', 'Today is 17/04/2017', true],
-            'Name with symbols' => ['Follow us: @moodle', 'Follow us: @moodle', true],
+            'Name with symbols' => ['Follow us: @powereduc', 'Follow us: @powereduc', true],
             'Name with tags' => ['This is <b>bold</b>', 'This is bold', true],
             'Long name' => [str_repeat('a', 100), str_repeat('a', 100), true],
             'Too long name' => [str_repeat('a', 300), str_repeat('a', 255), true],

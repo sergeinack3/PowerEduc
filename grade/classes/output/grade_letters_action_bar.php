@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,13 +16,13 @@
 
 namespace core_grades\output;
 
-use moodle_url;
+use powereduc_url;
 
 /**
  * Renderable class for the action bar elements in the grade letters page.
  *
  * @package    core_grades
- * @copyright  2021 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2021 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class grade_letters_action_bar extends action_bar {
@@ -47,12 +47,12 @@ class grade_letters_action_bar extends action_bar {
         // If in the course context, we should display the general navigation selector in gradebook.
         if ($this->context->contextlevel === CONTEXT_COURSE) {
             // Get the data used to output the general navigation selector.
-            $generalnavselector = new general_action_bar($this->context, new moodle_url('/grade/edit/letter/index.php',
+            $generalnavselector = new general_action_bar($this->context, new powereduc_url('/grade/edit/letter/index.php',
                 ['id' => $this->context->id]), 'letter', 'view');
             $data = $generalnavselector->export_for_template($output);
         }
         // Add a button to the action bar with a link to the 'edit grade letters' page.
-        $editbuttonlink = new moodle_url('/grade/edit/letter/index.php', ['id' => $this->context->id, 'edit' => 1]);
+        $editbuttonlink = new powereduc_url('/grade/edit/letter/index.php', ['id' => $this->context->id, 'edit' => 1]);
         $editbutton = new \single_button($editbuttonlink, get_string('edit'), 'get', true);
         $data['editbutton'] = $editbutton->export_for_template($output);
 

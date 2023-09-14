@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ require_login(null, false);
 $contextlevel = optional_param('contextlevel', CONTEXT_SYSTEM, PARAM_INT);
 $contextid = optional_param('contextid', 0, PARAM_INT);
 
-$url = new moodle_url('/admin/tool/dataprivacy/dataregistry.php');
+$url = new powereduc_url('/admin/tool/dataprivacy/dataregistry.php');
 $title = get_string('dataregistry', 'tool_dataprivacy');
 
 \tool_dataprivacy\page_helper::setup($url, $title);

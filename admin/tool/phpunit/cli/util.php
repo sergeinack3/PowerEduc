@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -82,7 +82,7 @@ define('PHPUNIT_UTIL', true);
 
 require(__DIR__ . '/../../../../lib/phpunit/bootstrap.php');
 
-// from now on this is a regular moodle CLI_SCRIPT
+// from now on this is a regular powereduc CLI_SCRIPT
 
 require_once($CFG->libdir.'/adminlib.php');
 require_once($CFG->libdir.'/upgradelib.php');

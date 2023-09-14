@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ class block_mnet_hosts extends block_list {
     }
 
     function applicable_formats() {
-        if (has_capability('moodle/site:mnetlogintoremote', context_system::instance(), NULL, false)) {
+        if (has_capability('powereduc/site:mnetlogintoremote', context_system::instance(), NULL, false)) {
             return array('all' => true, 'mod' => false, 'tag' => false);
         } else {
             return array('site' => true);
@@ -81,7 +81,7 @@ class block_mnet_hosts extends block_list {
             }
         }
 
-        if (!has_capability('moodle/site:mnetlogintoremote', context_system::instance(), NULL, false)) {
+        if (!has_capability('powereduc/site:mnetlogintoremote', context_system::instance(), NULL, false)) {
             if (debugging() and !empty($CFG->debugdisplay)) {
                 $this->content = new stdClass();
                 $this->content->footer = html_writer::tag('span',
@@ -140,9 +140,9 @@ class block_mnet_hosts extends block_list {
         if ($hosts) {
             foreach ($hosts as $host) {
                 if ($host->id == $USER->mnethostid) {
-                    $url = new \moodle_url($host->wwwroot);
+                    $url = new \powereduc_url($host->wwwroot);
                 } else {
-                    $url = new \moodle_url('/auth/mnet/jump.php', array('hostid' => $host->id));
+                    $url = new \powereduc_url('/auth/mnet/jump.php', array('hostid' => $host->id));
                 }
                 $this->content->items[] = html_writer::tag('a',
                     $OUTPUT->pix_icon("i/{$host->application}_host", get_string('server', 'block_mnet_hosts')) . s($host->name),
@@ -157,10 +157,10 @@ class block_mnet_hosts extends block_list {
     /**
      * This block shouldn't be added to a page if the mnet authentication method is disabled.
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @return bool
      */
-    public function can_block_be_added(moodle_page $page): bool {
+    public function can_block_be_added(powereduc_page $page): bool {
         return is_enabled_auth('mnet');
     }
 }

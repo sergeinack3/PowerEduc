@@ -1,6 +1,6 @@
 @core
 Feature: Forms with a large number of fields
-  In order to use certain forms on large Moodle installations
+  In order to use certain forms on large PowerEduc installations
   As an admin
   I need forms to work with more fields than the PHP max_input_vars setting
 

@@ -3,7 +3,7 @@
 require_once($CFG->libdir.'/formslib.php');
 
 
-class webservice_test_client_form extends moodleform {
+class webservice_test_client_form extends powereducform {
     public function definition() {
         global $CFG;
 
@@ -35,7 +35,7 @@ class webservice_test_client_form extends moodleform {
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @copyright 2017 Marina Glancy
  */
-abstract class webservice_test_client_base_form extends moodleform {
+abstract class webservice_test_client_base_form extends powereducform {
 
     /**
      * Definition of the parameters used by this WS function

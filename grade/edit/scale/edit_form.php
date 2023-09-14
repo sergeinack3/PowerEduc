@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ if (!defined('POWEREDUC_INTERNAL')) {
 
 require_once $CFG->libdir.'/formslib.php';
 
-class edit_scale_form extends moodleform {
+class edit_scale_form extends powereducform {
     function definition() {
         global $CFG;
         $mform =& $this->_form;
@@ -88,7 +88,7 @@ class edit_scale_form extends moodleform {
             if (empty($courseid)) {
                 $mform->hardFreeze('standard');
 
-            } else if (!has_capability('moodle/course:managescales', context_system::instance())) {
+            } else if (!has_capability('powereduc/course:managescales', context_system::instance())) {
                 //if they dont have managescales at system level the shouldnt be allowed to make scales standard (or not standard)
                 $mform->hardFreeze('standard');
 
@@ -102,7 +102,7 @@ class edit_scale_form extends moodleform {
 
         } else {
             $mform->removeElement('used');
-            if (empty($courseid) or !has_capability('moodle/course:managescales', context_system::instance())) {
+            if (empty($courseid) or !has_capability('powereduc/course:managescales', context_system::instance())) {
                 $mform->hardFreeze('standard');
             }
         }

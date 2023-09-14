@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ namespace core_calendar;
 use calendar_event;
 use DateInterval;
 use DateTime;
-use moodle_exception;
+use powereduc_exception;
 use stdClass;
 
 defined('POWEREDUC_INTERNAL') || die();
@@ -225,7 +225,7 @@ class rrule_manager {
      * Create events for specified rrule.
      *
      * @param calendar_event $passedevent Properties of event to create.
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function create_events($passedevent) {
         global $DB;
@@ -263,7 +263,7 @@ class rrule_manager {
      * Parse a property of the recurrence rule.
      *
      * @param string $prop property string with type-value pair
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function parse_rrule_property($prop) {
         list($property, $value) = explode('=', $prop);
@@ -312,7 +312,7 @@ class rrule_manager {
                 break;
             default:
                 // We should never get here, something is very wrong.
-                throw new moodle_exception('errorrrule', 'calendar');
+                throw new powereduc_exception('errorrrule', 'calendar');
         }
     }
 
@@ -320,7 +320,7 @@ class rrule_manager {
      * Sets Frequency property.
      *
      * @param string $freq Frequency of event
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function set_frequency($freq) {
         switch ($freq) {
@@ -347,7 +347,7 @@ class rrule_manager {
                 break;
             default:
                 // We should never get here, something is very wrong.
-                throw new moodle_exception('errorrrulefreq', 'calendar');
+                throw new powereduc_exception('errorrrulefreq', 'calendar');
         }
     }
 
@@ -355,7 +355,7 @@ class rrule_manager {
      * Gets the day from day string.
      *
      * @param string $daystring Day string (MO, TU, etc)
-     * @throws moodle_exception
+     * @throws powereduc_exception
      *
      * @return string Day represented by the parameter.
      */
@@ -384,7 +384,7 @@ class rrule_manager {
                 break;
             default:
                 // We should never get here, something is very wrong.
-                throw new moodle_exception('errorrruleday', 'calendar');
+                throw new powereduc_exception('errorrruleday', 'calendar');
         }
     }
 
@@ -392,7 +392,7 @@ class rrule_manager {
      * Sets the UNTIL rule.
      *
      * @param string $until The date string representation of the UNTIL rule.
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function set_until($until) {
         $this->until = strtotime($until);
@@ -402,7 +402,7 @@ class rrule_manager {
      * Sets the COUNT rule.
      *
      * @param string $count The count value.
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function set_count($count) {
         $this->count = intval($count);
@@ -422,12 +422,12 @@ class rrule_manager {
      *  - every year for a YEARLY rule.
      *
      * @param string $intervalstr The value for the interval rule.
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function set_interval($intervalstr) {
         $interval = intval($intervalstr);
         if ($interval < 1) {
-            throw new moodle_exception('errorinvalidinterval', 'calendar');
+            throw new powereduc_exception('errorinvalidinterval', 'calendar');
         }
         $this->interval = $interval;
     }
@@ -439,14 +439,14 @@ class rrule_manager {
      * Valid values are 0 to 59.
      *
      * @param string $bysecond Comma-separated list of seconds within a minute.
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function set_bysecond($bysecond) {
         $seconds = explode(',', $bysecond);
         $bysecondrules = [];
         foreach ($seconds as $second) {
             if ($second < 0 || $second > 59) {
-                throw new moodle_exception('errorinvalidbysecond', 'calendar');
+                throw new powereduc_exception('errorinvalidbysecond', 'calendar');
             }
             $bysecondrules[] = (int)$second;
         }
@@ -460,14 +460,14 @@ class rrule_manager {
      * Valid values are 0 to 59.
      *
      * @param string $byminute Comma-separated list of minutes within an hour.
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function set_byminute($byminute) {
         $minutes = explode(',', $byminute);
         $byminuterules = [];
         foreach ($minutes as $minute) {
             if ($minute < 0 || $minute > 59) {
-                throw new moodle_exception('errorinvalidbyminute', 'calendar');
+                throw new powereduc_exception('errorinvalidbyminute', 'calendar');
             }
             $byminuterules[] = (int)$minute;
         }
@@ -481,14 +481,14 @@ class rrule_manager {
      * Valid values are 0 to 23.
      *
      * @param string $byhour Comma-separated list of hours of the day.
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function set_byhour($byhour) {
         $hours = explode(',', $byhour);
         $byhourrules = [];
         foreach ($hours as $hour) {
             if ($hour < 0 || $hour > 23) {
-                throw new moodle_exception('errorinvalidbyhour', 'calendar');
+                throw new powereduc_exception('errorinvalidbyhour', 'calendar');
             }
             $byhourrules[] = (int)$hour;
         }
@@ -515,7 +515,7 @@ class rrule_manager {
      * For example, within a MONTHLY rule, MO represents all Mondays within the month.
      *
      * @param string $byday Comma-separated list of days of the week.
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function set_byday($byday) {
         $weekdays = array_keys(self::DAYS_OF_WEEK);
@@ -524,7 +524,7 @@ class rrule_manager {
         foreach ($days as $day) {
             $suffix = substr($day, -2);
             if (!in_array($suffix, $weekdays)) {
-                throw new moodle_exception('errorinvalidbydaysuffix', 'calendar');
+                throw new powereduc_exception('errorinvalidbydaysuffix', 'calendar');
             }
 
             $bydayrule = new stdClass();
@@ -544,7 +544,7 @@ class rrule_manager {
      * Valid values are 1 to 31 or -31 to -1. For example, -10 represents the tenth to the last day of the month.
      *
      * @param string $bymonthday Comma-separated list of days of the month.
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function set_bymonthday($bymonthday) {
         $monthdays = explode(',', $bymonthday);
@@ -552,7 +552,7 @@ class rrule_manager {
         foreach ($monthdays as $day) {
             // Valid values are 1 to 31 or -31 to -1.
             if ($day < -31 || $day > 31 || $day == 0) {
-                throw new moodle_exception('errorinvalidbymonthday', 'calendar');
+                throw new powereduc_exception('errorinvalidbymonthday', 'calendar');
             }
             $bymonthdayrules[] = (int)$day;
         }
@@ -571,7 +571,7 @@ class rrule_manager {
      * and -306 represents the 306th to the last day of the year (March 1st).
      *
      * @param string $byyearday Comma-separated list of days of the year.
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function set_byyearday($byyearday) {
         $yeardays = explode(',', $byyearday);
@@ -579,7 +579,7 @@ class rrule_manager {
         foreach ($yeardays as $day) {
             // Valid values are 1 to 366 or -366 to -1.
             if ($day < -366 || $day > 366 || $day == 0) {
-                throw new moodle_exception('errorinvalidbyyearday', 'calendar');
+                throw new powereduc_exception('errorinvalidbyyearday', 'calendar');
             }
             $byyeardayrules[] = (int)$day;
         }
@@ -599,7 +599,7 @@ class rrule_manager {
      * is January 1.
      *
      * @param string $byweekno Comma-separated list of number of weeks.
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function set_byweekno($byweekno) {
         $weeknumbers = explode(',', $byweekno);
@@ -607,7 +607,7 @@ class rrule_manager {
         foreach ($weeknumbers as $week) {
             // Valid values are 1 to 53 or -53 to -1.
             if ($week < -53 || $week > 53 || $week == 0) {
-                throw new moodle_exception('errorinvalidbyweekno', 'calendar');
+                throw new powereduc_exception('errorinvalidbyweekno', 'calendar');
             }
             $byweeknorules[] = (int)$week;
         }
@@ -621,7 +621,7 @@ class rrule_manager {
      * Valid values are 1 to 12.
      *
      * @param string $bymonth Comma-separated list of months of the year.
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function set_bymonth($bymonth) {
         $months = explode(',', $bymonth);
@@ -629,7 +629,7 @@ class rrule_manager {
         foreach ($months as $month) {
             // Valid values are 1 to 12.
             if ($month < 1 || $month > 12) {
-                throw new moodle_exception('errorinvalidbymonth', 'calendar');
+                throw new powereduc_exception('errorinvalidbymonth', 'calendar');
             }
             $bymonthrules[] = (int)$month;
         }
@@ -646,7 +646,7 @@ class rrule_manager {
      * For example "the last work day of the month" could be represented as: RRULE:FREQ=MONTHLY;BYDAY=MO,TU,WE,TH,FR;BYSETPOS=-1
      *
      * @param string $bysetpos Comma-separated list of values.
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function set_bysetpos($bysetpos) {
         $setposes = explode(',', $bysetpos);
@@ -654,7 +654,7 @@ class rrule_manager {
         foreach ($setposes as $pos) {
             // Valid values are 1 to 366 or -366 to -1.
             if ($pos < -366 || $pos > 366 || $pos == 0) {
-                throw new moodle_exception('errorinvalidbysetpos', 'calendar');
+                throw new powereduc_exception('errorinvalidbysetpos', 'calendar');
             }
             $bysetposrules[] = (int)$pos;
         }
@@ -664,31 +664,31 @@ class rrule_manager {
     /**
      * Validate the rules as a whole.
      *
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function validate_rules() {
         // UNTIL and COUNT cannot be in the same recurrence rule.
         if (!empty($this->until) && !empty($this->count)) {
-            throw new moodle_exception('errorhasuntilandcount', 'calendar');
+            throw new powereduc_exception('errorhasuntilandcount', 'calendar');
         }
 
         // BYSETPOS only be used in conjunction with another BYxxx rule part.
         if (!empty($this->bysetpos) && empty($this->bymonth) && empty($this->bymonthday) && empty($this->bysecond)
             && empty($this->byday) && empty($this->byweekno) && empty($this->byhour) && empty($this->byminute)
             && empty($this->byyearday)) {
-            throw new moodle_exception('errormustbeusedwithotherbyrule', 'calendar');
+            throw new powereduc_exception('errormustbeusedwithotherbyrule', 'calendar');
         }
 
         // Integer values preceding BYDAY rules can only be present for MONTHLY or YEARLY RRULE.
         foreach ($this->byday as $bydayrule) {
             if (!empty($bydayrule->value) && $this->freq != self::FREQ_MONTHLY && $this->freq != self::FREQ_YEARLY) {
-                throw new moodle_exception('errorinvalidbydayprefix', 'calendar');
+                throw new powereduc_exception('errorinvalidbydayprefix', 'calendar');
             }
         }
 
         // The BYWEEKNO rule is only valid for YEARLY rules.
         if (!empty($this->byweekno) && $this->freq != self::FREQ_YEARLY) {
-            throw new moodle_exception('errornonyearlyfreqwithbyweekno', 'calendar');
+            throw new powereduc_exception('errornonyearlyfreqwithbyweekno', 'calendar');
         }
     }
 
@@ -857,7 +857,7 @@ class rrule_manager {
      * Generates a DateInterval object based on the FREQ and INTERVAL rules.
      *
      * @return DateInterval
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function get_interval() {
         $intervalspec = null;
@@ -885,7 +885,7 @@ class rrule_manager {
                 break;
             default:
                 // We should never get here, something is very wrong.
-                throw new moodle_exception('errorrrulefreq', 'calendar');
+                throw new powereduc_exception('errorrrulefreq', 'calendar');
         }
 
         return new DateInterval($intervalspec);
@@ -1300,7 +1300,7 @@ class rrule_manager {
      *
      * @param int $eventtime Unix timestamp of the event time.
      * @return DateTime[]
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function get_period_boundaries($eventtime) {
         $nextintervalspec = null;
@@ -1341,7 +1341,7 @@ class rrule_manager {
                 break;
             default:
                 // We should never get here, something is very wrong.
-                throw new moodle_exception('errorrrulefreq', 'calendar');
+                throw new powereduc_exception('errorrrulefreq', 'calendar');
         }
 
         $eventstart = new DateTime($timestart);

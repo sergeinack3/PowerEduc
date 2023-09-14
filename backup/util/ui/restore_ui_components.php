@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -49,7 +49,7 @@ abstract class restore_search_base implements renderable {
     private $search = null;
     /**
      * The URL for this page including required params to return to it
-     * @var moodle_url
+     * @var powereduc_url
      */
     private $url = null;
     /**
@@ -97,15 +97,15 @@ abstract class restore_search_base implements renderable {
 
     /**
      * The URL for this search
-     * @global moodle_page $PAGE
-     * @return moodle_url The URL for this page
+     * @global powereduc_page $PAGE
+     * @return powereduc_url The URL for this page
      */
     final public function get_url() {
         global $PAGE;
         $params = array(
             $this->get_varsearch()    => $this->get_search()
         );
-        return ($this->url !== null) ? new moodle_url($this->url, $params) : new moodle_url($PAGE->url, $params);
+        return ($this->url !== null) ? new powereduc_url($this->url, $params) : new powereduc_url($PAGE->url, $params);
     }
 
     /**
@@ -140,9 +140,9 @@ abstract class restore_search_base implements renderable {
 
     /**
      * Sets the page URL
-     * @param moodle_url $url
+     * @param powereduc_url $url
      */
-    final public function set_url(moodle_url $url) {
+    final public function set_url(powereduc_url $url) {
         $this->url = $url;
     }
 
@@ -172,7 +172,7 @@ abstract class restore_search_base implements renderable {
     /**
      * Executes the search
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @return int The number of results
      */
     final public function search() {
@@ -302,12 +302,12 @@ class restore_course_search extends restore_search_base {
      * This will typically call $this->require_capability().
      */
     protected function setup_restrictions() {
-        $this->require_capability('moodle/restore:restorecourse');
+        $this->require_capability('powereduc/restore:restorecourse');
     }
 
     /**
      * Get the search SQL.
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @return array
      */
     protected function get_searchsql() {
@@ -385,11 +385,11 @@ class restore_category_search extends restore_search_base  {
      */
     public function __construct(array $config = array()) {
         parent::__construct($config);
-        $this->require_capability('moodle/course:create');
+        $this->require_capability('powereduc/course:create');
     }
     /**
      * Returns the search SQL.
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @return array
      */
     protected function get_searchsql() {

@@ -1,13 +1,13 @@
 This files describes API changes for course formats
 
-Overview of this plugin type at http://docs.moodle.org/dev/Course_formats
+Overview of this plugin type at http://docs.powereduc.org/dev/Course_formats
 
 === 4.1 ===
 * New \core_courseformat\stateupdates methods add_section_remove() and add_cm_remove() have been added to replace
   the deprecated methods add_section_delete() and add_cm_delete().
 * The 4th param of the core_courseformat\output\local\content\cm\cmname construct is now deprecated.
   The page edition is now detected using the course_format\base:show_editor method as the rest of the
-  core_courseformat outputs. It defaults to checking the capability 'moodle/course:manageactivities'. If different
+  core_courseformat outputs. It defaults to checking the capability 'powereduc/course:manageactivities'. If different
   capabilities are needed to check, an array of capabilities can be passed as an optional parameter to the function.
 
 === 4.0 ===
@@ -83,7 +83,7 @@ Overview of this plugin type at http://docs.moodle.org/dev/Course_formats
 
 === 3.1 ===
 * Course format may use the inplace_editable template to allow quick editing of section names, see
-  https://docs.moodle.org/dev/Inplace_editable and MDL-51802 for example implementation.
+  https://docs.powereduc.org/dev/Inplace_editable and MDL-51802 for example implementation.
 
 === 3.0 ===
 * Course formats should now use section_edit_control_items and use the returned array of controls items and their attributes to create a

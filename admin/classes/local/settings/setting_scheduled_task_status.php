@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,14 +28,14 @@ defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/adminlib.php');
-require_once($CFG->libdir . '/moodlelib.php');
+require_once($CFG->libdir . '/powereduclib.php');
 
 use admin_setting_description;
 use core\task\manager;
 use core\task\scheduled_task;
 use html_writer;
 use lang_string;
-use moodle_url;
+use powereduc_url;
 use stdClass;
 
 /**
@@ -100,7 +100,7 @@ class setting_scheduled_task_status extends admin_setting_description {
             $taskenabled = get_string('disabled', 'admin');
         }
         $taskenabled = strtolower($taskenabled);
-        $gotourl = new moodle_url(
+        $gotourl = new powereduc_url(
             '/admin/tool/task/scheduledtasks.php',
             [],
             scheduled_task::get_html_id($this->classname)

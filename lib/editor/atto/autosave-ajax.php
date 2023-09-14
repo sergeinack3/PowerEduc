@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Save and load draft text while a user is still editing a form.
@@ -48,7 +48,7 @@ $actions = array_map(function($actionparams) {
     foreach ($keys as $key => $type) {
         // Replicate required_param().
         if (!isset($actionparams[$key])) {
-            throw new \moodle_exception('missingparam', '', '', $key);
+            throw new \powereduc_exception('missingparam', '', '', $key);
         }
         $params[$key] = clean_param($actionparams[$key], $type);
     }
@@ -68,12 +68,12 @@ $PAGE->set_context($context);
 
 require_login();
 if (isguestuser()) {
-    throw new \moodle_exception('accessdenied', 'admin');
+    throw new \powereduc_exception('accessdenied', 'admin');
 }
 require_sesskey();
 
 if (!in_array('atto', explode(',', get_config('core', 'texteditors')))) {
-    throw new \moodle_exception('accessdenied', 'admin');
+    throw new \powereduc_exception('accessdenied', 'admin');
 }
 
 $responses = array();
@@ -94,7 +94,7 @@ foreach ($actions as $actionparams) {
 
         $record = $DB->get_record('editor_atto_autosave', $params);
         if ($record && $record->pageinstance != $pageinstance) {
-            throw new \moodle_exception('concurrent access from the same user is not supported');
+            throw new \powereduc_exception('concurrent access from the same user is not supported');
             die();
         }
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -110,7 +110,7 @@ class gradereport_user_renderer extends plugin_renderer_base {
                 $defaultgradeshowactiveenrol = !empty($CFG->grade_report_showonlyactiveenrol);
                 $showonlyactiveenrol = get_user_preferences('grade_report_showonlyactiveenrol', $defaultgradeshowactiveenrol);
                 $showonlyactiveenrol = $showonlyactiveenrol ||
-                    !has_capability('moodle/course:viewsuspendedusers', context_course::instance($course->id));
+                    !has_capability('powereduc/course:viewsuspendedusers', context_course::instance($course->id));
                 $gui = new graded_users_iterator($course, null, $groupid);
                 $gui->require_active_enrolment($showonlyactiveenrol);
                 $gui->init();
@@ -159,7 +159,7 @@ class gradereport_user_renderer extends plugin_renderer_base {
             $previoususer = $users[$arraykeys[$keynumber - 1]];
             $navigationdata['previoususer'] = [
                 'name' => fullname($previoususer),
-                'url' => (new moodle_url('/grade/report/user/index.php', ['id' => $courseid, 'userid' => $previoususer->id]))
+                'url' => (new powereduc_url('/grade/report/user/index.php', ['id' => $courseid, 'userid' => $previoususer->id]))
                     ->out(false),
                 'previousarrow' => $previousarrow
             ];
@@ -169,7 +169,7 @@ class gradereport_user_renderer extends plugin_renderer_base {
             $nextuser = $users[$arraykeys[$keynumber + 1]];
             $navigationdata['nextuser'] = [
                 'name' => fullname($nextuser),
-                'url' => (new moodle_url('/grade/report/user/index.php', ['id' => $courseid, 'userid' => $nextuser->id]))
+                'url' => (new powereduc_url('/grade/report/user/index.php', ['id' => $courseid, 'userid' => $nextuser->id]))
                     ->out(false),
                 'nextarrow' => $nextarrow
             ];
@@ -188,9 +188,9 @@ class gradereport_user_renderer extends plugin_renderer_base {
      */
     public function view_mode_selector(int $userid, int $userview, int $courseid): string {
 
-        $viewasotheruser = new moodle_url('/grade/report/user/index.php', ['id' => $courseid, 'userid' => $userid,
+        $viewasotheruser = new powereduc_url('/grade/report/user/index.php', ['id' => $courseid, 'userid' => $userid,
             'userview' => GRADE_REPORT_USER_VIEW_USER]);
-        $viewasmyself = new moodle_url('/grade/report/user/index.php', ['id' => $courseid, 'userid' => $userid,
+        $viewasmyself = new powereduc_url('/grade/report/user/index.php', ['id' => $courseid, 'userid' => $userid,
             'userview' => GRADE_REPORT_USER_VIEW_SELF]);
 
         $selectoroptions = [

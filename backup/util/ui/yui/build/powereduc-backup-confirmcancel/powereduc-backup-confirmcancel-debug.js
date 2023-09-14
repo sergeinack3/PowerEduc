@@ -1,9 +1,9 @@
-YUI.add('moodle-backup-confirmcancel', function (Y, NAME) {
+YUI.add('powereduc-backup-confirmcancel', function (Y, NAME) {
 
 /**
  * Add a confirmation dialogue when cancelling a backup.
  *
- * @module moodle-backup-confirmcancel
+ * @module powereduc-backup-confirmcancel
  */
 
 /**
@@ -88,4 +88,4 @@ M.core_backup.confirmcancel = {
 };
 
 
-}, '@VERSION@', {"requires": ["node", "node-event-simulate", "moodle-core-notification-confirm"]});
+}, '@VERSION@', {"requires": ["node", "node-event-simulate", "powereduc-core-notification-confirm"]});

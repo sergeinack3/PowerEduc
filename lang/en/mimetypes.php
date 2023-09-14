@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'mimetypes', language 'en', branch 'POWEREDUC_20_STABLE'
@@ -31,7 +31,7 @@
  * @see       get_mimetypes_array()
  * @see       get_mimetype_description()
  * @package   core
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -40,7 +40,7 @@ $string['application/epub_zip'] = 'EPUB ebook';
 $string['application/json'] = '{$a->MIMETYPE2} text';
 $string['application/msword'] = 'Word document';
 $string['application/pdf'] = 'PDF document';
-$string['application/vnd.moodle.backup'] = 'Moodle backup';
+$string['application/vnd.powereduc.backup'] = 'PowerEduc backup';
 $string['application/vnd.ms-excel'] = 'Excel spreadsheet';
 $string['application/vnd.ms-excel.sheet.macroEnabled.12'] = 'Excel 2007 macro-enabled workbook';
 $string['application/vnd.ms-powerpoint'] = 'Powerpoint presentation';

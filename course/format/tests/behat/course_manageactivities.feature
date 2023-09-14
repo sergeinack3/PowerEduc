@@ -1,7 +1,7 @@
 @core @core_courseformat @show_editor
 Feature: Verify edit utils availability.
   In order to edit the course activities
-  As a student with capability 'moodle/course:manageactivities'
+  As a student with capability 'powereduc/course:manageactivities'
   I need to be able to use the edit utils.
 
   Background:
@@ -23,7 +23,7 @@ Feature: Verify edit utils availability.
       | author    | Author | student   |
     And the following "permission overrides" exist:
       | capability                     | permission | role   | contextlevel | reference |
-      | moodle/course:manageactivities | Allow      | author | Course       | C1        |
+      | powereduc/course:manageactivities | Allow      | author | Course       | C1        |
     And the following "course enrolments" exist:
       | user     | course | role           |
       | teacher1 | C1     | editingteacher |
@@ -49,8 +49,8 @@ Feature: Verify edit utils availability.
     Then I should not see "Edit mode"
 
   @javascript
-  Scenario: Edit tools should be available to students with the capability 'moodle/course:manageactivities',
-  but should not be allowed to add and edit sections without having 'moodle/course:update'
+  Scenario: Edit tools should be available to students with the capability 'powereduc/course:manageactivities',
+  but should not be allowed to add and edit sections without having 'powereduc/course:update'
     Given I log in as "author1"
     When I am on "Course 1" course homepage
     And I turn editing mode on
@@ -61,10 +61,10 @@ Feature: Verify edit utils availability.
     And ".section_action_menu" "css_element" should not exist in the "Topic 1" "section"
 
   @javascript
-  Scenario: Section adding should be available to students if they also have the capability 'moodle/course:update'.
+  Scenario: Section adding should be available to students if they also have the capability 'powereduc/course:update'.
     Given the following "permission overrides" exist:
       | capability           | permission | role   | contextlevel | reference |
-      | moodle/course:update | Allow      | author | Course       | C1        |
+      | powereduc/course:update | Allow      | author | Course       | C1        |
     And I log in as "author1"
     When I am on "Course 1" course homepage
     And I turn editing mode on

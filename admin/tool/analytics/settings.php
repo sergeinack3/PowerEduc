@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,5 +26,5 @@ defined('POWEREDUC_INTERNAL') || die();
 
 if (\core_analytics\manager::is_analytics_enabled()) {
     $ADMIN->add('analytics', new admin_externalpage('analyticmodels', get_string('analyticmodels', 'tool_analytics'),
-        "$CFG->wwwroot/$CFG->admin/tool/analytics/index.php", 'moodle/analytics:managemodels'));
+        "$CFG->wwwroot/$CFG->admin/tool/analytics/index.php", 'powereduc/analytics:managemodels'));
 }

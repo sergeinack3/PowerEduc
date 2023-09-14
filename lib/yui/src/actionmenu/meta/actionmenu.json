@@ -1,5 +1,5 @@
 {
-  "moodle-core-actionmenu": {
+  "powereduc-core-actionmenu": {
     "requires": [
         "base",
         "event",

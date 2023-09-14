@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -84,7 +84,7 @@ class preview extends \html_table {
      * @return array
      * @throws \coding_exception
      * @throws \dml_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     protected function read_data() {
         global $DB, $CFG;
@@ -112,7 +112,7 @@ class preview extends \html_table {
                 if ($userid = $DB->get_field('user', 'id',
                         ['username' => $stdusername, 'mnethostid' => $CFG->mnet_localhost_id])) {
                     $rowcols['username'] = \html_writer::link(
-                        new \moodle_url('/user/profile.php', ['id' => $userid]), $rowcols['username']);
+                        new \powereduc_url('/user/profile.php', ['id' => $userid]), $rowcols['username']);
                 }
             } else {
                 $rowcols['status'][] = get_string('missingusername');

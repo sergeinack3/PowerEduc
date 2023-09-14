@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ use external_single_structure;
 use external_value;
 use external_warnings;
 use invalid_parameter_exception;
-use moodle_exception;
+use powereduc_exception;
 use restricted_context_exception;
 
 defined('POWEREDUC_INTERNAL') || die;
@@ -65,7 +65,7 @@ class get_groups_for_search_widget extends external_api {
      * @return array Groups and warnings to pass back to the calling widget.
      * @throws coding_exception
      * @throws invalid_parameter_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @throws restricted_context_exception
      */
     protected static function execute(int $courseid, string $actionbaseurl): array {
@@ -87,7 +87,7 @@ class get_groups_for_search_widget extends external_api {
         $course = $DB->get_record('course', ['id' => $params['courseid']]);
         // Initialise the grade tracking object.
         if ($groupmode = $course->groupmode) {
-            $aag = has_capability('moodle/site:accessallgroups', $context);
+            $aag = has_capability('powereduc/site:accessallgroups', $context);
 
             $usergroups = [];
             $groupuserid = 0;
@@ -111,7 +111,7 @@ class get_groups_for_search_widget extends external_api {
             }
 
             $mappedgroups = array_map(function($group) use ($COURSE, $actionbaseurl) {
-                $url = new \moodle_url($actionbaseurl, [
+                $url = new \powereduc_url($actionbaseurl, [
                     'id' => $COURSE->id,
                     'group' => $group->id
                 ]);

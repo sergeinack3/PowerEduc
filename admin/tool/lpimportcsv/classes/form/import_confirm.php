@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ namespace tool_lpimportcsv\form;
 
 defined('POWEREDUC_INTERNAL') || die('Direct access to this script is forbidden.');
 
-use moodleform;
+use powereducform;
 use core_competency\api;
 use tool_lpimportcsv\framework_importer;
 
@@ -39,7 +39,7 @@ require_once($CFG->libdir.'/formslib.php');
  * @copyright 2015 Damyon Wiese
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class import_confirm extends moodleform {
+class import_confirm extends powereducform {
 
     /**
      * Define the form - called by parent constructor

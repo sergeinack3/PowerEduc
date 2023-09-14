@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -133,7 +133,7 @@ class tour extends external_api {
 
         $result = [];
 
-        $matchingtours = \tool_usertours\manager::get_matching_tours(new \moodle_url($params['pageurl']));
+        $matchingtours = \tool_usertours\manager::get_matching_tours(new \powereduc_url($params['pageurl']));
         foreach ($matchingtours as $match) {
             if ($tour->get_id() === $match->get_id()) {
                 $result['startTour'] = $tour->get_id();
@@ -262,7 +262,7 @@ class tour extends external_api {
 
         $step = step::instance($params['stepid']);
         if ($step->get_tourid() != $params['tourid']) {
-            throw new \moodle_exception('Incorrect tour specified.');
+            throw new \powereduc_exception('Incorrect tour specified.');
         }
 
         \tool_usertours\event\step_shown::create([

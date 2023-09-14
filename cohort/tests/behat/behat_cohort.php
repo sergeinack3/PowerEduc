@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -47,7 +47,7 @@ class behat_cohort extends behat_base {
     public function i_add_user_to_cohort_members($user, $cohortidnumber) {
 
         // If we are not in the cohorts management we should move there before anything else.
-        $cohortsurl = new moodle_url('/cohort/index.php');
+        $cohortsurl = new powereduc_url('/cohort/index.php');
         if (strpos($this->getSession()->getCurrentUrl(), $cohortsurl->out(false)) !== 0) {
             // With JS enabled we should expand a few tree nodes.
             $parentnodes = get_string('users', 'admin') . ' > ' .

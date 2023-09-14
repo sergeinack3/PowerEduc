@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * The gradebook simple view - base class for the table
  *
  * @package   gradereport_singleview
- * @copyright 2014 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2014 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -37,7 +37,7 @@ defined('POWEREDUC_INTERNAL') || die;
  * The gradebook simple view - base class for the table
  *
  * @package   gradereport_singleview
- * @copyright 2014 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2014 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 abstract class tablelike extends screen implements be_readonly {
@@ -152,7 +152,7 @@ abstract class tablelike extends screen implements be_readonly {
 
             // Singleview users without proper permissions should be presented
             // disabled checkboxes for the Exclude grade attribute.
-            if ($field == 'exclude' && !has_capability('moodle/grade:manage', $this->context)) {
+            if ($field == 'exclude' && !has_capability('powereduc/grade:manage', $this->context)) {
                 $html->disabled = true;
             }
 

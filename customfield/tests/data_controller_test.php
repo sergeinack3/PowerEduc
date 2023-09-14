@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ use customfield_textarea;
  *
  * @package    core_customfield
  * @category   test
- * @copyright  2018 Toni Barbera <toni@moodle.com>
+ * @copyright  2018 Toni Barbera <toni@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class data_controller_test extends \advanced_testcase {
@@ -172,9 +172,9 @@ class data_controller_test extends \advanced_testcase {
             $field->set('type', 'invalid');
             data_controller::create(0, (object)['instanceid' => $course->id], $field);
             $this->fail('Expected exception');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('Field type invalid not found', $e->getMessage());
-            $this->assertEquals(\moodle_exception::class, get_class($e));
+            $this->assertEquals(\powereduc_exception::class, get_class($e));
         }
     }
 }

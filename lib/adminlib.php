@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Functions and classes used during installation, upgrades and for admin settings.
@@ -20,25 +20,25 @@
  *  ADMIN SETTINGS TREE INTRODUCTION
  *
  *  This file performs the following tasks:
- *   -it defines the necessary objects and interfaces to build the Moodle
+ *   -it defines the necessary objects and interfaces to build the PowerEduc
  *    admin hierarchy
  *   -it defines the admin_externalpage_setup()
  *
  *  ADMIN_SETTING OBJECTS
  *
- *  Moodle settings are represented by objects that inherit from the admin_setting
+ *  PowerEduc settings are represented by objects that inherit from the admin_setting
  *  class. These objects encapsulate how to read a setting, how to write a new value
  *  to a setting, and how to appropriately display the HTML to modify the setting.
  *
  *  ADMIN_SETTINGPAGE OBJECTS
  *
  *  The admin_setting objects are then grouped into admin_settingpages. The latter
- *  appear in the Moodle admin tree block. All interaction with admin_settingpage
+ *  appear in the PowerEduc admin tree block. All interaction with admin_settingpage
  *  objects is handled by the admin/settings.php file.
  *
  *  ADMIN_EXTERNALPAGE OBJECTS
  *
- *  There are some settings in Moodle that are too complex to (efficiently) handle
+ *  There are some settings in PowerEduc that are too complex to (efficiently) handle
  *  with admin_settingpages. (Consider, for example, user management and displaying
  *  lists of users.) In this case, we use the admin_externalpage object. This object
  *  places a link to an external PHP file in the admin tree block.
@@ -277,7 +277,7 @@ function get_component_version($component, $source='installed') {
 
     list($type, $name) = core_component::normalize_component($component);
 
-    // moodle core or a core subsystem
+    // powereduc core or a core subsystem
     if ($type === 'core') {
         if ($source === 'installed') {
             if (empty($CFG->version)) {
@@ -396,7 +396,7 @@ function drop_plugin_tables($name, $file, $feedback=true) {
 }
 
 /**
- * Returns names of all known tables == tables that moodle knows about.
+ * Returns names of all known tables == tables that powereduc knows about.
  *
  * @return array Array of lowercase table names
  */
@@ -492,7 +492,7 @@ function set_cron_lock($name, $until, $ignorecurrent=false) {
 function admin_critical_warnings_present() {
     global $SESSION;
 
-    if (!has_capability('moodle/site:config', context_system::instance())) {
+    if (!has_capability('powereduc/site:config', context_system::instance())) {
         return 0;
     }
 
@@ -543,7 +543,7 @@ function is_dataroot_insecure($fetchtest=false) {
     $rp = explode('/', $rp);
     foreach($rp as $r) {
         if (strpos($siteroot, '/'.$r.'/') === 0) {
-            $siteroot = substr($siteroot, strlen($r)+1); // moodle web in subdirectory
+            $siteroot = substr($siteroot, strlen($r)+1); // powereduc web in subdirectory
         } else {
             break; // probably alias root
         }
@@ -821,10 +821,10 @@ class admin_category implements parentable_part_of_admin_tree, linkable_settings
     /**
      * Get the URL to view this settings page.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    public function get_settings_page_url(): moodle_url {
-        return new moodle_url(
+    public function get_settings_page_url(): powereduc_url {
+        return new powereduc_url(
             '/admin/category.php',
             [
                 'category' => $this->name,
@@ -1245,12 +1245,12 @@ class admin_externalpage implements part_of_admin_tree, linkable_settings_page {
      * @param string $name The internal name for this external page. Must be unique amongst ALL part_of_admin_tree objects.
      * @param string $visiblename The displayed name for this external page. Usually obtained through get_string().
      * @param string $url The external URL that we should link to when someone requests this external page.
-     * @param mixed $req_capability The role capability/permission a user must have to access this external page. Defaults to 'moodle/site:config'.
+     * @param mixed $req_capability The role capability/permission a user must have to access this external page. Defaults to 'powereduc/site:config'.
      * @param boolean $hidden Is this external page hidden in admin tree block? Default false.
      * @param stdClass $context The context the page relates to. Not sure what happens
      *      if you specify something other than system or front page. Defaults to system.
      */
-    public function __construct($name, $visiblename, $url, $req_capability='moodle/site:config', $hidden=false, $context=NULL) {
+    public function __construct($name, $visiblename, $url, $req_capability='powereduc/site:config', $hidden=false, $context=NULL) {
         $this->name        = $name;
         $this->visiblename = $visiblename;
         $this->url         = $url;
@@ -1266,10 +1266,10 @@ class admin_externalpage implements part_of_admin_tree, linkable_settings_page {
     /**
      * Get the URL to view this settings page.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    public function get_settings_page_url(): moodle_url {
-        return new moodle_url($this->url);
+    public function get_settings_page_url(): powereduc_url {
+        return new powereduc_url($this->url);
     }
 
     /**
@@ -1408,7 +1408,7 @@ class admin_settingdependency {
         $plugin = '';
         if ($bits) {
             $plugin = array_pop($bits);
-            if ($plugin === 'moodle') {
+            if ($plugin === 'powereduc') {
                 $plugin = '';
             }
         }
@@ -1477,12 +1477,12 @@ class admin_settingpage implements part_of_admin_tree, linkable_settings_page {
      *
      * @param string $name The internal name for this external page. Must be unique amongst ALL part_of_admin_tree objects.
      * @param string $visiblename The displayed name for this external page. Usually obtained through get_string().
-     * @param mixed $req_capability The role capability/permission a user must have to access this external page. Defaults to 'moodle/site:config'.
+     * @param mixed $req_capability The role capability/permission a user must have to access this external page. Defaults to 'powereduc/site:config'.
      * @param boolean $hidden Is this external page hidden in admin tree block? Default false.
      * @param stdClass $context The context the page relates to. Not sure what happens
      *      if you specify something other than system or front page. Defaults to system.
      */
-    public function __construct($name, $visiblename, $req_capability='moodle/site:config', $hidden=false, $context=NULL) {
+    public function __construct($name, $visiblename, $req_capability='powereduc/site:config', $hidden=false, $context=NULL) {
         $this->settings    = new stdClass();
         $this->name        = $name;
         $this->visiblename = $visiblename;
@@ -1498,10 +1498,10 @@ class admin_settingpage implements part_of_admin_tree, linkable_settings_page {
     /**
      * Get the URL to view this page.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    public function get_settings_page_url(): moodle_url {
-        return new moodle_url(
+    public function get_settings_page_url(): powereduc_url {
+        return new powereduc_url(
             '/admin/settings.php',
             [
                 'section' => $this->name,
@@ -1905,18 +1905,18 @@ abstract class admin_setting {
     private function parse_setting_name($name) {
         $bits = explode('/', $name);
         if (count($bits) > 2) {
-            throw new moodle_exception('invalidadminsettingname', '', '', $name);
+            throw new powereduc_exception('invalidadminsettingname', '', '', $name);
         }
         $this->name = array_pop($bits);
         if (!preg_match('/^[a-zA-Z0-9_]+$/', $this->name)) {
-            throw new moodle_exception('invalidadminsettingname', '', '', $name);
+            throw new powereduc_exception('invalidadminsettingname', '', '', $name);
         }
         if (!empty($bits)) {
             $this->plugin = array_pop($bits);
-            if ($this->plugin === 'moodle') {
+            if ($this->plugin === 'powereduc') {
                 $this->plugin = null;
             } else if (!preg_match('/^[a-zA-Z0-9_]+$/', $this->plugin)) {
-                    throw new moodle_exception('invalidadminsettingname', '', '', $name);
+                    throw new powereduc_exception('invalidadminsettingname', '', '', $name);
                 }
         }
     }
@@ -2025,7 +2025,7 @@ abstract class admin_setting {
     public function get_defaultsetting() {
         $adminroot =  admin_get_root(false, false);
         if (!empty($adminroot->custom_defaults)) {
-            $plugin = is_null($this->plugin) ? 'moodle' : $this->plugin;
+            $plugin = is_null($this->plugin) ? 'powereduc' : $this->plugin;
             if (isset($adminroot->custom_defaults[$plugin])) {
                 if (array_key_exists($this->name, $adminroot->custom_defaults[$plugin])) { // null is valid value here ;-)
                     return $adminroot->custom_defaults[$plugin][$this->name];
@@ -2577,7 +2577,7 @@ class admin_setting_configtext_with_maxlength extends admin_setting_configtext {
                 // Max length check.
                 $length = core_text::strlen($data);
                 if ($length > $this->maxlength) {
-                    return get_string('maximumchars', 'moodle',  $this->maxlength);
+                    return get_string('maximumchars', 'powereduc',  $this->maxlength);
                 }
                 return true;
             } else {
@@ -3400,7 +3400,7 @@ class admin_setting_configselect extends admin_setting {
      * an empty string '' if the value is OK, or an error message if not.
      *
      * @param callable|null $validatefunction Validate function or null to clear
-     * @since Moodle 3.10
+     * @since PowerEduc 3.10
      */
     public function set_validate_function(?callable $validatefunction = null) {
         $this->validatefunction = $validatefunction;
@@ -3486,7 +3486,7 @@ class admin_setting_configselect extends admin_setting {
      *
      * @param string $data New value being set
      * @return string Empty string if valid, or error message text
-     * @since Moodle 3.10
+     * @since PowerEduc 3.10
      */
     protected function validate_setting(string $data): string {
         // If validation function is specified, call it now.
@@ -3508,7 +3508,7 @@ class admin_setting_configselect extends admin_setting {
      * @param string $current the currently selected option in the database, null if none.
      * @param string $default the default selected option.
      * @return array the HTML for the select element, and a warning message.
-     * @deprecated since Moodle 3.2
+     * @deprecated since PowerEduc 3.2
      */
     public function output_select_html($data, $current, $default, $extraname = '') {
         debugging('The method admin_setting_configselect::output_select_html is depreacted, do not use any more.', DEBUG_DEVELOPER);
@@ -3904,7 +3904,7 @@ class admin_setting_configduration extends admin_setting {
      * an empty string '' if the value is OK, or an error message if not.
      *
      * @param callable|null $validatefunction Validate function or null to clear
-     * @since Moodle 3.10
+     * @since PowerEduc 3.10
      */
     public function set_validate_function(?callable $validatefunction = null) {
         $this->validatefunction = $validatefunction;
@@ -3916,7 +3916,7 @@ class admin_setting_configduration extends admin_setting {
      *
      * @param int $data New value being set
      * @return string Empty string if valid, or error message text
-     * @since Moodle 3.10
+     * @since PowerEduc 3.10
      */
     protected function validate_setting(int $data): string {
         // If validation function is specified, call it now.
@@ -4318,7 +4318,7 @@ class admin_setting_configportlist extends admin_setting_configtextarea {
  * no paging or searching of this list.
  *
  * To correctly get a list of users from this config setting, you need to call the
- * get_users_from_config($CFG->mysetting, $capability); function in moodlelib.php.
+ * get_users_from_config($CFG->mysetting, $capability); function in powereduclib.php.
  *
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -5027,7 +5027,7 @@ class admin_setting_emoticons extends admin_setting {
             }
         }
 
-        $context->reseturl = new moodle_url('/admin/resetemoticons.php');
+        $context->reseturl = new powereduc_url('/admin/resetemoticons.php');
         $element = $OUTPUT->render_from_template('core_admin/setting_emoticons', $context);
         return format_admin_setting($this, $this->visiblename, $element, $this->description, false, '', NULL, $query);
     }
@@ -5177,7 +5177,7 @@ class admin_setting_langlist extends admin_setting_configtext {
  *
  * @package     core
  * @category    admin
- * @copyright   2020 David Mudrák <david@moodle.com>
+ * @copyright   2020 David Mudrák <david@powereduc.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class admin_setting_countrycodes extends admin_setting_configtext {
@@ -5272,7 +5272,7 @@ class admin_settings_num_course_sections extends admin_setting_configselect {
 
     /** Lazy-load the available choices for the select box */
     public function load_choices() {
-        $max = get_config('moodlecourse', 'maxsections');
+        $max = get_config('powereduccourse', 'maxsections');
         if (!isset($max) || !is_numeric($max)) {
             $max = 52;
         }
@@ -5884,7 +5884,7 @@ class admin_setting_special_gradelimiting extends admin_setting_configcheckbox {
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
     public function admin_setting_special_gradelimiting() {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
@@ -6307,7 +6307,7 @@ class admin_setting_grade_profilereport extends admin_setting_configselect {
 /**
  * Provides a selection of grade reports to be used for "grades".
  *
- * @copyright 2015 Adrian Greeve <adrian@moodle.com>
+ * @copyright 2015 Adrian Greeve <adrian@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class admin_setting_my_grades_report extends admin_setting_configselect {
@@ -6601,7 +6601,7 @@ class admin_setting_manageenrols extends admin_setting {
         // Iterate through enrol plugins and add to the display table.
         $updowncount = 1;
         $enrolcount = count($active_enrols);
-        $url = new moodle_url('/admin/enrol.php', array('sesskey'=>sesskey()));
+        $url = new powereduc_url('/admin/enrol.php', array('sesskey'=>sesskey()));
         $printed = array();
         foreach($allenrols as $enrol => $unused) {
             $plugininfo = $pluginmanager->get_plugin_info('enrol_'.$enrol);
@@ -6623,13 +6623,13 @@ class admin_setting_manageenrols extends admin_setting {
             // Hide/show links.
             $class = '';
             if (isset($active_enrols[$enrol])) {
-                $aurl = new moodle_url($url, array('action'=>'disable', 'enrol'=>$enrol));
+                $aurl = new powereduc_url($url, array('action'=>'disable', 'enrol'=>$enrol));
                 $hideshow = "<a href=\"$aurl\">";
                 $hideshow .= $OUTPUT->pix_icon('t/hide', $strdisable) . '</a>';
                 $enabled = true;
                 $displayname = $name;
             } else if (isset($enrols_available[$enrol])) {
-                $aurl = new moodle_url($url, array('action'=>'enable', 'enrol'=>$enrol));
+                $aurl = new powereduc_url($url, array('action'=>'enable', 'enrol'=>$enrol));
                 $hideshow = "<a href=\"$aurl\">";
                 $hideshow .= $OUTPUT->pix_icon('t/show', $strenable) . '</a>';
                 $enabled = false;
@@ -6643,21 +6643,21 @@ class admin_setting_manageenrols extends admin_setting {
             if ($PAGE->theme->resolve_image_location('icon', 'enrol_' . $name, false)) {
                 $icon = $OUTPUT->pix_icon('icon', '', 'enrol_' . $name, array('class' => 'icon pluginicon'));
             } else {
-                $icon = $OUTPUT->pix_icon('spacer', '', 'moodle', array('class' => 'icon pluginicon noicon'));
+                $icon = $OUTPUT->pix_icon('spacer', '', 'powereduc', array('class' => 'icon pluginicon noicon'));
             }
 
             // Up/down link (only if enrol is enabled).
             $updown = '';
             if ($enabled) {
                 if ($updowncount > 1) {
-                    $aurl = new moodle_url($url, array('action'=>'up', 'enrol'=>$enrol));
+                    $aurl = new powereduc_url($url, array('action'=>'up', 'enrol'=>$enrol));
                     $updown .= "<a href=\"$aurl\">";
                     $updown .= $OUTPUT->pix_icon('t/up', $strup) . '</a>&nbsp;';
                 } else {
                     $updown .= $OUTPUT->spacer() . '&nbsp;';
                 }
                 if ($updowncount < $enrolcount) {
-                    $aurl = new moodle_url($url, array('action'=>'down', 'enrol'=>$enrol));
+                    $aurl = new powereduc_url($url, array('action'=>'down', 'enrol'=>$enrol));
                     $updown .= "<a href=\"$aurl\">";
                     $updown .= $OUTPUT->pix_icon('t/down', $strdown) . '</a>&nbsp;';
                 } else {
@@ -6683,7 +6683,7 @@ class admin_setting_manageenrols extends admin_setting {
 
             $test = '';
             if (!empty($enrols_available[$enrol]) and method_exists($enrols_available[$enrol], 'test_settings')) {
-                $testsettingsurl = new moodle_url('/enrol/test_settings.php', array('enrol'=>$enrol, 'sesskey'=>sesskey()));
+                $testsettingsurl = new powereduc_url('/enrol/test_settings.php', array('enrol'=>$enrol, 'sesskey'=>sesskey()));
                 $test = html_writer::link($testsettingsurl, $strtest);
             }
 
@@ -6772,7 +6772,7 @@ class admin_page_managemessageoutputs extends admin_externalpage {
         global $CFG;
         parent::__construct('managemessageoutputs',
             get_string('defaultmessageoutputs', 'message'),
-            new moodle_url('/admin/message.php')
+            new powereduc_url('/admin/message.php')
         );
     }
 
@@ -6829,7 +6829,7 @@ class admin_page_manageqbehaviours extends admin_externalpage {
     public function __construct() {
         global $CFG;
         parent::__construct('manageqbehaviours', get_string('manageqbehaviours', 'admin'),
-                new moodle_url('/admin/qbehaviours.php'));
+                new powereduc_url('/admin/qbehaviours.php'));
     }
 
     /**
@@ -6877,7 +6877,7 @@ class admin_page_manageqtypes extends admin_externalpage {
     public function __construct() {
         global $CFG;
         parent::__construct('manageqtypes', get_string('manageqtypes', 'admin'),
-                new moodle_url('/admin/qtypes.php'));
+                new powereduc_url('/admin/qtypes.php'));
     }
 
     /**
@@ -7222,7 +7222,7 @@ class admin_setting_manageauths extends admin_setting {
 
             $test = '';
             if (!empty($authplugins[$auth]) and method_exists($authplugins[$auth], 'test_settings')) {
-                $testurl = new moodle_url('/auth/test_settings.php', array('auth'=>$auth, 'sesskey'=>sesskey()));
+                $testurl = new powereduc_url('/auth/test_settings.php', array('auth'=>$auth, 'sesskey'=>sesskey()));
                 $test = html_writer::link($testurl, $txt->testsettings);
             }
 
@@ -7393,7 +7393,7 @@ class admin_setting_manageeditors extends admin_setting {
 
             // settings link
             if (file_exists($CFG->dirroot.'/lib/editor/'.$editor.'/settings.php')) {
-                $eurl = new moodle_url('/admin/settings.php', array('section'=>'editorsettings'.$editor));
+                $eurl = new powereduc_url('/admin/settings.php', array('section'=>'editorsettings'.$editor));
                 $settings = "<a href='$eurl'>{$txt->settings}</a>";
             } else {
                 $settings = '';
@@ -7529,7 +7529,7 @@ class admin_setting_manageantiviruses extends admin_setting {
         // Iterate through auth plugins and add to the display table.
         $updowncount = 1;
         $antiviruscount = count($activeantiviruses);
-        $baseurl = new moodle_url('/admin/antiviruses.php', array('sesskey' => sesskey()));
+        $baseurl = new powereduc_url('/admin/antiviruses.php', array('sesskey' => sesskey()));
         foreach ($antivirusesavailable as $antivirus => $name) {
             // Hide/show link.
             $class = '';
@@ -7574,7 +7574,7 @@ class admin_setting_manageantiviruses extends admin_setting {
 
             // Settings link.
             if (file_exists($CFG->dirroot.'/lib/antivirus/'.$antivirus.'/settings.php')) {
-                $eurl = new moodle_url('/admin/settings.php', array('section' => 'antivirussettings'.$antivirus));
+                $eurl = new powereduc_url('/admin/settings.php', array('section' => 'antivirussettings'.$antivirus));
                 $settings = html_writer::link($eurl, $txt->settings);
             } else {
                 $settings = '';
@@ -7688,10 +7688,10 @@ class admin_setting_manageformats extends admin_setting {
         $table->data  = array();
 
         $cnt = 0;
-        $defaultformat = get_config('moodlecourse', 'format');
-        $spacer = $OUTPUT->pix_icon('spacer', '', 'moodle', array('class' => 'iconsmall'));
+        $defaultformat = get_config('powereduccourse', 'format');
+        $spacer = $OUTPUT->pix_icon('spacer', '', 'powereduc', array('class' => 'iconsmall'));
         foreach ($formats as $format) {
-            $url = new moodle_url('/admin/courseformats.php',
+            $url = new powereduc_url('/admin/courseformats.php',
                     array('sesskey' => sesskey(), 'format' => $format->name));
             $isdefault = '';
             $class = '';
@@ -7701,24 +7701,24 @@ class admin_setting_manageformats extends admin_setting {
                     $hideshow = $txt->default;
                 } else {
                     $hideshow = html_writer::link($url->out(false, array('action' => 'disable')),
-                            $OUTPUT->pix_icon('t/hide', $txt->disable, 'moodle', array('class' => 'iconsmall')));
+                            $OUTPUT->pix_icon('t/hide', $txt->disable, 'powereduc', array('class' => 'iconsmall')));
                 }
             } else {
                 $strformatname = $format->displayname;
                 $class = 'dimmed_text';
                 $hideshow = html_writer::link($url->out(false, array('action' => 'enable')),
-                    $OUTPUT->pix_icon('t/show', $txt->enable, 'moodle', array('class' => 'iconsmall')));
+                    $OUTPUT->pix_icon('t/show', $txt->enable, 'powereduc', array('class' => 'iconsmall')));
             }
             $updown = '';
             if ($cnt) {
                 $updown .= html_writer::link($url->out(false, array('action' => 'up')),
-                    $OUTPUT->pix_icon('t/up', $txt->up, 'moodle', array('class' => 'iconsmall'))). '';
+                    $OUTPUT->pix_icon('t/up', $txt->up, 'powereduc', array('class' => 'iconsmall'))). '';
             } else {
                 $updown .= $spacer;
             }
             if ($cnt < count($formats) - 1) {
                 $updown .= '&nbsp;'.html_writer::link($url->out(false, array('action' => 'down')),
-                    $OUTPUT->pix_icon('t/down', $txt->down, 'moodle', array('class' => 'iconsmall')));
+                    $OUTPUT->pix_icon('t/down', $txt->down, 'powereduc', array('class' => 'iconsmall')));
             } else {
                 $updown .= $spacer;
             }
@@ -7738,7 +7738,7 @@ class admin_setting_manageformats extends admin_setting {
             $table->data[] = $row;
         }
         $return .= html_writer::table($table);
-        $link = html_writer::link(new moodle_url('/admin/settings.php', array('section' => 'coursesettings')), new lang_string('coursesettings'));
+        $link = html_writer::link(new powereduc_url('/admin/settings.php', array('section' => 'coursesettings')), new lang_string('coursesettings'));
         $return .= html_writer::tag('p', get_string('manageformatsgotosettings', 'admin', $link));
         $return .= $OUTPUT->box_end();
         return highlight($query, $return);
@@ -7836,21 +7836,21 @@ class admin_setting_managecustomfields extends admin_setting {
         $table->attributes['class'] = 'managecustomfieldtable generaltable admintable';
         $table->data  = array();
 
-        $spacer = $OUTPUT->pix_icon('spacer', '', 'moodle', array('class' => 'iconsmall'));
+        $spacer = $OUTPUT->pix_icon('spacer', '', 'powereduc', array('class' => 'iconsmall'));
         foreach ($fields as $field) {
-            $url = new moodle_url('/admin/customfields.php',
+            $url = new powereduc_url('/admin/customfields.php',
                     array('sesskey' => sesskey(), 'field' => $field->name));
 
             if ($field->is_enabled()) {
                 $strfieldname = $field->displayname;
                 $class = '';
                 $hideshow = html_writer::link($url->out(false, array('action' => 'disable')),
-                        $OUTPUT->pix_icon('t/hide', $txt->disable, 'moodle', array('class' => 'iconsmall')));
+                        $OUTPUT->pix_icon('t/hide', $txt->disable, 'powereduc', array('class' => 'iconsmall')));
             } else {
                 $strfieldname = $field->displayname;
                 $class = 'dimmed_text';
                 $hideshow = html_writer::link($url->out(false, array('action' => 'enable')),
-                    $OUTPUT->pix_icon('t/show', $txt->enable, 'moodle', array('class' => 'iconsmall')));
+                    $OUTPUT->pix_icon('t/show', $txt->enable, 'powereduc', array('class' => 'iconsmall')));
             }
             $settings = '';
             if ($field->get_settings_url()) {
@@ -7959,7 +7959,7 @@ class admin_setting_managedataformats extends admin_setting {
         $table->data  = array();
 
         $cnt = 0;
-        $spacer = $OUTPUT->pix_icon('spacer', '', 'moodle', array('class' => 'iconsmall'));
+        $spacer = $OUTPUT->pix_icon('spacer', '', 'powereduc', array('class' => 'iconsmall'));
         $totalenabled = 0;
         foreach ($formats as $format) {
             if ($format->is_enabled() && $format->is_installed_and_upgraded()) {
@@ -7968,7 +7968,7 @@ class admin_setting_managedataformats extends admin_setting {
         }
         foreach ($formats as $format) {
             $status = $format->get_status();
-            $url = new moodle_url('/admin/dataformats.php',
+            $url = new powereduc_url('/admin/dataformats.php',
                     array('sesskey' => sesskey(), 'name' => $format->name));
 
             $class = '';
@@ -7978,25 +7978,25 @@ class admin_setting_managedataformats extends admin_setting {
                     $hideshow = '';
                 } else {
                     $hideshow = html_writer::link($url->out(false, array('action' => 'disable')),
-                        $OUTPUT->pix_icon('t/hide', $txt->disable, 'moodle', array('class' => 'iconsmall')));
+                        $OUTPUT->pix_icon('t/hide', $txt->disable, 'powereduc', array('class' => 'iconsmall')));
                 }
             } else {
                 $class = 'dimmed_text';
                 $strformatname = $format->displayname;
                 $hideshow = html_writer::link($url->out(false, array('action' => 'enable')),
-                    $OUTPUT->pix_icon('t/show', $txt->enable, 'moodle', array('class' => 'iconsmall')));
+                    $OUTPUT->pix_icon('t/show', $txt->enable, 'powereduc', array('class' => 'iconsmall')));
             }
 
             $updown = '';
             if ($cnt) {
                 $updown .= html_writer::link($url->out(false, array('action' => 'up')),
-                    $OUTPUT->pix_icon('t/up', $txt->up, 'moodle', array('class' => 'iconsmall'))). '';
+                    $OUTPUT->pix_icon('t/up', $txt->up, 'powereduc', array('class' => 'iconsmall'))). '';
             } else {
                 $updown .= $spacer;
             }
             if ($cnt < count($formats) - 1) {
                 $updown .= '&nbsp;'.html_writer::link($url->out(false, array('action' => 'down')),
-                    $OUTPUT->pix_icon('t/down', $txt->down, 'moodle', array('class' => 'iconsmall')));
+                    $OUTPUT->pix_icon('t/down', $txt->down, 'powereduc', array('class' => 'iconsmall')));
             } else {
                 $updown .= $spacer;
             }
@@ -8193,10 +8193,10 @@ abstract class admin_setting_manage_plugins extends admin_setting {
     /**
      * The URL for the management page for this plugintype.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
     protected function get_manage_url() {
-        return new moodle_url('/admin/updatesetting.php');
+        return new powereduc_url('/admin/updatesetting.php');
     }
 
     /**
@@ -8210,7 +8210,7 @@ abstract class admin_setting_manage_plugins extends admin_setting {
         global $CFG, $OUTPUT, $DB, $PAGE;
 
         $context = (object) [
-            'manageurl' => new moodle_url($this->get_manage_url(), [
+            'manageurl' => new powereduc_url($this->get_manage_url(), [
                     'type' => $this->get_plugin_type(),
                     'sesskey' => sesskey(),
                 ]),
@@ -8223,7 +8223,7 @@ abstract class admin_setting_manage_plugins extends admin_setting {
         $enabled = $pluginmanager->get_enabled_plugins($this->get_plugin_type());
         $plugins = array_merge($enabled, $allplugins);
         foreach ($plugins as $key => $plugin) {
-            $pluginlink = new moodle_url($context->manageurl, ['plugin' => $key]);
+            $pluginlink = new powereduc_url($context->manageurl, ['plugin' => $key]);
 
             $pluginkey = (object) [
                 'plugin' => $plugin->displayname,
@@ -8237,19 +8237,19 @@ abstract class admin_setting_manage_plugins extends admin_setting {
             ];
 
             // Enable/Disable link.
-            $togglelink = new moodle_url($pluginlink);
+            $togglelink = new powereduc_url($pluginlink);
             if ($plugin->is_enabled()) {
                 $toggletarget = false;
                 $togglelink->param('action', 'disable');
 
                 if (count($context->plugins)) {
                     // This is not the first plugin.
-                    $pluginkey->moveuplink = new moodle_url($pluginlink, ['action' => 'up']);
+                    $pluginkey->moveuplink = new powereduc_url($pluginlink, ['action' => 'up']);
                 }
 
                 if (count($enabled) > count($context->plugins) + 1) {
                     // This is not the last plugin.
-                    $pluginkey->movedownlink = new moodle_url($pluginlink, ['action' => 'down']);
+                    $pluginkey->movedownlink = new powereduc_url($pluginlink, ['action' => 'down']);
                 }
 
                 $pluginkey->info = $this->get_info_column($plugin);
@@ -8437,9 +8437,9 @@ class admin_setting_managemediaplayers extends admin_setting {
 
         // Iterate through media plugins and add to the display table.
         $updowncount = 1;
-        $url = new moodle_url('/admin/media.php', array('sesskey' => sesskey()));
+        $url = new powereduc_url('/admin/media.php', array('sesskey' => sesskey()));
         $printed = array();
-        $spacer = $OUTPUT->pix_icon('spacer', '', 'moodle', array('class' => 'iconsmall'));
+        $spacer = $OUTPUT->pix_icon('spacer', '', 'powereduc', array('class' => 'iconsmall'));
 
         $usedextensions = [];
         foreach ($plugins as $name => $plugin) {
@@ -8457,11 +8457,11 @@ class admin_setting_managemediaplayers extends admin_setting {
             } else {
                 $enabled = $plugininfo->is_enabled();
                 if ($enabled) {
-                    $hideshow = html_writer::link(new moodle_url($url, array('action' => 'disable')),
-                        $OUTPUT->pix_icon('t/hide', $strdisable, 'moodle', array('class' => 'iconsmall')));
+                    $hideshow = html_writer::link(new powereduc_url($url, array('action' => 'disable')),
+                        $OUTPUT->pix_icon('t/hide', $strdisable, 'powereduc', array('class' => 'iconsmall')));
                 } else {
-                    $hideshow = html_writer::link(new moodle_url($url, array('action' => 'enable')),
-                        $OUTPUT->pix_icon('t/show', $strenable, 'moodle', array('class' => 'iconsmall')));
+                    $hideshow = html_writer::link(new powereduc_url($url, array('action' => 'enable')),
+                        $OUTPUT->pix_icon('t/show', $strenable, 'powereduc', array('class' => 'iconsmall')));
                     $class = 'dimmed_text';
                 }
                 $displayname = $plugin->displayname;
@@ -8472,21 +8472,21 @@ class admin_setting_managemediaplayers extends admin_setting {
             if ($PAGE->theme->resolve_image_location('icon', 'media_' . $name, false)) {
                 $icon = $OUTPUT->pix_icon('icon', '', 'media_' . $name, array('class' => 'icon pluginicon'));
             } else {
-                $icon = $OUTPUT->pix_icon('spacer', '', 'moodle', array('class' => 'icon pluginicon noicon'));
+                $icon = $OUTPUT->pix_icon('spacer', '', 'powereduc', array('class' => 'icon pluginicon noicon'));
             }
 
             // Up/down link (only if enrol is enabled).
             $updown = '';
             if ($enabled) {
                 if ($updowncount > 1) {
-                    $updown = html_writer::link(new moodle_url($url, array('action' => 'up')),
-                        $OUTPUT->pix_icon('t/up', $strup, 'moodle', array('class' => 'iconsmall')));
+                    $updown = html_writer::link(new powereduc_url($url, array('action' => 'up')),
+                        $OUTPUT->pix_icon('t/up', $strup, 'powereduc', array('class' => 'iconsmall')));
                 } else {
                     $updown = $spacer;
                 }
                 if ($updowncount < count($enabledplugins)) {
-                    $updown .= html_writer::link(new moodle_url($url, array('action' => 'down')),
-                        $OUTPUT->pix_icon('t/down', $strdown, 'moodle', array('class' => 'iconsmall')));
+                    $updown .= html_writer::link(new powereduc_url($url, array('action' => 'down')),
+                        $OUTPUT->pix_icon('t/down', $strdown, 'powereduc', array('class' => 'iconsmall')));
                 } else {
                     $updown .= $spacer;
                 }
@@ -8529,7 +8529,7 @@ class admin_setting_managemediaplayers extends admin_setting {
 /**
  * Content bank content types manager. Allow reorder and to enable/disable content bank content types and jump to settings
  *
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class admin_setting_managecontentbankcontenttypes extends admin_setting {
@@ -8611,7 +8611,7 @@ class admin_setting_managecontentbankcontenttypes extends admin_setting {
         $table->align = array('left', 'center', 'center', 'center', 'center');
         $table->attributes['class'] = 'managecontentbanktable generaltable admintable';
         $table->data  = array();
-        $spacer = $OUTPUT->pix_icon('spacer', '', 'moodle', array('class' => 'iconsmall'));
+        $spacer = $OUTPUT->pix_icon('spacer', '', 'powereduc', array('class' => 'iconsmall'));
 
         $totalenabled = 0;
         $count = 0;
@@ -8622,30 +8622,30 @@ class admin_setting_managecontentbankcontenttypes extends admin_setting {
         }
 
         foreach ($types as $type) {
-            $url = new moodle_url('/admin/contentbank.php',
+            $url = new powereduc_url('/admin/contentbank.php',
                 array('sesskey' => sesskey(), 'name' => $type->name));
 
             $class = '';
             $strtypename = $type->displayname;
             if ($type->is_enabled()) {
                 $hideshow = html_writer::link($url->out(false, array('action' => 'disable')),
-                    $OUTPUT->pix_icon('t/hide', $txt->disable, 'moodle', array('class' => 'iconsmall')));
+                    $OUTPUT->pix_icon('t/hide', $txt->disable, 'powereduc', array('class' => 'iconsmall')));
             } else {
                 $class = 'dimmed_text';
                 $hideshow = html_writer::link($url->out(false, array('action' => 'enable')),
-                    $OUTPUT->pix_icon('t/show', $txt->enable, 'moodle', array('class' => 'iconsmall')));
+                    $OUTPUT->pix_icon('t/show', $txt->enable, 'powereduc', array('class' => 'iconsmall')));
             }
 
             $updown = '';
             if ($count) {
                 $updown .= html_writer::link($url->out(false, array('action' => 'up')),
-                        $OUTPUT->pix_icon('t/up', $txt->up, 'moodle', array('class' => 'iconsmall'))). '';
+                        $OUTPUT->pix_icon('t/up', $txt->up, 'powereduc', array('class' => 'iconsmall'))). '';
             } else {
                 $updown .= $spacer;
             }
             if ($count < count($types) - 1) {
                 $updown .= '&nbsp;'.html_writer::link($url->out(false, array('action' => 'down')),
-                        $OUTPUT->pix_icon('t/down', $txt->down, 'moodle', array('class' => 'iconsmall')));
+                        $OUTPUT->pix_icon('t/down', $txt->down, 'powereduc', array('class' => 'iconsmall')));
             } else {
                 $updown .= $spacer;
             }
@@ -8678,7 +8678,7 @@ class admin_setting_managecontentbankcontenttypes extends admin_setting {
  *
  * This function must be called on each admin page before other code.
  *
- * @global moodle_page $PAGE
+ * @global powereduc_page $PAGE
  *
  * @param string $section name of page
  * @param string $extrabutton extra HTML that is added after the blocks editing on/off button.
@@ -8710,22 +8710,22 @@ function admin_externalpage_setup($section, $extrabutton = '', array $extraurlpa
     $adminroot = admin_get_root(false, false); // settings not required for external pages
     $extpage = $adminroot->locate($section, true);
 
-    $hassiteconfig = has_capability('moodle/site:config', context_system::instance());
+    $hassiteconfig = has_capability('powereduc/site:config', context_system::instance());
     if (empty($extpage) or !($extpage instanceof admin_externalpage)) {
         // The requested section isn't in the admin tree
         // It could be because the user has inadequate capapbilities or because the section doesn't exist
         if (!$hassiteconfig) {
             // The requested section could depend on a different capability
             // but most likely the user has inadequate capabilities
-            throw new \moodle_exception('accessdenied', 'admin');
+            throw new \powereduc_exception('accessdenied', 'admin');
         } else {
-            throw new \moodle_exception('sectionerror', 'admin', "$CFG->wwwroot/$CFG->admin/");
+            throw new \powereduc_exception('sectionerror', 'admin', "$CFG->wwwroot/$CFG->admin/");
         }
     }
 
     // this eliminates our need to authenticate on the actual pages
     if (!$extpage->check_access()) {
-        throw new \moodle_exception('accessdenied', 'admin');
+        throw new \powereduc_exception('accessdenied', 'admin');
         die;
     }
 
@@ -8774,10 +8774,10 @@ function admin_externalpage_setup($section, $extrabutton = '', array $extraurlpa
     if ($PAGE->user_allowed_editing() && !$PAGE->theme->haseditswitch) {
         if ($PAGE->user_is_editing()) {
             $caption = get_string('blockseditoff');
-            $url = new moodle_url($PAGE->url, array('adminedit'=>'0', 'sesskey'=>sesskey()));
+            $url = new powereduc_url($PAGE->url, array('adminedit'=>'0', 'sesskey'=>sesskey()));
         } else {
             $caption = get_string('blocksediton');
-            $url = new moodle_url($PAGE->url, array('adminedit'=>'1', 'sesskey'=>sesskey()));
+            $url = new powereduc_url($PAGE->url, array('adminedit'=>'1', 'sesskey'=>sesskey()));
         }
         $PAGE->set_button($OUTPUT->single_button($url, $caption, 'get'));
     }
@@ -8787,7 +8787,7 @@ function admin_externalpage_setup($section, $extrabutton = '', array $extraurlpa
 
     if ($hassiteconfig && empty($options['nosearch'])) {
         $PAGE->add_header_action($OUTPUT->render_from_template('core_admin/header_search_input', [
-            'action' => new moodle_url('/admin/search.php'),
+            'action' => new powereduc_url('/admin/search.php'),
             'query' => $PAGE->url->get_param('query'),
         ]));
     }
@@ -9032,9 +9032,9 @@ function admin_search_settings_html($query) {
         $heading = highlight($query, $page->visiblename);
         $headingurl = null;
         if ($page instanceof admin_externalpage) {
-            $headingurl = new moodle_url($page->url);
+            $headingurl = new powereduc_url($page->url);
         } else if ($page instanceof admin_settingpage) {
-            $headingurl = new moodle_url('/admin/settings.php', ['section' => $page->name]);
+            $headingurl = new powereduc_url('/admin/settings.php', ['section' => $page->name]);
         } else {
             continue;
         }
@@ -9436,12 +9436,12 @@ class admin_setting_managerepository extends admin_setting {
     }
 
     /**
-     * Helper function that generates a moodle_url object
+     * Helper function that generates a powereduc_url object
      * relevant to the repository
      */
 
     function repository_action_url($repository) {
-        return new moodle_url($this->baseurl, array('sesskey'=>sesskey(), 'repos'=>$repository));
+        return new powereduc_url($this->baseurl, array('sesskey'=>sesskey(), 'repos'=>$repository));
     }
 
     /**
@@ -9499,7 +9499,7 @@ class admin_setting_managerepository extends admin_setting {
                 $instanceoptionnames = repository::static_function($typename, 'get_instance_option_names');
 
                 if (!empty($typeoptionnames) || !empty($instanceoptionnames)) {
-                    // Calculate number of instances in order to display them for the Moodle administrator
+                    // Calculate number of instances in order to display them for the PowerEduc administrator
                     if (!empty($instanceoptionnames)) {
                         $params = array();
                         $params['context'] = array(context_system::instance());
@@ -10000,7 +10000,7 @@ class admin_setting_webservicesoverview extends admin_setting {
         $return = "";
         $brtag = html_writer::empty_tag('br');
 
-        /// One system controlling Moodle with Token
+        /// One system controlling PowerEduc with Token
         $return .= $OUTPUT->heading(get_string('onesystemcontrolling', 'webservice'), 3, 'main');
         $table = new html_table();
         $table->head = array(get_string('step', 'webservice'), get_string('status'),
@@ -10015,7 +10015,7 @@ class admin_setting_webservicesoverview extends admin_setting {
 
         /// 1. Enable Web Services
         $row = array();
-        $url = new moodle_url("/admin/search.php?query=enablewebservices");
+        $url = new powereduc_url("/admin/search.php?query=enablewebservices");
         $row[0] = "1. " . html_writer::tag('a', get_string('enablews', 'webservice'),
                         array('href' => $url));
         $status = html_writer::tag('span', get_string('no'), array('class' => 'badge badge-danger'));
@@ -10028,7 +10028,7 @@ class admin_setting_webservicesoverview extends admin_setting {
 
         /// 2. Enable protocols
         $row = array();
-        $url = new moodle_url("/admin/settings.php?section=webserviceprotocols");
+        $url = new powereduc_url("/admin/settings.php?section=webserviceprotocols");
         $row[0] = "2. " . html_writer::tag('a', get_string('enableprotocols', 'webservice'),
                         array('href' => $url));
         $status = html_writer::tag('span', get_string('none'), array('class' => 'badge badge-danger'));
@@ -10047,7 +10047,7 @@ class admin_setting_webservicesoverview extends admin_setting {
 
         /// 3. Create user account
         $row = array();
-        $url = new moodle_url("/user/editadvanced.php?id=-1");
+        $url = new powereduc_url("/user/editadvanced.php?id=-1");
         $row[0] = "3. " . html_writer::tag('a', get_string('createuser', 'webservice'),
                         array('href' => $url));
         $row[1] = "";
@@ -10056,7 +10056,7 @@ class admin_setting_webservicesoverview extends admin_setting {
 
         /// 4. Add capability to users
         $row = array();
-        $url = new moodle_url("/admin/roles/check.php?contextid=1");
+        $url = new powereduc_url("/admin/roles/check.php?contextid=1");
         $row[0] = "4. " . html_writer::tag('a', get_string('checkusercapability', 'webservice'),
                         array('href' => $url));
         $row[1] = "";
@@ -10065,7 +10065,7 @@ class admin_setting_webservicesoverview extends admin_setting {
 
         /// 5. Select a web service
         $row = array();
-        $url = new moodle_url("/admin/settings.php?section=externalservices");
+        $url = new powereduc_url("/admin/settings.php?section=externalservices");
         $row[0] = "5. " . html_writer::tag('a', get_string('selectservice', 'webservice'),
                         array('href' => $url));
         $row[1] = "";
@@ -10074,7 +10074,7 @@ class admin_setting_webservicesoverview extends admin_setting {
 
         /// 6. Add functions
         $row = array();
-        $url = new moodle_url("/admin/settings.php?section=externalservices");
+        $url = new powereduc_url("/admin/settings.php?section=externalservices");
         $row[0] = "6. " . html_writer::tag('a', get_string('addfunctions', 'webservice'),
                         array('href' => $url));
         $row[1] = "";
@@ -10083,7 +10083,7 @@ class admin_setting_webservicesoverview extends admin_setting {
 
         /// 7. Add the specific user
         $row = array();
-        $url = new moodle_url("/admin/settings.php?section=externalservices");
+        $url = new powereduc_url("/admin/settings.php?section=externalservices");
         $row[0] = "7. " . html_writer::tag('a', get_string('selectspecificuser', 'webservice'),
                         array('href' => $url));
         $row[1] = "";
@@ -10092,7 +10092,7 @@ class admin_setting_webservicesoverview extends admin_setting {
 
         /// 8. Create token for the specific user
         $row = array();
-        $url = new moodle_url('/admin/webservice/tokens.php', ['action' => 'create']);
+        $url = new powereduc_url('/admin/webservice/tokens.php', ['action' => 'create']);
         $row[0] = "8. " . html_writer::tag('a', get_string('createtokenforuser', 'webservice'),
                         array('href' => $url));
         $row[1] = "";
@@ -10101,7 +10101,7 @@ class admin_setting_webservicesoverview extends admin_setting {
 
         /// 9. Enable the documentation
         $row = array();
-        $url = new moodle_url("/admin/search.php?query=enablewsdocumentation");
+        $url = new powereduc_url("/admin/search.php?query=enablewsdocumentation");
         $row[0] = "9. " . html_writer::tag('a', get_string('enabledocumentation', 'webservice'),
                         array('href' => $url));
         $status = '<span class="warning">' . get_string('no') . '</span>';
@@ -10114,7 +10114,7 @@ class admin_setting_webservicesoverview extends admin_setting {
 
         /// 10. Test the service
         $row = array();
-        $url = new moodle_url("/admin/webservice/testclient.php");
+        $url = new powereduc_url("/admin/webservice/testclient.php");
         $row[0] = "10. " . html_writer::tag('a', get_string('testwithtestclient', 'webservice'),
                         array('href' => $url));
         $row[1] = "";
@@ -10139,7 +10139,7 @@ class admin_setting_webservicesoverview extends admin_setting {
 
         /// 1. Enable Web Services
         $row = array();
-        $url = new moodle_url("/admin/search.php?query=enablewebservices");
+        $url = new powereduc_url("/admin/search.php?query=enablewebservices");
         $row[0] = "1. " . html_writer::tag('a', get_string('enablews', 'webservice'),
                         array('href' => $url));
         $status = html_writer::tag('span', get_string('no'), array('class' => 'badge badge-danger'));
@@ -10152,7 +10152,7 @@ class admin_setting_webservicesoverview extends admin_setting {
 
         /// 2. Enable protocols
         $row = array();
-        $url = new moodle_url("/admin/settings.php?section=webserviceprotocols");
+        $url = new powereduc_url("/admin/settings.php?section=webserviceprotocols");
         $row[0] = "2. " . html_writer::tag('a', get_string('enableprotocols', 'webservice'),
                         array('href' => $url));
         $status = html_writer::tag('span', get_string('none'), array('class' => 'badge badge-danger'));
@@ -10172,7 +10172,7 @@ class admin_setting_webservicesoverview extends admin_setting {
 
         /// 3. Select a web service
         $row = array();
-        $url = new moodle_url("/admin/settings.php?section=externalservices");
+        $url = new powereduc_url("/admin/settings.php?section=externalservices");
         $row[0] = "3. " . html_writer::tag('a', get_string('selectservice', 'webservice'),
                         array('href' => $url));
         $row[1] = "";
@@ -10181,7 +10181,7 @@ class admin_setting_webservicesoverview extends admin_setting {
 
         /// 4. Add functions
         $row = array();
-        $url = new moodle_url("/admin/settings.php?section=externalservices");
+        $url = new powereduc_url("/admin/settings.php?section=externalservices");
         $row[0] = "4. " . html_writer::tag('a', get_string('addfunctions', 'webservice'),
                         array('href' => $url));
         $row[1] = "";
@@ -10190,7 +10190,7 @@ class admin_setting_webservicesoverview extends admin_setting {
 
         /// 5. Add capability to users
         $row = array();
-        $url = new moodle_url("/admin/roles/check.php?contextid=1");
+        $url = new powereduc_url("/admin/roles/check.php?contextid=1");
         $row[0] = "5. " . html_writer::tag('a', get_string('addcapabilitytousers', 'webservice'),
                         array('href' => $url));
         $row[1] = "";
@@ -10199,7 +10199,7 @@ class admin_setting_webservicesoverview extends admin_setting {
 
         /// 6. Test the service
         $row = array();
-        $url = new moodle_url("/admin/webservice/testclient.php");
+        $url = new powereduc_url("/admin/webservice/testclient.php");
         $row[0] = "6. " . html_writer::tag('a', get_string('testwithtestclient', 'webservice'),
                         array('href' => $url));
         $row[1] = "";
@@ -10501,7 +10501,7 @@ class admin_setting_configcolourpicker extends admin_setting {
     /**
      * Generates the HTML for the setting
      *
-     * @global moodle_page $PAGE
+     * @global powereduc_page $PAGE
      * @global core_renderer $OUTPUT
      * @param string $data
      * @param string $query
@@ -10509,7 +10509,7 @@ class admin_setting_configcolourpicker extends admin_setting {
     public function output_html($data, $query = '') {
         global $PAGE, $OUTPUT;
 
-        $icon = new pix_icon('i/loading', get_string('loading', 'admin'), 'moodle', ['class' => 'loadingicon']);
+        $icon = new pix_icon('i/loading', get_string('loading', 'admin'), 'powereduc', ['class' => 'loadingicon']);
         $context = (object) [
             'id' => $this->get_id(),
             'name' => $this->get_full_name(),
@@ -10692,7 +10692,7 @@ class admin_setting_configstoredfile extends admin_setting {
         $fmoptions->context        = $options['context'];
         $fmoptions->areamaxbytes   = $options['areamaxbytes'];
 
-        $fm = new MoodleQuickForm_filemanager($elname, $this->visiblename, ['id' => $id], $fmoptions);
+        $fm = new PowerEducQuickForm_filemanager($elname, $this->visiblename, ['id' => $id], $fmoptions);
         $fm->setValue($draftitemid);
 
         return format_admin_setting($this, $this->visiblename,
@@ -11151,7 +11151,7 @@ class admin_setting_searchsetupinfo extends admin_setting {
 
         // Select a search engine.
         $row = array();
-        $url = new moodle_url('/admin/settings.php?section=manageglobalsearch#admin-searchengine');
+        $url = new powereduc_url('/admin/settings.php?section=manageglobalsearch#admin-searchengine');
         $row[0] = '1. ' . html_writer::tag('a', get_string('selectsearchengine', 'admin'),
                         array('href' => $url));
 
@@ -11166,7 +11166,7 @@ class admin_setting_searchsetupinfo extends admin_setting {
 
         // Available areas.
         $row = array();
-        $url = new moodle_url('/admin/searchareas.php');
+        $url = new powereduc_url('/admin/searchareas.php');
         $row[0] = '2. ' . html_writer::tag('a', get_string('enablesearchareas', 'admin'),
                         array('href' => $url));
 
@@ -11185,7 +11185,7 @@ class admin_setting_searchsetupinfo extends admin_setting {
             $row[1] = html_writer::tag('span', get_string('no'), array('class' => 'badge badge-danger'));
         } else {
             if ($ADMIN->locate('search' . $CFG->searchengine)) {
-                $url = new moodle_url('/admin/settings.php?section=search' . $CFG->searchengine);
+                $url = new powereduc_url('/admin/settings.php?section=search' . $CFG->searchengine);
                 $row[0] = '3. ' . html_writer::link($url, get_string('setupsearchengine', 'core_admin'));
             } else {
                 $row[0] = '3. ' . get_string('setupsearchengine', 'core_admin');
@@ -11195,7 +11195,7 @@ class admin_setting_searchsetupinfo extends admin_setting {
             $searchengine = \core_search\manager::search_engine_instance();
             try {
                 $serverstatus = $searchengine->is_server_ready();
-            } catch (\moodle_exception $e) {
+            } catch (\powereduc_exception $e) {
                 $serverstatus = $e->getMessage();
             }
             if ($serverstatus === true) {
@@ -11209,7 +11209,7 @@ class admin_setting_searchsetupinfo extends admin_setting {
 
         // Indexed data.
         $row = array();
-        $url = new moodle_url('/admin/searchareas.php');
+        $url = new powereduc_url('/admin/searchareas.php');
         $row[0] = '4. ' . html_writer::tag('a', get_string('indexdata', 'admin'), array('href' => $url));
         if ($anyindexed) {
             $status = html_writer::tag('span', get_string('yes'), array('class' => 'badge badge-success'));
@@ -11221,7 +11221,7 @@ class admin_setting_searchsetupinfo extends admin_setting {
 
         // Enable global search.
         $row = array();
-        $url = new moodle_url("/admin/search.php?query=enableglobalsearch");
+        $url = new powereduc_url("/admin/search.php?query=enableglobalsearch");
         $row[0] = '5. ' . html_writer::tag('a', get_string('enableglobalsearch', 'admin'),
                         array('href' => $url));
         $status = html_writer::tag('span', get_string('no'), array('class' => 'badge badge-danger'));
@@ -11233,7 +11233,7 @@ class admin_setting_searchsetupinfo extends admin_setting {
 
         // Replace front page search.
         $row = array();
-        $url = new moodle_url("/admin/search.php?query=searchincludeallcourses");
+        $url = new powereduc_url("/admin/search.php?query=searchincludeallcourses");
         $row[0] = '6. ' . html_writer::tag('a', get_string('replacefrontsearch', 'admin'),
                                            array('href' => $url));
         $status = html_writer::tag('span', get_string('no'), array('class' => 'badge badge-danger'));
@@ -11257,7 +11257,7 @@ class admin_setting_searchsetupinfo extends admin_setting {
  * to be used without knowledge of other config/scss included.
  *
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @copyright 2016 Dan Poltawski <dan@moodle.com>
+ * @copyright 2016 Dan Poltawski <dan@powereduc.com>
  */
 class admin_setting_scsscode extends admin_setting_configtextarea {
 
@@ -11293,7 +11293,7 @@ class admin_setting_scsscode extends admin_setting_configtextarea {
  * Administration setting to define a list of file types.
  *
  * @copyright 2016 Jonathon Fowler <fowlerj@usq.edu.au>
- * @copyright 2017 David Mudrák <david@moodle.com>
+ * @copyright 2017 David Mudrák <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class admin_setting_filetypes extends admin_setting_configtext {
@@ -11416,7 +11416,7 @@ class admin_setting_filetypes extends admin_setting_configtext {
  * Used to validate the content and format of the age of digital consent map and ensuring it is parsable.
  *
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @copyright 2018 Mihail Geshoski <mihail@moodle.com>
+ * @copyright 2018 Mihail Geshoski <mihail@powereduc.com>
  */
 class admin_setting_agedigitalconsentmap extends admin_setting_configtextarea {
 
@@ -11451,7 +11451,7 @@ class admin_setting_agedigitalconsentmap extends admin_setting_configtextarea {
 
         try {
             \core_auth\digital_consent::parse_age_digital_consent_map($data);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             return get_string('invalidagedigitalconsent', 'admin', $e->getMessage());
         }
 
@@ -11506,7 +11506,7 @@ class admin_settings_sitepolicy_handler_select extends admin_setting_configselec
  * Used to validate theme presets code and ensuring they compile well.
  *
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @copyright 2019 Bas Brands <bas@moodle.com>
+ * @copyright 2019 Bas Brands <bas@powereduc.com>
  */
 class admin_setting_configthemepreset extends admin_setting_configselect {
 
@@ -11598,7 +11598,7 @@ class admin_setting_configthemepreset extends admin_setting_configselect {
  * Selection of plugins that can work as H5P libraries handlers
  *
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @copyright 2020 Sara Arjona <sara@moodle.com>
+ * @copyright 2020 Sara Arjona <sara@powereduc.com>
  */
 class admin_settings_h5plib_handler_select extends admin_setting_configselect {
 

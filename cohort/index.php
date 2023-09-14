@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ if ($contextid) {
 }
 
 if ($context->contextlevel != CONTEXT_COURSECAT and $context->contextlevel != CONTEXT_SYSTEM) {
-    throw new \moodle_exception('invalidcontext');
+    throw new \powereduc_exception('invalidcontext');
 }
 
 $category = null;
@@ -51,10 +51,10 @@ if ($context->contextlevel == CONTEXT_COURSECAT) {
     $category = $DB->get_record('course_categories', array('id'=>$context->instanceid), '*', MUST_EXIST);
 }
 
-$manager = has_capability('moodle/cohort:manage', $context);
-$canassign = has_capability('moodle/cohort:assign', $context);
+$manager = has_capability('powereduc/cohort:manage', $context);
+$canassign = has_capability('powereduc/cohort:assign', $context);
 if (!$manager) {
-    require_capability('moodle/cohort:view', $context);
+    require_capability('powereduc/cohort:view', $context);
 }
 
 $strcohorts = get_string('cohorts', 'cohort');
@@ -74,7 +74,7 @@ if ($category) {
     $showall = false;
 } else {
     admin_externalpage_setup('cohorts', '', null, '', array('pagelayout'=>'report'));
-    navigation_node::override_active_url(new moodle_url('/cohort/index.php'));
+    navigation_node::override_active_url(new powereduc_url('/cohort/index.php'));
     if ($showall) {
         $strallcohorts = get_string('allcohorts', 'cohort');
         $PAGE->set_title($strallcohorts);
@@ -98,7 +98,7 @@ if ($searchquery) {
 if ($showall) {
     $params['showall'] = true;
 }
-$baseurl = new moodle_url('/cohort/index.php', $params);
+$baseurl = new powereduc_url('/cohort/index.php', $params);
 
 if ($editcontrols = cohort_edit_controls($context, $baseurl)) {
     echo $OUTPUT->render($editcontrols);

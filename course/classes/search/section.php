@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -49,7 +49,7 @@ class section extends \core_search\base {
      *
      * @param int $modifiedfrom timestamp
      * @param \context|null $context Restriction context
-     * @return \moodle_recordset|null Recordset or null if no change possible
+     * @return \powereduc_recordset|null Recordset or null if no change possible
      */
     public function get_document_recordset($modifiedfrom = 0, \context $context = null) {
         global $DB;
@@ -91,7 +91,7 @@ class section extends \core_search\base {
         // Get the context, modinfo, and section.
         try {
             $context = \context_course::instance($record->course);
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             // Notify it as we run here as admin, we should see everything.
             debugging('Error retrieving ' . $this->areaid . ' ' . $record->id .
                     ' document, not all required data is available: ' . $ex->getMessage(),
@@ -130,7 +130,7 @@ class section extends \core_search\base {
         }
         try {
             $modinfo = get_fast_modinfo($sectionrec->course);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             return \core_search\manager::ACCESS_DELETED;
         }
         $section = $modinfo->get_section_info($sectionrec->section, IGNORE_MISSING);
@@ -150,7 +150,7 @@ class section extends \core_search\base {
      * Gets a link to the section.
      *
      * @param \core_search\document $doc
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_doc_url(\core_search\document $doc) {
         global $DB;
@@ -163,7 +163,7 @@ class section extends \core_search\base {
      * Gets a link to the section.
      *
      * @param \core_search\document $doc
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_context_url(\core_search\document $doc) {
         return $this->get_doc_url($doc);
@@ -188,7 +188,7 @@ class section extends \core_search\base {
     }
 
     /**
-     * Returns the moodle component name, as used in the files table.
+     * Returns the powereduc component name, as used in the files table.
      *
      * @return string Component name
      */

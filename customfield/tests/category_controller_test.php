@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ use core_customfield_generator;
  *
  * @package    core_customfield
  * @category   test
- * @copyright  2018 Toni Barbera <toni@moodle.com>
+ * @copyright  2018 Toni Barbera <toni@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class category_controller_test extends \advanced_testcase {
@@ -84,9 +84,9 @@ class category_controller_test extends \advanced_testcase {
         try {
             category_controller::create($catrecord->id + 1);
             $this->fail('Expected exception');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('Category not found', $e->getMessage());
-            $this->assertEquals(\moodle_exception::class, get_class($e));
+            $this->assertEquals(\powereduc_exception::class, get_class($e));
         }
 
         // Missing required elements.

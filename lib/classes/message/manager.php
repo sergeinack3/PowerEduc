@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * New messaging manager class.
  *
  * @package   core_message
- * @since     Moodle 2.8
+ * @since     PowerEduc 2.8
  * @copyright 2014 Totara Learning Solutions Ltd {@link http://www.totaralms.com/}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @author    Petr Skoda <petr.skoda@totaralms.com>
@@ -36,7 +36,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * @access private
  *
  * @package   core_message
- * @since     Moodle 2.8
+ * @since     PowerEduc 2.8
  * @copyright 2014 Totara Learning Solutions Ltd {@link http://www.totaralms.com/}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @author    Petr Skoda <petr.skoda@totaralms.com>
@@ -68,7 +68,7 @@ class manager {
         global $DB, $CFG, $SITE;
 
         if (empty($eventdata->convid)) {
-            throw new \moodle_exception("Message is not being sent to a conversation. Please check event data.");
+            throw new \powereduc_exception("Message is not being sent to a conversation. Please check event data.");
         }
 
         // Fetch default (site) preferences.
@@ -95,7 +95,7 @@ class manager {
         $members = $DB->get_records_sql($sql, [$eventdata->convid, \core_message\api::CONVERSATION_ACTION_MUTED,
             $eventdata->convid]);
         if (empty($members)) {
-            throw new \moodle_exception("Conversation has no members or does not exist.");
+            throw new \powereduc_exception("Conversation has no members or does not exist.");
         }
 
         if (!is_object($localisedeventdata->userfrom)) {
@@ -169,7 +169,7 @@ class manager {
 
             // Spoof the userto based on the current member id.
             $localisedeventdata->userto = $recipient;
-            // Check if the notification is including images that will need a user token to be displayed outside Moodle.
+            // Check if the notification is including images that will need a user token to be displayed outside PowerEduc.
             if (!empty($localisedeventdata->customdata)) {
                 $customdata = json_decode($localisedeventdata->customdata);
                 if (is_object($customdata) && !empty($customdata->notificationiconurl)) {
@@ -355,7 +355,7 @@ class manager {
      * @param \stdClass|\core\message\message $eventdata
      * @param \stdClass $savemessage
      * @param array $processorlist
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @return int $messageid
      */
     protected static function send_message_to_processors($eventdata, \stdClass $savemessage, array
@@ -380,7 +380,7 @@ class manager {
 
         // Send the message to processors.
         if (!self::call_processors($eventdata, $processorlist)) {
-            throw new \moodle_exception("Message was not sent.");
+            throw new \powereduc_exception("Message was not sent.");
         }
 
         // Trigger event for sending a message or notification - we need to do this before marking as read!

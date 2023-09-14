@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,14 +20,14 @@ namespace core_completion;
 
 use advanced_testcase;
 use coding_exception;
-use moodle_exception;
+use powereduc_exception;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Class for unit testing core_completion/activity_custom_completion.
  *
  * @package   core_completion
- * @copyright 2021 Jun Pataleta <jun@moodle.com>
+ * @copyright 2021 Jun Pataleta <jun@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class activity_custom_completion_test extends advanced_testcase {
@@ -127,7 +127,7 @@ class activity_custom_completion_test extends advanced_testcase {
                 false, true, coding_exception::class
             ],
             'Not available' => [
-                true, false, moodle_exception::class
+                true, false, powereduc_exception::class
             ],
             'Defined and available' => [
                 true, true, null

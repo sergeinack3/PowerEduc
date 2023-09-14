@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,13 +16,13 @@
 
 namespace core_grades\output;
 
-use moodle_url;
+use powereduc_url;
 
 /**
  * Renderable class for the action bar elements in the gradebook publish export page.
  *
  * @package    core_grades
- * @copyright  2021 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2021 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class export_publish_action_bar extends action_bar {
@@ -63,7 +63,7 @@ class export_publish_action_bar extends action_bar {
         $courseid = $this->context->instanceid;
 
         // Add a back button to the action bar.
-        $backlink = new moodle_url("/grade/export/{$this->activeplugin}/index.php", ['id' => $courseid]);
+        $backlink = new powereduc_url("/grade/export/{$this->activeplugin}/index.php", ['id' => $courseid]);
         $backbutton = new \single_button($backlink, get_string('back'), 'get');
 
         return [

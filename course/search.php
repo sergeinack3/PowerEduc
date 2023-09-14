@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ if ($q) {
 }
 
 // List of minimum capabilities which user need to have for editing/moving course
-$capabilities = array('moodle/course:create', 'moodle/category:manage');
+$capabilities = array('powereduc/course:create', 'powereduc/category:manage');
 
 // Populate usercatlist with list of category id's with course:create and category:manage capabilities.
 $usercatlist = core_course_category::make_categories_list($capabilities);
@@ -77,9 +77,9 @@ $strsearch = new lang_string("search");
 $strsearchresults = new lang_string("searchresults");
 $strnovalidcourses = new lang_string('novalidcourses');
 
-$courseurl = core_course_category::user_top() ? new moodle_url('/course/index.php') : null;
+$courseurl = core_course_category::user_top() ? new powereduc_url('/course/index.php') : null;
 $PAGE->navbar->add($strcourses, $courseurl);
-$PAGE->navbar->add($strsearch, new moodle_url('/course/search.php'));
+$PAGE->navbar->add($strsearch, new powereduc_url('/course/search.php'));
 if (!empty($search)) {
     $PAGE->navbar->add(s($search));
 }
@@ -92,7 +92,7 @@ if (empty($searchcriteria)) {
     $PAGE->set_title("$site->fullname : $strsearchresults");
     // Link to manage search results should be visible if user have system or category level capability
     if ((can_edit_in_category() || !empty($usercatlist))) {
-        $aurl = new moodle_url('/course/management.php', $searchcriteria);
+        $aurl = new powereduc_url('/course/management.php', $searchcriteria);
         $searchform = $OUTPUT->single_button($aurl, get_string('managecourses'), 'get');
     } else {
         $searchform = $courserenderer->course_search_form($search);

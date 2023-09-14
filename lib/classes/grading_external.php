@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * External grading API
  *
  * @package    core_grading
- * @since      Moodle 2.5
+ * @since      PowerEduc 2.5
  * @copyright  2013 Paul Charsley
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -36,7 +36,7 @@ class core_grading_external extends external_api {
     /**
      * Describes the parameters for get_definitions
      * @return external_function_parameters
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_definitions_parameters() {
         return new external_function_parameters(
@@ -55,7 +55,7 @@ class core_grading_external extends external_api {
      * @param string $areaname
      * @param boolean $activeonly default is false, if true, only the active method is returned
      * @return array of areas with definitions for each requested course module id
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_definitions($cmids, $areaname, $activeonly = false) {
         global $DB, $CFG;
@@ -81,7 +81,7 @@ class core_grading_external extends external_api {
             }
             // Check if the user has managegradingforms capability.
             $isgradingmethodmanager = false;
-            if (has_capability('moodle/grade:managegradingforms', $context)) {
+            if (has_capability('powereduc/grade:managegradingforms', $context)) {
                 $isgradingmethodmanager = true;
             }
             $module = get_coursemodule_from_id('', $cmid, 0, false, MUST_EXIST);
@@ -117,7 +117,7 @@ class core_grading_external extends external_api {
                         $warnings[] = array(
                             'item' => 'module',
                             'itemid' => $cmid,
-                            'message' => 'Capability moodle/grade:managegradingforms required to view draft definitions',
+                            'message' => 'Capability powereduc/grade:managegradingforms required to view draft definitions',
                             'warningcode' => '1'
                         );
                         $isviewable = false;
@@ -129,7 +129,7 @@ class core_grading_external extends external_api {
                             $warnings[] = array(
                                 'item' => 'module',
                                 'itemid' => $cmid,
-                                'message' => 'Capability moodle/grade:managegradingforms required to preview definition',
+                                'message' => 'Capability powereduc/grade:managegradingforms required to preview definition',
                                 'warningcode' => '1'
                             );
                             $isviewable = false;
@@ -219,7 +219,7 @@ class core_grading_external extends external_api {
     /**
      * Creates a grading area
      * @return external_single_structure
-     * @since  Moodle 2.5
+     * @since  PowerEduc 2.5
      */
     private static function grading_area() {
         return new external_single_structure(
@@ -237,7 +237,7 @@ class core_grading_external extends external_api {
     /**
      * creates a grading form definition
      * @return external_single_structure
-     * @since  Moodle 2.5
+     * @since  PowerEduc 2.5
      */
     private static function definition() {
         global $CFG;
@@ -272,7 +272,7 @@ class core_grading_external extends external_api {
     /**
      * Describes the get_definitions return value
      * @return external_single_structure
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_definitions_returns() {
         return new external_single_structure(
@@ -285,7 +285,7 @@ class core_grading_external extends external_api {
 
     /**
      * @return array of available grading methods
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     private static function get_grading_methods() {
         $methods = array_keys(grading_manager::available_methods(false));
@@ -296,7 +296,7 @@ class core_grading_external extends external_api {
      * Describes the parameters for get_gradingform_instances
      *
      * @return external_function_parameters
-     * @since Moodle 2.6
+     * @since PowerEduc 2.6
      */
     public static function get_gradingform_instances_parameters() {
         return new external_function_parameters(
@@ -313,7 +313,7 @@ class core_grading_external extends external_api {
      * @param int $definitionid
      * @param int $since only return instances with timemodified >= since
      * @return array of grading instances with fillings for the definition id
-     * @since Moodle 2.6
+     * @since PowerEduc 2.6
      */
     public static function get_gradingform_instances($definitionid, $since = 0) {
         global $DB, $CFG;
@@ -332,7 +332,7 @@ class core_grading_external extends external_api {
             'contextid,component', MUST_EXIST);
 
         $context = context::instance_by_id($area->contextid);
-        require_capability('moodle/grade:managegradingforms', $context);
+        require_capability('powereduc/grade:managegradingforms', $context);
 
         $gradingmanager = get_grading_manager($definition->areaid);
         $controller = $gradingmanager->get_controller($definition->method);
@@ -401,7 +401,7 @@ class core_grading_external extends external_api {
      * Creates a grading instance
      *
      * @return external_single_structure
-     * @since  Moodle 2.6
+     * @since  PowerEduc 2.6
      */
     private static function grading_instance() {
         global $CFG;
@@ -433,7 +433,7 @@ class core_grading_external extends external_api {
      * Describes the get_gradingform_instances return value
      *
      * @return external_single_structure
-     * @since Moodle 2.6
+     * @since PowerEduc 2.6
      */
     public static function get_gradingform_instances_returns() {
         return new external_single_structure(
@@ -448,7 +448,7 @@ class core_grading_external extends external_api {
      * Describes the parameters for save_definitions
      *
      * @return external_function_parameters
-     * @since Moodle 2.8
+     * @since PowerEduc 2.8
      */
     public static function save_definitions_parameters() {
         return new external_function_parameters(
@@ -463,7 +463,7 @@ class core_grading_external extends external_api {
      * @param array $areas array of areas containing definitions to be saved
      * @return null
      * @throws invalid_parameter_exception
-     * @since Moodle 2.8
+     * @since PowerEduc 2.8
      */
     public static function save_definitions($areas) {
         $params = self::validate_parameters(self::save_definitions_parameters(),
@@ -472,7 +472,7 @@ class core_grading_external extends external_api {
         foreach ($params['areas'] as $area) {
 
             $context = context::instance_by_id($area['contextid']);
-            require_capability('moodle/grade:managegradingforms', $context);
+            require_capability('powereduc/grade:managegradingforms', $context);
             $gradingmanager = get_grading_manager($context, $area['component'], $area['areaname']);
             $gradingmanager->set_active_method($area['activemethod']);
             $availablemethods = $gradingmanager->get_available_methods();
@@ -492,7 +492,7 @@ class core_grading_external extends external_api {
      * Describes the return value for save_definitions
      *
      * @return external_single_structure
-     * @since Moodle 2.8
+     * @since PowerEduc 2.8
      */
     public static function save_definitions_returns() {
         return null;
@@ -504,7 +504,7 @@ class core_grading_external extends external_api {
      *
      * @param array $definition
      * @return stdClass definition object
-     * @since Moodle 2.8
+     * @since PowerEduc 2.8
      */
     private static function create_definition_object($definition) {
         global $CFG;
@@ -554,7 +554,7 @@ class core_grading_external extends external_api {
      * @param array $arraytoset the array to be processed
      * @param int $startnumber the starting number for the new id numbers
      * @return array with missing id keys added for all arrays
-     * @since Moodle 2.8
+     * @since PowerEduc 2.8
      */
     private static function set_new_ids($arraytoset, $startnumber) {
         $result = array();

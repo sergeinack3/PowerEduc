@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -56,8 +56,8 @@ class behat_admin extends behat_base {
             // Navigate straight to the search results fo rthis label.
             $this->execute('behat_general::i_visit', ["/admin/search.php?query=" . urlencode($label)]);
 
-            // Admin settings does not use the same DOM structure than other moodle forms
-            // but we also need to use lib/behat/form_field/* to deal with the different moodle form elements.
+            // Admin settings does not use the same DOM structure than other powereduc forms
+            // but we also need to use lib/behat/form_field/* to deal with the different powereduc form elements.
             $exception = new ElementNotFoundException($this->getSession(), '"' . $label . '" administration setting ');
 
             // The argument should be converted to an xpath literal.

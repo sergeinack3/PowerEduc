@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains subplugin info class for payment gateways.
  *
  * @package   core_payment
- * @copyright 2019 Shamim Rezaie <shamim@moodle.com>
+ * @copyright 2019 Shamim Rezaie <shamim@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,7 +29,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Payment gateway subplugin info class.
  *
- * @copyright 2019 Shamim Rezaie <shamim@moodle.com>
+ * @copyright 2019 Shamim Rezaie <shamim@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class paygw extends base {
@@ -58,7 +58,7 @@ class paygw extends base {
 
         $settings = null;
         if (file_exists($this->full_path('settings.php'))) {
-            $settings = new \admin_settingpage($section, $this->displayname, 'moodle/site:config', $this->is_enabled() === false);
+            $settings = new \admin_settingpage($section, $this->displayname, 'powereduc/site:config', $this->is_enabled() === false);
             include($this->full_path('settings.php')); // This may also set $settings to null.
         }
         if ($settings) {
@@ -67,7 +67,7 @@ class paygw extends base {
     }
 
     public static function get_manage_url() {
-        return new \moodle_url('/admin/settings.php', array('section' => 'managepaymentgateways'));
+        return new \powereduc_url('/admin/settings.php', array('section' => 'managepaymentgateways'));
     }
 
     public static function get_enabled_plugins() {

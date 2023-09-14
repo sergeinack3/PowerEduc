@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 
 namespace tool_admin_presets\local\action;
 
-use moodle_exception;
+use powereduc_exception;
 
 /**
  * This class extends base class and handles delete function.
@@ -41,9 +41,9 @@ class delete extends base {
             $deletetext = get_string('deletepreset', 'tool_admin_presets', $presetdata->name);
 
             $params = ['action' => $this->action, 'mode' => 'execute', 'id' => $this->id, 'sesskey' => sesskey()];
-            $confirmurl = new \moodle_url('/admin/tool/admin_presets/index.php', $params);
+            $confirmurl = new \powereduc_url('/admin/tool/admin_presets/index.php', $params);
 
-            $cancelurl = new \moodle_url('/admin/tool/admin_presets/index.php');
+            $cancelurl = new \powereduc_url('/admin/tool/admin_presets/index.php');
 
             // If the preset was applied add a warning text.
             if ($DB->get_records('adminpresets_app', ['adminpresetid' => $this->id])) {
@@ -56,7 +56,7 @@ class delete extends base {
             ];
             $this->outputs = $OUTPUT->confirm($deletetext, $confirmurl, $cancelurl, $displayoptions);
         } else {
-            throw new moodle_exception('errordeleting', 'core_adminpresets');
+            throw new powereduc_exception('errordeleting', 'core_adminpresets');
         }
     }
 
@@ -71,7 +71,7 @@ class delete extends base {
         // Trigger the as it is usually triggered after execute finishes.
         $this->log();
 
-        $url = new \moodle_url('/admin/tool/admin_presets/index.php');
+        $url = new \powereduc_url('/admin/tool/admin_presets/index.php');
         redirect($url);
     }
 }

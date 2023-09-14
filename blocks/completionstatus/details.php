@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -44,25 +44,25 @@ if ($userid) {
 require_login($course);
 
 if (!completion_can_view_data($user->id, $course)) {
-    throw new \moodle_exception('cannotviewreport');
+    throw new \powereduc_exception('cannotviewreport');
 }
 
 // Load completion data.
 $info = new completion_info($course);
 
-$returnurl = new moodle_url('/course/view.php', array('id' => $id));
+$returnurl = new powereduc_url('/course/view.php', array('id' => $id));
 
 // Don't display if completion isn't enabled.
 if (!$info->is_enabled()) {
-    throw new \moodle_exception('completionnotenabled', 'completion', $returnurl);
+    throw new \powereduc_exception('completionnotenabled', 'completion', $returnurl);
 }
 
 // Check this user is enroled.
 if (!$info->is_tracked_user($user->id)) {
     if ($USER->id == $user->id) {
-        throw new \moodle_exception('notenroled', 'completion', $returnurl);
+        throw new \powereduc_exception('notenroled', 'completion', $returnurl);
     } else {
-        throw new \moodle_exception('usernotenroled', 'completion', $returnurl);
+        throw new \powereduc_exception('usernotenroled', 'completion', $returnurl);
     }
 }
 
@@ -87,7 +87,7 @@ if ($USER->id != $user->id) {
     echo html_writer::start_tag('tr');
     echo html_writer::start_tag('td', array('colspan' => '2'));
     echo html_writer::tag('b', get_string('showinguser', 'completion') . ' ');
-    $url = new moodle_url('/user/view.php', array('id' => $user->id, 'course' => $course->id));
+    $url = new powereduc_url('/user/view.php', array('id' => $user->id, 'course' => $course->id));
     echo html_writer::link($url, fullname($user));
     echo html_writer::end_tag('td');
     echo html_writer::end_tag('tr');

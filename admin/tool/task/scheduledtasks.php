@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Scheduled task admin pages.
  *
  * @package    tool_task
- * @copyright  2013 Damyon Wiese <damyon@moodle.com>
+ * @copyright  2013 Damyon Wiese <damyon@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -38,7 +38,7 @@ $mform = null;
 if ($taskname) {
     $task = \core\task\manager::get_scheduled_task($taskname);
     if (!$task) {
-        throw new \moodle_exception('invaliddata');
+        throw new \powereduc_exception('invaliddata');
     }
 }
 
@@ -50,7 +50,7 @@ if ($action == 'edit') {
 
 if ($task) {
     $mform = new tool_task_edit_scheduled_task_form(null, $task);
-    $nexturl = new moodle_url($PAGE->url, ['lastchanged' => $taskname]);
+    $nexturl = new powereduc_url($PAGE->url, ['lastchanged' => $taskname]);
 }
 
 $PAGE->set_primary_active_tab('siteadminnode');

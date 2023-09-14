@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file contains the generic moodleform bridge for the backup user interface
+ * This file contains the generic powereducform bridge for the backup user interface
  * as well as the individual forms that relate to the different stages the user
  * interface can exist within.
  *
@@ -29,9 +29,9 @@ defined('POWEREDUC_INTERNAL') || die();
 require_once($CFG->libdir . '/formslib.php');
 
 /**
- * Base moodleform bridge
+ * Base powereducform bridge
  *
- * Ahhh the mighty moodleform bridge! Strong enough to take the weight of 682 full
+ * Ahhh the mighty powereducform bridge! Strong enough to take the weight of 682 full
  * grown african swallows all of whom have been carring coconuts for several days.
  * EWWWWW!!!!!!!!!!!!!!!!!!!!!!!!
  *
@@ -39,7 +39,7 @@ require_once($CFG->libdir . '/formslib.php');
  * @copyright 2010 Sam Hemelryk
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-abstract class base_moodleform extends moodleform {
+abstract class base_powereducform extends powereducform {
 
     /**
      * The stage this form belongs to
@@ -69,7 +69,7 @@ abstract class base_moodleform extends moodleform {
      * Creates the form
      *
      * @param base_ui_stage $uistage
-     * @param moodle_url|string $action
+     * @param powereduc_url|string $action
      * @param mixed $customdata
      * @param string $method get|post
      * @param string $target
@@ -123,7 +123,7 @@ abstract class base_moodleform extends moodleform {
     /**
      * Definition applied after the data is organised.. why's it here? because I want
      * to add elements on the fly.
-     * @global moodle_page $PAGE
+     * @global powereduc_page $PAGE
      */
     public function definition_after_data() {
         $buttonarray = array();
@@ -299,15 +299,15 @@ abstract class base_moodleform extends moodleform {
             $this->add_html_formatting($setting);
             switch ($setting->get_status()) {
                 case backup_setting::LOCKED_BY_PERMISSION:
-                    $icon = ' '.$OUTPUT->pix_icon('i/permissionlock', get_string('lockedbypermission', 'backup'), 'moodle',
+                    $icon = ' '.$OUTPUT->pix_icon('i/permissionlock', get_string('lockedbypermission', 'backup'), 'powereduc',
                             array('class' => 'smallicon lockedicon permissionlock'));
                     break;
                 case backup_setting::LOCKED_BY_CONFIG:
-                    $icon = ' '.$OUTPUT->pix_icon('i/configlock', get_string('lockedbyconfig', 'backup'), 'moodle',
+                    $icon = ' '.$OUTPUT->pix_icon('i/configlock', get_string('lockedbyconfig', 'backup'), 'powereduc',
                             array('class' => 'smallicon lockedicon configlock'));
                     break;
                 case backup_setting::LOCKED_BY_HIERARCHY:
-                    $icon = ' '.$OUTPUT->pix_icon('i/hierarchylock', get_string('lockedbyhierarchy', 'backup'), 'moodle',
+                    $icon = ' '.$OUTPUT->pix_icon('i/hierarchylock', get_string('lockedbyhierarchy', 'backup'), 'powereduc',
                             array('class' => 'smallicon lockedicon configlock'));
                     break;
                 default:
@@ -396,7 +396,7 @@ abstract class base_moodleform extends moodleform {
         $config->noLabel = get_string('confirmcancelno', 'backup');
         $config->closeButtonTitle = get_string('close', 'editor');
         $PAGE->requires->yui_module(
-            'moodle-backup-confirmcancel',
+            'powereduc-backup-confirmcancel',
             'M.core_backup.confirmcancel.watch_cancel_buttons',
             array($config)
         );
@@ -405,9 +405,9 @@ abstract class base_moodleform extends moodleform {
         $modinfo = get_fast_modinfo($COURSE);
         $modnames = array_map('strval', $modinfo->get_used_module_names(true));
         core_collator::asort($modnames);
-        $PAGE->requires->yui_module('moodle-backup-backupselectall', 'M.core_backup.backupselectall',
+        $PAGE->requires->yui_module('powereduc-backup-backupselectall', 'M.core_backup.backupselectall',
                 array($modnames));
-        $PAGE->requires->strings_for_js(array('select', 'all', 'none'), 'moodle');
+        $PAGE->requires->strings_for_js(array('select', 'all', 'none'), 'powereduc');
         $PAGE->requires->strings_for_js(array('showtypes', 'hidetypes'), 'backup');
 
         parent::display();

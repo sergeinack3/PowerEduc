@@ -1,7 +1,7 @@
 {
-    "name": "moodle-atto_backcolor-button",
+    "name": "powereduc-atto_backcolor-button",
     "builds": {
-        "moodle-atto_backcolor-button": {
+        "powereduc-atto_backcolor-button": {
             "jsfiles": [
                 "button.js"
             ]

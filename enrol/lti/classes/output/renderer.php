@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Renderer class for LTI enrolment
  *
  * @package    enrol_lti
- * @copyright  2016 John Okely <john@moodle.com>
+ * @copyright  2016 John Okely <john@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,7 +36,7 @@ use plugin_renderer_base;
  * Renderer class for LTI enrolment
  *
  * @package    enrol_lti
- * @copyright  2016 John Okely <john@moodle.com>
+ * @copyright  2016 John Okely <john@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class renderer extends plugin_renderer_base {
@@ -101,7 +101,7 @@ class renderer extends plugin_renderer_base {
     public function render_admin_setting_registered_platforms(array $registrations): string {
         $registrationscontext = [
             'registrations' => [],
-            'addurl' => (new \moodle_url('/enrol/lti/register_platform.php', ['action' => 'add']))->out(false),
+            'addurl' => (new \powereduc_url('/enrol/lti/register_platform.php', ['action' => 'add']))->out(false),
         ];
         $registrationscontext['hasregs'] = count($registrations) > 0;
 
@@ -120,13 +120,13 @@ class renderer extends plugin_renderer_base {
                 'countdeployments' => $countdeployments,
                 'isactive' => $reg->is_complete(),
                 'statusstring' => $status,
-                'tooldetailsurl' => (new \moodle_url('/enrol/lti/register_platform.php',
+                'tooldetailsurl' => (new \powereduc_url('/enrol/lti/register_platform.php',
                     ['action' => 'view', 'regid' => $reg->get_id(), 'tabselect' => 'tooldetails']))->out(false),
-                'platformdetailsurl' => (new \moodle_url('/enrol/lti/register_platform.php',
+                'platformdetailsurl' => (new \powereduc_url('/enrol/lti/register_platform.php',
                     ['action' => 'view', 'regid' => $reg->get_id(), 'tabselect' => 'platformdetails']))->out(false),
-                'deploymentsurl' => (new \moodle_url('/enrol/lti/register_platform.php',
+                'deploymentsurl' => (new \powereduc_url('/enrol/lti/register_platform.php',
                     ['action' => 'view', 'regid' => $reg->get_id(), 'tabselect' => 'tooldeployments']))->out(false),
-                'deleteurl' => (new \moodle_url('/enrol/lti/register_platform.php',
+                'deleteurl' => (new \powereduc_url('/enrol/lti/register_platform.php',
                     ['action' => 'delete', 'regid' => $reg->get_id()]))->out(false)
             ];
         }
@@ -161,7 +161,7 @@ class renderer extends plugin_renderer_base {
      * @param string $activetab a string identifying the tab to preselect when rendering.
      * @return bool|string
      * @throws \coding_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public function render_registration_view(int $registrationid, string $activetab = '') {
         global $CFG;
@@ -177,20 +177,20 @@ class renderer extends plugin_renderer_base {
             $deploymentscontext[] = [
                 'name' => $deployment->get_deploymentname(),
                 'deploymentid' => $deployment->get_deploymentid(),
-                'deleteurl' => (new \moodle_url(
+                'deleteurl' => (new \powereduc_url(
                     '/enrol/lti/manage_deployment.php',
                     ['action' => 'delete', 'id' => $deployment->get_id(), 'registrationid' => $registration->get_id()]
                 ))->out(false)
             ];
         }
 
-        $regurl = new \moodle_url('/enrol/lti/register.php', ['token' => $registration->get_uniqueid()]);
+        $regurl = new \powereduc_url('/enrol/lti/register.php', ['token' => $registration->get_uniqueid()]);
 
         $tcontext = [
             'tool_details_active' => $activetab == 'tooldetails',
             'platform_details_active' => $activetab == 'platformdetails',
             'tool_deployments_active' => $activetab == 'tooldeployments',
-            'back_url' => (new \moodle_url('/admin/settings.php', ['section' => 'enrolsettingslti_registrations']))->out(false),
+            'back_url' => (new \powereduc_url('/admin/settings.php', ['section' => 'enrolsettingslti_registrations']))->out(false),
             'dynamic_registration_info' => get_string(
                 'registrationurlinfomessage',
                 'enrol_lti',
@@ -251,12 +251,12 @@ class renderer extends plugin_renderer_base {
                     'value' => $registration->get_accesstokenurl() ?? '',
                 ]
             ],
-            'edit_platform_details_url' => (new \moodle_url('/enrol/lti/register_platform.php',
+            'edit_platform_details_url' => (new \powereduc_url('/enrol/lti/register_platform.php',
                 ['action' => 'edit', 'regid' => $registration->get_id()]))->out(false),
             'deployments_info' => get_string('deploymentsinfo', 'enrol_lti'),
             'has_deployments' => !empty($deploymentscontext),
             'tool_deployments' => $deploymentscontext,
-            'add_deployment_url' => (new \moodle_url('/enrol/lti/manage_deployment.php',
+            'add_deployment_url' => (new \powereduc_url('/enrol/lti/manage_deployment.php',
                 ['action' => 'add', 'registrationid' => $registrationid]))->out(false)
         ];
 

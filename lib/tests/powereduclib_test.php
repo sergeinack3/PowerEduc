@@ -1,33 +1,33 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
 use lang_string;
 
 /**
- * Unit tests for (some of) ../moodlelib.php.
+ * Unit tests for (some of) ../powereduclib.php.
  *
  * @package    core
  * @category   phpunit
  * @copyright  &copy; 2006 The Open University
  * @author     T.J.Hunt@open.ac.uk
- * @author     nicolas@moodle.com
+ * @author     nicolas@powereduc.com
  */
-class moodlelib_test extends \advanced_testcase {
+class powereduclib_test extends \advanced_testcase {
 
     /**
      * Define a local decimal separator.
@@ -199,13 +199,13 @@ class moodlelib_test extends \advanced_testcase {
         try {
             optional_param('username', 'default_user', null);
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         }
         try {
             @optional_param('username', 'default_user');
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         } catch (\Error $error) {
             // PHP 7.1 throws \Error even earlier.
@@ -214,7 +214,7 @@ class moodlelib_test extends \advanced_testcase {
         try {
             @optional_param('username');
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         } catch (\Error $error) {
             // PHP 7.1 throws \Error even earlier.
@@ -223,11 +223,11 @@ class moodlelib_test extends \advanced_testcase {
         try {
             optional_param('', 'default_user', PARAM_RAW);
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         }
 
-        // Make sure warning is displayed if array submitted - TODO: throw exception in Moodle 2.3.
+        // Make sure warning is displayed if array submitted - TODO: throw exception in PowerEduc 2.3.
         $_POST['username'] = array('a'=>'a');
         $this->assertSame($_POST['username'], optional_param('username', 'default_user', PARAM_RAW));
         $this->assertDebuggingCalled();
@@ -251,13 +251,13 @@ class moodlelib_test extends \advanced_testcase {
         try {
             optional_param_array('username', array('a'=>'default_user'), null);
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         }
         try {
             @optional_param_array('username', array('a'=>'default_user'));
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         } catch (\Error $error) {
             // PHP 7.1 throws \Error even earlier.
@@ -266,7 +266,7 @@ class moodlelib_test extends \advanced_testcase {
         try {
             @optional_param_array('username');
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         } catch (\Error $error) {
             // PHP 7.1 throws \Error even earlier.
@@ -275,7 +275,7 @@ class moodlelib_test extends \advanced_testcase {
         try {
             optional_param_array('', array('a'=>'default_user'), PARAM_RAW);
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         }
 
@@ -310,9 +310,9 @@ class moodlelib_test extends \advanced_testcase {
         unset($_GET['username']);
         try {
             $this->assertSame('default_user', required_param('username', PARAM_RAW));
-            $this->fail('moodle_exception expected');
-        } catch (\moodle_exception $ex) {
-            $this->assertInstanceOf('moodle_exception', $ex);
+            $this->fail('powereduc_exception expected');
+        } catch (\powereduc_exception $ex) {
+            $this->assertInstanceOf('powereduc_exception', $ex);
         }
 
         // Make sure exception is triggered when some params are missing, hide error notices here - new in 2.2.
@@ -320,7 +320,7 @@ class moodlelib_test extends \advanced_testcase {
         try {
             @required_param('username');
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         } catch (\Error $error) {
             // PHP 7.1 throws \Error even earlier.
@@ -329,17 +329,17 @@ class moodlelib_test extends \advanced_testcase {
         try {
             required_param('username', '');
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         }
         try {
             required_param('', PARAM_RAW);
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         }
 
-        // Make sure warning is displayed if array submitted - TODO: throw exception in Moodle 2.3.
+        // Make sure warning is displayed if array submitted - TODO: throw exception in PowerEduc 2.3.
         $_POST['username'] = array('a'=>'a');
         $this->assertSame($_POST['username'], required_param('username', PARAM_RAW));
         $this->assertDebuggingCalled();
@@ -360,13 +360,13 @@ class moodlelib_test extends \advanced_testcase {
         try {
             required_param_array('username', null);
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         }
         try {
             @required_param_array('username');
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         } catch (\Error $error) {
             // PHP 7.1 throws \Error.
@@ -375,7 +375,7 @@ class moodlelib_test extends \advanced_testcase {
         try {
             required_param_array('', PARAM_RAW);
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         }
 
@@ -384,7 +384,7 @@ class moodlelib_test extends \advanced_testcase {
             $_POST['username'] = array('a'=>array('b'=>'post_user'));
             required_param_array('username', PARAM_RAW);
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         }
 
@@ -392,9 +392,9 @@ class moodlelib_test extends \advanced_testcase {
         try {
             $_POST['username'] = 'post_user';
             required_param_array('username', PARAM_RAW);
-            $this->fail('moodle_exception expected');
-        } catch (\moodle_exception $ex) {
-            $this->assertInstanceOf('moodle_exception', $ex);
+            $this->fail('powereduc_exception expected');
+        } catch (\powereduc_exception $ex) {
+            $this->assertInstanceOf('powereduc_exception', $ex);
         }
 
         // Make sure array keys are sanitised.
@@ -408,7 +408,7 @@ class moodlelib_test extends \advanced_testcase {
         try {
             clean_param(array('x', 'y'), PARAM_RAW);
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         }
         try {
@@ -416,22 +416,22 @@ class moodlelib_test extends \advanced_testcase {
             $param->id = 1;
             clean_param($param, PARAM_RAW);
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         }
 
         // Require correct type.
         try {
             clean_param('x', 'xxxxxx');
-            $this->fail('moodle_exception expected');
-        } catch (\moodle_exception $ex) {
-            $this->assertInstanceOf('moodle_exception', $ex);
+            $this->fail('powereduc_exception expected');
+        } catch (\powereduc_exception $ex) {
+            $this->assertInstanceOf('powereduc_exception', $ex);
         }
         try {
             @clean_param('x');
-            $this->fail('moodle_exception expected');
-        } catch (\moodle_exception $ex) {
-            $this->assertInstanceOf('moodle_exception', $ex);
+            $this->fail('powereduc_exception expected');
+        } catch (\powereduc_exception $ex) {
+            $this->assertInstanceOf('powereduc_exception', $ex);
         } catch (\Error $error) {
             // PHP 7.1 throws \Error even earlier.
             $this->assertMatchesRegularExpression('/Too few arguments to function/', $error->getMessage());
@@ -446,15 +446,15 @@ class moodlelib_test extends \advanced_testcase {
         // Require correct type.
         try {
             clean_param_array(array('x'), 'xxxxxx');
-            $this->fail('moodle_exception expected');
-        } catch (\moodle_exception $ex) {
-            $this->assertInstanceOf('moodle_exception', $ex);
+            $this->fail('powereduc_exception expected');
+        } catch (\powereduc_exception $ex) {
+            $this->assertInstanceOf('powereduc_exception', $ex);
         }
         try {
             @clean_param_array(array('x'));
-            $this->fail('moodle_exception expected');
-        } catch (\moodle_exception $ex) {
-            $this->assertInstanceOf('moodle_exception', $ex);
+            $this->fail('powereduc_exception expected');
+        } catch (\powereduc_exception $ex) {
+            $this->assertInstanceOf('powereduc_exception', $ex);
         } catch (\Error $error) {
             // PHP 7.1 throws \Error even earlier.
             $this->assertMatchesRegularExpression('/Too few arguments to function/', $error->getMessage());
@@ -463,7 +463,7 @@ class moodlelib_test extends \advanced_testcase {
         try {
             clean_param_array(array('x', array('y')), PARAM_RAW);
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         }
 
@@ -665,9 +665,9 @@ class moodlelib_test extends \advanced_testcase {
         $this->assertSame('', clean_param('rtmp://example.com/livestream', PARAM_URL));
         $this->assertSame('', clean_param('rtmp://example.com/live&foo', PARAM_URL));
         $this->assertSame('', clean_param('rtmp://example.com/fms&mp4:path/to/file.mp4', PARAM_URL));
-        $this->assertSame('', clean_param('mailto:support@moodle.org', PARAM_URL));
-        $this->assertSame('', clean_param('mailto:support@moodle.org?subject=Hello%20Moodle', PARAM_URL));
-        $this->assertSame('', clean_param('mailto:support@moodle.org?subject=Hello%20Moodle&cc=feedback@moodle.org', PARAM_URL));
+        $this->assertSame('', clean_param('mailto:support@powereduc.org', PARAM_URL));
+        $this->assertSame('', clean_param('mailto:support@powereduc.org?subject=Hello%20PowerEduc', PARAM_URL));
+        $this->assertSame('', clean_param('mailto:support@powereduc.org?subject=Hello%20PowerEduc&cc=feedback@powereduc.org', PARAM_URL));
         $this->assertSame('', clean_param(null, PARAM_URL));
     }
 
@@ -892,7 +892,7 @@ class moodlelib_test extends \advanced_testcase {
         try {
             $param = validate_param('11a', PARAM_INT);
             $this->fail('invalid_parameter_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('invalid_parameter_exception', $ex);
         }
 
@@ -902,7 +902,7 @@ class moodlelib_test extends \advanced_testcase {
         try {
             $param = validate_param(null, PARAM_INT, false);
             $this->fail('invalid_parameter_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('invalid_parameter_exception', $ex);
         }
 
@@ -912,13 +912,13 @@ class moodlelib_test extends \advanced_testcase {
         try {
             $param = validate_param(array(), PARAM_INT);
             $this->fail('invalid_parameter_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('invalid_parameter_exception', $ex);
         }
         try {
             $param = validate_param(new \stdClass, PARAM_INT);
             $this->fail('invalid_parameter_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('invalid_parameter_exception', $ex);
         }
 
@@ -941,31 +941,31 @@ class moodlelib_test extends \advanced_testcase {
         try {
             $param = validate_param('1,2', PARAM_FLOAT);
             $this->fail('invalid_parameter_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('invalid_parameter_exception', $ex);
         }
         try {
             $param = validate_param('', PARAM_FLOAT);
             $this->fail('invalid_parameter_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('invalid_parameter_exception', $ex);
         }
         try {
             $param = validate_param('.', PARAM_FLOAT);
             $this->fail('invalid_parameter_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('invalid_parameter_exception', $ex);
         }
         try {
             $param = validate_param('e10', PARAM_FLOAT);
             $this->fail('invalid_parameter_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('invalid_parameter_exception', $ex);
         }
         try {
             $param = validate_param('abc', PARAM_FLOAT);
             $this->fail('invalid_parameter_exception expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('invalid_parameter_exception', $ex);
         }
     }
@@ -1495,7 +1495,7 @@ class moodlelib_test extends \advanced_testcase {
         try {
             set_user_preference('_test_long_user_preference', $longvalue);
             $this->fail('Exception expected - longer than 1333 chars not allowed as preference value');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         }
 
@@ -1503,37 +1503,37 @@ class moodlelib_test extends \advanced_testcase {
         try {
             set_user_preference('_test_user_preferences_pref', array());
             $this->fail('Exception expected - array not valid preference value');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         }
         try {
             set_user_preference('_test_user_preferences_pref', new \stdClass);
             $this->fail('Exception expected - class not valid preference value');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         }
         try {
             set_user_preference('_test_user_preferences_pref', 1, array('xx' => 1));
             $this->fail('Exception expected - user instance expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         }
         try {
             set_user_preference('_test_user_preferences_pref', 1, 'abc');
             $this->fail('Exception expected - user instance expected');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         }
         try {
             set_user_preference('', 1);
             $this->fail('Exception expected - invalid name accepted');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         }
         try {
             set_user_preference('1', 1);
             $this->fail('Exception expected - invalid name accepted');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         }
     }
@@ -1561,7 +1561,7 @@ class moodlelib_test extends \advanced_testcase {
     /**
      * Test essential features implementation of {@link get_extra_user_fields()} as the admin user with all capabilities.
      *
-     * @deprecated since Moodle 3.11 MDL-45242
+     * @deprecated since PowerEduc 3.11 MDL-45242
      */
     public function test_get_extra_user_fields_essentials() {
         global $CFG, $USER, $DB;
@@ -1601,7 +1601,7 @@ class moodlelib_test extends \advanced_testcase {
      * Prepare environment for couple of tests related to permission checks in {@link get_extra_user_fields()}.
      *
      * @return stdClass
-     * @deprecated since Moodle 3.11 MDL-45242
+     * @deprecated since PowerEduc 3.11 MDL-45242
      */
     protected function environment_for_get_extra_user_fields_tests() {
         global $CFG, $DB;
@@ -1632,7 +1632,7 @@ class moodlelib_test extends \advanced_testcase {
     /**
      * No identity fields shown to student user (no permission to view identity fields).
      *
-     * @deprecated since Moodle 3.11 MDL-45242
+     * @deprecated since PowerEduc 3.11 MDL-45242
      */
     public function test_get_extra_user_fields_no_access() {
 
@@ -1649,7 +1649,7 @@ class moodlelib_test extends \advanced_testcase {
     /**
      * Teacher can see students' identity fields only within the course.
      *
-     * @deprecated since Moodle 3.11 MDL-45242
+     * @deprecated since PowerEduc 3.11 MDL-45242
      */
     public function test_get_extra_user_fields_course_only_access() {
 
@@ -1666,7 +1666,7 @@ class moodlelib_test extends \advanced_testcase {
     /**
      * Teacher can be prevented from seeing students' identity fields even within the course.
      *
-     * @deprecated since Moodle 3.11 MDL-45242
+     * @deprecated since PowerEduc 3.11 MDL-45242
      */
     public function test_get_extra_user_fields_course_prevented_access() {
 
@@ -1674,7 +1674,7 @@ class moodlelib_test extends \advanced_testcase {
         $env = $this->environment_for_get_extra_user_fields_tests();
         $this->setUser($env->teacher);
 
-        assign_capability('moodle/course:viewhiddenuserfields', CAP_PREVENT, $env->teacherrole->id, $env->coursecontext->id);
+        assign_capability('powereduc/course:viewhiddenuserfields', CAP_PREVENT, $env->teacherrole->id, $env->coursecontext->id);
         $this->assertEquals(array('idnumber'), get_extra_user_fields($env->coursecontext));
 
         $this->assertDebuggingCalledCount(1);
@@ -1683,7 +1683,7 @@ class moodlelib_test extends \advanced_testcase {
     /**
      * Manager can see students' identity fields anywhere.
      *
-     * @deprecated since Moodle 3.11 MDL-45242
+     * @deprecated since PowerEduc 3.11 MDL-45242
      */
     public function test_get_extra_user_fields_anywhere_access() {
 
@@ -1700,7 +1700,7 @@ class moodlelib_test extends \advanced_testcase {
     /**
      * Manager can be prevented from seeing hidden fields outside the course.
      *
-     * @deprecated since Moodle 3.11 MDL-45242
+     * @deprecated since PowerEduc 3.11 MDL-45242
      */
     public function test_get_extra_user_fields_schismatic_access() {
 
@@ -1708,7 +1708,7 @@ class moodlelib_test extends \advanced_testcase {
         $env = $this->environment_for_get_extra_user_fields_tests();
         $this->setUser($env->manager);
 
-        assign_capability('moodle/user:viewhiddendetails', CAP_PREVENT, $env->managerrole->id, SYSCONTEXTID, true);
+        assign_capability('powereduc/user:viewhiddendetails', CAP_PREVENT, $env->managerrole->id, SYSCONTEXTID, true);
         $this->assertEquals(array('idnumber'), get_extra_user_fields(\context_system::instance()));
         // Note that inside the course, the manager can still see the hidden identifiers as this is currently
         // controlled by a separate capability for legacy reasons.
@@ -1720,7 +1720,7 @@ class moodlelib_test extends \advanced_testcase {
     /**
      * Two capabilities must be currently set to prevent manager from seeing hidden fields.
      *
-     * @deprecated since Moodle 3.11 MDL-45242
+     * @deprecated since PowerEduc 3.11 MDL-45242
      */
     public function test_get_extra_user_fields_hard_to_prevent_access() {
 
@@ -1728,8 +1728,8 @@ class moodlelib_test extends \advanced_testcase {
         $env = $this->environment_for_get_extra_user_fields_tests();
         $this->setUser($env->manager);
 
-        assign_capability('moodle/user:viewhiddendetails', CAP_PREVENT, $env->managerrole->id, SYSCONTEXTID, true);
-        assign_capability('moodle/course:viewhiddenuserfields', CAP_PREVENT, $env->managerrole->id, SYSCONTEXTID, true);
+        assign_capability('powereduc/user:viewhiddendetails', CAP_PREVENT, $env->managerrole->id, SYSCONTEXTID, true);
+        assign_capability('powereduc/course:viewhiddenuserfields', CAP_PREVENT, $env->managerrole->id, SYSCONTEXTID, true);
 
         $this->assertEquals(array('idnumber'), get_extra_user_fields(\context_system::instance()));
         $this->assertEquals(array('idnumber'), get_extra_user_fields($env->coursecontext));
@@ -1740,7 +1740,7 @@ class moodlelib_test extends \advanced_testcase {
     /**
      * Tests get_extra_user_fields_sql.
      *
-     * @deprecated since Moodle 3.11 MDL-45242
+     * @deprecated since PowerEduc 3.11 MDL-45242
      */
     public function test_get_extra_user_fields_sql() {
         global $CFG, $USER, $DB;
@@ -1784,13 +1784,13 @@ class moodlelib_test extends \advanced_testcase {
      *
      * This method tests some special TZ/DST combinations that were fixed
      * by MDL-38999. The tests are done by comparing the results of the
-     * output using Moodle TZ/DST support and PHP native one.
+     * output using PowerEduc TZ/DST support and PHP native one.
      *
      * Note: If you don't trust PHP TZ/DST support, can verify the
      * harcoded expectations below with:
      * http://www.tools4noobs.com/online_tools/unix_timestamp_to_datetime/
      */
-    public function test_some_moodle_special_dst() {
+    public function test_some_powereduc_special_dst() {
         $stamp = 1365386400; // 2013/04/08 02:00:00 GMT/UTC.
 
         // In Europe/Tallinn it was 2013/04/08 05:00:00.
@@ -1798,18 +1798,18 @@ class moodlelib_test extends \advanced_testcase {
         $phpdt = \DateTime::createFromFormat('U', $stamp, new \DateTimeZone('UTC'));
         $phpdt->setTimezone(new \DateTimeZone('Europe/Tallinn'));
         $phpres = $phpdt->format('Y/m/d H:i:s'); // PHP result.
-        $moodleres = userdate($stamp, '%Y/%m/%d %H:%M:%S', 'Europe/Tallinn', false); // Moodle result.
+        $powereducres = userdate($stamp, '%Y/%m/%d %H:%M:%S', 'Europe/Tallinn', false); // PowerEduc result.
         $this->assertSame($expectation, $phpres);
-        $this->assertSame($expectation, $moodleres);
+        $this->assertSame($expectation, $powereducres);
 
         // In St. Johns it was 2013/04/07 23:30:00.
         $expectation = '2013/04/07 23:30:00';
         $phpdt = \DateTime::createFromFormat('U', $stamp, new \DateTimeZone('UTC'));
         $phpdt->setTimezone(new \DateTimeZone('America/St_Johns'));
         $phpres = $phpdt->format('Y/m/d H:i:s'); // PHP result.
-        $moodleres = userdate($stamp, '%Y/%m/%d %H:%M:%S', 'America/St_Johns', false); // Moodle result.
+        $powereducres = userdate($stamp, '%Y/%m/%d %H:%M:%S', 'America/St_Johns', false); // PowerEduc result.
         $this->assertSame($expectation, $phpres);
-        $this->assertSame($expectation, $moodleres);
+        $this->assertSame($expectation, $powereducres);
 
         $stamp = 1383876000; // 2013/11/08 02:00:00 GMT/UTC.
 
@@ -1818,18 +1818,18 @@ class moodlelib_test extends \advanced_testcase {
         $phpdt = \DateTime::createFromFormat('U', $stamp, new \DateTimeZone('UTC'));
         $phpdt->setTimezone(new \DateTimeZone('Europe/Tallinn'));
         $phpres = $phpdt->format('Y/m/d H:i:s'); // PHP result.
-        $moodleres = userdate($stamp, '%Y/%m/%d %H:%M:%S', 'Europe/Tallinn', false); // Moodle result.
+        $powereducres = userdate($stamp, '%Y/%m/%d %H:%M:%S', 'Europe/Tallinn', false); // PowerEduc result.
         $this->assertSame($expectation, $phpres);
-        $this->assertSame($expectation, $moodleres);
+        $this->assertSame($expectation, $powereducres);
 
         // In St. Johns it was 2013/11/07 22:30:00.
         $expectation = '2013/11/07 22:30:00';
         $phpdt = \DateTime::createFromFormat('U', $stamp, new \DateTimeZone('UTC'));
         $phpdt->setTimezone(new \DateTimeZone('America/St_Johns'));
         $phpres = $phpdt->format('Y/m/d H:i:s'); // PHP result.
-        $moodleres = userdate($stamp, '%Y/%m/%d %H:%M:%S', 'America/St_Johns', false); // Moodle result.
+        $powereducres = userdate($stamp, '%Y/%m/%d %H:%M:%S', 'America/St_Johns', false); // PowerEduc result.
         $this->assertSame($expectation, $phpres);
-        $this->assertSame($expectation, $moodleres);
+        $this->assertSame($expectation, $powereducres);
     }
 
     public function test_userdate() {
@@ -1948,7 +1948,7 @@ class moodlelib_test extends \advanced_testcase {
     }
 
     /**
-     * Make sure the DST changes happen at the right time in Moodle.
+     * Make sure the DST changes happen at the right time in PowerEduc.
      */
     public function test_dst_changes() {
         // DST switching in Prague.
@@ -2193,7 +2193,7 @@ class moodlelib_test extends \advanced_testcase {
         $this->assertIsString($yes);
         $this->assertSame($yesexpected, $yes);
 
-        $yes = get_string('yes', 'moodle');
+        $yes = get_string('yes', 'powereduc');
         $this->assertIsString($yes);
         $this->assertSame($yesexpected, $yes);
 
@@ -2224,7 +2224,7 @@ class moodlelib_test extends \advanced_testcase {
         $this->assertSame($yesexpected, (string)$yes);
 
         // Test lazy loading (returning lang_string) correctly interpolates 0 being used as args.
-        $numdays = get_string('numdays', 'moodle', 0, true);
+        $numdays = get_string('numdays', 'powereduc', 0, true);
         $this->assertInstanceOf(lang_string::class, $numdays);
         $this->assertSame('0 days', (string) $numdays);
 
@@ -2329,7 +2329,7 @@ class moodlelib_test extends \advanced_testcase {
         $expected1 = <<<EOF
 lang_string::__set_state(array(
    'identifier' => 'no',
-   'component' => 'moodle',
+   'component' => 'powereduc',
    'a' => NULL,
    'lang' => NULL,
    'string' => NULL,
@@ -2343,7 +2343,7 @@ EOF;
         // Now execute the code that was returned - it should produce a correct string.
         $str = lang_string::__set_state(array(
             'identifier' => 'no',
-            'component' => 'moodle',
+            'component' => 'powereduc',
             'a' => NULL,
             'lang' => NULL,
             'string' => NULL,
@@ -2547,14 +2547,14 @@ EOF;
         try {
             delete_user($record);
             $this->fail('Expecting exception for invalid delete_user() $user parameter');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         }
         $record->id = 1;
         try {
             delete_user($record);
             $this->fail('Expecting exception for invalid delete_user() $user parameter');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertInstanceOf('coding_exception', $ex);
         }
 
@@ -3177,7 +3177,7 @@ EOF;
     /**
      * Tests the get_all_user_name_fields() deprecated function.
      *
-     * @deprecated since Moodle 3.11 MDL-45242
+     * @deprecated since PowerEduc 3.11 MDL-45242
      */
     public function test_get_all_user_name_fields() {
         $this->resetAfterTest();
@@ -3508,7 +3508,7 @@ EOF;
         $user1 = $this->getDataGenerator()->create_user(array('maildisplay' => 1, 'mailformat' => 0));
         $user2 = $this->getDataGenerator()->create_user(array('maildisplay' => 1, 'mailformat' => 1));
         $user3 = $this->getDataGenerator()->create_user(array('maildisplay' => 0));
-        set_config('allowedemaildomains', "example.com\r\nmoodle.org");
+        set_config('allowedemaildomains', "example.com\r\npowereduc.org");
 
         $subject = 'subject';
         $messagetext = 'message text';
@@ -3773,18 +3773,18 @@ EOF;
             ],
             "Custom external confirmation url" => [
                 "username" => "many_-.@characters@_@-..-..",
-                "confirmationurl" => "http://moodle.org/custom/external/url.php",
-                "expected" => "http://moodle.org/custom/external/url.php?data=/many_-%2E%40characters%40_%40-%2E%2E-%2E%2E"
+                "confirmationurl" => "http://powereduc.org/custom/external/url.php",
+                "expected" => "http://powereduc.org/custom/external/url.php?data=/many_-%2E%40characters%40_%40-%2E%2E-%2E%2E"
             ],
             "Custom external confirmation url with parameters" => [
                 "username" => "many_-.@characters@_@-..-..",
-                "confirmationurl" => "http://moodle.org/ext.php?with=some&param=eters",
-                "expected" => "http://moodle.org/ext.php?with=some&param=eters&data=/many_-%2E%40characters%40_%40-%2E%2E-%2E%2E"
+                "confirmationurl" => "http://powereduc.org/ext.php?with=some&param=eters",
+                "expected" => "http://powereduc.org/ext.php?with=some&param=eters&data=/many_-%2E%40characters%40_%40-%2E%2E-%2E%2E"
             ],
             "Custom external confirmation url with parameters" => [
                 "username" => "many_-.@characters@_@-..-..",
-                "confirmationurl" => "http://moodle.org/ext.php?with=some&data=test",
-                "expected" => "http://moodle.org/ext.php?with=some&data=/many_-%2E%40characters%40_%40-%2E%2E-%2E%2E"
+                "confirmationurl" => "http://powereduc.org/ext.php?with=some&data=test",
+                "expected" => "http://powereduc.org/ext.php?with=some&data=/many_-%2E%40characters%40_%40-%2E%2E-%2E%2E"
             ],
         ];
     }
@@ -4363,41 +4363,41 @@ EOF;
             ],
             // Test from email is not in allowed domain.
             // Test that from display is set to show no one.
-            [   'email' => 'fromuser@moodle.com',
+            [   'email' => 'fromuser@powereduc.com',
                 'display' => \core_user::MAILDISPLAY_HIDE,
                 'samecourse' => false,
                 'config' => "example.com\r\ntest.com",
                 'result' => false
             ],
             // Test that from display is set to course members only (course member).
-            [   'email' => 'fromuser@moodle.com',
+            [   'email' => 'fromuser@powereduc.com',
                 'display' => \core_user::MAILDISPLAY_COURSE_MEMBERS_ONLY,
                 'samecourse' => true,
                 'config' => "example.com\r\ntest.com",
                 'result' => false
             ],
             // Test that from display is set to course members only (Non course member.
-            [   'email' => 'fromuser@moodle.com',
+            [   'email' => 'fromuser@powereduc.com',
                 'display' => \core_user::MAILDISPLAY_COURSE_MEMBERS_ONLY,
                 'samecourse' => false,
                 'config' => "example.com\r\ntest.com",
                 'result' => false
             ],
             // Test that from display is set to show everyone.
-            [   'email' => 'fromuser@moodle.com',
+            [   'email' => 'fromuser@powereduc.com',
                 'display' => \core_user::MAILDISPLAY_EVERYONE,
                 'samecourse' => false,
                 'config' => "example.com\r\ntest.com",
                 'result' => false
             ],
             // Test a few erroneous config value and confirm failure.
-            [   'email' => 'fromuser@moodle.com',
+            [   'email' => 'fromuser@powereduc.com',
                 'display' => \core_user::MAILDISPLAY_EVERYONE,
                 'samecourse' => false,
                 'config' => "\r\n   \r\n",
                 'result' => false
             ],
-            [   'email' => 'fromuser@moodle.com',
+            [   'email' => 'fromuser@powereduc.com',
                 'display' => \core_user::MAILDISPLAY_EVERYONE,
                 'samecourse' => false,
                 'config' => " \n   \n \n ",
@@ -4415,7 +4415,7 @@ EOF;
 
         $data = (object)[
             'id' => 42,
-            'email' => 'my.email+from_moodle@example.com',
+            'email' => 'my.email+from_powereduc@example.com',
         ];
 
         $modargs = 'B'.base64_encode(pack('V', $data->id)).substr(md5($data->email), 0, 16);
@@ -4495,7 +4495,7 @@ EOF;
                 'result' => false
             ],
             // Test from email is not in allowed domain.
-            [   'email' => 'fromuser@moodle.com',
+            [   'email' => 'fromuser@powereduc.com',
                 'config' => 'example.com test.com',
                 'result' => get_string('emailonlyallowed', '', 'example.com test.com')
             ],
@@ -4574,7 +4574,7 @@ EOF;
                 'result' => get_string('emailnotallowed', '', '.example.com test.com')
             ],
             // Test from email is not in denied domain.
-            [   'email' => 'fromuser@moodle.com',
+            [   'email' => 'fromuser@powereduc.com',
                 'config' => 'example.com test.com',
                 'result' => false
             ],
@@ -4801,7 +4801,7 @@ EOF;
             ],
             'static_method_of_object' => [
                 [$this, 'my_foobar_method'],
-                'core\moodlelib_test::my_foobar_method',
+                'core\powereduclib_test::my_foobar_method',
             ],
             'method_of_object' => [
                 [new lang_string('parentlanguage', 'core_langconfig'), 'my_foobar_method'],
@@ -4819,7 +4819,7 @@ EOF;
     }
 
     /**
-     * Data provider for \core_moodlelib_testcase::test_get_complete_user_data().
+     * Data provider for \core_powereduclib_testcase::test_get_complete_user_data().
      *
      * @return array
      */

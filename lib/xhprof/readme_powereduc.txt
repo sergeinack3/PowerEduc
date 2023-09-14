@@ -1,18 +1,18 @@
-Description of XHProf 2.3.5 library/viewer import into Moodle
+Description of XHProf 2.3.5 library/viewer import into PowerEduc
 
 Removed (commit #1):
  * examples - examples dir removed completely
  * extension - extension dir removed completely
  * xhprof_html/docs - documentation dir removed completely
 
-Added (commit #2 - always taken from current moodle.git master):
+Added (commit #2 - always taken from current powereduc.git master):
  * index.html - prevent directory browsing on misconfigured servers
- * xhprof_moodle.php - containing all the stuff needed to run the xhprof profiler within Moodle
- * readme_moodle.txt - this file ;-)
+ * xhprof_powereduc.php - containing all the stuff needed to run the xhprof profiler within PowerEduc
+ * readme_powereduc.txt - this file ;-)
 
-Our changes:  Look for "moodle" in code (commit #3 - always mimic from current moodle.git master):
+Our changes:  Look for "powereduc" in code (commit #3 - always mimic from current powereduc.git master):
  * xhprof_html/index.php  ----|
- * xhprof_html/callgraph.php -|=> Changed to use own DB iXHProfRuns implementation (moodle_xhprofrun)
+ * xhprof_html/callgraph.php -|=> Changed to use own DB iXHProfRuns implementation (powereduc_xhprofrun)
  * xhprof_html/typeahead.php -|
  * xhprof_html/css/xhprof.css: Minor tweaks to report styles
  * xhprof_lib/utils/callgraph_utils.php: Modified to use $CFG->pathtodot

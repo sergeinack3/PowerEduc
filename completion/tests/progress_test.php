@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ use completion_completion;
  *
  * @package core_completion
  * @category test
- * @copyright 2017 Mark Nelson <markn@moodle.com>
+ * @copyright 2017 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class progress_test extends \advanced_testcase {
@@ -276,7 +276,7 @@ class progress_test extends \advanced_testcase {
         $this->assertEquals('100', \core_completion\progress::get_course_progress_percentage($course, $user->id));
 
         // Now make the user's role to be not tracked for completion.
-        unassign_capability('moodle/course:isincompletionreports', $studentrole->id);
+        unassign_capability('powereduc/course:isincompletionreports', $studentrole->id);
 
         // Check that the result is null now.
         $this->assertNull(\core_completion\progress::get_course_progress_percentage($course, $user->id));

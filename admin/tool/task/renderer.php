@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -83,7 +83,7 @@ class tool_task_renderer extends plugin_renderer_base {
 
             $customised = $task->is_customised() ? $no : $yes;
             if (empty($CFG->preventscheduledtaskchanges) && !$task->is_overridden()) {
-                $configureurl = new moodle_url('/admin/tool/task/scheduledtasks.php',
+                $configureurl = new powereduc_url('/admin/tool/task/scheduledtasks.php',
                         ['action' => 'edit', 'task' => $classname]);
                 $editlink = $this->output->action_icon($configureurl, new pix_icon('t/edit',
                         get_string('edittaskschedule', 'tool_task', $task->get_name())));
@@ -114,7 +114,7 @@ class tool_task_renderer extends plugin_renderer_base {
             $canrunthistask = $canruntasks && $task->can_run();
             if ($canrunthistask) {
                 $runnow = html_writer::div(html_writer::link(
-                        new moodle_url('/admin/tool/task/schedule_task.php',
+                        new powereduc_url('/admin/tool/task/schedule_task.php',
                             ['task' => $classname]),
                         get_string('runnow', 'tool_task')), 'task-runnow');
             }
@@ -122,7 +122,7 @@ class tool_task_renderer extends plugin_renderer_base {
             $faildelaycell = new html_table_cell($task->get_fail_delay());
             if ($task->get_fail_delay()) {
                 $faildelaycell->text .= html_writer::div(html_writer::link(
-                        new moodle_url('/admin/tool/task/clear_fail_delay.php',
+                        new powereduc_url('/admin/tool/task/clear_fail_delay.php',
                                 ['task' => $classname, 'sesskey' => sesskey()]),
                         get_string('clear')), 'task-clearfaildelay');
                 $faildelaycell->attributes['class'] = 'table-danger';
@@ -266,7 +266,7 @@ class tool_task_renderer extends plugin_renderer_base {
      * Displays a warning on the page if cron is disabled.
      *
      * @return string HTML code for information about cron being disabled
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function cron_disabled(): string {
         return $this->output->notification(get_string('crondisabled', 'tool_task'), 'warning');
@@ -279,7 +279,7 @@ class tool_task_renderer extends plugin_renderer_base {
      * @return string HTML code
      */
     public function link_back($taskclassname = '') {
-        $url = new moodle_url('/admin/tool/task/scheduledtasks.php');
+        $url = new powereduc_url('/admin/tool/task/scheduledtasks.php');
         if ($taskclassname) {
             $url->param('lastchanged', $taskclassname);
         }

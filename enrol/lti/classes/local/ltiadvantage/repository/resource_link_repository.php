@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -65,15 +65,15 @@ class resource_link_repository {
                 $scopes[] = $record->scorescope;
             }
             $resourcelink->add_grade_service(
-                $record->lineitemsservice ? new \moodle_url($record->lineitemsservice) : null,
-                $record->lineitemservice ? new \moodle_url($record->lineitemservice) : null,
+                $record->lineitemsservice ? new \powereduc_url($record->lineitemsservice) : null,
+                $record->lineitemservice ? new \powereduc_url($record->lineitemservice) : null,
                 $scopes
             );
         }
 
         if ($record->contextmembershipsurl) {
             $resourcelink->add_names_and_roles_service(
-                new \moodle_url($record->contextmembershipsurl),
+                new \powereduc_url($record->contextmembershipsurl),
                 json_decode($record->nrpsserviceversions)
             );
         }

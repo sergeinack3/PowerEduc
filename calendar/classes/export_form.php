@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ require_once($CFG->dirroot.'/lib/formslib.php');
  * @copyright 2014 Brian Barnes
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class core_calendar_export_form extends moodleform {
+class core_calendar_export_form extends powereducform {
 
     /**
      * The export form definition

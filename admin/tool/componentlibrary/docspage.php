@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  * Serves the Hugo docs html pages.
  *
  * @package    tool_componentlibrary
- * @copyright  2021 Bas Brands <bas@moodle.com>
+ * @copyright  2021 Bas Brands <bas@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,7 +28,7 @@ require_once(__DIR__ . '/../../../config.php');
 require_once($CFG->dirroot . '/lib/filelib.php');
 
 require_login();
-require_capability('moodle/site:configview', context_system::instance());
+require_capability('powereduc/site:configview', context_system::instance());
 
 if (empty($relativepath)) {
     $relativepath = get_file_argument();
@@ -47,7 +47,7 @@ $docspage = '';
 $validroots = [
     'bootstrap',
     'library',
-    'moodle',
+    'powereduc',
 ];
 
 if (in_array($docs, $validroots)) {
@@ -65,7 +65,7 @@ if (in_array($docs, $validroots)) {
     );
 }
 
-$thispageurl = new moodle_url('/admin/tool/componentlibrary/docspage.php');
+$thispageurl = new powereduc_url('/admin/tool/componentlibrary/docspage.php');
 
 $PAGE->set_pagelayout('base');
 $PAGE->set_url($thispageurl);
@@ -74,7 +74,7 @@ $title = get_string('pluginname', 'tool_componentlibrary');
 $PAGE->set_heading($title);
 $PAGE->set_title($title);
 $PAGE->requires->css($cssfile);
-$jsonfile = new moodle_url('/admin/tool/componentlibrary/hugo/site/data/my-index.json');
+$jsonfile = new powereduc_url('/admin/tool/componentlibrary/hugo/site/data/my-index.json');
 $PAGE->requires->js_call_amd('tool_componentlibrary/loader', 'init', ['jsonfile' => $jsonfile->out()]);
 $PAGE->set_secondary_navigation(false);
 
@@ -83,17 +83,17 @@ if (get_config('core', 'allowthemechangeonurl')) {
     $themes = array_keys($themes);
     $menuthemes = [];
     foreach ($themes as $themename) {
-        $actionurl = new moodle_url($thispageurl . $relativepath, ['theme' => $themename]);
+        $actionurl = new powereduc_url($thispageurl . $relativepath, ['theme' => $themename]);
         $menuthemes[] = new action_menu_link_secondary($actionurl, null, $themename);
     }
     $thememenu = new action_menu($menuthemes);
     $thememenu->set_menu_trigger($PAGE->theme->name, 'nav-link');
-    $thememenu->set_owner_selector('change-moodle-theme');
+    $thememenu->set_owner_selector('change-powereduc-theme');
     $PAGE->set_headingmenu($OUTPUT->render($thememenu));
 }
 
 if (!file_exists($docspage)) {
-    $firstpage = new moodle_url('/admin/tool/componentlibrary/docspage.php/library/getting-started/');
+    $firstpage = new powereduc_url('/admin/tool/componentlibrary/docspage.php/library/getting-started/');
     redirect($firstpage);
 }
 
@@ -104,12 +104,12 @@ if (!file_exists($CFG->dirroot . $docsdir)) {
 }
 // Load the content after the footer that contains the JS for this page.
 $page = file_get_contents($docspage);
-$jsdocurl = new moodle_url('/admin/tool/componentlibrary/jsdocspage.php');
+$jsdocurl = new powereduc_url('/admin/tool/componentlibrary/jsdocspage.php');
 $page = str_replace('http://JSDOC', $jsdocurl, $page);
 $page = str_replace('http://POWEREDUCROOT', $thispageurl, $page);
-$page = str_replace('POWEREDUCIMAGEDIR', new moodle_url('/admin/tool/componentlibrary/content/static'), $page);
+$page = str_replace('POWEREDUCIMAGEDIR', new powereduc_url('/admin/tool/componentlibrary/content/static'), $page);
 $filtered = str_replace('POWEREDUCROOT', $thispageurl, $page);
-$rooturl = new moodle_url('/');
+$rooturl = new powereduc_url('/');
 $filtered = str_replace('POWEREDUCSITE', $rooturl->out(), $page);
 echo $filtered;
 

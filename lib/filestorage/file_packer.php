@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Abstraction of general file packer.
@@ -40,10 +40,10 @@ abstract class file_packer {
      * the array:
      * - null = this entry represents a directory, so no file
      * - string = full path to file within operating system filesystem
-     * - stored_file = file within Moodle filesystem
+     * - stored_file = file within PowerEduc filesystem
      * - array with one string element = use in-memory string for file content
      *
-     * For the string (OS path) and stored_file (Moodle filesystem) cases, you
+     * For the string (OS path) and stored_file (PowerEduc filesystem) cases, you
      * can specify a directory instead of a file to recursively include all files
      * within this directory.
      *
@@ -71,10 +71,10 @@ abstract class file_packer {
      * the array:
      * - null = this entry represents a directory, so no file
      * - string = full path to file within operating system filesystem
-     * - stored_file = file within Moodle filesystem
+     * - stored_file = file within PowerEduc filesystem
      * - array with one string element = use in-memory string for file content
      *
-     * For the string (OS path) and stored_file (Moodle filesystem) cases, you
+     * For the string (OS path) and stored_file (PowerEduc filesystem) cases, you
      * can specify a directory instead of a file to recursively include all files
      * within this directory.
      *

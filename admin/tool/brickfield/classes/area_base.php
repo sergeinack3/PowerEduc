@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -165,22 +165,22 @@ abstract class area_base {
     /**
      * Return a recordset of the relevant areas for the component/module.
      * @param \core\event\base $event
-     * @return \moodle_recordset|null
+     * @return \powereduc_recordset|null
      */
-    abstract public function find_relevant_areas(\core\event\base $event): ?\moodle_recordset;
+    abstract public function find_relevant_areas(\core\event\base $event): ?\powereduc_recordset;
 
     /**
      * Return a recordset of the course areas for the course id.
      * @param int $courseid
-     * @return \moodle_recordset|null
+     * @return \powereduc_recordset|null
      */
-    abstract public function find_course_areas(int $courseid): ?\moodle_recordset;
+    abstract public function find_course_areas(int $courseid): ?\powereduc_recordset;
 
     /**
      * Return an array of area objects that contain content at the site and system levels only. Override this where necessary.
-     * @return \moodle_recordset|null
+     * @return \powereduc_recordset|null
      */
-    public function find_system_areas(): ?\moodle_recordset {
+    public function find_system_areas(): ?\powereduc_recordset {
         return null;
     }
 

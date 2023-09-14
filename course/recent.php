@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ $PAGE->set_url('/course/recent.php', array('id'=>$id));
 $PAGE->set_pagelayout('report');
 
 if (!$course = $DB->get_record('course', array('id'=>$id))) {
-    throw new \moodle_exception("That's an invalid course id");
+    throw new \powereduc_exception("That's an invalid course id");
 }
 
 require_login($course);
@@ -67,13 +67,13 @@ $dateinfo = get_string('alldays');
 
 if (!empty($param->user)) {
     if (!$u = $DB->get_record('user', array('id'=>$param->user))) {
-        throw new \moodle_exception("That's an invalid user!");
+        throw new \powereduc_exception("That's an invalid user!");
     }
     $userinfo = fullname($u);
 }
 
 $strrecentactivity = get_string('recentactivity');
-$PAGE->navbar->add($strrecentactivity, new moodle_url('/course/recent.php', array('id'=>$course->id)));
+$PAGE->navbar->add($strrecentactivity, new powereduc_url('/course/recent.php', array('id'=>$course->id)));
 $PAGE->navbar->add($userinfo);
 $PAGE->set_title("$course->shortname: $strrecentactivity");
 $PAGE->set_heading($course->fullname);
@@ -85,7 +85,7 @@ $mform->display();
 $modinfo = get_fast_modinfo($course);
 $modnames = get_module_types_names();
 
-if (has_capability('moodle/course:viewhiddensections', $context)) {
+if (has_capability('powereduc/course:viewhiddensections', $context)) {
     $hiddenfilter = "";
 } else {
     $hiddenfilter = "AND cs.visible = 1";
@@ -232,7 +232,7 @@ if (!empty($activities)) {
                 $modfullname = $modnames[$cm->modname];
 
                 $image = $OUTPUT->pix_icon('monologo', $modfullname, $cm->modname, array('class' => 'icon smallicon'));
-                $link = html_writer::link(new moodle_url("/mod/$cm->modname/view.php",
+                $link = html_writer::link(new powereduc_url("/mod/$cm->modname/view.php",
                             array("id" => $cm->id)), $name, array('class' => $class));
                 echo html_writer::tag('li', "$image $modfullname $link");
            }
@@ -241,7 +241,7 @@ if (!empty($activities)) {
 
             if (!isset($viewfullnames[$activity->cmid])) {
                 $cm_context = context_module::instance($activity->cmid);
-                $viewfullnames[$activity->cmid] = has_capability('moodle/site:viewfullnames', $cm_context);
+                $viewfullnames[$activity->cmid] = has_capability('powereduc/site:viewfullnames', $cm_context);
             }
 
             if (!$inbox) {

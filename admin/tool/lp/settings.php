@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,8 +34,8 @@ if (get_config('core_competency', 'enabled')) {
     $temp = new admin_externalpage(
         'toollpcompetencies',
         get_string('competencyframeworks', 'tool_lp'),
-        new moodle_url('/admin/tool/lp/competencyframeworks.php', array('pagecontextid' => context_system::instance()->id)),
-        array('moodle/competency:competencymanage')
+        new powereduc_url('/admin/tool/lp/competencyframeworks.php', array('pagecontextid' => context_system::instance()->id)),
+        array('powereduc/competency:competencymanage')
     );
     $ADMIN->add($parentname, $temp);
 
@@ -43,8 +43,8 @@ if (get_config('core_competency', 'enabled')) {
     $temp = new admin_externalpage(
         'toollplearningplans',
         get_string('templates', 'tool_lp'),
-        new moodle_url('/admin/tool/lp/learningplans.php', array('pagecontextid' => context_system::instance()->id)),
-        array('moodle/competency:templatemanage')
+        new powereduc_url('/admin/tool/lp/learningplans.php', array('pagecontextid' => context_system::instance()->id)),
+        array('powereduc/competency:templatemanage')
     );
     $ADMIN->add($parentname, $temp);
 }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -61,25 +61,25 @@ class administration_display_helper extends \core_cache\administration_helper {
      */
     public function get_definition_actions(\context $context, array $definitionsummary): array {
         global $OUTPUT;
-        if (has_capability('moodle/site:config', $context)) {
+        if (has_capability('powereduc/site:config', $context)) {
             $actions = array();
             // Edit mappings.
             $actions[] = $OUTPUT->action_link(
-                new \moodle_url('/cache/admin.php', array('action' => 'editdefinitionmapping',
+                new \powereduc_url('/cache/admin.php', array('action' => 'editdefinitionmapping',
                     'definition' => $definitionsummary['id'], 'sesskey' => sesskey())),
                 get_string('editmappings', 'cache')
             );
             // Edit sharing.
             if (count($definitionsummary['sharingoptions']) > 1) {
                 $actions[] = $OUTPUT->action_link(
-                    new \moodle_url('/cache/admin.php', array('action' => 'editdefinitionsharing',
+                    new \powereduc_url('/cache/admin.php', array('action' => 'editdefinitionsharing',
                         'definition' => $definitionsummary['id'], 'sesskey' => sesskey())),
                     get_string('editsharing', 'cache')
                 );
             }
             // Purge.
             $actions[] = $OUTPUT->action_link(
-                new \moodle_url('/cache/admin.php', array('action' => 'purgedefinition',
+                new \powereduc_url('/cache/admin.php', array('action' => 'purgedefinition',
                     'definition' => $definitionsummary['id'], 'sesskey' => sesskey())),
                 get_string('purge', 'cache')
             );
@@ -99,22 +99,22 @@ class administration_display_helper extends \core_cache\administration_helper {
     public function get_store_instance_actions(string $name, array $storedetails): array {
         global $OUTPUT;
         $actions = array();
-        if (has_capability('moodle/site:config', \context_system::instance())) {
-            $baseurl = new \moodle_url('/cache/admin.php', array('store' => $name, 'sesskey' => sesskey()));
+        if (has_capability('powereduc/site:config', \context_system::instance())) {
+            $baseurl = new \powereduc_url('/cache/admin.php', array('store' => $name, 'sesskey' => sesskey()));
             if (empty($storedetails['default'])) {
                 $actions[] = $OUTPUT->action_link(
-                    new \moodle_url($baseurl, array('action' => 'editstore', 'plugin' => $storedetails['plugin'])),
+                    new \powereduc_url($baseurl, array('action' => 'editstore', 'plugin' => $storedetails['plugin'])),
                     get_string('editstore', 'cache')
                 );
 
                 $actions[] = $OUTPUT->action_link(
-                    new \moodle_url($baseurl, array('action' => 'deletestore')),
+                    new \powereduc_url($baseurl, array('action' => 'deletestore')),
                     get_string('deletestore', 'cache')
                 );
             }
 
             $actions[] = $OUTPUT->action_link(
-                new \moodle_url($baseurl, array('action' => 'purgestore')),
+                new \powereduc_url($baseurl, array('action' => 'purgestore')),
                 get_string('purge', 'cache')
             );
         }
@@ -132,9 +132,9 @@ class administration_display_helper extends \core_cache\administration_helper {
     public function get_store_plugin_actions(string $name, array $plugindetails): array {
         global $OUTPUT;
         $actions = array();
-        if (has_capability('moodle/site:config', \context_system::instance())) {
+        if (has_capability('powereduc/site:config', \context_system::instance())) {
             if (!empty($plugindetails['canaddinstance'])) {
-                $url = new \moodle_url('/cache/admin.php',
+                $url = new \powereduc_url('/cache/admin.php',
                     array('action' => 'addstore', 'plugin' => $name, 'sesskey' => sesskey()));
                 $actions[] = $OUTPUT->action_link(
                     $url,
@@ -172,7 +172,7 @@ class administration_display_helper extends \core_cache\administration_helper {
 
         $locks = $this->get_possible_locks_for_stores($plugindir, $plugin);
 
-        $url = new \moodle_url('/cache/admin.php', array('action' => 'addstore'));
+        $url = new \powereduc_url('/cache/admin.php', array('action' => 'addstore'));
         return new $class($url, array('plugin' => $plugin, 'store' => null, 'locks' => $locks));
     }
 
@@ -210,7 +210,7 @@ class administration_display_helper extends \core_cache\administration_helper {
 
         $locks = $this->get_possible_locks_for_stores($plugindir, $plugin);
 
-        $url = new \moodle_url('/cache/admin.php', array('action' => 'editstore', 'plugin' => $plugin, 'store' => $store));
+        $url = new \powereduc_url('/cache/admin.php', array('action' => 'editstore', 'plugin' => $plugin, 'store' => $store));
         $editform = new $class($url, array('plugin' => $plugin, 'store' => $store, 'locks' => $locks));
         if (isset($stores[$store]['lock'])) {
             $editform->set_data(array('lock' => $stores[$store]['lock']));
@@ -444,7 +444,7 @@ class administration_display_helper extends \core_cache\administration_helper {
 
         $plugin = required_param('plugin', PARAM_PLUGIN);
         if (!$storepluginsummaries[$plugin]['canaddinstance']) {
-            throw new \moodle_exception('ex_unmetstorerequirements', 'cache');
+            throw new \powereduc_exception('ex_unmetstorerequirements', 'cache');
         }
         $mform = $this->get_add_store_form($plugin);
         $title = get_string('addstore', 'cache', $storepluginsummaries[$plugin]['name']);
@@ -525,7 +525,7 @@ class administration_display_helper extends \core_cache\administration_helper {
             if (!$confirm) {
                 $title = get_string('confirmstoredeletion', 'cache');
                 $params = array('store' => $store, 'confirm' => 1, 'action' => $action, 'sesskey' => sesskey());
-                $url = new \moodle_url($PAGE->url, $params);
+                $url = new \powereduc_url($PAGE->url, $params);
                 $button = new \single_button($url, get_string('deletestore', 'cache'));
 
                 $PAGE->set_title($title);
@@ -674,7 +674,7 @@ class administration_display_helper extends \core_cache\administration_helper {
                     'component' => $component,
                     'area' => $area,
                 ]);
-        $purgeagainlink = \html_writer::link(new \moodle_url('/cache/admin.php', [
+        $purgeagainlink = \html_writer::link(new \powereduc_url('/cache/admin.php', [
                 'action' => 'purgedefinition', 'sesskey' => sesskey(), 'definition' => $id]),
                 get_string('purgeagain', 'cache'));
         redirect($PAGE->url, $message . ' ' . $purgeagainlink, 5);
@@ -691,7 +691,7 @@ class administration_display_helper extends \core_cache\administration_helper {
         $store = required_param('store', PARAM_TEXT);
         cache_helper::purge_store($store);
         $message = get_string('purgexstoresuccess', 'cache', ['store' => $store]);
-        $purgeagainlink = \html_writer::link(new \moodle_url('/cache/admin.php', [
+        $purgeagainlink = \html_writer::link(new \powereduc_url('/cache/admin.php', [
                 'action' => 'purgestore', 'sesskey' => sesskey(), 'store' => $store]),
                 get_string('purgeagain', 'cache'));
         redirect($PAGE->url, $message . ' ' . $purgeagainlink, 5);
@@ -746,7 +746,7 @@ class administration_display_helper extends \core_cache\administration_helper {
             if (!$confirm) {
                 $title = get_string('confirmlockdeletion', 'cache');
                 $params = array('lock' => $lock, 'confirm' => 1, 'action' => $action, 'sesskey' => sesskey());
-                $url = new \moodle_url($PAGE->url, $params);
+                $url = new \powereduc_url($PAGE->url, $params);
                 $button = new \single_button($url, get_string('deletelock', 'cache'));
 
                 $PAGE->set_title($title);
@@ -790,7 +790,7 @@ class administration_display_helper extends \core_cache\administration_helper {
         $applicationstore = join(', ', $defaultmodestores[cache_store::MODE_APPLICATION]);
         $sessionstore = join(', ', $defaultmodestores[cache_store::MODE_SESSION]);
         $requeststore = join(', ', $defaultmodestores[cache_store::MODE_REQUEST]);
-        $editurl = new \moodle_url('/cache/admin.php', array('action' => 'editmodemappings', 'sesskey' => sesskey()));
+        $editurl = new \powereduc_url('/cache/admin.php', array('action' => 'editmodemappings', 'sesskey' => sesskey()));
         $html .= $renderer->mode_mappings($applicationstore, $sessionstore, $requeststore, $editurl);
 
         return $html;

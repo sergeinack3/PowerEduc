@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ use renderable;
 use templatable;
 use renderer_base;
 use stdClass;
-use moodle_url;
+use powereduc_url;
 use core_competency\api;
 use core_competency\external\plan_exporter;
 use core_user\external\user_summary_exporter;
@@ -73,7 +73,7 @@ class plans_to_review_page implements renderable, templatable {
 
         $data = array(
             'plans' => $planstoreview,
-            'pluginbaseurl' => (new moodle_url('/blocks/lp'))->out(false),
+            'pluginbaseurl' => (new powereduc_url('/blocks/lp'))->out(false),
         );
 
         return $data;

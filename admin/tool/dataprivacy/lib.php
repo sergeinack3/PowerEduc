@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * @return bool
  * @throws coding_exception
  * @throws dml_exception
- * @throws moodle_exception
+ * @throws powereduc_exception
  */
 function tool_dataprivacy_myprofile_navigation(tree $tree, $user, $iscurrentuser, $course) {
     global $PAGE, $USER;
@@ -61,7 +61,7 @@ function tool_dataprivacy_myprofile_navigation(tree $tree, $user, $iscurrentuser
         // Require our Javascript module to handle contact DPO interaction.
         $PAGE->requires->js_call_amd('tool_dataprivacy/contactdpo', 'init');
 
-        $url = new moodle_url('/admin/tool/dataprivacy/mydatarequests.php');
+        $url = new powereduc_url('/admin/tool/dataprivacy/mydatarequests.php');
         $node = new core_user\output\myprofile\node('privacyandpolicies', 'datarequests',
             get_string('datarequests', 'tool_dataprivacy'), null, $url);
         $category->add_node($node);
@@ -72,7 +72,7 @@ function tool_dataprivacy_myprofile_navigation(tree $tree, $user, $iscurrentuser
         // to download own data.
         if (!$hasexportrequest && \tool_dataprivacy\api::can_create_data_download_request_for_self()) {
             $exportparams = ['type' => \tool_dataprivacy\api::DATAREQUEST_TYPE_EXPORT];
-            $exporturl = new moodle_url('/admin/tool/dataprivacy/createdatarequest.php', $exportparams);
+            $exporturl = new powereduc_url('/admin/tool/dataprivacy/createdatarequest.php', $exportparams);
             $exportnode = new core_user\output\myprofile\node('privacyandpolicies', 'requestdataexport',
                 get_string('requesttypeexport', 'tool_dataprivacy'), null, $exporturl);
             $category->add_node($exportnode);
@@ -84,7 +84,7 @@ function tool_dataprivacy_myprofile_navigation(tree $tree, $user, $iscurrentuser
         // to create data deletion request.
         if (!$hasdeleterequest && \tool_dataprivacy\api::can_create_data_deletion_request_for_self()) {
             $deleteparams = ['type' => \tool_dataprivacy\api::DATAREQUEST_TYPE_DELETE];
-            $deleteurl = new moodle_url('/admin/tool/dataprivacy/createdatarequest.php', $deleteparams);
+            $deleteurl = new powereduc_url('/admin/tool/dataprivacy/createdatarequest.php', $deleteparams);
             $deletenode = new core_user\output\myprofile\node('privacyandpolicies', 'requestdatadeletion',
                 get_string('deletemyaccount', 'tool_dataprivacy'), null, $deleteurl);
             $category->add_node($deletenode);
@@ -99,7 +99,7 @@ function tool_dataprivacy_myprofile_navigation(tree $tree, $user, $iscurrentuser
     }
 
     if ($showsummary && $iscurrentuser) {
-        $summaryurl = new moodle_url('/admin/tool/dataprivacy/summary.php');
+        $summaryurl = new powereduc_url('/admin/tool/dataprivacy/summary.php');
         $summarynode = new core_user\output\myprofile\node('privacyandpolicies', 'retentionsummary',
             get_string('dataretentionsummary', 'tool_dataprivacy'), null, $summaryurl);
         $category->add_node($summarynode);
@@ -133,7 +133,7 @@ function tool_dataprivacy_standard_footer_html() {
     }
 
     if ($showsummary) {
-        $url = new moodle_url('/admin/tool/dataprivacy/summary.php');
+        $url = new powereduc_url('/admin/tool/dataprivacy/summary.php');
         $output = html_writer::link($url, get_string('dataretentionsummary', 'tool_dataprivacy'));
         $output = html_writer::div($output, 'tool_dataprivacy');
     }

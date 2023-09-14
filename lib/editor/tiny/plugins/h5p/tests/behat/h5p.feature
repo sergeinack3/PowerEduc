@@ -19,7 +19,7 @@ Feature: Use the TinyMCE editor to upload an h5p package
       | page     | PageName1 | PageDesc1 | 1           | C1     | H5Ptest | 1             | 1        |
     And the "displayh5p" filter is "on"
     And the following config values are set as admin:
-      | allowedsources | https://moodle.h5p.com/content/[id] | filter_displayh5p |
+      | allowedsources | https://powereduc.h5p.com/content/[id] | filter_displayh5p |
     And the following "blocks" exist:
       | blockname     | contextlevel | reference | pagetypepattern | defaultregion |
       | private_files | System       | 1         | my-index        | side-post     |
@@ -29,7 +29,7 @@ Feature: Use the TinyMCE editor to upload an h5p package
     Given I change window size to "large"
     And I am on the PageName1 "page activity editing" page logged in as admin
     And I click on the "Configure H5P content" button for the "Page content" TinyMCE editor
-    And I set the field "H5P URL or file upload" to "https://moodle.h5p.com/content/1290772960722742119"
+    And I set the field "H5P URL or file upload" to "https://powereduc.h5p.com/content/1290772960722742119"
     And I click on "Insert H5P content" "button" in the "Insert H5P content" "dialogue"
     When I click on "Save and display" "button"
     Then ".h5p-placeholder" "css_element" should exist
@@ -58,7 +58,7 @@ Feature: Use the TinyMCE editor to upload an h5p package
     Given the following "permission overrides" exist:
       | capability        | permission | role           | contextlevel | reference |
       | tiny/h5p:addembed | Prohibit   | editingteacher | Course       | C1        |
-      | moodle/h5p:deploy | Prohibit   | editingteacher | Course       | C1        |
+      | powereduc/h5p:deploy | Prohibit   | editingteacher | Course       | C1        |
     When I am on the PageName1 "page activity editing" page logged in as teacher1
     Then "Configure H5P content" "button" should not exist
 
@@ -77,7 +77,7 @@ Feature: Use the TinyMCE editor to upload an h5p package
   Scenario: When a user does not have the Upload H5P capability, they can embed but not upload H5P content with TinyMCE
     Given the following "permission overrides" exist:
       | capability        | permission | role           | contextlevel | reference |
-      | moodle/h5p:deploy | Prohibit   | editingteacher | Course       | C1        |
+      | powereduc/h5p:deploy | Prohibit   | editingteacher | Course       | C1        |
     When I am on the PageName1 "page activity editing" page logged in as teacher1
     And I click on the "Configure H5P content" button for the "Page content" TinyMCE editor
     Then I should not see "H5P file upload" in the "Insert H5P content" "dialogue"
@@ -106,7 +106,7 @@ Feature: Use the TinyMCE editor to upload an h5p package
     And I navigate to "Settings" in current page administration
     And I select the ".h5p-placeholder" "css_element" in the "Page content" TinyMCE editor
     And I click on the "Configure H5P content" button for the "Page content" TinyMCE editor
-    And I set the field "H5P URL or file upload" to "https://moodle.h5p.com/content/1290772960722742119"
+    And I set the field "H5P URL or file upload" to "https://powereduc.h5p.com/content/1290772960722742119"
     And I click on "Insert H5P" "button" in the "Insert H5P content" "dialogue"
     And I wait "1" seconds
     And I click on "Save and display" "button"
@@ -168,7 +168,7 @@ Feature: Use the TinyMCE editor to upload an h5p package
     Given I change window size to "large"
     And I am on the PageName1 "page activity editing" page logged in as admin
     And I click on the "Configure H5P content" button for the "Page content" TinyMCE editor
-    And I set the field "H5P URL or file upload" to "https://moodle.h5p.com/content/1291366510035871129"
+    And I set the field "H5P URL or file upload" to "https://powereduc.h5p.com/content/1291366510035871129"
     And I click on "H5P options" "link"
     And I click on "Embed button" "checkbox"
     And I click on "Insert H5P content" "button" in the "Insert H5P content" "dialogue"

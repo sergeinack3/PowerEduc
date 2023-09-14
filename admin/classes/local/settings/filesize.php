@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * File size admin setting.
  *
  * @package    core_admin
- * @copyright  2019 Shamim Rezaie <shamim@moodle.com>
+ * @copyright  2019 Shamim Rezaie <shamim@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,7 +31,7 @@ require_once($CFG->libdir . '/adminlib.php');
 /**
  * An admin setting to support entering and displaying of file sizes in Bytes, KB, MB or GB.
  *
- * @copyright   2019 Shamim Rezaie <shamim@moodle.com>
+ * @copyright   2019 Shamim Rezaie <shamim@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class filesize extends \admin_setting {

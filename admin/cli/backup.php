@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -54,7 +54,7 @@ Options:
 -h, --help                  Print out this help.
 
 Example:
-\$sudo -u www-data /usr/bin/php admin/cli/backup.php --courseid=2 --destination=/moodle/backup/\n
+\$sudo -u www-data /usr/bin/php admin/cli/backup.php --courseid=2 --destination=/powereduc/backup/\n
 EOL;
 
     echo $help;

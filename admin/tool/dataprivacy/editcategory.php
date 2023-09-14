@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ require_login(null, false);
 
 $id = optional_param('id', 0, PARAM_INT);
 
-$url = new \moodle_url('/admin/tool/dataprivacy/editcategory.php', array('id' => $id));
+$url = new \powereduc_url('/admin/tool/dataprivacy/editcategory.php', array('id' => $id));
 if ($id) {
     $title = get_string('editcategory', 'tool_dataprivacy');
 } else {
@@ -40,7 +40,7 @@ $category = new \tool_dataprivacy\category($id);
 $form = new \tool_dataprivacy\form\category($PAGE->url->out(false),
     array('persistent' => $category, 'showbuttons' => true));
 
-$returnurl = new \moodle_url('/admin/tool/dataprivacy/categories.php');
+$returnurl = new \powereduc_url('/admin/tool/dataprivacy/categories.php');
 if ($form->is_cancelled()) {
     redirect($returnurl);
 } else if ($data = $form->get_data()) {

@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -56,12 +56,12 @@ Options:
 --lang=CODE           Installation and default site language.
 --wwwroot=URL         Web address for the Moodle site,
                       required in non-interactive mode.
---dataroot=DIR        Location of the moodle data folder,
-                      must not be web accessible. Default is moodledata
+--dataroot=DIR        Location of the powereduc data folder,
+                      must not be web accessible. Default is powereducdata
                       in the parent directory.
 --dbtype=TYPE         Database type. Default is mysqli
 --dbhost=HOST         Database host. Default is localhost
---dbname=NAME         Database name. Default is moodle
+--dbname=NAME         Database name. Default is powereduc
 --dbuser=USERNAME     Database user. Default is root
 --dbpass=PASSWORD     Database password. Default is blank
 --dbport=NUMBER       Use database port.
@@ -70,10 +70,10 @@ Options:
 --fullname=STRING     The fullname of the site
 --shortname=STRING    The shortname of the site
 --summary=STRING      The summary to be displayed on the front page
---adminuser=USERNAME  Username for the moodle admin account. Default is admin
---adminpass=PASSWORD  Password for the moodle admin account,
+--adminuser=USERNAME  Username for the powereduc admin account. Default is admin
+--adminpass=PASSWORD  Password for the powereduc admin account,
                       required in non-interactive mode.
---adminemail=STRING   Email address for the moodle admin account.
+--adminemail=STRING   Email address for the powereduc admin account.
 --sitepreset=STRING   Admin site preset to be applied during the installation process.
 --supportemail=STRING Email address for support and help.
 --upgradekey=STRING   The upgrade key to be set in the config.php, leave empty to not set it.
@@ -150,7 +150,7 @@ define('IGNORE_COMPONENT_CACHE', true);
 
 // Check that PHP is of a sufficient version as soon as possible.
 require_once(__DIR__.'/../../lib/phpminimumversionlib.php');
-moodle_require_minimum_php_version();
+powereduc_require_minimum_php_version();
 
 // set up configuration
 global $CFG;
@@ -160,7 +160,7 @@ $CFG->dirroot              = dirname(dirname(__DIR__));
 $CFG->libdir               = "$CFG->dirroot/lib";
 $CFG->wwwroot              = "http://localhost";
 $CFG->httpswwwroot         = $CFG->wwwroot;
-$CFG->docroot              = 'http://docs.moodle.org';
+$CFG->docroot              = 'http://docs.powereduc.org';
 $CFG->running_installer    = true;
 $CFG->early_install_lang   = true;
 $CFG->ostype               = (stristr(PHP_OS, 'win') && !stristr(PHP_OS, 'darwin')) ? 'WINDOWS' : 'UNIX';
@@ -172,7 +172,7 @@ $CFG->debugdeveloper       = true;
 $parts = explode('/', str_replace('\\', '/', dirname(__DIR__)));
 $CFG->admin                = array_pop($parts);
 
-//point pear include path to moodles lib/pear so that includes and requires will search there for files before anywhere else
+//point pear include path to powereducs lib/pear so that includes and requires will search there for files before anywhere else
 //the problem is that we need specific version of quickforms and hacked excel files :-(
 ini_set('include_path', $CFG->libdir.'/pear' . PATH_SEPARATOR . ini_get('include_path'));
 
@@ -186,7 +186,7 @@ require_once($CFG->libdir.'/clilib.php');
 require_once($CFG->libdir.'/setuplib.php');
 require_once($CFG->libdir.'/weblib.php');
 require_once($CFG->libdir.'/dmllib.php');
-require_once($CFG->libdir.'/moodlelib.php');
+require_once($CFG->libdir.'/powereduclib.php');
 require_once($CFG->libdir.'/deprecatedlib.php');
 require_once($CFG->libdir.'/adminlib.php');
 require_once($CFG->libdir.'/componentlib.class.php');
@@ -216,12 +216,12 @@ $SITE = $COURSE;
 define('SITEID', 1);
 
 //Database types
-$databases = array('mysqli' => moodle_database::get_driver_instance('mysqli', 'native'),
-                   'auroramysql' => moodle_database::get_driver_instance('auroramysql', 'native'),
-                   'mariadb'=> moodle_database::get_driver_instance('mariadb', 'native'),
-                   'pgsql'  => moodle_database::get_driver_instance('pgsql',  'native'),
-                   'oci'    => moodle_database::get_driver_instance('oci',    'native'),
-                   'sqlsrv' => moodle_database::get_driver_instance('sqlsrv', 'native'), // MS SQL*Server PHP driver
+$databases = array('mysqli' => powereduc_database::get_driver_instance('mysqli', 'native'),
+                   'auroramysql' => powereduc_database::get_driver_instance('auroramysql', 'native'),
+                   'mariadb'=> powereduc_database::get_driver_instance('mariadb', 'native'),
+                   'pgsql'  => powereduc_database::get_driver_instance('pgsql',  'native'),
+                   'oci'    => powereduc_database::get_driver_instance('oci',    'native'),
+                   'sqlsrv' => powereduc_database::get_driver_instance('sqlsrv', 'native'), // MS SQL*Server PHP driver
                   );
 foreach ($databases as $type=>$database) {
     if ($database->driver_installed() !== true) {
@@ -241,10 +241,10 @@ list($options, $unrecognized) = cli_get_params(
         'chmod'             => isset($distro->directorypermissions) ? sprintf('%04o',$distro->directorypermissions) : '2777', // let distros set dir permissions
         'lang'              => $CFG->lang,
         'wwwroot'           => '',
-        'dataroot'          => empty($distro->dataroot) ? str_replace('\\', '/', dirname(dirname(dirname(__DIR__))).'/moodledata'): $distro->dataroot, // initialised later after including libs or by distro
+        'dataroot'          => empty($distro->dataroot) ? str_replace('\\', '/', dirname(dirname(dirname(__DIR__))).'/powereducdata'): $distro->dataroot, // initialised later after including libs or by distro
         'dbtype'            => empty($distro->dbtype) ? $defaultdb : $distro->dbtype, // let distro skip dbtype selection
         'dbhost'            => empty($distro->dbhost) ? 'localhost' : $distro->dbhost, // let distros set dbhost
-        'dbname'            => 'moodle',
+        'dbname'            => 'powereduc',
         'dbuser'            => empty($distro->dbuser) ? 'root' : $distro->dbuser, // let distros set dbuser
         'dbpass'            => '',
         'dbport'            => '',
@@ -415,7 +415,7 @@ if ($interactive) {
             $CFG->dataroot = ''; //can not find secure location for dataroot
             break;
         }
-        $CFG->dataroot = dirname($parrent).'/moodledata';
+        $CFG->dataroot = dirname($parrent).'/powereducdata';
     }
     cli_heading(get_string('dataroot', 'install'));
     $error = '';
@@ -655,7 +655,7 @@ if (!$skipdatabase) {
     // Ask for fullname.
     if ($interactive) {
         cli_separator();
-        cli_heading(get_string('fullsitename', 'moodle'));
+        cli_heading(get_string('fullsitename', 'powereduc'));
 
         if ($options['fullname'] !== '') {
             $prompt = get_string('clitypevaluedefault', 'admin', $options['fullname']);
@@ -676,7 +676,7 @@ if (!$skipdatabase) {
     // Ask for shortname.
     if ($interactive) {
         cli_separator();
-        cli_heading(get_string('shortsitename', 'moodle'));
+        cli_heading(get_string('shortsitename', 'powereduc'));
 
         if ($options['shortname'] !== '') {
             $prompt = get_string('clitypevaluedefault', 'admin', $options['shortname']);
@@ -825,7 +825,7 @@ require("$CFG->dirroot/version.php");
 
 // Test environment first.
 require_once($CFG->libdir . '/environmentlib.php');
-list($envstatus, $environment_results) = check_moodle_environment(normalize_version($release), ENV_SELECT_RELEASE);
+list($envstatus, $environment_results) = check_powereduc_environment(normalize_version($release), ENV_SELECT_RELEASE);
 if (!$envstatus) {
     $errors = environment_get_errors($environment_results);
     cli_heading(get_string('environment', 'admin'));

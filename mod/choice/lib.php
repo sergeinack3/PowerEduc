@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package   mod_choice
@@ -880,7 +880,7 @@ function choice_page_type_list($pagetype, $parentcontext, $currentcontext) {
 }
 
 /**
- * @deprecated since Moodle 3.3, when the block_course_overview block was removed.
+ * @deprecated since PowerEduc 3.3, when the block_course_overview block was removed.
  */
 function choice_print_overview() {
     throw new coding_exception('choice_print_overview() can not be used any more and is obsolete.');
@@ -893,7 +893,7 @@ function choice_print_overview() {
  * @param stdClass $choice Choice record
  * @param int $userid User id
  * @return array of choice answers records
- * @since  Moodle 3.6
+ * @since  PowerEduc 3.6
  */
 function choice_get_user_response($choice, $userid) {
     global $DB;
@@ -905,7 +905,7 @@ function choice_get_user_response($choice, $userid) {
  *
  * @param stdClass $choice Choice record
  * @return array of choice answers records
- * @since  Moodle 3.0
+ * @since  PowerEduc 3.0
  */
 function choice_get_my_response($choice) {
     global $USER;
@@ -918,7 +918,7 @@ function choice_get_my_response($choice) {
  *
  * @param stdClass $choice Choice record
  * @return array of choice answers records
- * @since  Moodle 3.0
+ * @since  PowerEduc 3.0
  */
 function choice_get_all_responses($choice) {
     global $DB;
@@ -933,7 +933,7 @@ function choice_get_all_responses($choice) {
  * @param rows|null $current my choice responses
  * @param bool|null $choiceopen if the choice is open
  * @return bool true if we can view the results, false otherwise.
- * @since  Moodle 3.0
+ * @since  PowerEduc 3.0
  */
 function choice_can_view_results($choice, $current = null, $choiceopen = null) {
 
@@ -970,7 +970,7 @@ function choice_can_view_results($choice, $current = null, $choiceopen = null) {
  * @param  stdClass $course     course object
  * @param  stdClass $cm         course module object
  * @param  stdClass $context    context object
- * @since Moodle 3.0
+ * @since PowerEduc 3.0
  */
 function choice_view($choice, $course, $cm, $context) {
 
@@ -1067,7 +1067,7 @@ function choice_refresh_events($courseid = 0, $instance = null, $cm = null) {
  * @param  int $from the time to check updates from
  * @param  array $filter  if we need to check only specific updates
  * @return stdClass an object with the different type of areas indicating if they were updated or not
- * @since Moodle 3.2
+ * @since PowerEduc 3.2
  */
 function choice_check_updates_since(cm_info $cm, $from, $filter = array()) {
     global $DB;

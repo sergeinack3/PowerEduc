@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ require_once($CFG->dirroot.'/lib/formslib.php');
  * @copyright   2018 Marina Glancy
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class accept_policy extends \moodleform {
+class accept_policy extends \powereducform {
 
     /**
      * Defines the form fields.
@@ -48,10 +48,10 @@ class accept_policy extends \moodleform {
         $mform = $this->_form;
 
         if (empty($this->_customdata['userids']) || !is_array($this->_customdata['userids'])) {
-            throw new \moodle_exception('missingparam', 'error', '', 'userids');
+            throw new \powereduc_exception('missingparam', 'error', '', 'userids');
         }
         if (empty($this->_customdata['versionids']) || !is_array($this->_customdata['versionids'])) {
-            throw new \moodle_exception('missingparam', '', '', 'versionids');
+            throw new \powereduc_exception('missingparam', '', '', 'versionids');
         }
         $action = $this->_customdata['action'];
         $userids = clean_param_array($this->_customdata['userids'], PARAM_INT);
@@ -88,7 +88,7 @@ class accept_policy extends \moodleform {
             $mform->addElement('static', 'ack', '', get_string('declineacknowledgement', 'tool_policy'));
             $mform->addElement('hidden', 'action', 'decline');
         } else {
-            throw new \moodle_exception('invalidaccessparameter');
+            throw new \powereduc_exception('invalidaccessparameter');
         }
 
         $mform->setType('action', PARAM_ALPHA);
@@ -140,7 +140,7 @@ class accept_policy extends \moodleform {
             }
             $user = $users[$userid];
             if (isguestuser($user)) {
-                throw new \moodle_exception('noguest');
+                throw new \powereduc_exception('noguest');
             }
             \context_helper::preload_from_record($user);
             if ($action === 'revoke') {
@@ -167,9 +167,9 @@ class accept_policy extends \moodleform {
         foreach ($versionids as $versionid) {
             $version = api::get_policy_version($versionid, $policies);
             if ($version->audience == policy_version::AUDIENCE_GUESTS) {
-                throw new \moodle_exception('errorpolicyversionnotfound', 'tool_policy');
+                throw new \powereduc_exception('errorpolicyversionnotfound', 'tool_policy');
             }
-            $url = new \moodle_url('/admin/tool/policy/view.php', ['versionid' => $version->id]);
+            $url = new \powereduc_url('/admin/tool/policy/view.php', ['versionid' => $version->id]);
             $policyname = $version->name;
             if ($version->status != policy_version::STATUS_ACTIVE) {
                 $policyname .= ' ' . $version->revision;

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -60,7 +60,7 @@ function xmldb_block_myoverview_upgrade($oldversion) {
 
         // See if this block already somehow exists, it should not but who knows.
         if (!$DB->record_exists('block_instances', $blockparams)) {
-            $page = new moodle_page();
+            $page = new powereduc_page();
             $page->set_context(context_system::instance());
             // Add the block to the default /my/courses.
             $page->blocks->add_region('content');

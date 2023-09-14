@@ -1,7 +1,7 @@
 {
-    "name": "moodle-core-event",
+    "name": "powereduc-core-event",
     "builds": {
-        "moodle-core-event": {
+        "powereduc-core-event": {
             "jsfiles": [
                 "event.js"
             ]

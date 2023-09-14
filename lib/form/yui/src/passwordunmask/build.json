@@ -1,7 +1,7 @@
 {
-    "name": "moodle-form-passwordunmask",
+    "name": "powereduc-form-passwordunmask",
     "builds": {
-        "moodle-form-passwordunmask": {
+        "powereduc-form-passwordunmask": {
             "jsfiles": [
                 "passwordunmask.js"
             ]

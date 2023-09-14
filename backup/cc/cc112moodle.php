@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,22 +15,22 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * @package   moodlecore
+ * @package   powereduccore
  * @subpackage backup-imscc
- * @copyright 2011 Darko Miletic (dmiletic@moodlerooms.com)
+ * @copyright 2011 Darko Miletic (dmiletic@powereducrooms.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('POWEREDUC_INTERNAL') or die('Direct access to this script is forbidden.');
 
-require_once($CFG->dirroot . '/backup/cc/cc2moodle.php');
+require_once($CFG->dirroot . '/backup/cc/cc2powereduc.php');
 require_once($CFG->dirroot . '/backup/cc/entities11.class.php');
 require_once($CFG->dirroot . '/backup/cc/entity11.resource.class.php');
 require_once($CFG->dirroot . '/backup/cc/entity11.forum.class.php');
 require_once($CFG->dirroot . '/backup/cc/entity11.quiz.class.php');
 require_once($CFG->dirroot . '/backup/cc/entity11.lti.class.php');
 
-class cc112moodle extends cc2moodle {
+class cc112powereduc extends cc2powereduc {
     const CC_TYPE_FORUM              = 'imsdt_xmlv1p1';
     const CC_TYPE_QUIZ               = 'imsqti_xmlv1p2/imscc_xmlv1p1/assessment';
     const CC_TYPE_QUESTION_BANK      = 'imsqti_xmlv1p2/imscc_xmlv1p1/question-bank';
@@ -60,7 +60,7 @@ class cc112moodle extends cc2moodle {
         parent::__construct($path_to_manifest);
     }
 
-    public function generate_moodle_xml () {
+    public function generate_powereduc_xml () {
 
         global $CFG;
         $cdir = static::$path_to_manifest_folder . DIRECTORY_SEPARATOR . 'course_files';
@@ -122,8 +122,8 @@ class cc112moodle extends cc2moodle {
 
         if (array_key_exists("index", self::$instances)) {
 
-            if (!file_put_contents(static::$path_to_manifest_folder . DIRECTORY_SEPARATOR . 'moodle.xml', $result_xml)) {
-                static::log_action('Cannot save the moodle manifest file: ' . static::$path_to_tmp_folder . DIRECTORY_SEPARATOR . 'moodle.xml', true);
+            if (!file_put_contents(static::$path_to_manifest_folder . DIRECTORY_SEPARATOR . 'powereduc.xml', $result_xml)) {
+                static::log_action('Cannot save the powereduc manifest file: ' . static::$path_to_tmp_folder . DIRECTORY_SEPARATOR . 'powereduc.xml', true);
             } else {
                 $status = true;
             }
@@ -137,8 +137,8 @@ class cc112moodle extends cc2moodle {
 
     }
 
-    public function convert_to_moodle_type ($cc_type) {
-        $type = parent::convert_to_moodle_type($cc_type);
+    public function convert_to_powereduc_type ($cc_type) {
+        $type = parent::convert_to_powereduc_type($cc_type);
 
         if ($type == TYPE_UNKNOWN) {
             if ($cc_type == static::CC_TYPE_BASICLTI) {
@@ -179,7 +179,7 @@ class cc112moodle extends cc2moodle {
 
     /**
     * (non-PHPdoc)
-    * @see cc2moodle::get_module_visible()
+    * @see cc2powereduc::get_module_visible()
     */
     protected function get_module_visible($identifier) {
         //Should item be hidden or not

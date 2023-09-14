@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -36,10 +36,10 @@ $context = context_system::instance();
 $taskname = required_param('task', PARAM_RAW_TRIMMED);
 $task = \core\task\manager::get_scheduled_task($taskname);
 if (!$task) {
-    throw new \moodle_exception('cannotfindinfo', 'error', $taskname);
+    throw new \powereduc_exception('cannotfindinfo', 'error', $taskname);
 }
 
-$returnurl = new moodle_url('/admin/tool/task/scheduledtasks.php',
+$returnurl = new powereduc_url('/admin/tool/task/scheduledtasks.php',
         ['lastchanged' => get_class($task)]);
 
 // If actually doing the clear, then carry out the task and redirect to the scheduled task page.
@@ -52,9 +52,9 @@ if (optional_param('confirm', 0, PARAM_INT)) {
 }
 
 // Start output.
-$PAGE->set_url(new moodle_url('/admin/tool/task/schedule_task.php'));
+$PAGE->set_url(new powereduc_url('/admin/tool/task/schedule_task.php'));
 $PAGE->set_context($context);
-$PAGE->navbar->add(get_string('scheduledtasks', 'tool_task'), new moodle_url('/admin/tool/task/scheduledtasks.php'));
+$PAGE->navbar->add(get_string('scheduledtasks', 'tool_task'), new powereduc_url('/admin/tool/task/scheduledtasks.php'));
 $PAGE->navbar->add(s($task->get_name()));
 $PAGE->navbar->add(get_string('clear'));
 echo $OUTPUT->header();
@@ -62,7 +62,7 @@ echo $OUTPUT->header();
 // The initial request just shows the confirmation page; we don't do anything further unless
 // they confirm.
 echo $OUTPUT->confirm(get_string('clearfaildelay_confirm', 'tool_task', $task->get_name()),
-        new single_button(new moodle_url('/admin/tool/task/clear_fail_delay.php',
+        new single_button(new powereduc_url('/admin/tool/task/clear_fail_delay.php',
                 ['task' => $taskname, 'confirm' => 1, 'sesskey' => sesskey()]),
                 get_string('clear')),
         new single_button($returnurl, get_string('cancel'), false));

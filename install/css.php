@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ if (file_exists(__DIR__.'/../config.php')) {
 }
 
 // and remove some of the CSS in $content.
-$files = array('boost/style/moodle.css');
+$files = array('boost/style/powereduc.css');
 
 $content = '';
 

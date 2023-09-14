@@ -1,7 +1,7 @@
 {
-  "name": "moodle-atto_underline-button",
+  "name": "powereduc-atto_underline-button",
   "builds": {
-    "moodle-atto_underline-button": {
+    "powereduc-atto_underline-button": {
       "jsfiles": [
         "button.js"
       ]

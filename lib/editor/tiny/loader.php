@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Tiny text editor integration - TinyMCE Loader.
@@ -24,7 +24,7 @@
 
 namespace editor_tiny;
 
-// Disable moodle specific debug messages and any errors in output.
+// Disable powereduc specific debug messages and any errors in output.
 define('NO_DEBUG_DISPLAY', true);
 
 // We need just the values from config.php and minlib.php.
@@ -122,7 +122,7 @@ class loader {
             $this->send_cached();
         } else {
             // If the revision is less than 0, then do not cache anything.
-            // Moodle is configured to not cache javascript or css.
+            // PowerEduc is configured to not cache javascript or css.
             $this->send_uncached_from_dirroot();
         }
     }
@@ -262,7 +262,7 @@ class loader {
     protected function send_cached(): void {
         $path = $this->candidatefile;
 
-        // 90 days only - based on Moodle point release cadence being every 3 months.
+        // 90 days only - based on PowerEduc point release cadence being every 3 months.
         $lifetime = 60 * 60 * 24 * 90;
 
         header('Etag: "' . $this->get_etag() . '"');
@@ -306,7 +306,7 @@ class loader {
      * @param int $lastmodified
      */
     protected function send_unmodified_headers(int $lastmodified): void {
-        // 90 days only - based on Moodle point release cadence being every 3 months.
+        // 90 days only - based on PowerEduc point release cadence being every 3 months.
         $lifetime = 60 * 60 * 24 * 90;
         header('HTTP/1.1 304 Not Modified');
         header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $lifetime) . ' GMT');

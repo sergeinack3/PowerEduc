@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -234,7 +234,7 @@ class output_test extends \advanced_testcase {
         @remove_dir(dirname($file));
         // Recreate test dir
         if (!check_dir_exists(dirname($file), true, true)) {
-            throw new \moodle_exception('error_creating_temp_dir', 'error', dirname($file));
+            throw new \powereduc_exception('error_creating_temp_dir', 'error', dirname($file));
         }
 
         // Instantiate xml_output

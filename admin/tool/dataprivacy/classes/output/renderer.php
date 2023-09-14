@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ defined('POWEREDUC_INTERNAL') || die();
 
 use coding_exception;
 use html_writer;
-use moodle_exception;
+use powereduc_exception;
 use plugin_renderer_base;
 
 /**
@@ -45,7 +45,7 @@ class renderer extends plugin_renderer_base {
      *
      * @param my_data_requests_page $page
      * @return string html for the page
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function render_my_data_requests_page(my_data_requests_page $page) {
         $data = $page->export_for_template($this);
@@ -69,7 +69,7 @@ class renderer extends plugin_renderer_base {
      *
      * @param data_requests_page $page
      * @return string html for the page
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function render_data_requests_page(data_requests_page $page) {
         $data = $page->export_for_template($this);
@@ -81,7 +81,7 @@ class renderer extends plugin_renderer_base {
      *
      * @param data_registry_page $page
      * @return string html for the page
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function render_data_registry_page(data_registry_page $page) {
         $data = $page->export_for_template($this);
@@ -93,7 +93,7 @@ class renderer extends plugin_renderer_base {
      *
      * @param data_registry_compliance_page $page
      * @return string html for the page
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function render_data_registry_compliance_page(data_registry_compliance_page $page) {
         $data = $page->export_for_template($this);
@@ -105,7 +105,7 @@ class renderer extends plugin_renderer_base {
      *
      * @param purposes $page
      * @return string html for the page
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function render_purposes(purposes $page) {
         $data = $page->export_for_template($this);
@@ -117,7 +117,7 @@ class renderer extends plugin_renderer_base {
      *
      * @param categories $page
      * @return string html for the page
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function render_categories(categories $page) {
         $data = $page->export_for_template($this);
@@ -129,7 +129,7 @@ class renderer extends plugin_renderer_base {
      *
      * @param data_deletion_page $page
      * @return string html for the page
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function render_data_deletion_page(data_deletion_page $page) {
         $data = $page->export_for_template($this);

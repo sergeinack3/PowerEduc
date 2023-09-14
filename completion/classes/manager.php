@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ use context_course;
 use cm_info;
 use tabobject;
 use lang_string;
-use moodle_url;
+use powereduc_url;
 defined('POWEREDUC_INTERNAL') || die;
 
 /**
@@ -220,7 +220,7 @@ class manager {
         // Add icon information.
         $data->modules = array_values($modules);
         $coursecontext = context_course::instance($this->courseid);
-        $canmanage = has_capability('moodle/course:manageactivities', $coursecontext);
+        $canmanage = has_capability('powereduc/course:manageactivities', $coursecontext);
         $course = get_course($this->courseid);
         foreach ($data->modules as $module) {
             $module->icon = $OUTPUT->image_url('monologo', $module->name)->out();
@@ -244,15 +244,15 @@ class manager {
      */
     public static function can_edit_bulk_completion($courseorid, $cm = null) {
         if ($cm) {
-            return $cm->uservisible && has_capability('moodle/course:manageactivities', $cm->context);
+            return $cm->uservisible && has_capability('powereduc/course:manageactivities', $cm->context);
         }
         $coursecontext = context_course::instance(is_object($courseorid) ? $courseorid->id : $courseorid);
-        if (has_capability('moodle/course:manageactivities', $coursecontext)) {
+        if (has_capability('powereduc/course:manageactivities', $coursecontext)) {
             return true;
         }
         $modinfo = get_fast_modinfo($courseorid);
         foreach ($modinfo->cms as $mod) {
-            if ($mod->uservisible && has_capability('moodle/course:manageactivities', $mod->context)) {
+            if ($mod->uservisible && has_capability('powereduc/course:manageactivities', $mod->context)) {
                 return true;
             }
         }
@@ -275,18 +275,18 @@ class manager {
         $courseid = is_object($courseorid) ? $courseorid->id : $courseorid;
         $coursecontext = context_course::instance($courseid);
 
-        if (has_capability('moodle/course:update', $coursecontext)) {
+        if (has_capability('powereduc/course:update', $coursecontext)) {
             $tabs[] = new tabobject(
                 'completion',
-                new moodle_url('/course/completion.php', ['id' => $courseid]),
+                new powereduc_url('/course/completion.php', ['id' => $courseid]),
                 new lang_string('coursecompletion', 'completion')
             );
         }
 
-        if (has_capability('moodle/course:manageactivities', $coursecontext)) {
+        if (has_capability('powereduc/course:manageactivities', $coursecontext)) {
             $tabs[] = new tabobject(
                 'defaultcompletion',
-                new moodle_url('/course/defaultcompletion.php', ['id' => $courseid]),
+                new powereduc_url('/course/defaultcompletion.php', ['id' => $courseid]),
                 new lang_string('defaultcompletion', 'completion')
             );
         }
@@ -294,7 +294,7 @@ class manager {
         if (self::can_edit_bulk_completion($courseorid)) {
             $tabs[] = new tabobject(
                 'bulkcompletion',
-                new moodle_url('/course/bulkcompletion.php', ['id' => $courseid]),
+                new powereduc_url('/course/bulkcompletion.php', ['id' => $courseid]),
                 new lang_string('bulkactivitycompletion', 'completion')
             );
         }
@@ -312,18 +312,18 @@ class manager {
         $coursecontext = context_course::instance($courseid);
         $options = [];
 
-        if (has_capability('moodle/course:update', $coursecontext)) {
-            $completionlink = new moodle_url('/course/completion.php', ['id' => $courseid]);
+        if (has_capability('powereduc/course:update', $coursecontext)) {
+            $completionlink = new powereduc_url('/course/completion.php', ['id' => $courseid]);
             $options[$completionlink->out(false)] = get_string('coursecompletion', 'completion');
         }
 
-        if (has_capability('moodle/course:manageactivities', $coursecontext)) {
-            $defaultcompletionlink = new moodle_url('/course/defaultcompletion.php', ['id' => $courseid]);
+        if (has_capability('powereduc/course:manageactivities', $coursecontext)) {
+            $defaultcompletionlink = new powereduc_url('/course/defaultcompletion.php', ['id' => $courseid]);
             $options[$defaultcompletionlink->out(false)] = get_string('defaultcompletion', 'completion');
         }
 
         if (self::can_edit_bulk_completion($courseid)) {
-            $bulkcompletionlink = new moodle_url('/course/bulkcompletion.php', ['id' => $courseid]);
+            $bulkcompletionlink = new powereduc_url('/course/bulkcompletion.php', ['id' => $courseid]);
             $options[$bulkcompletionlink->out(false)] = get_string('bulkactivitycompletion', 'completion');
         }
 

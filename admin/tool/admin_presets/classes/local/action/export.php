@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@ namespace tool_admin_presets\local\action;
 defined('POWEREDUC_INTERNAL') || die();
 
 use tool_admin_presets\form\export_form;
-use moodle_exception;
+use powereduc_exception;
 
 global $CFG;
 require_once($CFG->dirroot . '/lib/filelib.php');
@@ -44,8 +44,8 @@ class export extends base {
      * the settings in a hierarchical table
      */
     public function show(): void {
-        $url = new \moodle_url('/admin/tool/admin_presets/index.php', ['action' => 'export', 'mode' => 'execute']);
-        $this->moodleform = new export_form($url);
+        $url = new \powereduc_url('/admin/tool/admin_presets/index.php', ['action' => 'export', 'mode' => 'execute']);
+        $this->powereducform = new export_form($url);
     }
 
     /**
@@ -54,10 +54,10 @@ class export extends base {
     public function execute(): void {
         confirm_sesskey();
 
-        $url = new \moodle_url('/admin/tool/admin_presets/index.php', ['action' => 'export', 'mode' => 'execute']);
-        $this->moodleform = new export_form($url);
+        $url = new \powereduc_url('/admin/tool/admin_presets/index.php', ['action' => 'export', 'mode' => 'execute']);
+        $this->powereducform = new export_form($url);
 
-        if ($data = $this->moodleform->get_data()) {
+        if ($data = $this->powereducform->get_data()) {
             list($presetid, $settingsfound, $pluginsfound) = $this->manager->export_preset($data);
 
             // Store it here for logging and other future id-oriented stuff.
@@ -65,7 +65,7 @@ class export extends base {
 
             // If there are no settings nor plugins, an error should be raised.
             if (!$settingsfound && !$pluginsfound) {
-                $url = new \moodle_url('/admin/tool/admin_presets/index.php', ['action' => 'export']);
+                $url = new \powereduc_url('/admin/tool/admin_presets/index.php', ['action' => 'export']);
                 redirect($url, get_string('novalidsettingsselected', 'tool_admin_presets'));
             }
         }
@@ -73,7 +73,7 @@ class export extends base {
         // Trigger the as it is usually triggered after execute finishes.
         $this->log();
 
-        $url = new \moodle_url('/admin/tool/admin_presets/index.php');
+        $url = new \powereduc_url('/admin/tool/admin_presets/index.php');
         redirect($url);
     }
 
@@ -82,7 +82,7 @@ class export extends base {
      *
      * @return void preset file
      * @throws dml_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @throws xml_output_exception
      * @throws xml_writer_exception
      */

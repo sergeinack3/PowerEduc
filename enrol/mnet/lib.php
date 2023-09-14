@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * MNet enrolment plugin
  *
  * @package    enrol_mnet
- * @copyright  2010 David Mudrak <david@moodle.com>
+ * @copyright  2010 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -78,7 +78,7 @@ class enrol_mnet_plugin extends enrol_plugin {
             return false;
         }
         $coursecontext = context_course::instance($courseid);
-        if (!has_capability('moodle/course:enrolconfig', $coursecontext)) {
+        if (!has_capability('powereduc/course:enrolconfig', $coursecontext)) {
             return false;
         }
         $subscribers = $service->get_remote_subscribers();

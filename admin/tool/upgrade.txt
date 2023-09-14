@@ -25,4 +25,4 @@ How to migrate existing admin reports:
 # grep the plugin codebase and look for any remaining 'coursereport' occurrences
 # update CSS selectors
 
-See http://docs.moodle.org/dev/Admin_tools for more details and explanation.
+See http://docs.powereduc.org/dev/Admin_tools for more details and explanation.

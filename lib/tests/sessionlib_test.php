@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
@@ -149,7 +149,7 @@ class sessionlib_test extends \advanced_testcase {
      *
      * @return array of config and secure result
      */
-    public function moodle_cookie_secure_provider() {
+    public function powereduc_cookie_secure_provider() {
         return array(
             array(
                 // Non ssl, not set.
@@ -220,18 +220,18 @@ class sessionlib_test extends \advanced_testcase {
     /**
      * Test for secure cookie
      *
-     * @dataProvider moodle_cookie_secure_provider
+     * @dataProvider powereduc_cookie_secure_provider
      *
      * @param array $config Array of key value config settings
      * @param bool $secure Wether cookies should be secure or not
      */
-    public function test_is_moodle_cookie_secure($config, $secure) {
+    public function test_is_powereduc_cookie_secure($config, $secure) {
         global $CFG;
         $this->resetAfterTest();
         foreach ($config as $key => $value) {
             $CFG->$key = $value;
         }
-        $this->assertEquals($secure, is_moodle_cookie_secure());
+        $this->assertEquals($secure, is_powereduc_cookie_secure());
     }
 
     public function test_sesskey() {
@@ -269,7 +269,7 @@ class sessionlib_test extends \advanced_testcase {
         try {
             confirm_sesskey();
             $this->fail('Exception expected when sesskey not present');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertSame('missingparam', $e->errorcode);
         }
 
@@ -291,7 +291,7 @@ class sessionlib_test extends \advanced_testcase {
         try {
             require_sesskey();
             $this->fail('Exception expected when sesskey not present');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertSame('missingparam', $e->errorcode);
         }
 
@@ -302,7 +302,7 @@ class sessionlib_test extends \advanced_testcase {
         try {
             require_sesskey();
             $this->fail('Exception expected when sesskey not incorrect');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertSame('invalidsesskey', $e->errorcode);
         }
     }

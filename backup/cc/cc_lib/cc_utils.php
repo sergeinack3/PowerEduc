@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 /**
  * @package    backup-convert
  * @subpackage cc-library
- * @copyright  2011 Darko Miletic <dmiletic@moodlerooms.com>
+ * @copyright  2011 Darko Miletic <dmiletic@powereducrooms.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -26,7 +26,7 @@ require_once('xmlbase.php');
 /**
  *
  * Various helper utils
- * @author Darko Miletic dmiletic@moodlerooms.com
+ * @author Darko Miletic dmiletic@powereducrooms.com
  *
  */
 abstract class cc_helpers {
@@ -249,7 +249,7 @@ abstract class cc_helpers {
     public static function process_linked_files($content, cc_i_manifest &$manifest, $packageroot,
                                                 $contextid, $outdir, $webcontent = false) {
         // Detect all embedded files
-        // locate their physical counterparts in moodle 2 backup
+        // locate their physical counterparts in powereduc 2 backup
         // copy all files in the cc package stripping any spaces and using only lowercase letters
         // add those files as resources of the type webcontent to the manifest
         // replace the links to the resource using $IMS-CC-FILEBASE$ and their new locations

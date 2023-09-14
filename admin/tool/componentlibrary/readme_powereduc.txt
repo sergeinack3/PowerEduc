@@ -39,9 +39,9 @@ When serving the HTML pages some additional JavaScript is loaded:
 * mustache.js and jsrunner.js: The component library allows you to specify a core mustache template that should be loaded and displayed within the component library docs pages. The mustache.js module fetches the mustache template using a webservice call injecting it with custom variables for the templates if provided. the jsrunner.js fetches the JavaScript section of example code encapsulated in these tags {{#js}} custom js code {{/js}} and executes it. This way the component library can also fetch core js modules and render the result
 
 ### Example form
-The component library includes an example moodle form in `/admin/tool/componentlibrary/classes/exampleform.php` that renders most form fields inside a component library page. Since the rendering of form fields require php the form fields cannot be included as mustache templates only. The example form does not contain all possible fields but enough to serve as a testing page when any of the form CSS changes
+The component library includes an example powereduc form in `/admin/tool/componentlibrary/classes/exampleform.php` that renders most form fields inside a component library page. Since the rendering of form fields require php the form fields cannot be included as mustache templates only. The example form does not contain all possible fields but enough to serve as a testing page when any of the form CSS changes
 
-### A moodle icons page
+### A powereduc icons page
 The command line script `/admin/tool/componentlibrary/cli/fetchicons.php` was added to create a json file showing the list of available icons that can be called using the mustache {{#pix}} helper. The page showing the icons will show the FontAwesome icons and the old pix item that can still be used in custom themes.
 
 ### The hugo configuration

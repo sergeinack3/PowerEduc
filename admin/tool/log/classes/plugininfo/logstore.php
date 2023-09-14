@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  */
 namespace tool_log\plugininfo;
 
-use core\plugininfo\base, moodle_url, part_of_admin_tree, admin_settingpage;
+use core\plugininfo\base, powereduc_url, part_of_admin_tree, admin_settingpage;
 
 defined('POWEREDUC_INTERNAL') || die();
 
@@ -86,7 +86,7 @@ class logstore extends base {
             return;
         }
 
-        $settings = new admin_settingpage($section, $this->displayname, 'moodle/site:config', $this->is_enabled() === false);
+        $settings = new admin_settingpage($section, $this->displayname, 'powereduc/site:config', $this->is_enabled() === false);
         include($this->full_path('settings.php'));
 
         if ($settings) {
@@ -95,7 +95,7 @@ class logstore extends base {
     }
 
     public static function get_manage_url() {
-        return new moodle_url('/admin/settings.php', array('section' => 'managelogging'));
+        return new powereduc_url('/admin/settings.php', array('section' => 'managelogging'));
     }
 
     public function is_uninstall_allowed() {

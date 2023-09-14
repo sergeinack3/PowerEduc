@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -41,11 +41,11 @@ if ($edit){
     $pagename = 'repositoryinstancenew';
 }
 
-admin_externalpage_setup($pagename, '', null, new moodle_url('/admin/repositoryinstance.php'));
+admin_externalpage_setup($pagename, '', null, new powereduc_url('/admin/repositoryinstance.php'));
 
-$baseurl = new moodle_url("/$CFG->admin/repositoryinstance.php", array('sesskey'=>sesskey()));
+$baseurl = new powereduc_url("/$CFG->admin/repositoryinstance.php", array('sesskey'=>sesskey()));
 
-$parenturl = new moodle_url("/$CFG->admin/repository.php", array(
+$parenturl = new powereduc_url("/$CFG->admin/repository.php", array(
     'sesskey'=>sesskey(),
     'action'=>'edit',
 ));
@@ -104,7 +104,7 @@ if (!empty($edit) || !empty($new)) {
             core_plugin_manager::reset_caches();
             redirect($parenturl);
         } else {
-            throw new \moodle_exception('instancenotsaved', 'repository', $parenturl);
+            throw new \powereduc_exception('instancenotsaved', 'repository', $parenturl);
         }
         exit;
     } else {
@@ -134,19 +134,19 @@ if (!empty($edit) || !empty($new)) {
             core_plugin_manager::reset_caches();
             redirect($parenturl, $deletedstr, 3);
         } else {
-            throw new \moodle_exception('instancenotdeleted', 'repository', $parenturl);
+            throw new \powereduc_exception('instancenotdeleted', 'repository', $parenturl);
         }
         exit;
     }
 
     echo $OUTPUT->header();
     echo $OUTPUT->box_start('generalbox', 'notice');
-    $continueurl = new moodle_url($baseurl, array(
+    $continueurl = new powereduc_url($baseurl, array(
         'type' => $type,
         'delete' => $delete,
         'sure' => 'yes',
     ));
-    $continueanddownloadurl = new moodle_url($continueurl, array(
+    $continueanddownloadurl = new powereduc_url($continueurl, array(
         'downloadcontents' => 1
     ));
     $message = get_string('confirmdelete', 'repository', $instance->name);

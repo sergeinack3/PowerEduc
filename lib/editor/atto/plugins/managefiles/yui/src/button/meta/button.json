@@ -1,7 +1,7 @@
 {
-    "moodle-atto_managefiles-button": {
+    "powereduc-atto_managefiles-button": {
         "requires": [
-            "moodle-editor_atto-plugin"
+            "powereduc-editor_atto-plugin"
         ]
     }
 }

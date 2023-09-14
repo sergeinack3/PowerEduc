@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ $instance = $DB->get_record('enrol', array('id'=>$ue->enrolid), '*', MUST_EXIST)
 $course = $DB->get_record('course', array('id'=>$instance->courseid), '*', MUST_EXIST);
 
 // The URL of the enrolled users page for the course.
-$usersurl = new moodle_url('/user/index.php', array('id' => $course->id));
+$usersurl = new powereduc_url('/user/index.php', array('id' => $course->id));
 
 // Do not allow any changes if plugin disabled, not available or not suitable.
 if (!$plugin = enrol_get_plugin($instance->enrol)) {
@@ -64,9 +64,9 @@ $manager = new course_enrolment_manager($PAGE, $course, $filter);
 $table = new course_enrolment_users_table($manager, $PAGE);
 
 // The URl to return the user too after this screen.
-$returnurl = new moodle_url($usersurl, $manager->get_url_params()+$table->get_url_params());
+$returnurl = new powereduc_url($usersurl, $manager->get_url_params()+$table->get_url_params());
 // The URL of this page.
-$url = new moodle_url('/enrol/editenrolment.php', $returnurl->params());
+$url = new powereduc_url('/enrol/editenrolment.php', $returnurl->params());
 
 $PAGE->set_url($url);
 $PAGE->set_pagelayout('admin');

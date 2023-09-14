@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * The abstract custom fields handler
  *
  * @package   core_customfield
- * @copyright 2018 David Matamoros <davidmc@moodle.com>
+ * @copyright 2018 David Matamoros <davidmc@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -46,7 +46,7 @@ defined('POWEREDUC_INTERNAL') || die;
  * - \core_customfield\api::get_category($categoryid)
  *
  * @package core_customfield
- * @copyright 2018 David Matamoros <davidmc@moodle.com>
+ * @copyright 2018 David Matamoros <davidmc@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 abstract class handler {
@@ -117,7 +117,7 @@ abstract class handler {
             return $classname::create($itemid);
         }
         $a = ['component' => s($component), 'area' => s($area)];
-        throw new \moodle_exception('unknownhandler', 'core_customfield', (object)$a);
+        throw new \powereduc_exception('unknownhandler', 'core_customfield', (object)$a);
     }
 
     /**
@@ -148,9 +148,9 @@ abstract class handler {
     /**
      * URL for configuration of the fields on this handler.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
-    abstract public function get_configuration_url() : \moodle_url;
+    abstract public function get_configuration_url() : \powereduc_url;
 
     /**
      * Context that should be used for data stored for the given record
@@ -222,12 +222,12 @@ abstract class handler {
      *
      * @param category_controller $category
      * @return category_controller
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     protected function validate_category(category_controller $category) : category_controller {
         $categories = $this->get_categories_with_fields();
         if (!array_key_exists($category->get('id'), $categories)) {
-            throw new \moodle_exception('categorynotfound', 'core_customfield');
+            throw new \powereduc_exception('categorynotfound', 'core_customfield');
         }
         return $categories[$category->get('id')];
     }
@@ -237,15 +237,15 @@ abstract class handler {
      *
      * @param field_controller $field
      * @return field_controller
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     protected function validate_field(field_controller $field) : field_controller {
         if (!array_key_exists($field->get('categoryid'), $this->get_categories_with_fields())) {
-            throw new \moodle_exception('fieldnotfound', 'core_customfield');
+            throw new \powereduc_exception('fieldnotfound', 'core_customfield');
         }
         $category = $this->get_categories_with_fields()[$field->get('categoryid')];
         if (!array_key_exists($field->get('id'), $category->get_fields())) {
-            throw new \moodle_exception('fieldnotfound', 'core_customfield');
+            throw new \powereduc_exception('fieldnotfound', 'core_customfield');
         }
         return $category->get_fields()[$field->get('id')];
     }
@@ -521,7 +521,7 @@ abstract class handler {
     /**
      * Form data definition callback.
      *
-     * This method is called from moodleform::definition_after_data and allows to tweak
+     * This method is called from powereducform::definition_after_data and allows to tweak
      * mform with some data coming directly from the field plugin data controller.
      *
      * @param \MoodleQuickForm $mform
@@ -589,7 +589,7 @@ abstract class handler {
     }
 
     /**
-     * Validates the given data for custom fields, used in moodleform validation() function
+     * Validates the given data for custom fields, used in powereducform validation() function
      *
      * Example:
      *   public function validation($data, $files) {

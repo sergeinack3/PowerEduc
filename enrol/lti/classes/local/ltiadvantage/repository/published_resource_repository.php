@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -62,7 +62,7 @@ class published_resource_repository {
     private function get_available_resources_from_records(array $resources, int $userid): array {
         global $CFG;
         require_once($CFG->libdir . '/gradelib.php');
-        require_once($CFG->libdir . '/moodlelib.php');
+        require_once($CFG->libdir . '/powereduclib.php');
 
         $availableresources = [];
 
@@ -130,7 +130,7 @@ class published_resource_repository {
         global $DB, $CFG;
         require_once($CFG->libdir . '/accesslib.php');
         require_once($CFG->libdir . '/enrollib.php');
-        require_once($CFG->libdir . '/moodlelib.php');
+        require_once($CFG->libdir . '/powereduclib.php');
         require_once($CFG->libdir . '/modinfolib.php');
         require_once($CFG->libdir . '/weblib.php');
 
@@ -178,7 +178,7 @@ class published_resource_repository {
 
         require_once($CFG->libdir . '/accesslib.php');
         require_once($CFG->libdir . '/enrollib.php');
-        require_once($CFG->libdir . '/moodlelib.php');
+        require_once($CFG->libdir . '/powereduclib.php');
         require_once($CFG->libdir . '/modinfolib.php');
         require_once($CFG->libdir . '/weblib.php');
 

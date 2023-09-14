@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -50,11 +50,11 @@ if ('verify' == $step) {
     if ($live_users = $mnet_peer->count_live_sessions() > 0) {
         echo $OUTPUT->notification(get_string('usersareonline', 'mnet', $live_users));
     }
-    $yesurl = new moodle_url('/admin/mnet/delete.php', array('hostid' => $mnet_peer->id, 'step' => 'delete'));
-    $nourl = new moodle_url('/admin/mnet/peers.php');
+    $yesurl = new powereduc_url('/admin/mnet/delete.php', array('hostid' => $mnet_peer->id, 'step' => 'delete'));
+    $nourl = new powereduc_url('/admin/mnet/peers.php');
     echo $OUTPUT->confirm(get_string('reallydeleteserver', 'mnet')  . ': ' .  $mnet_peer->name, $yesurl, $nourl);
     echo $OUTPUT->footer();
 } elseif ('delete' == $step) {
     $mnet_peer->delete();
-    redirect(new moodle_url('/admin/mnet/peers.php'), get_string('hostdeleted', 'mnet'), 5);
+    redirect(new powereduc_url('/admin/mnet/peers.php'), get_string('hostdeleted', 'mnet'), 5);
 }

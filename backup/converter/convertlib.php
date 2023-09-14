@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  *
  * @package    core
  * @subpackage backup-convert
- * @copyright  2011 Mark Nielsen <mark@moodlerooms.com>
+ * @copyright  2011 Mark Nielsen <mark@powereducrooms.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -272,9 +272,9 @@ abstract class base_converter implements loggable {
 /**
  * General convert-related exception
  *
- * @author David Mudrak <david@moodle.com>
+ * @author David Mudrak <david@powereduc.com>
  */
-class convert_exception extends moodle_exception {
+class convert_exception extends powereduc_exception {
 
     /**
      * Constructor

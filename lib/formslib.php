@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * formslib.php - library of classes for creating forms in Moodle, based on PEAR QuickForms.
+ * formslib.php - library of classes for creating forms in PowerEduc, based on PEAR QuickForms.
  *
  * To use formslib then you will want to create a new file purpose_form.php eg. edit_form.php
  * and you want to name your class something like {modulename}_{purpose}_form. Your class will
- * extend moodleform overriding abstract classes definition and optionally defintion_after_data
+ * extend powereducform overriding abstract classes definition and optionally defintion_after_data
  * and validation.
  *
  * See examples of use of this library in course/edit.php and course/edit_form.php
@@ -71,7 +71,7 @@ if ($CFG->debugdeveloper) {
  * Initalize javascript for date type form element
  *
  * @staticvar bool $done make sure it gets initalize once.
- * @global moodle_page $PAGE
+ * @global powereduc_page $PAGE
  */
 function form_init_date_js() {
     global $PAGE;
@@ -83,7 +83,7 @@ function form_init_date_js() {
             // The YUI2 calendar only supports the gregorian calendar type.
             return;
         }
-        $module   = 'moodle-form-dateselector';
+        $module   = 'powereduc-form-dateselector';
         $function = 'M.form.dateselector.init_date_selectors';
         $defaulttimezone = date_default_timezone_get();
 
@@ -114,11 +114,11 @@ function form_init_date_js() {
 }
 
 /**
- * Wrapper that separates quickforms syntax from moodle code
+ * Wrapper that separates quickforms syntax from powereduc code
  *
- * Moodle specific wrapper that separates quickforms syntax from moodle code. You won't directly
+ * PowerEduc specific wrapper that separates quickforms syntax from powereduc code. You won't directly
  * use this class you should write a class definition which extends this class or a more specific
- * subclass such a moodleform_mod for each form you want to display and/or process with formslib.
+ * subclass such a powereducform_mod for each form you want to display and/or process with formslib.
  *
  * You will write your own definition() method which performs the form set up.
  *
@@ -127,11 +127,11 @@ function form_init_date_js() {
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @todo      MDL-19380 rethink the file scanning
  */
-abstract class moodleform {
+abstract class powereducform {
     /** @var string name of the form */
     protected $_formname;       // form name
 
-    /** @var MoodleQuickForm quickform object definition */
+    /** @var PowerEducQuickForm quickform object definition */
     protected $_form;
 
     /** @var array globals workaround */
@@ -154,11 +154,11 @@ abstract class moodleform {
      * you have specified in definition using addRule
      *
      * The name of the form (id attribute of the form) is automatically generated depending on
-     * the name you gave the class extending moodleform. You should call your class something
+     * the name you gave the class extending powereducform. You should call your class something
      * like
      *
      * @param mixed $action the action attribute for the form. If empty defaults to auto detect the
-     *              current url. If a moodle_url object then outputs params as hidden variables.
+     *              current url. If a powereduc_url object then outputs params as hidden variables.
      * @param mixed $customdata if your form defintion method needs access to data such as $course
      *              $cm, etc. to construct the form definition then pass it in this array. You can
      *              use globals for somethings.
@@ -179,7 +179,7 @@ abstract class moodleform {
     public function __construct($action=null, $customdata=null, $method='post', $target='', $attributes=null, $editable=true,
                                 $ajaxformdata=null) {
         global $CFG, $FULLME;
-        // no standard mform in moodle should allow autocomplete with the exception of user signup
+        // no standard mform in powereduc should allow autocomplete with the exception of user signup
         if (empty($attributes)) {
             $attributes = array('autocomplete'=>'off');
         } else if (is_array($attributes)) {
@@ -206,7 +206,7 @@ abstract class moodleform {
         $this->_formname = $this->get_form_identifier();
         $this->_ajaxformdata = $ajaxformdata;
 
-        $this->_form = new MoodleQuickForm($this->_formname, $method, $action, $target, $attributes, $ajaxformdata);
+        $this->_form = new PowerEducQuickForm($this->_formname, $method, $action, $target, $attributes, $ajaxformdata);
         if (!$editable){
             $this->_form->hardFreeze();
         }
@@ -231,9 +231,9 @@ abstract class moodleform {
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
-    public function moodleform($action=null, $customdata=null, $method='post', $target='', $attributes=null, $editable=true) {
+    public function powereducform($action=null, $customdata=null, $method='post', $target='', $attributes=null, $editable=true) {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
         self::__construct($action, $customdata, $method, $target, $attributes, $editable);
     }
@@ -312,7 +312,7 @@ abstract class moodleform {
         // the _qf__.$this->_formname serves as a marker that form was actually submitted
         if (array_key_exists('_qf__'.$this->_formname, $submission) and $submission['_qf__'.$this->_formname] == 1) {
             if (!confirm_sesskey()) {
-                throw new \moodle_exception('invalidsesskey');
+                throw new \powereduc_exception('invalidsesskey');
             }
             $files = $_FILES;
         } else {
@@ -650,20 +650,20 @@ abstract class moodleform {
 
             // Let the form instance validate the submitted values.
             $data = $mform->exportValues();
-            $moodle_val = $this->validation($data, $files);
-            if ((is_array($moodle_val) && count($moodle_val)!==0)) {
+            $powereduc_val = $this->validation($data, $files);
+            if ((is_array($powereduc_val) && count($powereduc_val)!==0)) {
                 // non-empty array means errors
-                foreach ($moodle_val as $element=>$msg) {
+                foreach ($powereduc_val as $element=>$msg) {
                     $mform->setElementError($element, $msg);
                 }
-                $moodle_val = false;
+                $powereduc_val = false;
 
             } else {
                 // anything else means validation ok
-                $moodle_val = true;
+                $powereduc_val = true;
             }
 
-            $this->_validated = ($internal_val and $element_val and $moodle_val and $file_val);
+            $this->_validated = ($internal_val and $element_val and $powereduc_val and $file_val);
         }
         return $this->_validated;
     }
@@ -736,10 +736,10 @@ abstract class moodleform {
     /**
      * Save verified uploaded files into directory. Upload process can be customised from definition()
      *
-     * @deprecated since Moodle 2.0
+     * @deprecated since PowerEduc 2.0
      * @todo MDL-31294 remove this api
-     * @see moodleform::save_stored_file()
-     * @see moodleform::save_file()
+     * @see powereducform::save_stored_file()
+     * @see powereducform::save_file()
      * @param string $destination path where file should be stored
      * @return bool Always false
      */
@@ -775,7 +775,7 @@ abstract class moodleform {
 
         $element = $this->_form->getElement($elname);
 
-        if ($element instanceof MoodleQuickForm_filepicker || $element instanceof MoodleQuickForm_filemanager) {
+        if ($element instanceof PowerEducQuickForm_filepicker || $element instanceof PowerEducQuickForm_filemanager) {
             $values = $this->_form->exportValues($elname);
             if (empty($values[$elname])) {
                 return false;
@@ -823,7 +823,7 @@ abstract class moodleform {
 
         $element = $this->_form->getElement($elname);
 
-        if ($element instanceof MoodleQuickForm_filepicker || $element instanceof MoodleQuickForm_filemanager) {
+        if ($element instanceof PowerEducQuickForm_filepicker || $element instanceof PowerEducQuickForm_filemanager) {
             $values = $this->_form->exportValues($elname);
             if (empty($values[$elname])) {
                 return false;
@@ -872,7 +872,7 @@ abstract class moodleform {
 
     /**
      * Get draft files of a form element
-     * This is a protected method which will be used only inside moodleforms
+     * This is a protected method which will be used only inside powereducforms
      *
      * @param string $elname name of element
      * @return array|bool|null
@@ -886,7 +886,7 @@ abstract class moodleform {
 
         $element = $this->_form->getElement($elname);
 
-        if ($element instanceof MoodleQuickForm_filepicker || $element instanceof MoodleQuickForm_filemanager) {
+        if ($element instanceof PowerEducQuickForm_filepicker || $element instanceof PowerEducQuickForm_filemanager) {
             $values = $this->_form->exportValues($elname);
             if (empty($values[$elname])) {
                 return false;
@@ -931,7 +931,7 @@ abstract class moodleform {
         $element = $this->_form->getElement($elname);
         $fs = get_file_storage();
 
-        if ($element instanceof MoodleQuickForm_filepicker) {
+        if ($element instanceof PowerEducQuickForm_filepicker) {
             $values = $this->_form->exportValues($elname);
             if (empty($values[$elname])) {
                 return false;
@@ -992,7 +992,7 @@ abstract class moodleform {
 
         $element = $this->_form->getElement($elname);
 
-        if ($element instanceof MoodleQuickForm_filepicker || $element instanceof MoodleQuickForm_filemanager) {
+        if ($element instanceof PowerEducQuickForm_filepicker || $element instanceof PowerEducQuickForm_filemanager) {
             $values = $this->_form->exportValues($elname);
             if (empty($values[$elname])) {
                 return false;
@@ -1054,7 +1054,7 @@ abstract class moodleform {
      * This is useful for intermediate classes to inject logic after the definition was
      * provided without requiring developers to call the parent {{@link self::definition()}}
      * as it's not obvious by design. The 'intermediate' class is 'MyClass extends
-     * IntermediateClass extends moodleform'.
+     * IntermediateClass extends powereducform'.
      *
      * Classes overriding this method should always call the parent. We may not add
      * anything specifically in this instance of the method, but intermediate classes
@@ -1303,7 +1303,7 @@ abstract class moodleform {
         // set checkbox state depending on orignal/submitted value by controoler button
         if (!is_null($contollerbutton) || is_null($selectvalue)) {
             foreach ($mform->_elements as $element) {
-                if (($element instanceof MoodleQuickForm_advcheckbox) &&
+                if (($element instanceof PowerEducQuickForm_advcheckbox) &&
                         $element->getAttribute('class') == $checkboxgroupclass &&
                         !$element->isFrozen()) {
                     $mform->setConstants(array($element->getName() => $newselectvalue));
@@ -1315,7 +1315,7 @@ abstract class moodleform {
         $mform->setType($checkboxcontrollerparam, PARAM_INT);
         $mform->setConstants(array($checkboxcontrollerparam => $newselectvalue));
 
-        $PAGE->requires->yui_module('moodle-form-checkboxcontroller', 'M.form.checkboxcontroller',
+        $PAGE->requires->yui_module('powereduc-form-checkboxcontroller', 'M.form.checkboxcontroller',
                 array(
                     array('groupid' => $groupid,
                         'checkboxclass' => $checkboxgroupclass,
@@ -1325,7 +1325,7 @@ abstract class moodleform {
                 );
 
         require_once("$CFG->libdir/form/submit.php");
-        $submitlink = new MoodleQuickForm_submit($checkboxcontrollername, $attributes);
+        $submitlink = new PowerEducQuickForm_submit($checkboxcontrollername, $attributes);
         $mform->addElement($submitlink);
         $mform->registerNoSubmitButton($checkboxcontrollername);
         $mform->setDefault($checkboxcontrollername, $text);
@@ -1376,7 +1376,7 @@ abstract class moodleform {
      * @param string $enhancement which init function should be called
      * @param array $options options passed to javascript
      * @param array $strings strings for javascript
-     * @deprecated since Moodle 3.3 MDL-57471
+     * @deprecated since PowerEduc 3.3 MDL-57471
      */
     function init_javascript_enhancement($element, $enhancement, array $options=array(), array $strings=null) {
         debugging('$mform->init_javascript_enhancement() is deprecated and no longer does anything. '.
@@ -1524,16 +1524,16 @@ abstract class moodleform {
     }
 
     /**
-     * Used by tests to generate valid submit keys for moodle forms that are
+     * Used by tests to generate valid submit keys for powereduc forms that are
      * submitted with ajax data.
      *
-     * @throws \moodle_exception If called outside unit test environment
+     * @throws \powereduc_exception If called outside unit test environment
      * @param array  $data Existing form data you wish to add the keys to.
      * @return array
      */
     public static function mock_generate_submit_keys($data = []) {
         if (!defined('PHPUNIT_TEST') || !PHPUNIT_TEST) {
-            throw new \moodle_exception("This function can only be used for unit testing.");
+            throw new \powereduc_exception("This function can only be used for unit testing.");
         }
 
         $formidentifier = get_called_class();
@@ -1558,7 +1558,7 @@ abstract class moodleform {
      * Set the initial 'dirty' state of the form.
      *
      * @param bool $state
-     * @since Moodle 3.7.1
+     * @since PowerEduc 3.7.1
      */
     public function set_initial_dirty_state($state = false) {
         $this->_form->set_initial_dirty_state($state);
@@ -1566,11 +1566,11 @@ abstract class moodleform {
 }
 
 /**
- * MoodleQuickForm implementation
+ * PowerEducQuickForm implementation
  *
  * You never extend this class directly. The class methods of this class are available from
- * the private $this->_form property on moodleform and its children. You generally only
- * call methods on this class from within abstract methods that you override on moodleform such
+ * the private $this->_form property on powereducform and its children. You generally only
+ * call methods on this class from within abstract methods that you override on powereducform such
  * as definition and definition_after_data
  *
  * @package   core_form
@@ -1578,7 +1578,7 @@ abstract class moodleform {
  * @copyright 2006 Jamie Pratt <me@jamiep.org>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class MoodleQuickForm extends HTML_QuickForm_DHTMLRulesTableless {
+class PowerEducQuickForm extends HTML_QuickForm_DHTMLRulesTableless {
     /** @var array type (PARAM_INT, PARAM_TEXT etc) of element value */
     var $_types = array();
 
@@ -1633,7 +1633,7 @@ class MoodleQuickForm extends HTML_QuickForm_DHTMLRulesTableless {
     var $_formName = '';
 
     /**
-     * String with the html for hidden params passed in as part of a moodle_url
+     * String with the html for hidden params passed in as part of a powereduc_url
      * object for the action. Output in the form.
      * @var string
      */
@@ -1667,7 +1667,7 @@ class MoodleQuickForm extends HTML_QuickForm_DHTMLRulesTableless {
      * @staticvar int $formcounter counts number of forms
      * @param string $formName Form's name.
      * @param string $method Form's method defaults to 'POST'
-     * @param string|moodle_url $action Form's action
+     * @param string|powereduc_url $action Form's action
      * @param string $target (optional)Form's target defaults to none
      * @param mixed $attributes (optional)Extra attributes for <form> tag
      * @param array $ajaxformdata Forms submitted via ajax, must pass their data here, instead of relying on _GET and _POST.
@@ -1681,7 +1681,7 @@ class MoodleQuickForm extends HTML_QuickForm_DHTMLRulesTableless {
         HTML_Common::__construct($attributes);
         $target = empty($target) ? array() : array('target' => $target);
         $this->_formName = $formName;
-        if (is_a($action, 'moodle_url')){
+        if (is_a($action, 'powereduc_url')){
             $this->_pageparams = html_writer::input_hidden_params($action);
             $action = $action->out_omit_querystring();
         } else {
@@ -1696,7 +1696,7 @@ class MoodleQuickForm extends HTML_QuickForm_DHTMLRulesTableless {
         $formcounter++;
         $this->updateAttributes($attributes);
 
-        // This is custom stuff for Moodle :
+        // This is custom stuff for PowerEduc :
         $this->_ajaxformdata = $ajaxformdata;
         $oldclass=   $this->getAttribute('class');
         if (!empty($oldclass)){
@@ -1712,9 +1712,9 @@ class MoodleQuickForm extends HTML_QuickForm_DHTMLRulesTableless {
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
-    public function MoodleQuickForm($formName, $method, $action, $target='', $attributes=null) {
+    public function PowerEducQuickForm($formName, $method, $action, $target='', $attributes=null) {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
         self::__construct($formName, $method, $action, $target, $attributes);
     }
@@ -1818,7 +1818,7 @@ class MoodleQuickForm extends HTML_QuickForm_DHTMLRulesTableless {
      * This function has been deprecated. Show advanced has been replaced by
      * "Show more.../Show less..." in the shortforms javascript module.
      *
-     * @deprecated since Moodle 2.5
+     * @deprecated since PowerEduc 2.5
      * @param bool $showadvancedNow if true will show advanced elements.
       */
     function setShowAdvanced($showadvancedNow = null){
@@ -1829,7 +1829,7 @@ class MoodleQuickForm extends HTML_QuickForm_DHTMLRulesTableless {
      * This function has been deprecated. Show advanced has been replaced by
      * "Show more.../Show less..." in the shortforms javascript module.
      *
-     * @deprecated since Moodle 2.5
+     * @deprecated since PowerEduc 2.5
      * @return bool (Always false)
       */
     function getShowAdvanced(){
@@ -1850,7 +1850,7 @@ class MoodleQuickForm extends HTML_QuickForm_DHTMLRulesTableless {
      * Set the initial 'dirty' state of the form.
      *
      * @param bool $state
-     * @since Moodle 3.7.1
+     * @since PowerEduc 3.7.1
      */
     public function set_initial_dirty_state($state = false) {
         $this->_initial_form_dirty_state = $state;
@@ -1860,7 +1860,7 @@ class MoodleQuickForm extends HTML_QuickForm_DHTMLRulesTableless {
      * Is the form currently set to dirty?
      *
      * @return boolean Initial dirty state.
-     * @since Moodle 3.7.1
+     * @since PowerEduc 3.7.1
      */
     public function is_dirty() {
         return $this->_initial_form_dirty_state;
@@ -2027,7 +2027,7 @@ class MoodleQuickForm extends HTML_QuickForm_DHTMLRulesTableless {
      *
      * @param string $elementname
      * @param int $paramtype defines type of data contained in element. Use the constants PARAM_*.
-     *        {@link lib/moodlelib.php} for defined parameter types
+     *        {@link lib/powereduclib.php} for defined parameter types
      */
     function setType($elementname, $paramtype) {
         $this->_types[$elementname] = $paramtype;
@@ -2047,7 +2047,7 @@ class MoodleQuickForm extends HTML_QuickForm_DHTMLRulesTableless {
      * This can be used to set several types at once.
      *
      * @param array $paramtypes types of parameters.
-     * @see MoodleQuickForm::setType
+     * @see PowerEducQuickForm::setType
      */
     function setTypes($paramtypes) {
         foreach ($paramtypes as $elementname => $paramtype) {
@@ -2125,7 +2125,7 @@ class MoodleQuickForm extends HTML_QuickForm_DHTMLRulesTableless {
         } else if (!is_array($type) && is_array($value)) {
             $value = clean_param_array($value, $type, true);
         } else {
-            throw new coding_exception('Unexpected type or value received in MoodleQuickForm::getCleanedValue()');
+            throw new coding_exception('Unexpected type or value received in PowerEducQuickForm::getCleanedValue()');
         }
         return $value;
     }
@@ -2183,7 +2183,7 @@ class MoodleQuickForm extends HTML_QuickForm_DHTMLRulesTableless {
 
     /**
      * Initializes a default form value. Used to specify the default for a new entry where
-     * no data is loaded in using moodleform::set_data()
+     * no data is loaded in using powereducform::set_data()
      *
      * note: $slashed param removed
      *
@@ -2208,14 +2208,14 @@ class MoodleQuickForm extends HTML_QuickForm_DHTMLRulesTableless {
      *   1/ get_string($identifier, $component) - the title of the help page
      *   2/ get_string($identifier.'_help', $component) - the actual help page text
      *
-     * @since Moodle 2.0
+     * @since PowerEduc 2.0
      * @param string $elementname name of the element to add the item to
      * @param string $identifier help string identifier without _help suffix
      * @param string $component component name to look the help string in
      * @param string $linktext optional text to display next to the icon
      * @param bool $suppresscheck set to true if the element may not exist
      */
-    function addHelpButton($elementname, $identifier, $component = 'moodle', $linktext = '', $suppresscheck = false) {
+    function addHelpButton($elementname, $identifier, $component = 'powereduc', $linktext = '', $suppresscheck = false) {
         global $OUTPUT;
         if (array_key_exists($elementname, $this->_elementIndex)) {
             $element = $this->_elements[$this->_elementIndex[$elementname]];
@@ -2444,7 +2444,7 @@ class MoodleQuickForm extends HTML_QuickForm_DHTMLRulesTableless {
                     if (is_object($element) && $element->getType() == 'editor') {
                         if ($element->getType() == 'editor') {
                             $fullelementname .= '[text]';
-                            // Add format to rule as moodleform check which format is supported by browser
+                            // Add format to rule as powereducform check which format is supported by browser
                             // it is not set anywhere... So small hack to make sure we pass it down to quickform.
                             if (is_null($rule['format'])) {
                                 $rule['format'] = $element->getFormat();
@@ -2754,7 +2754,7 @@ require([
             foreach ($elsInGroup as $elInGroup){
                 if (is_a($elInGroup, 'HTML_QuickForm_group')) {
                     // Groups nested in groups: append the group name to the element and then change it back.
-                    // We will be appending group name again in MoodleQuickForm_group::export_for_template().
+                    // We will be appending group name again in PowerEducQuickForm_group::export_for_template().
                     $oldname = $elInGroup->getName();
                     if ($element->_appendName) {
                         $elInGroup->setName($element->getName() . '[' . $oldname . ']');
@@ -2999,9 +2999,9 @@ require([
 }
 
 /**
- * MoodleQuickForm renderer
+ * PowerEducQuickForm renderer
  *
- * A renderer for MoodleQuickForm that only uses XHTML and CSS and no
+ * A renderer for PowerEducQuickForm that only uses XHTML and CSS and no
  * table tags, extends PEAR class HTML_QuickForm_Renderer_Tableless
  *
  * Stylesheet is part of standard theme and should be automatically included.
@@ -3010,7 +3010,7 @@ require([
  * @copyright 2007 Jamie Pratt <me@jamiep.org>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class MoodleQuickForm_Renderer extends HTML_QuickForm_Renderer_Tableless{
+class PowerEducQuickForm_Renderer extends HTML_QuickForm_Renderer_Tableless{
 
     /** @var array Element template array */
     var $_elementTemplates;
@@ -3087,9 +3087,9 @@ class MoodleQuickForm_Renderer extends HTML_QuickForm_Renderer_Tableless{
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
-    public function MoodleQuickForm_Renderer() {
+    public function PowerEducQuickForm_Renderer() {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
         self::__construct();
     }
@@ -3115,7 +3115,7 @@ class MoodleQuickForm_Renderer extends HTML_QuickForm_Renderer_Tableless{
     /**
      * What to do when starting the form
      *
-     * @param MoodleQuickForm $form reference of the form
+     * @param PowerEducQuickForm $form reference of the form
      */
     function startForm(&$form){
         global $PAGE, $OUTPUT;
@@ -3142,7 +3142,7 @@ class MoodleQuickForm_Renderer extends HTML_QuickForm_Renderer_Tableless{
             if (count($this->_collapsibleElements) > 1) {
                 $this->_collapseButtons = $OUTPUT->render_from_template('core_form/collapsesections', (object)[]);
             }
-            $PAGE->requires->yui_module('moodle-form-shortforms', 'M.form.shortforms', array(array('formid' => $formid)));
+            $PAGE->requires->yui_module('powereduc-form-shortforms', 'M.form.shortforms', array(array('formid' => $formid)));
         }
         if (!empty($this->_advancedElements)){
             $PAGE->requires->js_call_amd('core_form/showadvanced', 'init', [$formid]);
@@ -3152,7 +3152,7 @@ class MoodleQuickForm_Renderer extends HTML_QuickForm_Renderer_Tableless{
     /**
      * Create advance group of elements
      *
-     * @param MoodleQuickForm_group $group Passed by reference
+     * @param PowerEducQuickForm_group $group Passed by reference
      * @param bool $required if input is required field
      * @param string $error error message to display
      */
@@ -3298,8 +3298,8 @@ class MoodleQuickForm_Renderer extends HTML_QuickForm_Renderer_Tableless{
      * Called when visiting a form, after processing all form elements
      * Adds required note, form attributes, validation javascript and form content.
      *
-     * @global moodle_page $PAGE
-     * @param moodleform $form Passed by reference
+     * @global powereduc_page $PAGE
+     * @param powereducform $form Passed by reference
      */
     function finishForm(&$form){
         global $PAGE;
@@ -3311,7 +3311,7 @@ class MoodleQuickForm_Renderer extends HTML_QuickForm_Renderer_Tableless{
         if (!$form->isFrozen()) {
             $args = $form->getLockOptionObject();
             if (count($args[1]) > 0) {
-                $PAGE->requires->js_init_call('M.form.initFormDependencies', $args, true, moodleform::get_js_module());
+                $PAGE->requires->js_init_call('M.form.initFormDependencies', $args, true, powereducform::get_js_module());
             }
         }
     }
@@ -3319,7 +3319,7 @@ class MoodleQuickForm_Renderer extends HTML_QuickForm_Renderer_Tableless{
     * Called when visiting a header element
     *
     * @param HTML_QuickForm_header $header An HTML_QuickForm_header element being visited
-    * @global moodle_page $PAGE
+    * @global powereduc_page $PAGE
     */
     function renderHeader(&$header) {
         global $PAGE, $OUTPUT;
@@ -3393,7 +3393,7 @@ class MoodleQuickForm_Renderer extends HTML_QuickForm_Renderer_Tableless{
  * @copyright 2006 Jamie Pratt <me@jamiep.org>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class MoodleQuickForm_Rule_Required extends HTML_QuickForm_Rule {
+class PowerEducQuickForm_Rule_Required extends HTML_QuickForm_Rule {
     /**
      * Checks if an element is not empty.
      * This is a server-side validation, it works for both text fields and editor fields
@@ -3449,48 +3449,48 @@ class MoodleQuickForm_Rule_Required extends HTML_QuickForm_Rule {
  * @global object $GLOBALS['_HTML_QuickForm_default_renderer']
  * @name $_HTML_QuickForm_default_renderer
  */
-$GLOBALS['_HTML_QuickForm_default_renderer'] = new MoodleQuickForm_Renderer();
+$GLOBALS['_HTML_QuickForm_default_renderer'] = new PowerEducQuickForm_Renderer();
 
 /** Please keep this list in alphabetical order. */
-MoodleQuickForm::registerElementType('advcheckbox', "$CFG->libdir/form/advcheckbox.php", 'MoodleQuickForm_advcheckbox');
-MoodleQuickForm::registerElementType('autocomplete', "$CFG->libdir/form/autocomplete.php", 'MoodleQuickForm_autocomplete');
-MoodleQuickForm::registerElementType('button', "$CFG->libdir/form/button.php", 'MoodleQuickForm_button');
-MoodleQuickForm::registerElementType('cancel', "$CFG->libdir/form/cancel.php", 'MoodleQuickForm_cancel');
-MoodleQuickForm::registerElementType('course', "$CFG->libdir/form/course.php", 'MoodleQuickForm_course');
-MoodleQuickForm::registerElementType('cohort', "$CFG->libdir/form/cohort.php", 'MoodleQuickForm_cohort');
-MoodleQuickForm::registerElementType('searchableselector', "$CFG->libdir/form/searchableselector.php", 'MoodleQuickForm_searchableselector');
-MoodleQuickForm::registerElementType('checkbox', "$CFG->libdir/form/checkbox.php", 'MoodleQuickForm_checkbox');
-MoodleQuickForm::registerElementType('date_selector', "$CFG->libdir/form/dateselector.php", 'MoodleQuickForm_date_selector');
-MoodleQuickForm::registerElementType('date_time_selector', "$CFG->libdir/form/datetimeselector.php", 'MoodleQuickForm_date_time_selector');
-MoodleQuickForm::registerElementType('duration', "$CFG->libdir/form/duration.php", 'MoodleQuickForm_duration');
-MoodleQuickForm::registerElementType('editor', "$CFG->libdir/form/editor.php", 'MoodleQuickForm_editor');
-MoodleQuickForm::registerElementType('filemanager', "$CFG->libdir/form/filemanager.php", 'MoodleQuickForm_filemanager');
-MoodleQuickForm::registerElementType('filepicker', "$CFG->libdir/form/filepicker.php", 'MoodleQuickForm_filepicker');
-MoodleQuickForm::registerElementType('filetypes', "$CFG->libdir/form/filetypes.php", 'MoodleQuickForm_filetypes');
-MoodleQuickForm::registerElementType('float', "$CFG->libdir/form/float.php", 'MoodleQuickForm_float');
-MoodleQuickForm::registerElementType('grading', "$CFG->libdir/form/grading.php", 'MoodleQuickForm_grading');
-MoodleQuickForm::registerElementType('group', "$CFG->libdir/form/group.php", 'MoodleQuickForm_group');
-MoodleQuickForm::registerElementType('header', "$CFG->libdir/form/header.php", 'MoodleQuickForm_header');
-MoodleQuickForm::registerElementType('hidden', "$CFG->libdir/form/hidden.php", 'MoodleQuickForm_hidden');
-MoodleQuickForm::registerElementType('listing', "$CFG->libdir/form/listing.php", 'MoodleQuickForm_listing');
-MoodleQuickForm::registerElementType('defaultcustom', "$CFG->libdir/form/defaultcustom.php", 'MoodleQuickForm_defaultcustom');
-MoodleQuickForm::registerElementType('modgrade', "$CFG->libdir/form/modgrade.php", 'MoodleQuickForm_modgrade');
-MoodleQuickForm::registerElementType('modvisible', "$CFG->libdir/form/modvisible.php", 'MoodleQuickForm_modvisible');
-MoodleQuickForm::registerElementType('password', "$CFG->libdir/form/password.php", 'MoodleQuickForm_password');
-MoodleQuickForm::registerElementType('passwordunmask', "$CFG->libdir/form/passwordunmask.php", 'MoodleQuickForm_passwordunmask');
-MoodleQuickForm::registerElementType('questioncategory', "$CFG->libdir/form/questioncategory.php", 'MoodleQuickForm_questioncategory');
-MoodleQuickForm::registerElementType('radio', "$CFG->libdir/form/radio.php", 'MoodleQuickForm_radio');
-MoodleQuickForm::registerElementType('recaptcha', "$CFG->libdir/form/recaptcha.php", 'MoodleQuickForm_recaptcha');
-MoodleQuickForm::registerElementType('select', "$CFG->libdir/form/select.php", 'MoodleQuickForm_select');
-MoodleQuickForm::registerElementType('selectgroups', "$CFG->libdir/form/selectgroups.php", 'MoodleQuickForm_selectgroups');
-MoodleQuickForm::registerElementType('selectwithlink', "$CFG->libdir/form/selectwithlink.php", 'MoodleQuickForm_selectwithlink');
-MoodleQuickForm::registerElementType('selectyesno', "$CFG->libdir/form/selectyesno.php", 'MoodleQuickForm_selectyesno');
-MoodleQuickForm::registerElementType('static', "$CFG->libdir/form/static.php", 'MoodleQuickForm_static');
-MoodleQuickForm::registerElementType('submit', "$CFG->libdir/form/submit.php", 'MoodleQuickForm_submit');
-MoodleQuickForm::registerElementType('tags', "$CFG->libdir/form/tags.php", 'MoodleQuickForm_tags');
-MoodleQuickForm::registerElementType('text', "$CFG->libdir/form/text.php", 'MoodleQuickForm_text');
-MoodleQuickForm::registerElementType('textarea', "$CFG->libdir/form/textarea.php", 'MoodleQuickForm_textarea');
-MoodleQuickForm::registerElementType('url', "$CFG->libdir/form/url.php", 'MoodleQuickForm_url');
-MoodleQuickForm::registerElementType('warning', "$CFG->libdir/form/warning.php", 'MoodleQuickForm_warning');
+PowerEducQuickForm::registerElementType('advcheckbox', "$CFG->libdir/form/advcheckbox.php", 'PowerEducQuickForm_advcheckbox');
+PowerEducQuickForm::registerElementType('autocomplete', "$CFG->libdir/form/autocomplete.php", 'PowerEducQuickForm_autocomplete');
+PowerEducQuickForm::registerElementType('button', "$CFG->libdir/form/button.php", 'PowerEducQuickForm_button');
+PowerEducQuickForm::registerElementType('cancel', "$CFG->libdir/form/cancel.php", 'PowerEducQuickForm_cancel');
+PowerEducQuickForm::registerElementType('course', "$CFG->libdir/form/course.php", 'PowerEducQuickForm_course');
+PowerEducQuickForm::registerElementType('cohort', "$CFG->libdir/form/cohort.php", 'PowerEducQuickForm_cohort');
+PowerEducQuickForm::registerElementType('searchableselector', "$CFG->libdir/form/searchableselector.php", 'PowerEducQuickForm_searchableselector');
+PowerEducQuickForm::registerElementType('checkbox', "$CFG->libdir/form/checkbox.php", 'PowerEducQuickForm_checkbox');
+PowerEducQuickForm::registerElementType('date_selector', "$CFG->libdir/form/dateselector.php", 'PowerEducQuickForm_date_selector');
+PowerEducQuickForm::registerElementType('date_time_selector', "$CFG->libdir/form/datetimeselector.php", 'PowerEducQuickForm_date_time_selector');
+PowerEducQuickForm::registerElementType('duration', "$CFG->libdir/form/duration.php", 'PowerEducQuickForm_duration');
+PowerEducQuickForm::registerElementType('editor', "$CFG->libdir/form/editor.php", 'PowerEducQuickForm_editor');
+PowerEducQuickForm::registerElementType('filemanager', "$CFG->libdir/form/filemanager.php", 'PowerEducQuickForm_filemanager');
+PowerEducQuickForm::registerElementType('filepicker', "$CFG->libdir/form/filepicker.php", 'PowerEducQuickForm_filepicker');
+PowerEducQuickForm::registerElementType('filetypes', "$CFG->libdir/form/filetypes.php", 'PowerEducQuickForm_filetypes');
+PowerEducQuickForm::registerElementType('float', "$CFG->libdir/form/float.php", 'PowerEducQuickForm_float');
+PowerEducQuickForm::registerElementType('grading', "$CFG->libdir/form/grading.php", 'PowerEducQuickForm_grading');
+PowerEducQuickForm::registerElementType('group', "$CFG->libdir/form/group.php", 'PowerEducQuickForm_group');
+PowerEducQuickForm::registerElementType('header', "$CFG->libdir/form/header.php", 'PowerEducQuickForm_header');
+PowerEducQuickForm::registerElementType('hidden', "$CFG->libdir/form/hidden.php", 'PowerEducQuickForm_hidden');
+PowerEducQuickForm::registerElementType('listing', "$CFG->libdir/form/listing.php", 'PowerEducQuickForm_listing');
+PowerEducQuickForm::registerElementType('defaultcustom', "$CFG->libdir/form/defaultcustom.php", 'PowerEducQuickForm_defaultcustom');
+PowerEducQuickForm::registerElementType('modgrade', "$CFG->libdir/form/modgrade.php", 'PowerEducQuickForm_modgrade');
+PowerEducQuickForm::registerElementType('modvisible', "$CFG->libdir/form/modvisible.php", 'PowerEducQuickForm_modvisible');
+PowerEducQuickForm::registerElementType('password', "$CFG->libdir/form/password.php", 'PowerEducQuickForm_password');
+PowerEducQuickForm::registerElementType('passwordunmask', "$CFG->libdir/form/passwordunmask.php", 'PowerEducQuickForm_passwordunmask');
+PowerEducQuickForm::registerElementType('questioncategory', "$CFG->libdir/form/questioncategory.php", 'PowerEducQuickForm_questioncategory');
+PowerEducQuickForm::registerElementType('radio', "$CFG->libdir/form/radio.php", 'PowerEducQuickForm_radio');
+PowerEducQuickForm::registerElementType('recaptcha', "$CFG->libdir/form/recaptcha.php", 'PowerEducQuickForm_recaptcha');
+PowerEducQuickForm::registerElementType('select', "$CFG->libdir/form/select.php", 'PowerEducQuickForm_select');
+PowerEducQuickForm::registerElementType('selectgroups', "$CFG->libdir/form/selectgroups.php", 'PowerEducQuickForm_selectgroups');
+PowerEducQuickForm::registerElementType('selectwithlink', "$CFG->libdir/form/selectwithlink.php", 'PowerEducQuickForm_selectwithlink');
+PowerEducQuickForm::registerElementType('selectyesno', "$CFG->libdir/form/selectyesno.php", 'PowerEducQuickForm_selectyesno');
+PowerEducQuickForm::registerElementType('static', "$CFG->libdir/form/static.php", 'PowerEducQuickForm_static');
+PowerEducQuickForm::registerElementType('submit', "$CFG->libdir/form/submit.php", 'PowerEducQuickForm_submit');
+PowerEducQuickForm::registerElementType('tags', "$CFG->libdir/form/tags.php", 'PowerEducQuickForm_tags');
+PowerEducQuickForm::registerElementType('text', "$CFG->libdir/form/text.php", 'PowerEducQuickForm_text');
+PowerEducQuickForm::registerElementType('textarea', "$CFG->libdir/form/textarea.php", 'PowerEducQuickForm_textarea');
+PowerEducQuickForm::registerElementType('url', "$CFG->libdir/form/url.php", 'PowerEducQuickForm_url');
+PowerEducQuickForm::registerElementType('warning', "$CFG->libdir/form/warning.php", 'PowerEducQuickForm_warning');
 
-MoodleQuickForm::registerRule('required', null, 'MoodleQuickForm_Rule_Required', "$CFG->libdir/formslib.php");
+PowerEducQuickForm::registerRule('required', null, 'PowerEducQuickForm_Rule_Required', "$CFG->libdir/formslib.php");

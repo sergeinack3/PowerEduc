@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage backup-helper
  * @copyright  2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -217,13 +217,13 @@ abstract class backup_helper {
      * @param \core\progress\base $progress Optional progress monitor
      * @return stored_file if created, null otherwise
      *
-     * @throws moodle_exception in case of any problems
+     * @throws powereduc_exception in case of any problems
      */
     static public function store_backup_file($backupid, $filepath, \core\progress\base $progress = null) {
         global $CFG;
 
         // First of all, get some information from the backup_controller to help us decide
-        list($dinfo, $cinfo, $sinfo) = backup_controller_dbops::get_moodle_backup_information(
+        list($dinfo, $cinfo, $sinfo) = backup_controller_dbops::get_powereduc_backup_information(
                 $backupid, $progress);
 
         // Extract useful information to decide
@@ -240,7 +240,7 @@ abstract class backup_helper {
         // Quick hack. If for any reason, filename is blank, fix it here.
         // TODO: This hack will be out once MDL-22142 - P26 gets fixed
         if (empty($filename)) {
-            $filename = backup_plan_dbops::get_default_backup_filename('moodle2', $backuptype, $id, $hasusers, $isannon);
+            $filename = backup_plan_dbops::get_default_backup_filename('powereduc2', $backuptype, $id, $hasusers, $isannon);
         }
 
         // Backups of type IMPORT aren't stored ever

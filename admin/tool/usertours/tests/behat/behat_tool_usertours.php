@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@ class behat_tool_usertours extends behat_base {
 
         // Fill form and post.
         $this->execute('behat_forms::i_set_the_following_fields_to_these_values', $table);
-        $this->execute('behat_forms::press_button', get_string('savechanges', 'moodle'));
+        $this->execute('behat_forms::press_button', get_string('savechanges', 'powereduc'));
         $this->execute('behat_general::i_wait_to_be_redirected');
     }
 
@@ -79,7 +79,7 @@ class behat_tool_usertours extends behat_base {
                 $this->execute('behat_forms::i_set_the_field_to', [$this->escape($locator), $this->escape($value)]);
             }
 
-            $this->execute('behat_forms::press_button', get_string('savechanges', 'moodle'));
+            $this->execute('behat_forms::press_button', get_string('savechanges', 'powereduc'));
             $this->execute('behat_general::i_wait_to_be_redirected');
         }
     }

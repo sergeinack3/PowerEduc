@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Data generator.
@@ -416,7 +416,7 @@ EOD;
         }
 
         if (!empty($options['createsections']) && empty($record['numsections'])) {
-            // Since Moodle 3.3 function create_course() automatically creates sections if numsections is specified.
+            // Since PowerEduc 3.3 function create_course() automatically creates sections if numsections is specified.
             // For BC if 'createsections' is given but 'numsections' is not, assume the default value from config.
             $record['numsections'] = get_config('powereduccourse', 'numsections');
         }
@@ -663,7 +663,7 @@ EOD;
      * @param array|stdClass $record data to use to up set the instance.
      * @param array $options options
      * @return stdClass repository instance record
-     * @since Moodle 2.5.1
+     * @since PowerEduc 2.5.1
      */
     public function create_repository($type, $record=null, array $options = null) {
         $generator = $this->get_plugin_generator('repository_'.$type);
@@ -677,7 +677,7 @@ EOD;
      * @param array|stdClass $record data to use to up set the instance.
      * @param array $options options
      * @return repository_type object
-     * @since Moodle 2.5.1
+     * @since PowerEduc 2.5.1
      */
     public function create_repository_type($type, $record=null, array $options = null) {
         $generator = $this->get_plugin_generator('repository_'.$type);

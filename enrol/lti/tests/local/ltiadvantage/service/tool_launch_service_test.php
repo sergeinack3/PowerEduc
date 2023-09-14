@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -280,7 +280,7 @@ class tool_launch_service_test extends \lti_advantage_testcase {
         $mockuser = $this->get_mock_launch_users_with_ids(['1p3_1'])[0];
         $mocklaunch = $this->get_mock_launch($modresource, $mockuser, null, null, false, null, []);
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $this->expectExceptionMessage(get_string('ltiadvlauncherror:missingid', 'enrol_lti'));
         [$userid, $resource] = $launchservice->user_launches_tool($instructoruser, $mocklaunch);
     }
@@ -298,7 +298,7 @@ class tool_launch_service_test extends \lti_advantage_testcase {
         $mockuser = $this->get_mock_launch_users_with_ids(['1p3_1'])[0];
         $mocklaunch = $this->get_mock_launch($modresource, $mockuser, null, null, false, null, ['id' => 999999]);
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $this->expectExceptionMessage(get_string('ltiadvlauncherror:invalidid', 'enrol_lti', 999999));
         [$userid, $resource] = $launchservice->user_launches_tool($instructoruser, $mocklaunch);
     }
@@ -330,7 +330,7 @@ class tool_launch_service_test extends \lti_advantage_testcase {
         $mockuser = $this->get_mock_launch_users_with_ids(['1p3_1'])[0];
         $mocklaunch = $this->get_mock_launch($modresource, $mockuser);
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $this->expectExceptionMessage(get_string('ltiadvlauncherror:invalidregistration', 'enrol_lti',
             [$registration->get_platformid(), $registration->get_clientid()]));
         [$userid, $resource] = $launchservice->user_launches_tool($instructoruser, $mocklaunch);
@@ -363,7 +363,7 @@ class tool_launch_service_test extends \lti_advantage_testcase {
         $mockuser = $this->get_mock_launch_users_with_ids(['1p3_1'])[0];
         $mocklaunch = $this->get_mock_launch($modresource, $mockuser);
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $this->expectExceptionMessage(get_string('ltiadvlauncherror:invaliddeployment', 'enrol_lti',
             [$deployment->get_deploymentid()]));
         [$userid, $resource] = $launchservice->user_launches_tool($instructoruser, $mocklaunch);
@@ -485,7 +485,7 @@ class tool_launch_service_test extends \lti_advantage_testcase {
         $mockinstructorlaunch = $this->get_mock_launch($modresource, $mockinstructoruser);
         $launchservice = $this->get_tool_launch_service();
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $launchservice->user_launches_tool($instructoruser, $mockinstructorlaunch);
     }
 
@@ -578,7 +578,7 @@ class tool_launch_service_test extends \lti_advantage_testcase {
                 'aud' => ['cat', 'dog', '123'],
                 'expected' => [
                     'valid' => false,
-                    'exception' => \moodle_exception::class,
+                    'exception' => \powereduc_exception::class,
                     'exceptionmessage' => get_string('ltiadvlauncherror:invalidregistration', 'enrol_lti')
                 ]
             ],
@@ -586,7 +586,7 @@ class tool_launch_service_test extends \lti_advantage_testcase {
                 'aud' => ['cat'],
                 'expected' => [
                     'valid' => false,
-                    'exception' => \moodle_exception::class,
+                    'exception' => \powereduc_exception::class,
                     'exceptionmessage' => get_string('ltiadvlauncherror:invalidregistration', 'enrol_lti')
                 ]
             ],
@@ -594,7 +594,7 @@ class tool_launch_service_test extends \lti_advantage_testcase {
                 'aud' => 'cat',
                 'expected' => [
                     'valid' => false,
-                    'exception' => \moodle_exception::class,
+                    'exception' => \powereduc_exception::class,
                     'exceptionmessage' => get_string('ltiadvlauncherror:invalidregistration', 'enrol_lti')
                 ]
             ],
@@ -602,7 +602,7 @@ class tool_launch_service_test extends \lti_advantage_testcase {
                 'aud' => '',
                 'expected' => [
                     'valid' => false,
-                    'exception' => \moodle_exception::class,
+                    'exception' => \powereduc_exception::class,
                     'exceptionmessage' => get_string('ltiadvlauncherror:invalidregistration', 'enrol_lti')
                 ]
             ],

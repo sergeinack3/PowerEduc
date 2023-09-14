@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@ final class copy_helper {
 
         $missingfields = array_diff($requiredfields, array_keys((array)$formdata));
         if ($missingfields) {
-            throw new \moodle_exception('copyfieldnotfound', 'backup', '', null, implode(", ", $missingfields));
+            throw new \powereduc_exception('copyfieldnotfound', 'backup', '', null, implode(", ", $missingfields));
         }
 
         // Remove any extra stuff in the form data.

@@ -1,4 +1,4 @@
-Description of ADOdb library import into Moodle
+Description of ADOdb library import into PowerEduc
 
 Source: https://github.com/ADOdb/ADOdb
 
@@ -22,4 +22,4 @@ Removed:
 
 Added:
  * index.html - prevent directory browsing on misconfigured servers
- * readme_moodle.txt - this file ;-)
+ * readme_powereduc.txt - this file ;-)

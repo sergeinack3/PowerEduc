@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ $sort = optional_param('sort', 'fullname', PARAM_ALPHA);
 $dir  = optional_param('dir', 'asc', PARAM_ALPHA);
 
 admin_externalpage_setup('userbulk');
-require_capability('moodle/cohort:assign', context_system::instance());
+require_capability('powereduc/cohort:assign', context_system::instance());
 
 $users = $SESSION->bulk_users;
 
@@ -47,7 +47,7 @@ foreach ($allcohorts as $c) {
         continue;
     }
     $context = context::instance_by_id($c->contextid);
-    if (!has_capability('moodle/cohort:assign', $context)) {
+    if (!has_capability('powereduc/cohort:assign', $context)) {
         continue;
     }
 
@@ -60,7 +60,7 @@ foreach ($allcohorts as $c) {
 unset($allcohorts);
 
 if (count($cohorts) < 2) {
-    redirect(new moodle_url('/admin/user/user_bulk.php'), get_string('bulknocohort', 'core_cohort'));
+    redirect(new powereduc_url('/admin/user/user_bulk.php'), get_string('bulknocohort', 'core_cohort'));
 }
 
 $countries = get_string_manager()->get_list_of_countries(true);
@@ -80,7 +80,7 @@ unset($countries);
 $mform = new user_bulk_cohortadd_form(null, $cohorts);
 
 if (empty($users) or $mform->is_cancelled()) {
-    redirect(new moodle_url('/admin/user/user_bulk.php'));
+    redirect(new powereduc_url('/admin/user/user_bulk.php'));
 
 } else if ($data = $mform->get_data()) {
     // process request
@@ -89,7 +89,7 @@ if (empty($users) or $mform->is_cancelled()) {
             cohort_add_member($data->cohort, $user->id);
         }
     }
-    redirect(new moodle_url('/admin/user/user_bulk.php'));
+    redirect(new powereduc_url('/admin/user/user_bulk.php'));
 }
 
 // Need to sort by date

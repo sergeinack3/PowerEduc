@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * PostgreSQL specific SQL code generator.
@@ -384,7 +384,7 @@ class postgres_sql_generator extends sql_generator {
      * @param xmldb_field $xmldb_field The xmldb_field object instance.
      * @return array Array of SQL statements to create a field's default.
      *
-     * @todo MDL-31147 Moodle 2.1 - Drop getDropDefaultSQL()
+     * @todo MDL-31147 PowerEduc 2.1 - Drop getDropDefaultSQL()
      */
     public function getDropDefaultSQL($xmldb_table, $xmldb_field) {
         // Just a wrapper over the getAlterFieldSQL() function for PostgreSQL that

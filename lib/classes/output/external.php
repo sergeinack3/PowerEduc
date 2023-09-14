@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Mustache helper to load strings from string_manager.
@@ -31,7 +31,7 @@ use external_multiple_structure;
 use external_single_structure;
 use external_value;
 use core_component;
-use moodle_exception;
+use powereduc_exception;
 use context_system;
 use theme_config;
 use core\external\output\icon_system\load_fontawesome_map;
@@ -118,7 +118,7 @@ class external extends external_api {
      * @param string $template The name of the template.
      * @param string $themename The name of the current theme.
      * @param bool $includecomments Whether to strip comments from the template source.
-     * @param string $lang moodle translation language, null means use current.
+     * @param string $lang powereduc translation language, null means use current.
      * @return string the template
      */
     public static function load_template_with_dependencies(
@@ -204,7 +204,7 @@ class external extends external_api {
     /**
      * Return a mapping of icon names to icons.
      *
-     * @deprecated since Moodle 3.10
+     * @deprecated since PowerEduc 3.10
      * @return array the mapping
      */
     public static function load_fontawesome_icon_map() {

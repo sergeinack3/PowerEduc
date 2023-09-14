@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Extends the IMS Tool provider library for the LTI enrolment.
  *
  * @package    enrol_lti
- * @copyright  2016 John Okely <john@moodle.com>
+ * @copyright  2016 John Okely <john@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,8 +36,8 @@ use IMSGlobal\LTI\Profile\Message;
 use IMSGlobal\LTI\Profile\ResourceHandler;
 use IMSGlobal\LTI\Profile\ServiceDefinition;
 use IMSGlobal\LTI\ToolProvider\ToolProvider;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use stdClass;
 
 require_once($CFG->dirroot . '/user/lib.php');
@@ -46,7 +46,7 @@ require_once($CFG->dirroot . '/user/lib.php');
  * Extends the IMS Tool provider library for the LTI enrolment.
  *
  * @package    enrol_lti
- * @copyright  2016 John Okely <john@moodle.com>
+ * @copyright  2016 John Okely <john@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class tool_provider extends ToolProvider {
@@ -204,7 +204,7 @@ class tool_provider extends ToolProvider {
             $handlers = $proxy->tool_profile->resource_handler;
             foreach ($handlers as $handler) {
                 foreach ($handler->message as $message) {
-                    $handlerurl = new moodle_url($message->path);
+                    $handlerurl = new powereduc_url($message->path);
                     $fullpath = $handlerurl->out(false);
                     if ($message->message_type == "basic-lti-launch-request" && $fullpath == $url) {
                         $correctlaunchurl = true;
@@ -296,18 +296,18 @@ class tool_provider extends ToolProvider {
 
         if ($context->contextlevel == CONTEXT_COURSE) {
             $courseid = $context->instanceid;
-            $urltogo = new moodle_url('/course/view.php', ['id' => $courseid]);
+            $urltogo = new powereduc_url('/course/view.php', ['id' => $courseid]);
 
         } else if ($context->contextlevel == CONTEXT_MODULE) {
             $cm = get_coursemodule_from_id(false, $context->instanceid, 0, false, MUST_EXIST);
-            $urltogo = new moodle_url('/mod/' . $cm->modname . '/view.php', ['id' => $cm->id]);
+            $urltogo = new powereduc_url('/mod/' . $cm->modname . '/view.php', ['id' => $cm->id]);
 
             // If we are a student in the course module context we do not want to display blocks.
             if (!$isforceembed && !$isinstructor) {
                 $isforceembed = true;
             }
         } else {
-            throw new \moodle_exception('invalidcontext');
+            throw new \powereduc_exception('invalidcontext');
             exit();
         }
 
@@ -324,7 +324,7 @@ class tool_provider extends ToolProvider {
 
         // Display an error, if there is one.
         if ($result !== helper::ENROLMENT_SUCCESSFUL) {
-            throw new \moodle_exception($result, 'enrol_lti');
+            throw new \powereduc_exception($result, 'enrol_lti');
             exit();
         }
 
@@ -411,7 +411,7 @@ class tool_provider extends ToolProvider {
             $this->message = get_string('successfulregistration', 'enrol_lti');
 
             // Prepare response.
-            $returnurl = new moodle_url($this->returnUrl);
+            $returnurl = new powereduc_url($this->returnUrl);
             $returnurl->param('lti_msg', get_string("successfulregistration", "enrol_lti"));
             $returnurl->param('status', 'success');
             $guid = $this->consumer->getKey();
@@ -433,13 +433,13 @@ class tool_provider extends ToolProvider {
     /**
      * Performs mapping of the tool consumer to a published tool.
      *
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function map_tool_to_consumer() {
         global $DB;
 
         if (empty($this->consumer)) {
-            throw new moodle_exception('invalidtoolconsumer', 'enrol_lti');
+            throw new powereduc_exception('invalidtoolconsumer', 'enrol_lti');
         }
 
         // Map the consumer to the tool.

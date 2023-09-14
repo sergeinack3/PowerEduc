@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -109,7 +109,7 @@ class auth_plugin_email extends auth_plugin_base {
      * @param boolean $notify print notice with link and terminate
      * @param string $confirmationurl user confirmation URL
      * @return boolean true if everything well ok and $notify is set to true
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since Moodle 3.2
      */
     public function user_signup_with_confirmation($user, $notify=true, $confirmationurl = null) {
@@ -139,7 +139,7 @@ class auth_plugin_email extends auth_plugin_base {
         \core\event\user_created::create_from_userid($user->id)->trigger();
 
         if (! send_confirmation_email($user, $confirmationurl)) {
-            throw new \moodle_exception('auth_emailnoemail', 'auth_email');
+            throw new \powereduc_exception('auth_emailnoemail', 'auth_email');
         }
 
         if ($notify) {
@@ -224,7 +224,7 @@ class auth_plugin_email extends auth_plugin_base {
      * Returns the URL for changing the user's pw, or empty if the default can
      * be used.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
     function change_password_url() {
         return null; // use default internal method

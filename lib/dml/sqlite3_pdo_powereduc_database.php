@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Experimental pdo database class.
@@ -24,7 +24,7 @@
 
 defined('POWEREDUC_INTERNAL') || die();
 
-require_once(__DIR__.'/pdo_moodle_database.php');
+require_once(__DIR__.'/pdo_powereduc_database.php');
 
 /**
  * Experimental pdo database class
@@ -33,7 +33,7 @@ require_once(__DIR__.'/pdo_moodle_database.php');
  * @copyright  2008 Andrei Bautu
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class sqlite3_pdo_moodle_database extends pdo_moodle_database {
+class sqlite3_pdo_powereduc_database extends pdo_powereduc_database {
     protected $database_file_extension = '.sq3.php';
     /**
      * Detects if all needed PHP stuff installed.
@@ -67,7 +67,7 @@ class sqlite3_pdo_moodle_database extends pdo_moodle_database {
 
     protected function configure_dbconnection() {
         // try to protect database file against web access;
-        // this is required in case that the moodledata folder is web accessible and
+        // this is required in case that the powereducdata folder is web accessible and
         // .htaccess is not in place; requires that the database file extension is php
         $this->pdb->exec('CREATE TABLE IF NOT EXISTS "<?php die?>" (id int)');
         $this->pdb->exec('PRAGMA synchronous=OFF');
@@ -113,7 +113,7 @@ class sqlite3_pdo_moodle_database extends pdo_moodle_database {
      * If dboptions['file'] is set, then it is used (use :memory: for in memory database);
      * else if dboptions['path'] is set, then the file will be <dboptions path>/<dbname>.sq3.php;
      * else if dbhost is set and not localhost, then the file will be <dbhost>/<dbname>.sq3.php;
-     * else the file will be <moodle data path>/<dbname>.sq3.php
+     * else the file will be <powereduc data path>/<dbname>.sq3.php
      * @return string file path to the SQLite database;
      */
     public function get_dbfilepath() {

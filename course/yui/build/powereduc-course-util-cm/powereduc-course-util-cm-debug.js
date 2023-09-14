@@ -1,10 +1,10 @@
-YUI.add('moodle-course-util-cm', function (Y, NAME) {
+YUI.add('powereduc-course-util-cm', function (Y, NAME) {
 
 /**
  * A collection of utility classes for use with course modules.
  *
- * @module moodle-course-util
- * @submodule moodle-course-util-cm
+ * @module powereduc-course-util
+ * @submodule powereduc-course-util-cm
  */
 
 Y.namespace('Moodle.core_course.util.cm');
@@ -72,4 +72,4 @@ Y.Moodle.core_course.util.cm = {
 };
 
 
-}, '@VERSION@', {"requires": ["node", "moodle-course-util-base"]});
+}, '@VERSION@', {"requires": ["node", "powereduc-course-util-base"]});

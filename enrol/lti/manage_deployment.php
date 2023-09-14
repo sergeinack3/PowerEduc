@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -45,14 +45,14 @@ if (!in_array($action, ['add', 'delete'])) {
 }
 
 // The page to go back to when the respective action has been performed.
-$deploymentslisturl = new moodle_url($CFG->wwwroot . "/enrol/lti/register_platform.php",
+$deploymentslisturl = new powereduc_url($CFG->wwwroot . "/enrol/lti/register_platform.php",
     ['regid' => $registrationid, 'action' => 'view', 'tabselect' => 'tooldeployments']);
 
 // Local anon helper to extend the nav for this page and call admin_externalpage_setup.
 $pagesetup = function(string $pagetitle) {
     global $PAGE;
     navigation_node::override_active_url(
-        new moodle_url('/admin/settings.php', ['section' => 'enrolsettingslti_registrations'])
+        new powereduc_url('/admin/settings.php', ['section' => 'enrolsettingslti_registrations'])
     );
     admin_externalpage_setup('enrolsettingslti_deployment_manage', '', null, '', ['pagelayout' => 'admin']);
     $PAGE->navbar->add($pagetitle);
@@ -70,7 +70,7 @@ $maptodto = function($formdata): stdClass {
 if ($action === 'add') {
     $pagesetup(get_string('deploymentadd', 'enrol_lti'));
 
-    $pageurl = new moodle_url('/enrol/lti/manage_deployment.php', ['action' => 'add']);
+    $pageurl = new powereduc_url('/enrol/lti/manage_deployment.php', ['action' => 'add']);
     $mform = new deployment_form($pageurl->out(false));
     if ($data = $mform->get_data()) {
         $deploymentservice = new tool_deployment_service(new application_registration_repository(),
@@ -104,7 +104,7 @@ if ($action === 'add') {
             'sesskey' => sesskey(),
             'confirm' => true
         ];
-        $continueurl = new moodle_url('/enrol/lti/manage_deployment.php', $continueparams);
+        $continueurl = new powereduc_url('/enrol/lti/manage_deployment.php', $continueparams);
         $deploymentrepo = new deployment_repository();
         $deployment = $deploymentrepo->find($id);
         if (!$deployment) {

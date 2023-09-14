@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Check that, as in the coding guidelines, every to-do comment links to a tracker issue.
  *
- * As required by http://docs.moodle.org/dev/Coding_style.
+ * As required by http://docs.powereduc.org/dev/Coding_style.
  *
  * @package    core
  * @copyright  2009 Tim Hunt
@@ -28,7 +28,7 @@ require(__DIR__ . '/../../../config.php');
 
 require_login();
 $context = context_system::instance();
-require_capability('moodle/site:config', $context);
+require_capability('powereduc/site:config', $context);
 
 $PAGE->set_url('/lib/tests/other/todochecker.php');
 $PAGE->set_context($context);
@@ -63,14 +63,14 @@ if (empty($found)) {
     foreach ($found as $filepath => $matches) {
         echo '<dt>' . $filepath . ' <b>(' . count($matches) . ')</b></dt><dd><ul>';
         foreach ($matches as $lineno => $line) {
-            $url = 'http://cvs.moodle.org/moodle/' . $filepath . '?view=annotate#l' . $lineno;
+            $url = 'http://cvs.powereduc.org/powereduc/' . $filepath . '?view=annotate#l' . $lineno;
             $error = '';
 
             // Make sure there is a tracker issue id mentioned
             $matches = array();
             if (preg_match('/\bTODO\b.*?\b(MDL-\d+)/', $line, $matches)) {
                 $issueid = $matches[1];
-                $issueurl = 'http://tracker.moodle.org/browse/' . $issueid;
+                $issueurl = 'http://tracker.powereduc.org/browse/' . $issueid;
 
                 // Make sure the issue is still open.
                 list($issueopen, $issuesummary) = issue_info($issueid);
@@ -124,7 +124,7 @@ function issue_info($issueid) {
         return $cache[$issueid];
     }
 
-    $xmlurl = 'http://tracker.moodle.org/si/jira.issueviews:issue-xml/' . $issueid . '/' . $issueid . '.xml';
+    $xmlurl = 'http://tracker.powereduc.org/si/jira.issueviews:issue-xml/' . $issueid . '/' . $issueid . '.xml';
     $content = download_file_content($xmlurl);
 
     // Get the status.

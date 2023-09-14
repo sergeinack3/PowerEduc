@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 
 /**
  * Authentication Plugin: Manual Authentication
- * Just does a simple check against the moodle database.
+ * Just does a simple check against the powereduc database.
  *
  * @package    auth_manual
  * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
@@ -133,7 +133,7 @@ class auth_plugin_manual extends auth_plugin_base {
      * Returns the URL for changing the user's pw, or empty if the default can
      * be used.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
     function change_password_url() {
         return null;

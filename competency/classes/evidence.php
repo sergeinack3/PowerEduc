@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ use coding_exception;
 use context;
 use context_user;
 use lang_string;
-use moodle_exception;
+use powereduc_exception;
 use stdClass;
 
 /**
@@ -158,12 +158,12 @@ class evidence extends persistent {
     }
 
     /**
-     * Convenience method handling moodle_urls.
+     * Convenience method handling powereduc_urls.
      *
-     * @param null|string|moodle_url $url The URL.
+     * @param null|string|powereduc_url $url The URL.
      */
     protected function set_url($url) {
-        if ($url instanceof \moodle_url) {
+        if ($url instanceof \powereduc_url) {
             $url = $url->out(false);
         }
         $this->raw_set('url', $url);
@@ -191,7 +191,7 @@ class evidence extends persistent {
     protected function validate_contextid($value) {
         try {
             context::instance_by_id($value);
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             // That does not look good...
             return new lang_string('invaliddata', 'error');
         }
@@ -290,7 +290,7 @@ class evidence extends persistent {
      * @return bool
      */
     public static function can_delete_user($userid) {
-        return has_capability('moodle/competency:evidencedelete', context_user::instance($userid));
+        return has_capability('powereduc/competency:evidencedelete', context_user::instance($userid));
     }
 
     /**

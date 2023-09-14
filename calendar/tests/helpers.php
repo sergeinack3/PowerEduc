@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * This file contains helper classes and functions for testing.
  *
  * @package core_calendar
- * @copyright 2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright 2017 Ryan Wyllie <ryan@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -165,7 +165,7 @@ function create_group_override_event(string $modulename, int $instanceid, int $c
 /**
  * A test factory that will create action events.
  *
- * @copyright 2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright 2017 Ryan Wyllie <ryan@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or late
  */
 class action_event_test_factory implements event_factory_interface {
@@ -240,7 +240,7 @@ class action_event_test_factory implements event_factory_interface {
 
         $action = new action(
             'Test action',
-            new \moodle_url('/'),
+            new \powereduc_url('/'),
             1,
             true
         );

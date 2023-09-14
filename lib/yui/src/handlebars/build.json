@@ -1,7 +1,7 @@
 {
-    "name": "moodle-core-handlebars",
+    "name": "powereduc-core-handlebars",
     "builds": {
-        "moodle-core-handlebars": {
+        "powereduc-core-handlebars": {
             "jsfiles": [
                 "handlebars.js"
             ]

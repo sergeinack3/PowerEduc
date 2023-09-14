@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ $returntype = optional_param('return', null, PARAM_ALPHA);
 require_login(0, false);
 \core_competency\api::require_enabled();
 
-$url = new moodle_url('/admin/tool/lp/editplan.php', array('id' => $id, 'userid' => $userid, 'return' => $returntype));
+$url = new powereduc_url('/admin/tool/lp/editplan.php', array('id' => $id, 'userid' => $userid, 'return' => $returntype));
 
 $plan = null;
 if (empty($id)) {
@@ -62,13 +62,13 @@ $cancreate = \core_competency\plan::can_manage_user_draft($userid) || \core_comp
 // If editing plan, check if user has permissions to edit it.
 if ($plan != null) {
     if (!$plan->can_manage()) {
-        throw new required_capability_exception($PAGE->context, 'moodle/competency:planmanage', 'nopermissions', '');
+        throw new required_capability_exception($PAGE->context, 'powereduc/competency:planmanage', 'nopermissions', '');
     }
     if (!$plan->can_be_edited()) {
         throw new coding_exception('Completed plan can not be edited');
     }
 } else if (!$cancreate) {
-    throw new required_capability_exception($PAGE->context, 'moodle/competency:planmanage', 'nopermissions', '');
+    throw new required_capability_exception($PAGE->context, 'powereduc/competency:planmanage', 'nopermissions', '');
 }
 
 $form = new \tool_lp\form\plan($url->out(false), $customdata);
@@ -81,7 +81,7 @@ $data = $form->get_data();
 if ($data) {
     if (empty($data->id)) {
         $plan = \core_competency\api::create_plan($data);
-        $returnurl = new moodle_url('/admin/tool/lp/plan.php', ['id' => $plan->get('id')]);
+        $returnurl = new powereduc_url('/admin/tool/lp/plan.php', ['id' => $plan->get('id')]);
         $returnmsg = get_string('plancreated', 'tool_lp');
     } else {
         \core_competency\api::update_plan($data);

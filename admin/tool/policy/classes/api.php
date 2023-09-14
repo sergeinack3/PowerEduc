@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package     tool_policy
  * @category    output
- * @copyright   2018 David Mudrák <david@moodle.com>
+ * @copyright   2018 David Mudrák <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -40,7 +40,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Provides the API of the policies plugin.
  *
- * @copyright 2018 David Mudrak <david@moodle.com>
+ * @copyright 2018 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class api {
@@ -232,7 +232,7 @@ class api {
             }
         }
 
-        throw new \moodle_exception('errorpolicyversionnotfound', 'tool_policy');
+        throw new \powereduc_exception('errorpolicyversionnotfound', 'tool_policy');
     }
 
     /**
@@ -796,7 +796,7 @@ class api {
 
         if (!isloggedin() || isguestuser()) {
             if ($throwexception) {
-                throw new \moodle_exception('noguest');
+                throw new \powereduc_exception('noguest');
             } else {
                 return false;
             }
@@ -842,7 +842,7 @@ class api {
             if (static::get_agreement_optional($versionid) == policy_version::AGREEMENT_COMPULSORY) {
                 // Compulsory policies can't be declined (that is what makes them compulsory).
                 if ($throwexception) {
-                    throw new \moodle_exception('errorpolicyversioncompulsory', 'tool_policy');
+                    throw new \powereduc_exception('errorpolicyversioncompulsory', 'tool_policy');
                 } else {
                     return false;
                 }
@@ -871,7 +871,7 @@ class api {
         // Guests' acceptance is not stored so there is nothing to revoke.
         if (!isloggedin() || isguestuser()) {
             if ($throwexception) {
-                throw new \moodle_exception('noguest');
+                throw new \powereduc_exception('noguest');
             } else {
                 return false;
             }

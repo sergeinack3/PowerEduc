@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Course handler for custom fields
  *
  * @package   core_course
- * @copyright 2018 David Matamoros <davidmc@moodle.com>
+ * @copyright 2018 David Matamoros <davidmc@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,7 +33,7 @@ use core_customfield\field_controller;
  * Course handler for custom fields
  *
  * @package core_course
- * @copyright 2018 David Matamoros <davidmc@moodle.com>
+ * @copyright 2018 David Matamoros <davidmc@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class course_handler extends \core_customfield\handler {
@@ -85,7 +85,7 @@ class course_handler extends \core_customfield\handler {
      * @return bool true if the current can configure custom fields, false otherwise
      */
     public function can_configure() : bool {
-        return has_capability('moodle/course:configurecustomfields', $this->get_configuration_context());
+        return has_capability('powereduc/course:configurecustomfields', $this->get_configuration_context());
     }
 
     /**
@@ -99,15 +99,15 @@ class course_handler extends \core_customfield\handler {
         if ($instanceid) {
             $context = $this->get_instance_context($instanceid);
             return (!$field->get_configdata_property('locked') ||
-                    has_capability('moodle/course:changelockedcustomfields', $context));
+                    has_capability('powereduc/course:changelockedcustomfields', $context));
         } else {
             $context = $this->get_parent_context();
             if ($context->contextlevel == CONTEXT_SYSTEM) {
                 return (!$field->get_configdata_property('locked') ||
-                    has_capability('moodle/course:changelockedcustomfields', $context));
+                    has_capability('powereduc/course:changelockedcustomfields', $context));
             } else {
                 return (!$field->get_configdata_property('locked') ||
-                    guess_if_creator_will_have_course_capability('moodle/course:changelockedcustomfields', $context));
+                    guess_if_creator_will_have_course_capability('powereduc/course:changelockedcustomfields', $context));
             }
         }
     }
@@ -124,7 +124,7 @@ class course_handler extends \core_customfield\handler {
         if ($visibility == self::NOTVISIBLE) {
             return false;
         } else if ($visibility == self::VISIBLETOTEACHERS) {
-            return has_capability('moodle/course:update', $this->get_instance_context($instanceid));
+            return has_capability('powereduc/course:update', $this->get_instance_context($instanceid));
         } else {
             return true;
         }
@@ -168,10 +168,10 @@ class course_handler extends \core_customfield\handler {
     /**
      * URL for configuration of the fields on this handler.
      *
-     * @return \moodle_url The URL to configure custom fields for this component
+     * @return \powereduc_url The URL to configure custom fields for this component
      */
-    public function get_configuration_url() : \moodle_url {
-        return new \moodle_url('/course/customfield.php');
+    public function get_configuration_url() : \powereduc_url {
+        return new \powereduc_url('/course/customfield.php');
     }
 
     /**

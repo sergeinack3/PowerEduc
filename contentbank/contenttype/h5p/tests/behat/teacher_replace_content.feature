@@ -60,7 +60,7 @@ Feature: Replace H5P file from an existing content requires special capabilities
   Scenario: Teacher cannot replace a content without having upload capability
     Given the following "permission overrides" exist:
       | capability                | permission | role           | contextlevel | reference |
-      | moodle/contentbank:upload | Prevent    | editingteacher | Course       | C1        |
+      | powereduc/contentbank:upload | Prevent    | editingteacher | Course       | C1        |
     When I click on "teachercontent" "link"
     And I click on "More" "button"
     Then I should not see "Replace with file"
@@ -76,7 +76,7 @@ Feature: Replace H5P file from an existing content requires special capabilities
   Scenario: Teacher cannot replace a content without having the manage own content capability
     Given the following "permission overrides" exist:
       | capability                          | permission | role           | contextlevel | reference |
-      | moodle/contentbank:manageowncontent | Prevent    | editingteacher | Course       | C1        |
+      | powereduc/contentbank:manageowncontent | Prevent    | editingteacher | Course       | C1        |
     When I click on "teachercontent" "link"
     And I click on "More" "button"
     Then I should not see "Replace with file"

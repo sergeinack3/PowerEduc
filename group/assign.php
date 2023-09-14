@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Add/remove group from grouping.
@@ -31,17 +31,17 @@ $groupingid = required_param('id', PARAM_INT);
 $PAGE->set_url('/group/assign.php', array('id'=>$groupingid));
 
 if (!$grouping = $DB->get_record('groupings', array('id'=>$groupingid))) {
-    throw new \moodle_exception('invalidgroupid');
+    throw new \powereduc_exception('invalidgroupid');
 }
 
 if (!$course = $DB->get_record('course', array('id'=>$grouping->courseid))) {
-    throw new \moodle_exception('invalidcourse');
+    throw new \powereduc_exception('invalidcourse');
 }
 $courseid = $course->id;
 
 require_login($course);
 $context = context_course::instance($courseid);
-require_capability('moodle/course:managegroups', $context);
+require_capability('powereduc/course:managegroups', $context);
 
 $returnurl = $CFG->wwwroot.'/group/groupings.php?id='.$courseid;
 
@@ -128,12 +128,12 @@ $straddgroupstogroupings = get_string('addgroupstogroupings', 'group');
 
 $groupingname = format_string($grouping->name);
 
-navigation_node::override_active_url(new moodle_url('/group/index.php', array('id'=>$course->id)));
+navigation_node::override_active_url(new powereduc_url('/group/index.php', array('id'=>$course->id)));
 $PAGE->set_pagelayout('admin');
 
-$PAGE->navbar->add($strparticipants, new moodle_url('/user/index.php', array('id'=>$courseid)));
+$PAGE->navbar->add($strparticipants, new powereduc_url('/user/index.php', array('id'=>$courseid)));
 $PAGE->navbar->add(get_string('groupings', 'group'),
-    new moodle_url('/group/groupings.php', ['id' => $courseid]));
+    new powereduc_url('/group/groupings.php', ['id' => $courseid]));
 $PAGE->navbar->add($straddgroupstogroupings);
 
 /// Print header

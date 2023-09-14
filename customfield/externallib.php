@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * External interface library for customfields component
  *
  * @package   core_customfield
- * @copyright 2018 David Matamoros <davidmc@moodle.com>
+ * @copyright 2018 David Matamoros <davidmc@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,7 +29,7 @@ require_once($CFG->libdir . "/externallib.php");
 /**
  * Class core_customfield_external
  *
- * @copyright 2018 David Matamoros <davidmc@moodle.com>
+ * @copyright 2018 David Matamoros <davidmc@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core_customfield_external extends external_api {
@@ -56,7 +56,7 @@ class core_customfield_external extends external_api {
         $record = \core_customfield\field_controller::create($params['id']);
         $handler = $record->get_handler();
         if (!$handler->can_configure()) {
-            throw new moodle_exception('nopermissionconfigure', 'core_customfield');
+            throw new powereduc_exception('nopermissionconfigure', 'core_customfield');
         }
         $handler->delete_field_configuration($record);
     }
@@ -100,7 +100,7 @@ class core_customfield_external extends external_api {
         $handler = \core_customfield\handler::get_handler($params['component'], $params['area'], $params['itemid']);
         self::validate_context($handler->get_configuration_context());
         if (!$handler->can_configure()) {
-            throw new moodle_exception('nopermissionconfigure', 'core_customfield');
+            throw new powereduc_exception('nopermissionconfigure', 'core_customfield');
         }
         $output = $PAGE->get_renderer('core_customfield');
         $outputpage = new \core_customfield\output\management($handler);
@@ -163,7 +163,7 @@ class core_customfield_external extends external_api {
         $handler = $category->get_handler();
         self::validate_context($handler->get_configuration_context());
         if (!$handler->can_configure()) {
-            throw new moodle_exception('nopermissionconfigure', 'core_customfield');
+            throw new powereduc_exception('nopermissionconfigure', 'core_customfield');
         }
         $handler->delete_category($category);
     }
@@ -205,7 +205,7 @@ class core_customfield_external extends external_api {
         $handler = \core_customfield\handler::get_handler($params['component'], $params['area'], $params['itemid']);
         self::validate_context($handler->get_configuration_context());
         if (!$handler->can_configure()) {
-            throw new moodle_exception('nopermissionconfigure', 'core_customfield');
+            throw new powereduc_exception('nopermissionconfigure', 'core_customfield');
         }
         return $handler->create_category();
     }
@@ -245,7 +245,7 @@ class core_customfield_external extends external_api {
         $handler = $field->get_handler();
         self::validate_context($handler->get_configuration_context());
         if (!$handler->can_configure()) {
-            throw new moodle_exception('nopermissionconfigure', 'core_customfield');
+            throw new powereduc_exception('nopermissionconfigure', 'core_customfield');
         }
         $handler->move_field($field, $params['categoryid'], $params['beforeid']);
     }
@@ -282,7 +282,7 @@ class core_customfield_external extends external_api {
         $handler = $category->get_handler();
         self::validate_context($handler->get_configuration_context());
         if (!$handler->can_configure()) {
-            throw new moodle_exception('nopermissionconfigure', 'core_customfield');
+            throw new powereduc_exception('nopermissionconfigure', 'core_customfield');
         }
         $handler->move_category($category, $params['beforeid']);
     }

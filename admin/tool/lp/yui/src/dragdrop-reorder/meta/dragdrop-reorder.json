@@ -1,7 +1,7 @@
 {
-    "moodle-tool_lp-dragdrop-reorder": {
+    "powereduc-tool_lp-dragdrop-reorder": {
         "requires": [
-            "moodle-core-dragdrop"
+            "powereduc-core-dragdrop"
         ]
     }
 }

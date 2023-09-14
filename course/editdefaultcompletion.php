@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,13 +30,13 @@ $modids = optional_param_array('modids', [], PARAM_INT);
 $course = get_course($courseid);
 require_login($course);
 
-navigation_node::override_active_url(new moodle_url('/course/completion.php', array('id' => $course->id)));
-$PAGE->set_url(new moodle_url('/course/editdefaultcompletion.php', ['id' => $courseid]));
+navigation_node::override_active_url(new powereduc_url('/course/completion.php', array('id' => $course->id)));
+$PAGE->set_url(new powereduc_url('/course/editdefaultcompletion.php', ['id' => $courseid]));
 $PAGE->set_title($course->shortname);
 $PAGE->set_heading($course->fullname);
 $PAGE->set_pagelayout('admin');
 
-require_capability('moodle/course:manageactivities', context_course::instance($course->id));
+require_capability('powereduc/course:manageactivities', context_course::instance($course->id));
 
 // Prepare list of selected modules.
 $manager = new \core_completion\manager($course->id);
@@ -48,7 +48,7 @@ foreach ($allmodules->modules as $module) {
     }
 }
 
-$returnurl = new moodle_url('/course/defaultcompletion.php', ['id' => $course->id]);
+$returnurl = new powereduc_url('/course/defaultcompletion.php', ['id' => $course->id]);
 if (empty($modules)) {
     redirect($returnurl);
 }

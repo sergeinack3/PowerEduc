@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,13 +34,13 @@ require_once($CFG->dirroot . '/user/editlib.php');
  * @copyright  2007 Petr Skoda  {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class admin_uploaduser_form1 extends moodleform {
+class admin_uploaduser_form1 extends powereducform {
     function definition () {
         $mform = $this->_form;
 
         $mform->addElement('header', 'settingsheader', get_string('upload'));
 
-        $url = new moodle_url('example.csv');
+        $url = new powereduc_url('example.csv');
         $link = html_writer::link($url, 'example.csv');
         $mform->addElement('static', 'examplecsv', get_string('examplecsv', 'tool_uploaduser'), $link);
         $mform->addHelpButton('examplecsv', 'examplecsv', 'tool_uploaduser');
@@ -89,7 +89,7 @@ class admin_uploaduser_form1 extends moodleform {
  * @copyright  2007 Petr Skoda  {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class admin_uploaduser_form2 extends moodleform {
+class admin_uploaduser_form2 extends powereducform {
     function definition () {
         global $CFG, $USER;
 
@@ -152,7 +152,7 @@ class admin_uploaduser_form2 extends moodleform {
         $mform->addElement('selectyesno', 'uuallowdeletes', get_string('allowdeletes', 'tool_uploaduser'));
         $mform->setDefault('uuallowdeletes', 0);
         // Ensure user is able to perform user deletion.
-        if (!has_capability('moodle/user:delete', context_system::instance())) {
+        if (!has_capability('powereduc/user:delete', context_system::instance())) {
             $mform->hardFreeze('uuallowdeletes');
             $mform->setConstant('uuallowdeletes', 0);
         }

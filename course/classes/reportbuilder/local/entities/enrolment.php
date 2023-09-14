@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ use stdClass;
  * Course enrolment entity implementation
  *
  * @package     core_course
- * @copyright   2022 David Matamoros <davidmc@moodle.com>
+ * @copyright   2022 David Matamoros <davidmc@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class enrolment extends base {
@@ -103,7 +103,7 @@ class enrolment extends base {
         // Enrolment time created.
         $columns[] = (new column(
             'timecreated',
-            new lang_string('timecreated', 'moodle'),
+            new lang_string('timecreated', 'powereduc'),
             $this->get_entity_name()
         ))
             ->add_joins($this->get_joins())
@@ -143,7 +143,7 @@ class enrolment extends base {
         // Enrolment status.
         $columns[] = (new column(
             'status',
-            new lang_string('status', 'moodle'),
+            new lang_string('status', 'powereduc'),
             $this->get_entity_name()
         ))
             ->add_joins($this->get_joins())
@@ -159,7 +159,7 @@ class enrolment extends base {
         $r = database::generate_alias();
         $columns[] = (new column(
             'role',
-            new lang_string('role', 'moodle'),
+            new lang_string('role', 'powereduc'),
             $this->get_entity_name()
         ))
             ->add_joins($this->get_joins())
@@ -233,7 +233,7 @@ class enrolment extends base {
         $filters[] = (new filter(
             date::class,
             'timecreated',
-            new lang_string('timecreated', 'moodle'),
+            new lang_string('timecreated', 'powereduc'),
             $this->get_entity_name(),
             "{$userenrolments}.timecreated"
         ))
@@ -290,7 +290,7 @@ class enrolment extends base {
         $filters[] = (new filter(
             select::class,
             'status',
-            new lang_string('status', 'moodle'),
+            new lang_string('status', 'powereduc'),
             $this->get_entity_name(),
             $this->get_status_field_sql()
         ))

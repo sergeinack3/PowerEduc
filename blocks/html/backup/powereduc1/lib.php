@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Provides support for the conversion of moodle1 backup to the moodle2 format
+ * Provides support for the conversion of powereduc1 backup to the powereduc2 format
  *
  * @package    block_html
  * @copyright  2012 Paul Nicholls
@@ -27,7 +27,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Block conversion handler for html
  */
-class moodle1_block_html_handler extends moodle1_block_handler {
+class powereduc1_block_html_handler extends powereduc1_block_handler {
     private $fileman = null;
     protected function convert_configdata(array $olddata) {
         global $CFG;
@@ -44,7 +44,7 @@ class moodle1_block_html_handler extends moodle1_block_handler {
         // convert course files embedded in the block content
         $this->fileman->filearea = 'content';
         $this->fileman->itemid   = 0;
-        $configdata->text = moodle1_converter::migrate_referenced_files($configdata->text ?? '', $this->fileman);
+        $configdata->text = powereduc1_converter::migrate_referenced_files($configdata->text ?? '', $this->fileman);
         $configdata->format = FORMAT_HTML;
 
         return base64_encode(serialize($configdata));

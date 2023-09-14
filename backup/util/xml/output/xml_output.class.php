@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage backup-xml
  * @copyright  2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -153,7 +153,7 @@ abstract class xml_output {
 /*
  * Exception class used by all the @xml_output stuff
  */
-class xml_output_exception extends moodle_exception {
+class xml_output_exception extends powereduc_exception {
 
     public function __construct($errorcode, $a=NULL, $debuginfo=null) {
         parent::__construct($errorcode, 'error', '', $a, null, $debuginfo);

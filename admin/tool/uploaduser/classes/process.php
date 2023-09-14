@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -189,7 +189,7 @@ class process {
      */
     public function get_file_columns(): array {
         if ($this->filecolumns === null) {
-            $returnurl = new \moodle_url('/admin/tool/uploaduser/index.php');
+            $returnurl = new \powereduc_url('/admin/tool/uploaduser/index.php');
             $this->filecolumns = uu_validate_user_upload_columns($this->cir,
                 $this->standardfields, $this->profilefields, $returnurl);
         }
@@ -453,7 +453,7 @@ class process {
      * @param array $line
      * @throws \coding_exception
      * @throws \dml_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public function process_line(array $line) {
         global $DB, $CFG, $SESSION;
@@ -573,7 +573,7 @@ class process {
         // Delete user.
         if (!empty($user->deleted)) {
             if (!$this->get_allow_deletes() or $remoteuser or
-                    !has_capability('moodle/user:delete', context_system::instance())) {
+                    !has_capability('powereduc/user:delete', context_system::instance())) {
                 $this->usersskipped++;
                 $this->upt->track('status', get_string('usernotdeletedoff', 'error'), 'warning');
                 return;
@@ -699,7 +699,7 @@ class process {
             $user->id = $existinguser->id;
 
             $this->upt->track('username', \html_writer::link(
-                new \moodle_url('/user/profile.php', ['id' => $existinguser->id]), s($existinguser->username)), 'normal', false);
+                new \powereduc_url('/user/profile.php', ['id' => $existinguser->id]), s($existinguser->username)), 'normal', false);
             $this->upt->track('suspended', $this->get_string_yes_no($existinguser->suspended) , 'normal', false);
             $this->upt->track('auth', $existinguser->auth, 'normal', false);
 
@@ -1011,7 +1011,7 @@ class process {
 
             $user->id = user_create_user($user, false, false);
             $this->upt->track('username', \html_writer::link(
-                new \moodle_url('/user/profile.php', ['id' => $user->id]), s($user->username)), 'normal', false);
+                new \powereduc_url('/user/profile.php', ['id' => $user->id]), s($user->username)), 'normal', false);
 
             // Pre-process custom profile menu fields data from csv file.
             $user = uu_pre_process_custom_profile_data($user);
@@ -1061,7 +1061,7 @@ class process {
                         $cohort = $DB->get_record('cohort', ['id' => $addcohort]);
                     } else {
                         $cohort = $DB->get_record('cohort', ['idnumber' => $addcohort]);
-                        if (empty($cohort) && has_capability('moodle/cohort:manage', \context_system::instance())) {
+                        if (empty($cohort) && has_capability('powereduc/cohort:manage', \context_system::instance())) {
                             // Cohort was not found. Create a new one.
                             $cohortid = cohort_add_cohort((object)array(
                                 'idnumber' => $addcohort,
@@ -1354,7 +1354,7 @@ class process {
                     } else {
                         $this->upt->track('enrolments', get_string('addedtogroupnot', '', s($gname)), 'error');
                     }
-                } catch (\moodle_exception $e) {
+                } catch (\powereduc_exception $e) {
                     $this->upt->track('enrolments', get_string('addedtogroupnot', '', s($gname)), 'error');
                     continue;
                 }

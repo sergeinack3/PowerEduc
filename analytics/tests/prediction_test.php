@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -494,7 +494,7 @@ class prediction_test extends \advanced_testcase {
         }
 
         // Purge the directory used in this test (useful in case the mlbackend is storing files
-        // somewhere out of the default moodledata/models dir.
+        // somewhere out of the default powereducdata/models dir.
         $predictionsprocessor->delete_output_dir($dir, $modeluniqueid);
     }
 
@@ -528,7 +528,7 @@ class prediction_test extends \advanced_testcase {
      * @param string $predictionsprocessorclass
      * @param array|null $forcedconfig
      * @throws coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function test_ml_multi_classifier($timesplittingid, $predictionsprocessorclass, $forcedconfig) {
         global $DB;
@@ -844,7 +844,7 @@ class prediction_test extends \advanced_testcase {
      * @param string $targetclass
      * @return \core_analytics\model
      * @throws coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function add_multiclass_model($targetclass = 'test_target_shortname_multiclass') {
         $target = \core_analytics\manager::get_target($targetclass);

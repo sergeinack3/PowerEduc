@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ if ($ADMIN->fulltree) {
     require_once($CFG->dirroot.'/auth/shibboleth/classes/admin_setting_special_convert_data_configfile.php');
 
     // Introductory explanation.
-    $readmeurl = (new moodle_url('/auth/shibboleth/README.txt'))->out();
+    $readmeurl = (new powereduc_url('/auth/shibboleth/README.txt'))->out();
     $settings->add(new admin_setting_heading('auth_shibboleth/pluginname', '',
             new lang_string('auth_shibbolethdescription', 'auth_shibboleth', $readmeurl)));
 

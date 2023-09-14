@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ defined('POWEREDUC_INTERNAL') || die();
 // If you want to know what you can set in $tidyoptions and what their default
 // values are, see http://php.net/manual/en/function.tidy-get-config.php.
 
-class filter_tidy extends moodle_text_filter {
+class filter_tidy extends powereduc_text_filter {
     function filter($text, array $options = array()) {
 
     /// Configuration for tidy. Feel free to tune for your needs, e.g. to allow

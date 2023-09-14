@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,19 +34,19 @@ $context = context_course::instance($course->id, MUST_EXIST);
 
 $plugin = enrol_get_plugin($type);
 if (!$plugin) {
-    throw new moodle_exception('invaliddata', 'error');
+    throw new powereduc_exception('invaliddata', 'error');
 }
 
 require_login($course);
 require_capability('enrol/' . $type . ':config', $context);
 
-$url = new moodle_url('/enrol/editinstance.php', ['courseid' => $course->id, 'id' => $instanceid, 'type' => $type]);
+$url = new powereduc_url('/enrol/editinstance.php', ['courseid' => $course->id, 'id' => $instanceid, 'type' => $type]);
 $PAGE->set_url($url);
 $PAGE->set_pagelayout('admin');
 $PAGE->set_docs_path('enrol/' . $type . '/edit');
 
 if (empty($return)) {
-    $return = new moodle_url('/enrol/instances.php', array('id' => $course->id));
+    $return = new powereduc_url('/enrol/instances.php', array('id' => $course->id));
 }
 
 if (!enrol_is_enabled($type)) {
@@ -56,15 +56,15 @@ if (!enrol_is_enabled($type)) {
 if ($instanceid) {
     $instance = $DB->get_record('enrol', array('courseid' => $course->id, 'enrol' => $type, 'id' => $instanceid), '*', MUST_EXIST);
     if ($instance->status == ENROL_INSTANCE_DISABLED) { // The instance is currently disabled.
-        navigation_node::override_active_url(new moodle_url('/enrol/instances.php', ['id' => $course->id]));
+        navigation_node::override_active_url(new powereduc_url('/enrol/instances.php', ['id' => $course->id]));
         $name = $instance->name ?: get_string('pluginname', 'enrol_' . $type);
         $PAGE->navbar->add($name, $url);
     }
 
 } else {
-    require_capability('moodle/course:enrolconfig', $context);
+    require_capability('powereduc/course:enrolconfig', $context);
     // No instance yet, we have to add new instance.
-    navigation_node::override_active_url(new moodle_url('/enrol/instances.php', array('id' => $course->id)));
+    navigation_node::override_active_url(new powereduc_url('/enrol/instances.php', array('id' => $course->id)));
 
     $instance = (object)$plugin->get_instance_defaults();
     $instance->id       = null;

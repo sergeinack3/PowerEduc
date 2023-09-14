@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ require_once($CFG->libdir . '/completionlib.php');
  * @copyright 2014 The Open University
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class moodle2_test extends \advanced_testcase {
+class powereduc2_test extends \advanced_testcase {
 
     /**
      * Tests the availability field on modules and sections is correctly
@@ -127,7 +127,7 @@ class moodle2_test extends \advanced_testcase {
         // Extract backup file.
         $backupid = 'abc';
         $backuppath = make_backup_temp_directory($backupid);
-        get_file_packer('application/vnd.moodle.backup')->extract_to_pathname(
+        get_file_packer('application/vnd.powereduc.backup')->extract_to_pathname(
                 __DIR__ . '/fixtures/availability_26_format.mbz', $backuppath);
 
         // Do restore to new course with default settings.
@@ -580,14 +580,14 @@ class moodle2_test extends \advanced_testcase {
         $categorycontext = \context_course::instance($course->id)->get_parent_context();
 
         $caps = array_merge([
-            'moodle/course:view',
-            'moodle/course:create',
-            'moodle/backup:backupcourse',
-            'moodle/backup:configure',
-            'moodle/backup:backuptargetimport',
-            'moodle/restore:restorecourse',
-            'moodle/role:assign',
-            'moodle/restore:configure',
+            'powereduc/course:view',
+            'powereduc/course:create',
+            'powereduc/backup:backupcourse',
+            'powereduc/backup:configure',
+            'powereduc/backup:backuptargetimport',
+            'powereduc/restore:restorecourse',
+            'powereduc/role:assign',
+            'powereduc/restore:configure',
         ], $additionalcaps);
 
         foreach ($caps as $cap) {
@@ -615,8 +615,8 @@ class moodle2_test extends \advanced_testcase {
         // Restore the backup immediately.
 
         // Check if we need to unzip the file because the backup temp dir does not contains backup files.
-        if (!file_exists($backupbasepath . "/moodle_backup.xml")) {
-            $file->extract_to_pathname(get_file_packer('application/vnd.moodle.backup'), $backupbasepath);
+        if (!file_exists($backupbasepath . "/powereduc_backup.xml")) {
+            $file->extract_to_pathname(get_file_packer('application/vnd.powereduc.backup'), $backupbasepath);
         }
 
         if ($target == backup::TARGET_NEW_COURSE) {
@@ -665,7 +665,7 @@ class moodle2_test extends \advanced_testcase {
         global $DB;
 
         list($course, $newcourseid, $rc) = $this->prepare_for_enrolments_test(backup::TARGET_NEW_COURSE,
-            ['moodle/course:enrolconfig']);
+            ['powereduc/course:enrolconfig']);
 
         // Ensure enrolment methods will be restored.
         $this->assertEquals(backup::ENROL_NEVER, $rc->get_plan()->get_setting('enrolments')->get_value());
@@ -695,7 +695,7 @@ class moodle2_test extends \advanced_testcase {
         global $DB;
 
         list($course, $newcourseid, $rc) = $this->prepare_for_enrolments_test(backup::TARGET_NEW_COURSE,
-            ['moodle/backup:userinfo', 'moodle/restore:userinfo']);
+            ['powereduc/backup:userinfo', 'powereduc/restore:userinfo']);
 
         // Ensure enrolment methods will not be restored without capability.
         $this->assertEquals(backup::ENROL_NEVER, $rc->get_plan()->get_setting('enrolments')->get_value());
@@ -723,7 +723,7 @@ class moodle2_test extends \advanced_testcase {
         global $DB;
 
         list($course, $newcourseid, $rc) = $this->prepare_for_enrolments_test(backup::TARGET_NEW_COURSE,
-            ['moodle/backup:userinfo', 'moodle/restore:userinfo', 'moodle/course:enrolconfig']);
+            ['powereduc/backup:userinfo', 'powereduc/restore:userinfo', 'powereduc/course:enrolconfig']);
 
         // Ensure enrolment methods will be restored.
         $this->assertEquals(backup::ENROL_WITHUSERS, $rc->get_plan()->get_setting('enrolments')->get_value());
@@ -753,7 +753,7 @@ class moodle2_test extends \advanced_testcase {
         global $DB;
 
         list($course, $newcourseid, $rc) = $this->prepare_for_enrolments_test(backup::TARGET_EXISTING_ADDING,
-            ['moodle/backup:userinfo', 'moodle/restore:userinfo', 'moodle/course:enrolconfig']);
+            ['powereduc/backup:userinfo', 'powereduc/restore:userinfo', 'powereduc/course:enrolconfig']);
 
         // Ensure enrolment methods will be restored.
         $this->assertEquals(backup::ENROL_WITHUSERS, $rc->get_plan()->get_setting('enrolments')->get_value());
@@ -783,7 +783,7 @@ class moodle2_test extends \advanced_testcase {
         global $DB;
 
         list($course, $newcourseid, $rc) = $this->prepare_for_enrolments_test(backup::TARGET_EXISTING_DELETING,
-            ['moodle/backup:userinfo', 'moodle/restore:userinfo', 'moodle/course:enrolconfig']);
+            ['powereduc/backup:userinfo', 'powereduc/restore:userinfo', 'powereduc/course:enrolconfig']);
 
         // Ensure enrolment methods will be restored.
         $this->assertEquals(backup::ENROL_WITHUSERS, $rc->get_plan()->get_setting('enrolments')->get_value());
@@ -819,7 +819,7 @@ class moodle2_test extends \advanced_testcase {
         // Create course and add HTML block.
         $course = $generator->create_course();
         $context = \context_course::instance($course->id);
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context($context);
         $page->set_course($course);
         $page->set_pagelayout('standard');
@@ -886,7 +886,7 @@ class moodle2_test extends \advanced_testcase {
 
         // Add a block.
         $context = \context_course::instance($course->id);
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context($context);
         $page->set_course($course);
         $page->set_pagelayout('standard');
@@ -1017,7 +1017,7 @@ class moodle2_test extends \advanced_testcase {
             // Extract backup file.
             $backupid = $backupfile;
             $backuppath = make_backup_temp_directory($backupid);
-            get_file_packer('application/vnd.moodle.backup')->extract_to_pathname(
+            get_file_packer('application/vnd.powereduc.backup')->extract_to_pathname(
                     __DIR__ . "/fixtures/$backupfile.mbz", $backuppath);
 
             // Do restore to new course with default settings.

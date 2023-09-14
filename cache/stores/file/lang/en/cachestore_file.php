@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ $string['autocreate_help'] = 'If enabled the directory specified in path will be
 $string['lockwait'] = 'Maximum lock wait time';
 $string['lockwait_help'] = 'The maximum amount of time in seconds to wait for an exclusive lock before reading or writing a cache key. This is only used for cache definitions that have read or write locking required.';
 $string['path'] = 'Cache path';
-$string['path_help'] = 'The directory that should be used to store files for this cache store. If left blank (default) a directory will be automatically created in the moodledata directory. This can be used to point a file store towards a directory on a better performing drive (such as one in memory).';
+$string['path_help'] = 'The directory that should be used to store files for this cache store. If left blank (default) a directory will be automatically created in the powereducdata directory. This can be used to point a file store towards a directory on a better performing drive (such as one in memory).';
 $string['pluginname'] = 'File cache';
 $string['privacy:metadata'] = 'The File cache cachestore plugin stores data briefly as part of its caching functionality but this data is regularly cleared.';
 $string['prescan'] = 'Prescan directory';

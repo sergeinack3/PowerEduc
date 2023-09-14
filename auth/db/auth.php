@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -149,11 +149,11 @@ class auth_plugin_db extends auth_plugin_base {
      * Connect to external database.
      *
      * @return ADOConnection
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     function db_init() {
         if ($this->is_configured() === false) {
-            throw new moodle_exception('auth_dbcantconnect', 'auth_db');
+            throw new powereduc_exception('auth_dbcantconnect', 'auth_db');
         }
 
         // Connect to the external database (forcing new connection).
@@ -172,12 +172,12 @@ class auth_plugin_db extends auth_plugin_base {
     }
 
     /**
-     * Returns user attribute mappings between moodle and the external database.
+     * Returns user attribute mappings between powereduc and the external database.
      *
      * @return array
      */
     function db_attributes() {
-        $moodleattributes = array();
+        $powereducattributes = array();
         // If we have custom fields then merge them with user fields.
         $customfields = $this->get_custom_user_profile_fields();
         if (!empty($customfields) && !empty($this->userfields)) {
@@ -188,11 +188,11 @@ class auth_plugin_db extends auth_plugin_base {
 
         foreach ($userfields as $field) {
             if (!empty($this->config->{"field_map_$field"})) {
-                $moodleattributes[$field] = $this->config->{"field_map_$field"};
+                $powereducattributes[$field] = $this->config->{"field_map_$field"};
             }
         }
-        $moodleattributes['username'] = $this->config->fielduser;
-        return $moodleattributes;
+        $powereducattributes['username'] = $this->config->fielduser;
+        return $powereducattributes;
     }
 
     /**
@@ -273,11 +273,11 @@ class auth_plugin_db extends auth_plugin_base {
     }
 
     /**
-     * Synchronizes user from external db to moodle user table.
+     * Synchronizes user from external db to powereduc user table.
      *
      * Sync should be done by using idnumber attribute, not username.
      * You need to pass firstsync parameter to function to fill in
-     * idnumbers if they don't exists in moodle user table.
+     * idnumbers if they don't exists in powereduc user table.
      *
      * Syncing users removes (disables) users that don't exists anymore in external db.
      * Creates new users and updates coursecreator status of users.
@@ -462,7 +462,7 @@ class auth_plugin_db extends auth_plugin_base {
                 try {
                     $id = user_create_user($user, false, false); // It is truly a new user.
                     $trace->output(get_string('auth_dbinsertuser', 'auth_db', array('name'=>$user->username, 'id'=>$id)), 1);
-                } catch (moodle_exception $e) {
+                } catch (powereduc_exception $e) {
                     $trace->output(get_string('auth_dbinsertusererror', 'auth_db', $user->username), 1);
                     continue;
                 }
@@ -502,7 +502,7 @@ class auth_plugin_db extends auth_plugin_base {
                                  WHERE {$this->config->fielduser} = '".$this->ext_addslashes($extusername)."' ");
 
         if (!$rs) {
-            throw new \moodle_exception('auth_dbcantconnect', 'auth_db');
+            throw new \powereduc_exception('auth_dbcantconnect', 'auth_db');
         } else if (!$rs->EOF) {
             // User exists externally.
             $result = true;
@@ -525,7 +525,7 @@ class auth_plugin_db extends auth_plugin_base {
                                   FROM {$this->config->table} ");
 
         if (!$rs) {
-            throw new \moodle_exception('auth_dbcantconnect', 'auth_db');
+            throw new \powereduc_exception('auth_dbcantconnect', 'auth_db');
         } else if (!$rs->EOF) {
             while ($rec = $rs->FetchRow()) {
                 $rec = array_change_key_case((array)$rec, CASE_LOWER);
@@ -607,7 +607,7 @@ class auth_plugin_db extends auth_plugin_base {
                        SET ".implode(',', $update)."
                      WHERE {$this->config->fielduser} = ?";
             if (!$authdb->Execute($sql, array($this->ext_addslashes($extusername)))) {
-                throw new \moodle_exception('auth_dbupdateerror', 'auth_db');
+                throw new \powereduc_exception('auth_dbupdateerror', 'auth_db');
             }
         }
         $authdb->Close();
@@ -645,7 +645,7 @@ class auth_plugin_db extends auth_plugin_base {
     }
 
     /**
-     * Indicates if moodle should automatically update internal user
+     * Indicates if powereduc should automatically update internal user
      * records with data from external sources using the information
      * from auth_plugin_base::get_userinfo().
      *
@@ -669,7 +669,7 @@ class auth_plugin_db extends auth_plugin_base {
      * Returns the URL for changing the user's pw, or empty if the default can
      * be used.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
     function change_password_url() {
         if ($this->is_internal() || empty($this->config->changepasswordurl)) {
@@ -677,7 +677,7 @@ class auth_plugin_db extends auth_plugin_base {
             return null;
         } else {
             // Use admin defined custom url.
-            return new moodle_url($this->config->changepasswordurl);
+            return new powereduc_url($this->config->changepasswordurl);
         }
     }
 

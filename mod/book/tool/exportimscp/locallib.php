@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Book imscp export lib
@@ -122,7 +122,7 @@ function booktool_exportimscp_prepare_files($book, $context) {
     $imsitems = '';
     $imsresources = '';
 
-    // Moodle and Book version
+    // PowerEduc and Book version
     $powereduc_release = $CFG->release;
     $powereduc_version = $CFG->version;
     $book_version   = get_config('mod_book', 'version');
@@ -130,7 +130,7 @@ function booktool_exportimscp_prepare_files($book, $context) {
 
     // Load manifest header
         $imsmanifest .= '<?xml version="1.0" encoding="UTF-8"?>
-<!-- This package has been created with Moodle ' . $powereduc_release . ' (' . $powereduc_version . ') http://powereduc.org/, Book module version ' . $book_version . ' - https://github.com/skodak/powereduc-mod_book -->
+<!-- This package has been created with PowerEduc ' . $powereduc_release . ' (' . $powereduc_version . ') http://powereduc.org/, Book module version ' . $book_version . ' - https://github.com/skodak/powereduc-mod_book -->
 <!-- One idea and implementation by Eloy Lafuente (stronk7) and Antonio Vicent (C) 2001-3001 -->
 <manifest xmlns="http://www.imsglobal.org/xsd/imscp_v1p1" xmlns:imsmd="http://www.imsglobal.org/xsd/imsmd_v1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" identifier="MANIFEST-' . md5($CFG->wwwroot . '-' . $book->course . '-' . $book->id) . '" xsi:schemaLocation="http://www.imsglobal.org/xsd/imscp_v1p1 imscp_v1p1.xsd http://www.imsglobal.org/xsd/imsmd_v1p2 imsmd_v1p2p2.xsd">
   <organizations default="POWEREDUC-' . $book->course . '-' . $book->id . '">

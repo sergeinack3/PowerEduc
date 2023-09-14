@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Search area for course custom fields.
  *
  * @package core_course
- * @copyright Toni Barbera <toni@moodle.com>
+ * @copyright Toni Barbera <toni@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -34,7 +34,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * Search area for course custom fields.
  *
  * @package core_course
- * @copyright Toni Barbera <toni@moodle.com>
+ * @copyright Toni Barbera <toni@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class customfield extends \core_search\base {
@@ -52,7 +52,7 @@ class customfield extends \core_search\base {
      *
      * @param int $modifiedfrom timestamp
      * @param \context|null $context Restriction context
-     * @return \moodle_recordset|null Recordset or null if no change possible
+     * @return \powereduc_recordset|null Recordset or null if no change possible
      */
     public function get_document_recordset($modifiedfrom = 0, \context $context = null) {
         global $DB;
@@ -94,7 +94,7 @@ class customfield extends \core_search\base {
 
         try {
             $context = \context_course::instance($record->instanceid);
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             // Notify it as we run here as admin, we should see everything.
             debugging('Error retrieving ' . $this->areaid . ' ' . $record->id . ' document, not all required data is available: ' .
                 $ex->getMessage(), DEBUG_DEVELOPER);
@@ -147,7 +147,7 @@ class customfield extends \core_search\base {
         // Check whether user is enrolled and the course is visible, or user can view it while hidden.
         $context = \context_course::instance($course->id);
         $userenrolled = is_enrolled($context) &&
-            ($course->visible || has_capability('moodle/course:viewhiddencourses', $context));
+            ($course->visible || has_capability('powereduc/course:viewhiddencourses', $context));
 
         // Grant access if user is considered enrolled, or they can otherwise see the course info.
         if ($userenrolled || \core_course_category::can_view_course_info($course)) {
@@ -161,7 +161,7 @@ class customfield extends \core_search\base {
      * Link to the course.
      *
      * @param \core_search\document $doc
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_doc_url(\core_search\document $doc) {
         return $this->get_context_url($doc);
@@ -171,14 +171,14 @@ class customfield extends \core_search\base {
      * Link to the course.
      *
      * @param \core_search\document $doc
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_context_url(\core_search\document $doc) {
-        return new \moodle_url('/course/view.php', array('id' => $doc->get('courseid')));
+        return new \powereduc_url('/course/view.php', array('id' => $doc->get('courseid')));
     }
 
     /**
-     * Returns the moodle component name.
+     * Returns the powereduc component name.
      *
      * It might be the plugin name (whole frankenstyle name) or the core subsystem name.
      *

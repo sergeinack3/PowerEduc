@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -158,7 +158,7 @@ abstract class award_criteria {
         $types = badges_list_criteria(false);
 
         if (!isset($params['criteriatype']) || !isset($types[$params['criteriatype']])) {
-            throw new \moodle_exception('error:invalidcriteriatype', 'badges');
+            throw new \powereduc_exception('error:invalidcriteriatype', 'badges');
         }
 
         $class = 'award_criteria_' . $types[$params['criteriatype']];
@@ -249,9 +249,9 @@ abstract class award_criteria {
         global $OUTPUT;
         $agg = $data->get_aggregation_methods();
 
-        $editurl = new moodle_url('/badges/criteria_settings.php',
+        $editurl = new powereduc_url('/badges/criteria_settings.php',
                 array('badgeid' => $this->badgeid, 'edit' => true, 'type' => $this->criteriatype, 'crit' => $this->id));
-        $deleteurl = new moodle_url('/badges/criteria_action.php',
+        $deleteurl = new powereduc_url('/badges/criteria_action.php',
                 array('badgeid' => $this->badgeid, 'delete' => true, 'type' => $this->criteriatype));
         $editaction = $OUTPUT->action_icon($editurl, new pix_icon('t/edit', get_string('edit')), null, array('class' => 'criteria-action'));
         $deleteaction = $OUTPUT->action_icon($deleteurl, new pix_icon('t/delete', get_string('delete')), null, array('class' => 'criteria-action'));

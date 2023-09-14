@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Airnotifier message processor to send messages to the APNS provider: airnotfier. (https://github.com/dcai/airnotifier)
@@ -21,7 +21,7 @@
  * @category   external
  * @copyright  2012 Jerome Mouneyrac <jerome@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.7
+ * @since PowerEduc 2.7
  */
 
 
@@ -64,7 +64,7 @@ class message_output_airnotifier extends message_output {
             $eventdata->userto->username = $DB->get_field('user', 'username', array('id' => $eventdata->userto->id));
         }
 
-        // Site id, to map with Moodle Mobile stored sites.
+        // Site id, to map with PowerEduc Mobile stored sites.
         $siteid = md5($CFG->wwwroot . $eventdata->userto->username);
 
         // Airnotifier can handle custom requests using processors (that are Airnotifier plugins).

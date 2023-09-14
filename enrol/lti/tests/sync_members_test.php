@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Tests for the sync_members scheduled task class.
  *
  * @package enrol_lti
- * @copyright 2016 Jun Pataleta <jun@moodle.com>
+ * @copyright 2016 Jun Pataleta <jun@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,7 +36,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * Tests for the sync_members scheduled task class.
  *
  * @package enrol_lti
- * @copyright 2016 Jun Pataleta <jun@moodle.com>
+ * @copyright 2016 Jun Pataleta <jun@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class sync_members_test extends \advanced_testcase {
@@ -281,7 +281,7 @@ class sync_members_test extends \advanced_testcase {
  *
  * A class that extends sync_members so that we can expose the protected methods that we would like to test.
  *
- * @copyright 2016 Jun Pataleta <jun@moodle.com>
+ * @copyright 2016 Jun Pataleta <jun@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class dummy_sync_members_task extends sync_members {

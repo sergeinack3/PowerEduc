@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * General database importer class
@@ -40,7 +40,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * is respected.
  */
 class database_importer {
-    /** @var moodle_database Connection to the target database (a @see moodle_database object). */
+    /** @var powereduc_database Connection to the target database (a @see powereduc_database object). */
     protected $mdb;
     /** @var database_manager Database manager of the target database (a @see database_manager object). */
     protected $manager;
@@ -55,19 +55,19 @@ class database_importer {
     protected $check_schema;
     /** @var string How to use transactions. */
     protected $transactionmode = 'allinone';
-    /** @var moodle_transaction Transaction object */
+    /** @var powereduc_transaction Transaction object */
     protected $transaction;
 
     /**
      * Object constructor.
      *
-     * @param moodle_database $mdb Connection to the target database (a
-     * @see moodle_database object). Use null to use the current $DB connection.
+     * @param powereduc_database $mdb Connection to the target database (a
+     * @see powereduc_database object). Use null to use the current $DB connection.
      * @param boolean $check_schema - whether or not to check that XML database
      * schema matches the RDBMS database schema before importing (inside
      * @see begin_database_import).
      */
-    public function __construct(moodle_database $mdb, $check_schema=true) {
+    public function __construct(powereduc_database $mdb, $check_schema=true) {
         $this->mdb          = $mdb;
         $this->manager      = $mdb->get_manager();
         $this->schema       = $this->manager->get_install_xml_schema();
@@ -90,7 +90,7 @@ class database_importer {
      * operation, before any database changes are made. It will check the database
      * schema if @see check_schema is true
      *
-     * @throws dbtransfer_exception if any checking (e.g. database schema, Moodle
+     * @throws dbtransfer_exception if any checking (e.g. database schema, PowerEduc
      * version) fails
      *
      * @param float $version the version of the system which generated the data

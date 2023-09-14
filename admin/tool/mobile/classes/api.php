@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,8 +27,8 @@ namespace tool_mobile;
 use core_component;
 use core_plugin_manager;
 use context_system;
-use moodle_url;
-use moodle_exception;
+use powereduc_url;
+use powereduc_exception;
 use lang_string;
 use curl;
 use core_qrcode;
@@ -52,7 +52,7 @@ class api {
     /** @var int seconds an auto-login key will expire. */
     const LOGIN_KEY_TTL = 60;
     /** @var string URL of the Moodle Apps Portal */
-    const POWEREDUC_APPS_PORTAL_URL = 'https://apps.moodle.com';
+    const POWEREDUC_APPS_PORTAL_URL = 'https://apps.powereduc.com';
     /** @var int default value in seconds a QR login key will expire. */
     const LOGIN_QR_KEY_TTL = 600;
     /** @var int QR code disabled value */
@@ -62,7 +62,7 @@ class api {
     /** @var int QR code type login value */
     const QR_CODE_LOGIN = 2;
     /** @var string Default Android app id */
-    const DEFAULT_ANDROID_APP_ID = 'com.moodle.moodlemobile';
+    const DEFAULT_ANDROID_APP_ID = 'com.powereduc.powereducmobile';
     /** @var string Default iOS app id */
     const DEFAULT_IOS_APP_ID = '633359593';
 
@@ -215,14 +215,14 @@ class api {
         // Check if the user can sign-up to return the launch URL in that case.
         $cansignup = signup_is_enabled();
 
-        $url = new moodle_url("/$CFG->admin/tool/mobile/launch.php");
+        $url = new powereduc_url("/$CFG->admin/tool/mobile/launch.php");
         $settings['launchurl'] = $url->out(false);
 
-        // Check that we are receiving a moodle_url object, themes can override get_logo_url and may return incorrect values.
-        if (($logourl = $OUTPUT->get_logo_url()) && $logourl instanceof moodle_url) {
+        // Check that we are receiving a powereduc_url object, themes can override get_logo_url and may return incorrect values.
+        if (($logourl = $OUTPUT->get_logo_url()) && $logourl instanceof powereduc_url) {
             $settings['logourl'] = clean_param($logourl->out(false), PARAM_URL);
         }
-        if (($compactlogourl = $OUTPUT->get_compact_logo_url()) && $compactlogourl instanceof moodle_url) {
+        if (($compactlogourl = $OUTPUT->get_compact_logo_url()) && $compactlogourl instanceof powereduc_url) {
             $settings['compactlogourl'] = clean_param($compactlogourl->out(false), PARAM_URL);
         }
 
@@ -260,7 +260,7 @@ class api {
 
         $settings = new \stdClass;
         $context = context_system::instance();
-        $isadmin = has_capability('moodle/site:config', $context);
+        $isadmin = has_capability('powereduc/site:config', $context);
 
         if (empty($section) or $section == 'frontpagesettings') {
             require_once($CFG->dirroot . '/course/format/lib.php');
@@ -298,8 +298,8 @@ class api {
         if (empty($section) or $section == 'gradessettings') {
             require_once($CFG->dirroot . '/user/lib.php');
             $settings->mygradesurl = user_mygrades_url();
-            // The previous function may return moodle_url instances or plain string URLs.
-            if ($settings->mygradesurl instanceof moodle_url) {
+            // The previous function may return powereduc_url instances or plain string URLs.
+            if ($settings->mygradesurl instanceof powereduc_url) {
                 $settings->mygradesurl = $settings->mygradesurl->out(false);
             }
         }
@@ -368,21 +368,21 @@ class api {
      *
      * @param  int $userid  current user id
      * @since Moodle 3.2
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function check_autologin_prerequisites($userid) {
         global $CFG;
 
         if (!$CFG->enablewebservices or !$CFG->enablemobilewebservice) {
-            throw new moodle_exception('enablewsdescription', 'webservice');
+            throw new powereduc_exception('enablewsdescription', 'webservice');
         }
 
         if (!is_https()) {
-            throw new moodle_exception('httpsrequired', 'tool_mobile');
+            throw new powereduc_exception('httpsrequired', 'tool_mobile');
         }
 
-        if (has_capability('moodle/site:config', context_system::instance(), $userid) or is_siteadmin($userid)) {
-            throw new moodle_exception('autologinnotallowedtoadmins', 'tool_mobile');
+        if (has_capability('powereduc/site:config', context_system::instance(), $userid) or is_siteadmin($userid)) {
+            throw new powereduc_exception('autologinnotallowedtoadmins', 'tool_mobile');
         }
     }
 
@@ -718,7 +718,7 @@ class api {
             return null;
         }
 
-        $urlscheme = !empty($mobilesettings->forcedurlscheme) ? $mobilesettings->forcedurlscheme : 'moodlemobile';
+        $urlscheme = !empty($mobilesettings->forcedurlscheme) ? $mobilesettings->forcedurlscheme : 'powereducmobile';
         $data = $urlscheme . '://' . $CFG->wwwroot;
 
         if ($mobilesettings->qrcodetype == static::QR_CODE_LOGIN) {

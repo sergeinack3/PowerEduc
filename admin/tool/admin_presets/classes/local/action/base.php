@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 namespace tool_admin_presets\local\action;
 
 use context_system;
-use moodle_url;
+use powereduc_url;
 use core_adminpresets\manager;
 use tool_admin_presets\output\presets_list;
 use tool_admin_presets\output\export_import;
@@ -56,8 +56,8 @@ class base {
     /** @var int The output content to display in the page. **/
     protected $outputs;
 
-    /** @var int The moodle form to display in the page. **/
-    protected $moodleform;
+    /** @var int The powereduc form to display in the page. **/
+    protected $powereducform;
 
     /** @var manager The manager helper class instance. **/
     protected $manager;
@@ -108,8 +108,8 @@ class base {
         }
 
         // Form.
-        if ($this->moodleform) {
-            $this->moodleform->display();
+        if ($this->powereducform) {
+            $this->powereducform->display();
         }
 
         // Footer.

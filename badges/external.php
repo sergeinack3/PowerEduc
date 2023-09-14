@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Display details of an issued badge with criteria and evidence
@@ -36,7 +36,7 @@ if ($json) {
 $hash = required_param('hash', PARAM_ALPHANUM);
 $userid = required_param('user', PARAM_INT);
 
-$PAGE->set_url(new moodle_url('/badges/external.php', array('hash' => $hash, 'user' => $userid)));
+$PAGE->set_url(new powereduc_url('/badges/external.php', array('hash' => $hash, 'user' => $userid)));
 $PAGE->set_context(context_system::instance());
 
 // Using the same setting as user profile page.
@@ -55,7 +55,7 @@ $out = get_backpack_settings($userid);
 
 // If we didn't find any badges then print an error.
 if (is_null($out)) {
-    throw new \moodle_exception('error:externalbadgedoesntexist', 'badges');
+    throw new \powereduc_exception('error:externalbadgedoesntexist', 'badges');
 }
 
 $badges = $out->badges;
@@ -73,7 +73,7 @@ foreach ($badges as $b) {
 
 // If we didn't find the badge a user might be trying to replace the userid parameter.
 if (empty($badge)) {
-    throw new \moodle_exception('error:externalbadgedoesntexist', 'badges');
+    throw new \powereduc_exception('error:externalbadgedoesntexist', 'badges');
 }
 
 $output = $PAGE->get_renderer('core', 'badges');
@@ -92,9 +92,9 @@ if (!empty($badge->issued->assertion->badge->name)) {
 $PAGE->set_heading($badgename);
 $PAGE->navbar->add($badgename);
 if (isloggedin() && $USER->id == $userid) {
-    $url = new moodle_url('/badges/mybadges.php');
+    $url = new powereduc_url('/badges/mybadges.php');
 } else {
-    $url = new moodle_url($CFG->wwwroot);
+    $url = new powereduc_url($CFG->wwwroot);
 }
 navigation_node::override_active_url($url);
 

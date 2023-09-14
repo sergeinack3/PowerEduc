@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 
 namespace tool_dataprivacy;
 use context_system;
-use moodle_url;
+use powereduc_url;
 
 defined('POWEREDUC_INTERNAL') || die();
 
@@ -40,12 +40,12 @@ class page_helper {
     /**
      * Sets up $PAGE for data privacy admin pages.
      *
-     * @param moodle_url $url The page URL.
+     * @param powereduc_url $url The page URL.
      * @param string $title The page's title.
      * @param string $attachtoparentnode The parent navigation node where this page can be accessed from.
      * @param string $requiredcapability The required capability to view this page.
      */
-    public static function setup(moodle_url $url, $title, $attachtoparentnode = '',
+    public static function setup(powereduc_url $url, $title, $attachtoparentnode = '',
                                  $requiredcapability = 'tool/dataprivacy:managedataregistry') {
         global $PAGE, $SITE;
 
@@ -53,7 +53,7 @@ class page_helper {
 
         require_login();
         if (isguestuser()) {
-            throw new \moodle_exception('noguest');
+            throw new \powereduc_exception('noguest');
         }
 
         // TODO Check that data privacy is enabled.

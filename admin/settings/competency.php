@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,14 +25,14 @@
 defined('POWEREDUC_INTERNAL') || die();
 
 // Save processing when the user will not be able to access anything.
-if (has_capability('moodle/site:config', $systemcontext)) {
+if (has_capability('powereduc/site:config', $systemcontext)) {
 
     $parentname = 'competencies';
 
     // Settings page.
     $iscompetencyenabled = get_config('core_competency', 'enabled');
     $settings = new admin_settingpage('competencysettings', new lang_string('competenciessettings', 'core_competency'),
-    'moodle/site:config', !$iscompetencyenabled);
+    'powereduc/site:config', !$iscompetencyenabled);
     if ($iscompetencyenabled) {
         $ADMIN->add($parentname, $settings);
     }

@@ -49,7 +49,7 @@ Feature: Tiny editor autosave
     And I click on "Private files" "link" in the ".fp-repo-area" "css_element"
     And I click on "tinyscreenshot.png" "link"
     And I click on "Select this file" "button"
-    And I set the field "Describe this image" to "It's the Moodle"
+    And I set the field "Describe this image" to "It's the PowerEduc"
     And I click on "Save image" "button"
     And I click on "Save and display" "button"
     When I am on the "Course 1" course page logged in as teacher1

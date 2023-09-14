@@ -1,17 +1,17 @@
--- This file is part of Moodle - http://moodle.org/
+-- This file is part of PowerEduc - http://powereduc.org/
 --
--- Moodle is free software: you can redistribute it and/or modify
+-- PowerEduc is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
 -- the Free Software Foundation, either version 3 of the License, or
 -- (at your option) any later version.
 --
--- Moodle is distributed in the hope that it will be useful,
+-- PowerEduc is distributed in the hope that it will be useful,
 -- but WITHOUT ANY WARRANTY; without even the implied warranty of
 -- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 -- GNU General Public License for more details.
 --
 -- You should have received a copy of the GNU General Public License
--- along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+-- along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package    core_dml
@@ -22,16 +22,16 @@
 
 /**
  * This sql script generates various PL/SQL packages needed to provide
- * cross-db compatibility in the Moodle 2.x DB API with some operations
+ * cross-db compatibility in the PowerEduc 2.x DB API with some operations
  * not natively supported by Oracle, namely:
- *  - locking: Application locks used by Moodle DB sessions. It uses
+ *  - locking: Application locks used by PowerEduc DB sessions. It uses
  *             the DBMS_LOCK package so execution must be granted
- *             to the Moodle DB user by SYS to work properly.
+ *             to the PowerEduc DB user by SYS to work properly.
  *  - bit ops: To provide cross-db bitwise operations to be used by the
  *             sql_bitXXX() helper functions
  *  - one space hacks: One space empty string substitute hacks.
  *
- * Moodle will not parse this file correctly if it uses Windows line endings.
+ * PowerEduc will not parse this file correctly if it uses Windows line endings.
  */
 
 CREATE OR REPLACE PACKAGE POWEREDUCLIB AS

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,11 +16,11 @@
 /**
  * Contains the import_strategy_file class.
  *
- * @package tool_moodlenet
+ * @package tool_powereducnet
  * @copyright 2020 Jake Dallimore <jrhdallimore@gmail.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace tool_moodlenet\local;
+namespace tool_powereducnet\local;
 
 use core\antivirus\manager as avmanager;
 
@@ -62,7 +62,7 @@ class import_strategy_file implements import_strategy {
      * @param \stdClass $course the course into which the remote_resource is being imported.
      * @param int $section the section into which the remote_resource is being imported.
      * @return \stdClass the module data.
-     * @throws \moodle_exception if the file size means the upload limit is exceeded for the user.
+     * @throws \powereduc_exception if the file size means the upload limit is exceeded for the user.
      */
     public function import(remote_resource $resource, \stdClass $user, \stdClass $course, int $section): \stdClass {
         // Before starting a potentially lengthy download, try to ensure the file size does not exceed the upload size restrictions
@@ -72,7 +72,7 @@ class import_strategy_file implements import_strategy {
         $size = $resource->get_download_size() ?? -1;
         $useruploadlimit = $this->get_user_upload_limit($user, $course);
         if ($this->size_exceeds_upload_limit($size, $useruploadlimit)) {
-            throw new \moodle_exception('uploadlimitexceeded', 'tool_moodlenet', '', ['filesize' => $size,
+            throw new \powereduc_exception('uploadlimitexceeded', 'tool_powereducnet', '', ['filesize' => $size,
                 'uploadlimit' => $useruploadlimit]);
         }
 
@@ -83,7 +83,7 @@ class import_strategy_file implements import_strategy {
         // Check the final size of file against the user upload limits.
         $localsize = filesize(sprintf('%s/%s', $filepath, $filename));
         if ($this->size_exceeds_upload_limit($localsize, $useruploadlimit)) {
-            throw new \moodle_exception('uploadlimitexceeded', 'tool_moodlenet', '', ['filesize' => $localsize,
+            throw new \powereduc_exception('uploadlimitexceeded', 'tool_powereducnet', '', ['filesize' => $localsize,
                 'uploadlimit' => $useruploadlimit]);
         }
 

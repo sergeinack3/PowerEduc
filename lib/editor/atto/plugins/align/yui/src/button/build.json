@@ -1,7 +1,7 @@
 {
-  "name": "moodle-atto_align-button",
+  "name": "powereduc-atto_align-button",
   "builds": {
-    "moodle-atto_align-button": {
+    "powereduc-atto_align-button": {
       "jsfiles": [
         "button.js"
       ]

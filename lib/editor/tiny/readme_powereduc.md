@@ -1,8 +1,8 @@
-# This is a description for the TinyMCE 6 library integration with Moodle.
+# This is a description for the TinyMCE 6 library integration with PowerEduc.
 
 ## Upgrade procedure for TinyMCE Editor
 
-1. Store an environment variable to the Tiny directory in the Moodle repository (the current directory).
+1. Store an environment variable to the Tiny directory in the PowerEduc repository (the current directory).
 
  ```
  POWEREDUCDIR=`pwd`
@@ -61,7 +61,7 @@
 
  This will generate a language file for each available Language, as well as a `tinystrings.json`, and a `strings.php` which will be used in the subsequent steps.
 
-5. Copy the `tinystrings.json` file into the Moodle directory
+5. Copy the `tinystrings.json` file into the PowerEduc directory
 
  ```
  cp tinystrings.json "${POWEREDUCDIR}/tinystrings.json"
@@ -81,6 +81,6 @@
 
 **Note:** A set of language files are also generated for all supported translations and may be submitted to AMOS if desired.
 
-**Note:** You will need to manually check for any Moodle-updated language strings as part of this change (for example any from the en_fixes).
+**Note:** You will need to manually check for any PowerEduc-updated language strings as part of this change (for example any from the en_fixes).
 
 ---

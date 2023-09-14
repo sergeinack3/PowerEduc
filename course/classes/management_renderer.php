@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ class core_course_management_renderer extends plugin_renderer_base {
      * course management pages that much cooler.
      */
     public function enhance_management_interface() {
-        $this->page->requires->yui_module('moodle-course-management', 'M.course.management.init');
+        $this->page->requires->yui_module('powereduc-course-management', 'M.course.management.init');
         $this->page->requires->strings_for_js(
             array(
                 'show',
@@ -57,7 +57,7 @@ class core_course_management_renderer extends plugin_renderer_base {
                 'cancel',
                 'confirm'
             ),
-            'moodle'
+            'powereduc'
         );
     }
 
@@ -82,7 +82,7 @@ class core_course_management_renderer extends plugin_renderer_base {
             $html .= html_writer::start_div();
             $html .= $this->view_mode_selector(\core_course\management\helper::get_management_viewmodes(), $viewmode);
             if ($viewmode === 'courses') {
-                $categories = core_course_category::make_categories_list(array('moodle/category:manage', 'moodle/course:create'));
+                $categories = core_course_category::make_categories_list(array('powereduc/category:manage', 'powereduc/course:create'));
                 $nothing = false;
                 if ($categoryid === null) {
                     $nothing = array('' => get_string('selectacategory'));
@@ -209,7 +209,7 @@ class core_course_management_renderer extends plugin_renderer_base {
             $a = new stdClass;
             $a->category = $text;
             $a->parentcategory = $parent->get_formatted_name();
-            $textlabel = get_string('categorysubcategoryof', 'moodle', $a);
+            $textlabel = get_string('categorysubcategoryof', 'powereduc', $a);
         }
         $courseicon = $this->output->pix_icon('i/course', get_string('courses'));
         $bcatinput = array(
@@ -227,37 +227,37 @@ class core_course_management_renderer extends plugin_renderer_base {
             $checkboxclass = 'd-none';
         }
 
-        $viewcaturl = new moodle_url('/course/management.php', array('categoryid' => $category->id));
+        $viewcaturl = new powereduc_url('/course/management.php', array('categoryid' => $category->id));
         if ($isexpanded) {
             $icon = $this->output->pix_icon('t/switch_minus', get_string('collapse'),
-                    'moodle', array('class' => 'tree-icon', 'title' => ''));
+                    'powereduc', array('class' => 'tree-icon', 'title' => ''));
             $icon = html_writer::link(
                     $viewcaturl,
                     $icon,
                     array(
                             'class' => 'float-left',
                             'data-action' => 'collapse',
-                            'title' => get_string('collapsecategory', 'moodle', $text),
+                            'title' => get_string('collapsecategory', 'powereduc', $text),
                             'aria-controls' => 'subcategoryof'.$category->id
                     )
             );
         } else if ($isexpandable) {
             $icon = $this->output->pix_icon('t/switch_plus', get_string('expand'),
-                    'moodle', array('class' => 'tree-icon', 'title' => ''));
+                    'powereduc', array('class' => 'tree-icon', 'title' => ''));
             $icon = html_writer::link(
                     $viewcaturl,
                     $icon,
                     array(
                             'class' => 'float-left',
                             'data-action' => 'expand',
-                            'title' => get_string('expandcategory', 'moodle', $text)
+                            'title' => get_string('expandcategory', 'powereduc', $text)
                     )
             );
         } else {
             $icon = $this->output->pix_icon(
                     'i/empty',
                     '',
-                    'moodle',
+                    'powereduc',
                     array('class' => 'tree-icon'));
             $icon = html_writer::span($icon, 'float-left');
         }
@@ -269,7 +269,7 @@ class core_course_management_renderer extends plugin_renderer_base {
         $html .= html_writer::start_div('float-left ' . $checkboxclass);
         $html .= html_writer::start_div('custom-control custom-checkbox mr-1 ');
         $html .= html_writer::empty_tag('input', $bcatinput);
-        $labeltext = html_writer::span(get_string('bulkactionselect', 'moodle', $text), 'sr-only');
+        $labeltext = html_writer::span(get_string('bulkactionselect', 'powereduc', $text), 'sr-only');
         $html .= html_writer::tag('label', $labeltext, array(
             'class' => 'custom-control-label',
             'for' => 'categorylistitem' . $category->id));
@@ -343,11 +343,11 @@ class core_course_management_renderer extends plugin_renderer_base {
         }
 
         if ($cancreatecategory) {
-            $url = new moodle_url('/course/editcategory.php', array('parent' => $category->id));
+            $url = new powereduc_url('/course/editcategory.php', array('parent' => $category->id));
             $actions[] = html_writer::link($url, get_string('createnewcategory'), array('class' => 'btn btn-secondary'));
         }
         if (core_course_category::can_approve_course_requests()) {
-            $actions[] = html_writer::link(new moodle_url('/course/pending.php'), get_string('coursespending'));
+            $actions[] = html_writer::link(new powereduc_url('/course/pending.php'), get_string('coursespending'));
         }
         if (count($actions) === 0) {
             return '';
@@ -431,10 +431,10 @@ class core_course_management_renderer extends plugin_renderer_base {
             $form .= html_writer::div(
                 html_writer::select(
                     array(
-                        'name' => get_string('sortbyx', 'moodle', get_string('categoryname')),
-                        'namedesc' => get_string('sortbyxreverse', 'moodle', get_string('categoryname')),
-                        'idnumber' => get_string('sortbyx', 'moodle', get_string('idnumbercoursecategory')),
-                        'idnumberdesc' => get_string('sortbyxreverse' , 'moodle' , get_string('idnumbercoursecategory')),
+                        'name' => get_string('sortbyx', 'powereduc', get_string('categoryname')),
+                        'namedesc' => get_string('sortbyxreverse', 'powereduc', get_string('categoryname')),
+                        'idnumber' => get_string('sortbyx', 'powereduc', get_string('idnumbercoursecategory')),
+                        'idnumberdesc' => get_string('sortbyxreverse' , 'powereduc' , get_string('idnumbercoursecategory')),
                         'none' => get_string('dontsortcategories')
                     ),
                     'resortcategoriesby',
@@ -446,14 +446,14 @@ class core_course_management_renderer extends plugin_renderer_base {
             $form .= html_writer::div(
                 html_writer::select(
                     array(
-                        'fullname' => get_string('sortbyx', 'moodle', get_string('fullnamecourse')),
-                        'fullnamedesc' => get_string('sortbyxreverse', 'moodle', get_string('fullnamecourse')),
-                        'shortname' => get_string('sortbyx', 'moodle', get_string('shortnamecourse')),
-                        'shortnamedesc' => get_string('sortbyxreverse', 'moodle', get_string('shortnamecourse')),
-                        'idnumber' => get_string('sortbyx', 'moodle', get_string('idnumbercourse')),
-                        'idnumberdesc' => get_string('sortbyxreverse', 'moodle', get_string('idnumbercourse')),
-                        'timecreated' => get_string('sortbyx', 'moodle', get_string('timecreatedcourse')),
-                        'timecreateddesc' => get_string('sortbyxreverse', 'moodle', get_string('timecreatedcourse')),
+                        'fullname' => get_string('sortbyx', 'powereduc', get_string('fullnamecourse')),
+                        'fullnamedesc' => get_string('sortbyxreverse', 'powereduc', get_string('fullnamecourse')),
+                        'shortname' => get_string('sortbyx', 'powereduc', get_string('shortnamecourse')),
+                        'shortnamedesc' => get_string('sortbyxreverse', 'powereduc', get_string('shortnamecourse')),
+                        'idnumber' => get_string('sortbyx', 'powereduc', get_string('idnumbercourse')),
+                        'idnumberdesc' => get_string('sortbyxreverse', 'powereduc', get_string('idnumbercourse')),
+                        'timecreated' => get_string('sortbyx', 'powereduc', get_string('timecreatedcourse')),
+                        'timecreateddesc' => get_string('sortbyxreverse', 'powereduc', get_string('timecreatedcourse')),
                         'none' => get_string('dontsortcourses')
                     ),
                     'resortcoursesby',
@@ -476,7 +476,7 @@ class core_course_management_renderer extends plugin_renderer_base {
             if (core_course_category::top()->has_manage_capability()) {
                 $options[0] = core_course_category::top()->get_formatted_name();
             }
-            $options += core_course_category::make_categories_list('moodle/category:manage');
+            $options += core_course_category::make_categories_list('powereduc/category:manage');
             $select = html_writer::select(
                 $options,
                 'movecategoriesto',
@@ -580,22 +580,22 @@ class core_course_management_renderer extends plugin_renderer_base {
             if ($totalpages == 0) {
                 $str = get_string('nocoursesyet');
             } else if ($totalpages == 1) {
-                $str = get_string('showingacourses', 'moodle', $totalcourses);
+                $str = get_string('showingacourses', 'powereduc', $totalcourses);
             } else {
                 $a = new stdClass;
                 $a->start = ($page * $perpage) + 1;
                 $a->end = min((($page + 1) * $perpage), $totalcourses);
                 $a->total = $totalcourses;
-                $str = get_string('showingxofycourses', 'moodle', $a);
+                $str = get_string('showingxofycourses', 'powereduc', $a);
             }
             $html .= html_writer::div($str, 'listing-pagination-totals text-muted');
         }
 
         if ($viewmode !== 'default') {
-            $baseurl = new moodle_url('/course/management.php', array('categoryid' => $category->id,
+            $baseurl = new powereduc_url('/course/management.php', array('categoryid' => $category->id,
                 'view' => $viewmode));
         } else {
-            $baseurl = new moodle_url('/course/management.php', array('categoryid' => $category->id));
+            $baseurl = new powereduc_url('/course/management.php', array('categoryid' => $category->id));
         }
 
         $html .= $this->output->paging_bar($totalcourses, $page, $perpage, $baseurl);
@@ -637,7 +637,7 @@ class core_course_management_renderer extends plugin_renderer_base {
             $checkboxclass = 'd-none';
         }
 
-        $viewcourseurl = new moodle_url($this->page->url, array('courseid' => $course->id));
+        $viewcourseurl = new powereduc_url($this->page->url, array('courseid' => $course->id));
 
         $html  = html_writer::start_tag('li', $attributes);
         $html .= html_writer::start_div('clearfix');
@@ -650,7 +650,7 @@ class core_course_management_renderer extends plugin_renderer_base {
         $html .= html_writer::start_div('float-left ' . $checkboxclass);
         $html .= html_writer::start_div('custom-control custom-checkbox mr-1 ');
         $html .= html_writer::empty_tag('input', $bulkcourseinput);
-        $labeltext = html_writer::span(get_string('bulkactionselect', 'moodle', $text), 'sr-only');
+        $labeltext = html_writer::span(get_string('bulkactionselect', 'powereduc', $text), 'sr-only');
         $html .= html_writer::tag('label', $labeltext, array(
             'class' => 'custom-control-label',
             'for' => 'courselistitem' . $course->id));
@@ -681,70 +681,70 @@ class core_course_management_renderer extends plugin_renderer_base {
     public function course_listing_actions(core_course_category $category, core_course_list_element $course = null, $perpage = 20) {
         $actions = array();
         if ($category->can_create_course()) {
-            $url = new moodle_url('/course/edit.php', array('category' => $category->id, 'returnto' => 'catmanage'));
+            $url = new powereduc_url('/course/edit.php', array('category' => $category->id, 'returnto' => 'catmanage'));
             $actions[] = html_writer::link($url, get_string('createnewcourse'), array('class' => 'btn btn-secondary'));
         }
         if ($category->can_request_course()) {
             // Request a new course.
-            $url = new moodle_url('/course/request.php', array('category' => $category->id, 'return' => 'management'));
+            $url = new powereduc_url('/course/request.php', array('category' => $category->id, 'return' => 'management'));
             $actions[] = html_writer::link($url, get_string('requestcourse'));
         }
         if ($category->can_resort_courses()) {
             $params = $this->page->url->params();
             $params['action'] = 'resortcourses';
             $params['sesskey'] = sesskey();
-            $baseurl = new moodle_url('/course/management.php', $params);
-            $fullnameurl = new moodle_url($baseurl, array('resort' => 'fullname'));
-            $fullnameurldesc = new moodle_url($baseurl, array('resort' => 'fullnamedesc'));
-            $shortnameurl = new moodle_url($baseurl, array('resort' => 'shortname'));
-            $shortnameurldesc = new moodle_url($baseurl, array('resort' => 'shortnamedesc'));
-            $idnumberurl = new moodle_url($baseurl, array('resort' => 'idnumber'));
-            $idnumberdescurl = new moodle_url($baseurl, array('resort' => 'idnumberdesc'));
-            $timecreatedurl = new moodle_url($baseurl, array('resort' => 'timecreated'));
-            $timecreateddescurl = new moodle_url($baseurl, array('resort' => 'timecreateddesc'));
+            $baseurl = new powereduc_url('/course/management.php', $params);
+            $fullnameurl = new powereduc_url($baseurl, array('resort' => 'fullname'));
+            $fullnameurldesc = new powereduc_url($baseurl, array('resort' => 'fullnamedesc'));
+            $shortnameurl = new powereduc_url($baseurl, array('resort' => 'shortname'));
+            $shortnameurldesc = new powereduc_url($baseurl, array('resort' => 'shortnamedesc'));
+            $idnumberurl = new powereduc_url($baseurl, array('resort' => 'idnumber'));
+            $idnumberdescurl = new powereduc_url($baseurl, array('resort' => 'idnumberdesc'));
+            $timecreatedurl = new powereduc_url($baseurl, array('resort' => 'timecreated'));
+            $timecreateddescurl = new powereduc_url($baseurl, array('resort' => 'timecreateddesc'));
             $menu = new action_menu(array(
                     new action_menu_link_secondary($fullnameurl,
                             null,
-                            get_string('sortbyx', 'moodle', get_string('fullnamecourse'))),
+                            get_string('sortbyx', 'powereduc', get_string('fullnamecourse'))),
                     new action_menu_link_secondary($fullnameurldesc,
                             null,
-                            get_string('sortbyxreverse', 'moodle', get_string('fullnamecourse'))),
+                            get_string('sortbyxreverse', 'powereduc', get_string('fullnamecourse'))),
                     new action_menu_link_secondary($shortnameurl,
                             null,
-                            get_string('sortbyx', 'moodle', get_string('shortnamecourse'))),
+                            get_string('sortbyx', 'powereduc', get_string('shortnamecourse'))),
                     new action_menu_link_secondary($shortnameurldesc,
                             null,
-                            get_string('sortbyxreverse', 'moodle', get_string('shortnamecourse'))),
+                            get_string('sortbyxreverse', 'powereduc', get_string('shortnamecourse'))),
                     new action_menu_link_secondary($idnumberurl,
                             null,
-                            get_string('sortbyx', 'moodle', get_string('idnumbercourse'))),
+                            get_string('sortbyx', 'powereduc', get_string('idnumbercourse'))),
                     new action_menu_link_secondary($idnumberdescurl,
                             null,
-                            get_string('sortbyxreverse', 'moodle', get_string('idnumbercourse'))),
+                            get_string('sortbyxreverse', 'powereduc', get_string('idnumbercourse'))),
                     new action_menu_link_secondary($timecreatedurl,
                             null,
-                            get_string('sortbyx', 'moodle', get_string('timecreatedcourse'))),
+                            get_string('sortbyx', 'powereduc', get_string('timecreatedcourse'))),
                     new action_menu_link_secondary($timecreateddescurl,
                             null,
-                            get_string('sortbyxreverse', 'moodle', get_string('timecreatedcourse')))
+                            get_string('sortbyxreverse', 'powereduc', get_string('timecreatedcourse')))
             ));
             $menu->set_menu_trigger(get_string('resortcourses'));
             $actions[] = $this->render($menu);
         }
         $strall = get_string('all');
         $menu = new action_menu(array(
-                new action_menu_link_secondary(new moodle_url($this->page->url, array('perpage' => 5)), null, 5),
-                new action_menu_link_secondary(new moodle_url($this->page->url, array('perpage' => 10)), null, 10),
-                new action_menu_link_secondary(new moodle_url($this->page->url, array('perpage' => 20)), null, 20),
-                new action_menu_link_secondary(new moodle_url($this->page->url, array('perpage' => 50)), null, 50),
-                new action_menu_link_secondary(new moodle_url($this->page->url, array('perpage' => 100)), null, 100),
-                new action_menu_link_secondary(new moodle_url($this->page->url, array('perpage' => 999)), null, $strall),
+                new action_menu_link_secondary(new powereduc_url($this->page->url, array('perpage' => 5)), null, 5),
+                new action_menu_link_secondary(new powereduc_url($this->page->url, array('perpage' => 10)), null, 10),
+                new action_menu_link_secondary(new powereduc_url($this->page->url, array('perpage' => 20)), null, 20),
+                new action_menu_link_secondary(new powereduc_url($this->page->url, array('perpage' => 50)), null, 50),
+                new action_menu_link_secondary(new powereduc_url($this->page->url, array('perpage' => 100)), null, 100),
+                new action_menu_link_secondary(new powereduc_url($this->page->url, array('perpage' => 999)), null, $strall),
         ));
         if ((int)$perpage === 999) {
             $perpage = $strall;
         }
         $menu->attributes['class'] .= ' courses-per-page';
-        $menu->set_menu_trigger(get_string('perpagea', 'moodle', $perpage));
+        $menu->set_menu_trigger(get_string('perpagea', 'powereduc', $perpage));
         $actions[] = $this->render($menu);
         return html_writer::div(join(' ', $actions), 'listing-actions course-listing-actions');
     }
@@ -780,7 +780,7 @@ class core_course_management_renderer extends plugin_renderer_base {
         $html  = html_writer::start_div('course-bulk-actions bulk-actions');
         if ($category->can_move_courses_out_of()) {
             $html .= html_writer::div(get_string('coursebulkaction'), 'accesshide', array('tabindex' => '0'));
-            $options = core_course_category::make_categories_list('moodle/category:manage');
+            $options = core_course_category::make_categories_list('powereduc/category:manage');
             $select = html_writer::select(
                 $options,
                 'movecoursesto',
@@ -807,7 +807,7 @@ class core_course_management_renderer extends plugin_renderer_base {
     public function course_search_bulk_actions() {
         $html  = html_writer::start_div('course-bulk-actions bulk-actions');
         $html .= html_writer::div(get_string('coursebulkaction'), 'accesshide', array('tabindex' => '0'));
-        $options = core_course_category::make_categories_list('moodle/category:manage');
+        $options = core_course_category::make_categories_list('powereduc/category:manage');
         $select = html_writer::select(
             $options,
             'movecoursesto',
@@ -888,14 +888,14 @@ class core_course_management_renderer extends plugin_renderer_base {
     /**
      * Creates an action button (styled link)
      *
-     * @param moodle_url $url The URL to go to when clicked.
+     * @param powereduc_url $url The URL to go to when clicked.
      * @param string $text The text for the button.
      * @param string $id An id to give the button.
      * @param string $class A class to give the button.
      * @param array $attributes Any additional attributes
      * @return string
      */
-    protected function action_button(moodle_url $url, $text, $id = null, $class = null, $title = null, array $attributes = array()) {
+    protected function action_button(powereduc_url $url, $text, $id = null, $class = null, $title = null, array $attributes = array()) {
         if (isset($attributes['class'])) {
             $attributes['class'] .= ' yui3-button';
         } else {
@@ -996,7 +996,7 @@ class core_course_management_renderer extends plugin_renderer_base {
      * most part. What it does different is prepare the icon as HTML and use it
      * as the link text.
      *
-     * @param string|moodle_url $url A string URL or moodel_url
+     * @param string|powereduc_url $url A string URL or moodel_url
      * @param pix_icon $pixicon
      * @param component_action $action
      * @param array $attributes associative array of html link attributes + disabled
@@ -1005,8 +1005,8 @@ class core_course_management_renderer extends plugin_renderer_base {
      */
     public function action_icon($url, pix_icon $pixicon, component_action $action = null,
                                 array $attributes = null, $linktext = false) {
-        if (!($url instanceof moodle_url)) {
-            $url = new moodle_url($url);
+        if (!($url instanceof powereduc_url)) {
+            $url = new powereduc_url($url);
         }
         $attributes = (array)$attributes;
 
@@ -1031,11 +1031,11 @@ class core_course_management_renderer extends plugin_renderer_base {
      *
      * @param array $modes An array of view modes.
      * @param string $currentmode The current view mode.
-     * @param moodle_url $url The URL to use when changing actions. Defaults to the page URL.
+     * @param powereduc_url $url The URL to use when changing actions. Defaults to the page URL.
      * @param string $param The param name.
      * @return string
      */
-    public function view_mode_selector(array $modes, $currentmode, moodle_url $url = null, $param = 'view') {
+    public function view_mode_selector(array $modes, $currentmode, powereduc_url $url = null, $param = 'view') {
         if ($url === null) {
             $url = $this->page->url;
         }
@@ -1056,7 +1056,7 @@ class core_course_management_renderer extends plugin_renderer_base {
             if ($selected === null) {
                 $selected = $modestr;
             }
-            $modeurl = new moodle_url($url, array($param => $mode));
+            $modeurl = new powereduc_url($url, array($param => $mode));
             if ($mode === 'default') {
                 $modeurl->remove_params($param);
             }
@@ -1135,15 +1135,15 @@ class core_course_management_renderer extends plugin_renderer_base {
         $totalpages = ceil($totalcourses / $perpage);
         if ($showtotals) {
             if ($totalpages == 0) {
-                $str = get_string('nocoursesfound', 'moodle', s($search));
+                $str = get_string('nocoursesfound', 'powereduc', s($search));
             } else if ($totalpages == 1) {
-                $str = get_string('showingacourses', 'moodle', $totalcourses);
+                $str = get_string('showingacourses', 'powereduc', $totalcourses);
             } else {
                 $a = new stdClass;
                 $a->start = ($page * $perpage) + 1;
                 $a->end = min((($page + 1) * $perpage), $totalcourses);
                 $a->total = $totalcourses;
-                $str = get_string('showingxofycourses', 'moodle', $a);
+                $str = get_string('showingxofycourses', 'powereduc', $a);
             }
             $html .= html_writer::div($str, 'listing-pagination-totals text-muted');
         }
@@ -1165,8 +1165,8 @@ class core_course_management_renderer extends plugin_renderer_base {
         $items = array();
         $baseurl = $this->page->url;
         if ($page > 0) {
-            $items[] = $this->action_button(new moodle_url($baseurl, array('page' => 0)), get_string('first'));
-            $items[] = $this->action_button(new moodle_url($baseurl, array('page' => $page - 1)), get_string('prev'));
+            $items[] = $this->action_button(new powereduc_url($baseurl, array('page' => 0)), get_string('first'));
+            $items[] = $this->action_button(new powereduc_url($baseurl, array('page' => $page - 1)), get_string('prev'));
             $items[] = '...';
         }
         for ($i = $start; $i <= $end; $i++) {
@@ -1174,12 +1174,12 @@ class core_course_management_renderer extends plugin_renderer_base {
             if ($page == $i) {
                 $class = 'active-page';
             }
-            $items[] = $this->action_button(new moodle_url($baseurl, array('page' => $i)), $i + 1, null, $class);
+            $items[] = $this->action_button(new powereduc_url($baseurl, array('page' => $i)), $i + 1, null, $class);
         }
         if ($page < ($totalpages - 1)) {
             $items[] = '...';
-            $items[] = $this->action_button(new moodle_url($baseurl, array('page' => $page + 1)), get_string('next'));
-            $items[] = $this->action_button(new moodle_url($baseurl, array('page' => $totalpages - 1)), get_string('last'));
+            $items[] = $this->action_button(new powereduc_url($baseurl, array('page' => $page + 1)), get_string('next'));
+            $items[] = $this->action_button(new powereduc_url($baseurl, array('page' => $totalpages - 1)), get_string('last'));
         }
 
         $html .= html_writer::div(join('', $items), 'listing-pagination');
@@ -1215,7 +1215,7 @@ class core_course_management_renderer extends plugin_renderer_base {
                     'data-action' => 'select'
             );
         }
-        $viewcourseurl = new moodle_url($this->page->url, array('courseid' => $course->id));
+        $viewcourseurl = new powereduc_url($this->page->url, array('courseid' => $course->id));
         $categoryname = core_course_category::get($course->category)->get_formatted_name();
 
         $html  = html_writer::start_tag('li', $attributes);
@@ -1224,7 +1224,7 @@ class core_course_management_renderer extends plugin_renderer_base {
         if ($bulkcourseinput) {
             $html .= html_writer::start_div('custom-control custom-checkbox mr-1');
             $html .= html_writer::empty_tag('input', $bulkcourseinput);
-            $labeltext = html_writer::span(get_string('bulkactionselect', 'moodle', $text), 'sr-only');
+            $labeltext = html_writer::span(get_string('bulkactionselect', 'powereduc', $text), 'sr-only');
             $html .= html_writer::tag('label', $labeltext, array(
                 'class' => 'custom-control-label',
                 'for' => 'coursesearchlistitem' . $course->id));
@@ -1249,7 +1249,7 @@ class core_course_management_renderer extends plugin_renderer_base {
      * @return string
      */
     public function search_listitem_actions(core_course_list_element $course) {
-        $baseurl = new moodle_url(
+        $baseurl = new powereduc_url(
             '/course/managementsearch.php',
             array('courseid' => $course->id, 'categoryid' => $course->category, 'sesskey' => sesskey())
         );
@@ -1258,7 +1258,7 @@ class core_course_management_renderer extends plugin_renderer_base {
         if ($course->can_access()) {
             if ($course->can_edit()) {
                 $actions[] = $this->output->action_icon(
-                    new moodle_url('/course/edit.php', array('id' => $course->id)),
+                    new powereduc_url('/course/edit.php', array('id' => $course->id)),
                     new pix_icon('t/edit', get_string('edit')),
                     null,
                     array('class' => 'action-edit')
@@ -1267,7 +1267,7 @@ class core_course_management_renderer extends plugin_renderer_base {
             // Delete.
             if ($course->can_delete()) {
                 $actions[] = $this->output->action_icon(
-                    new moodle_url('/course/delete.php', array('id' => $course->id)),
+                    new powereduc_url('/course/delete.php', array('id' => $course->id)),
                     new pix_icon('t/delete', get_string('delete')),
                     null,
                     array('class' => 'action-delete')
@@ -1276,13 +1276,13 @@ class core_course_management_renderer extends plugin_renderer_base {
             // Show/Hide.
             if ($course->can_change_visibility()) {
                     $actions[] = $this->output->action_icon(
-                        new moodle_url($baseurl, array('action' => 'hidecourse')),
+                        new powereduc_url($baseurl, array('action' => 'hidecourse')),
                         new pix_icon('t/hide', get_string('hide')),
                         null,
                         array('data-action' => 'hide', 'class' => 'action-hide')
                     );
                     $actions[] = $this->output->action_icon(
-                        new moodle_url($baseurl, array('action' => 'showcourse')),
+                        new powereduc_url($baseurl, array('action' => 'showcourse')),
                         new pix_icon('t/show', get_string('show')),
                         null,
                         array('data-action' => 'show', 'class' => 'action-show')
@@ -1306,7 +1306,7 @@ class core_course_management_renderer extends plugin_renderer_base {
     public function course_search_form($value = '') {
         debugging('course_search_form() is deprecated. Use the class manage_categories_action_bar instead.', DEBUG_DEVELOPER);
         $data = [
-            'action' => new moodle_url('/course/management.php'),
+            'action' => new powereduc_url('/course/management.php'),
             'btnclass' => 'btn-primary',
             'extraclasses' => 'my-3 d-flex justify-content-center',
             'inputname' => 'search',
@@ -1326,7 +1326,7 @@ class core_course_management_renderer extends plugin_renderer_base {
      */
     public function accessible_skipto_links($displaycategorylisting, $displaycourselisting, $displaycoursedetail) {
         $html = html_writer::start_div('skiplinks accesshide');
-        $url = new moodle_url($this->page->url);
+        $url = new powereduc_url($this->page->url);
         if ($displaycategorylisting) {
             $url->set_anchor('category-listing');
             $html .= html_writer::link($url, get_string('skiptocategorylisting'), array('class' => 'skip'));

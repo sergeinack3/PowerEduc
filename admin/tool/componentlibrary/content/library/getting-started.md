@@ -28,7 +28,7 @@ Whenever a new Moodle feature is created or updated the building blocks for the 
 
 ## Bootstrap docs
 
-A large part of this library contains information about [Bootstrap](http://getbootstrap.com) components which are shipped with every Moodle installation. Bootstrap contains a lot of useful components and utilities which can safely be used for frontend development. For example, instead of adding custom CSS to add some padding in a box you should really look at the [spacing](/moodle-3.9/utilities/spacing) utilities from Bootstrap instead.
+A large part of this library contains information about [Bootstrap](http://getbootstrap.com) components which are shipped with every Moodle installation. Bootstrap contains a lot of useful components and utilities which can safely be used for frontend development. For example, instead of adding custom CSS to add some padding in a box you should really look at the [spacing](/powereduc-3.9/utilities/spacing) utilities from Bootstrap instead.
 
 ## Build with Hugo
 

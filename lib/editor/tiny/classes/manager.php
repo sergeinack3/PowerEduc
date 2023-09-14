@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace editor_tiny;
 
@@ -47,9 +47,9 @@ class manager {
         // Note: Disabled plugins are already removed from this list.
         $plugins = $this->get_shipped_plugins();
 
-        // Fetch configuration for Moodle plugins.
-        $moodleplugins = \core_component::get_plugin_list_with_class('tiny', 'plugininfo');
-        foreach ($moodleplugins as $plugin => $classname) {
+        // Fetch configuration for PowerEduc plugins.
+        $powereducplugins = \core_component::get_plugin_list_with_class('tiny', 'plugininfo');
+        foreach ($powereducplugins as $plugin => $classname) {
             if (in_array($plugin, $disabledplugins) || in_array("{$plugin}/plugin", $disabledplugins)) {
                 // Skip getting data for disabled plugins.
                 continue;
@@ -79,7 +79,7 @@ class manager {
                 $plugininfo['config'] = $config;
             }
 
-            // We suffix the plugin name for Moodle plugins with /plugin to avoid conflicts with Tiny plugins.
+            // We suffix the plugin name for PowerEduc plugins with /plugin to avoid conflicts with Tiny plugins.
             $plugins["{$plugin}/plugin"] = $plugininfo;
         }
 
@@ -175,7 +175,7 @@ class manager {
     }
 
     /**
-     * Return a list of all available plugins, including both TinyMCE shipped, and Moodle add-onis.
+     * Return a list of all available plugins, including both TinyMCE shipped, and PowerEduc add-onis.
      *
      * Each plugin is returned as an array element containing:
      * - a list of buttons (if applicable); and
@@ -188,7 +188,7 @@ class manager {
      */
     protected function get_available_plugins(): array {
         $plugins = $this->get_shipped_plugins();
-        $plugins += $this->get_moodle_plugins();
+        $plugins += $this->get_powereduc_plugins();
 
         $disabledplugins = $this->get_disabled_plugins();
         $plugins = array_filter($plugins, function ($plugin) use ($disabledplugins) {
@@ -199,7 +199,7 @@ class manager {
     }
 
     /**
-     * Return a list of all available plugins built into TinyMCE and not shipped as separate Moodle plugins.
+     * Return a list of all available plugins built into TinyMCE and not shipped as separate PowerEduc plugins.
      *
      * Each plugin is returned as an array element containing:
      * - a list of buttons (if applicable); and
@@ -487,27 +487,27 @@ class manager {
     protected function get_disabled_plugins(): array {
         return [
             // Disable the image and media plugins.
-            // These are not generally compatible with Moodle.
+            // These are not generally compatible with PowerEduc.
             'image',
             'media',
 
-            // Use the Moodle autosave plugin instead.
+            // Use the PowerEduc autosave plugin instead.
             'autosave',
 
             // Disable the Template plugin for now.
             'template',
 
-            // Disable the preview plugin as it does not support Moodle filters.
+            // Disable the preview plugin as it does not support PowerEduc filters.
             'preview',
         ];
     }
 
     /**
-     * Get a list of the Moodle plugins with their button, and menuitem, configuration.
+     * Get a list of the PowerEduc plugins with their button, and menuitem, configuration.
      *
      * @return array[]
      */
-    protected function get_moodle_plugins(): array {
+    protected function get_powereduc_plugins(): array {
         $plugins = \core_component::get_plugin_list_with_class('tiny', 'plugininfo');
 
         $pluginconfig = [];
@@ -535,7 +535,7 @@ class manager {
      * Get a list of the Tiny Premium plugins with their button, and menuitem, configuration.
      *
      * Note: This only includes _compatible_ premium plugins.
-     * Some premium plugins *may not* be compatible with Moodle, and some may require additional configuration.
+     * Some premium plugins *may not* be compatible with PowerEduc, and some may require additional configuration.
      *
      * @return array[]
      */

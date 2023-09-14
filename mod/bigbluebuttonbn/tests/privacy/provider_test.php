@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Privacy provider tests.
@@ -145,7 +145,7 @@ class provider_test extends \core_privacy\tests\provider_testcase {
      * Test that only users with relevant contexts are fetched.
      */
     public function test_get_users_in_context() {
-        // For backward compatibility with old versions of Moodle.
+        // For backward compatibility with old versions of PowerEduc.
         if (!class_exists('\core_privacy\local\request\userlist')) {
             return;
         }
@@ -235,7 +235,7 @@ class provider_test extends \core_privacy\tests\provider_testcase {
     public function test_delete_data_for_users() {
         global $DB;
 
-        // For backward compatibility with old versions of Moodle.
+        // For backward compatibility with old versions of PowerEduc.
         if (!class_exists('\core_privacy\local\request\approved_userlist')) {
             return;
         }

@@ -33,7 +33,7 @@
         if (isset($idplist[$idp])) {
             set_saml_cookie($idp);
 
-            $targeturl = new moodle_url('/auth/shibboleth/index.php');
+            $targeturl = new powereduc_url('/auth/shibboleth/index.php');
             $idpinfo = $idplist[$idp];
 
             // Redirect to SessionInitiator with entityID as argument.
@@ -65,8 +65,8 @@
         // Prevent logging when already logged in, we do not want them to relogin by accident because sesskey would be changed.
         echo $OUTPUT->box_start();
         $params = array('sesskey' => sesskey(), 'loginpage' => 1);
-        $logout = new single_button(new moodle_url('/login/logout.php', $params), get_string('logout'), 'post');
-        $continue = new single_button(new moodle_url('/'), get_string('cancel'), 'get');
+        $logout = new single_button(new powereduc_url('/login/logout.php', $params), get_string('logout'), 'post');
+        $continue = new single_button(new powereduc_url('/'), get_string('cancel'), 'get');
         echo $OUTPUT->confirm(get_string('alreadyloggedin', 'error', fullname($USER)), $logout, $continue);
         echo $OUTPUT->box_end();
     } else {
@@ -107,14 +107,14 @@
             'adminemail' => get_admin()->email,
             'cansignup' => $cansignup,
             'guestlogin' => $CFG->guestloginbutton,
-            'guestloginurl' => new moodle_url('/login/index.php'),
+            'guestloginurl' => new powereduc_url('/login/index.php'),
             'idps' => $idps,
             'instructions' => $instructions,
             'loginname' => $config->login_name ?? null,
             'logintoken' => \core\session\manager::get_login_token(),
-            'loginurl' => new moodle_url('/auth/shibboleth/login.php'),
+            'loginurl' => new powereduc_url('/auth/shibboleth/login.php'),
             'showinstructions' => $showinstructions,
-            'signupurl' => new moodle_url('/login/signup.php'),
+            'signupurl' => new powereduc_url('/login/signup.php'),
             'isvalid' => $isvalid
         ];
 

@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -57,10 +57,10 @@ define(['jquery',
             e.stopPropagation();
 
             Str.get_strings([
-                {key: 'confirm', component: 'moodle'},
-                {key: 'areyousure', component: 'moodle'},
-                {key: 'delete', component: 'moodle'},
-                {key: 'cancel', component: 'moodle'}
+                {key: 'confirm', component: 'powereduc'},
+                {key: 'areyousure', component: 'powereduc'},
+                {key: 'delete', component: 'powereduc'},
+                {key: 'cancel', component: 'powereduc'}
             ]).done(function(strings) {
                 Notification.confirm(
                     strings[0], // Confirm.

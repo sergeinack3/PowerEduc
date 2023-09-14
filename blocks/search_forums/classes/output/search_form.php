@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ namespace block_search_forums\output;
 defined('POWEREDUC_INTERNAL') || die();
 
 use help_icon;
-use moodle_url;
+use powereduc_url;
 use renderable;
 use renderer_base;
 use templatable;
@@ -42,7 +42,7 @@ class search_form implements renderable, templatable {
 
     /** @var int The course ID. */
     protected $courseid;
-    /** @var moodle_url The form action URL. */
+    /** @var powereduc_url The form action URL. */
     protected $actionurl;
     /** @var help_icon The help icon. */
     protected $helpicon;
@@ -54,7 +54,7 @@ class search_form implements renderable, templatable {
      */
     public function __construct($courseid) {
         $this->courseid = $courseid;
-        $this->actionurl = new moodle_url('/mod/forum/search.php', ['id' => $courseid]);
+        $this->actionurl = new powereduc_url('/mod/forum/search.php', ['id' => $courseid]);
         $this->helpicon = new help_icon('search', 'core');
     }
 

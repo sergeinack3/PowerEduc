@@ -78,9 +78,9 @@ Feature: Managers can create courses
     And I log in as "admin"
     And I set the following system permissions of "Creator" role:
       | capability | permission |
-      | moodle/course:create | Allow |
-      | moodle/course:manageactivities | Allow |
-      | moodle/course:viewparticipants | Allow |
+      | powereduc/course:create | Allow |
+      | powereduc/course:manageactivities | Allow |
+      | powereduc/course:viewparticipants | Allow |
     And I log out
     And I log in as "kevin"
     And I am on site homepage

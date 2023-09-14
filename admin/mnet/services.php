@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -73,7 +73,7 @@ if ($formdata = $mform->get_data()) {
             $DB->update_record('mnet_host2service', $host2service);
         }
     }
-    $redirecturl = new moodle_url('/admin/mnet/services.php?hostid=' . $hostid);
+    $redirecturl = new powereduc_url('/admin/mnet/services.php?hostid=' . $hostid);
     redirect($redirecturl, get_string('changessaved'));
 }
 

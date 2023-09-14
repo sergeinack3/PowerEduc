@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ require_once($CFG->dirroot . '/calendar/lib.php');
 
 use core\external\exporter;
 use renderer_base;
-use moodle_url;
+use powereduc_url;
 
 /**
  * Class for displaying the day view.
@@ -47,7 +47,7 @@ class day_exporter extends exporter {
     protected $calendar;
 
     /**
-     * @var moodle_url
+     * @var powereduc_url
      */
     protected $url;
     /**
@@ -60,7 +60,7 @@ class day_exporter extends exporter {
     public function __construct(\calendar_information $calendar, $data, $related) {
         $this->calendar = $calendar;
 
-        $url = new moodle_url('/calendar/view.php', [
+        $url = new powereduc_url('/calendar/view.php', [
                 'view' => 'day',
                 'time' => $calendar->time,
             ]);

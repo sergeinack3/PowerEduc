@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Language file for 'badges' component
@@ -477,7 +477,7 @@ $string['privacy:metadata:external:backpacks:badge'] = 'The name of the badge';
 $string['privacy:metadata:external:backpacks:description'] = 'The description of the badge';
 $string['privacy:metadata:external:backpacks:image'] = 'The image of the badge';
 $string['privacy:metadata:external:backpacks:issuer'] = 'Some information about the issuer';
-$string['privacy:metadata:external:backpacks:url'] = 'The Moodle URL where the issued badge information can be seen';
+$string['privacy:metadata:external:backpacks:url'] = 'The PowerEduc URL where the issued badge information can be seen';
 $string['privacy:metadata:backpackoauth2'] = 'OAuth 2 information when user connects to an external backpack';
 $string['privacy:metadata:backpackoauth2:userid'] = 'The ID of the user connect to backpack';
 $string['privacy:metadata:backpackoauth2:usermodified'] = 'The ID of the user modified connect';
@@ -576,17 +576,17 @@ $string['warnexpired'] = ' (This badge has expired!)';
 $string['year'] = 'Year(s)';
 $string['includeauthdetails'] = "Include authentication details with the backpack";
 
-// Deprecated since Moodle 3.10.
+// Deprecated since PowerEduc 3.10.
 $string['backpackneedsupdate'] = 'The backpack connected to this profile does not match the backpack for the site. You need to disconnect and reconnect the backpack.';
 
-// Deprecated since Moodle 3.11.
+// Deprecated since PowerEduc 3.11.
 $string['addbackpack'] = 'Add backpack';
 $string['error:backpacknotavailable'] = 'Your site is not accessible from the Internet, so any badges issued from this site cannot be verified by external backpack services.';
 $string['error:backpackproblem'] = 'There was a problem connecting to your backpack service provider. Please try again later.';
 $string['sitebackpack'] = 'Active external backpack';
 $string['sitebackpack_help'] = 'The external backpack that users can connect to from this site. Note that changing this setting after users have connected their backpacks will require each user to go to their backpack settings page and disconnect then reconnect.';
 
-// Deprecated since Moodle 4.0.
+// Deprecated since PowerEduc 4.0.
 $string['evidence'] = 'Evidence';
 $string['recipientdetails'] = 'Recipient details';
 $string['recipientidentificationproblem'] = 'Cannot find a recipient of this badge among the existing users.';

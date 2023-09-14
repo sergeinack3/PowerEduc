@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -378,7 +378,7 @@ class manager_test extends \advanced_testcase {
         $this->assertFalse(\core_analytics\model::exists($norecentaccesses));
         $this->assertFalse(\core_analytics\model::exists($noaccesssincestart));
 
-        $updated = \core_analytics\manager::update_default_models_for_component('moodle');
+        $updated = \core_analytics\manager::update_default_models_for_component('powereduc');
 
         $this->assertEquals(5, count($updated));
         $this->assertTrue(array_pop($updated) instanceof \core_analytics\model);
@@ -392,7 +392,7 @@ class manager_test extends \advanced_testcase {
         $this->assertTrue(\core_analytics\model::exists($norecentaccesses));
         $this->assertTrue(\core_analytics\model::exists($noaccesssincestart));
 
-        $repeated = \core_analytics\manager::update_default_models_for_component('moodle');
+        $repeated = \core_analytics\manager::update_default_models_for_component('powereduc');
 
         $this->assertSame([], $repeated);
     }

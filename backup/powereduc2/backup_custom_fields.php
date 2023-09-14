@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * Defines various element classes used in specific areas
  *
  * @package     core_backup
- * @subpackage  moodle2
+ * @subpackage  powereduc2
  * @category    backup
  * @copyright   2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -234,7 +234,7 @@ class encrypted_final_element extends backup_final_element {
  *
  * This class overwrites the standard fill_values() method, so it gets intercepted
  * for each file record being set to xml, in order to copy, at the same file, the
- * physical file from moodle file storage to backup file storage
+ * physical file from powereduc file storage to backup file storage
  *
  * TODO: Finish phpdocs
  */
@@ -253,9 +253,9 @@ class file_nested_element extends backup_nested_element {
     public function fill_values($values) {
         // Fill values
         parent::fill_values($values);
-        // Do our own tasks (copy file from moodle to backup)
+        // Do our own tasks (copy file from powereduc to backup)
         try {
-            backup_file_manager::copy_file_moodle2backup($this->backupid, $values);
+            backup_file_manager::copy_file_powereduc2backup($this->backupid, $values);
         } catch (file_exception $e) {
             $this->add_result(array('missing_files_in_pool' => true));
 

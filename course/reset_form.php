@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ require_once($CFG->dirroot . '/course/lib.php');
  * @copyright   2007 Petr Skoda
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class course_reset_form extends moodleform {
+class course_reset_form extends powereducform {
     function definition (){
         global $CFG, $COURSE, $DB;
 
@@ -47,7 +47,7 @@ class course_reset_form extends moodleform {
         $mform->addHelpButton('reset_end_date', 'enddate');
         $mform->addElement('checkbox', 'reset_events', get_string('deleteevents', 'calendar'));
         $mform->addElement('checkbox', 'reset_notes', get_string('deletenotes', 'notes'));
-        $mform->addElement('checkbox', 'reset_comments', get_string('deleteallcomments', 'moodle'));
+        $mform->addElement('checkbox', 'reset_comments', get_string('deleteallcomments', 'powereduc'));
         $mform->addElement('checkbox', 'reset_completion', get_string('deletecompletiondata', 'completion'));
         $mform->addElement('checkbox', 'delete_blog_associations', get_string('deleteblogassociations', 'blog'));
         $mform->addHelpButton('delete_blog_associations', 'deleteblogassociations', 'blog');

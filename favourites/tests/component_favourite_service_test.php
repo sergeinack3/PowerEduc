@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -67,7 +67,7 @@ class component_favourite_service_test extends \advanced_testcase {
                 // Check the objects for the unique key.
                 foreach ($mockstore as $item) {
                     if ($item->uniquekey == $key) {
-                        throw new \moodle_exception('Favourite already exists');
+                        throw new \powereduc_exception('Favourite already exists');
                     }
                 }
                 $index = count($mockstore);     // Integer index.

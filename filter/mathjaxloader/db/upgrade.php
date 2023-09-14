@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * MathJAX filter upgrade code.
  *
  * @package    filter_mathjaxloader
- * @copyright  2014 Damyon Wiese (damyon@moodle.com)
+ * @copyright  2014 Damyon Wiese (damyon@powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

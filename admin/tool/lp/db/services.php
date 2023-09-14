@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ $functions = array(
         'classpath'    => '',
         'description'  => 'Load the data for the competency frameworks manage page template',
         'type'         => 'read',
-        'capabilities' => 'moodle/competency:competencyview',
+        'capabilities' => 'powereduc/competency:competencyview',
         'ajax'         => true,
     ),
     'tool_lp_data_for_competency_summary' => array(
@@ -44,7 +44,7 @@ $functions = array(
         'classpath'    => '',
         'description'  => 'Load competency data for summary template.',
         'type'         => 'read',
-        'capabilities' => 'moodle/competency:competencyview',
+        'capabilities' => 'powereduc/competency:competencyview',
         'ajax'         => true,
     ),
     'tool_lp_data_for_competencies_manage_page' => array(
@@ -53,7 +53,7 @@ $functions = array(
         'classpath'    => '',
         'description'  => 'Load the data for the competencies manage page template',
         'type'         => 'read',
-        'capabilities' => 'moodle/competency:competencyview',
+        'capabilities' => 'powereduc/competency:competencyview',
         'ajax'         => true,
     ),
     'tool_lp_list_courses_using_competency' => array(
@@ -62,7 +62,7 @@ $functions = array(
         'classpath'    => '',
         'description'  => 'List the courses using a competency',
         'type'         => 'read',
-        'capabilities' => 'moodle/competency:coursecompetencyview',
+        'capabilities' => 'powereduc/competency:coursecompetencyview',
         'ajax'         => true,
     ),
     'tool_lp_data_for_course_competencies_page' => array(
@@ -71,7 +71,7 @@ $functions = array(
         'classpath'    => '',
         'description'  => 'Load the data for the course competencies page template.',
         'type'         => 'read',
-        'capabilities' => 'moodle/competency:coursecompetencyview',
+        'capabilities' => 'powereduc/competency:coursecompetencyview',
         'ajax'         => true,
         'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
@@ -81,7 +81,7 @@ $functions = array(
         'classpath'    => '',
         'description'  => 'Load the data for the template competencies page template.',
         'type'         => 'read',
-        'capabilities' => 'moodle/competency:templateview',
+        'capabilities' => 'powereduc/competency:templateview',
         'ajax'         => true,
     ),
     'tool_lp_data_for_templates_manage_page' => array(
@@ -90,7 +90,7 @@ $functions = array(
         'classpath'    => '',
         'description'  => 'Load the data for the learning plan templates manage page template',
         'type'         => 'read',
-        'capabilities' => 'moodle/competency:templateview',
+        'capabilities' => 'powereduc/competency:templateview',
         'ajax'         => true,
     ),
     'tool_lp_data_for_plans_page' => array(
@@ -99,7 +99,7 @@ $functions = array(
         'classpath'    => '',
         'description'  => 'Load the data for the plans page template',
         'type'         => 'read',
-        'capabilities' => 'moodle/competency:planviewown',
+        'capabilities' => 'powereduc/competency:planviewown',
         'ajax'         => true,
         'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
@@ -109,7 +109,7 @@ $functions = array(
         'classpath'    => '',
         'description'  => 'Load the data for the plan page template.',
         'type'         => 'read',
-        'capabilities' => 'moodle/competency:planview',
+        'capabilities' => 'powereduc/competency:planview',
         'ajax'         => true,
         'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
@@ -119,7 +119,7 @@ $functions = array(
         'classpath'    => '',
         'description'  => 'Load the data for the related competencies template.',
         'type'         => 'read',
-        'capabilities' => 'moodle/competency:competencyview',
+        'capabilities' => 'powereduc/competency:competencyview',
         'ajax'         => true,
     ),
     'tool_lp_search_users' => array(
@@ -138,7 +138,7 @@ $functions = array(
         'classpath'    => 'cohort/externallib.php',
         'description'  => 'Search for cohorts.',
         'type'         => 'read',
-        'capabilities' => 'moodle/cohort:view',
+        'capabilities' => 'powereduc/cohort:view',
         'ajax'         => true,
     ),
 
@@ -149,7 +149,7 @@ $functions = array(
         'classpath'    => '',
         'description'  => 'Load the data for the user evidence list page template',
         'type'         => 'read',
-        'capabilities' => 'moodle/competency:userevidenceview',
+        'capabilities' => 'powereduc/competency:userevidenceview',
         'ajax'         => true,
         'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
@@ -159,7 +159,7 @@ $functions = array(
         'classpath'    => '',
         'description'  => 'Load the data for the user evidence page template',
         'type'         => 'read',
-        'capabilities' => 'moodle/competency:userevidenceview',
+        'capabilities' => 'powereduc/competency:userevidenceview',
         'ajax'         => true,
         'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
@@ -171,7 +171,7 @@ $functions = array(
         'classpath'    => '',
         'description'  => 'Load a summary of a user competency.',
         'type'         => 'read',
-        'capabilities' => 'moodle/competency:planview',
+        'capabilities' => 'powereduc/competency:planview',
         'ajax'         => true,
         'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
@@ -181,7 +181,7 @@ $functions = array(
         'classpath'    => '',
         'description'  => 'Load a summary of a user competency.',
         'type'         => 'read',
-        'capabilities' => 'moodle/competency:planview',
+        'capabilities' => 'powereduc/competency:planview',
         'ajax'         => true,
         'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
@@ -191,7 +191,7 @@ $functions = array(
         'classpath'    => '',
         'description'  => 'Load a summary of a user competency.',
         'type'         => 'read',
-        'capabilities' => 'moodle/competency:coursecompetencyview',
+        'capabilities' => 'powereduc/competency:coursecompetencyview',
         'ajax'         => true,
         'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),

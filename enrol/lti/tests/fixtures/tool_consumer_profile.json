@@ -8,8 +8,8 @@
   "service_offered" : [
     {
       "@type" : "RestService",
-      "@id" : "http://www.example.com/moodle/lti/resource/ToolConsumerProfile/12434#Result.item",
-      "endpoint" : "http://www.example.com/moodle/enpoint.php",
+      "@id" : "http://www.example.com/powereduc/lti/resource/ToolConsumerProfile/12434#Result.item",
+      "endpoint" : "http://www.example.com/powereduc/enpoint.php",
       "format" : ["application/vnd.ims.lti.v2.toolproxy+json"],
       "action" : ["POST"]
     }

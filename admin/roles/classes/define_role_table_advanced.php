@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -62,7 +62,7 @@ class core_role_define_role_table_advanced extends core_role_capability_table_wi
         global $DB;
         if ($this->roleid) {
             if (!$this->role = $DB->get_record('role', array('id' => $this->roleid))) {
-                throw new moodle_exception('invalidroleid');
+                throw new powereduc_exception('invalidroleid');
             }
             $contextlevels = get_role_contextlevels($this->roleid);
             // Put the contextlevels in the array keys, as well as the values.

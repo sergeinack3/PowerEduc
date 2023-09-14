@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -86,7 +86,7 @@ foreach ($resources as $resource) {
 
 global $USER, $CFG, $OUTPUT;
 $PAGE->set_context(context_system::instance());
-$url = new moodle_url('/enrol/lti/configure.php');
+$url = new powereduc_url('/enrol/lti/configure.php');
 $PAGE->set_url($url);
 $PAGE->set_pagelayout('popup');
 echo $OUTPUT->header();

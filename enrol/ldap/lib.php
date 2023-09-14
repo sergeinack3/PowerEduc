@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
  *
  * @package    enrol_ldap
  * @author     Iñaki Arenaza - based on code by Martin Dougiamas, Martin Langhoff and others
- * @copyright  1999 onwards Martin Dougiamas {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas {@link http://powereduc.com}
  * @copyright  2010 Iñaki Arenaza <iarenaza@eps.mondragon.edu>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -214,7 +214,7 @@ class enrol_ldap_plugin extends enrol_plugin {
                     }
                 }
 
-                // Deal with enrolment in the moodle db
+                // Deal with enrolment in the powereduc db
                 // Add necessary enrol instance if not present yet;
                 $sql = "SELECT c.id, c.visible, e.id as enrolid
                           FROM {course} c
@@ -445,7 +445,7 @@ class enrol_ldap_plugin extends enrol_plugin {
                         $idnumber = $course[$this->config->course_idnumber][0];
                         $trace->output(get_string('synccourserole', 'enrol_ldap', array('idnumber'=>$idnumber, 'role_shortname'=>$role->shortname)));
 
-                        // Does the course exist in moodle already?
+                        // Does the course exist in powereduc already?
                         $course_obj = $DB->get_record('course', array($this->enrol_localcoursefield=>$idnumber));
                         if (empty($course_obj)) { // Course doesn't exist
                             if ($this->get_config('autocreate')) { // Autocreate
@@ -654,7 +654,7 @@ class enrol_ldap_plugin extends enrol_plugin {
 
     /**
      * Connect to the LDAP server, using the plugin configured
-     * settings. It's actually a wrapper around ldap_connect_moodle()
+     * settings. It's actually a wrapper around ldap_connect_powereduc()
      *
      * @param progress_trace $trace
      * @return bool success
@@ -667,7 +667,7 @@ class enrol_ldap_plugin extends enrol_plugin {
             return true;
         }
 
-        if ($ldapconnection = ldap_connect_moodle($this->get_config('host_url'), $this->get_config('ldap_version'),
+        if ($ldapconnection = ldap_connect_powereduc($this->get_config('host_url'), $this->get_config('ldap_version'),
                                                   $this->get_config('user_type'), $this->get_config('bind_dn'),
                                                   $this->get_config('bind_pw'), $this->get_config('opt_deref'),
                                                   $debuginfo, $this->get_config('start_tls'))) {
@@ -963,7 +963,7 @@ class enrol_ldap_plugin extends enrol_plugin {
     }
 
     /**
-     * Will create the moodle course from the template
+     * Will create the powereduc course from the template
      * course_ext is an array as obtained from ldap -- flattened somewhat
      *
      * @param array $course_ext
@@ -987,7 +987,7 @@ class enrol_ldap_plugin extends enrol_plugin {
             }
         }
         if (!$template) {
-            $courseconfig = get_config('moodlecourse');
+            $courseconfig = get_config('powereduccourse');
             $template = new stdClass();
             $template->summary        = '';
             $template->summaryformat  = FORMAT_HTML;
@@ -1039,7 +1039,7 @@ class enrol_ldap_plugin extends enrol_plugin {
     }
 
     /**
-     * Will update a moodle course with new values from LDAP
+     * Will update a powereduc course with new values from LDAP
      * A field will be updated only if it is marked to be updated
      * on sync in plugin settings
      *

@@ -307,10 +307,10 @@ function ldap_normalise_objectclass($objectclass, $default = '*') {
         // There is an additional possible value '(some-string-here)', that can be used to specify any valid filter
         // string, to select subsets of users based on any criteria.
         //
-        // For example, we could select the users whose objectClass is 'user' and have the 'enabledMoodleUser'
+        // For example, we could select the users whose objectClass is 'user' and have the 'enabledPowerEducUser'
         // attribute, with something like:
         //
-        // (&(objectClass=user)(enabledMoodleUser=1))
+        // (&(objectClass=user)(enabledPowerEducUser=1))
         //
         // In this particular case we don't need to do anything, so leave $this->config->objectclass as is.
         $return = $objectclass;

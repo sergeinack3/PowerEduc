@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Excel writer abstraction layer.
@@ -40,16 +40,16 @@ use \PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 /**
- * Define and operate over one Moodle Workbook.
+ * Define and operate over one PowerEduc Workbook.
  *
  * This class acts as a wrapper around another library
- * maintaining Moodle functions isolated from underlying code.
+ * maintaining PowerEduc functions isolated from underlying code.
  *
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @package moodlecore
+ * @package powereduccore
  */
-class MoodleExcelWorkbook {
+class PowerEducExcelWorkbook {
     /** @var PhpSpreadsheet */
     protected $objspreadsheet;
 
@@ -60,7 +60,7 @@ class MoodleExcelWorkbook {
     protected $type;
 
     /**
-     * Constructs one Moodle Workbook.
+     * Constructs one PowerEduc Workbook.
      *
      * @param string $filename The name of the file
      * @param string $type file format type used to be 'Xls or Xlsx' but now only 'Xlsx'
@@ -82,13 +82,13 @@ class MoodleExcelWorkbook {
     }
 
     /**
-     * Create one Moodle Worksheet
+     * Create one PowerEduc Worksheet
      *
      * @param string $name Name of the sheet
-     * @return MoodleExcelWorksheet
+     * @return PowerEducExcelWorksheet
      */
     public function add_worksheet($name = '') {
-        return new MoodleExcelWorksheet($name, $this->objspreadsheet);
+        return new PowerEducExcelWorksheet($name, $this->objspreadsheet);
     }
 
     /**
@@ -98,14 +98,14 @@ class MoodleExcelWorkbook {
      *                          valid names are set_XXXX existing
      *                          functions without the set_ part
      *                          i.e: [bold]=1 for set_bold(1)...Optional!
-     * @return MoodleExcelFormat
+     * @return PowerEducExcelFormat
      */
     public function add_format($properties = array()) {
-        return new MoodleExcelFormat($properties);
+        return new PowerEducExcelFormat($properties);
     }
 
     /**
-     * Close the Moodle Workbook
+     * Close the PowerEduc Workbook
      */
     public function close() {
         global $CFG;
@@ -156,18 +156,18 @@ class MoodleExcelWorkbook {
  * Define and operate over one Worksheet.
  *
  * This class acts as a wrapper around another library
- * maintaining Moodle functions isolated from underlying code.
+ * maintaining PowerEduc functions isolated from underlying code.
  *
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @package   core
  */
-class MoodleExcelWorksheet {
+class PowerEducExcelWorksheet {
     /** @var Worksheet */
     protected $worksheet;
 
     /**
-     * Constructs one Moodle Worksheet.
+     * Constructs one PowerEduc Worksheet.
      *
      * @param string $name The name of the file
      * @param Spreadsheet $workbook The internal Workbook object we are creating.
@@ -450,27 +450,27 @@ class MoodleExcelWorksheet {
 
     protected function apply_format($row, $col, $format = null) {
         if (!$format) {
-            $format = new MoodleExcelFormat();
+            $format = new PowerEducExcelFormat();
         } else if (is_array($format)) {
-            $format = new MoodleExcelFormat($format);
+            $format = new PowerEducExcelFormat($format);
         }
         $this->worksheet->getStyleByColumnAndRow($col, $row + 1)->applyFromArray($format->get_format_array());
     }
 
     protected function apply_column_format($col, $format = null) {
         if (!$format) {
-            $format = new MoodleExcelFormat();
+            $format = new PowerEducExcelFormat();
         } else if (is_array($format)) {
-            $format = new MoodleExcelFormat($format);
+            $format = new PowerEducExcelFormat($format);
         }
         $this->worksheet->getStyle(Coordinate::stringFromColumnIndex($col))->applyFromArray($format->get_format_array());
     }
 
     protected function apply_row_format($row, $format = null) {
         if (!$format) {
-            $format = new MoodleExcelFormat();
+            $format = new PowerEducExcelFormat();
         } else if (is_array($format)) {
-            $format = new MoodleExcelFormat($format);
+            $format = new PowerEducExcelFormat($format);
         }
         $this->worksheet->getStyle($row + 1)->applyFromArray($format->get_format_array());
     }
@@ -481,18 +481,18 @@ class MoodleExcelWorksheet {
  * Define and operate over one Format.
  *
  * A big part of this class acts as a wrapper over other libraries
- * maintaining Moodle functions isolated from underlying code.
+ * maintaining PowerEduc functions isolated from underlying code.
  *
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @package moodlecore
+ * @package powereduccore
  */
-class MoodleExcelFormat {
+class PowerEducExcelFormat {
     /** @var array */
     protected $format = array();
 
     /**
-     * Constructs one Moodle Format.
+     * Constructs one PowerEduc Format.
      *
      * @param array $properties
      */

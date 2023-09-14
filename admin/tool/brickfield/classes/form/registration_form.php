@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,8 +29,8 @@ defined('POWEREDUC_INTERNAL') || die();
 use coding_exception;
 use dml_exception;
 use html_writer;
-use moodle_exception;
-use moodleform;
+use powereduc_exception;
+use powereducform;
 use stdClass;
 use tool_brickfield\manager;
 use tool_brickfield\registration;
@@ -45,11 +45,11 @@ require_once($CFG->libdir . '/formslib.php');
  * @author  2020 JM Tomas <jmtomas@tresipunt.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
  */
-class registration_form  extends moodleform {
+class registration_form  extends powereducform {
 
     /**
      * Form definition.
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function definition() {
         $mform = & $this->_form;
@@ -87,7 +87,7 @@ class registration_form  extends moodleform {
     /**
      * Get default data for registration form
      *
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @return stdClass
      */
     protected function get_defaultinfo(): stdClass {
@@ -114,11 +114,11 @@ class registration_form  extends moodleform {
     private static function get_moreinfo(): array {
         global $CFG, $DB;
         $moreinfo = array();
-        $moodlerelease = $CFG->release;
-        if (preg_match('/^(\d+\.\d.*?)[. ]/', $moodlerelease, $matches)) {
-            $moodlerelease = $matches[1];
+        $powereducrelease = $CFG->release;
+        if (preg_match('/^(\d+\.\d.*?)[. ]/', $powereducrelease, $matches)) {
+            $powereducrelease = $matches[1];
         }
-        $moreinfo['release'] = $moodlerelease;
+        $moreinfo['release'] = $powereducrelease;
         $moreinfo['numcourses'] = $DB->count_records('course') - 1;
         $moreinfo['numusers'] = $DB->count_records('user', array('deleted' => 0));
         $moreinfo['numfiles'] = $DB->count_records('files');

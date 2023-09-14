@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,30 +16,30 @@
 
 declare(strict_types=1);
 
-namespace tool_moodlenet\task;
+namespace tool_powereducnet\task;
 
 /**
  * Ad-hoc task to send the notification to admin stating MoodleNet is automatically enabled after upgrade.
  *
- * @package   tool_moodlenet
- * @copyright 2022 Shamim Rezaie <shamim@moodle.com>
+ * @package   tool_powereducnet
+ * @copyright 2022 Shamim Rezaie <shamim@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class send_enable_notification extends \core\task\adhoc_task {
     public function execute(): void {
         $message = new \core\message\message();
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = 'notices';
         $message->userfrom = \core_user::get_noreply_user();
         $message->userto = get_admin();
         $message->notification = 1;
-        $message->contexturl = (new \moodle_url('/admin/settings.php',
-            ['section' => 'optionalsubsystems'], 'admin-enablemoodlenet'))->out(false);
+        $message->contexturl = (new \powereduc_url('/admin/settings.php',
+            ['section' => 'optionalsubsystems'], 'admin-enablepowereducnet'))->out(false);
         $message->contexturlname = get_string('advancedfeatures', 'admin');
-        $message->subject = get_string('autoenablenotification_subject', 'tool_moodlenet');
+        $message->subject = get_string('autoenablenotification_subject', 'tool_powereducnet');
         $message->fullmessageformat = FORMAT_HTML;
-        $message->fullmessagehtml = get_string('autoenablenotification', 'tool_moodlenet', (object) [
-            'settingslink' => (new \moodle_url('/admin/settings.php', ['section' => 'tool_moodlenet']))->out(false),
+        $message->fullmessagehtml = get_string('autoenablenotification', 'tool_powereducnet', (object) [
+            'settingslink' => (new \powereduc_url('/admin/settings.php', ['section' => 'tool_powereducnet']))->out(false),
         ]);
         $message->smallmessage = strip_tags($message->fullmessagehtml);
         message_send($message);

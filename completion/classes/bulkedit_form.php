@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -56,7 +56,7 @@ class core_completion_bulkedit_form extends core_completion_edit_base_form {
     /**
      * Returns an instance of component-specific module form for the first selected module
      *
-     * @return moodleform_mod|null
+     * @return powereducform_mod|null
      */
     protected function get_module_form() {
         global $CFG, $PAGE;
@@ -69,11 +69,11 @@ class core_completion_bulkedit_form extends core_completion_edit_base_form {
         $course = $this->course;
         $modname = $cm->modname;
 
-        $modmoodleform = "$CFG->dirroot/mod/$modname/mod_form.php";
-        if (file_exists($modmoodleform)) {
-            require_once($modmoodleform);
+        $modpowereducform = "$CFG->dirroot/mod/$modname/mod_form.php";
+        if (file_exists($modpowereducform)) {
+            require_once($modpowereducform);
         } else {
-            throw new \moodle_exception('noformdesc');
+            throw new \powereduc_exception('noformdesc');
         }
 
         list($cmrec, $context, $module, $data, $cw) = get_moduleinfo_data($cm, $course);

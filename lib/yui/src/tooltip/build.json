@@ -1,7 +1,7 @@
 {
-  "name": "moodle-core-tooltip",
+  "name": "powereduc-core-tooltip",
   "builds": {
-    "moodle-core-tooltip": {
+    "powereduc-core-tooltip": {
       "jsfiles": [
         "tooltip.js"
       ]

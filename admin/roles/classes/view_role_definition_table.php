@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ class core_role_view_role_definition_table extends core_role_define_role_table_a
     }
 
     public function save_changes() {
-        throw new moodle_exception('invalidaccess');
+        throw new powereduc_exception('invalidaccess');
     }
 
     protected function get_name_field($id) {
@@ -95,7 +95,7 @@ class core_role_view_role_definition_table extends core_role_define_role_table_a
             }
         }
 
-        $risksurl = new moodle_url(get_docs_url(s(get_string('risks', 'core_role'))));
+        $risksurl = new powereduc_url(get_docs_url(s(get_string('risks', 'core_role'))));
         foreach ($risks as $type => $risk) {
             $pixicon = new pix_icon('/i/' . str_replace('risk', 'risk_', $type), get_string($type . 'short', 'admin'));
             $risks[$type] = $OUTPUT->action_icon($risksurl, $pixicon, new popup_action('click', $risksurl));

@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ if (!defined('POWEREDUC_INTERNAL')) {
 
 require_once($CFG->libdir . '/formslib.php');
 
-class mnet_services_form extends moodleform {
+class mnet_services_form extends powereducform {
 
     function definition() {
         $mform =& $this->_form;
@@ -48,7 +48,7 @@ class mnet_services_form extends moodleform {
                 ($version['plugintype'] == 'mod'
                     ? ''
                     : ($version['plugintype'] . '_'))
-                . $version['pluginname']; // TODO there should be a moodle-wide way to do this
+                . $version['pluginname']; // TODO there should be a powereduc-wide way to do this
 
             if ($count > 0) {
                 $mform->addElement('html', '<hr />');

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -74,7 +74,7 @@ class tablelog extends \table_sql implements \renderable {
      *
      * @param string $uniqueid unique id of table.
      * @param \context_course $context Context of the report.
-     * @param \moodle_url $url url of the page where this table would be displayed.
+     * @param \powereduc_url $url url of the page where this table would be displayed.
      * @param array $filters options are:
      *                          userids : limit to specific users (default: none)
      *                          itemid : limit to specific grade item (default: all)
@@ -118,9 +118,9 @@ class tablelog extends \table_sql implements \renderable {
     /**
      * Define table configs.
      *
-     * @param \moodle_url $url url of the page where this table would be displayed.
+     * @param \powereduc_url $url url of the page where this table would be displayed.
      */
-    protected function define_table_configs(\moodle_url $url) {
+    protected function define_table_configs(\powereduc_url $url) {
 
         // Set table url.
         $urlparams = (array)$this->filters;
@@ -150,7 +150,7 @@ class tablelog extends \table_sql implements \renderable {
 
         // Add headers for extra user fields.
         foreach ($extrafields as $field) {
-            if (get_string_manager()->string_exists($field, 'moodle')) {
+            if (get_string_manager()->string_exists($field, 'powereduc')) {
                 $cols[$field] = get_string($field);
             } else {
                 $cols[$field] = \core_user\fields::get_display_name($field);
@@ -234,7 +234,7 @@ class tablelog extends \table_sql implements \renderable {
             if ($history->itemtype === 'mod' && !$this->is_downloading()) {
                 if (!empty($this->cms->instances[$history->itemmodule][$history->iteminstance])) {
                     $cm = $this->cms->instances[$history->itemmodule][$history->iteminstance];
-                    $url = new \moodle_url('/mod/' . $history->itemmodule . '/view.php', array('id' => $cm->id));
+                    $url = new \powereduc_url('/mod/' . $history->itemmodule . '/view.php', array('id' => $cm->id));
                     return \html_writer::link($url, $this->gradeitems[$itemid]->get_name());
                 }
             }
@@ -265,7 +265,7 @@ class tablelog extends \table_sql implements \renderable {
         }
 
         $userid = $history->usermodified;
-        $profileurl = new \moodle_url('/user/view.php', array('id' => $userid, 'course' => $this->courseid));
+        $profileurl = new \powereduc_url('/user/view.php', array('id' => $userid, 'course' => $this->courseid));
 
         return \html_writer::link($profileurl, $name);
     }
@@ -371,7 +371,7 @@ class tablelog extends \table_sql implements \renderable {
         // If the course is separate group mode and the current user is not allowed to see all groups make sure
         // that we display only users from the same groups as current user.
         $groupmode = get_course($coursecontext->instanceid)->groupmode;
-        if ($groupmode == SEPARATEGROUPS && !has_capability('moodle/site:accessallgroups', $coursecontext)) {
+        if ($groupmode == SEPARATEGROUPS && !has_capability('powereduc/site:accessallgroups', $coursecontext)) {
             $groupids = array_column(groups_get_all_groups($coursecontext->instanceid, $USER->id, 0, 'g.id'), 'id');
             list($gsql, $gparams) = $DB->get_in_or_equal($groupids, SQL_PARAMS_NAMED, 'gmuparam', true, 0);
             $filter .= " AND EXISTS (SELECT 1 FROM {groups_members} gmu WHERE gmu.userid=ggh.userid AND gmu.groupid $gsql)";

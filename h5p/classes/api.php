@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Contains API class for the H5P area.
  *
  * @package    core_h5p
- * @copyright  2020 Sara Arjona <sara@moodle.com>
+ * @copyright  2020 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ use Moodle\H5PCore;
 /**
  * Contains API class for the H5P area.
  *
- * @copyright  2020 Sara Arjona <sara@moodle.com>
+ * @copyright  2020 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class api {
@@ -373,7 +373,7 @@ class api {
             } else {
                 $displayoptions = helper::get_display_options($core, $config);
                 // Check if the user can set the displayoptions.
-                if ($displayoptions != $h5p->displayoptions && has_capability('moodle/h5p:setdisplayoptions', $context)) {
+                if ($displayoptions != $h5p->displayoptions && has_capability('powereduc/h5p:setdisplayoptions', $context)) {
                     // If displayoptions has changed and user has permission to modify it, update this information in DB.
                     $core->h5pF->updateContentFields($h5p->id, ['displayoptions' => $displayoptions]);
                 }
@@ -408,7 +408,7 @@ class api {
                 return [$file, false];
             };
 
-            if (!$h5pid && $file->get_userid() != $USER->id && has_capability('moodle/h5p:updatelibraries', $context)) {
+            if (!$h5pid && $file->get_userid() != $USER->id && has_capability('powereduc/h5p:updatelibraries', $context)) {
                 // The user has permission to update libraries but the package has been uploaded by a different
                 // user without this permission. Check if there is some missing required library error.
                 $missingliberror = false;
@@ -478,7 +478,7 @@ class api {
      * @param bool $preventredirect Set to true in scripts that can not redirect (CLI, RSS feeds, etc.), throws exceptions
      *
      * @return bool if user can access pluginfile hash.
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @throws \coding_exception
      * @throws \require_login_exception
      */
@@ -486,7 +486,7 @@ class api {
         global $USER, $CFG;
 
         // Decode the URL before start processing it.
-        $url = new \moodle_url(urldecode($url));
+        $url = new \powereduc_url(urldecode($url));
 
         // Remove params from the URL (such as the 'forcedownload=1'), to avoid errors.
         $url->remove_params(array_keys($url->params()));
@@ -509,13 +509,13 @@ class api {
         // Get the context.
         try {
             list($context, $course, $cm) = get_context_info_array($contextid);
-        } catch (\moodle_exception $e) {
-            throw new \moodle_exception('invalidcontextid', 'core_h5p');
+        } catch (\powereduc_exception $e) {
+            throw new \powereduc_exception('invalidcontextid', 'core_h5p');
         }
 
         // For CONTEXT_USER, such as the private files, raise an exception if the owner of the file is not the current user.
         if ($context->contextlevel == CONTEXT_USER && $USER->id !== $context->instanceid) {
-            throw new \moodle_exception('h5pprivatefile', 'core_h5p');
+            throw new \powereduc_exception('h5pprivatefile', 'core_h5p');
         }
 
         if (!is_siteadmin($USER)) {
@@ -582,12 +582,12 @@ class api {
      *
      * @return string|false pathnamehash for the file in the internal URL.
      *
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     protected static function get_pluginfile_hash(string $url) {
 
         // Decode the URL before start processing it.
-        $url = new \moodle_url(urldecode($url));
+        $url = new \powereduc_url(urldecode($url));
 
         // Remove params from the URL (such as the 'forcedownload=1'), to avoid errors.
         $url->remove_params(array_keys($url->params()));
@@ -616,8 +616,8 @@ class api {
         // Get the context.
         try {
             list($context, $course, $cm) = get_context_info_array($contextid);
-        } catch (\moodle_exception $e) {
-            throw new \moodle_exception('invalidcontextid', 'core_h5p');
+        } catch (\powereduc_exception $e) {
+            throw new \powereduc_exception('invalidcontextid', 'core_h5p');
         }
 
         // Some components, such as mod_page or mod_resource, add the revision to the URL to prevent caching problems.
@@ -742,7 +742,7 @@ class api {
      *
      * @param \stdClass $librarydata Supported fields for library: 'id' and 'machichename'.
      * @return bool
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public static function is_library_enabled(\stdClass $librarydata): bool {
         global $DB;
@@ -756,7 +756,7 @@ class api {
         }
 
         if (empty($params)) {
-            throw new \moodle_exception("Missing 'machinename' or 'id' in librarydata parameter");
+            throw new \powereduc_exception("Missing 'machinename' or 'id' in librarydata parameter");
         }
 
         $libraries = $DB->get_records('h5p_libraries', $params);

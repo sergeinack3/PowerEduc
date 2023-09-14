@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -68,7 +68,7 @@ class model_config {
         }
 
         if (!$this->model->can_export_configuration()) {
-            throw new \moodle_exception('errornoexportconfigrequirements', 'analytics');
+            throw new \powereduc_exception('errornoexportconfigrequirements', 'analytics');
         }
 
         $zip = new \zip_packer();
@@ -80,7 +80,7 @@ class model_config {
         $exporttmpdir = make_request_directory();
         $jsonfilepath = $exporttmpdir . DIRECTORY_SEPARATOR . 'model-config.json';
         if (!file_put_contents($jsonfilepath, json_encode($modeldata))) {
-            throw new \moodle_exception('errornoexportconfig', 'analytics');
+            throw new \powereduc_exception('errornoexportconfig', 'analytics');
         }
         $zipfiles[self::CONFIG_FILE_NAME] = $jsonfilepath;
 
@@ -129,7 +129,7 @@ class model_config {
         if ($mlbackenddir) {
             $modeldir = $model->get_output_dir(['execution']);
             if (!$model->get_predictions_processor(true)->import($model->get_unique_id(), $modeldir, $mlbackenddir)) {
-                throw new \moodle_exception('errorimport', 'analytics');
+                throw new \powereduc_exception('errorimport', 'analytics');
             }
             $model->mark_as_trained();
         }
@@ -263,17 +263,17 @@ class model_config {
 
         if (empty($filelist[self::CONFIG_FILE_NAME])) {
             // Missing required file.
-            throw new \moodle_exception('errorimport', 'analytics');
+            throw new \powereduc_exception('errorimport', 'analytics');
         }
 
         $jsonmodeldata = file_get_contents($importtempdir . DIRECTORY_SEPARATOR . self::CONFIG_FILE_NAME);
 
         if (!$modeldata = json_decode($jsonmodeldata)) {
-            throw new \moodle_exception('errorimport', 'analytics');
+            throw new \powereduc_exception('errorimport', 'analytics');
         }
 
         if (empty($modeldata->target) || empty($modeldata->timesplitting) || empty($modeldata->indicators)) {
-            throw new \moodle_exception('errorimport', 'analytics');
+            throw new \powereduc_exception('errorimport', 'analytics');
         }
 
         $mlbackenddir = $importtempdir . DIRECTORY_SEPARATOR . 'mlbackend';

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -154,7 +154,7 @@ class block_accessreview extends block_base {
             $this->content->text = get_string('schedule:blocknotscheduled', manager::PLUGINNAME, manager::get_helpurl());
 
             $button = new single_button(
-                new moodle_url(accessibility::get_plugin_url(), ['action' => 'requestanalysis', 'courseid' => $COURSE->id]),
+                new powereduc_url(accessibility::get_plugin_url(), ['action' => 'requestanalysis', 'courseid' => $COURSE->id]),
                 get_string('schedule:requestanalysis', manager::PLUGINNAME), 'post', true,
                 ['class' => 'block_accessreview_analysisbutton']);
             $this->content->text .= html_writer::tag('div', $OUTPUT->render($button),
@@ -167,10 +167,10 @@ class block_accessreview extends block_base {
     /**
      * This block shouldn't be added to a page if the accessibility tools setting is disabled.
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @return bool
      */
-    public function can_block_be_added(moodle_page $page): bool {
+    public function can_block_be_added(powereduc_page $page): bool {
         global $CFG;
 
         return $CFG->enableaccessibilitytools;
@@ -181,7 +181,7 @@ class block_accessreview extends block_base {
      * @param int $courseid The ID of the course.
      * @return array The data required by the table.
      * @throws coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function get_table_data($courseid): array {
         global $OUTPUT;
@@ -248,7 +248,7 @@ class block_accessreview extends block_base {
         // Toggle overlay link.
         return html_writer::link(
             '#',
-            $OUTPUT->pix_icon($icon, get_string('togglealt', 'block_accessreview'), 'moodle', ['class' => 'icon-accessmap']),
+            $OUTPUT->pix_icon($icon, get_string('togglealt', 'block_accessreview'), 'powereduc', ['class' => 'icon-accessmap']),
             [
                 'title' => get_string('togglealt', 'block_accessreview'),
                 'style' => 'cursor: pointer;',
@@ -264,14 +264,14 @@ class block_accessreview extends block_base {
      * @param context $context
      * @return string
      * @throws coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function get_download_link(context $context): string {
         global $OUTPUT, $COURSE;
 
         if (has_capability(accessibility::get_capability_name('viewcoursetools'), $context)) {
             return html_writer::link(
-                new moodle_url(accessibility::get_plugin_url(),
+                new powereduc_url(accessibility::get_plugin_url(),
                     [
                         'courseid' => $COURSE->id,
                         'tab' => 'printable',
@@ -296,14 +296,14 @@ class block_accessreview extends block_base {
      * @return string
      * @throws coding_exception
      * @throws dml_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function get_report_link(context $context): string {
         global $OUTPUT, $COURSE;
 
         if (has_capability(accessibility::get_capability_name('viewcoursetools'), $context)) {
             return html_writer::link(
-                new moodle_url(accessibility::get_plugin_url(),
+                new powereduc_url(accessibility::get_plugin_url(),
                     [
                         'courseid' => $COURSE->id,
                         'tab' => get_config('block_accessreview', 'toolpage'),

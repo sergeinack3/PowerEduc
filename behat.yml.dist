@@ -9,5 +9,5 @@ default:
       goutte: null
       webdriver: null
     Moodle\BehatExtension:
-      moodledirroot: /Should/Change/To/Moodle/www/dir
+      powereducdirroot: /Should/Change/To/Moodle/www/dir
       steps_definitions: {  }

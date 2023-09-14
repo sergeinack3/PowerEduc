@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  *  behalfid=<id> The user id to view the policy version as (such as child's id).
  *
  * @package     tool_policy
- * @copyright   2018 Sara Arjona (sara@moodle.com)
+ * @copyright   2018 Sara Arjona (sara@powereduc.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -63,7 +63,7 @@ $PAGE->set_url('/admin/tool/policy/index.php');
 $PAGE->set_popup_notification_allowed(false);
 
 if (array_diff($agreedocs, $listdocs) || array_diff($declinedocs, $listdocs)) {
-    throw new moodle_exception('invalidaccessparameter');
+    throw new powereduc_exception('invalidaccessparameter');
 }
 
 if (isloggedin() && !isguestuser()) {
@@ -77,7 +77,7 @@ if (isloggedin() && !isguestuser()) {
 if (!$haspermissionagreedocs) {
     $outputpage = new \tool_policy\output\page_nopermission($listdocs, $behalfid);
 } else if ($cancel) {
-    redirect(new moodle_url('/'));
+    redirect(new powereduc_url('/'));
 } else {
     if (!$behalfid && \core\session\manager::is_loggedinas()) {
         $behalfid = $USER->id;

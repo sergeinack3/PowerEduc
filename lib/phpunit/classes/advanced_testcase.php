@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Advanced test case.
@@ -25,7 +25,7 @@
 
 
 /**
- * Advanced PHPUnit test case customised for Moodle.
+ * Advanced PHPUnit test case customised for PowerEduc.
  *
  * @package    core
  * @category   phpunit
@@ -36,7 +36,7 @@ abstract class advanced_testcase extends base_testcase {
     /** @var bool automatically reset everything? null means log changes */
     private $resetAfterTest;
 
-    /** @var moodle_transaction */
+    /** @var powereduc_transaction */
     private $testdbtransaction;
 
     /** @var int timestamp used for current time asserts */
@@ -149,8 +149,8 @@ abstract class advanced_testcase extends base_testcase {
     /**
      * Creates a new XMLDataSet with the given $xmlFile. (absolute path.)
      *
-     * @deprecated since Moodle 3.10 - See MDL-67673 and MDL-64600 for more info.
-     * @todo This will be removed for Moodle 4.2 as part of MDL-69882.
+     * @deprecated since PowerEduc 3.10 - See MDL-67673 and MDL-64600 for more info.
+     * @todo This will be removed for PowerEduc 4.2 as part of MDL-69882.
      *
      * @param string $xmlFile
      * @return phpunit_dataset
@@ -163,8 +163,8 @@ abstract class advanced_testcase extends base_testcase {
     /**
      * Creates a new CsvDataSet from the given array of csv files. (absolute paths.)
      *
-     * @deprecated since Moodle 3.10 - See MDL-67673 and MDL-64600 for more info.
-     * @todo This will be removed for Moodle 4.2 as part of MDL-69882.
+     * @deprecated since PowerEduc 3.10 - See MDL-67673 and MDL-64600 for more info.
+     * @todo This will be removed for PowerEduc 4.2 as part of MDL-69882.
      *
      * @param array $files array tablename=>cvsfile
      * @param string $delimiter unused
@@ -180,8 +180,8 @@ abstract class advanced_testcase extends base_testcase {
     /**
      * Creates new ArrayDataSet from given array
      *
-     * @deprecated since Moodle 3.10 - See MDL-67673 and MDL-64600 for more info.
-     * @todo This will be removed for Moodle 4.2 as part of MDL-69882.
+     * @deprecated since PowerEduc 3.10 - See MDL-67673 and MDL-64600 for more info.
+     * @todo This will be removed for PowerEduc 4.2 as part of MDL-69882.
      *
      * @param array $data array of tables, first row in each table is columns
      * @return phpunit_dataset
@@ -192,10 +192,10 @@ abstract class advanced_testcase extends base_testcase {
     }
 
     /**
-     * Load date into moodle database tables from standard PHPUnit data set.
+     * Load date into powereduc database tables from standard PHPUnit data set.
      *
-     * @deprecated since Moodle 3.10 - See MDL-67673 and MDL-64600 for more info.
-     * @todo This will be removed for Moodle 4.2 as part of MDL-69882.
+     * @deprecated since PowerEduc 3.10 - See MDL-67673 and MDL-64600 for more info.
+     * @todo This will be removed for PowerEduc 4.2 as part of MDL-69882.
      *
      * Note: it is usually better to use data generators
      *
@@ -219,7 +219,7 @@ abstract class advanced_testcase extends base_testcase {
      *       'course' => '/path/to/courses.csv',
      *   ];
      *
-     * @since Moodle 3.10
+     * @since PowerEduc 3.10
      *
      * @param array $files full paths to CSV or XML files to load.
      * @return phpunit_dataset
@@ -234,7 +234,7 @@ abstract class advanced_testcase extends base_testcase {
     /**
      * Creates a new dataset from string (CSV or XML).
      *
-     * @since Moodle 3.10
+     * @since PowerEduc 3.10
      *
      * @param string $content contents (CSV or XML) to load.
      * @param string $type format of the content to be loaded (csv or xml).
@@ -250,7 +250,7 @@ abstract class advanced_testcase extends base_testcase {
     /**
      * Creates a new dataset from PHP array.
      *
-     * @since Moodle 3.10
+     * @since PowerEduc 3.10
      *
      * @param array $data array of tables, see {@see phpunit_dataset::from_array()} for supported formats.
      * @return phpunit_dataset
@@ -610,7 +610,7 @@ abstract class advanced_testcase extends base_testcase {
      *  - TEST_EXTERNAL_FILES_HTTPS_URL
      *
      * They should point to standard external test files repository,
-     * it defaults to 'http://download.moodle.org/unittest'.
+     * it defaults to 'http://download.powereduc.org/unittest'.
      *
      * False value means skip tests that require external files.
      *
@@ -630,7 +630,7 @@ abstract class advanced_testcase extends base_testcase {
                 }
                 return TEST_EXTERNAL_FILES_HTTPS_URL.$path;
             }
-            return 'https://download.moodle.org/unittest'.$path;
+            return 'https://download.powereduc.org/unittest'.$path;
         }
 
         if (defined('TEST_EXTERNAL_FILES_HTTP_URL')) {
@@ -639,7 +639,7 @@ abstract class advanced_testcase extends base_testcase {
             }
             return TEST_EXTERNAL_FILES_HTTP_URL.$path;
         }
-        return 'http://download.moodle.org/unittest'.$path;
+        return 'http://download.powereduc.org/unittest'.$path;
     }
 
     /**

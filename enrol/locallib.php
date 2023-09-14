@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -102,10 +102,10 @@ class course_enrolment_manager {
     protected $totalotherusers = null;
 
     /**
-     * The current moodle_page object
-     * @var moodle_page
+     * The current powereduc_page object
+     * @var powereduc_page
      */
-    protected $moodlepage = null;
+    protected $powereducpage = null;
 
     /**#@+
      * These variables are used to cache the information this class uses
@@ -128,7 +128,7 @@ class course_enrolment_manager {
     /**
      * Constructs the course enrolment manager
      *
-     * @param moodle_page $moodlepage
+     * @param powereduc_page $powereducpage
      * @param stdClass $course
      * @param string $instancefilter
      * @param int $rolefilter If non-zero, filters to users with specified role
@@ -136,9 +136,9 @@ class course_enrolment_manager {
      * @param int $groupfilter if non-zero, filter users with specified group
      * @param int $statusfilter if not -1, filter users with active/inactive enrollment.
      */
-    public function __construct(moodle_page $moodlepage, $course, $instancefilter = null,
+    public function __construct(powereduc_page $powereducpage, $course, $instancefilter = null,
             $rolefilter = 0, $searchfilter = '', $groupfilter = 0, $statusfilter = -1) {
-        $this->moodlepage = $moodlepage;
+        $this->powereducpage = $powereducpage;
         $this->context = context_course::instance($course->id);
         $this->course = $course;
         $this->instancefilter = $instancefilter;
@@ -149,11 +149,11 @@ class course_enrolment_manager {
     }
 
     /**
-     * Returns the current moodle page
-     * @return moodle_page
+     * Returns the current powereduc page
+     * @return powereduc_page
      */
-    public function get_moodlepage() {
-        return $this->moodlepage;
+    public function get_powereducpage() {
+        return $this->powereducpage;
     }
 
     /**
@@ -162,7 +162,7 @@ class course_enrolment_manager {
      * If a filter was specificed this will be the total number of users enrolled
      * in this course by means of that instance.
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @return int
      */
     public function get_total_users() {
@@ -191,7 +191,7 @@ class course_enrolment_manager {
      * If a filter was specificed this will be the total number of users enrolled
      * in this course by means of that instance.
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @return int
      */
     public function get_total_other_users() {
@@ -223,7 +223,7 @@ class course_enrolment_manager {
      * in this course by means of that instance. If role or search filters were
      * specified then these will also be applied.
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @param string $sort
      * @param string $direction ASC or DESC
      * @param int $page First page should be 0
@@ -329,7 +329,7 @@ class course_enrolment_manager {
      * Other users are users who have been assigned roles or inherited roles
      * within this course but who have not been enrolled in the course
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @param string $sort
      * @param string $direction
      * @param int $page
@@ -490,7 +490,7 @@ class course_enrolment_manager {
     /**
      * Gets an array of the users that can be enrolled in this course.
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @param int $enrolid
      * @param string $search
      * @param bool $searchanywhere
@@ -526,7 +526,7 @@ class course_enrolment_manager {
     /**
      * Searches other users and returns paginated results
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @param string $search
      * @param bool $searchanywhere
      * @param int $page Starting at 0
@@ -589,7 +589,7 @@ class course_enrolment_manager {
      * Gets an array containing some SQL to user for when selecting, params for
      * that SQL, and the filter that was used in constructing the sql.
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @return string
      */
     protected function get_instance_sql() {
@@ -716,7 +716,7 @@ class course_enrolment_manager {
         if ($otherusers) {
             if (!is_array($this->_assignablerolesothers)) {
                 $this->_assignablerolesothers = array();
-                list($courseviewroles, $ignored) = get_roles_with_cap_in_context($this->context, 'moodle/course:view');
+                list($courseviewroles, $ignored) = get_roles_with_cap_in_context($this->context, 'powereduc/course:view');
                 foreach ($this->_assignableroles as $roleid=>$role) {
                     if (isset($courseviewroles[$roleid])) {
                         $this->_assignablerolesothers[$roleid] = $role;
@@ -763,7 +763,7 @@ class course_enrolment_manager {
     /**
      * Unenrols a user from the course given the users ue entry
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @param stdClass $ue
      * @return bool
      */
@@ -802,7 +802,7 @@ class course_enrolment_manager {
     /**
      * Removes an assigned role from a user.
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @param int $userid
      * @param int $roleid
      * @return bool
@@ -812,7 +812,7 @@ class course_enrolment_manager {
         // Admins may unassign any role, others only those they could assign.
         if (!is_siteadmin() and !array_key_exists($roleid, $this->get_assignable_roles())) {
             if (defined('AJAX_SCRIPT')) {
-                throw new moodle_exception('invalidrole');
+                throw new powereduc_exception('invalidrole');
             }
             return false;
         }
@@ -843,10 +843,10 @@ class course_enrolment_manager {
      * @return int|false
      */
     public function assign_role_to_user($roleid, $userid) {
-        require_capability('moodle/role:assign', $this->context);
+        require_capability('powereduc/role:assign', $this->context);
         if (!array_key_exists($roleid, $this->get_assignable_roles())) {
             if (defined('AJAX_SCRIPT')) {
-                throw new moodle_exception('invalidrole');
+                throw new powereduc_exception('invalidrole');
             }
             return false;
         }
@@ -861,7 +861,7 @@ class course_enrolment_manager {
      * @return bool
      */
     public function add_user_to_group($user, $groupid) {
-        require_capability('moodle/course:managegroups', $this->context);
+        require_capability('powereduc/course:managegroups', $this->context);
         $group = $this->get_group($groupid);
         if (!$group) {
             return false;
@@ -872,14 +872,14 @@ class course_enrolment_manager {
     /**
      * Removes a user from a group
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @param StdClass $user
      * @param int $groupid
      * @return bool
      */
     public function remove_user_from_group($user, $groupid) {
         global $DB;
-        require_capability('moodle/course:managegroups', $this->context);
+        require_capability('powereduc/course:managegroups', $this->context);
         $group = $this->get_group($groupid);
         if (!groups_remove_member_allowed($group, $user)) {
             return false;
@@ -973,7 +973,7 @@ class course_enrolment_manager {
     /**
      * Gets the enrolments this user has in the course - including all suspended plugins and instances.
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @param int $userid
      * @return array
      */
@@ -1056,14 +1056,14 @@ class course_enrolment_manager {
      * course but have not been enrolled.
      *
      * @param core_enrol_renderer $renderer
-     * @param moodle_url $pageurl
+     * @param powereduc_url $pageurl
      * @param string $sort
      * @param string $direction ASC | DESC
      * @param int $page Starting from 0
      * @param int $perpage
      * @return array
      */
-    public function get_other_users_for_display(core_enrol_renderer $renderer, moodle_url $pageurl, $sort, $direction, $page, $perpage) {
+    public function get_other_users_for_display(core_enrol_renderer $renderer, powereduc_url $pageurl, $sort, $direction, $page, $perpage) {
 
         $userroles = $this->get_other_users($sort, $direction, $page, $perpage);
         $roles = $this->get_all_roles();
@@ -1127,7 +1127,7 @@ class course_enrolment_manager {
      * as well as minimal information on the users roles, groups, and enrolments.
      *
      * @param core_enrol_renderer $renderer
-     * @param moodle_url $pageurl
+     * @param powereduc_url $pageurl
      * @param int $sort
      * @param string $direction ASC or DESC
      * @param int $page
@@ -1135,7 +1135,7 @@ class course_enrolment_manager {
      * @return array
      */
     public function get_users_for_display(course_enrolment_manager $manager, $sort, $direction, $page, $perpage) {
-        $pageurl = $manager->get_moodlepage()->url;
+        $pageurl = $manager->get_powereducpage()->url;
         $users = $this->get_users($sort, $direction, $page, $perpage);
 
         $now = time();
@@ -1147,9 +1147,9 @@ class course_enrolment_manager {
         $assignable = $this->get_assignable_roles();
         $allgroups  = $this->get_all_groups();
         $context    = $this->get_context();
-        $canmanagegroups = has_capability('moodle/course:managegroups', $context);
+        $canmanagegroups = has_capability('powereduc/course:managegroups', $context);
 
-        $url = new moodle_url($pageurl, $this->get_url_params());
+        $url = new powereduc_url($pageurl, $this->get_url_params());
         // TODO Does not support custom user profile fields (MDL-70456).
         $extrafields = fields::get_identity_fields($context, false);
 
@@ -1227,7 +1227,7 @@ class course_enrolment_manager {
      * This function is called by both {@link get_users_for_display} and {@link get_other_users_for_display} to correctly
      * prepare user fields for display
      *
-     * Please note that this function does not check capability for moodle/coures:viewhiddenuserfields
+     * Please note that this function does not check capability for powereduc/coures:viewhiddenuserfields
      *
      * @param object $user The user record
      * @param array $extrafields The list of fields as returned from \core_user\fields::get_identity_fields used to determine which
@@ -1241,7 +1241,7 @@ class course_enrolment_manager {
             'userid'              => $user->id,
             'courseid'            => $this->get_course()->id,
             'picture'             => new user_picture($user),
-            'userfullnamedisplay' => fullname($user, has_capability('moodle/site:viewfullnames', $this->get_context())),
+            'userfullnamedisplay' => fullname($user, has_capability('powereduc/site:viewfullnames', $this->get_context())),
             'lastaccess'          => get_string('never'),
             'lastcourseaccess'    => get_string('never'),
         );
@@ -1311,7 +1311,7 @@ class course_enrolment_manager {
      * Given an array of user id's this function returns and array of user enrolments for those users
      * as well as enough user information to display the users name and picture for each enrolment.
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @param array $userids
      * @return array
      */
@@ -1390,11 +1390,11 @@ class enrol_user_button extends single_button {
      * Initialises the new enrol_user_button
      *
      * @staticvar int $count The number of enrol user buttons already created
-     * @param moodle_url $url
+     * @param powereduc_url $url
      * @param string $label The text to display in the button
      * @param string $method Either post or get
      */
-    public function __construct(moodle_url $url, $label, $method = 'post') {
+    public function __construct(powereduc_url $url, $label, $method = 'post') {
         static $count = 0;
         $count ++;
         parent::__construct($url, $label, $method);
@@ -1448,7 +1448,7 @@ class enrol_user_button extends single_button {
      * @param string $component
      * @param mixed $a
      */
-    public function strings_for_js($identifiers, $component = 'moodle', $a = null) {
+    public function strings_for_js($identifiers, $component = 'powereduc', $a = null) {
         $string = new stdClass;
         $string->identifiers = (array)$identifiers;
         $string->component = $component;
@@ -1459,9 +1459,9 @@ class enrol_user_button extends single_button {
     /**
      * Initialises the JS that is required by this button
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      */
-    public function initialise_js(moodle_page $page) {
+    public function initialise_js(powereduc_page $page) {
         foreach ($this->jsyuimodules as $js) {
             $page->requires->yui_module($js->modules, $js->function, $js->arguments, null, $js->ondomready);
         }
@@ -1499,7 +1499,7 @@ class user_enrolment_action implements renderable {
 
     /**
      * The URL to the action
-     * @var moodle_url
+     * @var powereduc_url
      */
     protected $url;
 
@@ -1513,13 +1513,13 @@ class user_enrolment_action implements renderable {
      * Constructor
      * @param pix_icon $icon
      * @param string $title
-     * @param moodle_url $url
+     * @param powereduc_url $url
      * @param array $attributes
      */
     public function __construct(pix_icon $icon, $title, $url, array $attributes = null) {
         $this->icon = $icon;
         $this->title = $title;
-        $this->url = new moodle_url($url);
+        $this->url = new powereduc_url($url);
         if (!empty($attributes)) {
             $this->attributes = $attributes;
         }
@@ -1544,7 +1544,7 @@ class user_enrolment_action implements renderable {
 
     /**
      * Returns the URL for this action
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function get_url() {
         return $this->url;
@@ -1559,7 +1559,7 @@ class user_enrolment_action implements renderable {
     }
 }
 
-class enrol_ajax_exception extends moodle_exception {
+class enrol_ajax_exception extends powereduc_exception {
     /**
      * Constructor
      * @param string $errorcode The name of the string from error.php to print
@@ -1604,12 +1604,12 @@ abstract class enrol_bulk_enrolment_operation {
     }
 
     /**
-     * Returns a moodleform used for this operation, or false if no form is required and the action
+     * Returns a powereducform used for this operation, or false if no form is required and the action
      * should be immediatly processed.
      *
-     * @param moodle_url|string $defaultaction
+     * @param powereduc_url|string $defaultaction
      * @param mixed $defaultcustomdata
-     * @return enrol_bulk_enrolment_change_form|moodleform|false
+     * @return enrol_bulk_enrolment_change_form|powereducform|false
      */
     public function get_form($defaultaction = null, $defaultcustomdata = null) {
         return false;

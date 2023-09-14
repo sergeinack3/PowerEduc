@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core\oauth2\discovery;
 
 use curl;
 use stdClass;
-use moodle_exception;
+use powereduc_exception;
 use core\oauth2\issuer;
 use core\oauth2\endpoint;
 
@@ -26,8 +26,8 @@ use core\oauth2\endpoint;
  * Class for IMS Open Badge Connect API (aka OBv2.1) discovery definition.
  *
  * @package    core
- * @since      Moodle 3.11
- * @copyright  2021 Sara Arjona (sara@moodle.com)
+ * @since      PowerEduc 3.11
+ * @copyright  2021 Sara Arjona (sara@powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class imsbadgeconnect extends base_definition {
@@ -63,7 +63,7 @@ class imsbadgeconnect extends base_definition {
             if (substr_compare($key, 'Url', - strlen('Url')) === 0 && !empty($value)) {
                 $record = new stdClass();
                 $record->issuerid = $issuer->get('id');
-                // Convert key names from xxxxUrl to xxxx_endpoint, in order to make it compliant with the Moodle oAuth API.
+                // Convert key names from xxxxUrl to xxxx_endpoint, in order to make it compliant with the PowerEduc oAuth API.
                 $record->name = strtolower(substr($key, 0, - strlen('Url'))) . '_endpoint';
                 $record->url = $value;
 
@@ -110,7 +110,7 @@ class imsbadgeconnect extends base_definition {
 
         // Registration request for getting client id and secret will be done only they are empty in the issuer.
         // For now this can't be run from PHPUNIT (because IMS testing platform needs real URLs). In the future, this
-        // request can be moved to the moodle-exttests repository.
+        // request can be moved to the powereduc-exttests repository.
         if (empty($clientid) && empty($clientsecret) && (!defined('PHPUNIT_TEST') || !PHPUNIT_TEST)) {
             $url = $issuer->get_endpoint_url('registration');
             if ($url) {
@@ -124,10 +124,10 @@ class imsbadgeconnect extends base_definition {
                 $request = [
                     'client_name' => $SITE->fullname,
                     'client_uri' => $hosturl,
-                    'logo_uri' => $hosturl . 'pix/f/moodle-256.png',
+                    'logo_uri' => $hosturl . 'pix/f/powereduc-256.png',
                     'tos_uri' => $hosturl,
                     'policy_uri' => $hosturl,
-                    'software_id' => 'moodle',
+                    'software_id' => 'powereduc',
                     'software_version' => $CFG->version,
                     'redirect_uris' => [
                         $hosturl . 'admin/oauth2callback.php'
@@ -152,7 +152,7 @@ class imsbadgeconnect extends base_definition {
                 if (!$jsonresponse = $curl->post($url, $jsonrequest)) {
                     $msg = 'Could not self-register identity issuer: ' . $issuer->get('name') .
                         ". Wrong URL or JSON data [URL: $url]";
-                    throw new moodle_exception($msg);
+                    throw new powereduc_exception($msg);
                 }
 
                 // Process the response and update client id and secret if they are valid.
@@ -164,7 +164,7 @@ class imsbadgeconnect extends base_definition {
                 } else {
                     $msg = 'Could not self-register identity issuer: ' . $issuer->get('name') .
                         '. Invalid response ' . $jsonresponse;
-                    throw new moodle_exception($msg);
+                    throw new powereduc_exception($msg);
                 }
             }
         }

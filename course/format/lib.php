@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -69,14 +69,14 @@ class format_site extends course_format {
      *
      * @param int|stdClass $section
      * @param array $options
-     * @return null|moodle_url
+     * @return null|powereduc_url
      */
     public function get_view_url($section, $options = array()) {
-        return new moodle_url('/', array('redirect' => 0));
+        return new powereduc_url('/', array('redirect' => 0));
     }
 
     /**
-     * Returns the list of blocks to be automatically added on the site frontpage when moodle is installed
+     * Returns the list of blocks to be automatically added on the site frontpage when powereduc is installed
      *
      * @return array of default blocks, must contain two keys BLOCK_POS_LEFT and BLOCK_POS_RIGHT
      *     each of values is an array of block names (for left and right side columns)
@@ -119,10 +119,10 @@ class format_site extends course_format {
     /**
      * Returns instance of page renderer used by the site page
      *
-     * @param moodle_page $page the current page
+     * @param powereduc_page $page the current page
      * @return renderer_base
      */
-    public function get_renderer(moodle_page $page) {
+    public function get_renderer(powereduc_page $page) {
         return new site_renderer($page, null);
     }
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,11 +34,11 @@ $manager = get_grading_manager($areaid);
 list($context, $course, $cm) = get_context_info_array($manager->get_context()->id);
 
 require_login($course, true, $cm);
-require_capability('moodle/grade:managegradingforms', $context);
+require_capability('powereduc/grade:managegradingforms', $context);
 
 $controller = $manager->get_controller('rubric');
 
-$PAGE->set_url(new moodle_url('/grade/grading/form/rubric/edit.php', array('areaid' => $areaid)));
+$PAGE->set_url(new powereduc_url('/grade/grading/form/rubric/edit.php', array('areaid' => $areaid)));
 $PAGE->set_title(get_string('definerubric', 'gradingform_rubric'));
 $PAGE->set_heading(get_string('definerubric', 'gradingform_rubric'));
 

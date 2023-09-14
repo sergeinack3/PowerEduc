@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ namespace tool_lpmigrate;
 defined('POWEREDUC_INTERNAL') || die();
 
 use coding_exception;
-use moodle_exception;
+use powereduc_exception;
 use core_competency\api;
 use core_competency\competency;
 use core_competency\course_competency;
@@ -474,7 +474,7 @@ class framework_processor {
                         }
                     }
 
-                } catch (moodle_exception $e) {
+                } catch (powereduc_exception $e) {
                     // There was a major problem with this competency, we will ignore it entirely for the course.
                     $skipcompetencies[$competencyid] = true;
 
@@ -483,7 +483,7 @@ class framework_processor {
 
                     try {
                         $transaction->rollback($e);
-                    } catch (moodle_exception $e) {
+                    } catch (powereduc_exception $e) {
                         // Catch the re-thrown exception.
                     }
 
@@ -541,7 +541,7 @@ class framework_processor {
                                     }
                                 }
 
-                            } catch (moodle_exception $e) {
+                            } catch (powereduc_exception $e) {
                                 // There was a major problem with this competency in this module.
                                 $competencieswithissues[$competencyid] = true;
                                 $message = get_string('errorwhilemigratingmodulecompetencywithexception', 'tool_lpmigrate',
@@ -550,7 +550,7 @@ class framework_processor {
 
                                 try {
                                     $transaction->rollback($e);
-                                } catch (moodle_exception $e) {
+                                } catch (powereduc_exception $e) {
                                     // Catch the re-thrown exception.
                                 }
 
@@ -564,7 +564,7 @@ class framework_processor {
                             if ($remove && api::remove_competency_from_course_module($cmid, $competencyid)) {
                                 $this->modulecompetencyremovals++;
                             }
-                        } catch (moodle_exception $e) {
+                        } catch (powereduc_exception $e) {
                             $competencieswithissues[$competencyid] = true;
                             $this->log_warning($courseid, $competencyid, $cmid,
                                 get_string('warningcouldnotremovemodulecompetency', 'tool_lpmigrate'));
@@ -585,7 +585,7 @@ class framework_processor {
                     // Process the course competency.
                     api::remove_competency_from_course($courseid, $competencyid);
                     $this->coursecompetencyremovals++;
-                } catch (moodle_exception $e) {
+                } catch (powereduc_exception $e) {
                     $this->log_warning($courseid, $competencyid, null,
                         get_string('warningcouldnotremovecoursecompetency', 'tool_lpmigrate'));
                 }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 /**
  * Form page for an external blog link.
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage blog
  * @copyright  2009 Nicolas Connault
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -27,18 +27,18 @@
 require_once('../config.php');
 require_once('lib.php');
 require_once('external_blog_edit_form.php');
-require_once($CFG->libdir . '/simplepie/moodle_simplepie.php');
+require_once($CFG->libdir . '/simplepie/powereduc_simplepie.php');
 
 require_login();
 $context = context_system::instance();
-require_capability('moodle/blog:manageexternal', $context);
+require_capability('powereduc/blog:manageexternal', $context);
 
 // TODO redirect if $CFG->useexternalblogs is off,
 //                  $CFG->maxexternalblogsperuser == 0,
 //                  or if user doesn't have caps to manage external blogs.
 
 $id = optional_param('id', null, PARAM_INT);
-$url = new moodle_url('/blog/external_blog_edit.php');
+$url = new powereduc_url('/blog/external_blog_edit.php');
 if ($id !== null) {
     $url->param('id', $id);
 }
@@ -46,7 +46,7 @@ $PAGE->set_url($url);
 $PAGE->set_context(context_user::instance($USER->id));
 $PAGE->set_pagelayout('admin');
 
-$returnurl = new moodle_url('/blog/external_blogs.php');
+$returnurl = new powereduc_url('/blog/external_blogs.php');
 
 $action = (empty($id)) ? 'add' : 'edit';
 
@@ -55,7 +55,7 @@ $external = new stdClass();
 // Retrieve the external blog record.
 if (!empty($id)) {
     if (!$external = $DB->get_record('blog_external', array('id' => $id, 'userid' => $USER->id))) {
-        throw new \moodle_exception('wrongexternalid', 'blog');
+        throw new \powereduc_exception('wrongexternalid', 'blog');
     }
     $external->autotags = core_tag_tag::get_item_tags_array('core', 'blog_external', $id);
 }
@@ -73,7 +73,7 @@ if ($externalblogform->is_cancelled()) {
     // Save stuff in db.
     switch ($action) {
         case 'add':
-            $rss = new moodle_simplepie($data->url);
+            $rss = new powereduc_simplepie($data->url);
 
             $newexternal = new stdClass();
             $newexternal->name = (empty($data->name)) ? $rss->get_title() : $data->name;
@@ -100,7 +100,7 @@ if ($externalblogform->is_cancelled()) {
         case 'edit':
             if ($data->id && $DB->record_exists('blog_external', array('id' => $data->id))) {
 
-                $rss = new moodle_simplepie($data->url);
+                $rss = new powereduc_simplepie($data->url);
 
                 $external->id = $data->id;
                 $external->name = (empty($data->name)) ? $rss->get_title() : $data->name;
@@ -122,19 +122,19 @@ if ($externalblogform->is_cancelled()) {
                 core_tag_tag::set_item_tags('core', 'blog_external', $external->id,
                         context_user::instance($external->userid), $data->autotags);
             } else {
-                throw new \moodle_exception('wrongexternalid', 'blog');
+                throw new \powereduc_exception('wrongexternalid', 'blog');
             }
 
             break;
 
         default :
-            throw new \moodle_exception('invalidaction');
+            throw new \powereduc_exception('invalidaction');
     }
 
     redirect($returnurl);
 }
 
-navigation_node::override_active_url(new moodle_url('/blog/external_blogs.php'));
+navigation_node::override_active_url(new powereduc_url('/blog/external_blogs.php'));
 $PAGE->navbar->add(get_string('addnewexternalblog', 'blog'));
 
 $PAGE->set_heading(fullname($USER));

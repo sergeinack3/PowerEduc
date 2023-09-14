@@ -55,10 +55,10 @@ M.core_role.init_cap_table_filter = function(Y, tableid, contextid) {
                 ' id="'+this.table.get('id')+'capabilitysearch" value="'+Y.Escape.html(filtervalue)+'" />');
             // Create a label for the search input.
             this.label = Y.Node.create('<label for="' + this.input.get('id') + '">' +
-                M.util.get_string('filter', 'moodle') + ' </label>');
+                M.util.get_string('filter', 'powereduc') + ' </label>');
             // Create a clear button to clear the input.
             this.button = Y.Node.create('<input type="button" class="btn btn-primary"' +
-                ' value="'+M.util.get_string('clear', 'moodle')+'" />').set('disabled', filtervalue=='');
+                ' value="'+M.util.get_string('clear', 'powereduc')+'" />').set('disabled', filtervalue=='');
 
             // Tie it all together
             this.div.append(this.label).append(this.input).append(this.button);

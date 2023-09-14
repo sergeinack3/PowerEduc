@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
@@ -74,11 +74,11 @@ class medialib_test extends \advanced_testcase {
     public function test_get_filename() {
         $manager = core_media_manager::instance();
 
-        $this->assertSame('frog.mp4', $manager->get_filename(new \moodle_url(
+        $this->assertSame('frog.mp4', $manager->get_filename(new \powereduc_url(
                 '/pluginfile.php/312/mod_page/content/7/frog.mp4')));
         // This should work even though slasharguments is true, because we want
         // it to support 'legacy' links if somebody toggles the option later.
-        $this->assertSame('frog.mp4', $manager->get_filename(new \moodle_url(
+        $this->assertSame('frog.mp4', $manager->get_filename(new \powereduc_url(
                 '/pluginfile.php?file=/312/mod_page/content/7/frog.mp4')));
     }
 
@@ -88,13 +88,13 @@ class medialib_test extends \advanced_testcase {
     public function test_get_extension() {
         $manager = core_media_manager::instance();
 
-        $this->assertSame('mp4', $manager->get_extension(new \moodle_url(
+        $this->assertSame('mp4', $manager->get_extension(new \powereduc_url(
                 '/pluginfile.php/312/mod_page/content/7/frog.mp4')));
-        $this->assertSame('', $manager->get_extension(new \moodle_url(
+        $this->assertSame('', $manager->get_extension(new \powereduc_url(
                 '/pluginfile.php/312/mod_page/content/7/frog')));
-        $this->assertSame('mp4', $manager->get_extension(new \moodle_url(
+        $this->assertSame('mp4', $manager->get_extension(new \powereduc_url(
                 '/pluginfile.php?file=/312/mod_page/content/7/frog.mp4')));
-        $this->assertSame('', $manager->get_extension(new \moodle_url(
+        $this->assertSame('', $manager->get_extension(new \powereduc_url(
                 '/pluginfile.php?file=/312/mod_page/content/7/frog')));
     }
 
@@ -105,9 +105,9 @@ class medialib_test extends \advanced_testcase {
         $test = new media_test_plugin(1, 13, ['tst', 'test']);
 
         // Some example URLs.
-        $supported1 = new \moodle_url('http://example.org/1.test');
-        $supported2 = new \moodle_url('http://example.org/2.TST');
-        $unsupported = new \moodle_url('http://example.org/2.jpg');
+        $supported1 = new \powereduc_url('http://example.org/1.test');
+        $supported2 = new \powereduc_url('http://example.org/2.TST');
+        $unsupported = new \powereduc_url('http://example.org/2.jpg');
 
         // No URLs => none.
         $result = $test->list_supported_urls(array());
@@ -164,7 +164,7 @@ class medialib_test extends \advanced_testcase {
      */
     public function test_can_embed_url() {
         // All players are initially disabled, so mp4 cannot be rendered.
-        $url = new \moodle_url('http://example.org/test.mp4');
+        $url = new \powereduc_url('http://example.org/test.mp4');
         $manager = core_media_manager::instance();
         $this->assertFalse($manager->can_embed_url($url));
 
@@ -196,7 +196,7 @@ class medialib_test extends \advanced_testcase {
         $link = 'mediafallbacklink';
         $test = 'mediaplugin_test';
 
-        $url = new \moodle_url('http://example.org/test.mp4');
+        $url = new \powereduc_url('http://example.org/test.mp4');
 
         // All plugins disabled, NOLINK option.
         \core\plugininfo\media::set_enabled_plugins('');
@@ -220,7 +220,7 @@ class medialib_test extends \advanced_testcase {
         $mediaformats = array('mp3', 'mp4');
 
         foreach ($mediaformats as $format) {
-            $url = new \moodle_url('http://example.org/test.' . $format);
+            $url = new \powereduc_url('http://example.org/test.' . $format);
             $textwithlink = $manager->embed_url($url);
             $textwithoutlink = $manager->embed_url($url, 0, 0, '', array(core_media_manager::OPTION_NO_LINK => true));
 
@@ -263,12 +263,12 @@ class medialib_test extends \advanced_testcase {
         $manager = core_media_manager::instance();
 
         // Without any options...
-        $url = new \moodle_url('http://example.org/test.swf');
+        $url = new \powereduc_url('http://example.org/test.swf');
         $t = $manager->embed_url($url);
         $this->assertStringNotContainsString('</object>', $t);
 
         // ...and with the 'no it's safe, I checked it' option.
-        $url = new \moodle_url('http://example.org/test.swf');
+        $url = new \powereduc_url('http://example.org/test.swf');
         $t = $manager->embed_url($url, '', 0, 0, array(core_media_manager::OPTION_TRUSTED => true));
         $this->assertStringNotContainsString('</object>', $t);
     }
@@ -287,7 +287,7 @@ class medialib_test extends \advanced_testcase {
         $manager = core_media_manager::instance();
 
         // Format: mp3.
-        $url = new \moodle_url('http://example.org/pluginfile.php?file=x/y/z/test.mp3');
+        $url = new \powereduc_url('http://example.org/pluginfile.php?file=x/y/z/test.mp3');
         $t = $manager->embed_url($url);
         $this->assertStringContainsString('</audio>', $t);
     }
@@ -304,13 +304,13 @@ class medialib_test extends \advanced_testcase {
         $options = array(core_media_manager::OPTION_FALLBACK_TO_BLANK => true);
 
         // Embed that does match something should still include the link too.
-        $url = new \moodle_url('http://example.org/test.ogg');
+        $url = new \powereduc_url('http://example.org/test.ogg');
         $t = $manager->embed_url($url, '', 0, 0, $options);
         $this->assertStringContainsString('</audio>', $t);
         $this->assertStringContainsString('mediafallbacklink', $t);
 
         // Embed that doesn't match something should be totally blank.
-        $url = new \moodle_url('http://example.org/test.mp4');
+        $url = new \powereduc_url('http://example.org/test.mp4');
         $t = $manager->embed_url($url, '', 0, 0, $options);
         $this->assertSame('', $t);
     }
@@ -329,7 +329,7 @@ class medialib_test extends \advanced_testcase {
         // through.
         \core\plugininfo\media::set_enabled_plugins('html5video');
         $manager = core_media_manager::instance();
-        $url = new \moodle_url('http://example.org/test.mp4');
+        $url = new \powereduc_url('http://example.org/test.mp4');
 
         // HTML5 default size - specifies core width and does not specify height.
         $t = $manager->embed_url($url);
@@ -342,7 +342,7 @@ class medialib_test extends \advanced_testcase {
         $this->assertStringContainsString('height="101"', $t);
 
         // HTML5 size specified in url, overrides call.
-        $url = new \moodle_url('http://example.org/test.mp4?d=123x456');
+        $url = new \powereduc_url('http://example.org/test.mp4?d=123x456');
         $t = $manager->embed_url($url, '', '666', '101');
         $this->assertStringContainsString('width="123"', $t);
         $this->assertStringContainsString('height="456"', $t);
@@ -358,7 +358,7 @@ class medialib_test extends \advanced_testcase {
         // html5video.
         \core\plugininfo\media::set_enabled_plugins('html5video');
         $manager = core_media_manager::instance();
-        $url = new \moodle_url('http://example.org/test.mp4');
+        $url = new \powereduc_url('http://example.org/test.mp4');
 
         // HTML5 default name - use filename.
         $t = $manager->embed_url($url);
@@ -375,7 +375,7 @@ class medialib_test extends \advanced_testcase {
     public function test_split_alternatives() {
         $mediamanager = core_media_manager::instance();
 
-        // Single URL - identical moodle_url.
+        // Single URL - identical powereduc_url.
         $mp4 = 'http://example.org/test.mp4';
         $result = $mediamanager->split_alternatives($mp4, $w, $h);
         $this->assertEquals($mp4, $result[0]->out(false));
@@ -384,7 +384,7 @@ class medialib_test extends \advanced_testcase {
         $this->assertEquals(0, $w);
         $this->assertEquals(0, $h);
 
-        // Two URLs - identical moodle_urls.
+        // Two URLs - identical powereduc_urls.
         $webm = 'http://example.org/test.webm';
         $result = $mediamanager->split_alternatives("$mp4#$webm", $w, $h);
         $this->assertEquals($mp4, $result[0]->out(false));
@@ -415,10 +415,10 @@ class medialib_test extends \advanced_testcase {
 
         // MP4, OGV, WebM and FLV.
         $urls = array(
-            new \moodle_url('http://example.org/test.mp4'),
-            new \moodle_url('http://example.org/test.ogv'),
-            new \moodle_url('http://example.org/test.webm'),
-            new \moodle_url('http://example.org/test.flv'),
+            new \powereduc_url('http://example.org/test.mp4'),
+            new \powereduc_url('http://example.org/test.ogv'),
+            new \powereduc_url('http://example.org/test.webm'),
+            new \powereduc_url('http://example.org/test.flv'),
         );
 
         // Enable html5 and "test" ("test" first).
@@ -453,15 +453,15 @@ class medialib_test extends \advanced_testcase {
      * Make sure the instance() method returns singleton for the same page and different object for another page
      */
     public function test_initialise() {
-        $moodlepage1 = new \moodle_page();
+        $powereducpage1 = new \powereduc_page();
 
-        $mediamanager1 = core_media_manager::instance($moodlepage1);
-        $mediamanager2 = core_media_manager::instance($moodlepage1);
+        $mediamanager1 = core_media_manager::instance($powereducpage1);
+        $mediamanager2 = core_media_manager::instance($powereducpage1);
 
         $this->assertSame($mediamanager1, $mediamanager2);
 
-        $moodlepage3 = new \moodle_page();
-        $mediamanager3 = core_media_manager::instance($moodlepage3);
+        $powereducpage3 = new \powereduc_page();
+        $mediamanager3 = core_media_manager::instance($powereducpage3);
 
         $this->assertNotSame($mediamanager1, $mediamanager3);
     }

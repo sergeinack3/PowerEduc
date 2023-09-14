@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Abstract database driver test class providing some moodle database interface
+ * Abstract database driver test class providing some powereduc database interface
  *
  * @package    core
  * @category   dml
@@ -27,8 +27,8 @@ namespace core;
 
 defined('POWEREDUC_INTERNAL') || die();
 
-require_once(__DIR__.'/../../moodle_database.php');
-require_once(__DIR__.'/../../moodle_temptables.php');
+require_once(__DIR__.'/../../powereduc_database.php');
+require_once(__DIR__.'/../../powereduc_temptables.php');
 require_once(__DIR__.'/../../../ddl/database_manager.php');
 require_once(__DIR__.'/test_sql_generator.php');
 
@@ -40,7 +40,7 @@ require_once(__DIR__.'/test_sql_generator.php');
  * @copyright  2018 Catalyst IT
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-abstract class test_moodle_database extends \moodle_database {
+abstract class test_powereduc_database extends \powereduc_database {
 
     /** @var string */
     private $error;
@@ -55,7 +55,7 @@ abstract class test_moodle_database extends \moodle_database {
     public function __construct($external = false) {
         parent::__construct($external);
 
-        $this->temptables = new \moodle_temptables($this);
+        $this->temptables = new \powereduc_temptables($this);
     }
 
     /**

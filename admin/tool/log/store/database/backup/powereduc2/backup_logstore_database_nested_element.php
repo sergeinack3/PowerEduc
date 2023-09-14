@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    logstore_database
  * @category   backup
- * @copyright  2015 Damyon Wiese <damyon@moodle.com>
+ * @copyright  2015 Damyon Wiese <damyon@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,13 +30,13 @@ defined('POWEREDUC_INTERNAL') || die();
  *
  * @package    logstore_database
  * @category   backup
- * @copyright  2015 Damyon Wiese <damyon@moodle.com>
+ * @copyright  2015 Damyon Wiese <damyon@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class backup_logstore_database_nested_element extends backup_nested_element {
 
     /**
-     * @var \moodle_database $sourcedb
+     * @var \powereduc_database $sourcedb
      */
     protected $sourcedb;
 
@@ -80,7 +80,7 @@ class backup_logstore_database_nested_element extends backup_nested_element {
     /**
      * Set the database we want to use.
      *
-     * @param \moodle_database $db
+     * @param \powereduc_database $db
      */
     public function set_source_db($db) {
         $this->sourcedb = $db;
@@ -89,7 +89,7 @@ class backup_logstore_database_nested_element extends backup_nested_element {
     /**
      * Get the database we want to use.
      *
-     * @return \moodle_database $db
+     * @return \powereduc_database $db
      */
     public function get_source_db() {
         return $this->sourcedb;

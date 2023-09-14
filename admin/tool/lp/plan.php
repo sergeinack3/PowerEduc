@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ if (isguestuser()) {
 \core_competency\api::require_enabled();
 
 $plan = \core_competency\api::read_plan($id);
-$url = new moodle_url('/admin/tool/lp/plan.php', array('id' => $id));
+$url = new powereduc_url('/admin/tool/lp/plan.php', array('id' => $id));
 
 list($title, $subtitle) = \tool_lp\page_helper::setup_for_plan($plan->get('userid'), $url, $plan);
 

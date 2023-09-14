@@ -1,7 +1,7 @@
 {
-  "name": "moodle-atto_accessibilityhelper-button",
+  "name": "powereduc-atto_accessibilityhelper-button",
   "builds": {
-    "moodle-atto_accessibilityhelper-button": {
+    "powereduc-atto_accessibilityhelper-button": {
       "jsfiles": [
         "button.js"
       ]

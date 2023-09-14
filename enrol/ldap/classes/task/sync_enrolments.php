@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 /**
  * Sync enrolments task
  * @package enrol_ldap
- * @author    Guy Thomas <gthomas@moodlerooms.com>
+ * @author    Guy Thomas <gthomas@powereducrooms.com>
  * @copyright Copyright (c) 2017 Blackboard Inc.
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -29,7 +29,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Class sync_enrolments
  * @package enrol_ldap
- * @author    Guy Thomas <gthomas@moodlerooms.com>
+ * @author    Guy Thomas <gthomas@powereducrooms.com>
  * @copyright Copyright (c) 2017 Blackboard Inc.
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

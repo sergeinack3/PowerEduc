@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ admin_externalpage_setup('toolhttpsreplace');
 $context = context_system::instance();
 
 $PAGE->set_context($context);
-$PAGE->set_url(new moodle_url('/admin/tool/httpsreplace/index.php'));
+$PAGE->set_url(new powereduc_url('/admin/tool/httpsreplace/index.php'));
 $PAGE->set_title(get_string('pageheader', 'tool_httpsreplace'));
 $PAGE->set_pagelayout('admin');
 
@@ -51,6 +51,6 @@ if (!is_https()) {
 echo '<p>'.get_string('domainexplain', 'tool_httpsreplace').'</p>';
 echo '<p>'.page_doc_link(get_string('doclink', 'tool_httpsreplace')).'</p>';
 
-echo $OUTPUT->continue_button(new moodle_url('/admin/tool/httpsreplace/tool.php'));
+echo $OUTPUT->continue_button(new powereduc_url('/admin/tool/httpsreplace/tool.php'));
 
 echo $OUTPUT->footer();

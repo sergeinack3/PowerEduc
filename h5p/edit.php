@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Open the editor to modify an H5P content from a given H5P URL.
  *
  * @package    core_h5p
- * @copyright  2021 Sara Arjona <sara@moodle.com>
+ * @copyright  2021 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,7 +36,7 @@ if (empty($returnurl)) {
     $returnurl = get_local_referer(false);
     if (empty($returnurl)) {
         // If local referer is empty, returnurl will be set to default site page.
-        $returnurl = new \moodle_url('/');
+        $returnurl = new \powereduc_url('/');
     }
 }
 
@@ -76,11 +76,11 @@ if (!empty($contenturl)) {
 }
 
 if (empty($contentid)) {
-    throw new \moodle_exception('error:emptycontentid', 'core_h5p', $returnurl);
+    throw new \powereduc_exception('error:emptycontentid', 'core_h5p', $returnurl);
 }
 
 $pagetitle = get_string('h5peditor', 'core_h5p');
-$url = new \moodle_url("/h5p/edit.php");
+$url = new \powereduc_url("/h5p/edit.php");
 
 $PAGE->set_context($context);
 $PAGE->set_url($url);

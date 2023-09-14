@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains CSS file serving functions.
@@ -89,7 +89,7 @@ function css_write_file($filename, $content) {
  * @param string $etag The revision to make sure we utilise any caches.
  */
 function css_send_cached_css($csspath, $etag) {
-    // 90 days only - based on Moodle point release cadence being every 3 months.
+    // 90 days only - based on PowerEduc point release cadence being every 3 months.
     $lifetime = 60 * 60 * 24 * 90;
 
     header('Etag: "'.$etag.'"');
@@ -115,7 +115,7 @@ function css_send_cached_css($csspath, $etag) {
  * @param string $etag The revision to make sure we utilise any caches.
  */
 function css_send_cached_css_content($csscontent, $etag) {
-    // 90 days only - based on Moodle point release cadence being every 3 months.
+    // 90 days only - based on PowerEduc point release cadence being every 3 months.
     $lifetime = 60 * 60 * 24 * 90;
 
     header('Etag: "'.$etag.'"');
@@ -187,7 +187,7 @@ function css_send_uncached_css($css) {
  * @param string $etag
  */
 function css_send_unmodified($lastmodified, $etag) {
-    // 90 days only - based on Moodle point release cadence being every 3 months.
+    // 90 days only - based on PowerEduc point release cadence being every 3 months.
     $lifetime = 60 * 60 * 24 * 90;
     header('HTTP/1.1 304 Not Modified');
     header('Expires: '. gmdate('D, d M Y H:i:s', time() + $lifetime) .' GMT');

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -104,16 +104,16 @@ if (file_exists($actionpath) && is_readable($actionpath)) {
             }
         } else {
             // TODO: need more detailed error info
-            throw new \moodle_exception('xmldberror');
+            throw new \powereduc_exception('xmldberror');
         }
     } else {
         $a = new stdClass();
         $a->action = $action;
         $a->actionclass = $actionclass;
-        throw new \moodle_exception('cannotinstantiateclass', 'tool_xmldb', '', $a);
+        throw new \powereduc_exception('cannotinstantiateclass', 'tool_xmldb', '', $a);
     }
 } else {
-    throw new \moodle_exception('invalidaction');
+    throw new \powereduc_exception('invalidaction');
 }
 
 if ($xmldb_action->getDoesGenerate() != ACTION_GENERATE_XML) {

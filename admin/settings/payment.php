@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,5 +25,5 @@
 $ADMIN->add('payment', new admin_externalpage(
     'paymentaccounts',
     new lang_string('paymentaccounts', 'payment'),
-    new moodle_url("/payment/accounts.php"),
-    ['moodle/payment:manageaccounts', 'moodle/payment:viewpayments']));
+    new powereduc_url("/payment/accounts.php"),
+    ['powereduc/payment:manageaccounts', 'powereduc/payment:viewpayments']));

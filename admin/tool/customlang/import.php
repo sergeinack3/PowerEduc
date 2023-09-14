@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    tool_customlang
  * @subpackage customlang
- * @copyright  2020 Ferran Recio <ferran@moodle.com>
+ * @copyright  2020 Ferran Recio <ferran@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,7 +36,7 @@ require_capability('tool/customlang:edit', context_system::instance());
 $lng = required_param('lng', PARAM_LANG);
 
 admin_externalpage_setup('toolcustomlang', '', null,
-    new moodle_url('/admin/tool/customlang/import.php', ['lng' => $lng]));
+    new powereduc_url('/admin/tool/customlang/import.php', ['lng' => $lng]));
 
 $PAGE->set_context(context_system::instance());
 
@@ -69,7 +69,7 @@ if ($data = $form->get_data()) {
     }
 
     // Show continue button.
-    echo $output->continue_button(new moodle_url('index.php', array('lng' => $lng)));
+    echo $output->continue_button(new powereduc_url('index.php', array('lng' => $lng)));
 
 } else {
     echo $output->header();

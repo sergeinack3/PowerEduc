@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ require_once($CFG->libdir . '/completionlib.php');
  * Course copy tests.
  *
  * @package    core_backup
- * @copyright  2020 onward The Moodle Users Association <https://moodleassociation.org/>
+ * @copyright  2020 onward The Moodle Users Association <https://powereducassociation.org/>
  * @author     Matt Porritt <mattp@catalyst-au.net>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @coversDefaultClass \copy_helper
@@ -150,7 +150,7 @@ class copy_helper_test extends \advanced_testcase {
      * @covers ::process_formdata
      */
     public function test_process_formdata_missing_fields() {
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         \copy_helper::process_formdata(new \stdClass);
     }
 
@@ -832,7 +832,7 @@ class copy_helper_test extends \advanced_testcase {
         $formdata->category = 1;
 
         // Expect and exception as form data is incomplete.
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $copydata = \copy_helper::process_formdata($formdata);
         \copy_helper::create_copy($copydata);
     }

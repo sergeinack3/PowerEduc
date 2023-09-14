@@ -1,4 +1,4 @@
-YUI.add('moodle-tool_lp-dragdrop-reorder', function (Y, NAME) {
+YUI.add('powereduc-tool_lp-dragdrop-reorder', function (Y, NAME) {
 
 /**
  * Simple drag and drop.
@@ -68,4 +68,4 @@ M.tool_lp.dragdrop_reorder = function(params) {
 };
 
 
-}, '@VERSION@', {"requires": ["moodle-core-dragdrop"]});
+}, '@VERSION@', {"requires": ["powereduc-core-dragdrop"]});

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -69,10 +69,10 @@ abstract class acceptance_base extends base {
     /**
      * Get URL related to the action.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_url() {
-        return new \moodle_url('/admin/tool/policy/acceptance.php', array('userid' => $this->relateduserid,
+        return new \powereduc_url('/admin/tool/policy/acceptance.php', array('userid' => $this->relateduserid,
             'versionid' => $this->other['policyversionid']));
     }
 

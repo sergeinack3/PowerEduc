@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core\navigation\output;
 
@@ -33,12 +33,12 @@ use custom_menu;
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class primary implements renderable, templatable {
-    /** @var moodle_page $page the moodle page that the navigation belongs to */
+    /** @var powereduc_page $page the powereduc page that the navigation belongs to */
     private $page = null;
 
     /**
      * primary constructor.
-     * @param \moodle_page $page
+     * @param \powereduc_page $page
      */
     public function __construct($page) {
         $this->page = $page;
@@ -150,7 +150,7 @@ class primary implements renderable, templatable {
                 'classes' => 'realuser'
             ];
             $usermenudata['metadata'][] = [
-                'content' => get_string('loggedinas', 'moodle', $info->metadata['userfullname']),
+                'content' => get_string('loggedinas', 'powereduc', $info->metadata['userfullname']),
                 'classes' => 'viewingas'
             ];
         }
@@ -212,7 +212,7 @@ class primary implements renderable, templatable {
                 // Place the link before the 'Log out' menu item which is either the last item in the menu or
                 // second to last when 'Switch roles' is available.
                 $menuposition = count($modifiedarray) - 1;
-                if (has_capability('moodle/role:switchroles', $PAGE->context)) {
+                if (has_capability('powereduc/role:switchroles', $PAGE->context)) {
                     $menuposition = count($modifiedarray) - 2;
                 }
                 array_splice($modifiedarray, $menuposition, 0, [$language]);

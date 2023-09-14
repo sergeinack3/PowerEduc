@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Contains the default section controls output class.
  *
  * @package   core_courseformat
- * @copyright 2020 Ferran Recio <ferran@moodle.com>
+ * @copyright 2020 Ferran Recio <ferran@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ use context_course;
 use core\output\named_templatable;
 use core_courseformat\base as course_format;
 use core_courseformat\output\local\courseformat_named_templatable;
-use moodle_url;
+use powereduc_url;
 use pix_icon;
 use renderable;
 use section_info;
@@ -40,7 +40,7 @@ use stdClass;
  * Base class to render section controls.
  *
  * @package   core_courseformat
- * @copyright 2020 Ferran Recio <ferran@moodle.com>
+ * @copyright 2020 Ferran Recio <ferran@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class controlmenu implements named_templatable, renderable {
@@ -92,7 +92,7 @@ class controlmenu implements named_templatable, renderable {
             $attr = empty($value['attr']) ? [] : $value['attr'];
             $class = empty($value['pixattr']['class']) ? '' : $value['pixattr']['class'];
             $al = new action_menu_link_secondary(
-                new moodle_url($url),
+                new powereduc_url($url),
                 new pix_icon($icon, '', null, ['class' => "smallicon " . $class]),
                 $name,
                 $attr
@@ -138,7 +138,7 @@ class controlmenu implements named_templatable, renderable {
 
         $controls = [];
 
-        if (!$isstealth && has_capability('moodle/course:update', $coursecontext, $user)) {
+        if (!$isstealth && has_capability('powereduc/course:update', $coursecontext, $user)) {
             if ($section->section > 0
                 && get_string_manager()->string_exists('editsection', 'format_'.$format->get_format())) {
                 $streditsection = get_string('editsection', 'format_'.$format->get_format());
@@ -147,7 +147,7 @@ class controlmenu implements named_templatable, renderable {
             }
 
             $controls['edit'] = [
-                'url'   => new moodle_url('/course/editsection.php', ['id' => $section->id, 'sr' => $sectionreturn]),
+                'url'   => new powereduc_url('/course/editsection.php', ['id' => $section->id, 'sr' => $sectionreturn]),
                 'icon' => 'i/settings',
                 'name' => $streditsection,
                 'pixattr' => ['class' => ''],
@@ -158,7 +158,7 @@ class controlmenu implements named_templatable, renderable {
         if ($section->section) {
             $url = clone($baseurl);
             if (!$isstealth) {
-                if (has_capability('moodle/course:sectionvisibility', $coursecontext, $user)) {
+                if (has_capability('powereduc/course:sectionvisibility', $coursecontext, $user)) {
                     $strhidefromothers = get_string('hidefromothers', 'format_' . $course->format);
                     $strshowfromothers = get_string('showfromothers', 'format_' . $course->format);
                     if ($section->visible) { // Show the hide/show eye.
@@ -196,7 +196,7 @@ class controlmenu implements named_templatable, renderable {
                     }
                 }
 
-                if (!$sectionreturn && has_capability('moodle/course:movesections', $coursecontext, $user)) {
+                if (!$sectionreturn && has_capability('powereduc/course:movesections', $coursecontext, $user)) {
                     if ($usecomponents) {
                         // This tool will appear only when the state is ready.
                         $url = clone ($baseurl);
@@ -205,7 +205,7 @@ class controlmenu implements named_templatable, renderable {
                         $controls['movesection'] = [
                             'url' => $url,
                             'icon' => 'i/dragdrop',
-                            'name' => get_string('move', 'moodle'),
+                            'name' => get_string('move', 'powereduc'),
                             'pixattr' => ['class' => ''],
                             'attr' => [
                                 'class' => 'icon move waitstate',
@@ -251,7 +251,7 @@ class controlmenu implements named_templatable, renderable {
                 } else {
                     $strdelete = get_string('deletesection');
                 }
-                $url = new moodle_url(
+                $url = new powereduc_url(
                     '/course/editsection.php',
                     [
                         'id' => $section->id,

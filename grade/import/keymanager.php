@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 /**
  * Grade import key management page.
  *
- * @package   moodlecore
+ * @package   powereduccore
  * @copyright 2008 Petr Skoda
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -31,18 +31,18 @@ $id = required_param('id', PARAM_INT); // course id
 $PAGE->set_url('/grade/import/keymanager.php', array('id' => $id));
 
 if (!$course = $DB->get_record('course', array('id'=>$id))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 require_login($course);
 $context = context_course::instance($id);
 
-require_capability('moodle/grade:import', $context);
+require_capability('powereduc/grade:import', $context);
 
 // Check if the user has at least one grade publishing capability.
 $plugins = grade_helper::get_plugins_import($course->id);
 if (!isset($plugins['keymanager'])) {
-    throw new \moodle_exception('nopermissions');
+    throw new \powereduc_exception('nopermissions');
 }
 
 $actionbar = new \core_grades\output\import_key_manager_action_bar($context);
@@ -61,7 +61,7 @@ if ($keys = $DB->get_records_select('user_private_key', "script='grade/import' A
         $line[1] = $key->iprestriction;
         $line[2] = empty($key->validuntil) ? get_string('always') : userdate($key->validuntil);
 
-        $url = new moodle_url('key.php', array('id' => $key->id));
+        $url = new powereduc_url('key.php', array('id' => $key->id));
 
         $buttons = $OUTPUT->action_icon($url, new pix_icon('t/edit', $stredit));
 

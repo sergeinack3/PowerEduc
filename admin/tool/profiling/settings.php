@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,5 +32,5 @@ $hasextension = $hasextension || extension_loaded('xhprof');
 $isenabled = !empty($CFG->profilingenabled) || !empty($CFG->earlyprofilingenabled);
 if ($hasextension && $isenabled) {
     $ADMIN->add('development', new admin_externalpage('toolprofiling', get_string('pluginname', 'tool_profiling'),
-            "$CFG->wwwroot/$CFG->admin/tool/profiling/index.php", 'moodle/site:config'));
+            "$CFG->wwwroot/$CFG->admin/tool/profiling/index.php", 'powereduc/site:config'));
 }

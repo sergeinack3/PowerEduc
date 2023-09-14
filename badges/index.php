@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Page for badges management
@@ -53,11 +53,11 @@ if ($page < 0) {
 require_login();
 
 if (empty($CFG->enablebadges)) {
-    throw new \moodle_exception('badgesdisabled', 'badges');
+    throw new \powereduc_exception('badgesdisabled', 'badges');
 }
 
 if (empty($CFG->badges_allowcoursebadges) && ($type == BADGE_TYPE_COURSE)) {
-    throw new \moodle_exception('coursebadgesdisabled', 'badges');
+    throw new \powereduc_exception('coursebadgesdisabled', 'badges');
 }
 
 $err = '';
@@ -71,7 +71,7 @@ if ($course = $DB->get_record('course', array('id' => $courseid))) {
 }
 
 $hdr = get_string('managebadges', 'badges');
-$returnurl = new moodle_url('/badges/index.php', $urlparams);
+$returnurl = new powereduc_url('/badges/index.php', $urlparams);
 $PAGE->set_url($returnurl);
 $PAGE->add_body_class('limitedwidth');
 
@@ -80,7 +80,7 @@ if ($type == BADGE_TYPE_SITE) {
     $PAGE->set_context(context_system::instance());
     $PAGE->set_pagelayout('admin');
     $PAGE->set_heading(get_string('administrationsite'));
-    navigation_node::override_active_url(new moodle_url('/badges/index.php', array('type' => BADGE_TYPE_SITE)), true);
+    navigation_node::override_active_url(new powereduc_url('/badges/index.php', array('type' => BADGE_TYPE_SITE)), true);
 } else {
     require_login($course);
     $coursecontext = context_course::instance($course->id);
@@ -89,25 +89,25 @@ if ($type == BADGE_TYPE_SITE) {
     $PAGE->set_pagelayout('incourse');
     $PAGE->set_heading(format_string($course->fullname, true, array('context' => $coursecontext)));
     navigation_node::override_active_url(
-        new moodle_url('/badges/index.php', array('type' => BADGE_TYPE_COURSE, 'id' => $course->id))
+        new powereduc_url('/badges/index.php', array('type' => BADGE_TYPE_COURSE, 'id' => $course->id))
     );
 }
 
 if (!has_any_capability(array(
-        'moodle/badges:viewawarded',
-        'moodle/badges:createbadge',
-        'moodle/badges:awardbadge',
-        'moodle/badges:configurecriteria',
-        'moodle/badges:configuremessages',
-        'moodle/badges:configuredetails',
-        'moodle/badges:deletebadge'), $PAGE->context)) {
+        'powereduc/badges:viewawarded',
+        'powereduc/badges:createbadge',
+        'powereduc/badges:awardbadge',
+        'powereduc/badges:configurecriteria',
+        'powereduc/badges:configuremessages',
+        'powereduc/badges:configuredetails',
+        'powereduc/badges:deletebadge'), $PAGE->context)) {
     redirect($CFG->wwwroot);
 }
 
 $PAGE->set_title($hdr);
 $output = $PAGE->get_renderer('core', 'badges');
 
-if (($delete || $archive) && has_capability('moodle/badges:deletebadge', $PAGE->context)) {
+if (($delete || $archive) && has_capability('powereduc/badges:deletebadge', $PAGE->context)) {
     $badgeid = ($archive != 0) ? $archive : $delete;
     $badge = new badge($badgeid);
     if (!$confirm) {
@@ -115,14 +115,14 @@ if (($delete || $archive) && has_capability('moodle/badges:deletebadge', $PAGE->
         // Archive this badge?
         echo $output->heading(get_string('archivebadge', 'badges', $badge->name));
         $archivebutton = $output->single_button(
-                            new moodle_url($PAGE->url, array('archive' => $badge->id, 'confirm' => 1)),
+                            new powereduc_url($PAGE->url, array('archive' => $badge->id, 'confirm' => 1)),
                             get_string('archiveconfirm', 'badges'));
         echo $output->box(get_string('archivehelp', 'badges') . $archivebutton, 'generalbox');
 
         // Delete this badge?
         echo $output->heading(get_string('delbadge', 'badges', $badge->name));
         $deletebutton = $output->single_button(
-                            new moodle_url($PAGE->url, array('delete' => $badge->id, 'confirm' => 1)),
+                            new powereduc_url($PAGE->url, array('delete' => $badge->id, 'confirm' => 1)),
                             get_string('delconfirm', 'badges'));
         echo $output->box(get_string('deletehelp', 'badges') . $deletebutton, 'generalbox');
 
@@ -139,7 +139,7 @@ if (($delete || $archive) && has_capability('moodle/badges:deletebadge', $PAGE->
     }
 }
 
-if ($deactivate && has_capability('moodle/badges:configuredetails', $PAGE->context)) {
+if ($deactivate && has_capability('powereduc/badges:configuredetails', $PAGE->context)) {
     require_sesskey();
     $badge = new badge($deactivate);
     if ($badge->is_locked()) {
@@ -153,7 +153,7 @@ if ($deactivate && has_capability('moodle/badges:configuredetails', $PAGE->conte
 }
 
 echo $OUTPUT->header();
-$backurl = $type == BADGE_TYPE_SITE ? null : new moodle_url('/badges/view.php', ['type' => $type, 'id' => $courseid]);
+$backurl = $type == BADGE_TYPE_SITE ? null : new powereduc_url('/badges/view.php', ['type' => $type, 'id' => $courseid]);
 $actionbar = new \core_badges\output\standard_action_bar($PAGE, $type, false, true, $backurl);
 echo $output->render_tertiary_navigation($actionbar);
 

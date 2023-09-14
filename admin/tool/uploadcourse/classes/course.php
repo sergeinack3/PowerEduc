@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -624,13 +624,13 @@ class tool_uploadcourse_course {
         if (!empty($coursedata['lang'])) {
             if ($exists) {
                 $courseid = $DB->get_field('course', 'id', ['shortname' => $this->shortname]);
-                if (!has_capability('moodle/course:setforcedlanguage', context_course::instance($courseid))) {
+                if (!has_capability('powereduc/course:setforcedlanguage', context_course::instance($courseid))) {
                     $this->error('cannotforcelang', new lang_string('cannotforcelang', 'tool_uploadcourse'));
                     return false;
                 }
             } else {
                 $catcontext = context_coursecat::instance($coursedata['category']);
-                if (!guess_if_creator_will_have_course_capability('moodle/course:setforcedlanguage', $catcontext)) {
+                if (!guess_if_creator_will_have_course_capability('powereduc/course:setforcedlanguage', $catcontext)) {
                     $this->error('cannotforcelang', new lang_string('cannotforcelang', 'tool_uploadcourse'));
                     return false;
                 }
@@ -762,10 +762,10 @@ class tool_uploadcourse_course {
                 if ($numsections != 0) {
                     $coursedata['numsections'] = $numsections;
                 } else {
-                    $coursedata['numsections'] = get_config('moodlecourse', 'numsections');
+                    $coursedata['numsections'] = get_config('powereduccourse', 'numsections');
                 }
             } else {
-                $coursedata['numsections'] = get_config('moodlecourse', 'numsections');
+                $coursedata['numsections'] = get_config('powereduccourse', 'numsections');
             }
         }
 
@@ -778,7 +778,7 @@ class tool_uploadcourse_course {
         // Ensure that user is allowed to configure course content download and the field contains a valid value.
         if (isset($coursedata['downloadcontent'])) {
             if (!$CFG->downloadcoursecontentallowed ||
-                    !has_capability('moodle/course:configuredownloadcontent', $context)) {
+                    !has_capability('powereduc/course:configuredownloadcontent', $context)) {
 
                 $this->error('downloadcontentnotallowed', new lang_string('downloadcontentnotallowed', 'tool_uploadcourse'));
                 return false;
@@ -849,7 +849,7 @@ class tool_uploadcourse_course {
         if (!$this->prepared) {
             throw new coding_exception('The course has not been prepared.');
         } else if ($this->has_errors()) {
-            throw new moodle_exception('Cannot proceed, errors were detected.');
+            throw new powereduc_exception('Cannot proceed, errors were detected.');
         } else if ($this->processstarted) {
             throw new coding_exception('The process has already been started.');
         }

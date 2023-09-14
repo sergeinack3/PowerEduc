@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ require_once($CFG->dirroot . '/user/externallib.php');
  * External policy webservice API tests.
  *
  * @package tool_policy
- * @copyright 2018 Sara Arjona <sara@moodle.com>
+ * @copyright 2018 Sara Arjona <sara@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class externallib_test extends externallib_advanced_testcase {
@@ -170,7 +170,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Make sure user can not login.
         $toolconsentpage = $sitepolicymanager->get_redirect_url();
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $this->expectExceptionMessage(get_string('sitepolicynotagreed', 'error', $toolconsentpage->out()));
         \core_user_external::validate_context(\context_system::instance());
 

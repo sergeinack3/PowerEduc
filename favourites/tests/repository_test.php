@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -99,7 +99,7 @@ class repository_test extends \advanced_testcase {
         );
         $favcourse->something = 'something';
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $favouritesrepo->add($favcourse);
     }
 
@@ -121,7 +121,7 @@ class repository_test extends \advanced_testcase {
         );
         unset($favcourse->userid);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $favouritesrepo->add($favcourse);
     }
 

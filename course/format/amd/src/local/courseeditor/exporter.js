@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @module     core_courseformat/local/courseeditor/exporter
  * @class      core_courseformat/local/courseeditor/exporter
- * @copyright  2021 Ferran Recio <ferran@moodle.com>
+ * @copyright  2021 Ferran Recio <ferran@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 export default class {

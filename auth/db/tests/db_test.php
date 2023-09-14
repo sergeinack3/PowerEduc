@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -491,7 +491,7 @@ class db_test extends \advanced_testcase {
         $this->assertEquals($extdbuser1->name, $user1->username);
         $this->assertEquals($extdbuser1->email, $user1->email);
 
-        // Get the user on moodle user table.
+        // Get the user on powereduc user table.
         $user2 = $DB->get_record('user', array('email'=> $extdbuser2->email, 'auth'=>'db'));
         $user3 = $DB->get_record('user', array('email'=> $extdbuser3->email, 'auth'=>'db'));
 
@@ -514,7 +514,7 @@ class db_test extends \advanced_testcase {
         $auth = get_auth_plugin('db');
         $auth->db_init();
 
-        // Set to delete from moodle when missing from DB.
+        // Set to delete from powereduc when missing from DB.
         set_config('removeuser', AUTH_REMOVEUSER_FULLDELETE, 'auth_db');
         $auth->config->removeuser = AUTH_REMOVEUSER_FULLDELETE;
 
@@ -526,15 +526,15 @@ class db_test extends \advanced_testcase {
             $users[] = $user;
         }
 
-        // Sync to moodle.
+        // Sync to powereduc.
         $trace = new \null_progress_trace();
         $auth->sync_users($trace, true);
 
         // Check user is there.
         $user = array_shift($users);
-        $moodleuser = $DB->get_record('user', array('email' => $user->email, 'auth' => 'db'));
-        $this->assertNotNull($moodleuser);
-        $this->assertEquals($user->username, $moodleuser->username);
+        $powereducuser = $DB->get_record('user', array('email' => $user->email, 'auth' => 'db'));
+        $this->assertNotNull($powereducuser);
+        $this->assertEquals($user->username, $powereducuser->username);
 
         // Delete a user.
         $DB->delete_records('auth_db_users', array('id' => $user->id));
@@ -543,9 +543,9 @@ class db_test extends \advanced_testcase {
         $auth->sync_users($trace, true);
 
         // Check user is no longer there.
-        $moodleuser = $DB->get_record('user', array('id' => $moodleuser->id));
+        $powereducuser = $DB->get_record('user', array('id' => $powereducuser->id));
         $this->assertFalse($auth->user_login($user->username, 'heslo'));
-        $this->assertEquals(1, $moodleuser->deleted);
+        $this->assertEquals(1, $powereducuser->deleted);
 
         // Make sure it was the only user deleted.
         $numberdeleted = $DB->count_records('user', array('deleted' => 1, 'auth' => 'db'));

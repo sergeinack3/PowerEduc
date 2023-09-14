@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
@@ -23,8 +23,8 @@ use coding_exception;
 use context_course;
 use context_module;
 use course_modinfo;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use Exception;
 
 /**
@@ -201,7 +201,7 @@ class modinfolib_test extends advanced_testcase {
         $this->assertEquals(context_module::instance($moduledb->id), $cm->context);
         $this->assertEquals($modnamessingular['assign'], $cm->modfullname);
         $this->assertEquals($modnamesplural['assign'], $cm->modplural);
-        $this->assertEquals(new moodle_url('/mod/assign/view.php', array('id' => $moduledb->id)), $cm->url);
+        $this->assertEquals(new powereduc_url('/mod/assign/view.php', array('id' => $moduledb->id)), $cm->url);
         $this->assertEquals($cachedcminfo->customdata, $cm->customdata);
 
         // Dynamic fields, just test that they can be retrieved (must be carefully tested in each activity type).
@@ -802,7 +802,7 @@ class modinfolib_test extends advanced_testcase {
         try {
             get_course_and_cm_from_cmid($page->cmid, 'forum');
             $this->fail();
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertEquals('invalidcoursemoduleid', $e->errorcode);
         }
 
@@ -818,7 +818,7 @@ class modinfolib_test extends advanced_testcase {
         try {
             get_course_and_cm_from_cmid($page->cmid + 1);
             $this->fail();
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertInstanceOf('dml_exception', $e);
         }
 
@@ -891,7 +891,7 @@ class modinfolib_test extends advanced_testcase {
         try {
             get_course_and_cm_from_instance($page->id, 'forum');
             $this->fail();
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertInstanceOf('dml_exception', $e);
         }
 
@@ -958,7 +958,7 @@ class modinfolib_test extends advanced_testcase {
         }
 
         if ($expectexception) {
-            $this->expectException(moodle_exception::class);
+            $this->expectException(powereduc_exception::class);
         }
 
         $sectionid = $sectionindex[$sectionnum] ?? -1;
@@ -1124,13 +1124,13 @@ class modinfolib_test extends advanced_testcase {
         $DB->update_record('course_sections', $section);
 
         // Assert exception text.
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $this->expectExceptionMessage('Invalid course module ID: ' . $forum1->cmid);
         delete_course($course, false);
     }
 
     /**
-     * Tests that if the modinfo cache returns a newer-than-expected version, Moodle won't rebuild
+     * Tests that if the modinfo cache returns a newer-than-expected version, PowerEduc won't rebuild
      * it.
      *
      * This is important to avoid wasted time/effort and poor performance, for example in cases

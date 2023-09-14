@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -41,7 +41,7 @@ require_once($CFG->libdir . '/form/text.php');
  * @copyright 2009 Tim Hunt
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class MoodleQuickForm_duration extends MoodleQuickForm_group {
+class PowerEducQuickForm_duration extends PowerEducQuickForm_group {
     /**
      * Control the field names for form elements
      * optional => if true, show a checkbox beside the element to turn it on (or off)
@@ -81,7 +81,7 @@ class MoodleQuickForm_duration extends MoodleQuickForm_group {
         if (isset($options['defaultunit'])) {
             if (!array_key_exists($options['defaultunit'], $this->get_units())) {
                 throw new coding_exception($options['defaultunit'] .
-                        ' is not a recognised unit in MoodleQuickForm_duration.');
+                        ' is not a recognised unit in PowerEducQuickForm_duration.');
             }
             $this->_options['defaultunit'] = $options['defaultunit'];
         }
@@ -96,7 +96,7 @@ class MoodleQuickForm_duration extends MoodleQuickForm_group {
             foreach ($options['units'] as $requestedunit) {
                 if (!isset($availableunits[$requestedunit])) {
                     throw new coding_exception($requestedunit .
-                            ' is not a recognised unit in MoodleQuickForm_duration.');
+                            ' is not a recognised unit in PowerEducQuickForm_duration.');
                 }
                 $displayunits[$requestedunit] = $availableunits[$requestedunit];
             }
@@ -108,9 +108,9 @@ class MoodleQuickForm_duration extends MoodleQuickForm_group {
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
-    public function MoodleQuickForm_duration($elementName = null, $elementLabel = null,
+    public function PowerEducQuickForm_duration($elementName = null, $elementLabel = null,
             $options = [], $attributes = null) {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
         self::__construct($elementName, $elementLabel, $options, $attributes);
@@ -205,11 +205,11 @@ class MoodleQuickForm_duration extends MoodleQuickForm_group {
      *
      * @param string $event Name of event
      * @param mixed $arg event arguments
-     * @param MoodleQuickForm $caller calling object
+     * @param PowerEducQuickForm $caller calling object
      * @return bool
      */
     function onQuickFormEvent($event, $arg, &$caller) {
-        $this->setMoodleForm($caller);
+        $this->setPowerEducForm($caller);
         switch ($event) {
             case 'updateValue':
                 // constant values override both default and submitted ones

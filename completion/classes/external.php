@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core_completion
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 2.9
  */
@@ -34,7 +34,7 @@ require_once("$CFG->libdir/completionlib.php");
  *
  * @package    core_completion
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 2.9
  */
@@ -61,7 +61,7 @@ class core_completion_external extends external_api {
      * @param  bool $completed Activity completed or not
      * @return array            Result and possible warnings
      * @since Moodle 2.9
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function update_activity_completion_status_manually($cmid,  $completed) {
 
@@ -75,19 +75,19 @@ class core_completion_external extends external_api {
 
         $context = context_module::instance($cmid);
         self::validate_context($context);
-        require_capability('moodle/course:togglecompletion', $context);
+        require_capability('powereduc/course:togglecompletion', $context);
 
         list($course, $cm) = get_course_and_cm_from_cmid($cmid);
 
         // Set up completion object and check it is enabled.
         $completion = new completion_info($course);
         if (!$completion->is_enabled()) {
-            throw new moodle_exception('completionnotenabled', 'completion');
+            throw new powereduc_exception('completionnotenabled', 'completion');
         }
 
         // Check completion state is manual.
         if ($cm->completion != COMPLETION_TRACKING_MANUAL) {
-            throw new moodle_exception('cannotmanualctrack', 'error');
+            throw new powereduc_exception('cannotmanualctrack', 'error');
         }
 
         $targetstate = ($completed) ? COMPLETION_COMPLETE : COMPLETION_INCOMPLETE;
@@ -138,7 +138,7 @@ class core_completion_external extends external_api {
      * @param  int $newstate  Activity completion
      * @return array          Array containing the current (updated) completion status.
      * @since Moodle 3.4
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function override_activity_completion_status($userid, $cmid, $newstate) {
         // Validate and normalize parameters.
@@ -156,7 +156,7 @@ class core_completion_external extends external_api {
         // Set up completion object and check it is enabled.
         $completion = new completion_info($course);
         if (!$completion->is_enabled()) {
-            throw new moodle_exception('completionnotenabled', 'completion');
+            throw new powereduc_exception('completionnotenabled', 'completion');
         }
 
         // Update completion state and get the new state back.
@@ -216,9 +216,9 @@ class core_completion_external extends external_api {
      * @param int $courseid ID of the Course
      * @param int $userid ID of the User
      * @return array of activities progress and warnings
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since Moodle 2.9
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_activities_completion_status($courseid, $userid) {
         global $CFG, $USER, $PAGE;
@@ -244,7 +244,7 @@ class core_completion_external extends external_api {
             require_capability('report/progress:view', $context);
             if (!groups_user_groups_visible($course, $user->id)) {
                 // We are not in the same group!
-                throw new moodle_exception('accessdenied', 'admin');
+                throw new powereduc_exception('accessdenied', 'admin');
             }
         }
 
@@ -372,7 +372,7 @@ class core_completion_external extends external_api {
      * @param int $userid ID of the User
      * @return array of course completion status and warnings
      * @since Moodle 2.9
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_course_completion_status($courseid, $userid) {
         global $CFG, $USER;
@@ -395,14 +395,14 @@ class core_completion_external extends external_api {
         // Can current user see user's course completion status?
         // This check verifies if completion is enabled because $course is mandatory.
         if (!completion_can_view_data($user->id, $course)) {
-            throw new moodle_exception('cannotviewreport');
+            throw new powereduc_exception('cannotviewreport');
         }
 
         // The previous function doesn't check groups.
         if ($user->id != $USER->id) {
             if (!groups_user_groups_visible($course, $user->id)) {
                 // We are not in the same group!
-                throw new moodle_exception('accessdenied', 'admin');
+                throw new powereduc_exception('accessdenied', 'admin');
             }
         }
 
@@ -411,15 +411,15 @@ class core_completion_external extends external_api {
         // Check this user is enroled.
         if (!$info->is_tracked_user($user->id)) {
             if ($USER->id == $user->id) {
-                throw new moodle_exception('notenroled', 'completion');
+                throw new powereduc_exception('notenroled', 'completion');
             } else {
-                throw new moodle_exception('usernotenroled', 'completion');
+                throw new powereduc_exception('usernotenroled', 'completion');
             }
         }
 
         $completions = $info->get_completions($user->id);
         if (empty($completions)) {
-            throw new moodle_exception('nocriteriaset', 'completion');
+            throw new powereduc_exception('nocriteriaset', 'completion');
         }
 
         // Load course completion.
@@ -515,7 +515,7 @@ class core_completion_external extends external_api {
      * @param  int $courseid    Course id
      * @return array            Result and possible warnings
      * @since Moodle 3.0
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function mark_course_self_completed($courseid) {
         global $USER;
@@ -531,23 +531,23 @@ class core_completion_external extends external_api {
         // Set up completion object and check it is enabled.
         $completion = new completion_info($course);
         if (!$completion->is_enabled()) {
-            throw new moodle_exception('completionnotenabled', 'completion');
+            throw new powereduc_exception('completionnotenabled', 'completion');
         }
 
         if (!$completion->is_tracked_user($USER->id)) {
-            throw new moodle_exception('nottracked', 'completion');
+            throw new powereduc_exception('nottracked', 'completion');
         }
 
         $completion = $completion->get_completion($USER->id, COMPLETION_CRITERIA_TYPE_SELF);
 
         // Self completion criteria not enabled.
         if (!$completion) {
-            throw new moodle_exception('noselfcompletioncriteria', 'completion');
+            throw new powereduc_exception('noselfcompletioncriteria', 'completion');
         }
 
         // Check if the user has already marked himself as complete.
         if ($completion->is_complete()) {
-            throw new moodle_exception('useralreadymarkedcomplete', 'completion');
+            throw new powereduc_exception('useralreadymarkedcomplete', 'completion');
         }
 
         // Mark the course complete.

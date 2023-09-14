@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ $capabilities = array(
                     'editingteacher' => CAP_ALLOW,
                     'manager' => CAP_ALLOW
                 ),
-                'clonepermissionsfrom' => 'moodle/site:manageblocks'
+                'clonepermissionsfrom' => 'powereduc/site:manageblocks'
         ),
         'block/badges:myaddinstance' => array(
                 'riskbitmask'  => RISK_PERSONAL,
@@ -40,6 +40,6 @@ $capabilities = array(
                 'archetypes'   => array(
                         'user' => CAP_ALLOW,
                 ),
-                'clonepermissionsfrom' => 'moodle/my:manageblocks'
+                'clonepermissionsfrom' => 'powereduc/my:manageblocks'
         ),
 );

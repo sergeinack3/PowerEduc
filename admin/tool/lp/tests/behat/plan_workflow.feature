@@ -43,19 +43,19 @@ Feature: Manage plan workflow
     And I log in as "admin"
     And I set the following system permissions of "User manage own draft plan role" role:
       | capability | permission |
-      | moodle/competency:planmanageowndraft | Allow |
+      | powereduc/competency:planmanageowndraft | Allow |
     And I set the following system permissions of "User manage own plan role" role:
       | capability | permission |
-      | moodle/competency:planmanageowndraft | Allow |
-      | moodle/competency:planmanageown | Allow |
+      | powereduc/competency:planmanageowndraft | Allow |
+      | powereduc/competency:planmanageown | Allow |
     And I set the following system permissions of "Manager all plans role" role:
       | capability | permission |
-      | moodle/competency:planmanage | Allow |
-      | moodle/competency:planmanagedraft | Allow |
-      | moodle/competency:planmanageowndraft | Allow |
-      | moodle/competency:planview | Allow |
-      | moodle/competency:planreview | Allow |
-      | moodle/competency:planrequestreview | Allow |
+      | powereduc/competency:planmanage | Allow |
+      | powereduc/competency:planmanagedraft | Allow |
+      | powereduc/competency:planmanageowndraft | Allow |
+      | powereduc/competency:planview | Allow |
+      | powereduc/competency:planreview | Allow |
+      | powereduc/competency:planrequestreview | Allow |
     And I log out
 
   Scenario: User can manages his own plan draft

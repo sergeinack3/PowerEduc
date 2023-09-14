@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -50,8 +50,8 @@ if ($action === 'delete') {
             echo $OUTPUT->header();
             $optionsyes = array('action'=>'delete', 'commentid'=>$commentid, 'confirm'=>1, 'sesskey'=>sesskey());
             $optionsno  = array('sesskey'=>sesskey());
-            $buttoncontinue = new single_button(new moodle_url('/comment/index.php', $optionsyes), get_string('delete'));
-            $buttoncancel = new single_button(new moodle_url('/comment/index.php', $optionsno), get_string('cancel'));
+            $buttoncontinue = new single_button(new powereduc_url('/comment/index.php', $optionsyes), get_string('delete'));
+            $buttoncancel = new single_button(new powereduc_url('/comment/index.php', $optionsno), get_string('cancel'));
             echo $OUTPUT->confirm(get_string('confirmdeletecomments', 'admin'), $buttoncontinue, $buttoncancel);
             echo $OUTPUT->footer();
             die;
@@ -77,7 +77,7 @@ echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('comments'));
 echo $OUTPUT->box_start('generalbox commentsreport');
 if (!empty($err)) {
-    throw new \moodle_exception($err, 'error', $CFG->wwwroot.'/comment/');
+    throw new \powereduc_exception($err, 'error', $CFG->wwwroot.'/comment/');
 }
 if (empty($action)) {
     echo '<form method="post">';

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -60,7 +60,7 @@ class grade_edit_tree {
     public function __construct($gtree, $moving, $gpr) {
         global $USER, $OUTPUT, $COURSE;
 
-        $systemdefault = get_config('moodle', 'grade_report_showcalculations');
+        $systemdefault = get_config('powereduc', 'grade_report_showcalculations');
         $this->show_calculations = get_user_preferences('grade_report_showcalculations', $systemdefault);
 
         $this->gtree = $gtree;
@@ -143,7 +143,7 @@ class grade_edit_tree {
 
         if ($element['type'] == 'item' or ($element['type'] == 'category' and $element['depth'] > 1)) {
             if ($this->element_deletable($element)) {
-                $aurl = new moodle_url('index.php', array('id' => $COURSE->id, 'action' => 'delete', 'eid' => $eid, 'sesskey' => sesskey()));
+                $aurl = new powereduc_url('index.php', array('id' => $COURSE->id, 'action' => 'delete', 'eid' => $eid, 'sesskey' => sesskey()));
                 $icon = new action_menu_link_secondary($aurl, new pix_icon('t/delete', get_string('delete')), get_string('delete'));
                 $actionsmenu->add($icon);
             }
@@ -154,13 +154,13 @@ class grade_edit_tree {
                 $duplicateparams['action'] = 'duplicate';
                 $duplicateparams['eid'] = $eid;
                 $duplicateparams['sesskey'] = sesskey();
-                $aurl = new moodle_url('index.php', $duplicateparams);
+                $aurl = new powereduc_url('index.php', $duplicateparams);
                 $duplicateicon = new pix_icon('t/copy', get_string('duplicate'));
                 $icon = new action_menu_link_secondary($aurl, $duplicateicon, get_string('duplicate'));
                 $actionsmenu->add($icon);
             }
 
-            $aurl = new moodle_url('index.php', array('id' => $COURSE->id, 'action' => 'moveselect', 'eid' => $eid, 'sesskey' => sesskey()));
+            $aurl = new powereduc_url('index.php', array('id' => $COURSE->id, 'action' => 'moveselect', 'eid' => $eid, 'sesskey' => sesskey()));
             $moveaction .= $OUTPUT->action_icon($aurl, new pix_icon('t/move', get_string('move')));
         }
 
@@ -234,7 +234,7 @@ class grade_edit_tree {
                     $strmove     = get_string('move');
                     $actions = $moveaction = ''; // no action icons when moving
 
-                    $aurl = new moodle_url('index.php', array('id' => $COURSE->id, 'action' => 'move', 'eid' => $this->moving, 'moveafter' => $child_eid, 'sesskey' => sesskey()));
+                    $aurl = new powereduc_url('index.php', array('id' => $COURSE->id, 'action' => 'move', 'eid' => $this->moving, 'moveafter' => $child_eid, 'sesskey' => sesskey()));
                     if ($first) {
                         $aurl->params($first);
                     }
@@ -503,7 +503,7 @@ class grade_edit_tree {
         }
 
         if(!$after_el = $this->gtree->locate_element("cg$moveafter")) {
-            throw new \moodle_exception('invalidelementid', '', $returnurl);
+            throw new \powereduc_exception('invalidelementid', '', $returnurl);
         }
 
         $after = $after_el['object'];
@@ -512,7 +512,7 @@ class grade_edit_tree {
 
         foreach ($eids as $eid) {
             if (!$element = $this->gtree->locate_element($eid)) {
-                throw new \moodle_exception('invalidelementid', '', $returnurl);
+                throw new \powereduc_exception('invalidelementid', '', $returnurl);
             }
             $object = $element['object'];
 
@@ -1046,7 +1046,7 @@ class grade_edit_tree_column_select extends grade_edit_tree_column {
 
     public function get_item_cell($item, $params) {
         if (empty($params['itemtype']) || empty($params['eid'])) {
-            throw new \moodle_exception('missingitemtypeoreid', 'core_grades');
+            throw new \powereduc_exception('missingitemtypeoreid', 'core_grades');
         }
         $itemcell = parent::get_item_cell($item, $params);
 

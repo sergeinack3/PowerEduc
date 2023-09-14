@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -1523,7 +1523,7 @@ class expired_contexts_test extends \advanced_testcase {
         $expiredcontext->save();
 
         // Now make the user a site admin.
-        $admins = explode(',', get_config('moodle', 'siteadmins'));
+        $admins = explode(',', get_config('powereduc', 'siteadmins'));
         $admins[] = $user->id;
         set_config('siteadmins', implode(',', $admins));
 
@@ -2139,10 +2139,10 @@ class expired_contexts_test extends \advanced_testcase {
      * Constructs a Page object for the User Dashboard.
      *
      * @param   \stdClass       $user User to create Dashboard for.
-     * @return  \moodle_page
+     * @return  \powereduc_page
      */
     protected function construct_user_page(\stdClass $user) {
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context(\context_user::instance($user->id));
         $page->set_pagelayout('mydashboard');
         $page->set_pagetype('my-index');

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Strings for component 'block_rss_client', language 'en', branch 'POWEREDUC_20_STABLE'
  *
  * @package   block_rss_client
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -43,7 +43,7 @@ $string['editfeeds'] = 'Edit, subscribe or unsubscribe from RSS/Atom news feeds'
 $string['editnewsfeeds'] = 'Edit news feeds';
 $string['editrssblock'] = 'Edit RSS headline block';
 $string['enableautodiscovery'] = 'Enable auto-discovery of feeds?';
-$string['enableautodiscovery_help'] = 'If enabled, feeds on web pages are found automatically. For example, if https://docs.moodle.org is entered, then https://docs.moodle.org/en/index.php?title=Special:RecentChanges&feed=rss would be found.';
+$string['enableautodiscovery_help'] = 'If enabled, feeds on web pages are found automatically. For example, if https://docs.powereduc.org is entered, then https://docs.powereduc.org/en/index.php?title=Special:RecentChanges&feed=rss would be found.';
 $string['failedfeed'] = 'Feed failed to download - will retry after {$a}';
 $string['failedfeeds'] = 'One or more RSS feeds have failed';
 $string['feed'] = 'Feed';

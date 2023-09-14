@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Log out a user from his external mobile devices (phones, tables, Moodle Desktop app, etc..)
  *
  * @package tool_mobile
- * @copyright 2020 Juan Leyva <juan@moodle.com>
+ * @copyright 2020 Juan Leyva <juan@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,7 +27,7 @@ require_once($CFG->dirroot . '/admin/tool/mobile/lib.php');
 require_once($CFG->dirroot . '/webservice/lib.php');
 
 if (!$CFG->enablemobilewebservice) {
-    throw new \moodle_exception('enablewsdescription', 'webservice');
+    throw new \powereduc_exception('enablewsdescription', 'webservice');
 }
 
 require_login(null, false);
@@ -35,7 +35,7 @@ require_login(null, false);
 // Require an active user: not guest, not suspended.
 core_user::require_active_user($USER);
 
-$redirecturl = new \moodle_url('/user/profile.php');
+$redirecturl = new \powereduc_url('/user/profile.php');
 
 if (optional_param('confirm', 0, PARAM_INT) && data_submitted()) {
     require_sesskey();
@@ -53,7 +53,7 @@ if (optional_param('confirm', 0, PARAM_INT) && data_submitted()) {
 // Page settings.
 $title = get_string('logout');
 $context = context_system::instance();
-$PAGE->set_url(new \moodle_url('/'.$CFG->admin.'/tool/mobile/logout.php'));
+$PAGE->set_url(new \powereduc_url('/'.$CFG->admin.'/tool/mobile/logout.php'));
 $PAGE->navbar->add($title);
 $PAGE->set_context($context);
 $PAGE->set_title($SITE->fullname. ': ' . $title);
@@ -62,7 +62,7 @@ $PAGE->set_title($SITE->fullname. ': ' . $title);
 echo $OUTPUT->header();
 
 $message = get_string('logoutconfirmation', 'tool_mobile');
-$confirmurl = new \moodle_url('logout.php', ['confirm' => 1]);
+$confirmurl = new \powereduc_url('logout.php', ['confirm' => 1]);
 $yesbutton = new single_button($confirmurl, get_string('yes'), 'post');
 $nobutton = new single_button($redirecturl, get_string('no'));
 echo $OUTPUT->confirm($message, $yesbutton, $nobutton);

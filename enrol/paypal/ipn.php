@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// Disable moodle specific debug messages and any errors in output,
+// Disable powereduc specific debug messages and any errors in output,
 // comment out when debugging or better look into error log!
 define('NO_DEBUG_DISPLAY', true);
 
@@ -45,13 +45,13 @@ set_exception_handler(\enrol_paypal\util::get_exception_handler());
 // Make sure we are enabled in the first place.
 if (!enrol_is_enabled('paypal')) {
     http_response_code(503);
-    throw new moodle_exception('errdisabled', 'enrol_paypal');
+    throw new powereduc_exception('errdisabled', 'enrol_paypal');
 }
 
 /// Keep out casual intruders
 if (empty($_POST) or !empty($_GET)) {
     http_response_code(400);
-    throw new moodle_exception('invalidrequest', 'core_error');
+    throw new powereduc_exception('invalidrequest', 'core_error');
 }
 
 /// Read all the data from PayPal and get it ready for later;
@@ -65,24 +65,24 @@ $data = new stdClass();
 
 foreach ($_POST as $key => $value) {
     if ($key !== clean_param($key, PARAM_ALPHANUMEXT)) {
-        throw new moodle_exception('invalidrequest', 'core_error', '', null, $key);
+        throw new powereduc_exception('invalidrequest', 'core_error', '', null, $key);
     }
     if (is_array($value)) {
-        throw new moodle_exception('invalidrequest', 'core_error', '', null, 'Unexpected array param: '.$key);
+        throw new powereduc_exception('invalidrequest', 'core_error', '', null, 'Unexpected array param: '.$key);
     }
     $req .= "&$key=".urlencode($value);
     $data->$key = fix_utf8($value);
 }
 
 if (empty($data->custom)) {
-    throw new moodle_exception('invalidrequest', 'core_error', '', null, 'Missing request param: custom');
+    throw new powereduc_exception('invalidrequest', 'core_error', '', null, 'Missing request param: custom');
 }
 
 $custom = explode('-', $data->custom);
 unset($data->custom);
 
 if (empty($custom) || count($custom) < 3) {
-    throw new moodle_exception('invalidrequest', 'core_error', '', null, 'Invalid value of the request param: custom');
+    throw new powereduc_exception('invalidrequest', 'core_error', '', null, 'Invalid value of the request param: custom');
 }
 
 $data->userid           = (int)$custom[0];
@@ -114,7 +114,7 @@ $location = "https://$paypaladdr/cgi-bin/webscr";
 $result = $c->post($location, $req, $options);
 
 if ($c->get_errno()) {
-    throw new moodle_exception('errpaypalconnect', 'enrol_paypal', '', array('url' => $paypaladdr, 'result' => $result),
+    throw new powereduc_exception('errpaypalconnect', 'enrol_paypal', '', array('url' => $paypaladdr, 'result' => $result),
         json_encode($data));
 }
 
@@ -153,7 +153,7 @@ if (strlen($result) > 0) {
         if ($data->payment_status == "Pending" and $data->pending_reason != "echeck") {
             $eventdata = new \core\message\message();
             $eventdata->courseid          = empty($data->courseid) ? SITEID : $data->courseid;
-            $eventdata->modulename        = 'moodle';
+            $eventdata->modulename        = 'powereduc';
             $eventdata->component         = 'enrol_paypal';
             $eventdata->name              = 'paypal_enrolment';
             $eventdata->userfrom          = get_admin();
@@ -246,7 +246,7 @@ if (strlen($result) > 0) {
         $plugin->enrol_user($plugin_instance, $user->id, $plugin_instance->roleid, $timestart, $timeend);
 
         // Pass $view=true to filter hidden caps if the user cannot see them
-        if ($users = get_users_by_capability($context, 'moodle/course:update', 'u.*', 'u.id ASC',
+        if ($users = get_users_by_capability($context, 'powereduc/course:update', 'u.*', 'u.id ASC',
                                              '', '', '', '', false, true)) {
             $users = sort_by_roleassignment_authority($users, $context);
             $teacher = array_shift($users);
@@ -267,7 +267,7 @@ if (strlen($result) > 0) {
 
             $eventdata = new \core\message\message();
             $eventdata->courseid          = $course->id;
-            $eventdata->modulename        = 'moodle';
+            $eventdata->modulename        = 'powereduc';
             $eventdata->component         = 'enrol_paypal';
             $eventdata->name              = 'paypal_enrolment';
             $eventdata->userfrom          = empty($teacher) ? core_user::get_noreply_user() : $teacher;
@@ -287,7 +287,7 @@ if (strlen($result) > 0) {
 
             $eventdata = new \core\message\message();
             $eventdata->courseid          = $course->id;
-            $eventdata->modulename        = 'moodle';
+            $eventdata->modulename        = 'powereduc';
             $eventdata->component         = 'enrol_paypal';
             $eventdata->name              = 'paypal_enrolment';
             $eventdata->userfrom          = $user;
@@ -307,7 +307,7 @@ if (strlen($result) > 0) {
             foreach ($admins as $admin) {
                 $eventdata = new \core\message\message();
                 $eventdata->courseid          = $course->id;
-                $eventdata->modulename        = 'moodle';
+                $eventdata->modulename        = 'powereduc';
                 $eventdata->component         = 'enrol_paypal';
                 $eventdata->name              = 'paypal_enrolment';
                 $eventdata->userfrom          = $user;
@@ -323,6 +323,6 @@ if (strlen($result) > 0) {
 
     } else if (strcmp ($result, "INVALID") == 0) { // ERROR
         $DB->insert_record("enrol_paypal", $data, false);
-        throw new moodle_exception('erripninvalid', 'enrol_paypal', '', null, json_encode($data));
+        throw new powereduc_exception('erripninvalid', 'enrol_paypal', '', null, json_encode($data));
     }
 }

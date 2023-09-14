@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ require_once($CFG->libdir . '/formslib.php');
  * @copyright   2019 Marina Glancy
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class core_customfield_test_instance_form extends moodleform {
+class core_customfield_test_instance_form extends powereducform {
     /** @var \core_customfield\handler */
     protected $handler;
 

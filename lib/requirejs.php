@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file is serving optimised JS for RequireJS.
@@ -106,7 +106,7 @@ if ($rev > 0 and $rev < (time() + 60 * 60)) {
 
             if (preg_match('/define\(\s*(\[|function)/', $js)) {
                 // If the JavaScript module has been defined without specifying a name then we'll
-                // add the Moodle module name now.
+                // add the PowerEduc module name now.
                 $replace = 'define(\'' . $modulename . '\', ';
                 $search = 'define(';
                 // Replace only the first occurrence.
@@ -149,7 +149,7 @@ if (!empty($jsfiles)) {
         $js = rtrim($js);
     } else {
         // This file doesn't have a map file. We might be dealing with an older source file from
-        // a plugin or previous version of Moodle so we should just return the full original source
+        // a plugin or previous version of PowerEduc so we should just return the full original source
         // like we used to.
         $originalsource = str_replace('/amd/build/', '/amd/src/', $jsfile);
         $originalsource = str_replace('.min.js', '.js', $originalsource);
@@ -159,7 +159,7 @@ if (!empty($jsfiles)) {
 
     if (preg_match('/define\(\s*(\[|function)/', $js)) {
         // If the JavaScript module has been defined without specifying a name then we'll
-        // add the Moodle module name now.
+        // add the PowerEduc module name now.
         $replace = 'define(\'' . $modulename . '\', ';
 
         // Replace only the first occurrence.

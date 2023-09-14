@@ -1,4 +1,4 @@
-Description of php-jwt library import into Moodle
+Description of php-jwt library import into PowerEduc
 
 Dependencies
 ------------

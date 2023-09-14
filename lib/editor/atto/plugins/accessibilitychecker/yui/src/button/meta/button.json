@@ -1,8 +1,8 @@
 {
-    "moodle-atto_accessibilitychecker-button": {
+    "powereduc-atto_accessibilitychecker-button": {
         "requires": [
             "color-base",
-            "moodle-editor_atto-plugin"
+            "powereduc-editor_atto-plugin"
         ]
     }
 }

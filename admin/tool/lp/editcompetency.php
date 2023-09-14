@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -67,7 +67,7 @@ $urloptions = [
     'parentid' => $parentid,
     'pagecontextid' => $pagecontextid
 ];
-$url = new moodle_url("/admin/tool/lp/editcompetency.php", $urloptions);
+$url = new powereduc_url("/admin/tool/lp/editcompetency.php", $urloptions);
 
 // Set up the page.
 list($title, $subtitle, $returnurl) = \tool_lp\page_helper::setup_for_competency($pagecontextid, $url, $competencyframework,

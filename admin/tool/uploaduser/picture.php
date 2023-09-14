@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ require_capability('tool/uploaduser:uploaduserpictures', context_system::instanc
 $site = get_site();
 
 if (!$adminuser = get_admin()) {
-    throw new \moodle_exception('noadmins', 'error');
+    throw new \powereduc_exception('noadmins', 'error');
 }
 
 $strfile = get_string('file');

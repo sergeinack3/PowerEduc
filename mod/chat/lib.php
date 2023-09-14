@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Library of functions and constants for module chat
@@ -739,7 +739,7 @@ function chat_update_chat_times($chatid=0) {
  * @param bool $issystem False for non-system messages, true for system messages.
  * @param object $cm The course module object, pass it to save a database query when we trigger the event.
  * @return int The message ID.
- * @since Moodle 2.6
+ * @since PowerEduc 2.6
  */
 function chat_send_chatmessage($chatuser, $messagetext, $issystem = false, $cm = null) {
     global $DB;
@@ -1180,7 +1180,7 @@ function chat_get_post_actions() {
 }
 
 /**
- * @deprecated since Moodle 3.3, when the block_course_overview block was removed.
+ * @deprecated since PowerEduc 3.3, when the block_course_overview block was removed.
  */
 function chat_print_overview() {
     throw new coding_exception('chat_print_overview() can not be used any more and is obsolete.');
@@ -1372,7 +1372,7 @@ function chat_page_type_list($pagetype, $parentcontext, $currentcontext) {
  * @param  stdClass $chatuser     chat user session data
  * @param  int      $chatlasttime last time messages were retrieved
  * @return array    list of messages
- * @since  Moodle 3.0
+ * @since  PowerEduc 3.0
  */
 function chat_get_latest_messages($chatuser, $chatlasttime) {
     global $DB;
@@ -1392,7 +1392,7 @@ function chat_get_latest_messages($chatuser, $chatlasttime) {
  * @param  stdClass $course     course object
  * @param  stdClass $cm         course module object
  * @param  stdClass $context    context object
- * @since Moodle 3.0
+ * @since PowerEduc 3.0
  */
 function chat_view($chat, $course, $cm, $context) {
 
@@ -1477,7 +1477,7 @@ function mod_chat_core_calendar_provide_event_action(calendar_event $event,
  * @param  array $messages list of messages from a chat. It is assumed that these are sorted by timestamp in DESCENDING order.
  * @param  bool $showall   whether to include incomplete sessions or not
  * @return array           the list of sessions
- * @since  Moodle 3.5
+ * @since  PowerEduc 3.5
  */
 function chat_get_sessions($messages, $showall = false) {
     $sessions     = [];
@@ -1543,7 +1543,7 @@ function chat_get_sessions($messages, $showall = false) {
  * @param  int $end         the session end timestamp (0 to not filter by time)
  * @param  string $sort     an order to sort the results in (optional, a valid SQL ORDER BY parameter)
  * @return array session messages
- * @since  Moodle 3.5
+ * @since  PowerEduc 3.5
  */
 function chat_get_session_messages($chatid, $group = false, $start = 0, $end = 0, $sort = '') {
     global $DB;

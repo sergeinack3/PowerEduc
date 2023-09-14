@@ -1,4 +1,4 @@
-@editor @editor_textarea @texarea @editor_moodleform
+@editor @editor_textarea @texarea @editor_powereducform
 Feature: Text area with enable/disable function.
   In order to test enable/disable function
   I set default editor is Text area editor, and I create a sample page to test this feature.

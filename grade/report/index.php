@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ $PAGE->set_url('/grade/report/index.php', array('id'=>$courseid));
 
 /// basic access checks
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 require_login($course);
 $context = context_course::instance($course->id);
@@ -45,7 +45,7 @@ foreach ($reports as $plugin => $plugindir) {                      // Remove one
 }
 
 if (empty($reports)) {
-    throw new \moodle_exception('noreports', 'debug', $CFG->wwwroot.'/course/view.php?id='.$course->id);
+    throw new \powereduc_exception('noreports', 'debug', $CFG->wwwroot.'/course/view.php?id='.$course->id);
 }
 
 if (!isset($USER->grade_last_report)) {

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ $versionid = $acceptancesfilter->get_version_id_filter();
 // Set up the page as an admin page 'tool_policy_managedocs'.
 $urlparams = ($policyid ? ['policyid' => $policyid] : []) + ($versionid ? ['versionid' => $versionid] : []);
 admin_externalpage_setup('tool_policy_acceptances', '', $urlparams,
-    new moodle_url('/admin/tool/policy/acceptances.php'));
+    new powereduc_url('/admin/tool/policy/acceptances.php'));
 
 $acceptancesfilter->validate_ids();
 $output = $PAGE->get_renderer('tool_policy');

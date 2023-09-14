@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This library includes the basic parts of enrol api.
@@ -286,7 +286,7 @@ function enrol_sharing_course($user1, $user2) {
  * The courses has to be visible and enrolments has to be active,
  * timestart and timeend restrictions are ignored.
  *
- * @global moodle_database $DB
+ * @global powereduc_database $DB
  * @param stdClass|int $user1
  * @param stdClass|int $user2
  * @param bool $preloadcontexts If set to true contexts for the returned courses
@@ -356,12 +356,12 @@ function enrol_get_shared_courses($user1, $user2, $preloadcontexts = false, $che
 /**
  * This function adds necessary enrol plugins UI into the course edit form.
  *
- * @param MoodleQuickForm $mform
+ * @param PowerEducQuickForm $mform
  * @param object $data course edit form data
  * @param object $context context of existing course or parent category if course does not exist
  * @return void
  */
-function enrol_course_edit_form(MoodleQuickForm $mform, $data, $context) {
+function enrol_course_edit_form(PowerEducQuickForm $mform, $data, $context) {
     $plugins = enrol_get_plugins(true);
     if (!empty($data->id)) {
         $instances = enrol_get_instances($data->id, false);
@@ -450,16 +450,16 @@ function enrol_add_course_navigation(navigation_node $coursenode, $course) {
 
     // List all participants - allows assigning roles, groups, etc.
     // Have this available even in the site context as the page is still accessible from the frontpage.
-    if (has_capability('moodle/course:enrolreview', $coursecontext)) {
-        $url = new moodle_url('/user/index.php', array('id' => $course->id));
+    if (has_capability('powereduc/course:enrolreview', $coursecontext)) {
+        $url = new powereduc_url('/user/index.php', array('id' => $course->id));
         $usersnode->add(get_string('enrolledusers', 'enrol'), $url, navigation_node::TYPE_SETTING,
             null, 'review', new pix_icon('i/enrolusers', ''));
     }
 
     if ($course->id != SITEID) {
         // manage enrol plugin instances
-        if (has_capability('moodle/course:enrolconfig', $coursecontext) or has_capability('moodle/course:enrolreview', $coursecontext)) {
-            $url = new moodle_url('/enrol/instances.php', array('id'=>$course->id));
+        if (has_capability('powereduc/course:enrolconfig', $coursecontext) or has_capability('powereduc/course:enrolreview', $coursecontext)) {
+            $url = new powereduc_url('/enrol/instances.php', array('id'=>$course->id));
         } else {
             $url = NULL;
         }
@@ -479,15 +479,15 @@ function enrol_add_course_navigation(navigation_node $coursenode, $course) {
     }
 
     // Manage groups in this course or even frontpage
-    if (($course->groupmode || !$course->groupmodeforce) && has_capability('moodle/course:managegroups', $coursecontext)) {
-        $url = new moodle_url('/group/index.php', array('id'=>$course->id));
+    if (($course->groupmode || !$course->groupmodeforce) && has_capability('powereduc/course:managegroups', $coursecontext)) {
+        $url = new powereduc_url('/group/index.php', array('id'=>$course->id));
         $usersnode->add(get_string('groups'), $url, navigation_node::TYPE_SETTING, null, 'groups', new pix_icon('i/group', ''));
     }
 
-     if (has_any_capability(array( 'moodle/role:assign', 'moodle/role:safeoverride','moodle/role:override', 'moodle/role:review'), $coursecontext)) {
+     if (has_any_capability(array( 'powereduc/role:assign', 'powereduc/role:safeoverride','powereduc/role:override', 'powereduc/role:review'), $coursecontext)) {
         // Override roles
-        if (has_capability('moodle/role:review', $coursecontext)) {
-            $url = new moodle_url('/admin/roles/permissions.php', array('contextid'=>$coursecontext->id));
+        if (has_capability('powereduc/role:review', $coursecontext)) {
+            $url = new powereduc_url('/admin/roles/permissions.php', array('contextid'=>$coursecontext->id));
         } else {
             $url = NULL;
         }
@@ -495,14 +495,14 @@ function enrol_add_course_navigation(navigation_node $coursenode, $course) {
 
         // Add assign or override roles if allowed
         if ($course->id == SITEID or (!empty($CFG->adminsassignrolesincourse) and is_siteadmin())) {
-            if (has_capability('moodle/role:assign', $coursecontext)) {
-                $url = new moodle_url('/admin/roles/assign.php', array('contextid'=>$coursecontext->id));
+            if (has_capability('powereduc/role:assign', $coursecontext)) {
+                $url = new powereduc_url('/admin/roles/assign.php', array('contextid'=>$coursecontext->id));
                 $permissionsnode->add(get_string('assignedroles', 'role'), $url, navigation_node::TYPE_SETTING, null, 'roles', new pix_icon('i/assignroles', ''));
             }
         }
         // Check role permissions
-        if (has_any_capability(array('moodle/role:assign', 'moodle/role:safeoverride', 'moodle/role:override'), $coursecontext)) {
-            $url = new moodle_url('/admin/roles/check.php', array('contextid'=>$coursecontext->id));
+        if (has_any_capability(array('powereduc/role:assign', 'powereduc/role:safeoverride', 'powereduc/role:override'), $coursecontext)) {
+            $url = new powereduc_url('/admin/roles/check.php', array('contextid'=>$coursecontext->id));
             $permissionsnode->add(get_string('checkpermissions', 'role'), $url, navigation_node::TYPE_SETTING, null, 'permissions', new pix_icon('i/checkpermissions', ''));
         }
      }
@@ -510,8 +510,8 @@ function enrol_add_course_navigation(navigation_node $coursenode, $course) {
      // Deal somehow with users that are not enrolled but still got a role somehow
     if ($course->id != SITEID) {
         //TODO, create some new UI for role assignments at course level
-        if (has_capability('moodle/course:reviewotherusers', $coursecontext)) {
-            $url = new moodle_url('/enrol/otherusers.php', array('id'=>$course->id));
+        if (has_capability('powereduc/course:reviewotherusers', $coursecontext)) {
+            $url = new powereduc_url('/enrol/otherusers.php', array('id'=>$course->id));
             $usersnode->add(get_string('notenrolledusers', 'enrol'), $url, navigation_node::TYPE_SETTING, null, 'otherusers', new pix_icon('i/assignroles', ''));
         }
     }
@@ -548,7 +548,7 @@ function enrol_add_course_navigation(navigation_node $coursenode, $course) {
                     }
                     $plugin = $plugins[$instance->enrol];
                     if ($plugin->show_enrolme_link($instance)) {
-                        $url = new moodle_url('/enrol/index.php', array('id'=>$course->id));
+                        $url = new powereduc_url('/enrol/index.php', array('id'=>$course->id));
                         $shortname = format_string($course->shortname, true, array('context' => $coursecontext));
                         $coursenode->add(get_string('enrolme', 'core_enrol', $shortname), $url, navigation_node::TYPE_SETTING, null, 'enrolself', new pix_icon('i/user', ''));
                         break;
@@ -772,8 +772,8 @@ function enrol_get_my_courses($fields = null, $sort = null, $limit = 0, $coursei
                 }
             }
 
-            // Include courses where the current user has moodle/course:view capability.
-            $courses = get_user_capability_course('moodle/course:view', null, false);
+            // Include courses where the current user has powereduc/course:view capability.
+            $courses = get_user_capability_course('powereduc/course:view', null, false);
             if (!$courses) {
                 $courses = [];
             }
@@ -815,7 +815,7 @@ function enrol_get_my_courses($fields = null, $sort = null, $limit = 0, $coursei
                 unset($courses[$id]);
                 continue;
             }
-            if (!has_capability('moodle/course:viewhiddencourses', $context)) {
+            if (!has_capability('powereduc/course:viewhiddencourses', $context)) {
                 unset($courses[$id]);
                 continue;
             }
@@ -946,7 +946,7 @@ function enrol_get_users_courses($userid, $onlyactive = false, $fields = null, $
                     unset($courses[$id]);
                     continue;
                 }
-                if (!has_capability('moodle/course:viewhiddencourses', $context, $userid)) {
+                if (!has_capability('powereduc/course:viewhiddencourses', $context, $userid)) {
                     unset($courses[$id]);
                     continue;
                 }
@@ -1024,7 +1024,7 @@ function enrol_user_sees_own_courses($user = null) {
         }
         context_helper::preload_from_record($course);
         $context = context_course::instance($course->id);
-        if (has_capability('moodle/course:viewhiddencourses', $context, $user)) {
+        if (has_capability('powereduc/course:viewhiddencourses', $context, $user)) {
             return true;
         }
     }
@@ -1708,7 +1708,7 @@ function enrol_output_fragment_user_enrolment_form($args) {
 
     $args = (object) $args;
     $context = $args->context;
-    require_capability('moodle/course:enrolreview', $context);
+    require_capability('powereduc/course:enrolreview', $context);
 
     $ueid = $args->ueid;
     $userenrolment = $DB->get_record('user_enrolments', ['id' => $ueid], '*', MUST_EXIST);
@@ -2318,7 +2318,7 @@ abstract class enrol_plugin {
     /**
      * This returns false for backwards compatibility, but it is really recommended.
      *
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      * @return boolean
      */
     public function use_standard_editing_ui() {
@@ -2356,7 +2356,7 @@ abstract class enrol_plugin {
     /**
      * Returns link to page which may be used to add new instance of enrolment plugin in course.
      * @param int $courseid
-     * @return moodle_url page url
+     * @return powereduc_url page url
      */
     public function get_newinstance_link($courseid) {
         // override for most plugins, check if instance already exists in cases only one instance is supported
@@ -2364,7 +2364,7 @@ abstract class enrol_plugin {
     }
 
     /**
-     * @deprecated since Moodle 2.8 MDL-35864 - please use can_delete_instance() instead.
+     * @deprecated since PowerEduc 2.8 MDL-35864 - please use can_delete_instance() instead.
      */
     public function instance_deleteable($instance) {
         throw new coding_exception('Function enrol_plugin::instance_deleteable() is deprecated, use
@@ -2397,7 +2397,7 @@ abstract class enrol_plugin {
      * Does the access control tests automatically.
      *
      * @param object $instance
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function get_manual_enrol_link($instance) {
         return NULL;
@@ -2407,7 +2407,7 @@ abstract class enrol_plugin {
      * Returns list of unenrol links for all enrol instances in course.
      *
      * @param int $instance
-     * @return moodle_url or NULL if self unenrolment not supported
+     * @return powereduc_url or NULL if self unenrolment not supported
      */
     public function get_unenrolself_link($instance) {
         global $USER, $CFG, $DB;
@@ -2443,39 +2443,39 @@ abstract class enrol_plugin {
             return NULL;
         }
 
-        return new moodle_url("/enrol/$name/unenrolself.php", array('enrolid'=>$instance->id));
+        return new powereduc_url("/enrol/$name/unenrolself.php", array('enrolid'=>$instance->id));
     }
 
     /**
      * Adds enrol instance UI to course edit form
      *
      * @param object $instance enrol instance or null if does not exist yet
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      * @param object $data
      * @param object $context context of existing course or parent category if course does not exist
      * @return void
      */
-    public function course_edit_form($instance, MoodleQuickForm $mform, $data, $context) {
+    public function course_edit_form($instance, PowerEducQuickForm $mform, $data, $context) {
         // override - usually at least enable/disable switch, has to add own form header
     }
 
     /**
      * Adds form elements to add/edit instance form.
      *
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      * @param object $instance enrol instance or null if does not exist yet
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      * @param context $context
      * @return void
      */
-    public function edit_instance_form($instance, MoodleQuickForm $mform, $context) {
+    public function edit_instance_form($instance, PowerEducQuickForm $mform, $context) {
         // Do nothing by default.
     }
 
     /**
      * Perform custom validation of the data used to edit the instance.
      *
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      * @param array $data array of ("fieldname"=>value) of submitted data
      * @param array $files array of uploaded files "element_name"=>tmp_file_path
      * @param object $instance The instance data loaded from the DB.
@@ -2558,7 +2558,7 @@ abstract class enrol_plugin {
     /**
      * Update instance of enrol plugin.
      *
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      * @param stdClass $instance
      * @param stdClass $data modified instance fields
      * @return boolean
@@ -2709,7 +2709,7 @@ abstract class enrol_plugin {
             $cap = 'enrol/' . $instance->enrol . ':config';
             if (has_capability($cap, $context)) {
                 $linkparams = array('courseid' => $instance->courseid, 'id' => $instance->id, 'type' => $instance->enrol);
-                $managelink = new moodle_url('/enrol/editinstance.php', $linkparams);
+                $managelink = new powereduc_url('/enrol/editinstance.php', $linkparams);
                 $instancesnode->add($this->get_instance_name($instance), $managelink, navigation_node::TYPE_SETTING);
             }
         }
@@ -2726,7 +2726,7 @@ abstract class enrol_plugin {
         $icons = array();
         if ($this->use_standard_editing_ui()) {
             $linkparams = array('courseid' => $instance->courseid, 'id' => $instance->id, 'type' => $instance->enrol);
-            $editlink = new moodle_url("/enrol/editinstance.php", $linkparams);
+            $editlink = new powereduc_url("/enrol/editinstance.php", $linkparams);
             $icons[] = $OUTPUT->action_icon($editlink, new pix_icon('t/edit', get_string('edit'), 'core',
                 array('class' => 'iconsmall')));
         }
@@ -2809,14 +2809,14 @@ abstract class enrol_plugin {
         $actions = [];
         $context = $manager->get_context();
         $instance = $ue->enrolmentinstance;
-        $params = $manager->get_moodlepage()->url->params();
+        $params = $manager->get_powereducpage()->url->params();
         $params['ue'] = $ue->id;
 
         // Edit enrolment action.
         if ($this->allow_manage($instance) && has_capability("enrol/{$instance->enrol}:manage", $context)) {
             $title = get_string('editenrolment', 'enrol');
             $icon = new pix_icon('t/edit', $title);
-            $url = new moodle_url('/enrol/editenrolment.php', $params);
+            $url = new powereduc_url('/enrol/editenrolment.php', $params);
             $actionparams = [
                 'class' => 'editenrollink',
                 'rel' => $ue->id,
@@ -2829,7 +2829,7 @@ abstract class enrol_plugin {
         if ($this->allow_unenrol_user($instance, $ue) && has_capability("enrol/{$instance->enrol}:unenrol", $context)) {
             $title = get_string('unenrol', 'enrol');
             $icon = new pix_icon('t/delete', $title);
-            $url = new moodle_url('/enrol/unenroluser.php', $params);
+            $url = new powereduc_url('/enrol/unenroluser.php', $params);
             $actionparams = [
                 'class' => 'unenrollink',
                 'rel' => $ue->id,
@@ -3067,7 +3067,7 @@ abstract class enrol_plugin {
 
             $user = $DB->get_record('user', array('id'=>$ue->userid));
 
-            $users[] = array('fullname'=>fullname($user, has_capability('moodle/site:viewfullnames', $context, $enroller)), 'timeend'=>$ue->timeend);
+            $users[] = array('fullname'=>fullname($user, has_capability('powereduc/site:viewfullnames', $context, $enroller)), 'timeend'=>$ue->timeend);
 
             if (!$ue->notifyall) {
                 continue;
@@ -3130,7 +3130,7 @@ abstract class enrol_plugin {
         $a->course   = format_string($ue->fullname, true, array('context'=>$context));
         $a->user     = fullname($user, true);
         $a->timeend  = userdate($ue->timeend, '', $user->timezone);
-        $a->enroller = fullname($enroller, has_capability('moodle/site:viewfullnames', $context, $user));
+        $a->enroller = fullname($enroller, has_capability('powereduc/site:viewfullnames', $context, $user));
 
         $subject = get_string('expirymessageenrolledsubject', 'enrol_'.$name, $a);
         $body = get_string('expirymessageenrolledbody', 'enrol_'.$name, $a);
@@ -3148,7 +3148,7 @@ abstract class enrol_plugin {
         $message->fullmessagehtml   = markdown_to_html($body);
         $message->smallmessage      = $subject;
         $message->contexturlname    = $a->course;
-        $message->contexturl        = (string)new moodle_url('/course/view.php', array('id'=>$ue->courseid));
+        $message->contexturl        = (string)new powereduc_url('/course/view.php', array('id'=>$ue->courseid));
 
         if (message_send($message)) {
             $trace->output("notifying user $ue->userid that enrolment in course $ue->courseid expires on ".userdate($ue->timeend, '', $CFG->timezone), 1);
@@ -3192,7 +3192,7 @@ abstract class enrol_plugin {
         $a->course    = format_string($course->fullname, true, array('context'=>$context));
         $a->threshold = get_string('numdays', '', $instance->expirythreshold / (60*60*24));
         $a->users     = implode("\n", $users);
-        $a->extendurl = (string)new moodle_url('/user/index.php', array('id'=>$instance->courseid));
+        $a->extendurl = (string)new powereduc_url('/user/index.php', array('id'=>$instance->courseid));
 
         $subject = get_string('expirymessageenrollersubject', 'enrol_'.$name, $a);
         $body = get_string('expirymessageenrollerbody', 'enrol_'.$name, $a);
@@ -3291,7 +3291,7 @@ abstract class enrol_plugin {
 
     /**
      * Returns defaults for new instances.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      * @return array
      */
     public function get_instance_defaults() {
@@ -3300,7 +3300,7 @@ abstract class enrol_plugin {
 
     /**
      * Validate a list of parameter names and types.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      *
      * @param array $data array of ("fieldname"=>value) of submitted data
      * @param array $rules array of ("fieldname"=>PARAM_X types - or "fieldname"=>array( list of valid options )

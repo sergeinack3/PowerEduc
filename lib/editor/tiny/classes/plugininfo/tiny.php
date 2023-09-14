@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace editor_tiny\plugininfo;
 
-use moodle_url;
+use powereduc_url;
 
 /**
  * Subplugin info class.
@@ -39,10 +39,10 @@ class tiny extends \core\plugininfo\base {
     /**
      * Return URL used for management of plugins of this type.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    public static function get_manage_url(): moodle_url {
-        return new moodle_url('/admin/settings.php', [
+    public static function get_manage_url(): powereduc_url {
+        return new powereduc_url('/admin/settings.php', [
             'section' => 'editosettingstiny',
         ]);
     }
@@ -54,7 +54,7 @@ class tiny extends \core\plugininfo\base {
      *
      * @param \part_of_admin_tree $adminroot
      * @param string $parentnodename
-     * @param bool $hassiteconfig whether the current user has moodle/site:config capability
+     * @param bool $hassiteconfig whether the current user has powereduc/site:config capability
      */
     public function load_settings(\part_of_admin_tree $adminroot, $parentnodename, $hassiteconfig): void {
         // In case settings.php wants to refer to them.
@@ -75,7 +75,7 @@ class tiny extends \core\plugininfo\base {
         $settings = new \admin_settingpage(
             $section,
             $this->displayname,
-            'moodle/site:config',
+            'powereduc/site:config',
             $this->is_enabled() === false
         );
 

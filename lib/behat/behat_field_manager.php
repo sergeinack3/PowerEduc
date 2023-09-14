@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Form fields helper.
@@ -48,7 +48,7 @@ class behat_field_manager {
      * @return behat_form_field
      */
     public static function get_form_field_from_label($label, RawMinkContext $context) {
-        // There are moodle form elements that are not directly related with
+        // There are powereduc form elements that are not directly related with
         // a basic HTML form field, we should also take care of them.
         // The DOM node.
         $fieldnode = $context->find_field($label);
@@ -61,7 +61,7 @@ class behat_field_manager {
     /**
      * Gets an instance of the form field.
      *
-     * Not all the fields are part of a moodle form, in this
+     * Not all the fields are part of a powereduc form, in this
      * cases it fallsback to the generic form field. Also note
      * that this generic field type is using a generic setValue()
      * method from the Behat API, which is not always good to set
@@ -73,12 +73,12 @@ class behat_field_manager {
      */
     public static function get_form_field(NodeElement $fieldnode, Session $session) {
 
-        // Get the field type if is part of a moodleform.
-        if (self::is_moodleform_field($fieldnode)) {
+        // Get the field type if is part of a powereducform.
+        if (self::is_powereducform_field($fieldnode)) {
             $type = self::get_field_node_type($fieldnode, $session);
         }
 
-        // If is not a moodleforms field use the base field type.
+        // If is not a powereducforms field use the base field type.
         if (empty($type)) {
             $type = 'field';
         }
@@ -99,7 +99,7 @@ class behat_field_manager {
     public static function get_field_instance($type, NodeElement $fieldnode, Session $session) {
         global $CFG;
 
-        // If the field is not part of a moodleform, we should still try to find out
+        // If the field is not part of a powereducform, we should still try to find out
         // which field type are we dealing with.
         if ($type == 'field' && $guessedtype = self::guess_field_type($fieldnode, $session)) {
             $type = $guessedtype;
@@ -123,7 +123,7 @@ class behat_field_manager {
      * Guesses a basic field type and returns it.
      *
      * This method is intended to detect HTML form fields when no
-     * moodleform-specific elements have been detected.
+     * powereducform-specific elements have been detected.
      *
      * @param NodeElement $fieldnode
      * @param Session $session
@@ -201,19 +201,19 @@ class behat_field_manager {
     }
 
     /**
-     * Detects when the field is a moodleform field type.
+     * Detects when the field is a powereducform field type.
      *
-     * Note that there are fields inside moodleforms that are not
-     * moodleform element; this method can not detect this, this will
+     * Note that there are fields inside powereducforms that are not
+     * powereducform element; this method can not detect this, this will
      * be managed by get_field_node_type, after failing to find the form
      * element element type.
      *
      * @param NodeElement $fieldnode
      * @return bool
      */
-    protected static function is_moodleform_field(NodeElement $fieldnode) {
+    protected static function is_powereducform_field(NodeElement $fieldnode) {
 
-        // We already waited when getting the NodeElement and we don't want an exception if it's not part of a moodleform.
+        // We already waited when getting the NodeElement and we don't want an exception if it's not part of a powereducform.
         $parentformfound = $fieldnode->find('xpath',
             "/ancestor::form[contains(concat(' ', normalize-space(@class), ' '), ' mform ')]"
         );
@@ -317,7 +317,7 @@ class behat_field_manager {
                 return substr($class, 10);
             }
 
-            // Stop propagation through the DOM, if it does not have a felement is not part of a moodle form.
+            // Stop propagation through the DOM, if it does not have a felement is not part of a powereduc form.
             if (strstr($class, 'fcontainer') != false) {
                 return null;
             }
@@ -342,7 +342,7 @@ class behat_field_manager {
     }
 
     /**
-     * @deprecated since Moodle 2.6 MDL-39634 - please do not use this function any more.
+     * @deprecated since PowerEduc 2.6 MDL-39634 - please do not use this function any more.
      */
     public static function get_field() {
         throw new coding_exception('behat_field_manager::get_field() can not be used any more, ' .
@@ -350,7 +350,7 @@ class behat_field_manager {
     }
 
     /**
-     * @deprecated since Moodle 2.6 MDL-39634 - please do not use this function any more.
+     * @deprecated since PowerEduc 2.6 MDL-39634 - please do not use this function any more.
      */
     protected static function get_node_type() {
         throw new coding_exception('behat_field_manager::get_node_type() can not be used any more, ' .

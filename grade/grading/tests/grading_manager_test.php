@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ require_once($CFG->dirroot . '/grade/grading/lib.php'); // Include the code to t
  *
  * @package    core_grading
  * @category   test
- * @copyright  2011 David Mudrak <david@moodle.com>
+ * @copyright  2011 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class grading_manager_test extends \advanced_testcase {
@@ -85,7 +85,7 @@ class grading_manager_test extends \advanced_testcase {
         $this->assertEquals('rubric', $gradingman->get_active_method());
 
         // attempting to set an invalid method
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $gradingman->set_active_method('no_one_should_ever_try_to_implement_a_method_with_this_silly_name');
     }
 

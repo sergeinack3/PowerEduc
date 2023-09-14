@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core_badges
  * @category   external
- * @copyright  2016 Juan Leyva <juan@moodle.com>
+ * @copyright  2016 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.1
  */
@@ -36,7 +36,7 @@ use core_badges\external\user_badge_exporter;
  *
  * @package    core_badges
  * @category   external
- * @copyright  2016 Juan Leyva <juan@moodle.com>
+ * @copyright  2016 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.1
  */
@@ -72,7 +72,7 @@ class core_badges_external extends external_api {
      * @param bool $onlypublic  whether to return only public badges
      * @return array array containing warnings and the awarded badges
      * @since  Moodle 3.1
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_user_badges($userid = 0, $courseid = 0, $page = 0, $perpage = 0, $search = '', $onlypublic = false) {
         global $CFG, $USER, $PAGE;
@@ -90,11 +90,11 @@ class core_badges_external extends external_api {
         $params = self::validate_parameters(self::get_user_badges_parameters(), $params);
 
         if (empty($CFG->enablebadges)) {
-            throw new moodle_exception('badgesdisabled', 'badges');
+            throw new powereduc_exception('badgesdisabled', 'badges');
         }
 
         if (empty($CFG->badges_allowcoursebadges) && $params['courseid'] != 0) {
-            throw new moodle_exception('coursebadgesdisabled', 'badges');
+            throw new powereduc_exception('coursebadgesdisabled', 'badges');
         }
 
         // Default value for userid.
@@ -110,7 +110,7 @@ class core_badges_external extends external_api {
         self::validate_context($usercontext);
 
         if ($USER->id != $user->id) {
-            require_capability('moodle/badges:viewotherbadges', $usercontext);
+            require_capability('powereduc/badges:viewotherbadges', $usercontext);
             // We are looking other user's badges, we must retrieve only public badges.
             $params['onlypublic'] = true;
         }
@@ -124,7 +124,7 @@ class core_badges_external extends external_api {
 
         foreach ($userbadges as $badge) {
             $context = ($badge->type == BADGE_TYPE_SITE) ? context_system::instance() : context_course::instance($badge->courseid);
-            $canconfiguredetails = has_capability('moodle/badges:configuredetails', $context);
+            $canconfiguredetails = has_capability('powereduc/badges:configuredetails', $context);
 
             // If the user is viewing another user's badge and doesn't have the right capability return only part of the data.
             if ($USER->id != $user->id and !$canconfiguredetails) {

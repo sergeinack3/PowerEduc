@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ use external_multiple_structure;
 use external_single_structure;
 use external_value;
 use external_warnings;
-use moodle_exception;
+use powereduc_exception;
 use required_capability_exception;
 use stdClass;
 
@@ -93,7 +93,7 @@ class fetch extends external_api {
      * @throws \invalid_parameter_exception
      * @throws \restricted_context_exception
      * @throws coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since Moodle 3.8
      */
     public static function execute(string $component, int $contextid, string $itemname, int $gradeduserid): array {
@@ -124,7 +124,7 @@ class fetch extends external_api {
         $gradeitem = gradeitem::instance($component, $context, $itemname);
 
         if (!$gradeitem->is_using_scale()) {
-            throw new moodle_exception("The {$itemname} item in {$component}/{$contextid} is not configured for grading with scales");
+            throw new powereduc_exception("The {$itemname} item in {$component}/{$contextid} is not configured for grading with scales");
         }
 
         $gradeduser = \core_user::get_user($gradeduserid, '*', MUST_EXIST);

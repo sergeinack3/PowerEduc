@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ require_once($CFG->libdir . '/formslib.php');
  * @copyright  2016 Andrew Nicols <andrew@nicols.co.uk>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class editstep extends \moodleform {
+class editstep extends \powereducform {
     /**
      * @var tool_usertours\step $step
      */
@@ -105,7 +105,7 @@ class editstep extends \moodleform {
         $mform->setDefault('contenttype', static::CONTENTTYPE_MANUAL);
 
         // Language identifier.
-        $mform->addElement('textarea', 'contentlangstring', get_string('moodle_language_identifier', 'tool_usertours'));
+        $mform->addElement('textarea', 'contentlangstring', get_string('powereduc_language_identifier', 'tool_usertours'));
         $mform->setType('contentlangstring', PARAM_TEXT);
         $mform->hideIf('contentlangstring', 'contenttype', 'eq', static::CONTENTTYPE_MANUAL);
 

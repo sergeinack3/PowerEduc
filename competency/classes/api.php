@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,8 +34,8 @@ use context_module;
 use context_user;
 use coding_exception;
 use require_login_exception;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use required_capability_exception;
 
 /**
@@ -89,11 +89,11 @@ class api {
      * Throws an exception if competencies are not enabled.
      *
      * @return void
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function require_enabled() {
         if (!static::is_enabled()) {
-            throw new moodle_exception('competenciesarenotenabled', 'core_competency');
+            throw new powereduc_exception('competenciesarenotenabled', 'core_competency');
         }
     }
 
@@ -164,7 +164,7 @@ class api {
         }
 
         $coursecontext = context_course::instance($course->id);
-        if (!$course->visible and !has_capability('moodle/course:viewhiddencourses', $coursecontext)) {
+        if (!$course->visible and !has_capability('powereduc/course:viewhiddencourses', $coursecontext)) {
             if ($throwexception) {
                 throw new require_login_exception('Course is hidden');
             } else {
@@ -178,7 +178,7 @@ class api {
     /**
      * Create a competency from a record containing all the data for the class.
      *
-     * Requires moodle/competency:competencymanage capability at the system context.
+     * Requires powereduc/competency:competencymanage capability at the system context.
      *
      * @param stdClass $record Record containing all the data for an instance of the class.
      * @return competency
@@ -188,7 +188,7 @@ class api {
         $competency = new competency(0, $record);
 
         // First we do a permissions check.
-        require_capability('moodle/competency:competencymanage', $competency->get_context());
+        require_capability('powereduc/competency:competencymanage', $competency->get_context());
 
         // Reset the sortorder, use reorder instead.
         $competency->set('sortorder', 0);
@@ -209,7 +209,7 @@ class api {
     /**
      * Delete a competency by id.
      *
-     * Requires moodle/competency:competencymanage capability at the system context.
+     * Requires powereduc/competency:competencymanage capability at the system context.
      *
      * @param int $id The record to delete. This will delete alot of related data - you better be sure.
      * @return boolean
@@ -220,7 +220,7 @@ class api {
         $competency = new competency($id);
 
         // First we do a permissions check.
-        require_capability('moodle/competency:competencymanage', $competency->get_context());
+        require_capability('powereduc/competency:competencymanage', $competency->get_context());
 
         $events = array();
         $competencyids = array(intval($competency->get('id')));
@@ -271,7 +271,7 @@ class api {
     /**
      * Reorder this competency.
      *
-     * Requires moodle/competency:competencymanage capability at the system context.
+     * Requires powereduc/competency:competencymanage capability at the system context.
      *
      * @param int $id The id of the competency to move.
      * @return boolean
@@ -281,7 +281,7 @@ class api {
         $current = new competency($id);
 
         // First we do a permissions check.
-        require_capability('moodle/competency:competencymanage', $current->get_context());
+        require_capability('powereduc/competency:competencymanage', $current->get_context());
 
         $max = self::count_competencies(array('parentid' => $current->get('parentid'),
                                               'competencyframeworkid' => $current->get('competencyframeworkid')));
@@ -314,7 +314,7 @@ class api {
     /**
      * Reorder this competency.
      *
-     * Requires moodle/competency:competencymanage capability at the system context.
+     * Requires powereduc/competency:competencymanage capability at the system context.
      *
      * @param int $id The id of the competency to move.
      * @return boolean
@@ -324,7 +324,7 @@ class api {
         $current = new competency($id);
 
         // First we do a permissions check.
-        require_capability('moodle/competency:competencymanage', $current->get_context());
+        require_capability('powereduc/competency:competencymanage', $current->get_context());
 
         $sortorder = $current->get('sortorder');
         if ($sortorder == 0) {
@@ -352,7 +352,7 @@ class api {
     /**
      * Move this competency so it sits in a new parent.
      *
-     * Requires moodle/competency:competencymanage capability at the system context.
+     * Requires powereduc/competency:competencymanage capability at the system context.
      *
      * @param int $id The id of the competency to move.
      * @param int $newparentid The new parent id for the competency.
@@ -364,7 +364,7 @@ class api {
         $current = new competency($id);
 
         // First we do a permissions check.
-        require_capability('moodle/competency:competencymanage', $current->get_context());
+        require_capability('powereduc/competency:competencymanage', $current->get_context());
         if ($id == $newparentid) {
             throw new coding_exception('Can not set a competency as a parent of itself.');
         } if ($newparentid == $current->get('parentid')) {
@@ -421,7 +421,7 @@ class api {
     /**
      * Update the details for a competency.
      *
-     * Requires moodle/competency:competencymanage capability at the system context.
+     * Requires powereduc/competency:competencymanage capability at the system context.
      *
      * @param stdClass $record The new details for the competency.
      *                         Note - must contain an id that points to the competency to update.
@@ -433,7 +433,7 @@ class api {
         $competency = new competency($record->id);
 
         // First we do a permissions check.
-        require_capability('moodle/competency:competencymanage', $competency->get_context());
+        require_capability('powereduc/competency:competencymanage', $competency->get_context());
 
         // Some things should not be changed in an update - they should use a more specific method.
         $record->sortorder = $competency->get('sortorder');
@@ -441,7 +441,7 @@ class api {
         $record->competencyframeworkid = $competency->get('competencyframeworkid');
 
         $competency->from_record($record);
-        require_capability('moodle/competency:competencymanage', $competency->get_context());
+        require_capability('powereduc/competency:competencymanage', $competency->get_context());
 
         // OK - all set.
         $result = $competency->update();
@@ -455,7 +455,7 @@ class api {
     /**
      * Read a the details for a single competency and return a record.
      *
-     * Requires moodle/competency:competencyview capability at the system context.
+     * Requires powereduc/competency:competencyview capability at the system context.
      *
      * @param int $id The id of the competency to read.
      * @param bool $includerelated Include related tags or not.
@@ -467,8 +467,8 @@ class api {
 
         // First we do a permissions check.
         $context = $competency->get_context();
-        if (!has_any_capability(array('moodle/competency:competencyview', 'moodle/competency:competencymanage'), $context)) {
-             throw new required_capability_exception($context, 'moodle/competency:competencyview', 'nopermissions', '');
+        if (!has_any_capability(array('powereduc/competency:competencyview', 'powereduc/competency:competencymanage'), $context)) {
+             throw new required_capability_exception($context, 'powereduc/competency:competencyview', 'nopermissions', '');
         }
 
         // OK - all set.
@@ -485,7 +485,7 @@ class api {
     /**
      * Perform a text search based and return all results and their parents.
      *
-     * Requires moodle/competency:competencyview capability at the framework context.
+     * Requires powereduc/competency:competencyview capability at the framework context.
      *
      * @param string $textsearch A string to search for.
      * @param int $competencyframeworkid The id of the framework to limit the search.
@@ -497,8 +497,8 @@ class api {
 
         // First we do a permissions check.
         $context = $framework->get_context();
-        if (!has_any_capability(array('moodle/competency:competencyview', 'moodle/competency:competencymanage'), $context)) {
-             throw new required_capability_exception($context, 'moodle/competency:competencyview', 'nopermissions', '');
+        if (!has_any_capability(array('powereduc/competency:competencyview', 'powereduc/competency:competencymanage'), $context)) {
+             throw new required_capability_exception($context, 'powereduc/competency:competencyview', 'nopermissions', '');
         }
 
         // OK - all set.
@@ -509,7 +509,7 @@ class api {
     /**
      * Perform a search based on the provided filters and return a paginated list of records.
      *
-     * Requires moodle/competency:competencyview capability at some context.
+     * Requires powereduc/competency:competencyview capability at some context.
      *
      * @param array $filters A list of filters to apply to the list.
      * @param string $sort The column to sort on
@@ -528,8 +528,8 @@ class api {
         }
 
         // First we do a permissions check.
-        if (!has_any_capability(array('moodle/competency:competencyview', 'moodle/competency:competencymanage'), $context)) {
-             throw new required_capability_exception($context, 'moodle/competency:competencyview', 'nopermissions', '');
+        if (!has_any_capability(array('powereduc/competency:competencyview', 'powereduc/competency:competencymanage'), $context)) {
+             throw new required_capability_exception($context, 'powereduc/competency:competencyview', 'nopermissions', '');
         }
 
         // OK - all set.
@@ -539,7 +539,7 @@ class api {
     /**
      * Perform a search based on the provided filters and return a paginated list of records.
      *
-     * Requires moodle/competency:competencyview capability at some context.
+     * Requires powereduc/competency:competencyview capability at some context.
      *
      * @param array $filters A list of filters to apply to the list.
      * @return int
@@ -554,8 +554,8 @@ class api {
         }
 
         // First we do a permissions check.
-        if (!has_any_capability(array('moodle/competency:competencyview', 'moodle/competency:competencymanage'), $context)) {
-             throw new required_capability_exception($context, 'moodle/competency:competencyview', 'nopermissions', '');
+        if (!has_any_capability(array('powereduc/competency:competencyview', 'powereduc/competency:competencymanage'), $context)) {
+             throw new required_capability_exception($context, 'powereduc/competency:competencyview', 'nopermissions', '');
         }
 
         // OK - all set.
@@ -565,7 +565,7 @@ class api {
     /**
      * Create a competency framework from a record containing all the data for the class.
      *
-     * Requires moodle/competency:competencymanage capability at the system context.
+     * Requires powereduc/competency:competencymanage capability at the system context.
      *
      * @param stdClass $record Record containing all the data for an instance of the class.
      * @return competency_framework
@@ -573,7 +573,7 @@ class api {
     public static function create_framework(stdClass $record) {
         static::require_enabled();
         $framework = new competency_framework(0, $record);
-        require_capability('moodle/competency:competencymanage', $framework->get_context());
+        require_capability('powereduc/competency:competencymanage', $framework->get_context());
 
         // Account for different formats of taxonomies.
         if (isset($record->taxonomies)) {
@@ -591,7 +591,7 @@ class api {
     /**
      * Duplicate a competency framework by id.
      *
-     * Requires moodle/competency:competencymanage capability at the system context.
+     * Requires powereduc/competency:competencymanage capability at the system context.
      *
      * @param int $id The record to duplicate. All competencies associated and related will be duplicated.
      * @return competency_framework the framework duplicated
@@ -601,7 +601,7 @@ class api {
         static::require_enabled();
 
         $framework = new competency_framework($id);
-        require_capability('moodle/competency:competencymanage', $framework->get_context());
+        require_capability('powereduc/competency:competencymanage', $framework->get_context());
         // Starting transaction.
         $transaction = $DB->start_delegated_transaction();
 
@@ -660,7 +660,7 @@ class api {
     /**
      * Delete a competency framework by id.
      *
-     * Requires moodle/competency:competencymanage capability at the system context.
+     * Requires powereduc/competency:competencymanage capability at the system context.
      *
      * @param int $id The record to delete. This will delete alot of related data - you better be sure.
      * @return boolean
@@ -669,7 +669,7 @@ class api {
         global $DB;
         static::require_enabled();
         $framework = new competency_framework($id);
-        require_capability('moodle/competency:competencymanage', $framework->get_context());
+        require_capability('powereduc/competency:competencymanage', $framework->get_context());
 
         $events = array();
         $competenciesid = competency::get_ids_by_frameworkid($id);
@@ -718,7 +718,7 @@ class api {
     /**
      * Update the details for a competency framework.
      *
-     * Requires moodle/competency:competencymanage capability at the system context.
+     * Requires powereduc/competency:competencymanage capability at the system context.
      *
      * @param stdClass $record The new details for the framework. Note - must contain an id that points to the framework to update.
      * @return boolean
@@ -728,7 +728,7 @@ class api {
         $framework = new competency_framework($record->id);
 
         // Check the permissions before update.
-        require_capability('moodle/competency:competencymanage', $framework->get_context());
+        require_capability('powereduc/competency:competencymanage', $framework->get_context());
 
         // Account for different formats of taxonomies.
         $framework->from_record($record);
@@ -745,7 +745,7 @@ class api {
     /**
      * Read a the details for a single competency framework and return a record.
      *
-     * Requires moodle/competency:competencyview capability at the system context.
+     * Requires powereduc/competency:competencyview capability at the system context.
      *
      * @param int $id The id of the framework to read.
      * @return competency_framework
@@ -753,9 +753,9 @@ class api {
     public static function read_framework($id) {
         static::require_enabled();
         $framework = new competency_framework($id);
-        if (!has_any_capability(array('moodle/competency:competencyview', 'moodle/competency:competencymanage'),
+        if (!has_any_capability(array('powereduc/competency:competencyview', 'powereduc/competency:competencymanage'),
                 $framework->get_context())) {
-            throw new required_capability_exception($framework->get_context(), 'moodle/competency:competencyview',
+            throw new required_capability_exception($framework->get_context(), 'powereduc/competency:competencyview',
                 'nopermissions', '');
         }
         return $framework;
@@ -773,9 +773,9 @@ class api {
         if (!is_object($framework)) {
             $framework = new competency_framework($framework);
         }
-        if (!has_any_capability(array('moodle/competency:competencyview', 'moodle/competency:competencymanage'),
+        if (!has_any_capability(array('powereduc/competency:competencyview', 'powereduc/competency:competencymanage'),
                 $framework->get_context())) {
-            throw new required_capability_exception($framework->get_context(), 'moodle/competency:competencyview',
+            throw new required_capability_exception($framework->get_context(), 'powereduc/competency:competencyview',
                 'nopermissions', '');
         }
         \core\event\competency_framework_viewed::create_from_framework($framework)->trigger();
@@ -795,9 +795,9 @@ class api {
             $competency = new competency($competency);
         }
 
-        if (!has_any_capability(array('moodle/competency:competencyview', 'moodle/competency:competencymanage'),
+        if (!has_any_capability(array('powereduc/competency:competencyview', 'powereduc/competency:competencymanage'),
                 $competency->get_context())) {
-            throw new required_capability_exception($competency->get_context(), 'moodle/competency:competencyview',
+            throw new required_capability_exception($competency->get_context(), 'powereduc/competency:competencyview',
                 'nopermissions', '');
         }
 
@@ -808,7 +808,7 @@ class api {
     /**
      * Perform a search based on the provided filters and return a paginated list of records.
      *
-     * Requires moodle/competency:competencyview capability at the system context.
+     * Requires powereduc/competency:competencyview capability at the system context.
      *
      * @param string $sort The column to sort on
      * @param string $order ('ASC' or 'DESC')
@@ -831,10 +831,10 @@ class api {
 
         // Get all the relevant contexts.
         $contexts = self::get_related_contexts($context, $includes,
-            array('moodle/competency:competencyview', 'moodle/competency:competencymanage'));
+            array('powereduc/competency:competencyview', 'powereduc/competency:competencymanage'));
 
         if (empty($contexts)) {
-            throw new required_capability_exception($context, 'moodle/competency:competencyview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:competencyview', 'nopermissions', '');
         }
 
         // OK - all set.
@@ -860,7 +860,7 @@ class api {
     /**
      * Perform a search based on the provided filters and return a paginated list of records.
      *
-     * Requires moodle/competency:competencyview capability at the system context.
+     * Requires powereduc/competency:competencyview capability at the system context.
      *
      * @param context $context The parent context of the frameworks.
      * @param string $includes Defines what other contexts to fetch frameworks from.
@@ -876,10 +876,10 @@ class api {
 
         // Get all the relevant contexts.
         $contexts = self::get_related_contexts($context, $includes,
-            array('moodle/competency:competencyview', 'moodle/competency:competencymanage'));
+            array('powereduc/competency:competencyview', 'powereduc/competency:competencymanage'));
 
         if (empty($contexts)) {
-            throw new required_capability_exception($context, 'moodle/competency:competencyview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:competencyview', 'nopermissions', '');
         }
 
         // OK - all set.
@@ -969,7 +969,7 @@ class api {
             }
 
             $context = context_course::instance($course->id);
-            $capabilities = array('moodle/competency:coursecompetencyview', 'moodle/competency:coursecompetencymanage');
+            $capabilities = array('powereduc/competency:coursecompetencyview', 'powereduc/competency:coursecompetencymanage');
             if (!has_any_capability($capabilities, $context)) {
                 continue;
             }
@@ -996,9 +996,9 @@ class api {
         $coursecontext = context_course::instance($courseid);
 
         // We will not check each module - course permissions should be enough.
-        $capabilities = array('moodle/competency:coursecompetencyview', 'moodle/competency:coursecompetencymanage');
+        $capabilities = array('powereduc/competency:coursecompetencyview', 'powereduc/competency:coursecompetencymanage');
         if (!has_any_capability($capabilities, $coursecontext)) {
-            throw new required_capability_exception($coursecontext, 'moodle/competency:coursecompetencyview', 'nopermissions', '');
+            throw new required_capability_exception($coursecontext, 'powereduc/competency:coursecompetencyview', 'nopermissions', '');
         }
 
         $cmlist = course_module_competency::list_course_modules($competencyid, $courseid);
@@ -1028,9 +1028,9 @@ class api {
         self::validate_course_module($cm);
         $context = context_module::instance($cm->id);
 
-        $capabilities = array('moodle/competency:coursecompetencyview', 'moodle/competency:coursecompetencymanage');
+        $capabilities = array('powereduc/competency:coursecompetencyview', 'powereduc/competency:coursecompetencymanage');
         if (!has_any_capability($capabilities, $context)) {
-            throw new required_capability_exception($context, 'moodle/competency:coursecompetencyview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:coursecompetencyview', 'nopermissions', '');
         }
 
         $result = array();
@@ -1059,7 +1059,7 @@ class api {
         // Now check permissions on each course.
         foreach ($courses as $id => $course) {
             $context = context_course::instance($course->id);
-            $capabilities = array('moodle/competency:coursecompetencyview', 'moodle/competency:coursecompetencymanage');
+            $capabilities = array('powereduc/competency:coursecompetencyview', 'powereduc/competency:coursecompetencymanage');
             if (!has_any_capability($capabilities, $context)) {
                 unset($courses[$id]);
                 continue;
@@ -1089,9 +1089,9 @@ class api {
         // First we do a permissions check.
         $context = context_course::instance($courseid);
 
-        $capabilities = array('moodle/competency:coursecompetencyview', 'moodle/competency:coursecompetencymanage');
+        $capabilities = array('powereduc/competency:coursecompetencyview', 'powereduc/competency:coursecompetencymanage');
         if (!has_any_capability($capabilities, $context)) {
-             throw new required_capability_exception($context, 'moodle/competency:coursecompetencyview', 'nopermissions', '');
+             throw new required_capability_exception($context, 'powereduc/competency:coursecompetencyview', 'nopermissions', '');
         }
 
         // OK - all set.
@@ -1112,9 +1112,9 @@ class api {
         // First we do a permissions check.
         $context = context_course::instance($courseid);
 
-        $capabilities = array('moodle/competency:coursecompetencyview', 'moodle/competency:coursecompetencymanage');
+        $capabilities = array('powereduc/competency:coursecompetencyview', 'powereduc/competency:coursecompetencymanage');
         if (!has_any_capability($capabilities, $context)) {
-             throw new required_capability_exception($context, 'moodle/competency:coursecompetencyview', 'nopermissions', '');
+             throw new required_capability_exception($context, 'powereduc/competency:coursecompetencyview', 'nopermissions', '');
         }
 
         // OK - all set.
@@ -1141,9 +1141,9 @@ class api {
         self::validate_course($course);
         $context = context_course::instance($course->id);
 
-        $capabilities = array('moodle/competency:coursecompetencyview', 'moodle/competency:coursecompetencymanage');
+        $capabilities = array('powereduc/competency:coursecompetencyview', 'powereduc/competency:coursecompetencymanage');
         if (!has_any_capability($capabilities, $context)) {
-            throw new required_capability_exception($context, 'moodle/competency:coursecompetencyview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:coursecompetencyview', 'nopermissions', '');
         }
 
         $result = array();
@@ -1181,7 +1181,7 @@ class api {
         }
 
         if (!$uc->can_read()) {
-            throw new required_capability_exception($uc->get_context(), 'moodle/competency:usercompetencyview',
+            throw new required_capability_exception($uc->get_context(), 'powereduc/competency:usercompetencyview',
                 'nopermissions', '');
         }
         return $uc;
@@ -1197,7 +1197,7 @@ class api {
         static::require_enabled();
         $uc = new user_competency($usercompetencyid);
         if (!$uc->can_read()) {
-            throw new required_capability_exception($uc->get_context(), 'moodle/competency:usercompetencyview',
+            throw new required_capability_exception($uc->get_context(), 'powereduc/competency:usercompetencyview',
                 'nopermissions', '');
         }
         return $uc;
@@ -1220,9 +1220,9 @@ class api {
         self::validate_course_module($cm);
         $context = context_module::instance($cm->id);
 
-        $capabilities = array('moodle/competency:coursecompetencyview', 'moodle/competency:coursecompetencymanage');
+        $capabilities = array('powereduc/competency:coursecompetencyview', 'powereduc/competency:coursecompetencymanage');
         if (!has_any_capability($capabilities, $context)) {
-            throw new required_capability_exception($context, 'moodle/competency:coursecompetencyview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:coursecompetencyview', 'nopermissions', '');
         }
 
         return course_module_competency::count_competencies($cm->id);
@@ -1248,9 +1248,9 @@ class api {
         self::validate_course_module($cm);
         $context = context_module::instance($cm->id);
 
-        $capabilities = array('moodle/competency:coursecompetencyview', 'moodle/competency:coursecompetencymanage');
+        $capabilities = array('powereduc/competency:coursecompetencyview', 'powereduc/competency:coursecompetencymanage');
         if (!has_any_capability($capabilities, $context)) {
-            throw new required_capability_exception($context, 'moodle/competency:coursecompetencyview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:coursecompetencyview', 'nopermissions', '');
         }
 
         $result = array();
@@ -1283,11 +1283,11 @@ class api {
         // First we do a permissions check.
         $context = context_course::instance($courseid);
 
-        $capabilities = array('moodle/competency:coursecompetencyview', 'moodle/competency:coursecompetencymanage');
+        $capabilities = array('powereduc/competency:coursecompetencyview', 'powereduc/competency:coursecompetencymanage');
         if (!has_any_capability($capabilities, $context)) {
-            throw new required_capability_exception($context, 'moodle/competency:coursecompetencyview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:coursecompetencyview', 'nopermissions', '');
         } else if (!user_competency::can_read_user_in_course($userid, $courseid)) {
-            throw new required_capability_exception($context, 'moodle/competency:usercompetencyview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:usercompetencyview', 'nopermissions', '');
         }
 
         // This will throw an exception if the competency does not belong to the course.
@@ -1319,11 +1319,11 @@ class api {
         $context = context_course::instance($courseid);
         $onlyvisible = 1;
 
-        $capabilities = array('moodle/competency:coursecompetencyview', 'moodle/competency:coursecompetencymanage');
+        $capabilities = array('powereduc/competency:coursecompetencyview', 'powereduc/competency:coursecompetencymanage');
         if (!has_any_capability($capabilities, $context)) {
-            throw new required_capability_exception($context, 'moodle/competency:coursecompetencyview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:coursecompetencyview', 'nopermissions', '');
         } else if (!user_competency::can_read_user_in_course($userid, $courseid)) {
-            throw new required_capability_exception($context, 'moodle/competency:usercompetencyview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:usercompetencyview', 'nopermissions', '');
         }
 
         // OK - all set.
@@ -1382,7 +1382,7 @@ class api {
             $userid = $USER->id;
         }
 
-        $capability = 'moodle/competency:usercompetencyreview';
+        $capability = 'powereduc/competency:usercompetencyreview';
         $ucfields = user_competency::get_sql_fields('uc', 'uc_');
         $compfields = competency::get_sql_fields('c', 'c_');
         $usercols = array('id') + get_user_fieldnames();
@@ -1462,7 +1462,7 @@ class api {
         // First we do a permissions check.
         $context = context_module::instance($cm->id);
 
-        require_capability('moodle/competency:coursecompetencymanage', $context);
+        require_capability('powereduc/competency:coursecompetencymanage', $context);
 
         // Check that the competency belongs to the course.
         $exists = course_competency::get_records(array('courseid' => $cm->course, 'competencyid' => $competencyid));
@@ -1504,7 +1504,7 @@ class api {
         // First we do a permissions check.
         $context = context_module::instance($cm->id);
 
-        require_capability('moodle/competency:coursecompetencymanage', $context);
+        require_capability('powereduc/competency:coursecompetencymanage', $context);
 
         $record = new stdClass();
         $record->cmid = $cm->id;
@@ -1521,7 +1521,7 @@ class api {
     /**
      * Move the course module competency up or down in the display list.
      *
-     * Requires moodle/competency:coursecompetencymanage capability at the course module context.
+     * Requires powereduc/competency:coursecompetencymanage capability at the course module context.
      *
      * @param mixed $cmorid The course module, or id of the course module
      * @param int $competencyidfrom The id of the competency we are moving.
@@ -1540,7 +1540,7 @@ class api {
         // First we do a permissions check.
         $context = context_module::instance($cm->id);
 
-        require_capability('moodle/competency:coursecompetencymanage', $context);
+        require_capability('powereduc/competency:coursecompetencymanage', $context);
 
         $down = true;
         $matches = course_module_competency::get_records(array('cmid' => $cm->id, 'competencyid' => $competencyidfrom));
@@ -1598,7 +1598,7 @@ class api {
         self::validate_course_module($cm);
         $context = context_module::instance($cm->id);
 
-        require_capability('moodle/competency:coursecompetencymanage', $context);
+        require_capability('powereduc/competency:coursecompetencymanage', $context);
 
         $coursemodulecompetency->set('ruleoutcome', $ruleoutcome);
         $coursemodulecompetency->set('overridegrade', $overridegrade);
@@ -1621,7 +1621,7 @@ class api {
         // First we do a permissions check.
         $context = context_course::instance($courseid);
 
-        require_capability('moodle/competency:coursecompetencymanage', $context);
+        require_capability('powereduc/competency:coursecompetencymanage', $context);
 
         $record = new stdClass();
         $record->courseid = $courseid;
@@ -1660,7 +1660,7 @@ class api {
         // First we do a permissions check.
         $context = context_course::instance($courseid);
 
-        require_capability('moodle/competency:coursecompetencymanage', $context);
+        require_capability('powereduc/competency:coursecompetencymanage', $context);
 
         $record = new stdClass();
         $record->courseid = $courseid;
@@ -1682,7 +1682,7 @@ class api {
     /**
      * Move the course competency up or down in the display list.
      *
-     * Requires moodle/competency:coursecompetencymanage capability at the course context.
+     * Requires powereduc/competency:coursecompetencymanage capability at the course context.
      *
      * @param int $courseid The course
      * @param int $competencyidfrom The id of the competency we are moving.
@@ -1697,7 +1697,7 @@ class api {
         // First we do a permissions check.
         $context = context_course::instance($courseid);
 
-        require_capability('moodle/competency:coursecompetencymanage', $context);
+        require_capability('powereduc/competency:coursecompetencymanage', $context);
 
         $down = true;
         $coursecompetency = new course_competency();
@@ -1753,7 +1753,7 @@ class api {
         self::validate_course($courseid);
         $coursecontext = context_course::instance($courseid);
 
-        require_capability('moodle/competency:coursecompetencymanage', $coursecontext);
+        require_capability('powereduc/competency:coursecompetencymanage', $coursecontext);
 
         $coursecompetency->set('ruleoutcome', $ruleoutcome);
         return $coursecompetency->update();
@@ -1762,7 +1762,7 @@ class api {
     /**
      * Create a learning plan template from a record containing all the data for the class.
      *
-     * Requires moodle/competency:templatemanage capability.
+     * Requires powereduc/competency:templatemanage capability.
      *
      * @param stdClass $record Record containing all the data for an instance of the class.
      * @return template
@@ -1773,7 +1773,7 @@ class api {
 
         // First we do a permissions check.
         if (!$template->can_manage()) {
-            throw new required_capability_exception($template->get_context(), 'moodle/competency:templatemanage',
+            throw new required_capability_exception($template->get_context(), 'powereduc/competency:templatemanage',
                 'nopermissions', '');
         }
 
@@ -1789,7 +1789,7 @@ class api {
     /**
      * Duplicate a learning plan template.
      *
-     * Requires moodle/competency:templatemanage capability at the template context.
+     * Requires powereduc/competency:templatemanage capability at the template context.
      *
      * @param int $id the template id.
      * @return template
@@ -1800,7 +1800,7 @@ class api {
 
         // First we do a permissions check.
         if (!$template->can_manage()) {
-            throw new required_capability_exception($template->get_context(), 'moodle/competency:templatemanage',
+            throw new required_capability_exception($template->get_context(), 'powereduc/competency:templatemanage',
                 'nopermissions', '');
         }
 
@@ -1828,7 +1828,7 @@ class api {
      * Delete a learning plan template by id.
      * If the learning plan template has associated cohorts they will be deleted.
      *
-     * Requires moodle/competency:templatemanage capability.
+     * Requires powereduc/competency:templatemanage capability.
      *
      * @param int $id The record to delete.
      * @param boolean $deleteplans True to delete plans associaated to template, false to unlink them.
@@ -1841,7 +1841,7 @@ class api {
 
         // First we do a permissions check.
         if (!$template->can_manage()) {
-            throw new required_capability_exception($template->get_context(), 'moodle/competency:templatemanage',
+            throw new required_capability_exception($template->get_context(), 'powereduc/competency:templatemanage',
                 'nopermissions', '');
         }
 
@@ -1888,7 +1888,7 @@ class api {
             // Commit the transaction.
             $transaction->allow_commit();
         } else {
-            $transaction->rollback(new moodle_exception('Error while deleting the template.'));
+            $transaction->rollback(new powereduc_exception('Error while deleting the template.'));
         }
 
         return $success;
@@ -1897,7 +1897,7 @@ class api {
     /**
      * Update the details for a learning plan template.
      *
-     * Requires moodle/competency:templatemanage capability.
+     * Requires powereduc/competency:templatemanage capability.
      *
      * @param stdClass $record The new details for the template. Note - must contain an id that points to the template to update.
      * @return boolean
@@ -1909,7 +1909,7 @@ class api {
 
         // First we do a permissions check.
         if (!$template->can_manage()) {
-            throw new required_capability_exception($template->get_context(), 'moodle/competency:templatemanage',
+            throw new required_capability_exception($template->get_context(), 'powereduc/competency:templatemanage',
                 'nopermissions', '');
 
         } else if (isset($record->contextid) && $record->contextid != $template->get('contextid')) {
@@ -1936,7 +1936,7 @@ class api {
         $success = $template->update();
 
         if (!$success) {
-            $transaction->rollback(new moodle_exception('Error while updating the template.'));
+            $transaction->rollback(new powereduc_exception('Error while updating the template.'));
             return $success;
         }
 
@@ -1955,7 +1955,7 @@ class api {
     /**
      * Read a the details for a single learning plan template and return a record.
      *
-     * Requires moodle/competency:templateview capability at the system context.
+     * Requires powereduc/competency:templateview capability at the system context.
      *
      * @param int $id The id of the template to read.
      * @return template
@@ -1967,7 +1967,7 @@ class api {
 
         // First we do a permissions check.
         if (!$template->can_read()) {
-             throw new required_capability_exception($template->get_context(), 'moodle/competency:templateview',
+             throw new required_capability_exception($template->get_context(), 'powereduc/competency:templateview',
                 'nopermissions', '');
         }
 
@@ -1978,7 +1978,7 @@ class api {
     /**
      * Perform a search based on the provided filters and return a paginated list of records.
      *
-     * Requires moodle/competency:templateview capability at the system context.
+     * Requires powereduc/competency:templateview capability at the system context.
      *
      * @param string $sort The column to sort on
      * @param string $order ('ASC' or 'DESC')
@@ -1999,11 +1999,11 @@ class api {
 
         // Get all the relevant contexts.
         $contexts = self::get_related_contexts($context, $includes,
-            array('moodle/competency:templateview', 'moodle/competency:templatemanage'));
+            array('powereduc/competency:templateview', 'powereduc/competency:templatemanage'));
 
         // First we do a permissions check.
         if (empty($contexts)) {
-             throw new required_capability_exception($context, 'moodle/competency:templateview', 'nopermissions', '');
+             throw new required_capability_exception($context, 'powereduc/competency:templateview', 'nopermissions', '');
         }
 
         // Make the order by.
@@ -2027,7 +2027,7 @@ class api {
     /**
      * Perform a search based on the provided filters and return how many results there are.
      *
-     * Requires moodle/competency:templateview capability at the system context.
+     * Requires powereduc/competency:templateview capability at the system context.
      *
      * @param context $context The parent context of the frameworks.
      * @param string $includes Defines what other contexts to fetch frameworks from.
@@ -2043,10 +2043,10 @@ class api {
 
         // First we do a permissions check.
         $contexts = self::get_related_contexts($context, $includes,
-            array('moodle/competency:templateview', 'moodle/competency:templatemanage'));
+            array('powereduc/competency:templateview', 'powereduc/competency:templatemanage'));
 
         if (empty($contexts)) {
-             throw new required_capability_exception($context, 'moodle/competency:templateview', 'nopermissions', '');
+             throw new required_capability_exception($context, 'powereduc/competency:templateview', 'nopermissions', '');
         }
 
         // OK - all set.
@@ -2067,12 +2067,12 @@ class api {
         $context = context_system::instance();
         $onlyvisible = 1;
 
-        $capabilities = array('moodle/competency:templateview', 'moodle/competency:templatemanage');
+        $capabilities = array('powereduc/competency:templateview', 'powereduc/competency:templatemanage');
         if (!has_any_capability($capabilities, $context)) {
-             throw new required_capability_exception($context, 'moodle/competency:templateview', 'nopermissions', '');
+             throw new required_capability_exception($context, 'powereduc/competency:templateview', 'nopermissions', '');
         }
 
-        if (has_capability('moodle/competency:templatemanage', $context)) {
+        if (has_capability('powereduc/competency:templatemanage', $context)) {
             $onlyvisible = 0;
         }
 
@@ -2092,12 +2092,12 @@ class api {
         $context = context_system::instance();
         $onlyvisible = 1;
 
-        $capabilities = array('moodle/competency:templateview', 'moodle/competency:templatemanage');
+        $capabilities = array('powereduc/competency:templateview', 'powereduc/competency:templatemanage');
         if (!has_any_capability($capabilities, $context)) {
-             throw new required_capability_exception($context, 'moodle/competency:templateview', 'nopermissions', '');
+             throw new required_capability_exception($context, 'powereduc/competency:templateview', 'nopermissions', '');
         }
 
-        if (has_capability('moodle/competency:templatemanage', $context)) {
+        if (has_capability('powereduc/competency:templatemanage', $context)) {
             $onlyvisible = 0;
         }
 
@@ -2121,7 +2121,7 @@ class api {
         }
 
         if (!$template->can_read()) {
-            throw new required_capability_exception($template->get_context(), 'moodle/competency:templateview',
+            throw new required_capability_exception($template->get_context(), 'powereduc/competency:templateview',
                 'nopermissions', '');
         }
 
@@ -2143,7 +2143,7 @@ class api {
         }
 
         if (!$template->can_read()) {
-            throw new required_capability_exception($template->get_context(), 'moodle/competency:templateview',
+            throw new required_capability_exception($template->get_context(), 'powereduc/competency:templateview',
                 'nopermissions', '');
         }
 
@@ -2166,7 +2166,7 @@ class api {
         }
 
         if (!$template->can_read()) {
-            throw new required_capability_exception($template->get_context(), 'moodle/competency:templateview',
+            throw new required_capability_exception($template->get_context(), 'powereduc/competency:templateview',
                 'nopermissions', '');
         }
 
@@ -2186,7 +2186,7 @@ class api {
         // First we do a permissions check.
         $template = new template($templateid);
         if (!$template->can_manage()) {
-            throw new required_capability_exception($template->get_context(), 'moodle/competency:templatemanage',
+            throw new required_capability_exception($template->get_context(), 'powereduc/competency:templatemanage',
                 'nopermissions', '');
         }
 
@@ -2222,7 +2222,7 @@ class api {
         // First we do a permissions check.
         $template = new template($templateid);
         if (!$template->can_manage()) {
-            throw new required_capability_exception($template->get_context(), 'moodle/competency:templatemanage',
+            throw new required_capability_exception($template->get_context(), 'powereduc/competency:templatemanage',
                 'nopermissions', '');
         }
 
@@ -2243,7 +2243,7 @@ class api {
     /**
      * Move the template competency up or down in the display list.
      *
-     * Requires moodle/competency:templatemanage capability at the system context.
+     * Requires powereduc/competency:templatemanage capability at the system context.
      *
      * @param int $templateid The template id
      * @param int $competencyidfrom The id of the competency we are moving.
@@ -2256,7 +2256,7 @@ class api {
 
         // First we do a permissions check.
         if (!$template->can_manage()) {
-            throw new required_capability_exception($template->get_context(), 'moodle/competency:templatemanage',
+            throw new required_capability_exception($template->get_context(), 'powereduc/competency:templatemanage',
                 'nopermissions', '');
         }
 
@@ -2312,7 +2312,7 @@ class api {
         if (!is_object($template)) {
             $template = new template($template);
         }
-        require_capability('moodle/competency:templatemanage', $template->get_context());
+        require_capability('powereduc/competency:templatemanage', $template->get_context());
 
         $cohort = $cohortorid;
         if (!is_object($cohort)) {
@@ -2321,8 +2321,8 @@ class api {
 
         // Replicate logic in cohort_can_view_cohort() because we can't use it directly as we don't have a course context.
         $cohortcontext = context::instance_by_id($cohort->contextid);
-        if (!$cohort->visible && !has_capability('moodle/cohort:view', $cohortcontext)) {
-            throw new required_capability_exception($cohortcontext, 'moodle/cohort:view', 'nopermissions', '');
+        if (!$cohort->visible && !has_capability('powereduc/cohort:view', $cohortcontext)) {
+            throw new required_capability_exception($cohortcontext, 'powereduc/cohort:view', 'nopermissions', '');
         }
 
         $tplcohort = template_cohort::get_relation($template->get('id'), $cohort->id);
@@ -2348,7 +2348,7 @@ class api {
         if (!is_object($template)) {
             $template = new template($template);
         }
-        require_capability('moodle/competency:templatemanage', $template->get_context());
+        require_capability('powereduc/competency:templatemanage', $template->get_context());
 
         $cohort = $cohortorid;
         if (!is_object($cohort)) {
@@ -2378,7 +2378,7 @@ class api {
 
         // Check that we can read something here.
         if (!plan::can_read_user($userid) && !plan::can_read_user_draft($userid)) {
-            throw new required_capability_exception($context, 'moodle/competency:planview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:planview', 'nopermissions', '');
         }
 
         // The user cannot view the drafts.
@@ -2463,7 +2463,7 @@ class api {
         }
 
         // TODO MDL-52243 Use core function.
-        list($insql, $inparams) = self::filter_users_with_capability_on_user_context_sql('moodle/competency:planreview',
+        list($insql, $inparams) = self::filter_users_with_capability_on_user_context_sql('powereduc/competency:planreview',
             $userid, SQL_PARAMS_NAMED);
         $sql .= " AND p.userid $insql";
         $params += $inparams;
@@ -2514,7 +2514,7 @@ class api {
 
         if (!$plan->can_manage()) {
             $context = context_user::instance($plan->get('userid'));
-            throw new required_capability_exception($context, 'moodle/competency:planmanage', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:planmanage', 'nopermissions', '');
         }
 
         $plan->create();
@@ -2540,7 +2540,7 @@ class api {
 
         // The user must be able to view the template to use it as a base for a plan.
         if (!$template->can_read()) {
-            throw new required_capability_exception($template->get_context(), 'moodle/competency:templateview',
+            throw new required_capability_exception($template->get_context(), 'powereduc/competency:templateview',
                 'nopermissions', '');
         }
         // Can not create plan from a hidden template.
@@ -2570,7 +2570,7 @@ class api {
 
         $plan = new plan(0, $record);
         if (!$plan->can_manage()) {
-            throw new required_capability_exception($plan->get_context(), 'moodle/competency:planmanage',
+            throw new required_capability_exception($plan->get_context(), 'powereduc/competency:planmanage',
                 'nopermissions', '');
         }
 
@@ -2608,7 +2608,7 @@ class api {
 
         // The user must be able to view the template to use it as a base for a plan.
         if (!$template->can_read()) {
-            throw new required_capability_exception($template->get_context(), 'moodle/competency:templateview',
+            throw new required_capability_exception($template->get_context(), 'powereduc/competency:templateview',
                 'nopermissions', '');
         }
 
@@ -2620,8 +2620,8 @@ class api {
         // Replicate logic in cohort_can_view_cohort() because we can't use it directly as we don't have a course context.
         $cohort = $DB->get_record('cohort', array('id' => $cohortid), '*', MUST_EXIST);
         $cohortcontext = context::instance_by_id($cohort->contextid);
-        if (!$cohort->visible && !has_capability('moodle/cohort:view', $cohortcontext)) {
-            throw new required_capability_exception($cohortcontext, 'moodle/cohort:view', 'nopermissions', '');
+        if (!$cohort->visible && !has_capability('powereduc/cohort:view', $cohortcontext)) {
+            throw new required_capability_exception($cohortcontext, 'powereduc/cohort:view', 'nopermissions', '');
         }
 
         // Convert the template to a plan.
@@ -2682,7 +2682,7 @@ class api {
 
         // The user must be allowed to manage the plans of the user, nothing about the template.
         if (!$plan->can_manage()) {
-            throw new required_capability_exception($plan->get_context(), 'moodle/competency:planmanage', 'nopermissions', '');
+            throw new required_capability_exception($plan->get_context(), 'powereduc/competency:planmanage', 'nopermissions', '');
         }
 
         // Only plan with status DRAFT or ACTIVE can be unliked..
@@ -2735,7 +2735,7 @@ class api {
 
         // Validate that the plan as it is can be managed.
         if (!$plan->can_manage()) {
-            throw new required_capability_exception($plan->get_context(), 'moodle/competency:planmanage', 'nopermissions', '');
+            throw new required_capability_exception($plan->get_context(), 'powereduc/competency:planmanage', 'nopermissions', '');
 
         } else if ($plan->get('status') == plan::STATUS_COMPLETE) {
             // A completed plan cannot be edited.
@@ -2780,7 +2780,7 @@ class api {
 
         if (!$plan->can_read()) {
             $context = context_user::instance($plan->get('userid'));
-            throw new required_capability_exception($context, 'moodle/competency:planview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:planview', 'nopermissions', '');
         }
 
         return $plan;
@@ -2802,7 +2802,7 @@ class api {
         // First we do a permissions check.
         if (!$plan->can_read()) {
             $context = context_user::instance($plan->get('userid'));
-            throw new required_capability_exception($context, 'moodle/competency:planview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:planview', 'nopermissions', '');
         }
 
         // Trigger a template viewed event.
@@ -2827,7 +2827,7 @@ class api {
 
         if (!$plan->can_manage()) {
             $context = context_user::instance($plan->get('userid'));
-            throw new required_capability_exception($context, 'moodle/competency:planmanage', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:planmanage', 'nopermissions', '');
         }
 
         // Wrap the suppression in a DB transaction.
@@ -2869,7 +2869,7 @@ class api {
 
         // We need to be able to view the plan at least.
         if (!$plan->can_read()) {
-            throw new required_capability_exception($plan->get_context(), 'moodle/competency:planview', 'nopermissions', '');
+            throw new required_capability_exception($plan->get_context(), 'powereduc/competency:planview', 'nopermissions', '');
         }
 
         if ($plan->is_based_on_template()) {
@@ -2877,7 +2877,7 @@ class api {
         } else if ($plan->get('status') != plan::STATUS_WAITING_FOR_REVIEW) {
             throw new coding_exception('The plan review cannot be cancelled at this stage.');
         } else if (!$plan->can_request_review()) {
-            throw new required_capability_exception($plan->get_context(), 'moodle/competency:planmanage', 'nopermissions', '');
+            throw new required_capability_exception($plan->get_context(), 'powereduc/competency:planmanage', 'nopermissions', '');
         }
 
         $plan->set('status', plan::STATUS_DRAFT);
@@ -2904,7 +2904,7 @@ class api {
 
         // We need to be able to view the plan at least.
         if (!$plan->can_read()) {
-            throw new required_capability_exception($plan->get_context(), 'moodle/competency:planview', 'nopermissions', '');
+            throw new required_capability_exception($plan->get_context(), 'powereduc/competency:planview', 'nopermissions', '');
         }
 
         if ($plan->is_based_on_template()) {
@@ -2912,7 +2912,7 @@ class api {
         } else if ($plan->get('status') != plan::STATUS_DRAFT) {
             throw new coding_exception('The plan cannot be sent for review at this stage.');
         } else if (!$plan->can_request_review()) {
-            throw new required_capability_exception($plan->get_context(), 'moodle/competency:planmanage', 'nopermissions', '');
+            throw new required_capability_exception($plan->get_context(), 'powereduc/competency:planmanage', 'nopermissions', '');
         }
 
         $plan->set('status', plan::STATUS_WAITING_FOR_REVIEW);
@@ -2940,7 +2940,7 @@ class api {
 
         // We need to be able to view the plan at least.
         if (!$plan->can_read()) {
-            throw new required_capability_exception($plan->get_context(), 'moodle/competency:planview', 'nopermissions', '');
+            throw new required_capability_exception($plan->get_context(), 'powereduc/competency:planview', 'nopermissions', '');
         }
 
         if ($plan->is_based_on_template()) {
@@ -2948,7 +2948,7 @@ class api {
         } else if ($plan->get('status') != plan::STATUS_WAITING_FOR_REVIEW) {
             throw new coding_exception('The plan review cannot be started at this stage.');
         } else if (!$plan->can_review()) {
-            throw new required_capability_exception($plan->get_context(), 'moodle/competency:planmanage', 'nopermissions', '');
+            throw new required_capability_exception($plan->get_context(), 'powereduc/competency:planmanage', 'nopermissions', '');
         }
 
         $plan->set('status', plan::STATUS_IN_REVIEW);
@@ -2976,7 +2976,7 @@ class api {
 
         // We need to be able to view the plan at least.
         if (!$plan->can_read()) {
-            throw new required_capability_exception($plan->get_context(), 'moodle/competency:planview', 'nopermissions', '');
+            throw new required_capability_exception($plan->get_context(), 'powereduc/competency:planview', 'nopermissions', '');
         }
 
         if ($plan->is_based_on_template()) {
@@ -2984,7 +2984,7 @@ class api {
         } else if ($plan->get('status') != plan::STATUS_IN_REVIEW) {
             throw new coding_exception('The plan review cannot be stopped at this stage.');
         } else if (!$plan->can_review()) {
-            throw new required_capability_exception($plan->get_context(), 'moodle/competency:planmanage', 'nopermissions', '');
+            throw new required_capability_exception($plan->get_context(), 'powereduc/competency:planmanage', 'nopermissions', '');
         }
 
         $plan->set('status', plan::STATUS_DRAFT);
@@ -3014,7 +3014,7 @@ class api {
 
         // We need to be able to view the plan at least.
         if (!$plan->can_read()) {
-            throw new required_capability_exception($plan->get_context(), 'moodle/competency:planview', 'nopermissions', '');
+            throw new required_capability_exception($plan->get_context(), 'powereduc/competency:planview', 'nopermissions', '');
         }
 
         // We can approve a plan that is either a draft, in review, or waiting for review.
@@ -3023,7 +3023,7 @@ class api {
         } else if (!$plan->is_draft()) {
             throw new coding_exception('The plan cannot be approved at this stage.');
         } else if (!$plan->can_review()) {
-            throw new required_capability_exception($plan->get_context(), 'moodle/competency:planmanage', 'nopermissions', '');
+            throw new required_capability_exception($plan->get_context(), 'powereduc/competency:planmanage', 'nopermissions', '');
         }
 
         $plan->set('status', plan::STATUS_ACTIVE);
@@ -3053,7 +3053,7 @@ class api {
 
         // We need to be able to view the plan at least.
         if (!$plan->can_read()) {
-            throw new required_capability_exception($plan->get_context(), 'moodle/competency:planview', 'nopermissions', '');
+            throw new required_capability_exception($plan->get_context(), 'powereduc/competency:planview', 'nopermissions', '');
         }
 
         if ($plan->is_based_on_template()) {
@@ -3061,7 +3061,7 @@ class api {
         } else if ($plan->get('status') != plan::STATUS_ACTIVE) {
             throw new coding_exception('The plan cannot be sent back to draft at this stage.');
         } else if (!$plan->can_review()) {
-            throw new required_capability_exception($plan->get_context(), 'moodle/competency:planmanage', 'nopermissions', '');
+            throw new required_capability_exception($plan->get_context(), 'powereduc/competency:planmanage', 'nopermissions', '');
         }
 
         $plan->set('status', plan::STATUS_DRAFT);
@@ -3090,7 +3090,7 @@ class api {
 
         // Validate that the plan can be managed.
         if (!$plan->can_manage()) {
-            throw new required_capability_exception($plan->get_context(), 'moodle/competency:planmanage', 'nopermissions', '');
+            throw new required_capability_exception($plan->get_context(), 'powereduc/competency:planmanage', 'nopermissions', '');
         }
 
         // Check if the plan was already completed.
@@ -3103,7 +3103,7 @@ class api {
 
         // The user should also be able to manage the plan when it's completed.
         if (!$plan->can_manage()) {
-            throw new required_capability_exception($plan->get_context(), 'moodle/competency:planmanage', 'nopermissions', '');
+            throw new required_capability_exception($plan->get_context(), 'powereduc/competency:planmanage', 'nopermissions', '');
         }
 
         // Put back original status because archive needs it to extract competencies from the right table.
@@ -3116,7 +3116,7 @@ class api {
         $success = $plan->update();
 
         if (!$success) {
-            $transaction->rollback(new moodle_exception('The plan could not be updated.'));
+            $transaction->rollback(new powereduc_exception('The plan could not be updated.'));
             return $success;
         }
 
@@ -3146,7 +3146,7 @@ class api {
         // Validate that the plan as it is can be managed.
         if (!$plan->can_manage()) {
             $context = context_user::instance($plan->get('userid'));
-            throw new required_capability_exception($context, 'moodle/competency:planmanage', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:planmanage', 'nopermissions', '');
         }
 
         $beforestatus = $plan->get('status');
@@ -3155,7 +3155,7 @@ class api {
         // Validate if status can be changed.
         if (!$plan->can_manage()) {
             $context = context_user::instance($plan->get('userid'));
-            throw new required_capability_exception($context, 'moodle/competency:planmanage', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:planmanage', 'nopermissions', '');
         }
 
         // Wrap the updates in a DB transaction.
@@ -3175,7 +3175,7 @@ class api {
         $success = $plan->update();
 
         if (!$success) {
-            $transaction->rollback(new moodle_exception('The plan could not be updated.'));
+            $transaction->rollback(new powereduc_exception('The plan could not be updated.'));
             return $success;
         }
 
@@ -3207,7 +3207,7 @@ class api {
         }
 
         if (!user_competency::can_read_user($plan->get('userid'))) {
-            throw new required_capability_exception($plan->get_context(), 'moodle/competency:usercompetencyview',
+            throw new required_capability_exception($plan->get_context(), 'powereduc/competency:usercompetencyview',
                 'nopermissions', '');
         }
 
@@ -3294,7 +3294,7 @@ class api {
 
         if (!$plan->can_read()) {
             $context = context_user::instance($plan->get('userid'));
-            throw new required_capability_exception($context, 'moodle/competency:planview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:planview', 'nopermissions', '');
         }
 
         $result = array();
@@ -3355,7 +3355,7 @@ class api {
 
         // First we do a permissions check.
         if (!$plan->can_manage()) {
-            throw new required_capability_exception($plan->get_context(), 'moodle/competency:planmanage', 'nopermissions', '');
+            throw new required_capability_exception($plan->get_context(), 'powereduc/competency:planmanage', 'nopermissions', '');
 
         } else if ($plan->is_based_on_template()) {
             throw new coding_exception('A competency can not be added to a learning plan based on a template');
@@ -3398,7 +3398,7 @@ class api {
         // First we do a permissions check.
         if (!$plan->can_manage()) {
             $context = context_user::instance($plan->get('userid'));
-            throw new required_capability_exception($context, 'moodle/competency:planmanage', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:planmanage', 'nopermissions', '');
 
         } else if ($plan->is_based_on_template()) {
             throw new coding_exception('A competency can not be removed from a learning plan based on a template');
@@ -3418,7 +3418,7 @@ class api {
     /**
      * Move the plan competency up or down in the display list.
      *
-     * Requires moodle/competency:planmanage capability at the system context.
+     * Requires powereduc/competency:planmanage capability at the system context.
      *
      * @param int $planid The plan  id
      * @param int $competencyidfrom The id of the competency we are moving.
@@ -3432,7 +3432,7 @@ class api {
         // First we do a permissions check.
         if (!$plan->can_manage()) {
             $context = context_user::instance($plan->get('userid'));
-            throw new required_capability_exception($context, 'moodle/competency:planmanage', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:planmanage', 'nopermissions', '');
 
         } else if ($plan->is_based_on_template()) {
             throw new coding_exception('A competency can not be reordered in a learning plan based on a template');
@@ -3489,11 +3489,11 @@ class api {
         $context = context_user::instance($userid);
         $uc = user_competency::get_record(array('userid' => $userid, 'competencyid' => $competencyid));
         if (!$uc || !$uc->can_read()) {
-            throw new required_capability_exception($context, 'moodle/competency:usercompetencyview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:usercompetencyview', 'nopermissions', '');
         } else if ($uc->get('status') != user_competency::STATUS_WAITING_FOR_REVIEW) {
             throw new coding_exception('The competency can not be cancel review request at this stage.');
         } else if (!$uc->can_request_review()) {
-            throw new required_capability_exception($context, 'moodle/competency:usercompetencyrequestreview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:usercompetencyrequestreview', 'nopermissions', '');
         }
 
         $uc->set('status', user_competency::STATUS_IDLE);
@@ -3520,12 +3520,12 @@ class api {
         }
 
         if (!$uc->can_read()) {
-            throw new required_capability_exception($uc->get_context(), 'moodle/competency:usercompetencyview',
+            throw new required_capability_exception($uc->get_context(), 'powereduc/competency:usercompetencyview',
                 'nopermissions', '');
         } else if ($uc->get('status') != user_competency::STATUS_IDLE) {
             throw new coding_exception('The competency can not be sent for review at this stage.');
         } else if (!$uc->can_request_review()) {
-            throw new required_capability_exception($uc->get_context(), 'moodle/competency:usercompetencyrequestreview',
+            throw new required_capability_exception($uc->get_context(), 'powereduc/competency:usercompetencyrequestreview',
                 'nopermissions', '');
         }
 
@@ -3551,11 +3551,11 @@ class api {
         $context = context_user::instance($userid);
         $uc = user_competency::get_record(array('userid' => $userid, 'competencyid' => $competencyid));
         if (!$uc || !$uc->can_read()) {
-            throw new required_capability_exception($context, 'moodle/competency:usercompetencyview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:usercompetencyview', 'nopermissions', '');
         } else if ($uc->get('status') != user_competency::STATUS_WAITING_FOR_REVIEW) {
             throw new coding_exception('The competency review can not be started at this stage.');
         } else if (!$uc->can_review()) {
-            throw new required_capability_exception($context, 'moodle/competency:usercompetencyreview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:usercompetencyreview', 'nopermissions', '');
         }
 
         $uc->set('status', user_competency::STATUS_IN_REVIEW);
@@ -3579,11 +3579,11 @@ class api {
         $context = context_user::instance($userid);
         $uc = user_competency::get_record(array('userid' => $userid, 'competencyid' => $competencyid));
         if (!$uc || !$uc->can_read()) {
-            throw new required_capability_exception($context, 'moodle/competency:usercompetencyview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:usercompetencyview', 'nopermissions', '');
         } else if ($uc->get('status') != user_competency::STATUS_IN_REVIEW) {
             throw new coding_exception('The competency review can not be stopped at this stage.');
         } else if (!$uc->can_review()) {
-            throw new required_capability_exception($context, 'moodle/competency:usercompetencyreview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:usercompetencyreview', 'nopermissions', '');
         }
 
         $uc->set('status', user_competency::STATUS_IDLE);
@@ -3608,7 +3608,7 @@ class api {
         }
 
         if (!$uc || !$uc->can_read()) {
-            throw new required_capability_exception($uc->get_context(), 'moodle/competency:usercompetencyview',
+            throw new required_capability_exception($uc->get_context(), 'powereduc/competency:usercompetencyview',
                 'nopermissions', '');
         }
 
@@ -3631,7 +3631,7 @@ class api {
         }
 
         if (!$uc || !$uc->can_read()) {
-            throw new required_capability_exception($uc->get_context(), 'moodle/competency:usercompetencyview',
+            throw new required_capability_exception($uc->get_context(), 'powereduc/competency:usercompetencyview',
                 'nopermissions', '');
         }
         $plan = new plan($planid);
@@ -3658,7 +3658,7 @@ class api {
         }
 
         if (!$ucc || !user_competency::can_read_user_in_course($ucc->get('userid'), $ucc->get('courseid'))) {
-            throw new required_capability_exception($ucc->get_context(), 'moodle/competency:usercompetencyview',
+            throw new required_capability_exception($ucc->get_context(), 'powereduc/competency:usercompetencyview',
                 'nopermissions', '');
         }
 
@@ -3683,7 +3683,7 @@ class api {
         }
 
         if (!$ucp || !user_competency::can_read_user($ucp->get('userid'))) {
-            throw new required_capability_exception($ucp->get_context(), 'moodle/competency:usercompetencyview',
+            throw new required_capability_exception($ucp->get_context(), 'powereduc/competency:usercompetencyview',
                 'nopermissions', '');
         }
         $plan = new plan($ucp->get('planid'));
@@ -3708,7 +3708,7 @@ class api {
         $template = new template($templateid);
 
         if (!$template->can_read()) {
-            throw new required_capability_exception($template->get_context(), 'moodle/competency:templateview',
+            throw new required_capability_exception($template->get_context(), 'powereduc/competency:templateview',
                 'nopermissions', '');
         }
 
@@ -3726,9 +3726,9 @@ class api {
         static::require_enabled();
         $competency = new competency($competencyid);
 
-        if (!has_any_capability(array('moodle/competency:competencyview', 'moodle/competency:competencymanage'),
+        if (!has_any_capability(array('powereduc/competency:competencyview', 'powereduc/competency:competencymanage'),
                 $competency->get_context())) {
-            throw new required_capability_exception($competency->get_context(), 'moodle/competency:competencyview',
+            throw new required_capability_exception($competency->get_context(), 'powereduc/competency:competencyview',
                 'nopermissions', '');
         }
 
@@ -3747,7 +3747,7 @@ class api {
         $competency1 = new competency($competencyid);
         $competency2 = new competency($relatedcompetencyid);
 
-        require_capability('moodle/competency:competencymanage', $competency1->get_context());
+        require_capability('powereduc/competency:competencymanage', $competency1->get_context());
 
         $relatedcompetency = related_competency::get_relation($competency1->get('id'), $competency2->get('id'));
         if (!$relatedcompetency->get('id')) {
@@ -3771,7 +3771,7 @@ class api {
 
         // This only check if we have the permission in either competency because both competencies
         // should belong to the same framework.
-        require_capability('moodle/competency:competencymanage', $competency->get_context());
+        require_capability('powereduc/competency:competencymanage', $competency->get_context());
 
         $relatedcompetency = related_competency::get_relation($competencyid, $relatedcompetencyid);
         if ($relatedcompetency->get('id')) {
@@ -3793,7 +3793,7 @@ class api {
 
         if (!$userevidence->can_read()) {
             $context = $userevidence->get_context();
-            throw new required_capability_exception($context, 'moodle/competency:userevidenceview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:userevidenceview', 'nopermissions', '');
         }
 
         return $userevidence;
@@ -3812,7 +3812,7 @@ class api {
         $context = $userevidence->get_context();
 
         if (!$userevidence->can_manage()) {
-            throw new required_capability_exception($context, 'moodle/competency:userevidencemanage', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:userevidencemanage', 'nopermissions', '');
         }
 
         $userevidence->create();
@@ -3841,7 +3841,7 @@ class api {
         $context = $userevidence->get_context();
 
         if (!$userevidence->can_manage()) {
-            throw new required_capability_exception($context, 'moodle/competency:userevidencemanage', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:userevidencemanage', 'nopermissions', '');
 
         } else if (property_exists($data, 'userid') && $data->userid != $userevidence->get('userid')) {
             throw new coding_exception('Can not change the userid of a user evidence.');
@@ -3874,7 +3874,7 @@ class api {
         $context = $userevidence->get_context();
 
         if (!$userevidence->can_manage()) {
-            throw new required_capability_exception($context, 'moodle/competency:userevidencemanage', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:userevidencemanage', 'nopermissions', '');
         }
 
         // Delete the user evidence.
@@ -3909,7 +3909,7 @@ class api {
         static::require_enabled();
         if (!user_evidence::can_read_user($userid)) {
             $context = context_user::instance($userid);
-            throw new required_capability_exception($context, 'moodle/competency:userevidenceview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:userevidenceview', 'nopermissions', '');
         }
 
         $evidence = user_evidence::get_records(array('userid' => $userid), 'name');
@@ -3935,7 +3935,7 @@ class api {
         // Perform user evidence capability checks.
         if (!$userevidence->can_manage()) {
             $context = $userevidence->get_context();
-            throw new required_capability_exception($context, 'moodle/competency:userevidencemanage', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:userevidencemanage', 'nopermissions', '');
         }
 
         // Perform competency capability checks.
@@ -3984,7 +3984,7 @@ class api {
         // Perform user evidence capability checks.
         if (!$userevidence->can_manage()) {
             $context = $userevidence->get_context();
-            throw new required_capability_exception($context, 'moodle/competency:userevidencemanage', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:userevidencemanage', 'nopermissions', '');
         }
 
         // Get (and delete) the relation.
@@ -4025,7 +4025,7 @@ class api {
         $userid = $userevidence->get('userid');
 
         if (!$userevidence->can_manage()) {
-            throw new required_capability_exception($context, 'moodle/competency:userevidencemanage', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:userevidencemanage', 'nopermissions', '');
         }
 
         $usercompetencies = user_evidence_competency::get_user_competencies_by_userevidenceid($id);
@@ -4197,7 +4197,7 @@ class api {
 
         if (!user_competency::can_read_user($userid)) {
             $context = context_user::instance($userid);
-            throw new required_capability_exception($context, 'moodle/competency:usercompetencyview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:usercompetencyview', 'nopermissions', '');
         }
 
         $usercompetency = user_competency::get_record(array('userid' => $userid, 'competencyid' => $competencyid));
@@ -4245,7 +4245,7 @@ class api {
 
         if (!user_competency::can_read_user_in_course($userid, $courseid)) {
             $context = context_user::instance($userid);
-            throw new required_capability_exception($context, 'moodle/competency:usercompetencyview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:usercompetencyview', 'nopermissions', '');
         }
 
         $usercompetency = user_competency::get_record(array('userid' => $userid, 'competencyid' => $competencyid));
@@ -4279,7 +4279,7 @@ class api {
      * @return evidence
      * @throws coding_exception
      * @throws invalid_persistent_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function add_evidence($userid, $competencyorid, $contextorid, $action, $descidentifier, $desccomponent,
                                         $desca = null, $recommend = false, $url = null, $grade = null, $actionuserid = null,
@@ -4520,7 +4520,7 @@ class api {
         $evidence = new evidence($evidenceid);
         $uc = new user_competency($evidence->get('usercompetencyid'));
         if (!$uc->can_read()) {
-            throw new required_capability_exception($uc->get_context(), 'moodle/competency:usercompetencyview',
+            throw new required_capability_exception($uc->get_context(), 'powereduc/competency:usercompetencyview',
                 'nopermissions', '');
         }
 
@@ -4541,7 +4541,7 @@ class api {
 
         $uc = new user_competency($evidence->get('usercompetencyid'));
         if (!evidence::can_delete_user($uc->get('userid'))) {
-            throw new required_capability_exception($uc->get_context(), 'moodle/competency:evidencedelete', 'nopermissions', '');
+            throw new required_capability_exception($uc->get_context(), 'powereduc/competency:evidencedelete', 'nopermissions', '');
         }
 
         return $evidence->delete();
@@ -4617,7 +4617,7 @@ class api {
             $action = evidence::ACTION_COMPLETE;
 
         } else {
-            throw new moodle_exception('Unexpected rule outcome: ' + $ruleoutcome);
+            throw new powereduc_exception('Unexpected rule outcome: ' + $ruleoutcome);
         }
 
         // Finally add an evidence.
@@ -4685,7 +4685,7 @@ class api {
                     $action = evidence::ACTION_COMPLETE;
 
                 } else {
-                    throw new moodle_exception('Unexpected rule outcome: ' + $outcome);
+                    throw new powereduc_exception('Unexpected rule outcome: ' + $outcome);
                 }
 
                 static::add_evidence(
@@ -4752,7 +4752,7 @@ class api {
                 $action = evidence::ACTION_COMPLETE;
 
             } else {
-                throw new moodle_exception('Unexpected rule outcome: ' + $outcome);
+                throw new powereduc_exception('Unexpected rule outcome: ' + $outcome);
             }
 
             static::add_evidence(
@@ -4873,15 +4873,15 @@ class api {
         $uc = static::get_user_competency($userid, $competencyid);
         $context = $uc->get_context();
         if (!user_competency::can_grade_user($uc->get('userid'))) {
-            throw new required_capability_exception($context, 'moodle/competency:competencygrade', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:competencygrade', 'nopermissions', '');
         }
 
         // Throws exception if competency not in plan.
         $competency = $uc->get_competency();
         $competencycontext = $competency->get_context();
-        if (!has_any_capability(array('moodle/competency:competencyview', 'moodle/competency:competencymanage'),
+        if (!has_any_capability(array('powereduc/competency:competencyview', 'powereduc/competency:competencymanage'),
                 $competencycontext)) {
-            throw new required_capability_exception($competencycontext, 'moodle/competency:competencyview', 'nopermissions', '');
+            throw new required_capability_exception($competencycontext, 'powereduc/competency:competencyview', 'nopermissions', '');
         }
 
         $action = evidence::ACTION_OVERRIDE;
@@ -4927,15 +4927,15 @@ class api {
 
         $context = $plan->get_context();
         if (!user_competency::can_grade_user($plan->get('userid'))) {
-            throw new required_capability_exception($context, 'moodle/competency:competencygrade', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:competencygrade', 'nopermissions', '');
         }
 
         // Throws exception if competency not in plan.
         $competency = $plan->get_competency($competencyid);
         $competencycontext = $competency->get_context();
-        if (!has_any_capability(array('moodle/competency:competencyview', 'moodle/competency:competencymanage'),
+        if (!has_any_capability(array('powereduc/competency:competencyview', 'powereduc/competency:competencymanage'),
                 $competencycontext)) {
-            throw new required_capability_exception($competencycontext, 'moodle/competency:competencyview', 'nopermissions', '');
+            throw new required_capability_exception($competencycontext, 'powereduc/competency:competencyview', 'nopermissions', '');
         }
 
         $action = evidence::ACTION_OVERRIDE;
@@ -4986,24 +4986,24 @@ class api {
 
         // Check that we can view the user competency details in the course.
         if (!user_competency::can_read_user_in_course($userid, $course->id)) {
-            throw new required_capability_exception($context, 'moodle/competency:usercompetencyview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:usercompetencyview', 'nopermissions', '');
         }
 
         // Validate the permission to grade.
         if (!user_competency::can_grade_user_in_course($userid, $course->id)) {
-            throw new required_capability_exception($context, 'moodle/competency:competencygrade', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:competencygrade', 'nopermissions', '');
         }
 
         // Check that competency is in course and visible to the current user.
         $competency = course_competency::get_competency($course->id, $competencyid);
         $competencycontext = $competency->get_context();
-        if (!has_any_capability(array('moodle/competency:competencyview', 'moodle/competency:competencymanage'),
+        if (!has_any_capability(array('powereduc/competency:competencyview', 'powereduc/competency:competencymanage'),
                 $competencycontext)) {
-            throw new required_capability_exception($competencycontext, 'moodle/competency:competencyview', 'nopermissions', '');
+            throw new required_capability_exception($competencycontext, 'powereduc/competency:competencyview', 'nopermissions', '');
         }
 
         // Check that the user is enrolled in the course, and is "gradable".
-        if (!is_enrolled($context, $userid, 'moodle/competency:coursecompetencygradable')) {
+        if (!is_enrolled($context, $userid, 'powereduc/competency:coursecompetencygradable')) {
             throw new coding_exception('The competency may not be rated at this time.');
         }
 
@@ -5034,7 +5034,7 @@ class api {
     /**
      * Count the plans in the template, filtered by status.
      *
-     * Requires moodle/competency:templateview capability at the system context.
+     * Requires powereduc/competency:templateview capability at the system context.
      *
      * @param mixed $templateorid The id or the template.
      * @param int $status One of the plan status constants (or 0 for all plans).
@@ -5049,7 +5049,7 @@ class api {
 
         // First we do a permissions check.
         if (!$template->can_read()) {
-            throw new required_capability_exception($template->get_context(), 'moodle/competency:templateview',
+            throw new required_capability_exception($template->get_context(), 'powereduc/competency:templateview',
                 'nopermissions', '');
         }
 
@@ -5059,7 +5059,7 @@ class api {
     /**
      * Count the user-completency-plans in the template, optionally filtered by proficiency.
      *
-     * Requires moodle/competency:templateview capability at the system context.
+     * Requires powereduc/competency:templateview capability at the system context.
      *
      * @param mixed $templateorid The id or the template.
      * @param mixed $proficiency If true, filter by proficiency, if false filter by not proficient, if null - no filter.
@@ -5074,7 +5074,7 @@ class api {
 
         // First we do a permissions check.
         if (!$template->can_read()) {
-             throw new required_capability_exception($template->get_context(), 'moodle/competency:templateview',
+             throw new required_capability_exception($template->get_context(), 'powereduc/competency:templateview',
                 'nopermissions', '');
         }
 
@@ -5084,7 +5084,7 @@ class api {
     /**
      * List the plans in the template, filtered by status.
      *
-     * Requires moodle/competency:templateview capability at the system context.
+     * Requires powereduc/competency:templateview capability at the system context.
      *
      * @param mixed $templateorid The id or the template.
      * @param int $status One of the plan status constants (or 0 for all plans).
@@ -5100,7 +5100,7 @@ class api {
 
         // First we do a permissions check.
         if (!$template->can_read()) {
-             throw new required_capability_exception($template->get_context(), 'moodle/competency:templateview',
+             throw new required_capability_exception($template->get_context(), 'powereduc/competency:templateview',
                 'nopermissions', '');
         }
 
@@ -5110,7 +5110,7 @@ class api {
     /**
      * Get the most often not completed competency for this course.
      *
-     * Requires moodle/competency:coursecompetencyview capability at the course context.
+     * Requires powereduc/competency:coursecompetencyview capability at the course context.
      *
      * @param int $courseid The course id
      * @param int $skip The number of records to skip
@@ -5121,9 +5121,9 @@ class api {
         static::require_enabled();
         $coursecontext = context_course::instance($courseid);
 
-        if (!has_any_capability(array('moodle/competency:coursecompetencyview', 'moodle/competency:coursecompetencymanage'),
+        if (!has_any_capability(array('powereduc/competency:coursecompetencyview', 'powereduc/competency:coursecompetencymanage'),
                 $coursecontext)) {
-            throw new required_capability_exception($coursecontext, 'moodle/competency:coursecompetencyview', 'nopermissions', '');
+            throw new required_capability_exception($coursecontext, 'powereduc/competency:coursecompetencyview', 'nopermissions', '');
         }
 
         return user_competency_course::get_least_proficient_competencies_for_course($courseid, $skip, $limit);
@@ -5132,7 +5132,7 @@ class api {
     /**
      * Get the most often not completed competency for this template.
      *
-     * Requires moodle/competency:templateview capability at the system context.
+     * Requires powereduc/competency:templateview capability at the system context.
      *
      * @param mixed $templateorid The id or the template.
      * @param int $skip The number of records to skip
@@ -5148,7 +5148,7 @@ class api {
 
         // First we do a permissions check.
         if (!$template->can_read()) {
-            throw new required_capability_exception($template->get_context(), 'moodle/competency:templateview',
+            throw new required_capability_exception($template->get_context(), 'powereduc/competency:templateview',
                 'nopermissions', '');
         }
 
@@ -5158,7 +5158,7 @@ class api {
     /**
      * Template event viewed.
      *
-     * Requires moodle/competency:templateview capability at the system context.
+     * Requires powereduc/competency:templateview capability at the system context.
      *
      * @param mixed $templateorid The id or the template.
      * @return boolean
@@ -5172,7 +5172,7 @@ class api {
 
         // First we do a permissions check.
         if (!$template->can_read()) {
-            throw new required_capability_exception($template->get_context(), 'moodle/competency:templateview',
+            throw new required_capability_exception($template->get_context(), 'powereduc/competency:templateview',
                 'nopermissions', '');
         }
 
@@ -5185,7 +5185,7 @@ class api {
     /**
      * Get the competency settings for a course.
      *
-     * Requires moodle/competency:coursecompetencyview capability at the course context.
+     * Requires powereduc/competency:coursecompetencyview capability at the course context.
      *
      * @param int $courseid The course id
      * @return course_competency_settings
@@ -5196,7 +5196,7 @@ class api {
         // First we do a permissions check.
         if (!course_competency_settings::can_read($courseid)) {
             $context = context_course::instance($courseid);
-            throw new required_capability_exception($context, 'moodle/competency:coursecompetencyview', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:coursecompetencyview', 'nopermissions', '');
         }
 
         return course_competency_settings::get_by_courseid($courseid);
@@ -5205,7 +5205,7 @@ class api {
     /**
      * Update the competency settings for a course.
      *
-     * Requires moodle/competency:coursecompetencyconfigure capability at the course context.
+     * Requires powereduc/competency:coursecompetencyconfigure capability at the course context.
      *
      * @param int $courseid The course id
      * @param stdClass $settings List of settings. The only valid setting ATM is pushratginstouserplans (boolean).
@@ -5222,7 +5222,7 @@ class api {
         // First we do a permissions check.
         if (!course_competency_settings::can_manage_course($courseid)) {
             $context = context_course::instance($courseid);
-            throw new required_capability_exception($context, 'moodle/competency:coursecompetencyconfigure', 'nopermissions', '');
+            throw new required_capability_exception($context, 'powereduc/competency:coursecompetencyconfigure', 'nopermissions', '');
         }
 
         $exists = course_competency_settings::get_record(array('courseid' => $courseid));

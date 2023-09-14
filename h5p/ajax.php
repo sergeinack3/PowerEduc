@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Responsible for handling AJAX requests related to H5P.
  *
  * @package    core_h5p
- * @copyright  2020 Victor Deniz <victor@moodle.com>, based on code by Joubel AS
+ * @copyright  2020 Victor Deniz <victor@powereduc.com>, based on code by Joubel AS
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

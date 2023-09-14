@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace gradereport_singleview\output;
 
-use moodle_url;
+use powereduc_url;
 use renderer_base;
 use gradereport_singleview\report\singleview;
 
@@ -26,7 +26,7 @@ use gradereport_singleview\report\singleview;
  * Renderable class for the action bar elements in the single view report page.
  *
  * @package   gradereport_singleview
- * @copyright 2022 Shamim Rezaie <shamim@moodle.com>
+ * @copyright 2022 Shamim Rezaie <shamim@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class action_bar extends \core_grades\output\action_bar {
@@ -72,7 +72,7 @@ class action_bar extends \core_grades\output\action_bar {
         // Get the data used to output the general navigation selector.
         $generalnavselector = new \core_grades\output\general_action_bar(
             $this->context,
-            new moodle_url('/grade/report/singleview/index.php', ['id' => $courseid]),
+            new powereduc_url('/grade/report/singleview/index.php', ['id' => $courseid]),
             'report',
             'singleview'
         );
@@ -83,9 +83,9 @@ class action_bar extends \core_grades\output\action_bar {
             'displaylabel' => true,
             'userselectactive' => $this->itemtype === 'user',
             'gradeselectactive' => $this->itemtype === 'grade',
-            'gradezerolink' => (new moodle_url('/grade/report/singleview/index.php',
+            'gradezerolink' => (new powereduc_url('/grade/report/singleview/index.php',
                 ['id' => $courseid, 'item' => 'grade_select']))->out(false),
-            'userzerolink' => (new moodle_url('/grade/report/singleview/index.php',
+            'userzerolink' => (new powereduc_url('/grade/report/singleview/index.php',
                 ['id' => $courseid, 'item' => 'user_select']))->out(false)
         ];
 

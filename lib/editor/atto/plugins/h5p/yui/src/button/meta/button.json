@@ -1,7 +1,7 @@
 {
-    "moodle-atto_h5p-button": {
+    "powereduc-atto_h5p-button": {
         "requires": [
-            "moodle-editor_atto-plugin"
+            "powereduc-editor_atto-plugin"
         ]
     }
 }

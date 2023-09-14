@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -165,11 +165,11 @@ class container {
 
                     $coursecontext = \context_course::instance($dbrow->courseid);
                     if (!$cm->get_course()->visible &&
-                            !has_capability('moodle/course:viewhiddencourses', $coursecontext, $requestinguserid)) {
+                            !has_capability('powereduc/course:viewhiddencourses', $coursecontext, $requestinguserid)) {
                         return true;
                     }
 
-                    if (!has_capability('moodle/course:view', $coursecontext, $requestinguserid) &&
+                    if (!has_capability('powereduc/course:view', $coursecontext, $requestinguserid) &&
                             !is_enrolled($coursecontext, $requestinguserid)) {
                         return true;
                     }

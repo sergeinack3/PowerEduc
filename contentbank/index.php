@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * List content in content bank.
  *
  * @package    core_contentbank
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,10 +32,10 @@ $context = context::instance_by_id($contextid, MUST_EXIST);
 
 $cb = new \core_contentbank\contentbank();
 if (!$cb->is_context_allowed($context)) {
-    throw new \moodle_exception('contextnotallowed', 'core_contentbank');
+    throw new \powereduc_exception('contextnotallowed', 'core_contentbank');
 }
 
-require_capability('moodle/contentbank:access', $context);
+require_capability('powereduc/contentbank:access', $context);
 
 $statusmsg = optional_param('statusmsg', '', PARAM_ALPHANUMEXT);
 $errormsg = optional_param('errormsg', '', PARAM_ALPHANUMEXT);
@@ -78,12 +78,12 @@ $foldercontents = $cb->search_contents($search, $contextid, $contenttypes);
 $toolbar = array ();
 
 // Place the Add button in the toolbar.
-if (has_capability('moodle/contentbank:useeditor', $context)) {
+if (has_capability('powereduc/contentbank:useeditor', $context)) {
     // Get the content types for which the user can use an editor.
     $editabletypes = $cb->get_contenttypes_with_capability_feature(\core_contentbank\contenttype::CAN_EDIT, $context);
     if (!empty($editabletypes)) {
         // Editor base URL.
-        $editbaseurl = new moodle_url('/contentbank/edit.php', ['contextid' => $contextid]);
+        $editbaseurl = new powereduc_url('/contentbank/edit.php', ['contextid' => $contextid]);
         $toolbar[] = [
             'name' => get_string('add'),
             'link' => $editbaseurl, 'dropdown' => true,
@@ -94,11 +94,11 @@ if (has_capability('moodle/contentbank:useeditor', $context)) {
 }
 
 // Place the Upload button in the toolbar.
-if (has_capability('moodle/contentbank:upload', $context)) {
+if (has_capability('powereduc/contentbank:upload', $context)) {
     // Don' show upload button if there's no plugin to support any file extension.
     $accepted = $cb->get_supported_extensions_as_string($context);
     if (!empty($accepted)) {
-        $importurl = new moodle_url('/contentbank/index.php', ['contextid' => $contextid]);
+        $importurl = new powereduc_url('/contentbank/index.php', ['contextid' => $contextid]);
         $toolbar[] = [
             'name' => get_string('upload', 'contentbank'),
             'link' => $importurl->out(false),

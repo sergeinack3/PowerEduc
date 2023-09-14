@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'chat', language 'en', branch 'POWEREDUC_20_STABLE'
@@ -169,15 +169,15 @@ $string['userlist'] = 'User list';
 $string['usingchat'] = 'Using chat';
 $string['usingchat_help'] = 'The chat module contains some features to make chatting a little nicer.
 
-* Smilies - Any smiley faces (emoticons) that you can type elsewhere in Moodle can also be typed here, for example :-)
+* Smilies - Any smiley faces (emoticons) that you can type elsewhere in PowerEduc can also be typed here, for example :-)
 * Links - Website addresses will be turned into links automatically
 * Emoting - You can start a line with "/me" or ":" to emote, for example if your name is Kim and you type ":laughs!" or "/me laughs!" then everyone will see "Kim laughs!"
 * Beeps - You can send a sound to other participants by clicking the "beep" link next to their name. A useful shortcut to beep all the people in the chat at once is to type "beep all".
 * HTML - If you know some HTML code, you can use it in your text to do things like insert images, play sounds or create different coloured text';
 $string['viewreport'] = 'Past sessions';
 
-// Deprecated since Moodle 3.11.
+// Deprecated since PowerEduc 3.11.
 $string['sessionstart'] = 'The next chat session will start on {$a->date}, ({$a->fromnow} from now)';
 
-// Deprecated since Moodle 4.0.
+// Deprecated since PowerEduc 4.0.
 $string['nextsession'] = 'Next scheduled session';

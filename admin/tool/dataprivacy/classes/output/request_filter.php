@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  */
 namespace tool_dataprivacy\output;
 
-use moodle_url;
+use powereduc_url;
 use renderable;
 use renderer_base;
 use stdClass;
@@ -45,7 +45,7 @@ class request_filter implements renderable, templatable {
     /** @var array $selectedoptions The list of selected filter option values. */
     protected $selectedoptions;
 
-    /** @var moodle_url|string $baseurl The url with params needed to call up this page. */
+    /** @var powereduc_url|string $baseurl The url with params needed to call up this page. */
     protected $baseurl;
 
     /**
@@ -53,13 +53,13 @@ class request_filter implements renderable, templatable {
      *
      * @param array $filteroptions The filter options.
      * @param array $selectedoptions The list of selected filter option values.
-     * @param string|moodle_url $baseurl The url with params needed to call up this page.
+     * @param string|powereduc_url $baseurl The url with params needed to call up this page.
      */
     public function __construct($filteroptions, $selectedoptions, $baseurl = null) {
         $this->filteroptions = $filteroptions;
         $this->selectedoptions = $selectedoptions;
         if (!empty($baseurl)) {
-            $this->baseurl = new moodle_url($baseurl);
+            $this->baseurl = new powereduc_url($baseurl);
         }
     }
 

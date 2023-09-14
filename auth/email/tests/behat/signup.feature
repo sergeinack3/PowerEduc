@@ -37,7 +37,7 @@ Feature: User must accept policy when logging in and signing up
     Given the following config values are set as admin:
       | registerauth    | email              |
       | passwordpolicy  | 0                  |
-      | sitepolicy      | https://moodle.org |
+      | sitepolicy      | https://powereduc.org |
     And I am on site homepage
     And I follow "Log in"
     When I click on "Create new account" "link"

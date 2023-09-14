@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ defined('POWEREDUC_INTERNAL') || die();
 // Note that there may be patent restrictions on the production of gif images
 // in Canada and some parts of Western Europe and Japan until July 2004.
 //-------------------------------------------------------------------------
-// You will then need to edit your moodle/config.php to invoke mathml_filter.php
+// You will then need to edit your powereduc/config.php to invoke mathml_filter.php
 //-------------------------------------------------------------------------
 
 function filter_algebra_image($imagefile, $tex= "", $height="", $width="", $align="middle") {
@@ -73,11 +73,11 @@ function filter_algebra_image($imagefile, $tex= "", $height="", $width="", $alig
     }
     $anchorcontents .= "\" $style />";
 
-    if (!file_exists("$CFG->dataroot/filter/algebra/$imagefile") && has_capability('moodle/site:config', context_system::instance())) {
+    if (!file_exists("$CFG->dataroot/filter/algebra/$imagefile") && has_capability('powereduc/site:config', context_system::instance())) {
         $link = '/filter/algebra/algebradebug.php';
         $action = null;
     } else {
-        $link = new moodle_url('/filter/tex/displaytex.php', array('texexp'=>$tex));
+        $link = new powereduc_url('/filter/tex/displaytex.php', array('texexp'=>$tex));
         $action = new popup_action('click', $link, 'popup', array('width'=>320,'height'=>240)); //TODO: the popups do not work when text caching is enabled!!
     }
     $output .= $OUTPUT->action_link($link, $anchorcontents, $action, array('title'=>'TeX'));
@@ -88,7 +88,7 @@ function filter_algebra_image($imagefile, $tex= "", $height="", $width="", $alig
   return $output;
 }
 
-class filter_algebra extends moodle_text_filter {
+class filter_algebra extends powereduc_text_filter {
     public function filter($text, array $options = array()){
         global $CFG, $DB;
 
@@ -97,7 +97,7 @@ class filter_algebra extends moodle_text_filter {
             return $text;
         }
 
-//restrict filtering to forum 130 (Maths Tools on moodle.org)
+//restrict filtering to forum 130 (Maths Tools on powereduc.org)
 #    $scriptname = $_SERVER['SCRIPT_NAME'];
 #    if (!strstr($scriptname,'/forum/')) {
 #        return $text;

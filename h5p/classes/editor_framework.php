@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Class \core_h5p\editor_framework
  *
  * @package    core_h5p
- * @copyright  2020 Victor Deniz <victor@moodle.com>, base on code by Joubel AS
+ * @copyright  2020 Victor Deniz <victor@powereduc.com>, base on code by Joubel AS
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -34,7 +34,7 @@ use stdClass;
  * database used by Moodle.
  *
  * @package    core_h5p
- * @copyright  2020 Victor Deniz <victor@moodle.com>, base on code by Joubel AS
+ * @copyright  2020 Victor Deniz <victor@powereduc.com>, base on code by Joubel AS
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class editor_framework implements H5peditorStorage {
@@ -78,9 +78,9 @@ class editor_framework implements H5peditorStorage {
         if ($result === false) {
 
             // Normalise Moodle language using underscore, as opposed to H5P which uses dash.
-            $moodlelanguage = str_replace('-', '_', $lang);
+            $powereduclanguage = str_replace('-', '_', $lang);
 
-            $dependencies = get_string_manager()->get_language_dependencies($moodlelanguage);
+            $dependencies = get_string_manager()->get_language_dependencies($powereduclanguage);
 
             // If current language has a dependency, then request it.
             if (count($dependencies) > 1) {

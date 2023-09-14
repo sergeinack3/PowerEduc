@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -492,7 +492,7 @@ class eventobservers_test extends \advanced_testcase {
         $msgs = $msgsink->get_messages();
         $msg = array_pop($msgs);
 
-        $modurl = new \moodle_url('/mod/book/view.php', array('id' => $book->cmid));
+        $modurl = new \powereduc_url('/mod/book/view.php', array('id' => $book->cmid));
 
         $this->assertMatchesRegularExpression('~<h2>.*' . preg_quote($event->get_url()->out(), '~') . '.*</h2>~',
             $msg->fullmessagehtml);

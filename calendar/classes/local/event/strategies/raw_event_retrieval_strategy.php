@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -207,7 +207,7 @@ class raw_event_retrieval_strategy implements raw_event_retrieval_strategy_inter
                     $subqueryparams = array_merge($subqueryparams, $inuserparams);
 
                     foreach ($usercourses as $courseid) {
-                        if (has_capability('moodle/site:accessallgroups', \context_course::instance($courseid), $userrecord)) {
+                        if (has_capability('powereduc/site:accessallgroups', \context_course::instance($courseid), $userrecord)) {
                             $usergroupmembership = groups_get_all_groups($courseid, $user, 0, 'g.id');
                             if (count($usergroupmembership) == 0) {
                                 $viewgroupsonly = true;

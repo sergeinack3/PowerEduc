@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Plugin version and other meta-data are defined here.
  *
  * @package     tool_policy
- * @copyright   2018 David Mudrák <david@moodle.com>
+ * @copyright   2018 David Mudrák <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -38,7 +38,7 @@ use tool_policy\policy_version;
  * @return bool
  * @throws coding_exception
  * @throws dml_exception
- * @throws moodle_exception
+ * @throws powereduc_exception
  */
 function tool_policy_myprofile_navigation(tree $tree, $user, $iscurrentuser, $course) {
     global $CFG;
@@ -62,7 +62,7 @@ function tool_policy_myprofile_navigation(tree $tree, $user, $iscurrentuser, $co
     // Add "Policies and agreements" node only for current user or users who can accept on behalf of current user.
     $usercontext = \context_user::instance($user->id);
     if ($iscurrentuser || has_capability('tool/policy:acceptbehalf', $usercontext)) {
-        $url = new moodle_url('/admin/tool/policy/user.php', ['userid' => $user->id]);
+        $url = new powereduc_url('/admin/tool/policy/user.php', ['userid' => $user->id]);
         $node = new core_user\output\myprofile\node('privacyandpolicies', 'tool_policy',
             get_string('policiesagreements', 'tool_policy'), null, $url);
         $category->add_node($node);
@@ -110,7 +110,7 @@ function tool_policy_standard_footer_html() {
             && $CFG->sitepolicyhandler == 'tool_policy') {
         $policies = api::get_current_versions_ids();
         if (!empty($policies)) {
-            $url = new moodle_url('/admin/tool/policy/viewall.php', ['returnurl' => $PAGE->url]);
+            $url = new powereduc_url('/admin/tool/policy/viewall.php', ['returnurl' => $PAGE->url]);
             $output .= html_writer::link($url, get_string('userpolicysettings', 'tool_policy'));
             $output = html_writer::div($output, 'policiesfooter');
         }
@@ -135,7 +135,7 @@ function tool_policy_pre_signup_requests() {
     if (!empty($policies) && !$userpolicyagreed) {
         // Redirect to "Policy" pages for consenting before creating the user.
         cache::make('core', 'presignup')->set('tool_policy_issignup', 1);
-        redirect(new \moodle_url('/admin/tool/policy/index.php'));
+        redirect(new \powereduc_url('/admin/tool/policy/index.php'));
     }
 }
 

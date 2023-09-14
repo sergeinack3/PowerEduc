@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -100,49 +100,49 @@ class category_test extends \advanced_testcase {
         try {
             core_course_category::create(array('name' => ''));
             $this->fail('Missing category name exception expected in core_course_category::create');
-        } catch (\moodle_exception $e) {
-            $this->assertInstanceOf('moodle_exception', $e);
+        } catch (\powereduc_exception $e) {
+            $this->assertInstanceOf('powereduc_exception', $e);
         }
         $cat1 = core_course_category::create(array('name' => 'Cat1', 'idnumber' => '1'));
         try {
             $cat1->update(array('name' => ''));
             $this->fail('Missing category name exception expected in core_course_category::update');
-        } catch (\moodle_exception $e) {
-            $this->assertInstanceOf('moodle_exception', $e);
+        } catch (\powereduc_exception $e) {
+            $this->assertInstanceOf('powereduc_exception', $e);
         }
         try {
             core_course_category::create(array('name' => 'Cat2', 'idnumber' => '1'));
             $this->fail('Duplicate idnumber exception expected in core_course_category::create');
-        } catch (\moodle_exception $e) {
-            $this->assertInstanceOf('moodle_exception', $e);
+        } catch (\powereduc_exception $e) {
+            $this->assertInstanceOf('powereduc_exception', $e);
         }
         $cat2 = core_course_category::create(array('name' => 'Cat2', 'idnumber' => '2'));
         try {
             $cat2->update(array('idnumber' => '1'));
             $this->fail('Duplicate idnumber exception expected in core_course_category::update');
-        } catch (\moodle_exception $e) {
-            $this->assertInstanceOf('moodle_exception', $e);
+        } catch (\powereduc_exception $e) {
+            $this->assertInstanceOf('powereduc_exception', $e);
         }
         // Test that duplicates with an idnumber of 0 cannot be created.
         core_course_category::create(array('name' => 'Cat3', 'idnumber' => '0'));
         try {
             core_course_category::create(array('name' => 'Cat4', 'idnumber' => '0'));
             $this->fail('Duplicate idnumber "0" exception expected in core_course_category::create');
-        } catch (\moodle_exception $e) {
-            $this->assertInstanceOf('moodle_exception', $e);
+        } catch (\powereduc_exception $e) {
+            $this->assertInstanceOf('powereduc_exception', $e);
         }
         // Test an update cannot make a duplicate idnumber of 0.
         try {
             $cat2->update(array('idnumber' => '0'));
             $this->fail('Duplicate idnumber "0" exception expected in core_course_category::update');
         } catch (\Exception $e) {
-            $this->assertInstanceOf('moodle_exception', $e);
+            $this->assertInstanceOf('powereduc_exception', $e);
         }
     }
 
     public function test_visibility() {
-        $this->assign_capability('moodle/category:viewhiddencategories');
-        $this->assign_capability('moodle/category:manage');
+        $this->assign_capability('powereduc/category:viewhiddencategories');
+        $this->assign_capability('powereduc/category:manage');
 
         // Create category 1 initially hidden.
         $category1 = core_course_category::create(array('name' => 'Cat1', 'visible' => 0));
@@ -209,8 +209,8 @@ class category_test extends \advanced_testcase {
     }
 
     public function test_hierarchy() {
-        $this->assign_capability('moodle/category:viewhiddencategories');
-        $this->assign_capability('moodle/category:manage');
+        $this->assign_capability('powereduc/category:viewhiddencategories');
+        $this->assign_capability('powereduc/category:manage');
 
         $category1 = core_course_category::create(array('name' => 'Cat1'));
         $category2 = core_course_category::create(array('name' => 'Cat2', 'parent' => $category1->id));
@@ -231,8 +231,8 @@ class category_test extends \advanced_testcase {
         try {
             $category2->change_parent($category4->id);
             $this->fail('Exception expected - can not move category');
-        } catch (\moodle_exception $e) {
-            $this->assertInstanceOf('moodle_exception', $e);
+        } catch (\powereduc_exception $e) {
+            $this->assertInstanceOf('powereduc_exception', $e);
         }
 
         $category4->change_parent(0);
@@ -262,8 +262,8 @@ class category_test extends \advanced_testcase {
     public function test_delete() {
         global $DB;
 
-        $this->assign_capability('moodle/category:manage');
-        $this->assign_capability('moodle/course:create');
+        $this->assign_capability('powereduc/category:manage');
+        $this->assign_capability('powereduc/course:create');
 
         $initialcatid = $DB->get_field_sql('SELECT max(id) from {course_categories}');
 
@@ -294,8 +294,8 @@ class category_test extends \advanced_testcase {
         // Delete category 2 and move content to category 3.
         $this->assertFalse($category2->can_move_content_to($category3->id)); // No luck!
         // Add necessary capabilities.
-        $this->assign_capability('moodle/course:create', CAP_ALLOW, \context_coursecat::instance($category3->id));
-        $this->assign_capability('moodle/category:manage');
+        $this->assign_capability('powereduc/course:create', CAP_ALLOW, \context_coursecat::instance($category3->id));
+        $this->assign_capability('powereduc/category:manage');
         $this->assertTrue($category2->can_move_content_to($category3->id)); // Hurray!
         $category2->delete_move($category3->id);
 
@@ -319,7 +319,7 @@ class category_test extends \advanced_testcase {
         // Delete category 3 completely.
         $this->assertFalse($category3->can_delete_full()); // No luck!
         // Add necessary capabilities.
-        $this->assign_capability('moodle/course:delete', CAP_ALLOW, \context_coursecat::instance($category3->id));
+        $this->assign_capability('powereduc/course:delete', CAP_ALLOW, \context_coursecat::instance($category3->id));
         $this->assertTrue($category3->can_delete_full()); // Hurray!
         $category3->delete_full();
 
@@ -581,9 +581,9 @@ class category_test extends \advanced_testcase {
         $this->setUser($this->getDataGenerator()->create_user());
 
         // Add necessary capabilities.
-        $this->assign_capability('moodle/course:create', CAP_ALLOW, \context_coursecat::instance($cat2->id));
+        $this->assign_capability('powereduc/course:create', CAP_ALLOW, \context_coursecat::instance($cat2->id));
         // Do another search with restricted capabilities.
-        $reqcaps = array('moodle/course:create');
+        $reqcaps = array('powereduc/course:create');
         $res = core_course_category::search_courses(array('search' => 'test'), array(), $reqcaps);
         $this->assertEquals(array($c8->id, $c5->id), array_keys($res));
         $this->assertEquals(2, core_course_category::search_courses_count(array('search' => 'test'), array(), $reqcaps));
@@ -992,7 +992,7 @@ class category_test extends \advanced_testcase {
         $this->assertTrue($category1->is_uservisible());
         $this->assertFalse($category2->is_uservisible());
 
-        $this->assign_capability('moodle/category:viewhiddencategories');
+        $this->assign_capability('powereduc/category:viewhiddencategories');
 
         $this->assertTrue($category1->is_uservisible());
         $this->assertTrue($category2->is_uservisible());
@@ -1001,18 +1001,18 @@ class category_test extends \advanced_testcase {
         $userid = $USER->id;
         $this->setUser($this->getDataGenerator()->create_user());
 
-        // User $user should still have the moodle/category:viewhiddencategories capability.
+        // User $user should still have the powereduc/category:viewhiddencategories capability.
         $this->assertTrue($category1->is_uservisible($userid));
         $this->assertTrue($category2->is_uservisible($userid));
 
-        $this->assign_capability('moodle/category:viewhiddencategories', CAP_INHERIT);
+        $this->assign_capability('powereduc/category:viewhiddencategories', CAP_INHERIT);
 
         $this->assertTrue($category1->is_uservisible());
         $this->assertFalse($category2->is_uservisible());
     }
 
     public function test_current_user_coursecat_get() {
-        $this->assign_capability('moodle/category:viewhiddencategories');
+        $this->assign_capability('powereduc/category:viewhiddencategories');
 
         // Create category 1 as visible.
         $category1 = core_course_category::create(array('name' => 'Cat1', 'visible' => 1));
@@ -1026,8 +1026,8 @@ class category_test extends \advanced_testcase {
         $this->setUser($this->getDataGenerator()->create_user());
         $this->assertEquals($category1->id, core_course_category::get($category1->id)->id);
 
-        // Expecting to get an exception as this new user does not have the moodle/category:viewhiddencategories capability.
-        $this->expectException('moodle_exception');
+        // Expecting to get an exception as this new user does not have the powereduc/category:viewhiddencategories capability.
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('cannotviewcategory', 'error'));
         core_course_category::get($category2->id);
     }
@@ -1035,7 +1035,7 @@ class category_test extends \advanced_testcase {
     public function test_another_user_coursecat_get() {
         global $USER;
 
-        $this->assign_capability('moodle/category:viewhiddencategories');
+        $this->assign_capability('powereduc/category:viewhiddencategories');
 
         // Create category 1 as visible.
         $category1 = core_course_category::create(array('name' => 'Cat1', 'visible' => 1));
@@ -1053,7 +1053,7 @@ class category_test extends \advanced_testcase {
         $this->setUser($user1);
 
         $this->assertEquals($category1->id, core_course_category::get($category1->id, MUST_EXIST, false, $user2)->id);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('cannotviewcategory', 'error'));
         core_course_category::get($category2->id, MUST_EXIST, false, $user2);
     }
@@ -1134,9 +1134,9 @@ class category_test extends \advanced_testcase {
         $this->setUser($user3);
         $coursecat = core_course_category::user_top();
         $this->assertEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['create']));
-        $this->assertEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['moodle/course:create']));
+        $this->assertEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['powereduc/course:create']));
         $this->assertEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['manage']));
-        $this->assertEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['moodle/category:manage']));
+        $this->assertEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['powereduc/category:manage']));
         $this->assertEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['create', 'manage']));
         // End scenario 1.
 
@@ -1145,55 +1145,55 @@ class category_test extends \advanced_testcase {
         $this->setUser($user1);
         $coursecat = core_course_category::user_top();
         $this->assertNotEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['create']));
-        $this->assertNotEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['moodle/course:create']));
+        $this->assertNotEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['powereduc/course:create']));
         $this->assertEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['manage']));
-        $this->assertEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['moodle/category:manage']));
+        $this->assertEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['powereduc/category:manage']));
         $this->assertEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['create', 'manage']));
         // The get_nearest_editable_subcategory should return Cat1.
         $this->assertEquals($category1->id, core_course_category::get_nearest_editable_subcategory($coursecat, ['create'])->id);
         $this->assertEquals($category1->id,
-            core_course_category::get_nearest_editable_subcategory($coursecat, ['moodle/course:create'])->id);
+            core_course_category::get_nearest_editable_subcategory($coursecat, ['powereduc/course:create'])->id);
         // Assign the user1 to 'Course creator' role for Cat2.
         role_assign($coursecreatorrole->id, $user1->id, $category2context->id);
         // The get_nearest_editable_subcategory should still return Cat1 (First creatable subcategory) for create course capability.
         $this->assertEquals($category1->id, core_course_category::get_nearest_editable_subcategory($coursecat, ['create'])->id);
         $this->assertEquals($category1->id,
-            core_course_category::get_nearest_editable_subcategory($coursecat, ['moodle/course:create'])->id);
+            core_course_category::get_nearest_editable_subcategory($coursecat, ['powereduc/course:create'])->id);
         // End scenario 2.
 
         // Start scenario 3.
         // user2 has no permission to create course but has permission to manage category.
         $this->setUser($user2);
-        // Remove the moodle/course:create capability for the manager role.
-        unassign_capability('moodle/course:create', $managerrole->id);
+        // Remove the powereduc/course:create capability for the manager role.
+        unassign_capability('powereduc/course:create', $managerrole->id);
         $coursecat = core_course_category::user_top();
         $this->assertEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['create']));
-        $this->assertEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['moodle/course:create']));
+        $this->assertEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['powereduc/course:create']));
         $this->assertNotEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['manage']));
-        $this->assertNotEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['moodle/category:manage']));
+        $this->assertNotEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['powereduc/category:manage']));
         $this->assertEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['create', 'manage']));
         // The get_nearest_editable_subcategory should return Cat3.
         $this->assertEquals($category3->id, core_course_category::get_nearest_editable_subcategory($coursecat, ['manage'])->id);
         $this->assertEquals($category3->id,
-            core_course_category::get_nearest_editable_subcategory($coursecat, ['moodle/category:manage'])->id);
+            core_course_category::get_nearest_editable_subcategory($coursecat, ['powereduc/category:manage'])->id);
         // End scenario 3.
 
         // Start scenario 4.
         // user2 has both permission to create course and manage category.
-        // Add the moodle/course:create capability back again for the manager role.
-        assign_capability('moodle/course:create', CAP_ALLOW, $managerrole->id, $category3context->id);
+        // Add the powereduc/course:create capability back again for the manager role.
+        assign_capability('powereduc/course:create', CAP_ALLOW, $managerrole->id, $category3context->id);
         $this->setUser($user2);
         $coursecat = core_course_category::user_top();
         $this->assertNotEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['create']));
-        $this->assertNotEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['moodle/course:create']));
+        $this->assertNotEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['powereduc/course:create']));
         $this->assertNotEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['manage']));
-        $this->assertNotEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['moodle/category:manage']));
+        $this->assertNotEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['powereduc/category:manage']));
         $this->assertNotEmpty(core_course_category::get_nearest_editable_subcategory($coursecat, ['create', 'manage']));
         // The get_nearest_editable_subcategory should return Cat3.
         $this->assertEquals($category3->id,
             core_course_category::get_nearest_editable_subcategory($coursecat, ['create', 'manage'])->id);
         $this->assertEquals($category3->id, core_course_category::get_nearest_editable_subcategory($coursecat,
-            ['moodle/course:create', 'moodle/category:manage'])->id);
+            ['powereduc/course:create', 'powereduc/category:manage'])->id);
         // End scenario 4.
 
         // Start scenario 5.

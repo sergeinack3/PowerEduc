@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,8 +35,8 @@ require_once($CFG->dirroot.'/course/modlib.php');
  * @copyright   2017 Marina Glancy
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-abstract class core_completion_edit_base_form extends moodleform {
-    /** @var moodleform_mod Do not use directly, call $this->get_module_form() */
+abstract class core_completion_edit_base_form extends powereducform {
+    /** @var powereducform_mod Do not use directly, call $this->get_module_form() */
     protected $_moduleform = null;
     /** @var bool */
     protected $hascustomrules = false;
@@ -81,7 +81,7 @@ abstract class core_completion_edit_base_form extends moodleform {
     /**
      * Returns an instance of component-specific module form for the first selected module
      *
-     * @return moodleform_mod|null
+     * @return powereducform_mod|null
      */
     abstract protected function get_module_form();
 

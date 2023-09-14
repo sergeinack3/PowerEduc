@@ -17,13 +17,13 @@
     if (!extension_loaded('openssl')) {
         echo $OUTPUT->header();
         set_config('mnet_dispatcher_mode', 'off');
-        throw new \moodle_exception('requiresopenssl', 'mnet');
+        throw new \powereduc_exception('requiresopenssl', 'mnet');
     }
 
     if (!function_exists('curl_init') ) {
         echo $OUTPUT->header();
         set_config('mnet_dispatcher_mode', 'off');
-        throw new \moodle_exception('nocurl', 'mnet');
+        throw new \powereduc_exception('nocurl', 'mnet');
     }
 
     if (!isset($CFG->mnet_dispatcher_mode)) {
@@ -37,15 +37,15 @@
                 if (set_config('mnet_dispatcher_mode', $form->mode)) {
                     redirect('index.php', get_string('changessaved'));
                 } else {
-                    throw new \moodle_exception('invalidaction', '', 'index.php');
+                    throw new \powereduc_exception('invalidaction', '', 'index.php');
                 }
             }
         } elseif (!empty($form->submit) && $form->submit == get_string('delete')) {
             $mnet->get_private_key();
             $SESSION->mnet_confirm_delete_key = md5(sha1($mnet->keypair['keypair_PEM'])).':'.time();
 
-            $formcontinue = new single_button(new moodle_url('index.php', array('confirm' => md5($mnet->public_key))), get_string('yes'));
-            $formcancel = new single_button(new moodle_url('index.php', array()), get_string('no'));
+            $formcontinue = new single_button(new powereduc_url('index.php', array('confirm' => md5($mnet->public_key))), get_string('yes'));
+            $formcancel = new single_button(new powereduc_url('index.php', array()), get_string('no'));
             echo $OUTPUT->confirm(get_string("deletekeycheck", "mnet"), $formcontinue, $formcancel);
             exit;
         } else {
@@ -63,13 +63,13 @@
 
             if($time < time() - 60) {
                 // fail - you're out of time.
-                throw new \moodle_exception ('deleteoutoftime', 'mnet', 'index.php');
+                throw new \powereduc_exception ('deleteoutoftime', 'mnet', 'index.php');
                 exit;
             }
 
             if ($key != md5(sha1($mnet->keypair['keypair_PEM']))) {
                 // fail - you're being attacked?
-                throw new \moodle_exception ('deletewrongkeyvalue', 'mnet', 'index.php');
+                throw new \powereduc_exception ('deletewrongkeyvalue', 'mnet', 'index.php');
                 exit;
             }
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Grader report viewed event.
  *
  * @package    gradereport_grader
- * @copyright  2014 Adrian Greeve <adrian@moodle.com>
+ * @copyright  2014 Adrian Greeve <adrian@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,7 +31,7 @@ defined('POWEREDUC_INTERNAL') || die();
  *
  * @package    gradereport_grader
  * @since      Moodle 2.8
- * @copyright  2014 Adrian Greeve <adrian@moodle.com>
+ * @copyright  2014 Adrian Greeve <adrian@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class grade_report_viewed extends \core\event\grade_report_viewed {

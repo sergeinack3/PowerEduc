@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package   mod_data
@@ -697,7 +697,7 @@ function data_set_events($data) {
  * @param  boolean $canmanageentries  optional, if the user can manage entries
  * @param  stdClass  $context         Module context, required if $canmanageentries is not set
  * @return array                      status (available or not and possible warnings)
- * @since  Moodle 3.3
+ * @since  PowerEduc 3.3
  */
 function data_get_time_availability_status($data, $canmanageentries = null, $context = null) {
     $open = true;
@@ -740,7 +740,7 @@ function data_get_time_availability_status($data, $canmanageentries = null, $con
  * @param  boolean $canmanageentries  optional, if the user can manage entries
  * @param  stdClass  $context          Module context, required if $canmanageentries is not set
  * @throws powereduc_exception
- * @since  Moodle 3.3
+ * @since  PowerEduc 3.3
  */
 function data_require_time_available($data, $canmanageentries = null, $context = null) {
 
@@ -759,7 +759,7 @@ function data_require_time_available($data, $canmanageentries = null, $context =
  * @param  int $numentries          the number of entries the current user has created
  * @param  bool $canmanageentries   whether the user can manage entries (teachers, managers)
  * @return int the number of entries left, 0 if no entries left or if is not required
- * @since  Moodle 3.3
+ * @since  PowerEduc 3.3
  */
 function data_get_entries_left_to_add($data, $numentries, $canmanageentries) {
     if ($data->requiredentries > 0 && $numentries < $data->requiredentries && !$canmanageentries) {
@@ -775,7 +775,7 @@ function data_get_entries_left_to_add($data, $numentries, $canmanageentries) {
  * @param  int $numentries          the number of entries the current user has created
  * @param  bool $canmanageentries   whether the user can manage entries (teachers, managers)
  * @return int the number of entries left, 0 if no entries left or if is not required
- * @since  Moodle 3.3
+ * @since  PowerEduc 3.3
  */
 function data_get_entries_left_to_view($data, $numentries, $canmanageentries) {
     if ($data->requiredentriestoview > 0 && $numentries < $data->requiredentriestoview && !$canmanageentries) {
@@ -1061,7 +1061,7 @@ function data_get_tag_title_for_entry($field, $entry) {
  * @param  array  $searcharray     when using advanced search, the advanced data to use
  * @param  stdClass  $record       if we jsut want this record after doing all the access checks
  * @return array the entries found among other data related to the search
- * @since  Moodle 3.3
+ * @since  PowerEduc 3.3
  */
 function data_search_entries($data, $cm, $context, $mode, $currentgroup, $search = '', $sort = null, $order = null, $page = 0,
         $perpage = 0, $advanced = null, $searcharray = null, $record = null) {
@@ -1302,7 +1302,7 @@ function data_search_entries($data, $cm, $context, $mode, $currentgroup, $search
  * @param  int $currentgroup        current group
  * @param  bool $canmanageentries   if the user can manage entries
  * @return bool true if the user can view the entry
- * @since  Moodle 3.3
+ * @since  PowerEduc 3.3
  */
 function data_can_view_record($data, $record, $currentgroup, $canmanageentries) {
     global $USER;
@@ -1322,7 +1322,7 @@ function data_can_view_record($data, $record, $currentgroup, $canmanageentries) 
  *
  * @param  stdClass $data database object
  * @return array field instances
- * @since  Moodle 3.3
+ * @since  PowerEduc 3.3
  */
 function data_get_field_instances($data) {
     global $DB;
@@ -1346,7 +1346,7 @@ function data_get_field_instances($data) {
  * @param  str $fn             the first name to search (optional)
  * @param  str $ln             the last name to search (optional)
  * @return array               the search array and plain search build based on the different elements
- * @since  Moodle 3.3
+ * @since  PowerEduc 3.3
  */
 function data_build_search_array($data, $paging, $searcharray, $defaults = null, $fn = '', $ln = '') {
     global $DB;
@@ -1437,7 +1437,7 @@ function data_build_search_array($data, $paging, $searcharray, $defaults = null,
  *
  * @param  int $entryid the entry to approve or unapprove.
  * @param  bool $approve Whether to approve or unapprove (true for approve false otherwise).
- * @since  Moodle 3.3
+ * @since  PowerEduc 3.3
  */
 function data_approve_entry($entryid, $approve) {
     global $DB;
@@ -1458,7 +1458,7 @@ function data_approve_entry($entryid, $approve) {
  * @param  array $fields            list of fields of the database
  * @param  stdClass $datarecord     the submitted data
  * @param  stdClass $processeddata  pre-processed submitted fields
- * @since  Moodle 3.3
+ * @since  PowerEduc 3.3
  */
 function data_add_fields_contents_to_new_record($data, $context, $recordid, $fields, $datarecord, $processeddata) {
     global $DB;
@@ -1489,7 +1489,7 @@ function data_add_fields_contents_to_new_record($data, $context, $recordid, $fie
  * @param  stdClass $context        context object
  * @param  stdClass $datarecord     the submitted data
  * @param  stdClass $processeddata  pre-processed submitted fields
- * @since  Moodle 3.3
+ * @since  PowerEduc 3.3
  */
 function data_update_record_fields_contents($data, $record, $context, $datarecord, $processeddata) {
     global $DB;

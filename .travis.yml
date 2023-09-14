@@ -72,7 +72,7 @@ cache:
       - $HOME/.npm
 
 before_install:
-    - docker run -d -p 127.0.0.1:8080:80 --name exttests moodlehq/moodle-exttests
+    - docker run -d -p 127.0.0.1:8080:80 --name exttests powereduchq/powereduc-exttests
     # Avoid IPv6 default binding as service (causes redis not to start).
     - sudo service redis-server start --bind 127.0.0.1
 
@@ -136,19 +136,19 @@ before_script:
         # Copy generic configuration in place.
         cp config-dist.php config.php ;
 
-        # Create the moodledata directory.
+        # Create the powereducdata directory.
         mkdir -p "$HOME"/roots/base
 
         # The database name and password.
         sed -i \
-          -e "s%= 'moodle'%= 'travis_ci_test'%" \
+          -e "s%= 'powereduc'%= 'travis_ci_test'%" \
           -e "s%= 'password'%= ''%" \
           config.php ;
 
         # The wwwroot and dataroot.
         sed -i \
-          -e "s%http://example.com/moodle%https://localhost%" \
-          -e "s%/home/example/moodledata%/home/travis/roots/base%" \
+          -e "s%http://example.com/powereduc%https://localhost%" \
+          -e "s%/home/example/powereducdata%/home/travis/roots/base%" \
           config.php ;
 
         if [ "$DB" = 'pgsql' ];
@@ -226,10 +226,10 @@ before_script:
 
         # The following repositories are required.
         # The local_ci repository does the actual checking.
-        git clone https://github.com/moodlehq/moodle-local_ci.git local/ci
+        git clone https://github.com/powereduchq/powereduc-local_ci.git local/ci
 
         # We need the official upstream for comparison
-        git remote add upstream https://github.com/moodle/moodle.git;
+        git remote add upstream https://github.com/powereduc/powereduc.git;
 
         git fetch upstream POWEREDUC_401_STABLE;
         export GIT_PREVIOUS_COMMIT="`git merge-base FETCH_HEAD $TRAVIS_COMMIT`";

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,16 +28,16 @@
     $name = optional_param('name', false, PARAM_RAW); // Course short name
 
     if (!$id and !$name) {
-        throw new \moodle_exception("unspecifycourseid");
+        throw new \powereduc_exception("unspecifycourseid");
     }
 
     if ($name) {
         if (!$course = $DB->get_record("course", array("shortname"=>$name))) {
-            throw new \moodle_exception("invalidshortname");
+            throw new \powereduc_exception("invalidshortname");
         }
     } else {
         if (!$course = $DB->get_record("course", array("id"=>$id))) {
-            throw new \moodle_exception("invalidcourseid");
+            throw new \powereduc_exception("invalidcourseid");
         }
     }
 
@@ -49,7 +49,7 @@
 
     $context = context_course::instance($course->id);
     if (!core_course_category::can_view_course_info($course) && !is_enrolled($context, null, '', true)) {
-        throw new \moodle_exception('cannotviewcategory', '', $CFG->wwwroot .'/');
+        throw new \powereduc_exception('cannotviewcategory', '', $CFG->wwwroot .'/');
     }
 
     $PAGE->set_course($course);

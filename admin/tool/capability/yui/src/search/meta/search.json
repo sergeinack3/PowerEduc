@@ -1,5 +1,5 @@
 {
-    "moodle-tool_capability-search": {
+    "powereduc-tool_capability-search": {
         "requires": [
             "base",
             "node"

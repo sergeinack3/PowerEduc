@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Utils to set Behat config
@@ -32,7 +32,7 @@ require_once(__DIR__ . '/../../testing/classes/tests_finder.php');
  * Behat configuration manager
  *
  * Creates/updates Behat config files getting tests
- * and steps from Moodle codebase
+ * and steps from PowerEduc codebase
  *
  * @package    core
  * @copyright  2016 Rajesh Taneja
@@ -288,7 +288,7 @@ class behat_config_util {
     }
 
     /**
-     * Gets the list of Moodle behat contexts
+     * Gets the list of PowerEduc behat contexts
      *
      * Class name as a key and the filepath as value
      *
@@ -363,7 +363,7 @@ class behat_config_util {
 
     /**
      * Behat config file specifing the main context class,
-     * the required Behat extensions and Moodle test wwwroot.
+     * the required Behat extensions and PowerEduc test wwwroot.
      *
      * @param array $features The system feature files
      * @param array $contexts The system steps definitions
@@ -543,7 +543,7 @@ class behat_config_util {
         $config = array(
             'default' => array(
                 'formatters' => array(
-                    'moodle_progress' => array(
+                    'powereduc_progress' => array(
                         'output_styles' => array(
                             'comment' => array('magenta'))
                     )
@@ -555,8 +555,8 @@ class behat_config_util {
                         'goutte' => null,
                         'webdriver' => $webdriverwdhost
                     ),
-                    'Moodle\BehatExtension' => array(
-                        'moodledirroot' => $CFG->dirroot,
+                    'PowerEduc\BehatExtension' => array(
+                        'powereducdirroot' => $CFG->dirroot,
                         'steps_definitions' => $allpaths,
                     )
                 )
@@ -1011,7 +1011,7 @@ class behat_config_util {
     public function merge_behat_profiles($config) {
         global $CFG;
 
-        // Check for Moodle custom ones.
+        // Check for PowerEduc custom ones.
         if (!empty($CFG->behat_profiles) && is_array($CFG->behat_profiles)) {
             foreach ($CFG->behat_profiles as $profile => $values) {
                 $config = $this->merge_config($config, $this->get_behat_profile($profile, $values));
@@ -1256,7 +1256,7 @@ class behat_config_util {
     }
 
     /**
-     * Return list of themes which can be set in moodle.
+     * Return list of themes which can be set in powereduc.
      *
      * @return array list of themes with tests.
      */

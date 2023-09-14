@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core_contentbank
  * @category   test
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -35,7 +35,7 @@ use contenttype_testable\contenttype as contenttype;
  *
  * @package    core_contentbank
  * @category   test
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @coversDefaultClass \core_contentbank\contenttype
  *
@@ -395,7 +395,7 @@ class contenttype_test extends \advanced_testcase {
         $this->assertTrue($this->contenttype->can_delete($usercontent));
 
         // Unassign capability to manager role and check not can only delete their own records.
-        unassign_capability('moodle/contentbank:deleteanycontent', $this->managerroleid);
+        unassign_capability('powereduc/contentbank:deleteanycontent', $this->managerroleid);
         $this->assertTrue($this->contenttype->can_delete($managercontent));
         $this->assertFalse($this->contenttype->can_delete($usercontent));
         $this->setUser($this->manager2);
@@ -458,7 +458,7 @@ class contenttype_test extends \advanced_testcase {
         return [
             'Standard name' => ['New name', 'New name', true],
             'Name with digits' => ['Today is 17/04/2017', 'Today is 17/04/2017', true],
-            'Name with symbols' => ['Follow us: @moodle', 'Follow us: @moodle', true],
+            'Name with symbols' => ['Follow us: @powereduc', 'Follow us: @powereduc', true],
             'Name with tags' => ['This is <b>bold</b>', 'This is bold', true],
             'Long name' => [str_repeat('a', 100), str_repeat('a', 100), true],
             'Too long name' => [str_repeat('a', 300), str_repeat('a', 255), true],
@@ -588,7 +588,7 @@ class contenttype_test extends \advanced_testcase {
         $this->assertFalse($contenttype->can_manage($contentbyadmin));
 
         // Unassign capability to teacher role and check they not can not edit any content.
-        unassign_capability('moodle/contentbank:manageowncontent', $teacherroleid);
+        unassign_capability('powereduc/contentbank:manageowncontent', $teacherroleid);
         $this->assertFalse($contenttype->can_manage($contentbyteacher));
         $this->assertFalse($contenttype->can_manage($contentbyadmin));
     }
@@ -622,7 +622,7 @@ class contenttype_test extends \advanced_testcase {
         $this->assertTrue($this->contenttype->can_download($usercontent));
 
         // Unassign capability to manager role and check she cannot download content anymore.
-        unassign_capability('moodle/contentbank:downloadcontent', $this->managerroleid);
+        unassign_capability('powereduc/contentbank:downloadcontent', $this->managerroleid);
         $this->assertFalse($this->contenttype->can_download($managercontent));
         $this->assertFalse($this->contenttype->can_download($usercontent));
     }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@
  * This class should be extended by all backup stages (a requirement of many backup ui functions).
  * Each stage must then define two abstract methods
  *  - process : To process the stage
- *  - initialise_stage_form : To get a backup_moodleform instance for the stage
+ *  - initialise_stage_form : To get a backup_powereducform instance for the stage
  *
  * @package   core_backup
  * @copyright 2010 Sam Hemelryk
@@ -88,10 +88,10 @@ class backup_ui_stage_initial extends backup_ui_stage {
 
     /**
      * Processes the initial backup stage
-     * @param base_moodleform $m
+     * @param base_powereducform $m
      * @return int The number of changes
      */
-    public function process(base_moodleform $m = null) {
+    public function process(base_powereducform $m = null) {
 
         $form = $this->initialise_stage_form();
 
@@ -171,7 +171,7 @@ class backup_ui_stage_initial extends backup_ui_stage {
     }
 
     /**
-     * Initialises the backup_moodleform instance for this stage
+     * Initialises the backup_powereducform instance for this stage
      *
      * @return backup_initial_form
      */
@@ -252,10 +252,10 @@ class backup_ui_stage_schema extends backup_ui_stage {
     /**
      * Processes the schema stage
      *
-     * @param base_moodleform $form
+     * @param base_powereducform $form
      * @return int The number of changes the user made
      */
-    public function process(base_moodleform $form = null) {
+    public function process(base_powereducform $form = null) {
         $form = $this->initialise_stage_form();
         // Check it wasn't cancelled.
         if ($form->is_cancelled()) {
@@ -405,10 +405,10 @@ class backup_ui_stage_confirmation extends backup_ui_stage {
     /**
      * Processes the confirmation stage
      *
-     * @param base_moodleform $form
+     * @param base_powereducform $form
      * @return int The number of changes the user made
      */
-    public function process(base_moodleform $form = null) {
+    public function process(base_powereducform $form = null) {
         $form = $this->initialise_stage_form();
         // Check it hasn't been cancelled.
         if ($form->is_cancelled()) {
@@ -549,10 +549,10 @@ class backup_ui_stage_final extends backup_ui_stage {
      *
      * In this case it ALWAYS passes processing to the previous stage (confirmation)
      *
-     * @param base_moodleform $form
+     * @param base_powereducform $form
      * @return bool
      */
-    public function process(base_moodleform $form = null) {
+    public function process(base_powereducform $form = null) {
         return true;
     }
 
@@ -625,12 +625,12 @@ class backup_ui_stage_complete extends backup_ui_stage_final {
                 $cmid = $this->get_ui()->get_controller()->get_id();
                 $cm = get_coursemodule_from_id(null, $cmid, $courseid);
                 $modcontext = context_module::instance($cm->id);
-                $restorerul = new moodle_url('/backup/restorefile.php', array('contextid' => $modcontext->id));
+                $restorerul = new powereduc_url('/backup/restorefile.php', array('contextid' => $modcontext->id));
                 break;
             case 'course':
             default:
                 $coursecontext = context_course::instance($courseid);
-                $restorerul = new moodle_url('/backup/restorefile.php', array('contextid' => $coursecontext->id));
+                $restorerul = new powereduc_url('/backup/restorefile.php', array('contextid' => $coursecontext->id));
         }
 
         $output = '';

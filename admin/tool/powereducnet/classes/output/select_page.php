@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,21 +17,21 @@
 /**
  * Select page renderable.
  *
- * @package    tool_moodlenet
+ * @package    tool_powereducnet
  * @copyright  2020 Mathew May {@link https://mathew.solutions}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace tool_moodlenet\output;
+namespace tool_powereducnet\output;
 
 defined('POWEREDUC_INTERNAL') || die;
 
-use tool_moodlenet\local\import_info;
+use tool_powereducnet\local\import_info;
 
 /**
  * Select page renderable.
  *
- * @package    tool_moodlenet
+ * @package    tool_powereducnet
  * @copyright  2020 Mathew May {@link https://mathew.solutions}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -70,7 +70,7 @@ class select_page implements \renderable, \templatable {
         return (object) [
             'name' => $this->importinfo->get_resource()->get_name(),
             'type' => $this->importinfo->get_config()->type,
-            'cancellink' => new \moodle_url('/'),
+            'cancellink' => new \powereduc_url('/'),
         ];
     }
 }

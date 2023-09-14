@@ -1,6 +1,6 @@
-YUI.add('moodle-filter_mathjaxloader-loader', function (Y, NAME) {
+YUI.add('powereduc-filter_mathjaxloader-loader', function (Y, NAME) {
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@ YUI.add('moodle-filter_mathjaxloader-loader', function (Y, NAME) {
  * Mathjax JS Loader.
  *
  * @package    filter_mathjaxloader
- * @copyright  2014 Damyon Wiese  <damyon@moodle.com>
+ * @copyright  2014 Damyon Wiese  <damyon@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 M.filter_mathjaxloader = M.filter_mathjaxloader || {
@@ -134,4 +134,4 @@ M.filter_mathjaxloader = M.filter_mathjaxloader || {
 };
 
 
-}, '@VERSION@', {"requires": ["moodle-core-event"]});
+}, '@VERSION@', {"requires": ["powereduc-core-event"]});

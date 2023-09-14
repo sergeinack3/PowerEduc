@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -63,18 +63,18 @@ class api_test extends \advanced_testcase {
         $sysctx = \context_system::instance();
 
         $roleallow = create_role('Allow', 'allow', 'Allow read');
-        assign_capability('moodle/competency:competencyview', CAP_ALLOW, $roleallow, $sysctx->id);
+        assign_capability('powereduc/competency:competencyview', CAP_ALLOW, $roleallow, $sysctx->id);
         role_assign($roleallow, $user->id, $sysctx->id);
 
         $roleprevent = create_role('Prevent', 'prevent', 'Prevent read');
-        assign_capability('moodle/competency:competencyview', CAP_PROHIBIT, $roleprevent, $sysctx->id);
+        assign_capability('powereduc/competency:competencyview', CAP_PROHIBIT, $roleprevent, $sysctx->id);
         role_assign($roleprevent, $user->id, $cat2ctx->id);
 
         accesslib_clear_all_caches_for_unit_testing();
         $this->setUser($user);
-        $this->assertFalse(has_capability('moodle/competency:competencyview', $cat2ctx));
+        $this->assertFalse(has_capability('powereduc/competency:competencyview', $cat2ctx));
 
-        $requiredcap = array('moodle/competency:competencyview');
+        $requiredcap = array('powereduc/competency:competencyview');
 
         $expected = array();
         $this->assertEquals($expected, api::get_related_contexts($cat2ctx, 'self', $requiredcap));
@@ -124,18 +124,18 @@ class api_test extends \advanced_testcase {
         $sysctx = \context_system::instance();
 
         $roleallow = create_role('Allow', 'allow', 'Allow read');
-        assign_capability('moodle/competency:templateview', CAP_ALLOW, $roleallow, $sysctx->id);
+        assign_capability('powereduc/competency:templateview', CAP_ALLOW, $roleallow, $sysctx->id);
         role_assign($roleallow, $user->id, $sysctx->id);
 
         $roleprevent = create_role('Prevent', 'prevent', 'Prevent read');
-        assign_capability('moodle/competency:templateview', CAP_PROHIBIT, $roleprevent, $sysctx->id);
+        assign_capability('powereduc/competency:templateview', CAP_PROHIBIT, $roleprevent, $sysctx->id);
         role_assign($roleprevent, $user->id, $cat2ctx->id);
 
         accesslib_clear_all_caches_for_unit_testing();
         $this->setUser($user);
-        $this->assertFalse(has_capability('moodle/competency:templateview', $cat2ctx));
+        $this->assertFalse(has_capability('powereduc/competency:templateview', $cat2ctx));
 
-        $requiredcap = array('moodle/competency:templateview');
+        $requiredcap = array('powereduc/competency:templateview');
 
         $expected = array();
         $this->assertEquals($expected, api::get_related_contexts($cat2ctx, 'self', $requiredcap));
@@ -400,17 +400,17 @@ class api_test extends \advanced_testcase {
             'shortname' => 'manage'
         ));
 
-        assign_capability('moodle/competency:planmanageowndraft', CAP_ALLOW, $manageowndraftrole, $syscontext->id);
-        assign_capability('moodle/competency:planviewowndraft', CAP_ALLOW, $manageowndraftrole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanageowndraft', CAP_ALLOW, $manageowndraftrole, $syscontext->id);
+        assign_capability('powereduc/competency:planviewowndraft', CAP_ALLOW, $manageowndraftrole, $syscontext->id);
 
-        assign_capability('moodle/competency:planmanageown', CAP_ALLOW, $manageownrole, $syscontext->id);
-        assign_capability('moodle/competency:planviewown', CAP_ALLOW, $manageownrole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanageown', CAP_ALLOW, $manageownrole, $syscontext->id);
+        assign_capability('powereduc/competency:planviewown', CAP_ALLOW, $manageownrole, $syscontext->id);
 
-        assign_capability('moodle/competency:planmanagedraft', CAP_ALLOW, $managedraftrole, $syscontext->id);
-        assign_capability('moodle/competency:planviewdraft', CAP_ALLOW, $managedraftrole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanagedraft', CAP_ALLOW, $managedraftrole, $syscontext->id);
+        assign_capability('powereduc/competency:planviewdraft', CAP_ALLOW, $managedraftrole, $syscontext->id);
 
-        assign_capability('moodle/competency:planmanage', CAP_ALLOW, $managerole, $syscontext->id);
-        assign_capability('moodle/competency:planview', CAP_ALLOW, $managerole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanage', CAP_ALLOW, $managerole, $syscontext->id);
+        assign_capability('powereduc/competency:planview', CAP_ALLOW, $managerole, $syscontext->id);
 
         $dg->role_assign($manageowndraftrole, $usermanageowndraft->id, $syscontext->id);
         $dg->role_assign($manageownrole, $usermanageown->id, $syscontext->id);
@@ -839,9 +839,9 @@ class api_test extends \advanced_testcase {
         $reviewerrole = $dg->create_role();
         $otheruserrole = $dg->create_role();
 
-        assign_capability('moodle/competency:planmanageowndraft', CAP_ALLOW, $userrole, $syscontext->id);
-        assign_capability('moodle/competency:planmanage', CAP_ALLOW, $reviewerrole, $syscontext->id);
-        assign_capability('moodle/competency:planviewdraft', CAP_ALLOW, $reviewerrole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanageowndraft', CAP_ALLOW, $userrole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanage', CAP_ALLOW, $reviewerrole, $syscontext->id);
+        assign_capability('powereduc/competency:planviewdraft', CAP_ALLOW, $reviewerrole, $syscontext->id);
         $dg->role_assign($userrole, $user->id, $syscontext->id);
         $dg->role_assign($reviewerrole, $reviewer->id, $syscontext->id);
         accesslib_clear_all_caches_for_unit_testing();
@@ -1480,10 +1480,10 @@ class api_test extends \advanced_testcase {
             'name' => 'User manage own',
             'shortname' => 'manageown'
         ));
-        assign_capability('moodle/competency:planmanageowndraft', CAP_ALLOW, $manageownrole, $syscontext->id);
-        assign_capability('moodle/competency:planviewowndraft', CAP_ALLOW, $manageownrole, $syscontext->id);
-        assign_capability('moodle/competency:planmanageown', CAP_ALLOW, $manageownrole, $syscontext->id);
-        assign_capability('moodle/competency:planviewown', CAP_ALLOW, $manageownrole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanageowndraft', CAP_ALLOW, $manageownrole, $syscontext->id);
+        assign_capability('powereduc/competency:planviewowndraft', CAP_ALLOW, $manageownrole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanageown', CAP_ALLOW, $manageownrole, $syscontext->id);
+        assign_capability('powereduc/competency:planviewown', CAP_ALLOW, $manageownrole, $syscontext->id);
         $dg->role_assign($manageownrole, $user->id, $syscontext->id);
         $this->setUser($user);
 
@@ -1676,8 +1676,8 @@ class api_test extends \advanced_testcase {
             'name' => 'User manage own',
             'shortname' => 'manageown'
         ));
-        assign_capability('moodle/competency:planmanageowndraft', CAP_ALLOW, $managerole, $syscontext->id);
-        assign_capability('moodle/competency:planmanageown', CAP_ALLOW, $managerole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanageowndraft', CAP_ALLOW, $managerole, $syscontext->id);
+        assign_capability('powereduc/competency:planmanageown', CAP_ALLOW, $managerole, $syscontext->id);
         $dg->role_assign($managerole, $user->id, $syscontext->id);
         $this->setUser($user);
 
@@ -1725,8 +1725,8 @@ class api_test extends \advanced_testcase {
             'name' => 'User view',
             'shortname' => 'view'
         ));
-        assign_capability('moodle/competency:planviewdraft', CAP_ALLOW, $viewrole, $syscontext->id);
-        assign_capability('moodle/competency:planview', CAP_ALLOW, $viewrole, $syscontext->id);
+        assign_capability('powereduc/competency:planviewdraft', CAP_ALLOW, $viewrole, $syscontext->id);
+        assign_capability('powereduc/competency:planview', CAP_ALLOW, $viewrole, $syscontext->id);
         $dg->role_assign($viewrole, $user->id, $syscontext->id);
         $this->setUser($user);
 
@@ -1830,11 +1830,11 @@ class api_test extends \advanced_testcase {
 
         $user = $dg->create_user();
         $role = $dg->create_role();
-        assign_capability('moodle/competency:templatemanage', CAP_ALLOW, $role, $syscontext->id, true);
+        assign_capability('powereduc/competency:templatemanage', CAP_ALLOW, $role, $syscontext->id, true);
         $dg->role_assign($role, $user->id, $syscontext->id);
 
         $cohortrole = $dg->create_role();
-        assign_capability('moodle/cohort:view', CAP_ALLOW, $cohortrole, $syscontext->id, true);
+        assign_capability('powereduc/cohort:view', CAP_ALLOW, $cohortrole, $syscontext->id, true);
 
         accesslib_clear_all_caches_for_unit_testing();
 
@@ -1874,7 +1874,7 @@ class api_test extends \advanced_testcase {
 
         $user = $dg->create_user();
         $role = $dg->create_role();
-        assign_capability('moodle/competency:templatemanage', CAP_ALLOW, $role, $syscontext->id, true);
+        assign_capability('powereduc/competency:templatemanage', CAP_ALLOW, $role, $syscontext->id, true);
         $dg->role_assign($role, $user->id, $syscontext->id);
 
         // Create a template.
@@ -1900,7 +1900,7 @@ class api_test extends \advanced_testcase {
         // Can reorder competencies with system context permissions in category context.
         $result = api::reorder_template_competency($template->get('id'), $competency2->get('id'), $competency1->get('id'));
         $this->assertTrue($result);
-        unassign_capability('moodle/competency:templatemanage', $role, $syscontext->id);
+        unassign_capability('powereduc/competency:templatemanage', $role, $syscontext->id);
         accesslib_clear_all_caches_for_unit_testing();
 
         try {
@@ -1911,13 +1911,13 @@ class api_test extends \advanced_testcase {
         }
 
         // Giving permissions in category context.
-        assign_capability('moodle/competency:templatemanage', CAP_ALLOW, $role, $catcontext->id, true);
+        assign_capability('powereduc/competency:templatemanage', CAP_ALLOW, $role, $catcontext->id, true);
         $dg->role_assign($role, $user->id, $catcontext->id);
         // User with templatemanage capability in category context can reorder competencies in temple.
         $result = api::reorder_template_competency($template->get('id'), $competency1->get('id'), $competency2->get('id'));
         $this->assertTrue($result);
         // Removing templatemanage capability in category context.
-        unassign_capability('moodle/competency:templatemanage', $role, $catcontext->id);
+        unassign_capability('powereduc/competency:templatemanage', $role, $catcontext->id);
         accesslib_clear_all_caches_for_unit_testing();
 
         try {
@@ -2028,7 +2028,7 @@ class api_test extends \advanced_testcase {
 
         // Creating a standard evidence with more information.
         $evidence = api::add_evidence($u1->id, $c1->get('id'), $u1ctx->id, \core_competency\evidence::ACTION_LOG, 'invaliddata',
-            'error', '$a', false, 'http://moodle.org', null, 2, 'The evidence of prior learning were reviewed.');
+            'error', '$a', false, 'http://powereduc.org', null, 2, 'The evidence of prior learning were reviewed.');
         $evidence->read();
         $uc = \core_competency\user_competency::get_record(array('userid' => $u1->id, 'competencyid' => $c1->get('id')));
         $this->assertEquals(\core_competency\user_competency::STATUS_IDLE, $uc->get('status'));
@@ -2040,7 +2040,7 @@ class api_test extends \advanced_testcase {
         $this->assertEquals('invaliddata', $evidence->get('descidentifier'));
         $this->assertEquals('error', $evidence->get('desccomponent'));
         $this->assertEquals('$a', $evidence->get('desca'));
-        $this->assertEquals('http://moodle.org', $evidence->get('url'));
+        $this->assertEquals('http://powereduc.org', $evidence->get('url'));
         $this->assertSame(null, $evidence->get('grade'));
         $this->assertEquals(2, $evidence->get('actionuserid'));
         $this->assertSame('The evidence of prior learning were reviewed.', $evidence->get('note'));
@@ -2289,7 +2289,7 @@ class api_test extends \advanced_testcase {
 
         // Create an evidence and check it was created with the right usercomptencyid and information.
         $evidence = api::add_evidence($user->id, $c1->get('id'), $syscontext->id, \core_competency\evidence::ACTION_OVERRIDE,
-            'invalidevidencedesc', 'core_competency', array('a' => 'b'), false, 'http://moodle.org', 1, 2);
+            'invalidevidencedesc', 'core_competency', array('a' => 'b'), false, 'http://powereduc.org', 1, 2);
         $this->assertEquals(1, \core_competency\evidence::count_records());
 
         $evidence->read();
@@ -2298,7 +2298,7 @@ class api_test extends \advanced_testcase {
         $this->assertEquals('invalidevidencedesc', $evidence->get('descidentifier'));
         $this->assertEquals('core_competency', $evidence->get('desccomponent'));
         $this->assertEquals((object) array('a' => 'b'), $evidence->get('desca'));
-        $this->assertEquals('http://moodle.org', $evidence->get('url'));
+        $this->assertEquals('http://powereduc.org', $evidence->get('url'));
         $this->assertEquals(\core_competency\evidence::ACTION_OVERRIDE, $evidence->get('action'));
         $this->assertEquals(2, $evidence->get('actionuserid'));
         $this->assertEquals(1, $evidence->get('grade'));
@@ -2328,7 +2328,7 @@ class api_test extends \advanced_testcase {
 
         // Create an evidence without a user competency record.
         $evidence = api::add_evidence($user->id, $c1->get('id'), $syscontext->id, \core_competency\evidence::ACTION_OVERRIDE,
-            'invalidevidencedesc', 'core_competency', 'Hello world!', false, 'http://moodle.org', 1, 2);
+            'invalidevidencedesc', 'core_competency', 'Hello world!', false, 'http://powereduc.org', 1, 2);
         $this->assertEquals(1, \core_competency\evidence::count_records());
         $this->assertEquals(1, \core_competency\user_competency::count_records());
 
@@ -2338,7 +2338,7 @@ class api_test extends \advanced_testcase {
         $this->assertEquals('invalidevidencedesc', $evidence->get('descidentifier'));
         $this->assertEquals('core_competency', $evidence->get('desccomponent'));
         $this->assertEquals('Hello world!', $evidence->get('desca'));
-        $this->assertEquals('http://moodle.org', $evidence->get('url'));
+        $this->assertEquals('http://powereduc.org', $evidence->get('url'));
         $this->assertEquals(\core_competency\evidence::ACTION_OVERRIDE, $evidence->get('action'));
         $this->assertEquals(2, $evidence->get('actionuserid'));
         $this->assertEquals(1, $evidence->get('grade'));
@@ -3936,22 +3936,22 @@ class api_test extends \advanced_testcase {
         $studentrole = array_shift($studentarch);
 
         $gradablerole = $dg->create_role();
-        assign_capability('moodle/competency:coursecompetencygradable', CAP_ALLOW, $gradablerole, $sysctx->id);
+        assign_capability('powereduc/competency:coursecompetencygradable', CAP_ALLOW, $gradablerole, $sysctx->id);
 
         $notgradablerole = $dg->create_role();
-        assign_capability('moodle/competency:coursecompetencygradable', CAP_PROHIBIT, $notgradablerole, $sysctx->id);
+        assign_capability('powereduc/competency:coursecompetencygradable', CAP_PROHIBIT, $notgradablerole, $sysctx->id);
 
         $canviewucrole = $dg->create_role();
-        assign_capability('moodle/competency:usercompetencyview', CAP_ALLOW, $canviewucrole, $sysctx->id);
+        assign_capability('powereduc/competency:usercompetencyview', CAP_ALLOW, $canviewucrole, $sysctx->id);
 
         $cannotviewcomp = $dg->create_role();
-        assign_capability('moodle/competency:competencyview', CAP_PROHIBIT, $cannotviewcomp, $sysctx->id);
+        assign_capability('powereduc/competency:competencyview', CAP_PROHIBIT, $cannotviewcomp, $sysctx->id);
 
         $canmanagecomp = $dg->create_role();
-        assign_capability('moodle/competency:competencymanage', CAP_ALLOW, $canmanagecomp, $sysctx->id);
+        assign_capability('powereduc/competency:competencymanage', CAP_ALLOW, $canmanagecomp, $sysctx->id);
 
         $cangraderole = $dg->create_role();
-        assign_capability('moodle/competency:competencygrade', CAP_ALLOW, $cangraderole, $sysctx->id);
+        assign_capability('powereduc/competency:competencygrade', CAP_ALLOW, $cangraderole, $sysctx->id);
 
         // Enrol s1 and s2 as students in course 1.
         $dg->enrol_user($student1->id, $c1->id, $studentrole->id);
@@ -4047,7 +4047,7 @@ class api_test extends \advanced_testcase {
         $raised = false;
         try {
             api::grade_competency_in_course($courseid, $userid, $compid, $grade);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $raised = true;
             $this->assertInstanceOf($exceptiontype, $e);
             $this->assertMatchesRegularExpression('@' . $exceptiontext . '@', $e->getMessage());
@@ -4523,8 +4523,8 @@ class api_test extends \advanced_testcase {
         $reviewer = $dg->create_user();
         $roleallow = $dg->create_role();
         $roleprohibit = $dg->create_role();
-        assign_capability('moodle/competency:planreview', CAP_ALLOW, $roleallow, $sysctx->id);
-        assign_capability('moodle/competency:planreview', CAP_PROHIBIT, $roleprohibit, $sysctx->id);
+        assign_capability('powereduc/competency:planreview', CAP_ALLOW, $roleallow, $sysctx->id);
+        assign_capability('powereduc/competency:planreview', CAP_PROHIBIT, $roleprohibit, $sysctx->id);
         role_assign($roleallow, $reviewer->id, $sysctx->id);
         accesslib_clear_all_caches_for_unit_testing();
 
@@ -4571,8 +4571,8 @@ class api_test extends \advanced_testcase {
         $reviewer = $dg->create_user();
         $roleallow = $dg->create_role();
         $roleprohibit = $dg->create_role();
-        assign_capability('moodle/competency:usercompetencyreview', CAP_ALLOW, $roleallow, $sysctx->id);
-        assign_capability('moodle/competency:usercompetencyreview', CAP_PROHIBIT, $roleprohibit, $sysctx->id);
+        assign_capability('powereduc/competency:usercompetencyreview', CAP_ALLOW, $roleallow, $sysctx->id);
+        assign_capability('powereduc/competency:usercompetencyreview', CAP_PROHIBIT, $roleprohibit, $sysctx->id);
         role_assign($roleallow, $reviewer->id, $sysctx->id);
         accesslib_clear_all_caches_for_unit_testing();
 

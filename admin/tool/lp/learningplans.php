@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,10 +31,10 @@ $context = context::instance_by_id($pagecontextid);
 require_login(0, false);
 \core_competency\api::require_enabled();
 if (!\core_competency\template::can_read_context($context)) {
-    throw new required_capability_exception($context, 'moodle/competency:templateview', 'nopermissions', '');
+    throw new required_capability_exception($context, 'powereduc/competency:templateview', 'nopermissions', '');
 }
 
-$url = new moodle_url('/admin/tool/lp/learningplans.php', array('pagecontextid' => $pagecontextid));
+$url = new powereduc_url('/admin/tool/lp/learningplans.php', array('pagecontextid' => $pagecontextid));
 list($title, $subtitle) = \tool_lp\page_helper::setup_for_template($pagecontextid, $url);
 
 $output = $PAGE->get_renderer('tool_lp');

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -35,14 +35,14 @@ $courseid = required_param('courseid', PARAM_INT);
 $PAGE->set_url('/group/autogroup.php', array('courseid' => $courseid));
 
 if (!$course = $DB->get_record('course', array('id'=>$courseid))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 // Make sure that the user has permissions to manage groups.
 require_login($course);
 
 $context       = context_course::instance($courseid);
-require_capability('moodle/course:managegroups', $context);
+require_capability('powereduc/course:managegroups', $context);
 
 $returnurl = $CFG->wwwroot.'/group/index.php?id='.$course->id;
 
@@ -53,7 +53,7 @@ $strautocreategroups = get_string('autocreategroups', 'group');
 $PAGE->set_title($strgroups);
 $PAGE->set_heading($course->fullname. ': '.$strgroups);
 $PAGE->set_pagelayout('admin');
-navigation_node::override_active_url(new moodle_url('/group/index.php', array('id' => $courseid)));
+navigation_node::override_active_url(new powereduc_url('/group/index.php', array('id' => $courseid)));
 
 // Print the page and form
 $preview = '';
@@ -83,7 +83,7 @@ if ($editform->is_cancelled()) {
         case 'idnumber':
             $orderby = 'idnumber'; break;
         default:
-            throw new \moodle_exception('unknoworder');
+            throw new \powereduc_exception('unknoworder');
     }
     $source = array();
     if ($data->cohortid) {
@@ -97,7 +97,7 @@ if ($editform->is_cancelled()) {
     }
 
     // Display only active users if the option was selected or they do not have the capability to view suspended users.
-    $onlyactive = !empty($data->includeonlyactiveenrol) || !has_capability('moodle/course:viewsuspendedusers', $context);
+    $onlyactive = !empty($data->includeonlyactiveenrol) || !has_capability('powereduc/course:viewsuspendedusers', $context);
 
     // TODO Does not support custom user profile fields (MDL-70456).
     $extrafields = \core_user\fields::get_identity_fields($context, false);
@@ -173,7 +173,7 @@ if ($editform->is_cancelled()) {
             $table->width = '90%';
         }
         $table->data  = array();
-        $viewfullnames = has_capability('moodle/site:viewfullnames', $context);
+        $viewfullnames = has_capability('powereduc/site:viewfullnames', $context);
         foreach ($groups as $group) {
             $line = array();
             if (groups_get_group_by_name($courseid, $group['name'])) {
@@ -261,8 +261,8 @@ if ($editform->is_cancelled()) {
     }
 }
 
-$PAGE->navbar->add($strparticipants, new moodle_url('/user/index.php', array('id'=>$courseid)));
-$PAGE->navbar->add($strgroups, new moodle_url('/group/index.php', array('id'=>$courseid)));
+$PAGE->navbar->add($strparticipants, new powereduc_url('/user/index.php', array('id'=>$courseid)));
+$PAGE->navbar->add($strgroups, new powereduc_url('/group/index.php', array('id'=>$courseid)));
 $PAGE->navbar->add($strautocreategroups);
 
 echo $OUTPUT->header();

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ defined('POWEREDUC_INTERNAL') || die();
 
 use coding_exception;
 use core_text;
-use moodle_url;
+use powereduc_url;
 use renderer_base;
 use stdClass;
 use stored_file;
@@ -149,7 +149,7 @@ class stored_file_exporter extends \core\external\exporter {
 
         $icon = $this->file->is_directory() ? file_folder_icon(128) : file_file_icon($this->file, 128);
 
-        $url = moodle_url::make_pluginfile_url(
+        $url = powereduc_url::make_pluginfile_url(
             $this->file->get_contextid(),
             $this->file->get_component(),
             $this->file->get_filearea(),

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    tool
  * @subpackage customlang
- * @copyright  2010 David Mudrak <david@moodle.com>
+ * @copyright  2010 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -55,7 +55,7 @@ class tool_customlang_utils {
     public static function list_components() {
 
         if (self::$components === null) {
-            $list['moodle'] = 'core';
+            $list['powereduc'] = 'core';
 
             $coresubsystems = core_component::get_core_subsystems();
             ksort($coresubsystems); // Should be but just in case.
@@ -281,13 +281,13 @@ class tool_customlang_utils {
         global $CFG;
 
         if ($lang !== clean_param($lang, PARAM_LANG)) {
-            throw new moodle_exception('Unable to dump local strings for non-installed language pack .'.s($lang));
+            throw new powereduc_exception('Unable to dump local strings for non-installed language pack .'.s($lang));
         }
         if ($component !== clean_param($component, PARAM_COMPONENT)) {
             throw new coding_exception('Incorrect component name');
         }
         if (!$filename = self::get_component_filename($component)) {
-            throw new moodle_exception('Unable to find the filename for the component '.s($component));
+            throw new powereduc_exception('Unable to find the filename for the component '.s($component));
         }
         if ($filename !== clean_param($filename, PARAM_FILE)) {
             throw new coding_exception('Incorrect file name '.s($filename));
@@ -304,12 +304,12 @@ class tool_customlang_utils {
         }
 
         if (!$f = fopen($filepath, 'w')) {
-            throw new moodle_exception('Unable to write '.s($filepath));
+            throw new powereduc_exception('Unable to write '.s($filepath));
         }
         fwrite($f, <<<EOF
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -354,7 +354,7 @@ EOF
      * Returns the name of the file where the component's local strings should be exported into
      *
      * @param string $component normalized name of the component, eg 'core' or 'mod_workshop'
-     * @return string|boolean filename eg 'moodle.php' or 'workshop.php', false if not found
+     * @return string|boolean filename eg 'powereduc.php' or 'workshop.php', false if not found
      */
     protected static function get_component_filename($component) {
 
@@ -435,7 +435,7 @@ class tool_customlang_menu implements renderable {
     /**
      * Returns the menu items
      *
-     * @return array (string)key => (object)[->(string)title ->(moodle_url)url ->(string)method]
+     * @return array (string)key => (object)[->(string)title ->(powereduc_url)url ->(string)method]
      */
     public function get_items() {
         return $this->items;
@@ -446,10 +446,10 @@ class tool_customlang_menu implements renderable {
      *
      * @param string $key item identifier
      * @param string $title localized action title
-     * @param moodle_url $url action handler
+     * @param powereduc_url $url action handler
      * @param string $method form method
      */
-    public function add_item($key, $title, moodle_url $url, $method) {
+    public function add_item($key, $title, powereduc_url $url, $method) {
         if (isset($this->items[$key])) {
             throw new coding_exception('Menu item already exists');
         }
@@ -475,7 +475,7 @@ class tool_customlang_translator implements renderable {
     /** @var int total number of the rows int the table */
     public $numofrows = 0;
 
-    /** @var moodle_url */
+    /** @var powereduc_url */
     public $handler;
 
     /** @var string language code */
@@ -490,7 +490,7 @@ class tool_customlang_translator implements renderable {
     /** @var stdclass */
     protected $filter;
 
-    public function __construct(moodle_url $handler, $lang, $filter, $currentpage = 0) {
+    public function __construct(powereduc_url $handler, $lang, $filter, $currentpage = 0) {
         global $DB;
 
         $this->handler      = $handler;

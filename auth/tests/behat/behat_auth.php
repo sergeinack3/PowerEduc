@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -44,16 +44,16 @@ class behat_auth extends behat_base {
      * @Given /^I log in as "(?P<username_string>(?:[^"]|\\")*)"$/
      * @Given I am logged in as :username
      * @param string $username the user to log in as.
-     * @param moodle_url|null $wantsurl optional, URL to go to after logging in.
+     * @param powereduc_url|null $wantsurl optional, URL to go to after logging in.
      */
-    public function i_log_in_as(string $username, moodle_url $wantsurl = null) {
+    public function i_log_in_as(string $username, powereduc_url $wantsurl = null) {
         // In the mobile app the required tasks are different (does not support $wantsurl).
         if ($this->is_in_app()) {
             $this->execute('behat_app::login', [$username]);
             return;
         }
 
-        $loginurl = new moodle_url('/auth/tests/behat/login.php', [
+        $loginurl = new powereduc_url('/auth/tests/behat/login.php', [
             'username' => $username,
         ]);
         if ($wantsurl !== null) {
@@ -71,6 +71,6 @@ class behat_auth extends behat_base {
      * @Given I am not logged in
      */
     public function i_log_out() {
-        $this->execute('behat_general::i_visit', [new moodle_url('/auth/tests/behat/logout.php')]);
+        $this->execute('behat_general::i_visit', [new powereduc_url('/auth/tests/behat/logout.php')]);
     }
 }

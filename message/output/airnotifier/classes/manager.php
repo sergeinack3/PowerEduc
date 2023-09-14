@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Airnotifier manager class
@@ -21,7 +21,7 @@
  * @category   external
  * @copyright  2012 Jerome Mouneyrac <jerome@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.7
+ * @since PowerEduc 2.7
  */
 
 defined('POWEREDUC_INTERNAL') || die;
@@ -82,7 +82,7 @@ class message_airnotifier_manager {
 
         $params = array('appid' => $appname, 'userid' => $userid);
 
-        // First, we look all the devices registered for this user in the Moodle core.
+        // First, we look all the devices registered for this user in the PowerEduc core.
         // We are going to allow only ios devices (since these are the ones that supports PUSH notifications).
         $userdevices = $DB->get_records('user_devices', $params);
         foreach ($userdevices as $device) {
@@ -128,7 +128,7 @@ class message_airnotifier_manager {
         $curl = new curl();
         $curl->setHeader($header);
 
-        // Site ids are stored as secrets in md5 in the Moodle public hub.
+        // Site ids are stored as secrets in md5 in the PowerEduc public hub.
         $params = array(
             'url' => $CFG->wwwroot,
             'siteid' => md5($CFG->siteidentifier),
@@ -199,7 +199,7 @@ class message_airnotifier_manager {
      * @param  int $deviceid the device id
      * @param  bool $enable  true to enable it, false to disable it
      * @return bool true if the device was enabled, false in case of error
-     * @since  Moodle 3.2
+     * @since  PowerEduc 3.2
      */
     public static function enable_device($deviceid, $enable) {
         global $DB, $USER;

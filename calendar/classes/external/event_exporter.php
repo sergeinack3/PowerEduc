@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Contains event class for displaying a calendar event.
  *
  * @package   core_calendar
- * @copyright 2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright 2017 Ryan Wyllie <ryan@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -37,7 +37,7 @@ use \renderer_base;
  * Class for displaying a calendar event.
  *
  * @package   core_calendar
- * @copyright 2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright 2017 Ryan Wyllie <ryan@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class event_exporter extends event_exporter_base {
@@ -71,11 +71,11 @@ class event_exporter extends event_exporter_base {
         if ($moduleproxy = $event->get_course_module()) {
             $modulename = $moduleproxy->get('modname');
             $moduleid = $moduleproxy->get('id');
-            $url = new \moodle_url(sprintf('/mod/%s/view.php', $modulename), ['id' => $moduleid]);
+            $url = new \powereduc_url(sprintf('/mod/%s/view.php', $modulename), ['id' => $moduleid]);
 
             // Build edit event url for action events.
             $params = array('update' => $moduleid, 'return' => true, 'sesskey' => sesskey());
-            $editurl = new \moodle_url('/course/mod.php', $params);
+            $editurl = new \powereduc_url('/course/mod.php', $params);
             $values['editurl'] = $editurl->out(false);
         } else if ($event->get_type() == 'category') {
             $url = $event->get_category()->get_proxied_instance()->get_view_link();

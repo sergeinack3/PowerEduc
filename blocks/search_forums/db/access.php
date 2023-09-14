@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Search forums block caps.
  *
  * @package    block_search_forums
- * @copyright  Mark Nelson <markn@moodle.com>
+ * @copyright  Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,6 +36,6 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         ),
 
-        'clonepermissionsfrom' => 'moodle/site:manageblocks'
+        'clonepermissionsfrom' => 'powereduc/site:manageblocks'
     ),
 );

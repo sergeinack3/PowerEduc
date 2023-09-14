@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
@@ -33,13 +33,13 @@ class htmlpurifier_test extends \basic_testcase {
         // See MDL-52651 for an explanation as to why the rel="noreferrer" attribute is expected here.
         // Also note we do not need to test links with an existing rel attribute as the HTML Purifier is configured to remove
         // the rel attribute.
-        $text = '<a href="http://moodle.org" target="_blank">Some link</a>';
-        $expected = '<a href="http://moodle.org" target="_blank" rel="noreferrer noopener">Some link</a>';
+        $text = '<a href="http://powereduc.org" target="_blank">Some link</a>';
+        $expected = '<a href="http://powereduc.org" target="_blank" rel="noreferrer noopener">Some link</a>';
         $result = format_text($text, FORMAT_HTML);
         $this->assertSame($expected, $result);
 
-        $result = format_text('<a href="http://moodle.org" target="some">Some link</a>', FORMAT_HTML);
-        $this->assertSame('<a href="http://moodle.org">Some link</a>', $result);
+        $result = format_text('<a href="http://powereduc.org" target="some">Some link</a>', FORMAT_HTML);
+        $this->assertSame('<a href="http://powereduc.org">Some link</a>', $result);
     }
 
     /**
@@ -287,7 +287,7 @@ class htmlpurifier_test extends \basic_testcase {
         $text = '<a href="mailto:user@example.com">link</a>';
         $this->assertSame($text, purify_html($text));
 
-        // Extra schemes allowed in moodle.
+        // Extra schemes allowed in powereduc.
         $text = '<a href="irc://irc.example.com/3213?pass">link</a>';
         $this->assertSame($text, purify_html($text));
 

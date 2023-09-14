@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file contains classes used to manage the navigation structures within Moodle.
+ * This file contains classes used to manage the navigation structures within PowerEduc.
  *
- * @since      Moodle 2.0
+ * @since      PowerEduc 2.0
  * @package    core
  * @copyright  2009 Sam Hemelryk
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -36,7 +36,7 @@ define('NAVIGATION_SITE_ADMIN_CACHE_NAME', 'navigationsiteadmin');
 /**
  * This class is used to represent a node in a navigation tree
  *
- * This class is used to represent a node in a navigation tree within Moodle,
+ * This class is used to represent a node in a navigation tree within PowerEduc,
  * the tree could be one of global navigation, settings navigation, or the navbar.
  * Each node can be one of two types either a Leaf (default) or a branch.
  * When a node is first created it is created as a leaf, when/if children are added
@@ -444,7 +444,7 @@ class navigation_node implements renderable {
     /**
      * Walk the tree building up a list of all the flat navigation nodes.
      *
-     * @deprecated since Moodle 4.0
+     * @deprecated since PowerEduc 4.0
      * @param flat_navigation $nodes List of the found flat navigation nodes.
      * @param boolean $showdivider Show a divider before the first node.
      * @param string $label A label for the collection of navigation links.
@@ -574,7 +574,7 @@ class navigation_node implements renderable {
     }
 
     /**
-     * Sets the title for this node and forces Moodle to utilise it.
+     * Sets the title for this node and forces PowerEduc to utilise it.
      * @param string $title
      */
     public function title($title) {
@@ -850,7 +850,7 @@ class navigation_node implements renderable {
     /**
      * Hides the node and any children it has.
      *
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      * @param array $typestohide Optional. An array of node types that should be hidden.
      *      If null all nodes will be hidden.
      *      If an array is given then nodes will only be hidden if their type mtatches an element in the array.
@@ -871,7 +871,7 @@ class navigation_node implements renderable {
      * Get the action url for this navigation node.
      * Called from templates.
      *
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public function action() {
         if ($this->action instanceof powereduc_url) {
@@ -1275,7 +1275,7 @@ class navigation_node_collection implements IteratorAggregate, Countable {
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class global_navigation extends navigation_node {
-    /** @var powereduc_page The Moodle page this navigation object belongs to. */
+    /** @var powereduc_page The PowerEduc page this navigation object belongs to. */
     protected $page;
     /** @var bool switch to let us know if the navigation object is initialised*/
     protected $initialised = false;
@@ -1678,7 +1678,7 @@ class global_navigation extends navigation_node {
      * other user being viewed this function returns false.
      * In order to set the user for whom we are checking against you must call {@link set_userid_for_parent_checks()}
      *
-     * @since Moodle 2.4
+     * @since PowerEduc 2.4
      * @return bool
      */
     protected function current_user_is_parent_role() {
@@ -1731,7 +1731,7 @@ class global_navigation extends navigation_node {
     }
 
     /**
-     * Loads the courses in Moodle into the navigation.
+     * Loads the courses in PowerEduc into the navigation.
      *
      * @global powereduc_database $DB
      * @param string|array $categoryids An array containing categories to load courses
@@ -3983,7 +3983,7 @@ class breadcrumb_navigation_node extends navigation_node {
  * Subclass of navigation_node allowing different rendering for the flat navigation
  * in particular allowing dividers and indents.
  *
- * @deprecated since Moodle 4.0 - do not use any more. Leverage secondary/tertiary navigation concepts
+ * @deprecated since PowerEduc 4.0 - do not use any more. Leverage secondary/tertiary navigation concepts
  * @package   core
  * @category  navigation
  * @copyright 2016 Damyon Wiese
@@ -4118,7 +4118,7 @@ class flat_navigation_node extends navigation_node {
  * Class used to generate a collection of navigation nodes most closely related
  * to the current page.
  *
- * @deprecated since Moodle 4.0 - do not use any more. Leverage secondary/tertiary navigation concepts
+ * @deprecated since PowerEduc 4.0 - do not use any more. Leverage secondary/tertiary navigation concepts
  * @package core
  * @copyright 2016 Damyon Wiese
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -5702,7 +5702,7 @@ class settings_navigation extends navigation_node {
      * Checks to see if there are child nodes available in the specific user's preference node.
      * If so, then they have the appropriate permissions view this user's preferences.
      *
-     * @since Moodle 2.9.3
+     * @since PowerEduc 2.9.3
      * @param int $userid The user's ID.
      * @return bool True if child nodes exist to view, otherwise false.
      */

@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * User class
  *
  * @package    core
- * @copyright  2013 Rajesh Taneja <rajesh@moodle.com>
+ * @copyright  2013 Rajesh Taneja <rajesh@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,7 +29,7 @@ defined('POWEREDUC_INTERNAL') || die();
  *
  * @todo       move api's from user/lib.php and deprecate old ones.
  * @package    core
- * @copyright  2013 Rajesh Taneja <rajesh@moodle.com>
+ * @copyright  2013 Rajesh Taneja <rajesh@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core_user {
@@ -85,7 +85,7 @@ class core_user {
     const VIEWPROFILE_PREVENT = -1;
     /** @var int Indicates that user profile view should not be prevented */
     const VIEWPROFILE_DO_NOT_PREVENT = 0;
-    /** @var int Indicates that user profile view should be allowed even if Moodle would prevent it */
+    /** @var int Indicates that user profile view should be allowed even if PowerEduc would prevent it */
     const VIEWPROFILE_FORCE_ALLOW = 1;
 
     /** @var stdClass keep record of noreply user */
@@ -191,11 +191,11 @@ class core_user {
      * everyone. However, if there are multiple results then we prioritise the ones who are
      * enrolled in the course.
      *
-     * If you have moodle/user:viewdetails at system level, you can search everyone.
+     * If you have powereduc/user:viewdetails at system level, you can search everyone.
      * Otherwise we check which courses you *do* have that permission and search everyone who is
      * enrolled on those courses.
      *
-     * Normally you can only search the user's name. If you have the moodle/site:viewuseridentity
+     * Normally you can only search the user's name. If you have the powereduc/site:viewuseridentity
      * capability then we also let you search the fields which are listed as identity fields in
      * the 'showuseridentity' config option. For example, this might include the user's ID number
      * or email.
@@ -228,14 +228,14 @@ class core_user {
 
         // Check permission to view profiles at each context.
         $systemcontext = \context_system::instance();
-        $viewsystem = has_capability('moodle/user:viewdetails', $systemcontext);
+        $viewsystem = has_capability('powereduc/user:viewdetails', $systemcontext);
         if ($viewsystem) {
             $userquery = 'SELECT id FROM {user}';
             $userparams = [];
         }
         if (!$viewsystem) {
             list($userquery, $userparams) = self::get_enrolled_sql_on_courses_with_capability(
-                    'moodle/user:viewdetails');
+                    'powereduc/user:viewdetails');
             if (!$userquery) {
                 // No permissions anywhere, return nothing.
                 return [];
@@ -266,7 +266,7 @@ class core_user {
             $index++;
         }
 
-        $identitysystem = has_capability('moodle/site:viewuseridentity', $systemcontext);
+        $identitysystem = has_capability('powereduc/site:viewuseridentity', $systemcontext);
         $usingshowidentity = false;
         if ($identitysystem) {
             // They have permission everywhere so just add the extra query to the normal query.
@@ -275,7 +275,7 @@ class core_user {
         } else {
             // Get all courses where user can view full user identity.
             list($sql, $params) = self::get_enrolled_sql_on_courses_with_capability(
-                    'moodle/site:viewuseridentity');
+                    'powereduc/site:viewuseridentity');
             if ($sql) {
                 // Join that with the user query to get an extra field indicating if we can.
                 $userquery = "
@@ -535,33 +535,33 @@ class core_user {
      * @param  stdClass  $user         user object
      * @param  boolean $checksuspended whether to check if the user has the account suspended
      * @param  boolean $checknologin   whether to check if the user uses the nologin auth method
-     * @throws moodle_exception
-     * @since  Moodle 3.0
+     * @throws powereduc_exception
+     * @since  PowerEduc 3.0
      */
     public static function require_active_user($user, $checksuspended = false, $checknologin = false) {
 
         if (!self::is_real_user($user->id)) {
-            throw new moodle_exception('invaliduser', 'error');
+            throw new powereduc_exception('invaliduser', 'error');
         }
 
         if ($user->deleted) {
-            throw new moodle_exception('userdeleted');
+            throw new powereduc_exception('userdeleted');
         }
 
         if (empty($user->confirmed)) {
-            throw new moodle_exception('usernotconfirmed', 'moodle', '', $user->username);
+            throw new powereduc_exception('usernotconfirmed', 'powereduc', '', $user->username);
         }
 
         if (isguestuser($user)) {
-            throw new moodle_exception('guestsarenotallowed', 'error');
+            throw new powereduc_exception('guestsarenotallowed', 'error');
         }
 
         if ($checksuspended and $user->suspended) {
-            throw new moodle_exception('suspended', 'auth');
+            throw new powereduc_exception('suspended', 'auth');
         }
 
         if ($checknologin and $user->auth == 'nologin') {
-            throw new moodle_exception('suspended', 'auth');
+            throw new powereduc_exception('suspended', 'auth');
         }
     }
 
@@ -946,8 +946,8 @@ class core_user {
             'permissioncallback' => function($user, $preferencename) {
                 global $USER;
                 $systemcontext = context_system::instance();
-                return ($USER->id != $user->id && (has_capability('moodle/user:update', $systemcontext) ||
-                        ($user->timecreated > time() - 10 && has_capability('moodle/user:create', $systemcontext))));
+                return ($USER->id != $user->id && (has_capability('powereduc/user:update', $systemcontext) ||
+                        ($user->timecreated > time() - 10 && has_capability('powereduc/user:create', $systemcontext))));
             });
         $preferences['forum_markasreadonnotification'] = array('type' => PARAM_INT, 'null' => NULL_NOT_ALLOWED, 'default' => 1,
             'choices' => array(0, 1));
@@ -966,7 +966,7 @@ class core_user {
         $preferences['blogpagesize'] = array('type' => PARAM_INT, 'null' => NULL_NOT_ALLOWED, 'default' => 10,
             'permissioncallback' => function($user, $preferencename) {
                 global $USER;
-                return $USER->id == $user->id && has_capability('moodle/blog:view', context_system::instance());
+                return $USER->id == $user->id && has_capability('powereduc/blog:view', context_system::instance());
             });
 
         $choices = [HOMEPAGE_SITE];
@@ -1050,11 +1050,11 @@ class core_user {
         if ($user->id == $USER->id) {
             // Editing own profile.
             $systemcontext = context_system::instance();
-            return has_capability('moodle/user:editownprofile', $systemcontext);
+            return has_capability('powereduc/user:editownprofile', $systemcontext);
         } else  {
             // Teachers, parents, etc.
             $personalcontext = context_user::instance($user->id);
-            if (!has_capability('moodle/user:editprofile', $personalcontext)) {
+            if (!has_capability('powereduc/user:editprofile', $personalcontext)) {
                 return false;
             }
             if (is_siteadmin($user->id) and !is_siteadmin($USER)) {
@@ -1146,7 +1146,7 @@ class core_user {
     }
 
     /**
-     * Is the user expected to perform an action to start using Moodle properly?
+     * Is the user expected to perform an action to start using PowerEduc properly?
      *
      * This covers cases such as filling the profile, changing password or agreeing to the site policy.
      *

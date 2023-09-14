@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ $externalbackpack = badges_get_site_backpack($backpackid);
 $persistedissuer = \core\oauth2\issuer::get_record(['id' => $externalbackpack->oauth2_issuerid]);
 if ($persistedissuer) {
     $issuer = new \core\oauth2\issuer($externalbackpack->oauth2_issuerid);
-    $returnurl = new moodle_url('/badges/backpack-connect.php',
+    $returnurl = new powereduc_url('/badges/backpack-connect.php',
         ['action' => 'authorization', 'sesskey' => sesskey(), 'backpackid' => $backpackid]);
 
     // If scope is not passed as parameter, use the issuer supported scopes.
@@ -52,12 +52,12 @@ if ($persistedissuer) {
         if (!$client->is_logged_in()) {
             redirect($client->get_login_url());
         }
-        $wantsurl = new moodle_url('/badges/mybadges.php');
+        $wantsurl = new powereduc_url('/badges/mybadges.php');
         $auth = new \core_badges\oauth2\auth();
         $auth->complete_data($client, $wantsurl);
     } else {
-        throw new moodle_exception('Could not get an OAuth client.');
+        throw new powereduc_exception('Could not get an OAuth client.');
     }
 } else {
-    throw new moodle_exception('Unknown OAuth client.');
+    throw new powereduc_exception('Unknown OAuth client.');
 }

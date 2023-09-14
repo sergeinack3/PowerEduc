@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Tests for the enrol_lti_plugin class.
  *
  * @package enrol_lti
- * @copyright 2016 Jun Pataleta <jun@moodle.com>
+ * @copyright 2016 Jun Pataleta <jun@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace enrol_lti;
@@ -38,7 +38,7 @@ require_once(__DIR__ . '/local/ltiadvantage/lti_advantage_testcase.php');
  * Tests for the enrol_lti_plugin class.
  *
  * @package enrol_lti
- * @copyright 2016 Jun Pataleta <jun@moodle.com>
+ * @copyright 2016 Jun Pataleta <jun@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class lib_test extends \lti_advantage_testcase {

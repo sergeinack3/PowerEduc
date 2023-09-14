@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains functions for managing user access
@@ -849,7 +849,7 @@ function has_capability_in_accessdata($capability, context $context, array &$acc
  * A convenience function that tests has_capability, and displays an error if
  * the user does not have that capability.
  *
- * NOTE before Moodle 2.0, this function attempted to make an appropriate
+ * NOTE before PowerEduc 2.0, this function attempted to make an appropriate
  * require_login call before checking the capability. This is no longer the case.
  * You must call require_login (or one of its variants) if you want to check the
  * user is logged in, before you call this function.
@@ -1086,7 +1086,7 @@ function reload_all_capabilities() {
  * Useful for the "temporary guest" access we grant to logged-in users.
  * This is useful for enrol plugins only.
  *
- * @since Moodle 2.2
+ * @since PowerEduc 2.2
  * @param context_course $coursecontext
  * @param int $roleid
  * @return void
@@ -1121,7 +1121,7 @@ function load_temp_course_role(context_course $coursecontext, $roleid) {
  * Removes any extra guest roles from current USER->access array.
  * This is useful for enrol plugins only.
  *
- * @since Moodle 2.2
+ * @since PowerEduc 2.2
  * @param context_course $coursecontext
  * @return void
  */
@@ -2428,7 +2428,7 @@ function get_all_risks() {
  * Return a link to powereduc docs for a given capability name
  *
  * @param stdClass $capability a capability - a row from the mdl_capabilities table.
- * @return string the human-readable capability name as a link to Moodle Docs.
+ * @return string the human-readable capability name as a link to PowerEduc Docs.
  */
 function get_capability_docs_link($capability) {
     $url = get_docs_url('Capabilities/' . $capability->name);
@@ -2926,7 +2926,7 @@ function get_archetype_roles($archetype) {
  * Gets all the user roles assigned in this context, or higher contexts for a list of users.
  *
  * If you try using the combination $userids = [], $checkparentcontexts = true then this is likely
- * to cause an out-of-memory error on large Moodle sites, so this combination is deprecated and
+ * to cause an out-of-memory error on large PowerEduc sites, so this combination is deprecated and
  * outputs a warning, even though it is the default.
  *
  * @param context $context
@@ -2940,7 +2940,7 @@ function get_users_roles(context $context, $userids = [], $checkparentcontexts =
 
     if (!$userids && $checkparentcontexts) {
         debugging('Please do not call get_users_roles() with $checkparentcontexts = true ' .
-                'and $userids array not set. This combination causes large Moodle sites ' .
+                'and $userids array not set. This combination causes large PowerEduc sites ' .
                 'with lots of site-wide role assignemnts to run out of memory.', DEBUG_DEVELOPER);
     }
 
@@ -4981,7 +4981,7 @@ function role_change_permission($roleid, $context, $capname, $permission) {
  * @category  access
  * @copyright Petr Skoda {@link http://skodak.org}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since     Moodle 2.2
+ * @since     PowerEduc 2.2
  *
  * @property-read int $id context id
  * @property-read int $contextlevel CONTEXT_SYSTEM, CONTEXT_COURSE, etc.
@@ -6007,7 +6007,7 @@ abstract class context extends stdClass implements IteratorAggregate {
  * @category  access
  * @copyright Petr Skoda {@link http://skodak.org}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since     Moodle 2.2
+ * @since     PowerEduc 2.2
  */
 class context_helper extends context {
 
@@ -6340,7 +6340,7 @@ class context_helper extends context {
  * @category  access
  * @copyright Petr Skoda {@link http://skodak.org}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since     Moodle 2.2
+ * @since     PowerEduc 2.2
  */
 class context_system extends context {
     /**
@@ -6595,7 +6595,7 @@ class context_system extends context {
  * @category  access
  * @copyright Petr Skoda {@link http://skodak.org}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since     Moodle 2.2
+ * @since     PowerEduc 2.2
  */
 class context_user extends context {
     /**
@@ -6779,7 +6779,7 @@ class context_user extends context {
  * @category  access
  * @copyright Petr Skoda {@link http://skodak.org}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since     Moodle 2.2
+ * @since     PowerEduc 2.2
  */
 class context_coursecat extends context {
     /**
@@ -7015,7 +7015,7 @@ class context_coursecat extends context {
  * @category  access
  * @copyright Petr Skoda {@link http://skodak.org}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since     Moodle 2.2
+ * @since     PowerEduc 2.2
  */
 class context_course extends context {
     /**
@@ -7245,7 +7245,7 @@ class context_course extends context {
  * @category  access
  * @copyright Petr Skoda {@link http://skodak.org}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since     Moodle 2.2
+ * @since     PowerEduc 2.2
  */
 class context_module extends context {
     /**
@@ -7526,7 +7526,7 @@ class context_module extends context {
  * @category  access
  * @copyright Petr Skoda {@link http://skodak.org}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since     Moodle 2.2
+ * @since     PowerEduc 2.2
  */
 class context_block extends context {
     /**

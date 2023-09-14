@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Cache language strings
  *
- * This file is part of Moodle's cache API, affectionately called MUC.
+ * This file is part of PowerEduc's cache API, affectionately called MUC.
  * It contains the components that are requried in order to use caching.
  *
  * @package    core_cache
@@ -92,7 +92,7 @@ $string['cachedef_grade_letters'] = 'Grade letter queries';
 $string['cachedef_string'] = 'Language string cache';
 $string['cachedef_tags'] = 'Tags collections and areas';
 $string['cachedef_temp_tables'] = 'Temporary tables cache';
-$string['cachedef_userselections'] = 'Data used to persist user selections throughout Moodle';
+$string['cachedef_userselections'] = 'Data used to persist user selections throughout PowerEduc';
 $string['cachedef_user_favourite_course_content_items'] = 'User\'s starred items';
 $string['cachedef_user_group_groupings'] = 'User\'s groupings and groups per course';
 $string['cachedef_user_course_content_items'] = 'User\'s content items (activities, resources and their subtypes) per course';
@@ -162,7 +162,7 @@ $string['nativelocking'] = 'This plugin handles its own locking.';
 $string['none'] = 'None';
 $string['plugin'] = 'Plugin';
 $string['pluginsummaries'] = 'Installed cache stores';
-$string['privacy:metadata:cachestore'] = 'The Cache subsystem stores data temporarily on behalf of other parts of Moodle. This data is not easily identifiable, and is very short lived. It serves as a cache of data stored elsewhere in Moodle, and should therefore already be handled by those Moodle components.';
+$string['privacy:metadata:cachestore'] = 'The Cache subsystem stores data temporarily on behalf of other parts of PowerEduc. This data is not easily identifiable, and is very short lived. It serves as a cache of data stored elsewhere in PowerEduc, and should therefore already be handled by those PowerEduc components.';
 $string['purge'] = 'Purge';
 $string['purgeagain'] = 'Purge again';
 $string['purgexdefinitionsuccess'] = 'Successfully purged the "{$a->name}" cache ({$a->component}/{$a->area}).';

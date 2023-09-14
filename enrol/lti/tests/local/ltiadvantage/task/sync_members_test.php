@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -47,7 +47,7 @@ class sync_members_test extends \lti_advantage_testcase {
         $usercontext = \context_user::instance($user->id);
         $expected = $CFG->wwwroot . '/pluginfile.php/' . $usercontext->id . '/user/icon/boost/f2?rev='. $user->picture;
 
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_url('/user/profile.php');
         $page->set_context(\context_system::instance());
         $renderer = $page->get_renderer('core');

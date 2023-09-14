@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -52,7 +52,7 @@ class auth_plugin_oauth2 extends \auth_oauth2\auth {
             foreach ($idps as $idp) {
                 $idpid = $idp['url']->get_param('id');
                 $sesskey = $idp['url']->get_param('sesskey');
-                $testurl = new moodle_url('/auth/oauth2/test.php', ['id' => $idpid, 'sesskey' => $sesskey]);
+                $testurl = new powereduc_url('/auth/oauth2/test.php', ['id' => $idpid, 'sesskey' => $sesskey]);
 
                 $templateidps[] = ['name' => $idp['name'], 'url' => $testurl->out(), 'iconurl' => $idp['iconurl']];
             }

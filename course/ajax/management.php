@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -63,13 +63,13 @@ switch ($action) {
         if ($totalpages == 0) {
             $str = get_string('nocoursesyet');
         } else if ($totalpages == 1) {
-            $str = get_string('showingacourses', 'moodle', $totalcourses);
+            $str = get_string('showingacourses', 'powereduc', $totalcourses);
         } else {
             $a = new stdClass;
             $a->start = ($page * $perpage) + 1;
             $a->end = min((($page + 1) * $perpage), $totalcourses);
             $a->total = $totalcourses;
-            $str = get_string('showingxofycourses', 'moodle', $a);
+            $str = get_string('showingxofycourses', 'powereduc', $a);
         }
         $outcome->totalcatcourses = $category->get_courses_count();
         $outcome->fromcatcoursecount = $totalcourses;

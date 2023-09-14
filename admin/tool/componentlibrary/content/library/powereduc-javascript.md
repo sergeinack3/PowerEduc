@@ -2,7 +2,7 @@
 layout: docs
 title: "Moodle JavaScript"
 date: 2020-01-14T13:38:37+01:00
-group: moodle-components
+group: powereduc-components
 draft: false
 menu: "main"
 ---

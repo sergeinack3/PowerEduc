@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -75,11 +75,11 @@ class application_registration_service {
     private function registration_from_dto(\stdClass $dto): application_registration {
         $registration = $this->appregistrationrepo->find($dto->id);
         $registration->set_name($dto->name);
-        $registration->set_platformid(new \moodle_url($dto->platformid));
+        $registration->set_platformid(new \powereduc_url($dto->platformid));
         $registration->set_clientid($dto->clientid);
-        $registration->set_accesstokenurl(new \moodle_url($dto->accesstokenurl));
-        $registration->set_jwksurl(new \moodle_url($dto->jwksurl));
-        $registration->set_authenticationrequesturl(new \moodle_url($dto->authenticationrequesturl));
+        $registration->set_accesstokenurl(new \powereduc_url($dto->accesstokenurl));
+        $registration->set_jwksurl(new \powereduc_url($dto->jwksurl));
+        $registration->set_authenticationrequesturl(new \powereduc_url($dto->authenticationrequesturl));
         $registration->complete_registration();
         return $registration;
     }

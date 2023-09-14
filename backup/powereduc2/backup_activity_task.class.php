@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * Defines backup_activity_task class
  *
  * @package     core_backup
- * @subpackage  moodle2
+ * @subpackage  powereduc2
  * @category    backup
  * @copyright   2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -31,7 +31,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * Provides all the settings and steps to perform one complete backup of the activity
  *
  * Activities are supposed to provide the subclass of this class in their file
- * mod/MODULENAME/backup/moodle2/backup_MODULENAME_activity_task.class.php
+ * mod/MODULENAME/backup/powereduc2/backup_MODULENAME_activity_task.class.php
  * The expected name of the subclass is backup_MODULENAME_activity_task
  */
 abstract class backup_activity_task extends backup_task {
@@ -55,9 +55,9 @@ abstract class backup_activity_task extends backup_task {
         if (!$coursemodule = get_coursemodule_from_id(false, $moduleid)) {
             throw new backup_task_exception('activity_task_coursemodule_not_found', $moduleid);
         }
-        // Check activity supports this moodle2 backup format
+        // Check activity supports this powereduc2 backup format
         if (!plugin_supports('mod', $coursemodule->modname, FEATURE_BACKUP_POWEREDUC2)) {
-            throw new backup_task_exception('activity_task_activity_lacks_moodle2_backup_support', $coursemodule->modname);
+            throw new backup_task_exception('activity_task_activity_lacks_powereduc2_backup_support', $coursemodule->modname);
         }
 
         $this->moduleid   = $moduleid;
@@ -341,7 +341,7 @@ abstract class backup_activity_task extends backup_task {
      * Encodes URLs to the activity instance's scripts into a site-independent form
      *
      * The current instance of the activity may be referenced from other places in
-     * the course by URLs like http://my.moodle.site/mod/workshop/view.php?id=42
+     * the course by URLs like http://my.powereduc.site/mod/workshop/view.php?id=42
      * Obvisouly, such URLs are not valid any more once the course is restored elsewhere.
      * For this reason the backup file does not store the original URLs but encodes them
      * into a transportable form. During the restore, the reverse process is applied and

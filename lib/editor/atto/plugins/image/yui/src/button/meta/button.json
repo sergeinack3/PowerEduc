@@ -1,7 +1,7 @@
 {
-    "moodle-atto_image-button": {
+    "powereduc-atto_image-button": {
         "requires": [
-            "moodle-editor_atto-plugin"
+            "powereduc-editor_atto-plugin"
         ]
     }
 }

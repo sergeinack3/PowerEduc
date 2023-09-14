@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ require_once($CFG->dirroot.'/lib/formslib.php');
  * @copyright  2012 Sam Hemelryk
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class cachestore_addinstance_form extends moodleform {
+class cachestore_addinstance_form extends powereducform {
 
     /**
      * The definition of the add instance form
@@ -126,7 +126,7 @@ class cachestore_addinstance_form extends moodleform {
  * @copyright  2012 Sam Hemelryk
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class cache_definition_mappings_form extends moodleform {
+class cache_definition_mappings_form extends powereducform {
 
     /**
      * The definition of the form
@@ -198,7 +198,7 @@ class cache_definition_mappings_form extends moodleform {
  * @copyright  2013 Sam Hemelryk
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class cache_definition_sharing_form extends moodleform {
+class cache_definition_sharing_form extends powereducform {
     /**
      * The definition of the form
      */
@@ -277,7 +277,7 @@ class cache_definition_sharing_form extends moodleform {
  * @copyright  2012 Sam Hemelryk
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class cache_mode_mappings_form extends moodleform {
+class cache_mode_mappings_form extends powereducform {
     /**
      * The definition of the form
      */
@@ -323,7 +323,7 @@ class cache_mode_mappings_form extends moodleform {
  * @copyright  2013 Sam Hemelryk
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class cache_lock_form extends moodleform {
+class cache_lock_form extends powereducform {
 
     /**
      * Defines this form.

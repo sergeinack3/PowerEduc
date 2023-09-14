@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -40,11 +40,11 @@ class user_button extends \single_button implements \renderable {
     /**
      * Initialises the new select_user_button.
      *
-     * @param \moodle_url $url
+     * @param \powereduc_url $url
      * @param string $label The text to display in the button
      * @param string $method Either post or get
      */
-    public function __construct(\moodle_url $url, $label, $method = 'post') {
+    public function __construct(\powereduc_url $url, $label, $method = 'post') {
         parent::__construct($url, $label, $method);
         $this->class = 'singlebutton selectusersbutton gradereport_history_plugin';
         $this->formid = \html_writer::random_id('selectusersbutton');

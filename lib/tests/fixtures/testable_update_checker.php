@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Provides \core\update\testable_checker class.
@@ -20,7 +20,7 @@
  * @package     core_plugin
  * @subpackage  fixtures
  * @category    test
- * @copyright   2012, 2015 David Mudrak <david@moodle.com>
+ * @copyright   2012, 2015 David Mudrak <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace core\update;
@@ -30,7 +30,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Modified version of {@link \core\update\checker} suitable for testing.
  *
- * @copyright 2012, 2015 David Mudrak <david@moodle.com>
+ * @copyright 2012, 2015 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class testable_checker extends checker {
@@ -97,7 +97,7 @@ class testable_checker extends checker {
     private function get_fake_response() {
         $fakeresponse = array(
             'status' => 'OK',
-            'provider' => 'https://download.moodle.org/api/1.0/updates.php',
+            'provider' => 'https://download.powereduc.org/api/1.0/updates.php',
             'apiver' => '1.0',
             'timegenerated' => time(),
             'forversion' => '2012010100.00',
@@ -109,15 +109,15 @@ class testable_checker extends checker {
                         'version' => 2012060103.00,
                         'release' => '2.3.3 (Build: 20121201)',
                         'maturity' => 200,
-                        'url' => 'https://download.moodle.org/',
-                        'download' => 'https://download.moodle.org/download.php/POWEREDUC_23_STABLE/moodle-2.3.3-latest.zip',
+                        'url' => 'https://download.powereduc.org/',
+                        'download' => 'https://download.powereduc.org/download.php/POWEREDUC_23_STABLE/powereduc-2.3.3-latest.zip',
                     ),
                     array(
                         'version' => 2012120100.00,
                         'release' => '2.4dev (Build: 20121201)',
                         'maturity' => 50,
-                        'url' => 'https://download.moodle.org/',
-                        'download' => 'https://download.moodle.org/download.php/POWEREDUC_24_STABLE/moodle-2.4.0-latest.zip',
+                        'url' => 'https://download.powereduc.org/',
+                        'download' => 'https://download.powereduc.org/download.php/POWEREDUC_24_STABLE/powereduc-2.4.0-latest.zip',
                     ),
                 ),
                 'mod_foo' => array(
@@ -126,15 +126,15 @@ class testable_checker extends checker {
                         'requires' => 2012010100,
                         'maturity' => 200,
                         'release' => '1.1',
-                        'url' => 'http://moodle.org/plugins/blahblahblah/',
-                        'download' => 'http://moodle.org/plugins/download.php/blahblahblah',
+                        'url' => 'http://powereduc.org/plugins/blahblahblah/',
+                        'download' => 'http://powereduc.org/plugins/download.php/blahblahblah',
                     ),
                     array(
                         'version' => 2012030502,
                         'requires' => 2012010100,
                         'maturity' => 100,
                         'release' => '1.2 beta',
-                        'url' => 'http://moodle.org/plugins/',
+                        'url' => 'http://powereduc.org/plugins/',
                     ),
                 ),
             ),
@@ -172,7 +172,7 @@ class testable_checker extends checker {
 /**
  * Exception used to detect {@link checker::cron_execute()} calls.
  *
- * @copyright 2012, 2015 David Mudrak <david@moodle.com>
+ * @copyright 2012, 2015 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class testable_checker_cron_executed extends \Exception {

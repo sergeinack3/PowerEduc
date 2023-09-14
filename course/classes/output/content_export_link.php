@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Prepares content for buttons/links to course content export/download.
  *
  * @package   core_course
- * @copyright 2020 Michael Hawkins <michaelh@moodle.com>
+ * @copyright 2020 Michael Hawkins <michaelh@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,7 +28,7 @@ namespace core_course\output;
  * Prepares content for buttons/links to course content export/download.
  *
  * @package   core_course
- * @copyright 2020 Michael Hawkins <michaelh@moodle.com>
+ * @copyright 2020 Michael Hawkins <michaelh@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class content_export_link {
@@ -42,10 +42,10 @@ class content_export_link {
     public static function get_attributes(\context $context): \stdClass {
         global $CFG;
         $downloadattr = new \stdClass();
-        $downloadattr->url = new \moodle_url('/course/downloadcontent.php', ['contextid' => $context->id]);
+        $downloadattr->url = new \powereduc_url('/course/downloadcontent.php', ['contextid' => $context->id]);
         $downloadattr->displaystring = get_string('downloadcoursecontent', 'course');
         $maxfilesize = display_size($CFG->maxsizeperdownloadcoursefile);
-        $downloadlink = new \moodle_url('/course/downloadcontent.php', ['contextid' => $context->id, 'download' => 1]);
+        $downloadlink = new \powereduc_url('/course/downloadcontent.php', ['contextid' => $context->id, 'download' => 1]);
 
         $downloadattr->elementattributes = [
             'data-downloadcourse' => 1,

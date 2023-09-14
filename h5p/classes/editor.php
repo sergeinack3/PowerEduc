@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * H5P editor class.
  *
  * @package    core_h5p
- * @copyright  2020 Victor Deniz <victor@moodle.com>
+ * @copyright  2020 Victor Deniz <victor@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -38,7 +38,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * H5P editor class, for editing local H5P content.
  *
  * @package    core_h5p
- * @copyright  2020 Victor Deniz <victor@moodle.com>
+ * @copyright  2020 Victor Deniz <victor@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class editor {
@@ -104,7 +104,7 @@ class editor {
         // Load the present content.
         $this->oldcontent = $this->core->loadContent($id);
         if ($this->oldcontent === null) {
-            throw new \moodle_exception('invalidelementid');
+            throw new \powereduc_exception('invalidelementid');
         }
 
         // Identify the content type library.
@@ -115,7 +115,7 @@ class editor {
         $fs = get_file_storage();
         $oldfile = $fs->get_file_by_hash($pathnamehash);
         if (!$oldfile) {
-            throw new \moodle_exception('invalidelementid');
+            throw new \powereduc_exception('invalidelementid');
         }
         $this->set_filearea(
             $oldfile->get_contextid(),
@@ -382,7 +382,7 @@ class editor {
 
         // Add JavaScript settings.
         $root = $CFG->wwwroot;
-        $filespathbase = \moodle_url::make_draftfile_url(0, '', '');
+        $filespathbase = \powereduc_url::make_draftfile_url(0, '', '');
 
         $factory = new factory();
         $contentvalidator = $factory->get_content_validator();

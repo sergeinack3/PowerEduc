@@ -55,7 +55,7 @@ module.exports = grunt => {
                             grunt: true,
                             // Run from current working dir and inherit stdio from process.
                             opts: {
-                                cwd: grunt.moodleEnv.fullRunDir,
+                                cwd: grunt.powereducEnv.fullRunDir,
                                 stdio: 'inherit'
                             },
                             args: [task, filesOption]
@@ -134,7 +134,7 @@ module.exports = grunt => {
             resp.files.forEach(function(file) {
                 grunt.log.ok('File changed: ' + file.name);
 
-                var fullPath = grunt.moodleEnv.fullRunDir + '/' + file.name;
+                var fullPath = grunt.powereducEnv.fullRunDir + '/' + file.name;
                 Object.keys(watchConfig).forEach(function(task) {
 
                     const fileGlobs = watchConfig[task].files;
@@ -147,7 +147,7 @@ module.exports = grunt => {
                         // to that directory. However the grunt tasks  expect the file paths to be
                         // relative to the Gruntfile.js location so let's normalise them before
                         // adding them to the queue.
-                        var relativePath = fullPath.replace(grunt.moodleEnv.gruntFilePath + '/', '');
+                        var relativePath = fullPath.replace(grunt.powereducEnv.gruntFilePath + '/', '');
                         if (task in watchTaskQueue) {
                             if (!watchTaskQueue[task].includes(relativePath)) {
                                 watchTaskQueue[task] = watchTaskQueue[task].concat(relativePath);
@@ -173,7 +173,7 @@ module.exports = grunt => {
         });
 
         // Initiate the watch on the current directory.
-        watchmanClient.command(['watch-project', grunt.moodleEnv.fullRunDir], function(watchError, watchResponse) {
+        watchmanClient.command(['watch-project', grunt.powereducEnv.fullRunDir], function(watchError, watchResponse) {
             if (watchError) {
                 grunt.log.error('Error initiating watch:', watchError);
                 watchTaskDone(1);
@@ -248,7 +248,7 @@ module.exports = grunt => {
                         return;
                     }
 
-                    grunt.log.ok('Listening for changes to files in ' + grunt.moodleEnv.fullRunDir);
+                    grunt.log.ok('Listening for changes to files in ' + grunt.powereducEnv.fullRunDir);
                 });
             });
         });

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -43,13 +43,13 @@ class format_social extends core_courseformat\base {
      * @param array $options options for view URL. At the moment core uses:
      *     'navigation' (bool) if true and section has no separate page, the function returns null
      *     'sr' (int) used by multipage formats to specify to which section to return
-     * @return null|moodle_url
+     * @return null|powereduc_url
      */
     public function get_view_url($section, $options = array()) {
         if (!empty($options['navigation']) && $section !== null) {
             return null;
         }
-        return new moodle_url('/course/view.php', array('id' => $this->courseid));
+        return new powereduc_url('/course/view.php', array('id' => $this->courseid));
     }
 
     /**

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core_contentbank
  * @category   test
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -34,7 +34,7 @@ use contenttype_testable\contenttype as contenttype;
  *
  * @package    core_contentbank
  * @category   test
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @coversDefaultClass \core_contentbank\content
  *
@@ -78,7 +78,7 @@ class content_test extends \advanced_testcase {
         return [
             'Standard name' => ['New name', 'New name'],
             'Name with digits' => ['Today is 17/04/2017', 'Today is 17/04/2017'],
-            'Name with symbols' => ['Follow us: @moodle', 'Follow us: @moodle'],
+            'Name with symbols' => ['Follow us: @powereduc', 'Follow us: @powereduc'],
             'Name with tags' => ['This is <b>bold</b>', 'This is bold'],
             'Long name' => [str_repeat('a', 100), str_repeat('a', 100)],
             'Too long name' => [str_repeat('a', 300), str_repeat('a', 255)],

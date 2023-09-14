@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -62,7 +62,7 @@ class gradingform_guide_controller extends gradingform_controller {
      * Extends the module settings navigation with the guide grading settings
      *
      * This function is called when the context for the page is an activity module with the
-     * FEATURE_ADVANCED_GRADING, the user has the permission moodle/grade:managegradingforms
+     * FEATURE_ADVANCED_GRADING, the user has the permission powereduc/grade:managegradingforms
      * and there is an area with the active grading method set to 'guide'.
      *
      * @param settings_navigation $settingsnav {@link settings_navigation}
@@ -85,13 +85,13 @@ class gradingform_guide_controller extends gradingform_controller {
      * @return void
      */
     public function extend_navigation(global_navigation $navigation, navigation_node $node=null) {
-        if (has_capability('moodle/grade:managegradingforms', $this->get_context())) {
+        if (has_capability('powereduc/grade:managegradingforms', $this->get_context())) {
             // No need for preview if user can manage forms, he will have link to manage.php in settings instead.
             return;
         }
         if ($this->is_form_defined() && ($options = $this->get_options()) && !empty($options['alwaysshowdefinition'])) {
             $node->add(get_string('gradingof', 'gradingform_guide', get_grading_manager($this->get_areaid())->get_area_title()),
-                    new moodle_url('/grade/grading/form/'.$this->get_method_name().'/preview.php',
+                    new powereduc_url('/grade/grading/form/'.$this->get_method_name().'/preview.php',
                         array('areaid' => $this->get_areaid())), settings_navigation::TYPE_CUSTOM);
         }
     }
@@ -495,20 +495,20 @@ class gradingform_guide_controller extends gradingform_controller {
     /**
      * Returns the guide plugin renderer
      *
-     * @param moodle_page $page the target page
+     * @param powereduc_page $page the target page
      * @return gradingform_guide_renderer
      */
-    public function get_renderer(moodle_page $page) {
+    public function get_renderer(powereduc_page $page) {
         return $page->get_renderer('gradingform_'. $this->get_method_name());
     }
 
     /**
      * Returns the HTML code displaying the preview of the grading form
      *
-     * @param moodle_page $page the target page
+     * @param powereduc_page $page the target page
      * @return string
      */
-    public function render_preview(moodle_page $page) {
+    public function render_preview(powereduc_page $page) {
 
         if (!$this->is_form_defined()) {
             throw new coding_exception('It is the caller\'s responsibility to make sure that the form is actually defined');
@@ -516,7 +516,7 @@ class gradingform_guide_controller extends gradingform_controller {
 
         // Check if current user is able to see preview
         $options = $this->get_options();
-        if (empty($options['alwaysshowdefinition']) && !has_capability('moodle/grade:managegradingforms', $page->context))  {
+        if (empty($options['alwaysshowdefinition']) && !has_capability('powereduc/grade:managegradingforms', $page->context))  {
             return '';
         }
 
@@ -526,7 +526,7 @@ class gradingform_guide_controller extends gradingform_controller {
 
         $guide = '';
         $guide .= $output->box($this->get_formatted_description(), 'gradingform_guide-description');
-        if (has_capability('moodle/grade:managegradingforms', $page->context)) {
+        if (has_capability('powereduc/grade:managegradingforms', $page->context)) {
             $guide .= $output->display_guide_mapping_explained($this->get_min_max_score());
             $guide .= $output->display_guide($criteria, $comments, $options, self::DISPLAY_PREVIEW, 'guide');
         } else {
@@ -593,7 +593,7 @@ class gradingform_guide_controller extends gradingform_controller {
     /**
      * Returns html code to be included in student's feedback.
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @param int $itemid
      * @param array $gradinginfo result of function grade_get_grades
      * @param string $defaultcontent default string to be returned if no active grading is found
@@ -927,7 +927,7 @@ class gradingform_guide_instance extends gradingform_instance {
     /**
      * Returns html for form element of type 'grading'.
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @param MoodleQuickForm_grading $gradingformelement
      * @return string
      */

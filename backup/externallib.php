@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -85,9 +85,9 @@ class core_backup_external extends external_api {
         self::validate_context($context);
 
         if ($cm) {
-            require_capability('moodle/backup:backupactivity', $context);
+            require_capability('powereduc/backup:backupactivity', $context);
         } else {
-            require_capability('moodle/backup:backupcourse', $context);
+            require_capability('powereduc/backup:backupcourse', $context);
         }
 
         $results = array();
@@ -156,7 +156,7 @@ class core_backup_external extends external_api {
         // Context validation.
         list($context, $course, $cm) = get_context_info_array($contextid);
         self::validate_context($context);
-        require_capability('moodle/backup:backupcourse', $context);
+        require_capability('powereduc/backup:backupcourse', $context);
 
         if ($cm) {
             $filearea = 'activity';
@@ -228,7 +228,7 @@ class core_backup_external extends external_api {
             $context = context::instance_by_id($contextid);
         }
         self::validate_context($context);
-        require_capability('moodle/restore:restorecourse', $context);
+        require_capability('powereduc/restore:restorecourse', $context);
 
         $results = \async_helper::get_restore_url($backupid);
 
@@ -391,7 +391,7 @@ class core_backup_external extends external_api {
             $copydata = \copy_helper::process_formdata($mdata);
             $copyids = \copy_helper::create_copy($copydata);
         } else {
-            throw new moodle_exception('copyformfail', 'backup');
+            throw new powereduc_exception('copyformfail', 'backup');
         }
 
         return json_encode($copyids);

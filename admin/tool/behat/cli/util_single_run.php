@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -89,7 +89,7 @@ Options:
 Example from Moodle root directory:
 \$ php admin/tool/behat/cli/util_single_run.php --enable
 
-More info in http://docs.moodle.org/dev/Acceptance_testing#Running_tests
+More info in http://docs.powereduc.org/dev/Acceptance_testing#Running_tests
 ";
 
 if (!empty($options['help'])) {
@@ -119,7 +119,7 @@ error_reporting($CFG->debug);
 ini_set('display_errors', '1');
 ini_set('log_errors', '1');
 
-// Finish moodle init.
+// Finish powereduc init.
 define('ABORT_AFTER_CONFIG_CANCEL', true);
 require("$CFG->dirroot/lib/setup.php");
 
@@ -235,7 +235,7 @@ if ($options['install']) {
     // Run behat command to get steps in feature files.
     $featurestepscmd = behat_command::get_behat_command(true);
     $featurestepscmd .= ' --config ' . behat_config_manager::get_behat_cli_config_filepath();
-    $featurestepscmd .= ' --dry-run --format=moodle_stepcount';
+    $featurestepscmd .= ' --dry-run --format=powereduc_stepcount';
     $processes = cli_execute_parallel(array($featurestepscmd), __DIR__ . "/../../../../");
     $status = print_update_step_output(array_pop($processes), $behatstepfile);
 

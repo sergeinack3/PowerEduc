@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ require_once($CFG->libdir.'/formslib.php');
  * @copyright 2002 onwards Martin Dougiamas (http://dougiamas.com)
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class core_course_editcategory_form extends moodleform {
+class core_course_editcategory_form extends powereducform {
 
     /**
      * The form definition.
@@ -55,12 +55,12 @@ class core_course_editcategory_form extends moodleform {
         // var_dump($campus);die;
         // Get list of categories to use as parents, with site as the first one.
         $options = array();
-        if (has_capability('moodle/category:manage', context_system::instance()) || $parent == 0) {
+        if (has_capability('powereduc/category:manage', context_system::instance()) || $parent == 0) {
             $options[0] = get_string('top');
         }
         if ($categoryid) {
             // Editing an existing category.
-            $options += core_course_category::make_categories_list('moodle/category:manage', $categoryid);
+            $options += core_course_category::make_categories_list('powereduc/category:manage', $categoryid);
             if (empty($options[$parent])) {
                 // Ensure the the category parent has been included in the options.
                 $options[$parent] = $DB->get_field('course_categories', 'name', array('id'=>$parent));
@@ -68,7 +68,7 @@ class core_course_editcategory_form extends moodleform {
             $strsubmit = get_string('savechanges');
         } else {
             // Making a new category.
-            $options += core_course_category::make_categories_list('moodle/category:manage');
+            $options += core_course_category::make_categories_list('powereduc/category:manage');
             $strsubmit = get_string('createcategory');
         }
         if($campus!=null)

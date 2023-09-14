@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -74,11 +74,11 @@ class cache_config_writer extends cache_config {
         if ($directory !== $CFG->dataroot && !file_exists($directory)) {
             $result = make_writable_directory($directory, false);
             if (!$result) {
-                throw new cache_exception('ex_configcannotsave', 'cache', '', null, 'Cannot create config directory. Check the permissions on your moodledata directory.');
+                throw new cache_exception('ex_configcannotsave', 'cache', '', null, 'Cannot create config directory. Check the permissions on your powereducdata directory.');
             }
         }
         if (!file_exists($directory) || !is_writable($directory)) {
-            throw new cache_exception('ex_configcannotsave', 'cache', '', null, 'Config directory is not writable. Check the permissions on the moodledata/muc directory.');
+            throw new cache_exception('ex_configcannotsave', 'cache', '', null, 'Config directory is not writable. Check the permissions on the powereducdata/muc directory.');
         }
 
         // Prepare a configuration array to store.

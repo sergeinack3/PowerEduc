@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -41,10 +41,10 @@ if (!empty($id)) {
 // We check that we have the permission to edit this framework, in its own context.
 require_login(0, false);
 \core_competency\api::require_enabled();
-require_capability('moodle/competency:templatemanage', $context);
+require_capability('powereduc/competency:templatemanage', $context);
 
 // We keep the original context in the URLs, so that we remain in the same context.
-$url = new moodle_url("/admin/tool/lp/edittemplate.php", [
+$url = new powereduc_url("/admin/tool/lp/edittemplate.php", [
     'id' => $id,
     'pagecontextid' => $pagecontextid,
     'return' => $returntype
@@ -70,7 +70,7 @@ $data = $form->get_data();
 if ($data) {
     if (empty($data->id)) {
         $template = \core_competency\api::create_template($data);
-        $returnurl = new moodle_url('/admin/tool/lp/templatecompetencies.php', [
+        $returnurl = new powereduc_url('/admin/tool/lp/templatecompetencies.php', [
             'templateid' => $template->get('id'),
             'pagecontextid' => $pagecontextid
         ]);

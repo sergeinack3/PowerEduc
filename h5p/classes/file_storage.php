@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Class \core_h5p\file_storage.
  *
  * @package    core_h5p
- * @copyright  2019 Victor Deniz <victor@moodle.com>, base on code by Joubel AS
+ * @copyright  2019 Victor Deniz <victor@powereduc.com>, base on code by Joubel AS
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,7 +33,7 @@ use Moodle\H5PFileStorage;
  * Class to handle storage and export of H5P Content.
  *
  * @package    core_h5p
- * @copyright  2019 Victor Deniz <victor@moodle.com>
+ * @copyright  2019 Victor Deniz <victor@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class file_storage implements H5PFileStorage {
@@ -466,7 +466,7 @@ class file_storage implements H5PFileStorage {
             $filepath,
             self::ICON_FILENAME)
         ) {
-            $iconurl  = \moodle_url::make_pluginfile_url(
+            $iconurl  = \powereduc_url::make_pluginfile_url(
                 $this->context->id,
                 self::COMPONENT,
                 self::LIBRARY_FILEAREA,

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 namespace core_competency;
 defined('POWEREDUC_INTERNAL') || die();
 
-use moodle_url;
+use powereduc_url;
 
 /**
  * URL manager class.
@@ -67,7 +67,7 @@ class url {
         }
         if (!method_exists(static::$resolver, $resource)) {
             debugging("URL for '$resource' not implemented.", DEBUG_DEVELOPER);
-            return new moodle_url('/');
+            return new powereduc_url('/');
         }
         return call_user_func_array([static::$resolver, $resource], $args);
     }
@@ -77,7 +77,7 @@ class url {
      *
      * @param int $competencyid The competency ID.
      * @param int $pagecontextid The ID of the context we are in.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function competency($competencyid, $pagecontextid) {
         return static::get(__FUNCTION__, func_get_args());
@@ -88,7 +88,7 @@ class url {
      *
      * @param int $frameworkid The framework ID.
      * @param int $pagecontextid The ID of the context we are in.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function framework($frameworkid, $pagecontextid) {
         return static::get(__FUNCTION__, func_get_args());
@@ -98,7 +98,7 @@ class url {
      * The URL where the frameworks can be found.
      *
      * @param int $pagecontextid The ID of the context that we are browsing.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function frameworks($pagecontextid) {
         return static::get(__FUNCTION__, func_get_args());
@@ -108,7 +108,7 @@ class url {
      * The URL where the plan can be found.
      *
      * @param int $planid The plan ID.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function plan($planid) {
         return static::get(__FUNCTION__, func_get_args());
@@ -118,7 +118,7 @@ class url {
      * The URL where the plans of a user can be found.
      *
      * @param int $userid The user ID.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function plans($userid) {
         return static::get(__FUNCTION__, func_get_args());
@@ -129,7 +129,7 @@ class url {
      *
      * @param int $templateid The template ID.
      * @param int $pagecontextid The ID of the context we are in.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function template($templateid, $pagecontextid) {
         return static::get(__FUNCTION__, func_get_args());
@@ -139,7 +139,7 @@ class url {
      * The URL where the templates can be found.
      *
      * @param int $pagecontextid The ID of the context that we are browsing.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function templates($pagecontextid) {
         return static::get(__FUNCTION__, func_get_args());
@@ -149,7 +149,7 @@ class url {
      * The URL where the user competency can be found.
      *
      * @param int $usercompetencyid The user competency ID
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function user_competency($usercompetencyid) {
         return static::get(__FUNCTION__, func_get_args());
@@ -161,7 +161,7 @@ class url {
      * @param int $userid The user ID
      * @param int $competencyid The competency ID.
      * @param int $courseid The course ID.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function user_competency_in_course($userid, $competencyid, $courseid) {
         return static::get(__FUNCTION__, func_get_args());
@@ -173,7 +173,7 @@ class url {
      * @param int $userid The user ID
      * @param int $competencyid The competency ID.
      * @param int $planid The plan ID.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function user_competency_in_plan($userid, $competencyid, $planid) {
         return static::get(__FUNCTION__, func_get_args());
@@ -183,7 +183,7 @@ class url {
      * The URL where the user evidence (of prior learning) can be found.
      *
      * @param int $userevidenceid The user evidence ID
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function user_evidence($userevidenceid) {
         return static::get(__FUNCTION__, func_get_args());

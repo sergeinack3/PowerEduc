@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * A scheduled task.
@@ -26,7 +26,7 @@ namespace core\oauth2;
 
 use \core\task\scheduled_task;
 use core_user;
-use moodle_exception;
+use powereduc_exception;
 
 defined('POWEREDUC_INTERNAL') || die();
 
@@ -64,7 +64,7 @@ class refresh_system_tokens_task extends scheduled_task {
             $short = get_string('oauthrefreshtokenexpiredshort', 'core_admin', $strparams);
             $message = new \core\message\message();
             $message->courseid          = SITEID;
-            $message->component         = 'moodle';
+            $message->component         = 'powereduc';
             $message->name              = 'errors';
             $message->userfrom          = core_user::get_noreply_user();
             $message->userto            = $admin;
@@ -90,9 +90,9 @@ class refresh_system_tokens_task extends scheduled_task {
             if ($issuer->is_system_account_connected()) {
                 try {
                     // Try to get an authenticated client; renew token if necessary.
-                    // Returns false or throws a moodle_exception on error.
+                    // Returns false or throws a powereduc_exception on error.
                     $success = \core\oauth2\api::get_system_oauth_client($issuer);
-                } catch (moodle_exception $e) {
+                } catch (powereduc_exception $e) {
                     mtrace($e->getMessage());
                     $success = false;
                 }
@@ -104,7 +104,7 @@ class refresh_system_tokens_task extends scheduled_task {
         }
 
         if (!$tasksuccess) {
-             throw new moodle_exception('oauth2refreshtokentaskerror', 'core_error');
+             throw new powereduc_exception('oauth2refreshtokentaskerror', 'core_error');
         }
     }
 

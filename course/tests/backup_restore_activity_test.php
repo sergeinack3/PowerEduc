@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -64,11 +64,11 @@ class backup_restore_activity_test extends \advanced_testcase {
         // Backup the course.
         $backupid = $this->backup_course($course);
 
-        // Create a manger user without 'moodle/course:setforcedlanguage' to do the restore.
+        // Create a manger user without 'powereduc/course:setforcedlanguage' to do the restore.
         $manager = $generator->create_user();
         $generator->role_assign('manager', $manager->id);
         role_change_permission($DB->get_field('role', 'id', ['shortname' => 'manager'], MUST_EXIST),
-                \context_system::instance(), 'moodle/course:setforcedlanguage', CAP_INHERIT);
+                \context_system::instance(), 'powereduc/course:setforcedlanguage', CAP_INHERIT);
         $this->setUser($manager);
 
         // Restore the course.

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ $userid = optional_param('userid', $USER->id, PARAM_INT);
 $id = optional_param('id', null, PARAM_INT);
 $returntype = optional_param('return', null, PARAM_ALPHA);
 
-$url = new moodle_url('/admin/tool/lp/user_evidence_edit.php', array('id' => $id, 'userid' => $userid, 'return' => $returntype));
+$url = new powereduc_url('/admin/tool/lp/user_evidence_edit.php', array('id' => $id, 'userid' => $userid, 'return' => $returntype));
 
 $userevidence = null;
 if (empty($id)) {
@@ -68,12 +68,12 @@ $customdata = array(
 // Check if user has permissions to manage user evidence.
 if ($userevidence != null) {
     if (!$userevidence->can_manage()) {
-        throw new required_capability_exception($context, 'moodle/competency:userevidencemanage', 'nopermissions', '');
+        throw new required_capability_exception($context, 'powereduc/competency:userevidencemanage', 'nopermissions', '');
     }
     $customdata['evidence'] = $userevidence;
 
 } else if (!\core_competency\user_evidence::can_manage_user($userid)) {
-    throw new required_capability_exception($context, 'moodle/competency:userevidencemanage', 'nopermissions', '');
+    throw new required_capability_exception($context, 'powereduc/competency:userevidencemanage', 'nopermissions', '');
 }
 
 $form = new \tool_lp\form\user_evidence($url->out(false), $customdata);
@@ -100,7 +100,7 @@ if ($data = $form->get_data()) {
 
     if (empty($userevidence)) {
         $userevidence = \core_competency\api::create_user_evidence($data, $draftitemid);
-        $returnurl = new moodle_url('/admin/tool/lp/user_evidence.php', ['id' => $userevidence->get('id')]);
+        $returnurl = new powereduc_url('/admin/tool/lp/user_evidence.php', ['id' => $userevidence->get('id')]);
         $returnmsg = get_string('userevidencecreated', 'tool_lp');
     } else {
         \core_competency\api::update_user_evidence($data, $draftitemid);

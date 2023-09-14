@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ namespace enrol_lti\local\ltiadvantage\entity;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later */
 class nrps_info {
 
-    /** @var \moodle_url the memberships URL for the service. */
+    /** @var \powereduc_url the memberships URL for the service. */
     private $contextmembershipsurl;
 
     /** @var float[] the array of supported service versions. */
@@ -48,10 +48,10 @@ class nrps_info {
     /**
      * The private nrps_info constructor.
      *
-     * @param \moodle_url $contextmembershipsurl the memberships URL.
+     * @param \powereduc_url $contextmembershipsurl the memberships URL.
      * @param string[] $serviceversions the supported service versions.
      */
-    private function __construct(\moodle_url $contextmembershipsurl, array $serviceversions = [self::SERVICE_VERSION_2]) {
+    private function __construct(\powereduc_url $contextmembershipsurl, array $serviceversions = [self::SERVICE_VERSION_2]) {
         $this->contextmembershipsurl = $contextmembershipsurl;
         $this->set_service_versions($serviceversions);
     }
@@ -59,11 +59,11 @@ class nrps_info {
     /**
      * Factory method to create a new nrps_info instance.
      *
-     * @param \moodle_url $contextmembershipsurl the memberships URL.
+     * @param \powereduc_url $contextmembershipsurl the memberships URL.
      * @param string[] $serviceversions the supported service versions.
      * @return nrps_info the object instance.
      */
-    public static function create(\moodle_url $contextmembershipsurl,
+    public static function create(\powereduc_url $contextmembershipsurl,
             array $serviceversions = [self::SERVICE_VERSION_2]): nrps_info {
         return new self($contextmembershipsurl, $serviceversions);
     }
@@ -105,9 +105,9 @@ class nrps_info {
     /**
      * Get the service URL for this grade service instance.
      *
-     * @return \moodle_url the service URL.
+     * @return \powereduc_url the service URL.
      */
-    public function get_context_memberships_url(): \moodle_url {
+    public function get_context_memberships_url(): \powereduc_url {
         return $this->contextmembershipsurl;
     }
 

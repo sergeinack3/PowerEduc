@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  *
  * @package    enrol_lti
  * @category   privacy
- * @copyright  2018 Mark Nelson <markn@moodle.com>
+ * @copyright  2018 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -37,7 +37,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Privacy Subsystem for enrol_lti.
  *
- * @copyright  2018 Mark Nelson <markn@moodle.com>
+ * @copyright  2018 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements
@@ -221,14 +221,14 @@ class provider implements
     /**
      * Loop and export from a recordset.
      *
-     * @param \moodle_recordset $recordset The recordset.
+     * @param \powereduc_recordset $recordset The recordset.
      * @param string $splitkey The record key to determine when to export.
      * @param mixed $initial The initial data to reduce from.
      * @param callable $reducer The function to return the dataset, receives current dataset, and the current record.
      * @param callable $export The function to export the dataset, receives the last value from $splitkey and the dataset.
      * @return void
      */
-    protected static function recordset_loop_and_export(\moodle_recordset $recordset, $splitkey, $initial,
+    protected static function recordset_loop_and_export(\powereduc_recordset $recordset, $splitkey, $initial,
             callable $reducer, callable $export) {
         $data = $initial;
         $lastid = null;

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ require_once($CFG->libdir.'/formslib.php');
  * @copyright  2014 Marina Glancy
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class cohort_upload_form extends moodleform {
+class cohort_upload_form extends powereducform {
     /** @var array new cohorts that need to be created */
     public $processeddata = null;
     /** @var array cached list of available contexts */
@@ -137,10 +137,10 @@ class cohort_upload_form extends moodleform {
     protected function get_context_options() {
         if ($this->contextoptions === null) {
             $this->contextoptions = array();
-            $displaylist = core_course_category::make_categories_list('moodle/cohort:manage');
+            $displaylist = core_course_category::make_categories_list('powereduc/cohort:manage');
             // We need to index the options array by context id instead of category id and add option for system context.
             $syscontext = context_system::instance();
-            if (has_capability('moodle/cohort:manage', $syscontext)) {
+            if (has_capability('powereduc/cohort:manage', $syscontext)) {
                 $this->contextoptions[$syscontext->id] = $syscontext->get_context_name();
             }
             foreach ($displaylist as $cid => $name) {
@@ -174,7 +174,7 @@ class cohort_upload_form extends moodleform {
      */
     protected function get_cohort_file($draftid) {
         global $USER;
-        // We can not use moodleform::get_file_content() method because we need the content before the form is validated.
+        // We can not use powereducform::get_file_content() method because we need the content before the form is validated.
         if (!$draftid) {
             return null;
         }
@@ -240,7 +240,7 @@ class cohort_upload_form extends moodleform {
             $context = context::instance_by_id($line['data']['contextid']);
             foreach ($columns as $key => $value) {
                 if ($key === 'contextid') {
-                    $text = html_writer::link(new moodle_url('/cohort/index.php', array('contextid' => $context->id)),
+                    $text = html_writer::link(new powereduc_url('/cohort/index.php', array('contextid' => $context->id)),
                         $context->get_context_name(false));
                 } else {
                     $text = s($line['data'][$key]);

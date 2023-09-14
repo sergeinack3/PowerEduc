@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -119,7 +119,7 @@ if (($form = data_submitted()) && confirm_sesskey()) {
 
     core_plugin_manager::reset_caches();
 
-    $url = new moodle_url('message.php');
+    $url = new powereduc_url('message.php');
     redirect($url);
 }
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Defines site config settings for the grader report
  *
  * @package    gradereport_grader
- * @copyright  2007 Moodle Pty Ltd (http://moodle.com)
+ * @copyright  2007 Moodle Pty Ltd (http://powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

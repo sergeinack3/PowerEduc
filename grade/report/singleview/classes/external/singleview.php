@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,8 +25,8 @@ use external_single_structure;
 use external_value;
 use external_warnings;
 use invalid_parameter_exception;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use restricted_context_exception;
 use grade_tree;
 
@@ -63,7 +63,7 @@ class singleview extends core_course_external {
      * @return array Users and warnings to pass back to the calling widget.
      * @throws coding_exception
      * @throws invalid_parameter_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @throws restricted_context_exception
      */
     protected static function get_grade_items_for_search_widget(int $courseid): array {
@@ -86,7 +86,7 @@ class singleview extends core_course_external {
         $gradeitems = array_map(function ($gradeitem) use ($PAGE, $USER, $params) {
             $item = new \stdClass();
             $item->id = $gradeitem->id;
-            $url = new moodle_url('/grade/report/singleview/index.php', [
+            $url = new powereduc_url('/grade/report/singleview/index.php', [
                     'id' => $params['courseid'],
                     'itemid' => $gradeitem->id,
                     'item' => 'grade'

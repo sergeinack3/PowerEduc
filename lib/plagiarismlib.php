@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * plagiarismlib.php - Contains core Plagiarism related functions.
  *
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package    core
  * @subpackage plagiarism
  * @copyright  2010 Dan Marsden http://danmarsden.com
@@ -56,11 +56,11 @@ function plagiarism_get_links($linkarray) {
 /**
  * returns array of plagiarism details about specified file
  *
- * @deprecated Since Moodle 4.0. - this function was a placeholder and not used in core.
- * @todo MDL-71326 This is to be moved from here to deprecatedlib.php in Moodle 4.4
+ * @deprecated Since PowerEduc 4.0. - this function was a placeholder and not used in core.
+ * @todo MDL-71326 This is to be moved from here to deprecatedlib.php in PowerEduc 4.4
  * @param int $cmid
  * @param int $userid
- * @param object $file moodle file object
+ * @param object $file powereduc file object
  * @return array - sets of details about specified file, one array of details per plagiarism plugin
  *  - each set contains at least 'analyzed', 'score', 'reporturl'
  */
@@ -85,8 +85,8 @@ function plagiarism_get_file_results($cmid, $userid, $file) {
 /**
  * saves/updates plagiarism settings from a modules config page - called by course/modedit.php
  *
- * @deprecated Since Moodle 3.9. MDL-65835 Please use {plugin name}_coursemodule_edit_post_actions() instead.
- * @todo MDL-67526 This is to be moved from here to deprecatedlib.php in Moodle 4.1
+ * @deprecated Since PowerEduc 3.9. MDL-65835 Please use {plugin name}_coursemodule_edit_post_actions() instead.
+ * @todo MDL-67526 This is to be moved from here to deprecatedlib.php in PowerEduc 4.1
  * @param object $data - form data
  */
 function plagiarism_save_form_elements($data) {
@@ -114,9 +114,9 @@ function plagiarism_save_form_elements($data) {
 /**
  * adds the list of plagiarism settings to a form - called inside modules that have enabled plagiarism
  *
- * @deprecated Since Moodle 3.9. MDL-65835 Please use {plugin name}_coursemodule_standard_elements() instead.
- * @todo MDL-67526 This is to be moved from here to deprecatedlib.php in Moodle 4.1
- * @param object $mform - Moodle form object
+ * @deprecated Since PowerEduc 3.9. MDL-65835 Please use {plugin name}_coursemodule_standard_elements() instead.
+ * @todo MDL-67526 This is to be moved from here to deprecatedlib.php in PowerEduc 4.1
+ * @param object $mform - PowerEduc form object
  * @param object $context - context object
  * @param string $modulename - Name of the module
  */
@@ -144,7 +144,7 @@ function plagiarism_get_form_elements_module($mform, $context, $modulename = "")
 /**
  * Allows a plagiarism plugin to print a button/link at the top of activity overview report pages.
  *
- * @deprecated Since Moodle 4.0 - Please use {plugin name}_before_standard_top_of_body_html instead.
+ * @deprecated Since PowerEduc 4.0 - Please use {plugin name}_before_standard_top_of_body_html instead.
  * @todo MDL-71326 Remove this method.
  * @param object $course - full Course object
  * @param object $cm - full cm object
@@ -197,7 +197,7 @@ function plagiarism_print_disclosure($cmid) {
 /**
  * Helper function - also loads lib file of plagiarism plugin
  *
- * @todo MDL-67872 the deprecated code in this function to be removed in Moodle 4.1
+ * @todo MDL-67872 the deprecated code in this function to be removed in PowerEduc 4.1
  * @return array of available plugins
  */
 function plagiarism_load_available_plugins() {
@@ -212,7 +212,7 @@ function plagiarism_load_available_plugins() {
     foreach ($plagiarismplugins as $plugin => $dir) {
         // Check this plugin is enabled and a lib file exists.
         if (get_config('plagiarism', $plugin."_use")) {
-            // Deprecated Since Moodle 3.9.
+            // Deprecated Since PowerEduc 3.9.
             $pluginenabled = true;
             if (empty($showndeprecatedmessage[$plugin])) {
                 $text = 'The setting plagiarism:'.$plugin.'_use is deprecated.';

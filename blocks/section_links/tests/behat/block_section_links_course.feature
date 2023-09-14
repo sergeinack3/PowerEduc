@@ -1,6 +1,6 @@
 @block @block_section_links
-Feature: The section links block allows users to quickly navigate around a moodle course
-  In order to navigate a moodle course
+Feature: The section links block allows users to quickly navigate around a powereduc course
+  In order to navigate a powereduc course
   As a teacher
   I can use the section links block
 

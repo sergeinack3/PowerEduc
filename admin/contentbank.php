@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core
  * @subpackage contentbank
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,13 +36,13 @@ $PAGE->set_context($syscontext);
 require_admin();
 require_sesskey();
 
-$return = new moodle_url('/admin/settings.php', array('section' => 'managecontentbanktypes'));
+$return = new powereduc_url('/admin/settings.php', array('section' => 'managecontentbanktypes'));
 
 $plugins = core_plugin_manager::instance()->get_plugins_of_type('contenttype');
 $sortorder = array_flip(array_keys($plugins));
 
 if (!isset($plugins[$name])) {
-    throw new \moodle_exception('contenttypenotfound', 'error', $return, $name);
+    throw new \powereduc_exception('contenttypenotfound', 'error', $return, $name);
 }
 
 switch ($action) {

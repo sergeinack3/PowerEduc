@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -52,10 +52,10 @@ $idtoken = optional_param('id_token', null, PARAM_RAW);
 $launchid = optional_param('launchid', null, PARAM_RAW);
 
 if (!is_enabled_auth('lti')) {
-    throw new moodle_exception('pluginnotenabled', 'auth', '', get_string('pluginname', 'auth_lti'));
+    throw new powereduc_exception('pluginnotenabled', 'auth', '', get_string('pluginname', 'auth_lti'));
 }
 if (!enrol_is_enabled('lti')) {
-    throw new moodle_exception('enrolisdisabled', 'enrol_lti');
+    throw new powereduc_exception('enrolisdisabled', 'enrol_lti');
 }
 if (empty($idtoken) && empty($launchid)) {
     throw new coding_exception('Error: launch requires id_token');
@@ -74,7 +74,7 @@ if ($launchid) {
     $messagelaunch = LtiMessageLaunch::fromCache($launchid, $issdb, $sesscache, $serviceconnector);
 }
 if (empty($messagelaunch)) {
-    throw new moodle_exception('Bad launch. Message launch data could not be found');
+    throw new powereduc_exception('Bad launch. Message launch data could not be found');
 }
 
 // Authenticate the platform user, which could be an instructor, an admin or a learner.
@@ -89,13 +89,13 @@ if (!empty($launchdata['https://purl.imsglobal.org/spec/lti/claim/lti1p1']['oaut
 
 // To authenticate, we need the resource's account provisioning mode for the given LTI role.
 if (empty($launchdata['https://purl.imsglobal.org/spec/lti/claim/custom']['id'])) {
-    throw new \moodle_exception('ltiadvlauncherror:missingid', 'enrol_lti');
+    throw new \powereduc_exception('ltiadvlauncherror:missingid', 'enrol_lti');
 }
 $resourceuuid = $launchdata['https://purl.imsglobal.org/spec/lti/claim/custom']['id'];
 $resource = array_values(\enrol_lti\helper::get_lti_tools(['uuid' => $resourceuuid]));
 $resource = $resource[0] ?? null;
 if (empty($resource) || $resource->status != ENROL_INSTANCE_ENABLED) {
-    throw new \moodle_exception('ltiadvlauncherror:invalidid', 'enrol_lti', '', $resourceuuid);
+    throw new \powereduc_exception('ltiadvlauncherror:invalidid', 'enrol_lti', '', $resourceuuid);
 }
 
 $provisioningmode = message_helper::is_instructor_launch($launchdata) ? $resource->provisioningmodeinstructor
@@ -103,7 +103,7 @@ $provisioningmode = message_helper::is_instructor_launch($launchdata) ? $resourc
 $auth = get_auth_plugin('lti');
 $auth->complete_login(
     $messagelaunch->getLaunchData(),
-    new moodle_url('/enrol/lti/launch.php', ['launchid' => $messagelaunch->getLaunchId()]),
+    new powereduc_url('/enrol/lti/launch.php', ['launchid' => $messagelaunch->getLaunchId()]),
     $provisioningmode,
     $legacyconsumersecrets ?? []
 );
@@ -111,7 +111,7 @@ $auth->complete_login(
 require_login(null, false);
 global $USER, $CFG, $PAGE;
 $PAGE->set_context(context_system::instance());
-$PAGE->set_url(new moodle_url('/enrol/lti/launch.php'));
+$PAGE->set_url(new powereduc_url('/enrol/lti/launch.php'));
 $PAGE->set_pagelayout('popup'); // Same layout as the tool.php page in Legacy 1.1/2.0 launches.
 $PAGE->set_title(get_string('opentool', 'enrol_lti'));
 
@@ -127,12 +127,12 @@ $toollaunchservice = new tool_launch_service(
 $context = context::instance_by_id($resource->contextid);
 if ($context->contextlevel == CONTEXT_COURSE) {
     $courseid = $context->instanceid;
-    $redirecturl = new moodle_url('/course/view.php', ['id' => $courseid]);
+    $redirecturl = new powereduc_url('/course/view.php', ['id' => $courseid]);
 } else if ($context->contextlevel == CONTEXT_MODULE) {
     $cm = get_coursemodule_from_id(false, $context->instanceid, 0, false, MUST_EXIST);
-    $redirecturl = new moodle_url('/mod/' . $cm->modname . '/view.php', ['id' => $cm->id]);
+    $redirecturl = new powereduc_url('/mod/' . $cm->modname . '/view.php', ['id' => $cm->id]);
 } else {
-    throw new moodle_exception('invalidcontext');
+    throw new powereduc_exception('invalidcontext');
 }
 
 if (empty($CFG->allowframembedding)) {

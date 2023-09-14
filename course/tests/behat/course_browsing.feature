@@ -28,13 +28,13 @@ Feature: Restricting access to course lists
     Given I log in as "admin"
     And I set the following system permissions of "Authenticated user" role:
       | capability | permission |
-      | moodle/category:viewcourselist | Prevent |
+      | powereduc/category:viewcourselist | Prevent |
     And I set the following system permissions of "Guest" role:
       | capability | permission |
-      | moodle/category:viewcourselist | Prevent |
+      | powereduc/category:viewcourselist | Prevent |
     And I set the following system permissions of "Category viewer" role:
       | capability | permission |
-      | moodle/category:viewcourselist | Allow |
+      | powereduc/category:viewcourselist | Allow |
     And I am on site homepage
     And I turn editing mode on
     And the following config values are set as admin:

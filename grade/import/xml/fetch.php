@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,13 +20,13 @@ require_once '../../../config.php';
 
 $id = required_param('id', PARAM_INT); // course id
 if (!$course = $DB->get_record('course', array('id'=>$id))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 require_user_key_login('grade/import', $id); // we want different keys for each course
 
 if (empty($CFG->gradepublishing)) {
-    throw new \moodle_exception('gradepubdisable');
+    throw new \powereduc_exception('gradepubdisable');
 }
 
 $context = context_course::instance($id);

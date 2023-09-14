@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Contains the default activity availability information.
  *
  * @package   core_courseformat
- * @copyright 2020 Ferran Recio <ferran@moodle.com>
+ * @copyright 2020 Ferran Recio <ferran@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,7 +36,7 @@ use core_availability\info;
  * Base class to render a course module availability inside a course format.
  *
  * @package   core_courseformat
- * @copyright 2020 Ferran Recio <ferran@moodle.com>
+ * @copyright 2020 Ferran Recio <ferran@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class availability extends section_avalability {
@@ -129,7 +129,7 @@ class availability extends section_avalability {
         // information that module is not available to all/some students.
         $mod  = $this->mod;
         $modcontext = $mod->context;
-        $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $modcontext);
+        $canviewhidden = has_capability('powereduc/course:viewhiddenactivities', $modcontext);
         if (!$canviewhidden || empty($CFG->enableavailability)) {
             return [];
         }

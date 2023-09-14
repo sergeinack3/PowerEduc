@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * The class \core\update\api is defined here.
  *
  * @package     core
- * @copyright   2015 David Mudrak <david@moodle.com>
+ * @copyright   2015 David Mudrak <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,30 +31,30 @@ defined('POWEREDUC_INTERNAL') || die();
 require_once($CFG->libdir.'/filelib.php');
 
 /**
- * General purpose client for https://download.moodle.org/api/
+ * General purpose client for https://download.powereduc.org/api/
  *
  * The API provides proxy access to public information about plugins available
- * in the Moodle Plugins directory. It is used when we are checking for
+ * in the PowerEduc Plugins directory. It is used when we are checking for
  * updates, resolving missing dependecies or installing a plugin. This client
  * can be used to:
  *
  * - obtain information about particular plugin version
- * - locate the most suitable plugin version for the given Moodle branch
+ * - locate the most suitable plugin version for the given PowerEduc branch
  *
  * TODO:
  *
  * - Convert \core\update\checker to use this client too, so that we have a
  *   single access point for all the API services.
  * - Implement client method for pluglist.php even if it is not actually
- *   used by the Moodle core.
+ *   used by the PowerEduc core.
  *
- * @copyright 2015 David Mudrak <david@moodle.com>
+ * @copyright 2015 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class api {
 
     /** The root of the standard API provider */
-    const APIROOT = 'https://download.moodle.org/api';
+    const APIROOT = 'https://download.powereduc.org/api';
 
     /** The API version to be used by this client */
     const APIVER = '1.3';
@@ -78,7 +78,7 @@ class api {
      * Returns info about the particular plugin version in the plugins directory.
      *
      * Uses pluginfo.php end-point to find the given plugin version in the
-     * Moodle plugins directory. This is typically used to handle the
+     * PowerEduc plugins directory. This is typically used to handle the
      * installation request coming from the plugins directory (aka clicking the
      * "Install" button there).
      *
@@ -106,7 +106,7 @@ class api {
      * Locate the given plugin in the plugin directory.
      *
      * Uses pluginfo.php end-point to find a plugin with the given component
-     * name, that suits best for the given Moodle core branch. Minimal required
+     * name, that suits best for the given PowerEduc core branch. Minimal required
      * plugin version can be specified. This is typically used for resolving
      * dependencies.
      *
@@ -122,7 +122,7 @@ class api {
      *
      * @param string $component frankenstyle name of the plugin
      * @param string|int $reqversion minimal required version of the plugin, defaults to ANY_VERSION
-     * @param int $branch moodle core branch such as 29, 30, 31 etc, defaults to $CFG->branch
+     * @param int $branch powereduc core branch such as 29, 30, 31 etc, defaults to $CFG->branch
      * @return \core\update\remote_info|bool
      */
     public function find_plugin($component, $reqversion=ANY_VERSION, $branch=null) {
@@ -183,7 +183,7 @@ class api {
             }
             $versionproperties = array('id' => 1, 'version' => 1, 'release' => 0, 'maturity' => 0,
                 'downloadurl' => 1, 'downloadmd5' => 1, 'vcssystem' => 0, 'vcssystemother' => 0,
-                'vcsrepositoryurl' => 0, 'vcsbranch' => 0, 'vcstag' => 0, 'supportedmoodles' => 0);
+                'vcsrepositoryurl' => 0, 'vcsbranch' => 0, 'vcstag' => 0, 'supportedpowereducs' => 0);
             foreach ($versionproperties as $property => $required) {
                 if (!property_exists($data->version, $property)) {
                     return false;
@@ -196,15 +196,15 @@ class api {
                 return false;
             }
 
-            if (!empty($data->version->supportedmoodles)) {
-                if (!is_array($data->version->supportedmoodles)) {
+            if (!empty($data->version->supportedpowereducs)) {
+                if (!is_array($data->version->supportedpowereducs)) {
                     return false;
                 }
-                foreach ($data->version->supportedmoodles as $supportedmoodle) {
-                    if (!is_object($supportedmoodle)) {
+                foreach ($data->version->supportedpowereducs as $supportedpowereduc) {
+                    if (!is_object($supportedpowereduc)) {
                         return false;
                     }
-                    if (empty($supportedmoodle->version) or empty($supportedmoodle->release)) {
+                    if (empty($supportedpowereduc->version) or empty($supportedpowereduc->release)) {
                         return false;
                     }
                 }
@@ -293,12 +293,12 @@ class api {
     /**
      * Converts the given branch from XY format to the X.Y format
      *
-     * The syntax of $CFG->branch uses the XY format that suits the Moodle docs
+     * The syntax of $CFG->branch uses the XY format that suits the PowerEduc docs
      * versioning and stable branches numbering scheme. The API at
-     * download.moodle.org uses the X.Y numbering scheme.
+     * download.powereduc.org uses the X.Y numbering scheme.
      *
-     * @param int $branch moodle branch in the XY format (e.g. 29, 30, 31 etc)
-     * @return string moodle branch in the X.Y format (e.g. 2.9, 3.0, 3.1 etc)
+     * @param int $branch powereduc branch in the XY format (e.g. 29, 30, 31 etc)
+     * @return string powereduc branch in the X.Y format (e.g. 2.9, 3.0, 3.1 etc)
      */
     protected function convert_branch_numbering_format($branch) {
 

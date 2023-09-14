@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir . '/formslib.php');
 
-abstract class filter_local_settings_form extends moodleform {
+abstract class filter_local_settings_form extends powereducform {
     protected $filter;
     protected $context;
 

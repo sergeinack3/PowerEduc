@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -43,11 +43,11 @@ class issuer_database_test extends \advanced_testcase {
         $appreg = application_registration::create(
             'My platform',
             'a2c94a2c94',
-            new \moodle_url('https://lms.example.com'),
+            new \powereduc_url('https://lms.example.com'),
             'client-id-123',
-            new \moodle_url('https://lms.example.com/lti/auth'),
-            new \moodle_url('https://lms.example.com/lti/jwks'),
-            new \moodle_url('https://lms.example.com/lti/token')
+            new \powereduc_url('https://lms.example.com/lti/auth'),
+            new \powereduc_url('https://lms.example.com/lti/jwks'),
+            new \powereduc_url('https://lms.example.com/lti/token')
         );
         $appregrepo->save($appreg);
 
@@ -78,11 +78,11 @@ class issuer_database_test extends \advanced_testcase {
         $appreg = application_registration::create(
             'My platform',
             'a2c94a2c94',
-            new \moodle_url('https://lms.example.com'),
+            new \powereduc_url('https://lms.example.com'),
             'client-id-123',
-            new \moodle_url('https://lms.example.com/lti/auth'),
-            new \moodle_url('https://lms.example.com/lti/jwks'),
-            new \moodle_url('https://lms.example.com/lti/token')
+            new \powereduc_url('https://lms.example.com/lti/auth'),
+            new \powereduc_url('https://lms.example.com/lti/jwks'),
+            new \powereduc_url('https://lms.example.com/lti/token')
         );
         $appreg = $appregrepo->save($appreg);
         $dep = $appreg->add_tool_deployment('Site wide tool deployment', 'deployment-id-1');

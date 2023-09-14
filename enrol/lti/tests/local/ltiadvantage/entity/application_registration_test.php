@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -65,11 +65,11 @@ class application_registration_test extends \advanced_testcase {
                 'args' => [
                     'name' => 'Platform X',
                     'uniqueid' => 'a2c94a2c94',
-                    'platformid' => new \moodle_url('https://lms.example.com'),
+                    'platformid' => new \powereduc_url('https://lms.example.com'),
                     'clientid' => 'client-id-12345',
-                    'authrequesturl' => new \moodle_url('https://lms.example.com/auth'),
-                    'jwksurl' => new \moodle_url('https://lms.example.com/jwks'),
-                    'accesstokenurl' => new \moodle_url('https://lms.example.com/token'),
+                    'authrequesturl' => new \powereduc_url('https://lms.example.com/auth'),
+                    'jwksurl' => new \powereduc_url('https://lms.example.com/jwks'),
+                    'accesstokenurl' => new \powereduc_url('https://lms.example.com/token'),
                 ],
                 'expectations' => [
                     'valid' => true
@@ -79,11 +79,11 @@ class application_registration_test extends \advanced_testcase {
                 'args' => [
                     'name' => 'Platform X',
                     'uniqueid' => 'a2c94a2c94',
-                    'platformid' => new \moodle_url('https://lms.example.com'),
+                    'platformid' => new \powereduc_url('https://lms.example.com'),
                     'clientid' => 'client-id-12345',
-                    'authrequesturl' => new \moodle_url('https://lms.example.com/auth'),
-                    'jwksurl' => new \moodle_url('https://lms.example.com/jwks'),
-                    'accesstokenurl' => new \moodle_url('https://lms.example.com/token'),
+                    'authrequesturl' => new \powereduc_url('https://lms.example.com/auth'),
+                    'jwksurl' => new \powereduc_url('https://lms.example.com/jwks'),
+                    'accesstokenurl' => new \powereduc_url('https://lms.example.com/token'),
                     'id' => 24
                 ],
                 'expectations' => [
@@ -94,11 +94,11 @@ class application_registration_test extends \advanced_testcase {
                 'args' => [
                     'name' => '',
                     'uniqueid' => 'a2c94a2c94',
-                    'platformid' => new \moodle_url('https://lms.example.com'),
+                    'platformid' => new \powereduc_url('https://lms.example.com'),
                     'clientid' => 'client-id-12345',
-                    'authrequesturl' => new \moodle_url('https://lms.example.com/auth'),
-                    'jwksurl' => new \moodle_url('https://lms.example.com/jwks'),
-                    'accesstokenurl' => new \moodle_url('https://lms.example.com/token'),
+                    'authrequesturl' => new \powereduc_url('https://lms.example.com/auth'),
+                    'jwksurl' => new \powereduc_url('https://lms.example.com/jwks'),
+                    'accesstokenurl' => new \powereduc_url('https://lms.example.com/token'),
                 ],
                 'expectations' => [
                     'valid' => false,
@@ -110,11 +110,11 @@ class application_registration_test extends \advanced_testcase {
                 'args' => [
                     'name' => 'Platform X',
                     'uniqueid' => '',
-                    'platformid' => new \moodle_url('https://lms.example.com'),
+                    'platformid' => new \powereduc_url('https://lms.example.com'),
                     'clientid' => 'client-id-12345',
-                    'authrequesturl' => new \moodle_url('https://lms.example.com/auth'),
-                    'jwksurl' => new \moodle_url('https://lms.example.com/jwks'),
-                    'accesstokenurl' => new \moodle_url('https://lms.example.com/token'),
+                    'authrequesturl' => new \powereduc_url('https://lms.example.com/auth'),
+                    'jwksurl' => new \powereduc_url('https://lms.example.com/jwks'),
+                    'accesstokenurl' => new \powereduc_url('https://lms.example.com/token'),
                 ],
                 'expectations' => [
                     'valid' => false,
@@ -126,11 +126,11 @@ class application_registration_test extends \advanced_testcase {
                 'args' => [
                     'name' => 'Platform X',
                     'uniqueid' => 'a2c94a2c94',
-                    'platformid' => new \moodle_url('https://lms.example.com'),
+                    'platformid' => new \powereduc_url('https://lms.example.com'),
                     'clientid' => '',
-                    'authrequesturl' => new \moodle_url('https://lms.example.com/auth'),
-                    'jwksurl' => new \moodle_url('https://lms.example.com/jwks'),
-                    'accesstokenurl' => new \moodle_url('https://lms.example.com/token'),
+                    'authrequesturl' => new \powereduc_url('https://lms.example.com/auth'),
+                    'jwksurl' => new \powereduc_url('https://lms.example.com/jwks'),
+                    'accesstokenurl' => new \powereduc_url('https://lms.example.com/token'),
                 ],
                 'expectations' => [
                     'valid' => false,
@@ -181,11 +181,11 @@ class application_registration_test extends \advanced_testcase {
 
         // Add information to the draft, but don't complete it. It should still be incomplete.
         $draft->set_name('Adjusted platform name');
-        $draft->set_platformid(new \moodle_url('https://lms.example.com'));
+        $draft->set_platformid(new \powereduc_url('https://lms.example.com'));
         $draft->set_clientid('bcgd23');
-        $draft->set_authenticationrequesturl(new \moodle_url('https://lms.example.com/auth'));
-        $draft->set_jwksurl(new \moodle_url('https://lms.example.com/jwks'));
-        $draft->set_accesstokenurl(new \moodle_url('https://lms.example.com/token'));
+        $draft->set_authenticationrequesturl(new \powereduc_url('https://lms.example.com/auth'));
+        $draft->set_jwksurl(new \powereduc_url('https://lms.example.com/jwks'));
+        $draft->set_accesstokenurl(new \powereduc_url('https://lms.example.com/token'));
         $this->assertFalse($draft->is_complete());
 
         // Complete the registration. It will now be indicated as complete.
@@ -275,11 +275,11 @@ class application_registration_test extends \advanced_testcase {
                     'registration' => [
                         'name' => 'Platform X',
                         'uniqueid' => 'a2c94a2c94',
-                        'platformid' => new \moodle_url('https://lms.example.com'),
+                        'platformid' => new \powereduc_url('https://lms.example.com'),
                         'clientid' => 'client-id-12345',
-                        'authrequesturl' => new \moodle_url('https://lms.example.com/auth'),
-                        'jwksurl' => new \moodle_url('https://lms.example.com/jwks'),
-                        'accesstokenurl' => new \moodle_url('https://lms.example.com/token'),
+                        'authrequesturl' => new \powereduc_url('https://lms.example.com/auth'),
+                        'jwksurl' => new \powereduc_url('https://lms.example.com/jwks'),
+                        'accesstokenurl' => new \powereduc_url('https://lms.example.com/token'),
                         'id' => 24
                     ],
                     'deployment' => [
@@ -296,11 +296,11 @@ class application_registration_test extends \advanced_testcase {
                     'registration' => [
                         'name' => 'Platform X',
                         'uniqueid' => 'a2c94a2c94',
-                        'platformid' => new \moodle_url('https://lms.example.com'),
+                        'platformid' => new \powereduc_url('https://lms.example.com'),
                         'clientid' => 'client-id-12345',
-                        'authrequesturl' => new \moodle_url('https://lms.example.com/auth'),
-                        'jwksurl' => new \moodle_url('https://lms.example.com/jwks'),
-                        'accesstokenurl' => new \moodle_url('https://lms.example.com/token'),
+                        'authrequesturl' => new \powereduc_url('https://lms.example.com/auth'),
+                        'jwksurl' => new \powereduc_url('https://lms.example.com/jwks'),
+                        'accesstokenurl' => new \powereduc_url('https://lms.example.com/token'),
                     ],
                     'deployment' => [
                         'name' => 'Deployment at site level',
@@ -318,11 +318,11 @@ class application_registration_test extends \advanced_testcase {
                     'registration' => [
                         'name' => 'Platform X',
                         'uniqueid' => 'a2c94a2c94',
-                        'platformid' => new \moodle_url('https://lms.example.com'),
+                        'platformid' => new \powereduc_url('https://lms.example.com'),
                         'clientid' => 'client-id-12345',
-                        'authrequesturl' => new \moodle_url('https://lms.example.com/auth'),
-                        'jwksurl' => new \moodle_url('https://lms.example.com/jwks'),
-                        'accesstokenurl' => new \moodle_url('https://lms.example.com/token'),
+                        'authrequesturl' => new \powereduc_url('https://lms.example.com/auth'),
+                        'jwksurl' => new \powereduc_url('https://lms.example.com/jwks'),
+                        'accesstokenurl' => new \powereduc_url('https://lms.example.com/token'),
                         'id' => 24
                     ],
                     'deployment' => [
@@ -341,11 +341,11 @@ class application_registration_test extends \advanced_testcase {
                     'registration' => [
                         'name' => 'Platform X',
                         'uniqueid' => 'a2c94a2c94',
-                        'platformid' => new \moodle_url('https://lms.example.com'),
+                        'platformid' => new \powereduc_url('https://lms.example.com'),
                         'clientid' => 'client-id-12345',
-                        'authrequesturl' => new \moodle_url('https://lms.example.com/auth'),
-                        'jwksurl' => new \moodle_url('https://lms.example.com/jwks'),
-                        'accesstokenurl' => new \moodle_url('https://lms.example.com/token'),
+                        'authrequesturl' => new \powereduc_url('https://lms.example.com/auth'),
+                        'jwksurl' => new \powereduc_url('https://lms.example.com/jwks'),
+                        'accesstokenurl' => new \powereduc_url('https://lms.example.com/token'),
                         'id' => 24
                     ],
                     'deployment' => [

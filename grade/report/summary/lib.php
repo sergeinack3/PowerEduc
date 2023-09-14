@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ defined('POWEREDUC_INTERNAL') || die;
  * Definition of the summary report class
  *
  * @package   gradereport_summary
- * @copyright 2022 Ilya Tregubov <ilya@moodle.com>
+ * @copyright 2022 Ilya Tregubov <ilya@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,7 +31,7 @@ require_once($CFG->dirroot . '/grade/report/lib.php');
  *
  * @package   gradereport_summary
  * @uses      grade_report
- * @copyright 2022 Ilya Tregubov <ilya@moodle.com>
+ * @copyright 2022 Ilya Tregubov <ilya@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class grade_report_summary extends grade_report {
@@ -53,7 +53,7 @@ class grade_report_summary extends grade_report {
     public function __construct($courseid, $gpr, $context) {
         parent::__construct($courseid, $gpr, $context);
 
-        $this->canviewhidden = has_capability('moodle/grade:viewhidden', $context);
+        $this->canviewhidden = has_capability('powereduc/grade:viewhidden', $context);
         $this->setup_groups();
     }
 

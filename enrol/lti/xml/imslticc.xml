@@ -10,7 +10,7 @@ http://www.imsglobal.org/xsd/imslticm_v1p0 http://www.imsglobal.org/xsd/lti/ltiv
 http://www.imsglobal.org/xsd/imslticp_v1p0 http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticp_v1p0.xsd">
     <blti:title></blti:title>
     <blti:description></blti:description>
-    <blti:extensions platform="org.moodle.lms">
+    <blti:extensions platform="org.powereduc.lms">
         <lticm:property name="icon_url"></lticm:property>
         <lticm:property name="secure_icon_url"></lticm:property>
     </blti:extensions>

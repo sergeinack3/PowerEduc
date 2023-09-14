@@ -67,7 +67,7 @@ function mnet_get_public_key($uri, $application=null) {
     // Let's create a client to handle the request and the response easily.
     $client = new \PhpXmlRpc\Client($uri . $application->xmlrpc_server_url);
     $client->setUseCurl(\PhpXmlRpc\Client::USE_CURL_ALWAYS);
-    $client->setUserAgent('Moodle');
+    $client->setUserAgent('PowerEduc');
     $client->return_type = 'xmlrpcvals'; // This (keyswap) is not encrypted, so we can expect proper xmlrpc in this case.
     $client->request_charset_encoding = 'utf-8';
 
@@ -220,7 +220,7 @@ function mnet_sign_message($message, $privatekey = null) {
 
     $message = '<?xml version="1.0" encoding="iso-8859-1"?>
     <signedMessage>
-        <Signature Id="MoodleSignature" xmlns="http://www.w3.org/2000/09/xmldsig#">
+        <Signature Id="PowerEducSignature" xmlns="http://www.w3.org/2000/09/xmldsig#">
             <SignedInfo>
                 <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
                 <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
@@ -390,7 +390,7 @@ function mnet_generate_keypair($dn = null, $days=28) {
            "stateOrProvinceName" => $province,
            "localityName" => $locality,
            "organizationName" => $organization,
-           "organizationalUnitName" => 'Moodle',
+           "organizationalUnitName" => 'PowerEduc',
            "commonName" => substr($CFG->wwwroot, 0, 64),
            "subjectAltName" => $CFG->wwwroot,
            "emailAddress" => $email

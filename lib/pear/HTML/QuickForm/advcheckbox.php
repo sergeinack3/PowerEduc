@@ -85,7 +85,7 @@ class HTML_QuickForm_advcheckbox extends HTML_QuickForm_checkbox
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
     public function HTML_QuickForm_advcheckbox($elementName=null, $elementLabel=null, $text=null, $attributes=null, $values=null) {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);

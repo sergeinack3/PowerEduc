@@ -76,8 +76,8 @@ Feature: Access to downloading course content can be controlled
     And I log in as "admin"
     And I set the following system permissions of "Teacher" role:
       | capability                             | permission |
-      | moodle/course:downloadcoursecontent    | Prohibit   |
-      | moodle/course:configuredownloadcontent | Prohibit   |
+      | powereduc/course:downloadcoursecontent    | Prohibit   |
+      | powereduc/course:configuredownloadcontent | Prohibit   |
     And I log out
     # Check teacher can no longer see download option, and that enable value is visible, but dropdown no longer available.
     When I log in as "teacher1"
@@ -104,7 +104,7 @@ Feature: Access to downloading course content can be controlled
     # Remove student's capability for download course content.
     When I set the following system permissions of "Student" role:
       | capability                             | permission |
-      | moodle/course:downloadcoursecontent    | Prohibit   |
+      | powereduc/course:downloadcoursecontent    | Prohibit   |
     And I log out
     # Check student can no longer see the download link.
     And I log in as "student1"

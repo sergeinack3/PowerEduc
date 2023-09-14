@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core\navigation\views;
 
@@ -84,10 +84,10 @@ class primary_test extends \advanced_testcase {
 
         // If seturl is null then set actionurl of child6 to '/'.
         if ($seturl === null) {
-            $child6actionurl = new \moodle_url('/');
+            $child6actionurl = new \powereduc_url('/');
         } else {
             // If seturl is provided then set actionurl of child6 to '/foo'.
-            $child6actionurl = new \moodle_url('/foo');
+            $child6actionurl = new \powereduc_url('/foo');
         }
         $child6 = $child2->add('sixth child', $child6actionurl, navigation_node::TYPE_COURSE, 'sixthchld', 'sixthchild');
         // Activate the sixthchild node.
@@ -113,10 +113,10 @@ class primary_test extends \advanced_testcase {
         global $PAGE;
 
         if ($seturl !== null) {
-            navigation_node::override_active_url(new \moodle_url($seturl));
+            navigation_node::override_active_url(new \powereduc_url($seturl));
         } else {
             $PAGE->set_url('/');
-            navigation_node::override_active_url(new \moodle_url('/'));
+            navigation_node::override_active_url(new \powereduc_url('/'));
         }
         if ($key !== null) {
             $PAGE->set_primary_active_tab($key);

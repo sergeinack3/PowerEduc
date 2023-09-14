@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * LTI enrolment plugin helper.
  *
  * @package enrol_lti
- * @copyright 2016 Mark Nelson <markn@moodle.com>
+ * @copyright 2016 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * LTI enrolment plugin helper class.
  *
  * @package enrol_lti
- * @copyright 2016 Mark Nelson <markn@moodle.com>
+ * @copyright 2016 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class helper {
@@ -385,11 +385,11 @@ class helper {
      * Returns the url to launch the lti tool.
      *
      * @param int $toolid the id of the shared tool
-     * @return \moodle_url the url to launch the tool
+     * @return \powereduc_url the url to launch the tool
      * @since Moodle 3.2
      */
     public static function get_launch_url($toolid) {
-        return new \moodle_url('/enrol/lti/tool.php', array('id' => $toolid));
+        return new \powereduc_url('/enrol/lti/tool.php', array('id' => $toolid));
     }
 
     /**
@@ -439,7 +439,7 @@ class helper {
      * Returns the icon of the tool.
      *
      * @param \stdClass $tool The lti tool
-     * @return \moodle_url A url to the icon of the tool
+     * @return \powereduc_url A url to the icon of the tool
      * @since Moodle 3.2
      */
     public static function get_icon($tool) {
@@ -464,9 +464,9 @@ class helper {
         $id = $tool->id;
         $token = self::generate_cartridge_token($tool->id);
         if ($CFG->slasharguments) {
-            $url = new \moodle_url('/enrol/lti/cartridge.php/' . $id . '/' . $token . '/cartridge.xml');
+            $url = new \powereduc_url('/enrol/lti/cartridge.php/' . $id . '/' . $token . '/cartridge.xml');
         } else {
-            $url = new \moodle_url('/enrol/lti/cartridge.php',
+            $url = new \powereduc_url('/enrol/lti/cartridge.php',
                     array(
                         'id' => $id,
                         'token' => $token
@@ -492,9 +492,9 @@ class helper {
         $id = $tool->id;
         $token = self::generate_proxy_token($tool->id);
         if ($CFG->slasharguments) {
-            $url = new \moodle_url('/enrol/lti/proxy.php/' . $id . '/' . $token . '/');
+            $url = new \powereduc_url('/enrol/lti/proxy.php/' . $id . '/' . $token . '/');
         } else {
-            $url = new \moodle_url('/enrol/lti/proxy.php',
+            $url = new \powereduc_url('/enrol/lti/proxy.php',
                     array(
                         'id' => $id,
                         'token' => $token
@@ -581,7 +581,7 @@ class helper {
         $iconurl = $iconurl->out(false);
         $securelaunchurl = null;
         $secureiconurl = null;
-        $vendorurl = new \moodle_url('/');
+        $vendorurl = new \powereduc_url('/');
         $vendorurl = $vendorurl->out(false);
         $description = self::get_description($tool);
 

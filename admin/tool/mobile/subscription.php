@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package   tool_mobile
  * @copyright 2020 Moodle Pty Ltd
- * @author    <juan@moodle.com>
+ * @author    <juan@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,11 +30,11 @@ admin_externalpage_setup('mobileappsubscription', '', null, '');
 
 // Check Mobile web services enabled. This page should not be linked in that case, but avoid just in case.
 if (!$CFG->enablemobilewebservice) {
-    throw new \moodle_exception('enablewsdescription', 'webservice');
+    throw new \powereduc_exception('enablewsdescription', 'webservice');
 }
 // Check is this feature is globaly disabled.
 if (!empty($CFG->disablemobileappsubscription)) {
-    throw new \moodle_exception('disabled', 'admin');
+    throw new \powereduc_exception('disabled', 'admin');
 }
 
 $subscriptiondata = \tool_mobile\api::get_subscription_information();

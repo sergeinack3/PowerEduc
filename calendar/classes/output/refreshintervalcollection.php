@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@ class refreshintervalcollection extends inplace_editable {
             $tmpl = new self($subscription);
             return $tmpl;
         } else {
-            throw new \moodle_exception('nopermissions', 'error', '', get_string('managesubscriptions', 'calendar'));
+            throw new \powereduc_exception('nopermissions', 'error', '', get_string('managesubscriptions', 'calendar'));
         }
     }
 }

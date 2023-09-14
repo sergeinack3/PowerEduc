@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -57,7 +57,7 @@ class async_helper_test extends \advanced_testcase {
         $generator->enrol_user($user2->id, $course->id, 'editingteacher');
 
         $DB->set_field_select('message_processors', 'enabled', 0, "name <> 'email'");
-        set_user_preference('message_provider_moodle_asyncbackupnotification', 'email', $user2);
+        set_user_preference('message_provider_powereduc_asyncbackupnotification', 'email', $user2);
 
         // Make the backup controller for an async backup.
         $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_POWEREDUC,

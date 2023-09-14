@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,26 +21,26 @@ use convert_path;
 use convert_path_exception;
 use convert_factory;
 use convert_helper;
-use moodle1_converter;
-use moodle1_convert_empty_storage_exception;
-use moodle1_convert_exception;
-use moodle1_convert_storage_exception;
+use powereduc1_converter;
+use powereduc1_convert_empty_storage_exception;
+use powereduc1_convert_exception;
+use powereduc1_convert_storage_exception;
 
 defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
-require_once($CFG->dirroot . '/backup/converter/moodle1/lib.php');
+require_once($CFG->dirroot . '/backup/converter/powereduc1/lib.php');
 
 /**
- * Unit tests for the moodle1 converter
+ * Unit tests for the powereduc1 converter
  *
  * @package    core_backup
  * @subpackage backup-convert
  * @category   test
- * @copyright  2011 Mark Nielsen <mark@moodlerooms.com>
+ * @copyright  2011 Mark Nielsen <mark@powereducrooms.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class moodle1_converter_test extends \advanced_testcase {
+class powereduc1_converter_test extends \advanced_testcase {
 
     /** @var string the name of the directory containing the unpacked Moodle 1.9 backup */
     protected $tempdir;
@@ -59,28 +59,28 @@ class moodle1_converter_test extends \advanced_testcase {
         check_dir_exists("$this->tempdirpath/course_files/sub1");
         check_dir_exists("$this->tempdirpath/moddata/unittest/4/7");
         copy(
-            "$CFG->dirroot/backup/converter/moodle1/tests/fixtures/moodle.xml",
-            "$this->tempdirpath/moodle.xml"
+            "$CFG->dirroot/backup/converter/powereduc1/tests/fixtures/powereduc.xml",
+            "$this->tempdirpath/powereduc.xml"
         );
         copy(
-            "$CFG->dirroot/backup/converter/moodle1/tests/fixtures/icon.gif",
+            "$CFG->dirroot/backup/converter/powereduc1/tests/fixtures/icon.gif",
             "$this->tempdirpath/course_files/file1.gif"
         );
         copy(
-            "$CFG->dirroot/backup/converter/moodle1/tests/fixtures/icon.gif",
+            "$CFG->dirroot/backup/converter/powereduc1/tests/fixtures/icon.gif",
             "$this->tempdirpath/course_files/sub1/file2.gif"
         );
         copy(
-            "$CFG->dirroot/backup/converter/moodle1/tests/fixtures/icon.gif",
+            "$CFG->dirroot/backup/converter/powereduc1/tests/fixtures/icon.gif",
             "$this->tempdirpath/moddata/unittest/4/file1.gif"
         );
         copy(
-            "$CFG->dirroot/backup/converter/moodle1/tests/fixtures/icon.gif",
+            "$CFG->dirroot/backup/converter/powereduc1/tests/fixtures/icon.gif",
             "$this->tempdirpath/moddata/unittest/4/icon.gif"
         );
         $this->iconhash = \file_storage::hash_from_path($this->tempdirpath.'/moddata/unittest/4/icon.gif');
         copy(
-            "$CFG->dirroot/backup/converter/moodle1/tests/fixtures/icon.gif",
+            "$CFG->dirroot/backup/converter/powereduc1/tests/fixtures/icon.gif",
             "$this->tempdirpath/moddata/unittest/4/7/icon.gif"
         );
     }
@@ -93,40 +93,40 @@ class moodle1_converter_test extends \advanced_testcase {
     }
 
     public function test_detect_format() {
-        $detected = moodle1_converter::detect_format($this->tempdir);
+        $detected = powereduc1_converter::detect_format($this->tempdir);
         $this->assertEquals(backup::FORMAT_POWEREDUC1, $detected);
     }
 
     public function test_convert_factory() {
-        $converter = convert_factory::get_converter('moodle1', $this->tempdir);
-        $this->assertInstanceOf('moodle1_converter', $converter);
+        $converter = convert_factory::get_converter('powereduc1', $this->tempdir);
+        $this->assertInstanceOf('powereduc1_converter', $converter);
     }
 
     public function test_stash_storage_not_created() {
-        $converter = convert_factory::get_converter('moodle1', $this->tempdir);
-        $this->expectException(moodle1_convert_storage_exception::class);
+        $converter = convert_factory::get_converter('powereduc1', $this->tempdir);
+        $this->expectException(powereduc1_convert_storage_exception::class);
         $converter->set_stash('tempinfo', 12);
     }
 
     public function test_stash_requiring_empty_stash() {
         $this->resetAfterTest(true);
-        $converter = convert_factory::get_converter('moodle1', $this->tempdir);
+        $converter = convert_factory::get_converter('powereduc1', $this->tempdir);
         $converter->create_stash_storage();
         $converter->set_stash('tempinfo', 12);
         try {
             $converter->get_stash('anothertempinfo');
 
-        } catch (moodle1_convert_empty_storage_exception $e) {
+        } catch (powereduc1_convert_empty_storage_exception $e) {
             // we must drop the storage here so we are able to re-create it in the next test
-            $this->expectException(moodle1_convert_empty_storage_exception::class);
+            $this->expectException(powereduc1_convert_empty_storage_exception::class);
             $converter->drop_stash_storage();
-            throw new moodle1_convert_empty_storage_exception('rethrowing');
+            throw new powereduc1_convert_empty_storage_exception('rethrowing');
         }
     }
 
     public function test_stash_storage() {
         $this->resetAfterTest(true);
-        $converter = convert_factory::get_converter('moodle1', $this->tempdir);
+        $converter = convert_factory::get_converter('powereduc1', $this->tempdir);
         $converter->create_stash_storage();
 
         // no implicit stashes
@@ -182,7 +182,7 @@ class moodle1_converter_test extends \advanced_testcase {
 
     public function test_get_stash_or_default() {
         $this->resetAfterTest(true);
-        $converter = convert_factory::get_converter('moodle1', $this->tempdir);
+        $converter = convert_factory::get_converter('powereduc1', $this->tempdir);
         $converter->create_stash_storage();
 
         $this->assertTrue(is_null($converter->get_stash_or_default('stashname')));
@@ -216,7 +216,7 @@ class moodle1_converter_test extends \advanced_testcase {
     public function test_get_contextid() {
         $this->resetAfterTest(true);
 
-        $converter = convert_factory::get_converter('moodle1', $this->tempdir);
+        $converter = convert_factory::get_converter('powereduc1', $this->tempdir);
 
         // stash storage must be created in advance
         $converter->create_stash_storage();
@@ -257,7 +257,7 @@ class moodle1_converter_test extends \advanced_testcase {
     public function test_get_nextid() {
         $this->resetAfterTest(true);
 
-        $converter = convert_factory::get_converter('moodle1', $this->tempdir);
+        $converter = convert_factory::get_converter('powereduc1', $this->tempdir);
 
         $id1 = $converter->get_nextid();
         $id2 = $converter->get_nextid();
@@ -272,7 +272,7 @@ class moodle1_converter_test extends \advanced_testcase {
         $this->resetAfterTest(true);
 
         // set-up the file manager
-        $converter = convert_factory::get_converter('moodle1', $this->tempdir);
+        $converter = convert_factory::get_converter('powereduc1', $this->tempdir);
         $converter->create_stash_storage();
         $contextid = $converter->get_contextid(CONTEXT_MODULE, 32);
         $fileman   = $converter->get_file_manager($contextid, 'mod_unittest', 'testarea');
@@ -285,7 +285,7 @@ class moodle1_converter_test extends \advanced_testcase {
         $thrown = false;
         try {
             $fileman->migrate_file('/../../../../../../../../../../../../../../etc/passwd');
-        } catch (moodle1_convert_exception $e) {
+        } catch (powereduc1_convert_exception $e) {
             $thrown = true;
         }
         $this->assertTrue($thrown);
@@ -325,7 +325,7 @@ class moodle1_converter_test extends \advanced_testcase {
         $this->resetAfterTest(true);
 
         // Set-up the file manager.
-        $converter = convert_factory::get_converter('moodle1', $this->tempdir);
+        $converter = convert_factory::get_converter('powereduc1', $this->tempdir);
         $converter->create_stash_storage();
         $contextid = $converter->get_contextid(CONTEXT_MODULE, 32);
         $fileman   = $converter->get_file_manager($contextid, 'mod_unittest', 'testarea');
@@ -373,7 +373,7 @@ class moodle1_converter_test extends \advanced_testcase {
         $this->resetAfterTest(true);
 
         // Set-up the file manager.
-        $converter = convert_factory::get_converter('moodle1', $this->tempdir);
+        $converter = convert_factory::get_converter('powereduc1', $this->tempdir);
         $converter->create_stash_storage();
         $contextid = $converter->get_contextid(CONTEXT_MODULE, 32);
         $fileman   = $converter->get_file_manager($contextid, 'mod_unittest', 'testarea');
@@ -401,7 +401,7 @@ class moodle1_converter_test extends \advanced_testcase {
         $data = array(
             'ID' => 76,
             'ELOY' => 'stronk7',
-            'MARTIN' => 'moodler',
+            'MARTIN' => 'powereducr',
             'EMPTY' => null,
         );
         // apply default recipes (converting keys to lowercase)
@@ -409,7 +409,7 @@ class moodle1_converter_test extends \advanced_testcase {
         $this->assertEquals(4, count($data));
         $this->assertEquals(76, $data['id']);
         $this->assertEquals('stronk7', $data['eloy']);
-        $this->assertEquals('moodler', $data['martin']);
+        $this->assertEquals('powereducr', $data['martin']);
         $this->assertSame(null, $data['empty']);
     }
 
@@ -432,7 +432,7 @@ class moodle1_converter_test extends \advanced_testcase {
         $data = array(
             'ID' => 76,
             'ELOY' => 'stronk7',
-            'MARTIN' => 'moodler',
+            'MARTIN' => 'powereducr',
             'EMPTY' => null,
         );
         $data = $path->apply_recipes($data);
@@ -440,7 +440,7 @@ class moodle1_converter_test extends \advanced_testcase {
         $this->assertEquals(5, count($data));
         $this->assertFalse(array_key_exists('id', $data));
         $this->assertEquals('stronk7', $data['eloy']);
-        $this->assertEquals('moodler', $data['martin']);
+        $this->assertEquals('powereducr', $data['martin']);
         $this->assertEquals('mudrd8mz', $data['david']);
         $this->assertEquals('skodak', $data['petr']);
         $this->assertSame(null, $data['nothing']);
@@ -521,13 +521,13 @@ as it is parsed from the backup file. <br /><br /><img border="0" width="110" vs
     <div><a href=\'$@FILEPHP@$$@SLASH@$..$@SLASH@$..$@SLASH@$..$@SLASH@$..$@SLASH@$..$@SLASH@$..$@SLASH@$..$@SLASH@$..$@SLASH@$..$@SLASH@$..$@SLASH@$..$@SLASH@$..$@SLASH@$..$@SLASH@$..$@SLASH@$..$@SLASH@$etc$@SLASH@$shadow\'>download shadows</a></div>
     <br /><a href=\'$@FILEPHP@$$@SLASH@$MANUAL.DOC$@FORCEDOWNLOAD@$\'>download manual</a><br />';
 
-        $files = moodle1_converter::find_referenced_files($text);
+        $files = powereduc1_converter::find_referenced_files($text);
         $this->assertEquals(gettype($files), 'array');
         $this->assertEquals(2, count($files));
         $this->assertTrue(in_array('/pics/news.gif', $files));
         $this->assertTrue(in_array('/MANUAL.DOC', $files));
 
-        $text = moodle1_converter::rewrite_filephp_usage($text, array('/pics/news.gif', '/another/file/notused.txt'));
+        $text = powereduc1_converter::rewrite_filephp_usage($text, array('/pics/news.gif', '/another/file/notused.txt'));
         $this->assertEquals($text, 'This is a text containing links to file.php
 as it is parsed from the backup file. <br /><br /><img border="0" width="110" vspace="0" hspace="0" height="92" title="News" alt="News" src="@@PLUGINFILE@@/pics/news.gif" /><a href="@@PLUGINFILE@@/pics/news.gif?forcedownload=1">download image</a><br />
     <div><a href=\'$@FILEPHP@$/../../../../../../../../../../../../../../../etc/passwd\'>download passwords</a></div>
@@ -545,14 +545,14 @@ as it is parsed from the backup file. <br /><br /><img border="0" width="110" vs
 <a href="$@FILEPHP@$$@SLASH@$illegal%20pics+movies$@SLASH@$romeo+juliet.avi">Download the full AVI for free! (only space encoded)</a>
 <a href="$@FILEPHP@$$@SLASH@$illegal pics%2Bmovies$@SLASH@$romeo%2Bjuliet.avi">Download the full AVI for free! (only plus)</a>';
 
-        $files = moodle1_converter::find_referenced_files($text);
+        $files = powereduc1_converter::find_referenced_files($text);
         $this->assertEquals(gettype($files), 'array');
         $this->assertEquals(3, count($files));
         $this->assertTrue(in_array('/pics/news.gif', $files));
         $this->assertTrue(in_array('/pics/news with spaces.gif', $files));
         $this->assertTrue(in_array('/illegal pics+movies/romeo+juliet.avi', $files));
 
-        $text = moodle1_converter::rewrite_filephp_usage($text, $files);
+        $text = powereduc1_converter::rewrite_filephp_usage($text, $files);
         $this->assertEquals('This is a text containing links to file.php
 as it is parsed from the backup file. <br /><br /><img border="0" width="110" vspace="0" hspace="0" height="92" title="News" alt="News" src="@@PLUGINFILE@@/pics/news.gif" /><a href="@@PLUGINFILE@@/pics/news.gif?forcedownload=1">no space</a><br />
     <br /><a href=\'@@PLUGINFILE@@/pics/news%20with%20spaces.gif?forcedownload=1\'>with urlencoded spaces</a><br />
@@ -568,21 +568,21 @@ as it is parsed from the backup file. <br /><br /><img border="0" width="110" vs
         $this->resetAfterTest(true);
 
         copy(
-            "$CFG->dirroot/backup/converter/moodle1/tests/fixtures/questions.xml",
-            "$this->tempdirpath/moodle.xml"
+            "$CFG->dirroot/backup/converter/powereduc1/tests/fixtures/questions.xml",
+            "$this->tempdirpath/powereduc.xml"
         );
-        $converter = convert_factory::get_converter('moodle1', $this->tempdir);
+        $converter = convert_factory::get_converter('powereduc1', $this->tempdir);
         $converter->convert();
     }
 
     public function test_convert_run_convert() {
         $this->resetAfterTest(true);
-        $converter = convert_factory::get_converter('moodle1', $this->tempdir);
+        $converter = convert_factory::get_converter('powereduc1', $this->tempdir);
         $converter->convert();
     }
 
     public function test_inforef_manager() {
-        $converter = convert_factory::get_converter('moodle1', $this->tempdir);
+        $converter = convert_factory::get_converter('powereduc1', $this->tempdir);
         $inforef = $converter->get_inforef_manager('unittest');
         $inforef->add_ref('file', 45);
         $inforef->add_refs('file', array(46, 47));

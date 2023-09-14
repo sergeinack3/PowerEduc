@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -30,9 +30,9 @@
  * statements instead of direct handling of SQL sentences.
  *
  * This library should be used, exclusively, by the installation and
- * upgrade process of Moodle.
+ * upgrade process of PowerEduc.
  *
- * For further documentation, visit {@link http://docs.moodle.org/en/DDL_functions}
+ * For further documentation, visit {@link http://docs.powereduc.org/en/DDL_functions}
  *
  * @package    core
  * @subpackage ddl
@@ -70,9 +70,9 @@ require_once($CFG->libdir.'/ddl/database_manager.php');
 
 
 /**
- * DDL exception class, use instead of throw new \moodle_exception() and "return false;" in ddl code.
+ * DDL exception class, use instead of throw new \powereduc_exception() and "return false;" in ddl code.
  */
-class ddl_exception extends moodle_exception {
+class ddl_exception extends powereduc_exception {
     /**
      * @param string $errorcode
      * @param string $debuginfo

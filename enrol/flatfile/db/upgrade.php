@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Keeps track of upgrades to the enrol_flatfile plugin
  *
  * @package    enrol_flatfile
- * @copyright  2010 Aparup Banerjee <aparup@moodle.com>
+ * @copyright  2010 Aparup Banerjee <aparup@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

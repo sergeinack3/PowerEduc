@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * UI element representing the finalgrade column.
  *
  * @package   gradereport_singleview
- * @copyright 2014 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2014 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,7 +31,7 @@ use stdClass;
  * UI element representing the finalgrade column.
  *
  * @package   gradereport_singleview
- * @copyright 2014 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2014 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class finalgrade extends grade_attribute_format implements unique_value, be_disabled, be_readonly {
@@ -177,7 +177,7 @@ class finalgrade extends grade_attribute_format implements unique_value, be_disa
         if ($errorstr) {
             $user = get_complete_user_data('id', $userid);
             $gradestr = new stdClass;
-            if (has_capability('moodle/site:viewfullnames', \context_course::instance($gradeitem->courseid))) {
+            if (has_capability('powereduc/site:viewfullnames', \context_course::instance($gradeitem->courseid))) {
                 $gradestr->username = fullname($user, true);
             } else {
                 $gradestr->username = fullname($user);

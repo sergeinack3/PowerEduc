@@ -1,10 +1,10 @@
 {
-  "moodle-availability_profile-form": {
+  "powereduc-availability_profile-form": {
     "requires": [
         "base",
         "node",
         "event",
-        "moodle-core_availability-form"
+        "powereduc-core_availability-form"
     ]
   }
 }

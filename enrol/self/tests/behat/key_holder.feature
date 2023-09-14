@@ -36,14 +36,14 @@ Feature: Users can be defined as key holders in courses where self enrolment is 
     Given I log in as "admin"
     When I add "Self enrolment" enrolment method in "Course 1" with:
       | Custom instance name | Test student enrolment |
-      | Enrolment key | moodle_rules |
+      | Enrolment key | powereduc_rules |
     And I log out
     And I log in as "student1"
     And I am on "Course 1" course homepage
     And I should see "You should have received this enrolment key from:"
     And I should see "Manager 1"
     And I set the following fields to these values:
-      | Enrolment key | moodle_rules |
+      | Enrolment key | powereduc_rules |
     And I press "Enrol me"
     Then I should see "Topic 1"
     And I should not see "Enrolment options"

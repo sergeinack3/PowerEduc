@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  * @package     tool_installaddon
  * @subpackage  fixtures
  * @category    test
- * @copyright   2013, 2015 David Mudrak <david@moodle.com>
+ * @copyright   2013, 2015 David Mudrak <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,7 +29,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Testable subclass of the tested class
  *
- * @copyright 2013 David Mudrak <david@moodle.com>
+ * @copyright 2013 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class testable_tool_installaddon_installer extends tool_installaddon_installer {

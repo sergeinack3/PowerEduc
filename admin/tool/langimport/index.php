@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Fetches language packages from download.moodle.org server
+ * Fetches language packages from download.powereduc.org server
  *
- * Language packages are available at https://download.moodle.org/langpack/
+ * Language packages are available at https://download.powereduc.org/langpack/
  * in ZIP format together with a file languages.md5 containing their hashes
  * and meta info.
  * Locally, language packs are saved into $CFG->dataroot/lang/
@@ -34,7 +34,7 @@ require_once($CFG->libdir.'/adminlib.php');
 admin_externalpage_setup('toollangimport');
 
 if (empty($CFG->langotherroot)) {
-    throw new moodle_exception('missingcfglangotherroot', 'tool_langimport');
+    throw new powereduc_exception('missingcfglangotherroot', 'tool_langimport');
 }
 
 $mode               = optional_param('mode', 0, PARAM_INT);              // action
@@ -52,7 +52,7 @@ if ($purgecaches) {
 if (!empty($CFG->skiplangupgrade)) {
     echo $OUTPUT->header();
     echo $OUTPUT->box(get_string('langimportdisabled', 'tool_langimport'));
-    echo $OUTPUT->single_button(new moodle_url($PAGE->url, array('purgecaches' => 1)), get_string('purgestringcaches', 'tool_langimport'));
+    echo $OUTPUT->single_button(new powereduc_url($PAGE->url, array('purgecaches' => 1)), get_string('purgestringcaches', 'tool_langimport'));
     echo $OUTPUT->footer();
     die;
 }
@@ -91,7 +91,7 @@ if ($mode == DELETION_OF_SELECTED_LANG and (!empty($uninstalllang) or !empty($co
     } else if (empty($confirmtounistall) and confirm_sesskey()) { // User chose langs to be deleted, show confirmation.
         echo $OUTPUT->header();
         echo $OUTPUT->confirm(get_string('uninstallconfirm', 'tool_langimport', implode(', ', $uninstalllang)),
-            new moodle_url($PAGE->url, array(
+            new powereduc_url($PAGE->url, array(
                 'mode' => DELETION_OF_SELECTED_LANG,
                 'confirmtouninstall' => implode('/', $uninstalllang),
             )), $PAGE->url);
@@ -164,7 +164,7 @@ foreach ($installedlangs as $installedlang => $langpackname) {
 if (!empty($missinglocales)) {
     // There is at least one missing locale.
     $a = new stdClass();
-    $a->globallocale = moodle_getlocale();
+    $a->globallocale = powereduc_getlocale();
     $a->missinglocales = $missinglocales;
     $controller->errors[] = get_string('langunsupported', 'tool_langimport', $a);
 }
@@ -204,12 +204,12 @@ if ($missingparents) {
     }
 }
 
-$uninstallurl = new moodle_url('/admin/tool/langimport/index.php', array('mode' => DELETION_OF_SELECTED_LANG));
+$uninstallurl = new powereduc_url('/admin/tool/langimport/index.php', array('mode' => DELETION_OF_SELECTED_LANG));
 $updateurl = null;
 if ($remote) {
-    $updateurl = new moodle_url('/admin/tool/langimport/index.php', array('mode' => UPDATE_ALL_LANG));
+    $updateurl = new powereduc_url('/admin/tool/langimport/index.php', array('mode' => UPDATE_ALL_LANG));
 }
-$installurl = new moodle_url('/admin/tool/langimport/index.php', array('mode' => INSTALLATION_OF_SELECTED_LANG));
+$installurl = new powereduc_url('/admin/tool/langimport/index.php', array('mode' => INSTALLATION_OF_SELECTED_LANG));
 
 // List of available languages.
 $options = array();
@@ -225,7 +225,7 @@ echo $output->render($renderable);
 
 $PAGE->requires->strings_for_js(array('uninstallconfirm', 'uninstall', 'selectlangs', 'noenglishuninstall'),
                                 'tool_langimport');
-$PAGE->requires->yui_module('moodle-core-languninstallconfirm',
+$PAGE->requires->yui_module('powereduc-core-languninstallconfirm',
                             'Y.M.core.languninstallconfirm.init',
                              array(array('uninstallUrl' => $uninstallurl->out()))
                             );

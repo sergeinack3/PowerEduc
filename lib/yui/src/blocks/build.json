@@ -1,7 +1,7 @@
 {
-  "name": "moodle-core-blocks",
+  "name": "powereduc-core-blocks",
   "builds": {
-    "moodle-core-blocks": {
+    "powereduc-core-blocks": {
       "jsfiles": [
         "shared.js",
         "blocks.js",

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,11 +37,11 @@ $canmanagetemplate = $template->can_manage();
 $duedatereached = $template->get('duedate') > 0 && $template->get('duedate') < time();
 
 if (!$canreadtemplate) {
-    throw new required_capability_exception($context, 'moodle/competency:templateview', 'nopermissions', '');
+    throw new required_capability_exception($context, 'powereduc/competency:templateview', 'nopermissions', '');
 }
 
 // Set up the page.
-$url = new moodle_url('/admin/tool/lp/template_cohorts.php', array(
+$url = new powereduc_url('/admin/tool/lp/template_cohorts.php', array(
     'id' => $id,
     'pagecontextid' => $pagecontextid
 ));

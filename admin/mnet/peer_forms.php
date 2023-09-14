@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ require_once($CFG->libdir . '/formslib.php');
  * The very basic first step add new host form - just wwwroot & application
  * The second form is loaded up with the information from this one.
  */
-class mnet_simple_host_form extends moodleform {
+class mnet_simple_host_form extends powereducform {
     function definition() {
         global $DB;
 
@@ -59,7 +59,7 @@ class mnet_simple_host_form extends moodleform {
             $wwwroot = 'http://'.$wwwroot;
         }
         if ($host = $DB->get_record('mnet_host', array('wwwroot' => $wwwroot))) {
-            $str = get_string('hostexists', 'mnet', (new moodle_url('/admin/mnet/peers.php', ['hostid' => $host->id]))->out());
+            $str = get_string('hostexists', 'mnet', (new powereduc_url('/admin/mnet/peers.php', ['hostid' => $host->id]))->out());
             return array('wwwroot' => $str);
         }
         return array();
@@ -70,7 +70,7 @@ class mnet_simple_host_form extends moodleform {
  * The second step of the form - reviewing the host details
  * This is also the same form that is used for editing an existing host
  */
-class mnet_review_host_form extends moodleform {
+class mnet_review_host_form extends powereducform {
     function definition() {
         global $OUTPUT;
 

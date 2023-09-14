@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ class store implements \tool_log\log\writer, \core\log\sql_reader {
         dispose as helper_dispose;
     }
 
-    /** @var \moodle_database $extdb */
+    /** @var \powereduc_database $extdb */
     protected $extdb;
 
     /** @var bool $logguests true if logging guest access */
@@ -79,7 +79,7 @@ class store implements \tool_log\log\writer, \core\log\sql_reader {
         }
         list($dblibrary, $dbtype) = explode('/', $dbdriver);
 
-        if (!$db = \moodle_database::get_driver_instance($dbtype, $dblibrary, true)) {
+        if (!$db = \powereduc_database::get_driver_instance($dbtype, $dblibrary, true)) {
             debugging("Unknown driver $dblibrary/$dbtype", DEBUG_DEVELOPER);
             $this->extdb = false;
             return false;
@@ -101,7 +101,7 @@ class store implements \tool_log\log\writer, \core\log\sql_reader {
                 $this->extdb = false;
                 return false;
             }
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             debugging('Cannot connect to external database: ' . $e->getMessage(), DEBUG_DEVELOPER);
             $this->extdb = false;
             return false;
@@ -146,7 +146,7 @@ class store implements \tool_log\log\writer, \core\log\sql_reader {
         }
         try {
             $this->extdb->insert_records($dbtable, $evententries);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             debugging('Cannot write to external database: ' . $e->getMessage(), DEBUG_DEVELOPER);
         }
     }
@@ -188,7 +188,7 @@ class store implements \tool_log\log\writer, \core\log\sql_reader {
     /**
      * Fetch records using given criteria returning a Traversable object.
      *
-     * Note that the traversable object contains a moodle_recordset, so
+     * Note that the traversable object contains a powereduc_recordset, so
      * remember that is important that you call close() once you finish
      * using it.
      *
@@ -296,7 +296,7 @@ class store implements \tool_log\log\writer, \core\log\sql_reader {
     /**
      * Get the external database object.
      *
-     * @return \moodle_database $extdb
+     * @return \powereduc_database $extdb
      */
     public function get_extdb() {
         if (!$this->init()) {

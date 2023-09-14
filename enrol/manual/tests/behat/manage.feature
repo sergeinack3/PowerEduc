@@ -26,7 +26,7 @@ Feature: A teacher can manage manually enrolled users in their course
       | alternativefullnameformat | firstname middlename lastname |
     And the following "permission overrides" exist:
       | capability                | permission   | role           | contextlevel | reference |
-      | moodle/site:viewfullnames | <permission> | editingteacher | Course       | C1        |
+      | powereduc/site:viewfullnames | <permission> | editingteacher | Course       | C1        |
     When I am on the "Course 1" "enrolment methods" page logged in as "teacher"
     And I click on "Enrol users" "link" in the "Manual enrolments" "table_row"
     And I set the field "addselect_searchtext" to "First"
@@ -45,7 +45,7 @@ Feature: A teacher can manage manually enrolled users in their course
       | alternativefullnameformat | firstname middlename lastname |
     And the following "permission overrides" exist:
       | capability                | permission   | role           | contextlevel | reference |
-      | moodle/site:viewfullnames | <permission> | editingteacher | Course       | C1        |
+      | powereduc/site:viewfullnames | <permission> | editingteacher | Course       | C1        |
     And the following "course enrolments" exist:
       | user  | course | role    |
       | user1 | C1     | student |

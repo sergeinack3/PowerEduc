@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -86,7 +86,7 @@ trait eventtype {
 
         if (!empty($eventtypes['category'])) {
             $categoryoptions = [];
-            foreach (\core_course_category::make_categories_list('moodle/category:manage') as $id => $category) {
+            foreach (\core_course_category::make_categories_list('powereduc/category:manage') as $id => $category) {
                 $categoryoptions[$id] = $category;
             }
 

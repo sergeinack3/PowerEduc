@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Test specific features of the Postgres dml support relating to recordsets.
@@ -26,7 +26,7 @@
 defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
-require_once($CFG->dirroot.'/lib/dml/pgsql_native_moodle_database.php');
+require_once($CFG->dirroot.'/lib/dml/pgsql_native_powereduc_database.php');
 
 /**
  * Test specific features of the Postgres dml support relating to recordsets.
@@ -38,7 +38,7 @@ require_once($CFG->dirroot.'/lib/dml/pgsql_native_moodle_database.php');
  */
 class pgsql_native_recordset_test extends basic_testcase {
 
-    /** @var pgsql_native_moodle_database Special database connection */
+    /** @var pgsql_native_powereduc_database Special database connection */
     protected $specialdb;
 
     /**
@@ -50,7 +50,7 @@ class pgsql_native_recordset_test extends basic_testcase {
         parent::setUp();
 
         // Skip tests if not using Postgres.
-        if (!($DB instanceof pgsql_native_moodle_database)) {
+        if (!($DB instanceof pgsql_native_powereduc_database)) {
             $this->markTestSkipped('Postgres-only test');
         }
     }
@@ -64,7 +64,7 @@ class pgsql_native_recordset_test extends basic_testcase {
 
         // To make testing easier, create a database with the same dboptions as the real one,
         // but a low number for the cursor size.
-        $this->specialdb = \moodle_database::get_driver_instance('pgsql', 'native', true);
+        $this->specialdb = \powereduc_database::get_driver_instance('pgsql', 'native', true);
         $dboptions = $CFG->dboptions;
         $dboptions['fetchbuffersize'] = $fetchbuffersize;
         $this->specialdb->connect($CFG->dbhost, $CFG->dbuser, $CFG->dbpass, $CFG->dbname,

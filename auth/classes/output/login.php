@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ require_once($CFG->libdir . '/externallib.php');
 
 use context_system;
 use help_icon;
-use moodle_url;
+use powereduc_url;
 use renderable;
 use renderer_base;
 use stdClass;
@@ -56,15 +56,15 @@ class login implements renderable, templatable {
     public $cookieshelpicon;
     /** @var string The error message, if any. */
     public $error;
-    /** @var moodle_url Forgot password URL. */
+    /** @var powereduc_url Forgot password URL. */
     public $forgotpasswordurl;
     /** @var array Additional identify providers, contains the keys 'url', 'name' and 'icon'. */
     public $identityproviders;
     /** @var string Login instructions, if any. */
     public $instructions;
-    /** @var moodle_url The form action login URL. */
+    /** @var powereduc_url The form action login URL. */
     public $loginurl;
-    /** @var moodle_url The sign-up URL. */
+    /** @var powereduc_url The sign-up URL. */
     public $signupurl;
     /** @var string The user name to pre-fill the form with. */
     public $username;
@@ -100,9 +100,9 @@ class login implements renderable, templatable {
 
         $this->autofocusform = !empty($CFG->loginpageautofocus);
 
-        $this->forgotpasswordurl = new moodle_url('/login/forgot_password.php');
-        $this->loginurl = new moodle_url('/login/index.php');
-        $this->signupurl = new moodle_url('/login/signup.php');
+        $this->forgotpasswordurl = new powereduc_url('/login/forgot_password.php');
+        $this->loginurl = new powereduc_url('/login/index.php');
+        $this->signupurl = new powereduc_url('/login/signup.php');
 
         // Authentication instructions.
         $this->instructions = $CFG->auth_instructions;

@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the core_userfeedback class
  *
  * @package    core
- * @copyright  2020 Shamim Rezaie <shamim@moodle.com>
+ * @copyright  2020 Shamim Rezaie <shamim@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,7 +27,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * This Class contains helper functions for user feedback functionality.
  *
- * @copyright  2020 Shamim Rezaie <shamim@moodle.com>
+ * @copyright  2020 Shamim Rezaie <shamim@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core_userfeedback {
@@ -121,22 +121,22 @@ class core_userfeedback {
     /**
      * Prepare and return the URL of the feedback site
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    public static function make_link(): moodle_url {
+    public static function make_link(): powereduc_url {
         global $CFG, $PAGE;
 
-        $baseurl = $CFG->userfeedback_url ?? 'https://feedback.moodle.org/lms';
+        $baseurl = $CFG->userfeedback_url ?? 'https://feedback.powereduc.org/lms';
         $lang = clean_param(current_language(), PARAM_LANG); // Avoid breaking WS because of incorrect package langs.
-        $moodleurl = $CFG->wwwroot;
-        $moodleversion = $CFG->release;
+        $powereducurl = $CFG->wwwroot;
+        $powereducversion = $CFG->release;
         $theme = $PAGE->theme->name;
         $themeversion = get_config('theme_'.$theme, 'version');
 
-        $url = new moodle_url($baseurl, [
+        $url = new powereduc_url($baseurl, [
             'lang' => $lang,
-            'moodle_url' => $moodleurl,
-            'moodle_version' => $moodleversion,
+            'powereduc_url' => $powereducurl,
+            'powereduc_version' => $powereducversion,
             'theme' => $theme,
             'theme_version' => $themeversion,
             'newtest' => 'Y', // Respondents might be using the same device/browser to fill out the survey.

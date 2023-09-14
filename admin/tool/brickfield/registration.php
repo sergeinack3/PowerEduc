@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,13 +32,13 @@ require(__DIR__ . '/../../../config.php');
 
 global $CFG, $OUTPUT, $PAGE;
 require_once($CFG->libdir . '/adminlib.php');
-require_once($CFG->libdir . '/moodlelib.php');
+require_once($CFG->libdir . '/powereduclib.php');
 
 // If this feature has been disabled, do nothing.
 \tool_brickfield\accessibility::require_accessibility_enabled();
 
 admin_externalpage_setup('tool_brickfield_activation');
-$thisurl = new moodle_url(\tool_brickfield\accessibility::get_plugin_url().'/registration.php');
+$thisurl = new powereduc_url(\tool_brickfield\accessibility::get_plugin_url().'/registration.php');
 $PAGE->set_url($thisurl);
 
 $context = context_system::instance();

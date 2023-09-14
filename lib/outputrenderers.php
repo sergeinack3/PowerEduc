@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Classes for rendering HTML output for Moodle.
+ * Classes for rendering HTML output for PowerEduc.
  *
- * Please see {@link http://docs.moodle.org/en/Developement:How_Moodle_outputs_HTML}
+ * Please see {@link http://docs.powereduc.org/en/Developement:How_PowerEduc_outputs_HTML}
  * for an overview.
  *
  * Included in this file are the primary renderer classes:
@@ -42,7 +42,7 @@ use core_course\output\activity_information;
 defined('POWEREDUC_INTERNAL') || die();
 
 /**
- * Simple base class for Moodle renderers.
+ * Simple base class for PowerEduc renderers.
  *
  * Tracks the xhtml_container_stack to use, which is passed in in the constructor.
  *
@@ -50,7 +50,7 @@ defined('POWEREDUC_INTERNAL') || die();
  *
  * @copyright 2009 Tim Hunt
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -61,7 +61,7 @@ class renderer_base {
     protected $opencontainers;
 
     /**
-     * @var moodle_page The Moodle page the renderer has been created to assist with.
+     * @var powereduc_page The PowerEduc page the renderer has been created to assist with.
      */
     protected $page;
 
@@ -154,10 +154,10 @@ class renderer_base {
      * The target is an additional identifier that can be used to load different
      * renderers for different options.
      *
-     * @param moodle_page $page the page we are doing output for.
+     * @param powereduc_page $page the page we are doing output for.
      * @param string $target one of rendering target constants
      */
-    public function __construct(moodle_page $page, $target) {
+    public function __construct(powereduc_page $page, $target) {
         $this->opencontainers = $page->opencontainers;
         $this->page = $page;
         $this->target = $target;
@@ -197,7 +197,7 @@ class renderer_base {
                 $template = $mustache->loadTemplate($templatename);
                 $templatecache[$templatename] = $template;
             } catch (Mustache_Exception_UnknownTemplateException $e) {
-                throw new moodle_exception('Unknown template: ' . $templatename);
+                throw new powereduc_exception('Unknown template: ' . $templatename);
             }
         }
 
@@ -290,7 +290,7 @@ class renderer_base {
      * @return boolean true if the header has been printed.
      */
     public function has_started() {
-        return $this->page->state >= moodle_page::STATE_IN_BODY;
+        return $this->page->state >= powereduc_page::STATE_IN_BODY;
     }
 
     /**
@@ -311,18 +311,18 @@ class renderer_base {
      *
      * Use this function sparingly and never for icons. For icons use pix_icon or the pix helper in a mustache template.
      *
-     * @deprecated since Moodle 3.3
+     * @deprecated since PowerEduc 3.3
      * @param string $imagename the name of the icon.
      * @param string $component specification of one plugin like in get_string()
-     * @return moodle_url
+     * @return powereduc_url
      */
-    public function pix_url($imagename, $component = 'moodle') {
+    public function pix_url($imagename, $component = 'powereduc') {
         debugging('pix_url is deprecated. Use image_url for images and pix_icon for icons.', DEBUG_DEVELOPER);
         return $this->page->theme->image_url($imagename, $component);
     }
 
     /**
-     * Return the moodle_url for an image.
+     * Return the powereduc_url for an image.
      *
      * The exact image location and extension is determined
      * automatically by searching for gif|png|jpg|jpeg, please
@@ -343,9 +343,9 @@ class renderer_base {
      *
      * @param string $imagename the pathname of the image
      * @param string $component full plugin name (aka component) or 'theme'
-     * @return moodle_url
+     * @return powereduc_url
      */
-    public function image_url($imagename, $component = 'moodle') {
+    public function image_url($imagename, $component = 'powereduc') {
         return $this->page->theme->image_url($imagename, $component);
     }
 
@@ -354,7 +354,7 @@ class renderer_base {
      *
      * @param int $maxwidth The maximum width, or null when the maximum width does not matter.
      * @param int $maxheight The maximum height, or null when the maximum height does not matter.
-     * @return moodle_url|false
+     * @return powereduc_url|false
      */
     public function get_logo_url($maxwidth = null, $maxheight = 200) {
         global $CFG;
@@ -370,7 +370,7 @@ class renderer_base {
         $filepath = ((int) $maxwidth . 'x' . (int) $maxheight) . '/';
 
         // Use $CFG->themerev to prevent browser caching when the file changes.
-        return moodle_url::make_pluginfile_url(context_system::instance()->id, 'core_admin', 'logo', $filepath,
+        return powereduc_url::make_pluginfile_url(context_system::instance()->id, 'core_admin', 'logo', $filepath,
             theme_get_revision(), $logo);
     }
 
@@ -379,7 +379,7 @@ class renderer_base {
      *
      * @param int $maxwidth The maximum width, or null when the maximum width does not matter.
      * @param int $maxheight The maximum height, or null when the maximum height does not matter.
-     * @return moodle_url|false
+     * @return powereduc_url|false
      */
     public function get_compact_logo_url($maxwidth = 300, $maxheight = 300) {
         global $CFG;
@@ -392,7 +392,7 @@ class renderer_base {
         $filepath = ((int) $maxwidth . 'x' . (int) $maxheight) . '/';
 
         // Use $CFG->themerev to prevent browser caching when the file changes.
-        return moodle_url::make_pluginfile_url(context_system::instance()->id, 'core_admin', 'logocompact', $filepath,
+        return powereduc_url::make_pluginfile_url(context_system::instance()->id, 'core_admin', 'logocompact', $filepath,
             theme_get_revision(), $logo);
     }
 
@@ -410,13 +410,13 @@ class renderer_base {
 
     /**
      * Whether we should display the main logo.
-     * @deprecated since Moodle 4.0
-     * @todo final deprecation. To be removed in Moodle 4.4 MDL-73165.
+     * @deprecated since PowerEduc 4.0
+     * @todo final deprecation. To be removed in PowerEduc 4.4 MDL-73165.
      * @param int $headinglevel The heading level we want to check against.
      * @return bool
      */
     public function should_display_main_logo($headinglevel = 1) {
-        debugging('should_display_main_logo() is deprecated and will be removed in Moodle 4.4.', DEBUG_DEVELOPER);
+        debugging('should_display_main_logo() is deprecated and will be removed in PowerEduc 4.4.', DEBUG_DEVELOPER);
         // Only render the logo if we're on the front page or login page and the we have a logo.
         $logo = $this->get_logo_url();
         if ($headinglevel == 1 && !empty($logo)) {
@@ -436,7 +436,7 @@ class renderer_base {
  *
  * @copyright Petr Skoda (skodak)
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -452,10 +452,10 @@ class plugin_renderer_base extends renderer_base {
     /**
      * Constructor method, calls the parent constructor
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @param string $target one of rendering target constants
      */
-    public function __construct(moodle_page $page, $target) {
+    public function __construct(powereduc_page $page, $target) {
         if (empty($target) && $page->pagelayout === 'maintenance') {
             // If the page is using the maintenance layout then we're going to force the target to maintenance.
             // This way we'll get a special maintenance renderer that is designed to block access to API's that are likely
@@ -553,7 +553,7 @@ class plugin_renderer_base extends renderer_base {
  *
  * @copyright 2009 Tim Hunt
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -599,10 +599,10 @@ class core_renderer extends renderer_base {
     /**
      * Constructor
      *
-     * @param moodle_page $page the page we are doing output for.
+     * @param powereduc_page $page the page we are doing output for.
      * @param string $target one of rendering target constants
      */
-    public function __construct(moodle_page $page, $target) {
+    public function __construct(powereduc_page $page, $target) {
         $this->opencontainers = $page->opencontainers;
         $this->page = $page;
         $this->target = $target;
@@ -706,7 +706,7 @@ class core_renderer extends renderer_base {
         }
 
         $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' . "\n";
-        $output .= '<meta name="keywords" content="moodle, ' . $this->page->title . '" />' . "\n";
+        $output .= '<meta name="keywords" content="powereduc, ' . $this->page->title . '" />' . "\n";
         // This is only set by the {@link redirect()} method
         $output .= $this->metarefreshtag;
 
@@ -723,11 +723,11 @@ class core_renderer extends renderer_base {
         if (!empty($focus)) {
             if (preg_match("#forms\['([a-zA-Z0-9]+)'\].elements\['([a-zA-Z0-9]+)'\]#", $focus, $matches)) {
                 // This is a horrifically bad way to handle focus but it is passed in
-                // through messy formslib::moodleform
+                // through messy formslib::powereducform
                 $this->page->requires->js_function_call('old_onload_focus', array($matches[1], $matches[2]));
             } else if (strpos($focus, '.')!==false) {
                 // Old style of focus, bad way to do it
-                debugging('This code is using the old style focus event, Please update this code to focus on an element id or the moodleform focus method.', DEBUG_DEVELOPER);
+                debugging('This code is using the old style focus event, Please update this code to focus on an element id or the powereducform focus method.', DEBUG_DEVELOPER);
                 $this->page->requires->js_function_call('old_onload_focus', explode('.', $focus, 2));
             } else {
                 // Focus element with given id
@@ -834,7 +834,7 @@ class core_renderer extends renderer_base {
             $timeleft = $CFG->maintenance_later - time();
             // If timeleft less than 30 sec, set the class on block to error to highlight.
             $errorclass = ($timeleft < 30) ? 'alert-error alert-danger' : 'alert-warning';
-            $output .= $this->box_start($errorclass . ' moodle-has-zindex maintenancewarning m-3 alert');
+            $output .= $this->box_start($errorclass . ' powereduc-has-zindex maintenancewarning m-3 alert');
             $a = new stdClass();
             $a->hour = (int)($timeleft / 3600);
             $a->min = (int)(($timeleft / 60) % 60);
@@ -846,7 +846,7 @@ class core_renderer extends renderer_base {
             }
 
             $output .= $this->box_end();
-            $this->page->requires->yui_module('moodle-core-maintenancemodetimer', 'M.core.maintenancemodetimer',
+            $this->page->requires->yui_module('powereduc-core-maintenancemodetimer', 'M.core.maintenancemodetimer',
                     array(array('timeleftinsec' => $timeleft)));
             $this->page->requires->strings_for_js(
                     array('maintenancemodeisscheduled', 'maintenancemodeisscheduledlong', 'sitemaintenance'),
@@ -920,7 +920,7 @@ class core_renderer extends renderer_base {
             $output .= '<div class="performanceinfo pageinfo">' . get_string('pageinfodebugsummary', 'core_admin',
                 $this->page->debug_summary()) . '</div>';
         }
-        if (debugging(null, DEBUG_DEVELOPER) and has_capability('moodle/site:config', context_system::instance())) {  // Only in developer mode
+        if (debugging(null, DEBUG_DEVELOPER) and has_capability('powereduc/site:config', context_system::instance())) {  // Only in developer mode
 
             // Add link to profiling report if necessary
             if (function_exists('profiling_is_running') && profiling_is_running()) {
@@ -930,7 +930,7 @@ class core_renderer extends renderer_base {
                 $link= '<a title="' . $title . '" href="' . $url . '">' . $txt . '</a>';
                 $output .= '<div class="profilingfooter">' . $link . '</div>';
             }
-            $purgeurl = new moodle_url('/admin/purgecaches.php', array('confirm' => 1,
+            $purgeurl = new powereduc_url('/admin/purgecaches.php', array('confirm' => 1,
                 'sesskey' => sesskey(), 'returnurl' => $this->page->url->out_as_local_url(false)));
             $output .= '<div class="purgecaches">' .
                     html_writer::link($purgeurl, get_string('purgecaches', 'admin')) . '</div>';
@@ -940,8 +940,8 @@ class core_renderer extends renderer_base {
         }
         if (!empty($CFG->debugvalidators)) {
             $siteurl = qualified_me();
-            $nuurl = new moodle_url('https://validator.w3.org/nu/', ['doc' => $siteurl, 'showsource' => 'yes']);
-            $waveurl = new moodle_url('https://wave.webaim.org/report#/' . urlencode($siteurl));
+            $nuurl = new powereduc_url('https://validator.w3.org/nu/', ['doc' => $siteurl, 'showsource' => 'yes']);
+            $waveurl = new powereduc_url('https://wave.webaim.org/report#/' . urlencode($siteurl));
             $validatorlinks = [
                 html_writer::link($nuurl, get_string('validatehtml')),
                 html_writer::link($waveurl, get_string('wcagcheck'))
@@ -1039,7 +1039,7 @@ class core_renderer extends renderer_base {
                 $modname .= ' ' . get_string('hiddenwithbrackets');
             }
             // Module URL.
-            $linkurl = new moodle_url($module->url, array('forceview' => 1));
+            $linkurl = new powereduc_url($module->url, array('forceview' => 1));
             // Add module URL (as key) and name (as value) to the activity list array.
             $activitylist[$linkurl->out(false)] = $modname;
         }
@@ -1172,7 +1172,7 @@ class core_renderer extends renderer_base {
             $context = context_course::instance($course->id);
 
             $fullname = fullname($USER);
-            // Since Moodle 2.0 this link always goes to the public profile page (not the course profile page)
+            // Since PowerEduc 2.0 this link always goes to the public profile page (not the course profile page)
             if ($withlinks) {
                 $linktitle = get_string('viewprofile');
                 $username = "<a href=\"$CFG->wwwroot/user/profile.php?id=$USER->id\" title=\"$linktitle\">$fullname</a>";
@@ -1196,19 +1196,19 @@ class core_renderer extends renderer_base {
                 if ($role = $DB->get_record('role', array('id'=>$USER->access['rsw'][$context->path]))) {
                     $rolename = ': '.role_get_name($role, $context);
                 }
-                $loggedinas = get_string('loggedinas', 'moodle', $username).$rolename;
+                $loggedinas = get_string('loggedinas', 'powereduc', $username).$rolename;
                 if ($withlinks) {
-                    $url = new moodle_url('/course/switchrole.php', array('id'=>$course->id,'sesskey'=>sesskey(), 'switchrole'=>0, 'returnurl'=>$this->page->url->out_as_local_url(false)));
+                    $url = new powereduc_url('/course/switchrole.php', array('id'=>$course->id,'sesskey'=>sesskey(), 'switchrole'=>0, 'returnurl'=>$this->page->url->out_as_local_url(false)));
                     $loggedinas .= ' ('.html_writer::tag('a', get_string('switchrolereturn'), array('href' => $url)).')';
                 }
             } else {
-                $loggedinas = $realuserinfo.get_string('loggedinas', 'moodle', $username);
+                $loggedinas = $realuserinfo.get_string('loggedinas', 'powereduc', $username);
                 if ($withlinks) {
                     $loggedinas .= " (<a href=\"$CFG->wwwroot/login/logout.php?sesskey=".sesskey()."\">".get_string('logout').'</a>)';
                 }
             }
         } else {
-            $loggedinas = get_string('loggedinnot', 'moodle');
+            $loggedinas = get_string('loggedinnot', 'powereduc');
             if (!$loginpage && $withlinks) {
                 $loggedinas .= " (<a href=\"$loginurl\">".get_string('login').'</a>)';
             }
@@ -1227,7 +1227,7 @@ class core_renderer extends renderer_base {
                     $a->attempts = $count;
                     $loggedinas .= get_string('failedloginattempts', '', $a);
                     if (file_exists("$CFG->dirroot/report/log/index.php") and has_capability('report/log:view', context_system::instance())) {
-                        $loggedinas .= ' ('.html_writer::link(new moodle_url('/report/log/index.php', array('chooselog' => 1,
+                        $loggedinas .= ' ('.html_writer::link(new powereduc_url('/report/log/index.php', array('chooselog' => 1,
                                 'id' => 0 , 'modid' => 'site_errors')), get_string('logs')).')';
                     }
                     $loggedinas .= '</div>';
@@ -1241,7 +1241,7 @@ class core_renderer extends renderer_base {
     /**
      * Check whether the current page is a login page.
      *
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      * @return bool
      */
     protected function is_login_page() {
@@ -1268,14 +1268,14 @@ class core_renderer extends renderer_base {
         if ($this->page->pagetype == 'site-index') {
             // Special case for site home page - please do not remove
             return '<div class="sitelink">' .
-                   '<a title="Moodle" class="d-inline-block aalink" href="http://moodle.org/">' .
-                   '<img src="' . $this->image_url('moodlelogo_grayhat') . '" alt="'.get_string('moodlelogo').'" /></a></div>';
+                   '<a title="PowerEduc" class="d-inline-block aalink" href="http://powereduc.org/">' .
+                   '<img src="' . $this->image_url('powereduclogo_grayhat') . '" alt="'.get_string('powereduclogo').'" /></a></div>';
 
         } else if (!empty($CFG->target_release) && $CFG->target_release != $CFG->release) {
             // Special case for during install/upgrade.
             return '<div class="sitelink">'.
-                   '<a title="Moodle" href="http://docs.moodle.org/en/Administrator_documentation" onclick="this.target=\'_blank\'">' .
-                   '<img src="' . $this->image_url('moodlelogo_grayhat') . '" alt="'.get_string('moodlelogo').'" /></a></div>';
+                   '<a title="PowerEduc" href="http://docs.powereduc.org/en/Administrator_documentation" onclick="this.target=\'_blank\'">' .
+                   '<img src="' . $this->image_url('powereduclogo_grayhat') . '" alt="'.get_string('powereduclogo').'" /></a></div>';
 
         } else if ($this->page->course->id == $SITE->id || strpos($this->page->pagetype, 'course-view') === 0) {
             return '<div class="homelink"><a href="' . $CFG->wwwroot . '/">' .
@@ -1314,7 +1314,7 @@ class core_renderer extends renderer_base {
         $url = str_replace('&amp;', '&', $encodedurl);
 
         switch ($this->page->state) {
-            case moodle_page::STATE_BEFORE_HEADER :
+            case powereduc_page::STATE_BEFORE_HEADER :
                 // No output yet it is safe to delivery the full arsenal of redirect methods
                 if (!$debugdisableredirect) {
                     // Don't use exactly the same time here, it can cause problems when both redirects fire at the same time.
@@ -1323,11 +1323,11 @@ class core_renderer extends renderer_base {
                 }
                 $output = $this->header();
                 break;
-            case moodle_page::STATE_PRINTING_HEADER :
+            case powereduc_page::STATE_PRINTING_HEADER :
                 // We should hopefully never get here
                 throw new coding_exception('You cannot redirect while printing the page header');
                 break;
-            case moodle_page::STATE_IN_BODY :
+            case powereduc_page::STATE_IN_BODY :
                 // We really shouldn't be here but we can deal with this
                 debugging("You should really redirect before you start page output");
                 if (!$debugdisableredirect) {
@@ -1335,7 +1335,7 @@ class core_renderer extends renderer_base {
                 }
                 $output = $this->opencontainers->pop_all_but_last();
                 break;
-            case moodle_page::STATE_DONE :
+            case powereduc_page::STATE_DONE :
                 // Too late to be calling redirect now
                 throw new coding_exception('You cannot redirect after the entire page has been generated');
                 break;
@@ -1391,7 +1391,7 @@ class core_renderer extends renderer_base {
         // Give themes a chance to init/alter the page object.
         $this->page->theme->init_page($this->page);
 
-        $this->page->set_state(moodle_page::STATE_PRINTING_HEADER);
+        $this->page->set_state(powereduc_page::STATE_PRINTING_HEADER);
 
         // Find the appropriate page layout file, based on $this->page->pagelayout.
         $layoutfile = $this->page->theme->layout_file($this->page->pagelayout);
@@ -1420,7 +1420,7 @@ class core_renderer extends renderer_base {
 
         // If this theme version is below 2.4 release and this is a course view page
         if ((!isset($this->page->theme->settings->version) || $this->page->theme->settings->version < 2012101500) &&
-                $this->page->pagelayout === 'course' && $this->page->url->compare(new moodle_url('/course/view.php'), URL_MATCH_BASE)) {
+                $this->page->pagelayout === 'course' && $this->page->url->compare(new powereduc_url('/course/view.php'), URL_MATCH_BASE)) {
             // check if course content header/footer have not been output during render of theme layout
             $coursecontentheader = $this->course_content_header(true);
             $coursecontentfooter = $this->course_content_footer(true);
@@ -1438,7 +1438,7 @@ class core_renderer extends renderer_base {
         send_headers($this->contenttype, $this->page->cacheable);
 
         $this->opencontainers->push('header/footer', $footer);
-        $this->page->set_state(moodle_page::STATE_IN_BODY);
+        $this->page->set_state(powereduc_page::STATE_IN_BODY);
 
         // If an activity record has been set, activity_header will handle this.
         if (!$this->page->cm || !empty($this->page->layout_options['noactivityheader'])) {
@@ -1462,7 +1462,7 @@ class core_renderer extends renderer_base {
         // The next lines are a bit tricky. The point is, here we are in a method
         // of a renderer class, and this object may, or may not, be the same as
         // the global $OUTPUT object. When rendering the page layout file, we want to use
-        // this object. However, people writing Moodle code expect the current
+        // this object. However, people writing PowerEduc code expect the current
         // renderer to be called $OUTPUT, not $this, so define a variable called
         // $OUTPUT pointing at $this. The same comment applies to $PAGE and $COURSE.
         $OUTPUT = $this;
@@ -1529,7 +1529,7 @@ class core_renderer extends renderer_base {
         }
         $footer = str_replace($this->unique_end_html_token, $this->page->requires->get_end_code(), $footer);
 
-        $this->page->set_state(moodle_page::STATE_DONE);
+        $this->page->set_state(powereduc_page::STATE_DONE);
 
         return $output . $footer;
     }
@@ -1963,7 +1963,7 @@ class core_renderer extends renderer_base {
      * Theme developers: DO NOT OVERRIDE! Please override function
      * {@link core_renderer::render_action_link()} instead.
      *
-     * @param string|moodle_url $url
+     * @param string|powereduc_url $url
      * @param string $text HTML fragment
      * @param component_action $action
      * @param array $attributes associative array of html link attributes + disabled
@@ -1971,8 +1971,8 @@ class core_renderer extends renderer_base {
      * @return string HTML fragment
      */
     public function action_link($url, $text, component_action $action = null, array $attributes = null, $icon = null) {
-        if (!($url instanceof moodle_url)) {
-            $url = new moodle_url($url);
+        if (!($url instanceof powereduc_url)) {
+            $url = new powereduc_url($url);
         }
         $link = new action_link($url, $text, $action, $attributes, $icon);
 
@@ -2003,7 +2003,7 @@ class core_renderer extends renderer_base {
      * consider overriding function {@link core_renderer::render_action_link()} and
      * {@link core_renderer::render_pix_icon()}.
      *
-     * @param string|moodle_url $url A string URL or moodel_url
+     * @param string|powereduc_url $url A string URL or moodel_url
      * @param pix_icon $pixicon
      * @param component_action $action
      * @param array $attributes associative array of html link attributes + disabled
@@ -2011,8 +2011,8 @@ class core_renderer extends renderer_base {
      * @return string HTML fragment
      */
     public function action_icon($url, pix_icon $pixicon, component_action $action = null, array $attributes = null, $linktext=false) {
-        if (!($url instanceof moodle_url)) {
-            $url = new moodle_url($url);
+        if (!($url instanceof powereduc_url)) {
+            $url = new powereduc_url($url);
         }
         $attributes = (array)$attributes;
 
@@ -2035,11 +2035,11 @@ class core_renderer extends renderer_base {
    /**
     * Print a message along with button choices for Continue/Cancel
     *
-    * If a string or moodle_url is given instead of a single_button, method defaults to post.
+    * If a string or powereduc_url is given instead of a single_button, method defaults to post.
     *
     * @param string $message The question to ask the user
-    * @param single_button|moodle_url|string $continue The single_button component representing the Continue answer. Can also be a moodle_url or string URL
-    * @param single_button|moodle_url|string $cancel The single_button component representing the Cancel answer. Can also be a moodle_url or string URL
+    * @param single_button|powereduc_url|string $continue The single_button component representing the Continue answer. Can also be a powereduc_url or string URL
+    * @param single_button|powereduc_url|string $cancel The single_button component representing the Cancel answer. Can also be a powereduc_url or string URL
     * @param array $displayoptions optional extra display options
     * @return string HTML fragment
     */
@@ -2054,21 +2054,21 @@ class core_renderer extends renderer_base {
             // ok
             $continue->primary = true;
         } else if (is_string($continue)) {
-            $continue = new single_button(new moodle_url($continue), $displayoptions['continuestr'], 'post', true);
-        } else if ($continue instanceof moodle_url) {
+            $continue = new single_button(new powereduc_url($continue), $displayoptions['continuestr'], 'post', true);
+        } else if ($continue instanceof powereduc_url) {
             $continue = new single_button($continue, $displayoptions['continuestr'], 'post', true);
         } else {
-            throw new coding_exception('The continue param to $OUTPUT->confirm() must be either a URL (string/moodle_url) or a single_button instance.');
+            throw new coding_exception('The continue param to $OUTPUT->confirm() must be either a URL (string/powereduc_url) or a single_button instance.');
         }
 
         if ($cancel instanceof single_button) {
             // ok
         } else if (is_string($cancel)) {
-            $cancel = new single_button(new moodle_url($cancel), $displayoptions['cancelstr'], 'get');
-        } else if ($cancel instanceof moodle_url) {
+            $cancel = new single_button(new powereduc_url($cancel), $displayoptions['cancelstr'], 'get');
+        } else if ($cancel instanceof powereduc_url) {
             $cancel = new single_button($cancel, $displayoptions['cancelstr'], 'get');
         } else {
-            throw new coding_exception('The cancel param to $OUTPUT->confirm() must be either a URL (string/moodle_url) or a single_button instance.');
+            throw new coding_exception('The cancel param to $OUTPUT->confirm() must be either a URL (string/powereduc_url) or a single_button instance.');
         }
 
         $attributes = [
@@ -2104,15 +2104,15 @@ class core_renderer extends renderer_base {
      * Theme developers: DO NOT OVERRIDE! Please override function
      * {@link core_renderer::render_single_button()} instead.
      *
-     * @param string|moodle_url $url
+     * @param string|powereduc_url $url
      * @param string $label button text
      * @param string $method get or post submit method
      * @param array $options associative array {disabled, title, etc.}
      * @return string HTML fragment
      */
     public function single_button($url, $label, $method='post', array $options=null) {
-        if (!($url instanceof moodle_url)) {
-            $url = new moodle_url($url);
+        if (!($url instanceof powereduc_url)) {
+            $url = new powereduc_url($url);
         }
         $button = new single_button($url, $label, $method);
 
@@ -2145,7 +2145,7 @@ class core_renderer extends renderer_base {
      * Theme developers: DO NOT OVERRIDE! Please override function
      * {@link core_renderer::render_single_select()} instead.
      *
-     * @param moodle_url $url form action target, includes hidden fields
+     * @param powereduc_url $url form action target, includes hidden fields
      * @param string $name name of selection field - the changing parameter in url
      * @param array $options list of options
      * @param string $selected selected element
@@ -2156,8 +2156,8 @@ class core_renderer extends renderer_base {
      */
     public function single_select($url, $name, array $options, $selected = '',
                                 $nothing = array('' => 'choosedots'), $formid = null, $attributes = array()) {
-        if (!($url instanceof moodle_url)) {
-            $url = new moodle_url($url);
+        if (!($url instanceof powereduc_url)) {
+            $url = new powereduc_url($url);
         }
         $select = new single_select($url, $name, $options, $selected, $nothing, $formid);
 
@@ -2174,7 +2174,7 @@ class core_renderer extends renderer_base {
      * Returns a dataformat selection and download form
      *
      * @param string $label A text label
-     * @param moodle_url|string $base The download page url
+     * @param powereduc_url|string $base The download page url
      * @param string $name The query param which will hold the type of the download
      * @param array $params Extra params sent to the download page
      * @return string HTML fragment
@@ -2262,13 +2262,13 @@ class core_renderer extends renderer_base {
     public function doc_link($path, $text = '', $forcepopup = false, array $attributes = []) {
         global $CFG;
 
-        $icon = $this->pix_icon('book', '', 'moodle', array('class' => 'iconhelp icon-pre', 'role' => 'presentation'));
+        $icon = $this->pix_icon('book', '', 'powereduc', array('class' => 'iconhelp icon-pre', 'role' => 'presentation'));
 
-        $attributes['href'] = new moodle_url(get_docs_url($path));
+        $attributes['href'] = new powereduc_url(get_docs_url($path));
         $newwindowicon = '';
         if (!empty($CFG->doctonewwindow) || $forcepopup) {
             $attributes['target'] = '_blank';
-            $newwindowicon = $this->pix_icon('i/externallink', get_string('opensinnewwindow'), 'moodle',
+            $newwindowicon = $this->pix_icon('i/externallink', get_string('opensinnewwindow'), 'powereduc',
             ['class' => 'fa fa-externallink fa-fw']);
         }
 
@@ -2283,11 +2283,11 @@ class core_renderer extends renderer_base {
      *
      * @param string $pix short pix name
      * @param string $alt mandatory alt attribute
-     * @param string $component standard compoennt name like 'moodle', 'mod_forum', etc.
+     * @param string $component standard compoennt name like 'powereduc', 'mod_forum', etc.
      * @param array $attributes htm attributes
      * @return string HTML fragment
      */
-    public function image_icon($pix, $alt, $component='moodle', array $attributes = null) {
+    public function image_icon($pix, $alt, $component='powereduc', array $attributes = null) {
         $icon = new image_icon($pix, $alt, $component, $attributes);
         return $this->render($icon);
     }
@@ -2311,11 +2311,11 @@ class core_renderer extends renderer_base {
      *
      * @param string $pix short pix name
      * @param string $alt mandatory alt attribute
-     * @param string $component standard compoennt name like 'moodle', 'mod_forum', etc.
+     * @param string $component standard compoennt name like 'powereduc', 'mod_forum', etc.
      * @param array $attributes htm lattributes
      * @return string HTML fragment
      */
-    public function pix_icon($pix, $alt, $component='moodle', array $attributes = null) {
+    public function pix_icon($pix, $alt, $component='powereduc', array $attributes = null) {
         $icon = new pix_icon($pix, $alt, $component, $attributes);
         return $this->render($icon);
     }
@@ -2453,13 +2453,13 @@ class core_renderer extends renderer_base {
      * @param string $text A heading text
      * @param string $helpidentifier The keyword that defines a help page
      * @param string $component component name
-     * @param string|moodle_url $icon
+     * @param string|powereduc_url $icon
      * @param string $iconalt icon alt text
      * @param int $level The level of importance of the heading. Defaulting to 2
      * @param string $classnames A space-separated list of CSS classes. Defaulting to null
      * @return string HTML fragment
      */
-    public function heading_with_help($text, $helpidentifier, $component = 'moodle', $icon = '', $iconalt = '', $level = 2, $classnames = null) {
+    public function heading_with_help($text, $helpidentifier, $component = 'powereduc', $icon = '', $iconalt = '', $level = 2, $classnames = null) {
         $image = '';
         if ($icon) {
             $image = $this->pix_icon($icon, $iconalt, $component, array('class'=>'icon iconlarge'));
@@ -2476,9 +2476,9 @@ class core_renderer extends renderer_base {
     /**
      * Returns HTML to display a help icon.
      *
-     * @deprecated since Moodle 2.0
+     * @deprecated since PowerEduc 2.0
      */
-    public function old_help_icon($helpidentifier, $title, $component = 'moodle', $linktext = '') {
+    public function old_help_icon($helpidentifier, $title, $component = 'powereduc', $linktext = '') {
         throw new coding_exception('old_help_icon() can not be used any more, please see help_icon().');
     }
 
@@ -2493,7 +2493,7 @@ class core_renderer extends renderer_base {
      * @param string|bool $linktext true means use $title as link text, string means link text value
      * @return string HTML fragment
      */
-    public function help_icon($identifier, $component = 'moodle', $linktext = '') {
+    public function help_icon($identifier, $component = 'powereduc', $linktext = '') {
         $icon = new help_icon($identifier, $component);
         $icon->diag_strings();
         if ($linktext === true) {
@@ -2527,11 +2527,11 @@ class core_renderer extends renderer_base {
 
         $title = get_string('helpprefix2', '', $scale->name) .' ('.get_string('newwindow').')';
 
-        $icon = $this->pix_icon('help', get_string('scales'), 'moodle', array('class'=>'iconhelp'));
+        $icon = $this->pix_icon('help', get_string('scales'), 'powereduc', array('class'=>'iconhelp'));
 
         $scaleid = abs($scale->id);
 
-        $link = new moodle_url('/course/scales.php', array('id' => $courseid, 'list' => true, 'scaleid' => $scaleid));
+        $link = new powereduc_url('/course/scales.php', array('id' => $courseid, 'list' => true, 'scaleid' => $scaleid));
         $action = new popup_action('click', $link, 'ratingscale');
 
         return html_writer::tag('span', $this->action_link($link, $icon, $action), array('class' => 'helplink'));
@@ -2555,7 +2555,7 @@ class core_renderer extends renderer_base {
         }
         $attributes['class'] = 'spacer';
 
-        $output = $this->pix_icon('spacer', '', 'moodle', $attributes);
+        $output = $this->pix_icon('spacer', '', 'powereduc', $attributes);
 
         if (!empty($br)) {
             $output .= '<br />';
@@ -2619,7 +2619,7 @@ class core_renderer extends renderer_base {
         global $CFG;
 
         $user = $userpicture->user;
-        $canviewfullnames = has_capability('moodle/site:viewfullnames', $this->page->context);
+        $canviewfullnames = has_capability('powereduc/site:viewfullnames', $this->page->context);
 
         $alt = '';
         if ($userpicture->alttext) {
@@ -2673,9 +2673,9 @@ class core_renderer extends renderer_base {
             $courseid = $userpicture->courseid;
         }
         if ($courseid == SITEID) {
-            $url = new moodle_url('/user/profile.php', array('id' => $user->id));
+            $url = new powereduc_url('/user/profile.php', array('id' => $user->id));
         } else {
-            $url = new moodle_url('/user/view.php', array('id' => $user->id, 'course' => $courseid));
+            $url = new powereduc_url('/user/view.php', array('id' => $user->id, 'course' => $courseid));
         }
 
         // Then wrap it in link if needed. Also we don't wrap it in link if the link redirects to itself.
@@ -2759,8 +2759,8 @@ class core_renderer extends renderer_base {
         $strsaved = get_string('filesaved', 'repository');
         $straddfile = get_string('openpicker', 'repository');
         $strloading  = get_string('loading', 'repository');
-        $strdndenabled = get_string('dndenabled_inbox', 'moodle');
-        $strdroptoupload = get_string('droptoupload', 'moodle');
+        $strdndenabled = get_string('dndenabled_inbox', 'powereduc');
+        $strdroptoupload = get_string('droptoupload', 'powereduc');
         $iconprogress = $this->pix_icon('i/loading_small', $strloading).'';
 
         $currentfile = $options->currentfile;
@@ -2777,7 +2777,7 @@ class core_renderer extends renderer_base {
         if ($size == -1) {
             $maxsize = '';
         } else {
-            $maxsize = get_string('maxfilesize', 'moodle', display_size($size, 0));
+            $maxsize = get_string('maxfilesize', 'powereduc', display_size($size, 0));
         }
         if ($options->buttonname) {
             $buttonname = ' name="' . $options->buttonname . '"';
@@ -2818,7 +2818,7 @@ EOD;
     }
 
     /**
-     * @deprecated since Moodle 3.2
+     * @deprecated since PowerEduc 3.2
      */
     public function update_module_button() {
         throw new coding_exception('core_renderer::update_module_button() can not be used anymore. Activity ' .
@@ -2829,11 +2829,11 @@ EOD;
     /**
      * Returns HTML to display a "Turn editing on/off" button in a form.
      *
-     * @param moodle_url $url The URL + params to send through when clicking the button
+     * @param powereduc_url $url The URL + params to send through when clicking the button
      * @param string $method
      * @return string HTML the button
      */
-    public function edit_button(moodle_url $url, string $method = 'post') {
+    public function edit_button(powereduc_url $url, string $method = 'post') {
 
         if ($this->page->theme->haseditswitch == true) {
             return;
@@ -2859,7 +2859,7 @@ EOD;
         if ($this->page->user_allowed_editing()) {
 
             $temp = (object) [
-                'legacyseturl' => (new moodle_url('/editmode.php'))->out(false),
+                'legacyseturl' => (new powereduc_url('/editmode.php'))->out(false),
                 'pagecontextid' => $this->page->context->id,
                 'pageurl' => $this->page->url,
                 'sesskey' => sesskey(),
@@ -2881,7 +2881,7 @@ EOD;
         if (empty($text)) {
             $text = get_string('closewindow');
         }
-        $button = new single_button(new moodle_url('#'), $text, 'get');
+        $button = new single_button(new powereduc_url('#'), $text, 'get');
         $button->add_action(new component_action('click', 'close_window'));
 
         return $this->container($this->render($button), 'closewindow');
@@ -2991,7 +2991,7 @@ EOD;
         }
 
         if (empty($CFG->rolesactive)) {
-            // continue does not make much sense if moodle is not installed yet because error is most probably not recoverable
+            // continue does not make much sense if powereduc is not installed yet because error is most probably not recoverable
         } else if (!empty($link)) {
             $output .= $this->continue_button($link);
         }
@@ -3068,7 +3068,7 @@ EOD;
     }
 
     /**
-     * @deprecated since Moodle 3.1 MDL-30811 - please do not use this function any more.
+     * @deprecated since PowerEduc 3.1 MDL-30811 - please do not use this function any more.
      */
     public function notify_problem() {
         throw new coding_exception('core_renderer::notify_problem() can not be used any more, '.
@@ -3076,7 +3076,7 @@ EOD;
     }
 
     /**
-     * @deprecated since Moodle 3.1 MDL-30811 - please do not use this function any more.
+     * @deprecated since PowerEduc 3.1 MDL-30811 - please do not use this function any more.
      */
     public function notify_success() {
         throw new coding_exception('core_renderer::notify_success() can not be used any more, '.
@@ -3084,7 +3084,7 @@ EOD;
     }
 
     /**
-     * @deprecated since Moodle 3.1 MDL-30811 - please do not use this function any more.
+     * @deprecated since PowerEduc 3.1 MDL-30811 - please do not use this function any more.
      */
     public function notify_message() {
         throw new coding_exception('core_renderer::notify_message() can not be used any more, '.
@@ -3092,7 +3092,7 @@ EOD;
     }
 
     /**
-     * @deprecated since Moodle 3.1 MDL-30811 - please do not use this function any more.
+     * @deprecated since PowerEduc 3.1 MDL-30811 - please do not use this function any more.
      */
     public function notify_redirect() {
         throw new coding_exception('core_renderer::notify_redirect() can not be used any more, '.
@@ -3113,12 +3113,12 @@ EOD;
     /**
      * Returns HTML to display a continue button that goes to a particular URL.
      *
-     * @param string|moodle_url $url The url the button goes to.
+     * @param string|powereduc_url $url The url the button goes to.
      * @return string the HTML to output.
      */
     public function continue_button($url) {
-        if (!($url instanceof moodle_url)) {
-            $url = new moodle_url($url);
+        if (!($url instanceof powereduc_url)) {
+            $url = new powereduc_url($url);
         }
         $button = new single_button($url, get_string('continue'), 'get', true);
         $button->class = 'continuebutton';
@@ -3135,7 +3135,7 @@ EOD;
      * @param int $totalcount The total number of entries available to be paged through
      * @param int $page The page you are currently viewing
      * @param int $perpage The number of entries that should be shown per page
-     * @param string|moodle_url $baseurl url of the current page, the $pagevar parameter is added
+     * @param string|powereduc_url $baseurl url of the current page, the $pagevar parameter is added
      * @param string $pagevar name of page parameter that holds the page number
      * @return string the HTML to output.
      */
@@ -3353,12 +3353,12 @@ EOD;
         // Accessing $CFG directly as using \core_search::is_global_search_enabled would
         // result in an extra included file for each site, even the ones where global search
         // is disabled.
-        if (empty($CFG->enableglobalsearch) || !has_capability('moodle/search:query', context_system::instance())) {
+        if (empty($CFG->enableglobalsearch) || !has_capability('powereduc/search:query', context_system::instance())) {
             return '';
         }
 
         $data = [
-            'action' => new moodle_url('/search/index.php'),
+            'action' => new powereduc_url('/search/index.php'),
             'hiddenfields' => (object) ['name' => 'context', 'value' => $this->page->context->id],
             'inputname' => 'q',
             'searchstring' => get_string('search'),
@@ -3438,7 +3438,7 @@ EOD;
         $opts = user_get_user_navigation_info($user, $this->page);
 
         if (!empty($opts->unauthenticateduser)) {
-            $returnstr = get_string($opts->unauthenticateduser['content'], 'moodle');
+            $returnstr = get_string($opts->unauthenticateduser['content'], 'powereduc');
             // If not logged in, show the typical not-logged-in string.
             if (!$loginpage && (!$opts->unauthenticateduser['guest'] || $withlinks)) {
                 $returnstr .= " (<a href=\"$loginurl\">" . get_string('login') . '</a>)';
@@ -3468,7 +3468,7 @@ EOD;
                 'span',
                 get_string(
                     'loggedinas',
-                    'moodle',
+                    'powereduc',
                     html_writer::span(
                         $opts->metadata['userfullname'],
                         'value'
@@ -3622,7 +3622,7 @@ EOD;
      */
     protected function render_breadcrumb_navigation_node(breadcrumb_navigation_node $item) {
 
-        if ($item->action instanceof moodle_url) {
+        if ($item->action instanceof powereduc_url) {
             $content = $item->get_content();
             $title = $item->get_title();
             $attributes = array();
@@ -3679,7 +3679,7 @@ EOD;
                 $link->text = $content;
             }
             $content = $this->render($link);
-        } else if ($item->action instanceof moodle_url) {
+        } else if ($item->action instanceof powereduc_url) {
             $attributes = array();
             if ($title !== '') {
                 $attributes['title'] = $title;
@@ -3800,9 +3800,9 @@ EOD;
             } else {
                 $currentlang = $strlang;
             }
-            $this->language = $custommenu->add($currentlang, new moodle_url('#'), $strlang, 10000);
+            $this->language = $custommenu->add($currentlang, new powereduc_url('#'), $strlang, 10000);
             foreach ($langs as $langtype => $langname) {
-                $this->language->add($langname, new moodle_url($this->page->url, array('lang' => $langtype)), $langname);
+                $this->language->add($langname, new powereduc_url($this->page->url, array('lang' => $langtype)), $langname);
             }
         }
 
@@ -3837,7 +3837,7 @@ EOD;
             } else {
                 $currentlangstr = $strlang;
             }
-            $this->language = $menu->add($currentlangstr, new moodle_url('#'), $strlang, 10000);
+            $this->language = $menu->add($currentlangstr, new powereduc_url('#'), $strlang, 10000);
             foreach ($langs as $langtype => $langname) {
                 $attributes = [];
                 // Set the lang attribute for languages different from the page's current language.
@@ -3847,7 +3847,7 @@ EOD;
                         'value' => get_html_lang_attribute_value($langtype),
                     ];
                 }
-                $this->language->add($langname, new moodle_url($this->page->url, ['lang' => $langtype]), null, null, $attributes);
+                $this->language->add($langname, new powereduc_url($this->page->url, ['lang' => $langtype]), null, null, $attributes);
             }
         }
 
@@ -3951,7 +3951,7 @@ EOD;
             $linktext = get_string('switchdevicedefault');
             $devicetype = 'default';
         }
-        $linkurl = new moodle_url('/theme/switchdevice.php', array('url' => $this->page->url, 'device' => $devicetype, 'sesskey' => sesskey()));
+        $linkurl = new powereduc_url('/theme/switchdevice.php', array('url' => $this->page->url, 'device' => $devicetype, 'sesskey' => sesskey()));
 
         $content  = html_writer::start_tag('div', array('id' => 'theme_switch_link'));
         $content .= html_writer::link($linkurl, $linktext, array('rel' => 'nofollow'));
@@ -3963,7 +3963,7 @@ EOD;
     /**
      * Renders tabs
      *
-     * This function replaces print_tabs() used before Moodle 2.5 but with slightly different arguments
+     * This function replaces print_tabs() used before PowerEduc 2.5 but with slightly different arguments
      *
      * Theme developers: In order to change how tabs are displayed please override functions
      * {@link core_renderer::render_tabtree()} and/or {@link core_renderer::render_tabobject()}
@@ -4012,10 +4012,10 @@ EOD;
             // No name for tabtree root.
         } else if ($tabobject->inactive || $tabobject->activated || ($tabobject->selected && !$tabobject->linkedwhenselected)) {
             // Tab name without a link. The <a> tag is used for styling.
-            $str .= html_writer::tag('a', html_writer::span($tabobject->text), array('class' => 'nolink moodle-has-zindex'));
+            $str .= html_writer::tag('a', html_writer::span($tabobject->text), array('class' => 'nolink powereduc-has-zindex'));
         } else {
             // Tab name with a link.
-            if (!($tabobject->link instanceof moodle_url)) {
+            if (!($tabobject->link instanceof powereduc_url)) {
                 // backward compartibility when link was passed as quoted string
                 $str .= "<a href=\"$tabobject->link\" title=\"$tabobject->title\"><span>$tabobject->text</span></a>";
             } else {
@@ -4065,7 +4065,7 @@ EOD;
     /**
      * Get the HTML for blocks in the given region.
      *
-     * @since Moodle 2.5.1 2.6
+     * @since PowerEduc 2.5.1 2.6
      * @param string $region The region to get HTML for.
      * @param array $classes Wrapping tag classes.
      * @param string $tag Wrapping tag.
@@ -4115,7 +4115,7 @@ EOD;
     /**
      * Returns the CSS classes to apply to the body tag.
      *
-     * @since Moodle 2.5.1 2.6
+     * @since PowerEduc 2.5.1 2.6
      * @param array $additionalclasses Any additional classes to apply.
      * @return string
      */
@@ -4126,7 +4126,7 @@ EOD;
     /**
      * The ID attribute to apply to the body tag.
      *
-     * @since Moodle 2.5.1 2.6
+     * @since PowerEduc 2.5.1 2.6
      * @return string
      */
     public function body_id() {
@@ -4136,7 +4136,7 @@ EOD;
     /**
      * Returns HTML attributes to use within the body tag. This includes an ID and classes.
      *
-     * @since Moodle 2.5.1 2.6
+     * @since PowerEduc 2.5.1 2.6
      * @param string|array $additionalclasses Any additional classes to give the body tag,
      * @return string
      */
@@ -4150,7 +4150,7 @@ EOD;
     /**
      * Gets HTML for the page heading.
      *
-     * @since Moodle 2.5.1 2.6
+     * @since PowerEduc 2.5.1 2.6
      * @param string $tag The tag to encase the heading in. h1 by default.
      * @return string HTML.
      */
@@ -4161,7 +4161,7 @@ EOD;
     /**
      * Gets the HTML for the page heading button.
      *
-     * @since Moodle 2.5.1 2.6
+     * @since PowerEduc 2.5.1 2.6
      * @return string HTML.
      */
     public function page_heading_button() {
@@ -4169,15 +4169,15 @@ EOD;
     }
 
     /**
-     * Returns the Moodle docs link to use for this page.
+     * Returns the PowerEduc docs link to use for this page.
      *
-     * @since Moodle 2.5.1 2.6
+     * @since PowerEduc 2.5.1 2.6
      * @param string $text
      * @return string
      */
     public function page_doc_link($text = null) {
         if ($text === null) {
-            $text = get_string('moodledocslink');
+            $text = get_string('powereducdocslink');
         }
         $path = page_get_doc_link_path($this->page);
         if (!$path) {
@@ -4209,7 +4209,7 @@ EOD;
 
         if (!empty($CFG->supportpage)) {
             $attributes = ['href' => $CFG->supportpage, 'target' => 'blank'];
-            $content .= $this->pix_icon('i/externallink', '', 'moodle', ['class' => 'ml-1']);
+            $content .= $this->pix_icon('i/externallink', '', 'powereduc', ['class' => 'ml-1']);
         } else {
             $attributes = ['href' => $CFG->wwwroot . '/user/contactsitesupport.php'];
         }
@@ -4233,10 +4233,10 @@ EOD;
             return '';
         }
 
-        $liferingicon = $this->pix_icon('t/life-ring', '', 'moodle', ['class' => 'fa fa-life-ring']);
-        $newwindowicon = $this->pix_icon('i/externallink', get_string('opensinnewwindow'), 'moodle', ['class' => 'ml-1']);
-        $link = 'https://moodle.com/help/?utm_source=CTA-banner&utm_medium=platform&utm_campaign=name~Moodle4+cat~lms+mp~no';
-        $content = $liferingicon . get_string('moodleservicesandsupport') . $newwindowicon;
+        $liferingicon = $this->pix_icon('t/life-ring', '', 'powereduc', ['class' => 'fa fa-life-ring']);
+        $newwindowicon = $this->pix_icon('i/externallink', get_string('opensinnewwindow'), 'powereduc', ['class' => 'ml-1']);
+        $link = 'https://powereduc.com/help/?utm_source=CTA-banner&utm_medium=platform&utm_campaign=name~PowerEduc4+cat~lms+mp~no';
+        $content = $liferingicon . get_string('powereducservicesandsupport') . $newwindowicon;
 
         return html_writer::tag('a', $content, ['target' => '_blank', 'href' => $link]);
     }
@@ -4253,7 +4253,7 @@ EOD;
     /**
      * Returns the page heading menu.
      *
-     * @since Moodle 2.5.1 2.6
+     * @since PowerEduc 2.5.1 2.6
      * @return string HTML.
      */
     public function page_heading_menu() {
@@ -4263,7 +4263,7 @@ EOD;
     /**
      * Returns the title to use on the page.
      *
-     * @since Moodle 2.5.1 2.6
+     * @since PowerEduc 2.5.1 2.6
      * @return string
      */
     public function page_title() {
@@ -4271,10 +4271,10 @@ EOD;
     }
 
     /**
-     * Returns the moodle_url for the favicon.
+     * Returns the powereduc_url for the favicon.
      *
-     * @since Moodle 2.5.1 2.6
-     * @return moodle_url The moodle_url for the favicon
+     * @since PowerEduc 2.5.1 2.6
+     * @return powereduc_url The powereduc_url for the favicon
      */
     public function favicon() {
         $logo = null;
@@ -4286,7 +4286,7 @@ EOD;
         }
 
         // Use $CFG->themerev to prevent browser caching when the file changes.
-        return moodle_url::make_pluginfile_url(context_system::instance()->id, 'core_admin', 'favicon', '64x64/',
+        return powereduc_url::make_pluginfile_url(context_system::instance()->id, 'core_admin', 'favicon', '64x64/',
             theme_get_revision(), $logo);
     }
 
@@ -4367,12 +4367,12 @@ EOD;
                 $imagedata = $this->user_picture($user, array('size' => 100));
 
                 // Check to see if we should be displaying a message button.
-                if (!empty($CFG->messaging) && has_capability('moodle/site:sendmessage', $context)) {
+                if (!empty($CFG->messaging) && has_capability('powereduc/site:sendmessage', $context)) {
                     $userbuttons = array(
                         'messages' => array(
                             'buttontype' => 'message',
                             'title' => get_string('message', 'message'),
-                            'url' => new moodle_url('/message/index.php', array('id' => $user->id)),
+                            'url' => new powereduc_url('/message/index.php', array('id' => $user->id)),
                             'image' => 'message',
                             'linkattributes' => \core_message\helper::messageuser_link_params($user->id),
                             'page' => $this->page
@@ -4387,7 +4387,7 @@ EOD;
                         $userbuttons['togglecontact'] = array(
                                 'buttontype' => 'togglecontact',
                                 'title' => get_string($contacttitle, 'message'),
-                                'url' => new moodle_url('/message/index.php', array(
+                                'url' => new powereduc_url('/message/index.php', array(
                                         'user1' => $USER->id,
                                         'user2' => $user->id,
                                         $contacturlaction => $user->id,
@@ -4474,7 +4474,7 @@ EOD;
                     if ($button['buttontype'] === 'message') {
                         \core_message\helper::messageuser_requirejs();
                     }
-                    $image = $this->pix_icon($button['formattedimage'], $button['title'], 'moodle', array(
+                    $image = $this->pix_icon($button['formattedimage'], $button['title'], 'powereduc', array(
                         'class' => 'iconsmall',
                         'role' => 'presentation'
                     ));
@@ -4603,7 +4603,7 @@ EOD;
                 // We only add a list to the full settings menu if we didn't include every node in the short menu.
                 if ($skipped) {
                     $text = get_string('morenavigationlinks');
-                    $url = new moodle_url('/course/admin.php', array('courseid' => $this->page->course->id));
+                    $url = new powereduc_url('/course/admin.php', array('courseid' => $this->page->course->id));
                     $link = new action_link($url, $text, null, null, new pix_icon('t/edit', $text));
                     $menu->add_secondary_action($link);
                 }
@@ -4617,7 +4617,7 @@ EOD;
                 // We only add a list to the full settings menu if we didn't include every node in the short menu.
                 if ($skipped) {
                     $text = get_string('morenavigationlinks');
-                    $url = new moodle_url('/course/admin.php', array('courseid' => $this->page->course->id));
+                    $url = new powereduc_url('/course/admin.php', array('courseid' => $this->page->course->id));
                     $link = new action_link($url, $text, null, null, new pix_icon('t/edit', $text));
                     $menu->add_secondary_action($link);
                 }
@@ -4671,7 +4671,7 @@ EOD;
                         $skipped = true;
                         continue;
                     }
-                    $link = new action_link(new moodle_url('#'), $menuitem->text, null, ['disabled' => true], $menuitem->icon);
+                    $link = new action_link(new powereduc_url('#'), $menuitem->text, null, ['disabled' => true], $menuitem->icon);
                 }
                 if ($indent) {
                     $link->add_class('ml-4');
@@ -5018,9 +5018,9 @@ EOD;
 
     /**
      * Renders release information in the footer popup
-     * @return string Moodle release info.
+     * @return string PowerEduc release info.
      */
-    public function moodle_release() {
+    public function powereduc_release() {
         global $CFG;
         if (!during_initial_install() && is_siteadmin()) {
             return $CFG->release;
@@ -5048,7 +5048,7 @@ EOD;
             if (!empty($region)) {
                 $params['bui_blockregion'] = $region;
             }
-            $url = new moodle_url($this->page->url, $params);
+            $url = new powereduc_url($this->page->url, $params);
             $addblockbutton = $this->render_from_template('core/add_block_button',
                 [
                     'link' => $url->out(false),
@@ -5070,7 +5070,7 @@ EOD;
  *
  * @copyright 2009 Tim Hunt
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -5307,7 +5307,7 @@ class core_renderer_cli extends core_renderer {
  *
  * @copyright 2010 Petr Skoda
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package core
  * @category output
  */
@@ -5366,7 +5366,7 @@ class core_renderer_ajax extends core_renderer {
      * AJAX redirections should not occur and as such redirection messages
      * are discarded.
      *
-     * @param moodle_url|string $encodedurl
+     * @param powereduc_url|string $encodedurl
      * @param string $message
      * @param int $delay
      * @param bool $debugdisableredirect
@@ -5427,7 +5427,7 @@ class core_renderer_ajax extends core_renderer {
  * is running a maintenance related task.
  * It must always extend the core_renderer as we switch from the core_renderer to this renderer in a couple of places.
  *
- * @since Moodle 2.6
+ * @since PowerEduc 2.6
  * @package core
  * @category output
  * @copyright 2013 Sam Hemelryk
@@ -5438,11 +5438,11 @@ class core_renderer_maintenance extends core_renderer {
     /**
      * Initialises the renderer instance.
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @param string $target
      * @throws coding_exception
      */
-    public function __construct(moodle_page $page, $target) {
+    public function __construct(powereduc_page $page, $target) {
         if ($target !== RENDERER_TARGET_MAINTENANCE || $page->pagelayout !== 'maintenance') {
             throw new coding_exception('Invalid request for the maintenance renderer.');
         }
@@ -5557,34 +5557,34 @@ class core_renderer_maintenance extends core_renderer {
      * Overridden confirm message for upgrades.
      *
      * @param string $message The question to ask the user
-     * @param single_button|moodle_url|string $continue The single_button component representing the Continue answer.
-     * @param single_button|moodle_url|string $cancel The single_button component representing the Cancel answer.
+     * @param single_button|powereduc_url|string $continue The single_button component representing the Continue answer.
+     * @param single_button|powereduc_url|string $cancel The single_button component representing the Cancel answer.
      * @param array $displayoptions optional extra display options
      * @return string HTML fragment
      */
     public function confirm($message, $continue, $cancel, array $displayoptions = []) {
         // We need plain styling of confirm boxes on upgrade because we don't know which stylesheet we have (it could be
-        // from any previous version of Moodle).
+        // from any previous version of PowerEduc).
         if ($continue instanceof single_button) {
             $continue->primary = true;
         } else if (is_string($continue)) {
-            $continue = new single_button(new moodle_url($continue), get_string('continue'), 'post', true);
-        } else if ($continue instanceof moodle_url) {
+            $continue = new single_button(new powereduc_url($continue), get_string('continue'), 'post', true);
+        } else if ($continue instanceof powereduc_url) {
             $continue = new single_button($continue, get_string('continue'), 'post', true);
         } else {
             throw new coding_exception('The continue param to $OUTPUT->confirm() must be either a URL' .
-                                       ' (string/moodle_url) or a single_button instance.');
+                                       ' (string/powereduc_url) or a single_button instance.');
         }
 
         if ($cancel instanceof single_button) {
             $output = '';
         } else if (is_string($cancel)) {
-            $cancel = new single_button(new moodle_url($cancel), get_string('cancel'), 'get');
-        } else if ($cancel instanceof moodle_url) {
+            $cancel = new single_button(new powereduc_url($cancel), get_string('cancel'), 'get');
+        } else if ($cancel instanceof powereduc_url) {
             $cancel = new single_button($cancel, get_string('cancel'), 'get');
         } else {
             throw new coding_exception('The cancel param to $OUTPUT->confirm() must be either a URL' .
-                                       ' (string/moodle_url) or a single_button instance.');
+                                       ' (string/powereduc_url) or a single_button instance.');
         }
 
         $output = $this->box_start('generalbox', 'notice');

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -58,7 +58,7 @@ if ($action === 'delete') {
     }
     //show confirmation
     echo $OUTPUT->header();
-    $yesurl = new moodle_url($PAGE->url, array('roleid'=>$roleid, 'contextlevel'=>$contextlevel, 'action'=>'delete', 'confirm'=>1, 'sesskey'=>sesskey()));
+    $yesurl = new powereduc_url($PAGE->url, array('roleid'=>$roleid, 'contextlevel'=>$contextlevel, 'action'=>'delete', 'confirm'=>1, 'sesskey'=>sesskey()));
     $levelname = context_helper::get_level_name($contextlevel);
     $rolename = format_string($role->name);
     $message = get_string('confirmdelete', 'tool_unsuproles', array('level'=>$levelname, 'role'=>$rolename));
@@ -99,9 +99,9 @@ if (!$problems) {
         //TODO: show list of users if count low
         $count = $problem->racount;
         $edit = array();
-        $aurl = new moodle_url('/admin/roles/define.php', array('roleid'=>$problem->roleid, 'action'=>'edit'));
+        $aurl = new powereduc_url('/admin/roles/define.php', array('roleid'=>$problem->roleid, 'action'=>'edit'));
         $edit[] = html_writer::link($aurl, $OUTPUT->pix_icon('t/edit', get_string('edit')));
-        $aurl = new moodle_url($PAGE->url, array('roleid'=>$problem->roleid, 'contextlevel'=>$problem->contextlevel, 'action'=>'delete'));
+        $aurl = new powereduc_url($PAGE->url, array('roleid'=>$problem->roleid, 'contextlevel'=>$problem->contextlevel, 'action'=>'delete'));
         $edit[] = html_writer::link($aurl, $OUTPUT->pix_icon('t/delete', get_string('delete')));
         $data[] = array($levelname, $rolename, $count, implode('&nbsp;', $edit));
     }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ use cm_info;
 use section_info;
 use stdClass;
 use course_modinfo;
-use moodle_exception;
+use powereduc_exception;
 use context_module;
 use context_course;
 
@@ -36,7 +36,7 @@ use context_course;
  * extends core_courseformat\stateactions.
  *
  * @package    core_courseformat
- * @copyright  2021 Ferran Recio <ferran@moodle.com>
+ * @copyright  2021 Ferran Recio <ferran@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class stateactions {
@@ -59,7 +59,7 @@ class stateactions {
     ): void {
         // Validate target elements.
         if (!$targetsectionid && !$targetcmid) {
-            throw new moodle_exception("Action cm_move requires targetsectionid or targetcmid");
+            throw new powereduc_exception("Action cm_move requires targetsectionid or targetcmid");
         }
 
         $this->validate_cms($course, $ids, __FUNCTION__);
@@ -67,7 +67,7 @@ class stateactions {
         // Check capabilities on every activity context.
         foreach ($ids as $cmid) {
             $modcontext = context_module::instance($cmid);
-            require_capability('moodle/course:manageactivities', $modcontext);
+            require_capability('powereduc/course:manageactivities', $modcontext);
         }
 
         $modinfo = get_fast_modinfo($course);
@@ -126,13 +126,13 @@ class stateactions {
     ): void {
         // Validate target elements.
         if (!$targetsectionid) {
-            throw new moodle_exception("Action cm_move requires targetsectionid");
+            throw new powereduc_exception("Action cm_move requires targetsectionid");
         }
 
         $this->validate_sections($course, $ids, __FUNCTION__);
 
         $coursecontext = context_course::instance($course->id);
-        require_capability('moodle/course:movesections', $coursecontext);
+        require_capability('powereduc/course:movesections', $coursecontext);
 
         $modinfo = get_fast_modinfo($course);
 
@@ -184,7 +184,7 @@ class stateactions {
     ): void {
 
         $coursecontext = context_course::instance($course->id);
-        require_capability('moodle/course:update', $coursecontext);
+        require_capability('powereduc/course:update', $coursecontext);
 
         // Get course format settings.
         $format = course_get_format($course->id);
@@ -192,7 +192,7 @@ class stateactions {
         $maxsections = $format->get_max_sections();
 
         if ($lastsectionnumber >= $maxsections) {
-            throw new moodle_exception('maxsectionslimit', 'moodle', $maxsections);
+            throw new powereduc_exception('maxsectionslimit', 'powereduc', $maxsections);
         }
 
         $modinfo = get_fast_modinfo($course);
@@ -202,7 +202,7 @@ class stateactions {
             $this->validate_sections($course, [$targetsectionid], __FUNCTION__);
             $targetsection = $modinfo->get_section_info_by_id($targetsectionid, MUST_EXIST);
             // Inserting sections at any position except in the very end requires capability to move sections.
-            require_capability('moodle/course:movesections', $coursecontext);
+            require_capability('powereduc/course:movesections', $coursecontext);
             $insertposition = $targetsection->section + 1;
         } else {
             // Get last section.
@@ -235,8 +235,8 @@ class stateactions {
     ): void {
 
         $coursecontext = context_course::instance($course->id);
-        require_capability('moodle/course:update', $coursecontext);
-        require_capability('moodle/course:movesections', $coursecontext);
+        require_capability('powereduc/course:update', $coursecontext);
+        require_capability('powereduc/course:movesections', $coursecontext);
 
         $modinfo = get_fast_modinfo($course);
 
@@ -311,7 +311,7 @@ class stateactions {
     ) {
         $this->validate_sections($course, $ids, __FUNCTION__);
         $coursecontext = context_course::instance($course->id);
-        require_all_capabilities(['moodle/course:update', 'moodle/course:sectionvisibility'], $coursecontext);
+        require_all_capabilities(['powereduc/course:update', 'powereduc/course:sectionvisibility'], $coursecontext);
 
         $modinfo = get_fast_modinfo($course);
 
@@ -402,7 +402,7 @@ class stateactions {
         // Check capabilities on every activity context.
         foreach ($ids as $cmid) {
             $modcontext = context_module::instance($cmid);
-            require_all_capabilities(['moodle/course:manageactivities', 'moodle/course:activityvisibility'], $modcontext);
+            require_all_capabilities(['powereduc/course:manageactivities', 'powereduc/course:activityvisibility'], $modcontext);
         }
 
         $format = course_get_format($course->id);
@@ -652,19 +652,19 @@ class stateactions {
      * @param stdClass $course The course where given $sectionids belong.
      * @param array $sectionids List of sections to validate.
      * @param string|null $info additional information in case of error (default null).
-     * @throws moodle_exception if any id is not valid
+     * @throws powereduc_exception if any id is not valid
      */
     protected function validate_sections(stdClass $course, array $sectionids, ?string $info = null): void {
         global $DB;
 
         if (empty($sectionids)) {
-            throw new moodle_exception('emptysectionids', 'core', null, $info);
+            throw new powereduc_exception('emptysectionids', 'core', null, $info);
         }
 
         // No section actions are allowed if course format does not support sections.
         $courseformat = course_get_format($course->id);
         if (!$courseformat->uses_sections()) {
-            throw new moodle_exception('sectionactionnotsupported', 'core', null, $info);
+            throw new powereduc_exception('sectionactionnotsupported', 'core', null, $info);
         }
 
         list($insql, $inparams) = $DB->get_in_or_equal($sectionids, SQL_PARAMS_NAMED);
@@ -672,7 +672,7 @@ class stateactions {
         // Check if all the given sections exist.
         $couintsections = $DB->count_records_select('course_sections', "id $insql", $inparams);
         if ($couintsections != count($sectionids)) {
-            throw new moodle_exception('unexistingsectionid', 'core', null, $info);
+            throw new powereduc_exception('unexistingsectionid', 'core', null, $info);
         }
     }
 
@@ -682,18 +682,18 @@ class stateactions {
      * @param stdClass $course The course where given $cmids belong.
      * @param array $cmids List of course module ids to validate.
      * @param string $info additional information in case of error.
-     * @throws moodle_exception if any id is not valid
+     * @throws powereduc_exception if any id is not valid
      */
     protected function validate_cms(stdClass $course, array $cmids, ?string $info = null): void {
 
         if (empty($cmids)) {
-            throw new moodle_exception('emptycmids', 'core', null, $info);
+            throw new powereduc_exception('emptycmids', 'core', null, $info);
         }
 
         $moduleinfo = get_fast_modinfo($course->id);
         $intersect = array_intersect($cmids, array_keys($moduleinfo->get_cms()));
         if (count($cmids) != count($intersect)) {
-            throw new moodle_exception('unexistingcmid', 'core', null, $info);
+            throw new powereduc_exception('unexistingcmid', 'core', null, $info);
         }
     }
 }

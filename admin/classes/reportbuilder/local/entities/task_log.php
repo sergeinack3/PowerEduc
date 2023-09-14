@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ use core_collator;
  * Task log entity class implementation
  *
  * @package    core_admin
- * @copyright  2021 David Matamoros <davidmc@moodle.com>
+ * @copyright  2021 David Matamoros <davidmc@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class task_log extends base {
@@ -186,7 +186,7 @@ class task_log extends base {
                 if (empty($duration)) {
                     // The format_time function returns 'now' when the difference is exactly 0.
                     // Note: format_time performs concatenation in exactly this fashion so we should do this for consistency.
-                    return '0 ' . get_string('secs', 'moodle');
+                    return '0 ' . get_string('secs', 'powereduc');
                 }
                 return format_time($duration);
             });

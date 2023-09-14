@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Abstract database driver class.
@@ -25,8 +25,8 @@
 defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__.'/database_column_info.php');
-require_once(__DIR__.'/moodle_recordset.php');
-require_once(__DIR__.'/moodle_transaction.php');
+require_once(__DIR__.'/powereduc_recordset.php');
+require_once(__DIR__.'/powereduc_transaction.php');
 
 /** SQL_PARAMS_NAMED - Bitmask, indicates :name type parameters are supported by db backend. */
 define('SQL_PARAMS_NAMED', 1);
@@ -57,18 +57,18 @@ define('SQL_QUERY_AUX', 5);
 define('SQL_QUERY_AUX_READONLY', 6);
 
 /**
- * Abstract class representing moodle database interface.
- * @link http://docs.moodle.org/dev/DML_functions
+ * Abstract class representing powereduc database interface.
+ * @link http://docs.powereduc.org/dev/DML_functions
  *
  * @package    core_dml
  * @copyright  2008 Petr Skoda (http://skodak.org)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-abstract class moodle_database {
+abstract class powereduc_database {
 
     /** @var database_manager db manager which allows db structure modifications. */
     protected $database_manager;
-    /** @var moodle_temptables temptables manager to provide cross-db support for temp tables. */
+    /** @var powereduc_temptables temptables manager to provide cross-db support for temp tables. */
     protected $temptables;
     /** @var array Cache of table info. */
     protected $tables  = null;
@@ -88,7 +88,7 @@ abstract class moodle_database {
     /** @var array Database or driver specific options, such as sockets or TCP/IP db connections. */
     protected $dboptions;
 
-    /** @var bool True means non-moodle external database used.*/
+    /** @var bool True means non-powereduc external database used.*/
     protected $external;
 
     /** @var int The database reads (performance counter).*/
@@ -149,7 +149,7 @@ abstract class moodle_database {
     protected $skiplogging = false;
 
     /**
-     * Constructor - Instantiates the database, specifying if it's external (connect to other systems) or not (Moodle DB).
+     * Constructor - Instantiates the database, specifying if it's external (connect to other systems) or not (PowerEduc DB).
      *              Note that this affects the decision of whether prefix checks must be performed or not.
      * @param bool $external True means that an external database is used.
      */
@@ -183,17 +183,17 @@ abstract class moodle_database {
     /**
      * Loads and returns a database instance with the specified type and library.
      *
-     * The loaded class is within lib/dml directory and of the form: $type.'_'.$library.'_moodle_database'
+     * The loaded class is within lib/dml directory and of the form: $type.'_'.$library.'_powereduc_database'
      *
      * @param string $type Database driver's type. (eg: mysqli, pgsql, mssql, sqldrv, oci, etc.)
      * @param string $library Database driver's library (native, pdo, etc.)
      * @param bool $external True if this is an external database.
-     * @return moodle_database driver object or null if error, for example of driver object see {@link mysqli_native_moodle_database}
+     * @return powereduc_database driver object or null if error, for example of driver object see {@link mysqli_native_powereduc_database}
      */
     public static function get_driver_instance($type, $library, $external = false) {
         global $CFG;
 
-        $classname = $type.'_'.$library.'_moodle_database';
+        $classname = $type.'_'.$library.'_powereduc_database';
         $libfile   = "$CFG->libdir/dml/$classname.php";
 
         if (!file_exists($libfile)) {
@@ -296,7 +296,7 @@ abstract class moodle_database {
      * @param string $dbuser The database user to connect as.
      * @param string $dbpass The password to use when connecting to the database.
      * @param string $dbname The name of the database being connected to.
-     * @param mixed $prefix string means moodle db prefix, false used for external databases where prefix not used
+     * @param mixed $prefix string means powereduc db prefix, false used for external databases where prefix not used
      * @param array $dboptions driver specific options
      * @return bool true
      * @throws dml_connection_exception if error
@@ -309,7 +309,7 @@ abstract class moodle_database {
      * @param string $dbuser The database user to connect as.
      * @param string $dbpass The password to use when connecting to the database.
      * @param string $dbname The name of the database being connected to.
-     * @param mixed $prefix string means moodle db prefix, false used for external databases where prefix not used
+     * @param mixed $prefix string means powereduc db prefix, false used for external databases where prefix not used
      * @param array $dboptions driver specific options
      * @return void
      */
@@ -775,7 +775,7 @@ abstract class moodle_database {
 
         // default behavior, throw exception on empty array
         if (is_array($items) and empty($items) and $onemptyitems === false) {
-            throw new coding_exception('moodle_database::get_in_or_equal() does not accept empty arrays');
+            throw new coding_exception('powereduc_database::get_in_or_equal() does not accept empty arrays');
         }
         // handle $onemptyitems on empty array of items
         if (is_array($items) and empty($items)) {
@@ -1061,9 +1061,9 @@ abstract class moodle_database {
 
         $callers = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
 
-        // Ignore moodle_database internals.
+        // Ignore powereduc_database internals.
         $callers = array_filter($callers, function($caller) {
-            return empty($caller['class']) || $caller['class'] != 'moodle_database';
+            return empty($caller['class']) || $caller['class'] != 'powereduc_database';
         });
 
         $callers = array_slice($callers, 0, $level);
@@ -1286,7 +1286,7 @@ abstract class moodle_database {
     /**
      * Enable/disable detailed sql logging
      *
-     * @deprecated since Moodle 2.9
+     * @deprecated since PowerEduc 2.9
      */
     public function set_logging($state) {
         throw new coding_exception('set_logging() can not be used any more.');
@@ -1312,7 +1312,7 @@ abstract class moodle_database {
     public abstract function execute($sql, array $params=null);
 
     /**
-     * Get a number of records as a moodle_recordset where all the given conditions met.
+     * Get a number of records as a powereduc_recordset where all the given conditions met.
      *
      * Selects records from the table $table.
      *
@@ -1333,7 +1333,7 @@ abstract class moodle_database {
      * order) and then return the next $limitnum records. If either of $limitfrom
      * or $limitnum is specified, both must be present.
      *
-     * The return value is a moodle_recordset
+     * The return value is a powereduc_recordset
      * if the query succeeds. If an error occurs, false is returned.
      *
      * @param string $table the table to query.
@@ -1342,7 +1342,7 @@ abstract class moodle_database {
      * @param string $fields a comma separated list of fields to return (optional, by default all fields are returned).
      * @param int $limitfrom return a subset of records, starting at this point (optional).
      * @param int $limitnum return a subset comprising this many records (optional, required if $limitfrom is set).
-     * @return moodle_recordset A moodle_recordset instance
+     * @return powereduc_recordset A powereduc_recordset instance
      * @throws dml_exception A DML specific exception is thrown for any errors.
      */
     public function get_recordset($table, array $conditions=null, $sort='', $fields='*', $limitfrom=0, $limitnum=0) {
@@ -1351,7 +1351,7 @@ abstract class moodle_database {
     }
 
     /**
-     * Get a number of records as a moodle_recordset where one field match one list of values.
+     * Get a number of records as a powereduc_recordset where one field match one list of values.
      *
      * Only records where $field takes one of the values $values are returned.
      * $values must be an array of values.
@@ -1365,7 +1365,7 @@ abstract class moodle_database {
      * @param string $fields a comma separated list of fields to return (optional, by default all fields are returned).
      * @param int $limitfrom return a subset of records, starting at this point (optional).
      * @param int $limitnum return a subset comprising this many records (optional, required if $limitfrom is set).
-     * @return moodle_recordset A moodle_recordset instance.
+     * @return powereduc_recordset A powereduc_recordset instance.
      * @throws dml_exception A DML specific exception is thrown for any errors.
      */
     public function get_recordset_list($table, $field, array $values, $sort='', $fields='*', $limitfrom=0, $limitnum=0) {
@@ -1374,7 +1374,7 @@ abstract class moodle_database {
     }
 
     /**
-     * Get a number of records as a moodle_recordset which match a particular WHERE clause.
+     * Get a number of records as a powereduc_recordset which match a particular WHERE clause.
      *
      * If given, $select is used as the SELECT parameter in the SQL query,
      * otherwise all records from the table are returned.
@@ -1388,7 +1388,7 @@ abstract class moodle_database {
      * @param string $fields a comma separated list of fields to return (optional, by default all fields are returned).
      * @param int $limitfrom return a subset of records, starting at this point (optional).
      * @param int $limitnum return a subset comprising this many records (optional, required if $limitfrom is set).
-     * @return moodle_recordset A moodle_recordset instance.
+     * @return powereduc_recordset A powereduc_recordset instance.
      * @throws dml_exception A DML specific exception is thrown for any errors.
      */
     public function get_recordset_select($table, $select, array $params=null, $sort='', $fields='*', $limitfrom=0, $limitnum=0) {
@@ -1403,7 +1403,7 @@ abstract class moodle_database {
     }
 
     /**
-     * Get a number of records as a moodle_recordset using a SQL statement.
+     * Get a number of records as a powereduc_recordset using a SQL statement.
      *
      * Since this method is a little less readable, use of it should be restricted to
      * code where it's possible there might be large datasets being returned.  For known
@@ -1415,7 +1415,7 @@ abstract class moodle_database {
      * @param array $params array of sql parameters
      * @param int $limitfrom return a subset of records, starting at this point (optional).
      * @param int $limitnum return a subset comprising this many records (optional, required if $limitfrom is set).
-     * @return moodle_recordset A moodle_recordset instance.
+     * @return powereduc_recordset A powereduc_recordset instance.
      * @throws dml_exception A DML specific exception is thrown for any errors.
      */
     public abstract function get_recordset_sql($sql, array $params=null, $limitfrom=0, $limitnum=0);
@@ -1427,7 +1427,7 @@ abstract class moodle_database {
      * this method may block access to table until the recordset is closed.
      *
      * @param string $table Name of database table.
-     * @return moodle_recordset A moodle_recordset instance {@link function get_recordset}.
+     * @return powereduc_recordset A powereduc_recordset instance {@link function get_recordset}.
      * @throws dml_exception A DML specific exception is thrown for any errors.
      */
     public function export_table_recordset($table) {
@@ -1820,7 +1820,7 @@ abstract class moodle_database {
      * This method is intended for inserting of large number of small objects,
      * do not use for huge objects with text or binary fields.
      *
-     * @since Moodle 2.7
+     * @since PowerEduc 2.7
      *
      * @param string $table  The database table to be inserted into
      * @param array|Traversable $dataobjects list of objects to be inserted, must be compatible with foreach
@@ -2062,7 +2062,7 @@ abstract class moodle_database {
      * @param string $subquery Subquery that will return values of the field to delete
      * @param array $params Parameters for subquery
      * @throws dml_exception If there is any error
-     * @since Moodle 3.10
+     * @since PowerEduc 3.10
      */
     public function delete_records_subquery(string $table, string $field, string $alias,
             string $subquery, array $params = []): void {
@@ -2242,7 +2242,7 @@ abstract class moodle_database {
      * Note the use of this method may lead to slower queries (full scans) so
      * use it only when needed and against already reduced data sets.
      *
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      *
      * @param string $fieldname Usually the name of the table column.
      * @param string $param Usually the bound query parameter (?, :named).
@@ -2387,7 +2387,7 @@ abstract class moodle_database {
      */
     public function sql_substr($expr, $start, $length=false) {
         if (count(func_get_args()) < 2) {
-            throw new coding_exception('moodle_database::sql_substr() requires at least two parameters', 'Originally this function was only returning name of SQL substring function, it now requires all parameters.');
+            throw new coding_exception('powereduc_database::sql_substr() requires at least two parameters', 'Originally this function was only returning name of SQL substring function, it now requires all parameters.');
         }
         if ($length === false) {
             return "SUBSTR($expr, $start)";
@@ -2542,7 +2542,7 @@ abstract class moodle_database {
     /**
      * Returns the SQL that allows to find intersection of two or more queries
      *
-     * @since Moodle 2.8
+     * @since PowerEduc 2.8
      *
      * @param array $selects array of SQL select queries, each of them only returns fields with the names from $fields
      * @param string $fields comma-separated list of fields (used only by some DB engines)
@@ -2565,7 +2565,7 @@ abstract class moodle_database {
     /**
      * Does this driver support tool_replace?
      *
-     * @since Moodle 2.6.1
+     * @since PowerEduc 2.6.1
      * @return bool
      */
     public function replace_all_text_supported() {
@@ -2575,7 +2575,7 @@ abstract class moodle_database {
     /**
      * Replace given text in all rows of column.
      *
-     * @since Moodle 2.6.1
+     * @since PowerEduc 2.6.1
      * @param string $table name of the table
      * @param database_column_info $column
      * @param string $search
@@ -2672,10 +2672,10 @@ abstract class moodle_database {
      * successfully. If any part of the transaction rolls back then the whole
      * thing is rolled back.
      *
-     * @return moodle_transaction
+     * @return powereduc_transaction
      */
     public function start_delegated_transaction() {
-        $transaction = new moodle_transaction($this);
+        $transaction = new powereduc_transaction($this);
         $this->transactions[] = $transaction;
         if (count($this->transactions) == 1) {
             $this->begin_transaction();
@@ -2694,11 +2694,11 @@ abstract class moodle_database {
      * Indicates delegated transaction finished successfully.
      * The real database transaction is committed only if
      * all delegated transactions committed.
-     * @param moodle_transaction $transaction The transaction to commit
+     * @param powereduc_transaction $transaction The transaction to commit
      * @return void
      * @throws dml_transaction_exception Creates and throws transaction related exceptions.
      */
-    public function commit_delegated_transaction(moodle_transaction $transaction) {
+    public function commit_delegated_transaction(powereduc_transaction $transaction) {
         if ($transaction->is_disposed()) {
             throw new dml_transaction_exception('Transactions already disposed', $transaction);
         }
@@ -2746,11 +2746,11 @@ abstract class moodle_database {
      * because all open delegated transactions are rolled back
      * automatically if exceptions not caught.
      *
-     * @param moodle_transaction $transaction An instance of a moodle_transaction.
+     * @param powereduc_transaction $transaction An instance of a powereduc_transaction.
      * @param Exception|Throwable $e The related exception/throwable to this transaction rollback.
      * @return void This does not return, instead the exception passed in will be rethrown.
      */
-    public function rollback_delegated_transaction(moodle_transaction $transaction, $e) {
+    public function rollback_delegated_transaction(powereduc_transaction $transaction, $e) {
         if (!($e instanceof Exception) && !($e instanceof Throwable)) {
             // PHP7 - we catch Throwables in phpunit but can't use that as the type hint in PHP5.
             $e = new \coding_exception("Must be given an Exception or Throwable object!");

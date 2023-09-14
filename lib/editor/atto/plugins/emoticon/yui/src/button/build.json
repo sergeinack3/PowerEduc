@@ -1,7 +1,7 @@
 {
-  "name": "moodle-atto_emoticon-button",
+  "name": "powereduc-atto_emoticon-button",
   "builds": {
-    "moodle-atto_emoticon-button": {
+    "powereduc-atto_emoticon-button": {
       "jsfiles": [
         "button.js"
       ]

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Advanced grading methods support
  *
  * @package    core_grading
- * @copyright  2011 David Mudrak <david@moodle.com>
+ * @copyright  2011 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -88,7 +88,7 @@ function get_grading_manager($context_or_areaid = null, $component = null, $area
  * manager. Such pattern is used when copying form definitions, for example.
  *
  * @package    core_grading
- * @copyright  2011 David Mudrak <david@moodle.com>
+ * @copyright  2011 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @category   grading
  */
@@ -392,11 +392,11 @@ class grading_manager {
             $method = null;
         } else {
             if ('gradingform_'.$method !== clean_param('gradingform_'.$method, PARAM_COMPONENT)) {
-                throw new moodle_exception('invalid_method_name', 'core_grading');
+                throw new powereduc_exception('invalid_method_name', 'core_grading');
             }
             $available = $this->get_available_methods(false);
             if (!array_key_exists($method, $available)) {
-                throw new moodle_exception('invalid_method_name', 'core_grading');
+                throw new powereduc_exception('invalid_method_name', 'core_grading');
             }
         }
 
@@ -438,7 +438,7 @@ class grading_manager {
      * Extends the settings navigation with the grading settings
      *
      * This function is called when the context for the page is an activity module with the
-     * FEATURE_ADVANCED_GRADING and the user has the permission moodle/grade:managegradingforms.
+     * FEATURE_ADVANCED_GRADING and the user has the permission powereduc/grade:managegradingforms.
      *
      * @param settings_navigation $settingsnav {@link settings_navigation}
      * @param navigation_node $modulenode {@link navigation_node}
@@ -497,11 +497,11 @@ class grading_manager {
 
         // make sure the passed method is a valid plugin name
         if ('gradingform_'.$method !== clean_param('gradingform_'.$method, PARAM_COMPONENT)) {
-            throw new moodle_exception('invalid_method_name', 'core_grading');
+            throw new powereduc_exception('invalid_method_name', 'core_grading');
         }
         $available = $this->get_available_methods(false);
         if (!array_key_exists($method, $available)) {
-            throw new moodle_exception('invalid_method_name', 'core_grading');
+            throw new powereduc_exception('invalid_method_name', 'core_grading');
         }
 
         // get the current grading area record if it exists
@@ -548,10 +548,10 @@ class grading_manager {
     /**
      * Returns the URL of the grading area management page
      *
-     * @param moodle_url $returnurl optional URL of the page where the user should be sent back to
-     * @return moodle_url
+     * @param powereduc_url $returnurl optional URL of the page where the user should be sent back to
+     * @return powereduc_url
      */
-    public function get_management_url(moodle_url $returnurl = null) {
+    public function get_management_url(powereduc_url $returnurl = null) {
 
         $this->ensure_isset(array('context', 'component'));
 
@@ -568,7 +568,7 @@ class grading_manager {
             $params['returnurl'] = $returnurl->out(false);
         }
 
-        return new moodle_url('/grade/grading/manage.php', $params);
+        return new powereduc_url('/grade/grading/manage.php', $params);
     }
 
     /**

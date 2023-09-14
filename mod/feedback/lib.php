@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Library of functions and constants for module feedback
@@ -564,7 +564,7 @@ function feedback_cron () {
 }
 
 /**
- * @deprecated since Moodle 3.8
+ * @deprecated since PowerEduc 3.8
  */
 function feedback_scale_used() {
     throw new coding_exception('feedback_scale_used() can not be used anymore. Plugins can implement ' .
@@ -1819,7 +1819,7 @@ function feedback_move_item($moveitem, $pos) {
 }
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function feedback_print_item_preview() {
     throw new coding_exception('feedback_print_item_preview() can not be used anymore. '
@@ -1827,7 +1827,7 @@ function feedback_print_item_preview() {
 }
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function feedback_print_item_complete() {
     throw new coding_exception('feedback_print_item_complete() can not be used anymore. '
@@ -1835,7 +1835,7 @@ function feedback_print_item_complete() {
 }
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function feedback_print_item_show_value() {
     throw new coding_exception('feedback_print_item_show_value() can not be used anymore. '
@@ -1947,7 +1947,7 @@ function feedback_save_tmp_values($feedbackcompletedtmp, $feedbackcompleted) {
 }
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function feedback_delete_completedtmp() {
     throw new coding_exception('feedback_delete_completedtmp() can not be used anymore.');
@@ -2027,7 +2027,7 @@ function feedback_get_last_break_position($feedbackid) {
 }
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function feedback_get_page_to_continue() {
     throw new coding_exception('feedback_get_page_to_continue() can not be used anymore.');
@@ -2040,7 +2040,7 @@ function feedback_get_page_to_continue() {
 ////////////////////////////////////////////////
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function feedback_clean_input_value() {
     throw new coding_exception('feedback_clean_input_value() can not be used anymore. '
@@ -2049,14 +2049,14 @@ function feedback_clean_input_value() {
 }
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function feedback_save_values() {
     throw new coding_exception('feedback_save_values() can not be used anymore.');
 }
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function feedback_save_guest_values() {
     throw new coding_exception('feedback_save_guest_values() can not be used anymore.');
@@ -2105,7 +2105,7 @@ function feedback_compare_item_value($completedid, $item, $dependvalue, $tmp = f
 }
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function feedback_check_values() {
     throw new coding_exception('feedback_check_values() can not be used anymore. '
@@ -2113,14 +2113,14 @@ function feedback_check_values() {
 }
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function feedback_create_values() {
     throw new coding_exception('feedback_create_values() can not be used anymore.');
 }
 
 /**
- * @deprecated since Moodle 3.1
+ * @deprecated since PowerEduc 3.1
  */
 function feedback_update_values() {
     throw new coding_exception('feedback_update_values() can not be used anymore.');
@@ -2221,7 +2221,7 @@ function feedback_is_already_submitted($feedbackid, $courseid = false) {
 }
 
 /**
- * @deprecated since Moodle 3.1. Use feedback_get_current_completed_tmp() or feedback_get_last_completed.
+ * @deprecated since PowerEduc 3.1. Use feedback_get_current_completed_tmp() or feedback_get_last_completed.
  */
 function feedback_get_current_completed() {
     throw new coding_exception('feedback_get_current_completed() can not be used anymore. Please ' .
@@ -2935,7 +2935,7 @@ function mod_feedback_get_fontawesome_icon_map() {
  * @param  int $from the time to check updates from
  * @param  array $filter if we need to check only specific updates
  * @return stdClass an object with the different type of areas indicating if they were updated or not
- * @since Moodle 3.3
+ * @since PowerEduc 3.3
  */
 function feedback_check_updates_since(cm_info $cm, $from, $filter = array()) {
     global $DB, $USER, $CFG;

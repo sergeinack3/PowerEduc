@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
@@ -27,7 +27,7 @@ require_once(__DIR__.'/fixtures/testable_update_validator.php');
  *
  * @package   core
  * @category  test
- * @copyright 2013, 2015 David Mudrak <david@moodle.com>
+ * @copyright 2013, 2015 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class update_validator_test extends \advanced_testcase {
@@ -97,14 +97,14 @@ class update_validator_test extends \advanced_testcase {
 
         // Invalid root directory name.
         $validator = testable_core_update_validator::instance($fixtures.'/github', array(
-            'moodle-repository_mahara-master/' => true,
-            'moodle-repository_mahara-master/lang/' => true,
-            'moodle-repository_mahara-master/lang/en/' => true,
-            'moodle-repository_mahara-master/lang/en/repository_mahara.php' => true,
-            'moodle-repository_mahara-master/version.php' => true));
+            'powereduc-repository_mahara-master/' => true,
+            'powereduc-repository_mahara-master/lang/' => true,
+            'powereduc-repository_mahara-master/lang/en/' => true,
+            'powereduc-repository_mahara-master/lang/en/repository_mahara.php' => true,
+            'powereduc-repository_mahara-master/version.php' => true));
         $this->assertFalse($validator->execute());
         $this->assertTrue($this->has_message($validator->get_messages(), $validator::ERROR, 'rootdirinvalid',
-            'moodle-repository_mahara-master'));
+            'powereduc-repository_mahara-master'));
     }
 
     public function test_validate_version_php() {
@@ -116,7 +116,7 @@ class update_validator_test extends \advanced_testcase {
             'noversion/lang/en/' => true,
             'noversion/lang/en/theme_noversion.php' => true));
         $validator->assert_plugin_type('theme');
-        $validator->assert_moodle_version(0);
+        $validator->assert_powereduc_version(0);
         $this->assertTrue($validator->execute());
         $this->assertTrue($this->has_message($validator->get_messages(), $validator::DEBUG, 'missingversionphp'));
         $this->assertTrue(is_null($validator->get_versionphp_info()));
@@ -127,7 +127,7 @@ class update_validator_test extends \advanced_testcase {
             'noversion/lang/en/' => true,
             'noversion/lang/en/noversion.php' => true));
         $validator->assert_plugin_type('mod');
-        $validator->assert_moodle_version(0);
+        $validator->assert_powereduc_version(0);
         $this->assertFalse($validator->execute());
         $this->assertTrue($this->has_message($validator->get_messages(), $validator::ERROR, 'missingversionphp'));
 
@@ -138,7 +138,7 @@ class update_validator_test extends \advanced_testcase {
             'legacymod/lang/en/' => true,
             'legacymod/lang/en/legacymod.php' => true));
         $validator->assert_plugin_type('mod');
-        $validator->assert_moodle_version(0);
+        $validator->assert_powereduc_version(0);
         $this->assertFalse($validator->execute());
         $this->assertTrue($this->has_message($validator->get_messages(), $validator::ERROR, 'versionphpsyntax', '$module'));
 
@@ -149,7 +149,7 @@ class update_validator_test extends \advanced_testcase {
             'baz/lang/en/' => true,
             'baz/lang/en/auth_baz.php' => true));
         $validator->assert_plugin_type('auth');
-        $validator->assert_moodle_version(0);
+        $validator->assert_powereduc_version(0);
         $this->assertFalse($validator->execute());
         $this->assertTrue($this->has_message($validator->get_messages(), $validator::ERROR, 'missingcomponent'));
 
@@ -159,7 +159,7 @@ class update_validator_test extends \advanced_testcase {
             'foobar/index.php' => true,
             'foobar/lang/' => true));
         $validator->assert_plugin_type('block');
-        $validator->assert_moodle_version('2013031400.00');
+        $validator->assert_powereduc_version('2013031400.00');
         $this->assertFalse($validator->execute());
         $this->assertTrue($this->has_message($validator->get_messages(), $validator::ERROR, 'componentmismatchtype',
             array('expected' => 'block', 'found' => 'local')));
@@ -172,7 +172,7 @@ class update_validator_test extends \advanced_testcase {
             'foobar/lang/en/' => true,
             'foobar/lang/en/local_foobar.php' => true));
         $validator->assert_plugin_type('local');
-        $validator->assert_moodle_version('2013031400.00');
+        $validator->assert_powereduc_version('2013031400.00');
         $this->assertTrue($validator->execute());
         $this->assertTrue($validator->get_result());
         $this->assertEquals('foobar', $validator->get_rootdir());
@@ -197,7 +197,7 @@ class update_validator_test extends \advanced_testcase {
             'bah/view.php' => true,
             'bah/version.php' => true));
         $validator->assert_plugin_type('mod');
-        $validator->assert_moodle_version(0);
+        $validator->assert_powereduc_version(0);
         $this->assertFalse($validator->execute());
         $this->assertTrue($this->has_message($validator->get_messages(), $validator::ERROR, 'missinglangenfolder'));
 
@@ -207,7 +207,7 @@ class update_validator_test extends \advanced_testcase {
             'bah/lang/' => true,
             'bah/lang/en/' => true));
         $validator->assert_plugin_type('mod');
-        $validator->assert_moodle_version(0);
+        $validator->assert_powereduc_version(0);
         $this->assertFalse($validator->execute());
         $this->assertTrue($this->has_message($validator->get_messages(), $validator::ERROR, 'missinglangenfile'));
 
@@ -219,7 +219,7 @@ class update_validator_test extends \advanced_testcase {
             'bah/lang/en/bleh.php' => true,
             'bah/lang/en/bah.php' => true));
         $validator->assert_plugin_type('mod');
-        $validator->assert_moodle_version(0);
+        $validator->assert_powereduc_version(0);
         $this->assertTrue($validator->execute());
         $this->assertTrue($this->has_message($validator->get_messages(), $validator::WARNING, 'multiplelangenfiles'));
         $this->assertTrue(is_null($validator->get_language_file_name()));
@@ -231,7 +231,7 @@ class update_validator_test extends \advanced_testcase {
             'bah/lang/en/' => true,
             'bah/lang/en/bah.php' => true));
         $validator->assert_plugin_type('block');
-        $validator->assert_moodle_version(0);
+        $validator->assert_powereduc_version(0);
         $this->assertFalse($validator->execute());
         $this->assertTrue($this->has_message($validator->get_messages(), $validator::ERROR, 'missingexpectedlangenfile',
             'block_bah.php'));
@@ -243,7 +243,7 @@ class update_validator_test extends \advanced_testcase {
             'noversion/lang/en/' => true,
             'noversion/lang/en/theme_noversion.php' => true));
         $validator->assert_plugin_type('theme');
-        $validator->assert_moodle_version(0);
+        $validator->assert_powereduc_version(0);
         $this->assertTrue($validator->execute());
         $this->assertTrue($this->has_message($validator->get_messages(), $validator::DEBUG, 'foundlangfile', 'theme_noversion'));
         $this->assertEquals('theme_noversion', $validator->get_language_file_name());
@@ -256,7 +256,7 @@ class update_validator_test extends \advanced_testcase {
             'foobar/lang/en/' => true,
             'foobar/lang/en/local_foobar.php' => true));
         $validator->assert_plugin_type('local');
-        $validator->assert_moodle_version('2013031400.00');
+        $validator->assert_powereduc_version('2013031400.00');
         $this->assertTrue($validator->execute());
         $this->assertTrue($this->has_message($validator->get_messages(), $validator::DEBUG, 'foundlangfile', 'local_foobar'));
         $this->assertEquals('local_foobar', $validator->get_language_file_name());
@@ -273,7 +273,7 @@ class update_validator_test extends \advanced_testcase {
             'greenbar/lang/en/' => true,
             'greenbar/lang/en/local_greenbar.php' => true));
         $validator->assert_plugin_type('local');
-        $validator->assert_moodle_version('2013031400.00');
+        $validator->assert_powereduc_version('2013031400.00');
 
         $this->assertTrue($validator->execute());
         $this->assertFalse($this->has_message($validator->get_messages(), $validator::WARNING, 'targetexists',
@@ -302,7 +302,7 @@ class update_validator_test extends \advanced_testcase {
             'foobar/lang/en/' => true,
             'foobar/lang/en/local_foobar.php' => true));
         $validator->assert_plugin_type('local');
-        $validator->assert_moodle_version('2013031400.00');
+        $validator->assert_powereduc_version('2013031400.00');
         $this->assertTrue($validator->execute());
         $this->assertTrue($this->has_message($validator->get_messages(), $validator::INFO, 'pathwritable',
             $validator->get_plugintype_location('local')));

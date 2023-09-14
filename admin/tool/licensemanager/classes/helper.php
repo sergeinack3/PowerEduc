@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 
 namespace tool_licensemanager;
 
-use moodle_url;
+use powereduc_url;
 
 defined('POWEREDUC_INTERNAL') || die();
 
@@ -45,12 +45,12 @@ class helper {
     /**
      * Get the URL for viewing the license manager interface.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
-    public static function get_licensemanager_url() : moodle_url {
+    public static function get_licensemanager_url() : powereduc_url {
         global $CFG;
 
-        $url = new moodle_url($CFG->wwwroot . self::MANAGER_PATH,
+        $url = new powereduc_url($CFG->wwwroot . self::MANAGER_PATH,
             ['sesskey' => sesskey()]);
 
         return $url;
@@ -61,10 +61,10 @@ class helper {
      *
      * @param string $licenseshortname the shortname of license to enable.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
-    public static function get_enable_license_url(string $licenseshortname) : moodle_url {
-        $url = new moodle_url(self::MANAGER_PATH,
+    public static function get_enable_license_url(string $licenseshortname) : powereduc_url {
+        $url = new powereduc_url(self::MANAGER_PATH,
             ['action' => manager::ACTION_ENABLE, 'license' => $licenseshortname, 'sesskey' => sesskey()]);
 
         return $url;
@@ -75,10 +75,10 @@ class helper {
      *
      * @param string $licenseshortname the shortname of license to disable.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
-    public static function get_disable_license_url(string $licenseshortname) : moodle_url {
-        $url = new moodle_url(self::MANAGER_PATH,
+    public static function get_disable_license_url(string $licenseshortname) : powereduc_url {
+        $url = new powereduc_url(self::MANAGER_PATH,
             ['action' => manager::ACTION_DISABLE, 'license' => $licenseshortname, 'sesskey' => sesskey()]);
 
         return $url;
@@ -87,10 +87,10 @@ class helper {
     /**
      * Get the URL endpoint to create a new license.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
-    public static function get_create_license_url() : moodle_url {
-        $url = new moodle_url(self::MANAGER_PATH,
+    public static function get_create_license_url() : powereduc_url {
+        $url = new powereduc_url(self::MANAGER_PATH,
             ['action' => manager::ACTION_CREATE, 'sesskey' => sesskey()]);
 
         return $url;
@@ -101,10 +101,10 @@ class helper {
      *
      * @param string $licenseshortname the shortname of license to update.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
-    public static function get_update_license_url(string $licenseshortname) : moodle_url {
-        $url = new moodle_url(self::MANAGER_PATH,
+    public static function get_update_license_url(string $licenseshortname) : powereduc_url {
+        $url = new powereduc_url(self::MANAGER_PATH,
             ['action' => manager::ACTION_UPDATE, 'license' => $licenseshortname, 'sesskey' => sesskey()]);
 
         return $url;
@@ -115,10 +115,10 @@ class helper {
      *
      * @param string $licenseshortname the shortname of license to move up.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
-    public static function get_moveup_license_url(string $licenseshortname) : moodle_url {
-        $url = new moodle_url(self::MANAGER_PATH,
+    public static function get_moveup_license_url(string $licenseshortname) : powereduc_url {
+        $url = new powereduc_url(self::MANAGER_PATH,
             ['action' => manager::ACTION_MOVE_UP, 'license' => $licenseshortname, 'sesskey' => sesskey()]);
 
         return $url;
@@ -129,10 +129,10 @@ class helper {
      *
      * @param string $licenseshortname the shortname of license to move down.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
-    public static function get_movedown_license_url(string $licenseshortname) : moodle_url {
-        $url = new moodle_url(self::MANAGER_PATH,
+    public static function get_movedown_license_url(string $licenseshortname) : powereduc_url {
+        $url = new powereduc_url(self::MANAGER_PATH,
             ['action' => manager::ACTION_MOVE_DOWN, 'license' => $licenseshortname, 'sesskey' => sesskey()]);
 
         return $url;

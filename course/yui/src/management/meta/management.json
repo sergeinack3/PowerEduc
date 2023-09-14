@@ -1,10 +1,10 @@
 {
-  "moodle-course-management": {
+  "powereduc-course-management": {
     "requires": [
         "base",
         "node",
         "io-base",
-        "moodle-core-notification-exception",
+        "powereduc-core-notification-exception",
         "json-parse",
         "dd-constrain",
         "dd-proxy",

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ if ($hassiteconfig) {
                                                   '',
                                                   $options));
 
-    $url = new moodle_url('/files/converter/googledrive/test.php');
+    $url = new powereduc_url('/files/converter/googledrive/test.php');
     $link = html_writer::link($url, get_string('test_converter', 'fileconverter_googledrive'));
     $settings->add(new admin_setting_heading('test_converter', '', $link));
 }

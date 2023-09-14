@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -111,13 +111,13 @@ class core_cohort_external extends external_api {
                 throw new invalid_parameter_exception('Invalid context');
             }
             self::validate_context($context);
-            require_capability('moodle/cohort:manage', $context);
+            require_capability('powereduc/cohort:manage', $context);
 
             // Make sure theme is valid.
             if (isset($cohort->theme)) {
                 if (!empty($CFG->allowcohortthemes)) {
                     if (empty($availablethemes[$cohort->theme])) {
-                        throw new moodle_exception('errorinvalidparam', 'webservice', '', 'theme');
+                        throw new powereduc_exception('errorinvalidparam', 'webservice', '', 'theme');
                     }
                 }
             }
@@ -198,7 +198,7 @@ class core_cohort_external extends external_api {
                 throw new invalid_parameter_exception('Invalid context');
             }
             self::validate_context($context);
-            require_capability('moodle/cohort:manage', $context);
+            require_capability('powereduc/cohort:manage', $context);
             cohort_delete_cohort($cohort);
         }
         $transaction->allow_commit();
@@ -257,8 +257,8 @@ class core_cohort_external extends external_api {
                 throw new invalid_parameter_exception('Invalid context');
             }
             self::validate_context($context);
-            if (!has_any_capability(array('moodle/cohort:manage', 'moodle/cohort:view'), $context)) {
-                throw new required_capability_exception($context, 'moodle/cohort:view', 'nopermissions', '');
+            if (!has_any_capability(array('powereduc/cohort:manage', 'powereduc/cohort:view'), $context)) {
+                throw new required_capability_exception($context, 'powereduc/cohort:view', 'nopermissions', '');
             }
 
             // Only return theme when $CFG->allowcohortthemes is enabled.
@@ -364,9 +364,9 @@ class core_cohort_external extends external_api {
 
         self::validate_context($context);
 
-        $manager = has_capability('moodle/cohort:manage', $context);
+        $manager = has_capability('powereduc/cohort:manage', $context);
         if (!$manager) {
-            require_capability('moodle/cohort:view', $context);
+            require_capability('powereduc/cohort:view', $context);
         }
 
         // TODO Make this more efficient.
@@ -499,7 +499,7 @@ class core_cohort_external extends external_api {
 
             $oldcohort = $DB->get_record('cohort', array('id' => $cohort->id), '*', MUST_EXIST);
             $oldcontext = context::instance_by_id($oldcohort->contextid, MUST_EXIST);
-            require_capability('moodle/cohort:manage', $oldcontext);
+            require_capability('powereduc/cohort:manage', $oldcontext);
 
             // Category type (context id).
             $categorytype = $cohort->categorytype;
@@ -522,14 +522,14 @@ class core_cohort_external extends external_api {
                 }
 
                 self::validate_context($context);
-                require_capability('moodle/cohort:manage', $context);
+                require_capability('powereduc/cohort:manage', $context);
             }
 
             // Make sure theme is valid.
             if (!empty($cohort->theme) && !empty($CFG->allowcohortthemes)) {
                 if (empty($availablethemes[$cohort->theme])) {
                     $debuginfo = 'The following cohort theme is not installed on this site: '.$cohort->theme;
-                    throw new moodle_exception('errorinvalidparam', 'webservice', '', 'theme', $debuginfo);
+                    throw new powereduc_exception('errorinvalidparam', 'webservice', '', 'theme', $debuginfo);
                 }
             }
 
@@ -660,10 +660,10 @@ class core_cohort_external extends external_api {
                 }
                 self::validate_context($context);
             } catch (Exception $e) {
-                throw new moodle_exception('Error', 'cohort', '', $e->getMessage());
+                throw new powereduc_exception('Error', 'cohort', '', $e->getMessage());
             }
-            if (!has_any_capability(array('moodle/cohort:manage', 'moodle/cohort:assign'), $context)) {
-                throw new required_capability_exception($context, 'moodle/cohort:assign', 'nopermissions', '');
+            if (!has_any_capability(array('powereduc/cohort:manage', 'powereduc/cohort:assign'), $context)) {
+                throw new required_capability_exception($context, 'powereduc/cohort:assign', 'nopermissions', '');
             }
             cohort_add_member($cohortid, $userid);
         }
@@ -738,8 +738,8 @@ class core_cohort_external extends external_api {
                 throw new invalid_parameter_exception('Invalid context');
             }
             self::validate_context($context);
-            if (!has_any_capability(array('moodle/cohort:manage', 'moodle/cohort:assign'), $context)) {
-                throw new required_capability_exception($context, 'moodle/cohort:assign', 'nopermissions', '');
+            if (!has_any_capability(array('powereduc/cohort:manage', 'powereduc/cohort:assign'), $context)) {
+                throw new required_capability_exception($context, 'powereduc/cohort:assign', 'nopermissions', '');
             }
 
             cohort_remove_member($cohort->id, $user->id);
@@ -793,8 +793,8 @@ class core_cohort_external extends external_api {
                 throw new invalid_parameter_exception('Invalid context');
             }
             self::validate_context($context);
-            if (!has_any_capability(array('moodle/cohort:manage', 'moodle/cohort:view'), $context)) {
-                throw new required_capability_exception($context, 'moodle/cohort:view', 'nopermissions', '');
+            if (!has_any_capability(array('powereduc/cohort:manage', 'powereduc/cohort:view'), $context)) {
+                throw new required_capability_exception($context, 'powereduc/cohort:view', 'nopermissions', '');
             }
 
             $cohortmembers = $DB->get_records_sql("SELECT u.id FROM {user} u, {cohort_members} cm

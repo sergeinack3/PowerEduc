@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package    core
@@ -60,7 +60,7 @@ class search_token {
   /**
    * Old syntax of class constructor. Deprecated in PHP7.
    *
-   * @deprecated since Moodle 3.1
+   * @deprecated since PowerEduc 3.1
    */
   public function search_token($type, $value) {
     debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
@@ -216,7 +216,7 @@ class search_lexer extends Lexer{
   /**
    * Old syntax of class constructor. Deprecated in PHP7.
    *
-   * @deprecated since Moodle 3.1
+   * @deprecated since PowerEduc 3.1
    */
   public function search_lexer(&$parser) {
     debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
@@ -386,8 +386,8 @@ class search_parser {
  * using TEXT indexes. If searches aren't suitable to use TEXT
  * this function calls the default search_generate_SQL() one.
  *
- * @deprecated since Moodle 2.9 MDL-48939
- * @todo MDL-48940 This will be deleted in Moodle 3.2
+ * @deprecated since PowerEduc 2.9 MDL-48939
+ * @todo MDL-48940 This will be deleted in PowerEduc 3.2
  * @see search_generate_SQL()
  */
 function search_generate_text_SQL($parsetree, $datafield, $metafield, $mainidfield, $useridfield,

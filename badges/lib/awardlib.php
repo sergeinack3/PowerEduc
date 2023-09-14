@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Classes to manage manual badge award.
@@ -53,7 +53,7 @@ abstract class badge_award_selector_base extends user_selector_base {
     protected $issuerid = null;
 
     /**
-     * The return address. Accepts either a string or a moodle_url.
+     * The return address. Accepts either a string or a powereduc_url.
      * @var string $url
      */
     public $url;
@@ -183,7 +183,7 @@ class badge_potential_users_selector extends badge_award_selector_base {
 
         list($groupsql, $groupwheresql, $groupwheresqlparams) = $this->get_groups_sql();
 
-        list($esql, $eparams) = get_enrolled_sql($this->context, 'moodle/badges:earnbadge', 0, true);
+        list($esql, $eparams) = get_enrolled_sql($this->context, 'powereduc/badges:earnbadge', 0, true);
         $params = array_merge($params, $eparams, $groupwheresqlparams);
 
         $fields      = 'SELECT ' . $this->required_fields_sql('u');
@@ -244,7 +244,7 @@ class badge_existing_users_selector extends badge_award_selector_base {
         $params['badgeid'] = $this->badgeid;
         $params['issuerrole'] = $this->issuerrole;
 
-        list($esql, $eparams) = get_enrolled_sql($this->context, 'moodle/badges:earnbadge', 0, true);
+        list($esql, $eparams) = get_enrolled_sql($this->context, 'powereduc/badges:earnbadge', 0, true);
         $fields = $this->required_fields_sql('u');
         list($sort, $sortparams) = users_order_by_sql('u', $search, $this->accesscontext);
 
@@ -324,7 +324,7 @@ function process_manual_revoke($recipientid, $issuerid, $issuerrole, $badgeid) {
             return true;
         }
     } else {
-        throw new moodle_exception('error:badgenotfound', 'badges');
+        throw new powereduc_exception('error:badgenotfound', 'badges');
     }
     return false;
 }

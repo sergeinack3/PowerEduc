@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
  * This file is best run from cron on the host system (ie outside PHP).
  * It is strongly recommended to add password protection via admin settings.
  *
- * eg   wget -q -O /dev/null 'http: *moodle.somewhere.edu/admin/cron.php?password=SeCreT666'
+ * eg   wget -q -O /dev/null 'http: *powereduc.somewhere.edu/admin/cron.php?password=SeCreT666'
  *
  * It is also possible to use CLI script admin/cli/cron.php instead,
  * you can not call this script from command line any more.
@@ -58,7 +58,7 @@ require_once($CFG->libdir.'/cronlib.php');
 // check if execution allowed
 if (!empty($CFG->cronclionly)) {
     // This script can only be run via the cli.
-    throw new \moodle_exception('cronerrorclionly', 'admin');
+    throw new \powereduc_exception('cronerrorclionly', 'admin');
     exit;
 }
 // This script is being called via the web, so check the password if there is one.
@@ -66,7 +66,7 @@ if (!empty($CFG->cronremotepassword)) {
     $pass = optional_param('password', '', PARAM_RAW);
     if ($pass != $CFG->cronremotepassword) {
         // wrong password.
-        throw new \moodle_exception('cronerrorpassword', 'admin');
+        throw new \powereduc_exception('cronerrorpassword', 'admin');
         exit;
     }
 }

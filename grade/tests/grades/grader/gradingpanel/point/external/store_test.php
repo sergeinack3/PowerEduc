@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ use coding_exception;
 use core_grades\component_gradeitem;
 use external_api;
 use mod_forum\local\entities\forum as forum_entity;
-use moodle_exception;
+use powereduc_exception;
 use grade_grade;
 use grade_item;
 
@@ -85,7 +85,7 @@ class store_test extends advanced_testcase {
 
         $gradeitem = component_gradeitem::instance('mod_forum', $forum->get_context(), 'forum');
 
-        $this->expectException(moodle_exception::class);
+        $this->expectException(powereduc_exception::class);
         $this->expectExceptionMessage("not configured for direct grading");
         store::execute('mod_forum', (int) $forum->get_context()->id, 'forum', (int) $student->id, false, 'formdata');
     }
@@ -104,7 +104,7 @@ class store_test extends advanced_testcase {
 
         $gradeitem = component_gradeitem::instance('mod_forum', $forum->get_context(), 'forum');
 
-        $this->expectException(moodle_exception::class);
+        $this->expectException(powereduc_exception::class);
         $this->expectExceptionMessage("Grading is not enabled");
         store::execute('mod_forum', (int) $forum->get_context()->id, 'forum', (int) $student->id, false, 'formdata');
     }
@@ -287,7 +287,7 @@ class store_test extends advanced_testcase {
 
         $gradeitem = component_gradeitem::instance('mod_forum', $forum->get_context(), 'forum');
 
-        $this->expectException(moodle_exception::class);
+        $this->expectException(powereduc_exception::class);
         $this->expectExceptionMessage("Invalid grade '{$suppliedvalue}' provided. Grades must be between 0 and {$maxvalue}.");
         store::execute('mod_forum', (int) $forum->get_context()->id, 'forum',
                 (int) $student->id, false, http_build_query($formdata));

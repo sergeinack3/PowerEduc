@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -60,9 +60,9 @@ class block_feedback extends block_list {
         }
 
         if ($feedbacks = feedback_get_feedbacks_from_sitecourse_map($courseid)) {
-            $baseurl = new moodle_url('/mod/feedback/view.php');
+            $baseurl = new powereduc_url('/mod/feedback/view.php');
             foreach ($feedbacks as $feedback) {
-                $url = new moodle_url($baseurl);
+                $url = new powereduc_url($baseurl);
                 $url->params(array('id'=>$feedback->cmid, 'courseid'=>$courseid));
                 $this->content->items[] = '<a href="'.$url->out().'">'.$icon.$feedback->name.'</a>';
             }

@@ -1,8 +1,8 @@
 /**
  * A collection of utility classes for use with course sections.
  *
- * @module moodle-course-util
- * @submodule moodle-course-util-section
+ * @module powereduc-course-util
+ * @submodule powereduc-course-util-section
  */
 
 Y.namespace('Moodle.core_course.util.section');

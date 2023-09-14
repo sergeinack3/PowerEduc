@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  *
  * @package    core
  * @subpackage backup-convert
- * @copyright  2011 Darko Miletic <dmiletic@moodlerooms.com>
+ * @copyright  2011 Darko Miletic <dmiletic@powereducrooms.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -67,7 +67,7 @@ class imscc11_store_backup_file extends backup_execution_step {
         // Perform storage and return it (TODO: shouldn't be array but proper result object)
         // Let's send the file to file storage, everything already defined
         // First of all, get some information from the backup_controller to help us decide
-        list($dinfo, $cinfo, $sinfo) = backup_controller_dbops::get_moodle_backup_information($this->get_backupid());
+        list($dinfo, $cinfo, $sinfo) = backup_controller_dbops::get_powereduc_backup_information($this->get_backupid());
 
         // Extract useful information to decide
         $file      = $sinfo['filename']->value;
@@ -143,12 +143,12 @@ class imscc11_backup_convert extends backup_execution_step {
 
         if (mkdir($tempdir, $CFG->directorypermissions, true)) {
 
-            cc_convert_moodle2::convert($basepath, $tempdir);
+            cc_convert_powereduc2::convert($basepath, $tempdir);
             //Switch the directories
             if (empty($CFG->keeptempdirectoriesonbackup)) {
                 fulldelete($basepath);
             } else {
-                if (!rename($basepath, $basepath  . '_moodle2_source')) {
+                if (!rename($basepath, $basepath  . '_powereduc2_source')) {
                     throw new backup_task_exception('failed_rename_source_tempdir');
                 }
             }

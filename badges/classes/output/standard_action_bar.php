@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,8 +16,8 @@
 
 namespace core_badges\output;
 
-use moodle_page;
-use moodle_url;
+use powereduc_page;
+use powereduc_url;
 use renderer_base;
 use single_button;
 
@@ -35,20 +35,20 @@ class standard_action_bar extends base_action_bar {
     /** @var bool $showaddbadge Whether or not to show the add badges button. */
     protected $showaddbadge;
 
-    /** @var moodle_url $backurl BackURL to be used when the back button is required. */
+    /** @var powereduc_url $backurl BackURL to be used when the back button is required. */
     protected $backurl;
 
     /**
      * standard_action_bar constructor
      *
-     * @param moodle_page $page The page object
+     * @param powereduc_page $page The page object
      * @param int $type The type of badge we are operating with
      * @param bool $showmanage Whether or not to show the manage badges button
      * @param bool $showaddbadge Whether or not to show the add badges button
-     * @param moodle_url|null $backurl The backurl to be used
+     * @param powereduc_url|null $backurl The backurl to be used
      */
-    public function __construct(moodle_page $page, int $type, bool $showmanage = true,
-            $showaddbadge = true, ?moodle_url $backurl = null) {
+    public function __construct(powereduc_page $page, int $type, bool $showmanage = true,
+            $showaddbadge = true, ?powereduc_url $backurl = null) {
         parent::__construct($page, $type);
 
         $this->showmanage = $showmanage;
@@ -83,12 +83,12 @@ class standard_action_bar extends base_action_bar {
         }
 
         if ($this->showmanage) {
-            $buttons[] = new single_button(new moodle_url('/badges/index.php', $params),
+            $buttons[] = new single_button(new powereduc_url('/badges/index.php', $params),
                 get_string('managebadges', 'core_badges'), 'get');
         }
 
-        if ($this->showaddbadge && has_capability('moodle/badges:createbadge', $this->page->context)) {
-            $buttons[] = new single_button(new moodle_url('/badges/newbadge.php', $params),
+        if ($this->showaddbadge && has_capability('powereduc/badges:createbadge', $this->page->context)) {
+            $buttons[] = new single_button(new powereduc_url('/badges/newbadge.php', $params),
                 get_string('newbadge', 'core_badges'), 'post', true);
         }
 

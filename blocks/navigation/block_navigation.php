@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -111,7 +111,7 @@ class block_navigation extends block_base {
         $arguments = array(
             'instanceid' => $this->instance->id
         );
-        $this->page->requires->string_for_js('viewallcourses', 'moodle');
+        $this->page->requires->string_for_js('viewallcourses', 'powereduc');
         $this->page->requires->js_call_amd('block_navigation/navblock', 'init', $arguments);
     }
 

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Fixture for Behat test of the max_input_vars handling for large forms.
@@ -48,7 +48,7 @@ class core_max_input_vars_form extends powereducform {
         $mform->setType('type', PARAM_ALPHA);
 
         // This is similar to how the selects are created for the role tables,
-        // without using a Moodle form element.
+        // without using a PowerEduc form element.
         $select = html_writer::select(array(13 => 'ArrayOpt13', 42 => 'ArrayOpt4', 666 => 'ArrayOpt666'),
                 'arraytest[]', array(13, 42), false, array('multiple' => 'multiple', 'size' => 10));
         $mform->addElement('static', 'arraybit', $select);
@@ -170,7 +170,7 @@ if ($type && ($result = $mform->get_data())) {
             if (array_key_exists($fieldcount, $testc)) {
                 $success = false;
             }
-            // Check using Moodle form and _param functions too.
+            // Check using PowerEduc form and _param functions too.
             $key = 'test_c' . ($fieldcount - 1);
             if (empty($result->{$key})) {
                 $success = false;
@@ -199,7 +199,7 @@ if ($type && ($result = $mform->get_data())) {
             if (in_array($fieldcount, $testa)) {
                 $success = false;
             }
-            // Check using Moodle _param function. The form does not include these
+            // Check using PowerEduc _param function. The form does not include these
             // fields so it won't be in the form result.
             $array = optional_param_array('test_a', array(), PARAM_INT);
             if ($array != $testa) {

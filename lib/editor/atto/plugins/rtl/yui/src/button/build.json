@@ -1,7 +1,7 @@
 {
-  "name": "moodle-atto_rtl-button",
+  "name": "powereduc-atto_rtl-button",
   "builds": {
-    "moodle-atto_rtl-button": {
+    "powereduc-atto_rtl-button": {
       "jsfiles": [
         "button.js"
       ]

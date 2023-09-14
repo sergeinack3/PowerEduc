@@ -2,7 +2,7 @@
 
 ///////////////////////////////////////////////////////////////////////////
 //                                                                       //
-// This file is part of Moodle - http://moodle.org/                      //
+// This file is part of Moodle - http://powereduc.org/                      //
 // Moodle - Modular Object-Oriented Dynamic Learning Environment         //
 //                                                                       //
 // Moodle is free software: you can redistribute it and/or modify        //
@@ -21,7 +21,7 @@
 ///////////////////////////////////////////////////////////////////////////
 
 /**
- * @package    moodle
+ * @package    powereduc
  * @subpackage registration
  * @author     Jerome Mouneyrac <jerome@mouneyrac.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
@@ -37,18 +37,18 @@ require_once($CFG->libdir . '/adminlib.php');
 $url = optional_param('url', '', PARAM_URL);
 $token = optional_param('token', '', PARAM_TEXT);
 
-admin_externalpage_setup('registrationmoodleorg');
+admin_externalpage_setup('registrationpowereducorg');
 
 if (parse_url($url, PHP_URL_HOST) !== parse_url(HUB_POWEREDUCORGHUBURL, PHP_URL_HOST)) {
     // Allow other plugins to renew registration on custom hubs. Plugins implementing this
-    // callback need to redirect or exit. See https://docs.moodle.org/en/Hub_registration .
+    // callback need to redirect or exit. See https://docs.powereduc.org/en/Hub_registration .
     $callbacks = get_plugins_with_function('hub_registration');
     foreach ($callbacks as $plugintype => $plugins) {
         foreach ($plugins as $plugin => $callback) {
             $callback('renew');
         }
     }
-    throw new moodle_exception('errorotherhubsnotsupported', 'hub');
+    throw new powereduc_exception('errorotherhubsnotsupported', 'hub');
 }
 
 // Check that we are waiting a confirmation from this hub, and check that the token is correct.
@@ -60,7 +60,7 @@ $hublink = html_writer::tag('a', HUB_POWEREDUCORGHUBURL, array('href' => HUB_POW
 
 $deletedregmsg = get_string('previousregistrationdeleted', 'hub', $hublink);
 
-$button = new single_button(new moodle_url('/admin/registration/index.php'),
+$button = new single_button(new powereduc_url('/admin/registration/index.php'),
                 get_string('restartregistration', 'hub'));
 $button->class = 'restartregbutton';
 

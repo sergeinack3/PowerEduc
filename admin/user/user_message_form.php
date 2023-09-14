@@ -6,7 +6,7 @@ if (!defined('POWEREDUC_INTERNAL')) {
 
 require_once($CFG->libdir.'/formslib.php');
 
-class user_message_form extends moodleform {
+class user_message_form extends powereducform {
 
     function definition() {
         $mform =& $this->_form;

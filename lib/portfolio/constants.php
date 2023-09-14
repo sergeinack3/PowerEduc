@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains all the defined constants to do with portfolios.
@@ -82,7 +82,7 @@ define('PORTFOLIO_FORMAT_FILE', 'file');
 /**
  * PORTFOLIO_FORMAT_MBKP - the plugin needs to be able to write a complete backup
  *                         the caller need to be able to export the particular XML bits to insert
- *                         into moodle.xml (?and the file bits if necessary)
+ *                         into powereduc.xml (?and the file bits if necessary)
  */
 define('PORTFOLIO_FORMAT_MBKP', 'mbkp');
 
@@ -202,7 +202,7 @@ define('PORTFOLIO_ADD_TEXT_LINK', 4);
 define('PORTFOLIO_ADD_FAKE_URL', 5);
 
 /**
- * PORTFOLIO_ADD_MOODULE_URL - hacky way to turn the button class into a moodle_url to redirect to
+ * PORTFOLIO_ADD_MOODULE_URL - hacky way to turn the button class into a powereduc_url to redirect to
  *                             this replaces the old portfolio_fake_add_url function
  */
 define('PORTFOLIO_ADD_POWEREDUC_URL', 6);

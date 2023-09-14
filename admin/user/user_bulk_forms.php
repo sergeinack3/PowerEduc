@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ require_once($CFG->libdir.'/datalib.php');
  * @copyright  Moodle
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class user_bulk_action_form extends moodleform {
+class user_bulk_action_form extends powereducform {
 
     /**
      * Returns an array of action_link's of all bulk actions available for this user.
@@ -46,39 +46,39 @@ class user_bulk_action_form extends moodleform {
 
         $syscontext = context_system::instance();
         $actions = [];
-        if (has_capability('moodle/user:update', $syscontext)) {
+        if (has_capability('powereduc/user:update', $syscontext)) {
             $actions['confirm'] = new action_link(
-                new moodle_url('/admin/user/user_bulk_confirm.php'),
+                new powereduc_url('/admin/user/user_bulk_confirm.php'),
                 get_string('confirm'));
         }
-        if (has_capability('moodle/site:readallmessages', $syscontext) && !empty($CFG->messaging)) {
+        if (has_capability('powereduc/site:readallmessages', $syscontext) && !empty($CFG->messaging)) {
             $actions['message'] = new action_link(
-                new moodle_url('/admin/user/user_bulk_message.php'),
+                new powereduc_url('/admin/user/user_bulk_message.php'),
                 get_string('messageselectadd'));
         }
-        if (has_capability('moodle/user:delete', $syscontext)) {
+        if (has_capability('powereduc/user:delete', $syscontext)) {
             $actions['delete'] = new action_link(
-                new moodle_url('/admin/user/user_bulk_delete.php'),
+                new powereduc_url('/admin/user/user_bulk_delete.php'),
                 get_string('delete'));
         }
         $actions['displayonpage'] = new action_link(
-                new moodle_url('/admin/user/user_bulk_display.php'),
+                new powereduc_url('/admin/user/user_bulk_display.php'),
                 get_string('displayonpage'));
 
-        if (has_capability('moodle/user:update', $syscontext)) {
+        if (has_capability('powereduc/user:update', $syscontext)) {
             $actions['download'] = new action_link(
-                new moodle_url('/admin/user/user_bulk_download.php'),
+                new powereduc_url('/admin/user/user_bulk_download.php'),
                 get_string('download', 'admin'));
         }
 
-        if (has_capability('moodle/user:update', $syscontext)) {
+        if (has_capability('powereduc/user:update', $syscontext)) {
             $actions['forcepasswordchange'] = new action_link(
-                new moodle_url('/admin/user/user_bulk_forcepasswordchange.php'),
+                new powereduc_url('/admin/user/user_bulk_forcepasswordchange.php'),
                 get_string('forcepasswordchange'));
         }
-        if (has_capability('moodle/cohort:assign', $syscontext)) {
+        if (has_capability('powereduc/cohort:assign', $syscontext)) {
             $actions['addtocohort'] = new action_link(
-                new moodle_url('/admin/user/user_bulk_cohortadd.php'),
+                new powereduc_url('/admin/user/user_bulk_cohortadd.php'),
                 get_string('bulkadd', 'core_cohort'));
         }
 
@@ -123,7 +123,7 @@ class user_bulk_action_form extends moodleform {
  * @copyright  Moodle
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class user_bulk_form extends moodleform {
+class user_bulk_form extends powereducform {
 
     /**
      * Form definition

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -193,7 +193,7 @@ class cache_test extends \advanced_testcase {
             $this->helper_create_step((object) ['tourid' => $tour->get_id()]);
         }
 
-        $matches = \tool_usertours\cache::get_matching_tourdata(new \moodle_url($targetmatch));
+        $matches = \tool_usertours\cache::get_matching_tourdata(new \powereduc_url($targetmatch));
         $this->assertCount(count($expected), $matches);
 
         for ($i = 0; $i < count($matches); $i++) {

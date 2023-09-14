@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Environment class to aid with the detection and establishment of the working environment.
@@ -138,15 +138,15 @@ class core_useragent {
     }
 
     /**
-     * Get the MoodleBot UserAgent for this site.
+     * Get the PowerEducBot UserAgent for this site.
      *
      * @return string UserAgent
      */
-    public static function get_moodlebot_useragent() {
+    public static function get_powereducbot_useragent() {
         global $CFG;
 
-        $version = moodle_major_version(); // Only major version for security.
-        return "MoodleBot/$version (+{$CFG->wwwroot})";
+        $version = powereduc_major_version(); // Only major version for security.
+        return "PowerEducBot/$version (+{$CFG->wwwroot})";
     }
 
     /**
@@ -227,7 +227,7 @@ class core_useragent {
      * @return bool
      */
     protected function is_useragent_web_crawler() {
-        $regex = '/MoodleBot|Googlebot|google\.com|Yahoo! Slurp|\[ZSEBOT\]|msnbot|bingbot|BingPreview|Yandex|AltaVista'
+        $regex = '/PowerEducBot|Googlebot|google\.com|Yahoo! Slurp|\[ZSEBOT\]|msnbot|bingbot|BingPreview|Yandex|AltaVista'
                 .'|Baiduspider|Teoma/i';
         return (preg_match($regex, $this->useragent));
     }
@@ -1029,7 +1029,7 @@ class core_useragent {
      *
      * @param scalar $version The version if we need to find out if it is equal to or greater than that specified.
      * @return bool true if the client is using iOS
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function is_ios($version = null) {
         $useragent = self::get_user_agent_string();
@@ -1082,16 +1082,16 @@ class core_useragent {
     }
 
     /**
-     * Returns true if the client appears to be the Moodle app (or an app based on the Moodle app code).
+     * Returns true if the client appears to be the PowerEduc app (or an app based on the PowerEduc app code).
      *
-     * @return bool true if the client is the Moodle app
-     * @since Moodle 3.7
+     * @return bool true if the client is the PowerEduc app
+     * @since PowerEduc 3.7
      */
-    public static function is_moodle_app() {
+    public static function is_powereduc_app() {
         $useragent = self::get_user_agent_string();
 
         // Make it case insensitive, things can change in the app or desktop app depending on the platform frameworks.
-        if (stripos($useragent, 'MoodleMobile') !== false) {
+        if (stripos($useragent, 'PowerEducMobile') !== false) {
             return true;
         }
 

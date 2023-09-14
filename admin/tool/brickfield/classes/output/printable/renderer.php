@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ class renderer extends \tool_brickfield\output\renderer {
      * @return String HTML showing charts.
      * @throws \coding_exception
      * @throws \dml_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public function display(\stdClass $data, filter $filter): string {
         $css = '';
@@ -52,7 +52,7 @@ class renderer extends \tool_brickfield\output\renderer {
 
         if (empty($filter->target)) {
             $linkname = get_string('printable:downloadpdf', 'tool_brickfield');
-            $link = new \moodle_url(
+            $link = new \powereduc_url(
                 accessibility::get_plugin_url(),
                 [
                     'tab' => 'printable',
@@ -220,7 +220,7 @@ class renderer extends \tool_brickfield\output\renderer {
      * @param filter $filter Display filters.
      * @throws \coding_exception
      * @throws \dml_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @return void
      */
     public function pdf_renderer(\stdClass $data, filter $filter) {

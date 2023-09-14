@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,8 +37,8 @@ raise_memory_limit(MEMORY_HUGE);
 
 admin_externalpage_setup('tooluploaduser');
 
-$returnurl = new moodle_url('/admin/tool/uploaduser/index.php');
-$bulknurl  = new moodle_url('/admin/user/user_bulk.php');
+$returnurl = new powereduc_url('/admin/tool/uploaduser/index.php');
+$bulknurl  = new powereduc_url('/admin/user/user_bulk.php');
 
 if (empty($iid)) {
     $mform1 = new admin_uploaduser_form1();
@@ -54,7 +54,7 @@ if (empty($iid)) {
         unset($content);
 
         if (!is_null($csvloaderror)) {
-            throw new \moodle_exception('csvloaderror', '', $returnurl, $csvloaderror);
+            throw new \powereduc_exception('csvloaderror', '', $returnurl, $csvloaderror);
         }
         // Continue to form2.
 

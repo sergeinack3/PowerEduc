@@ -6,6 +6,6 @@
 
     require_login();
 
-    require_capability('moodle/backup:backupcourse', context_system::instance());
+    require_capability('powereduc/backup:backupcourse', context_system::instance());
 
     redirect("$CFG->wwwroot/report/backups/index.php", '', 'admin', 1);

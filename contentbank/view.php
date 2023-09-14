@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Generic content bank visualizer.
  *
  * @package   core_contentbank
- * @copyright  2020 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2020 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -35,15 +35,15 @@ $PAGE->requires->js_call_amd('core_contentbank/actions', 'init');
 
 $record = $DB->get_record('contentbank_content', ['id' => $id], '*', MUST_EXIST);
 $context = context::instance_by_id($record->contextid, MUST_EXIST);
-require_capability('moodle/contentbank:access', $context);
+require_capability('powereduc/contentbank:access', $context);
 
 $statusmsg = optional_param('statusmsg', '', PARAM_ALPHANUMEXT);
 $errormsg = optional_param('errormsg', '', PARAM_ALPHANUMEXT);
 
-$returnurl = new \moodle_url('/contentbank/index.php', ['contextid' => $context->id]);
+$returnurl = new \powereduc_url('/contentbank/index.php', ['contextid' => $context->id]);
 $plugin = core_plugin_manager::instance()->get_plugin_info($record->contenttype);
 if (!$plugin || !$plugin->is_enabled()) {
-    throw new \moodle_exception('unsupported', 'core_contentbank', $returnurl);
+    throw new \powereduc_exception('unsupported', 'core_contentbank', $returnurl);
 }
 
 $title = get_string('contentbank');
@@ -57,7 +57,7 @@ $content = $cb->get_content_from_id($record->id);
 $contenttype = $content->get_content_type_instance();
 
 if (!$content->is_view_allowed()) {
-    $cburl = new \moodle_url('/contentbank/index.php', ['contextid' => $context->id, 'errormsg' => 'notavailable']);
+    $cburl = new \powereduc_url('/contentbank/index.php', ['contextid' => $context->id, 'errormsg' => 'notavailable']);
     redirect($cburl);
 }
 
@@ -65,7 +65,7 @@ if ($context->contextlevel == CONTEXT_COURSECAT) {
     $PAGE->set_primary_active_tab('home');
 }
 
-$PAGE->set_url(new \moodle_url('/contentbank/view.php', ['id' => $id]));
+$PAGE->set_url(new \powereduc_url('/contentbank/view.php', ['id' => $id]));
 if ($context->id == \context_system::instance()->id) {
     $PAGE->set_context(context_course::instance($context->id));
 } else {
@@ -94,7 +94,7 @@ if ($errormsg !== '' && get_string_manager()->string_exists($errormsg, 'core_con
                 $visibilitymsg = get_string('unlisted', 'core_contentbank');
                 break;
             default:
-                throw new \moodle_exception('contentvisibilitynotfound', 'error', $returnurl, $content->get_visibility());
+                throw new \powereduc_exception('contentvisibilitynotfound', 'error', $returnurl, $content->get_visibility());
                 break;
         }
         $statusmsg = get_string($statusmsg, 'core_contentbank', $visibilitymsg);

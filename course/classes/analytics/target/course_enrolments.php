@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Base class for targets whose analysable is a course using user enrolments as samples.
  *
  * @package   core_course
- * @copyright 2019 Victor Deniz <victor@moodle.com>
+ * @copyright 2019 Victor Deniz <victor@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * Base class for targets whose analysable is a course using user enrolments as samples.
  *
  * @package   core_course
- * @copyright 2019 Victor Deniz <victor@moodle.com>
+ * @copyright 2019 Victor Deniz <victor@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 abstract class course_enrolments extends \core_analytics\local\target\binary {
@@ -87,10 +87,10 @@ abstract class course_enrolments extends \core_analytics\local\target\binary {
      * @param  \context     $context
      * @param  string       $contextname
      * @param  \stdClass    $user
-     * @param  \moodle_url  $insighturl
+     * @param  \powereduc_url  $insighturl
      * @return string[]                     The plain text message and the HTML message
      */
-    public function get_insight_body(\context $context, string $contextname, \stdClass $user, \moodle_url $insighturl): array {
+    public function get_insight_body(\context $context, string $contextname, \stdClass $user, \powereduc_url $insighturl): array {
         global $OUTPUT;
 
         $a = (object)['coursename' => $contextname, 'userfirstname' => $user->firstname];
@@ -230,7 +230,7 @@ abstract class course_enrolments extends \core_analytics\local\target\binary {
         $studentid = $sampledata['user']->id;
 
         // View outline report.
-        $url = new \moodle_url('/report/outline/user.php', array('id' => $studentid, 'course' => $sampledata['course']->id,
+        $url = new \powereduc_url('/report/outline/user.php', array('id' => $studentid, 'course' => $sampledata['course']->id,
                 'mode' => 'outline'));
         $pix = new \pix_icon('i/report', get_string('outlinereport'));
         $actions[] = new \core_analytics\prediction_action('viewoutlinereport', $prediction, $url, $pix,
@@ -264,7 +264,7 @@ abstract class course_enrolments extends \core_analytics\local\target\binary {
             'data-bulk-sendmessage' => '1',
             'data-prediction-to-user-id' => json_encode($userids)
         );
-        $actions[] = new \core_analytics\bulk_action(self::MESSAGE_ACTION_NAME, new \moodle_url(''),
+        $actions[] = new \core_analytics\bulk_action(self::MESSAGE_ACTION_NAME, new \powereduc_url(''),
             new \pix_icon('t/message', get_string('sendmessage', 'message')),
             get_string('sendmessage', 'message'), true, $attrs);
 

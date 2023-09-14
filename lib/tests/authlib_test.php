@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 namespace core;
@@ -426,7 +426,7 @@ class authlib_test extends \advanced_testcase {
         $CFG->passwordpolicy = false;
 
         // In this test, we want to check accent-sensitive email search. However, accented email addresses do not pass
-        // the default `validate_email()` and Moodle does not yet provide a CFG switch to allow such emails.  So we
+        // the default `validate_email()` and PowerEduc does not yet provide a CFG switch to allow such emails.  So we
         // inject our own validation method here and revert it back once we are done. This custom validator method is
         // identical to the default 'php' validator with the only difference: it has the FILTER_FLAG_EMAIL_UNICODE set
         // so that it allows to use non-ASCII characters in email addresses.
@@ -436,7 +436,7 @@ class authlib_test extends \advanced_testcase {
         };
 
         // Check that two users cannot share the same email address if the site is configured so.
-        // Emails in Moodle are supposed to be case-insensitive (and accent-sensitive but accents are not yet supported).
+        // Emails in PowerEduc are supposed to be case-insensitive (and accent-sensitive but accents are not yet supported).
         $CFG->allowaccountssameemail = false;
 
         $u1 = $this->getDataGenerator()->create_user([
@@ -456,7 +456,7 @@ class authlib_test extends \advanced_testcase {
         $this->assertStringContainsString('This email address is already registered.', $errors['email']);
 
         // Emails are accent-sensitive though so if we change a -> á in the u1's email, it should pass.
-        // Please note that Moodle does not normally support such emails yet. We test the DB search sensitivity here.
+        // Please note that PowerEduc does not normally support such emails yet. We test the DB search sensitivity here.
         $formdata['email'] = 'ábcdef@example.com';
         $errors = signup_validate_data($formdata, []);
         $this->assertArrayNotHasKey('email', $errors);

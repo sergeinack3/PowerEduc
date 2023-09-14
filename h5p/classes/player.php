@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * H5P player class.
  *
  * @package    core_h5p
- * @copyright  2019 Sara Arjona <sara@moodle.com>
+ * @copyright  2019 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,7 +33,7 @@ use core_xapi\local\statement\item_activity;
  * H5P player class, for displaying any local H5P content.
  *
  * @package    core_h5p
- * @copyright  2019 Sara Arjona <sara@moodle.com>
+ * @copyright  2019 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class player {
@@ -104,16 +104,16 @@ class player {
      * @param string $url Local URL of the H5P file to display.
      * @param stdClass $config Configuration for H5P buttons.
      * @param bool $preventredirect Set to true in scripts that can not redirect (CLI, RSS feeds, etc.), throws exceptions
-     * @param string $component optional moodle component to sent xAPI tracking
+     * @param string $component optional powereduc component to sent xAPI tracking
      * @param bool $skipcapcheck Whether capabilities should be checked or not to get the pluginfile URL because sometimes they
      *     might be controlled before calling this method.
      */
     public function __construct(string $url, \stdClass $config, bool $preventredirect = true, string $component = '',
             bool $skipcapcheck = false) {
         if (empty($url)) {
-            throw new \moodle_exception('h5pinvalidurl', 'core_h5p');
+            throw new \powereduc_exception('h5pinvalidurl', 'core_h5p');
         }
-        $this->url = new \moodle_url($url);
+        $this->url = new \powereduc_url($url);
         $this->preventredirect = $preventredirect;
 
         $this->factory = new \core_h5p\factory();
@@ -152,7 +152,7 @@ class player {
      * @param string $url Local URL of the H5P file to display.
      * @param stdClass $config Configuration for H5P buttons.
      * @param bool $preventredirect Set to true in scripts that can not redirect (CLI, RSS feeds, etc.), throws exceptions
-     * @param string $component optional moodle component to sent xAPI tracking
+     * @param string $component optional powereduc component to sent xAPI tracking
      * @param bool $displayedit Whether the edit button should be displayed below the H5P content.
      *
      * @return string The embedable code to display a H5P file.
@@ -173,7 +173,7 @@ class player {
                 $params[$optparam] = $config->$optparam;
             }
         }
-        $fileurl = new \moodle_url('/h5p/embed.php', $params);
+        $fileurl = new \powereduc_url('/h5p/embed.php', $params);
 
         $template = new \stdClass();
         $template->embedurl = $fileurl->out(false);
@@ -215,14 +215,14 @@ class player {
         $disable = array_key_exists('disable', $this->content) ? $this->content['disable'] : core::DISABLE_NONE;
         $displayoptions = $this->core->getDisplayOptionsForView($disable, $this->h5pid);
 
-        $contenturl = \moodle_url::make_pluginfile_url($systemcontext->id, \core_h5p\file_storage::COMPONENT,
+        $contenturl = \powereduc_url::make_pluginfile_url($systemcontext->id, \core_h5p\file_storage::COMPONENT,
             \core_h5p\file_storage::CONTENT_FILEAREA, $this->h5pid, null, null);
         $exporturl = $this->get_export_settings($displayoptions[ core::DISPLAY_OPTION_DOWNLOAD ]);
         $xapiobject = item_activity::create_from_id($this->context->id);
         $contentsettings = [
             'library'         => core::libraryToString($this->content['library']),
             'fullScreen'      => $this->content['library']['fullscreen'],
-            'exportUrl'       => ($exporturl instanceof \moodle_url) ? $exporturl->out(false) : '',
+            'exportUrl'       => ($exporturl instanceof \powereduc_url) ? $exporturl->out(false) : '',
             'embedCode'       => $this->get_embed_code($this->url->out(),
                 $displayoptions[ core::DISPLAY_OPTION_EMBED ]),
             'resizeCode'      => self::get_resize_code(),
@@ -307,9 +307,9 @@ class player {
      *
      * @param bool $downloadenabled Whether the option to export the H5P content is enabled.
      *
-     * @return \moodle_url|null The URL of the exported file.
+     * @return \powereduc_url|null The URL of the exported file.
      */
-    private function get_export_settings(bool $downloadenabled): ?\moodle_url {
+    private function get_export_settings(bool $downloadenabled): ?\powereduc_url {
 
         if (!$downloadenabled) {
             return null;
@@ -320,7 +320,7 @@ class player {
         // We have to build the right URL.
         // Depending the request was made through webservice/pluginfile.php or pluginfile.php.
         if (strpos($this->url, '/webservice/pluginfile.php')) {
-            $url  = \moodle_url::make_webservice_pluginfile_url(
+            $url  = \powereduc_url::make_webservice_pluginfile_url(
                 $systemcontext->id,
                 \core_h5p\file_storage::COMPONENT,
                 \core_h5p\file_storage::EXPORT_FILEAREA,
@@ -334,7 +334,7 @@ class player {
             if (strpos($this->url, '/tokenpluginfile.php')) {
                 $includetoken = true;
             }
-            $url  = \moodle_url::make_pluginfile_url(
+            $url  = \powereduc_url::make_pluginfile_url(
                 $systemcontext->id,
                 \core_h5p\file_storage::COMPONENT,
                 \core_h5p\file_storage::EXPORT_FILEAREA,
@@ -367,10 +367,10 @@ class player {
         // Get core assets.
         $settings = helper::get_core_assets();
         // Added here because in the helper we don't have the h5p content id.
-        $settings['moodleLibraryPaths'] = $this->core->get_dependency_roots($this->h5pid);
+        $settings['powereducLibraryPaths'] = $this->core->get_dependency_roots($this->h5pid);
         // Add also the Moodle component where the results will be tracked.
-        $settings['moodleComponent'] = $this->component;
-        if (!empty($settings['moodleComponent'])) {
+        $settings['powereducComponent'] = $this->component;
+        if (!empty($settings['powereducComponent'])) {
             $settings['reportingIsEnabled'] = true;
         }
 
@@ -394,7 +394,7 @@ class player {
                     $url = $h5ppath . $url;
                 }
                 $settings['loadedJs'][] = $url;
-                $this->jsrequires[] = new \moodle_url($isexternal ? $url : $CFG->wwwroot . $url);
+                $this->jsrequires[] = new \powereduc_url($isexternal ? $url : $CFG->wwwroot . $url);
             }
 
             // Schedule stylesheets for loading through Moodle.
@@ -407,7 +407,7 @@ class player {
                     $url = $h5ppath . $url;
                 }
                 $settings['loadedCss'][] = $url;
-                $this->cssrequires[] = new \moodle_url($isexternal ? $url : $CFG->wwwroot . $url);
+                $this->cssrequires[] = new \powereduc_url($isexternal ? $url : $CFG->wwwroot . $url);
             }
 
         } else {
@@ -499,16 +499,16 @@ class player {
      * @param  string $url The URL of the .h5p file.
      * @param string $component optional Moodle component to send xAPI tracking
      *
-     * @return \moodle_url The embed URL.
+     * @return \powereduc_url The embed URL.
      */
-    public static function get_embed_url(string $url, string $component = ''): \moodle_url {
+    public static function get_embed_url(string $url, string $component = ''): \powereduc_url {
         $params = ['url' => $url];
         if (!empty($component)) {
             // If component is not empty, it will be passed too, in order to allow tracking too.
             $params['component'] = $component;
         }
 
-        return new \moodle_url('/h5p/embed.php', $params);
+        return new \powereduc_url('/h5p/embed.php', $params);
     }
 
     /**

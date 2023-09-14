@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,22 +32,22 @@ $id        = required_param('id', PARAM_INT);
 $section   = optional_param('section', 'calculation', PARAM_ALPHA);
 $idnumbers = optional_param_array('idnumbers', null, PARAM_RAW);
 
-$url = new moodle_url('/grade/edit/tree/calculation.php', array('id'=>$id, 'courseid'=>$courseid));
+$url = new powereduc_url('/grade/edit/tree/calculation.php', array('id'=>$id, 'courseid'=>$courseid));
 if ($section !== 'calculation') {
     $url->param('section', $section);
 }
 $PAGE->set_url($url);
 
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 require_login($course);
 $context = context_course::instance($course->id);
-require_capability('moodle/grade:manage', $context);
+require_capability('powereduc/grade:manage', $context);
 
 $PAGE->set_pagelayout('admin');
-navigation_node::override_active_url(new moodle_url('/grade/edit/tree/index.php',
+navigation_node::override_active_url(new powereduc_url('/grade/edit/tree/index.php',
     array('id'=>$course->id)));
 
 // default return url
@@ -55,7 +55,7 @@ $gpr = new grade_plugin_return();
 $returnurl = $gpr->get_return_url($CFG->wwwroot.'/grade/report/index.php?id='.$course->id);
 
 if (!$grade_item = grade_item::fetch(array('id'=>$id, 'courseid'=>$course->id))) {
-    throw new \moodle_exception('invaliditemid');
+    throw new \powereduc_exception('invaliditemid');
 }
 
 // activity items and items without grade can not have calculation

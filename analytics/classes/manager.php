@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -72,7 +72,7 @@ class manager {
      * @return void
      */
     public static function check_can_manage_models() {
-        require_capability('moodle/analytics:managemodels', \context_system::instance());
+        require_capability('powereduc/analytics:managemodels', \context_system::instance());
     }
 
     /**
@@ -87,9 +87,9 @@ class manager {
         global $USER;
 
         if ($context->contextlevel === CONTEXT_USER && $context->instanceid == $USER->id) {
-            $capability = 'moodle/analytics:listowninsights';
+            $capability = 'powereduc/analytics:listowninsights';
         } else {
-            $capability = 'moodle/analytics:listinsights';
+            $capability = 'powereduc/analytics:listinsights';
         }
 
         if ($return) {
@@ -203,7 +203,7 @@ class manager {
             if ($checkisready) {
                 $isready = $instance->is_ready();
                 if ($isready !== true) {
-                    throw new \moodle_exception('errorprocessornotready', 'analytics', '', $isready);
+                    throw new \powereduc_exception('errorprocessornotready', 'analytics', '', $isready);
                 }
             }
             self::$predictionprocessors[$checkisready][$predictionclass] = $instance;
@@ -572,12 +572,12 @@ class manager {
         global $DB;
 
         if (!$predictionobj = $DB->get_record('analytics_predictions', array('id' => $predictionid))) {
-            throw new \moodle_exception('errorpredictionnotfound', 'analytics');
+            throw new \powereduc_exception('errorpredictionnotfound', 'analytics');
         }
 
         $context = \context::instance_by_id($predictionobj->contextid, IGNORE_MISSING);
         if (!$context) {
-            throw new \moodle_exception('errorpredictioncontextnotavailable', 'analytics');
+            throw new \powereduc_exception('errorpredictioncontextnotavailable', 'analytics');
         }
 
         if ($requirelogin) {

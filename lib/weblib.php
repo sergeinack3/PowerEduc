@@ -1,28 +1,28 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Library of functions for web output
  *
- * Library of all general-purpose Moodle PHP functions and constants
+ * Library of all general-purpose PowerEduc PHP functions and constants
  * that produce HTML output
  *
  * Other main libraries:
  * - datalib.php - functions that access the database.
- * - powereduclib.php - general-purpose Moodle functions.
+ * - powereduclib.php - general-purpose PowerEduc functions.
  *
  * @package    core
  * @subpackage lib
@@ -201,7 +201,7 @@ function qualified_me() {
 }
 
 /**
- * Determines whether or not the Moodle site is being served over HTTPS.
+ * Determines whether or not the PowerEduc site is being served over HTTPS.
  *
  * This is done simply by checking the value of $CFG->wwwroot, which seems
  * to be the only reliable method.
@@ -965,7 +965,7 @@ class powereduc_url {
 /**
  * Determine if there is data waiting to be processed from a form
  *
- * Used on most forms in Moodle to check for data
+ * Used on most forms in PowerEduc to check for data
  * Returns the data as an object, if it's found.
  * This object can be used in foreach loops without
  * casting because it's cast to (array) automatically
@@ -1078,7 +1078,7 @@ function page_doc_link($text='') {
 /**
  * Returns the path to use when constructing a link to the docs.
  *
- * @since Moodle 2.5.1 2.6
+ * @since PowerEduc 2.5.1 2.6
  * @param powereduc_page $page
  * @return string
  */
@@ -1312,7 +1312,7 @@ function format_text($text, $format = FORMAT_POWEREDUC, $options = null, $course
 
         case FORMAT_WIKI:
             // This format is deprecated.
-            $text = '<p>NOTICE: Wiki-like formatting has been removed from Moodle.  You should not be seeing
+            $text = '<p>NOTICE: Wiki-like formatting has been removed from PowerEduc.  You should not be seeing
                      this message as all texts should have been converted to Markdown format instead.
                      Please post a bug report to http://powereduc.org/bugs with information about where you
                      saw this message.</p>'.s($text);
@@ -1423,7 +1423,7 @@ function reset_text_filters_cache($phpunitreset = false) {
  * @staticvar bool $strcache
  * @param string $string The string to be filtered. Should be plain text, expect
  * possibly for multilang tags.
- * @param boolean $striplinks To strip any link in the result text. Moodle 1.8 default changed from false to true! MDL-8713
+ * @param boolean $striplinks To strip any link in the result text. PowerEduc 1.8 default changed from false to true! MDL-8713
  * @param array $options options array/object or courseid
  * @return string
  */
@@ -1596,10 +1596,10 @@ function format_module_intro($module, $activity, $cmid, $filter=true) {
 }
 
 /**
- * Removes the usage of Moodle files from a text.
+ * Removes the usage of PowerEduc files from a text.
  *
  * In some rare cases we need to re-use a text that already has embedded links
- * to some files hosted within Moodle. But the new area in which we will push
+ * to some files hosted within PowerEduc. But the new area in which we will push
  * this content does not support files... therefore we need to remove those files.
  *
  * @param string $source The text
@@ -1680,7 +1680,7 @@ function trusttext_active() {
  * Cleans raw text removing nasties.
  *
  * Given raw text (eg typed in by a user) this function cleans it up and removes any nasty tags that could mess up
- * Moodle pages through XSS attacks.
+ * PowerEduc pages through XSS attacks.
  *
  * The result must be used as a HTML text fragment, this function can not cleanup random
  * parts of html tags such as url or src attributes.
@@ -2262,7 +2262,7 @@ function get_html_lang($dir = false) {
 // STANDARD WEB PAGE PARTS.
 
 /**
- * Send the HTTP headers that Moodle requires.
+ * Send the HTTP headers that PowerEduc requires.
  *
  * There is a backwards compatibility hack for legacy code
  * that needs to add custom IE compatibility directive.
@@ -2310,7 +2310,7 @@ function send_headers($contenttype, $cacheable = true) {
     }
     @header('Accept-Ranges: none');
 
-    // The Moodle app must be allowed to embed content always.
+    // The PowerEduc app must be allowed to embed content always.
     if (empty($CFG->allowframembedding) && !core_useragent::is_powereduc_app()) {
         @header('X-Frame-Options: sameorigin');
     }
@@ -2987,7 +2987,7 @@ function redirect($url, $message='', $delay=null, $messagetype = \core\output\no
         // This helps when debugging redirect issues like loops and it is not clear
         // which layer in the stack sent the redirect header. If debugging is on
         // then the file and line is also shown.
-        $redirectby = 'Moodle';
+        $redirectby = 'PowerEduc';
         if (debugging('', DEBUG_DEVELOPER)) {
             $origin = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1)[0];
             $redirectby .= ' /' . str_replace($CFG->dirroot . '/', '', $origin['file']) . ':' . $origin['line'];
@@ -3124,8 +3124,8 @@ function rebuildnolinktag($text) {
 function print_maintenance_message() {
     global $CFG, $SITE, $PAGE, $OUTPUT;
 
-    header($_SERVER['SERVER_PROTOCOL'] . ' 503 Moodle under maintenance');
-    header('Status: 503 Moodle under maintenance');
+    header($_SERVER['SERVER_PROTOCOL'] . ' 503 PowerEduc under maintenance');
+    header('Status: 503 PowerEduc under maintenance');
     header('Retry-After: 300');
 
     $PAGE->set_pagetype('maintenance-message');
@@ -3146,7 +3146,7 @@ function print_maintenance_message() {
 /**
  * Returns a string containing a nested list, suitable for formatting into tabs with CSS.
  *
- * It is not recommended to use this function in Moodle 2.5 but it is left for backward
+ * It is not recommended to use this function in PowerEduc 2.5 but it is left for backward
  * compartibility.
  *
  * Example how to print a single line tabs:
@@ -3323,7 +3323,7 @@ function right_to_left() {
 /**
  * Returns swapped left<=> right if in RTL environment.
  *
- * Part of RTL Moodles support.
+ * Part of RTL PowerEducs support.
  *
  * @param string $align align to check
  * @return string
@@ -3347,7 +3347,7 @@ function fix_align_rtl($align) {
  *
  * Gets the information from the URL parameter inpopup.
  *
- * @todo Use a central function to create the popup calls all over Moodle and
+ * @todo Use a central function to create the popup calls all over PowerEduc and
  * In the moment only works with resources and probably questions.
  *
  * @return boolean
@@ -3741,7 +3741,7 @@ function get_formatted_help_string($identifier, $component, $ajax = false, $a = 
         $data->text = format_text(get_string($identifier.'_help', $component, $a), FORMAT_MARKDOWN, $options);
 
         $helplink = $identifier . '_link';
-        if ($sm->string_exists($helplink, $component)) {  // Link to further info in Moodle docs.
+        if ($sm->string_exists($helplink, $component)) {  // Link to further info in PowerEduc docs.
             $link = get_string($helplink, $component);
             $linktext = get_string('morehelp');
 

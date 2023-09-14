@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -79,7 +79,7 @@ class core_course_bulk_activity_completion_renderer extends plugin_renderer_base
     /**
      * Renders the form for bulk editing activities completion
      *
-     * @param moodleform $form
+     * @param powereducform $form
      * @param array $activities
      * @return string
      */
@@ -100,7 +100,7 @@ class core_course_bulk_activity_completion_renderer extends plugin_renderer_base
     /**
      * Renders the form for editing default completion
      *
-     * @param moodleform $form
+     * @param powereducform $form
      * @param array $modules
      * @return string
      */

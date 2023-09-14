@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains class used to return information to display for the message area.
@@ -1830,7 +1830,7 @@ class api {
      * @param string $name  Name of the processor.
      * @param bool $ready only return ready-to-use processors.
      * @return mixed $processor if processor present else empty array.
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_message_processor($name, $ready = false) {
         global $DB, $CFG;
@@ -1884,7 +1884,7 @@ class api {
      * @param \stdClass $processor processor record.
      * @param 0|1 $enabled 0 or 1 to set the processor status.
      * @return bool
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function update_processor_status($processor, $enabled) {
         global $DB;
@@ -1900,7 +1900,7 @@ class api {
      *
      * @param \stdClass $processor processor object
      * @return \stdClass processed processor object
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_processed_processor_object(\stdClass $processor) {
         global $CFG;
@@ -2126,7 +2126,7 @@ class api {
      *
      * @param int $userid The user id to get the self-conversations
      * @return \stdClass|false The self-conversation object or false if it doesn't exist
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function get_self_conversation(int $userid) {
         global $DB;
@@ -2154,7 +2154,7 @@ class api {
      * @param int[] $userids The array of users to add to the conversation
      * @param string|null $name The name of the conversation
      * @param int $enabled Determines if the conversation is created enabled or disabled
-     * @param string|null $component Defines the Moodle component which the conversation belongs to, if any
+     * @param string|null $component Defines the PowerEduc component which the conversation belongs to, if any
      * @param string|null $itemtype Defines the type of the component
      * @param int|null $itemid The id of the component
      * @param int|null $contextid The id of the context
@@ -2767,7 +2767,7 @@ class api {
     /**
      * Checks whether or not a conversation area is enabled.
      *
-     * @param string $component Defines the Moodle component which the area was added to.
+     * @param string $component Defines the PowerEduc component which the area was added to.
      * @param string $itemtype Defines the type of the component.
      * @param int $itemid The id of the component.
      * @param int $contextid The id of the context.
@@ -2790,7 +2790,7 @@ class api {
     /**
      * Get conversation by area.
      *
-     * @param string $component Defines the Moodle component which the area was added to.
+     * @param string $component Defines the PowerEduc component which the area was added to.
      * @param string $itemtype Defines the type of the component.
      * @param int $itemid The id of the component.
      * @param int $contextid The id of the context.

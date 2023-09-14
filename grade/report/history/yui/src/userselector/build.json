@@ -1,7 +1,7 @@
 {
-    "name": "moodle-gradereport_history-userselector",
+    "name": "powereduc-gradereport_history-userselector",
     "builds": {
-        "moodle-gradereport_history-userselector": {
+        "powereduc-gradereport_history-userselector": {
             "jsfiles": [
                 "userselector.js"
             ]

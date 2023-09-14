@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -88,7 +88,7 @@ class course_competency_settings extends persistent {
     public static function can_read($courseid) {
         $context = context_course::instance($courseid);
 
-        $capabilities = array('moodle/competency:coursecompetencyview', 'moodle/competency:coursecompetencymanage');
+        $capabilities = array('powereduc/competency:coursecompetencyview', 'powereduc/competency:coursecompetencymanage');
 
         return has_any_capability($capabilities, $context);
     }
@@ -102,7 +102,7 @@ class course_competency_settings extends persistent {
     public static function can_manage_course($courseid) {
         $context = context_course::instance($courseid);
 
-        $capabilities = array('moodle/competency:coursecompetencyconfigure');
+        $capabilities = array('powereduc/competency:coursecompetencyconfigure');
 
         return has_any_capability($capabilities, $context);
     }

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Statement verb object for xAPI structure checking and usage.
@@ -36,7 +36,7 @@ defined('POWEREDUC_INTERNAL') || die();
  * Verbs represent the interaction a user/group made inside a xAPI
  * compatible plugin. Internally a xAPI verb must be representad as
  * in a valid IRI format (which is a less restrictive version of a
- * regular URL so a moodle_url out is completelly fine). To make it
+ * regular URL so a powereduc_url out is completelly fine). To make it
  * easy for plugins to generate valid IRI, a simple string van be
  * provided and the class will convert into a valid IRI internally.
  *

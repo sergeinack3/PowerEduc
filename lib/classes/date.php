@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Core date and time related code.
@@ -26,7 +26,7 @@
 /**
  * Core date and time related code.
  *
- * @since Moodle 2.9
+ * @since PowerEduc 2.9
  * @package   core
  * @copyright 2015 Totara Learning Solutions Ltd {@link http://www.totaralms.com/}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -228,7 +228,7 @@ class core_date {
      *    // Date for other user via legacy API.
      *    $datestr = userdate($time, core_date::get_user_timezone($user));
      *
-     * The coding style rules in Moodle are moronic,
+     * The coding style rules in PowerEduc are moronic,
      * why cannot the parameter names have underscores in them?
      *
      * @param mixed $userorforcedtz user object or legacy forced timezone string or tz object
@@ -674,7 +674,7 @@ class core_date {
             }
         }
 
-        // Legacy Moodle half an hour offsets - pick any city nearby, ideally without DST.
+        // Legacy PowerEduc half an hour offsets - pick any city nearby, ideally without DST.
         self::$badzones['4.5'] = 'Asia/Kabul';
         self::$badzones['5.5'] = 'Asia/Kolkata';
         self::$badzones['6.5'] = 'Asia/Rangoon';
@@ -708,8 +708,8 @@ class core_date {
      * @author BohwaZ <https://bohwaz.net/>
      */
     public static function strftime(string $format, $timestamp = null, ?string $locale = null) : string {
-        // Moodle-specific modification. For the IntlDateFormatter we need to use unix-style locale
-        // from the string 'locale' even for Windows, so we can neither use moodle_getlocale().
+        // PowerEduc-specific modification. For the IntlDateFormatter we need to use unix-style locale
+        // from the string 'locale' even for Windows, so we can neither use powereduc_getlocale().
         // nor rely on the setlocale() use below. We also ignore $CFG->locale because it can use
         // Windows format.
         $locale = $locale ?: get_string('locale', 'langconfig');

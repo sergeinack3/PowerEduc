@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -87,7 +87,7 @@ class exporters_content_item_test extends \advanced_testcase {
             -1,
             'test_name',
             new \core_course\local\entity\string_title('test_title'),
-            new \moodle_url(''),
+            new \powereduc_url(''),
             '',
             '* First point
             * Another point',

@@ -1,4 +1,4 @@
-Description of Mustache library import into moodle.
+Description of Mustache library import into powereduc.
 
 1) Download the latest version of mustache.php from upstream (found
 at https://github.com/bobthecow/mustache.php/releases)
@@ -9,8 +9,8 @@ e.g.
 wget https://github.com/bobthecow/mustache.php/archive/v2.13.0.zip
 unzip v2.13.0.zip
 cd mustache.php-2.13.0/
-mv src /path/to/moodle/lib/mustache/
-mv LICENSE /path/to/moodle/lib/mustache/
+mv src /path/to/powereduc/lib/mustache/
+mv LICENSE /path/to/powereduc/lib/mustache/
 
 Local changes:
 

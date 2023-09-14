@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -188,7 +188,7 @@ abstract class data_object {
         if ($instances = self::fetch_all_helper($table, $classname, $params)) {
             if (count($instances) > 1) {
                 // we should not tolerate any errors here - problems might appear later
-                throw new \moodle_exception('morethanonerecordinfetch', 'debug');
+                throw new \powereduc_exception('morethanonerecordinfetch', 'debug');
             }
             return reset($instances);
         } else {

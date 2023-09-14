@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -292,7 +292,7 @@ class enrol_manual_editselectedusers_operation extends enrol_bulk_enrolment_oper
      * Returns a enrol_bulk_enrolment_operation extension form to be used
      * in collecting required information for this operation to be processed.
      *
-     * @param string|moodle_url|null $defaultaction
+     * @param string|powereduc_url|null $defaultaction
      * @param mixed $defaultcustomdata
      * @return enrol_manual_editselectedusers_form
      */
@@ -335,7 +335,7 @@ class enrol_manual_deleteselectedusers_operation extends enrol_bulk_enrolment_op
      * Returns a enrol_bulk_enrolment_operation extension form to be used
      * in collecting required information for this operation to be processed.
      *
-     * @param string|moodle_url|null $defaultaction
+     * @param string|powereduc_url|null $defaultaction
      * @param mixed $defaultcustomdata
      * @return enrol_manual_editselectedusers_form
      */
@@ -354,7 +354,7 @@ class enrol_manual_deleteselectedusers_operation extends enrol_bulk_enrolment_op
     /**
      * Processes the bulk operation request for the given userids with the provided properties.
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @param course_enrolment_manager $manager
      * @param array $userids
      * @param stdClass $properties The data returned by the form.

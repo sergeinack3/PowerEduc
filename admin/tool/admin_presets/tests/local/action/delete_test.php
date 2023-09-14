@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ namespace tool_admin_presets\local\action;
  *
  * @package    tool_admin_presets
  * @category   test
- * @copyright  2021 Sara Arjona (sara@moodle.com)
+ * @copyright  2021 Sara Arjona (sara@powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @coversDefaultClass \tool_admin_presets\local\action\delete
  */
@@ -69,8 +69,8 @@ class delete_test extends \advanced_testcase {
             $action->execute();
         } catch (\exception $e) {
             // If delete action was successfull, redirect should be called so we will encounter an
-            // 'unsupported redirect error' moodle_exception.
-            $this->assertInstanceOf(\moodle_exception::class, $e);
+            // 'unsupported redirect error' powereduc_exception.
+            $this->assertInstanceOf(\powereduc_exception::class, $e);
         } finally {
             // Check the preset data has been removed.
             $presets = $DB->get_records('adminpresets');
@@ -120,7 +120,7 @@ class delete_test extends \advanced_testcase {
         $_POST['sesskey'] = sesskey();
 
         $action = new delete();
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $action->execute();
     }
 
@@ -144,7 +144,7 @@ class delete_test extends \advanced_testcase {
         $_POST['id'] = $presetid * 2; // Unexisting preset identifier.
 
         $action = new delete();
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $action->show();
     }
 }

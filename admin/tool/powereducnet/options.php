@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,15 +22,15 @@
  *
  * This page requires a course, section an resourceurl to be provided via import_info.
  *
- * @package     tool_moodlenet
+ * @package     tool_powereducnet
  * @copyright   2020 Jake Dallimore <jrhdallimore@gmail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-use tool_moodlenet\local\import_handler_registry;
-use tool_moodlenet\local\import_processor;
-use tool_moodlenet\local\import_info;
-use tool_moodlenet\local\import_strategy_file;
-use tool_moodlenet\local\import_strategy_link;
+use tool_powereducnet\local\import_handler_registry;
+use tool_powereducnet\local\import_processor;
+use tool_powereducnet\local\import_info;
+use tool_powereducnet\local\import_strategy_file;
+use tool_powereducnet\local\import_strategy_link;
 
 require_once(__DIR__ . '/../../../config.php');
 require_once($CFG->dirroot . '/course/lib.php');
@@ -41,7 +41,7 @@ $cancel = optional_param('cancel', null, PARAM_ALPHA);
 $id = required_param('id', PARAM_ALPHANUM);
 
 if (is_null($importinfo = import_info::load($id))) {
-    throw new moodle_exception('missinginvalidpostdata', 'tool_moodlenet');
+    throw new powereduc_exception('missinginvalidpostdata', 'tool_powereducnet');
 }
 
 // Resolve course and section params.
@@ -57,14 +57,14 @@ if (!isset($config->course)) {
 
 // Access control.
 require_login($config->course, false);
-require_capability('moodle/course:manageactivities', context_course::instance($config->course));
-if (!get_config('tool_moodlenet', 'enablemoodlenet')) {
-    throw new \moodle_exception('moodlenetnotenabled', 'tool_moodlenet');
+require_capability('powereduc/course:manageactivities', context_course::instance($config->course));
+if (!get_config('tool_powereducnet', 'enablepowereducnet')) {
+    throw new \powereduc_exception('powereducnetnotenabled', 'tool_powereducnet');
 }
 
 // If the user cancelled, break early.
 if ($cancel) {
-    redirect(new moodle_url('/course/view.php', ['id' => $config->course]));
+    redirect(new powereduc_url('/course/view.php', ['id' => $config->course]));
 }
 
 // Set up required objects.
@@ -92,15 +92,15 @@ if ($import && $module) {
 
     $importinfo->purge(); // We don't need information about the import any more.
 
-    redirect(new moodle_url('/course/view.php', ['id' => $course->id]));
+    redirect(new powereduc_url('/course/view.php', ['id' => $course->id]));
 }
 
 // Setup the page and display the form.
 $PAGE->set_context(context_course::instance($course->id));
 $PAGE->set_pagelayout('base');
-$PAGE->set_title(get_string('coursetitle', 'moodle', array('course' => $course->fullname)));
+$PAGE->set_title(get_string('coursetitle', 'powereduc', array('course' => $course->fullname)));
 $PAGE->set_heading($course->fullname);
-$PAGE->set_url(new moodle_url('/admin/tool/moodlenet/options.php'));
+$PAGE->set_url(new powereduc_url('/admin/tool/powereducnet/options.php'));
 
 // Fetch the handlers supporting this resource. We'll display each of these as an option in the form.
 $handlercontext = [];
@@ -124,5 +124,5 @@ $context = [
 ];
 
 echo $OUTPUT->header();
-echo $PAGE->get_renderer('core')->render_from_template('tool_moodlenet/import_options_select', $context);
+echo $PAGE->get_renderer('core')->render_from_template('tool_powereducnet/import_options_select', $context);
 echo $OUTPUT->footer();

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'message_airnotifier', language 'en'
@@ -31,7 +31,7 @@ $string['airnotifierurl'] = 'Airnotifier URL';
 $string['checkconfiguration'] = 'Check and test push notification configuration';
 $string['configairnotifierurl'] = 'The server URL to connect to for sending push notifications.';
 $string['configairnotifierport'] = 'The port to use when connecting to the airnotifier server.';
-$string['configairnotifieraccesskey'] = 'The access key for connecting to the Airnotifier server. You can obtain an access key by clicking the "Request access key" link below (registered sites only) or by creating an account on the <a href="https://apps.powereduc.com">Moodle Apps Portal</a>.';
+$string['configairnotifieraccesskey'] = 'The access key for connecting to the Airnotifier server. You can obtain an access key by clicking the "Request access key" link below (registered sites only) or by creating an account on the <a href="https://apps.powereduc.com">PowerEduc Apps Portal</a>.';
 $string['configairnotifierappname'] = 'The app name identifier in Airnotifier.';
 $string['configairnotifiermobileappname'] = 'The Mobile app unique identifier (usually something like com.powereduc.powereducmobile).';
 $string['configured'] = 'Configured';
@@ -39,12 +39,12 @@ $string['deletecheckdevicename'] = 'Delete your device: {$a->name}';
 $string['deletedevice'] = 'Delete the device. Note that an app can register the device again. If the device keeps reappearing, disable it.';
 $string['devicetoken'] = 'Device token';
 $string['enableprocessor'] = 'Enable mobile notifications';
-$string['errorretrievingkey'] = 'An error occurred while retrieving the access key. Your site must be registered to use this service. If your site is already registered, please try updating your registration. Alternatively, you can obtain an access key by creating an account on the <a href="https://apps.powereduc.com">Moodle Apps Portal</a>.';
-$string['keyretrievedsuccessfully'] = 'The access key was retrieved successfully. To access Moodle app usage statistics, please create an account on the <a href="https://apps.powereduc.com">Moodle Apps Portal</a>.';
+$string['errorretrievingkey'] = 'An error occurred while retrieving the access key. Your site must be registered to use this service. If your site is already registered, please try updating your registration. Alternatively, you can obtain an access key by creating an account on the <a href="https://apps.powereduc.com">PowerEduc Apps Portal</a>.';
+$string['keyretrievedsuccessfully'] = 'The access key was retrieved successfully. To access PowerEduc app usage statistics, please create an account on the <a href="https://apps.powereduc.com">PowerEduc Apps Portal</a>.';
 $string['messageprovidersempty'] = 'There are no mobile notifications enabled in default notification preferences.';
 $string['messageproviderslow'] = 'Only a few mobile notifications are enabled in default notification preferences.';
-$string['powereducappsportallimitswarning'] = 'Please note that the number of user devices allowed to receive notifications depends on your Moodle app subscription. For details, visit the <a href="{$a}" target="_blank">Moodle Apps Portal</a>.';
-$string['nodevices'] = 'No registered devices. Devices will automatically appear after you install the Moodle app and add this site.';
+$string['powereducappsportallimitswarning'] = 'Please note that the number of user devices allowed to receive notifications depends on your PowerEduc app subscription. For details, visit the <a href="{$a}" target="_blank">PowerEduc Apps Portal</a>.';
+$string['nodevices'] = 'No registered devices. Devices will automatically appear after you install the PowerEduc app and add this site.';
 $string['noemailevernotset'] = '$CFG->noemailever disabled';
 $string['noemaileverset'] = '$CFG->noemailever is enabled in config.php. You need to set this setting to false or remove it.';
 $string['nopermissiontomanagedevices'] = 'You don\'t have permission to manage devices.';
@@ -68,7 +68,7 @@ $string['privacy:metadata:userid'] = 'The ID of the user who sent the message.';
 $string['privacy:metadata:username'] = 'The username of the user.';
 $string['privacy:metadata:usersubsystem'] = 'This plugin is connected to the user subsystem.';
 $string['privacy:subcontext'] = 'Message Airnotifier';
-$string['sitemustberegistered'] = 'In order to use the public Airnotifier instance, your site must be registered. Alternatively, you can obtain an access key by creating an account on the <a href="https://apps.powereduc.com">Moodle Apps Portal</a>.';
+$string['sitemustberegistered'] = 'In order to use the public Airnotifier instance, your site must be registered. Alternatively, you can obtain an access key by creating an account on the <a href="https://apps.powereduc.com">PowerEduc Apps Portal</a>.';
 $string['showhide'] = 'Enable/disable the device.';
 $string['requestaccesskey'] = 'Request access key';
 $string['sendtest'] = 'Send test push notification to my devices';

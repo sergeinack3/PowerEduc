@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -55,7 +55,7 @@ class award_criteria_overall extends award_criteria {
 
             $agg = $data->get_aggregation_methods();
             if (!$data->is_locked() && !$data->is_active()) {
-                $editurl = new moodle_url('/badges/criteria_settings.php',
+                $editurl = new powereduc_url('/badges/criteria_settings.php',
                                array('badgeid' => $this->badgeid,
                                    'edit' => true,
                                    'type' => $this->criteriatype,
@@ -66,7 +66,7 @@ class award_criteria_overall extends award_criteria {
                               array('class' => 'criteria-action'));
                 echo $OUTPUT->box($editaction, array('criteria-header'));
 
-                $url = new moodle_url('criteria.php', array('id' => $data->id, 'sesskey' => sesskey()));
+                $url = new powereduc_url('criteria.php', array('id' => $data->id, 'sesskey' => sesskey()));
                 echo $OUTPUT->single_select($url, 'update', $agg, $data->get_aggregation_method($this->criteriatype),
                     null, null, array('aria-describedby' => 'overall'));
                 echo html_writer::span(get_string('overallcrit', 'badges'), '', array('id' => 'overall'));

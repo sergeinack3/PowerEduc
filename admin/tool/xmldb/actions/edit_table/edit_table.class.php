@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -179,7 +179,7 @@ class edit_table extends XMLDBAction {
         // The view php code button
         $b .= '&nbsp;<a href="index.php?action=view_table_php&amp;table=' . $tableparam . '&amp;dir=' . urlencode(str_replace($CFG->dirroot, '', $dirpath)) . '">[' . $this->str['viewphpcode'] . ']</a>';
         // The add persistent fields button.
-        $url = new \moodle_url('/admin/tool/xmldb/index.php', [
+        $url = new \powereduc_url('/admin/tool/xmldb/index.php', [
             'action' => 'add_persistent_mandatory',
             'sesskey' => sesskey(),
             'table' => $tableparam,
@@ -213,7 +213,7 @@ class edit_table extends XMLDBAction {
             foreach ($fields as $field) {
                 // Drag element up/down.
                 $move = (count($fields) > 1) ? html_writer::span($OUTPUT->render_from_template('core/drag_handle',
-                    ['movetitle' => get_string('movecontent', 'moodle', $field->getName())]), '',
+                    ['movetitle' => get_string('movecontent', 'powereduc', $field->getName())]), '',
                     ['data-action' => 'move_updown_field', 'data-dir' => str_replace($CFG->dirroot, '', $dirpath),
                         'data-table' => $table->getName(), 'data-field' => $field->getName()]) : '';
                 // The field name (link to edit - if the field has no uses)
@@ -264,7 +264,7 @@ class edit_table extends XMLDBAction {
             foreach ($keys as $key) {
                 // Drag element up/down.
                 $move = (count($keys) > 1) ? html_writer::span($OUTPUT->render_from_template('core/drag_handle',
-                    ['movetitle' => get_string('movecontent', 'moodle', $key->getName())]), '',
+                    ['movetitle' => get_string('movecontent', 'powereduc', $key->getName())]), '',
                     ['data-action' => 'move_updown_key', 'data-dir' => str_replace($CFG->dirroot, '', $dirpath),
                         'data-table' => $table->getName(), 'data-key' => $key->getName()]) : '';
                 // The key name (link to edit - if the key has no uses)
@@ -310,7 +310,7 @@ class edit_table extends XMLDBAction {
             foreach ($indexes as $index) {
                 // Drag element up/down.
                 $move = (count($indexes) > 1) ? html_writer::span($OUTPUT->render_from_template('core/drag_handle',
-                    ['movetitle' => get_string('movecontent', 'moodle', $index->getName())]), '',
+                    ['movetitle' => get_string('movecontent', 'powereduc', $index->getName())]), '',
                     ['data-action' => 'move_updown_index', 'data-dir' => str_replace($CFG->dirroot, '', $dirpath),
                         'data-table' => $table->getName(), 'data-index' => $index->getName()]) : '';
                 // The index name (link to edit)

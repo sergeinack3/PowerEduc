@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ use html_table_cell;
 use html_table_row;
 use html_writer;
 use lang_string;
-use moodle_url;
+use powereduc_url;
 use single_select;
 
 /**
@@ -270,7 +270,7 @@ class renderer extends \plugin_renderer_base {
         $html .= $this->output->heading(get_string('definitionsummaries', 'cache'), 3);
         $html .= html_writer::table($table);
 
-        $url = new moodle_url('/cache/admin.php', array('action' => 'rescandefinitions', 'sesskey' => sesskey()));
+        $url = new powereduc_url('/cache/admin.php', array('action' => 'rescandefinitions', 'sesskey' => sesskey()));
         $link = html_writer::link($url, get_string('rescandefinitions', 'cache'));
         $html .= html_writer::tag('div', $link, array('id' => 'core-cache-rescan-definitions'));
 
@@ -284,10 +284,10 @@ class renderer extends \plugin_renderer_base {
      * @param string $applicationstore
      * @param string $sessionstore
      * @param string $requeststore
-     * @param moodle_url $editurl
+     * @param powereduc_url $editurl
      * @return string HTML
      */
-    public function mode_mappings($applicationstore, $sessionstore, $requeststore, moodle_url $editurl) {
+    public function mode_mappings($applicationstore, $sessionstore, $requeststore, powereduc_url $editurl) {
         $table = new html_table();
         $table->colclasses = array(
             'mode',
@@ -353,7 +353,7 @@ class renderer extends \plugin_renderer_base {
         foreach ($locks as $lock) {
             $actions = array();
             if ($lock['uses'] === 0 && !$lock['default']) {
-                $url = new moodle_url('/cache/admin.php', array('lock' => $lock['name'], 'action' => 'deletelock', 'sesskey' => sesskey()));
+                $url = new powereduc_url('/cache/admin.php', array('lock' => $lock['name'], 'action' => 'deletelock', 'sesskey' => sesskey()));
                 $actions[] = html_writer::link($url, get_string('delete', 'cache'));
             }
             $table->data[] = new html_table_row(array(
@@ -378,7 +378,7 @@ class renderer extends \plugin_renderer_base {
      * @return string
      */
     public function additional_lock_actions() : string {
-        $url = new moodle_url('/cache/admin.php', array('action' => 'newlockinstance', 'sesskey' => sesskey()));
+        $url = new powereduc_url('/cache/admin.php', array('action' => 'newlockinstance', 'sesskey' => sesskey()));
         $select = new single_select($url, 'lock', cache_factory::get_administration_display_helper()->get_addable_lock_options());
         $select->label = get_string('addnewlockinstance', 'cache');
 
@@ -535,10 +535,10 @@ class renderer extends \plugin_renderer_base {
      *
      * @param \html_table $maintable Main table
      * @param \html_table $summarytable Summary table
-     * @param \moodleform $samplesform Form to select number of samples
+     * @param \powereducform $samplesform Form to select number of samples
      * @return string HTML for page
      */
-    public function usage_page(\html_table $maintable, \html_table $summarytable, \moodleform $samplesform): string {
+    public function usage_page(\html_table $maintable, \html_table $summarytable, \powereducform $samplesform): string {
         $data = [
             'maintable' => \html_writer::table($maintable),
             'summarytable' => \html_writer::table($summarytable),

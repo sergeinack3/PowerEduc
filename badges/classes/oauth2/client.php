@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,8 +32,8 @@ require_once($CFG->libdir . '/oauthlib.php');
 require_once($CFG->libdir . '/filelib.php');
 require_once('badge_backpack_oauth2.php');
 
-use moodle_url;
-use moodle_exception;
+use powereduc_url;
+use powereduc_exception;
 use stdClass;
 
 define('BACKPACK_CHALLENGE_METHOD', 'S256');
@@ -57,7 +57,7 @@ class client extends \core\oauth2\client {
     /** @var string $clientsecret The client secret. */
     private $clientsecret = '';
 
-    /** @var moodle_url $returnurl URL to return to after authenticating */
+    /** @var powereduc_url $returnurl URL to return to after authenticating */
     private $returnurl = null;
 
     /** @var string $grantscope */
@@ -96,9 +96,9 @@ class client extends \core\oauth2\client {
     /**
      * Get login url.
      *
-     * @return moodle_url
+     * @return powereduc_url
      * @throws \coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function get_login_url() {
         $callbackurl = self::callback_url();
@@ -126,7 +126,7 @@ class client extends \core\oauth2\client {
                 'code_challenge_method' => BACKPACK_CHALLENGE_METHOD,
             ]
         );
-        return new moodle_url($this->auth_url(), $params);
+        return new powereduc_url($this->auth_url(), $params);
     }
 
     /**
@@ -170,10 +170,10 @@ class client extends \core\oauth2\client {
     /**
      * Callback url where the request is returned to.
      *
-     * @return moodle_url url of callback
+     * @return powereduc_url url of callback
      */
     public static function callback_url() {
-        return new moodle_url('/admin/oauth2callback.php');
+        return new powereduc_url('/admin/oauth2callback.php');
     }
 
     /**
@@ -181,7 +181,7 @@ class client extends \core\oauth2\client {
      *
      * @return bool
      * @throws \coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function is_logged_in() {
 
@@ -190,7 +190,7 @@ class client extends \core\oauth2\client {
             if (isset($this->accesstoken->refreshtoken)) {
                 return $this->upgrade_token($this->accesstoken->refreshtoken, 'refresh_token');
             } else {
-                throw new moodle_exception('Could not refresh oauth token, please try again.');
+                throw new powereduc_exception('Could not refresh oauth token, please try again.');
             }
         }
 
@@ -216,7 +216,7 @@ class client extends \core\oauth2\client {
      * @param string $code code verify from Auth site.
      * @param string $granttype grant type.
      * @return bool
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function upgrade_token($code, $granttype = 'authorization_code') {
         $callbackurl = self::callback_url();
@@ -247,17 +247,17 @@ class client extends \core\oauth2\client {
         $response = $this->post($this->token_url(), $this->build_post_data($params));
         if ($this->info['http_code'] !== 200) {
             $debuginfo = !empty($this->error) ? $this->error : $response;
-            throw new moodle_exception('oauth2refreshtokenerror', 'core_error', '', $this->info['http_code'], $debuginfo);
+            throw new powereduc_exception('oauth2refreshtokenerror', 'core_error', '', $this->info['http_code'], $debuginfo);
         }
 
         $r = json_decode($response);
 
         if (is_null($r)) {
-            throw new moodle_exception("Could not decode JSON token response");
+            throw new powereduc_exception("Could not decode JSON token response");
         }
 
         if (!empty($r->error)) {
-            throw new moodle_exception($r->error . ' ' . $r->error_description);
+            throw new powereduc_exception($r->error . ' ' . $r->error_description);
         }
 
         if (!isset($r->access_token)) {

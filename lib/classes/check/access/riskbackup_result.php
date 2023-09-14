@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Lists all roles that have the ability to backup user data, as well as users
@@ -56,7 +56,7 @@ class riskbackup_result extends \core\check\result {
 
         $syscontext = \context_system::instance();
 
-        $params = array('capability' => 'moodle/backup:userinfo', 'permission' => CAP_ALLOW, 'contextid' => $syscontext->id);
+        $params = array('capability' => 'powereduc/backup:userinfo', 'permission' => CAP_ALLOW, 'contextid' => $syscontext->id);
         $sql = "SELECT DISTINCT r.id, r.name, r.shortname, r.sortorder, r.archetype
                   FROM {role} r
                   JOIN {role_capabilities} rc ON rc.roleid = r.id
@@ -67,7 +67,7 @@ class riskbackup_result extends \core\check\result {
 
         // Ensure first field is unique (role.id + role_capabilities.contextid).
         $roleidcontextfield = $DB->sql_concat_join("','", ['r.id', 'rc.contextid']);
-        $params = array('capability' => 'moodle/backup:userinfo', 'permission' => CAP_ALLOW, 'contextid' => $syscontext->id);
+        $params = array('capability' => 'powereduc/backup:userinfo', 'permission' => CAP_ALLOW, 'contextid' => $syscontext->id);
         $sql = "SELECT DISTINCT {$roleidcontextfield} AS rolecontext, r.id, r.name, r.shortname, r.sortorder, r.archetype,
                        rc.contextid
                   FROM {role} r
@@ -82,7 +82,7 @@ class riskbackup_result extends \core\check\result {
         // "sc" is context where is role assigned,
         // "c" is context where is role overridden or system context if in role definition.
         $params = [
-            'capability' => 'moodle/backup:userinfo',
+            'capability' => 'powereduc/backup:userinfo',
             'permission' => CAP_ALLOW,
             'context1' => CONTEXT_COURSE,
             'context2' => CONTEXT_COURSE,
@@ -137,7 +137,7 @@ class riskbackup_result extends \core\check\result {
             $links = array();
             foreach ($this->systemroles as $role) {
                 $role->name = role_get_name($role);
-                $role->url = (new \moodle_url('/admin/roles/manage.php', ['action' => 'edit', 'roleid' => $role->id]))->out();
+                $role->url = (new \powereduc_url('/admin/roles/manage.php', ['action' => 'edit', 'roleid' => $role->id]))->out();
                 $links[] = \html_writer::tag('li', get_string('check_riskbackup_editrole', 'report_security', $role));
             }
             $links = \html_writer::tag('ul', implode('', $links));
@@ -151,7 +151,7 @@ class riskbackup_result extends \core\check\result {
                 $context = context::instance_by_id($role->contextid);
                 $role->name = role_get_name($role, $context, ROLENAME_BOTH);
                 $role->contextname = $context->get_context_name();
-                $role->url = (new \moodle_url('/admin/roles/override.php',
+                $role->url = (new \powereduc_url('/admin/roles/override.php',
                     ['contextid' => $role->contextid, 'roleid' => $role->id]))->out();
                 $links[] = \html_writer::tag('li', get_string('check_riskbackup_editoverride', 'report_security', $role));
             }
@@ -164,7 +164,7 @@ class riskbackup_result extends \core\check\result {
 
         list($sort, $sortparams) = users_order_by_sql('u');
         $params = [
-            'capability' => 'moodle/backup:userinfo',
+            'capability' => 'powereduc/backup:userinfo',
             'permission' => CAP_ALLOW,
             'context1' => CONTEXT_COURSE,
             'context2' => CONTEXT_COURSE,
@@ -180,7 +180,7 @@ class riskbackup_result extends \core\check\result {
 
         foreach ($rs as $user) {
             $context = \context::instance_by_id($user->contextid);
-            $url = new \moodle_url('/admin/roles/assign.php', ['contextid' => $user->contextid, 'roleid' => $user->roleid]);
+            $url = new \powereduc_url('/admin/roles/assign.php', ['contextid' => $user->contextid, 'roleid' => $user->roleid]);
             $a = (object)array(
                 'fullname' => fullname($user),
                 'url' => $url->out(),

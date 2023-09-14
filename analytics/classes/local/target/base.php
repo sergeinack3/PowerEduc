@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -157,7 +157,7 @@ abstract class base extends \core_analytics\calculable {
 
         if ($this->link_insights_report() && $includedetailsaction) {
 
-            $predictionurl = new \moodle_url('/report/insights/prediction.php', array('id' => $predictionid));
+            $predictionurl = new \powereduc_url('/report/insights/prediction.php', array('id' => $predictionid));
             $detailstext = $this->get_view_details_text();
 
             $actions[] = new \core_analytics\prediction_action(\core_analytics\prediction::ACTION_PREDICTION_DETAILS, $prediction,
@@ -262,15 +262,15 @@ abstract class base extends \core_analytics\calculable {
     /**
      * Returns the list of users that will receive insights notifications.
      *
-     * Feel free to overwrite if you need to but keep in mind that moodle/analytics:listinsights
-     * or moodle/analytics:listowninsights capability is required to access the list of insights.
+     * Feel free to overwrite if you need to but keep in mind that powereduc/analytics:listinsights
+     * or powereduc/analytics:listowninsights capability is required to access the list of insights.
      *
      * @param \context $context
      * @return array
      */
     public function get_insights_users(\context $context) {
         if ($context->contextlevel === CONTEXT_USER) {
-            if (!has_capability('moodle/analytics:listowninsights', $context, $context->instanceid)) {
+            if (!has_capability('powereduc/analytics:listowninsights', $context, $context->instanceid)) {
                 $users = [];
             } else {
                 $users = [$context->instanceid => \core_user::get_user($context->instanceid)];
@@ -279,9 +279,9 @@ abstract class base extends \core_analytics\calculable {
         } else if ($context->contextlevel >= CONTEXT_COURSE) {
             // At course level or below only enrolled users although this is not ideal for
             // teachers assigned at category level.
-            $users = get_enrolled_users($context, 'moodle/analytics:listinsights', 0, 'u.*', null, 0, 0, true);
+            $users = get_enrolled_users($context, 'powereduc/analytics:listinsights', 0, 'u.*', null, 0, 0, true);
         } else {
-            $users = get_users_by_capability($context, 'moodle/analytics:listinsights');
+            $users = get_users_by_capability($context, 'powereduc/analytics:listinsights');
         }
         return $users;
     }
@@ -291,10 +291,10 @@ abstract class base extends \core_analytics\calculable {
      *
      * @param  int $modelid
      * @param  \context $context
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_insight_context_url($modelid, $context) {
-        return new \moodle_url('/report/insights/insights.php?modelid=' . $modelid . '&contextid=' . $context->id);
+        return new \powereduc_url('/report/insights/insights.php?modelid=' . $modelid . '&contextid=' . $context->id);
     }
 
     /**
@@ -319,10 +319,10 @@ abstract class base extends \core_analytics\calculable {
      * @param  \context     $context
      * @param  string       $contextname
      * @param  \stdClass    $user
-     * @param  \moodle_url  $insighturl
+     * @param  \powereduc_url  $insighturl
      * @return string[]                     The plain text message and the HTML message
      */
-    public function get_insight_body(\context $context, string $contextname, \stdClass $user, \moodle_url $insighturl): array {
+    public function get_insight_body(\context $context, string $contextname, \stdClass $user, \powereduc_url $insighturl): array {
         global $OUTPUT;
 
         $fullmessage = get_string('insightinfomessageplain', 'analytics', $insighturl->out(false));

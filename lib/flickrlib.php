@@ -14,21 +14,21 @@
  *   Please submit all problems or questions to the Help Forum on my project page:
  *     {@link http://sourceforge.net/forum/forum.php?forum_id=469652}
  *
- * Modified by Dongsheng Cai <dongsheng@moodle.com>
+ * Modified by Dongsheng Cai <dongsheng@powereduc.com>
  * ChangeLog:
  *   1. Remove PEAR HTTP LIB, use curl.class.php (created by myself)
  *   2. Remove PEAR DB LIB
  *   3. Remove all cache code, it will implement in curl class.
  *   4. Clean up session code
  *
- * Modified by David Mudrak <david@moodle.com>
+ * Modified by David Mudrak <david@powereduc.com>
  * ChangeLog:
- *   1. upload() method uses Moodle stored_file
+ *   1. upload() method uses PowerEduc stored_file
  *   2. upload() method supports all params provided by http://www.flickr.com/services/api/upload.api.html
  *   3. auth() method shows debugging warning as this library cannot be used any
  *      more for calling Flickr API that requires authentication.
  *
- * @package moodlecore
+ * @package powereduccore
  * @subpackage 3rd-party
  */
 
@@ -39,7 +39,7 @@ require_once("{$CFG->libdir}/flickrclient.php");
 
 /**
  * Flickr Class
- * @package moodlecore
+ * @package powereduccore
  * @subpackage 3rd-party
  */
 class phpFlickr {
@@ -84,7 +84,7 @@ class phpFlickr {
         $this->php_version = explode("-", phpversion());
         $this->php_version = explode(".", $this->php_version[0]);
 
-        // Initialize curl helper, set custom user agent as Flickr blocks our "MoodleBot" agent string.
+        // Initialize curl helper, set custom user agent as Flickr blocks our "PowerEducBot" agent string.
         $this->curl = new curl(array('cache'=>true, 'module_cache'=>'repository'));
         $this->curl->setopt([
             'CURLOPT_USERAGENT' => flickr_client::user_agent(),
@@ -1106,12 +1106,12 @@ class phpFlickr {
     }
 
     /**
-     * Upload a photo from Moodle file pool to Flickr
+     * Upload a photo from PowerEduc file pool to Flickr
      *
      * Optional meta information are title, description, tags, is_public, is_friend, is_family, safety_level,
      * content_type and hidden {@see http://www.flickr.com/services/api/upload.api.html}
      *
-     * @param stored_file $photo stored in Moodle file pool
+     * @param stored_file $photo stored in PowerEduc file pool
      * @param array $meta optional meta information
      * @return boolean
      */

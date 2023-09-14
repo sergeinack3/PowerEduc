@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ use context_coursecat;
 use context_helper;
 use html_writer;
 use lang_string;
-use moodle_url;
+use powereduc_url;
 use stdClass;
 use core_course_category;
 use core_reportbuilder\local\entities\base;
@@ -34,7 +34,7 @@ use core_reportbuilder\local\report\filter;
  * Course category entity
  *
  * @package     core_course
- * @copyright   2021 Paul Holden <paulh@moodle.com>
+ * @copyright   2021 Paul Holden <paulh@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class course_category extends base {
@@ -125,7 +125,7 @@ class course_category extends base {
                 }
                 context_helper::preload_from_record($category);
                 $context = context_coursecat::instance($category->id);
-                $url = new moodle_url('/course/management.php', ['categoryid' => $category->id]);
+                $url = new powereduc_url('/course/management.php', ['categoryid' => $category->id]);
                 return html_writer::link($url,
                     format_string($category->name, true, ['context' => $context]));
             })
@@ -212,7 +212,7 @@ class course_category extends base {
         ))
             ->add_joins($this->get_joins())
             ->set_options([
-                'requiredcapabilities' => 'moodle/category:viewcourselist',
+                'requiredcapabilities' => 'powereduc/category:viewcourselist',
             ]);
 
         // Name filter.

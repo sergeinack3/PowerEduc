@@ -14,7 +14,7 @@
          echo"<tr>
                  <td>".$value1->firstname."</td>
                  <td>".$value1->lastname."</td>
-                 <td><a href='".new moodle_url('/local/powerschool/bulletinnote.php?idet='.$value1->userid.'&idsp='.$_POST["specialite"].'&idcy='.$_POST["cycle"].'')."' class='btn-primary form-control col-3'>Voir note</a></td>
+                 <td><a href='".new powereduc_url('/local/powerschool/bulletinnote.php?idet='.$value1->userid.'&idsp='.$_POST["specialite"].'&idcy='.$_POST["cycle"].'')."' class='btn-primary form-control col-3'>Voir note</a></td>
                </tr>";
     }
    }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 namespace tool_lp\form;
 defined('POWEREDUC_INTERNAL') || die();
 
-use moodleform;
+use powereducform;
 
 require_once($CFG->libdir . '/formslib.php');
 
@@ -36,7 +36,7 @@ require_once($CFG->libdir . '/formslib.php');
  * @copyright  2015 Frédéric Massart - FMCorz.net
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class template_cohorts extends moodleform {
+class template_cohorts extends powereducform {
 
     /**
      * Form definition

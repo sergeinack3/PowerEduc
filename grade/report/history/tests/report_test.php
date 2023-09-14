@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -169,7 +169,7 @@ class report_test extends \advanced_testcase {
         // Put course in separate groups mode, add grader1 and two students to the same group.
         $c1->groupmode = SEPARATEGROUPS;
         update_course($c1);
-        $this->assertFalse(has_capability('moodle/site:accessallgroups', \context_course::instance($c1->id)));
+        $this->assertFalse(has_capability('powereduc/site:accessallgroups', \context_course::instance($c1->id)));
         $g1 = self::getDataGenerator()->create_group(['courseid' => $c1->id, 'name' => 'g1']);
         self::getDataGenerator()->create_group_member(['groupid' => $g1->id, 'userid' => $grader1->id]);
         self::getDataGenerator()->create_group_member(['groupid' => $g1->id, 'userid' => $u1->id]);
@@ -628,7 +628,7 @@ class report_test extends \advanced_testcase {
      * @return mixed Count or array of objects.
      */
     protected function get_tablelog_results($coursecontext, $filters = array(), $count = false) {
-        $table = new gradereport_history_tests_tablelog('something', $coursecontext, new \moodle_url(''), $filters);
+        $table = new gradereport_history_tests_tablelog('something', $coursecontext, new \powereduc_url(''), $filters);
         return $table->get_test_results($count);
     }
 

@@ -203,7 +203,7 @@ Feature: Teacher can search and enrol users one by one into the course
     And I click on "Cancel" "button" in the "Enrol users" "dialogue"
     And the following "permission overrides" exist:
       | capability                   | permission | role           | contextlevel | reference |
-      | moodle/site:viewuseridentity | Prevent    | editingteacher | Course       | C001      |
+      | powereduc/site:viewuseridentity | Prevent    | editingteacher | Course       | C001      |
     And I press "Enrol users"
     # Do this by keyboard because the 'I set the field' step doesn't let you set it to a missing value.
     And I press tab

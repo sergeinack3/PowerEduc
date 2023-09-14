@@ -1,7 +1,7 @@
 {
-    "name": "moodle-atto_html-beautify",
+    "name": "powereduc-atto_html-beautify",
     "builds": {
-        "moodle-atto_html-beautify": {
+        "powereduc-atto_html-beautify": {
             "jsfiles": [
                 "wrapper.js",
                 "beautify.js",

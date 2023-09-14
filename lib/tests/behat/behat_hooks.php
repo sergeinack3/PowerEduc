@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Behat hooks steps definitions.
@@ -180,7 +180,7 @@ class behat_hooks extends behat_base {
         if (!behat_util::is_test_data_updated()) {
             $commandpath = 'php admin/tool/behat/cli/init.php';
             $message = <<<EOF
-Your behat test site is outdated, please run the following command from your Moodle dirroot to drop, and reinstall the Behat test site.
+Your behat test site is outdated, please run the following command from your PowerEduc dirroot to drop, and reinstall the Behat test site.
 
     {$commandpath}
 
@@ -469,7 +469,7 @@ EOF;
         // Set up the tags for current scenario.
         self::fetch_tags_for_scenario($scope);
 
-        // If scenario requires the Moodle app to be running, set this up.
+        // If scenario requires the PowerEduc app to be running, set this up.
         if ($this->has_tag('app')) {
             $this->execute('behat_app::start_scenario');
 
@@ -513,7 +513,7 @@ EOF;
             $session = $this->getSession();
             $this->execute('behat_general::i_visit', ['/']);
 
-            // Checking that the root path is a Moodle test site.
+            // Checking that the root path is a PowerEduc test site.
             if (self::is_first_scenario()) {
                 $message = "The base URL ({$CFG->wwwroot}) is not a behat test site. " .
                     'Ensure that you started the built-in web server in the correct directory, ' .
@@ -799,7 +799,7 @@ EOF;
      *
      * @Given /^I look for exceptions$/
      * @throw Exception Unknown type, depending on what we caught in the hook or basic \Exception.
-     * @see Moodle\BehatExtension\EventDispatcher\Tester\ChainedStepTester
+     * @see PowerEduc\BehatExtension\EventDispatcher\Tester\ChainedStepTester
      */
     public function i_look_for_exceptions() {
         // If the scenario already failed in a hook throw the exception.

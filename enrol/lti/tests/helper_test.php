@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ namespace enrol_lti;
  * Test the helper functionality.
  *
  * @package enrol_lti
- * @copyright 2016 Mark Nelson <markn@moodle.com>
+ * @copyright 2016 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class helper_test extends \advanced_testcase {
@@ -64,7 +64,7 @@ class helper_test extends \advanced_testcase {
         $this->user1 = $DB->get_record('user', array('id' => $this->user1->id));
 
         // Set the page details.
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_url('/user/profile.php');
         $page->set_context(\context_system::instance());
         $renderer = $page->get_renderer('core');
@@ -252,7 +252,7 @@ class helper_test extends \advanced_testcase {
 
         $id = $tool1->id;
         $launchurl = \enrol_lti\helper::get_launch_url($id);
-        $this->assertEquals('https://www.example.com/moodle/enrol/lti/tool.php?id=' . $id, $launchurl->out());
+        $this->assertEquals('https://www.example.com/powereduc/enrol/lti/tool.php?id=' . $id, $launchurl->out());
     }
 
     /**
@@ -273,13 +273,13 @@ class helper_test extends \advanced_testcase {
         $id = $tool1->id;
         $token = \enrol_lti\helper::generate_cartridge_token($id);
         $launchurl = \enrol_lti\helper::get_cartridge_url($tool1);
-        $this->assertEquals('https://www.example.com/moodle/enrol/lti/cartridge.php?id=' . $id . '&amp;token=' . $token,
+        $this->assertEquals('https://www.example.com/powereduc/enrol/lti/cartridge.php?id=' . $id . '&amp;token=' . $token,
                             $launchurl->out());
 
         $CFG->slasharguments = true;
 
         $launchurl = \enrol_lti\helper::get_cartridge_url($tool1);
-        $this->assertEquals('https://www.example.com/moodle/enrol/lti/cartridge.php/' . $id . '/' . $token . '/cartridge.xml',
+        $this->assertEquals('https://www.example.com/powereduc/enrol/lti/cartridge.php/' . $id . '/' . $token . '/cartridge.xml',
                             $launchurl->out());
 
         $CFG->slasharguments = $slasharguments;
@@ -303,13 +303,13 @@ class helper_test extends \advanced_testcase {
         $id = $tool1->id;
         $token = \enrol_lti\helper::generate_proxy_token($id);
         $launchurl = \enrol_lti\helper::get_proxy_url($tool1);
-        $this->assertEquals('https://www.example.com/moodle/enrol/lti/proxy.php?id=' . $id . '&amp;token=' . $token,
+        $this->assertEquals('https://www.example.com/powereduc/enrol/lti/proxy.php?id=' . $id . '&amp;token=' . $token,
                             $launchurl->out());
 
         $CFG->slasharguments = true;
 
         $launchurl = \enrol_lti\helper::get_proxy_url($tool1);
-        $this->assertEquals('https://www.example.com/moodle/enrol/lti/proxy.php/' . $id . '/' . $token . '/',
+        $this->assertEquals('https://www.example.com/powereduc/enrol/lti/proxy.php/' . $id . '/' . $token . '/',
                             $launchurl->out());
 
         $CFG->slasharguments = $slasharguments;

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@ namespace core_courseformat\output\local\state;
 
 use core_courseformat\base as course_format;
 use course_modinfo;
-use moodle_url;
+use powereduc_url;
 use renderable;
 use stdClass;
 
@@ -26,7 +26,7 @@ use stdClass;
  * Contains the ajax update course structure.
  *
  * @package   core_course
- * @copyright 2021 Ferran Recio <ferran@moodle.com>
+ * @copyright 2021 Ferran Recio <ferran@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class course implements renderable {
@@ -55,7 +55,7 @@ class course implements renderable {
         // State must represent always the most updated version of the course.
         $modinfo = course_modinfo::instance($course);
 
-        $url = new moodle_url('/course/view.php', ['id' => $course->id]);
+        $url = new powereduc_url('/course/view.php', ['id' => $course->id]);
 
         $data = (object)[
             'id' => $course->id,

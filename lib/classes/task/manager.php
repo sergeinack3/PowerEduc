@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Scheduled and adhoc task management.
@@ -187,7 +187,7 @@ class manager {
      * If these values do not match exactly then a new task is scheduled.
      *
      * @param \core\task\adhoc_task $task - The new adhoc task information to store.
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function reschedule_or_queue_adhoc_task(adhoc_task $task) : void {
         global $DB;
@@ -567,8 +567,8 @@ class manager {
      *
      * @param array $records array of task records
      * @param array $records array of same task records shuffled
-     * @deprecated since Moodle 4.1 MDL-67648 - please do not use this method anymore.
-     * @todo MDL-74843 This method will be deleted in Moodle 4.5
+     * @deprecated since PowerEduc 4.1 MDL-67648 - please do not use this method anymore.
+     * @todo MDL-74843 This method will be deleted in PowerEduc 4.5
      * @see \core\task\manager::get_next_adhoc_task
      */
     public static function ensure_adhoc_task_qos(array $records): array {
@@ -646,7 +646,7 @@ class manager {
      * @param int $timestart
      * @param bool $checklimits Should we check limits?
      * @return \core\task\adhoc_task or null if not found
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public static function get_next_adhoc_task($timestart, $checklimits = true) {
         global $DB;
@@ -801,7 +801,7 @@ class manager {
                 // as late as possible and release it as soon as possible.
                 if (!$cronlock = $cronlockfactory->get_lock('core_cron', 10)) {
                     $lock->release();
-                    throw new \moodle_exception('locktimeout');
+                    throw new \powereduc_exception('locktimeout');
                 }
 
                 $task->set_lock($lock);
@@ -887,7 +887,7 @@ class manager {
      *
      * @param int $timestart - The start of the cron process - do not repeat any tasks that have been run more recently than this.
      * @return \core\task\scheduled_task or null
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public static function get_next_scheduled_task($timestart) {
         global $DB;
@@ -937,7 +937,7 @@ class manager {
                 // as late as possible and release it as soon as possible.
                 if (!$cronlock = $cronlockfactory->get_lock('core_cron', 10)) {
                     $lock->release();
-                    throw new \moodle_exception('locktimeout');
+                    throw new \powereduc_exception('locktimeout');
                 }
 
                 if (!$task->is_blocking()) {
@@ -1355,7 +1355,7 @@ class manager {
     }
 
     /**
-     * Returns if Moodle have access to PHP CLI binary or not.
+     * Returns if PowerEduc have access to PHP CLI binary or not.
      *
      * @return bool
      */
@@ -1368,14 +1368,14 @@ class manager {
      *
      * @param \core\task\task_base $task Task that be executed via CLI.
      * @return bool
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public static function run_from_cli(\core\task\task_base $task):bool {
         global $CFG;
 
         if (!self::is_runnable()) {
-            $redirecturl = new \moodle_url('/admin/settings.php', ['section' => 'systempaths']);
-            throw new \moodle_exception('cannotfindthepathtothecli', 'tool_task', $redirecturl->out());
+            $redirecturl = new \powereduc_url('/admin/settings.php', ['section' => 'systempaths']);
+            throw new \powereduc_exception('cannotfindthepathtothecli', 'tool_task', $redirecturl->out());
         } else {
             // Shell-escaped path to the PHP binary.
             $phpbinary = escapeshellarg(self::find_php_cli_path());

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -150,7 +150,7 @@ abstract class base {
     abstract public function get_sample_analysable($sampleid);
 
     /**
-     * Returns the sample's origin in moodle database.
+     * Returns the sample's origin in powereduc database.
      *
      * @return string
      */
@@ -159,7 +159,7 @@ abstract class base {
     /**
      * Returns the context of a sample.
      *
-     * moodle/analytics:listinsights will be required at this level to access the sample predictions.
+     * powereduc/analytics:listinsights will be required at this level to access the sample predictions.
      *
      * @param int $sampleid
      * @return \context
@@ -370,7 +370,7 @@ abstract class base {
      *
      * This function receives the alias of a table with a 'sampleid' field and it should return a SQL join
      * with static::get_samples_origin and with 'user' table. Note that:
-     * - The function caller expects the returned 'user' table to be aliased as 'u' (defacto standard in moodle).
+     * - The function caller expects the returned 'user' table to be aliased as 'u' (defacto standard in powereduc).
      * - You can join with other tables if your samples origin table does not contain a 'userid' field (if that would be
      *   a requirement this solution would be automated for you) you can't though use the following
      *   aliases: 'ap', 'apa', 'aic' and 'am'.

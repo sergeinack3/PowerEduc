@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ $iid           = optional_param('iid', null, PARAM_INT);
 $importcode    = optional_param('importcode', '', PARAM_FILE);
 $forceimport   = optional_param('forceimport', false, PARAM_BOOL);
 
-$url = new moodle_url('/grade/import/csv/index.php', array('id'=>$id));
+$url = new powereduc_url('/grade/import/csv/index.php', array('id'=>$id));
 if ($separator !== '') {
     $url->param('separator', $separator);
 }
@@ -39,16 +39,16 @@ if ($verbosescales !== 1) {
 $PAGE->set_url($url);
 
 if (!$course = $DB->get_record('course', array('id'=>$id))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 require_login($course);
 $context = context_course::instance($id);
-require_capability('moodle/grade:import', $context);
+require_capability('powereduc/grade:import', $context);
 require_capability('gradeimport/csv:view', $context);
 
 $separatemode = (groups_get_course_groupmode($COURSE) == SEPARATEGROUPS and
-        !has_capability('moodle/site:accessallgroups', $context));
+        !has_capability('powereduc/site:accessallgroups', $context));
 $currentgroup = groups_get_course_group($course);
 
 $actionbar = new \core_grades\output\import_action_bar($context, null, 'csv');

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This script produces sample Excel and ODF spreadsheets.
@@ -31,7 +31,7 @@ $PAGE->set_url('/lib/tests/other/spreadsheettestpage.php');
 $PAGE->set_context($context);
 
 require_login();
-require_capability('moodle/site:config', $context);
+require_capability('powereduc/site:config', $context);
 
 $type = optional_param('type', '', PARAM_ALPHANUM);
 
@@ -40,8 +40,8 @@ if (!in_array($type, array('xslx', 'ods'))) {
 }
 
 if (!$type) {
-    $PAGE->set_title('Moodle spreadsheet export test');
-    $PAGE->set_heading('Moodle spreadsheet export test');
+    $PAGE->set_title('PowerEduc spreadsheet export test');
+    $PAGE->set_heading('PowerEduc spreadsheet export test');
 
     echo $OUTPUT->header();
     echo $OUTPUT->box_start();
@@ -65,16 +65,16 @@ Known problems:
 
     echo markdown_to_html($notes);
     echo $OUTPUT->box_end();
-    echo $OUTPUT->single_button(new moodle_url($PAGE->url, array('type' => 'xslx')), 'Test Excel format');
-    echo $OUTPUT->single_button(new moodle_url($PAGE->url, array('type' => 'ods')), 'Test ODS format');
+    echo $OUTPUT->single_button(new powereduc_url($PAGE->url, array('type' => 'xslx')), 'Test Excel format');
+    echo $OUTPUT->single_button(new powereduc_url($PAGE->url, array('type' => 'ods')), 'Test ODS format');
     echo $OUTPUT->footer();
     die;
 }
 
 if ($type === 'xslx') {
-    $workbook = new MoodleExcelWorkbook('moodletest.xlsx', 'Xslx');
+    $workbook = new PowerEducExcelWorkbook('powereductest.xlsx', 'Xslx');
 } else if ($type === 'ods') {
-    $workbook = new MoodleODSWorkbook('moodletest.ods');
+    $workbook = new PowerEducODSWorkbook('powereductest.ods');
 }
 
 $worksheet = array();
@@ -83,10 +83,10 @@ $worksheet = $workbook->add_worksheet('Supported');
 
 $worksheet->hide_screen_gridlines();
 
-$worksheet->write_string(0, 0, 'Moodle worksheet export test',
+$worksheet->write_string(0, 0, 'PowerEduc worksheet export test',
     $workbook->add_format(array('color' => 'red', 'size' => 20, 'bold' => 1, 'italic' => 1)));
 $worksheet->set_row(0, 25);
-$worksheet->write(1, 0, 'Moodle release: '.$CFG->release, $workbook->add_format(array('size' => 8, 'italic' => 1)));
+$worksheet->write(1, 0, 'PowerEduc release: '.$CFG->release, $workbook->add_format(array('size' => 8, 'italic' => 1)));
 
 $worksheet->set_column(0, 0, 20);
 $worksheet->set_column(1, 1, 30);
@@ -114,7 +114,7 @@ $worksheet->write(7, 0, 'Float');
 $worksheet->write_number(7, 1, 3.14159);
 
 $worksheet->write(8, 0, 'URL');
-$worksheet->write_url(8, 1, 'http://moodle.org');
+$worksheet->write_url(8, 1, 'http://powereduc.org');
 
 $worksheet->write(9, 0, 'Date (now)');
 $worksheet->write_date(9, 1, time());

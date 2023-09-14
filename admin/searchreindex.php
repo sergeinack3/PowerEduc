@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,13 +29,13 @@ require(__DIR__ . '/../config.php');
 // Check access.
 require_once($CFG->libdir . '/adminlib.php');
 
-admin_externalpage_setup('searchareas', '', null, (new moodle_url('/admin/searchreindex.php'))->out(false));
+admin_externalpage_setup('searchareas', '', null, (new powereduc_url('/admin/searchreindex.php'))->out(false));
 
 // Get area parameter and check it exists.
 $areaid = required_param('areaid', PARAM_ALPHAEXT);
 $area = \core_search\manager::get_search_area($areaid);
 if ($area === false) {
-    throw new moodle_exception('invalidrequest');
+    throw new powereduc_exception('invalidrequest');
 }
 $areaname = $area->get_visible_name();
 
@@ -78,13 +78,13 @@ if (optional_param('sesskey', '', PARAM_ALPHANUM)) {
     $a = (object)['name' => html_writer::tag('strong', $areaname), 'count' => $count];
     echo $OUTPUT->box(get_string('gradualreindex_queued', 'search', $a));
 
-    echo $OUTPUT->continue_button(new moodle_url('/admin/searchareas.php'));
+    echo $OUTPUT->continue_button(new powereduc_url('/admin/searchareas.php'));
 } else {
     // Display confirmation prompt.
     echo $OUTPUT->confirm(get_string('gradualreindex_confirm', 'search', html_writer::tag('strong', $areaname)),
-            new single_button(new moodle_url('/admin/searchreindex.php', ['areaid' => $areaid,
+            new single_button(new powereduc_url('/admin/searchreindex.php', ['areaid' => $areaid,
                 'sesskey' => sesskey()]), get_string('continue'), 'post', true),
-            new single_button(new moodle_url('/admin/searchareas.php'), get_string('cancel'), 'get'));
+            new single_button(new powereduc_url('/admin/searchareas.php'), get_string('cancel'), 'get'));
 }
 
 echo $OUTPUT->footer();

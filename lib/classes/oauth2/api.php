@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Class for loading/storing oauth2 endpoints from the DB.
@@ -28,9 +28,9 @@ defined('POWEREDUC_INTERNAL') || die();
 require_once($CFG->libdir . '/filelib.php');
 
 use stdClass;
-use moodle_url;
+use powereduc_url;
 use context_system;
-use moodle_exception;
+use powereduc_exception;
 
 /**
  * Static list of api methods for system oauth2 configuration.
@@ -47,13 +47,13 @@ class api {
      * @return \core\oauth2\issuer
      */
     public static function init_standard_issuer($type) {
-        require_capability('moodle/site:config', context_system::instance());
+        require_capability('powereduc/site:config', context_system::instance());
 
         $classname = self::get_service_classname($type);
         if (class_exists($classname)) {
             return $classname::init();
         }
-        throw new moodle_exception('OAuth 2 service type not recognised: ' . $type);
+        throw new powereduc_exception('OAuth 2 service type not recognised: ' . $type);
     }
 
     /**
@@ -63,14 +63,14 @@ class api {
      * @return \core\oauth2\issuer
      */
     public static function create_endpoints_for_standard_issuer($type, $issuer) {
-        require_capability('moodle/site:config', context_system::instance());
+        require_capability('powereduc/site:config', context_system::instance());
 
         $classname = self::get_service_classname($type);
         if (class_exists($classname)) {
             $classname::create_endpoints($issuer);
             return $issuer;
         }
-        throw new moodle_exception('OAuth 2 service type not recognised: ' . $type);
+        throw new powereduc_exception('OAuth 2 service type not recognised: ' . $type);
     }
 
     /**
@@ -81,16 +81,16 @@ class api {
      * @return \core\oauth2\issuer
      */
     public static function create_standard_issuer($type, $baseurl = false) {
-        require_capability('moodle/site:config', context_system::instance());
+        require_capability('powereduc/site:config', context_system::instance());
 
         switch ($type) {
             case 'imsobv2p1':
                 if (!$baseurl) {
-                    throw new moodle_exception('IMS OBv2.1 service type requires the baseurl parameter.');
+                    throw new powereduc_exception('IMS OBv2.1 service type requires the baseurl parameter.');
                 }
             case 'nextcloud':
                 if (!$baseurl) {
-                    throw new moodle_exception('Nextcloud service type requires the baseurl parameter.');
+                    throw new powereduc_exception('Nextcloud service type requires the baseurl parameter.');
                 }
             case 'google':
             case 'facebook':
@@ -104,7 +104,7 @@ class api {
                 return self::create_endpoints_for_standard_issuer($type, $issuer);
         }
 
-        throw new moodle_exception('OAuth 2 service type not recognised: ' . $type);
+        throw new powereduc_exception('OAuth 2 service type not recognised: ' . $type);
     }
 
 
@@ -205,7 +205,7 @@ class api {
      *
      * @param \core\oauth2\issuer $issuer
      * @return \core\oauth2\client|false An authenticated client (or false if the token could not be upgraded)
-     * @throws moodle_exception Request for token upgrade failed for technical reasons
+     * @throws powereduc_exception Request for token upgrade failed for technical reasons
      */
     public static function get_system_oauth_client(issuer $issuer) {
         $systemaccount = self::get_system_account($issuer);
@@ -230,12 +230,12 @@ class api {
      * This call does the redirect dance back to the current page after authentication.
      *
      * @param \core\oauth2\issuer $issuer The desired OAuth issuer
-     * @param moodle_url $currenturl The url to the current page.
+     * @param powereduc_url $currenturl The url to the current page.
      * @param string $additionalscopes The additional scopes required for authorization.
      * @param bool $autorefresh Should the client support the use of refresh tokens to persist access across sessions.
      * @return \core\oauth2\client
      */
-    public static function get_user_oauth_client(issuer $issuer, moodle_url $currenturl, $additionalscopes = '',
+    public static function get_user_oauth_client(issuer $issuer, powereduc_url $currenturl, $additionalscopes = '',
             $autorefresh = false) {
         $class = self::get_client_classname($issuer->get('servicetype'));
         $client = new $class($issuer, $currenturl, $additionalscopes, false, $autorefresh);
@@ -275,7 +275,7 @@ class api {
     }
 
     /**
-     * Get the list of defined mapping from OAuth user fields to moodle user fields.
+     * Get the list of defined mapping from OAuth user fields to powereduc user fields.
      *
      * @param \core\oauth2\issuer $issuer The desired OAuth issuer
      * @return \core\oauth2\user_field_mapping[]
@@ -326,7 +326,7 @@ class api {
      * @return issuer The created/updated issuer.
      */
     protected static function create_or_update_issuer($data, bool $create): issuer {
-        require_capability('moodle/site:config', context_system::instance());
+        require_capability('powereduc/site:config', context_system::instance());
         $issuer = new issuer($data->id ?? 0, $data);
 
         // Will throw exceptions on validation failures.
@@ -373,7 +373,7 @@ class api {
      * @return \core\oauth2\endpoint
      */
     public static function update_endpoint($data) {
-        require_capability('moodle/site:config', context_system::instance());
+        require_capability('powereduc/site:config', context_system::instance());
         $endpoint = new endpoint(0, $data);
 
         // Will throw exceptions on validation failures.
@@ -389,7 +389,7 @@ class api {
      * @return \core\oauth2\endpoint
      */
     public static function create_endpoint($data) {
-        require_capability('moodle/site:config', context_system::instance());
+        require_capability('powereduc/site:config', context_system::instance());
         $endpoint = new endpoint(0, $data);
 
         // Will throw exceptions on validation failures.
@@ -404,7 +404,7 @@ class api {
      * @return \core\oauth2\user_field_mapping
      */
     public static function update_user_field_mapping($data) {
-        require_capability('moodle/site:config', context_system::instance());
+        require_capability('powereduc/site:config', context_system::instance());
         $userfieldmapping = new user_field_mapping(0, $data);
 
         // Will throw exceptions on validation failures.
@@ -420,7 +420,7 @@ class api {
      * @return \core\oauth2\user_field_mapping
      */
     public static function create_user_field_mapping($data) {
-        require_capability('moodle/site:config', context_system::instance());
+        require_capability('powereduc/site:config', context_system::instance());
         $userfieldmapping = new user_field_mapping(0, $data);
 
         // Will throw exceptions on validation failures.
@@ -431,13 +431,13 @@ class api {
     /**
      * Reorder this identity issuer.
      *
-     * Requires moodle/site:config capability at the system context.
+     * Requires powereduc/site:config capability at the system context.
      *
      * @param int $id The id of the identity issuer to move.
      * @return boolean
      */
     public static function move_up_issuer($id) {
-        require_capability('moodle/site:config', context_system::instance());
+        require_capability('powereduc/site:config', context_system::instance());
         $current = new issuer($id);
 
         $sortorder = $current->get('sortorder');
@@ -464,13 +464,13 @@ class api {
     /**
      * Reorder this identity issuer.
      *
-     * Requires moodle/site:config capability at the system context.
+     * Requires powereduc/site:config capability at the system context.
      *
      * @param int $id The id of the identity issuer to move.
      * @return boolean
      */
     public static function move_down_issuer($id) {
-        require_capability('moodle/site:config', context_system::instance());
+        require_capability('powereduc/site:config', context_system::instance());
         $current = new issuer($id);
 
         $max = issuer::count_records();
@@ -501,13 +501,13 @@ class api {
     /**
      * Disable an identity issuer.
      *
-     * Requires moodle/site:config capability at the system context.
+     * Requires powereduc/site:config capability at the system context.
      *
      * @param int $id The id of the identity issuer to disable.
      * @return boolean
      */
     public static function disable_issuer($id) {
-        require_capability('moodle/site:config', context_system::instance());
+        require_capability('powereduc/site:config', context_system::instance());
         $issuer = new issuer($id);
 
         $issuer->set('enabled', 0);
@@ -518,13 +518,13 @@ class api {
     /**
      * Enable an identity issuer.
      *
-     * Requires moodle/site:config capability at the system context.
+     * Requires powereduc/site:config capability at the system context.
      *
      * @param int $id The id of the identity issuer to enable.
      * @return boolean
      */
     public static function enable_issuer($id) {
-        require_capability('moodle/site:config', context_system::instance());
+        require_capability('powereduc/site:config', context_system::instance());
         $issuer = new issuer($id);
 
         $issuer->set('enabled', 1);
@@ -534,13 +534,13 @@ class api {
     /**
      * Delete an identity issuer.
      *
-     * Requires moodle/site:config capability at the system context.
+     * Requires powereduc/site:config capability at the system context.
      *
      * @param int $id The id of the identity issuer to delete.
      * @return boolean
      */
     public static function delete_issuer($id) {
-        require_capability('moodle/site:config', context_system::instance());
+        require_capability('powereduc/site:config', context_system::instance());
         $issuer = new issuer($id);
 
         $systemaccount = self::get_system_account($issuer);
@@ -561,13 +561,13 @@ class api {
     /**
      * Delete an endpoint.
      *
-     * Requires moodle/site:config capability at the system context.
+     * Requires powereduc/site:config capability at the system context.
      *
      * @param int $id The id of the endpoint to delete.
      * @return boolean
      */
     public static function delete_endpoint($id) {
-        require_capability('moodle/site:config', context_system::instance());
+        require_capability('powereduc/site:config', context_system::instance());
         $endpoint = new endpoint($id);
 
         // Will throw exceptions on validation failures.
@@ -577,13 +577,13 @@ class api {
     /**
      * Delete a user_field_mapping.
      *
-     * Requires moodle/site:config capability at the system context.
+     * Requires powereduc/site:config capability at the system context.
      *
      * @param int $id The id of the user_field_mapping to delete.
      * @return boolean
      */
     public static function delete_user_field_mapping($id) {
-        require_capability('moodle/site:config', context_system::instance());
+        require_capability('powereduc/site:config', context_system::instance());
         $userfieldmapping = new user_field_mapping($id);
 
         // Will throw exceptions on validation failures.
@@ -593,14 +593,14 @@ class api {
     /**
      * Perform the OAuth dance and get a refresh token.
      *
-     * Requires moodle/site:config capability at the system context.
+     * Requires powereduc/site:config capability at the system context.
      *
      * @param \core\oauth2\issuer $issuer
-     * @param moodle_url $returnurl The url to the current page (we will be redirected back here after authentication).
+     * @param powereduc_url $returnurl The url to the current page (we will be redirected back here after authentication).
      * @return boolean
      */
     public static function connect_system_account($issuer, $returnurl) {
-        require_capability('moodle/site:config', context_system::instance());
+        require_capability('powereduc/site:config', context_system::instance());
 
         // We need to authenticate with an oauth 2 client AS a system user and get a refresh token for offline access.
         $scopes = self::get_system_scopes_for_issuer($issuer);

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,42 +25,42 @@
 use core_admin\local\settings\filesize;
 
 $capabilities = array(
-    'moodle/backup:backupcourse',
-    'moodle/category:manage',
-    'moodle/course:create',
-    'moodle/site:approvecourse',
-    'moodle/restore:restorecourse'
+    'powereduc/backup:backupcourse',
+    'powereduc/category:manage',
+    'powereduc/course:create',
+    'powereduc/site:approvecourse',
+    'powereduc/restore:restorecourse'
 );
 if ($hassiteconfig or has_any_capability($capabilities, $systemcontext)) {
     // Speedup for non-admins, add all caps used on this page.
     $ADMIN->add('courses',
         new admin_externalpage('coursemgmt', new lang_string('coursemgmt', 'admin'),
             $CFG->wwwroot . '/course/management.php',
-            array('moodle/category:manage', 'moodle/course:create')
+            array('powereduc/category:manage', 'powereduc/course:create')
         )
     );
     $ADMIN->add('courses',
         new admin_externalpage('course_customfield', new lang_string('course_customfield', 'admin'),
             $CFG->wwwroot . '/course/customfield.php',
-            array('moodle/course:configurecustomfields')
+            array('powereduc/course:configurecustomfields')
         )
     );
     $ADMIN->add('courses',
         new admin_externalpage('addcategory', new lang_string('addcategory', 'admin'),
-            new moodle_url('/course/editcategory.php', array('parent' => 0)),
-            array('moodle/category:manage')
+            new powereduc_url('/course/editcategory.php', array('parent' => 0)),
+            array('powereduc/category:manage')
         )
     );
     $ADMIN->add('courses',
         new admin_externalpage('addnewcourse', new lang_string('addnewcourse'),
-            new moodle_url('/course/edit.php', array('category' => 0)),
-            array('moodle/category:manage')
+            new powereduc_url('/course/edit.php', array('category' => 0)),
+            array('powereduc/category:manage')
         )
     );
     $ADMIN->add('courses',
         new admin_externalpage('restorecourse', new lang_string('restorecourse', 'admin'),
-            new moodle_url('/backup/restorefile.php', array('contextid' => context_system::instance()->id)),
-            array('moodle/restore:restorecourse')
+            new powereduc_url('/backup/restorefile.php', array('contextid' => context_system::instance()->id)),
+            array('powereduc/restore:restorecourse')
         )
     );
 
@@ -74,7 +74,7 @@ if ($hassiteconfig or has_any_capability($capabilities, $systemcontext)) {
     $choices = array();
     $choices['0'] = new lang_string('hide');
     $choices['1'] = new lang_string('show');
-    $temp->add(new admin_setting_configselect('moodlecourse/visible', new lang_string('visible'), new lang_string('visible_help'),
+    $temp->add(new admin_setting_configselect('powereduccourse/visible', new lang_string('visible'), new lang_string('visible_help'),
         1, $choices));
 
     // Enable/disable download course content.
@@ -82,7 +82,7 @@ if ($hassiteconfig or has_any_capability($capabilities, $systemcontext)) {
         DOWNLOAD_COURSE_CONTENT_DISABLED => new lang_string('no'),
         DOWNLOAD_COURSE_CONTENT_ENABLED => new lang_string('yes'),
     ];
-    $downloadcontentsitedefault = new admin_setting_configselect('moodlecourse/downloadcontentsitedefault',
+    $downloadcontentsitedefault = new admin_setting_configselect('powereduccourse/downloadcontentsitedefault',
             new lang_string('enabledownloadcoursecontent', 'course'),
             new lang_string('downloadcoursecontent_help', 'course'), 0, $choices);
     $downloadcontentsitedefault->add_dependent_on('downloadcoursecontentallowed');
@@ -90,7 +90,7 @@ if ($hassiteconfig or has_any_capability($capabilities, $systemcontext)) {
 
     $temp->add(
             new admin_setting_configtext(
-                'moodlecourse/participantsperpage',
+                'powereduccourse/participantsperpage',
                 new lang_string('participants:perpage', 'course'),
                 new lang_string('participants:perpage_help', 'course'),
                 20
@@ -105,31 +105,31 @@ if ($hassiteconfig or has_any_capability($capabilities, $systemcontext)) {
     foreach ($courseformats as $courseformat) {
         $formcourseformats[$courseformat] = new lang_string('pluginname', "format_$courseformat");
     }
-    $temp->add(new admin_setting_configselect('moodlecourse/format', new lang_string('format'), new lang_string('coursehelpformat'),
+    $temp->add(new admin_setting_configselect('powereduccourse/format', new lang_string('format'), new lang_string('coursehelpformat'),
         'topics', $formcourseformats));
 
-    $temp->add(new admin_setting_configtext('moodlecourse/maxsections', new lang_string('maxnumberweeks'),
+    $temp->add(new admin_setting_configtext('powereduccourse/maxsections', new lang_string('maxnumberweeks'),
         new lang_string('maxnumberweeks_desc'), 52));
 
-    $temp->add(new admin_settings_num_course_sections('moodlecourse/numsections', new lang_string('numberweeks'),
+    $temp->add(new admin_settings_num_course_sections('powereduccourse/numsections', new lang_string('numberweeks'),
         new lang_string('coursehelpnumberweeks'), 4));
 
     $choices = array();
     $choices['0'] = new lang_string('hiddensectionscollapsed');
     $choices['1'] = new lang_string('hiddensectionsinvisible');
-    $temp->add(new admin_setting_configselect('moodlecourse/hiddensections', new lang_string('hiddensections'),
+    $temp->add(new admin_setting_configselect('powereduccourse/hiddensections', new lang_string('hiddensections'),
         new lang_string('coursehelphiddensections'), 1, $choices));
 
     $choices = array();
     $choices[COURSE_DISPLAY_SINGLEPAGE] = new lang_string('coursedisplay_single');
     $choices[COURSE_DISPLAY_MULTIPAGE] = new lang_string('coursedisplay_multi');
-    $temp->add(new admin_setting_configselect('moodlecourse/coursedisplay', new lang_string('coursedisplay'),
+    $temp->add(new admin_setting_configselect('powereduccourse/coursedisplay', new lang_string('coursedisplay'),
         new lang_string('coursedisplay_help'), COURSE_DISPLAY_SINGLEPAGE, $choices));
 
-    $temp->add(new admin_setting_configcheckbox('moodlecourse/courseenddateenabled', get_string('courseenddateenabled'),
+    $temp->add(new admin_setting_configcheckbox('powereduccourse/courseenddateenabled', get_string('courseenddateenabled'),
         get_string('courseenddateenabled_desc'), 1));
 
-    $temp->add(new admin_setting_configduration('moodlecourse/courseduration', get_string('courseduration'),
+    $temp->add(new admin_setting_configduration('powereduccourse/courseduration', get_string('courseduration'),
         get_string('courseduration_desc'), YEARSECS));
 
     // Appearance.
@@ -138,17 +138,17 @@ if ($hassiteconfig or has_any_capability($capabilities, $systemcontext)) {
     $languages = array();
     $languages[''] = new lang_string('forceno');
     $languages += get_string_manager()->get_list_of_translations();
-    $temp->add(new admin_setting_configselect('moodlecourse/lang', new lang_string('forcelanguage'), '', key($languages),
+    $temp->add(new admin_setting_configselect('powereduccourse/lang', new lang_string('forcelanguage'), '', key($languages),
         $languages));
 
     $options = range(0, 10);
-    $temp->add(new admin_setting_configselect('moodlecourse/newsitems', new lang_string('newsitemsnumber'),
+    $temp->add(new admin_setting_configselect('powereduccourse/newsitems', new lang_string('newsitemsnumber'),
         new lang_string('coursehelpnewsitemsnumber'), 5, $options));
-    $temp->add(new admin_setting_configselect('moodlecourse/showgrades', new lang_string('showgrades'),
+    $temp->add(new admin_setting_configselect('powereduccourse/showgrades', new lang_string('showgrades'),
         new lang_string('coursehelpshowgrades'), 1, array(0 => new lang_string('no'), 1 => new lang_string('yes'))));
-    $temp->add(new admin_setting_configselect('moodlecourse/showreports', new lang_string('showreports'), '', 0,
+    $temp->add(new admin_setting_configselect('powereduccourse/showreports', new lang_string('showreports'), '', 0,
         array(0 => new lang_string('no'), 1 => new lang_string('yes'))));
-    $temp->add(new admin_setting_configselect('moodlecourse/showactivitydates',
+    $temp->add(new admin_setting_configselect('powereduccourse/showactivitydates',
         new lang_string('showactivitydates'),
         new lang_string('showactivitydates_help'), 1, [
             0 => new lang_string('no'),
@@ -161,26 +161,26 @@ if ($hassiteconfig or has_any_capability($capabilities, $systemcontext)) {
 
     if (!empty($CFG->legacyfilesinnewcourses)) {
         $choices = array('0'=>new lang_string('no'), '2'=>new lang_string('yes'));
-        $temp->add(new admin_setting_configselect('moodlecourse/legacyfiles', new lang_string('courselegacyfiles'),
+        $temp->add(new admin_setting_configselect('powereduccourse/legacyfiles', new lang_string('courselegacyfiles'),
             new lang_string('courselegacyfiles_help'), key($choices), $choices));
     }
 
-    $currentmaxbytes = get_config('moodlecourse', 'maxbytes');
+    $currentmaxbytes = get_config('powereduccourse', 'maxbytes');
     if (isset($CFG->maxbytes)) {
         $choices = get_max_upload_sizes($CFG->maxbytes, 0, 0, $currentmaxbytes);
     } else {
         $choices = get_max_upload_sizes(0, 0, 0, $currentmaxbytes);
     }
-    $temp->add(new admin_setting_configselect('moodlecourse/maxbytes', new lang_string('maximumupload'),
+    $temp->add(new admin_setting_configselect('powereduccourse/maxbytes', new lang_string('maximumupload'),
         new lang_string('coursehelpmaximumupload'), key($choices), $choices));
 
     // Completion tracking.
     $temp->add(new admin_setting_heading('progress', new lang_string('completion','completion'), ''));
-    $temp->add(new admin_setting_configselect('moodlecourse/enablecompletion', new lang_string('completion', 'completion'),
+    $temp->add(new admin_setting_configselect('powereduccourse/enablecompletion', new lang_string('completion', 'completion'),
         new lang_string('enablecompletion_help', 'completion'), 1, array(0 => new lang_string('no'), 1 => new lang_string('yes'))));
 
     // Display completion conditions.
-    $temp->add(new admin_setting_configselect('moodlecourse/showcompletionconditions',
+    $temp->add(new admin_setting_configselect('powereduccourse/showcompletionconditions',
         new lang_string('showcompletionconditions', 'completion'),
         new lang_string('showcompletionconditions_help', 'completion'), 1, [
             0 => new lang_string('no'),
@@ -194,13 +194,13 @@ if ($hassiteconfig or has_any_capability($capabilities, $systemcontext)) {
     $choices[NOGROUPS] = new lang_string('groupsnone', 'group');
     $choices[SEPARATEGROUPS] = new lang_string('groupsseparate', 'group');
     $choices[VISIBLEGROUPS] = new lang_string('groupsvisible', 'group');
-    $temp->add(new admin_setting_configselect('moodlecourse/groupmode', new lang_string('groupmode'), '', key($choices),$choices));
-    $temp->add(new admin_setting_configselect('moodlecourse/groupmodeforce', new lang_string('force'), new lang_string('coursehelpforce'), 0,array(0 => new lang_string('no'), 1 => new lang_string('yes'))));
+    $temp->add(new admin_setting_configselect('powereduccourse/groupmode', new lang_string('groupmode'), '', key($choices),$choices));
+    $temp->add(new admin_setting_configselect('powereduccourse/groupmodeforce', new lang_string('force'), new lang_string('coursehelpforce'), 0,array(0 => new lang_string('no'), 1 => new lang_string('yes'))));
 
     $ADMIN->add('courses', $temp);
 
     // Download course content.
-    $downloadcoursedefaulturl = new moodle_url('/admin/settings.php', ['section' => 'coursesettings']);
+    $downloadcoursedefaulturl = new powereduc_url('/admin/settings.php', ['section' => 'coursesettings']);
     $temp = new admin_settingpage('downloadcoursecontent', new lang_string('downloadcoursecontent', 'course'));
     $temp->add(new admin_setting_configcheckbox('downloadcoursecontentallowed',
             new lang_string('downloadcoursecontentallowed', 'admin'),
@@ -225,13 +225,13 @@ if ($hassiteconfig or has_any_capability($capabilities, $systemcontext)) {
     $temp->add(new admin_setting_configcheckbox('lockrequestcategory',
         new lang_string('lockrequestcategory', 'admin'),
         new lang_string('configlockrequestcategory', 'admin'), 0));
-    $temp->add(new admin_setting_users_with_capability('courserequestnotify', new lang_string('courserequestnotify', 'admin'), new lang_string('configcourserequestnotify2', 'admin'), array(), 'moodle/site:approvecourse'));
+    $temp->add(new admin_setting_users_with_capability('courserequestnotify', new lang_string('courserequestnotify', 'admin'), new lang_string('configcourserequestnotify2', 'admin'), array(), 'powereduc/site:approvecourse'));
     $ADMIN->add('courses', $temp);
 
     // Pending course requests.
     if (!empty($CFG->enablecourserequests)) {
         $ADMIN->add('courses', new admin_externalpage('coursespending', new lang_string('pendingrequests'),
-                $CFG->wwwroot . '/course/pending.php', array('moodle/site:approvecourse')));
+                $CFG->wwwroot . '/course/pending.php', array('powereduc/site:approvecourse')));
     }
 
     // Add a category for the Activity Chooser.
@@ -279,8 +279,8 @@ if ($hassiteconfig or has_any_capability($capabilities, $systemcontext)) {
     $ADMIN->add('activitychooser', $temp);
     $ADMIN->add('activitychooser',
         new admin_externalpage('activitychooserrecommended', new lang_string('activitychooserrecommendations', 'course'),
-            new moodle_url('/course/recommendations.php'),
-            array('moodle/course:recommendactivity')
+            new powereduc_url('/course/recommendations.php'),
+            array('powereduc/course:recommendactivity')
         )
     );
 
@@ -288,7 +288,7 @@ if ($hassiteconfig or has_any_capability($capabilities, $systemcontext)) {
     $ADMIN->add('courses', new admin_category('backups', new lang_string('backups','admin')));
 
     // Create a page for general backups configuration and defaults.
-    $temp = new admin_settingpage('backupgeneralsettings', new lang_string('generalbackdefaults', 'backup'), 'moodle/backup:backupcourse');
+    $temp = new admin_settingpage('backupgeneralsettings', new lang_string('generalbackdefaults', 'backup'), 'powereduc/backup:backupcourse');
 
     // General configuration section.
     $temp->add(new admin_setting_configselect('backup/loglifetime', new lang_string('loglifetime', 'backup'), new lang_string('configloglifetime', 'backup'), 30, array(
@@ -344,7 +344,7 @@ if ($hassiteconfig or has_any_capability($capabilities, $systemcontext)) {
     $ADMIN->add('backups', $temp);
 
     // Create a page for general import configuration and defaults.
-    $temp = new admin_settingpage('importgeneralsettings', new lang_string('importgeneralsettings', 'backup'), 'moodle/backup:backupcourse');
+    $temp = new admin_settingpage('importgeneralsettings', new lang_string('importgeneralsettings', 'backup'), 'powereduc/backup:backupcourse');
     $temp->add(new admin_setting_configtext('backup/import_general_maxresults', new lang_string('importgeneralmaxresults', 'backup'), new lang_string('importgeneralmaxresults_desc', 'backup'), 10));
     $temp->add(new admin_setting_configcheckbox('backup/import_general_duplicate_admin_allowed',
             new lang_string('importgeneralduplicateadminallowed', 'backup'),
@@ -379,7 +379,7 @@ if ($hassiteconfig or has_any_capability($capabilities, $systemcontext)) {
     $ADMIN->add('backups', $temp);
 
     // Create a page for automated backups configuration and defaults.
-    $temp = new admin_settingpage('automated', new lang_string('automatedsetup','backup'), 'moodle/backup:backupcourse');
+    $temp = new admin_settingpage('automated', new lang_string('automatedsetup','backup'), 'powereduc/backup:backupcourse');
 
     // Automated configuration section.
     $temp->add(new admin_setting_configselect('backup/backup_auto_active', new lang_string('active'),  new lang_string('autoactivedescription', 'backup'), 0, array(

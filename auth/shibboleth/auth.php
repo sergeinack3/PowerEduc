@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -105,7 +105,7 @@ class auth_plugin_shibboleth extends auth_plugin_base {
 
         // Check whether we have got all the essential attributes
         if ( empty($_SERVER[$this->config->user_attribute]) ) {
-            throw new \moodle_exception( 'shib_not_all_attributes_error', 'auth_shibboleth' , '',
+            throw new \powereduc_exception( 'shib_not_all_attributes_error', 'auth_shibboleth' , '',
                     "'".$this->config->user_attribute."' ('".$_SERVER[$this->config->user_attribute]."'), '".
                 $this->config->field_map_firstname."' ('".$_SERVER[$this->config->field_map_firstname]."'), '".
                 $this->config->field_map_lastname."' ('".$_SERVER[$this->config->field_map_lastname]."') and '".
@@ -141,7 +141,7 @@ class auth_plugin_shibboleth extends auth_plugin_base {
             ) {
 
             // Include a custom file outside the Moodle dir to
-            // modify the variable $moodleattributes
+            // modify the variable $powereducattributes
             include($this->config->convert_data);
         }
 
@@ -156,16 +156,16 @@ class auth_plugin_shibboleth extends auth_plugin_base {
     function get_attributes() {
         $configarray = (array) $this->config;
 
-        $moodleattributes = array();
+        $powereducattributes = array();
         $userfields = array_merge($this->userfields, $this->get_custom_user_profile_fields());
         foreach ($userfields as $field) {
             if (isset($configarray["field_map_$field"])) {
-                $moodleattributes[$field] = $configarray["field_map_$field"];
+                $powereducattributes[$field] = $configarray["field_map_$field"];
             }
         }
-        $moodleattributes['username'] = $configarray["user_attribute"];
+        $powereducattributes['username'] = $configarray["user_attribute"];
 
-        return $moodleattributes;
+        return $powereducattributes;
     }
 
     function prevent_local_passwords() {
@@ -200,11 +200,11 @@ class auth_plugin_shibboleth extends auth_plugin_base {
     /**
      * Get password change url.
      *
-     * @return moodle_url|null Returns URL to change password or null otherwise.
+     * @return powereduc_url|null Returns URL to change password or null otherwise.
      */
     function change_password_url() {
         if (!empty($this->config->changepasswordurl)) {
-            return new moodle_url($this->config->changepasswordurl);
+            return new powereduc_url($this->config->changepasswordurl);
         } else {
             return null;
         }
@@ -243,7 +243,7 @@ class auth_plugin_shibboleth extends auth_plugin_base {
             }
 
             // Overwrite redirect in order to send user to Shibboleth logout page and let him return back
-            $redirecturl = new moodle_url($this->config->logout_handler, array('return' => $temp_redirect));
+            $redirecturl = new powereduc_url($this->config->logout_handler, array('return' => $temp_redirect));
             $redirect = $redirecturl->out();
         }
     }
@@ -268,7 +268,7 @@ class auth_plugin_shibboleth extends auth_plugin_base {
 
         if (!isset($this->config->user_attribute) || empty($this->config->user_attribute)) {
             echo $OUTPUT->notification(get_string("shib_not_set_up_error", "auth_shibboleth",
-                (new moodle_url('/auth/shibboleth/README.txt'))->out()), 'notifyproblem');
+                (new powereduc_url('/auth/shibboleth/README.txt'))->out()), 'notifyproblem');
             return;
         }
         if ($this->config->convert_data and $this->config->convert_data != '' and !is_readable($this->config->convert_data)) {
@@ -298,10 +298,10 @@ class auth_plugin_shibboleth extends auth_plugin_base {
             return $result;
         }
 
-        $url = new moodle_url('/auth/shibboleth/index.php');
+        $url = new powereduc_url('/auth/shibboleth/index.php');
 
         if ($config->auth_logo) {
-            $iconurl = moodle_url::make_pluginfile_url(
+            $iconurl = powereduc_url::make_pluginfile_url(
                 context_system::instance()->id,
                 'auth_shibboleth',
                 'logo',

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -135,7 +135,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_parse_rrule_validation() {
         $rrule = "RANDOM=PROPERTY;";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -145,7 +145,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_freq_validation() {
         $rrule = "FREQ=RANDOMLY;";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -157,7 +157,7 @@ class rrule_manager_test extends \advanced_testcase {
         $until = date('Y-m-d', $until);
         $rrule = "FREQ=DAILY;COUNT=2;UNTIL=$until";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -167,7 +167,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_interval_validation() {
         $rrule = "INTERVAL=0";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -177,7 +177,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_bysecond_validation() {
         $rrule = "BYSECOND=30,45,60";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -187,7 +187,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_byminute_validation() {
         $rrule = "BYMINUTE=30,45,60";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -197,7 +197,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_byhour_validation() {
         $rrule = "BYHOUR=23,45";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -207,7 +207,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_byday_validation() {
         $rrule = "BYDAY=MO,2SE";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -228,7 +228,7 @@ class rrule_manager_test extends \advanced_testcase {
         // This is invalid.
         $rrule = "FREQ=WEEKLY;BYDAY=MO,2SA";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -238,7 +238,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_bymonthday_upper_bound_validation() {
         $rrule = "BYMONTHDAY=1,32";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -248,7 +248,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_bymonthday_0_validation() {
         $rrule = "BYMONTHDAY=1,0";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -258,7 +258,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_bymonthday_lower_bound_validation() {
         $rrule = "BYMONTHDAY=1,-31,-32";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -268,7 +268,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_byyearday_upper_bound_validation() {
         $rrule = "BYYEARDAY=1,366,367";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -278,7 +278,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_byyearday_0_validation() {
         $rrule = "BYYEARDAY=0";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -288,7 +288,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_byyearday_lower_bound_validation() {
         $rrule = "BYYEARDAY=-1,-366,-367";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -298,7 +298,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_non_yearly_freq_with_byweekno() {
         $rrule = "BYWEEKNO=1,53";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -308,7 +308,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_byweekno_upper_bound_validation() {
         $rrule = "FREQ=YEARLY;BYWEEKNO=1,53,54";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -318,7 +318,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_byweekno_0_validation() {
         $rrule = "FREQ=YEARLY;BYWEEKNO=0";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -328,7 +328,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_byweekno_lower_bound_validation() {
         $rrule = "FREQ=YEARLY;BYWEEKNO=-1,-53,-54";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -338,7 +338,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_bymonth_upper_bound_validation() {
         $rrule = "BYMONTH=1,12,13";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -348,7 +348,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_bymonth_lower_bound_validation() {
         $rrule = "BYMONTH=0";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -358,7 +358,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_bysetpos_without_other_byrules() {
         $rrule = "BYSETPOS=1,366";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -368,7 +368,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_bysetpos_upper_bound_validation() {
         $rrule = "BYSETPOS=1,366,367";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -378,7 +378,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_bysetpos_0_validation() {
         $rrule = "BYSETPOS=0";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 
@@ -388,7 +388,7 @@ class rrule_manager_test extends \advanced_testcase {
     public function test_bysetpos_lower_bound_validation() {
         $rrule = "BYSETPOS=-1,-366,-367";
         $mang = new rrule_manager($rrule);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $mang->parse_rrule();
     }
 

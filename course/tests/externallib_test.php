@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -59,7 +59,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Set the required capabilities by the external function
         $contextid = context_system::instance()->id;
-        $roleid = $this->assignUserCapability('moodle/category:manage', $contextid);
+        $roleid = $this->assignUserCapability('powereduc/category:manage', $contextid);
 
         // Create base categories.
         $category1 = new stdClass();
@@ -120,7 +120,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertGreaterThan($category3->sortorder, $category2->sortorder);
 
         // Call without required capability
-        $this->unassignUserCapability('moodle/category:manage', $contextid, $roleid);
+        $this->unassignUserCapability('powereduc/category:manage', $contextid, $roleid);
         $this->expectException('required_capability_exception');
         $createdsubcats = core_course_external::create_categories($subcategories);
 
@@ -136,7 +136,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Set the required capabilities by the external function
         $contextid = context_system::instance()->id;
-        $roleid = $this->assignUserCapability('moodle/category:manage', $contextid);
+        $roleid = $this->assignUserCapability('powereduc/category:manage', $contextid);
 
         $category1  = self::getDataGenerator()->create_category();
         $category2  = self::getDataGenerator()->create_category(
@@ -163,7 +163,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals($dbcategory5->path, $category3->path . '/' . $category5->id);
 
          // Call without required capability
-        $this->unassignUserCapability('moodle/category:manage', $contextid, $roleid);
+        $this->unassignUserCapability('powereduc/category:manage', $contextid, $roleid);
         $this->expectException('required_capability_exception');
         $createdsubcats = core_course_external::delete_categories(
                 array(array('id' => $category3->id)));
@@ -201,8 +201,8 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Set the required capabilities by the external function.
         $context = context_system::instance();
-        $roleid = $this->assignUserCapability('moodle/category:manage', $context->id);
-        $this->assignUserCapability('moodle/category:viewhiddencategories', $context->id, $roleid);
+        $roleid = $this->assignUserCapability('powereduc/category:manage', $context->id);
+        $this->assignUserCapability('powereduc/category:viewhiddencategories', $context->id, $roleid);
 
         // Retrieve category1 + sub-categories except not visible ones
         $categories = core_course_external::get_categories(array(
@@ -280,7 +280,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         $this->assertEquals($DB->count_records('course_categories'), count($categories));
 
-        $this->unassignUserCapability('moodle/category:viewhiddencategories', $context->id, $roleid);
+        $this->unassignUserCapability('powereduc/category:viewhiddencategories', $context->id, $roleid);
 
         // Ensure maxdepthcategory is 2 and retrieve all categories without category:viewhiddencategories capability.
         // It should retrieve all visible categories as well.
@@ -293,7 +293,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals($DB->count_records('course_categories', array('visible' => 1)), count($categories));
 
         // Call without required capability (it will fail cause of the search on idnumber).
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $categories = core_course_external::get_categories(array(
             array('key' => 'id', 'value' => $category1->id),
             array('key' => 'idnumber', 'value' => $category1->idnumber),
@@ -310,7 +310,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Set the required capabilities by the external function
         $contextid = context_system::instance()->id;
-        $roleid = $this->assignUserCapability('moodle/category:manage', $contextid);
+        $roleid = $this->assignUserCapability('powereduc/category:manage', $contextid);
 
         // Create base categories.
         $category1data['idnumber'] = 'idnumbercat1';
@@ -358,7 +358,7 @@ class externallib_test extends externallib_advanced_testcase {
                 $dbcategories[$category5->id]->path);
 
         // Call without required capability.
-        $this->unassignUserCapability('moodle/category:manage', $contextid, $roleid);
+        $this->unassignUserCapability('powereduc/category:manage', $contextid, $roleid);
         $this->expectException('required_capability_exception');
         core_course_external::update_categories($categories);
     }
@@ -373,8 +373,8 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Set the required capabilities by the external function.
         $contextid = context_system::instance()->id;
-        $roleid = $this->assignUserCapability('moodle/course:create', $contextid);
-        $this->assignUserCapability('moodle/course:visibility', $contextid, $roleid);
+        $roleid = $this->assignUserCapability('powereduc/course:create', $contextid);
+        $this->assignUserCapability('powereduc/course:visibility', $contextid, $roleid);
 
         $numsections = 10;
         $category  = self::getDataGenerator()->create_category();
@@ -420,9 +420,9 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Set the required capabilities by the external function
         $contextid = context_system::instance()->id;
-        $roleid = $this->assignUserCapability('moodle/course:create', $contextid);
-        $this->assignUserCapability('moodle/course:visibility', $contextid, $roleid);
-        $this->assignUserCapability('moodle/course:setforcedlanguage', $contextid, $roleid);
+        $roleid = $this->assignUserCapability('powereduc/course:create', $contextid);
+        $this->assignUserCapability('powereduc/course:visibility', $contextid, $roleid);
+        $this->assignUserCapability('powereduc/course:setforcedlanguage', $contextid, $roleid);
 
         $category  = self::getDataGenerator()->create_category();
 
@@ -511,7 +511,7 @@ class externallib_test extends externallib_advanced_testcase {
                 $this->assertEquals($courseinfo->enablecompletion, $course2['enablecompletion']);
 
             } else if ($createdcourse['shortname'] == $course1['shortname']) {
-                $courseconfig = get_config('moodlecourse');
+                $courseconfig = get_config('powereduccourse');
                 $this->assertEquals($courseinfo->fullname, $course1['fullname']);
                 $this->assertEquals($courseinfo->shortname, $course1['shortname']);
                 $this->assertEquals($courseinfo->category, $course1['categoryid']);
@@ -542,12 +542,12 @@ class externallib_test extends externallib_advanced_testcase {
                 $customfields = $handler->export_instance_data_object($createdcourse['id']);
                 $this->assertEquals((object)['test' => 'Test value'], $customfields);
             } else {
-                throw new moodle_exception('Unexpected shortname');
+                throw new powereduc_exception('Unexpected shortname');
             }
         }
 
         // Call without required capability
-        $this->unassignUserCapability('moodle/course:create', $contextid, $roleid);
+        $this->unassignUserCapability('powereduc/course:create', $contextid, $roleid);
         $this->expectException('required_capability_exception');
         $createdsubcats = core_course_external::create_courses($courses);
     }
@@ -596,7 +596,7 @@ class externallib_test extends externallib_advanced_testcase {
         // Create a category for the new course.
         $course['categoryid'] = $this->getDataGenerator()->create_category()->id;
 
-        $this->expectException(moodle_exception::class);
+        $this->expectException(powereduc_exception::class);
         $this->expectExceptionMessageMatches("/{$expectedemptyfield}/");
         core_course_external::create_courses([$course]);
     }
@@ -722,14 +722,14 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Set the required capabilities by the external function.
         $context = context_system::instance();
-        $roleid = $this->assignUserCapability('moodle/course:view', $context->id);
-        $this->assignUserCapability('moodle/course:update',
+        $roleid = $this->assignUserCapability('powereduc/course:view', $context->id);
+        $this->assignUserCapability('powereduc/course:update',
                 context_course::instance($course1->id)->id, $roleid);
-        $this->assignUserCapability('moodle/course:update',
+        $this->assignUserCapability('powereduc/course:update',
                 context_course::instance($course2->id)->id, $roleid);
-        $this->assignUserCapability('moodle/course:update',
+        $this->assignUserCapability('powereduc/course:update',
                 context_course::instance($course3->id)->id, $roleid);
-        $this->assignUserCapability('moodle/course:update',
+        $this->assignUserCapability('powereduc/course:update',
                 context_course::instance($course4->id)->id, $roleid);
 
         $courses = core_course_external::get_courses(array('ids' =>
@@ -862,7 +862,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             core_course_external::get_courses(array('ids' => [$course1->id]));
             $this->fail('Exception expected');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertEquals(1, preg_match('/Course or activity not accessible. \(Not enrolled\)/', $e->getMessage()));
         }
     }
@@ -880,14 +880,14 @@ class externallib_test extends externallib_advanced_testcase {
         $coursedata1['fullname'] = 'FIRST COURSE';
         $course1  = self::getDataGenerator()->create_course($coursedata1);
 
-        $page = new moodle_page();
+        $page = new powereduc_page();
         $page->set_course($course1);
         $page->blocks->add_blocks([BLOCK_POS_LEFT => ['news_items'], BLOCK_POS_RIGHT => []], 'course-view-*');
 
         $coursedata2['fullname'] = 'SECOND COURSE';
         $course2  = self::getDataGenerator()->create_course($coursedata2);
 
-        $page = new moodle_page();
+        $page = new powereduc_page();
         $page->set_course($course2);
         $page->blocks->add_blocks([BLOCK_POS_LEFT => ['news_items'], BLOCK_POS_RIGHT => []], 'course-view-*');
 
@@ -1062,12 +1062,12 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Set the required capabilities by the external function.
         $context = context_course::instance($course->id);
-        $roleid = $this->assignUserCapability('moodle/course:view', $context->id);
-        $this->assignUserCapability('moodle/course:update', $context->id, $roleid);
+        $roleid = $this->assignUserCapability('powereduc/course:view', $context->id);
+        $this->assignUserCapability('powereduc/course:update', $context->id, $roleid);
         $this->assignUserCapability('mod/data:view', $context->id, $roleid);
 
         $conditions = array('course' => $course->id, 'section' => 2);
-        $DB->set_field('course_sections', 'summary', 'Text with iframe <iframe src="https://moodle.org"></iframe>', $conditions);
+        $DB->set_field('course_sections', 'summary', 'Text with iframe <iframe src="https://powereduc.org"></iframe>', $conditions);
 
         // Add date availability condition not met for section 3.
         $availability = '{"op":"&","c":[{"type":"date","d":">=","t":' . $tomorrow . '}],"showc":[true]}';
@@ -1170,7 +1170,7 @@ class externallib_test extends externallib_advanced_testcase {
             $sections = core_course_external::get_course_contents($course->id,
                                                                     array(array("name" => "invalid", "value" => 1)));
             $this->fail('Exception expected due to invalid option.');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertEquals('errorinvalidparam', $e->errorcode);
         }
     }
@@ -1729,14 +1729,14 @@ class externallib_test extends externallib_advanced_testcase {
         // Set the required capabilities by the external function.
         $coursecontext = context_course::instance($course->id);
         $categorycontext = context_coursecat::instance($course->category);
-        $roleid = $this->assignUserCapability('moodle/course:create', $categorycontext->id);
-        $this->assignUserCapability('moodle/course:view', $categorycontext->id, $roleid);
-        $this->assignUserCapability('moodle/restore:restorecourse', $categorycontext->id, $roleid);
-        $this->assignUserCapability('moodle/backup:backupcourse', $coursecontext->id, $roleid);
-        $this->assignUserCapability('moodle/backup:configure', $coursecontext->id, $roleid);
+        $roleid = $this->assignUserCapability('powereduc/course:create', $categorycontext->id);
+        $this->assignUserCapability('powereduc/course:view', $categorycontext->id, $roleid);
+        $this->assignUserCapability('powereduc/restore:restorecourse', $categorycontext->id, $roleid);
+        $this->assignUserCapability('powereduc/backup:backupcourse', $coursecontext->id, $roleid);
+        $this->assignUserCapability('powereduc/backup:configure', $coursecontext->id, $roleid);
         // Optional capabilities to copy user data.
-        $this->assignUserCapability('moodle/backup:userinfo', $coursecontext->id, $roleid);
-        $this->assignUserCapability('moodle/restore:userinfo', $categorycontext->id, $roleid);
+        $this->assignUserCapability('powereduc/backup:userinfo', $coursecontext->id, $roleid);
+        $this->assignUserCapability('powereduc/restore:userinfo', $categorycontext->id, $roleid);
 
         $newcourse['fullname'] = 'Course duplicate';
         $newcourse['shortname'] = 'courseduplicate';
@@ -1772,16 +1772,16 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Set the required capabilities by the external function.
         $contextid = context_system::instance()->id;
-        $roleid = $this->assignUserCapability('moodle/course:update', $contextid);
-        $this->assignUserCapability('moodle/course:changecategory', $contextid, $roleid);
-        $this->assignUserCapability('moodle/course:changelockedcustomfields', $contextid, $roleid);
-        $this->assignUserCapability('moodle/course:changefullname', $contextid, $roleid);
-        $this->assignUserCapability('moodle/course:changeshortname', $contextid, $roleid);
-        $this->assignUserCapability('moodle/course:changeidnumber', $contextid, $roleid);
-        $this->assignUserCapability('moodle/course:changesummary', $contextid, $roleid);
-        $this->assignUserCapability('moodle/course:visibility', $contextid, $roleid);
-        $this->assignUserCapability('moodle/course:viewhiddencourses', $contextid, $roleid);
-        $this->assignUserCapability('moodle/course:setforcedlanguage', $contextid, $roleid);
+        $roleid = $this->assignUserCapability('powereduc/course:update', $contextid);
+        $this->assignUserCapability('powereduc/course:changecategory', $contextid, $roleid);
+        $this->assignUserCapability('powereduc/course:changelockedcustomfields', $contextid, $roleid);
+        $this->assignUserCapability('powereduc/course:changefullname', $contextid, $roleid);
+        $this->assignUserCapability('powereduc/course:changeshortname', $contextid, $roleid);
+        $this->assignUserCapability('powereduc/course:changeidnumber', $contextid, $roleid);
+        $this->assignUserCapability('powereduc/course:changesummary', $contextid, $roleid);
+        $this->assignUserCapability('powereduc/course:visibility', $contextid, $roleid);
+        $this->assignUserCapability('powereduc/course:viewhiddencourses', $contextid, $roleid);
+        $this->assignUserCapability('powereduc/course:setforcedlanguage', $contextid, $roleid);
 
         // Create category and courses.
         $category1  = self::getDataGenerator()->create_category();
@@ -1889,7 +1889,7 @@ class externallib_test extends externallib_advanced_testcase {
             } else if ($course['id'] == $course3['id']) {
                 $this->assertEquals(['test' => $updatedcustomfieldvalue['value']], (array)$customfields);
             } else {
-                throw new moodle_exception('Unexpected shortname');
+                throw new powereduc_exception('Unexpected shortname');
             }
         }
 
@@ -1897,7 +1897,7 @@ class externallib_test extends externallib_advanced_testcase {
         // Try update course without update capability.
         $user = self::getDataGenerator()->create_user();
         $this->setUser($user);
-        $this->unassignUserCapability('moodle/course:update', $contextid, $roleid);
+        $this->unassignUserCapability('powereduc/course:update', $contextid, $roleid);
         self::getDataGenerator()->enrol_user($user->id, $course1['id'], $roleid);
         $updatedcoursewarnings = core_course_external::update_courses($courses);
         $updatedcoursewarnings = external_api::clean_returnvalue(core_course_external::update_courses_returns(),
@@ -1905,8 +1905,8 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals(1, count($updatedcoursewarnings['warnings']));
 
         // Try update course category without capability.
-        $this->assignUserCapability('moodle/course:update', $contextid, $roleid);
-        $this->unassignUserCapability('moodle/course:changecategory', $contextid, $roleid);
+        $this->assignUserCapability('powereduc/course:update', $contextid, $roleid);
+        $this->unassignUserCapability('powereduc/course:changecategory', $contextid, $roleid);
         $user = self::getDataGenerator()->create_user();
         $this->setUser($user);
         self::getDataGenerator()->enrol_user($user->id, $course1['id'], $roleid);
@@ -1918,8 +1918,8 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals(1, count($updatedcoursewarnings['warnings']));
 
         // Try update course fullname without capability.
-        $this->assignUserCapability('moodle/course:changecategory', $contextid, $roleid);
-        $this->unassignUserCapability('moodle/course:changefullname', $contextid, $roleid);
+        $this->assignUserCapability('powereduc/course:changecategory', $contextid, $roleid);
+        $this->unassignUserCapability('powereduc/course:changefullname', $contextid, $roleid);
         $user = self::getDataGenerator()->create_user();
         $this->setUser($user);
         self::getDataGenerator()->enrol_user($user->id, $course1['id'], $roleid);
@@ -1935,8 +1935,8 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals(1, count($updatedcoursewarnings['warnings']));
 
         // Try update course shortname without capability.
-        $this->assignUserCapability('moodle/course:changefullname', $contextid, $roleid);
-        $this->unassignUserCapability('moodle/course:changeshortname', $contextid, $roleid);
+        $this->assignUserCapability('powereduc/course:changefullname', $contextid, $roleid);
+        $this->unassignUserCapability('powereduc/course:changeshortname', $contextid, $roleid);
         $user = self::getDataGenerator()->create_user();
         $this->setUser($user);
         self::getDataGenerator()->enrol_user($user->id, $course1['id'], $roleid);
@@ -1952,8 +1952,8 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals(1, count($updatedcoursewarnings['warnings']));
 
         // Try update course idnumber without capability.
-        $this->assignUserCapability('moodle/course:changeshortname', $contextid, $roleid);
-        $this->unassignUserCapability('moodle/course:changeidnumber', $contextid, $roleid);
+        $this->assignUserCapability('powereduc/course:changeshortname', $contextid, $roleid);
+        $this->unassignUserCapability('powereduc/course:changeidnumber', $contextid, $roleid);
         $user = self::getDataGenerator()->create_user();
         $this->setUser($user);
         self::getDataGenerator()->enrol_user($user->id, $course1['id'], $roleid);
@@ -1969,8 +1969,8 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals(1, count($updatedcoursewarnings['warnings']));
 
         // Try update course summary without capability.
-        $this->assignUserCapability('moodle/course:changeidnumber', $contextid, $roleid);
-        $this->unassignUserCapability('moodle/course:changesummary', $contextid, $roleid);
+        $this->assignUserCapability('powereduc/course:changeidnumber', $contextid, $roleid);
+        $this->unassignUserCapability('powereduc/course:changesummary', $contextid, $roleid);
         $user = self::getDataGenerator()->create_user();
         $this->setUser($user);
         self::getDataGenerator()->enrol_user($user->id, $course1['id'], $roleid);
@@ -1986,7 +1986,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals(1, count($updatedcoursewarnings['warnings']));
 
         // Try update course with invalid summary format.
-        $this->assignUserCapability('moodle/course:changesummary', $contextid, $roleid);
+        $this->assignUserCapability('powereduc/course:changesummary', $contextid, $roleid);
         $user = self::getDataGenerator()->create_user();
         $this->setUser($user);
         self::getDataGenerator()->enrol_user($user->id, $course1['id'], $roleid);
@@ -2002,7 +2002,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals(1, count($updatedcoursewarnings['warnings']));
 
         // Try update course visibility without capability.
-        $this->unassignUserCapability('moodle/course:visibility', $contextid, $roleid);
+        $this->unassignUserCapability('powereduc/course:visibility', $contextid, $roleid);
         $user = self::getDataGenerator()->create_user();
         $this->setUser($user);
         self::getDataGenerator()->enrol_user($user->id, $course1['id'], $roleid);
@@ -2020,7 +2020,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals(1, count($updatedcoursewarnings['warnings']));
 
         // Try update course custom fields without capability.
-        $this->unassignUserCapability('moodle/course:changelockedcustomfields', $contextid, $roleid);
+        $this->unassignUserCapability('powereduc/course:changelockedcustomfields', $contextid, $roleid);
         $user = self::getDataGenerator()->create_user();
         $this->setUser($user);
         self::getDataGenerator()->enrol_user($user->id, $course3['id'], $roleid);
@@ -2082,12 +2082,12 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Assign capabilities to delete module 1.
         $modcontext = context_module::instance($module1->cmid);
-        $this->assignUserCapability('moodle/course:manageactivities', $modcontext->id);
+        $this->assignUserCapability('powereduc/course:manageactivities', $modcontext->id);
 
         // Assign capabilities to delete module 2.
         $modcontext = context_module::instance($module2->cmid);
         $newrole = create_role('Role 2', 'role2', 'Role 2 description');
-        $this->assignUserCapability('moodle/course:manageactivities', $modcontext->id, $newrole);
+        $this->assignUserCapability('powereduc/course:manageactivities', $modcontext->id, $newrole);
 
         // Deleting these module instances.
         core_course_external::delete_modules(array($module1->cmid, $module2->cmid));
@@ -2119,7 +2119,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             core_course_external::delete_modules(array($module1->cmid, $module2->cmid));
             $this->fail('Exception expected due to missing capability.');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertEquals('nopermissions', $e->errorcode);
         }
 
@@ -2130,7 +2130,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             core_course_external::delete_modules(array($module1->cmid, $module2->cmid));
             $this->fail('Exception expected due to being unenrolled from the course.');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertEquals('requireloginerror', $e->errorcode);
         }
     }
@@ -2331,7 +2331,7 @@ class externallib_test extends externallib_advanced_testcase {
         $course1  = self::getDataGenerator()->create_course();
         $course2  = self::getDataGenerator()->create_course();
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('invalidextparam', 'webservice', -1));
         // Import from course1 to course2, with invalid option
         core_course_external::import_course($course1->id, $course2->id, -1);;
@@ -2470,7 +2470,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             core_course_external::get_course_module($assign->cmid);
             $this->fail('Exception expected due to invalid permissions.');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertEquals('requireloginerror', $e->errorcode);
         }
 
@@ -2535,7 +2535,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             core_course_external::get_course_module_by_instance('quiz', $quiz->id);
             $this->fail('Exception expected due to invalid permissions.');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertEquals('requireloginerror', $e->errorcode);
         }
 
@@ -3613,7 +3613,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->setUser($teacher);
         $teacherroleid = $DB->get_field('role', 'id', array('shortname' => 'editingteacher'));
         $usercontext = context_user::instance($student->id);
-        $this->assignUserCapability('moodle/user:viewdetails', $usercontext, $teacherroleid);
+        $this->assignUserCapability('powereduc/user:viewdetails', $usercontext, $teacherroleid);
 
         // Sorted by course id DESC.
         $result = core_course_external::get_recent_courses($student->id);

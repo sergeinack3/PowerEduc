@@ -1,28 +1,28 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Defines classes used for plugins management
  *
  * This library provides a unified interface to various plugin types in
- * Moodle. It is mainly used by the plugins management admin page and the
+ * PowerEduc. It is mainly used by the plugins management admin page and the
  * plugins check page during the upgrade.
  *
  * @package    core
- * @copyright  2011 David Mudrak <david@moodle.com>
+ * @copyright  2011 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,7 +33,7 @@ defined('POWEREDUC_INTERNAL') || die();
  */
 class core_plugin_manager {
 
-    /** the plugin is shipped with standard Moodle distribution */
+    /** the plugin is shipped with standard PowerEduc distribution */
     const PLUGIN_SOURCE_STANDARD    = 'std';
     /** the plugin is added extension */
     const PLUGIN_SOURCE_EXTENSION   = 'ext';
@@ -59,7 +59,7 @@ class core_plugin_manager {
     const REQUIREMENT_STATUS_OUTDATED = 'outdated';
     /** the required dependency is not installed */
     const REQUIREMENT_STATUS_MISSING = 'missing';
-    /** the current Moodle version is too high for plugin. */
+    /** the current PowerEduc version is too high for plugin. */
     const REQUIREMENT_STATUS_NEWER = 'newer';
 
     /** the required dependency is available in the plugins directory */
@@ -67,9 +67,9 @@ class core_plugin_manager {
     /** the required dependency is available in the plugins directory */
     const REQUIREMENT_UNAVAILABLE = 'unavailable';
 
-    /** the moodle version is explicitly supported */
+    /** the powereduc version is explicitly supported */
     const VERSION_SUPPORTED = 'supported';
-    /** the moodle version is not explicitly supported */
+    /** the powereduc version is not explicitly supported */
     const VERSION_NOT_SUPPORTED = 'notsupported';
     /** the plugin does not specify supports */
     const VERSION_NO_SUPPORTS = 'nosupports';
@@ -94,7 +94,7 @@ class core_plugin_manager {
     protected $plugintypes = null;
     /** @var \core\update\code_manager code manager to use for plugins code operations */
     protected $codemanager = null;
-    /** @var \core\update\api client instance to use for accessing download.moodle.org/api/ */
+    /** @var \core\update\api client instance to use for accessing download.powereduc.org/api/ */
     protected $updateapiclient = null;
 
     /**
@@ -580,7 +580,7 @@ class core_plugin_manager {
         $pluginfo = $this->get_plugin_info($component);
 
         if (is_null($pluginfo)) {
-            throw new moodle_exception('err_unknown_plugin', 'core_plugin', '', array('plugin' => $component));
+            throw new powereduc_exception('err_unknown_plugin', 'core_plugin', '', array('plugin' => $component));
         }
 
         return $pluginfo->displayname;
@@ -744,12 +744,12 @@ class core_plugin_manager {
      * argument is populated with the list of plugins that have failed dependencies (note that
      * a single plugin can appear multiple times in the $failedplugins).
      *
-     * @param int $moodleversion the version from version.php.
+     * @param int $powereducversion the version from version.php.
      * @param array $failedplugins to return the list of plugins with non-satisfied dependencies
-     * @param int $branch the current moodle branch, null if not provided
+     * @param int $branch the current powereduc branch, null if not provided
      * @return bool true if all the dependencies are satisfied for all plugins.
      */
-    public function all_plugins_ok($moodleversion, &$failedplugins = array(), $branch = null) {
+    public function all_plugins_ok($powereducversion, &$failedplugins = array(), $branch = null) {
         global $CFG;
         if (empty($branch)) {
             $branch = $CFG->branch ?? '';
@@ -765,7 +765,7 @@ class core_plugin_manager {
         foreach ($this->get_plugins() as $type => $plugins) {
             foreach ($plugins as $plugin) {
 
-                if (!$plugin->is_core_dependency_satisfied($moodleversion)) {
+                if (!$plugin->is_core_dependency_satisfied($powereducversion)) {
                     $return = false;
                     $failedplugins[] = $plugin->component;
                 }
@@ -798,11 +798,11 @@ class core_plugin_manager {
      *  ->(string)availability
      *
      * @param \core\plugininfo\base $plugin the plugin we are checking
-     * @param null|string|int|double $moodleversion explicit moodle core version to check against, defaults to $CFG->version
-     * @param null|string|int $moodlebranch explicit moodle core branch to check against, defaults to $CFG->branch
+     * @param null|string|int|double $powereducversion explicit powereduc core version to check against, defaults to $CFG->version
+     * @param null|string|int $powereducbranch explicit powereduc core branch to check against, defaults to $CFG->branch
      * @return array of objects
      */
-    public function resolve_requirements(\core\plugininfo\base $plugin, $moodleversion=null, $moodlebranch=null) {
+    public function resolve_requirements(\core\plugininfo\base $plugin, $powereducversion=null, $powereducbranch=null) {
         global $CFG;
 
         if ($plugin->versiondisk === null) {
@@ -810,36 +810,36 @@ class core_plugin_manager {
             return array();
         }
 
-        if ($moodleversion === null) {
-            $moodleversion = $CFG->version;
+        if ($powereducversion === null) {
+            $powereducversion = $CFG->version;
         }
 
-        if ($moodlebranch === null) {
-            $moodlebranch = $CFG->branch;
+        if ($powereducbranch === null) {
+            $powereducbranch = $CFG->branch;
         }
 
         $reqs = array();
-        $reqcore = $this->resolve_core_requirements($plugin, $moodleversion, $moodlebranch);
+        $reqcore = $this->resolve_core_requirements($plugin, $powereducversion, $powereducbranch);
 
         if (!empty($reqcore)) {
             $reqs['core'] = $reqcore;
         }
 
         foreach ($plugin->get_other_required_plugins() as $reqplug => $reqver) {
-            $reqs[$reqplug] = $this->resolve_dependency_requirements($plugin, $reqplug, $reqver, $moodlebranch);
+            $reqs[$reqplug] = $this->resolve_dependency_requirements($plugin, $reqplug, $reqver, $powereducbranch);
         }
 
         return $reqs;
     }
 
     /**
-     * Helper method to resolve plugin's requirements on the moodle core.
+     * Helper method to resolve plugin's requirements on the powereduc core.
      *
      * @param \core\plugininfo\base $plugin the plugin we are checking
-     * @param string|int|double $moodleversion moodle core branch to check against
+     * @param string|int|double $powereducversion powereduc core branch to check against
      * @return stdObject
      */
-    protected function resolve_core_requirements(\core\plugininfo\base $plugin, $moodleversion, $moodlebranch) {
+    protected function resolve_core_requirements(\core\plugininfo\base $plugin, $powereducversion, $powereducbranch) {
 
         $reqs = (object)array(
             'hasver' => null,
@@ -847,7 +847,7 @@ class core_plugin_manager {
             'status' => null,
             'availability' => null,
         );
-        $reqs->hasver = $moodleversion;
+        $reqs->hasver = $powereducversion;
 
         if (empty($plugin->versionrequires)) {
             $reqs->reqver = ANY_VERSION;
@@ -855,7 +855,7 @@ class core_plugin_manager {
             $reqs->reqver = $plugin->versionrequires;
         }
 
-        if ($plugin->is_core_dependency_satisfied($moodleversion)) {
+        if ($plugin->is_core_dependency_satisfied($powereducversion)) {
             $reqs->status = self::REQUIREMENT_STATUS_OK;
         } else {
             $reqs->status = self::REQUIREMENT_STATUS_OUTDATED;
@@ -863,7 +863,7 @@ class core_plugin_manager {
 
         // Now check if there is an explicit incompatible, supersedes requires.
         if (isset($plugin->pluginincompatible) && $plugin->pluginincompatible != null) {
-            if (!$plugin->is_core_compatible_satisfied($moodlebranch)) {
+            if (!$plugin->is_core_compatible_satisfied($powereducbranch)) {
 
                 $reqs->status = self::REQUIREMENT_STATUS_NEWER;
             }
@@ -878,11 +878,11 @@ class core_plugin_manager {
      * @param \core\plugininfo\base $plugin the plugin we are checking
      * @param string $otherpluginname
      * @param string|int $requiredversion
-     * @param string|int $moodlebranch explicit moodle core branch to check against, defaults to $CFG->branch
+     * @param string|int $powereducbranch explicit powereduc core branch to check against, defaults to $CFG->branch
      * @return stdClass
      */
     protected function resolve_dependency_requirements(\core\plugininfo\base $plugin, $otherpluginname,
-            $requiredversion, $moodlebranch) {
+            $requiredversion, $powereducbranch) {
 
         $reqs = (object)array(
             'hasver' => null,
@@ -923,10 +923,10 @@ class core_plugin_manager {
     }
 
     /**
-     * Helper method to determine whether a moodle version is explicitly supported.
+     * Helper method to determine whether a powereduc version is explicitly supported.
      *
      * @param \core\plugininfo\base $plugin the plugin we are checking
-     * @param int $branch the moodle branch to check support for
+     * @param int $branch the powereduc branch to check support for
      * @return string
      */
     public function check_explicitly_supported($plugin, $branch) : string {
@@ -1002,7 +1002,7 @@ class core_plugin_manager {
      * @param string $component
      * @param int $version version number
      * @param string $reason returned code of the reason why it is not
-     * @param bool $checkremote check this version availability on moodle server
+     * @param bool $checkremote check this version availability on powereduc server
      * @return boolean
      */
     public function is_remote_plugin_installable($component, $version, &$reason = null, $checkremote = true) {
@@ -1173,7 +1173,7 @@ class core_plugin_manager {
      * Detects the plugin's name from its ZIP file.
      *
      * Plugin ZIP packages are expected to contain a single directory and the
-     * directory name would become the plugin name once extracted to the Moodle
+     * directory name would become the plugin name once extracted to the PowerEduc
      * dirroot.
      *
      * @param string $zipfilepath full path to the ZIP files
@@ -1292,7 +1292,7 @@ class core_plugin_manager {
     /**
      * Perform the installation of plugins.
      *
-     * If used for installation of remote plugins from the Moodle Plugins
+     * If used for installation of remote plugins from the PowerEduc Plugins
      * directory, the $plugins must be list of {@link \core\update\remote_info}
      * object that represent installable remote plugins. The caller can use
      * {@link self::filter_installable()} to prepare the list.
@@ -1363,7 +1363,7 @@ class core_plugin_manager {
 
             $validator = \core\update\validator::instance($tmp, $zipcontents);
             $validator->assert_plugin_type($plugintype);
-            $validator->assert_moodle_version($CFG->version);
+            $validator->assert_powereduc_version($CFG->version);
             // TODO Check for missing dependencies during validation.
             $result = $validator->execute();
             if (!$silent) {
@@ -1467,7 +1467,7 @@ class core_plugin_manager {
      *
      * @param string $component
      * @param string $return either 'overview' or 'manage'
-     * @return moodle_url uninstall URL, null if uninstall not supported
+     * @return powereduc_url uninstall URL, null if uninstall not supported
      */
     public function get_uninstall_url($component, $return = 'overview') {
         if (!$this->can_uninstall_plugin($component)) {
@@ -1711,7 +1711,7 @@ class core_plugin_manager {
     }
 
     /**
-     * Defines a list of all plugins that were originally shipped in the standard Moodle distribution,
+     * Defines a list of all plugins that were originally shipped in the standard PowerEduc distribution,
      * but are not anymore and are deleted during upgrades.
      *
      * The main purpose of this list is to hide missing plugins during upgrade.
@@ -1724,7 +1724,7 @@ class core_plugin_manager {
         // Do not include plugins that were removed during upgrades to versions that are
         // not supported as source versions for upgrade any more. For example, at POWEREDUC_23_STABLE
         // branch, listed should be no plugins that were removed at 1.9.x - 2.1.x versions as
-        // Moodle 2.3 supports upgrades from 2.2.x only.
+        // PowerEduc 2.3 supports upgrades from 2.2.x only.
         $plugins = array(
             'qformat' => array('blackboard', 'learnwise', 'examview'),
             'auth' => array('radius', 'fc', 'nntp', 'pam', 'pop3', 'imap'),
@@ -1755,7 +1755,7 @@ class core_plugin_manager {
     }
 
     /**
-     * Defines a white list of all plugins shipped in the standard Moodle distribution
+     * Defines a white list of all plugins shipped in the standard PowerEduc distribution
      *
      * @param string $type
      * @return false|array array of standard plugins or false if the type is unknown
@@ -2038,8 +2038,8 @@ class core_plugin_manager {
             ],
 
             'tinymce' => array(
-                'ctrlhelp', 'managefiles', 'moodleemoticon', 'moodleimage',
-                'moodlemedia', 'moodlenolink', 'pdw', 'spellchecker', 'wrap'
+                'ctrlhelp', 'managefiles', 'powereducemoticon', 'powereducimage',
+                'powereducmedia', 'powereducnolink', 'pdw', 'spellchecker', 'wrap'
             ),
 
             'theme' => array(
@@ -2050,7 +2050,7 @@ class core_plugin_manager {
                 'admin_presets', 'analytics', 'availabilityconditions', 'behat', 'brickfield', 'capability', 'cohortroles',
                 'componentlibrary', 'customlang', 'dataprivacy', 'dbtransfer', 'filetypes', 'generator', 'httpsreplace', 'innodb',
                 'installaddon', 'langimport', 'licensemanager', 'log', 'lp', 'lpimportcsv', 'lpmigrate', 'messageinbound',
-                'mobile', 'moodlenet', 'multilangupgrade', 'monitor', 'oauth2', 'phpunit', 'policy', 'profiling', 'recyclebin',
+                'mobile', 'powereducnet', 'multilangupgrade', 'monitor', 'oauth2', 'phpunit', 'policy', 'profiling', 'recyclebin',
                 'replace', 'spamcleaner', 'task', 'templatelibrary', 'uploadcourse', 'uploaduser', 'unsuproles',
                 'usertours', 'xmldb'
             ),
@@ -2094,7 +2094,7 @@ class core_plugin_manager {
     public function remove_plugin_folder(\core\plugininfo\base $plugin) {
 
         if (!$this->is_plugin_folder_removable($plugin->component)) {
-            throw new moodle_exception('err_removing_unremovable_folder', 'core_plugin', '',
+            throw new powereduc_exception('err_removing_unremovable_folder', 'core_plugin', '',
                 array('plugin' => $plugin->component, 'rootdir' => $plugin->rootdir),
                 'plugin root folder is not removable as expected');
         }
@@ -2265,7 +2265,7 @@ class core_plugin_manager {
      * For technical reasons, plugin types returned by {@link core_component::get_plugin_types()} are
      * in a certain order that does not need to fit the expected order for the display.
      * Particularly, activity modules should be displayed first as they represent the
-     * real heart of Moodle. They should be followed by other plugin types that are
+     * real heart of PowerEduc. They should be followed by other plugin types that are
      * used to build the courses (as that is what one expects from LMS). After that,
      * other supportive plugin types follow.
      *
@@ -2414,7 +2414,7 @@ class core_plugin_manager {
     }
 
     /**
-     * Returns a client for https://download.moodle.org/api/
+     * Returns a client for https://download.powereduc.org/api/
      *
      * @return \core\update\api
      */

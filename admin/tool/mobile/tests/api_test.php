@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -97,12 +97,12 @@ class api_test extends \externallib_advanced_testcase {
         set_config('allowedemaildomains', 'example.com');
 
         $DB->set_field_select('message_processors', 'enabled', 0, "name <> 'email'");
-        set_user_preference('message_provider_moodle_instantmessage_enabled', 'email', $user2);
+        set_user_preference('message_provider_powereduc_instantmessage_enabled', 'email', $user2);
 
         // Extra content for all types of messages.
         $message = new \core\message\message();
         $message->courseid          = 1;
-        $message->component         = 'moodle';
+        $message->component         = 'powereduc';
         $message->name              = 'instantmessage';
         $message->userfrom          = $user1;
         $message->userto            = $user2;

@@ -1,4 +1,4 @@
-Instructions to import http-message into Moodle:
+Instructions to import http-message into PowerEduc:
 
 1/ Download from https://github.com/php-fig/http-message/releases
 

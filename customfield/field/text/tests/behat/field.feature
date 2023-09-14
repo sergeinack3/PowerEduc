@@ -68,7 +68,7 @@ Feature: Managers can manage course custom fields text
       | Name       | See more on website       |
       | Short name | testfield                 |
       | Visible to | Everyone                  |
-      | Link       | https://www.moodle.org/$$ |
+      | Link       | https://www.powereduc.org/$$ |
     And I click on "Save changes" "button" in the "Adding a new Short text" "dialogue"
     And I log out
     Then I log in as "teacher1"

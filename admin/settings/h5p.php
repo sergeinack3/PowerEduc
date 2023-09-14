@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * H5P settings link.
  *
  * @package    core_h5p
- * @copyright  2019 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2019 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -26,11 +26,11 @@ defined('POWEREDUC_INTERNAL') || die();
 
 // H5P overview.
 $ADMIN->add('h5p', new admin_externalpage('h5poverview', get_string('h5poverview', 'core_h5p'),
-    new moodle_url('/h5p/overview.php'), ['moodle/site:config']));
+    new powereduc_url('/h5p/overview.php'), ['powereduc/site:config']));
 
 // Manage H5P libraries page.
 $ADMIN->add('h5p', new admin_externalpage('h5pmanagelibraries', get_string('h5pmanage', 'core_h5p'),
-    new moodle_url('/h5p/libraries.php'), ['moodle/site:config', 'moodle/h5p:updatelibraries']));
+    new powereduc_url('/h5p/libraries.php'), ['powereduc/site:config', 'powereduc/h5p:updatelibraries']));
 
 // H5P settings.
 $defaulth5plib = \core_h5p\local\library\autoloader::get_default_handler_library();

@@ -2,7 +2,7 @@ ogv.js 1.8.4
 --------------
 https://github.com/brion/ogv.js
 
-Instructions to import ogv.js library into Moodle:
+Instructions to import ogv.js library into PowerEduc:
 
 1. Download the latest release from https://github.com/brion/ogv.js/releases
    (do not choose "Source code")

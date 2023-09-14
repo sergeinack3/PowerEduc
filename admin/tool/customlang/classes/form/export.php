@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ use tool_customlang_utils;
  * @copyright  2020 Thomas Wedekind <Thomas.Wedekind@univie.ac.at>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class export extends \moodleform {
+class export extends \powereducform {
 
     /**
      * Add elements to form
@@ -44,7 +44,7 @@ class export extends \moodleform {
 
         // The export button only appears if a local lang is present.
         if (!check_dir_exists($langdir) || !count(glob("$langdir/*"))) {
-            throw new \moodle_exception('nolocallang', 'tool_customlang');
+            throw new \powereduc_exception('nolocallang', 'tool_customlang');
         }
 
         $langfiles = scandir($langdir);

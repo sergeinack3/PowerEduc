@@ -1,7 +1,7 @@
 {
-  "name": "moodle-atto_clear-button",
+  "name": "powereduc-atto_clear-button",
   "builds": {
-    "moodle-atto_clear-button": {
+    "powereduc-atto_clear-button": {
       "jsfiles": [
         "button.js"
       ]

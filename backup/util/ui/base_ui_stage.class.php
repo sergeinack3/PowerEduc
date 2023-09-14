@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@
  * This class should be extended by all backup stages (a requirement of many backup ui functions).
  * Each stage must then define two abstract methods
  *  - process : To process the stage
- *  - initialise_stage_form : To get a backup_moodleform instance for the stage
+ *  - initialise_stage_form : To get a backup_powereducform instance for the stage
  *
  * @package   core_backup
  * @copyright 2010 Sam Hemelryk
@@ -53,8 +53,8 @@ abstract class base_ui_stage {
     protected $ui;
 
     /**
-     * The moodleform for this stage
-     * @var base_moodleform
+     * The powereducform for this stage
+     * @var base_powereducform
      */
     protected $stageform = null;
 
@@ -135,7 +135,7 @@ abstract class base_ui_stage {
     public function display(core_backup_renderer $renderer) {
 
         $form = $this->initialise_stage_form();
-        // A nasty hack follows to work around the sad fact that moodle quickforms
+        // A nasty hack follows to work around the sad fact that powereduc quickforms
         // do not allow to actually return the HTML content, just to echo it.
         flush();
         ob_start();
@@ -152,16 +152,16 @@ abstract class base_ui_stage {
      * This must be overridden by every stage as it will be different for every stage
      *
      * @abstract
-     * @param base_moodleform $form
+     * @param base_powereducform $form
      */
-    abstract public function process(base_moodleform $form = null);
+    abstract public function process(base_powereducform $form = null);
 
     /**
-     * Creates an instance of the correct moodleform properly populated and all
+     * Creates an instance of the correct powereducform properly populated and all
      * dependencies instantiated
      *
      * @abstract
-     * @return backup_moodleform
+     * @return backup_powereducform
      */
     abstract protected function initialise_stage_form();
 

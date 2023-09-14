@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 /**
  * Allows the admin to manage question behaviours.
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage questionengine
  * @copyright  2011 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -33,10 +33,10 @@ require_once($CFG->libdir . '/tablelib.php');
 // Check permissions.
 require_login(null, false);
 $systemcontext = context_system::instance();
-require_capability('moodle/question:config', $systemcontext);
+require_capability('powereduc/question:config', $systemcontext);
 
 admin_externalpage_setup('manageqbehaviours');
-$thispageurl = new moodle_url('/admin/qbehaviours.php');
+$thispageurl = new powereduc_url('/admin/qbehaviours.php');
 
 $behaviours = core_component::get_plugin_list('qbehaviour');
 $pluginmanager = core_plugin_manager::instance();
@@ -84,7 +84,7 @@ if (!empty($config->disabledbehaviours)) {
 // Disable.
 if (($disable = optional_param('disable', '', PARAM_PLUGIN)) && confirm_sesskey()) {
     if (!isset($behaviours[$disable])) {
-        throw new \moodle_exception('unknownbehaviour', 'question', $thispageurl, $disable);
+        throw new \powereduc_exception('unknownbehaviour', 'question', $thispageurl, $disable);
     }
 
     if (array_search($disable, $disabledbehaviours) === false) {
@@ -97,11 +97,11 @@ if (($disable = optional_param('disable', '', PARAM_PLUGIN)) && confirm_sesskey(
 // Enable.
 if (($enable = optional_param('enable', '', PARAM_PLUGIN)) && confirm_sesskey()) {
     if (!isset($behaviours[$enable])) {
-        throw new \moodle_exception('unknownbehaviour', 'question', $thispageurl, $enable);
+        throw new \powereduc_exception('unknownbehaviour', 'question', $thispageurl, $enable);
     }
 
     if (!$archetypal[$enable]) {
-        throw new \moodle_exception('cannotenablebehaviour', 'question', $thispageurl, $enable);
+        throw new \powereduc_exception('cannotenablebehaviour', 'question', $thispageurl, $enable);
     }
 
     if (($key = array_search($enable, $disabledbehaviours)) !== false) {
@@ -114,7 +114,7 @@ if (($enable = optional_param('enable', '', PARAM_PLUGIN)) && confirm_sesskey())
 // Move up in order.
 if (($up = optional_param('up', '', PARAM_PLUGIN)) && confirm_sesskey()) {
     if (!isset($behaviours[$up])) {
-        throw new \moodle_exception('unknownbehaviour', 'question', $thispageurl, $up);
+        throw new \powereduc_exception('unknownbehaviour', 'question', $thispageurl, $up);
     }
 
     // This function works fine for behaviours, as well as qtypes.
@@ -126,7 +126,7 @@ if (($up = optional_param('up', '', PARAM_PLUGIN)) && confirm_sesskey()) {
 // Move down in order.
 if (($down = optional_param('down', '', PARAM_PLUGIN)) && confirm_sesskey()) {
     if (!isset($behaviours[$down])) {
-        throw new \moodle_exception('unknownbehaviour', 'question', $thispageurl, $down);
+        throw new \powereduc_exception('unknownbehaviour', 'question', $thispageurl, $down);
     }
 
     // This function works fine for behaviours, as well as qtypes.
@@ -231,8 +231,8 @@ function question_behaviour_enable_disable_icons($behaviour, $enabled) {
 
 function question_behaviour_icon_html($action, $behaviour, $icon, $alt, $tip) {
     global $OUTPUT;
-    return $OUTPUT->action_icon(new moodle_url('/admin/qbehaviours.php',
+    return $OUTPUT->action_icon(new powereduc_url('/admin/qbehaviours.php',
             array($action => $behaviour, 'sesskey' => sesskey())),
-            new pix_icon($icon, $alt, 'moodle', array('title' => '', 'class' => 'iconsmall')),
+            new pix_icon($icon, $alt, 'powereduc', array('title' => '', 'class' => 'iconsmall')),
             null, array('title' => $tip));
 }

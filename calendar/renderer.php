@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -157,15 +157,15 @@ class core_calendar_renderer extends plugin_renderer_base {
         $output .= $this->output->box_start('card-header clearfix');
         if (calendar_edit_event_allowed($event) && $showactions) {
             if (calendar_delete_event_allowed($event)) {
-                $editlink = new moodle_url(CALENDAR_URL.'event.php', array('action' => 'edit', 'id' => $event->id));
-                $deletelink = new moodle_url(CALENDAR_URL.'delete.php', array('id' => $event->id));
+                $editlink = new powereduc_url(CALENDAR_URL.'event.php', array('action' => 'edit', 'id' => $event->id));
+                $deletelink = new powereduc_url(CALENDAR_URL.'delete.php', array('id' => $event->id));
                 if (!empty($event->calendarcourseid)) {
                     $editlink->param('course', $event->calendarcourseid);
                     $deletelink->param('course', $event->calendarcourseid);
                 }
             } else {
                 $params = array('update' => $event->cmid, 'return' => true, 'sesskey' => sesskey());
-                $editlink = new moodle_url('/course/mod.php', $params);
+                $editlink = new powereduc_url('/course/mod.php', $params);
                 $deletelink = null;
             }
 
@@ -220,7 +220,7 @@ class core_calendar_renderer extends plugin_renderer_base {
         }
 
         if (!empty($event->actionurl)) {
-            $actionlink = html_writer::link(new moodle_url($event->actionurl), $event->actionname);
+            $actionlink = html_writer::link(new powereduc_url($event->actionurl), $event->actionname);
             $output .= html_writer::tag('div', $actionlink, ['class' => 'action']);
         }
 
@@ -245,13 +245,13 @@ class core_calendar_renderer extends plugin_renderer_base {
     /**
      * Displays a course filter selector
      *
-     * @param moodle_url $returnurl The URL that the user should be taken too upon selecting a course.
+     * @param powereduc_url $returnurl The URL that the user should be taken too upon selecting a course.
      * @param string $label The label to use for the course select.
      * @param int $courseid The id of the course to be selected.
      * @param int|null $calendarinstanceid The instance ID of the calendar we're generating this course filter for.
      * @return string
      */
-    public function course_filter_selector(moodle_url $returnurl, $label = null, $courseid = null, int $calendarinstanceid = null) {
+    public function course_filter_selector(powereduc_url $returnurl, $label = null, $courseid = null, int $calendarinstanceid = null) {
         global $CFG, $DB;
 
         if (!isloggedin() or isguestuser()) {
@@ -298,7 +298,7 @@ class core_calendar_renderer extends plugin_renderer_base {
         } else {
             $selected = '';
         }
-        $courseurl = new moodle_url($returnurl);
+        $courseurl = new powereduc_url($returnurl);
         $courseurl->remove_params('course');
 
         $labelattributes = [];
@@ -324,10 +324,10 @@ class core_calendar_renderer extends plugin_renderer_base {
      * @return string
      */
     public function render_subscriptions_header(): string {
-        $importcalendarbutton = new single_button(new moodle_url('/calendar/import.php', calendar_get_export_import_link_params()),
+        $importcalendarbutton = new single_button(new powereduc_url('/calendar/import.php', calendar_get_export_import_link_params()),
                 get_string('importcalendar', 'calendar'), 'get', true);
         $importcalendarbutton->class .= ' float-sm-right float-right';
-        $exportcalendarbutton = new single_button(new moodle_url('/calendar/export.php', calendar_get_export_import_link_params()),
+        $exportcalendarbutton = new single_button(new powereduc_url('/calendar/export.php', calendar_get_export_import_link_params()),
                 get_string('exportcalendar', 'calendar'), 'get', true);
         $exportcalendarbutton->class .= ' float-sm-right float-right';
         $output = $this->output->heading(get_string('managesubscriptions', 'calendar'));
@@ -351,7 +351,7 @@ class core_calendar_renderer extends plugin_renderer_base {
      */
     public function render_no_calendar_subscriptions(): string {
         $output = html_writer::start_div('mt-5');
-        $importlink = html_writer::link((new moodle_url('/calendar/import.php', calendar_get_export_import_link_params()))->out(),
+        $importlink = html_writer::link((new powereduc_url('/calendar/import.php', calendar_get_export_import_link_params()))->out(),
                 get_string('importcalendarexternal', 'calendar'));
         $output .= get_string('nocalendarsubscriptions', 'calendar', $importlink);
         $output .= html_writer::end_div();

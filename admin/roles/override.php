@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ $roleid    = required_param('roleid', PARAM_INT);
 
 list($context, $course, $cm) = get_context_info_array($contextid);
 
-$url = new moodle_url('/admin/roles/override.php', array('contextid' => $contextid, 'roleid' => $roleid));
+$url = new powereduc_url('/admin/roles/override.php', array('contextid' => $contextid, 'roleid' => $roleid));
 
 if ($course) {
     $isfrontpage = ($course->id == SITEID);
@@ -48,8 +48,8 @@ if ($course) {
 // Security first.
 require_login($course, false, $cm);
 $safeoverridesonly = false;
-if (!has_capability('moodle/role:override', $context)) {
-    require_capability('moodle/role:safeoverride', $context);
+if (!has_capability('powereduc/role:override', $context)) {
+    require_capability('powereduc/role:safeoverride', $context);
     $safeoverridesonly = true;
 }
 $PAGE->set_url($url);
@@ -58,17 +58,17 @@ $PAGE->set_pagelayout('admin');
 if ($context->contextlevel == CONTEXT_USER and $USER->id != $context->instanceid) {
     $PAGE->navigation->extend_for_user($user);
     $PAGE->set_context(context_course::instance($course->id));
-    navigation_node::override_active_url(new moodle_url('/admin/roles/permissions.php',
+    navigation_node::override_active_url(new powereduc_url('/admin/roles/permissions.php',
         array('contextid'=>$context->id, 'userid'=>$context->instanceid, 'courseid'=>$course->id)));
 
 } else {
     $PAGE->set_context($context);
-    navigation_node::override_active_url(new moodle_url('/admin/roles/permissions.php', array('contextid'=>$context->id)));
+    navigation_node::override_active_url(new powereduc_url('/admin/roles/permissions.php', array('contextid'=>$context->id)));
 }
 
 $courseid = $course->id;
 
-$returnurl = new moodle_url('/admin/roles/permissions.php', array('contextid' => $context->id));
+$returnurl = new powereduc_url('/admin/roles/permissions.php', array('contextid' => $context->id));
 
 // Handle the cancel button.
 if (optional_param('cancel', false, PARAM_BOOL)) {
@@ -93,10 +93,10 @@ $PAGE->set_title($title);
 $PAGE->navbar->add($straction);
 switch ($context->contextlevel) {
     case CONTEXT_SYSTEM:
-        throw new \moodle_exception('cannotoverridebaserole', 'error');
+        throw new \powereduc_exception('cannotoverridebaserole', 'error');
         break;
     case CONTEXT_USER:
-        $fullname = fullname($user, has_capability('moodle/site:viewfullnames', $context));
+        $fullname = fullname($user, has_capability('powereduc/site:viewfullnames', $context));
         $PAGE->set_heading($fullname);
         $showroles = 1;
         break;
@@ -124,7 +124,7 @@ if (empty($overridableroles[$roleid])) {
     $a = new stdClass;
     $a->roleid = $roleid;
     $a->context = $contextname;
-    throw new \moodle_exception('cannotoverriderolehere', '', $context->get_url(), $a);
+    throw new \powereduc_exception('cannotoverriderolehere', '', $context->get_url(), $a);
 }
 
 // If we are actually overriding a role, create the table object, and save changes if appropriate.

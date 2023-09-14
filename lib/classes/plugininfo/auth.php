@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Defines classes used for plugin info.
@@ -23,7 +23,7 @@
  */
 namespace core\plugininfo;
 
-use moodle_url, part_of_admin_tree, admin_settingpage, admin_externalpage;
+use powereduc_url, part_of_admin_tree, admin_settingpage, admin_externalpage;
 
 defined('POWEREDUC_INTERNAL') || die();
 
@@ -115,12 +115,12 @@ class auth extends base {
         if (file_exists($this->full_path('settings.php'))) {
             // TODO: finish implementation of common settings - locking, etc.
             $settings = new admin_settingpage($section, $this->displayname,
-                'moodle/site:config', $this->is_enabled() === false);
+                'powereduc/site:config', $this->is_enabled() === false);
             include($this->full_path('settings.php')); // This may also set $settings to null.
         } else if (file_exists($this->full_path('config.html'))) {
-            $settingsurl = new moodle_url('/admin/auth_config.php', array('auth' => $this->name));
+            $settingsurl = new powereduc_url('/admin/auth_config.php', array('auth' => $this->name));
             $settings = new admin_externalpage($section, $this->displayname,
-                $settingsurl, 'moodle/site:config', $this->is_enabled() === false);
+                $settingsurl, 'powereduc/site:config', $this->is_enabled() === false);
         }
 
         if ($settings) {
@@ -130,10 +130,10 @@ class auth extends base {
 
     /**
      * Return URL used for management of plugins of this type.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function get_manage_url() {
-        return new moodle_url('/admin/settings.php', array('section'=>'manageauths'));
+        return new powereduc_url('/admin/settings.php', array('section'=>'manageauths'));
     }
 
     /**

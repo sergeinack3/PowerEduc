@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,10 +22,10 @@ use core_h5p\editor;
  * Form to edit an existing H5P content.
  *
  * @package    core_h5p
- * @copyright  2020 Victor Deniz <victor@moodle.com>
+ * @copyright  2020 Victor Deniz <victor@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class editcontent_form extends \moodleform {
+class editcontent_form extends \powereducform {
 
     /** @var editor H5P editor object */
     private $editor;

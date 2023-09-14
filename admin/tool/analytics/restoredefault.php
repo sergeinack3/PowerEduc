@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - https://moodle.org/
+// This file is part of Moodle - https://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Check and create missing default prediction models.
  *
  * @package     tool_analytics
- * @copyright   2019 David Mudrák <david@moodle.com>
+ * @copyright   2019 David Mudrák <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -37,8 +37,8 @@ if (!\core_analytics\manager::is_analytics_enabled()) {
 $confirmed = optional_param('confirmed', false, PARAM_BOOL);
 $restoreids = optional_param_array('restoreid', [], PARAM_ALPHANUM);
 
-$returnurl = new \moodle_url('/admin/tool/analytics/index.php');
-$myurl = new \moodle_url('/admin/tool/analytics/restoredefault.php');
+$returnurl = new \powereduc_url('/admin/tool/analytics/index.php');
+$myurl = new \powereduc_url('/admin/tool/analytics/restoredefault.php');
 
 \tool_analytics\output\helper::set_navbar(get_string('restoredefault', 'tool_analytics'), $myurl);
 

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Completion tests.
@@ -1475,7 +1475,7 @@ class completionlib_test extends advanced_testcase {
         $this->assertEquals(context_module::instance($forum->cmid), $event->get_context());
         $this->assertEquals($USER->id, $event->userid);
         $this->assertEquals($this->user->id, $event->relateduserid);
-        $this->assertInstanceOf('moodle_url', $event->get_url());
+        $this->assertInstanceOf('powereduc_url', $event->get_url());
         $this->assertEventLegacyData($current, $event);
     }
 
@@ -1505,7 +1505,7 @@ class completionlib_test extends advanced_testcase {
         $this->assertEquals($USER->id, $event->userid);
         $this->assertEquals($this->user->id, $event->relateduserid);
         $this->assertEquals(context_course::instance($this->course->id), $event->get_context());
-        $this->assertInstanceOf('moodle_url', $event->get_url());
+        $this->assertInstanceOf('powereduc_url', $event->get_url());
         $data = $ccompletion->get_record_data();
         $this->assertEventLegacyData($data, $event);
     }
@@ -1563,7 +1563,7 @@ class completionlib_test extends advanced_testcase {
         $this->assertInstanceOf('\core\event\course_completion_updated', $event);
         $this->assertEquals($this->course->id, $event->courseid);
         $this->assertEquals($coursecontext, $event->get_context());
-        $this->assertInstanceOf('moodle_url', $event->get_url());
+        $this->assertInstanceOf('powereduc_url', $event->get_url());
         $expectedlegacylog = array($this->course->id, 'course', 'completion updated', 'completion.php?id='.$this->course->id);
         $this->assertEventLegacyLogData($expectedlegacylog, $event);
     }

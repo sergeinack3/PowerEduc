@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ use core_admin\reportbuilder\local\entities\task_log;
 use core_reportbuilder\local\entities\user;
 use core_reportbuilder\local\report\action;
 use lang_string;
-use moodle_url;
+use powereduc_url;
 use pix_icon;
 use core_reportbuilder\system_report;
 
@@ -29,7 +29,7 @@ use core_reportbuilder\system_report;
  * Task logs system report class implementation
  *
  * @package    core_admin
- * @copyright  2021 David Matamoros <davidmc@moodle.com>
+ * @copyright  2021 David Matamoros <davidmc@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class task_logs extends system_report {
@@ -70,7 +70,7 @@ class task_logs extends system_report {
      * @return bool
      */
     protected function can_view(): bool {
-        return has_capability('moodle/site:config', context_system::instance());
+        return has_capability('powereduc/site:config', context_system::instance());
     }
 
     /**
@@ -140,7 +140,7 @@ class task_logs extends system_report {
 
         // Action to view individual task log on a popup window.
         $this->add_action((new action(
-            new moodle_url('/admin/tasklogs.php', ['logid' => ':id']),
+            new powereduc_url('/admin/tasklogs.php', ['logid' => ':id']),
             new pix_icon('e/search', ''),
             [],
             true,
@@ -149,7 +149,7 @@ class task_logs extends system_report {
 
         // Action to download individual task log.
         $this->add_action((new action(
-            new moodle_url('/admin/tasklogs.php', ['logid' => ':id', 'download' => true]),
+            new powereduc_url('/admin/tasklogs.php', ['logid' => ':id', 'download' => true]),
             new pix_icon('t/download', ''),
             [],
             false,

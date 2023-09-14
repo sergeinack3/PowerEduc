@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -386,10 +386,10 @@ class cachestore_apcu extends cache_store implements cache_is_key_aware, cache_i
     /**
      * Allows the cache store to set its data against the edit form before it is shown to the user.
      *
-     * @param moodleform $editform
+     * @param powereducform $editform
      * @param array $config
      */
-    public static function config_set_edit_form_data(moodleform $editform, array $config) {
+    public static function config_set_edit_form_data(powereducform $editform, array $config) {
         if (isset($config['prefix'])) {
             $data['prefix'] = $config['prefix'];
         } else {

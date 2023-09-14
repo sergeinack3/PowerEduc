@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * The mform for creating a calendar event. Based on the old event form.
  *
  * @package    core_calendar
- * @copyright 2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright 2017 Ryan Wyllie <ryan@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace core_calendar\local\event\forms;
@@ -32,10 +32,10 @@ require_once($CFG->dirroot.'/lib/formslib.php');
 /**
  * The mform class for creating a calendar event.
  *
- * @copyright 2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright 2017 Ryan Wyllie <ryan@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class create extends \moodleform {
+class create extends \powereducform {
 
     use eventtype;
 
@@ -71,7 +71,7 @@ class create extends \moodleform {
         $eventtypes = $this->_customdata['eventtypes'];
 
         if (in_array(true, $eventtypes, true) === false) {
-            throw new \moodle_exception('nopermissiontoupdatecalendar');
+            throw new \powereduc_exception('nopermissiontoupdatecalendar');
         }
 
         $mform->setDisableShortforms();
@@ -100,7 +100,7 @@ class create extends \moodleform {
         $mform->setType('description', PARAM_RAW);
         $mform->setAdvanced('description');
 
-        $mform->addElement('text', 'location', get_string('location', 'moodle'), 'size="50"');
+        $mform->addElement('text', 'location', get_string('location', 'powereduc'), 'size="50"');
         $mform->setType('location', PARAM_RAW_TRIMMED);
         $mform->setAdvanced('location');
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ use coding_exception;
 use core_grades\component_gradeitem;
 use external_api;
 use mod_forum\local\entities\forum as forum_entity;
-use moodle_exception;
+use powereduc_exception;
 
 /**
  * Unit tests for core_grades\component_gradeitems;
@@ -83,7 +83,7 @@ class fetch_test extends advanced_testcase {
 
         $gradeitem = component_gradeitem::instance('mod_forum', $forum->get_context(), 'forum');
 
-        $this->expectException(moodle_exception::class);
+        $this->expectException(powereduc_exception::class);
         $this->expectExceptionMessage("not configured for grading with scales");
         fetch::execute('mod_forum', (int) $forum->get_context()->id, 'forum', (int) $student->id);
     }

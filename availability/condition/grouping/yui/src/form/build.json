@@ -1,7 +1,7 @@
 {
-  "name": "moodle-availability_grouping-form",
+  "name": "powereduc-availability_grouping-form",
   "builds": {
-    "moodle-availability_grouping-form": {
+    "powereduc-availability_grouping-form": {
       "jsfiles": [
         "form.js"
       ]

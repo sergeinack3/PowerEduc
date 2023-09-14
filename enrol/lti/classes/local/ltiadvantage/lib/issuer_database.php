@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -63,7 +63,7 @@ class issuer_database implements IDatabase {
         }
 
         global $CFG;
-        require_once($CFG->libdir . '/moodlelib.php'); // For get_config() usage.
+        require_once($CFG->libdir . '/powereduclib.php'); // For get_config() usage.
 
         // We can identify registrations two ways. Either:
         // 1. Using issuer + the platform-generated clientid. Most platforms will have sent client_id in the initiate login request

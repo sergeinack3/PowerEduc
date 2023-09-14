@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -71,7 +71,7 @@ class enrol_meta_plugin extends enrol_plugin {
      */
     public function can_add_instance($courseid) {
         $context = context_course::instance($courseid, MUST_EXIST);
-        if (!has_capability('moodle/course:enrolconfig', $context) or !has_capability('enrol/meta:config', $context)) {
+        if (!has_capability('powereduc/course:enrolconfig', $context) or !has_capability('enrol/meta:config', $context)) {
             return false;
         }
         // Multiple instances supported - multiple parent courses linked.
@@ -130,7 +130,7 @@ class enrol_meta_plugin extends enrol_plugin {
         foreach ($courses as $courseid) {
             if (!empty($fields['customint2']) && $fields['customint2'] == ENROL_META_CREATE_GROUP) {
                 $context = context_course::instance($course->id);
-                require_capability('moodle/course:managegroups', $context);
+                require_capability('powereduc/course:managegroups', $context);
                 $groupid = enrol_meta_create_new_group($course->id, $courseid);
                 $fields['customint2'] = $groupid;
             }
@@ -157,7 +157,7 @@ class enrol_meta_plugin extends enrol_plugin {
 
         if (!empty($data->customint2) && $data->customint2 == ENROL_META_CREATE_GROUP) {
             $context = context_course::instance($instance->courseid);
-            require_capability('moodle/course:managegroups', $context);
+            require_capability('powereduc/course:managegroups', $context);
             $groupid = enrol_meta_create_new_group($instance->courseid, $data->customint1);
             $data->customint2 = $groupid;
         }
@@ -252,7 +252,7 @@ class enrol_meta_plugin extends enrol_plugin {
             }
             context_helper::preload_from_record($c);
             $coursecontext = context_course::instance($c->id);
-            if (!$c->visible and !has_capability('moodle/course:viewhiddencourses', $coursecontext)) {
+            if (!$c->visible and !has_capability('powereduc/course:viewhiddencourses', $coursecontext)) {
                 continue;
             }
             if (!has_capability('enrol/meta:selectaslinked', $coursecontext)) {
@@ -273,7 +273,7 @@ class enrol_meta_plugin extends enrol_plugin {
     protected function get_group_options($coursecontext) {
         $groups = array(0 => get_string('none'));
         $courseid = $coursecontext->instanceid;
-        if (has_capability('moodle/course:managegroups', $coursecontext)) {
+        if (has_capability('powereduc/course:managegroups', $coursecontext)) {
             $groups[ENROL_META_CREATE_GROUP] = get_string('creategroup', 'enrol_meta');
         }
         foreach (groups_get_all_groups($courseid) as $group) {
@@ -354,9 +354,9 @@ class enrol_meta_plugin extends enrol_plugin {
                 } else {
                     foreach ($coursesrecords as $coursesrecord) {
                         $coursecontext = context_course::instance($coursesrecord->id);
-                        if (!$coursesrecord->visible and !has_capability('moodle/course:viewhiddencourses', $coursecontext)) {
+                        if (!$coursesrecord->visible and !has_capability('powereduc/course:viewhiddencourses', $coursecontext)) {
                             $errors['customint1'] = get_string('nopermissions', 'error',
-                                'moodle/course:viewhiddencourses');
+                                'powereduc/course:viewhiddencourses');
                         } else if (!has_capability('enrol/meta:selectaslinked', $coursecontext)) {
                             $errors['customint1'] = get_string('nopermissions', 'error',
                                 'enrol/meta:selectaslinked');

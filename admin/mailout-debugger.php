@@ -9,19 +9,19 @@
    * "sendmail_path" setting to this file with a logfile parameter.
    *
    * - Set in php.ini (not settable in config.php):
-   *     sendmail_path=/path-to-moodle/admin/mailout-debugger.php');
+   *     sendmail_path=/path-to-powereduc/admin/mailout-debugger.php');
    *   Or from the commandline
-   *     php -d sendmail_path='/path-to-moodle/admin/mailout-debugger.php' /path/to/cron.php
+   *     php -d sendmail_path='/path-to-powereduc/admin/mailout-debugger.php' /path/to/cron.php
    *
    * - Create a file in admin called mailout-debugger.enable
    *   (this is a security check to prevent execution in prod environments)
-   *   touch /path/to/moodle/admin/mailout-debugger.enable
+   *   touch /path/to/powereduc/admin/mailout-debugger.enable
    *
    * - Mark as executable: chmod ugo+rx mailout-debugger.php
    *
    * - Run your admin/cron.php
    *
-   * - Read /tmp/moodle-mailout.log
+   * - Read /tmp/powereduc-mailout.log
    *
    *
    * This script will create logfiles in /tmp/ or in $TMPDIR if set.
@@ -42,7 +42,7 @@ if (isset($_ENV['TMPDIR']) && is_dir($_ENV['TMPDIR'])) {
     $tmpdir = $_ENV['TMPDIR'];
 }
 
-$tmpfile = $tmpdir . '/moodle-mailout.log';
+$tmpfile = $tmpdir . '/powereduc-mailout.log';
 $fh = fopen($tmpfile, 'a+', false)
     or mdie("Error openning $tmpfile on append\n");
 fwrite($fh, "==== ".date("D M d H:i:s Y", time())." ====\n");

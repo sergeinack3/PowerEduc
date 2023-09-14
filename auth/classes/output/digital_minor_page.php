@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Digital minor renderable.
  *
  * @package     core_auth
- * @copyright   2018 Mihail Geshoski <mihail@moodle.com>
+ * @copyright   2018 Mihail Geshoski <mihail@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,7 +33,7 @@ use templatable;
 /**
  * Digital minor renderable class.
  *
- * @copyright 2018 Mihail Geshoski <mihail@moodle.com>
+ * @copyright 2018 Mihail Geshoski <mihail@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class digital_minor_page implements renderable, templatable {
@@ -55,7 +55,7 @@ class digital_minor_page implements renderable, templatable {
             'sitename' => $sitename,
             'supportname' => $supportname,
             'supportemail' => $supportemail,
-            'homelink' => new \moodle_url('/')
+            'homelink' => new \powereduc_url('/')
         ];
 
         return $context;

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ require_once($CFG->libdir . '/formslib.php');
  * @copyright 2012 Jonathan Harker
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class managesubscriptions extends \moodleform {
+class managesubscriptions extends \powereducform {
 
     use eventtype;
 
@@ -44,7 +44,7 @@ class managesubscriptions extends \moodleform {
         $mform = $this->_form;
         $eventtypes = calendar_get_allowed_event_types();
         if (in_array(true, $eventtypes, true) === false) {
-            throw new \moodle_exception('nopermissiontoupdatecalendar');
+            throw new \powereduc_exception('nopermissiontoupdatecalendar');
         }
 
         // Name.
@@ -131,7 +131,7 @@ class managesubscriptions extends \moodleform {
                 $url = clean_param($data['url'], PARAM_URL);
                 try {
                     calendar_get_icalendar($url);
-                } catch (\moodle_exception $e) {
+                } catch (\powereduc_exception $e) {
                     $errors['url'] = get_string('errorinvalidicalurl', 'calendar');
                 }
             }

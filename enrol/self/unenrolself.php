@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ $context = context_course::instance($course->id, MUST_EXIST);
 
 require_login();
 if (!is_enrolled($context)) {
-    redirect(new moodle_url('/'));
+    redirect(new powereduc_url('/'));
 }
 require_login($course);
 
@@ -41,7 +41,7 @@ $plugin = enrol_get_plugin('self');
 
 // Security defined inside following function.
 if (!$plugin->get_unenrolself_link($instance)) {
-    redirect(new moodle_url('/course/view.php', array('id'=>$course->id)));
+    redirect(new powereduc_url('/course/view.php', array('id'=>$course->id)));
 }
 
 $PAGE->set_url('/enrol/self/unenrolself.php', array('enrolid'=>$instance->id));
@@ -53,12 +53,12 @@ if ($confirm and confirm_sesskey()) {
     \core\notification::success(get_string('youunenrolledfromcourse', 'enrol', format_string($course->fullname, true,
         ["context" => $context])));
 
-    redirect(new moodle_url('/index.php'));
+    redirect(new powereduc_url('/index.php'));
 }
 
 echo $OUTPUT->header();
-$yesurl = new moodle_url($PAGE->url, array('confirm'=>1, 'sesskey'=>sesskey()));
-$nourl = new moodle_url('/course/view.php', array('id'=>$course->id));
+$yesurl = new powereduc_url($PAGE->url, array('confirm'=>1, 'sesskey'=>sesskey()));
+$nourl = new powereduc_url('/course/view.php', array('id'=>$course->id));
 $message = get_string('unenrolselfconfirm', 'enrol_self', format_string($course->fullname));
 echo $OUTPUT->confirm($message, $yesurl, $nourl);
 echo $OUTPUT->footer();

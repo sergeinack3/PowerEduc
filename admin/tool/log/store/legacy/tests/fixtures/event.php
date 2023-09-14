@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ class unittest_executed extends \core\event\base {
     }
 
     public function get_url() {
-        return new \moodle_url('/somepath/somefile.php', array('id' => $this->data['other']['sample']));
+        return new \powereduc_url('/somepath/somefile.php', array('id' => $this->data['other']['sample']));
     }
 
     public static function get_legacy_eventname() {

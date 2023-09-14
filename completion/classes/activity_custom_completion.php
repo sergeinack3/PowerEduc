@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ namespace core_completion;
 
 use cm_info;
 use coding_exception;
-use moodle_exception;
+use powereduc_exception;
 
 /**
  * Base class for defining an activity module's custom completion rules.
@@ -29,7 +29,7 @@ use moodle_exception;
  * of the custom completion rules for a given module instance and a user.
  *
  * @package   core_completion
- * @copyright 2021 Jun Pataleta <jun@moodle.com>
+ * @copyright 2021 Jun Pataleta <jun@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 abstract class activity_custom_completion {
@@ -69,7 +69,7 @@ abstract class activity_custom_completion {
 
         // Check that this custom rule is included in the course module's custom completion rules.
         if (!$this->is_available($rule)) {
-            throw new moodle_exception("Custom completion rule '$rule' is not used by this activity.");
+            throw new powereduc_exception("Custom completion rule '$rule' is not used by this activity.");
         }
     }
 

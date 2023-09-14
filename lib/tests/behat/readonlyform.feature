@@ -1,6 +1,6 @@
 @core
 Feature: Read-only forms should work
-  In order to use certain forms on large Moodle installations
+  In order to use certain forms on large PowerEduc installations
   As a user
   Relevant featuers of non-editable forms should still work
 

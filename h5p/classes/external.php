@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * This is the external API for this component.
  *
  * @package    core_h5p
- * @copyright  2019 Carlos Escobedo <carlos@moodle.com>
+ * @copyright  2019 Carlos Escobedo <carlos@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -38,7 +38,7 @@ use external_warnings;
 /**
  * This is the external API for this component.
  *
- * @copyright  2019 Carlos Escobedo <carlos@moodle.com>
+ * @copyright  2019 Carlos Escobedo <carlos@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class external extends external_api {
@@ -75,7 +75,7 @@ class external extends external_api {
      * @param  int $embed The embed allow to copy the code to your site
      * @param  int $copyright The copyright option
      * @return array
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public static function get_trusted_h5p_file(string $url, int $frame, int $export, int $embed, int $copyright) {
 
@@ -97,13 +97,13 @@ class external extends external_api {
         try {
             $h5pplayer = new player($url, $config);
             $messages = $h5pplayer->get_messages();
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $messages = (object) [
                 'code' => $e->getCode(),
             ];
             // To mantain the coherence between web coding error and Mobile coding errors.
             // We need to return the same message error to Mobile.
-            // The 'out_al_local_url called on a non-local URL' error is provided by the \moodle_exception.
+            // The 'out_al_local_url called on a non-local URL' error is provided by the \powereduc_exception.
             // We have to translate to h5pinvalidurl which is the same coding error showed in web.
             if ($e->errorcode === 'codingerror' &&
                     $e->a === 'out_as_local_url called on a non-local URL') {

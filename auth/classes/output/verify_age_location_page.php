@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Age and location verification renderable.
  *
  * @package     core_auth
- * @copyright   2018 Mihail Geshoski <mihail@moodle.com>
+ * @copyright   2018 Mihail Geshoski <mihail@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -35,7 +35,7 @@ require_once($CFG->libdir.'/formslib.php');
 /**
  * Age and location verification renderable class.
  *
- * @copyright 2018 Mihail Geshoski <mihail@moodle.com>
+ * @copyright 2018 Mihail Geshoski <mihail@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class verify_age_location_page implements renderable, templatable {

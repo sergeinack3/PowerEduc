@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Report builder related settings.
  *
  * @package   core_reportbuilder
- * @copyright 2021 David Matamoros <davidmc@moodle.com>
+ * @copyright 2021 David Matamoros <davidmc@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -42,7 +42,7 @@ $ADMIN->add(
     'reportbuilder', new accesscallback(
         'customreports',
         get_string('customreports', 'core_reportbuilder'),
-        (new moodle_url('/reportbuilder/index.php'))->out(),
+        (new powereduc_url('/reportbuilder/index.php'))->out(),
         static function(accesscallback $accesscallback): bool {
             return permission::can_view_reports_list();
         },
@@ -51,7 +51,7 @@ $ADMIN->add(
 );
 
 $settings = new admin_settingpage('reportbuildersettings', get_string('customreportssettings', 'core_reportbuilder'),
-    'moodle/site:config', empty($CFG->enablecustomreports));
+    'powereduc/site:config', empty($CFG->enablecustomreports));
 
 $settings->add(new admin_setting_configtext(
     'customreportslimit',

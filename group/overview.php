@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -39,10 +39,10 @@ $returnurl = $CFG->wwwroot.'/group/index.php?id='.$courseid;
 $rooturl   = $CFG->wwwroot.'/group/overview.php?id='.$courseid;
 
 if (!$course = $DB->get_record('course', array('id'=>$courseid))) {
-    throw new \moodle_exception('invalidcourse');
+    throw new \powereduc_exception('invalidcourse');
 }
 
-$url = new moodle_url('/group/overview.php', array('id'=>$courseid));
+$url = new powereduc_url('/group/overview.php', array('id'=>$courseid));
 if ($groupid !== 0) {
     $url->param('group', $groupid);
 }
@@ -55,7 +55,7 @@ $PAGE->set_url($url);
 require_login($course);
 
 $context = context_course::instance($courseid);
-require_capability('moodle/course:managegroups', $context);
+require_capability('powereduc/course:managegroups', $context);
 
 $strgroups           = get_string('groups');
 $strparticipants     = get_string('participants');
@@ -266,7 +266,7 @@ if ($dataformat !== '') {
 }
 
 // Main page content.
-navigation_node::override_active_url(new moodle_url('/group/index.php', array('id'=>$courseid)));
+navigation_node::override_active_url(new powereduc_url('/group/index.php', array('id'=>$courseid)));
 $PAGE->navbar->add(get_string('overview', 'group'));
 
 /// Print header
@@ -286,7 +286,7 @@ $options[0] = get_string('all');
 foreach ($groupings as $grouping) {
     $options[$grouping->id] = strip_tags($grouping->formattedname);
 }
-$popupurl = new moodle_url($rooturl.'&group='.$groupid);
+$popupurl = new powereduc_url($rooturl.'&group='.$groupid);
 $select = new single_select($popupurl, 'grouping', $options, $groupingid, array());
 $select->label = $strgrouping;
 $select->formid = 'selectgrouping';
@@ -297,7 +297,7 @@ $options[0] = get_string('all');
 foreach ($groups as $group) {
     $options[$group->id] = strip_tags(format_string($group->name));
 }
-$popupurl = new moodle_url($rooturl.'&grouping='.$groupingid);
+$popupurl = new powereduc_url($rooturl.'&grouping='.$groupingid);
 $select = new single_select($popupurl, 'group', $options, $groupid, array());
 $select->label = $strgroup;
 $select->formid = 'selectgroup';
@@ -328,7 +328,7 @@ foreach ($members as $gpgid=>$groupdata) {
         $options->noclean = true;
         $options->overflowdiv = true;
         $line[] = $name;
-        $viewfullnames = has_capability('moodle/site:viewfullnames', $context);
+        $viewfullnames = has_capability('powereduc/site:viewfullnames', $context);
         $fullnames = array();
         foreach ($users as $user) {
             $displayname = fullname($user, $viewfullnames);
@@ -340,7 +340,7 @@ foreach ($members as $gpgid=>$groupdata) {
                 $displayname .= ' (' . implode(', ', $extrafieldsdisplay) . ')';
             }
 
-            $fullnames[] = html_writer::link(new moodle_url('/user/view.php', ['id' => $user->id, 'course' => $course->id]),
+            $fullnames[] = html_writer::link(new powereduc_url('/user/view.php', ['id' => $user->id, 'course' => $course->id]),
                 $displayname);
         }
         $line[] = implode(', ', $fullnames);

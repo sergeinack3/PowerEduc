@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 
 namespace core_badges\output;
 
-use moodle_url;
+use powereduc_url;
 use renderer_base;
 use single_button;
 
@@ -48,8 +48,8 @@ class recipients_action_bar extends manage_badge_action_bar {
 
         // Add button for badge manual award.
         if ($this->badge->has_manual_award_criteria()
-                && has_capability('moodle/badges:awardbadge', $this->page->context) && $this->badge->is_active()) {
-            $url = new moodle_url('/badges/award.php', ['id' => $this->badge->id]);
+                && has_capability('powereduc/badges:awardbadge', $this->page->context) && $this->badge->is_active()) {
+            $url = new powereduc_url('/badges/award.php', ['id' => $this->badge->id]);
             $button = new single_button($url, get_string('award', 'badges'), 'post', true);
             $elements['awardbutton'] = $button->export_for_template($output);
         }

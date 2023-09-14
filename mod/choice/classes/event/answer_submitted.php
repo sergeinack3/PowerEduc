@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * The mod_choice answer submitted event.
@@ -29,9 +29,9 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * The mod_choice answer submitted event class.
  *
- * This event is deprecated in Moodle 3.2, it can no longer be triggered, do not
+ * This event is deprecated in PowerEduc 3.2, it can no longer be triggered, do not
  * write event observers for it. This event can only be initiated during
- * restore from previous Moodle versions and appear in the logs.
+ * restore from previous PowerEduc versions and appear in the logs.
  *
  * Event observers should listen to mod_choice\event\answer_created instead that
  * will be triggered once for each option selected
@@ -45,7 +45,7 @@ defined('POWEREDUC_INTERNAL') || die();
  *
  * @deprecated since 3.2
  * @package    mod_choice
- * @since      Moodle 2.6
+ * @since      PowerEduc 2.6
  * @copyright  2013 Adrian Greeve <adrian@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

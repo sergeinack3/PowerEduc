@@ -1,29 +1,29 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Moodle\BehatExtension\Driver;
+namespace PowerEduc\BehatExtension\Driver;
 
 use Behat\MinkExtension\ServiceContainer\Driver\DriverFactory;
 use OAndreyev\Mink\Driver\WebDriverFactory as UpstreamFactory;
 use Symfony\Component\DependencyInjection\Definition;
 
-// phpcs:disable moodle.NamingConventions.ValidFunctionName.LowercaseMethod
+// phpcs:disable powereduc.NamingConventions.ValidFunctionName.LowercaseMethod
 
 /**
- * Driver factory for the Moodle WebDriver.
+ * Driver factory for the PowerEduc WebDriver.
  *
  * @package    core
  * @copyright  2020 Andrew Nicols <andrew@nicols.co.uk>

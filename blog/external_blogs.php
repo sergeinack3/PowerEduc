@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 /**
  * List of external blogs for current user.
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage blog
  * @copyright  2009 Nicolas Connault
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -30,8 +30,8 @@ require_once('lib.php');
 require_login();
 $context = context_system::instance();
 $PAGE->set_context(context_user::instance($USER->id));
-$PAGE->set_url(new moodle_url('/blog/external_blogs.php'));
-require_capability('moodle/blog:manageexternal', $context);
+$PAGE->set_url(new powereduc_url('/blog/external_blogs.php'));
+require_capability('powereduc/blog:manageexternal', $context);
 
 $delete = optional_param('delete', null, PARAM_INT);
 
@@ -96,10 +96,10 @@ if (!empty($blogs)) {
             $validicon = $OUTPUT->pix_icon('i/valid', get_string('feedisvalid', 'blog'));
         }
 
-        $editurl = new moodle_url('/blog/external_blog_edit.php', array('id' => $blog->id));
+        $editurl = new powereduc_url('/blog/external_blog_edit.php', array('id' => $blog->id));
         $editicon = $OUTPUT->action_icon($editurl, new pix_icon('t/edit', get_string('editexternalblog', 'blog')));
 
-        $deletelink = new moodle_url('/blog/external_blogs.php', array('delete' => $blog->id, 'sesskey' => sesskey()));
+        $deletelink = new powereduc_url('/blog/external_blogs.php', array('delete' => $blog->id, 'sesskey' => sesskey()));
         $action = new confirm_action(get_string('externalblogdeleteconfirm', 'blog'));
         $deleteicon = $OUTPUT->action_icon($deletelink, new pix_icon('t/delete', get_string('deleteexternalblog', 'blog')),
                                            $action);
@@ -113,7 +113,7 @@ if (!empty($blogs)) {
     echo html_writer::table($table);
 }
 
-$newexternalurl = new moodle_url('/blog/external_blog_edit.php');
+$newexternalurl = new powereduc_url('/blog/external_blog_edit.php');
 echo html_writer::link($newexternalurl, $straddnewexternalblog);
 echo $OUTPUT->box_end();
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,13 +16,13 @@
 
 namespace core_grades\output;
 
-use moodle_url;
+use powereduc_url;
 
 /**
  * Renderable class for the action bar elements in the manage outcomes page.
  *
  * @package    core_grades
- * @copyright  2021 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2021 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class manage_outcomes_action_bar extends action_bar {
@@ -63,27 +63,27 @@ class manage_outcomes_action_bar extends action_bar {
         if ($this->context->contextlevel === CONTEXT_COURSE) {
             $courseid = $this->context->instanceid;
             // Add a button to the action bar with a link to the 'course outcomes' page.
-            $backlink = new moodle_url('/grade/edit/outcome/course.php', ['id' => $courseid]);
+            $backlink = new powereduc_url('/grade/edit/outcome/course.php', ['id' => $courseid]);
             $backbutton = new \single_button($backlink, get_string('back'), 'get');
             $data['backbutton'] = $backbutton->export_for_template($output);
 
             // Add a button to the action bar with a link to the 'import outcomes' page. The import outcomes
             // functionality is currently only available in the course context.
-            $importoutcomeslink = new moodle_url('/grade/edit/outcome/import.php', ['courseid' => $courseid]);
+            $importoutcomeslink = new powereduc_url('/grade/edit/outcome/import.php', ['courseid' => $courseid]);
             $importoutcomesbutton = new \single_button($importoutcomeslink, get_string('importoutcomes', 'grades'),
                 'get');
             $data['importoutcomesbutton'] = $importoutcomesbutton->export_for_template($output);
         }
 
         // Add a button to the action bar with a link to the 'add new outcome' page.
-        $addoutcomelink = new moodle_url('/grade/edit/outcome/edit.php', ['courseid' => $courseid]);
+        $addoutcomelink = new powereduc_url('/grade/edit/outcome/edit.php', ['courseid' => $courseid]);
         $addoutcomebutton = new \single_button($addoutcomelink, get_string('outcomecreate', 'grades'),
             'get', true);
         $data['addoutcomebutton'] = $addoutcomebutton->export_for_template($output);
 
         if ($this->hasoutcomes) {
             // Add a button to the action bar which enables export of all existing outcomes.
-            $exportoutcomeslink = new moodle_url('/grade/edit/outcome/export.php',
+            $exportoutcomeslink = new powereduc_url('/grade/edit/outcome/export.php',
                 ['id' => $courseid, 'sesskey' => sesskey()]);
             $exportoutcomesbutton = new \single_button($exportoutcomeslink, get_string('exportalloutcomes', 'grades'),
                 'get');

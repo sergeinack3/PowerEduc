@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -507,8 +507,8 @@ class report_graderlib_test extends \advanced_testcase {
         // to a bug, it previously did).
         $context = \context_course::instance($course->id);
         $managerroleid = $DB->get_field('role', 'id', array('shortname' => 'manager'));
-        assign_capability('moodle/grade:viewhidden', CAP_PROHIBIT, $managerroleid, $context->id, true);
-        $this->assertFalse(has_capability('moodle/grade:viewhidden', $context));
+        assign_capability('powereduc/grade:viewhidden', CAP_PROHIBIT, $managerroleid, $context->id, true);
+        $this->assertFalse(has_capability('powereduc/grade:viewhidden', $context));
 
         // Recreate the report. Confirm it returns successfully still.
         $report = $this->create_report($course);

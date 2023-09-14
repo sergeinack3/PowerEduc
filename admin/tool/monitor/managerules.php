@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -51,7 +51,7 @@ if (empty($courseid)) {
 require_capability('tool/monitor:managerules', $context);
 
 // Set up the page.
-$manageurl = new moodle_url("/admin/tool/monitor/managerules.php", array('courseid' => $courseid));
+$manageurl = new powereduc_url("/admin/tool/monitor/managerules.php", array('courseid' => $courseid));
 $PAGE->set_url($manageurl);
 $PAGE->set_pagelayout('report');
 $PAGE->set_title($coursename);
@@ -62,7 +62,7 @@ if (!empty($action) && $action == 'changestatus') {
     require_capability('tool/monitor:managetool', context_system::instance());
     // Toggle status of the plugin.
     set_config('enablemonitor', $status, 'tool_monitor');
-    redirect(new moodle_url('/admin/tool/monitor/managerules.php', array('courseid' => 0)));
+    redirect(new powereduc_url('/admin/tool/monitor/managerules.php', array('courseid' => 0)));
 }
 
 // Copy/delete rule if needed.
@@ -71,7 +71,7 @@ if (!empty($action) && $ruleid) {
 
     // If the rule does not exist, then redirect back as the rule must have already been deleted.
     if (!$rule = $DB->get_record('tool_monitor_rules', array('id' => $ruleid), '*', IGNORE_MISSING)) {
-        redirect(new moodle_url('/admin/tool/monitor/managerules.php', array('courseid' => $courseid)));
+        redirect(new powereduc_url('/admin/tool/monitor/managerules.php', array('courseid' => $courseid)));
     }
 
     if ($action === 'delete') {
@@ -87,10 +87,10 @@ if (!empty($action) && $ruleid) {
             break;
         case 'delete':
             if ($rule->can_manage_rule()) {
-                $confirmurl = new moodle_url($CFG->wwwroot. '/admin/tool/monitor/managerules.php',
+                $confirmurl = new powereduc_url($CFG->wwwroot. '/admin/tool/monitor/managerules.php',
                     array('ruleid' => $ruleid, 'courseid' => $courseid, 'action' => 'delete',
                         'confirm' => true, 'sesskey' => sesskey()));
-                $cancelurl = new moodle_url($CFG->wwwroot. '/admin/tool/monitor/managerules.php',
+                $cancelurl = new powereduc_url($CFG->wwwroot. '/admin/tool/monitor/managerules.php',
                     array('courseid' => $courseid));
                 if ($confirm) {
                     $rule->delete_rule();
@@ -107,7 +107,7 @@ if (!empty($action) && $ruleid) {
                 }
             } else {
                 // User doesn't have permissions. Should never happen for real users.
-                throw new moodle_exception('rulenopermissions', 'tool_monitor', $manageurl, $action);
+                throw new powereduc_exception('rulenopermissions', 'tool_monitor', $manageurl, $action);
             }
             break;
         default:
@@ -128,7 +128,7 @@ if ($status) {
     if (has_capability('tool/monitor:managetool', context_system::instance())) {
         // We don't need to show enabled status to everyone.
         echo get_string('monitorenabled', 'tool_monitor');
-        $disableurl = new moodle_url("/admin/tool/monitor/managerules.php",
+        $disableurl = new powereduc_url("/admin/tool/monitor/managerules.php",
                 array('courseid' => $courseid, 'action' => 'changestatus', 'status' => 0, 'sesskey' => sesskey()));
         echo ' ' . html_writer::link($disableurl, get_string('disable'));
         echo $OUTPUT->render($help);
@@ -136,7 +136,7 @@ if ($status) {
 } else {
     echo get_string('monitordisabled', 'tool_monitor');
     if (has_capability('tool/monitor:managetool', context_system::instance())) {
-        $enableurl = new moodle_url("/admin/tool/monitor/managerules.php",
+        $enableurl = new powereduc_url("/admin/tool/monitor/managerules.php",
                 array('courseid' => $courseid, 'action' => 'changestatus', 'status' => 1, 'sesskey' => sesskey()));
         echo ' ' . html_writer::link($enableurl, get_string('enable'));
         echo $OUTPUT->render($help);
@@ -152,7 +152,7 @@ $renderable = new \tool_monitor\output\managerules\renderable('toolmonitorrules'
 $renderer = $PAGE->get_renderer('tool_monitor', 'managerules');
 echo $renderer->render($renderable);
 if (has_capability('tool/monitor:subscribe', $context)) {
-    $manageurl = new moodle_url("/admin/tool/monitor/index.php", array('courseid' => $courseid));
+    $manageurl = new powereduc_url("/admin/tool/monitor/index.php", array('courseid' => $courseid));
     echo $renderer->render_subscriptions_link($manageurl);
 }
 echo $OUTPUT->footer();

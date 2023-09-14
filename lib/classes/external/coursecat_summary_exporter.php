@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Class for exporting summary information for a course category.
@@ -25,7 +25,7 @@ namespace core\external;
 defined('POWEREDUC_INTERNAL') || die();
 
 use renderer_base;
-use moodle_url;
+use powereduc_url;
 
 /**
  * Class for exporting a course summary from an stdClass.
@@ -72,7 +72,7 @@ class coursecat_summary_exporter extends \core\external\exporter {
     protected function get_other_values(renderer_base $output) {
         $return = [
             'nestedname' => $this->category->get_nested_name(),
-            'url' => (new moodle_url('/course/index.php', [
+            'url' => (new powereduc_url('/course/index.php', [
                     'categoryid' => $this->category->id,
                 ]))->out(false),
         ];

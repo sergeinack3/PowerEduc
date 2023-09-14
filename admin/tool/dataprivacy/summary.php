@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 require_once(__DIR__ . '/../../../config.php');
 require_once($CFG->dirroot . '/' . $CFG->admin . '/tool/dataprivacy/lib.php');
 
-$url = new moodle_url('/' . $CFG->admin . '/tool/dataprivacy/summary.php');
+$url = new powereduc_url('/' . $CFG->admin . '/tool/dataprivacy/summary.php');
 $title = get_string('summary', 'tool_dataprivacy');
 
 $context = \context_system::instance();

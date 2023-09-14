@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'user', language 'en', branch 'POWEREDUC_20_STABLE'
@@ -23,8 +23,8 @@
  */
 
 $string['countparticipantsfound'] = '{$a} participants found';
-$string['powereducnetprofile'] = 'MoodleNet profile ID';
-$string['powereducnetprofile_help'] = 'Your MoodleNet profile ID links your MoodleNet profile with this site.';
+$string['powereducnetprofile'] = 'PowerEducNet profile ID';
+$string['powereducnetprofile_help'] = 'Your PowerEducNet profile ID links your PowerEducNet profile with this site.';
 $string['placeholdertype'] = 'Type...';
 $string['privacy:courserequestpath'] = 'Requested courses';
 $string['privacy:descriptionpath'] = 'Profile description';
@@ -78,7 +78,7 @@ $string['privacy:metadata:maildisplay'] = 'A preference for the user about displ
 $string['privacy:metadata:middlename'] = 'The middle name of the user';
 $string['privacy:metadata:mnethostid'] = 'An identifier for the MNet host if used';
 $string['privacy:metadata:model'] = 'The device name, occam or iPhone etc..';
-$string['privacy:metadata:powereducnetprofile'] = 'The MoodleNet profile for the user';
+$string['privacy:metadata:powereducnetprofile'] = 'The PowerEducNet profile for the user';
 $string['privacy:metadata:msn'] = 'The MSN identifier of the user';
 $string['privacy:metadata:my_pages'] = 'User pages - dashboard and profile. This table does not contain personal data and only used to link dashboard blocks to users';
 $string['privacy:metadata:my_pages:name'] = 'Page name';
@@ -140,7 +140,7 @@ $string['target:upcomingactivitiesdue'] = 'Upcoming activities due';
 $string['target:upcomingactivitiesdue_help'] = 'This target generates reminders for upcoming activities due.';
 $string['target:upcomingactivitiesdueinfo'] = 'All upcoming activities due insights are listed here. These students have received these insights directly.';
 
-// Deprecated since Moodle 4.1.
+// Deprecated since PowerEduc 4.1.
 $string['addcondition'] = 'Add condition';
 $string['adverbfor_and'] = 'and';
 $string['adverbfor_andnot'] = 'and';

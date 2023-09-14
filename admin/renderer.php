@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    core
  * @subpackage admin
- * @copyright  2011 David Mudrak <david@moodle.com>
+ * @copyright  2011 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core_admin_renderer extends plugin_renderer_base {
@@ -36,15 +36,15 @@ class core_admin_renderer extends plugin_renderer_base {
         $copyrightnotice = text_to_html(get_string('gpl3'));
         $copyrightnotice = str_replace('target="_blank"', 'onclick="this.target=\'_blank\'"', $copyrightnotice); // extremely ugly validation hack
 
-        $continue = new single_button(new moodle_url($this->page->url, array(
+        $continue = new single_button(new powereduc_url($this->page->url, array(
             'lang' => $CFG->lang, 'agreelicense' => 1)), get_string('continue'), 'get');
 
         $output .= $this->header();
-        $output .= $this->heading('<a href="http://moodle.org">Moodle</a> - Modular Object-Oriented Dynamic Learning Environment');
+        $output .= $this->heading('<a href="http://powereduc.org">Moodle</a> - Modular Object-Oriented Dynamic Learning Environment');
         $output .= $this->heading(get_string('copyrightnotice'));
         $output .= $this->box($copyrightnotice, 'copyrightnotice');
         $output .= html_writer::empty_tag('br');
-        $output .= $this->confirm(get_string('doyouagree'), $continue, "http://docs.moodle.org/dev/License");
+        $output .= $this->confirm(get_string('doyouagree'), $continue, "http://docs.powereduc.org/dev/License");
         $output .= $this->footer();
 
         return $output;
@@ -75,7 +75,7 @@ class core_admin_renderer extends plugin_renderer_base {
      * @param int $maturity
      * @param boolean $envstatus final result of the check (true/false)
      * @param array $environment_results array of results gathered
-     * @param string $release moodle release
+     * @param string $release powereduc release
      * @return string HTML to output.
      */
     public function install_environment_page($maturity, $envstatus, $environment_results, $release) {
@@ -90,10 +90,10 @@ class core_admin_renderer extends plugin_renderer_base {
         $output .= $this->environment_check_table($envstatus, $environment_results);
 
         if (!$envstatus) {
-            $output .= $this->upgrade_reload(new moodle_url($this->page->url, array('agreelicense' => 1, 'lang' => $CFG->lang)));
+            $output .= $this->upgrade_reload(new powereduc_url($this->page->url, array('agreelicense' => 1, 'lang' => $CFG->lang)));
         } else {
             $output .= $this->notification(get_string('environmentok', 'admin'), 'notifysuccess');
-            $output .= $this->continue_button(new moodle_url($this->page->url, array(
+            $output .= $this->continue_button(new powereduc_url($this->page->url, array(
                 'agreelicense' => 1, 'confirmrelease' => 1, 'lang' => $CFG->lang)));
         }
 
@@ -106,10 +106,10 @@ class core_admin_renderer extends plugin_renderer_base {
      *
      * @param double|string|int $version Moodle on-disk version
      * @param array $failed list of plugins with unsatisfied dependecies
-     * @param moodle_url $reloadurl URL of the page to recheck the dependencies
+     * @param powereduc_url $reloadurl URL of the page to recheck the dependencies
      * @return string HTML
      */
-    public function unsatisfied_dependencies_page($version, array $failed, moodle_url $reloadurl) {
+    public function unsatisfied_dependencies_page($version, array $failed, powereduc_url $reloadurl) {
         $output = '';
 
         $output .= $this->header();
@@ -135,9 +135,9 @@ class core_admin_renderer extends plugin_renderer_base {
     public function upgrade_confirm_page($strnewversion, $maturity, $testsite) {
         $output = '';
 
-        $continueurl = new moodle_url($this->page->url, array('confirmupgrade' => 1, 'cache' => 0));
+        $continueurl = new powereduc_url($this->page->url, array('confirmupgrade' => 1, 'cache' => 0));
         $continue = new single_button($continueurl, get_string('continue'), 'get');
-        $cancelurl = new moodle_url('/admin/index.php');
+        $cancelurl = new powereduc_url('/admin/index.php');
 
         $output .= $this->header();
         $output .= $this->maturity_warning($maturity);
@@ -165,7 +165,7 @@ class core_admin_renderer extends plugin_renderer_base {
         $output .= $this->environment_check_table($envstatus, $environment_results);
 
         if (!$envstatus) {
-            $output .= $this->upgrade_reload(new moodle_url($this->page->url, array('confirmupgrade' => 1, 'cache' => 0)));
+            $output .= $this->upgrade_reload(new powereduc_url($this->page->url, array('confirmupgrade' => 1, 'cache' => 0)));
 
         } else {
             $output .= $this->notification(get_string('environmentok', 'admin'), 'notifysuccess');
@@ -174,7 +174,7 @@ class core_admin_renderer extends plugin_renderer_base {
                 $output .= $this->box(get_string('langpackwillbeupdated', 'admin'), 'generalbox', 'notice');
             }
 
-            $output .= $this->continue_button(new moodle_url($this->page->url, array(
+            $output .= $this->continue_button(new powereduc_url($this->page->url, array(
                 'confirmupgrade' => 1, 'confirmrelease' => 1, 'cache' => 0)));
         }
 
@@ -189,8 +189,8 @@ class core_admin_renderer extends plugin_renderer_base {
      * @param \core\update\checker $checker provides information about available updates.
      * @param int $version the version of the Moodle code from version.php.
      * @param bool $showallplugins
-     * @param moodle_url $reloadurl
-     * @param moodle_url $continueurl
+     * @param powereduc_url $reloadurl
+     * @param powereduc_url $continueurl
      * @return string HTML to output.
      */
     public function upgrade_plugin_check_page(core_plugin_manager $pluginman, \core\update\checker $checker,
@@ -225,16 +225,16 @@ class core_admin_renderer extends plugin_renderer_base {
      * Display a page to confirm plugin installation cancelation.
      *
      * @param array $abortable list of \core\update\plugininfo
-     * @param moodle_url $continue
+     * @param powereduc_url $continue
      * @return string
      */
-    public function upgrade_confirm_abort_install_page(array $abortable, moodle_url $continue) {
+    public function upgrade_confirm_abort_install_page(array $abortable, powereduc_url $continue) {
 
         $pluginman = core_plugin_manager::instance();
 
         if (empty($abortable)) {
             // The UI should not allow this.
-            throw new moodle_exception('err_no_plugin_install_abortable', 'core_plugin');
+            throw new powereduc_exception('err_no_plugin_install_abortable', 'core_plugin');
         }
 
         $out = $this->output->header();
@@ -320,7 +320,7 @@ class core_admin_renderer extends plugin_renderer_base {
 
         //////////////////////////////////////////////////////////////////////////////////////////////////
         ////  IT IS ILLEGAL AND A VIOLATION OF THE GPL TO HIDE, REMOVE OR MODIFY THIS COPYRIGHT NOTICE ///
-        $output .= $this->moodle_copyright();
+        $output .= $this->powereduc_copyright();
         //////////////////////////////////////////////////////////////////////////////////////////////////
 
         $output .= $this->footer();
@@ -358,7 +358,7 @@ class core_admin_renderer extends plugin_renderer_base {
      * Renders a button to fetch for available updates.
      *
      * @param \core\update\checker $checker
-     * @param moodle_url $reloadurl
+     * @param powereduc_url $reloadurl
      * @return string HTML
      */
     public function check_for_updates_button(\core\update\checker $checker, $reloadurl) {
@@ -368,7 +368,7 @@ class core_admin_renderer extends plugin_renderer_base {
         if ($checker->enabled()) {
             $output .= $this->container_start('checkforupdates mb-4');
             $output .= $this->single_button(
-                new moodle_url($reloadurl, array('fetchupdates' => 1)),
+                new powereduc_url($reloadurl, array('fetchupdates' => 1)),
                 get_string('checkforupdates', 'core_plugin')
             );
             if ($timefetched = $checker->get_last_timefetched()) {
@@ -387,11 +387,11 @@ class core_admin_renderer extends plugin_renderer_base {
      *
      * @param core_plugin_manager $pluginman
      * @param \core\plugininfo\base $pluginfo
-     * @param moodle_url $continueurl URL to continue after confirmation
-     * @param moodle_url $cancelurl URL to to go if cancelled
+     * @param powereduc_url $continueurl URL to continue after confirmation
+     * @param powereduc_url $cancelurl URL to to go if cancelled
      * @return string
      */
-    public function plugin_uninstall_confirm_page(core_plugin_manager $pluginman, \core\plugininfo\base $pluginfo, moodle_url $continueurl, moodle_url $cancelurl) {
+    public function plugin_uninstall_confirm_page(core_plugin_manager $pluginman, \core\plugininfo\base $pluginfo, powereduc_url $continueurl, powereduc_url $cancelurl) {
         $output = '';
 
         $pluginname = $pluginman->plugin_name($pluginfo->component);
@@ -415,11 +415,11 @@ class core_admin_renderer extends plugin_renderer_base {
      * @param core_plugin_manager $pluginman
      * @param \core\plugininfo\base $pluginfo
      * @param progress_trace_buffer $progress
-     * @param moodle_url $continueurl URL to continue to remove the plugin folder
+     * @param powereduc_url $continueurl URL to continue to remove the plugin folder
      * @return string
      */
     public function plugin_uninstall_results_removable_page(core_plugin_manager $pluginman, \core\plugininfo\base $pluginfo,
-                                                            progress_trace_buffer $progress, moodle_url $continueurl) {
+                                                            progress_trace_buffer $progress, powereduc_url $continueurl) {
         $output = '';
 
         $pluginname = $pluginman->plugin_name($pluginfo->component);
@@ -442,7 +442,7 @@ class core_admin_renderer extends plugin_renderer_base {
         }
 
         // After any uninstall we must execute full upgrade to finish the cleanup!
-        $output .= $this->output->confirm($confirm, $continueurl, new moodle_url('/admin/index.php'));
+        $output .= $this->output->confirm($confirm, $continueurl, new powereduc_url('/admin/index.php'));
         $output .= $this->output->footer();
 
         return $output;
@@ -468,7 +468,7 @@ class core_admin_renderer extends plugin_renderer_base {
 
         $output .= $this->output->box(get_string('uninstalldelete', 'core_plugin',
             array('name' => $pluginname, 'rootdir' => $pluginfo->rootdir)), 'generalbox uninstalldelete');
-        $output .= $this->output->continue_button(new moodle_url('/admin/index.php'));
+        $output .= $this->output->continue_button(new powereduc_url('/admin/index.php'));
         $output .= $this->output->footer();
 
         return $output;
@@ -488,7 +488,7 @@ class core_admin_renderer extends plugin_renderer_base {
 
         // Print the component download link
         $output .= html_writer::tag('div', html_writer::link(
-                    new moodle_url('/admin/environment.php', array('action' => 'updatecomponent', 'sesskey' => sesskey())),
+                    new powereduc_url('/admin/environment.php', array('action' => 'updatecomponent', 'sesskey' => sesskey())),
                     get_string('updatecomponent', 'admin')),
                 array('class' => 'reportlink'));
 
@@ -498,8 +498,8 @@ class core_admin_renderer extends plugin_renderer_base {
         // Box with info and a menu to choose the version.
         $output .= $this->box_start();
         $output .= html_writer::tag('div', get_string('adminhelpenvironment'));
-        $select = new single_select(new moodle_url('/admin/environment.php'), 'version', $versions, $version, null);
-        $select->label = get_string('moodleversion');
+        $select = new single_select(new powereduc_url('/admin/environment.php'), 'version', $versions, $version, null);
+        $select->label = get_string('powereducversion');
         $output .= $this->render($select);
         $output .= $this->box_end();
 
@@ -548,7 +548,7 @@ class core_admin_renderer extends plugin_renderer_base {
     protected function development_libs_directories_warning($devlibdir) {
 
         if ($devlibdir) {
-            $moreinfo = new moodle_url('/report/security/index.php');
+            $moreinfo = new powereduc_url('/report/security/index.php');
             $warning = get_string('devlibdirpresent', 'core_admin', ['moreinfourl' => $moreinfo->out()]);
             return $this->warning($warning, 'danger');
 
@@ -683,7 +683,7 @@ class core_admin_renderer extends plugin_renderer_base {
             return '';
         }
 
-        $url = new moodle_url('/admin/settings.php', array('section' => 'maintenancemode'));
+        $url = new powereduc_url('/admin/settings.php', array('section' => 'maintenancemode'));
         $url = $url->out(); // get_string() does not support objects in params
 
         return $this->warning(get_string('sitemaintenancewarning2', 'admin', $url));
@@ -740,16 +740,16 @@ class core_admin_renderer extends plugin_renderer_base {
      * Output the copyright notice.
      * @return string HTML to output.
      */
-    protected function moodle_copyright() {
+    protected function powereduc_copyright() {
         global $CFG;
 
         //////////////////////////////////////////////////////////////////////////////////////////////////
         ////  IT IS ILLEGAL AND A VIOLATION OF THE GPL TO HIDE, REMOVE OR MODIFY THIS COPYRIGHT NOTICE ///
-        $copyrighttext = '<a href="http://moodle.org/">Moodle</a> '.
-                         '<a href="http://docs.moodle.org/dev/Releases" title="'.$CFG->version.'">'.$CFG->release.'</a><br />'.
+        $copyrighttext = '<a href="http://powereduc.org/">Moodle</a> '.
+                         '<a href="http://docs.powereduc.org/dev/Releases" title="'.$CFG->version.'">'.$CFG->release.'</a><br />'.
                          'Copyright &copy; 1999 onwards, Martin Dougiamas<br />'.
-                         'and <a href="http://moodle.org/dev">many other contributors</a>.<br />'.
-                         '<a href="http://docs.moodle.org/dev/License">GNU Public License</a>';
+                         'and <a href="http://powereduc.org/dev">many other contributors</a>.<br />'.
+                         '<a href="http://docs.powereduc.org/dev/License">GNU Public License</a>';
         //////////////////////////////////////////////////////////////////////////////////////////////////
 
         return $this->box($copyrighttext, 'copyright');
@@ -796,7 +796,7 @@ class core_admin_renderer extends plugin_renderer_base {
                 $someupdateavailable = true;
                 $updateinfo .= $this->heading(get_string('updateavailable', 'core_admin'), 3);
                 foreach ($updates['core'] as $update) {
-                    $updateinfo .= $this->moodle_available_update_info($update);
+                    $updateinfo .= $this->powereduc_available_update_info($update);
                 }
                 $updateinfo .= html_writer::tag('p', get_string('updateavailablerecommendation', 'core_admin'),
                     array('class' => 'updateavailablerecommendation'));
@@ -806,7 +806,7 @@ class core_admin_renderer extends plugin_renderer_base {
             if (!empty($updates)) {
                 $someupdateavailable = true;
                 $updateinfo .= $this->heading(get_string('updateavailableforplugin', 'core_admin'), 3);
-                $pluginsoverviewurl = new moodle_url('/admin/plugins.php', array('updatesonly' => 1));
+                $pluginsoverviewurl = new powereduc_url('/admin/plugins.php', array('updatesonly' => 1));
                 $updateinfo .= $this->container(get_string('pluginsoverviewsee', 'core_admin',
                     array('url' => $pluginsoverviewurl->out())));
             }
@@ -820,7 +820,7 @@ class core_admin_renderer extends plugin_renderer_base {
         }
 
         $updateinfo .= $this->container_start('checkforupdates mt-1');
-        $fetchurl = new moodle_url('/admin/index.php', array('fetchupdates' => 1, 'sesskey' => sesskey(), 'cache' => 0));
+        $fetchurl = new powereduc_url('/admin/index.php', array('fetchupdates' => 1, 'sesskey' => sesskey(), 'cache' => 0));
         $updateinfo .= $this->single_button($fetchurl, get_string('checkforupdates', 'core_plugin'));
         if ($fetch) {
             $updateinfo .= $this->container(get_string('checkforupdateslast', 'core_plugin',
@@ -840,8 +840,8 @@ class core_admin_renderer extends plugin_renderer_base {
     protected function registration_warning($registered) {
 
         if (!$registered && site_is_public()) {
-            if (has_capability('moodle/site:config', context_system::instance())) {
-                $registerbutton = $this->single_button(new moodle_url('/admin/registration/index.php'),
+            if (has_capability('powereduc/site:config', context_system::instance())) {
+                $registerbutton = $this->single_button(new powereduc_url('/admin/registration/index.php'),
                     get_string('register', 'admin'));
                 $str = 'registrationwarning';
             } else {
@@ -858,7 +858,7 @@ class core_admin_renderer extends plugin_renderer_base {
     }
 
     /**
-     * Return an admin page warning if site is not registered with moodle.org
+     * Return an admin page warning if site is not registered with powereduc.org
      *
      * @return string
      */
@@ -875,7 +875,7 @@ class core_admin_renderer extends plugin_renderer_base {
     protected function mobile_configuration_warning($mobileconfigured) {
         $output = '';
         if (!$mobileconfigured) {
-            $settingslink = new moodle_url('/admin/settings.php', ['section' => 'mobilesettings']);
+            $settingslink = new powereduc_url('/admin/settings.php', ['section' => 'mobilesettings']);
             $configurebutton = $this->single_button($settingslink, get_string('enablemobilewebservice', 'admin'));
             $output .= $this->warning(get_string('mobilenotconfiguredwarning', 'admin') . '&nbsp;' . $configurebutton);
         }
@@ -895,7 +895,7 @@ class core_admin_renderer extends plugin_renderer_base {
         }
 
         $lang = current_language();
-        $url = "https://campaign.moodle.org/current/lms/{$lang}/install/";
+        $url = "https://campaign.powereduc.org/current/lms/{$lang}/install/";
         $params = [
             'url' => $url,
             'iframeid' => 'campaign-content'
@@ -916,7 +916,7 @@ class core_admin_renderer extends plugin_renderer_base {
         }
 
         $lang = current_language();
-        $url = "https://campaign.moodle.org/current/lms/{$lang}/servicesandsupport/";
+        $url = "https://campaign.powereduc.org/current/lms/{$lang}/servicesandsupport/";
         $params = [
             'url' => $url,
             'iframeid' => 'services-support-content'
@@ -934,8 +934,8 @@ class core_admin_renderer extends plugin_renderer_base {
     protected function forgotten_password_url_warning($invalidforgottenpasswordurl) {
         $output = '';
         if ($invalidforgottenpasswordurl) {
-            $settingslink = new moodle_url('/admin/settings.php', ['section' => 'manageauths']);
-            $configurebutton = $this->single_button($settingslink, get_string('check', 'moodle'));
+            $settingslink = new powereduc_url('/admin/settings.php', ['section' => 'manageauths']);
+            $configurebutton = $this->single_button($settingslink, get_string('check', 'powereduc'));
             $output .= $this->warning(get_string('invalidforgottenpasswordurl', 'admin') . '&nbsp;' . $configurebutton,
                 'error alert alert-danger');
         }
@@ -948,9 +948,9 @@ class core_admin_renderer extends plugin_renderer_base {
      *
      * @param \core\update\info $updateinfo information about the available Moodle core update
      */
-    protected function moodle_available_update_info(\core\update\info $updateinfo) {
+    protected function powereduc_available_update_info(\core\update\info $updateinfo) {
 
-        $boxclasses = 'moodleupdateinfo mb-2';
+        $boxclasses = 'powereducupdateinfo mb-2';
         $info = array();
 
         if (isset($updateinfo->release)) {
@@ -991,7 +991,7 @@ class core_admin_renderer extends plugin_renderer_base {
      * @return string HTML to output.
      */
     protected function release_notes_link() {
-        $releasenoteslink = get_string('releasenoteslink', 'admin', 'http://docs.moodle.org/dev/Releases');
+        $releasenoteslink = get_string('releasenoteslink', 'admin', 'http://docs.powereduc.org/dev/Releases');
         $releasenoteslink = str_replace('target="_blank"', 'onclick="this.target=\'_blank\'"', $releasenoteslink); // extremely ugly validation hack
         return $this->box($releasenoteslink, 'generalbox alert alert-info');
     }
@@ -1146,7 +1146,7 @@ class core_admin_renderer extends plugin_renderer_base {
 
                 if (!empty($installabortable[$plugin->component])) {
                     $status .= $this->output->single_button(
-                        new moodle_url($this->page->url, array('abortinstall' => $plugin->component, 'confirmplugincheck' => 0)),
+                        new powereduc_url($this->page->url, array('abortinstall' => $plugin->component, 'confirmplugincheck' => 0)),
                         get_string('cancelinstallone', 'core_plugin'),
                         'post',
                         array('class' => 'actionbutton cancelinstallone d-block mt-1')
@@ -1155,7 +1155,7 @@ class core_admin_renderer extends plugin_renderer_base {
 
                 if (!empty($upgradeabortable[$plugin->component])) {
                     $status .= $this->output->single_button(
-                        new moodle_url($this->page->url, array('abortupgrade' => $plugin->component)),
+                        new powereduc_url($this->page->url, array('abortupgrade' => $plugin->component)),
                         get_string('cancelupgradeone', 'core_plugin'),
                         'post',
                         array('class' => 'actionbutton cancelupgradeone d-block mt-1')
@@ -1236,7 +1236,7 @@ class core_admin_renderer extends plugin_renderer_base {
         $installableupdates = $pluginman->filter_installable($pluginman->available_updates());
         if ($installableupdates) {
             $out .= $this->output->single_button(
-                new moodle_url($this->page->url, array('installupdatex' => 1)),
+                new powereduc_url($this->page->url, array('installupdatex' => 1)),
                 get_string('updateavailableinstallall', 'core_admin', count($installableupdates)),
                 'post',
                 array('class' => 'singlebutton updateavailableinstallall mr-1')
@@ -1245,7 +1245,7 @@ class core_admin_renderer extends plugin_renderer_base {
 
         if ($installabortable) {
             $out .= $this->output->single_button(
-                new moodle_url($this->page->url, array('abortinstallx' => 1, 'confirmplugincheck' => 0)),
+                new powereduc_url($this->page->url, array('abortinstallx' => 1, 'confirmplugincheck' => 0)),
                 get_string('cancelinstallall', 'core_plugin', count($installabortable)),
                 'post',
                 array('class' => 'singlebutton cancelinstallall mr-1')
@@ -1254,18 +1254,18 @@ class core_admin_renderer extends plugin_renderer_base {
 
         if ($upgradeabortable) {
             $out .= $this->output->single_button(
-                new moodle_url($this->page->url, array('abortupgradex' => 1)),
+                new powereduc_url($this->page->url, array('abortupgradex' => 1)),
                 get_string('cancelupgradeall', 'core_plugin', count($upgradeabortable)),
                 'post',
                 array('class' => 'singlebutton cancelupgradeall mr-1')
             );
         }
 
-        $out .= html_writer::div(html_writer::link(new moodle_url($this->page->url, array('showallplugins' => 0)),
+        $out .= html_writer::div(html_writer::link(new powereduc_url($this->page->url, array('showallplugins' => 0)),
             get_string('plugincheckattention', 'core_plugin')).' '.html_writer::span($sumattention, 'badge badge-light'),
             'btn btn-link mr-1');
 
-        $out .= html_writer::div(html_writer::link(new moodle_url($this->page->url, array('showallplugins' => 1)),
+        $out .= html_writer::div(html_writer::link(new powereduc_url($this->page->url, array('showallplugins' => 1)),
             get_string('plugincheckall', 'core_plugin')).' '.html_writer::span($sumtotal, 'badge badge-light'),
             'btn btn-link mr-1');
 
@@ -1282,11 +1282,11 @@ class core_admin_renderer extends plugin_renderer_base {
     /**
      * Display the continue / cancel widgets for the plugins management pages.
      *
-     * @param null|moodle_url $continue URL for the continue button, should it be displayed
-     * @param null|moodle_url $cancel URL for the cancel link, defaults to the current page
+     * @param null|powereduc_url $continue URL for the continue button, should it be displayed
+     * @param null|powereduc_url $cancel URL for the cancel link, defaults to the current page
      * @return string HTML
      */
-    public function plugins_management_confirm_buttons(moodle_url $continue=null, moodle_url $cancel=null) {
+    public function plugins_management_confirm_buttons(powereduc_url $continue=null, powereduc_url $cancel=null) {
 
         $out = html_writer::start_div('plugins-management-confirm-buttons');
 
@@ -1346,7 +1346,7 @@ class core_admin_renderer extends plugin_renderer_base {
             if ($unavailable) {
                 $unavailablelist = array();
                 foreach ($unavailable as $component => $remoteinfoanyversion) {
-                    $unavailablelistitem = html_writer::link('https://moodle.org/plugins/view.php?plugin='.$component,
+                    $unavailablelistitem = html_writer::link('https://powereduc.org/plugins/view.php?plugin='.$component,
                         '<strong>'.$remoteinfoanyversion->name.'</strong>');
                     if ($remoteinfoanyversion->version) {
                         $unavailablelistitem .= ' ('.$component.' &gt; '.$remoteinfoanyversion->version->version.')';
@@ -1359,7 +1359,7 @@ class core_admin_renderer extends plugin_renderer_base {
                     implode(', ', $unavailablelist))))->set_show_closebutton(false));
             }
             $out .= $this->output->container_start('plugins-check-dependencies-actions mb-4');
-            $out .= ' '.html_writer::link(new moodle_url('/admin/tool/installaddon/'),
+            $out .= ' '.html_writer::link(new powereduc_url('/admin/tool/installaddon/'),
                 get_string('dependencyuploadmissing', 'core_plugin'), array('class' => 'btn btn-secondary'));
             $out .= $this->output->container_end(); // End of .plugins-check-dependencies-actions container.
         }
@@ -1371,14 +1371,14 @@ class core_admin_renderer extends plugin_renderer_base {
             $installable = $pluginman->filter_installable($available);
             if ($installable) {
                 $out .= $this->output->single_button(
-                    new moodle_url($this->page->url, array('installdepx' => 1)),
+                    new powereduc_url($this->page->url, array('installdepx' => 1)),
                     get_string('dependencyinstallmissing', 'core_plugin', count($installable)),
                     'post',
                     array('class' => 'singlebutton dependencyinstallmissing d-inline-block mr-1')
                 );
             }
 
-            $out .= html_writer::div(html_writer::link(new moodle_url('/admin/tool/installaddon/'),
+            $out .= html_writer::div(html_writer::link(new powereduc_url('/admin/tool/installaddon/'),
                 get_string('dependencyuploadmissing', 'core_plugin'), array('class' => 'btn btn-link')),
                 'dependencyuploadmissing d-inline-block mr-1');
 
@@ -1408,20 +1408,20 @@ class core_admin_renderer extends plugin_renderer_base {
             get_string('displayname', 'core_plugin'),
             get_string('release', 'core_plugin'),
             get_string('version', 'core_plugin'),
-            get_string('supportedmoodleversions', 'core_plugin'),
+            get_string('supportedpowereducversions', 'core_plugin'),
             get_string('info', 'core'),
         );
-        $table->colclasses = array('displayname', 'release', 'version', 'supportedmoodleversions', 'info');
+        $table->colclasses = array('displayname', 'release', 'version', 'supportedpowereducversions', 'info');
         $table->data = array();
 
         foreach ($dependencies as $plugin) {
 
-            $supportedmoodles = array();
-            foreach ($plugin->version->supportedmoodles as $moodle) {
-                if ($CFG->branch == str_replace('.', '', $moodle->release)) {
-                    $supportedmoodles[] = html_writer::span($moodle->release, 'badge badge-success');
+            $supportedpowereducs = array();
+            foreach ($plugin->version->supportedpowereducs as $powereduc) {
+                if ($CFG->branch == str_replace('.', '', $powereduc->release)) {
+                    $supportedpowereducs[] = html_writer::span($powereduc->release, 'badge badge-success');
                 } else {
-                    $supportedmoodles[] = html_writer::span($moodle->release, 'badge badge-light');
+                    $supportedpowereducs[] = html_writer::span($powereduc->release, 'badge badge-light');
                 }
             }
 
@@ -1444,13 +1444,13 @@ class core_admin_renderer extends plugin_renderer_base {
             $info .= $this->output->container_start('actions');
 
             $info .= html_writer::div(
-                html_writer::link('https://moodle.org/plugins/view.php?plugin='.$plugin->component,
+                html_writer::link('https://powereduc.org/plugins/view.php?plugin='.$plugin->component,
                     get_string('misdepinfoplugin', 'core_plugin')),
                 'misdepinfoplugin d-inline-block mr-3 mb-1'
             );
 
             $info .= html_writer::div(
-                html_writer::link('https://moodle.org/plugins/pluginversion.php?id='.$plugin->version->id,
+                html_writer::link('https://powereduc.org/plugins/pluginversion.php?id='.$plugin->version->id,
                     get_string('misdepinfoversion', 'core_plugin')),
                 'misdepinfoversion d-inline-block mr-3 mb-1'
             );
@@ -1460,7 +1460,7 @@ class core_admin_renderer extends plugin_renderer_base {
 
             if ($pluginman->is_remote_plugin_installable($plugin->component, $plugin->version->version, $reason)) {
                 $info .= $this->output->single_button(
-                    new moodle_url($this->page->url, array('installdep' => $plugin->component)),
+                    new powereduc_url($this->page->url, array('installdep' => $plugin->component)),
                     get_string('dependencyinstall', 'core_plugin'),
                     'post',
                     array('class' => 'singlebutton dependencyinstall mr-3 mb-1')
@@ -1478,7 +1478,7 @@ class core_admin_renderer extends plugin_renderer_base {
                 html_writer::div($plugin->name, 'name').' '.html_writer::div($plugin->component, 'component text-muted small'),
                 $plugin->version->release,
                 $plugin->version->version,
-                implode(' ', $supportedmoodles),
+                implode(' ', $supportedpowereducs),
                 $info
             );
         }
@@ -1537,13 +1537,13 @@ class core_admin_renderer extends plugin_renderer_base {
 
                 } else if ($branch != null && $plugin->pluginsupported != null) {
                     $requires[] = html_writer::tag('li',
-                        html_writer::span(get_string('moodlebranch', 'core_plugin',
+                        html_writer::span(get_string('powereducbranch', 'core_plugin',
                         array('min' => $plugin->pluginsupported[0], 'max' => $plugin->pluginsupported[1])), 'dep dep-core').
                         ' '.$label, array('class' => $class));
 
                 } else if ($reqinfo->reqver != ANY_VERSION) {
                     $requires[] = html_writer::tag('li',
-                        html_writer::span(get_string('moodleversion', 'core_plugin', $plugin->versionrequires), 'dep dep-core').
+                        html_writer::span(get_string('powereducversion', 'core_plugin', $plugin->versionrequires), 'dep dep-core').
                         ' '.$label, array('class' => $class));
                 }
 
@@ -1560,7 +1560,7 @@ class core_admin_renderer extends plugin_renderer_base {
                         $label .= ' '.html_writer::span(get_string('dependencyavailable', 'core_plugin'), 'badge badge-warning');
                         $class = 'requires-failed requires-missing requires-available';
                         $actions[] = html_writer::link(
-                            new moodle_url('https://moodle.org/plugins/view.php', array('plugin' => $reqname)),
+                            new powereduc_url('https://powereduc.org/plugins/view.php', array('plugin' => $reqname)),
                             get_string('misdepinfoplugin', 'core_plugin')
                         );
 
@@ -1611,7 +1611,7 @@ class core_admin_renderer extends plugin_renderer_base {
         if ($displayuploadlink) {
             $out .= html_writer::div(
                 html_writer::link(
-                    new moodle_url('/admin/tool/installaddon/'),
+                    new powereduc_url('/admin/tool/installaddon/'),
                     get_string('dependencyuploadmissing', 'core_plugin'),
                     array('class' => 'btn btn-secondary btn-sm m-1')
                 ),
@@ -1622,7 +1622,7 @@ class core_admin_renderer extends plugin_renderer_base {
         if ($displayupdateslink) {
             $out .= html_writer::div(
                 html_writer::link(
-                    new moodle_url($this->page->url, array('sesskey' => sesskey(), 'fetchupdates' => 1)),
+                    new powereduc_url($this->page->url, array('sesskey' => sesskey(), 'fetchupdates' => 1)),
                     get_string('checkforupdates', 'core_plugin'),
                     array('class' => 'btn btn-secondary btn-sm m-1')
                 ),
@@ -1676,20 +1676,20 @@ class core_admin_renderer extends plugin_renderer_base {
         }
 
         $infoall = html_writer::link(
-            new moodle_url($this->page->url, array('contribonly' => 0, 'updatesonly' => 0)),
+            new powereduc_url($this->page->url, array('contribonly' => 0, 'updatesonly' => 0)),
             get_string('overviewall', 'core_plugin'),
             array('title' => get_string('filterall', 'core_plugin'))
         ).' '.html_writer::span($numtotal, 'badge number number-all');
 
         $infoext = html_writer::link(
-            new moodle_url($this->page->url, array('contribonly' => 1, 'updatesonly' => 0)),
+            new powereduc_url($this->page->url, array('contribonly' => 1, 'updatesonly' => 0)),
             get_string('overviewext', 'core_plugin'),
             array('title' => get_string('filtercontribonly', 'core_plugin'))
         ).' '.html_writer::span($numextension, 'badge number number-additional');
 
         if ($numupdatable) {
             $infoupdatable = html_writer::link(
-                new moodle_url($this->page->url, array('contribonly' => 0, 'updatesonly' => 1)),
+                new powereduc_url($this->page->url, array('contribonly' => 0, 'updatesonly' => 1)),
                 get_string('overviewupdatable', 'core_plugin'),
                 array('title' => get_string('filterupdatesonly', 'core_plugin'))
             ).' '.html_writer::span($numupdatable, 'badge badge-info number number-updatable');
@@ -1708,7 +1708,7 @@ class core_admin_renderer extends plugin_renderer_base {
 
         if ($numinstallable) {
             $out .= $this->output->single_button(
-                new moodle_url($this->page->url, array('installupdatex' => 1)),
+                new powereduc_url($this->page->url, array('installupdatex' => 1)),
                 get_string('updateavailableinstallall', 'core_admin', $numinstallable),
                 'post',
                 array('class' => 'singlebutton updateavailableinstallall')
@@ -1957,7 +1957,7 @@ class core_admin_renderer extends plugin_renderer_base {
 
         if ($pluginman->is_remote_plugin_installable($updateinfo->component, $updateinfo->version, $reason, false)) {
             $box .= $this->output->single_button(
-                new moodle_url($this->page->url, array('installupdate' => $updateinfo->component,
+                new powereduc_url($this->page->url, array('installupdate' => $updateinfo->component,
                     'installupdateversion' => $updateinfo->version)),
                 get_string('updateavailableinstall', 'core_admin'),
                 'post',
@@ -2165,7 +2165,7 @@ class core_admin_renderer extends plugin_renderer_base {
     /**
      * Render a simple page for providing the upgrade key.
      *
-     * @param moodle_url|string $url
+     * @param powereduc_url|string $url
      * @return string
      */
     public function upgradekey_form_page($url) {
@@ -2212,25 +2212,25 @@ class core_admin_renderer extends plugin_renderer_base {
      *
      * @return string
      */
-    public function moodleorg_registration_message() {
+    public function powereducorg_registration_message() {
 
-        $out = format_text(get_string('registerwithmoodleorginfo', 'core_hub'), FORMAT_MARKDOWN);
+        $out = format_text(get_string('registerwithpowereducorginfo', 'core_hub'), FORMAT_MARKDOWN);
 
         $out .= html_writer::link(
-            new moodle_url('/admin/settings.php', ['section' => 'moodleservices']),
-            $this->output->pix_icon('i/info', '').' '.get_string('registerwithmoodleorginfoapp', 'core_hub'),
+            new powereduc_url('/admin/settings.php', ['section' => 'powereducservices']),
+            $this->output->pix_icon('i/info', '').' '.get_string('registerwithpowereducorginfoapp', 'core_hub'),
             ['class' => 'btn btn-link', 'role' => 'opener', 'target' => '_href']
         );
 
         $out .= html_writer::link(
             HUB_POWEREDUCORGHUBURL,
-            $this->output->pix_icon('i/stats', '').' '.get_string('registerwithmoodleorginfostats', 'core_hub'),
+            $this->output->pix_icon('i/stats', '').' '.get_string('registerwithpowereducorginfostats', 'core_hub'),
             ['class' => 'btn btn-link', 'role' => 'opener', 'target' => '_href']
         );
 
         $out .= html_writer::link(
             HUB_POWEREDUCORGHUBURL.'/sites',
-            $this->output->pix_icon('i/location', '').' '.get_string('registerwithmoodleorginfosites', 'core_hub'),
+            $this->output->pix_icon('i/location', '').' '.get_string('registerwithpowereducorginfosites', 'core_hub'),
             ['class' => 'btn btn-link', 'role' => 'opener', 'target' => '_href']
         );
 
@@ -2247,7 +2247,7 @@ class core_admin_renderer extends plugin_renderer_base {
         $output = '';
 
         if ($showfeedbackencouragement) {
-            $settingslink = new moodle_url('/admin/settings.php', ['section' => 'userfeedback']);
+            $settingslink = new powereduc_url('/admin/settings.php', ['section' => 'userfeedback']);
             $output .= $this->warning(get_string('userfeedbackencouragement', 'admin', $settingslink->out()), 'info');
         }
 

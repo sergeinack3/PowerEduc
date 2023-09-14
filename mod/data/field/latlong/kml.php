@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 // A lot of this initial stuff is copied from mod/data/view.php
 
@@ -104,7 +104,7 @@ echo data_latlong_kml_top();
 if($rid) { // List one single item
     $pm = new stdClass();
     $pm->name = data_latlong_kml_get_item_name($content, $field);
-    $pm->description = "&lt;a href='$CFG->wwwroot/mod/data/view.php?d=$d&amp;rid=$rid'&gt;Item #$rid&lt;/a&gt; in Moodle data activity";
+    $pm->description = "&lt;a href='$CFG->wwwroot/mod/data/view.php?d=$d&amp;rid=$rid'&gt;Item #$rid&lt;/a&gt; in PowerEduc data activity";
     $pm->long = $content->content1;
     $pm->lat = $content->content;
     echo data_latlong_kml_placemark($pm);
@@ -116,7 +116,7 @@ if($rid) { // List one single item
 
     foreach($contents as $content) {
         $pm->name = data_latlong_kml_get_item_name($content, $field);
-        $pm->description = "&lt;a href='$CFG->wwwroot/mod/data/view.php?d=$d&amp;rid=$content->recordid'&gt;Item #$content->recordid&lt;/a&gt; in Moodle data activity";
+        $pm->description = "&lt;a href='$CFG->wwwroot/mod/data/view.php?d=$d&amp;rid=$content->recordid'&gt;Item #$content->recordid&lt;/a&gt; in PowerEduc data activity";
         $pm->long = $content->content1;
         $pm->lat = $content->content;
         echo data_latlong_kml_placemark($pm);

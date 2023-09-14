@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This class represent the base generator class where all the needed functions to generate proper SQL are defined.
@@ -166,7 +166,7 @@ abstract class sql_generator {
     /** @var string List of reserved words (in order to quote them properly).*/
     public $reserved_words;
 
-    /** @var moodle_database The moodle_database instance.*/
+    /** @var powereduc_database The powereduc_database instance.*/
     public $mdb;
 
     /** @var Control existing temptables.*/
@@ -174,8 +174,8 @@ abstract class sql_generator {
 
     /**
      * Creates a new sql_generator.
-     * @param moodle_database $mdb The moodle_database object instance.
-     * @param moodle_temptables $temptables The optional moodle_temptables instance, null by default.
+     * @param powereduc_database $mdb The powereduc_database object instance.
+     * @param powereduc_temptables $temptables The optional powereduc_temptables instance, null by default.
      */
     public function __construct($mdb, $temptables = null) {
         $this->prefix         = $mdb->get_prefix();
@@ -230,7 +230,7 @@ abstract class sql_generator {
             return true;
         }
 
-        // Get all tables in moodle database.
+        // Get all tables in powereduc database.
         $tables = $this->mdb->get_tables();
         return isset($tables[$tablename]);
     }
@@ -484,7 +484,7 @@ abstract class sql_generator {
             // The type and length
             $field .= ' ' . $this->getTypeSQL($xmldb_field->getType(), $xmldb_field->getLength(), $xmldb_field->getDecimals());
         }
-        // note: unsigned is not supported any more since moodle 2.3, all numbers are signed
+        // note: unsigned is not supported any more since powereduc 2.3, all numbers are signed
         // Calculate the not null clause
         $notnull = '';
         // Only if we don't want to skip it
@@ -1091,7 +1091,7 @@ abstract class sql_generator {
         static $usednames = array();
         static $previouscounters = array();
 
-        // Use standard naming. See http://docs.moodle.org/en/XMLDB_key_and_index_naming
+        // Use standard naming. See http://docs.powereduc.org/en/XMLDB_key_and_index_naming
         $tablearr = explode ('_', $tablename);
         foreach ($tablearr as $table) {
             $name .= substr(trim($table),0,4);
@@ -1221,8 +1221,8 @@ abstract class sql_generator {
      * MySQL's CONCAT function will be used instead.
      *
      * @param array $elements An array of elements to concatenate.
-     * @return mixed Returns the result of moodle_database::sql_concat() or false.
-     * @uses moodle_database::sql_concat()
+     * @return mixed Returns the result of powereduc_database::sql_concat() or false.
+     * @uses powereduc_database::sql_concat()
      * @uses call_user_func_array()
      */
     public function getConcatSQL($elements) {
@@ -1361,7 +1361,7 @@ abstract class sql_generator {
      * @param xmldb_field $xmldb_field The xmldb_field object instance.
      * @return array Array of SQL statements to create a field's default.
      *
-     * @todo MDL-31147 Moodle 2.1 - Drop getDropDefaultSQL()
+     * @todo MDL-31147 PowerEduc 2.1 - Drop getDropDefaultSQL()
      */
     public abstract function getDropDefaultSQL($xmldb_table, $xmldb_field);
 

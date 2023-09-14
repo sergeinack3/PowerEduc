@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * External grade report overview API
  *
  * @package    gradereport_overview
- * @copyright  2016 Juan Leyva <juan@moodle.com>
+ * @copyright  2016 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,7 +33,7 @@ require_once($CFG->dirroot . '/grade/report/overview/lib.php');
  * External grade overview report API implementation
  *
  * @package    gradereport_overview
- * @copyright  2016 Juan Leyva <juan@moodle.com>
+ * @copyright  2016 Juan Leyva <juan@powereduc.com>
  * @category   external
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -85,7 +85,7 @@ class gradereport_overview_external extends external_api {
             // We must check if the current user can view other users grades.
             $user = core_user::get_user($userid, '*', MUST_EXIST);
             core_user::require_active_user($user);
-            require_capability('moodle/grade:viewall', $systemcontext);
+            require_capability('powereduc/grade:viewall', $systemcontext);
         }
 
         // We need the site course, and course context.
@@ -165,7 +165,7 @@ class gradereport_overview_external extends external_api {
      * @param int $userid id of the user the report belongs to
      * @return array of warnings and status result
      * @since Moodle 3.2
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function view_grade_report($courseid, $userid = 0) {
         global $USER;
@@ -196,7 +196,7 @@ class gradereport_overview_external extends external_api {
         $access = grade_report_overview::check_access($systemcontext, $context, $personalcontext, $course, $userid);
 
         if (!$access) {
-            throw new moodle_exception('nopermissiontoviewgrades', 'error');
+            throw new powereduc_exception('nopermissiontoviewgrades', 'error');
         }
 
         grade_report_overview::viewed($context, $course->id, $userid);

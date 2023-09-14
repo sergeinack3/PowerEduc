@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Database driver test class for testing moodle_read_slave_trait
+ * Database driver test class for testing powereduc_read_slave_trait
  *
  * @package    core
  * @category   dml
@@ -27,17 +27,17 @@ namespace core;
 
 defined('POWEREDUC_INTERNAL') || die();
 
-require_once(__DIR__.'/read_slave_moodle_database.php');
+require_once(__DIR__.'/read_slave_powereduc_database.php');
 
 /**
- * Database driver mock test class that uses read_slave_moodle_recordset_special
+ * Database driver mock test class that uses read_slave_powereduc_recordset_special
  *
  * @package    core
  * @category   dml
  * @copyright  2018 Catalyst IT
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class read_slave_moodle_database_special extends read_slave_moodle_database {
+class read_slave_powereduc_database_special extends read_slave_powereduc_database {
     /**
      * Returns empty array
      * @param string $sql the SQL select query to execute.
@@ -52,7 +52,7 @@ class read_slave_moodle_database_special extends read_slave_moodle_database {
     }
 
     /**
-     * Returns read_slave_moodle_database::get_records_sql()
+     * Returns read_slave_powereduc_database::get_records_sql()
      * For the tests where we need both fake result and dbhandle info.
      * @param string $sql the SQL select query to execute.
      * @param array $params array of sql parameters
@@ -74,7 +74,7 @@ class read_slave_moodle_database_special extends read_slave_moodle_database {
      */
     public function get_recordset_sql($sql, array $params = null, $limitfrom = 0, $limitnum = 0) {
         $dbhandle = parent::get_recordset_sql($sql, $params);
-        return new read_slave_moodle_recordset_special();
+        return new read_slave_powereduc_recordset_special();
     }
 
     /**
@@ -97,7 +97,7 @@ class read_slave_moodle_database_special extends read_slave_moodle_database {
  * @copyright  2018 Catalyst IT
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class read_slave_moodle_recordset_special extends \moodle_recordset {
+class read_slave_powereduc_recordset_special extends \powereduc_recordset {
     /**
      * Iterator interface
      * @return void

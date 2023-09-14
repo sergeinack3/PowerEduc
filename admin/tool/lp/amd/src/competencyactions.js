@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * Handle selection changes and actions on the competency tree.
  *
  * @module     tool_lp/competencyactions
- * @copyright  2015 Damyon Wiese <damyon@moodle.com>
+ * @copyright  2015 Damyon Wiese <damyon@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 define(['jquery',
@@ -85,7 +85,7 @@ define(['jquery',
 
         if (parent !== null && treeModel.hasRule(parent.id)) {
             str.get_strings([
-                {key: 'confirm', component: 'moodle'},
+                {key: 'confirm', component: 'powereduc'},
                 {key: 'addingcompetencywillresetparentrule', component: 'tool_lp', param: parent.shortname},
                 {key: 'yes', component: 'core'},
                 {key: 'no', component: 'core'}
@@ -156,10 +156,10 @@ define(['jquery',
         // Show confirm, and/or do the things.
         if (showConfirm) {
             str.get_strings([
-                {key: 'confirm', component: 'moodle'},
+                {key: 'confirm', component: 'powereduc'},
                 {key: confirmMessage, component: 'tool_lp'},
-                {key: 'yes', component: 'moodle'},
-                {key: 'no', component: 'moodle'}
+                {key: 'yes', component: 'powereduc'},
+                {key: 'no', component: 'powereduc'}
             ]).done(function(strings) {
                 notification.confirm(
                     strings[0], // Confirm.
@@ -266,7 +266,7 @@ define(['jquery',
             str.get_strings([
                 {key: 'movecompetency', component: 'tool_lp', param: competency.shortname},
                 {key: 'move', component: 'tool_lp'},
-                {key: 'cancel', component: 'moodle'}
+                {key: 'cancel', component: 'powereduc'}
             ]).done(function(strings) {
 
                 var context = {
@@ -502,7 +502,7 @@ define(['jquery',
             if (success === false) {
                 str.get_strings([
                 {key: 'competencycannotbedeleted', component: 'tool_lp', param: competency.shortname},
-                {key: 'cancel', component: 'moodle'}
+                {key: 'cancel', component: 'powereduc'}
                 ]).done(function(strings) {
                     notification.alert(
                         null,
@@ -527,10 +527,10 @@ define(['jquery',
         }
 
         str.get_strings([
-            {key: 'confirm', component: 'moodle'},
+            {key: 'confirm', component: 'powereduc'},
             {key: confirmMessage, component: 'tool_lp', param: competency.shortname},
-            {key: 'delete', component: 'moodle'},
-            {key: 'cancel', component: 'moodle'}
+            {key: 'delete', component: 'powereduc'},
+            {key: 'cancel', component: 'powereduc'}
         ]).done(function(strings) {
             notification.confirm(
                 strings[0], // Confirm.

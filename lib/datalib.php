@@ -1,28 +1,28 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Library of functions for database manipulation.
  *
  * Other main libraries:
  * - weblib.php - functions that produce web output
- * - moodlelib.php - general-purpose Moodle functions
+ * - powereduclib.php - general-purpose PowerEduc functions
  *
  * @package    core
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -584,7 +584,7 @@ function get_site() {
     } else {
         // course table exists, but the site is not there,
         // unfortunately there is no automatic way to recover
-        throw new moodle_exception('nosite', 'error');
+        throw new powereduc_exception('nosite', 'error');
     }
 }
 
@@ -1525,11 +1525,11 @@ function get_log_manager($forcereload = false) {
  * Add an entry to the config log table.
  *
  * These are "action" focussed rather than web server hits,
- * and provide a way to easily reconstruct changes to Moodle configuration.
+ * and provide a way to easily reconstruct changes to PowerEduc configuration.
  *
  * @package core
  * @category log
- * @global moodle_database $DB
+ * @global powereduc_database $DB
  * @global stdClass $USER
  * @param    string  $name     The name of the configuration change action
                                For example 'filter_active' when activating or deactivating a filter
@@ -1573,7 +1573,7 @@ function add_to_config_log($name, $oldvalue, $value, $plugin) {
  * @category log
  * @global stdClass $USER
  * @global stdClass $CFG
- * @global moodle_database $DB
+ * @global powereduc_database $DB
  * @uses LASTACCESS_UPDATE_SECS
  * @uses SITEID
  * @param int $courseid  empty courseid means site
@@ -1714,7 +1714,7 @@ function user_can_create_courses() {
     global $DB;
     $catsrs = $DB->get_recordset('course_categories');
     foreach ($catsrs as $cat) {
-        if (has_capability('moodle/course:create', context_coursecat::instance($cat->id))) {
+        if (has_capability('powereduc/course:create', context_coursecat::instance($cat->id))) {
             $catsrs->close();
             return true;
         }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -170,7 +170,7 @@ abstract class completion_criteria extends data_object {
         global $CFG, $COMPLETION_CRITERIA_TYPES;
 
         if (!isset($params['criteriatype']) || !isset($COMPLETION_CRITERIA_TYPES[$params['criteriatype']])) {
-            throw new \moodle_exception('invalidcriteriatype', 'completion');
+            throw new \powereduc_exception('invalidcriteriatype', 'completion');
         }
 
         $class = 'completion_criteria_'.$COMPLETION_CRITERIA_TYPES[$params['criteriatype']];
@@ -182,7 +182,7 @@ abstract class completion_criteria extends data_object {
     /**
      * Add appropriate form elements to the critieria form
      *
-     * @param moodleform $mform Moodle forms object
+     * @param powereducform $mform Moodle forms object
      * @param mixed $data optional Any additional data that can be used to set default values in the form
      * @return void
      */
@@ -245,7 +245,7 @@ abstract class completion_criteria extends data_object {
         global $COMPLETION_CRITERIA_TYPES;
 
         $criteriatype = $COMPLETION_CRITERIA_TYPES[$this->criteriatype];
-        return new pix_icon('i/'.$criteriatype, $alt, 'moodle', $attributes);
+        return new pix_icon('i/'.$criteriatype, $alt, 'powereduc', $attributes);
     }
 
     /**

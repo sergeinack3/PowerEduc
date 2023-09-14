@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core;
 
@@ -28,7 +28,7 @@ class regex_test extends \advanced_testcase {
     public function test_whitespace_replacement_with_u() {
         $unicode = "Теорія і практика використання системи управління навчанням Moo
 dleКиївський національний університет будівництва і архітектури, 21-22 тра
-вня 2015 р.http://2015.moodlemoot.in.ua/";
+вня 2015 р.http://2015.powereducmoot.in.ua/";
 
         $whitespaced = preg_replace('/\s+/u', ' ', $unicode);
         $this->assertSame(str_replace("\n", ' ', $unicode), $whitespaced);

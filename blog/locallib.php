@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 /**
  * Classes for Blogs.
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage blog
  * @copyright  2009 Nicolas Connault
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -33,7 +33,7 @@ require_once($CFG->libdir . '/filelib.php');
  * This class follows the Object Relational Mapping technique, its member variables being mapped to
  * the fields of the post table.
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage blog
  * @copyright  2009 Nicolas Connault
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -167,7 +167,7 @@ class blog_entry implements renderable {
                         // TODO: performance!!!!
                         $instancename = $DB->get_field('course', 'shortname', array('id' => $context->instanceid));
 
-                        $associations[$key]->url = $assocurl = new moodle_url('/course/view.php',
+                        $associations[$key]->url = $assocurl = new powereduc_url('/course/view.php',
                                                                               array('id' => $context->instanceid));
                         $associations[$key]->text = $instancename;
                         $associations[$key]->icon = new pix_icon('i/course', $associations[$key]->text);
@@ -185,7 +185,7 @@ class blog_entry implements renderable {
                         $instancename = $DB->get_field($modinfo->name, 'name', array('id' => $modinfo->instance));
 
                         $associations[$key]->type = get_string('modulename', $modinfo->name);
-                        $associations[$key]->url = new moodle_url('/mod/' . $modinfo->name . '/view.php',
+                        $associations[$key]->url = new powereduc_url('/mod/' . $modinfo->name . '/view.php',
                                                                   array('id' => $context->instanceid));
                         $associations[$key]->text = $instancename;
                         $associations[$key]->icon = new pix_icon('icon', $associations[$key]->text, $modinfo->name);
@@ -275,7 +275,7 @@ class blog_entry implements renderable {
      * Updates this entry in the database. Access control checks must be done by calling code.
      *
      * @param array       $params            Entry parameters.
-     * @param moodleform  $form              Used for attachments.
+     * @param powereducform  $form              Used for attachments.
      * @param array       $summaryoptions    Summary options.
      * @param array       $attachmentoptions Attachment options.
      *
@@ -441,8 +441,8 @@ class blog_entry implements renderable {
 
     /**
      * User can edit a blog entry if this is their own blog entry and they have
-     * the capability moodle/blog:create, or if they have the capability
-     * moodle/blog:manageentries.
+     * the capability powereduc/blog:create, or if they have the capability
+     * powereduc/blog:manageentries.
      * This also applies to deleting of entries.
      *
      * @param int $userid Optional. If not given, $USER is used
@@ -457,11 +457,11 @@ class blog_entry implements renderable {
 
         $sitecontext = context_system::instance();
 
-        if (has_capability('moodle/blog:manageentries', $sitecontext)) {
+        if (has_capability('powereduc/blog:manageentries', $sitecontext)) {
             return true; // Can edit any blog entry.
         }
 
-        if ($this->userid == $userid && has_capability('moodle/blog:create', $sitecontext)) {
+        if ($this->userid == $userid && has_capability('powereduc/blog:create', $sitecontext)) {
             return true; // Can edit own when having blog:create capability.
         }
 
@@ -481,7 +481,7 @@ class blog_entry implements renderable {
         global $CFG, $USER, $DB;
         $sitecontext = context_system::instance();
 
-        if (empty($CFG->enableblogs) || !has_capability('moodle/blog:view', $sitecontext)) {
+        if (empty($CFG->enableblogs) || !has_capability('powereduc/blog:view', $sitecontext)) {
             return false; // Blog system disabled or user has no blog view capability.
         }
 
@@ -489,12 +489,12 @@ class blog_entry implements renderable {
             return true; // Can view own entries in any case.
         }
 
-        if (has_capability('moodle/blog:manageentries', $sitecontext)) {
+        if (has_capability('powereduc/blog:manageentries', $sitecontext)) {
             return true; // Can manage all entries.
         }
 
         // Coming for 1 entry, make sure it's not a draft.
-        if ($this->publishstate == 'draft' && !has_capability('moodle/blog:viewdrafts', $sitecontext)) {
+        if ($this->publishstate == 'draft' && !has_capability('powereduc/blog:viewdrafts', $sitecontext)) {
             return false;  // Can not view draft of others.
         }
 
@@ -518,7 +518,7 @@ class blog_entry implements renderable {
             case BLOG_USER_LEVEL:
             default:
                 $personalcontext = context_user::instance($targetuserid);
-                return has_capability('moodle/user:readuserblogs', $personalcontext);
+                return has_capability('powereduc/user:readuserblogs', $personalcontext);
                 break;
         }
     }
@@ -527,7 +527,7 @@ class blog_entry implements renderable {
      * Use this function to retrieve a list of publish states available for
      * the currently logged in user.
      *
-     * @return array This function returns an array ideal for sending to moodles'
+     * @return array This function returns an array ideal for sending to powereducs'
      *                choose_from_menu function.
      */
 
@@ -555,7 +555,7 @@ class blog_entry implements renderable {
 /**
  * Abstract Blog_Listing class: used to gather blog entries and output them as listings. One of the subclasses must be used.
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage blog
  * @copyright  2009 Nicolas Connault
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -660,11 +660,11 @@ class blog_listing {
 
         // Fix for MDL-9165, use with readuserblogs capability in a user context can read that user's private blogs.
         // Admins can see all blogs regardless of publish states, as described on the help page.
-        if (has_capability('moodle/user:readuserblogs', context_system::instance())) {
+        if (has_capability('powereduc/user:readuserblogs', context_system::instance())) {
             // Don't add permission constraints.
 
         } else if (!empty($this->filters['user'])
-                   && has_capability('moodle/user:readuserblogs',
+                   && has_capability('powereduc/user:readuserblogs',
                                      context_user::instance((empty($this->filters['user']->id) ? 0 : $this->filters['user']->id)))) {
             // Don't add permission constraints.
 
@@ -736,7 +736,7 @@ class blog_listing {
 
         echo $OUTPUT->render($pagingbar);
 
-        if (has_capability('moodle/blog:create', $sitecontext)) {
+        if (has_capability('powereduc/blog:create', $sitecontext)) {
             // The user's blog is enabled and they are viewing their own blog.
             $userid = optional_param('userid', null, PARAM_INT);
 
@@ -745,7 +745,7 @@ class blog_listing {
                 $courseid = optional_param('courseid', null, PARAM_INT);
                 $modid = optional_param('modid', null, PARAM_INT);
 
-                $addurl = new moodle_url("$CFG->wwwroot/blog/edit.php");
+                $addurl = new powereduc_url("$CFG->wwwroot/blog/edit.php");
                 $urlparams = array('action' => 'add',
                                    'userid' => $userid,
                                    'courseid' => $courseid,

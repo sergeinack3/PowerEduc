@@ -1,7 +1,7 @@
 /**
  * The Moodle.core_course.util classes provide course-related utility functions.
  *
- * @module moodle-course-util
+ * @module powereduc-course-util
  * @main
  */
 

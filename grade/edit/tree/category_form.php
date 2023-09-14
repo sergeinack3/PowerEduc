@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * A moodleform to edit the grade options for an individual grade category
+ * A powereducform to edit the grade options for an individual grade category
  *
  * @package   core_grades
  * @copyright 2007 Petr Skoda
@@ -28,7 +28,7 @@ if (!defined('POWEREDUC_INTERNAL')) {
 
 require_once $CFG->libdir.'/formslib.php';
 
-class edit_category_form extends moodleform {
+class edit_category_form extends powereducform {
     private $aggregation_options = array();
 
     function definition() {
@@ -172,7 +172,7 @@ class edit_category_form extends moodleform {
         $mform->disabledIf('grade_item_grademax', 'grade_item_gradetype', 'noteq', GRADE_TYPE_VALUE);
         $mform->disabledIf('grade_item_grademax', 'aggregation', 'eq', GRADE_AGGREGATE_SUM);
 
-        if ((bool) get_config('moodle', 'grade_report_showmin')) {
+        if ((bool) get_config('powereduc', 'grade_report_showmin')) {
             $mform->addElement('float', 'grade_item_grademin', get_string('grademin', 'grades'));
             $mform->addHelpButton('grade_item_grademin', 'grademin', 'grades');
             $mform->disabledIf('grade_item_grademin', 'grade_item_gradetype', 'noteq', GRADE_TYPE_VALUE);

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -280,7 +280,7 @@ class data_request extends persistent {
         }
 
         if (!$this->is_resettable()) {
-            throw new \moodle_exception('cannotreset', 'tool_dataprivacy');
+            throw new \powereduc_exception('cannotreset', 'tool_dataprivacy');
         }
 
         $currentdata = $this->to_record();

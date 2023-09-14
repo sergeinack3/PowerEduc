@@ -1,6 +1,6 @@
 @core @core_course @javascript
 Feature: Users can request and approve courses
-  As a moodle admin
+  As a powereduc admin
   In order to improve course creation process
   I need to be able to enable course approval
 
@@ -20,7 +20,7 @@ Feature: Users can request and approve courses
     Given I log in as "admin"
     And I set the following system permissions of "Authenticated user" role:
       | capability | permission |
-      | moodle/course:request | Allow |
+      | powereduc/course:request | Allow |
     And I log out
     When I log in as "user1"
     And I am on course index
@@ -74,7 +74,7 @@ Feature: Users can request and approve courses
     Given I log in as "admin"
     And I set the following system permissions of "Course requestor" role:
       | capability            | permission |
-      | moodle/course:request | Allow      |
+      | powereduc/course:request | Allow      |
     And I log out
     And I log in as "user1"
     And I am on course index

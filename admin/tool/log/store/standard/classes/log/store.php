@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -91,7 +91,7 @@ class store implements \tool_log\log\writer, \core\log\sql_internal_table_reader
     /**
      * Fetch records using given criteria returning a Traversable object.
      *
-     * Note that the traversable object contains a moodle_recordset, so
+     * Note that the traversable object contains a powereduc_recordset, so
      * remember that is important that you call close() once you finish
      * using it.
      *

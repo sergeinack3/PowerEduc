@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -54,7 +54,7 @@ if ($data = $mform->get_data()) {
     $usersfile = tool_generator_testplan_backend::create_users_file($data->courseid, $data->updateuserspassword, $data->size);
 
     // Test plan link.
-    $testplanurl = moodle_url::make_pluginfile_url(
+    $testplanurl = powereduc_url::make_pluginfile_url(
         $testplanfile->get_contextid(),
         $testplanfile->get_component(),
         $testplanfile->get_filearea(),
@@ -67,7 +67,7 @@ if ($data = $mform->get_data()) {
     );
 
     // Users file link.
-    $usersfileurl = moodle_url::make_pluginfile_url(
+    $usersfileurl = powereduc_url::make_pluginfile_url(
         $usersfile->get_contextid(),
         $usersfile->get_component(),
         $usersfile->get_filearea(),

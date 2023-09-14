@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -290,7 +290,7 @@ class plan extends persistent {
                 $strname = 'complete';
                 break;
             default:
-                throw new \moodle_exception('errorplanstatus', 'core_competency', '', $status);
+                throw new \powereduc_exception('errorplanstatus', 'core_competency', '', $status);
                 break;
         }
 
@@ -370,9 +370,9 @@ class plan extends persistent {
     public static function can_comment_user($planuserid) {
         global $USER;
 
-        $capabilities = array('moodle/competency:plancomment');
+        $capabilities = array('powereduc/competency:plancomment');
         if ($USER->id == $planuserid) {
-            $capabilities[] = 'moodle/competency:plancommentown';
+            $capabilities[] = 'powereduc/competency:plancommentown';
         }
 
         return has_any_capability($capabilities, context_user::instance($planuserid));
@@ -388,9 +388,9 @@ class plan extends persistent {
         global $USER;
         $context = context_user::instance($planuserid);
 
-        $capabilities = array('moodle/competency:planmanage');
+        $capabilities = array('powereduc/competency:planmanage');
         if ($context->instanceid == $USER->id) {
-            $capabilities[] = 'moodle/competency:planmanageown';
+            $capabilities[] = 'powereduc/competency:planmanageown';
         }
 
         return has_any_capability($capabilities, $context);
@@ -406,9 +406,9 @@ class plan extends persistent {
         global $USER;
         $context = context_user::instance($planuserid);
 
-        $capabilities = array('moodle/competency:planmanagedraft');
+        $capabilities = array('powereduc/competency:planmanagedraft');
         if ($context->instanceid == $USER->id) {
-            $capabilities[] = 'moodle/competency:planmanageowndraft';
+            $capabilities[] = 'powereduc/competency:planmanageowndraft';
         }
 
         return has_any_capability($capabilities, $context);
@@ -435,9 +435,9 @@ class plan extends persistent {
         global $USER;
         $context = context_user::instance($planuserid);
 
-        $capabilities = array('moodle/competency:planview');
+        $capabilities = array('powereduc/competency:planview');
         if ($context->instanceid == $USER->id) {
-            $capabilities[] = 'moodle/competency:planviewown';
+            $capabilities[] = 'powereduc/competency:planviewown';
         }
 
         return has_any_capability($capabilities, $context)
@@ -454,9 +454,9 @@ class plan extends persistent {
         global $USER;
         $context = context_user::instance($planuserid);
 
-        $capabilities = array('moodle/competency:planviewdraft');
+        $capabilities = array('powereduc/competency:planviewdraft');
         if ($context->instanceid == $USER->id) {
-            $capabilities[] = 'moodle/competency:planviewowndraft';
+            $capabilities[] = 'powereduc/competency:planviewowndraft';
         }
 
         return has_any_capability($capabilities, $context)
@@ -472,9 +472,9 @@ class plan extends persistent {
     public static function can_request_review_user($planuserid) {
         global $USER;
 
-        $capabilities = array('moodle/competency:planrequestreview');
+        $capabilities = array('powereduc/competency:planrequestreview');
         if ($USER->id == $planuserid) {
-            $capabilities[] = 'moodle/competency:planrequestreviewown';
+            $capabilities[] = 'powereduc/competency:planrequestreviewown';
         }
 
         return has_any_capability($capabilities, context_user::instance($planuserid));
@@ -489,7 +489,7 @@ class plan extends persistent {
      * @return bool
      */
     public static function can_review_user($planuserid) {
-        return has_capability('moodle/competency:planreview', context_user::instance($planuserid))
+        return has_capability('powereduc/competency:planreview', context_user::instance($planuserid))
             || self::can_manage_user($planuserid);
     }
 
@@ -548,7 +548,7 @@ class plan extends persistent {
     /**
      * Get the recordset of the plans that are due, incomplete and not draft.
      *
-     * @return \moodle_recordset
+     * @return \powereduc_recordset
      */
     public static function get_recordset_for_due_and_incomplete() {
         global $DB;

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ require_capability('tool/customlang:export', context_system::instance());
 $lng = required_param('lng', PARAM_LANG);
 
 admin_externalpage_setup('toolcustomlang', '', null,
-    new moodle_url('/admin/tool/customlang/import.php', ['lng' => $lng]));
+    new powereduc_url('/admin/tool/customlang/import.php', ['lng' => $lng]));
 
 $form = new \tool_customlang\form\export(null, ['lng' => $lng]);
 

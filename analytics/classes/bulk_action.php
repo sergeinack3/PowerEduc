@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ class bulk_action extends action {
      * Prediction action constructor.
      *
      * @param string $actionname They should match a-zA-Z_0-9-, as we apply a PARAM_ALPHANUMEXT filter
-     * @param \moodle_url $actionurl The final URL where the user should be forwarded.
+     * @param \powereduc_url $actionurl The final URL where the user should be forwarded.
      * @param \pix_icon $icon Link icon
      * @param string $text Link text
      * @param bool $primary Primary button or secondary.
@@ -47,7 +47,7 @@ class bulk_action extends action {
      * @param string|false $type
      * @return void
      */
-    public function __construct($actionname, \moodle_url $actionurl, \pix_icon $icon,
+    public function __construct($actionname, \powereduc_url $actionurl, \pix_icon $icon,
                                 $text, $primary = false, $attributes = array(), $type = false) {
         global $OUTPUT;
 
@@ -57,7 +57,7 @@ class bulk_action extends action {
 
         // We want to track how effective are our suggested actions, we pass users through a script that will log these actions.
         $params = array('action' => $this->actionname, 'forwardurl' => $actionurl->out(false));
-        $this->url = new \moodle_url('/report/insights/action.php', $params);
+        $this->url = new \powereduc_url('/report/insights/action.php', $params);
 
         $label = $OUTPUT->render($icon) . $this->text;
         $this->actionlink = new \single_button($this->url, $label, 'get', $primary, $attributes);

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core\navigation\views;
 
@@ -44,7 +44,7 @@ class primary extends view {
             !in_array('home', $this->page->theme->removedprimarynavitems);
         // We do not need to change the text for the home/dashboard depending on the set homepage.
         if ($showhomenode) {
-            $sitehome = $this->add(get_string('home'), new \moodle_url('/'), self::TYPE_SYSTEM,
+            $sitehome = $this->add(get_string('home'), new \powereduc_url('/'), self::TYPE_SYSTEM,
                 null, 'home', new \pix_icon('i/home', ''));
         }
         if (isloggedin() && !isguestuser()) {
@@ -60,7 +60,7 @@ class primary extends view {
             $showmyhomenode = !empty($CFG->enabledashboard) && (empty($this->page->theme->removedprimarynavitems) ||
                 !in_array('myhome', $this->page->theme->removedprimarynavitems));
             if ($showmyhomenode) {
-                $this->add(get_string('myhome'), new \moodle_url('/my/'),
+                $this->add(get_string('myhome'), new \powereduc_url('/my/'),
                     self::TYPE_SETTING, null, 'myhome', new \pix_icon('i/dashboard', ''));
             }
 
@@ -68,7 +68,7 @@ class primary extends view {
             $showcoursesnode = empty($this->page->theme->removedprimarynavitems) ||
                 !in_array('courses', $this->page->theme->removedprimarynavitems);
             if ($showcoursesnode) {
-                $this->add(get_string('mycourses'), new \moodle_url('/my/courses.php'), self::TYPE_ROOTNODE, null, 'mycourses');
+                $this->add(get_string('mycourses'), new \powereduc_url('/my/courses.php'), self::TYPE_ROOTNODE, null, 'mycourses');
             }
         }
 
@@ -88,15 +88,15 @@ class primary extends view {
              if($role&& isloggedin())
              {
     
-                 $this->add("Notes", new \moodle_url('/local/powerschool/note.php'), self::TYPE_ROOTNODE, null, 'notes');
-                 $this->add("Gérer les absences", new \moodle_url('/local/powerschool/absenceetu.php'), self::TYPE_ROOTNODE, null, 'notes');
-                 $this->add("Liste des apprenants absences", new \moodle_url('/local/powerschool/listeetuabsenprof.php'), self::TYPE_ROOTNODE, null, 'notes');
+                 $this->add("Notes", new \powereduc_url('/local/powerschool/note.php'), self::TYPE_ROOTNODE, null, 'notes');
+                 $this->add("Gérer les absences", new \powereduc_url('/local/powerschool/absenceetu.php'), self::TYPE_ROOTNODE, null, 'notes');
+                 $this->add("Liste des apprenants absences", new \powereduc_url('/local/powerschool/listeetuabsenprof.php'), self::TYPE_ROOTNODE, null, 'notes');
                 }
             }
             if(is_siteadmin())
             {
 
-                $this->add("Liste des absences", new \moodle_url('/local/powerschool/listeetuabsenadmin.php'), self::TYPE_ROOTNODE, null, 'notes');
+                $this->add("Liste des absences", new \powereduc_url('/local/powerschool/listeetuabsenadmin.php'), self::TYPE_ROOTNODE, null, 'notes');
             }
         
         if ($showsiteadminnode ) {
@@ -105,7 +105,7 @@ class primary extends view {
            if($role)
            {
 
-               $this->add("Profit Apprenant", new \moodle_url('/local/powerschool/gerer.php'), self::TYPE_ROOTNODE, null, 'notes');
+               $this->add("Profit Apprenant", new \powereduc_url('/local/powerschool/gerer.php'), self::TYPE_ROOTNODE, null, 'notes');
            }
         }
 

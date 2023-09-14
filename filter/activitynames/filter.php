@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Activity name filtering
  */
-class filter_activitynames extends moodle_text_filter {
+class filter_activitynames extends powereduc_text_filter {
 
     function filter($text, array $options = array()) {
         $coursectx = $this->context->get_course_context(false);

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -343,7 +343,7 @@ class block_tag_youtube extends block_base {
      * array index represents the category ID and the array value represents the category name.
      *
      * @return array The array containing the relevant video categories
-     * @throws moodle_exception If the API key is not set
+     * @throws powereduc_exception If the API key is not set
      * @throws Google_Service_Exception If an error occurs while obtaining the categories through the API call
      */
     public function get_categories() {
@@ -376,7 +376,7 @@ class block_tag_youtube extends block_base {
                 return $categories;
             }, []);
         } else {
-            throw new \moodle_exception('apierror', 'block_tag_youtube');
+            throw new \powereduc_exception('apierror', 'block_tag_youtube');
         }
     }
 
@@ -414,7 +414,7 @@ class block_tag_youtube extends block_base {
     public function get_config_for_external() {
         // There is a private key, only admins can see it.
         $pluginconfigs = get_config('block_tag_youtube');
-        if (!has_capability('moodle/site:config', context_system::instance())) {
+        if (!has_capability('powereduc/site:config', context_system::instance())) {
             unset($pluginconfigs->apikey);
         }
         $instanceconfigs = !empty($this->config) ? $this->config : new stdClass();

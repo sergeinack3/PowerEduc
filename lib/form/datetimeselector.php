@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -39,7 +39,7 @@ require_once($CFG->libdir . '/formslib.php');
  * @copyright 2006 Jamie Pratt <me@jamiep.org>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class MoodleQuickForm_date_time_selector extends MoodleQuickForm_group {
+class PowerEducQuickForm_date_time_selector extends PowerEducQuickForm_group {
 
     /**
      * Options for the element.
@@ -50,7 +50,7 @@ class MoodleQuickForm_date_time_selector extends MoodleQuickForm_group {
      * timezone => int|float|string (optional) timezone modifier used for edge case only.
      *      If not specified, then date is caclulated based on current user timezone.
      *      Note: dst will be calculated for string timezones only
-     *      {@link http://docs.moodle.org/dev/Time_API#Timezone}
+     *      {@link http://docs.powereduc.org/dev/Time_API#Timezone}
      * step => step to increment minutes by
      * optional => if true, show a checkbox beside the date to turn it on (or off)
      * @var array
@@ -105,9 +105,9 @@ class MoodleQuickForm_date_time_selector extends MoodleQuickForm_group {
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
-    public function MoodleQuickForm_date_time_selector($elementName = null, $elementLabel = null, $options = array(), $attributes = null) {
+    public function PowerEducQuickForm_date_time_selector($elementName = null, $elementLabel = null, $options = array(), $attributes = null) {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
         self::__construct($elementName, $elementLabel, $options, $attributes);
     }
@@ -152,7 +152,7 @@ class MoodleQuickForm_date_time_selector extends MoodleQuickForm_group {
         }
         // The YUI2 calendar only supports the gregorian calendar type so only display the calendar image if this is being used.
         if ($calendartype->get_name() === 'gregorian') {
-            $image = $OUTPUT->pix_icon('i/calendar', get_string('calendar', 'calendar'), 'moodle');
+            $image = $OUTPUT->pix_icon('i/calendar', get_string('calendar', 'calendar'), 'powereduc');
             $this->_elements[] = $this->createFormElement('link', 'calendar',
                     null, '#', $image);
         }
@@ -177,7 +177,7 @@ class MoodleQuickForm_date_time_selector extends MoodleQuickForm_group {
      * @return bool
      */
     function onQuickFormEvent($event, $arg, &$caller) {
-        $this->setMoodleForm($caller);
+        $this->setPowerEducForm($caller);
         switch ($event) {
             case 'updateValue':
                 // Constant values override both default and submitted ones

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ namespace core_adminpresets;
  * Admin presets helper class.
  *
  * @package    core_adminpresets
- * @copyright  2021 Sara Arjona (sara@moodle.com)
+ * @copyright  2021 Sara Arjona (sara@powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class helper {
@@ -55,8 +55,8 @@ class helper {
             'comments' => $comments,
             'site' => $CFG->wwwroot,
             'author' => $author,
-            'moodleversion' => $CFG->version,
-            'moodlerelease' => $CFG->release,
+            'powereducversion' => $CFG->version,
+            'powereducrelease' => $CFG->release,
             'iscore' => $iscore,
             'timecreated' => time(),
             'timeimported' => 0,

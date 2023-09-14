@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,4 +27,4 @@ require('../config.php');
 
 $id = required_param('id', PARAM_INT);
 
-redirect(new moodle_url('/enrol/index.php', array('id'=>$id)));
+redirect(new powereduc_url('/enrol/index.php', array('id'=>$id)));

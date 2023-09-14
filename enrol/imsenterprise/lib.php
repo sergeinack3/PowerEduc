@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -69,12 +69,12 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
     protected $xmlcache;
 
     /**
-     * @var $coursemappings array of mappings between IMS data fields and moodle course fields.
+     * @var $coursemappings array of mappings between IMS data fields and powereduc course fields.
      */
     protected $coursemappings;
 
     /**
-     * @var $rolemappings array of mappings between IMS roles and moodle roles.
+     * @var $rolemappings array of mappings between IMS roles and powereduc roles.
      */
     protected $rolemappings;
 
@@ -223,7 +223,7 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
 
             $eventdata = new \core\message\message();
             $eventdata->courseid          = SITEID;
-            $eventdata->modulename        = 'moodle';
+            $eventdata->modulename        = 'powereduc';
             $eventdata->component         = 'enrol_imsenterprise';
             $eventdata->name              = 'imsenterprise_enrolment';
             $eventdata->userfrom          = get_admin();
@@ -361,7 +361,7 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
                     } else {
 
                         // Create the (hidden) course(s) if not found.
-                        $courseconfig = get_config('moodlecourse'); // Load Moodle Course shell defaults.
+                        $courseconfig = get_config('powereduccourse'); // Load Moodle Course shell defaults.
 
                         // New course.
                         $course = new stdClass();
@@ -687,9 +687,9 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
 
                     // Decide the "real" role (i.e. the Moodle role) that this user should be assigned to.
                     // Zero means this roletype is supposed to be skipped.
-                    $moodleroleid = (isset($member->roletype) && isset($this->rolemappings[$member->roletype]))
+                    $powereducroleid = (isset($member->roletype) && isset($this->rolemappings[$member->roletype]))
                         ? $this->rolemappings[$member->roletype] : null;
-                    if (!$moodleroleid) {
+                    if (!$powereducroleid) {
                         $this->log_line("SKIPPING role " .
                             ($member->roletype ?? "[]") . " for $memberstoreobj->userid " .
                             "($member->idnumber) in course $memberstoreobj->course");
@@ -707,7 +707,7 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
                             $einstance = $DB->get_record('enrol', array('id' => $enrolid));
                         }
 
-                        $this->enrol_user($einstance, $memberstoreobj->userid, $moodleroleid, $timeframe->begin, $timeframe->end);
+                        $this->enrol_user($einstance, $memberstoreobj->userid, $powereducroleid, $timeframe->begin, $timeframe->end);
 
                         $this->log_line("Enrolled user #$memberstoreobj->userid ($member->idnumber) "
                             ."to role $member->roletype in course $memberstoreobj->course");
@@ -780,7 +780,7 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
                                             ]);
 
                                             $this->log_line("Removing role assignments for user " .
-                                                "$member->idnumber from role $moodleroleid in course " .
+                                                "$member->idnumber from role $powereducroleid in course " .
                                                 "$ship->coursecode ");
                                         }
                                     }

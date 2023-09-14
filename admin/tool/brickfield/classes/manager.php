@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -115,7 +115,7 @@ class manager {
     const DB_SUMMARY = self::PLUGINNAME . '_summary';
 
     /** @var string The URL to find help at. */
-    private static $helpurl = 'https://www.brickfield.ie/moodle-help-311';
+    private static $helpurl = 'https://www.brickfield.ie/powereduc-help-311';
 
 
     /** @var  array Statically stores the database checks records. */
@@ -124,9 +124,9 @@ class manager {
     /**
      * Returns the URL used for registration.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
-    public static function registration_url(): \moodle_url {
+    public static function registration_url(): \powereduc_url {
         return accessibility::get_plugin_url('registration.php');
     }
 
@@ -136,11 +136,11 @@ class manager {
      * @return string
      * @throws \coding_exception
      * @throws \dml_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public static function registration_message(): string {
         $firstline = get_string('notregistered', self::PLUGINNAME);
-        if (has_capability('moodle/site:config', \context_system::instance())) {
+        if (has_capability('powereduc/site:config', \context_system::instance())) {
             $secondline = \html_writer::link(self::registration_url(), get_string('registernow', self::PLUGINNAME));
         } else {
             $secondline = get_string('contactadmin', self::PLUGINNAME);

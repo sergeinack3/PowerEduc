@@ -1,17 +1,17 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 /* jshint node: true, browser: false */
 /* eslint-env node */
 
@@ -72,7 +72,7 @@ module.exports = grunt => {
         const scssFiles = [];
         const cssFiles = [];
 
-        const requestedFiles = grunt.moodleEnv.files;
+        const requestedFiles = grunt.powereducEnv.files;
         if (requestedFiles) {
             // Grunt was called with a files argument.
             // Check whether each of the requested files matches either the CSS or SCSS source file list.
@@ -81,7 +81,7 @@ module.exports = grunt => {
                 let matchesGlob;
 
                 // Check whether this watched path matches any watched SCSS file.
-                matchesGlob = grunt.moodleEnv.scssSrc.some(watchedPathGlob => {
+                matchesGlob = grunt.powereducEnv.scssSrc.some(watchedPathGlob => {
                     return glob.sync(watchedPathGlob).indexOf(changedFilePath) !== -1;
                 });
                 if (matchesGlob) {
@@ -90,7 +90,7 @@ module.exports = grunt => {
                 }
 
                 // Check whether this watched path matches any watched CSS file.
-                matchesGlob = grunt.moodleEnv.cssSrc.some(watchedPathGlob => {
+                matchesGlob = grunt.powereducEnv.cssSrc.some(watchedPathGlob => {
                     return glob.sync(watchedPathGlob).indexOf(changedFilePath) !== -1;
                 });
                 if (matchesGlob) {
@@ -104,15 +104,15 @@ module.exports = grunt => {
             // Check each scssSrc file to see if it's in the start directory.
             // This means that we can lint just mod/*/styles.css if started in the mod directory.
 
-            grunt.moodleEnv.scssSrc.forEach(path => {
-                if (path.startsWith(grunt.moodleEnv.runDir)) {
+            grunt.powereducEnv.scssSrc.forEach(path => {
+                if (path.startsWith(grunt.powereducEnv.runDir)) {
                     scssFiles.push(path);
                     hasScss = true;
                 }
             });
 
-            grunt.moodleEnv.cssSrc.forEach(path => {
-                if (path.startsWith(grunt.moodleEnv.runDir)) {
+            grunt.powereducEnv.cssSrc.forEach(path => {
+                if (path.startsWith(grunt.powereducEnv.runDir)) {
                     cssFiles.push(path);
                     hasCss = true;
                 }
@@ -149,11 +149,11 @@ module.exports = grunt => {
     const getCoreThemeMatches = () => {
         const scssMatch = 'scss/**/*.scss';
 
-        if (grunt.moodleEnv.inTheme) {
+        if (grunt.powereducEnv.inTheme) {
             return [scssMatch];
         }
 
-        if (grunt.moodleEnv.runDir.startsWith('theme')) {
+        if (grunt.powereducEnv.runDir.startsWith('theme')) {
             return [`*/${scssMatch}`];
         }
 
@@ -168,7 +168,7 @@ module.exports = grunt => {
                     '**/*.css',
                 ],
                 excludes: [
-                    '**/moodle.css',
+                    '**/powereduc.css',
                     '**/editor.css',
                     'jsdoc/styles/*.css',
                 ],

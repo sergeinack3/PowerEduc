@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains classes, functions and constants used in badges.
@@ -149,7 +149,7 @@ function badges_notify_badge_award(badge $badge, $userid, $issued, $filepathhash
     $userfrom->firstname = !empty($CFG->badges_defaultissuername) ? $CFG->badges_defaultissuername : $admin->firstname;
     $userfrom->maildisplay = true;
 
-    $issuedlink = html_writer::link(new moodle_url('/badges/badge.php', array('hash' => $issued)), $badge->name);
+    $issuedlink = html_writer::link(new powereduc_url('/badges/badge.php', array('hash' => $issued)), $badge->name);
     $userto = $DB->get_record('user', array('id' => $userid), '*', MUST_EXIST);
 
     $params = new stdClass();
@@ -162,7 +162,7 @@ function badges_notify_badge_award(badge $badge, $userid, $issued, $filepathhash
     // Notify recipient.
     $eventdata = new \core\message\message();
     $eventdata->courseid          = is_null($badge->courseid) ? SITEID : $badge->courseid; // Profile/site come with no courseid.
-    $eventdata->component         = 'moodle';
+    $eventdata->component         = 'powereduc';
     $eventdata->name              = 'badgerecipientnotice';
     $eventdata->userfrom          = $userfrom;
     $eventdata->userto            = $userto;
@@ -173,7 +173,7 @@ function badges_notify_badge_award(badge $badge, $userid, $issued, $filepathhash
     $eventdata->fullmessagehtml   = $message;
     $eventdata->smallmessage      = '';
     $eventdata->customdata        = [
-        'notificationiconurl' => moodle_url::make_pluginfile_url(
+        'notificationiconurl' => powereduc_url::make_pluginfile_url(
             $badge->get_context()->id, 'badges', 'badgeimage', $badge->id, '/', 'f1')->out(),
         'hash' => $issued,
     ];
@@ -204,7 +204,7 @@ function badges_notify_badge_award(badge $badge, $userid, $issued, $filepathhash
 
         $eventdata = new \core\message\message();
         $eventdata->courseid          = $badge->courseid;
-        $eventdata->component         = 'moodle';
+        $eventdata->component         = 'powereduc';
         $eventdata->name              = 'badgecreatornotice';
         $eventdata->userfrom          = $userfrom;
         $eventdata->userto            = $creator;
@@ -215,7 +215,7 @@ function badges_notify_badge_award(badge $badge, $userid, $issued, $filepathhash
         $eventdata->fullmessagehtml   = $creatormessage;
         $eventdata->smallmessage      = '';
         $eventdata->customdata        = [
-            'notificationiconurl' => moodle_url::make_pluginfile_url(
+            'notificationiconurl' => powereduc_url::make_pluginfile_url(
                 $badge->get_context()->id, 'badges', 'badgeimage', $badge->id, '/', 'f1')->out(),
             'hash' => $issued,
         ];
@@ -389,26 +389,26 @@ function badges_add_course_navigation(navigation_node $coursenode, stdClass $cou
 
     $coursecontext = context_course::instance($course->id);
     $isfrontpage = (!$coursecontext || $course->id == $SITE->id);
-    $canmanage = has_any_capability(array('moodle/badges:viewawarded',
-                                          'moodle/badges:createbadge',
-                                          'moodle/badges:awardbadge',
-                                          'moodle/badges:configurecriteria',
-                                          'moodle/badges:configuremessages',
-                                          'moodle/badges:configuredetails',
-                                          'moodle/badges:deletebadge'), $coursecontext);
+    $canmanage = has_any_capability(array('powereduc/badges:viewawarded',
+                                          'powereduc/badges:createbadge',
+                                          'powereduc/badges:awardbadge',
+                                          'powereduc/badges:configurecriteria',
+                                          'powereduc/badges:configuremessages',
+                                          'powereduc/badges:configuredetails',
+                                          'powereduc/badges:deletebadge'), $coursecontext);
 
     if (!empty($CFG->enablebadges) && !empty($CFG->badges_allowcoursebadges) && !$isfrontpage && $canmanage) {
         $coursenode->add(get_string('coursebadges', 'badges'), null,
                 navigation_node::TYPE_CONTAINER, null, 'coursebadges',
                 new pix_icon('i/badge', get_string('coursebadges', 'badges')));
 
-        $url = new moodle_url('/badges/index.php', array('type' => BADGE_TYPE_COURSE, 'id' => $course->id));
+        $url = new powereduc_url('/badges/index.php', array('type' => BADGE_TYPE_COURSE, 'id' => $course->id));
 
         $coursenode->get('coursebadges')->add(get_string('managebadges', 'badges'), $url,
             navigation_node::TYPE_SETTING, null, 'coursebadges');
 
-        if (has_capability('moodle/badges:createbadge', $coursecontext)) {
-            $url = new moodle_url('/badges/newbadge.php', array('type' => BADGE_TYPE_COURSE, 'id' => $course->id));
+        if (has_capability('powereduc/badges:createbadge', $coursecontext)) {
+            $url = new powereduc_url('/badges/newbadge.php', array('type' => BADGE_TYPE_COURSE, 'id' => $course->id));
 
             $coursenode->get('coursebadges')->add(get_string('newbadge', 'badges'), $url,
                     navigation_node::TYPE_SETTING, null, 'newbadge');
@@ -474,7 +474,7 @@ function badges_process_badge_image(badge $badge, $iconfile) {
 function print_badge_image(badge $badge, stdClass $context, $size = 'small') {
     $fsize = ($size == 'small') ? 'f2' : 'f1';
 
-    $imageurl = moodle_url::make_pluginfile_url($context->id, 'badges', 'badgeimage', $badge->id, '/', $fsize, false);
+    $imageurl = powereduc_url::make_pluginfile_url($context->id, 'badges', 'badgeimage', $badge->id, '/', $fsize, false);
     // Appending a random parameter to image link to forse browser reload the image.
     $imageurl->param('refresh', rand(1, 10000));
     $attributes = array('src' => $imageurl, 'alt' => s($badge->name), 'class' => 'activatebadge');
@@ -540,7 +540,7 @@ function badges_bake($hash, $badgeid, $userid = 0, $pathhash = false) {
         return $file->get_pathnamehash();
     }
 
-    $fileurl = moodle_url::make_pluginfile_url($user_context->id, 'badges', 'userbadge', $badge->id, '/', $hash, true);
+    $fileurl = powereduc_url::make_pluginfile_url($user_context->id, 'badges', 'userbadge', $badge->id, '/', $hash, true);
     return $fileurl;
 }
 
@@ -635,7 +635,7 @@ function badges_download($userid) {
 /**
  * Checks if badges can be pushed to external backpack.
  *
- * @deprecated Since Moodle 3.11.
+ * @deprecated Since PowerEduc 3.11.
  * @return string Code of backpack accessibility status.
  */
 function badges_check_backpack_accessibility() {
@@ -690,7 +690,7 @@ function badges_handle_course_deletion($courseid) {
 /**
  * Loads JS files required for backpack support.
  *
- * @deprecated Since Moodle 3.11.
+ * @deprecated Since PowerEduc 3.11.
  * @return void
  */
 function badges_setup_backpack_js() {
@@ -702,7 +702,7 @@ function badges_setup_backpack_js() {
  * No js files are required for backpack support.
  * This only exists to directly support the custom V1 backpack api.
  *
- * @deprecated Since Moodle 3.11.
+ * @deprecated Since PowerEduc 3.11.
  * @param boolean $checksite Call check site function.
  * @return void
  */
@@ -720,7 +720,7 @@ function badges_local_backpack_js($checksite = false) {
 function badges_create_site_backpack($data) {
     global $DB;
     $context = context_system::instance();
-    require_capability('moodle/badges:manageglobalsettings', $context);
+    require_capability('powereduc/badges:manageglobalsettings', $context);
 
     $max = $DB->get_field_sql('SELECT MAX(sortorder) FROM {badge_external_backpack}');
     $data->sortorder = $max + 1;
@@ -738,7 +738,7 @@ function badges_create_site_backpack($data) {
 function badges_update_site_backpack($id, $data) {
     global $DB;
     $context = context_system::instance();
-    require_capability('moodle/badges:manageglobalsettings', $context);
+    require_capability('powereduc/badges:manageglobalsettings', $context);
 
     if ($backpack = badges_get_site_backpack($id)) {
         $data->id = $id;
@@ -758,7 +758,7 @@ function badges_delete_site_backpack($id) {
     global $DB;
 
     $context = context_system::instance();
-    require_capability('moodle/badges:manageglobalsettings', $context);
+    require_capability('powereduc/badges:manageglobalsettings', $context);
 
     // Only remove site backpack if it's not the default one.
     $defaultbackpack = badges_get_site_primary_backpack();
@@ -960,7 +960,7 @@ function badges_get_site_backpacks() {
  * @param int $backpackid The backpack identifier to be moved.
  * @param int $direction The direction (BACKPACK_MOVE_UP/BACKPACK_MOVE_DOWN) where to move the backpack.
  *
- * @throws \moodle_exception if attempting to use invalid direction value.
+ * @throws \powereduc_exception if attempting to use invalid direction value.
  */
 function badges_change_sortorder_backpacks(int $backpackid, int $direction): void {
     global $DB;
@@ -1011,7 +1011,7 @@ function badges_get_default_issuer() {
 
     $sitebackpack = badges_get_site_primary_backpack();
     $issuer = array();
-    $issuerurl = new moodle_url('/');
+    $issuerurl = new powereduc_url('/');
     $issuer['name'] = $CFG->badges_defaultissuername;
     if (empty($issuer['name'])) {
         $issuer['name'] = $SITE->fullname ? $SITE->fullname : $SITE->shortname;
@@ -1019,7 +1019,7 @@ function badges_get_default_issuer() {
     $issuer['url'] = $issuerurl->out(false);
     $issuer['email'] = $sitebackpack->backpackemail ?: $CFG->badges_defaultissuercontact;
     $issuer['@context'] = OPEN_BADGES_V2_CONTEXT;
-    $issuerid = new moodle_url('/badges/issuer_json.php');
+    $issuerid = new powereduc_url('/badges/issuer_json.php');
     $issuer['id'] = $issuerid->out(false);
     $issuer['type'] = OPEN_BADGES_V2_TYPE_ISSUER;
     return $issuer;
@@ -1054,7 +1054,7 @@ function badges_disconnect_user_backpack($userid) {
  *
  * @param integer $sitebackpackid The site backpack to connect to.
  * @param string $type The type of this remote object.
- * @param string $internalid The id for this object on the Moodle site.
+ * @param string $internalid The id for this object on the PowerEduc site.
  * @param string $param The param we need to return. Defaults to the externalid.
  * @return mixed The id or false if it doesn't exist.
  */
@@ -1079,7 +1079,7 @@ function badges_external_get_mapping($sitebackpackid, $type, $internalid, $param
  *
  * @param integer $sitebackpackid The site backpack to connect to.
  * @param string $type The type of this remote object.
- * @param string $internalid The id for this object on the Moodle site.
+ * @param string $internalid The id for this object on the PowerEduc site.
  * @param string $externalid The id of this object on the remote site.
  * @return boolean
  */
@@ -1115,7 +1115,7 @@ function badges_external_delete_mappings($sitebackpackid) {
  *
  * @param integer $sitebackpackid The site backpack to connect to.
  * @param string $type The type of this remote object.
- * @param string $internalid The id for this object on the Moodle site.
+ * @param string $internalid The id for this object on the PowerEduc site.
  * @return boolean
  */
 function badges_external_delete_mapping($sitebackpackid, $type, $internalid) {
@@ -1160,7 +1160,7 @@ function badges_send_verification_email($email, $backpackid, $backpackpassword) 
 
     // Generate the verification email body.
     $verificationurl = '/badges/backpackemailverify.php';
-    $verificationurl = new moodle_url($verificationurl);
+    $verificationurl = new powereduc_url($verificationurl);
     $verificationpath = $verificationurl->out(false);
 
     $site = get_site();
@@ -1252,7 +1252,7 @@ function badge_assemble_notification(stdClass $badge) {
 
         // Put all messages in one digest.
         foreach ($msgs as $msg) {
-            $issuedlink = html_writer::link(new moodle_url('/badges/badge.php', array('hash' => $msg->uniquehash)), $badge->name);
+            $issuedlink = html_writer::link(new powereduc_url('/badges/badge.php', array('hash' => $msg->uniquehash)), $badge->name);
             $recipient = $DB->get_record('user', array('id' => $msg->userid), '*', MUST_EXIST);
 
             $a = new stdClass();
@@ -1265,7 +1265,7 @@ function badge_assemble_notification(stdClass $badge) {
         // Create a message object.
         $eventdata = new \core\message\message();
         $eventdata->courseid          = SITEID;
-        $eventdata->component         = 'moodle';
+        $eventdata->component         = 'powereduc';
         $eventdata->name              = 'badgecreatornotice';
         $eventdata->userfrom          = $userfrom;
         $eventdata->userto            = $creator;
@@ -1321,10 +1321,10 @@ function badges_verify_backpack(int $backpackid) {
             $warning = $backpackapi->get_authentication_error();
 
             $params = ['id' => $backpack->id, 'action' => 'edit'];
-            $backpackurl = (new moodle_url('/badges/backpacks.php', $params))->out(false);
+            $backpackurl = (new powereduc_url('/badges/backpacks.php', $params))->out(false);
 
             $message = get_string('sitebackpackwarning', 'badges', ['url' => $backpackurl, 'warning' => $warning]);
-            $icon = $OUTPUT->pix_icon('i/warning', get_string('warning', 'moodle'));
+            $icon = $OUTPUT->pix_icon('i/warning', get_string('warning', 'powereduc'));
             return $OUTPUT->container($icon . $message, 'text-danger');
         }
     }
@@ -1367,7 +1367,7 @@ function badges_generate_badgr_open_url($backpack, $type, $externalid) {
         if ($type == OPEN_BADGES_V2_TYPE_BADGE) {
             $entity = "badge";
         }
-        $url = new moodle_url($backpack->backpackapiurl);
+        $url = new powereduc_url($backpack->backpackapiurl);
         return "{$url->get_scheme()}://{$url->get_host()}/public/{$entity}s/$externalid";
 
     }

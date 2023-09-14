@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Table filterset.
@@ -30,7 +30,7 @@ namespace core_table\local\filter;
 use InvalidArgumentException;
 use JsonSerializable;
 use UnexpectedValueException;
-use moodle_exception;
+use powereduc_exception;
 
 /**
  * Class representing a set of filters.
@@ -226,7 +226,7 @@ abstract class filterset implements JsonSerializable {
     /**
      * Confirm whether the filter has been correctly specified.
      *
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function check_validity(): void {
         // Ensure that all required filters are present.
@@ -238,7 +238,7 @@ abstract class filterset implements JsonSerializable {
         }
 
         if (!empty($missing)) {
-            throw new moodle_exception(
+            throw new powereduc_exception(
                 'missingrequiredfields',
                 'core_table',
                 '',

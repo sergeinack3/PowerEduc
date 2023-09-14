@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,23 +18,23 @@
  * Contains the base definition class for any course format plugin.
  *
  * @package   core_courseformat
- * @copyright 2020 Ferran Recio <ferran@moodle.com>
+ * @copyright 2020 Ferran Recio <ferran@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace core_courseformat;
 
 use navigation_node;
-use moodle_page;
+use powereduc_page;
 use core_component;
 use course_modinfo;
 use html_writer;
 use section_info;
 use context_course;
 use editsection_form;
-use moodle_exception;
+use powereduc_exception;
 use coding_exception;
-use moodle_url;
+use powereduc_url;
 use lang_string;
 use completion_info;
 use external_api;
@@ -129,7 +129,7 @@ abstract class base {
         }
 
         // Else return default format.
-        $defaultformat = get_config('moodlecourse', 'format');
+        $defaultformat = get_config('powereduccourse', 'format');
         if (!in_array($defaultformat, $plugins)) {
             // When default format is not set correctly, use the first available format.
             $defaultformat = reset($plugins);
@@ -376,7 +376,7 @@ abstract class base {
      * @return int
      */
     public function get_max_sections() {
-        $maxsections = get_config('moodlecourse', 'maxsections');
+        $maxsections = get_config('powereduccourse', 'maxsections');
         if (!isset($maxsections) || !is_numeric($maxsections)) {
             $maxsections = 52;
         }
@@ -493,7 +493,7 @@ abstract class base {
             return $sections[$sectionnum];
         }
         if ($strictness == MUST_EXIST) {
-            throw new moodle_exception('sectionnotexist');
+            throw new powereduc_exception('sectionnotexist');
         }
         return null;
     }
@@ -691,12 +691,12 @@ abstract class base {
      * @param array $options options for view URL. At the moment core uses:
      *     'navigation' (bool) if true and section has no separate page, the function returns null
      *     'sr' (int) used by multipage formats to specify to which section to return
-     * @return null|moodle_url
+     * @return null|powereduc_url
      */
     public function get_view_url($section, $options = array()) {
         global $CFG;
         $course = $this->get_course();
-        $url = new moodle_url('/course/view.php', array('id' => $course->id));
+        $url = new powereduc_url('/course/view.php', array('id' => $course->id));
 
         if (array_key_exists('sr', $options)) {
             $sectionno = $options['sr'];
@@ -799,7 +799,7 @@ abstract class base {
      * 'label' - localised human-readable label for the edit form
      * 'element_type' - type of the form element, default 'text'
      * 'element_attributes' - additional attributes for the form element, these are 4th and further
-     *    arguments in the moodleform::addElement() method
+     *    arguments in the powereducform::addElement() method
      * 'help' - string for help button. Note that if 'help' value is 'myoption' then the string with
      *    the name 'myoption_help' must exist in the language file
      * 'help_component' - language component to look for help string, by default this the component
@@ -966,7 +966,7 @@ abstract class base {
             // Check if course end date form field should be enabled by default.
             // If a default date is provided to the form element, it is magically enabled by default in the
             // MoodleQuickForm_date_time_selector class, otherwise it's disabled by default.
-            if (get_config('moodlecourse', 'courseenddateenabled')) {
+            if (get_config('powereduccourse', 'courseenddateenabled')) {
                 // At this stage (this is called from definition_after_data) course data is already set as default.
                 // We can not overwrite what is in the database.
                 $mform->setDefault('enddate', $this->get_default_course_enddate($mform));
@@ -1032,7 +1032,7 @@ abstract class base {
      *
      * If $data does not contain property with the option name, the option will not be updated
      *
-     * @param stdClass|array $data return value from moodleform::get_data() or array with data
+     * @param stdClass|array $data return value from powereducform::get_data() or array with data
      * @param null|int $sectionid null if these are options for course or section id (course_sections.id)
      *     if these are options for section
      * @return bool whether there were any changes to the options values
@@ -1119,7 +1119,7 @@ abstract class base {
      *
      * If $data does not contain property with the option name, the option will not be updated
      *
-     * @param stdClass|array $data return value from moodleform::get_data() or array with data
+     * @param stdClass|array $data return value from powereducform::get_data() or array with data
      * @param stdClass $oldcourse if this function is called from update_course()
      *     this object contains information about the course before update
      * @return bool whether there were any changes to the options values
@@ -1134,7 +1134,7 @@ abstract class base {
      * Section id is expected in $data->id (or $data['id'])
      * If $data does not contain property with the option name, the option will not be updated
      *
-     * @param stdClass|array $data return value from moodleform::get_data() or array with data
+     * @param stdClass|array $data return value from powereducform::get_data() or array with data
      * @return bool whether there were any changes to the options values
      */
     public function update_section_format_options($data) {
@@ -1143,7 +1143,7 @@ abstract class base {
     }
 
     /**
-     * Return an instance of moodleform to edit a specified section
+     * Return an instance of powereducform to edit a specified section
      *
      * Default implementation returns instance of editsection_form that automatically adds
      * additional fields defined in course_format::section_format_options()
@@ -1151,11 +1151,11 @@ abstract class base {
      * Format plugins may extend editsection_form if they want to have custom edit section form.
      *
      * @param mixed $action the action attribute for the form. If empty defaults to auto detect the
-     *              current url. If a moodle_url object then outputs params as hidden variables.
+     *              current url. If a powereduc_url object then outputs params as hidden variables.
      * @param array $customdata the array with custom data to be passed to the form
      *     /course/editsection.php passes section_info object in 'cs' field
      *     for filling availability fields
-     * @return moodleform
+     * @return powereducform
      */
     public function editsection_form($action, $customdata = array()) {
         global $CFG;
@@ -1167,21 +1167,21 @@ abstract class base {
     }
 
     /**
-     * Allows course format to execute code on moodle_page::set_course()
+     * Allows course format to execute code on powereduc_page::set_course()
      *
-     * @param moodle_page $page instance of page calling set_course
+     * @param powereduc_page $page instance of page calling set_course
      */
-    public function page_set_course(moodle_page $page) {
+    public function page_set_course(powereduc_page $page) {
     }
 
     /**
-     * Allows course format to execute code on moodle_page::set_cm()
+     * Allows course format to execute code on powereduc_page::set_cm()
      *
      * Current module can be accessed as $page->cm (returns instance of cm_info)
      *
-     * @param moodle_page $page instance of page calling set_cm
+     * @param powereduc_page $page instance of page calling set_cm
      */
-    public function page_set_cm(moodle_page $page) {
+    public function page_set_cm(powereduc_page $page) {
     }
 
     /**
@@ -1244,13 +1244,13 @@ abstract class base {
     /**
      * Returns instance of page renderer used by this plugin
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @return renderer_base
      */
-    public function get_renderer(moodle_page $page) {
+    public function get_renderer(powereduc_page $page) {
         try {
             $renderer = $page->get_renderer('format_'. $this->get_format());
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $formatname = $this->get_format();
             $expectedrenderername = 'format_'. $this->get_format() . '\output\renderer';
             debugging(
@@ -1341,15 +1341,15 @@ abstract class base {
      * return true if the course editor must be displayed.
      *
      * @param array|null $capabilities array of capabilities a user needs to have to see edit controls in general.
-     *  If null or not specified, the user needs to have 'moodle/course:manageactivities'.
+     *  If null or not specified, the user needs to have 'powereduc/course:manageactivities'.
      * @return bool true if edit controls must be displayed
      */
-    public function show_editor(?array $capabilities = ['moodle/course:manageactivities']): bool {
+    public function show_editor(?array $capabilities = ['powereduc/course:manageactivities']): bool {
         global $PAGE;
         $course = $this->get_course();
         $coursecontext = context_course::instance($course->id);
         if ($capabilities === null) {
-            $capabilities = ['moodle/course:manageactivities'];
+            $capabilities = ['powereduc/course:manageactivities'];
         }
         return $PAGE->user_is_editing() && has_all_capabilities($capabilities, $coursecontext);
     }
@@ -1480,7 +1480,7 @@ abstract class base {
         require_once($CFG->dirroot.'/course/lib.php');
 
         if ($editable === null) {
-            $editable = !empty($USER->editing) && has_capability('moodle/course:update',
+            $editable = !empty($USER->editing) && has_capability('powereduc/course:update',
                     context_course::instance($section->course));
         }
 
@@ -1524,7 +1524,7 @@ abstract class base {
         if ($itemtype === 'sectionname' || $itemtype === 'sectionnamenl') {
             $context = context_course::instance($section->course);
             external_api::validate_context($context);
-            require_capability('moodle/course:update', $context);
+            require_capability('powereduc/course:update', $context);
 
             $newtitle = clean_param($newvalue, PARAM_TEXT);
             if (strval($section->name) !== strval($newtitle)) {
@@ -1539,10 +1539,10 @@ abstract class base {
      * Returns the default end date value based on the start date.
      *
      * This is the default implementation for course formats, it is based on
-     * moodlecourse/courseduration setting. Course formats like format_weeks for
+     * powereduccourse/courseduration setting. Course formats like format_weeks for
      * example can overwrite this method and return a value based on their internal options.
      *
-     * @param moodleform $mform
+     * @param powereducform $mform
      * @param array $fieldnames The form - field names mapping.
      * @return int
      */
@@ -1553,7 +1553,7 @@ abstract class base {
         }
 
         $startdate = $this->get_form_start_date($mform, $fieldnames);
-        $courseduration = intval(get_config('moodlecourse', 'courseduration'));
+        $courseduration = intval(get_config('powereduccourse', 'courseduration'));
         if (!$courseduration) {
             // Default, it should be already set during upgrade though.
             $courseduration = YEARSECS;
@@ -1585,7 +1585,7 @@ abstract class base {
     /**
      * Get the start date value from the course settings page form.
      *
-     * @param moodleform $mform
+     * @param powereducform $mform
      * @param array $fieldnames The form - field names mapping.
      * @return int
      */
@@ -1624,7 +1624,7 @@ abstract class base {
         if (!$this->uses_sections() || !$section->section) {
             // No section actions are allowed if course format does not support sections.
             // No actions are allowed on the 0-section by default (overwrite in course format if needed).
-            throw new moodle_exception('sectionactionnotsupported', 'core', null, s($action));
+            throw new powereduc_exception('sectionactionnotsupported', 'core', null, s($action));
         }
 
         $course = $this->get_course();
@@ -1643,7 +1643,7 @@ abstract class base {
         switch($action) {
             case 'hide':
             case 'show':
-                require_capability('moodle/course:sectionvisibility', $coursecontext);
+                require_capability('powereduc/course:sectionvisibility', $coursecontext);
                 $visible = ($action === 'hide') ? 0 : 1;
                 course_update_section($course, $section, array('visible' => $visible));
                 break;
@@ -1652,7 +1652,7 @@ abstract class base {
                     'content' => $renderer->course_section_updated($this, $section),
                 ];
             default:
-                throw new moodle_exception('sectionactionnotsupported', 'core', null, s($action));
+                throw new powereduc_exception('sectionactionnotsupported', 'core', null, s($action));
         }
 
         return ['modules' => $this->get_section_modules_updated($section)];

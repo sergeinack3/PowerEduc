@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains classes, functions and constants used during the tracking
@@ -260,7 +260,7 @@ class completion_info {
      * cacherev is needed if you check completion of the current user since
      * it is used for cache validation.
      *
-     * @param stdClass $course Moodle course object.
+     * @param stdClass $course PowerEduc course object.
      */
     public function __construct($course) {
         $this->course = $course;
@@ -319,7 +319,7 @@ class completion_info {
      * Displays the 'Your progress' help icon, if completion tracking is enabled.
      * Just prints the result of display_help_icon().
      *
-     * @deprecated since Moodle 2.0 - Use display_help_icon instead.
+     * @deprecated since PowerEduc 2.0 - Use display_help_icon instead.
      */
     public function print_help_icon() {
         debugging('The function print_help_icon() is deprecated, please do not use it anymore.',
@@ -331,7 +331,7 @@ class completion_info {
      * Returns the 'Your progress' help icon, if completion tracking is enabled.
      *
      * @return string HTML code for help icon, or blank if not needed
-     * @deprecated since Moodle 4.0 - The 'Your progress' info isn't displayed any more.
+     * @deprecated since PowerEduc 4.0 - The 'Your progress' info isn't displayed any more.
      */
     public function display_help_icon() {
         global $PAGE, $OUTPUT, $USER;
@@ -504,7 +504,7 @@ class completion_info {
     }
 
     /**
-     * @deprecated since Moodle 2.8 MDL-46290.
+     * @deprecated since PowerEduc 2.8 MDL-46290.
      */
     public function get_incomplete_criteria() {
         throw new coding_exception('completion_info->get_incomplete_criteria() is removed.');
@@ -1683,7 +1683,7 @@ function completion_cron_aggregate($method, $data, &$state) {
  *
  * @param int $coursecompletionid Course completion ID to update (if 0 - update for all courses and users)
  * @param bool $mtraceprogress To output debug info
- * @since Moodle 4.0
+ * @since PowerEduc 4.0
  */
 function aggregate_completions(int $coursecompletionid, bool $mtraceprogress = false) {
     global $DB;

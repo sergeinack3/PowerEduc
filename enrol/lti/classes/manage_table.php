@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Displays enrolment LTI instances.
  *
  * @package    enrol_lti
- * @copyright  2016 Mark Nelson <markn@moodle.com>
+ * @copyright  2016 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -34,7 +34,7 @@ require_once($CFG->libdir . '/tablelib.php');
  * Handles displaying enrolment LTI instances.
  *
  * @package    enrol_lti
- * @copyright  2016 Mark Nelson <markn@moodle.com>
+ * @copyright  2016 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class manage_table extends \table_sql {
@@ -85,7 +85,7 @@ class manage_table extends \table_sql {
         // Set the variables we need access to.
         $this->ltiplugin = enrol_get_plugin('lti');
         $this->ltienabled = enrol_is_enabled('lti');
-        $this->canconfig = has_capability('moodle/course:enrolconfig', \context_course::instance($courseid));
+        $this->canconfig = has_capability('powereduc/course:enrolconfig', \context_course::instance($courseid));
         $this->courseid = $courseid;
 
         // Set help icons.
@@ -183,22 +183,22 @@ class manage_table extends \table_sql {
         $strenable = get_string('enable');
         $strdisable = get_string('disable');
 
-        $url = new \moodle_url('/enrol/lti/index.php',
+        $url = new \powereduc_url('/enrol/lti/index.php',
             array('sesskey' => sesskey(), 'courseid' => $this->courseid, 'legacy' => 1));
 
         if ($this->ltiplugin->can_delete_instance($instance)) {
-            $aurl = new \moodle_url($url, array('action' => 'delete', 'instanceid' => $instance->id));
+            $aurl = new \powereduc_url($url, array('action' => 'delete', 'instanceid' => $instance->id));
             $buttons[] = $OUTPUT->action_icon($aurl, new \pix_icon('t/delete', $strdelete, 'core',
                 array('class' => 'iconsmall')));
         }
 
         if ($this->ltienabled && $this->ltiplugin->can_hide_show_instance($instance)) {
             if ($instance->status == ENROL_INSTANCE_ENABLED) {
-                $aurl = new \moodle_url($url, array('action' => 'disable', 'instanceid' => $instance->id));
+                $aurl = new \powereduc_url($url, array('action' => 'disable', 'instanceid' => $instance->id));
                 $buttons[] = $OUTPUT->action_icon($aurl, new \pix_icon('t/hide', $strdisable, 'core',
                     array('class' => 'iconsmall')));
             } else if ($instance->status == ENROL_INSTANCE_DISABLED) {
-                $aurl = new \moodle_url($url, array('action' => 'enable', 'instanceid' => $instance->id));
+                $aurl = new \powereduc_url($url, array('action' => 'enable', 'instanceid' => $instance->id));
                 $buttons[] = $OUTPUT->action_icon($aurl, new \pix_icon('t/show', $strenable, 'core',
                     array('class' => 'iconsmall')));
             }
@@ -210,10 +210,10 @@ class manage_table extends \table_sql {
                 'id' => $instance->id,
                 'type' => $instance->enrol,
                 'legacy' => 1,
-                'returnurl' => new \moodle_url('/enrol/lti/index.php',
+                'returnurl' => new \powereduc_url('/enrol/lti/index.php',
                     array('courseid' => $this->courseid, 'legacy' => 1))
             );
-            $editlink = new \moodle_url("/enrol/editinstance.php", $linkparams);
+            $editlink = new \powereduc_url("/enrol/editinstance.php", $linkparams);
             $buttons[] = $OUTPUT->action_icon($editlink, new \pix_icon('t/edit', get_string('edit'), 'core',
                 array('class' => 'iconsmall')));
         }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
 require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
 require_once($CFG->dirroot . '/course/format/topics/lib.php');
 require_once($CFG->libdir . '/completionlib.php');
-require_once($CFG->dirroot . '/backup/moodle2/tests/fixtures/format_test_cs_options.php');
+require_once($CFG->dirroot . '/backup/powereduc2/tests/fixtures/format_test_cs_options.php');
 
 /**
  * Tests for Moodle 2 course format section_options backup operation.
@@ -37,7 +37,7 @@ require_once($CFG->dirroot . '/backup/moodle2/tests/fixtures/format_test_cs_opti
  * @copyright 2014 Russell Smith
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class moodle2_course_format_test extends \advanced_testcase {
+class powereduc2_course_format_test extends \advanced_testcase {
 
     /**
      * Tests a backup and restore adds the required section option data

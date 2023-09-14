@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ require_once($CFG->libdir . '/adminlib.php');
  *
  * @package    core_adminpresets
  * @category   test
- * @copyright  2021 Sara Arjona (sara@moodle.com)
+ * @copyright  2021 Sara Arjona (sara@powereduc.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core_adminpresets_generator extends \component_generator_base {
@@ -79,8 +79,8 @@ class core_adminpresets_generator extends \component_generator_base {
             'comments' => $data['comments'],
             'site' => $CFG->wwwroot,
             'author' => $data['author'],
-            'moodleversion' => $CFG->version,
-            'moodlerelease' => $CFG->release,
+            'powereducversion' => $CFG->version,
+            'powereducrelease' => $CFG->release,
             'timecreated' => time(),
             'timeimported' => 0,
             'iscore' => $data['iscore'],

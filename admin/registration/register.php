@@ -2,7 +2,7 @@
 
 ///////////////////////////////////////////////////////////////////////////
 //                                                                       //
-// This file is part of Moodle - http://moodle.org/                      //
+// This file is part of Moodle - http://powereduc.org/                      //
 // Moodle - Modular Object-Oriented Dynamic Learning Environment         //
 //                                                                       //
 // Moodle is free software: you can redistribute it and/or modify        //
@@ -21,7 +21,7 @@
 ///////////////////////////////////////////////////////////////////////////
 
 /**
- * @package    moodle
+ * @package    powereduc
  * @subpackage registration
  * @author     Jerome Mouneyrac <jerome@mouneyrac.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
@@ -35,4 +35,4 @@
 
 require_once('../../config.php');
 
-redirect(new moodle_url('/admin/registration/index.php'));
+redirect(new powereduc_url('/admin/registration/index.php'));

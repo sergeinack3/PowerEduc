@@ -5,7 +5,7 @@
  * @copyright  2016 Andrew Nicols <andrew@nicols.co.uk>
  */
 import {call as fetchMany} from 'core/ajax';
-import moodleConfig from 'core/config';
+import powereducConfig from 'core/config';
 
 /**
  * Reset the tour state of the specified tour.
@@ -17,7 +17,7 @@ export const resetTourState = tourid => fetchMany([{
     methodname: 'tool_usertours_reset_tour',
     args: {
         tourid,
-        context: moodleConfig.contextid,
+        context: powereducConfig.contextid,
         pageurl: window.location.href,
     }
 }])[0];
@@ -36,7 +36,7 @@ export const markTourComplete = (stepid, tourid, stepindex) => fetchMany([{
         stepid,
         stepindex: stepindex,
         tourid,
-        context: moodleConfig.contextid,
+        context: powereducConfig.contextid,
         pageurl: window.location.href,
     }
 }])[0];
@@ -51,7 +51,7 @@ export const fetchTour = tourid => fetchMany([{
     methodname: 'tool_usertours_fetch_and_start_tour',
     args: {
         tourid,
-        context: moodleConfig.contextid,
+        context: powereducConfig.contextid,
         pageurl: window.location.href,
     }
 }])[0];
@@ -70,7 +70,7 @@ export const markStepShown = (stepid, tourid, stepindex) => fetchMany([{
         tourid,
         stepid,
         stepindex,
-        context: moodleConfig.contextid,
+        context: powereducConfig.contextid,
         pageurl: window.location.href,
     }
 }])[0];

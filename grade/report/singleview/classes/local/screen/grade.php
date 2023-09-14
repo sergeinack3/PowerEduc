@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * The screen with a list of users.
  *
  * @package   gradereport_singleview
- * @copyright 2014 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2014 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,7 +28,7 @@ use gradereport_singleview\local\ui\range;
 use gradereport_singleview\local\ui\bulk_insert;
 use grade_grade;
 use grade_item;
-use moodle_url;
+use powereduc_url;
 use pix_icon;
 use html_writer;
 use gradereport_singleview;
@@ -39,7 +39,7 @@ defined('POWEREDUC_INTERNAL') || die;
  * The screen with a list of users.
  *
  * @package   gradereport_singleview
- * @copyright 2014 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2014 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class grade extends tablelike implements selectable_items, filterable_items {
@@ -68,7 +68,7 @@ class grade extends tablelike implements selectable_items, filterable_items {
      * @return bool
      */
     public static function allowcategories(): bool {
-        return get_config('moodle', 'grade_overridecat');
+        return get_config('powereduc', 'grade_overridecat');
     }
 
     /**
@@ -77,7 +77,7 @@ class grade extends tablelike implements selectable_items, filterable_items {
      * @return bool
      */
     public static function filter($item): bool {
-        return get_config('moodle', 'grade_overridecat') ||
+        return get_config('powereduc', 'grade_overridecat') ||
                 !($item->is_course_item() || $item->is_category_item());
     }
 
@@ -207,14 +207,14 @@ class grade extends tablelike implements selectable_items, filterable_items {
             $lockicon = $OUTPUT->pix_icon('t/locked', 'grade is locked') . ' ';
         }
 
-        if (has_capability('moodle/site:viewfullnames', \context_course::instance($this->courseid))) {
+        if (has_capability('powereduc/site:viewfullnames', \context_course::instance($this->courseid))) {
             $fullname = $lockicon . fullname($item, true);
         } else {
             $fullname = $lockicon . fullname($item);
         }
 
         $item->imagealt = $fullname;
-        $url = new moodle_url("/user/view.php", ['id' => $item->id, 'course' => $this->courseid]);
+        $url = new powereduc_url("/user/view.php", ['id' => $item->id, 'course' => $this->courseid]);
         $grade->label = $fullname;
         $userpic = $OUTPUT->user_picture($item, ['link' => false, 'visibletoscreenreaders' => false]);
 
@@ -285,7 +285,7 @@ class grade extends tablelike implements selectable_items, filterable_items {
 
         return $OUTPUT->paging_bar(
             $this->totalitemcount, $this->page, $this->perpage,
-            new moodle_url('/grade/report/singleview/index.php', [
+            new powereduc_url('/grade/report/singleview/index.php', [
                 'perpage' => $this->perpage,
                 'id' => $this->courseid,
                 'group' => $this->groupid,
@@ -391,7 +391,7 @@ class grade extends tablelike implements selectable_items, filterable_items {
         global $OUTPUT;
 
         $menuitems = [];
-        $url = new moodle_url($this->format_link('user', $user->id));
+        $url = new powereduc_url($this->format_link('user', $user->id));
         $title = get_string('showallgrades', 'core_grades');
         $menuitems[] = new \action_menu_link_secondary($url, null, $title);
         $menu = new \action_menu($menuitems);

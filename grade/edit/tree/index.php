@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,18 +34,18 @@ $action          = optional_param('action', 0, PARAM_ALPHA);
 $eid             = optional_param('eid', 0, PARAM_ALPHANUM);
 $weightsadjusted = optional_param('weightsadjusted', 0, PARAM_INT);
 
-$url = new moodle_url('/grade/edit/tree/index.php', array('id' => $courseid));
+$url = new powereduc_url('/grade/edit/tree/index.php', array('id' => $courseid));
 $PAGE->set_url($url);
 $PAGE->set_pagelayout('admin');
 
 /// Make sure they can even access this course
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 require_login($course);
 $context = context_course::instance($course->id);
-require_capability('moodle/grade:manage', $context);
+require_capability('powereduc/grade:manage', $context);
 
 $PAGE->requires->js_call_amd('core_grades/edittree_index', 'enhance');
 
@@ -63,7 +63,7 @@ if (empty($eid)) {
 
 } else {
     if (!$element = $gtree->locate_element($eid)) {
-        throw new \moodle_exception('invalidelementid', '', $returnurl);
+        throw new \powereduc_exception('invalidelementid', '', $returnurl);
     }
     $object = $element['object'];
 }
@@ -89,7 +89,7 @@ switch ($action) {
     case 'duplicate':
         if ($eid and confirm_sesskey()) {
             if (!$el = $gtree->locate_element($eid)) {
-                throw new \moodle_exception('invalidelementid', '', $returnurl);
+                throw new \powereduc_exception('invalidelementid', '', $returnurl);
             }
 
             $object->duplicate();
@@ -117,8 +117,8 @@ switch ($action) {
                 $strdeletecheckfull = get_string('deletecheck', '', $object->get_name());
                 $optionsyes = array('eid'=>$eid, 'confirm'=>1, 'sesskey'=>sesskey(), 'id'=>$course->id, 'action'=>'delete');
                 $optionsno  = array('id'=>$course->id);
-                $formcontinue = new single_button(new moodle_url('index.php', $optionsyes), get_string('yes'));
-                $formcancel = new single_button(new moodle_url('index.php', $optionsno), get_string('no'), 'get');
+                $formcontinue = new single_button(new powereduc_url('index.php', $optionsyes), get_string('yes'));
+                $formcancel = new single_button(new powereduc_url('index.php', $optionsno), get_string('no'), 'get');
                 echo $OUTPUT->confirm($strdeletecheckfull, $formcontinue, $formcancel);
                 echo $OUTPUT->footer();
                 die;
@@ -136,7 +136,7 @@ switch ($action) {
             $first = optional_param('first', false,  PARAM_BOOL); // If First is set to 1, it means the target is the first child of the category $moveafter
 
             if(!$after_el = $gtree->locate_element($moveafter)) {
-                throw new \moodle_exception('invalidelementid', '', $returnurl);
+                throw new \powereduc_exception('invalidelementid', '', $returnurl);
             }
 
             $after = $after_el['object'];
@@ -228,7 +228,7 @@ $originalweights = grade_helper::fetch_all_natural_weights_for_course($courseid)
  * @param int $courseid The course ID
  * @param array $originalweights The weights before the regrade
  * @param int $weightsadjusted Whether weights have been adjusted
- * @return moodle_url A URL to redirect to after regrading when a progress bar is displayed.
+ * @return powereduc_url A URL to redirect to after regrading when a progress bar is displayed.
  */
 $grade_edit_tree_index_checkweights = function() use ($courseid, $originalweights, &$weightsadjusted) {
     global $PAGE;
@@ -236,7 +236,7 @@ $grade_edit_tree_index_checkweights = function() use ($courseid, $originalweight
     $alteredweights = grade_helper::fetch_all_natural_weights_for_course($courseid);
     if (array_diff($originalweights, $alteredweights)) {
         $weightsadjusted = 1;
-        return new moodle_url($PAGE->url, array('weightsadjusted' => $weightsadjusted));
+        return new powereduc_url($PAGE->url, array('weightsadjusted' => $weightsadjusted));
     }
     return $PAGE->url;
 };
@@ -287,7 +287,7 @@ echo $OUTPUT->box_end();
 echo $OUTPUT->container_start('buttons mdl-align');
 
 if ($moving) {
-    echo $OUTPUT->single_button(new moodle_url('index.php', array('id'=>$course->id)), get_string('cancel'), 'get');
+    echo $OUTPUT->single_button(new powereduc_url('index.php', array('id'=>$course->id)), get_string('cancel'), 'get');
 }
 
 echo $OUTPUT->container_end();

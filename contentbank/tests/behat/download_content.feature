@@ -38,7 +38,7 @@ Feature: Download H5P content from the content bank
   Scenario: Users can download content created by different users
     Given the following "permission overrides" exist:
       | capability                            | permission | role    | contextlevel | reference |
-      | moodle/contentbank:manageanycontent   | Prohibit   | manager | System       |           |
+      | powereduc/contentbank:manageanycontent   | Prohibit   | manager | System       |           |
     And I log out
     And I log in as "manager"
     When I click on "Site pages" "list_item" in the "Navigation" "block"
@@ -52,7 +52,7 @@ Feature: Download H5P content from the content bank
   Scenario: Users without the required capability cannot download content
     Given the following "permission overrides" exist:
       | capability                            | permission | role    | contextlevel | reference |
-      | moodle/contentbank:downloadcontent    | Prohibit   | manager | System       |           |
+      | powereduc/contentbank:downloadcontent    | Prohibit   | manager | System       |           |
     And I log out
     And I log in as "manager"
     When I click on "Site pages" "list_item" in the "Navigation" "block"

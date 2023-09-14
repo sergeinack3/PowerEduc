@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@ class tour_list extends \flexible_table {
     public function __construct() {
         parent::__construct('tours');
 
-        $baseurl = new \moodle_url('/tool/usertours/configure.php');
+        $baseurl = new \powereduc_url('/tool/usertours/configure.php');
         $this->define_baseurl($baseurl);
 
         // Column definition.

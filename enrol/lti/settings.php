@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * General plugin functions.
  *
  * @package    enrol_lti
- * @copyright  2016 Mark Nelson <markn@moodle.com>
+ * @copyright  2016 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,7 +29,7 @@ defined('POWEREDUC_INTERNAL') || die;
 $ADMIN->add('enrolments', new admin_category('enrolltifolder', new lang_string('pluginname', 'enrol_lti'),
     $this->is_enabled() === false));
 
-$settings = new admin_settingpage($section, "User default values", 'moodle/site:config', $this->is_enabled() === false);
+$settings = new admin_settingpage($section, "User default values", 'powereduc/site:config', $this->is_enabled() === false);
 // Add all the user default values settings to the first page.
 if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_heading('enrol_lti_settings', '', get_string('pluginname_desc', 'enrol_lti')));
@@ -81,7 +81,7 @@ if ($ADMIN->fulltree) {
 $ADMIN->add('enrolltifolder', $settings);
 
 // Now, create a tool registrations settings page.
-$settings = new admin_settingpage('enrolsettingslti_registrations', "Tool registration", 'moodle/site:config',
+$settings = new admin_settingpage('enrolsettingslti_registrations', "Tool registration", 'powereduc/site:config',
     $this->is_enabled() === false);
 
 $settings->add(new admin_setting_heading('enrol_lti_tool_registrations_heading',
@@ -94,12 +94,12 @@ $ADMIN->add('enrolltifolder', $settings);
 // On this page, we'll  override the active node to force a match on enrolsettingslti_registrations settings page.
 $ADMIN->add('enrolltifolder', new admin_externalpage('enrolsettingslti_registrations_edit',
     get_string('registerplatformadd', 'enrol_lti'), "$CFG->wwwroot/$CFG->admin/enrol/lti/register_platform.php",
-    'moodle/site:config', true));
+    'powereduc/site:config', true));
 
 // And deployments add/edit.
 $ADMIN->add('enrolltifolder', new admin_externalpage('enrolsettingslti_deployment_manage',
     get_string('deployments', 'enrol_lti'), "$CFG->wwwroot/$CFG->admin/enrol/lti/manage_deployment.php",
-    'moodle/site:config', true));
+    'powereduc/site:config', true));
 
 // Tell core we're finished.
 $settings = null;

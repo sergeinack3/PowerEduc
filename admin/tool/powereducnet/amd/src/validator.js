@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 /**
  * Our validator that splits the user's input then fires off to a webservice
  *
- * @module     tool_moodlenet/validator
+ * @module     tool_powereducnet/validator
  * @copyright  2020 Mathew May <mathew.solutions>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -34,7 +34,7 @@ define(['jquery', 'core/ajax', 'core/str', 'core/notification'], function($, Aja
         // They didn't submit anything or they gave us a simple string that we can't do anything with.
         if (inputValue === "" || !inputValue.includes("@")) {
             // Create a promise and immediately reject it.
-            $.when(Str.get_string('profilevalidationerror', 'tool_moodlenet')).then(function(strings) {
+            $.when(Str.get_string('profilevalidationerror', 'tool_powereducnet')).then(function(strings) {
                 return Promise.reject().catch(function() {
                     return {result: false, message: strings[0]};
                 });
@@ -42,7 +42,7 @@ define(['jquery', 'core/ajax', 'core/str', 'core/notification'], function($, Aja
         }
 
         return Ajax.call([{
-            methodname: 'tool_moodlenet_verify_webfinger',
+            methodname: 'tool_powereducnet_verify_webfinger',
             args: {
                 profileurl: inputValue,
                 course: inputElement.dataset.courseid,

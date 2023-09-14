@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -44,21 +44,21 @@ if (async_helper::is_async_enabled()) {
 
 list($context, $course, $cm) = get_context_info_array($contextid);
 
-navigation_node::override_active_url(new moodle_url('/backup/restorefile.php', array('contextid'=>$contextid)));
-$PAGE->set_url(new moodle_url('/backup/restore.php', array('contextid'=>$contextid)));
+navigation_node::override_active_url(new powereduc_url('/backup/restorefile.php', array('contextid'=>$contextid)));
+$PAGE->set_url(new powereduc_url('/backup/restore.php', array('contextid'=>$contextid)));
 $PAGE->set_context($context);
 $PAGE->set_pagelayout('admin');
 $PAGE->set_secondary_active_tab('coursereuse');
 
 require_login($course, null, $cm);
-require_capability('moodle/restore:restorecourse', $context);
+require_capability('powereduc/restore:restorecourse', $context);
 
 $PAGE->secondarynav->set_overflow_selected_node('restore');
 
 if (is_null($course)) {
     $coursefullname = $SITE->fullname;
     $courseshortname = $SITE->shortname;
-    $courseurl = new moodle_url('/');
+    $courseurl = new powereduc_url('/');
 } else {
     $coursefullname = $course->fullname;
     $courseshortname = $course->shortname;
@@ -179,7 +179,7 @@ if ($restore->get_stage() != restore_ui::STAGE_PROCESS) {
     \core\task\manager::queue_adhoc_task($asynctask);
 
     // Add ajax progress bar and initiate ajax via a template.
-    $restoreurl = new moodle_url('/backup/restorefile.php', array('contextid' => $contextid));
+    $restoreurl = new powereduc_url('/backup/restorefile.php', array('contextid' => $contextid));
     $progresssetup = array(
             'backupid' => $restoreid,
             'contextid' => $contextid,

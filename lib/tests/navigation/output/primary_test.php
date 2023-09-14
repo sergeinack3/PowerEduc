@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core\navigation\output;
 
@@ -37,7 +37,7 @@ class primary_test extends \advanced_testcase {
         $assign = $this->getDataGenerator()->create_module('assign', ['course' => $pagecourse->id]);
         $cm = get_coursemodule_from_id('assign', $assign->cmid);
         $contextrecord = \context_module::instance($cm->id);
-        $pageurl = new \moodle_url('/mod/assign/view.php', ['id' => $cm->instance]);
+        $pageurl = new \powereduc_url('/mod/assign/view.php', ['id' => $cm->instance]);
         $PAGE->set_cm($cm);
         $PAGE->set_url($pageurl);
         $PAGE->set_course($pagecourse);
@@ -188,7 +188,7 @@ class primary_test extends \advanced_testcase {
                 Netflix|https://netflix.com/au", [
                     (object) [
                         'text' => 'Course search',
-                        'url' => 'https://www.example.com/moodle/course/search.php',
+                        'url' => 'https://www.example.com/powereduc/course/search.php',
                         'title' => '',
                         'sort' => 1,
                         'children' => [],
@@ -213,46 +213,46 @@ class primary_test extends \advanced_testcase {
                 ]
             ],
             'Complex, nested custom menu' => [
-                "Moodle community|http://moodle.org
-                -Moodle free support|http://moodle.org/support
-                -Moodle development|http://moodle.org/development
-                --Moodle Tracker|http://tracker.moodle.org
-                --Moodle Docs|https://docs.moodle.org
-                -Moodle News|http://moodle.org/news
-                Moodle company
-                -Moodle commercial hosting|http://moodle.com/hosting
-                -Moodle commercial support|http://moodle.com/support", [
+                "PowerEduc community|http://powereduc.org
+                -PowerEduc free support|http://powereduc.org/support
+                -PowerEduc development|http://powereduc.org/development
+                --PowerEduc Tracker|http://tracker.powereduc.org
+                --PowerEduc Docs|https://docs.powereduc.org
+                -PowerEduc News|http://powereduc.org/news
+                PowerEduc company
+                -PowerEduc commercial hosting|http://powereduc.com/hosting
+                -PowerEduc commercial support|http://powereduc.com/support", [
                     (object) [
-                        'text' => 'Moodle community',
-                        'url' => 'http://moodle.org',
+                        'text' => 'PowerEduc community',
+                        'url' => 'http://powereduc.org',
                         'title' => '',
                         'sort' => 1,
                         'children' => [
                             (object) [
-                                'text' => 'Moodle free support',
-                                'url' => 'http://moodle.org/support',
+                                'text' => 'PowerEduc free support',
+                                'url' => 'http://powereduc.org/support',
                                 'title' => '',
                                 'sort' => 2,
                                 'children' => [],
                                 'haschildren' => false,
                             ],
                             (object) [
-                                'text' => 'Moodle development',
-                                'url' => 'http://moodle.org/development',
+                                'text' => 'PowerEduc development',
+                                'url' => 'http://powereduc.org/development',
                                 'title' => '',
                                 'sort' => 3,
                                 'children' => [
                                     (object) [
-                                        'text' => 'Moodle Tracker',
-                                        'url' => 'http://tracker.moodle.org',
+                                        'text' => 'PowerEduc Tracker',
+                                        'url' => 'http://tracker.powereduc.org',
                                         'title' => '',
                                         'sort' => 4,
                                         'children' => [],
                                         'haschildren' => false,
                                     ],
                                     (object) [
-                                        'text' => 'Moodle Docs',
-                                        'url' => 'https://docs.moodle.org',
+                                        'text' => 'PowerEduc Docs',
+                                        'url' => 'https://docs.powereduc.org',
                                         'title' => '',
                                         'sort' => 5,
                                         'children' => [],
@@ -262,8 +262,8 @@ class primary_test extends \advanced_testcase {
                                 'haschildren' => true,
                             ],
                             (object) [
-                                'text' => 'Moodle News',
-                                'url' => 'http://moodle.org/news',
+                                'text' => 'PowerEduc News',
+                                'url' => 'http://powereduc.org/news',
                                 'title' => '',
                                 'sort' => 6,
                                 'children' => [],
@@ -273,22 +273,22 @@ class primary_test extends \advanced_testcase {
                         'haschildren' => true,
                     ],
                     (object) [
-                        'text' => 'Moodle company',
+                        'text' => 'PowerEduc company',
                         'url' => null,
                         'title' => '',
                         'sort' => 7,
                         'children' => [
                             (object) [
-                                'text' => 'Moodle commercial hosting',
-                                'url' => 'http://moodle.com/hosting',
+                                'text' => 'PowerEduc commercial hosting',
+                                'url' => 'http://powereduc.com/hosting',
                                 'title' => '',
                                 'sort' => 8,
                                 'children' => [],
                                 'haschildren' => false,
                             ],
                             (object) [
-                                'text' => 'Moodle commercial support',
-                                'url' => 'http://moodle.com/support',
+                                'text' => 'PowerEduc commercial support',
+                                'url' => 'http://powereduc.com/support',
                                 'title' => '',
                                 'sort' => 9,
                                 'children' => [],

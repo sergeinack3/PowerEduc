@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ $newvalue = optional_param('newvalue', false, PARAM_TEXT);
 
 /// basic access checks
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 $context = context_course::instance($course->id);
 require_login($course);
@@ -47,12 +47,12 @@ switch ($action) {
         if (!confirm_sesskey()) {
             break;
         }
-        require_capability('moodle/grade:edit', $context);
+        require_capability('powereduc/grade:edit', $context);
 
         if (!empty($userid) && !empty($itemid) && $newvalue !== false && !empty($type)) {
             // Save the grade or feedback
             if (!$grade_item = grade_item::fetch(array('id'=>$itemid, 'courseid'=>$courseid))) { // we must verify course id here!
-                throw new \moodle_exception('invalidgradeitemid');
+                throw new \powereduc_exception('invalidgradeitemid');
             }
 
             /**

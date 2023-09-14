@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    auth_email
  * @category   external
- * @copyright  2016 Juan Leyva <juan@moodle.com>
+ * @copyright  2016 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.2
  */
@@ -36,7 +36,7 @@ require_once($CFG->dirroot . '/user/profile/lib.php');
  *
  * @package    auth_email
  * @category   external
- * @copyright  2016 Juan Leyva <juan@moodle.com>
+ * @copyright  2016 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.2
  */
@@ -45,14 +45,14 @@ class auth_email_external extends external_api {
     /**
      * Check if registration is enabled in this site.
      *
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since Moodle 3.2
      */
     protected static function check_signup_enabled() {
         global $CFG;
 
         if (empty($CFG->registerauth) or $CFG->registerauth != 'email') {
-            throw new moodle_exception('registrationdisabled', 'error');
+            throw new powereduc_exception('registrationdisabled', 'error');
         }
     }
 
@@ -71,7 +71,7 @@ class auth_email_external extends external_api {
      *
      * @return array settings and possible warnings
      * @since Moodle 3.2
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_signup_settings() {
         global $CFG, $PAGE;
@@ -227,7 +227,7 @@ class auth_email_external extends external_api {
      * @param  string $redirect               Site url to redirect the user after confirmation
      * @return array settings and possible warnings
      * @since Moodle 3.2
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @throws invalid_parameter_exception
      */
     public static function signup_user($username, $password, $firstname, $lastname, $email, $city = '', $country = '',
@@ -340,10 +340,10 @@ class auth_email_external extends external_api {
             // Check if we should redirect the user once the user is confirmed.
             $confirmationurl = null;
             if (!empty($params['redirect'])) {
-                // Pass via moodle_url to fix thinks like admin links.
-                $redirect = new moodle_url($params['redirect']);
+                // Pass via powereduc_url to fix thinks like admin links.
+                $redirect = new powereduc_url($params['redirect']);
 
-                $confirmationurl = new moodle_url('/login/confirm.php', array('redirect' => $redirect->out()));
+                $confirmationurl = new powereduc_url('/login/confirm.php', array('redirect' => $redirect->out()));
             }
             $authplugin->user_signup_with_confirmation($user, false, $confirmationurl);
 

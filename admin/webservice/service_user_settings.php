@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * Web services user settings UI
  *
  * @package   webservice
- * @copyright 2009 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2009 Moodle Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once('../../config.php');
@@ -40,11 +40,11 @@ if ($node) {
     $node->make_active();
 }
 $PAGE->navbar->add(get_string('serviceusers', 'webservice'),
-        new moodle_url('/' . $CFG->admin . '/webservice/service_users.php', array('id' => $serviceid)));
+        new powereduc_url('/' . $CFG->admin . '/webservice/service_users.php', array('id' => $serviceid)));
 $PAGE->navbar->add(get_string('serviceusersettings', 'webservice'));
 
-$formaction = new moodle_url('', array('id' => $serviceid, 'userid' => $userid));
-$returnurl = new moodle_url('/' . $CFG->admin . '/webservice/service_users.php', array('id' => $serviceid));
+$formaction = new powereduc_url('', array('id' => $serviceid, 'userid' => $userid));
+$returnurl = new powereduc_url('/' . $CFG->admin . '/webservice/service_users.php', array('id' => $serviceid));
 
 $webservicemanager = new webservice();
 $serviceuser = $webservicemanager->get_ws_authorised_user($serviceid, $userid);

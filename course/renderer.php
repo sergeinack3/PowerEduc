@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
  *
  * This renderer should contain methods useful to courses, and categories.
  *
- * @package   moodlecore
+ * @package   powereduccore
  * @copyright 2010 Sam Hemelryk
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -60,10 +60,10 @@ class core_course_renderer extends plugin_renderer_base {
     /**
      * Override the constructor so that we can initialise the string cache
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @param string $target
      */
-    public function __construct(moodle_page $page, $target) {
+    public function __construct(powereduc_page $page, $target) {
         $this->strings = new stdClass;
         $courseid = $page->course->id;
         parent::__construct($page, $target);
@@ -97,7 +97,7 @@ class core_course_renderer extends plugin_renderer_base {
      *
      * @deprecated since 2.5
      *
-     * Please see http://docs.moodle.org/dev/Courses_lists_upgrade_to_2.5
+     * Please see http://docs.powereduc.org/dev/Courses_lists_upgrade_to_2.5
      *
      * @param array $ignored argument ignored
      * @return string
@@ -112,7 +112,7 @@ class core_course_renderer extends plugin_renderer_base {
      *
      * @deprecated since 2.5
      *
-     * Please see http://docs.moodle.org/dev/Courses_lists_upgrade_to_2.5
+     * Please see http://docs.powereduc.org/dev/Courses_lists_upgrade_to_2.5
      *
      * @param array $category
      * @param int $depth
@@ -275,7 +275,7 @@ class core_course_renderer extends plugin_renderer_base {
      */
     function course_section_add_cm_control($course, $section, $sectionreturn = null, $displayoptions = array()) {
         // Check to see if user can add menus.
-        if (!has_capability('moodle/course:manageactivities', context_course::instance($course->id))
+        if (!has_capability('powereduc/course:manageactivities', context_course::instance($course->id))
                 || !$this->page->user_is_editing()) {
             return '';
         }
@@ -313,7 +313,7 @@ class core_course_renderer extends plugin_renderer_base {
 
         // Check to see if user can add menus.
         if (
-            !has_capability('moodle/course:manageactivities', context_course::instance($course->id))
+            !has_capability('powereduc/course:manageactivities', context_course::instance($course->id))
             || !$this->page->user_is_editing()
         ) {
             return '';
@@ -495,7 +495,7 @@ class core_course_renderer extends plugin_renderer_base {
                 $imgalt = get_string('completion-alt-' . $completionicon, 'completion', $formattedname);
             }
 
-            if ($isediting || !$istrackeduser || !has_capability('moodle/course:togglecompletion', $mod->context)) {
+            if ($isediting || !$istrackeduser || !has_capability('powereduc/course:togglecompletion', $mod->context)) {
                 // When editing, the icon is just an image.
                 $completionpixicon = new pix_icon('i/completion-'.$completionicon, $imgalt, '',
                         array('title' => $imgalt, 'class' => 'iconsmall'));
@@ -517,7 +517,7 @@ class core_course_renderer extends plugin_renderer_base {
                     $extraclass = ' preventjs';
                 }
                 $output .= html_writer::start_tag('form', array('method' => 'post',
-                    'action' => new moodle_url('/course/togglecompletion.php'),
+                    'action' => new powereduc_url('/course/togglecompletion.php'),
                     'class' => 'togglecompletion'. $extraclass));
                 $output .= html_writer::start_tag('div');
                 $output .= html_writer::empty_tag('input', array(
@@ -979,7 +979,7 @@ class core_course_renderer extends plugin_renderer_base {
         if (!empty($moduleshtml) || $ismoving) {
             foreach ($moduleshtml as $modnumber => $modulehtml) {
                 if ($ismoving) {
-                    $movingurl = new moodle_url('/course/mod.php', array('moveto' => $modnumber, 'sesskey' => sesskey()));
+                    $movingurl = new powereduc_url('/course/mod.php', array('moveto' => $modnumber, 'sesskey' => sesskey()));
                     $sectionoutput .= html_writer::tag('li',
                         html_writer::link($movingurl, '', array('title' => $strmovefull, 'class' => 'movehere')),
                         array('class' => 'movehere'));
@@ -989,7 +989,7 @@ class core_course_renderer extends plugin_renderer_base {
             }
 
             if ($ismoving) {
-                $movingurl = new moodle_url('/course/mod.php', array('movetosection' => $section->id, 'sesskey' => sesskey()));
+                $movingurl = new powereduc_url('/course/mod.php', array('movetosection' => $section->id, 'sesskey' => sesskey()));
                 $sectionoutput .= html_writer::tag('li',
                     html_writer::link($movingurl, '', array('title' => $strmovefull, 'class' => 'movehere')),
                     array('class' => 'movehere'));
@@ -1015,7 +1015,7 @@ class core_course_renderer extends plugin_renderer_base {
      * @param array $courses array of course records (or instances of core_course_list_element) to show on this page
      * @param bool $showcategoryname whether to add category name to the course description
      * @param string $additionalclasses additional CSS classes to add to the div.courses
-     * @param moodle_url $paginationurl url to view more or url to form links to the other pages in paging bar
+     * @param powereduc_url $paginationurl url to view more or url to form links to the other pages in paging bar
      * @param int $totalcount total number of courses on all pages, if omitted $paginationurl will be displayed as 'View more' link
      * @param int $page current page number (defaults to 0 referring to the first page)
      * @param int $perpage number of records per page (defaults to $CFG->coursesperpage)
@@ -1065,7 +1065,7 @@ class core_course_renderer extends plugin_renderer_base {
             $nametag = 'div';
         }
         $coursename = $chelper->get_course_formatted_name($course);
-        $coursenamelink = html_writer::link(new moodle_url('/course/view.php', ['id' => $course->id]),
+        $coursenamelink = html_writer::link(new powereduc_url('/course/view.php', ['id' => $course->id]),
             $coursename, ['class' => $course->visible ? 'aalink' : 'aalink dimmed']);
         $content .= html_writer::tag($nametag, $coursenamelink, ['class' => 'coursename']);
         // If we display course in collapsed form but the course has summary or course contacts, display the link to the info page.
@@ -1073,7 +1073,7 @@ class core_course_renderer extends plugin_renderer_base {
         if ($chelper->get_show_courses() < self::COURSECAT_SHOW_COURSES_EXPANDED) {
             if ($course->has_summary() || $course->has_course_contacts() || $course->has_course_overviewfiles()
                 || $course->has_custom_fields()) {
-                $url = new moodle_url('/course/info.php', ['id' => $course->id]);
+                $url = new powereduc_url('/course/info.php', ['id' => $course->id]);
                 $image = $this->output->pix_icon('i/info', $this->strings->summary);
                 $content .= html_writer::link($url, $image, ['title' => $this->strings->summary]);
                 // Make sure JS file to expand course content is included.
@@ -1183,7 +1183,7 @@ class core_course_renderer extends plugin_renderer_base {
                     return $role->displayname;
                 }, $coursecontact['roles']);
                 $name = html_writer::tag('span', implode(", ", $rolenames).': ', ['class' => 'font-weight-bold']);
-                $name .= html_writer::link(new moodle_url('/user/view.php',
+                $name .= html_writer::link(new powereduc_url('/user/view.php',
                         ['id' => $coursecontact['user']->id, 'course' => SITEID]),
                         $coursecontact['username']);
                 $content .= html_writer::tag('li', $name);
@@ -1205,7 +1205,7 @@ class core_course_renderer extends plugin_renderer_base {
         $contentimages = $contentfiles = '';
         foreach ($course->get_course_overviewfiles() as $file) {
             $isimage = $file->is_valid_image();
-            $url = moodle_url::make_file_url("$CFG->wwwroot/pluginfile.php",
+            $url = powereduc_url::make_file_url("$CFG->wwwroot/pluginfile.php",
                 '/' . $file->get_contextid() . '/' . $file->get_component() . '/' .
                 $file->get_filearea() . $file->get_filepath() . $file->get_filename(), !$isimage);
             if ($isimage) {
@@ -1213,7 +1213,7 @@ class core_course_renderer extends plugin_renderer_base {
                     html_writer::empty_tag('img', ['src' => $url]),
                     ['class' => 'courseimage']);
             } else {
-                $image = $this->output->pix_icon(file_file_icon($file, 24), $file->get_filename(), 'moodle');
+                $image = $this->output->pix_icon(file_file_icon($file, 24), $file->get_filename(), 'powereduc');
                 $filename = html_writer::tag('span', $image, ['class' => 'fp-icon']).
                     html_writer::tag('span', $file->get_filename(), ['class' => 'fp-filename']);
                 $contentfiles .= html_writer::tag('span',
@@ -1238,7 +1238,7 @@ class core_course_renderer extends plugin_renderer_base {
             if ($cat = core_course_category::get($course->category, IGNORE_MISSING)) {
                 $content .= html_writer::start_tag('div', ['class' => 'coursecat']);
                 $content .= html_writer::tag('span', get_string('category').': ', ['class' => 'font-weight-bold']);
-                $content .= html_writer::link(new moodle_url('/course/index.php', ['categoryid' => $cat->id]),
+                $content .= html_writer::link(new powereduc_url('/course/index.php', ['categoryid' => $cat->id]),
                         $cat->get_formatted_name(), ['class' => $cat->visible ? '' : 'dimmed']);
                 $content .= html_writer::end_tag('div');
             }
@@ -1425,7 +1425,7 @@ class core_course_renderer extends plugin_renderer_base {
                 }
             } else if ($viewmoreurl = $chelper->get_categories_display_option('viewmoreurl')) {
                 // the option 'viewmoreurl' was specified, display more link (if it is link to category view page, add category id)
-                if ($viewmoreurl->compare(new moodle_url('/course/index.php'), URL_MATCH_BASE)) {
+                if ($viewmoreurl->compare(new powereduc_url('/course/index.php'), URL_MATCH_BASE)) {
                     $viewmoreurl->param('categoryid', $coursecat->id);
                 }
                 $viewmoretext = $chelper->get_categories_display_option('viewmoretext', new lang_string('viewmore'));
@@ -1469,7 +1469,7 @@ class core_course_renderer extends plugin_renderer_base {
         }
 
         // We must only load this module once.
-        $this->page->requires->yui_module('moodle-course-categoryexpander',
+        $this->page->requires->yui_module('powereduc-course-categoryexpander',
                 'Y.Moodle.course.categoryexpander.init');
     }
 
@@ -1504,8 +1504,8 @@ class core_course_renderer extends plugin_renderer_base {
             }
             if ($viewmoreurl = $chelper->get_courses_display_option('viewmoreurl')) {
                 // the option for 'View more' link was specified, display more link (if it is link to category view page, add category id)
-                if ($viewmoreurl->compare(new moodle_url('/course/index.php'), URL_MATCH_BASE)) {
-                    $chelper->set_courses_display_option('viewmoreurl', new moodle_url($viewmoreurl, array('categoryid' => $coursecat->id)));
+                if ($viewmoreurl->compare(new powereduc_url('/course/index.php'), URL_MATCH_BASE)) {
+                    $chelper->set_courses_display_option('viewmoreurl', new powereduc_url($viewmoreurl, array('categoryid' => $coursecat->id)));
                 }
             }
             $content .= $this->coursecat_courses($chelper, $courses, $coursecat->get_courses_count());
@@ -1569,7 +1569,7 @@ class core_course_renderer extends plugin_renderer_base {
 
         // category name
         $categoryname = $coursecat->get_formatted_name();
-        $categoryname = html_writer::link(new moodle_url('/course/index.php',
+        $categoryname = html_writer::link(new powereduc_url('/course/index.php',
                 array('categoryid' => $coursecat->id)),
                 $categoryname);
         if ($chelper->get_show_courses() == self::COURSECAT_SHOW_COURSES_COUNT
@@ -1628,7 +1628,7 @@ class core_course_renderer extends plugin_renderer_base {
             $content .= html_writer::start_tag('div', array('class' => 'collapsible-actions'));
             $content .= html_writer::link('#', $linkname, array('class' => implode(' ', $classes)));
             $content .= html_writer::end_tag('div');
-            $this->page->requires->strings_for_js(array('collapseall', 'expandall'), 'moodle');
+            $this->page->requires->strings_for_js(array('collapseall', 'expandall'), 'powereduc');
         }
 
         $content .= html_writer::tag('div', $categorycontent, array('class' => 'content'));
@@ -1686,7 +1686,7 @@ class core_course_renderer extends plugin_renderer_base {
         $browse = optional_param('browse', null, PARAM_ALPHA);
         $perpage = optional_param('perpage', $CFG->coursesperpage, PARAM_INT);
         $page = optional_param('page', 0, PARAM_INT);
-        $baseurl = new moodle_url('/course/index.php');
+        $baseurl = new powereduc_url('/course/index.php');
         if ($coursecat->id) {
             $baseurl->param('categoryid', $coursecat->id);
         }
@@ -1697,20 +1697,20 @@ class core_course_renderer extends plugin_renderer_base {
         $catdisplayoptions['limit'] = $perpage;
         if ($browse === 'courses' || !$coursecat->get_children_count()) {
             $coursedisplayoptions['offset'] = $page * $perpage;
-            $coursedisplayoptions['paginationurl'] = new moodle_url($baseurl, array('browse' => 'courses'));
+            $coursedisplayoptions['paginationurl'] = new powereduc_url($baseurl, array('browse' => 'courses'));
             $catdisplayoptions['nodisplay'] = true;
-            $catdisplayoptions['viewmoreurl'] = new moodle_url($baseurl, array('browse' => 'categories'));
+            $catdisplayoptions['viewmoreurl'] = new powereduc_url($baseurl, array('browse' => 'categories'));
             $catdisplayoptions['viewmoretext'] = new lang_string('viewallsubcategories');
         } else if ($browse === 'categories' || !$coursecat->get_courses_count()) {
             $coursedisplayoptions['nodisplay'] = true;
             $catdisplayoptions['offset'] = $page * $perpage;
-            $catdisplayoptions['paginationurl'] = new moodle_url($baseurl, array('browse' => 'categories'));
-            $coursedisplayoptions['viewmoreurl'] = new moodle_url($baseurl, array('browse' => 'courses'));
+            $catdisplayoptions['paginationurl'] = new powereduc_url($baseurl, array('browse' => 'categories'));
+            $coursedisplayoptions['viewmoreurl'] = new powereduc_url($baseurl, array('browse' => 'courses'));
             $coursedisplayoptions['viewmoretext'] = new lang_string('viewallcourses');
         } else {
             // we have a category that has both subcategories and courses, display pagination separately
-            $coursedisplayoptions['viewmoreurl'] = new moodle_url($baseurl, array('browse' => 'courses', 'page' => 1));
-            $catdisplayoptions['viewmoreurl'] = new moodle_url($baseurl, array('browse' => 'categories', 'page' => 1));
+            $coursedisplayoptions['viewmoreurl'] = new powereduc_url($baseurl, array('browse' => 'courses', 'page' => 1));
+            $catdisplayoptions['viewmoreurl'] = new powereduc_url($baseurl, array('browse' => 'categories', 'page' => 1));
         }
         $chelper->set_courses_display_options($coursedisplayoptions)->set_categories_display_options($catdisplayoptions);
 
@@ -1743,14 +1743,14 @@ class core_course_renderer extends plugin_renderer_base {
             $category = core_course_category::get($categoryid);
 
             $chelper = new coursecat_helper();
-            $baseurl = new moodle_url('/course/index.php', array('categoryid' => $categoryid));
+            $baseurl = new powereduc_url('/course/index.php', array('categoryid' => $categoryid));
             $coursedisplayoptions = array(
                 'limit' => $CFG->coursesperpage,
-                'viewmoreurl' => new moodle_url($baseurl, array('browse' => 'courses', 'page' => 1))
+                'viewmoreurl' => new powereduc_url($baseurl, array('browse' => 'courses', 'page' => 1))
             );
             $catdisplayoptions = array(
                 'limit' => $CFG->coursesperpage,
-                'viewmoreurl' => new moodle_url($baseurl, array('browse' => 'categories', 'page' => 1))
+                'viewmoreurl' => new powereduc_url($baseurl, array('browse' => 'categories', 'page' => 1))
             );
             $chelper->set_show_courses($showcourses)->
                     set_courses_display_options($coursedisplayoptions)->
@@ -1799,7 +1799,7 @@ class core_course_renderer extends plugin_renderer_base {
                 $displayoptions['offset'] = $displayoptions['limit'] * $page;
             }
             // options 'paginationurl' and 'paginationallowall' are only used in method coursecat_courses()
-            $displayoptions['paginationurl'] = new moodle_url('/course/search.php', $searchcriteria);
+            $displayoptions['paginationurl'] = new powereduc_url('/course/search.php', $searchcriteria);
             $displayoptions['paginationallowall'] = true; // allow adding link 'View all'
 
             $class = 'course-search-result';
@@ -1874,7 +1874,7 @@ class core_course_renderer extends plugin_renderer_base {
                     $details = '';
                     if ($showcategories && ($cat = core_course_category::get($course->category, IGNORE_MISSING))) {
                         $details = get_string('category').': '.
-                                html_writer::link(new moodle_url('/course/index.php', array('categoryid' => $cat->id)),
+                                html_writer::link(new powereduc_url('/course/index.php', array('categoryid' => $cat->id)),
                                         $cat->get_formatted_name(), array('class' => $cat->visible ? '' : 'dimmed'));
                     }
                     $tagfeed->add($imgwithlink, $coursename, $details);
@@ -1893,7 +1893,7 @@ class core_course_renderer extends plugin_renderer_base {
      * @return string
      */
     protected function frontpage_remote_course(stdClass $course) {
-        $url = new moodle_url('/auth/mnet/jump.php', array(
+        $url = new powereduc_url('/auth/mnet/jump.php', array(
             'hostid' => $course->hostid,
             'wantsurl' => '/course/view.php?id='. $course->remoteid
         ));
@@ -1977,13 +1977,13 @@ class core_course_renderer extends plugin_renderer_base {
                 // There are more enrolled courses than we can display, display link to 'My courses'.
                 $courses = array_slice($courses, 0, $CFG->frontpagecourselimit, true);
                 $chelper->set_courses_display_options(array(
-                        'viewmoreurl' => new moodle_url('/my/courses.php'),
+                        'viewmoreurl' => new powereduc_url('/my/courses.php'),
                         'viewmoretext' => new lang_string('mycourses')
                     ));
             } else if (core_course_category::top()->is_uservisible()) {
                 // All enrolled courses are displayed, display link to 'All courses' if there are more courses in system.
                 $chelper->set_courses_display_options(array(
-                        'viewmoreurl' => new moodle_url('/course/index.php'),
+                        'viewmoreurl' => new powereduc_url('/course/index.php'),
                         'viewmoretext' => new lang_string('fulllistofcourses')
                     ));
                 $totalcount = $DB->count_records('course') - 1;
@@ -2025,13 +2025,13 @@ class core_course_renderer extends plugin_renderer_base {
                 set_courses_display_options(array(
                     'recursive' => true,
                     'limit' => $CFG->frontpagecourselimit,
-                    'viewmoreurl' => new moodle_url('/course/index.php'),
+                    'viewmoreurl' => new powereduc_url('/course/index.php'),
                     'viewmoretext' => new lang_string('fulllistofcourses')));
 
         $chelper->set_attributes(array('class' => 'frontpage-course-list-all'));
         $courses = core_course_category::top()->get_courses($chelper->get_courses_display_options());
         $totalcount = core_course_category::top()->get_courses_count($chelper->get_courses_display_options());
-        if (!$totalcount && !$this->page->user_is_editing() && has_capability('moodle/course:create', context_system::instance())) {
+        if (!$totalcount && !$this->page->user_is_editing() && has_capability('powereduc/course:create', context_system::instance())) {
             // Print link to create a new course, for the 1st available category.
             return $this->add_new_course_button();
         }
@@ -2047,7 +2047,7 @@ class core_course_renderer extends plugin_renderer_base {
         global $CFG;
         // Print link to create a new course, for the 1st available category.
         $output = $this->container_start('buttons');
-        $url = new moodle_url('/course/edit.php', array('category' => $CFG->defaultrequestcategory, 'returnto' => 'topcat'));
+        $url = new powereduc_url('/course/edit.php', array('category' => $CFG->defaultrequestcategory, 'returnto' => 'topcat'));
         $output .= $this->single_button($url, get_string('addnewcourse'), 'get');
         $output .= $this->container_end('buttons');
         return $output;
@@ -2069,12 +2069,12 @@ class core_course_renderer extends plugin_renderer_base {
         $chelper->set_subcat_depth($CFG->maxcategorydepth)->
             set_categories_display_options(array(
                 'limit' => $CFG->coursesperpage,
-                'viewmoreurl' => new moodle_url('/course/index.php',
+                'viewmoreurl' => new powereduc_url('/course/index.php',
                         array('browse' => 'categories', 'page' => 1))
             ))->
             set_courses_display_options(array(
                 'limit' => $CFG->coursesperpage,
-                'viewmoreurl' => new moodle_url('/course/index.php',
+                'viewmoreurl' => new powereduc_url('/course/index.php',
                         array('browse' => 'courses', 'page' => 1))
             ))->
             set_attributes(array('class' => 'frontpage-category-combo'));
@@ -2098,7 +2098,7 @@ class core_course_renderer extends plugin_renderer_base {
                 set_show_courses(self::COURSECAT_SHOW_COURSES_COUNT)->
                 set_categories_display_options(array(
                     'limit' => $CFG->coursesperpage,
-                    'viewmoreurl' => new moodle_url('/course/index.php',
+                    'viewmoreurl' => new powereduc_url('/course/index.php',
                             array('browse' => 'categories', 'page' => 1))
                 ))->
                 set_attributes(array('class' => 'frontpage-category-names'));
@@ -2224,7 +2224,7 @@ class core_course_renderer extends plugin_renderer_base {
             } else {
                 $subtext = get_string('subscribe', 'forum');
             }
-            $suburl = new moodle_url('/mod/forum/subscribe.php', array('id' => $forum->id, 'sesskey' => sesskey()));
+            $suburl = new powereduc_url('/mod/forum/subscribe.php', array('id' => $forum->id, 'sesskey' => sesskey()));
             $output .= html_writer::tag('div', html_writer::link($suburl, $subtext), array('class' => 'subscribelink'));
         }
 

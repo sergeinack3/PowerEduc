@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Upgrade code for the section links block.
  *
- * @global moodle_database $DB
+ * @global powereduc_database $DB
  * @param int $oldversion
  * @param object $block
  */

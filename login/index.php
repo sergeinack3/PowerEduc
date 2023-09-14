@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Main login page.
@@ -41,7 +41,7 @@ $resendconfirmemail = optional_param('resendconfirmemail', false, PARAM_BOOL);
 if (defined('BEHAT_SITE_RUNNING') && BEHAT_SITE_RUNNING) {
     $wantsurl    = optional_param('wantsurl', '', PARAM_LOCALURL);   // Overrides $SESSION->wantsurl if given.
     if ($wantsurl !== '') {
-        $SESSION->wantsurl = (new moodle_url($wantsurl))->out(false);
+        $SESSION->wantsurl = (new powereduc_url($wantsurl))->out(false);
     }
 }
 
@@ -104,7 +104,7 @@ if ($user !== false or $frm !== false or $errormsg !== '') {
     // some auth plugin already supplied full user, fake form data or prevented user login with error message
 
 } else if (!empty($SESSION->wantsurl) && file_exists($CFG->dirroot.'/login/weblinkauth.php')) {
-    // Handles the case of another Moodle site linking into a page on this site
+    // Handles the case of another PowerEduc site linking into a page on this site
     //TODO: move weblink into own auth plugin
     include($CFG->dirroot.'/login/weblinkauth.php');
     if (function_exists('weblink_auth')) {
@@ -124,7 +124,7 @@ if ($user !== false or $frm !== false or $errormsg !== '') {
 // will only work for internal auth plugins, SSO plugins such as
 // SAML / CAS / OIDC will have to handle this correctly directly.
 if ($anchor && isset($SESSION->wantsurl) && strpos($SESSION->wantsurl, '#') === false) {
-    $wantsurl = new moodle_url($SESSION->wantsurl);
+    $wantsurl = new powereduc_url($SESSION->wantsurl);
     $wantsurl->set_anchor(substr($anchor, 1));
     $SESSION->wantsurl = $wantsurl->out();
 }
@@ -194,7 +194,7 @@ if ($frm and isset($frm->username)) {                             // Login WITH 
                 }
             }
             echo $OUTPUT->box(get_string("emailconfirmsent", "", s($user->email)), "generalbox boxaligncenter");
-            $resendconfirmurl = new moodle_url('/login/index.php',
+            $resendconfirmurl = new powereduc_url('/login/index.php',
                 [
                     'username' => $frm->username,
                     'password' => $frm->password,
@@ -220,10 +220,10 @@ if ($frm and isset($frm->username)) {                             // Login WITH 
 
         } else if (empty($CFG->rememberusername)) {
             // no permanent cookies, delete old one if exists
-            set_moodle_cookie('');
+            set_powereduc_cookie('');
 
         } else {
-            set_moodle_cookie($USER->username);
+            set_powereduc_cookie($USER->username);
         }
 
         $urltogo = core_login_get_return_url();
@@ -273,7 +273,7 @@ if ($frm and isset($frm->username)) {                             // Login WITH 
 
         // test the session actually works by redirecting to self
         $SESSION->wantsurl = $urltogo;
-        redirect(new moodle_url(get_login_url(), array('testsession'=>$USER->id)));
+        redirect(new powereduc_url(get_login_url(), array('testsession'=>$USER->id)));
 
     } else {
         if (empty($errormsg)) {
@@ -310,7 +310,7 @@ if (empty($SESSION->wantsurl)) {
 
 /// Redirect to alternative login URL if needed
 if (!empty($CFG->alternateloginurl)) {
-    $loginurl = new moodle_url($CFG->alternateloginurl);
+    $loginurl = new powereduc_url($CFG->alternateloginurl);
 
     $loginurlstr = $loginurl->out(false);
 
@@ -338,7 +338,7 @@ if (empty($frm->username) && $authsequence[0] != 'shibboleth') {  // See bug 518
         // we do not want data from _POST here
         $frm->username = clean_param($_GET["username"], PARAM_RAW); // we do not want data from _POST here
     } else {
-        $frm->username = get_moodle_cookie();
+        $frm->username = get_powereduc_cookie();
     }
 
     $frm->password = "";
@@ -358,7 +358,7 @@ if (!empty($SESSION->loginerrormsg)) {
     if ($errormsg) {
         $SESSION->loginerrormsg = $errormsg;
     }
-    redirect(new moodle_url('/login/index.php'));
+    redirect(new powereduc_url('/login/index.php'));
 }
 
 $PAGE->set_title("$site->fullname: $loginsite");
@@ -369,8 +369,8 @@ echo $OUTPUT->header();
 if (isloggedin() and !isguestuser()) {
     // prevent logging when already logged in, we do not want them to relogin by accident because sesskey would be changed
     echo $OUTPUT->box_start();
-    $logout = new single_button(new moodle_url('/login/logout.php', array('sesskey'=>sesskey(),'loginpage'=>1)), get_string('logout'), 'post');
-    $continue = new single_button(new moodle_url('/'), get_string('cancel'), 'get');
+    $logout = new single_button(new powereduc_url('/login/logout.php', array('sesskey'=>sesskey(),'loginpage'=>1)), get_string('logout'), 'post');
+    $continue = new single_button(new powereduc_url('/'), get_string('cancel'), 'get');
     echo $OUTPUT->confirm(get_string('alreadyloggedin', 'error', fullname($USER)), $logout, $continue);
     echo $OUTPUT->box_end();
 } else {

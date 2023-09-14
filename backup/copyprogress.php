@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * This script is used to configure and execute the course copy proccess.
  *
  * @package    core_backup
- * @copyright  2020 onward The Moodle Users Association <https://moodleassociation.org/>
+ * @copyright  2020 onward The Moodle Users Association <https://powereducassociation.org/>
  * @author     Matt Porritt <mattp@catalyst-au.net>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -31,7 +31,7 @@ defined('POWEREDUC_INTERNAL') || die();
 
 $courseid = required_param('id', PARAM_INT);
 
-$url = new moodle_url('/backup/copyprogress.php', array('id' => $courseid));
+$url = new powereduc_url('/backup/copyprogress.php', array('id' => $courseid));
 $course = get_course($courseid);
 $coursecontext = context_course::instance($course->id);
 
