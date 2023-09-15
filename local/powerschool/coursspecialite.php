@@ -160,6 +160,7 @@ if ($mform->is_cancelled()) {
             \core\notification::add('Cette configuration a été fait précedemment enregistré regarder dans le tableau,liberez le d\'abord dans ce tableau', \core\output\notification::NOTIFY_ERROR);
 
             redirect($CFG->wwwroot . '/local/powerschool/coursspecialite.php?idca='.$_POST["idcampus"].'');
+       
         }
      
     }
@@ -334,6 +335,9 @@ $menumini = (object)[
     'confinot' => new powereduc_url('/local/powerschool/configurationnote.php'),
     'logo' => new powereduc_url('/local/powerschool/logo.php'),
     'message' => new powereduc_url('/local/powerschool/message.php'),
+    'materiell' => new powereduc_url('/local/powerschool/materiels.php'),
+    'groupe' => new powereduc_url('/local/powerschool/groupsalle.php'),
+
 
 
 ];

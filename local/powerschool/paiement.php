@@ -38,7 +38,7 @@ $PAGE->set_context(\context_system::instance());
 $PAGE->set_title('Enregistrer une paiement');
 $PAGE->set_heading('Enregistrer une paiement');
 
-$PAGE->navbar->add(get_string('inscription', 'local_powerschool'),  new powereduc_url('/local/powerschool/inscription.php'));
+$PAGE->navbar->add(get_string('inscription', 'local_powerschool'),  new powereduc_url('/local/powerschool/inscription.php?idca='.$_GET["idca"].''));
 $PAGE->navbar->add(get_string('paiement', 'local_powerschool'), $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');

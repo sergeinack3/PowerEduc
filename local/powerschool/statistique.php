@@ -91,8 +91,8 @@ $filann=$DB->get_records_sql($sqlfilann);
 foreach($filann as $key => $fila)
 {
 $sqlanninsc="SELECT SUM(montant) entrees FROM {inscription} i,{specialite} sp ,{paiement} pa
-             WHERE i.id=pa.idinscription AND i.idspecialite=sp.id AND idfiliere='".$fila->id."'
-             AND idanneescolaire='".$_GET["annee"]."' AND i.idcampus='".$_GET["idca"]."'";
+             WHERE i.id=pa.idinscription AND i.idspecialite=sp.id AND sp.idfiliere='".$fila->id."'
+             AND idanneescolaire='".$_GET["annee"]."' AND i.idcampus='".$_GET["campus"]."'";
 
   $annnesome=$DB->get_records_sql($sqlanninsc);
   foreach($annnesome as $key=>$somne)
@@ -100,6 +100,7 @@ $sqlanninsc="SELECT SUM(montant) entrees FROM {inscription} i,{specialite} sp ,{
     $annnnnee[]=$somne->entrees;
   }
   $filiereanee[]=$fila->libellefiliere;
+//   var_dump($annnnnee);
 }
 // $specialites = array("Informatique", "Génie Civil", "Economie","mmmmmmmm",
 //                     "Informatique", "Génie Civil", "Economie","mmmmmmmm",
@@ -110,7 +111,7 @@ $sqlanninsc="SELECT SUM(montant) entrees FROM {inscription} i,{specialite} sp ,{
 $specialites_json = json_encode($specialites);
 $entrees_json = json_encode($entrees);
 
-// var_dump($specialites_json);die;
+// die;
 $fils=$DB->get_records_sql("SELECT id FROM {filiere}");
 
 $taret=array();
@@ -167,8 +168,8 @@ foreach($etufil as $key => $etu)
     $data = array();
  foreach($speciaaa as $key => $val){
     $sqlsomme="SELECT SUM(montant) as entrees,libellespecialite  FROM {specialite} sp,{cycle} cy,{inscription} i,{filiere} fi,{paiement} pa 
-             WHERE i.id=pa.idinscription AND fi.id=sp.idfiliere AND i.idcycle=cy.id AND sp.id=i.idspecialite AND sp.idfiliere ='".$_GET["filiere"]."' AND 
-             idspecialite ='".$val->id."' AND idanneescolaire='".$_GET["annee"]."'";
+               WHERE i.id=pa.idinscription AND fi.id=sp.idfiliere AND i.idcycle=cy.id AND sp.id=i.idspecialite AND sp.idfiliere ='".$_GET["filiere"]."'
+               AND idspecialite ='".$val->id."' AND idanneescolaire='".$_GET["annee"]."'";
     
     $sppsom=$DB->get_records_sql($sqlsomme);
     
@@ -602,25 +603,25 @@ else{
 
             foreach($sqlanneagefi as $key => $vallle)
             {
-                if(!empty($_GET["gender"]))
-           {
+                            if(!empty($_GET["gender"]))
+                    {
 
-               $sqlcountfilage="SELECT count(i.id) cou
-                       FROM  {inscription} i
-                       INNER JOIN {specialite} s ON i.idspecialite = s.id
-                       INNER JOIN  {filiere} f ON s.idfiliere = f.id
-                       WHERE f.id='".$_GET["filiere"]."' AND YEAR(FROM_UNIXTIME(i.date_naissance))='".$vallle->datena."'
-                       AND gender='".$_GET["gender"]."'";
-           }
-           else{
+                        $sqlcountfilage="SELECT count(i.id) cou
+                                FROM  {inscription} i
+                                INNER JOIN {specialite} s ON i.idspecialite = s.id
+                                INNER JOIN  {filiere} f ON s.idfiliere = f.id
+                                WHERE f.id='".$_GET["filiere"]."' AND YEAR(FROM_UNIXTIME(i.date_naissance))='".$vallle->datena."'
+                                AND gender='".$_GET["gender"]."'";
+                    }
+                    else{
 
-               $sqlcountfilage="SELECT count(i.id) cou
-                       FROM  {inscription} i
-                       INNER JOIN {specialite} s ON i.idspecialite = s.id
-                       INNER JOIN  {filiere} f ON s.idfiliere = f.id
-                       WHERE f.id='".$_GET["filiere"]."' AND YEAR(FROM_UNIXTIME(i.date_naissance))='".$vallle->datena."'
-                       ";
-           }
+                        $sqlcountfilage="SELECT count(i.id) cou
+                                FROM  {inscription} i
+                                INNER JOIN {specialite} s ON i.idspecialite = s.id
+                                INNER JOIN  {filiere} f ON s.idfiliere = f.id
+                                WHERE f.id='".$_GET["filiere"]."' AND YEAR(FROM_UNIXTIME(i.date_naissance))='".$vallle->datena."'
+                                ";
+                    }
                         
                         
                         $tarfilieresomeage[]=$vallle->datena;
@@ -851,103 +852,377 @@ else{
 
   // Statistique pour les notes
       //par filiere
- $filiere=$DB->get_records_sql("SELECT * FROM {filiere} WHERE idcampus=1");
- foreach($filiere as $key=>$valm)
- {
+//      
+$tanoteefiliere=array();
+$hhfiliere=$DB->get_records_sql("SELECT fi.id,fi.libellefiliere FROM {inscription} i,{specialite} sp,{filiere} fi
+                                 WHERE i.idspecialite=sp.id AND fi.id=sp.idfiliere AND fi.idcampus='".$_GET["campus"]."'");
 
-      $sqlnotefil="SELECT
-      F.libellefiliere AS libellefilie,
-      S.libellespecialite AS libellespecial,
-      AVG((LN.note2 * 0.5 + LN.note3 * 0.5)) AS moyenne
-        FROM
-            {listenote} LN
-        JOIN
-            {affecterprof} AP ON LN.idaffecterprof = AP.id
-        JOIN
-            {user} U ON AP.idprof = U.id
-        JOIN
-            {courssemestre} CS ON AP.idcourssemestre = CS.id
-        JOIN
-            {coursspecialite} CSp ON CS.idcoursspecialite = CSp.id
-        JOIN
-            {specialite} S ON CSp.idspecialite = S.id
-        JOIN
-            {filiere} F ON S.idfiliere = F.id
-        WHERE F.id='".$valm->id."'
-  ";
-  $notefil=$DB->get_records_sql($sqlnotefil);
+foreach($hhfiliere as $key => $filll)
+{
+    $moyennespe=0;
+    
+    
+    $sql1="SELECT idetudiant FROM {inscription} i,{user} u,{specialite} sp,{cycle} cy,{filiere} fi WHERE i.idetudiant=u.id
+        AND i.idcycle=cy.id AND sp.id=idspecialite AND sp.idfiliere=fi.id AND fi.id='".$filll->id."'";
+        
+        $sql2c="SELECT count(DISTINCT idetudiant) coutet FROM {coursspecialite} sp,{courssemestre} cs,{affecterprof} af,{listenote} li,{cycle} cy,{specialite} spe,{semestre} se,{filiere} fi
+        WHERE sp.id=cs.idcoursspecialite AND af.idcourssemestre=cs.id AND li.idaffecterprof=af.id AND sp.idspecialite=spe.id AND spe.idfiliere=fi.id
+        AND sp.idcycle=cy.id AND cs.idsemestre=se.id AND fi.id='".$filll->id."'";
+        $counttt=$DB->get_records_sql($sql2c);
+        $inscription=$DB->get_records_sql($sql1);
+        // var_dump($inscription);die;
+        // var_dump($counttt);
+        // die;
+        
+        
+        $rolecam=$DB->get_records_sql("SELECT * FROM {campus} c,{typecampus} ty WHERE c.idtypecampus=ty.id AND c.id='".$_GET["campus"]."'");
+        foreach($inscription as $key => $vvallno)
+        {
+            $sommenote=0;
+            $sommecredi=0;
+            foreach($rolecam as $key => $rolev)
+            {}
+            if($rolev->libelletype=="universite")
+            {
+            // $user=$DB->get_records("user");
+            // foreach($user as $key)
+            // {
+                $sqlli="SELECT note2,credit,note3,idetudiant FROM {coursspecialite} sp,{courssemestre} cs,{affecterprof} af,{listenote} li,{cycle} cy,{specialite} spe,{semestre} se
+                    WHERE sp.id=cs.idcoursspecialite AND af.idcourssemestre=cs.id AND li.idaffecterprof=af.id AND sp.idspecialite=spe.id
+                    AND sp.idcycle=cy.id AND cs.idsemestre=se.id AND li.idetudiant='".$vvallno->idetudiant."'";
+        
+        $gromoy=$DB->get_records_sql($sqlli);
+        // die;
+            foreach($gromoy as $key =>$keynote)
+            {   
+            
+            
+            if($keynote->idetudiant==$vvallno->idetudiant)  
+            {
+                
+                    $pourcent=$DB->get_records("configurationnote",array("idcampus"=>$_GET["campus"]));
+            
+                    foreach($pourcent as $key =>$pou)
+                    {}
+                    $sommenote=$sommenote+(($keynote->note2*($pou->cc/100))*$keynote->credit+($keynote->note3*($pou->normal/100))*$keynote->credit);
+                    $sommecredi=$sommecredi+$keynote->credit;
+                    // $nobret++;
+                
+                $moyenne=$sommenote/$sommecredi;
+                $vvallno->moyenne_semestre=round($moyenne,2);
+                
+                
+            }
+            
+        }
+    }
+    $moyennespe=$moyennespe+$vvallno->moyenne_semestre;
+    // var_dump($moyennespe);
+}
 
-//   var_dump($notefil);
- }
-//   die;
+    // die;
+        
+        // foreach($hhfiliere as $key=>$mofil )
+        // {}
+        if($filll->libellefiliere!=null)
+        {
+            foreach($counttt as $mm){}
+            if($mm->coutet!=0)
+            {
 
+                $moyennespe=round($moyennespe/$mm->coutet,2);
+        
+                $tanoteefiliere[]=[
+                    "libelle"=>$filll->libellefiliere,
+                    "moyenne"=>$moyennespe
+                ];
+            }
+        }
+        // var_dump($tanotee);
+}
+    // die;
   //connaissant la filiere et la specialite
 
-  $specialitefiliere=$DB->get_records_sql("SELECT * FROM {filiere} WHERE id=5 AND idcampus=1");
-  foreach($specialitefiliere as $key=>$valn)
-  {}
-  $specialitefilierenote=$DB->get_records_sql("SELECT * FROM {specialite} WHERE idfiliere='".$valn->id."'");
-    // var_dump($specialitefilierenote);die;
-foreach($specialitefilierenote as $key =>$valspfil)
-{
 
 
-      $sqlnotespeciafil="SELECT
-      F.libellefiliere AS libellefilie,
-      S.libellespecialite AS libellespecial,
-      AVG((LN.note2 * 0.5 + LN.note3 * 0.5)) AS moyenne
-        FROM
-            {listenote} LN
-        JOIN
-            {affecterprof} AP ON LN.idaffecterprof = AP.id
-        JOIN
-            {user} U ON AP.idprof = U.id
-        JOIN
-            {courssemestre} CS ON AP.idcourssemestre = CS.id
-        JOIN
-            {coursspecialite} CSp ON CS.idcoursspecialite = CSp.id
-        JOIN
-            {specialite} S ON CSp.idspecialite = S.id
-        JOIN
-            {filiere} F ON S.idfiliere = F.id
-        WHERE S.id='".$valspfil->id."'
-  ";
-  $notespeciafil=$DB->get_records_sql($sqlnotespeciafil);
+//   $specialitefiliere=$DB->get_records_sql("SELECT * FROM {filiere} WHERE id='".$_GET["filiere"]."' AND idcampus='".$_GET["campus"]."'");
+//   foreach($specialitefiliere as $key=>$valn)
+//   {}
+//   $specialitefilierenote=$DB->get_records_sql("SELECT * FROM {specialite} WHERE idfiliere='".$valn->id."'");
+//     // var_dump($specialitefilierenote);die;
+// foreach($specialitefilierenote as $key =>$valspfil)
+// {
 
-//   var_dump($notespeciafil);
-}
+
+//       $sqlnotespeciafil="SELECT
+//       S.libellespecialite AS libellespecial,
+//       ROUND(SUM(((LN.note2 * CSp.credit) * '".$bb->cc."' + ((LN.note3 * CSp.credit) * '".$bb->normal."')))/SUM(CSp.credit),2) AS moyenne
+//         FROM
+//             {listenote} LN
+//         JOIN
+//             {affecterprof} AP ON LN.idaffecterprof = AP.id
+//         JOIN
+//             {user} U ON AP.idprof = U.id
+//         JOIN
+//             {courssemestre} CS ON AP.idcourssemestre = CS.id
+//         JOIN
+//             {coursspecialite} CSp ON CS.idcoursspecialite = CSp.id
+//         JOIN
+//             {specialite} S ON CSp.idspecialite = S.id
+//         JOIN
+//             {filiere} F ON S.idfiliere = F.id
+//         WHERE S.id='".$valspfil->id."'
+//   ";
+//   $notespeciafil=$DB->get_records_sql($sqlnotespeciafil);
+
+//   foreach($notespeciafil as $key =>$bppp)
+//   {
+//       if($bppp->libellespecial!=null || $bppp->moyenne!=0)
+//       {
+  
+//           $tanoteefilsp=[
+//               "libelle"=>$bppp->libellespecial,
+//               "moyenne"=>$bppp->moyenne
+//           ];
+//         //   var_dump($tanoteefilsp);
+//       }
+//   }
+// //   var_dump($notespeciafil);
+// }
 //   die;
 
-  //connaissant la filiere et le cycle
-  $cyclefiliere=$DB->get_records_sql("SELECT * FROM {cycle} WHERE idcampus=1");
 
-  foreach($cyclefiliere as $key => $valcy)
-  {
-    $sqlnotecyclefil="SELECT
-    F.libellefiliere AS libellefilie,
-    C.libellecycle AS libellecycle,
-    AVG((LN.note2 * 0.5 + LN.note3 * 0.5)) AS moyenne
-      FROM
-          {listenote} LN
-      JOIN
-          {affecterprof} AP ON LN.idaffecterprof = AP.id
-      JOIN
-          {user} U ON AP.idprof = U.id
-      JOIN
-          {courssemestre} CS ON AP.idcourssemestre = CS.id
-      JOIN
-          {coursspecialite} CSp ON CS.idcoursspecialite = CSp.id
-      JOIN
-          {cycle} C ON CSp.idcycle = C.id
-      JOIN
-          {specialite} S ON CSp.idspecialite = S.id
-      JOIN
-          {filiere} F ON S.idfiliere = F.id
-      WHERE C.id='".$valcy->id."' AND F.id=5
-";
-$notecyclefil=$DB->get_records_sql($sqlnotecyclefil);
-// var_dump($notecyclefil);
-  }
+$noteefilieresp=array();
+$hhfilieresp=$DB->get_records_sql("SELECT fi.id,cy.libellecycle FROM {inscription} i,{specialite} sp,{filiere} fi,{cycle} cy
+                                 WHERE cy.id=i.idcycle AND i.idspecialite=sp.id AND fi.id='".$_GET["filiere"]."' AND fi.idcampus='".$_GET["campus"]."'");
+$cyclesql=$DB->get_records("cycle",array("idcampus"=>$_GET["campus"]));
+
+foreach($cyclesql as $keyy){
+        foreach($hhfilieresp as $key => $filll)
+        {
+            $moyennespefil=0;
+            
+
+                $sql1="SELECT idetudiant FROM {inscription} i,{user} u,{cycle} cy,{filiere} fi,{specialite} sp WHERE i.idetudiant=u.id
+                    AND i.idcycle=cy.id AND sp.idfiliere=fi.id AND sp.id='".$_GET["specialite"]."' AND fi.id='".$filll->id."' AND i.idspecialite='".$_GET["specialite"]."' AND cy.id='".$keyy->id."'";
+                    
+            
+            // die;
+                $sql2c="SELECT count(DISTINCT idetudiant) coutet FROM {coursspecialite} sp,{courssemestre} cs,{affecterprof} af,{listenote} li,{cycle} cy,{specialite} spe,{semestre} se,{filiere} fi
+                WHERE sp.id=cs.idcoursspecialite AND af.idcourssemestre=cs.id AND li.idaffecterprof=af.id AND sp.idspecialite=spe.id AND spe.idfiliere=fi.id
+                AND sp.idcycle=cy.id AND cs.idsemestre=se.id AND fi.id='".$filll->id."' AND sp.idspecialite='".$_GET["specialite"]."' AND se.id='".$_GET["semestre"]."' AND cy.id='".$keyy->id."'";
+                $counttt=$DB->get_records_sql($sql2c);
+                // die;
+                $inscription=$DB->get_records_sql($sql1);
+                // var_dump($inscription);die;
+                // var_dump($counttt);
+                
+                
+                $rolecam=$DB->get_records_sql("SELECT * FROM {campus} c,{typecampus} ty WHERE c.idtypecampus=ty.id AND c.id='".$_GET["campus"]."'");
+                foreach($inscription as $key => $vvallno)
+                {
+                    $sommenote=0;
+                    $sommecredi=0;
+                    foreach($rolecam as $key => $rolev)
+                    {}
+                    if($rolev->libelletype=="universite")
+                    {
+                    // $user=$DB->get_records("user");
+                    // foreach($user as $key)
+                    // {
+                        $sqlli="SELECT note2,credit,note3,idetudiant FROM {coursspecialite} sp,{courssemestre} cs,{affecterprof} af,{listenote} li,{cycle} cy,{specialite} spe,{semestre} se
+                            WHERE sp.id=cs.idcoursspecialite AND af.idcourssemestre=cs.id AND li.idaffecterprof=af.id AND sp.idspecialite=spe.id
+                            AND sp.idcycle=cy.id AND cs.idsemestre=se.id AND li.idetudiant='".$vvallno->idetudiant."' AND sp.idspecialite='".$_GET["specialite"]."'";
+                
+                $gromoy=$DB->get_records_sql($sqlli);
+                // die;
+                    foreach($gromoy as $key =>$keynote)
+                    {   
+                    
+                    
+                    if($keynote->idetudiant==$vvallno->idetudiant)  
+                    {
+                        
+                            $pourcent=$DB->get_records("configurationnote",array("idcampus"=>$_GET["campus"]));
+                    
+                            foreach($pourcent as $key =>$pou)
+                            {}
+                            $sommenote=$sommenote+(($keynote->note2*($pou->cc/100))*$keynote->credit+($keynote->note3*($pou->normal/100))*$keynote->credit);
+                            $sommecredi=$sommecredi+$keynote->credit;
+                            // $nobret++;
+                        
+                        $moyennenotesp=$sommenote/$sommecredi;
+                        $vvallno->moyenne_semestre=round($moyennenotesp,2);
+                        
+                        
+                    }
+                    
+                }
+            }
+            $moyennespefil=$moyennespefil+$vvallno->moyenne_semestre;
+            // var_dump($moyennespe);
+        }
+
+            // die;
+                
+                // foreach($hhfiliere as $key=>$mofil )
+                // {}
+                if($filll->libellecycle!=null)
+                {
+                    foreach($counttt as $mm){}
+                    if($mm->coutet!=0)
+                    {
+
+                        $moyennespefil=round($moyennespefil/$mm->coutet,2);
+                
+                        $tanoteefilierespec[]=[
+                            "libelle"=>$keyy->libellecycle,
+                            "moyenne"=>$moyennespefil
+                        ];
+                    }
+                }
+            }
+}
+  //connaissant la filiere et le cycle
+
+  $noteefilierecy=array();
+$hhfilierecy=$DB->get_records_sql("SELECT fi.id,sp.libellespecialite FROM {inscription} i,{specialite} sp,{filiere} fi,{cycle} cy
+                                 WHERE cy.id=i.idcycle AND i.idspecialite=sp.id AND fi.id='".$_GET["filiere"]."' AND cy.id='".$_GET["cycle"]."' AND fi.idcampus='".$_GET["campus"]."'");
+$specialsql=$DB->get_records_sql("SELECT sp.id,libellespecialite FROM {specialite} sp,{filiere} fi
+                            WHERE sp.idfiliere=fi.id AND fi.idcampus='".$_GET["campus"]."' AND fi.id='".$_GET["filiere"]."'");
+// die;
+
+foreach($specialsql as $keyy){
+        foreach($hhfilierecy as $key => $filll)
+        {
+            $moyennecycfil=0;
+            
+
+                $sql1="SELECT idetudiant FROM {inscription} i,{user} u,{cycle} cy,{filiere} fi,{specialite} sp WHERE i.idetudiant=u.id
+                    AND i.idcycle=cy.id AND sp.idfiliere=fi.id AND fi.id='".$filll->id."' AND i.idspecialite='".$keyy->id."' AND cy.id='".$_GET["cycle"]."'";
+                    
+            
+            // die;
+                $sql2c="SELECT count(DISTINCT idetudiant) coutet FROM {coursspecialite} sp,{courssemestre} cs,{affecterprof} af,{listenote} li,{cycle} cy,{specialite} spe,{semestre} se,{filiere} fi
+                WHERE sp.id=cs.idcoursspecialite AND af.idcourssemestre=cs.id AND li.idaffecterprof=af.id AND sp.idspecialite=spe.id AND spe.idfiliere=fi.id
+                AND sp.idcycle=cy.id AND cs.idsemestre=se.id AND fi.id='".$filll->id."' AND sp.idcycle='".$_GET["cycle"]."' AND se.id='".$_GET["semestre"]."' AND spe.id='".$keyy->id."'";
+                $counttt=$DB->get_records_sql($sql2c);
+                // die;
+                $inscription=$DB->get_records_sql($sql1);
+                // var_dump($inscription);die;
+                // var_dump($counttt);
+                
+                
+                $rolecam=$DB->get_records_sql("SELECT * FROM {campus} c,{typecampus} ty WHERE c.idtypecampus=ty.id AND c.id='".$_GET["campus"]."'");
+                foreach($inscription as $key => $vvallno)
+                {
+                    $sommenote=0;
+                    $sommecredi=0;
+                    foreach($rolecam as $key => $rolev)
+                    {}
+                    if($rolev->libelletype=="universite")
+                    {
+                    // $user=$DB->get_records("user");
+                    // foreach($user as $key)
+                    // {
+                        $sqlli="SELECT note2,credit,note3,idetudiant FROM {coursspecialite} sp,{courssemestre} cs,{affecterprof} af,{listenote} li,{cycle} cy,{specialite} spe,{semestre} se
+                            WHERE sp.id=cs.idcoursspecialite AND af.idcourssemestre=cs.id AND li.idaffecterprof=af.id AND sp.idspecialite=spe.id
+                            AND sp.idcycle=cy.id AND cs.idsemestre=se.id AND li.idetudiant='".$vvallno->idetudiant."' AND cy.id='".$_GET["cycle"]."'";
+                
+                $gromoy=$DB->get_records_sql($sqlli);
+                    foreach($gromoy as $key =>$keynote)
+                    {   
+                    
+                    
+                    if($keynote->idetudiant==$vvallno->idetudiant)  
+                    {
+                        
+                            $pourcent=$DB->get_records("configurationnote",array("idcampus"=>$_GET["campus"]));
+                    
+                            foreach($pourcent as $key =>$pou)
+                            {}
+                            $sommenote=$sommenote+(($keynote->note2*($pou->cc/100))*$keynote->credit+($keynote->note3*($pou->normal/100))*$keynote->credit);
+                            $sommecredi=$sommecredi+$keynote->credit;
+                            // $nobret++;
+                        
+                        $moyennenotecy=$sommenote/$sommecredi;
+                        $vvallno->moyenne_semestre=round($moyennenotecy,2);
+                        
+                        
+                        // var_dump($vvallno->idetudiant,$moyennenotecy);
+                    }
+                    
+                }
+            }
+            $moyennecycfil=$moyennecycfil+$vvallno->moyenne_semestre;
+            // var_dump($moyennespe);
+        }
+
+            // die;
+                
+                // foreach($hhfiliere as $key=>$mofil )
+                // {}
+                if($filll->libellespecialite!=null)
+                {
+                    
+                    foreach($counttt as $mm){
+                            if($mm->coutet!=0)
+                            {
+
+                                $moyennecycfil=round($moyennecycfil/$mm->coutet,2);
+
+                                // var_dump($mm->coutet);
+                           }
+                        }
+                
+                        $noteefilierecy[]=[
+                            "libelle"=>$keyy->libellespecialite,
+                            "moyenne"=>$moyennecycfil
+                        ];
+                }
+            }
+}
+// die;
+//   $cyclefiliere=$DB->get_records_sql("SELECT * FROM {cycle} WHERE idcampus='".$_GET["campus"]."'");
+
+//   foreach($cyclefiliere as $key => $valcy)
+//   {
+//     $sqlnotecyclefil="SELECT
+//     C.libellecycle AS libellecycle,
+//     AVG((LN.note2 * 0.5 + LN.note3 * 0.5)) AS moyenne
+//       FROM
+//           {listenote} LN
+//       JOIN
+//           {affecterprof} AP ON LN.idaffecterprof = AP.id
+//       JOIN
+//           {user} U ON AP.idprof = U.id
+//       JOIN
+//           {courssemestre} CS ON AP.idcourssemestre = CS.id
+//       JOIN
+//           {coursspecialite} CSp ON CS.idcoursspecialite = CSp.id
+//       JOIN
+//           {cycle} C ON CSp.idcycle = C.id
+//       JOIN
+//           {specialite} S ON CSp.idspecialite = S.id
+//       JOIN
+//           {filiere} F ON S.idfiliere = F.id
+//       WHERE C.id='".$valcy->id."' AND F.id='".$_GET["filiere"]."'
+// ";
+// $notecyclefil=$DB->get_records_sql($sqlnotecyclefil);
+// // var_dump($notecyclefil);
+//     foreach($notecyclefil as $key =>$bppp)
+//     {
+//         if($bppp->libellecycle!=null || $bppp->moyenne!=0)
+//         {
+
+//             $tanoteefilcy=[
+//                 "libelle"=>$bppp->libellecycle,
+//                 "moyenne"=>$bppp->moyenne
+//             ];
+//             // var_dump($tanoteefilcy);
+//         }
+//     }
+//   }
 //   die;
 
   //connaissant la filiere la specilite le cycle
@@ -977,15 +1252,40 @@ foreach($countuser as $key => $count)
             {specialite} S ON CSp.idspecialite = S.id
         JOIN
             {filiere} F ON S.idfiliere = F.id
-        WHERE C.id=2 AND F.id=5 AND S.id=6 AND LN.idetudiant='".$count->id."'
+        WHERE C.id='".$_GET["cycle"]."' AND F.id='".$_GET["filiere"]."' AND S.id='".$_GET["specialite"]."' AND LN.idetudiant='".$count->id."'
         
   ";
-  $notecycspelefil=$DB->get_records_sql($sqlnotecyclefilspec);
+//   $notecycspelefil=$DB->get_records_sql($sqlnotecyclefilspec);
 //   var_dump($notecycspelefil);
+    // foreach($notecycspelefil as $key =>$bppp)
+    // {
+    //     if($bppp->libellecycle!=null || $bppp->moyenne!=0)
+    //     {
+
+    //         $tanoteefilcy=[
+    //             "libelle"=>$bppp->libellecycle,
+    //             "moyenne"=>$bppp->moyenne
+    //         ];
+    //         // var_dump($tanoteefilcy);
+    //     }
+    // }
 
 }
 // die;
+//verifiertypecampus
+$vericcc=$DB->get_records("campus",array("idtypecampus"=>4,"id"=>$_GET["campus"]));
+
+if($vericcc)
+{
+   
+}else
+{
+ $htmlcyetdet="<div><canvas id='diagrammeCirculairecydetcyetudet'></canvas></div>";
+}
+// var_dump(json_encode($tanoteefiliere));die;
+$semestre=$DB->get_records("semestre");
 $templatecontext = (object)[
+    'htmlcyetdet'=>$htmlcyetdet,
     'anneee'=>array_values($annee),
     'roote'=>$CFG->wwwroot,
     'specialite1' => array_values($specialite),
@@ -1045,6 +1345,28 @@ $templatecontext = (object)[
 
     'tarfilieresomeagecysp'=>json_encode($tarfilieresomeagecysp),
     'tarfilierecountagecysp'=>json_encode($tarfilierecountagecysp),
+
+    //Note
+    "tanoteefiliere"=>json_encode($tanoteefiliere),
+    "tanoteefilierespec"=>json_encode($tanoteefilierespec),
+    "noteefilierecy"=>json_encode($noteefilierecy),
+
+    //$_GET
+    "idca"=>$_GET["campus"],
+    "idsp"=>$_GET["specialite"],
+    "idcy"=>$_GET["cycle"],
+    "idan"=>$_GET["annee"],
+    "idge"=>$_GET["gender"],
+    "idfi"=>$_GET["filiere"],
+    "idsem"=>$_GET["semestre"],
+
+    //lien
+    "listevers"=>new powereduc_url('/local/powerschool/listeversements.php'),
+    "listenombre"=>new powereduc_url('/local/powerschool/listenombreapp.php'),
+    "listenote"=>new powereduc_url('/local/powerschool/listeetudmoyem.php'),
+
+    //semestre
+    'semestre'=>array_values($semestre)
 ];
 
 

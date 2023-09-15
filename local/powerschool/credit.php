@@ -65,7 +65,22 @@ echo $OUTPUT->header();
 // echo $OUTPUT->render_from_template('local_powerschool/navbarconfiguration', $menumini);
 // echo'<div style="margin-top:35px"></div>';
 // echo $OUTPUT->render_from_template('local_powerschool/campustou', $campuss);
-$mform->display();
+
+$vericam=$DB->get_records_sql("SELECT * FROM {campus} c,{typecampus} t WHERE c.idtypecampus=t.id AND c.id='".$_GET["idca"]."'");
+
+foreach($vericam as $key)
+{}
+if($key->libelletype=="universite")
+{
+
+    $mform->display();
+}else
+{
+    \core\notification::add('Votre n\'est autorisé pour cette partie', \core\output\notification::NOTIFY_ERROR);
+
+            redirect($CFG->wwwroot . '/local/powerschool/coursspecialite.php?idca='.$_GET["idca"].'');
+       
+}
 
 
 // echo $OUTPUT->render_from_template('local_powerschool/coursspecialite', $templatecontext);

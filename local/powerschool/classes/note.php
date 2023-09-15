@@ -36,6 +36,44 @@ class note extends powereducform {
         global $CFG;
         
         global $USER,$DB;
+        $tarspecialcat=array();
+        $camp=$DB->get_records("campus",array("id"=>$_GET["idca"]));
+        foreach ($camp as $key => $value) {
+            # code...
+        }
+        $categ=$DB->get_records("course_categories",array("name"=>$value->libellecampus));
+        foreach ($categ as $key => $value1categ) {
+            # code...
+        }
+        // $filiere = $DB->get_records('filiere', array("idcampus"=>$_GET["idca"]));
+        
+        $catfill=$DB->get_records_sql("SELECT * FROM {course_categories} WHERE depth=2");
+        $catspecia=$DB->get_records_sql("SELECT * FROM {course_categories} WHERE depth=3");
+        foreach($catfill as $key => $valfil)
+        {
+            $fff=explode("/",$valfil->path);
+            $idca=array_search($value1categ->id,$fff);
+          if($idca!==false)
+          {
+            foreach($catspecia as $key => $vallssp)
+            {
+                $sss=explode("/",$vallssp->path);
+                $idfill=array_search($valfil->id,$sss);
+                if($idfill!==false)
+                {
+        
+                    // var_dump($vallssp->name);
+                    array_push($tarspecialcat,$vallssp->name);
+                }
+            }
+            
+          }
+        }
+        $stringspecialitecat=implode("','",$tarspecialcat);
+        // die;
+        
+        $sql8 = "SELECT s.id,libellespecialite,libellefiliere,abreviationspecialite FROM {filiere} f, {specialite} s WHERE s.idfiliere = f.id AND idcampus='".$_GET["idca"]."' AND libellespecialite IN ('$stringspecialitecat')";
+        
         $campus = new campus();
         $semestre = $anneescolaire = $ecole = $specialite = $cycle =  array();
         // $sql1 = "SELECT * FROM {courssemestre} cs,{affecterprof} af,{semestre} se WHERE se.id=cs.idsemestre AND af.idcourssemestre=cs.id AND idprof='".$USER->id."'";
@@ -45,14 +83,15 @@ class note extends powereducform {
         // $sql4 = "SELECT sp.id as ids,libellespecialite FROM {specialite} sp,{affecterprof} af,{courssemestre} cs,{coursspecialite} csp WHERE csp.idspecialite=sp.id AND cs.idcoursspecialite=csp.id AND cs.id=af.idcourssemestre AND idprof='".$USER->id."'";
         $sql4 = "SELECT * FROM {specialite}";
         // $sql5 = "SELECT * FROM {cycle} cy,{affecterprof} af,{courssemestre} cs,{coursspecialite} csp WHERE cy.id=csp.idcycle AND cs.idcoursspecialite=csp.id AND cs.id=af.idcourssemestre AND idprof='".$USER->id."'";
-        $sql5 = "SELECT * FROM {cycle} ";
+        $sql5 = "SELECT id,libellecycle FROM {cycle} WHERE idcampus='".$_GET["idca"]."'";
 
         $semestre = $campus->select($sql1);
         $anneescolaire = $campus->select($sql2);
         $ecole = $campus->select($sql3);
-        $specialite = $DB->get_recordset_sql($sql4);
+        $specialite = $DB->get_recordset_sql($sql8);
         $cycle = $campus->select($sql5);
-        
+        // $salle=$DB->get_records_sql("SELECT id,numerosalle FROM {salle} WHERE idcampus='".$_GET["idca"]."' AND numerosalle IN (SELECT DISTINCT name FROM {groups})");        
+        $salle=$DB->get_records_sql("SELECT id,numerosalle FROM {salle} WHERE idcampus='".$_GET["idca"]."'");        
 
 
         $mform = $this->_form; // Don't forget the underscore!
@@ -88,9 +127,13 @@ class note extends powereducform {
         {
             $selectcycle[$key] = $val->libellecycle;
         }
+        foreach ($salle as $key => $val)
+        {
+            $selectsalle[$key] = $val->numerosalle;
+        }
         // var_dump( $campus->selectcampus($sql)); 
         // die;
-        $mform->addElement('select', 'idsemestre', 'Semestre', $selectetudiant ); // Add elements to your form
+        $mform->addElement('select', 'idsemestre', 'Partie de Année Scolaire', $selectetudiant ); // Add elements to your form
         $mform->setType('idsemestre', PARAM_TEXT);                   //Set type of element
         $mform->addRule('idsemestre', 'Choix du Cours', 'required', null, 'client');
         $mform->addHelpButton('idsemestre', 'cours');
@@ -101,11 +144,11 @@ class note extends powereducform {
         $mform->addRule('idanneescolaire', 'Choix de l annee scolaire', 'required', null, 'client');
         $mform->addHelpButton('idanneescolaire', 'specialite');
 
-        $mform->addElement('select', 'idcampus', 'Campus', $selectcampus ); // Add elements to your form
-        $mform->setType('idcampus', PARAM_TEXT);                   //Set type of element
-        $mform->setDefault('idcampus', '');        //Default value
-        $mform->addRule('idcampus', 'Choix du campus', 'required', null, 'client');
-        $mform->addHelpButton('idcampus', 'specialite');
+        $mform->addElement('select', 'salle', 'Salle', $selectsalle ); // Add elements to your form
+        $mform->setType('salle', PARAM_TEXT);                   //Set type of element
+        $mform->setDefault('salle', '');        //Default value
+        $mform->addRule('salle', 'Choix du campus', 'required', null, 'client');
+        $mform->addHelpButton('salle', 'Salle');
 
         $mform->addElement('select', 'idspecialite', 'Specialite', $selectspecialite ); // Add elements to your form
         $mform->setType('idspecialite', PARAM_TEXT);                   //Set type of element
@@ -121,6 +164,10 @@ class note extends powereducform {
 
         //informations sur le parent
       
+
+        $mform->addElement('hidden', 'idcampus'); // Add elements to your form
+        $mform->setType('idcampus', PARAM_INT);                   //Set type of element
+        $mform->setDefault('idcampus', $_GET["idca"]);        //Default value
 
         $mform->addElement('hidden', 'usermodified'); // Add elements to your form
         $mform->setType('usermodified', PARAM_INT);                   //Set type of element

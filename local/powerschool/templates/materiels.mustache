@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="table card mt-2 mb-2">
+        <table class="table">
+
+            <tr>
+                <th>libelle</th>
+                <th>Quantité</th>
+                <th>Prix unitaire</th>
+                <th>Somme Total</th>
+                <th>Information sur la sortie du materiel</th>
+                <th>Actions</th>
+            </tr>
+            {{#materiels}}
+            <tr>
+                <td>{{libellemate}}</td>
+                <td>{{quantite}}</td>
+                <td>{{prixuni}}</td>
+                <td>{{sommetota}}</td>
+                <td>{{description}}</td>
+                <td>
+                        {{! <input type="button" class="btn btn-primary local_annee_delete_button" value="Modifier" onclick="location.href='{{materielsmod}}<!--?id={{id}}'"> }}-->
+                        <input type="button" class="btn btn-danger local_annee_delete_button" value="Supprimer" action="affectercours" onclick="location.href='{{materielssup}}?id={{id}}'">
+                </td>
+            </tr>
+            {{/materiels}}
+            <tr>
+               {{#somme}}
+                <td colspan=6>Total des dépenses: {{sommateriel}}</td>
+               {{/somme}}
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

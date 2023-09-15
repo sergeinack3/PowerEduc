@@ -62,6 +62,9 @@ $recordtoinsert = new stdClass();
 // var_dump($recordtoinsert);
 // die;
 // var_dump($_POST["idcycle"]);die;
+$datesea=$_POST["date_naissance"];
+$date_naissance= strtotime($datesea["day"]."-".$datesea["month"]."-".$datesea["year"]);
+
 if (!$mform->veri_insc($_POST["idetudiant"])) {
     # code...
     $recordtoinsert->idanneescolaire=$_POST["idanneescolaire"];
@@ -73,12 +76,14 @@ if (!$mform->veri_insc($_POST["idetudiant"])) {
     $recordtoinsert->nomsparent=$_POST["nomsparent"];
     $recordtoinsert->telparent=$_POST["telparent"];
     $recordtoinsert->emailparent=$_POST["emailparent"];
+    $recordtoinsert->gender=$_POST["gender"];
+    $recordtoinsert->date_naissance=$date_naissance;
     $recordtoinsert->professionparent=$_POST["professionparent"];
     $recordtoinsert->usermodified=$_POST["usermodified"];
     $recordtoinsert->timecreated=$_POST["timecreated"];
     $recordtoinsert->timemodified=$_POST["timemodified"];
 
-    // var_dump($recordtoinsert);die;
+    // var_dump($date_naissance);die;
     $DB->insert_record('inscription', $recordtoinsert);
     redirect($CFG->wwwroot . '/local/powerschool/inscription.php?idca='.$_POST["idcampus"].'', 'Enregistrement effectué');
     exit;
@@ -99,8 +104,8 @@ if (!$mform->veri_insc($_POST["idetudiant"])) {
 
 if($_GET['id'] && $_GET['action']='affectercours') {
 
-$veriaff=$DB->get_records_sql("SELECT * FROM {coursspecialite} cs,{course} c,{courssemestre} css,{affecterprof} af
-                               WHERE cs.idspecialite='".$_GET["idsp"]."' AND cs.idcycle='".$_GET["idcy"]."' 
+$veriaff=$DB->get_records_sql("SELECT c.id as coursid,c.fullname,en.id as enroleid FROM {coursspecialite} cs,{course} c,{courssemestre} css,{affecterprof} af,{enrol} en
+                               WHERE cs.idspecialite='".$_GET["idsp"]."' AND cs.idcycle='".$_GET["idcy"]."' AND en.courseid=c.id
                                AND cs.idcourses=c.id AND css.idcoursspecialite=cs.id AND af.idcourssemestre=css.id");
 $veripaie=$DB->get_records("paiement",array("idinscription"=>$_GET['id']));
 
@@ -121,34 +126,36 @@ $veripaie=$DB->get_records("paiement",array("idinscription"=>$_GET['id']));
                 
                 
                 //Affectation des cours de la specialite a l'etudiant
-                
-                $sql_cours = "SELECT c.id, c.fullname, e.id as enroleid, e.enrol,i.idspecialite,i.idcycle FROM {inscription} i, {user} u, {specialite} s, {coursspecialite} cs, {course} c, {enrol} e 
-                WHERE i.idetudiant=u.id AND i.idspecialite=s.id AND cs.idspecialite=s.id AND cs.idcourses=c.id AND e.courseid = c.id AND e.enrol='manual' AND i.idetudiant = $idetudiant";
+                $sql_cours = "SELECT c.id as courseid, c.fullname, e.id as enroleid, e.enrol,cs.idspecialite,cs.idcycle FROM 
+                {inscription} i, {user} u, {specialite} s, {coursspecialite} cs, {course} c, {enrol} e WHERE i.idetudiant=u.id 
+                AND i.idspecialite=s.id AND cs.idspecialite=s.id AND cs.idcourses=c.id AND e.courseid = c.id AND e.enrol='manual' 
+                AND i.idetudiant = $idetudiant AND cs.idspecialite='".$_GET["idsp"]."' AND cs.idcycle='".$_GET["idcy"]."' AND c.id=cs.idcourses";
 
 
-            // var_dump($sql_get_inscrip);
-            // var_dump($req);
-            // var_dump($sql_cours);
+// var_dump($sql_get_inscrip);
+// var_dump($req);
+// var_dump($veriaff);
 
-            // die;
-            $tarcon=array();
+// die;
+$tarcon=array();
 
-                    // $spc=$DB->get_records_sql('SELECT * FROM {course} WHERE id="'.$_POST["cours"].'"');
-                    // $tarcon=array();
-                    // $cont=$DB->get_records_sql("SELECT * FROM {context} WHERE contextlevel=50");
-                    // foreach ($cont as $key => $value4) {
-                        //     array_push($tarcon,$value4->id);
-                        //    }
-                        
-                        $recuperer_cours=array();
-
-            $recuperer_cours = $DB->get_records_sql($sql_cours);
+// $spc=$DB->get_records_sql('SELECT * FROM {course} WHERE id="'.$_POST["cours"].'"');
+// $tarcon=array();
+// $cont=$DB->get_records_sql("SELECT * FROM {context} WHERE contextlevel=50");
+// foreach ($cont as $key => $value4) {
+    //     array_push($tarcon,$value4->id);
+    //    }
+    
+    $recuperer_cours=array();
+    
+    $recuperer_cours = $DB->get_records_sql($sql_cours);
+    // die;
 
             // var_dump(  $recuperer_cours );
             // die;
 
             foreach ($recuperer_cours as $key=>$val){
-                $cont=$DB->get_records_sql("SELECT * FROM {context} WHERE contextlevel=50 AND instanceid='".$val->id."'");
+                $cont=$DB->get_records_sql("SELECT * FROM {context} WHERE contextlevel=50 AND instanceid='".$val->courseid."'");
                 foreach ($cont as $key => $value4) {
                     // array_push($tarcon,$value4->id);
                     // var_dump($value4->id,$val->fullname);die;
@@ -159,14 +166,14 @@ $veripaie=$DB->get_records("paiement",array("idinscription"=>$_GET['id']));
             if (!$verif) {
                 # code...
             
-                $sql_enrol = "INSERT INTO {user_enrolments} (`status`, `enrolid`, `userid`, `timestart`, `timeend`, `modifierid`, `timecreated`, `timemodified`) 
-                            VALUES ('0',$val->enroleid,$idetudiant,'0','0',$USER->id,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)";
+                // $sql_enrol = "INSERT INTO {user_enrolments} (`status`, `enrolid`, `userid`, `timestart`, `timeend`, `modifierid`, `timecreated`, `timemodified`) 
+                //             VALUES ('0',$val->enroleid,$idetudiant,'0','0',$USER->id,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)";
                 $sql_enrol = [
                 
                     "status"=>0,
                     "enrolid"=> $val->enroleid,
                     "userid"=>$idetudiant,
-                    "timestart"=>0,
+                    "timestart"=>time(),
                     "timeend"=>0,
                     "modifierid"=>$USER->id,
                     "timecreated"=>time(),
@@ -182,7 +189,7 @@ $veripaie=$DB->get_records("paiement",array("idinscription"=>$_GET['id']));
                 ];
                     // var_dump($recuperer_cours);die;
                     
-                    // var_dump($sql_enrol);
+                    // var_dump($val->fullname);
                     // die;
                     
                     $DB->insert_record('user_enrolments', $sql_enrol);
@@ -194,7 +201,7 @@ $veripaie=$DB->get_records("paiement",array("idinscription"=>$_GET['id']));
 
 
             }
-                    
+            //  die;       
             $sql="SELECT * FROM {coursspecialite} WHERE idspecialite='".$val->idspecialite."' AND idcycle='".$val->idcycle."'";
             $listenote=$DB->get_records_sql($sql);
             foreach ($listenote as $key => $value) {
@@ -238,14 +245,14 @@ $veripaie=$DB->get_records("paiement",array("idinscription"=>$_GET['id']));
 
                     redirect($CFG->wwwroot . '/local/powerschool/listeetudiant.php?campus='.$_GET["idca"].'&specialite='.$_GET["idsp"].'&cycle='.$_GET["idcy"].'&filiere='.$_GET["idfi"].'&annee='.$_GET["idan"].'', 'les cours ont été bien affectés');
                 }
-                    redirect($CFG->wwwroot . '/local/powerschool/inscription.php', 'les cours ont été bien affectés');
+                    redirect($CFG->wwwroot . '/local/powerschool/inscription.php?idca='.$_GET["idca"].'', 'les cours ont été bien affectés');
         }else{
             if($_GET["liste"]=="listeet"){
                 \core\notification::add('Affecter au moins un cours à un enseignants', \core\output\notification::NOTIFY_ERROR);
                 redirect($CFG->wwwroot . '/local/powerschool/listeetudiant.php?campus='.$_GET["idca"].'&specialite='.$_GET["idsp"].'&cycle='.$_GET["idcy"].'&filiere='.$_GET["idfi"].'&annee='.$_GET["idan"].'');
             }   
             \core\notification::add('Affecter au moins un cours à un enseignants', \core\output\notification::NOTIFY_ERROR);
-                redirect($CFG->wwwroot . '/local/powerschool/inscription.php');
+                redirect($CFG->wwwroot . '/local/powerschool/inscription.php?idca='.$_GET["idca"].'');
         } 
     }else{
         if($_GET["liste"]=="listeet"){
@@ -253,7 +260,7 @@ $veripaie=$DB->get_records("paiement",array("idinscription"=>$_GET['id']));
             redirect($CFG->wwwroot . '/local/powerschool/listeetudiant.php?campus='.$_GET["idca"].'&specialite='.$_GET["idsp"].'&cycle='.$_GET["idcy"].'&filiere='.$_GET["idfi"].'&annee='.$_GET["idan"].'');
         }   
         \core\notification::add("Cet apprenant n'a pas encore commercé le paiement", \core\output\notification::NOTIFY_ERROR);
-            redirect($CFG->wwwroot . '/local/powerschool/inscription.php');
+            redirect($CFG->wwwroot . '/local/powerschool/inscription.php?idca='.$_GET["idca"].'');
     }   
 }
 

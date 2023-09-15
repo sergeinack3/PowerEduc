@@ -76,7 +76,7 @@ $recordtoinsert = $fromform;
 
 if($_GET['id']) {
 
-    $mform->supp_periode($_GET['id']);
+    $DB->delete_records("configurationnote",array("id"=>$_GET['id']));
     redirect($CFG->wwwroot . '/local/powerschool/configurationnote.php', 'Information Bien supprimée');
         
 }

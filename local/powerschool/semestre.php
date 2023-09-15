@@ -80,7 +80,7 @@ $recordtoinsert = $fromform;
                 // var_dump(date("Y-m-d",$value->datefinsemestre),date("Y-m-d",$value1->datefin),date("Y-m-d",$fromform->datedebutsemestre));
                 // die;
                 
-                if(($value->datefinsemestre<$fromform->datedebutsemestre && $fromform->datedebutsemestre<$value1->datefin))
+                if(($value->datefinsemestre<=$fromform->datedebutsemestre && $fromform->datedebutsemestre<=$value1->datefin))
                 {  
                     
                     $DB->insert_record('semestre', $recordtoinsert);

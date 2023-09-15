@@ -155,7 +155,7 @@ class inscription extends powereducform {
         $mform->addElement('hidden','idcampus');
         $mform->setDefault('idcampus',$_GET["idca"]);
 
-        $mform->addElement('select', 'idspecialite', 'Specialite', $selectspecialite ); // Add elements to your form
+        $mform->addElement('select', 'idspecialite', 'Specialite/Classes', $selectspecialite ); // Add elements to your form
         $mform->setType('idspecialite', PARAM_TEXT);                   //Set type of element
         $mform->setDefault('idspecialite', '');        //Default value
         $mform->addRule('idspecialite', 'Choix de la specialite', 'required', null, 'client');
@@ -167,7 +167,7 @@ class inscription extends powereducform {
         $mform->addRule('idcycle', 'Choix du cycle', 'required', null, 'client');
         $mform->addHelpButton('idcycle', 'specialite');
        
-        $mform->addElement('select', 'gender', 'gender', $selectgender ); // Add elements to your form
+        $mform->addElement('select', 'gender', 'Sex', $selectgender ); // Add elements to your form
         $mform->setType('gender', PARAM_TEXT);                   //Set type of element
         $mform->setDefault('gender', '');        //Default value
         $mform->addRule('gender', 'Choix du gender', 'required', null, 'client');

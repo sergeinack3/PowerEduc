@@ -337,6 +337,7 @@
         <FIELD NAME="usermodified" TYPE="int" LENGTH="20" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="20" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="timemodified" TYPE="int" LENGTH="20" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="idsalle" TYPE="int" LENGTH="20" NOTNULL="false" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
@@ -346,6 +347,7 @@
         <KEY NAME="idcampus" TYPE="foreign" FIELDS="idcampus" REFTABLE="campus" REFFIELDS="id"/>
         <KEY NAME="idspecialite" TYPE="foreign" FIELDS="idspecialite" REFTABLE="specialite" REFFIELDS="id"/>
         <KEY NAME="idcycle" TYPE="foreign" FIELDS="idcycle" REFTABLE="cycle" REFFIELDS="id"/>
+        <KEY NAME="idsalle" TYPE="foreign" FIELDS="idsalle" REFTABLE="salle" REFFIELDS="id"/>
       </KEYS>
     </TABLE>
     <TABLE NAME="paiement" COMMENT="Default comment for the table, please edit me">
@@ -473,6 +475,28 @@
         <KEY NAME="idcourses" TYPE="foreign" FIELDS="idcourses" REFTABLE="course" REFFIELDS="id"/>
         <KEY NAME="idprof" TYPE="foreign" FIELDS="idprof" REFTABLE="user" REFFIELDS="id"/>
         <KEY NAME="idetudiant" TYPE="foreign" FIELDS="idetudiant" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="idanneescolaire" TYPE="foreign" FIELDS="idanneescolaire" REFTABLE="anneescolaire" REFFIELDS="id"/>
+      </KEYS>
+    </TABLE>
+
+    <TABLE NAME="materiels" COMMENT="Default comment for the table, please edit me">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="libellemate" TYPE="char" LENGTH="50" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="quantite" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="prixuni" TYPE="float" LENGTH="20" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="sommetota" TYPE="float" LENGTH="20" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="description" TYPE="char" LENGTH="300" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="idcampus" TYPE="int" LENGTH="20" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="usermodified" TYPE="int" LENGTH="20" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="idanneescolaire" TYPE="int" LENGTH="20" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="idcampus" TYPE="foreign" FIELDS="idcampus" REFTABLE="campus" REFFIELDS="id"/>
+        <KEY NAME="usermodified" TYPE="foreign" FIELDS="usermodified" REFTABLE="user" REFFIELDS="id"/>
         <KEY NAME="idanneescolaire" TYPE="foreign" FIELDS="idanneescolaire" REFTABLE="anneescolaire" REFFIELDS="id"/>
       </KEYS>
     </TABLE>

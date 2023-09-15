@@ -39,9 +39,9 @@ $string['modepaiement'] = 'Modes de Paiement EN';
 $string['seance'] = 'Seance';
 $string['statistique'] = 'Statistique EN';
 $string['inscription'] = 'Inscription';
-$string['semestre'] = 'Configuration des semestres';
+$string['semestre'] = 'Configuration des differentes parties';
 $string['accueilp'] = 'Accueil de Powerschool';
-$string['courssemestre'] = 'Configuration des cours par semestres';
+$string['courssemestre'] = 'Configuration des cours par differentes de année';
 $string['coursspecialite'] = 'Configuration des cours par specialités';
 $string['configurationminini'] = 'Configuration minimal EN';
 $string['programme'] = 'Programme EN';
@@ -49,16 +49,18 @@ $string['bulletin'] = 'Bulletin EN';
 $string['tranche'] = 'Tranche EN';
 $string['affecterprof'] = 'Affecter le cours à un professeur EN';
 $string['configurerpaie'] = 'Configuration des differentes Tranches paiement EN';
-$string['sallelere'] = 'retirer les etudiants dans une classe EN';
-$string['sallele'] = 'affecter les etudiants dans une classe EN';
+$string['sallelere'] = 'retirer les apprenants dans une classe EN';
+$string['sallele'] = 'affecter les apprenants dans une classe EN';
 $string['message'] = 'Personnalisé votre message EN';
 $string['confignote'] = 'Configuration des notes EN';
 $string['pourcentage'] = 'Pourcentage EN';
 $string['indexprogramme'] = 'Calendrier de programme EN';
 $string['paiement'] = 'paiement EN';
-$string['listeetudiant'] = 'Liste des etudiants EN';
+$string['listeetudiant'] = 'Liste des Apprenants EN';
 $string['logo'] = 'Logo EN';
 $string['absenceetu'] = 'Gérer les absences des Apprenants EN';
+$string['materiel'] = 'Materiel EN';
+$string['groupsalle'] = 'Groupe de salle EN';
 
 
 

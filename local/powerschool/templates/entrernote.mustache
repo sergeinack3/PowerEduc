@@ -5,14 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<div style="margin-top:5rem">
- <form action='{{ajou}}?id={{idaff}}&idbu={{idbu}}' method="post">
+
+<div class="row col-12 mt-5">
+    <form method="POST" action="{{ajou}}?id={{idaff}}&idbu={{idbu}}&notetest=test&idsa={{idsa}}&idcour={{idcour}}&idsp={{idsp}}&idcy={{idcy}}&idsem={{idsem}}&idca={{idca}}&idan={{idan}}&libelcou={{libelcou}}" class="row col-12">
+        <div class="col-3">
+            <select class="form-control" name="test">
+              <option value="">Choisir un Test</option>
+              {{#test}}
+              <option value="{{id}}">{{name}}</option>
+              {{/test}}
+          </select>
+        </div>
+        <div class="col-3">
+            <select class="form-control" name="lesson">
+              <option value="">Choisir une Leçon</option>
+              {{#lesson}}
+              <option value="{{id}}">{{name}}</option>
+              {{/lesson}}
+          </select>
+        </div>
+        <div class="col-3">
+            <select class="form-control" name="normalcc">
+              <option value="">Choisir le type de note</option>
+              <option value="cc">Controle continu</option>
+              <option value="normal">Note/normal</option>
+          </select>
+        </div>
+             <input type="submit" class="btn btn-info local_annee_delete_button" value="Note générale">
+    </form>
+      {{! <div class="col-6 mt-5">
+             <label>Utilisez la moyenne générale</label>
+          <form method="POST" action="">
+            <div class="col-4">
+                <select class="form-control">
+                  <option value="">Choisir le type de note</option>
+                  <option value="cc">Controle continu</option>
+                  <option value="normal">Note/normal</option>
+              </select>
+            </div>
+             <input type="submit" class="btn btn-info local_annee_delete_button mt-3" value="Note générale">
+          </form>
+      </div>
+
+</div> }}
+<div style="margin-top:1rem">
+ <form action='{{ajou}}?id={{idaff}}&idbu={{idbu}}&idsa={{idsa}}&idcour={{idcour}}&idsp={{idsp}}&idcy={{idcy}}&idsem={{idsem}}&idca={{idca}}&idan={{idan}}&libelcou={{libelcou}}' method="post">
     <div class="mt-5">
       <div>
+      <label> Selectionner d'abord le cours</label>
         <select class="form-control col-3" onchange="if (this.value) location.href=this.value;">
              <option value="">Choisir un cours</option>
             {{#cours}}
-            <option value="{{coursid}}?idcour={{idcourse}}&idsp={{idsp}}&idcy={{idcy}}&idsem={{idsem}}&idca={{idca}}&idan={{idan}}&libelcou={{fullname}}&idbu={{idbu}}">{{fullname}}</option>
+            <option value="{{coursid}}?idcour={{idcourse}}&idsp={{idsp}}&idcy={{idcy}}&idsem={{idsem}}&idca={{idca}}&idan={{idan}}&libelcou={{fullname}}&idbu={{idbu}}&idsa={{idsa}}">{{fullname}}</option>
             {{/cours}}
         </select>
        </div>

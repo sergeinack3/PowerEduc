@@ -29,6 +29,14 @@ if(!empty($_POST["salle"])&&!empty($_POST["etudiantsid"]))
     
     $ff=$DB->update_record("salleele",$salleete);
     //  var_dump($ff);die;
+
+    $salet=$DB->get_records("salle",array("id"=>$_POST["salle"]));
+    foreach($salet as $key =>$ppp)
+    {}
+    $groupsal=$DB->get_records("groups",array("name"=>$ppp->numerosalle));
+    foreach($groupsal as $key)
+    {}
+    $DB->delete_records("groups_members",array("groupid"=>$key->id,"userid"=>$etudiantsidd[$i]));
 }
     // }
 

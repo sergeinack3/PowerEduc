@@ -80,6 +80,8 @@ $menumini = (object)[
     'confinot' => new powereduc_url('/local/powerschool/configurationnote.php'),
     'logo' => new powereduc_url('/local/powerschool/logo.php'),
     'message' => new powereduc_url('/local/powerschool/message.php'),
+    'materiell' => new powereduc_url('/local/powerschool/materiels.php'),
+
 
 ];
 echo $OUTPUT->header();

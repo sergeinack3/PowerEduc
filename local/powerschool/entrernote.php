@@ -39,8 +39,8 @@ $PAGE->set_context(\context_system::instance());
 $PAGE->set_title('Entrer les '.$_GET['libelcou'].'');
 $PAGE->set_heading('Entrer notes de '.$_GET['libelcou'].'');
 
-$PAGE->navbar->add('Administration du Site',  new powereduc_url('/local/powerschool/index.php'));
-$PAGE->navbar->add(get_string('inscription', 'local_powerschool'), $managementurl);
+// $PAGE->navbar->add('Administration du Site',  new powereduc_url('/local/powerschool/index.php'));
+$PAGE->navbar->add("Entrer Note", $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 
@@ -57,7 +57,7 @@ $PAGE->navbar->add(get_string('inscription', 'local_powerschool'), $managementur
 // $inscription =$tab = array();
 
 //cours
-$sql="SELECT c.id as idcourse,fullname FROM {coursspecialite} as cs,{course} as c,{affecterprof} as af,{courssemestre} as cse WHERE cse.idcoursspecialite=cs.id AND af.idcourssemestre=cse.id AND idprof='".$USER->id."' AND c.id=cs.idcourses AND idspecialite='".$_GET["idsp"]."' AND idcycle='".$_GET["idcy"]."' AND idsemestre='".$_GET["idsem"]."'";
+$sql="SELECT c.id as idcourse,fullname FROM {coursspecialite} as cs,{course} as c,{affecterprof} as af,{courssemestre} as cse WHERE cse.idcoursspecialite=cs.id AND af.idcourssemestre=cse.id AND idprof='".$USER->id."' AND c.id=cs.idcourses AND idspecialite='".$_GET["idsp"]."' AND idcycle='".$_GET["idcy"]."' AND idsemestre='".$_GET["idsem"]."' AND af.idsalle='".$_GET["idsa"]."'";
 $cours=$DB->get_records_sql($sql);
 
 //etudiants
@@ -73,16 +73,16 @@ $sql_courspe="SELECT cs.id as idcsem FROM {coursspecialite} csp,{courssemestre} 
 $courspe = $DB->get_records_sql($sql_courspe);
 foreach ($courspe as $key => $value1) {
     
-    $sql_prof="SELECT * FROM {affecterprof} WHERE idcourssemestre='".$value1->idcsem."' AND idprof='".$USER->id."'";
+    $sql_prof="SELECT * FROM {affecterprof} WHERE idcourssemestre='".$value1->idcsem."' AND idprof='".$USER->id."' AND idsalle='".$_GET["idsa"]."'";
     $prof = $DB->get_records_sql($sql_prof);
     foreach ($prof as $key => $value2) {
         // var_dump($value2->id);
     }
 }
 
-$sql_etuu="SELECT u.id as userid, u.firstname, u.lastname,note1,note2,note3 FROM ((((({listenote} l LEFT JOIN {affecterprof} af ON l.idaffecterprof=af.id)LEFT JOIN {courssemestre} couss ON couss.id=af.idcourssemestre)
+$sql_etuu="SELECT u.id as userid, u.firstname, u.lastname,note1,note2,note3 FROM (((((({listenote} l LEFT JOIN {affecterprof} af ON l.idaffecterprof=af.id)LEFT JOIN {courssemestre} couss ON couss.id=af.idcourssemestre)
             LEFT JOIN {coursspecialite} coursspe ON coursspe.id=couss.idcoursspecialite)
-            LEFT JOIN {course} c ON c.id=coursspe.idcourses) LEFT JOIN {user} u ON u.id=l.idetudiant) WHERE af.id='".$value2->id."'";
+            LEFT JOIN {course} c ON c.id=coursspe.idcourses) LEFT JOIN {user} u ON u.id=l.idetudiant) LEFT JOIN {salleele} saa ON saa.idetudiant=u.id) WHERE af.id='".$value2->id."' AND saa.idsalle='".$_GET["idsa"]."' AND saa.etudiantpresen=1";
 $etudiants = $DB->get_records_sql($sql_etuu);
 // var_dump($etudiants);die;
 
@@ -104,9 +104,12 @@ $etudiants = $DB->get_records_sql($sql_etuu);
 
 
 // die;
-
+$test=$DB->get_records("quiz",array("course"=>$_GET["idcour"]));
+$lesson=$DB->get_records("lesson",array("course"=>$_GET["idcour"]));
 $templatecontext = (object)[
     'cours'=>array_values($cours),
+    'lesson'=>array_values($lesson),
+    'test'=>array_values($test),
     // 'notee'=>array_values($notee),
     'etudiants'=>array_values($etudiants),
     'ajoute'=> new powereduc_url('/local/powerschool/inscription.php'),
@@ -122,7 +125,8 @@ $templatecontext = (object)[
     'libelcou'=>$_GET['libelcou'],
     'idaff'=>$value2->id,
     'note'=>$_GET["note"],
-    'idbu'=>$_GET["idbu"]
+    'idbu'=>$_GET["idbu"],
+    'idsa'=>$_GET["idsa"],
     // 'imprimer' => new powereduc_url('/local/powerschool/imp.php'),
 ];
 
@@ -149,7 +153,7 @@ $menu = (object)[
 echo $OUTPUT->header();
 
 
-echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
+// echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
 // $mform->display();
 
 

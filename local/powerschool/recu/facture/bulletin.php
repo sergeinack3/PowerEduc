@@ -315,7 +315,7 @@ $html = '
                     if ("universite"===$value1->libelletype) {
                         # code...
                         $html.= '<td>'.((($item->note3*$valuepour->normal/100))+(($item->note2*($valuepour->cc)/100))).'</td>';
-                        $somp=((($item->note3*70/100))+(($item->note2*(30)/100)));
+                        $somp=((($item->note3*$valuepour->normal/100))+(($item->note2*($valuepour->cc)/100)));
                     }
 
                     if ("universite"===$value1->libelletype) {

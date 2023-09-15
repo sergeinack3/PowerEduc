@@ -87,6 +87,8 @@ $templatecontext = (object)[
     'coursspecialite' => new powereduc_url('/local/powerschool/coursspecialite.php'),
     'semestre' => new powereduc_url('/local/powerschool/semestre.php'),
     'salleele' => new powereduc_url('/local/powerschool/salleele.php'),
+    'groupe' => new powereduc_url('/local/powerschool/groupsalle.php'),
+
 ];
 
 // $menu = (object)[

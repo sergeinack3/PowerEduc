@@ -74,7 +74,7 @@ const ctx = document.getElementById('myChart');
             data: {
                 labels: age1,
                 datasets: [{
-                    label: 'Age des etudiants par filiere par année',
+                    label: 'Age des Apprenants dans une filiere par année',
                     data: agecount1,
                     backgroundColor:getRandomColor(age1.length),
                     borderColor: getRandomColor(age1.length),
@@ -102,7 +102,7 @@ const ctx = document.getElementById('myChart');
             data: {
                 labels: age2a,
                 datasets: [{
-                    label: 'Age des etudiants par filiere et specialite par année',
+                    label: 'Age des Apprenants dans une filiere et specialite par année',
                     data: agecount2,
                     backgroundColor:getRandomColor(age2a.length),
                     borderColor: getRandomColor(age2a.length),
@@ -129,7 +129,7 @@ const ctx = document.getElementById('myChart');
             data: {
                 labels: age3a,
                 datasets: [{
-                    label: 'Age des etudiants par filiere et cycle par année',
+                    label: 'Age des Apprenants dans une filiere et cycle par année',
                     data: agecount3,
                     backgroundColor:getRandomColor(age3a.length),
                     borderColor: getRandomColor(age3a.length),
@@ -156,7 +156,7 @@ const ctx = document.getElementById('myChart');
             data: {
                 labels: age4a,
                 datasets: [{
-                    label: 'Age des etudiants par filiere et specialite et cycle par année',
+                    label: 'Age des Apprenants dans une filiere et specialite et cycle par année',
                     data: agecount4,
                     backgroundColor:getRandomColor(age4a.length),
                     borderColor: getRandomColor(age4a.length),

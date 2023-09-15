@@ -7,12 +7,37 @@
     WHERE i.idanneescolaire=a.id AND saet.idetudiant=u.id AND sa.id=saet.idsalle AND etudiantpresen=1 AND i.idspecialite='".$_POST["specialite"]."' AND i.idetudiant=u.id 
     AND i.idcampus=c.id AND i.idcycle ='".$_POST["cycle"]."'";
 
+    $sallejs="";
     $cours=$DB->get_records_sql($sql);
-        echo'<option value=""><option>';
+        $sallejs='<option value=""><option>';
     foreach ($cours as $key => $value1) {
-         echo'<option value='.$value1->idsa.'>'.$value1->numerosalle.'</option>';
+         $sallejs.='<option value='.$value1->idsa.'>'.$value1->numerosalle.'</option>';
+    }
+
+    $sql1="SELECT c.id as idco,c.fullname FROM {coursspecialite},{cycle} as cy,{course} as c WHERE idspecialite='".$_POST['specialite']."' AND idcycle='".$_POST['cycle']."' AND idcourses=c.id";
+    $cours=$DB->get_records_sql($sql1);
+    // var_dump($cours);die;
+    $coursjs="";
+    $coursjs='<option value=""><option>';
+    foreach ($cours as $key => $value1) {
+          $coursjs.= '<option value='.$value1->idco.'>'.$value1->fullname.'</option>';
     }
    }
+
+   $tardeux=[
+    "sallejs"=>$sallejs,
+    "coursjs"=>$coursjs,
+   ];
+   echo json_encode($tardeux);
+//    if ($_POST["cycle"] && $_POST["specialite"]) {
+//     $sql="SELECT c.id as idco,c.fullname FROM {coursspecialite},{cycle} as cy,{course} as c WHERE idspecialite='".$_POST['specialite']."' AND idcycle='".$_POST['cycle']."' AND idcourses=c.id";
+//     $cours=$DB->get_records_sql($sql);
+//     // var_dump($cours);die;
+//     echo'<option value=""><option>';
+//     foreach ($cours as $key => $value1) {
+//           echo '<option value='.$value1->idco.'>'.$value1->fullname.'</option>';
+//     }
+//    }
 //    if ($_POST["cycle"] && $_POST["specialite"]&&$_POST["salle"]) {
 //     $sql="SELECT i.id, u.firstname, u.lastname, a.datedebut, a.datefin, c.libellecampus, c.villecampus, 
 //     s.libellespecialite, s.abreviationspecialite , cy.libellecycle, cy.nombreannee,u.id as userid

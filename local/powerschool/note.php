@@ -52,32 +52,67 @@ if ($mform->is_cancelled()) {
 
     redirect($CFG->wwwroot . '/local/powerschool/index.php', 'annuler');
 
-} else if ($_SERVER['REQUEST_METHOD'] === 'POST' && $fromform = $mform->get_data() ) {
+} else if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
 
 $recordtoinsert = new stdClass();
 
-$recordtoinsert = $fromform;
+// $recordtoinsert = $fromform;
     
 // var_dump($recordtoinsert);
 // die;
     # code...
-    $recordtoinsert->idcycle=$fromform->idcycle;
-    $recordtoinsert->idprofesseur=$USER->id;
-    $recordtoinsert->idcampus=$fromform->idcampus;
-    $recordtoinsert->idsemestre=$fromform->idsemestre;
-    $recordtoinsert->idanneescolaire=$fromform->idanneescolaire;
-    $recordtoinsert->idspecialite=$fromform->idspecialite;
-    $recordtoinsert->usermodified=$fromform->usermodified;
-    $recordtoinsert->timecreated=$fromform->timecreated;
-    $recordtoinsert->timemodified=$fromform->timemodified;
+    $verif=$DB->get_records_sql("SELECT * FROM {coursspecialite} cs,{courssemestre} css,{affecterprof} af
+                                 WHERE cs.id=css.idcoursspecialite AND css.id=af.idcourssemestre AND 
+                                 cs.idcycle='".$_POST["idcycle"]."' AND cs.idspecialite='".$_POST["idspecialite"]."'
+                                 AND css.idsemestre='".$_POST["idsemestre"]."' AND af.idprof='".$USER->id."' 
+                                 AND af.idsalle='".$_POST["salle"]."'");
+ if($verif)
+ {
+    $vetar=[
+       "idcycle"=>$_POST["idcycle"],
+       "idspecialite"=>$_POST["idspecialite"],
+       "idcampus"=>$_POST["idcampus"],
+       "idsemestre"=>$_POST["idsemestre"],
+       "idanneescolaire"=>$_POST["idanneescolaire"],
+       "idprofesseur"=>$USER->id,
+    ];
+    $verib=$DB->get_records("bulletin",$vetar);
+        if(!$verib)
+        {
 
-    // var_dump($recordtoinsert);die;
-    // $DB->insert_record('bulletin', $recordtoinsert);
-    $DB->execute("INSERT INTO mdl_bulletin VALUES(0,'".$USER->id."','".$recordtoinsert->idanneescolaire."','".$recordtoinsert->idsemestre."','".$recordtoinsert->idcampus."','".$recordtoinsert->idspecialite."','".$recordtoinsert->idcycle."','".$recordtoinsert->usermodified."','".$recordtoinsert->timecreated."','".$recordtoinsert->timemodified."')");
-    redirect($CFG->wwwroot . '/local/powerschool/note.php', 'Enregistrement effectué');
+        
+            $recordtoinsert->idcycle=$_POST["idcycle"];
+            $recordtoinsert->idprofesseur=$USER->id;
+            $recordtoinsert->idcampus=$_POST["idcampus"];
+            $recordtoinsert->idsemestre=$_POST["idsemestre"];
+            $recordtoinsert->idanneescolaire=$_POST["idanneescolaire"];
+            $recordtoinsert->idspecialite=$_POST["idspecialite"];
+            $recordtoinsert->usermodified=$_POST["usermodified"];
+            $recordtoinsert->timecreated=$_POST["timecreated"];
+            $recordtoinsert->timemodified=$_POST["timemodified"];
 
+            // var_dump($recordtoinsert,$_POST["salle"]);die;
+            // $DB->insert_record('bulletin', $recordtoinsert);
+            $DB->execute("INSERT INTO mdl_bulletin VALUES(0,'".$USER->id."','".$recordtoinsert->idanneescolaire."','".$recordtoinsert->idsemestre."','".$recordtoinsert->idcampus."','".$recordtoinsert->idspecialite."','".$recordtoinsert->idcycle."','".$recordtoinsert->usermodified."','".$recordtoinsert->timecreated."','".$recordtoinsert->timemodified."','".$_POST["salle"]."')");
+            redirect($CFG->wwwroot . '/local/powerschool/note.php?idca='.$_POST["idcampus"].'', 'Enregistrement effectué');
+        }
+        else{
 
+            \core\notification::add('Vos avez déjà fait une configuration similaire', \core\output\notification::NOTIFY_ERROR);
+           
+            redirect($CFG->wwwroot . '/local/powerschool/note.php?idca='.$_POST["idcampus"].'');
+        }
+ }
+ else
+ {
+    \core\notification::add('Soit vous n\'appartenez pas à cette Specialite/Classe <br>
+                             Soit à au cycle <br>
+                             Soit à la Salle <br>', \core\output\notification::NOTIFY_ERROR);
+
+    redirect($CFG->wwwroot . '/local/powerschool/note.php?idca='.$_POST["idcampus"].'');
+
+ }
  
    
 }
@@ -94,10 +129,10 @@ $recordtoinsert = $fromform;
 
 // $inscription =$tab = array();
 
-$sql_inscrip = "SELECT i.id as idbu,idspecialite,idcycle,i.idanneescolaire,i.idcampus,idsemestre,libellesemestre,datedebut,datefin,villecampus,libellecampus,libellespecialite,libellecycle,nombreannee
-                FROM {bulletin} i, {anneescolaire} a,{semestre} sem, {user} u, {specialite} s, {campus} c, {cycle} cy
-                WHERE i.idanneescolaire=a.id AND i.idspecialite=s.id AND i.idprofesseur=u.id 
-                AND i.idcampus=c.id AND i.idcycle = cy.id AND i.idsemestre=sem.id AND i.idprofesseur='".$USER->id."'" ;
+$sql_inscrip = "SELECT i.id as idbu,idspecialite,idcycle,i.idanneescolaire,i.idcampus,numerosalle,sa.id as idsa,idsemestre,libellesemestre,datedebut,datefin,villecampus,libellecampus,libellespecialite,libellecycle,nombreannee
+                FROM {bulletin} i, {anneescolaire} a,{semestre} sem, {user} u, {specialite} s, {campus} c, {cycle} cy,{salle} sa
+                WHERE i.idsalle=sa.id AND i.idanneescolaire=a.id AND i.idspecialite=s.id AND i.idprofesseur=u.id 
+                AND i.idcampus=c.id AND i.idcycle = cy.id AND i.idsemestre=sem.id AND i.idprofesseur='".$USER->id."' AND i.idcampus='".$_GET["idca"]."'" ;
 
 // $inscription = $DB->get_records('inscription', null, 'id');
 
@@ -129,7 +164,11 @@ foreach ($inscriptionss as $key=> $value){
 // var_dump($i);
 // var_dump($inscription);
 // die;
-
+$campus=$DB->get_records("campus");
+$campuss=(object)[
+    'campus'=>array_values($campus),
+    'confpaie'=>new powereduc_url('/local/powerschool/note.php'),
+];
 $templatecontext = (object)[
     'inscription' => array_values($inscription),
     // 'nb'=>array_values($tab),
@@ -163,6 +202,9 @@ echo $OUTPUT->header();
 
 
 // echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
+echo '<div style="margin-top:80px";><wxcvbn</div>';
+echo $OUTPUT->render_from_template('local_powerschool/campustou', $campuss);
+
 $mform->display();
 
 

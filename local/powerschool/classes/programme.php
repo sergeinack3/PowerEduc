@@ -161,13 +161,13 @@ $sql8 = "SELECT s.id,libellespecialite,libellefiliere,abreviationspecialite FROM
         $mform->addRule('idcourses', 'Choix du Cours', 'required', null, 'client');
         $mform->addHelpButton('idcourses', 'cours');
 
-        $mform->addElement('select', 'idsemestre', 'Semestre', $selectsemestre ); // Add elements to your form
+        $mform->addElement('select', 'idsemestre', 'Partie scolaire', $selectsemestre ); // Add elements to your form
         $mform->setType('idsemestre', PARAM_TEXT);                   //Set type of element
         $mform->setDefault('idsemestre', '');        //Default value
         $mform->addRule('idsemestre', 'Choix du Semestre', 'required', null, 'client');
         $mform->addHelpButton('idsemestre', 'semestre');
 
-        $mform->addElement('select', 'idspecialite', 'Specialite', $selectspecialite ); // Add elements to your form
+        $mform->addElement('select', 'idspecialite', 'Specialite/Classes', $selectspecialite ); // Add elements to your form
         $mform->setType('idspecialite', PARAM_TEXT);                   //Set type of element
         $mform->setDefault('idspecialite', '');        //Default value
         $mform->addRule('idspecialite', 'Choix de la specialite', 'required', null, 'client');
@@ -185,7 +185,7 @@ $sql8 = "SELECT s.id,libellespecialite,libellefiliere,abreviationspecialite FROM
         $mform->addRule('idsalle', 'Choix une salle', 'required', null, 'client');
         $mform->addHelpButton('idsalle', 'Salle');
     
-        $mform->addElement('select', 'idprof', 'Profession', $selectprofession ); // Add elements to your form
+        $mform->addElement('select', 'idprof', 'Enseignants', $selectprofession ); // Add elements to your form
         $mform->setType('idprof', PARAM_TEXT);                   //Set type of element
         $mform->setDefault('idprof', '');        //Default value
         $mform->addRule('idprof', 'Choix une salle', 'required', null, 'client');

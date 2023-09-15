@@ -23,39 +23,31 @@
 
     }
 }}
-<div class="d-flex flex-wrap align-items-center">
-    <!--<div class="form-group fitem">
-  
-      
-    <input type="button" class="btn btn-info align-items-center" value="suivant" onclick="location.href='{{cycle}}'"> 
-    </div>-->
-  
-</div>
-<h1>Liste des tranches</h1>
+
+{{! <h1>inscription de cours</h1> }}
 
 <div class="table card mt-2 mb-2">
         <table class="table">
             <thead>
               <tr>
                 <th scope="col">id</th>
-                <th scope="col">tranche</th>
-                <th scope="col">Actions</th>
+                {{! <th scope="col">Apprenants</th> }}
+                <th scope="col">Specialite</th>
+                <th scope="col">Cycle</th>
+                <th scope="col">Nombre etudiant</th>
               </tr>
             </thead>
-            {{#tranche}}
+            {{#etudiant}}
             <tbody>
               <tr>
                 
-                    <th scope="row">{{id}} </th>
-                    <td>{{libelletranche}} </td>
-                    <td>
-                        <input type="button" class="btn btn-primary" value="modifier" onclick="location.href='{{trancheedit}}?id={{id}}'">
-                        <input type="button" class="btn btn-danger local_annee_delete_button" value="supprimer" onclick="location.href='{{tranchesupp}}?id={{id}}'">
-                    </td>
+                    <th scope="row"> {{id}} </th>
+                    <td>{{libellespecialite}}</td>
+                    <td>{{libellecycle}} </td>
+                    <td>{{nombetu}} </td>
                 </tr>
             </tbody>
-            
-            {{/tranche}}
+            {{/etudiant}}
           </table>
 </div>
 

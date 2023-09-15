@@ -22,7 +22,7 @@
                   </select>
               </div>
               <div class="col-2">
-                  <label>Choisir Campus</label>
+                  <label>Choisir Etablissement</label>
                   <select class="form-control campus1" name="campus">
                   <option value=""></option>
                   {{#campus1}}
@@ -41,7 +41,7 @@
                   </select>
               </div>
               <div class="col-2">
-                  <label>Choisir Specialite</label>
+                  <label>Choisir Specialite/Classe</label>
                   <select class="form-control specialite1" name="specialite">
                   <option value=""></option>
                   {{#specialite1}}
@@ -56,6 +56,15 @@
                   {{#cycle1}}
                   <option value="{{id}}">{{libellecycle}}</option>
                   {{/cycle1}}
+                  </select>
+              </div>
+              <div class="col-2">
+                  <label>Choisir une partie de l'année scolaire</label>
+                  <select class="form-control semestre" name="semestre">
+                    <option></option>
+                  {{#semestre}}
+                  <option value="{{id}}">{{libellesemestre}}</option>
+                  {{/semestre}}
                   </select>
               </div>
       </div> 
@@ -612,18 +621,22 @@
    <div class="d-flex justify-content-between flex-row mb-3">
         <h2>Statistiques Global</h2>
         <div>
+	    <h6>Elle permet de savoir Somme Total par specialite dans<br> une filiere précise qu'un quand soit le niveau<h6>
             <canvas id="diagrammeCirculaire"></canvas>
         </div>
         <div>
+<h6>Elle permet de savoir le nombre Somme Total par niveau dans<br> une filiere précise qu'un quand soit la spécialité<h6>
             <canvas id="diagrammeCirculairecy"></canvas>
         </div>
    </div>
    <div class="d-flex justify-content-between flex-row mb-3">
         <h2>Statistiques Details</h2>
-        <div>
+        <div class="mt-5">
+<h6><h6>Elle permet de savoir La somme Total dans un cycle precis qu'un quand soit la spécialité<h6><h6>
             <canvas id="diagrammeCirculairedetsp"></canvas>
         </div>
-        <div>
+        <div class="mt-5">
+<h6>Specifique au primaire Elle permet de savoir Somme Total dans une spécialité/classe qu'un quand soit le Cycle<h6>
             <canvas id="diagrammeCirculairecydetcy"></canvas>
         </div>
    </div>
@@ -709,24 +722,34 @@
               </div>
       </div>-->
      <div class="d-flex justify-content-between flex-row mb-3">
+   
         <h2>Statistiques Global</h2>
-        <div>
+       <div class="mt-5">
+	    <h6>Elle permet de savoir le nombre d'apprenant par specialite dans une filiere précise pour chaque niveau<h6>
             <canvas id="diagrammeCirculaireetuspfil"></canvas>
+        
         </div>
-        <div>
+        <div class="mt-5">
+           <h6>Elle permet de savoir le nombre d'apprenant par niveau dans une filiere précise pour chaque la spécialite<h6>
             <canvas id="diagrammeCirculaireetucyfil"></canvas>
         </div>
+    
    </div>
    <div class="d-flex justify-content-between flex-row mb-3">
         <h2>Statistiques Details</h2>
-        <div>
+              
+        <div class="mt-5">
+		<h6>Specifique au primaire Elle permet de savoir le nombre d'apprenant<br> dans un cycle precis pour chaque spécialité/classe<h6>
             <canvas id="diagrammeCirculairedetspetudet"></canvas>
         </div>
-        <div>
-            <canvas id="diagrammeCirculairecydetcyetudet"></canvas>
+            
+        <div class="mt-5">
+	    <h6>Elle permet de savoir le nombre d'apprenant dans Cycle<h6>
+	   <canvas id='diagrammeCirculairecydetcyetudet'></canvas>
         </div>
+           
    </div>
-
+ 
 
    <h1>Statistique de l'age</h1>
    {{! age1gra }}
@@ -762,11 +785,54 @@
     {{! <div style="width: 800px;"><canvas id="acquisitions1"></canvas></div>
     <div style="width: 800px;"><canvas id="acquisitions2"></canvas></div> }}
      <!--<div id="map" style="height: 500px;"></div>-->
+    <h1>Statistique Sur les notes</h1>
+    
+       <input type="hidden" value="{{tanoteefiliere}}" class="tanoteefiliere">
+       <input type="hidden" value="{{tanoteefilierespec}}" class="tanoteefilierespec">
+       <input type="hidden" value="{{noteefilierecy}}" class="noteefilierecy">
+       <div class="d-flex justify-content-between flex-row mb-3">
+   
+        <h2>Statistiques Global</h2>
+       <div class="mt-5">
+	    <h6>Elle permet de savoir le nombre d'apprenant par specialite dans une filiere précise pour chaque niveau<h6>
+            <canvas id="diagrammeCirculaireetuspfilnote"></canvas>
+        
+        </div>
+        <div class="mt-5">
+           <h6>Elle permet de savoir le nombre d'apprenant par niveau dans une filiere précise pour chaque la spécialite<h6>
+            <canvas id="diagrammeCirculaireetucyfilnote"></canvas>
+        </div>
+    
+   </div>
+   <div class="d-flex justify-content-between flex-row mb-3">
+        <h2>Statistiques Details</h2>
+              
+        <div class="mt-5">
+		<h6>Specifique au primaire Elle permet de savoir le nombre d'apprenant<br> dans un cycle precis pour chaque spécialité/classe<h6>
+            <canvas id="diagrammeCirculairedetspetudetnote"></canvas>
+        </div>
+            
+        <div class="mt-5">
+	    <h6>Elle permet de savoir le nombre d'apprenant dans Cycle<h6>
+	   <canvas id='diagrammeCirculairecydetcyetudetnote'></canvas>
+        </div>
+           
+   </div>
 
+    <h1 class="align-text ">Liste des Apprenants des differentes statistiques</h1>
+    <div class="d-flex justify-content-evenly">
+      
+        <div><a class="btn btn-primary mr-4" href="{{listevers}}?idca={{idca}}&idfi={{idfi}}&idsp={{idsp}}&idcy={{idcy}}&idan={{idan}}&idgen={{idge}}">Liste des differents versements </a></div>
+        <div><a class="btn btn-primary mr-4" href="{{listenombre}}?idca={{idca}}&idfi={{idfi}}&idsp={{idsp}}&idcy={{idcy}}&idan={{idan}}&idgen={{idge}}">Liste de nombre d'apprenant</a></div>
+        <div><a class="btn btn-primary mr-4" href="{{listenote}}?idca={{idca}}&idfi={{idfi}}&idsp={{idsp}}&idcy={{idcy}}&idan={{idan}}&idgen={{idge}}&idsem={{idsem}}">Liste de Note des differents apprenants</a></div>
+       <!-- <div><a class="btn btn-primary mr-4" href="{{nomm}}">Button</a></div>-->
+       
+    </div>
     <script src="{{wwwroot}}/powereduc1/local/powerschool/js/jquery.js"></script>
     <script src="{{wwwroot}}/powereduc1/local/powerschool/js/chart.js"></script>
     <script src="{{wwwroot}}/powereduc1/local/powerschool/js/statitisquefiltrer.js"></script>
     <script src="{{wwwroot}}/powereduc1/local/powerschool/js/circulaires.js"></script>
     <script src="{{wwwroot}}/powereduc1/local/powerschool/js/statistique.js"></script>
+    <script src="{{wwwroot}}/powereduc1/local/powerschool/js/statistiquenote.js"></script>
 </body>
 </html>

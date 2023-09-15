@@ -49,15 +49,17 @@ $string['bulletin'] = 'Bulletin';
 $string['tranche'] = 'Tranche';
 $string['affecterprof'] = 'Affecter le cours à un professeur';
 $string['configurerpaie'] = 'Configuration des differentes Tranches paiement';
-$string['sallele'] = 'affecter les etudiants dans une classe';
-$string['sallelere'] = 'retirer les etudiants dans une classe';
+$string['sallele'] = 'affecter les apprenants dans une classe';
+$string['sallelere'] = 'retirer les apprenants dans une classe';
 $string['message'] = 'Personnalisé votre message';
 $string['confignote'] = 'Configuration des notes';
 $string['pourcentage'] = 'Pourcentage';
 $string['indexprogramme'] = 'Calendrier de programme';
 $string['paiement'] = 'paiement';
-$string['listeetudiant'] = 'Liste des etudiants';
+$string['listeetudiant'] = 'Liste des Apprenants';
 $string['logo'] = 'Logo';
 $string['absenceetu'] = 'Gérer les absences des Apprenants';
+$string['materiel'] = 'Materiels';
+$string['groupsalle'] = 'Groupe de salle';
 
 ?>

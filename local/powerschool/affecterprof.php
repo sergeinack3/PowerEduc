@@ -25,7 +25,7 @@ use local_powerschool\affecterprof;
 
 require_once(__DIR__ . '/../../config.php');
 require_once($CFG->dirroot.'/local/powerschool/classes/affecterprof.php');
-
+require_once(__DIR__ .'/../../group/lib.php');
 global $DB;
 global $USER;
 
@@ -66,103 +66,130 @@ if (!empty($_POST["professeur"])&& !empty($_POST["specialite"])&& !empty($_POST[
      foreach ($cours as $key => $value) {
          
     }
+    $verifsallf=$DB->get_records("affecterprof",array("idcourssemestre"=>$value->idcouse,"idsalle"=>$_POST["salle"]));
 
     $verifisaletsql="SELECT * FROM {salleele} sa,{inscription} i WHERE sa.idsalle='".$_POST["salle"]."'
                      AND sa.idetudiant=i.idetudiant AND i.idspecialite='".$_POST["specialite"]."' AND i.idcycle='".$_POST["cycle"]."'";
                     
     $verifisal=$DB->get_records_sql($verifisaletsql);
         // var_dump($verifisal);die;
-if($verifisal)
-  {
+     if(!$verifsallf)
+     {
 
-    $veriprof=$DB->get_records_sql("SELECT * FROM {coursspecialite} as csp,{courssemestre} cse,{affecterprof} af WHERE af.idcourssemestre=cse.id AND csp.id=cse.idcoursspecialite AND idsemestre='".$_POST["semestre"]."' AND idcourses='".$_POST["cours"]."' AND idspecialite='".$_POST["specialite"]."' AND idcycle='".$_POST["cycle"]."' AND idprof='".$_POST["professeur"]."'");
+         if($verifisal)
+         {
+             $veriprof=$DB->get_records_sql("SELECT * FROM {coursspecialite} as csp,{courssemestre} cse,{affecterprof} af WHERE af.idcourssemestre=cse.id AND csp.id=cse.idcoursspecialite AND idsemestre='".$_POST["semestre"]."' AND idcourses='".$_POST["cours"]."' AND idspecialite='".$_POST["specialite"]."' AND idcycle='".$_POST["cycle"]."' AND idprof='".$_POST["professeur"]."' AND idsalle='".$_POST["salle"]."'");
+             
+             if(!$veriprof)
+             {
+                 
+                         $recordtoinsert = new stdClass();
+                         $recordtoinsert->idcourssemestre = $value->idcouse;
+                         // var_dump($recordtoinsert->idcourssemestre);die;
+                         $recordtoinsert->idprof =$_POST["professeur"];
+                         //  var_dump($_POST["professeur"],$_POST["specialite"],$_POST["cycle"],$_POST["cours"],$_POST["semestre"],$recordtoinsert->idcourssemestre,$recordtoinsert->idprof,$USER->id);die;
+                         
+                         
+                         
+                         $sql_cours = "SELECT e.id as iden FROM {enrol} e ,{course} c
+                                     WHERE e.enrol='manual' AND e.courseid=c.id  AND courseid='".$_POST["cours"]."'";
+ 
+ 
+                     $recuperer_cours = $DB->get_records_sql($sql_cours);
+                 // die;
+                 // die;
+ 
+                         
+                         foreach ($recuperer_cours as $key=>$val){
+                             $cont=$DB->get_records_sql("SELECT * FROM {context} WHERE contextlevel=50 AND instanceid='".$_POST["cours"]."'");
+                             foreach ($cont as $key => $value4) {
+                                 // array_push($tarcon,$value4->id);
+                                 // var_dump($value4->id,$val->fullname);die;
+                                 }
+                             
+                             $sql_verienr="SELECT * FROM {user_enrolments} WHERE enrolid='".$val->iden."' AND userid='".$recordtoinsert->idprof."'";
+                             $verif=$DB->get_records_sql($sql_verienr);
+                             // var_dump($verif);die;
+                             if (!$verif) {
+                                 # code...
+                                 // var_dump(  $val->iden );
+                                 // die;
+                     
+                         // $sql_enrol = "INSERT INTO {user_enrolments} (`status`, `enrolid`, `userid`, `timestart`, `timeend`, `modifierid`, `timecreated`, `timemodified`) 
+                         //             VALUES ('0',$val->enroleid,$recordtoinsert->idprof,'0','0',$USER->id,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)";
+                         $sql_enrol = [
+                         
+                             "status"=>0,
+                             "enrolid"=> $val->iden,
+                             "userid"=>$recordtoinsert->idprof,
+                             "timestart"=>0,
+                             "timeend"=>0,
+                             "modifierid"=>$USER->id,
+                             "timecreated"=>time(),
+                             "timemodified"=>time()];
+                         $sql_roleass=[
+                                 "roleid"=>3,
+                                 "contextid"=>$value4->id,
+                                 "userid"=>$recordtoinsert->idprof,
+                                 "timemodified"=>time(),
+                                 "modifierid"=>$USER->id,
+                                 "itemid"=>0,
+                                 "sortorder"=>0,
+                             ];
+                             // var_dump($recuperer_cours);die;
+                             
+                             // var_dump($sql_enrol);
+                             // die;
+                             
+                             $DB->insert_record('user_enrolments', $sql_enrol);
+                             $DB->insert_record('role_assignments', $sql_roleass);
+ 
+                             
+                         }    
+                         //  $DB->insert_record('affecterprof', $recordtoinsert);
+                     }
+                           $salet=$DB->get_records("salle",array("id"=>$_POST["salle"]));
+                             foreach($salet as $valss)
+                             {
+                             }
+                             $grid=$DB->get_records("groups",array("name"=>$valss->numerosalle,"courseid"=>$_POST["cours"]));
+                             // if(!$grid)
+                             foreach($grid as $mo){}
+                            //  var_dump($mo->id,$_POST["cours"],$valss->numerosalle);
+                            //  $groupsa=new stdClass();
+                            //  $groupsa->groupid=$mo->id;
+                            //  $groupsa->userid=$recordtoinsert->idprof;
+                            //  $groupsa->timeadded=time();
+                            //  $groupsa->itemid=0;
+                            //  $DB->insert_record("groups_members", $groupsa);
+                            // die;
+                             groups_add_member($mo->id,$recordtoinsert->idprof);
+                         $DB->execute("INSERT INTO mdl_affecterprof VALUES (0,'".$recordtoinsert->idcourssemestre."', '".$recordtoinsert->idprof."', '".$USER->id."','".time()."','".time()."','".$_POST["salle"]."')");
+             }
+             else
+             {
+ 
+                 \core\notification::add('Vous ne pouvez pas affecter un cours dans une meme partie année un meme Enseignant'.$value->libellespecialite.'', \core\output\notification::NOTIFY_ERROR);
+                 redirect($CFG->wwwroot . '/local/powerschool/affecterprof.php?idca='.$_POST["idcampus"].'');
+             }
+         }
+         else{
+             $speci=$DB->get_records_sql("SELECT * FROM {specialite} WHERE id='".$_POST["specialite"]."'");
+ 
+             foreach ($speci as $key => $value) {
+                 # code...
+             }
+             \core\notification::add('Cette salle n\'appertient pas à cette specialité '.$value->libellespecialite.'', \core\output\notification::NOTIFY_ERROR);
+             redirect($CFG->wwwroot . '/local/powerschool/affecterprof.php?idca='.$_POST["idcampus"].'');
+             
+            }
+        }
+        else
+        {
+            \core\notification::add('Ce cours est déjà donné par un enseignant dans cette salle '.$value->libellespecialite.'', \core\output\notification::NOTIFY_ERROR);
+            redirect($CFG->wwwroot . '/local/powerschool/affecterprof.php?idca='.$_POST["idcampus"].'');
 
-    if(!$veriprof)
-    {
-
-        $recordtoinsert = new stdClass();
-        $recordtoinsert->idcourssemestre = $value->idcouse;
-        // var_dump($recordtoinsert->idcourssemestre);die;
-        $recordtoinsert->idprof =$_POST["professeur"];
-        //  var_dump($_POST["professeur"],$_POST["specialite"],$_POST["cycle"],$_POST["cours"],$_POST["semestre"],$recordtoinsert->idcourssemestre,$recordtoinsert->idprof,$USER->id);die;
-    
-
-
-        $sql_cours = "SELECT e.id as iden FROM {enrol} e ,{course} c
-                     WHERE e.enrol='manual' AND e.courseid=c.id  AND courseid='".$_POST["cours"]."'";
-
-
-        $recuperer_cours = $DB->get_records_sql($sql_cours);
-
-        
-        foreach ($recuperer_cours as $key=>$val){
-            $cont=$DB->get_records_sql("SELECT * FROM {context} WHERE contextlevel=50 AND instanceid='".$_POST["cours"]."'");
-            foreach ($cont as $key => $value4) {
-                // array_push($tarcon,$value4->id);
-                // var_dump($value4->id,$val->fullname);die;
-                }
-            
-            $sql_verienr="SELECT * FROM {user_enrolments} WHERE enrolid='".$val->iden."' AND userid='".$recordtoinsert->idprof."'";
-            $verif=$DB->get_records_sql($sql_verienr);
-            // var_dump($verif);die;
-            if (!$verif) {
-                # code...
-                // var_dump(  $val->iden );
-                // die;
-      
-        // $sql_enrol = "INSERT INTO {user_enrolments} (`status`, `enrolid`, `userid`, `timestart`, `timeend`, `modifierid`, `timecreated`, `timemodified`) 
-        //             VALUES ('0',$val->enroleid,$recordtoinsert->idprof,'0','0',$USER->id,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)";
-        $sql_enrol = [
-        
-            "status"=>0,
-            "enrolid"=> $val->iden,
-            "userid"=>$recordtoinsert->idprof,
-            "timestart"=>0,
-            "timeend"=>0,
-            "modifierid"=>$USER->id,
-            "timecreated"=>time(),
-            "timemodified"=>time()];
-        $sql_roleass=[
-                "roleid"=>3,
-                "contextid"=>$value4->id,
-                "userid"=>$recordtoinsert->idprof,
-                "timemodified"=>time(),
-                "modifierid"=>$USER->id,
-                "itemid"=>0,
-                "sortorder"=>0,
-            ];
-            // var_dump($recuperer_cours);die;
-            
-            // var_dump($sql_enrol);
-            // die;
-            
-            $DB->insert_record('user_enrolments', $sql_enrol);
-            $DB->insert_record('role_assignments', $sql_roleass);
-
-            
-        }    
-        //  $DB->insert_record('affecterprof', $recordtoinsert);
-    }
-          $DB->execute("INSERT INTO mdl_affecterprof VALUES (0,'".$recordtoinsert->idcourssemestre."', '".$recordtoinsert->idprof."', '".$USER->id."','".time()."','".time()."','".$_POST["salle"]."')");
-
-    }
-    else
-    {
-
-        \core\notification::add('Vous ne pouvez pas affecter un cours dans le meme semestre un meme professeur'.$value->libellespecialite.'', \core\output\notification::NOTIFY_ERROR);
-        redirect($CFG->wwwroot . '/local/powerschool/affecterprof.php?idca='.$_POST["idcampus"].'');
-    }
-  }
-  else{
-    $speci=$DB->get_records_sql("SELECT * FROM {specialite} WHERE id='".$_POST["specialite"]."'");
-
-    foreach ($speci as $key => $value) {
-        # code...
-    }
-    \core\notification::add('Cette salle n\'appertient pas à cette specialité '.$value->libellespecialite.'', \core\output\notification::NOTIFY_ERROR);
-    redirect($CFG->wwwroot . '/local/powerschool/affecterprof.php?idca='.$_POST["idcampus"].'');
-
-  }
+       }
 }
 
 if($_GET['id']) {
@@ -252,6 +279,8 @@ $menumini = (object)[
     'confinot' => new powereduc_url('/local/powerschool/configurationnote.php'),
     'logo' => new powereduc_url('/local/powerschool/logo.php'),
     'message' => new powereduc_url('/local/powerschool/message.php'),
+    'materiell' => new powereduc_url('/local/powerschool/materiels.php'),
+    'groupe' => new powereduc_url('/local/powerschool/groupsalle.php'),
 
     ];
 $campus=$DB->get_records('campus');

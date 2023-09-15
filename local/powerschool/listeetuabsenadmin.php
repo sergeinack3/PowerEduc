@@ -165,8 +165,8 @@ $campuss=(object)[
     ];
 echo $OUTPUT->header();
 
-echo $OUTPUT->render_from_template('local_powerschool/navbarconfiguration', $menumini);
-echo '<div style="margin-top:80px";><wxcvbn</div>';
+// echo $OUTPUT->render_from_template('local_powerschool/navbarconfiguration', $menumini);
+echo '<div style="margin-top:20px";><wxcvbn</div>';
 echo $OUTPUT->render_from_template('local_powerschool/campustou', $campuss);
 // echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
 // $mform->display();

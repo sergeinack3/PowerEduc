@@ -71,19 +71,20 @@ $recordtoinsert->idannee=(int)$_POST["idannee"];
     $datelimite = date("Y-m-d", $recordtoinsert->datelimite);
 
     $veran=$DB->get_records_sql("SELECT * FROM {anneescolaire} WHERE id='".$_POST["idannee"]."' AND $recordtoinsert->datelimite BETWEEN datedebut AND datefin");
-    $sqlverifildate=$DB->get_records_sql("SELECT * FROM {filierecycletranc} WHERE DATE(FROM_UNIXTIME(datelimite))='$datelimite' AND idannee='".$_POST["idannee"]."'");
     //    var_dump($sqlverifil);die;
     
-
+    
     $vercampus=$DB->get_records_sql("SELECT * FROM {campus} c,{typecampus} t WHERE c.idtypecampus=t.id AND c.id='".$_POST["idcampus"]."'");
     foreach($vercampus as $key =>$valllcam)
     {}
     if($valllcam->libelletype=="universite")
     {
+        $sqlverifildate=$DB->get_records_sql("SELECT * FROM {filierecycletranc} WHERE idfiliere='".$_POST["idfiliere"]."' AND idcycle='".$_POST["idcycle"]."' AND DATE(FROM_UNIXTIME(datelimite))='$datelimite' AND idannee='".$_POST["idannee"]."'");
         $sqlverifil=$DB->get_records_sql("SELECT * FROM {filierecycletranc} WHERE idcycle='".$_POST["idcycle"]."' AND idfiliere='".$_POST["idfiliere"]."' AND idtranc='".$_POST["idtranc"]."' AND idannee='".$_POST["idannee"]."'");
     }
     else{
-       $verspfil=$DB->get_records("specialite",array("id"=>$_POST["idspecialite"],"idfiliere"=>$_POST["idfiliere"]));
+        $verspfil=$DB->get_records("specialite",array("id"=>$_POST["idspecialite"],"idfiliere"=>$_POST["idfiliere"]));
+        $sqlverifildate=$DB->get_records_sql("SELECT * FROM {filierecycletranc} WHERE idfiliere='".$_POST["idfiliere"]."' AND idspecialite='".$_POST["idspecialite"]."' AND DATE(FROM_UNIXTIME(datelimite))='$datelimite' AND idannee='".$_POST["idannee"]."'");
        if($verspfil)
        {
 
@@ -192,9 +193,10 @@ $menumini = (object)[
     'salleele' => new powereduc_url('/local/powerschool/salleele.php'),
     'tranche' => new powereduc_url('/local/powerschool/tranche.php'),
     'confinot' => new powereduc_url('/local/powerschool/configurationnote.php'),
-
+    'materiell' => new powereduc_url('/local/powerschool/materiels.php'),
     'logo' => new powereduc_url('/local/powerschool/logo.php'),
     'message' => new powereduc_url('/local/powerschool/message.php'),
+    'groupe' => new powereduc_url('/local/powerschool/groupsalle.php'),
 
 ];
 
