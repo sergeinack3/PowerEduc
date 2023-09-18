@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Moodleform.
+ * PowerEducform.
  *
  * @package   core_course
  * @copyright Andrew Nicols <andrew@nicols.co.uk>
@@ -32,7 +32,7 @@ use core_grades\component_gradeitems;
 
 /**
  * This class adds extra methods to form wrapper specific to be used for module add / update forms
- * mod/{modname}/mod_form.php replaced deprecated mod/{modname}/mod.html Moodleform.
+ * mod/{modname}/mod_form.php replaced deprecated mod/{modname}/mod.html PowerEducform.
  *
  * @package   core_course
  * @copyright Andrew Nicols <andrew@nicols.co.uk>
@@ -134,7 +134,7 @@ abstract class powereducform_mod extends powereducform {
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
     public function powereducform_mod($current, $section, $cm, $course) {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);

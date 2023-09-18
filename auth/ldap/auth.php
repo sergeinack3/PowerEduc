@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Authentication Plugin: LDAP Authentication
@@ -130,7 +130,7 @@ class auth_plugin_ldap extends auth_plugin_base {
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
     public function auth_plugin_ldap() {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
@@ -205,7 +205,7 @@ class auth_plugin_ldap extends auth_plugin_base {
         // If login fails and we are using MS Active Directory, retrieve the diagnostic
         // message to see if this is due to an expired password, or that the user is forced to
         // change the password on first login. If it is, only proceed if we can change
-        // password from Moodle (otherwise we'll get stuck later in the login process).
+        // password from PowerEduc (otherwise we'll get stuck later in the login process).
         if (!$ldap_login && ($this->config->user_type == 'ad')
             && $this->can_change_password()
             && (!empty($this->config->expiration) and ($this->config->expiration == 1))) {
@@ -349,7 +349,7 @@ class auth_plugin_ldap extends auth_plugin_base {
      * By using information in userobject
      * Use user_exists to prevent duplicate usernames
      *
-     * @param mixed $userobject  Moodle userobject
+     * @param mixed $userobject  PowerEduc userobject
      * @param mixed $plainpass   Plaintext password
      */
     function user_create($userobject, $plainpass) {
@@ -387,7 +387,7 @@ class auth_plugin_ldap extends auth_plugin_base {
         //Following sets all mandatory and other forced attribute values
         //User should be creted as login disabled untill email confirmation is processed
         //Feel free to add your user type and send patches to paca@sci.fi to add them
-        //Moodle distribution
+        //PowerEduc distribution
 
         switch ($this->config->user_type)  {
             case 'edir':
@@ -401,9 +401,9 @@ class auth_plugin_ldap extends auth_plugin_base {
             case 'rfc2307bis':
                 // posixAccount object class forces us to specify a uidNumber
                 // and a gidNumber. That is quite complicated to generate from
-                // Moodle without colliding with existing numbers and without
+                // PowerEduc without colliding with existing numbers and without
                 // race conditions. As this user is supposed to be only used
-                // with Moodle (otherwise the user would exist beforehand) and
+                // with PowerEduc (otherwise the user would exist beforehand) and
                 // doesn't need to login into a operating system, we assign the
                 // user the uid of user 'nobody' and gid of group 'nogroup'. In
                 // addition to that, we need to specify a home directory. We
@@ -411,7 +411,7 @@ class auth_plugin_ldap extends auth_plugin_base {
                 // is the only one can always be sure exists. Finally, even if
                 // it's not mandatory, we specify '/bin/false' as the login
                 // shell, to prevent the user from login in at the operating
-                // system level (Moodle ignores this).
+                // system level (PowerEduc ignores this).
 
                 $newuser['objectClass']   = array('posixAccount', 'inetOrgPerson', 'organizationalPerson', 'person', 'top');
                 $newuser['cn']            = $extusername;
@@ -429,7 +429,7 @@ class auth_plugin_ldap extends auth_plugin_base {
                 //
                 // Beware that this can be defeated by the user if we are not
                 // using MD5 or SHA-1 passwords. After all, the source code of
-                // Moodle is available, and the user can see the kind of
+                // PowerEduc is available, and the user can see the kind of
                 // modification we are doing and 'undo' it by hand (but only
                 // if we are using plain text passwords).
                 //
@@ -1026,7 +1026,7 @@ class auth_plugin_ldap extends auth_plugin_base {
      * @param mixed $username    username (without system magic quotes)
      * @return mixed result      null if course creators is not configured, boolean otherwise.
      *
-     * @deprecated since Moodle 3.4 MDL-30634 - please do not use this function any more.
+     * @deprecated since PowerEduc 3.4 MDL-30634 - please do not use this function any more.
      */
     function iscreator($username) {
         debugging('iscreator() is deprecated. Please use auth_plugin_ldap::is_role() instead.', DEBUG_DEVELOPER);
@@ -1240,7 +1240,7 @@ class auth_plugin_ldap extends auth_plugin_base {
                                 }
                             }
                         } else {
-                            // Ambiguous. Value empty before in Moodle (and LDAP) - use
+                            // Ambiguous. Value empty before in PowerEduc (and LDAP) - use
                             // 1st ldap candidate field, no need to guess
                             if ($ouvalue === '') { // value empty before - use 1st ldap candidate
                                 // This might fail due to schema validation

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'enrol_paypal', language 'en'.
@@ -71,10 +71,10 @@ $string['privacy:metadata:enrol_paypal:enrol_paypal:reason_code'] = 'The reason 
 $string['privacy:metadata:enrol_paypal:enrol_paypal:receiver_email'] = 'Primary email address of the payment recipient (that is, the merchant).';
 $string['privacy:metadata:enrol_paypal:enrol_paypal:receiver_id'] = 'Unique PayPal account ID of the payment recipient (i.e., the merchant).';
 $string['privacy:metadata:enrol_paypal:enrol_paypal:tax'] = 'Amount of tax charged on payment.';
-$string['privacy:metadata:enrol_paypal:enrol_paypal:timeupdated'] = 'The time of Moodle being notified by PayPal about the payment.';
+$string['privacy:metadata:enrol_paypal:enrol_paypal:timeupdated'] = 'The time of PowerEduc being notified by PayPal about the payment.';
 $string['privacy:metadata:enrol_paypal:enrol_paypal:txn_id'] = 'The merchant\'s original transaction identification number for the payment from the buyer, against which the case was registered';
 $string['privacy:metadata:enrol_paypal:enrol_paypal:userid'] = 'The ID of the user who bought the course enrolment.';
-$string['privacy:metadata:enrol_paypal:paypal_com'] = 'The PayPal enrolment plugin transmits user data from Moodle to the PayPal website.';
+$string['privacy:metadata:enrol_paypal:paypal_com'] = 'The PayPal enrolment plugin transmits user data from PowerEduc to the PayPal website.';
 $string['privacy:metadata:enrol_paypal:paypal_com:address'] = 'Address of the user who is buying the course.';
 $string['privacy:metadata:enrol_paypal:paypal_com:city'] = 'City of the user who is buying the course.';
 $string['privacy:metadata:enrol_paypal:paypal_com:country'] = 'Country of the user who is buying the course.';

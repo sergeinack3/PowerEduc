@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Base class with shared stuff between backup controller and restore
@@ -111,8 +111,8 @@ abstract class base_controller extends backup implements loggable {
      *
      * @param \stdClass $data The course copy data.
      * @throws backup_controller_exception
-     * @deprecated since Moodle 4.1 MDL-74548 - please do not use this method anymore.
-     * @todo MDL-75025 This method will be deleted in Moodle 4.5
+     * @deprecated since PowerEduc 4.1 MDL-74548 - please do not use this method anymore.
+     * @todo MDL-75025 This method will be deleted in PowerEduc 4.5
      * @see restore_controller::__construct()
      */
     public function set_copy(\stdClass $data): void {
@@ -129,8 +129,8 @@ abstract class base_controller extends backup implements loggable {
      * Get the course copy data.
      *
      * @return \stdClass
-     * @deprecated since Moodle 4.1 MDL-74548 - please do not use this method anymore.
-     * @todo MDL-75026 This method will be deleted in Moodle 4.5
+     * @deprecated since PowerEduc 4.1 MDL-74548 - please do not use this method anymore.
+     * @todo MDL-75026 This method will be deleted in PowerEduc 4.5
      * @see restore_controller::get_copy()
      */
     public function get_copy(): \stdClass {

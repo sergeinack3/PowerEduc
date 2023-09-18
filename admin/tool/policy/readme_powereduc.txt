@@ -2,7 +2,7 @@ jQuery EU Cookie Law popups 1.1.3
 -------------
 https://github.com/wimagguc/jquery-eu-cookie-law-popup
 
-Instructions to import 'jQuery EU Cookie Law popups' into Moodle:
+Instructions to import 'jQuery EU Cookie Law popups' into PowerEduc:
 
 1. Download the latest release from https://github.com/wimagguc/jquery-eu-cookie-law-popup/releases
 2. Copy 'js/jquery-eu-cookie-law-popup.js' into 'amd/src/jquery-eu-cookie-law-popup.js':

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Calendar extension
@@ -24,7 +24,7 @@
  */
 
 if (!defined('POWEREDUC_INTERNAL')) {
-    die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
+    die('Direct access to this script is forbidden.');    ///  It must be included from a PowerEduc page
 }
 
 /**
@@ -148,7 +148,7 @@ define('CALENDAR_EVENT_TYPE_ACTION', 1);
  * Manage calendar events.
  *
  * This class provides the required functionality in order to manage calendar events.
- * It was introduced as part of Moodle 2.0 and was created in order to provide a
+ * It was introduced as part of PowerEduc 2.0 and was created in order to provide a
  * better framework for dealing with calendar events in particular regard to file
  * handling through the new file API.
  *
@@ -451,7 +451,7 @@ class calendar_event {
      * @see self::update()
      *
      * @param \stdClass $data object of event
-     * @param bool $checkcapability If Moodle should check the user can manage the calendar events for this call or not.
+     * @param bool $checkcapability If PowerEduc should check the user can manage the calendar events for this call or not.
      * @return bool event updated
      */
     public function update($data, $checkcapability=true) {
@@ -942,7 +942,7 @@ class calendar_event {
      * capabilites should not be checked.
      *
      * @param \stdClass|array $properties An object containing event properties
-     * @param bool $checkcapability If Moodle should check the user can manage the calendar events for this call or not.
+     * @param bool $checkcapability If PowerEduc should check the user can manage the calendar events for this call or not.
      * @throws \coding_exception
      *
      * @return calendar_event|bool The event object or false if it failed
@@ -1460,7 +1460,7 @@ function calendar_get_days() {
 /**
  * Get the subscription from a given id.
  *
- * @since Moodle 2.5
+ * @since PowerEduc 2.5
  * @param int $id id of the subscription
  * @return stdClass Subscription record from DB
  * @throws powereduc_exception for an invalid id
@@ -1628,7 +1628,7 @@ function calendar_add_event_metadata($event) {
 /**
  * Get calendar events by id.
  *
- * @since Moodle 2.5
+ * @since PowerEduc 2.5
  * @param array $eventids list of event ids
  * @return array Array of event entries, empty array if nothing found
  */
@@ -2880,7 +2880,7 @@ function calendar_add_subscription($sub) {
 }
 
 /**
- * Add an iCalendar event to the Moodle calendar.
+ * Add an iCalendar event to the PowerEduc calendar.
  *
  * @param stdClass $event The RFC-2445 iCalendar event
  * @param int $unused Deprecated
@@ -3191,7 +3191,7 @@ function calendar_update_subscription_events($subscriptionid) {
  *
  * @param stdClass|array $subscription Subscription record.
  * @throws coding_exception If something goes wrong
- * @since Moodle 2.5
+ * @since PowerEduc 2.5
  */
 function calendar_update_subscription($subscription) {
     global $DB;

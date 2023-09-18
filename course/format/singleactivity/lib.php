@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains main class for the course format singleactivity
@@ -208,7 +208,7 @@ class format_singleactivity extends core_courseformat\base {
      *
      * Format singleactivity adds a warning when format of the course is about to be changed.
      *
-     * @param MoodleQuickForm $mform form the elements are added to
+     * @param PowerEducQuickForm $mform form the elements are added to
      * @param bool $forsection 'true' if this is a section edit form, 'false' if this is course edit form
      * @return array array of references to the added form elements
      */
@@ -534,7 +534,7 @@ class format_singleactivity extends core_courseformat\base {
      * Return the plugin configs for external functions.
      *
      * @return array the list of configuration settings
-     * @since Moodle 3.5
+     * @since PowerEduc 3.5
      */
     public function get_config_for_external() {
         // Return everything (nothing to hide).

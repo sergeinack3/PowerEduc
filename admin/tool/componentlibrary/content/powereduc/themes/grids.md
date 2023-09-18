@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: "Grids"
-descriptions: Using grids in Moodle
+descriptions: Using grids in PowerEduc
 date: 2020-02-04T09:40:32+01:00
 draft: false
 weight: 1

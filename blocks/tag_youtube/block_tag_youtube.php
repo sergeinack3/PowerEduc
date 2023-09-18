@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Tag youtube block
@@ -207,12 +207,12 @@ class block_tag_youtube extends block_base {
      * Sends a request to fetch data.
      *
      * @see block_tag_youtube::service
-     * @deprecated since Moodle 2.8.8, 2.9.2 and 3.0 MDL-49085 - please do not use this function any more.
+     * @deprecated since PowerEduc 2.8.8, 2.9.2 and 3.0 MDL-49085 - please do not use this function any more.
      * @param string $request
      * @throws coding_exception
      */
     public function fetch_request($request) {
-        throw new coding_exception('Sorry, this function has been deprecated in Moodle 2.8.8, 2.9.2 and 3.0. Use block_tag_youtube::get_service instead.');
+        throw new coding_exception('Sorry, this function has been deprecated in PowerEduc 2.8.8, 2.9.2 and 3.0. Use block_tag_youtube::get_service instead.');
 
         $c = new curl(array('cache' => true, 'module_cache'=>'tag_youtube'));
         $c->setopt(array('CURLOPT_TIMEOUT' => 3, 'CURLOPT_CONNECTTIMEOUT' => 3));
@@ -227,12 +227,12 @@ class block_tag_youtube extends block_base {
      * Renders the video list.
      *
      * @see block_tag_youtube::render_items
-     * @deprecated since Moodle 2.8.8, 2.9.2 and 3.0 MDL-49085 - please do not use this function any more.
+     * @deprecated since PowerEduc 2.8.8, 2.9.2 and 3.0 MDL-49085 - please do not use this function any more.
      * @param SimpleXMLElement $xml
      * @throws coding_exception
      */
     function render_video_list(SimpleXMLElement $xml){
-        throw new coding_exception('Sorry, this function has been deprecated in Moodle 2.8.8, 2.9.2 and 3.0. Use block_tag_youtube::render_items instead.');
+        throw new coding_exception('Sorry, this function has been deprecated in PowerEduc 2.8.8, 2.9.2 and 3.0. Use block_tag_youtube::render_items instead.');
     }
 
     /**
@@ -409,7 +409,7 @@ class block_tag_youtube extends block_base {
      * Return the plugin config settings for external functions.
      *
      * @return stdClass the configs for both the block instance and plugin
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public function get_config_for_external() {
         // There is a private key, only admins can see it.

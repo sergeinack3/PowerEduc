@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'tool_spamcleaner', language 'en', branch 'POWEREDUC_22_STABLE'
@@ -28,7 +28,7 @@ $string['spamauto'] = 'Autodetect common spam patterns';
 $string['spamcannotdelete'] = 'Cannot delete this user';
 $string['spamcannotfinduser'] = 'No users matching your search';
 $string['spamcleanerintro'] = '<p>This script allows you to search all user profiles for certain strings and then delete those accounts which are obviously created by spammers. You can search for multiple keywords using commas (e.g. casino, porn).</p>
-<p>For further information, see the documentation <a href="https://docs.powereduc.org/en/Reducing_spam_in_Moodle">Reducing spam in Moodle</a>.</p>';
+<p>For further information, see the documentation <a href="https://docs.powereduc.org/en/Reducing_spam_in_PowerEduc">Reducing spam in PowerEduc</a>.</p>';
 $string['spamdeleteall'] = 'Delete all these user accounts';
 $string['spamdeleteallconfirm'] = 'Are you sure you want to delete all these user accounts?  You can not undo this.';
 $string['spamdeleteconfirm'] = 'Are you sure you want to delete this entry?  You can not undo this.';

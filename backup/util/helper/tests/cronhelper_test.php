@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Unit tests for backups cron helper.
@@ -511,7 +511,7 @@ class testable_backup_cron_automated_helper extends backup_cron_automated_helper
      * Provides access to protected method get_courses.
      *
      * @param int $now Timestamp to use.
-     * @return powereduc_recordset The returned courses as a Moodle recordest.
+     * @return powereduc_recordset The returned courses as a PowerEduc recordest.
      */
     public static function testable_get_courses($now) {
         return parent::get_courses($now);

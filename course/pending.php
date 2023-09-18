@@ -4,7 +4,7 @@
 //                                                                       //
 // NOTICE OF COPYRIGHT                                                   //
 //                                                                       //
-// Moodle - Modular Object-Oriented Dynamic Learning Environment         //
+// PowerEduc - Modular Object-Oriented Dynamic Learning Environment         //
 //          http://powereduc.org                                            //
 //                                                                       //
 // Copyright (C) 1999 onwards Martin Dougiamas  http://dougiamas.com     //

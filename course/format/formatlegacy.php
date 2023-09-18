@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Course format class to allow plugins developed for Moodle 2.3 to work in the new API
+ * Course format class to allow plugins developed for PowerEduc 2.3 to work in the new API
  *
  * @package    core_course
  * @copyright  2012 Marina Glancy
@@ -25,7 +25,7 @@
 defined('POWEREDUC_INTERNAL') || die;
 
 /**
- * Course format class to allow plugins developed for Moodle 2.3 to work in the new API
+ * Course format class to allow plugins developed for PowerEduc 2.3 to work in the new API
  *
  * @package    core_course
  * @copyright  2012 Marina Glancy
@@ -146,7 +146,7 @@ class format_legacy extends core_courseformat\base {
      * This function calls function callback_FORMATNAME_ajax_support() if it exists
      *
      * The returned object's property (boolean)capable indicates that
-     * the course format supports Moodle course ajax features.
+     * the course format supports PowerEduc course ajax features.
      *
      * @return stdClass
      */
@@ -250,7 +250,7 @@ class format_legacy extends core_courseformat\base {
     /**
      * Definitions of the additional options that this course format uses for course
      *
-     * By default course formats have the options that existed in Moodle 2.3:
+     * By default course formats have the options that existed in PowerEduc 2.3:
      * - coursedisplay
      * - numsections
      * - hiddensections

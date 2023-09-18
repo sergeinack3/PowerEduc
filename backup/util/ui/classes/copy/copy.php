@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Course copy class.
@@ -21,10 +21,10 @@
  * and sets up the course copy process.
  *
  * @package    core_backup
- * @copyright  2020 onward The Moodle Users Association <https://powereducassociation.org/>
+ * @copyright  2020 onward The PowerEduc Users Association <https://powereducassociation.org/>
  * @author     Matt Porritt <mattp@catalyst-au.net>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @deprecated since Moodle 4.1. Use copy_helper instead
+ * @deprecated since PowerEduc 4.1. Use copy_helper instead
  */
 
 namespace core_backup\copy;
@@ -42,11 +42,11 @@ require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
  * and sets up the course copy process.
  *
  * @package    core_backup
- * @copyright  2020 onward The Moodle Users Association <https://powereducassociation.org/>
+ * @copyright  2020 onward The PowerEduc Users Association <https://powereducassociation.org/>
  * @author     Matt Porritt <mattp@catalyst-au.net>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @deprecated since Moodle 4.1 MDL-74548 - please use copy_helper instead
- * @todo MDL-75022 This class will be deleted in Moodle 4.5
+ * @deprecated since PowerEduc 4.1 MDL-74548 - please use copy_helper instead
+ * @todo MDL-75022 This class will be deleted in PowerEduc 4.5
  * @see copy_helper
  */
 class copy {
@@ -138,8 +138,8 @@ class copy {
      * Sets up relevant controllers and adhoc task.
      *
      * @return array $copyids THe backup and restore controller ids.
-     * @deprecated since Moodle 4.1 MDL-74548 - please use copy_helper instead.
-     * @todo MDL-75023 This method will be deleted in Moodle 4.5
+     * @deprecated since PowerEduc 4.1 MDL-74548 - please use copy_helper instead.
+     * @todo MDL-75023 This method will be deleted in PowerEduc 4.5
      * @see copy_helper::process_formdata()
      * @see copy_helper::create_copy()
      */
@@ -157,8 +157,8 @@ class copy {
      * @param int $userid User id to get the course copies for.
      * @param int $courseid The optional source course id to get copies for.
      * @return array $copies Details of the inprogress copies.
-     * @deprecated since Moodle 4.1 MDL-74548 - please use copy_helper::get_copies() instead.
-     * @todo MDL-75024 This method will be deleted in Moodle 4.5
+     * @deprecated since PowerEduc 4.1 MDL-74548 - please use copy_helper::get_copies() instead.
+     * @todo MDL-75024 This method will be deleted in PowerEduc 4.5
      * @see copy_helper::get_copies()
      */
     public static function get_copies(int $userid, int $courseid=0): array {

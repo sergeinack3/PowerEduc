@@ -23,7 +23,7 @@ Feature: Add a new custom file type
       | MIME type | application/x-powereduc-rules |
       | File icon | document                       |
       | Description type | Custom description specified in this form |
-      | Custom description | Moodle rules |
+      | Custom description | PowerEduc rules |
     And I press "Save changes"
     And I should see "application/x-powereduc-rules"
     And I log out
@@ -36,4 +36,4 @@ Feature: Add a new custom file type
       | Display resource description | 1             |
     And I am on "Course 1" course homepage
     Then I should see "Test file"
-    And I should see "Moodle rules" in the "span.resourcelinkdetails" "css_element"
+    And I should see "PowerEduc rules" in the "span.resourcelinkdetails" "css_element"

@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package    powereduccore
@@ -163,13 +163,13 @@ abstract class backup_general_helper extends backup_helper {
         }
         $info->original_course_contextid = $infoarr['original_course_contextid'];
         $info->original_system_contextid = $infoarr['original_system_contextid'];
-        // Moodle backup file don't have this option before 2.3
+        // PowerEduc backup file don't have this option before 2.3
         if (!empty($infoarr['include_file_references_to_external_content'])) {
             $info->include_file_references_to_external_content = 1;
         } else {
             $info->include_file_references_to_external_content = 0;
         }
-        // Introduced in Moodle 2.9.
+        // Introduced in PowerEduc 2.9.
         $info->original_course_format = '';
         if (!empty($infoarr['original_course_format'])) {
             $info->original_course_format = $infoarr['original_course_format'];
@@ -258,7 +258,7 @@ abstract class backup_general_helper extends backup_helper {
      * @param string $filepath absolute path to the MBZ file.
      * @param file_progress $progress Progress updates
      * @return stdClass containing information.
-     * @since Moodle 2.4
+     * @since PowerEduc 2.4
      */
     public static function get_backup_information_from_mbz($filepath, file_progress $progress = null) {
         global $CFG;

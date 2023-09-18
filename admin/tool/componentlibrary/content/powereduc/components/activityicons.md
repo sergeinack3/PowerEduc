@@ -13,7 +13,7 @@ tags:
 
 ## Activity icon types
 
-Moodle activity icons are single black svg icons that is stored in mod/PLUGINNAME/pix/icon.svg.
+PowerEduc activity icons are single black svg icons that is stored in mod/PLUGINNAME/pix/icon.svg.
 
 ### Minimal activity icons
 When rendered in a page with limited space the icons will be shown in their original design, for example on the course gradebook where activity show in the grade table header. Note: the icon is using the ```.icon``` css class for sizing.

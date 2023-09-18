@@ -62,4 +62,4 @@ The HTML and CSS for the component library pages are found here:
 Find the example page in `/admin/tool/componentlibrary/content/powereduc/components/example.md` and use it as a template for your new
 page. In the top part of the example.md file you will find the `frontmatter` configuration between the `---` characters. This part is used when hugo generates the page name and description. Change it to describe the new page you are creating.
 
-The document setup is not fixed at all, the example page is just there for inspiration when starting to describe a Moodle component.
+The document setup is not fixed at all, the example page is just there for inspiration when starting to describe a PowerEduc component.

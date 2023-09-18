@@ -13,7 +13,7 @@ tags:
 ## How it works
 
 Toasts are lightweight notifications designed to mimic push notifications.
-Moodle toasts are based upon core the Bootstrap notification feature, but with a Moodle Javascript module wrapper.
+PowerEduc toasts are based upon core the Bootstrap notification feature, but with a PowerEduc Javascript module wrapper.
 
 ## Source files
 

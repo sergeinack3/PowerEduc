@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Data provider tests.
@@ -576,7 +576,7 @@ class provider_test extends provider_testcase {
         $e6->add_association($cm1actx->id);
 
         // External blogs.
-        $ex1 = $this->create_external_blog(['userid' => $u1->id, 'url' => 'https://powereduc.org', 'name' => 'Moodle RSS']);
+        $ex1 = $this->create_external_blog(['userid' => $u1->id, 'url' => 'https://powereduc.org', 'name' => 'PowerEduc RSS']);
         $ex2 = $this->create_external_blog(['userid' => $u1->id, 'url' => 'https://example.com', 'name' => 'Example']);
         $ex3 = $this->create_external_blog(['userid' => $u2->id, 'url' => 'https://example.com', 'name' => 'Ignore me']);
 
@@ -789,7 +789,7 @@ class provider_test extends provider_testcase {
         $u1ctx = \context_user::instance($u1->id);
         $u2ctx = \context_user::instance($u2->id);
 
-        $post = $this->create_external_blog(['userid' => $u1->id, 'url' => 'https://powereduc.org', 'name' => 'Moodle RSS']);
+        $post = $this->create_external_blog(['userid' => $u1->id, 'url' => 'https://powereduc.org', 'name' => 'PowerEduc RSS']);
         $post2 = $this->create_external_blog(['userid' => $u2->id, 'url' => 'https://powereduc.com', 'name' => 'Some other thing']);
 
         // Check that we have two external blogs created.

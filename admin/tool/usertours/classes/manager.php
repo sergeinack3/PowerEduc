@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Tour manager.
@@ -856,13 +856,13 @@ class manager {
     }
 
     /**
-     * Make sure all of the default tours that are shipped with Moodle are created
+     * Make sure all of the default tours that are shipped with PowerEduc are created
      * and up to date with the latest version.
      */
     public static function update_shipped_tours() {
         global $DB, $CFG;
 
-        // A list of tours that are shipped with Moodle. They are in
+        // A list of tours that are shipped with PowerEduc. They are in
         // the format filename => version. The version value needs to
         // be increased if the tour has been updated.
         $shippedtours = [
@@ -875,15 +875,15 @@ class manager {
         // These are tours that we used to ship but don't ship any longer.
         // We do not remove them, but we do disable them.
         $unshippedtours = [
-            // Formerly included in Moodle 3.2.0.
+            // Formerly included in PowerEduc 3.2.0.
             'boost_administrator.json' => 1,
             'boost_course_view.json' => 1,
 
-            // Formerly included in Moodle 3.6.0.
+            // Formerly included in PowerEduc 3.6.0.
             '36_dashboard.json' => 3,
             '36_messaging.json' => 3,
 
-            // Formerly included in Moodle 3.11.0.
+            // Formerly included in PowerEduc 3.11.0.
             '311_activity_information_activity_page_student.json' => 2,
             '311_activity_information_activity_page_teacher.json' => 2,
             '311_activity_information_course_page_student.json' => 2,

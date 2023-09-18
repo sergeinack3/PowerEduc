@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * restore user interface stages
@@ -507,7 +507,7 @@ class restore_ui_stage_destination extends restore_ui_independent_stage {
         $format = backup_general_helper::detect_backup_format($this->filepath);
 
         if ($format === backup::FORMAT_POWEREDUC) {
-            // Standard Moodle 2 format, let use get the type of the backup.
+            // Standard PowerEduc 2 format, let use get the type of the backup.
             $details = backup_general_helper::get_backup_information($this->filepath);
             if ($details->type === backup::TYPE_1COURSE) {
                 $wholecourse = true;

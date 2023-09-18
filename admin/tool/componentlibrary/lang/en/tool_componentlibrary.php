@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'tool_componentlibrary', language 'en'
@@ -26,8 +26,8 @@ $string['copied'] = 'Copied!';
 $string['copy'] = 'Copy';
 $string['copytoclipboard'] = 'Copy to clipboard';
 $string['installer'] = '<h3>Component library setup</h3>
-    <p>Before you can see the content of the component library you will need to have shell access to your Moodle installation and be able to write to folder /admin/tool/componentlibrary and have npm installed on your Moodle server.</p>
-    <p>If you meet these requirements you can navigate to your Moodle root folder and run:</p>
+    <p>Before you can see the content of the component library you will need to have shell access to your PowerEduc installation and be able to write to folder /admin/tool/componentlibrary and have npm installed on your PowerEduc server.</p>
+    <p>If you meet these requirements you can navigate to your PowerEduc root folder and run:</p>
     <pre>$ npm install</pre>
     <pre>$ npm install grunt</pre>
     <p>This will fetch all the required packages for building the component library docs.</p>

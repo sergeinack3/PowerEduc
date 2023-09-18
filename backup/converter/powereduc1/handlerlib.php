@@ -1,22 +1,22 @@
 <?php
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines Moodle 1.9 backup conversion handlers
+ * Defines PowerEduc 1.9 backup conversion handlers
  *
  * Handlers are classes responsible for the actual conversion work. Their logic
  * is similar to the functionality provided by steps in plan based restore process.
@@ -945,7 +945,7 @@ class powereduc1_course_outline_handler extends powereduc1_xml_handler {
                     }
                     $this->xmlwriter->end_tag('grade_items');
                 }
-                $this->write_xml('grade_letters', array()); // no grade_letters in module context in Moodle 1.9
+                $this->write_xml('grade_letters', array()); // no grade_letters in module context in PowerEduc 1.9
                 $this->xmlwriter->end_tag('activity_gradebook');
                 $this->close_xml_writer();
 
@@ -1536,7 +1536,7 @@ class powereduc1_gradebook_handler extends powereduc1_xml_handler {
     /**
      * Processes one GRADE_LETTER data
      *
-     * In Moodle 1.9, all grade_letters are from course context only. Therefore
+     * In PowerEduc 1.9, all grade_letters are from course context only. Therefore
      * we put them here.
      */
     public function process_gradebook_grade_letter(array $data, array $raw) {
@@ -1638,7 +1638,7 @@ class powereduc1_gradebook_handler extends powereduc1_xml_handler {
     /**
      * Calculates the path to the grade_category
      *
-     * Moodle 1.9 backup does not store the grade_category's depth and path. This method is used
+     * PowerEduc 1.9 backup does not store the grade_category's depth and path. This method is used
      * to repopulate this information using the $this->categoryparent values.
      *
      * @param int $categoryid

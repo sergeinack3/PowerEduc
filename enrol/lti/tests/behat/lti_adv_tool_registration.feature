@@ -1,6 +1,6 @@
 @enrol @enrol_lti
 Feature: Register a platform with the tool
-  In order to share and consume a Moodle resource or activity over LTI Advantage
+  In order to share and consume a PowerEduc resource or activity over LTI Advantage
   As an admin
   I need to be able to manage platform registrations in the tool
 
@@ -136,30 +136,30 @@ Feature: Register a platform with the tool
     And I should see "No tool deployments found"
     And I follow "Add a deployment"
     And I set the following fields to these values:
-      | Deployment name | Sitewide deployment of Moodle on platform x |
+      | Deployment name | Sitewide deployment of PowerEduc on platform x |
       | Deployment ID   | 1a2b3c                                      |
     And I press "Cancel"
-    And I should not see "Sitewide deployment of Moodle on platform x"
+    And I should not see "Sitewide deployment of PowerEduc on platform x"
     And I should see "No tool deployments found"
     And I follow "Add a deployment"
     And I set the following fields to these values:
-      | Deployment name | Sitewide deployment of Moodle on platform x |
+      | Deployment name | Sitewide deployment of PowerEduc on platform x |
       | Deployment ID | 1a2b3c                                        |
     And I press "Save changes"
     Then I should see "Deployment added"
-    And I should see "1a2b3c" in the "Sitewide deployment of Moodle on platform x" "table_row"
+    And I should see "1a2b3c" in the "Sitewide deployment of PowerEduc on platform x" "table_row"
     And I should not see "No tool deployments found"
-    And "Delete" "link" should exist in the "Sitewide deployment of Moodle on platform x" "table_row"
+    And "Delete" "link" should exist in the "Sitewide deployment of PowerEduc on platform x" "table_row"
     And I navigate to "Plugins > Enrolments > Publish as LTI tool > Tool registration" in site administration
     And "1" "link" should exist in the "My test platform" "table_row"
     And I click on "1" "link" in the "My test platform" "table_row"
-    And I should see "1a2b3c" in the "Sitewide deployment of Moodle on platform x" "table_row"
+    And I should see "1a2b3c" in the "Sitewide deployment of PowerEduc on platform x" "table_row"
     And I follow "Add a deployment"
     And I set the following fields to these values:
-      | Deployment name | Course context deployment of Moodle on platform x |
+      | Deployment name | Course context deployment of PowerEduc on platform x |
       | Deployment ID | 4d5e6f                                              |
     And I press "Save changes"
-    And I should see "4d5e6f" in the "Course context deployment of Moodle on platform x" "table_row"
+    And I should see "4d5e6f" in the "Course context deployment of PowerEduc on platform x" "table_row"
     And I navigate to "Plugins > Enrolments > Publish as LTI tool > Tool registration" in site administration
     And "2" "link" should exist in the "My test platform" "table_row"
 

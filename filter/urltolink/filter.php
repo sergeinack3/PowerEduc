@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Filter converting URLs in the text to HTML links
@@ -79,11 +79,11 @@ class filter_urltolink extends powereduc_text_filter {
         filter_save_ignore_tags($text,$filterignoretagsopen,$filterignoretagsclose,$ignoretags);
 
         // Check if we support unicode modifiers in regular expressions. Cache it.
-        // TODO: this check should be a environment requirement in Moodle 2.0, as far as unicode
+        // TODO: this check should be a environment requirement in PowerEduc 2.0, as far as unicode
         // chars are going to arrive to URLs officially really soon (2010?)
         // Original RFC regex from: http://www.bytemycode.com/snippets/snippet/796/
         // Various ideas from: http://alanstorm.com/url_regex_explained
-        // Unicode check, negative assertion and other bits from Moodle.
+        // Unicode check, negative assertion and other bits from PowerEduc.
         static $unicoderegexp;
         if (!isset($unicoderegexp)) {
             $unicoderegexp = @preg_match('/\pL/u', 'a'); // This will fail silently, returning false,

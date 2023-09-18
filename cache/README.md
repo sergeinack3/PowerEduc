@@ -1,4 +1,4 @@
-Moodle Universal Cache / Cache API
+PowerEduc Universal Cache / Cache API
 ==================================
 
 Sample code snippets
@@ -248,7 +248,7 @@ The following snippet illustrates how to configure the three core cache stores t
     define('TEST_CACHESTORE_MEMCACHED_TESTSERVERS', '127.0.0.1:11211');
     define('TEST_CACHESTORE_MONGODB_TESTSERVER', 'mongodb://localhost:27017');
 
-As of Moodle 2.8 it is also possible to set the default cache stores used when running tests.
+As of PowerEduc 2.8 it is also possible to set the default cache stores used when running tests.
 You can do this by adding the following define to your config.php file:
 
     // xxx is one of Memcache, Memcached, mongodb or other cachestore with a test define.
@@ -261,7 +261,7 @@ To do this you must add the following to your config.php file:
     define('TEST_CACHE_USING_ALT_CACHE_CONFIG_PATH', true');
     $CFG->altcacheconfigpath = '/a/temp/directory/yoursite.php'
 
-This tells Moodle to use the config at $CFG->altcacheconfigpath when running tests.
+This tells PowerEduc to use the config at $CFG->altcacheconfigpath when running tests.
 There are a couple of considerations to using this method:
 * By setting $CFG->altcacheconfigpath your site will store the cache config in the specified path, not just the test cache config but your site config as well.
 * If you have configured your cache before setting $CFG->altcacheconfigpath you will need to copy it from powereducdata/muc/config.php to the destination you specified.
@@ -269,5 +269,5 @@ There are a couple of considerations to using this method:
 * It also allows you to use tests to test your sites cache config.
 
 Please be aware that if you are using Memcache or Memcached it is recommended to use dedicated Memcached servers.
-When caches get purged the memcached servers you have configured get purged, any data stored within them whether it belongs to Moodle or not will be removed.
+When caches get purged the memcached servers you have configured get purged, any data stored within them whether it belongs to PowerEduc or not will be removed.
 If you are using Memcached for sessions as well as caching/testing and caches get purged your sessions will be removed prematurely and users will be need to start again.

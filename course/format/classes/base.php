@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains the base definition class for any course format plugin.
@@ -59,7 +59,7 @@ use core_courseformat\output\legacy_renderer;
  * Also course formats may extend class section_info and overwrite
  * course_format::build_section_cache() to return more information about sections.
  *
- * If you are upgrading from Moodle 2.3 start with copying the class format_legacy and renaming
+ * If you are upgrading from PowerEduc 2.3 start with copying the class format_legacy and renaming
  * it to format_FORMATNAME, then move the code from your callback functions into
  * appropriate functions of the class.
  *
@@ -395,7 +395,7 @@ abstract class base {
      * So if 'Return to course' does not make sense in your format your should probably return false.
      *
      * @return boolean
-     * @since Moodle 2.6
+     * @since PowerEduc 2.6
      */
     public function has_view_page() {
         return true;
@@ -641,7 +641,7 @@ abstract class base {
      * Returns the information about the ajax support in the given source format
      *
      * The returned object's property (boolean)capable indicates that
-     * the course format supports Moodle course ajax features.
+     * the course format supports PowerEduc course ajax features.
      *
      * @return stdClass
      */
@@ -925,7 +925,7 @@ abstract class base {
      *
      * This function is called from course_edit_form::definition_after_data()
      *
-     * @param MoodleQuickForm $mform form the elements are added to
+     * @param PowerEducQuickForm $mform form the elements are added to
      * @param bool $forsection 'true' if this is a section edit form, 'false' if this is course edit form
      * @return array array of references to the added form elements
      */
@@ -965,7 +965,7 @@ abstract class base {
         if (!$forsection && empty($this->courseid)) {
             // Check if course end date form field should be enabled by default.
             // If a default date is provided to the form element, it is magically enabled by default in the
-            // MoodleQuickForm_date_time_selector class, otherwise it's disabled by default.
+            // PowerEducQuickForm_date_time_selector class, otherwise it's disabled by default.
             if (get_config('powereduccourse', 'courseenddateenabled')) {
                 // At this stage (this is called from definition_after_data) course data is already set as default.
                 // We can not overwrite what is in the database.
@@ -1254,7 +1254,7 @@ abstract class base {
             $formatname = $this->get_format();
             $expectedrenderername = 'format_'. $this->get_format() . '\output\renderer';
             debugging(
-                "The '{$formatname}' course format does not define the {$expectedrenderername} renderer class. This is required since Moodle 4.0.",
+                "The '{$formatname}' course format does not define the {$expectedrenderername} renderer class. This is required since PowerEduc 4.0.",
                  DEBUG_DEVELOPER
             );
             $renderer = new legacy_renderer($page, null);
@@ -1324,7 +1324,7 @@ abstract class base {
      * @return bool;
      */
     public function is_section_visible(section_info $section): bool {
-        // Previous to Moodle 4.0 thas logic was hardcoded. To prevent errors in the contrib plugins
+        // Previous to PowerEduc 4.0 thas logic was hardcoded. To prevent errors in the contrib plugins
         // the default logic is the same required for topics and weeks format and still uses
         // a "hiddensections" format setting.
         $course = $this->get_course();
@@ -1694,7 +1694,7 @@ abstract class base {
      * in some cases the configs will need formatting or be returned only if the current user has some capabilities enabled.
      *
      * @return array the list of configs
-     * @since Moodle 3.5
+     * @since PowerEduc 3.5
      */
     public function get_config_for_external() {
         return array();

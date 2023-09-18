@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Special settings for auth_shibboleth WAYF.
@@ -62,7 +62,7 @@ class auth_shibboleth_admin_setting_special_wayf_select extends admin_setting_co
             set_config('alternateloginurl', $CFG->wwwroot.'/auth/shibboleth/login.php');
         } else {
             // Check if integrated WAYF was enabled and is now turned off.
-            // If it was and only then, reset the Moodle alternate URL.
+            // If it was and only then, reset the PowerEduc alternate URL.
             $oldsetting = get_config('auth_shibboleth', 'alt_login');
             if (isset($oldsetting) and $oldsetting == 'on') {
                 set_config('alt_login', 'off', 'auth_shibboleth');

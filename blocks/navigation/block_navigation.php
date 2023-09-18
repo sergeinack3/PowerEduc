@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file contains classes used to manage the navigation structures in Moodle
- * and was introduced as part of the changes occuring in Moodle 2.0
+ * This file contains classes used to manage the navigation structures in PowerEduc
+ * and was introduced as part of the changes occuring in PowerEduc 2.0
  *
- * @since     Moodle 2.0
+ * @since     PowerEduc 2.0
  * @package   block_navigation
  * @copyright 2009 Sam Hemelryk
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -27,7 +27,7 @@
 /**
  * The global navigation tree block class
  *
- * Used to produce the global navigation block new to Moodle 2.0
+ * Used to produce the global navigation block new to PowerEduc 2.0
  *
  * @package   block_navigation
  * @category  navigation
@@ -86,7 +86,7 @@ class block_navigation extends block_base {
 
     /**
      * The navigation block cannot be hidden by default as it is integral to
-     * the navigation of Moodle.
+     * the navigation of PowerEduc.
      *
      * @return false
      */
@@ -331,7 +331,7 @@ class block_navigation extends block_base {
      * Return the plugin config settings for external functions.
      *
      * @return stdClass the configs for both the block instance and plugin
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public function get_config_for_external() {
         // Return all settings for all users since it is safe (no private keys, etc..).

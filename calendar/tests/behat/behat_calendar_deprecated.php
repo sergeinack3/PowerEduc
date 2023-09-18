@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 // NOTE: no POWEREDUC_INTERNAL test here, this file may be required by behat before including /config.php.
 
@@ -39,7 +39,7 @@ class behat_calendar_deprecated extends behat_deprecated_base {
      * @param int $day The day of the current month
      *
      * @deprecated since 4.0 MDL-72810. This tested the three-month calendar pseudo block, which has been removed.
-     * @todo MDL-73117 This will be deleted in Moodle 4.4.
+     * @todo MDL-73117 This will be deleted in PowerEduc 4.4.
      */
     public function i_hover_over_day_of_this_month_in_calendar($day) {
         $this->deprecated_message('behat_calendar::i_hover_over_day_of_this_month_in_mini_calendar_block');
@@ -65,7 +65,7 @@ class behat_calendar_deprecated extends behat_deprecated_base {
      * @param int $day The day of the current month
      *
      * @deprecated since 4.0 MDL-72810. This tested the three-month calendar pseudo block, which has been removed.
-     * @todo MDL-73117 This will be deleted in Moodle 4.4.
+     * @todo MDL-73117 This will be deleted in PowerEduc 4.4.
      */
     public function i_click_day_of_this_month_in_calendar($day) {
         $this->deprecated_message([

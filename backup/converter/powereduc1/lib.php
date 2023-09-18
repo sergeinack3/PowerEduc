@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Provides classes used by the powereduc1 converter
@@ -36,7 +36,7 @@ require_once($CFG->dirroot . '/backup/util/xml/contenttransformer/xml_contenttra
 require_once(__DIR__ . '/handlerlib.php');
 
 /**
- * Converter of Moodle 1.9 backup into Moodle 2.x format
+ * Converter of PowerEduc 1.9 backup into PowerEduc 2.x format
  */
 class powereduc1_converter extends base_converter {
 
@@ -81,10 +81,10 @@ class powereduc1_converter extends base_converter {
     }
 
     /**
-     * Detects the Moodle 1.9 format of the backup directory
+     * Detects the PowerEduc 1.9 format of the backup directory
      *
      * @param string $tempdir the name of the backup directory
-     * @return null|string backup::FORMAT_POWEREDUC1 if the Moodle 1.9 is detected, null otherwise
+     * @return null|string backup::FORMAT_POWEREDUC1 if the PowerEduc 1.9 is detected, null otherwise
      */
     public static function detect_format($tempdir) {
         global $CFG;
@@ -525,8 +525,8 @@ class powereduc1_converter extends base_converter {
     /**
      * Generates an artificial context id
      *
-     * Moodle 1.9 backups do not contain any context information. But we need them
-     * in Moodle 2.x format so here we generate fictive context id for every given
+     * PowerEduc 1.9 backups do not contain any context information. But we need them
+     * in PowerEduc 2.x format so here we generate fictive context id for every given
      * context level + instance combo.
      *
      * CONTEXT_SYSTEM and CONTEXT_COURSE ignore the $instance as they represent a
@@ -789,14 +789,14 @@ class powereduc1_xml_transformer extends xml_contenttransformer {
         // the content should be a string. If array or object is given, try our best recursively
         // but inform the developer
         if (is_array($content)) {
-            debugging('Moodle1 XML transformer should not process arrays but plain content always', DEBUG_DEVELOPER);
+            debugging('PowerEduc1 XML transformer should not process arrays but plain content always', DEBUG_DEVELOPER);
             foreach($content as $key => $plaincontent) {
                 $content[$key] = $this->process($plaincontent);
             }
             return $content;
 
         } else if (is_object($content)) {
-            debugging('Moodle1 XML transformer should not process objects but plain content always', DEBUG_DEVELOPER);
+            debugging('PowerEduc1 XML transformer should not process objects but plain content always', DEBUG_DEVELOPER);
             foreach((array)$content as $key => $plaincontent) {
                 $content[$key] = $this->process($plaincontent);
             }
@@ -1159,7 +1159,7 @@ class convert_path_exception extends powereduc_exception {
 /**
  * The class responsible for files migration
  *
- * The files in Moodle 1.9 backup are stored in moddata, user_files, group_files,
+ * The files in PowerEduc 1.9 backup are stored in moddata, user_files, group_files,
  * course_files and site_files folders.
  */
 class powereduc1_file_manager implements loggable {

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'auth_mnet', language 'en'.
@@ -23,7 +23,7 @@
  */
 
 $string['auth_mnet_auto_add_remote_users'] = 'When set to Yes, a local user record is auto-created when a remote user logs in for the first time.';
-$string['auth_mnetdescription'] = 'Users are authenticated according to the web of trust defined in your Moodle Network settings.';
+$string['auth_mnetdescription'] = 'Users are authenticated according to the web of trust defined in your PowerEduc Network settings.';
 $string['auth_mnet_roamin'] = 'These host\'s users can roam in to your site';
 $string['auth_mnet_roamout'] = 'Your users can roam out to these hosts';
 $string['auth_mnet_rpc_negotiation_timeout'] = 'The timeout in seconds for authentication over the XMLRPC transport.';
@@ -37,7 +37,7 @@ $string['sso_sp_description'] = 'Publish  this service to allow authenticated us
 $string['sso_sp_name'] = 'SSO (Service Provider)';
 $string['pluginname'] = 'MNet authentication';
 $string['privacy:metadata:external:mahara'] = 'This plugin can send data externally to a linked Mahara application.';
-$string['privacy:metadata:external:powereduc'] = 'This plugin can send data externally to a linked Moodle application.';
+$string['privacy:metadata:external:powereduc'] = 'This plugin can send data externally to a linked PowerEduc application.';
 $string['privacy:metadata:mnet_external:address'] = 'The address of the user.';
 $string['privacy:metadata:mnet_external:alternatename'] = 'An alternative name for the user.';
 $string['privacy:metadata:mnet_external:autosubscribe'] = 'A preference as to if the user should be auto-subscribed to forums the user posts in.';
@@ -95,7 +95,7 @@ $string['privacy:metadata:mnet_session:userid'] = 'ID of the user jumping to rem
 $string['privacy:metadata:mnet_session:username'] = 'Username of the user jumping to remote system.';
 $string['unknownhost'] = 'Unknown host';
 
-// Deprecated since Moodle 3.11.
+// Deprecated since PowerEduc 3.11.
 $string['privacy:metadata:mnet_external:aim'] = 'The AIM identifier of the user';
 $string['privacy:metadata:mnet_external:icq'] = 'The ICQ number of the user.';
 $string['privacy:metadata:mnet_external:msn'] = 'The MSN identifier of the user';

@@ -1,4 +1,4 @@
-Description of phpCAS import into Moodle
+Description of phpCAS import into PowerEduc
 
 Last release can be found at https://github.com/apereo/phpCAS/releases
 
@@ -7,10 +7,10 @@ NOTICE:
  * Composer version 2.2.4 2022-01-08 12:30:42
 
 STEPS:
- * Make sure you're using the lowest supported PHP version for the given release (e.g. PHP 7.4 for Moodle 4.1)
- * Create a temporary folder outside your Moodle installation
+ * Make sure you're using the lowest supported PHP version for the given release (e.g. PHP 7.4 for PowerEduc 4.1)
+ * Create a temporary folder outside your PowerEduc installation
  * Execute 'composer require apereo/phpcas:VERSION'
- * Check any new libraries that have been added and make sure they do not exist in Moodle already.
+ * Check any new libraries that have been added and make sure they do not exist in PowerEduc already.
  * Remove the old 'vendor' directory in auth/cas/CAS/
  * Copy contents of 'vendor' directory
  * Create a commit with only the library changes.

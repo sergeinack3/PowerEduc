@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: "Icons"
-description: "Moodle icons are rendered with fontawesome or as small images"
+description: "PowerEduc icons are rendered with fontawesome or as small images"
 weight: 40
 date: 2020-02-04T09:40:32+01:00
 draft: false
@@ -11,7 +11,7 @@ tags:
 
 ## Description
 
-Most Moodle icons are rendered using the 4.7 verions of [Fontawesome](https://fontawesome.com/v4.7.0/). Iconnames are mapped from the Moodle icon name to the fontawesome icon names in `/lib/classes/output/icon_system_fontawesome.php`
+Most PowerEduc icons are rendered using the 4.7 verions of [Fontawesome](https://fontawesome.com/v4.7.0/). Iconnames are mapped from the PowerEduc icon name to the fontawesome icon names in `/lib/classes/output/icon_system_fontawesome.php`
 
 If needed a theme can override this map and provide its own mapping.
 

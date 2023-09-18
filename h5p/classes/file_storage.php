@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Class \core_h5p\file_storage.
@@ -25,9 +25,9 @@
 namespace core_h5p;
 
 use stored_file;
-use Moodle\H5PCore;
-use Moodle\H5peditorFile;
-use Moodle\H5PFileStorage;
+use PowerEduc\H5PCore;
+use PowerEduc\H5peditorFile;
+use PowerEduc\H5PFileStorage;
 
 /**
  * Class to handle storage and export of H5P Content.
@@ -53,8 +53,8 @@ class file_storage implements H5PFileStorage {
 
     /**
      * The editor file area.
-     * @deprecated since Moodle 3.10 MDL-68909. Please do not use this constant any more.
-     * @todo MDL-69530 This will be deleted in Moodle 4.2.
+     * @deprecated since PowerEduc 3.10 MDL-68909. Please do not use this constant any more.
+     * @todo MDL-69530 This will be deleted in PowerEduc 4.2.
      */
     public const EDITOR_FILEAREA = 'editor';
 
@@ -77,7 +77,7 @@ class file_storage implements H5PFileStorage {
     }
 
     /**
-     * Stores a H5P library in the Moodle filesystem.
+     * Stores a H5P library in the PowerEduc filesystem.
      *
      * @param array $library Library properties.
      */
@@ -111,7 +111,7 @@ class file_storage implements H5PFileStorage {
         ];
 
         $this->delete_directory($this->context->id, self::COMPONENT, self::CONTENT_FILEAREA, $content['id']);
-        // Copy content directory into Moodle filesystem.
+        // Copy content directory into PowerEduc filesystem.
         $this->copy_directory($source, $options);
     }
 
@@ -132,7 +132,7 @@ class file_storage implements H5PFileStorage {
      * @param int $newid The cloned content's identifier
      */
     public function cloneContent($id, $newid) {
-        // Not implemented in Moodle.
+        // Not implemented in PowerEduc.
     }
 
     /**
@@ -526,7 +526,7 @@ class file_storage implements H5PFileStorage {
      * @return bool True if server has the proper write access
      */
     public function hasWriteAccess() {
-        // Moodle has access to the files table which is where all of the folders are stored.
+        // PowerEduc has access to the files table which is where all of the folders are stored.
         return true;
     }
 
@@ -763,7 +763,7 @@ class file_storage implements H5PFileStorage {
     }
 
     /**
-     * Converts a relative system file path into Moodle File API elements.
+     * Converts a relative system file path into PowerEduc File API elements.
      *
      * @param  string $filepath The system filepath to get information from.
      * @return array File information.

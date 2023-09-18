@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * IMS Enterprise file enrolment plugin.
@@ -127,9 +127,9 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
             $categoryseparator = trim($this->get_config('categoryseparator'));
             $categoryidnumber = $this->get_config('categoryidnumber');
 
-            // Make sure we understand how to map the IMS-E roles to Moodle roles.
+            // Make sure we understand how to map the IMS-E roles to PowerEduc roles.
             $this->load_role_mappings();
-            // Make sure we understand how to map the IMS-E course names to Moodle course names.
+            // Make sure we understand how to map the IMS-E course names to PowerEduc course names.
             $this->load_course_mappings();
 
             $md5 = md5_file($filename); // NB We'll write this value back to the database at the end of the cron.
@@ -206,7 +206,7 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
 
         if (!empty($mailadmins) && $fileisnew) {
             $timeelapsed = isset($timeelapsed) ? $timeelapsed : 0;
-            $msg = "An IMS enrolment has been carried out within Moodle.\nTime taken: $timeelapsed seconds.\n\n";
+            $msg = "An IMS enrolment has been carried out within PowerEduc.\nTime taken: $timeelapsed seconds.\n\n";
             if (!empty($logtolocation)) {
                 if ($this->logfp) {
                     $msg .= "Log data has been written to:\n";
@@ -228,7 +228,7 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
             $eventdata->name              = 'imsenterprise_enrolment';
             $eventdata->userfrom          = get_admin();
             $eventdata->userto            = get_admin();
-            $eventdata->subject           = "Moodle IMS Enterprise enrolment notification";
+            $eventdata->subject           = "PowerEduc IMS Enterprise enrolment notification";
             $eventdata->fullmessage       = $msg;
             $eventdata->fullmessageformat = FORMAT_PLAIN;
             $eventdata->fullmessagehtml   = '';
@@ -293,7 +293,7 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
     }
 
     /**
-     * Process the group tag. This defines a Moodle course.
+     * Process the group tag. This defines a PowerEduc course.
      *
      * @param string $tagcontents The raw contents of the XML element
      */
@@ -357,11 +357,11 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
                 $dbcourse = $DB->get_record('course', array('idnumber' => $coursecode));
                 if (!$dbcourse) {
                     if (!$createnewcourses) {
-                        $this->log_line("Course $coursecode not found in Moodle's course idnumbers.");
+                        $this->log_line("Course $coursecode not found in PowerEduc's course idnumbers.");
                     } else {
 
                         // Create the (hidden) course(s) if not found.
-                        $courseconfig = get_config('powereduccourse'); // Load Moodle Course shell defaults.
+                        $courseconfig = get_config('powereduccourse'); // Load PowerEduc Course shell defaults.
 
                         // New course.
                         $course = new stdClass();
@@ -404,7 +404,7 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
 
                         $course = create_course($course);
 
-                        $this->log_line("Created course $coursecode in Moodle (Moodle ID is $course->id)");
+                        $this->log_line("Created course $coursecode in PowerEduc (PowerEduc ID is $course->id)");
                     }
                 } else if (($recstatus == self::IMSENTERPRISE_UPDATE) && $dbcourse) {
                     if ($updatecourses) {
@@ -426,7 +426,7 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
                         if ($hasupdates) {
                             update_course($dbcourse);
                             $courseid = $dbcourse->id;
-                            $this->log_line("Updated course $coursecode in Moodle (Moodle ID is $courseid)");
+                            $this->log_line("Updated course $coursecode in PowerEduc (PowerEduc ID is $courseid)");
                         }
                     } else {
                         // Update courses option is not enabled. Ignore.
@@ -437,14 +437,14 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
                     $courseid = $dbcourse->id;
                     $show = false;
                     course_change_visibility($courseid, $show);
-                    $this->log_line("Updated (set to hidden) course $coursecode in Moodle (Moodle ID is $courseid)");
+                    $this->log_line("Updated (set to hidden) course $coursecode in PowerEduc (PowerEduc ID is $courseid)");
                 }
             }
         }
     }
 
     /**
-     * Process the person tag. This defines a Moodle user.
+     * Process the person tag. This defines a PowerEduc user.
      *
      * @param string $tagcontents The raw contents of the XML element
      */
@@ -601,7 +601,7 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
     }
 
     /**
-     * Process the membership tag. This defines whether the specified Moodle users
+     * Process the membership tag. This defines whether the specified PowerEduc users
      * should be added/removed as teachers/students.
      *
      * @param string $tagcontents The raw contents of the XML element
@@ -685,7 +685,7 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
                 $memberstoreobj->timemodified = time();
                 if ($memberstoreobj->userid) {
 
-                    // Decide the "real" role (i.e. the Moodle role) that this user should be assigned to.
+                    // Decide the "real" role (i.e. the PowerEduc role) that this user should be assigned to.
                     // Zero means this roletype is supposed to be skipped.
                     $powereducroleid = (isset($member->roletype) && isset($this->rolemappings[$member->roletype]))
                         ? $this->rolemappings[$member->roletype] : null;
@@ -881,7 +881,7 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
 
     /**
      * Load the role mappings (from the config), so we can easily refer to
-     * how an IMS-E role corresponds to a Moodle role
+     * how an IMS-E role corresponds to a PowerEduc role
      */
     protected function load_role_mappings() {
         require_once('locallib.php');
@@ -897,7 +897,7 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
 
     /**
      * Load the name mappings (from the config), so we can easily refer to
-     * how an IMS-E course properties corresponds to a Moodle course properties
+     * how an IMS-E course properties corresponds to a PowerEduc course properties
      */
     protected function load_course_mappings() {
         require_once('locallib.php');
@@ -1007,7 +1007,7 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
                     $this->log_line("Created new (hidden) category '$fullnestedcatname'");
                 } else {
                     // If not found and not allowed to create, stick with default.
-                    $this->log_line('Category ' . $categoryinfo . ' not found in Moodle database. Using default category instead.');
+                    $this->log_line('Category ' . $categoryinfo . ' not found in PowerEduc database. Using default category instead.');
                     $catid = $this->get_default_category_id();
                     break;
                 }

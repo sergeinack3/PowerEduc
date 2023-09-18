@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains the default section course format output class.
@@ -66,7 +66,7 @@ abstract class section_renderer extends core_course_renderer {
      * @deprecated since 4.0
      *
      * Note: this method exists only for compatibilitiy with legacy course formats. Legacy formats
-     * depends on $this->courserenderer to access the course renderer methods. Since Moodle 4.0
+     * depends on $this->courserenderer to access the course renderer methods. Since PowerEduc 4.0
      * core_courseformat\output\section_renderer extends core_course_renderer and all metdhos can be used directly from $this.
      *
      * @param powereduc_page $page
@@ -444,7 +444,7 @@ abstract class section_renderer extends core_course_renderer {
     /**
      * Old method to print section edit controls. Do not use it!
      *
-     * @deprecated since Moodle 3.0 MDL-48947 - Use core_courseformat\output\section_renderer::section_edit_control_items() instead
+     * @deprecated since PowerEduc 3.0 MDL-48947 - Use core_courseformat\output\section_renderer::section_edit_control_items() instead
      */
     protected function section_edit_controls() {
         throw new coding_exception('section_edit_controls() can not be used anymore. Please use ' .

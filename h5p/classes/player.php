@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * H5P player class.
@@ -368,7 +368,7 @@ class player {
         $settings = helper::get_core_assets();
         // Added here because in the helper we don't have the h5p content id.
         $settings['powereducLibraryPaths'] = $this->core->get_dependency_roots($this->h5pid);
-        // Add also the Moodle component where the results will be tracked.
+        // Add also the PowerEduc component where the results will be tracked.
         $settings['powereducComponent'] = $this->component;
         if (!empty($settings['powereducComponent'])) {
             $settings['reportingIsEnabled'] = true;
@@ -384,7 +384,7 @@ class player {
             $systemcontext = \context_system::instance();
             $h5ppath = "/pluginfile.php/{$systemcontext->id}/core_h5p";
 
-            // Schedule JavaScripts for loading through Moodle.
+            // Schedule JavaScripts for loading through PowerEduc.
             foreach ($files['scripts'] as $script) {
                 $url = $script->path . $script->version;
 
@@ -397,7 +397,7 @@ class player {
                 $this->jsrequires[] = new \powereduc_url($isexternal ? $url : $CFG->wwwroot . $url);
             }
 
-            // Schedule stylesheets for loading through Moodle.
+            // Schedule stylesheets for loading through PowerEduc.
             foreach ($files['styles'] as $style) {
                 $url = $style->path . $style->version;
 
@@ -497,7 +497,7 @@ class player {
     /**
      * Get the encoded URL for embeding this H5P content.
      * @param  string $url The URL of the .h5p file.
-     * @param string $component optional Moodle component to send xAPI tracking
+     * @param string $component optional PowerEduc component to send xAPI tracking
      *
      * @return \powereduc_url The embed URL.
      */

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -37,7 +37,7 @@ require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
  * @category   external
  * @copyright  2018 Matt Porritt <mattp@catalyst-au.net>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 3.7
+ * @since PowerEduc 3.7
  */
 class core_backup_external extends external_api {
 
@@ -45,7 +45,7 @@ class core_backup_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function get_async_backup_progress_parameters() {
         return new external_function_parameters(
@@ -65,7 +65,7 @@ class core_backup_external extends external_api {
      * @param string $backupids The ids of the backup to get progress for.
      * @param int $contextid The context the backup relates to.
      * @return array $results The array of results.
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function get_async_backup_progress($backupids, $contextid) {
         // Release session lock.
@@ -102,7 +102,7 @@ class core_backup_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function get_async_backup_progress_returns() {
         return new external_multiple_structure(
@@ -121,7 +121,7 @@ class core_backup_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function get_async_backup_links_backup_parameters() {
         return new external_function_parameters(
@@ -138,7 +138,7 @@ class core_backup_external extends external_api {
      *
      * @param string $filename The file name of the backup file.
      * @param int $contextid The context the backup relates to.
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function get_async_backup_links_backup($filename, $contextid) {
         // Release session lock.
@@ -173,7 +173,7 @@ class core_backup_external extends external_api {
      * Returns description of method result value.
      *
      * @return external_description
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function get_async_backup_links_backup_returns() {
         return new external_single_structure(
@@ -187,7 +187,7 @@ class core_backup_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function get_async_backup_links_restore_parameters() {
         return new external_function_parameters(
@@ -205,7 +205,7 @@ class core_backup_external extends external_api {
      * @param string $backupid The id of the backup record.
      * @param int $contextid The context the restore relates to.
      * @return array $results The array of results.
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function get_async_backup_links_restore($backupid, $contextid) {
         // Release session lock.
@@ -239,7 +239,7 @@ class core_backup_external extends external_api {
      * Returns description of method result value.
      *
      * @return external_description
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function get_async_backup_links_restore_returns() {
         return new external_single_structure(
@@ -252,7 +252,7 @@ class core_backup_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.9
+     * @since PowerEduc 3.9
      */
     public static function get_copy_progress_parameters() {
         return new external_function_parameters(
@@ -276,7 +276,7 @@ class core_backup_external extends external_api {
      *
      * @param array $copies Array of ids.
      * @return array $results The array of results.
-     * @since Moodle 3.9
+     * @since PowerEduc 3.9
      */
     public static function get_copy_progress($copies) {
         // Release session lock.
@@ -322,7 +322,7 @@ class core_backup_external extends external_api {
      * Returns description of method result value.
      *
      * @return external_description
-     * @since Moodle 3.9
+     * @since PowerEduc 3.9
      */
     public static function get_copy_progress_returns() {
         return new external_multiple_structure(
@@ -341,7 +341,7 @@ class core_backup_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.9
+     * @since PowerEduc 3.9
      */
     public static function submit_copy_form_parameters() {
         return new external_function_parameters(
@@ -401,7 +401,7 @@ class core_backup_external extends external_api {
      * Returns description of method result value.
      *
      * @return external_description
-     * @since Moodle 3.9
+     * @since PowerEduc 3.9
      */
     public static function submit_copy_form_returns() {
         return new external_value(PARAM_RAW, 'JSON response.');

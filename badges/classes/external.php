@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Badges external API
@@ -21,7 +21,7 @@
  * @category   external
  * @copyright  2016 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.1
+ * @since      PowerEduc 3.1
  */
 
 defined('POWEREDUC_INTERNAL') || die;
@@ -38,7 +38,7 @@ use core_badges\external\user_badge_exporter;
  * @category   external
  * @copyright  2016 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.1
+ * @since      PowerEduc 3.1
  */
 class core_badges_external extends external_api {
 
@@ -46,7 +46,7 @@ class core_badges_external extends external_api {
      * Describes the parameters for get_user_badges.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_user_badges_parameters() {
         return new external_function_parameters (
@@ -71,7 +71,7 @@ class core_badges_external extends external_api {
      * @param string  $search   a simple string to search for
      * @param bool $onlypublic  whether to return only public badges
      * @return array array containing warnings and the awarded badges
-     * @since  Moodle 3.1
+     * @since  PowerEduc 3.1
      * @throws powereduc_exception
      */
     public static function get_user_badges($userid = 0, $courseid = 0, $page = 0, $perpage = 0, $search = '', $onlypublic = false) {
@@ -191,7 +191,7 @@ class core_badges_external extends external_api {
      * Describes the get_user_badges return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_user_badges_returns() {
         return new external_single_structure(

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -40,7 +40,7 @@ require_once(__DIR__ . "/lib.php");
  * @category   external
  * @copyright  2011 Jerome Mouneyrac
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.2
+ * @since PowerEduc 2.2
  */
 class core_course_external extends external_api {
 
@@ -48,8 +48,8 @@ class core_course_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.9 Options available
-     * @since Moodle 2.2
+     * @since PowerEduc 2.9 Options available
+     * @since PowerEduc 2.2
      */
     public static function get_course_contents_parameters() {
         return new external_function_parameters(
@@ -71,7 +71,7 @@ class core_course_external extends external_api {
                                     'value' => new external_value(PARAM_RAW, 'the value of the option,
                                                                     this param is personaly validated in the external function.')
                               )
-                      ), 'Options, used since Moodle 2.9', VALUE_DEFAULT, array())
+                      ), 'Options, used since PowerEduc 2.9', VALUE_DEFAULT, array())
                 )
         );
     }
@@ -80,10 +80,10 @@ class core_course_external extends external_api {
      * Get course contents
      *
      * @param int $courseid course id
-     * @param array $options Options for filtering the results, used since Moodle 2.9
+     * @param array $options Options for filtering the results, used since PowerEduc 2.9
      * @return array
-     * @since Moodle 2.9 Options available
-     * @since Moodle 2.2
+     * @since PowerEduc 2.9 Options available
+     * @since PowerEduc 2.2
      */
     public static function get_course_contents($courseid, $options = array()) {
         global $CFG, $DB, $USER, $PAGE;
@@ -424,7 +424,7 @@ class core_course_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function get_course_contents_returns() {
         $completiondefinition = \core_completion\external\completion_info_exporter::get_read_structure(VALUE_DEFAULT, []);
@@ -541,7 +541,7 @@ class core_course_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     public static function get_courses_parameters() {
         return new external_function_parameters(
@@ -561,7 +561,7 @@ class core_course_external extends external_api {
      *
      * @param array $options It contains an array (list of ids)
      * @return array
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function get_courses($options = array()) {
         global $CFG, $DB;
@@ -677,7 +677,7 @@ class core_course_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function get_courses_returns() {
         return new external_multiple_structure(
@@ -763,7 +763,7 @@ class core_course_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function create_courses_parameters() {
         $courseconfig = get_config('powereduccourse'); //needed for many default values
@@ -845,7 +845,7 @@ class core_course_external extends external_api {
      *
      * @param array $courses
      * @return array courses (id and shortname only)
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function create_courses($courses) {
         global $CFG, $DB;
@@ -951,7 +951,7 @@ class core_course_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function create_courses_returns() {
         return new external_multiple_structure(
@@ -968,7 +968,7 @@ class core_course_external extends external_api {
      * Update courses
      *
      * @return external_function_parameters
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function update_courses_parameters() {
         return new external_function_parameters(
@@ -1036,7 +1036,7 @@ class core_course_external extends external_api {
      * Update courses
      *
      * @param array $courses
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function update_courses($courses) {
         global $CFG, $DB;
@@ -1176,7 +1176,7 @@ class core_course_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function update_courses_returns() {
         return new external_single_structure(
@@ -1190,7 +1190,7 @@ class core_course_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function delete_courses_parameters() {
         return new external_function_parameters(
@@ -1204,7 +1204,7 @@ class core_course_external extends external_api {
      * Delete courses
      *
      * @param array $courseids A list of course ids
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function delete_courses($courseids) {
         global $CFG, $DB;
@@ -1263,7 +1263,7 @@ class core_course_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function delete_courses_returns() {
         return new external_single_structure(
@@ -1277,7 +1277,7 @@ class core_course_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     public static function duplicate_course_parameters() {
         return new external_function_parameters(
@@ -1321,7 +1321,7 @@ class core_course_external extends external_api {
      * @param int $visible Duplicated course availability
      * @param array $options List of backup options
      * @return array New course info
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     public static function duplicate_course($courseid, $fullname, $shortname, $categoryid, $visible = 1, $options = array()) {
         global $CFG, $USER, $DB;
@@ -1498,7 +1498,7 @@ class core_course_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     public static function duplicate_course_returns() {
         return new external_single_structure(
@@ -1513,7 +1513,7 @@ class core_course_external extends external_api {
      * Returns description of method parameters for import_course
      *
      * @return external_function_parameters
-     * @since Moodle 2.4
+     * @since PowerEduc 2.4
      */
     public static function import_course_parameters() {
         return new external_function_parameters(
@@ -1546,7 +1546,7 @@ class core_course_external extends external_api {
      * @param bool $deletecontent Whether to delete the course we are importing to content
      * @param array $options List of backup options
      * @return null
-     * @since Moodle 2.4
+     * @since PowerEduc 2.4
      */
     public static function import_course($importfrom, $importto, $deletecontent = 0, $options = array()) {
         global $CFG, $USER, $DB;
@@ -1686,7 +1686,7 @@ class core_course_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.4
+     * @since PowerEduc 2.4
      */
     public static function import_course_returns() {
         return null;
@@ -1696,7 +1696,7 @@ class core_course_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     public static function get_categories_parameters() {
         return new external_function_parameters(
@@ -1733,7 +1733,7 @@ class core_course_external extends external_api {
      * @param array $criteria Criteria to match the results
      * @param booln $addsubcategories obtain only the category (false) or its subcategories (true - default)
      * @return array list of categories
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     public static function get_categories($criteria = array(), $addsubcategories = true) {
         global $CFG, $DB;
@@ -1952,7 +1952,7 @@ class core_course_external extends external_api {
      * @param array $category1
      * @param array $category2
      * @return int result of strcmp
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     private static function compare_categories_by_path($category1, $category2) {
         return strcmp($category1->path, $category2->path);
@@ -1965,7 +1965,7 @@ class core_course_external extends external_api {
      * @param array $category1
      * @param array $category2
      * @return int result of strcmp
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     private static function compare_categories_by_sortorder($category1, $category2) {
         return strcmp($category1['sortorder'], $category2['sortorder']);
@@ -1975,7 +1975,7 @@ class core_course_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     public static function get_categories_returns() {
         return new external_multiple_structure(
@@ -2004,7 +2004,7 @@ class core_course_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     public static function create_categories_parameters() {
         return new external_function_parameters(
@@ -2037,7 +2037,7 @@ class core_course_external extends external_api {
      *
      * @param array $categories - see create_categories_parameters() for the array structure
      * @return array - see create_categories_returns() for the array structure
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     public static function create_categories($categories) {
         global $DB;
@@ -2081,7 +2081,7 @@ class core_course_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     public static function create_categories_returns() {
         return new external_multiple_structure(
@@ -2098,7 +2098,7 @@ class core_course_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     public static function update_categories_parameters() {
         return new external_function_parameters(
@@ -2126,7 +2126,7 @@ class core_course_external extends external_api {
      *
      * @param array $categories The list of categories to update
      * @return null
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     public static function update_categories($categories) {
         global $DB;
@@ -2156,7 +2156,7 @@ class core_course_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     public static function update_categories_returns() {
         return null;
@@ -2166,7 +2166,7 @@ class core_course_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     public static function delete_categories_parameters() {
         return new external_function_parameters(
@@ -2191,7 +2191,7 @@ class core_course_external extends external_api {
      *
      * @param array $categories A list of category ids
      * @return array
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     public static function delete_categories($categories) {
         global $CFG, $DB;
@@ -2247,7 +2247,7 @@ class core_course_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.3
+     * @since PowerEduc 2.3
      */
     public static function delete_categories_returns() {
         return null;
@@ -2257,7 +2257,7 @@ class core_course_external extends external_api {
      * Describes the parameters for delete_modules.
      *
      * @return external_function_parameters
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function delete_modules_parameters() {
         return new external_function_parameters (
@@ -2272,7 +2272,7 @@ class core_course_external extends external_api {
      * Deletes a list of provided module instances.
      *
      * @param array $cmids the course module ids
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function delete_modules($cmids) {
         global $CFG, $DB;
@@ -2312,7 +2312,7 @@ class core_course_external extends external_api {
      * Describes the delete_modules return value.
      *
      * @return external_single_structure
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function delete_modules_returns() {
         return null;
@@ -2322,7 +2322,7 @@ class core_course_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function view_course_parameters() {
         return new external_function_parameters(
@@ -2339,7 +2339,7 @@ class core_course_external extends external_api {
      * @param int $courseid id of course
      * @param int $sectionnumber sectionnumber (0, 1, 2...)
      * @return array of warnings and status result
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      * @throws powereduc_exception
      */
     public static function view_course($courseid, $sectionnumber = 0) {
@@ -2382,7 +2382,7 @@ class core_course_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function view_course_returns() {
         return new external_single_structure(
@@ -2397,7 +2397,7 @@ class core_course_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function search_courses_parameters() {
         return new external_function_parameters(
@@ -2424,7 +2424,7 @@ class core_course_external extends external_api {
      * @param  core_course_list_element $course        course in list object
      * @param  stdClass       $coursecontext course context object
      * @return array the course information
-     * @since  Moodle 3.2
+     * @since  PowerEduc 3.2
      */
     protected static function get_course_public_information(core_course_list_element $course, $coursecontext) {
 
@@ -2529,7 +2529,7 @@ class core_course_external extends external_api {
      * @param int $limittoenrolled  Limit to only enrolled courses
      * @param int onlywithcompletion Limit to only courses where completion is enabled
      * @return array of course objects and warnings
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      * @throws powereduc_exception
      */
     public static function search_courses($criterianame,
@@ -2624,7 +2624,7 @@ class core_course_external extends external_api {
      *
      * @param  boolean $onlypublicdata set to true, to retrieve only fields viewable by anyone when the course is visible
      * @return array the course structure
-     * @since  Moodle 3.2
+     * @since  PowerEduc 3.2
      */
     protected static function get_course_structure($onlypublicdata = true) {
         $coursestructure = array(
@@ -2723,7 +2723,7 @@ class core_course_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function search_courses_returns() {
         return new external_single_structure(
@@ -2739,7 +2739,7 @@ class core_course_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_course_module_parameters() {
         return new external_function_parameters(
@@ -2754,7 +2754,7 @@ class core_course_external extends external_api {
      *
      * @param int $cmid the course module id
      * @return array of warnings and the course module
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      * @throws powereduc_exception
      */
     public static function get_course_module($cmid) {
@@ -2841,7 +2841,7 @@ class core_course_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_course_module_returns() {
         return new external_single_structure(
@@ -2907,7 +2907,7 @@ class core_course_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_course_module_by_instance_parameters() {
         return new external_function_parameters(
@@ -2924,7 +2924,7 @@ class core_course_external extends external_api {
      * @param string $module the module name
      * @param int $instance the activity instance id
      * @return array of warnings and the course module
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      * @throws powereduc_exception
      */
     public static function get_course_module_by_instance($module, $instance) {
@@ -2945,7 +2945,7 @@ class core_course_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_course_module_by_instance_returns() {
         return self::get_course_module_returns();
@@ -2955,7 +2955,7 @@ class core_course_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_user_navigation_options_parameters() {
         return new external_function_parameters(
@@ -2970,7 +2970,7 @@ class core_course_external extends external_api {
      *
      * @param array $courseids a list of course ids
      * @return array of warnings and the options availability
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      * @throws powereduc_exception
      */
     public static function get_user_navigation_options($courseids) {
@@ -3016,7 +3016,7 @@ class core_course_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_user_navigation_options_returns() {
         return new external_single_structure(
@@ -3045,7 +3045,7 @@ class core_course_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_user_administration_options_parameters() {
         return new external_function_parameters(
@@ -3060,7 +3060,7 @@ class core_course_external extends external_api {
      *
      * @param array $courseids a list of course ids
      * @return array of warnings and the options availability
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      * @throws powereduc_exception
      */
     public static function get_user_administration_options($courseids) {
@@ -3102,7 +3102,7 @@ class core_course_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_user_administration_options_returns() {
         return self::get_user_navigation_options_returns();
@@ -3112,7 +3112,7 @@ class core_course_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_courses_by_field_parameters() {
         return new external_function_parameters(
@@ -3137,7 +3137,7 @@ class core_course_external extends external_api {
      * @param  string $value value to search
      * @return array list of courses and warnings
      * @throws  invalid_parameter_exception
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_courses_by_field($field = '', $value = '') {
         global $DB, $CFG;
@@ -3266,7 +3266,7 @@ class core_course_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_courses_by_field_returns() {
         // Course structure, including not only public viewable fields.
@@ -3282,7 +3282,7 @@ class core_course_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function check_updates_parameters() {
         return new external_function_parameters(
@@ -3318,7 +3318,7 @@ class core_course_external extends external_api {
      * @param array $filter check only for updates in these areas
      * @return array list of updates and warnings
      * @throws powereduc_exception
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function check_updates($courseid, $tocheck, $filter = array()) {
         global $CFG, $DB;
@@ -3376,7 +3376,7 @@ class core_course_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function check_updates_returns() {
         return new external_single_structure(
@@ -3411,7 +3411,7 @@ class core_course_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_updates_since_parameters() {
         return new external_function_parameters(
@@ -3437,7 +3437,7 @@ class core_course_external extends external_api {
      * @param array $filter check only for updates in these areas
      * @return array list of updates and warnings
      * @throws powereduc_exception
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_updates_since($courseid, $since, $filter = array()) {
         global $CFG, $DB;
@@ -3475,7 +3475,7 @@ class core_course_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_updates_since_returns() {
         return self::check_updates_returns();
@@ -3484,7 +3484,7 @@ class core_course_external extends external_api {
     /**
      * Parameters for function edit_module()
      *
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @return external_function_parameters
      */
     public static function edit_module_parameters() {
@@ -3507,7 +3507,7 @@ class core_course_external extends external_api {
      *
      * Throws exception if operation is not permitted/possible
      *
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @param string $action
      * @param int $id
      * @param null|int $sectionreturn
@@ -3613,7 +3613,7 @@ class core_course_external extends external_api {
     /**
      * Return structure for edit_module()
      *
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @return external_description
      */
     public static function edit_module_returns() {
@@ -3623,7 +3623,7 @@ class core_course_external extends external_api {
     /**
      * Parameters for function get_module()
      *
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @return external_function_parameters
      */
     public static function get_module_parameters() {
@@ -3637,7 +3637,7 @@ class core_course_external extends external_api {
     /**
      * Returns html for displaying one activity module on course page
      *
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @param int $id
      * @param null|int $sectionreturn
      * @return string
@@ -3679,7 +3679,7 @@ class core_course_external extends external_api {
     /**
      * Return structure for get_module()
      *
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @return external_description
      */
     public static function get_module_returns() {
@@ -3689,7 +3689,7 @@ class core_course_external extends external_api {
     /**
      * Parameters for function edit_section()
      *
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @return external_function_parameters
      */
     public static function edit_section_parameters() {
@@ -3704,7 +3704,7 @@ class core_course_external extends external_api {
     /**
      * Performs one of the edit section actions
      *
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @param string $action
      * @param int $id section id
      * @param int $sectionreturn section to return to
@@ -3734,7 +3734,7 @@ class core_course_external extends external_api {
     /**
      * Return structure for edit_section()
      *
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @return external_description
      */
     public static function edit_section_returns() {
@@ -4065,7 +4065,7 @@ class core_course_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.6
+     * @since PowerEduc 3.6
      */
     public static function get_recent_courses_parameters() {
         return new external_function_parameters(
@@ -4136,7 +4136,7 @@ class core_course_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.6
+     * @since PowerEduc 3.6
      */
     public static function get_recent_courses_returns() {
         return new external_multiple_structure(course_summary_exporter::get_read_structure(), 'Courses');

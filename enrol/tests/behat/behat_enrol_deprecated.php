@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 // NOTE: no POWEREDUC_INTERNAL test here, this file may be required by behat before including /config.php.
 
@@ -42,7 +42,7 @@ class behat_enrol_deprecated extends behat_deprecated_base {
      * @param TableNode $table
      *
      * @deprecated since 4.0 MDL-72090. We now need the course to enrol in. Please use i_add_enrolment_method_for_with()
-     * @todo MDL-71733 This will be deleted in Moodle 4.4.
+     * @todo MDL-71733 This will be deleted in PowerEduc 4.4.
      */
     public function i_add_enrolment_method_with($enrolmethod, TableNode $table) {
         $this->deprecated_message(['behat_enrol::i_add_enrolment_method_for_with']);

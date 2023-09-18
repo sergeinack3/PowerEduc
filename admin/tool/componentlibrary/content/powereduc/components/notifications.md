@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: "Notifications"
-description: "Moodle notifications"
+description: "PowerEduc notifications"
 date: 2020-02-04T09:40:32+01:00
 draft: false
 weight: 50
@@ -12,7 +12,7 @@ tags:
 
 ## How it works
 
-Notifications are coupled with actions and provide instant feedback to the action results. Moodle notifications are shown right above the actionable content or overlaying the user interface for JavaScript related actions.
+Notifications are coupled with actions and provide instant feedback to the action results. PowerEduc notifications are shown right above the actionable content or overlaying the user interface for JavaScript related actions.
 
 ## Example
 

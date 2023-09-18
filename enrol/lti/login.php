@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * LTI 1.3 login endpoint.
@@ -47,7 +47,7 @@ $targetlinkuri = required_param('target_link_uri', PARAM_URL); // The took launc
 $ltimessagehint = optional_param('lti_message_hint', null, PARAM_RAW);
 
 // The target_link_uri param should contain the endpoint that will be executed at the end of the OIDC login process.
-// In Moodle, this will either be:
+// In PowerEduc, this will either be:
 // - enrol/lti/launch.php endpoint (for regular resource link launches) or
 // - enrol/lti/launch_deeplink.php endpoint (for deep linking launches)
 // Thus, the target_link_uri signifies intent to perform a certain launch type. It can be used to generate the

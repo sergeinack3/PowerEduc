@@ -1,6 +1,6 @@
 BEGIN:VCALENDAR
 METHOD:PUBLISH
-PRODID:-//Huong Nguyen/NONSGML Moodle//EN
+PRODID:-//Huong Nguyen/NONSGML PowerEduc//EN
 VERSION:2.0
 BEGIN:VEVENT
 UID:special_import_powereduc_1

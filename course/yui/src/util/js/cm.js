@@ -5,15 +5,15 @@
  * @submodule powereduc-course-util-cm
  */
 
-Y.namespace('Moodle.core_course.util.cm');
+Y.namespace('PowerEduc.core_course.util.cm');
 
 /**
  * A collection of utility classes for use with course modules.
  *
- * @class Moodle.core_course.util.cm
+ * @class PowerEduc.core_course.util.cm
  * @static
  */
-Y.Moodle.core_course.util.cm = {
+Y.PowerEduc.core_course.util.cm = {
     CONSTANTS: {
         MODULEIDPREFIX: 'module-'
     },

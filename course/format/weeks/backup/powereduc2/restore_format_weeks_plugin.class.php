@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Specialised restore for format_weeks
@@ -41,7 +41,7 @@ class restore_format_weeks_plugin extends restore_format_plugin {
     protected $originalnumsections = 0;
 
     /**
-     * Checks if backup file was made on Moodle before 3.3 and we should respect the 'numsections'
+     * Checks if backup file was made on PowerEduc before 3.3 and we should respect the 'numsections'
      * and potential "orphaned" sections in the end of the course.
      *
      * @return bool
@@ -150,7 +150,7 @@ class restore_format_weeks_plugin extends restore_format_plugin {
      */
     public function after_restore_course() {
         if (!$this->is_pre_33_backup()) {
-            // Backup file was made in Moodle 3.3 or later, we don't need to process it.
+            // Backup file was made in PowerEduc 3.3 or later, we don't need to process it.
             return;
         }
 

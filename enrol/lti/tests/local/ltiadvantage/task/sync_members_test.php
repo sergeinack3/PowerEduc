@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace enrol_lti\local\ltiadvantage\task;
 
@@ -38,7 +38,7 @@ class sync_members_test extends \lti_advantage_testcase {
     /**
      * Verify the user's profile picture has been set, which is useful to verify picture syncs.
      *
-     * @param int $userid the id of the Moodle user.
+     * @param int $userid the id of the PowerEduc user.
      * @param bool $match true to verify a match, false to verify a non-match.
      */
     protected function verify_user_profile_image(int $userid, bool $match = true): void {

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'auth_db', language 'en'.
@@ -27,10 +27,10 @@ $string['auth_dbdebugauthdb'] = 'Debug ADOdb';
 $string['auth_dbdebugauthdbhelp'] = 'Debug ADOdb connection to external database - use when getting empty page during login. Not suitable for production sites.';
 $string['auth_dbdeleteuser'] = 'Deleted user {$a->name} id {$a->id}';
 $string['auth_dbdeleteusererror'] = 'Error deleting user {$a}';
-$string['auth_dbdescription'] = 'This method uses an external database table to check whether a given username and password is valid.  If the account is a new one, then information from other fields may also be copied across into Moodle.';
+$string['auth_dbdescription'] = 'This method uses an external database table to check whether a given username and password is valid.  If the account is a new one, then information from other fields may also be copied across into PowerEduc.';
 $string['auth_dbextencoding'] = 'External db encoding';
 $string['auth_dbextencodinghelp'] = 'Encoding used in external database';
-$string['auth_dbextrafields'] = 'These fields are optional.  You can choose to pre-fill some Moodle user fields with information from the <b>external database fields</b> that you specify here. <p>If you leave these blank, then defaults will be used.</p><p>In either case, the user will be able to edit all of these fields after they log in.</p>';
+$string['auth_dbextrafields'] = 'These fields are optional.  You can choose to pre-fill some PowerEduc user fields with information from the <b>external database fields</b> that you specify here. <p>If you leave these blank, then defaults will be used.</p><p>In either case, the user will be able to edit all of these fields after they log in.</p>';
 $string['auth_dbfieldpass'] = 'Name of the field containing passwords';
 $string['auth_dbfieldpass_key'] = 'Password field';
 $string['auth_dbfielduser'] = 'Name of the field containing usernames. This field must be a varchar data type.';
@@ -45,7 +45,7 @@ $string['auth_dbname'] = 'Name of the database itself. Leave empty if using an O
 $string['auth_dbname_key'] = 'DB name';
 $string['auth_dbpass'] = 'Password matching the above username';
 $string['auth_dbpass_key'] = 'Password';
-$string['auth_dbpasstype'] = '<p>Specify the format that the password field is using.</p> <p>Use \'internal\' if you want the external database to manage usernames and email addresses, but Moodle to manage passwords. If you use \'internal\', you must provide a populated email address field in the external database, and you must enable the \auth_db\task\sync_users scheduled task. Moodle will send an email to new users with a temporary password.</p>';
+$string['auth_dbpasstype'] = '<p>Specify the format that the password field is using.</p> <p>Use \'internal\' if you want the external database to manage usernames and email addresses, but PowerEduc to manage passwords. If you use \'internal\', you must provide a populated email address field in the external database, and you must enable the \auth_db\task\sync_users scheduled task. PowerEduc will send an email to new users with a temporary password.</p>';
 $string['auth_dbpasstype_key'] = 'Password format';
 $string['auth_dbreviveduser'] = 'Revived user {$a->name} id {$a->id}';
 $string['auth_dbrevivedusererror'] = 'Error reviving user {$a}';

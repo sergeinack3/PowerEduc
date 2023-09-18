@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Community of inquiry abstract indicator.
@@ -895,7 +895,7 @@ abstract class community_of_inquiry_activity extends linear {
      * True if the activity is due or it has been closed during this period, false if during another period, null if no due time.
      *
      * It can be overwritten by activities that allow teachers to set a due date or a time close separately
-     * from Moodle availability system. Note that in most of the cases overwriting get_timeclose_field should
+     * from PowerEduc availability system. Note that in most of the cases overwriting get_timeclose_field should
      * be enough.
      *
      * Returns true or false if the time close date falls into the provided time range. Null otherwise.
@@ -932,7 +932,7 @@ abstract class community_of_inquiry_activity extends linear {
      * Returns the name of the field that controls activity availability.
      *
      * Should be overwritten by activities that allow teachers to set a due date or a time close separately
-     * from Moodle availability system.
+     * from PowerEduc availability system.
      *
      * Just 1 field will not be enough for all cases, but for the most simple ones without
      * overrides and stuff like that.

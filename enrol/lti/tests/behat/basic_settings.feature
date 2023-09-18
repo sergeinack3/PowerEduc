@@ -24,7 +24,7 @@ Feature: Check that settings are adhered to when creating an enrolment plugin
       | City/town           | Perth                                  |
       | Select a country    | Australia                              |
       | Timezone            | Australia/Perth                        |
-      | Institution         | Moodle Pty Ltd                         |
+      | Institution         | PowerEduc Pty Ltd                         |
     And I press "Save changes"
     And I log out
 
@@ -37,17 +37,17 @@ Feature: Check that settings are adhered to when creating an enrolment plugin
     And the field "City/town" matches value "Perth"
     And the field "Select a country" matches value "Australia"
     And the field "Timezone" matches value "Australia/Perth"
-    And the field "Institution" matches value "Moodle Pty Ltd"
+    And the field "Institution" matches value "PowerEduc Pty Ltd"
     And I set the following fields to these values:
       | Email display       | Hide my email address from non-privileged users |
       | City/town           | Whistler                                        |
       | Select a country    | Canada                                          |
       | Timezone            | America/Vancouver                               |
-      | Institution         | Moodle Pty Ltd - remote                         |
+      | Institution         | PowerEduc Pty Ltd - remote                         |
     And I press "Add method"
     And I click on "Edit" "link" in the "Publish as LTI tool" "table_row"
     And the field "Email display" matches value "Hide my email address from non-privileged users"
     And the field "City/town" matches value "Whistler"
     And the field "Select a country" matches value "Canada"
     And the field "Timezone" matches value "America/Vancouver"
-    And the field "Institution" matches value "Moodle Pty Ltd - remote"
+    And the field "Institution" matches value "PowerEduc Pty Ltd - remote"

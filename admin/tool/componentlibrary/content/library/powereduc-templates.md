@@ -1,15 +1,15 @@
 ---
 layout: docs
-title: "Moodle templates"
+title: "PowerEduc templates"
 date: 2020-01-14T13:38:37+01:00
 group: powereduc-components
 draft: false
 menu: "main"
 ---
 
-## Moodle templates
+## PowerEduc templates
 
-[Moodle templates](https://docs.powereduc.org/dev/Templates) are use to write HTML and Javascript using mustache files.
+[PowerEduc templates](https://docs.powereduc.org/dev/Templates) are use to write HTML and Javascript using mustache files.
 
 If you are creating your own pages in the UI Component library you can load core templates using this (shortcode) syntax:
 
@@ -25,9 +25,9 @@ This is the result of adding the core/notification template on this page:
 
 This allows you to document any mustache template in the component library.
 
-## Moodle templates with custom data
+## PowerEduc templates with custom data
 
-Not all templates found in Moodle core are will documented with example JSON formatted data (see the variables tab for the notification_error). To use custom Json data please use this (shortcode) syntax:
+Not all templates found in PowerEduc core are will documented with example JSON formatted data (see the variables tab for the notification_error). To use custom Json data please use this (shortcode) syntax:
 
 ```
 {{</* mustache template="core/notification_error" */>}}

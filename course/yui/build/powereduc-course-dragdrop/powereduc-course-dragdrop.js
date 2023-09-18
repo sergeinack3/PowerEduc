@@ -92,7 +92,7 @@ Y.extend(DRAGSECTION, M.core.dragdrop, {
     setup_for_section: function(baseselector) {
         Y.Node.all(baseselector).each(function(sectionnode) {
             // Determine the section ID
-            var sectionid = Y.Moodle.core_course.util.section.getId(sectionnode);
+            var sectionid = Y.PowerEduc.core_course.util.section.getId(sectionnode);
 
             // We skip the top section as it is not draggable
             if (sectionid > 0) {
@@ -192,7 +192,7 @@ Y.extend(DRAGSECTION, M.core.dragdrop, {
 
         // Get references to our nodes and their IDs.
         var dragnode = drag.get('node'),
-            dragnodeid = Y.Moodle.core_course.util.section.getId(dragnode),
+            dragnodeid = Y.PowerEduc.core_course.util.section.getId(dragnode),
             loopstart = dragnodeid,
 
             dropnodeindex = this.get_section_index(dragnode),
@@ -269,8 +269,8 @@ Y.extend(DRAGSECTION, M.core.dragdrop, {
                     do {
                         swapped = false;
                         for (index = loopstart; index <= loopend; index++) {
-                            if (Y.Moodle.core_course.util.section.getId(sectionlist.item(index - 1)) >
-                                        Y.Moodle.core_course.util.section.getId(sectionlist.item(index))) {
+                            if (Y.PowerEduc.core_course.util.section.getId(sectionlist.item(index - 1)) >
+                                        Y.PowerEduc.core_course.util.section.getId(sectionlist.item(index))) {
                                 // Swap section id.
                                 var sectionid = sectionlist.item(index - 1).get('id');
                                 sectionlist.item(index - 1).set('id', sectionlist.item(index).get('id'));
@@ -283,7 +283,7 @@ Y.extend(DRAGSECTION, M.core.dragdrop, {
                                 swapped = true;
                             }
                             sectionlist.item(index).setAttribute('data-sectionid',
-                                Y.Moodle.core_course.util.section.getId(sectionlist.item(index)));
+                                Y.PowerEduc.core_course.util.section.getId(sectionlist.item(index)));
                         }
                         loopend = loopend - 1;
                     } while (swapped);
@@ -478,7 +478,7 @@ Y.extend(DRAGRESOURCE, M.core.dragdrop, {
         }
 
         // Variables needed to update the course state.
-        var cmid = Number(Y.Moodle.core_course.util.cm.getId(dragnode));
+        var cmid = Number(Y.PowerEduc.core_course.util.cm.getId(dragnode));
         var beforeid = null;
 
         // Prepare request parameters
@@ -487,10 +487,10 @@ Y.extend(DRAGRESOURCE, M.core.dragdrop, {
         params['class'] = 'resource';
         params.field = 'move';
         params.id = cmid;
-        params.sectionId = Y.Moodle.core_course.util.section.getId(dropnode.ancestor(M.course.format.get_section_wrapper(Y), true));
+        params.sectionId = Y.PowerEduc.core_course.util.section.getId(dropnode.ancestor(M.course.format.get_section_wrapper(Y), true));
 
         if (dragnode.next()) {
-            beforeid = Number(Y.Moodle.core_course.util.cm.getId(dragnode.next()));
+            beforeid = Number(Y.PowerEduc.core_course.util.cm.getId(dragnode.next()));
             params.beforeId = beforeid;
         }
 

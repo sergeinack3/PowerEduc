@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace gradereport_user\external;
 
@@ -54,7 +54,7 @@ class user extends external_api {
      * @param  int  $userid   the user id to retrieve data from
      * @param  int $groupid   the group id
      * @return array with the parameters cleaned and other required information
-     * @since  Moodle 3.2
+     * @since  PowerEduc 3.2
      */
     protected static function check_report_access(int $courseid, int $userid, int $groupid = 0): array {
         global $USER;
@@ -140,7 +140,7 @@ class user extends external_api {
      * @param  int $groupid      the group id to filter
      * @param  bool $tabledata   whether to get the table data (true) or the gradeitemdata
      * @return array data and possible warnings
-     * @since  Moodle 3.2
+     * @since  PowerEduc 3.2
      */
     protected static function get_report_data(
         stdClass $course,
@@ -231,7 +231,7 @@ class user extends external_api {
      * Describes the parameters for get_grades_table.
      *
      * @return external_function_parameters
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function get_grades_table_parameters(): external_function_parameters {
         return new external_function_parameters (
@@ -251,7 +251,7 @@ class user extends external_api {
      * @param int $groupid  Get users from this group only
      *
      * @return array the grades tables
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function get_grades_table(int $courseid, int $userid = 0, int $groupid = 0): array {
 
@@ -271,7 +271,7 @@ class user extends external_api {
      * Creates a table column structure
      *
      * @return array
-     * @since  Moodle 2.9
+     * @since  PowerEduc 2.9
      */
     private static function grades_table_column(): array {
         return [
@@ -285,7 +285,7 @@ class user extends external_api {
      * Describes tget_grades_table return value.
      *
      * @return external_single_structure
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function get_grades_table_returns(): external_single_structure {
         return new external_single_structure(
@@ -359,7 +359,7 @@ class user extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function view_grade_report_parameters(): external_function_parameters {
         return new external_function_parameters(
@@ -376,7 +376,7 @@ class user extends external_api {
      * @param int $courseid id of course
      * @param int $userid id of the user the report belongs to
      * @return array of warnings and status result
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      * @throws powereduc_exception
      */
     public static function view_grade_report(int $courseid, int $userid = 0): array {
@@ -433,7 +433,7 @@ class user extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function view_grade_report_returns(): external_description {
         return new external_single_structure(
@@ -448,7 +448,7 @@ class user extends external_api {
      * Describes the parameters for get_grade_items.
      *
      * @return external_function_parameters
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_grade_items_parameters(): external_function_parameters {
         return self::get_grades_table_parameters();
@@ -462,7 +462,7 @@ class user extends external_api {
      * @param int $groupid  Get users from this group only
      *
      * @return array the grades tables
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_grade_items(int $courseid, int $userid = 0, int $groupid = 0): array {
 
@@ -489,7 +489,7 @@ class user extends external_api {
      * Describes tget_grade_items return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_grade_items_returns(): external_single_structure {
         return new external_single_structure(

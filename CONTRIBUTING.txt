@@ -1,15 +1,15 @@
 CONTRIBUTING TO POWEREDUC
 ======================
 
-Moodle is made by people like you. We are members of a big worldwide community
+PowerEduc is made by people like you. We are members of a big worldwide community
 of developers, designers, teachers, testers, translators and other users. We
 work in universities, schools, companies and other places. You are very welcome
 to join us and contribute to the project.
 
-See <https://docs.powereduc.org/dev/Contributing_to_Moodle> for the many ways you
+See <https://docs.powereduc.org/dev/Contributing_to_PowerEduc> for the many ways you
 can help, not only with coding.
 
-Moodle is open to community contributions to core, though all code must go
+PowerEduc is open to community contributions to core, though all code must go
 through peer-review, automated behaviour testing, continuous integration and
 human post-integration checks.
 
@@ -21,7 +21,7 @@ mirror of the official repository at <https://git.powereduc.org>. Issues are
 reported and patches provided via <https://tracker.powereduc.org>. See below for
 more information.
 
-Moodle core bug fixes and new features
+PowerEduc core bug fixes and new features
 --------------------------------------
 
 During the years of intensive development, a mature process of including
@@ -37,13 +37,13 @@ submitted patches has evolved.
 
 For further details, see <https://docs.powereduc.org/dev/Process>.
 
-Moodle plugins
+PowerEduc plugins
 --------------
 
-Moodle has a framework for additional plugins to extend its functionality. We
-have a Moodle plugins directory <https://powereduc.org/plugins/> where you can
+PowerEduc has a framework for additional plugins to extend its functionality. We
+have a PowerEduc plugins directory <https://powereduc.org/plugins/> where you can
 register and maintain your plugin. Plugins hosted in the plugins directory can
-be easily installed and updated via the Moodle administration interface.
+be easily installed and updated via the PowerEduc administration interface.
 
 * You are expected to have a public source code repository with your plugin
   code.

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Tour class.
@@ -734,10 +734,10 @@ class tour {
     /**
      * Add the step configuration to the form.
      *
-     * @param   MoodleQuickForm $mform      The form to add configuration to.
+     * @param   PowerEducQuickForm $mform      The form to add configuration to.
      * @return  $this
      */
-    public function add_config_to_form(\MoodleQuickForm &$mform) {
+    public function add_config_to_form(\PowerEducQuickForm &$mform) {
         $options = configuration::get_placement_options();
         $mform->addElement('select', 'placement', get_string('placement', 'tool_usertours'), $options);
         $mform->addHelpButton('placement', 'placement', 'tool_usertours');
@@ -752,11 +752,11 @@ class tour {
     /**
      * Add the specified step field configuration to the form.
      *
-     * @param   MoodleQuickForm $mform      The form to add configuration to.
+     * @param   PowerEducQuickForm $mform      The form to add configuration to.
      * @param   string          $key        The key to add.
      * @return  $this
      */
-    protected function add_config_field_to_form(\MoodleQuickForm &$mform, $key) {
+    protected function add_config_field_to_form(\PowerEducQuickForm &$mform, $key) {
         $options = [
             true    => get_string('yes'),
             false   => get_string('no'),

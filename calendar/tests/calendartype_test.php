@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the class that handles testing the calendar type system.
@@ -45,10 +45,10 @@ require_once($CFG->dirroot . '/user/profile/definelib.php');
  * @package core_calendar
  * @copyright 2013 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.6
+ * @since PowerEduc 2.6
  */
 class calendartype_test extends \advanced_testcase {
-    /** @var MoodleQuickForm Keeps reference of dummy form object */
+    /** @var PowerEducQuickForm Keeps reference of dummy form object */
     private $mform;
 
     /**
@@ -86,7 +86,7 @@ class calendartype_test extends \advanced_testcase {
     }
 
     /**
-     * Test that calling core Moodle functions responsible for displaying the date
+     * Test that calling core PowerEduc functions responsible for displaying the date
      * have the same results as directly calling the same function in the calendar type.
      */
     public function test_calendar_type_core_functions() {
@@ -320,7 +320,7 @@ class temp_form_calendartype extends \powereducform {
     }
     /**
      * Returns form reference
-     * @return MoodleQuickForm
+     * @return PowerEducQuickForm
      */
     public function getform() {
         $mform = $this->_form;

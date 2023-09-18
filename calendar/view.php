@@ -4,7 +4,7 @@
 //                                                                         //
 // NOTICE OF COPYRIGHT                                                     //
 //                                                                         //
-// Moodle - Calendar extension                                             //
+// PowerEduc - Calendar extension                                             //
 //                                                                         //
 // Copyright (C) 2003-2004  Greek School Network            www.sch.gr     //
 //                                                                         //

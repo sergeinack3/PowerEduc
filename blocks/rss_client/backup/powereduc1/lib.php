@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Provides support for the conversion of powereduc1 backup to the powereduc2 format
@@ -33,7 +33,7 @@ class powereduc1_block_rss_client_handler extends powereduc1_block_handler {
         $instanceid = $data['id'];
         $contextid = $this->converter->get_contextid(CONTEXT_BLOCK, $data['id']);
 
-        // Moodle 1.9 backups do not include sufficient data to restore feeds, so we need an empty shell rss_client.xml
+        // PowerEduc 1.9 backups do not include sufficient data to restore feeds, so we need an empty shell rss_client.xml
         // for the restore process to find
         $this->open_xml_writer("course/blocks/{$data['name']}_{$instanceid}/rss_client.xml");
         $this->xmlwriter->begin_tag('block', array('id' => $instanceid, 'contextid' => $contextid, 'blockname' => 'rss_client'));

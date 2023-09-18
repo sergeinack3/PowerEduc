@@ -1,6 +1,6 @@
 ---
 layout: docs
-title: "Moodle Charts"
+title: "PowerEduc Charts"
 date: 2020-01-14T16:32:24+01:00
 draft: false
 ---

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Auth e-mail external API
@@ -21,7 +21,7 @@
  * @category   external
  * @copyright  2016 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.2
+ * @since      PowerEduc 3.2
  */
 
 defined('POWEREDUC_INTERNAL') || die;
@@ -38,7 +38,7 @@ require_once($CFG->dirroot . '/user/profile/lib.php');
  * @category   external
  * @copyright  2016 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.2
+ * @since      PowerEduc 3.2
  */
 class auth_email_external extends external_api {
 
@@ -46,7 +46,7 @@ class auth_email_external extends external_api {
      * Check if registration is enabled in this site.
      *
      * @throws powereduc_exception
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     protected static function check_signup_enabled() {
         global $CFG;
@@ -60,7 +60,7 @@ class auth_email_external extends external_api {
      * Describes the parameters for get_signup_settings.
      *
      * @return external_function_parameters
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_signup_settings_parameters() {
         return new external_function_parameters(array());
@@ -70,7 +70,7 @@ class auth_email_external extends external_api {
      * Get the signup required settings and profile fields.
      *
      * @return array settings and possible warnings
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      * @throws powereduc_exception
      */
     public static function get_signup_settings() {
@@ -128,7 +128,7 @@ class auth_email_external extends external_api {
      * Describes the get_signup_settings return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_signup_settings_returns() {
 
@@ -182,7 +182,7 @@ class auth_email_external extends external_api {
      * Describes the parameters for signup_user.
      *
      * @return external_function_parameters
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function signup_user_parameters() {
         return new external_function_parameters(
@@ -226,7 +226,7 @@ class auth_email_external extends external_api {
      * @param  array  $customprofilefields    user custom fields (also known as user profile fields)
      * @param  string $redirect               Site url to redirect the user after confirmation
      * @return array settings and possible warnings
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      * @throws powereduc_exception
      * @throws invalid_parameter_exception
      */
@@ -359,7 +359,7 @@ class auth_email_external extends external_api {
      * Describes the signup_user return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function signup_user_returns() {
 

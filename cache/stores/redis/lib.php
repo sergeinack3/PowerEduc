@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Redis Cache Store - Main library
@@ -27,7 +27,7 @@ defined('POWEREDUC_INTERNAL') || die();
 /**
  * Redis Cache Store
  *
- * To allow separation of definitions in Moodle and faster purging, each cache
+ * To allow separation of definitions in PowerEduc and faster purging, each cache
  * is implemented as a Redis hash.  That is a trade-off between having functionality of TTL
  * and being able to manage many caches in a single redis instance.  Given the recommendation
  * not to use TTL if at all possible and the benefits of having many stores in Redis using the
@@ -146,7 +146,7 @@ class cachestore_redis extends cache_store implements cache_is_key_aware, cache_
      */
     public static function get_supported_features(array $configuration = array()) {
         // Although this plugin now supports TTL I did not add SUPPORTS_NATIVE_TTL here, because
-        // doing so would cause Moodle to stop adding a 'TTL wrapper' to data items which enforces
+        // doing so would cause PowerEduc to stop adding a 'TTL wrapper' to data items which enforces
         // the precise specified TTL. Unless the scheduled task is set to run rather frequently,
         // this could cause change in behaviour. Maybe later this should be reconsidered...
         return self::SUPPORTS_DATA_GUARANTEE + self::DEREFERENCES_OBJECTS + self::IS_SEARCHABLE;
@@ -332,7 +332,7 @@ class cachestore_redis extends cache_store implements cache_is_key_aware, cache_
      * need to serialize it to compute the size, which would have a significant performance cost.
      *
      * @return int Bytes read or written
-     * @since Moodle 4.0
+     * @since PowerEduc 4.0
      */
     public function get_last_io_bytes(): int {
         if ($this->compressor != self::COMPRESSOR_NONE) {

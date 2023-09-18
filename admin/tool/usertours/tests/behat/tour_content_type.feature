@@ -33,7 +33,7 @@ Feature: Apply content type to a tour
     And I should not see "Language string ID" in the "#fitem_id_contentlangstring" "css_element"
 
   @javascript
-  Scenario: Create a new step with Moodle Language content type
+  Scenario: Create a new step with PowerEduc Language content type
     Given I open the User tour settings page
     And I click on "View" "link" in the "My first tour" "table_row"
     And I click on "New step" "link"

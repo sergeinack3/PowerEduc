@@ -1,34 +1,34 @@
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 /* jshint node: true, browser: false */
 /* eslint-env node */
 
 /**
- * Grunt configuration for Moodle.
+ * Grunt configuration for PowerEduc.
  *
  * @copyright  2014 Andrew Nicols
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
- * Setup the Grunt Moodle environment.
+ * Setup the Grunt PowerEduc environment.
  *
  * @param   {Grunt} grunt
  * @returns {Object}
  */
-const setupMoodleEnvironment = grunt => {
+const setupPowerEducEnvironment = grunt => {
     const fs = require('fs');
     const path = require('path');
     const ComponentList = require(path.join(process.cwd(), '.grunt', 'components.js'));
@@ -228,8 +228,8 @@ module.exports = function(grunt) {
     // Verify that the Node version meets our requirements.
     verifyNodeVersion(grunt);
 
-    // Setup the Moodle environemnt within the Grunt object.
-    grunt.powereducEnv = setupMoodleEnvironment(grunt);
+    // Setup the PowerEduc environemnt within the Grunt object.
+    grunt.powereducEnv = setupPowerEducEnvironment(grunt);
 
     /**
      * Add the named task.
@@ -249,7 +249,7 @@ module.exports = function(grunt) {
     // Startup tasks.
     grunt.powereducEnv.startupTasks = [];
 
-    // Add Moodle task configuration.
+    // Add PowerEduc task configuration.
     addTask('gherkinlint', grunt);
     addTask('ignorefiles', grunt);
 

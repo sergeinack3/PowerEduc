@@ -1,17 +1,17 @@
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Various actions on modules and sections in the editing mode - hiding, duplicating, deleting, etc.
@@ -117,7 +117,7 @@ define(
         };
 
         /**
-         * Wrapper for Y.Moodle.core_course.util.cm.getId
+         * Wrapper for Y.PowerEduc.core_course.util.cm.getId
          *
          * @param {JQuery} element
          * @returns {Integer}
@@ -131,13 +131,13 @@ define(
             // Use YUI way if data-id is not present.
             let id;
             Y.use('powereduc-course-util', function(Y) {
-                id = Y.Moodle.core_course.util.cm.getId(Y.Node(item));
+                id = Y.PowerEduc.core_course.util.cm.getId(Y.Node(item));
             });
             return id;
         };
 
         /**
-         * Wrapper for Y.Moodle.core_course.util.cm.getName
+         * Wrapper for Y.PowerEduc.core_course.util.cm.getName
          *
          * @param {JQuery} element
          * @returns {String}
@@ -145,7 +145,7 @@ define(
         var getModuleName = function(element) {
             var name;
             Y.use('powereduc-course-util', function(Y) {
-                name = Y.Moodle.core_course.util.cm.getName(Y.Node(element.get(0)));
+                name = Y.PowerEduc.core_course.util.cm.getName(Y.Node(element.get(0)));
             });
             // Check if we have the name in the course state.
             const state = courseeditor.state;
@@ -796,7 +796,7 @@ define(
             });
         });
 
-        // From Moodle 4.0 all edit actions are being re-implemented as state mutation.
+        // From PowerEduc 4.0 all edit actions are being re-implemented as state mutation.
         // This means all method from this "actions" module will be deprecated when all the course
         // interface is migrated to reactive components.
         // Most legacy actions did not provide enough information to regenarate the course so they
@@ -805,7 +805,7 @@ define(
         // call by implementing an adhoc mutation.
         courseeditor.addMutations({
             /**
-             * Compatibility function to update Moodle 4.0 course state using legacy actions.
+             * Compatibility function to update PowerEduc 4.0 course state using legacy actions.
              *
              * This method only updates some actions which does not require to use cmState mutation
              * to get updated data form the server.
@@ -1046,7 +1046,7 @@ define(
              *
              * This method can be used by course formats in their listener to the coursesectionedited event
              *
-             * @deprecated since Moodle 3.9
+             * @deprecated since PowerEduc 3.9
              * @param {JQuery} sectionelement
              * @param {String} selector CSS selector inside the section element, for example "a[data-action=show]"
              * @param {String} image new image name ("i/show", "i/hide", etc.)

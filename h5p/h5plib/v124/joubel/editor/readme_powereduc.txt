@@ -23,9 +23,9 @@ Changed:
      - Prefix  "editor:" has been added.
      - Keys have been lowercased.
    Attention: When upgrading to 1.22.4, most of the new strings haven't been added to the lang file
-   because they are related to the H5P Hub which is not currently supported by Moodle.
+   because they are related to the H5P Hub which is not currently supported by PowerEduc.
  * Add namespace to this library to avoid collision. It means:
-     - Add the "namespace Moodle;" line at the top of all the h5peditor*.php files in the root folder.
+     - Add the "namespace PowerEduc;" line at the top of all the h5peditor*.php files in the root folder.
      - Replace \H5Pxxx uses to H5Pxxx (for instance, in h5peditor-ajax.class.php there are several references to \H5PCore that
        must be replaced with H5PCore).
  * Add "use stdClass;" in h5peditor.class.php and h5peditor-file.class.php (check that it's still used before replacing it when

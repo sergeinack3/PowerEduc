@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This is the external API for this component.
@@ -45,7 +45,7 @@ class external extends external_api {
     /**
      * get_trusted_h5p_file parameters.
      *
-     * @since  Moodle 3.8
+     * @since  PowerEduc 3.8
      * @return external_function_parameters
      */
     public static function get_trusted_h5p_file_parameters() {
@@ -68,7 +68,7 @@ class external extends external_api {
      * by the core checking the right caps, validating the H5P package
      * and doing any clean-up process involved.
      *
-     * @since  Moodle 3.8
+     * @since  PowerEduc 3.8
      * @param  string $url H5P file url
      * @param  int $frame The frame allow to show the bar options below the content
      * @param  int $export The export allow to download the package
@@ -150,7 +150,7 @@ class external extends external_api {
     /**
      * get_trusted_h5p_file return
      *
-     * @since  Moodle 3.8
+     * @since  PowerEduc 3.8
      * @return external_description
      */
     public static function get_trusted_h5p_file_returns() {

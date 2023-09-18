@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * External course participation api.
@@ -37,7 +37,7 @@ require_once("$CFG->libdir/externallib.php");
  * @category   external
  * @copyright  2011 Jerome Mouneyrac
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.2
+ * @since PowerEduc 2.2
  */
 class enrol_manual_external extends external_api {
 
@@ -45,7 +45,7 @@ class enrol_manual_external extends external_api {
      * Returns description of method parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function enrol_users_parameters() {
         return new external_function_parameters(
@@ -71,7 +71,7 @@ class enrol_manual_external extends external_api {
      *
      * Function throw an exception at the first error encountered.
      * @param array $enrolments  An array of user enrolment
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function enrol_users($enrolments) {
         global $DB, $CFG;
@@ -150,7 +150,7 @@ class enrol_manual_external extends external_api {
      * Returns description of method result value.
      *
      * @return null
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function enrol_users_returns() {
         return null;

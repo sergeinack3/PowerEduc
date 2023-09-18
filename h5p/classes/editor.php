@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * H5P editor class.
@@ -26,11 +26,11 @@ namespace core_h5p;
 
 use core_h5p\local\library\autoloader;
 use core_h5p\output\h5peditor as editor_renderer;
-use Moodle\H5PCore;
-use Moodle\H5peditor;
+use PowerEduc\H5PCore;
+use PowerEduc\H5peditor;
 use stdClass;
 use coding_exception;
-use MoodleQuickForm;
+use PowerEducQuickForm;
 
 defined('POWEREDUC_INTERNAL') || die();
 
@@ -154,7 +154,7 @@ class editor {
     }
 
     /**
-     * Sets the Moodle file area where the file of a new H5P content will be stored.
+     * Sets the PowerEduc file area where the file of a new H5P content will be stored.
      *
      * @param int $contextid Context where the file of the H5P content will be stored.
      * @param string $component Component where the file of the H5P content will be stored.
@@ -184,11 +184,11 @@ class editor {
     /**
      * Adds an H5P editor to a form.
      *
-     * @param MoodleQuickForm $mform Moodle Quick Form
+     * @param PowerEducQuickForm $mform PowerEduc Quick Form
      *
      * @return void
      */
-    public function add_editor_to_form(MoodleQuickForm $mform): void {
+    public function add_editor_to_form(PowerEducQuickForm $mform): void {
         global $PAGE;
 
         $this->add_assets_to_page();
@@ -418,7 +418,7 @@ class editor {
 
     /**
      * Get editor translations for the defined language.
-     * Check if the editor strings have been translated in Moodle.
+     * Check if the editor strings have been translated in PowerEduc.
      * If the strings exist, they will override the existing ones in the JS file.
      *
      * @param string $language The language for the translations to be returned.
@@ -434,7 +434,7 @@ class editor {
             $languagescript = 'language/en.js';
         }
 
-        // Check if the editor strings have been translated in Moodle.
+        // Check if the editor strings have been translated in PowerEduc.
         // If the strings exist, they will override the existing ones in the JS file.
 
         // Get existing strings from current JS language file.

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_backup;
 
@@ -269,8 +269,8 @@ class structure_test extends \advanced_testcase {
 
         $read->set_source_table('forum_read', array('forumid' => '../../id'));
 
-        $inventeds->set_source_array(array((object)array('reason' => 'I love Moodle', 'version' => '1.0'),
-            (object)array('reason' => 'I love Moodle', 'version' => '2.0'))); // 2 object array
+        $inventeds->set_source_array(array((object)array('reason' => 'I love PowerEduc', 'version' => '1.0'),
+            (object)array('reason' => 'I love PowerEduc', 'version' => '2.0'))); // 2 object array
         $invented->set_source_array(array((object)array('one' => 1, 'two' => 2, 'three' => 3),
             (object)array('one' => 11, 'two' => 22, 'three' => 33))); // 2 object array
 

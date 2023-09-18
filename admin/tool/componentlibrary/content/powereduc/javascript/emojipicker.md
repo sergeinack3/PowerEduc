@@ -10,7 +10,7 @@ tags:
 
 ## How it works
 
-The emoji picker is used in the Moodle messaging interface and in Atto. It allows you to select an emoji which then is returned for use in your input element.
+The emoji picker is used in the PowerEduc messaging interface and in Atto. It allows you to select an emoji which then is returned for use in your input element.
 
 ## Source files
 

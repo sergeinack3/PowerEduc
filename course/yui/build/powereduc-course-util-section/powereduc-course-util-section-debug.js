@@ -7,15 +7,15 @@ YUI.add('powereduc-course-util-section', function (Y, NAME) {
  * @submodule powereduc-course-util-section
  */
 
-Y.namespace('Moodle.core_course.util.section');
+Y.namespace('PowerEduc.core_course.util.section');
 
 /**
  * A collection of utility classes for use with course sections.
  *
- * @class Moodle.core_course.util.section
+ * @class PowerEduc.core_course.util.section
  * @static
  */
-Y.Moodle.core_course.util.section = {
+Y.PowerEduc.core_course.util.section = {
     CONSTANTS: {
         SECTIONIDPREFIX: 'section-'
     },

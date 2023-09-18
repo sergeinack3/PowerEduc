@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * LTI enrolment plugin helper.
@@ -386,7 +386,7 @@ class helper {
      *
      * @param int $toolid the id of the shared tool
      * @return \powereduc_url the url to launch the tool
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_launch_url($toolid) {
         return new \powereduc_url('/enrol/lti/tool.php', array('id' => $toolid));
@@ -397,7 +397,7 @@ class helper {
      *
      * @param \stdClass $tool The lti tool
      * @return string The name of the tool
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_name($tool) {
         $name = null;
@@ -417,7 +417,7 @@ class helper {
      *
      * @param \stdClass $tool The lti tool
      * @return string A description of the tool
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_description($tool) {
         global $DB;
@@ -440,7 +440,7 @@ class helper {
      *
      * @param \stdClass $tool The lti tool
      * @return \powereduc_url A url to the icon of the tool
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_icon($tool) {
         global $OUTPUT;
@@ -455,7 +455,7 @@ class helper {
      *
      * @param \stdClass $tool The lti tool
      * @return string The url to the cartridge representing the tool
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_cartridge_url($tool) {
         global $CFG;
@@ -511,7 +511,7 @@ class helper {
      *
      * @param int $toolid The id of the shared tool
      * @return string MD5 hash of combined site ID and enrolment instance ID.
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function generate_cartridge_token($toolid) {
         $siteidentifier = get_site_identifier();
@@ -526,7 +526,7 @@ class helper {
      *
      * @param int $toolid The id of the shared tool
      * @return string MD5 hash of combined site ID and enrolment instance ID.
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function generate_proxy_token($toolid) {
         $siteidentifier = get_site_identifier();
@@ -540,7 +540,7 @@ class helper {
      * @param int $toolid The id of the shared tool
      * @param string $token hash for this site and this enrolment instance
      * @return boolean True if the token matches, false if it does not
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function verify_cartridge_token($toolid, $token) {
         return $token == self::generate_cartridge_token($toolid);
@@ -552,7 +552,7 @@ class helper {
      * @param int $toolid The id of the shared tool
      * @param string $token hash for this site and this enrolment instance
      * @return boolean True if the token matches, false if it does not
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function verify_proxy_token($toolid, $token) {
         return $token == self::generate_proxy_token($toolid);
@@ -564,7 +564,7 @@ class helper {
      * @param int $toolid The id of the shared tool
      * @return array Recursive associative array with partial xpath to be concatenated into an xpath expression
      *     before setting the value.
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     protected static function get_cartridge_parameters($toolid) {
         global $PAGE, $SITE;
@@ -621,7 +621,7 @@ class helper {
      * @param array $parameters The array of xpaths to search through
      * @param string $prefix The current xpath prefix (gets longer the deeper into the array you go)
      * @return void
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     protected static function set_xpath($xpath, $parameters, $prefix = '') {
         foreach ($parameters as $key => $value) {
@@ -650,7 +650,7 @@ class helper {
      *
      * @param int $toolid The id of the shared tool
      * @return string representing the generated cartridge
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function create_cartridge($toolid) {
         $cartridge = new \DOMDocument();

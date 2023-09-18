@@ -319,7 +319,7 @@ M.core_availability.plugin = {
      * Fills in any errors from this plugin's controls. If there are any
      * errors, push them into the supplied array.
      *
-     * Errors are Moodle language strings in format component:string, e.g.
+     * Errors are PowerEduc language strings in format component:string, e.g.
      * 'availability_date:error_date_past_end_of_world'.
      *
      * The default implementation does nothing.

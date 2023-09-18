@@ -1,4 +1,4 @@
-# PLEASE NOTE: Travis is not currently utilised by the Moodle core integration
+# PLEASE NOTE: Travis is not currently utilised by the PowerEduc core integration
 # process (which uses our internal CI system) this file is here for the benefit
 # of community developers git clones - see MDL-51458.
 
@@ -204,7 +204,7 @@ before_script:
           -e "/require_once/i \\define('TEST_SESSION_REDIS_HOST', '127.0.0.1');" \
           config.php ;
 
-        # Initialise PHPUnit for Moodle.
+        # Initialise PHPUnit for PowerEduc.
         php admin/tool/phpunit/cli/init.php
       fi
 

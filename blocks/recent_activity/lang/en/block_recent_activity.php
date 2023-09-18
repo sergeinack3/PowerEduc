@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'block_recent_activity', language 'en', branch 'POWEREDUC_20_STABLE'
@@ -25,7 +25,7 @@
 
 $string['cleanuptask'] = 'Cleanup task for recent activity block';
 $string['pluginname'] = 'Recent activity';
-$string['privacy:metadata'] = 'The recent activity block contains a cache of data stored elsewhere in Moodle.';
+$string['privacy:metadata'] = 'The recent activity block contains a cache of data stored elsewhere in PowerEduc.';
 $string['privacy:metadata:block_recent_activity'] = 'Temporary log of recent teacher activity. Removed after two days';
 $string['privacy:metadata:block_recent_activity:action'] = 'Action: created, updated or deleted';
 $string['privacy:metadata:block_recent_activity:cmid'] = 'Course activity ID';

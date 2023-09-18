@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Completion external API
@@ -21,7 +21,7 @@
  * @category   external
  * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 2.9
+ * @since      PowerEduc 2.9
  */
 
 defined('POWEREDUC_INTERNAL') || die;
@@ -36,7 +36,7 @@ require_once("$CFG->libdir/completionlib.php");
  * @category   external
  * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 2.9
+ * @since      PowerEduc 2.9
  */
 class core_completion_external extends external_api {
 
@@ -44,7 +44,7 @@ class core_completion_external extends external_api {
      * Describes the parameters for update_activity_completion_status_manually.
      *
      * @return external_function_parameters
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function update_activity_completion_status_manually_parameters() {
         return new external_function_parameters (
@@ -60,7 +60,7 @@ class core_completion_external extends external_api {
      * @param  int $cmid      Course module id
      * @param  bool $completed Activity completed or not
      * @return array            Result and possible warnings
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      * @throws powereduc_exception
      */
     public static function update_activity_completion_status_manually($cmid,  $completed) {
@@ -103,7 +103,7 @@ class core_completion_external extends external_api {
      * Describes the update_activity_completion_status_manually return value.
      *
      * @return external_single_structure
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function update_activity_completion_status_manually_returns() {
 
@@ -119,7 +119,7 @@ class core_completion_external extends external_api {
      * Describes the parameters for override_activity_completion_status.
      *
      * @return external_external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function override_activity_completion_status_parameters() {
         return new external_function_parameters (
@@ -137,7 +137,7 @@ class core_completion_external extends external_api {
      * @param  int $cmid      Course module id
      * @param  int $newstate  Activity completion
      * @return array          Array containing the current (updated) completion status.
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      * @throws powereduc_exception
      */
     public static function override_activity_completion_status($userid, $cmid, $newstate) {
@@ -178,7 +178,7 @@ class core_completion_external extends external_api {
      * Describes the override_activity_completion_status return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function override_activity_completion_status_returns() {
 
@@ -199,7 +199,7 @@ class core_completion_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function get_activities_completion_status_parameters() {
         return new external_function_parameters(
@@ -217,7 +217,7 @@ class core_completion_external extends external_api {
      * @param int $userid ID of the User
      * @return array of activities progress and warnings
      * @throws powereduc_exception
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      * @throws powereduc_exception
      */
     public static function get_activities_completion_status($courseid, $userid) {
@@ -284,7 +284,7 @@ class core_completion_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function get_activities_completion_status_returns() {
         return new external_single_structure(
@@ -355,7 +355,7 @@ class core_completion_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function get_course_completion_status_parameters() {
         return new external_function_parameters(
@@ -371,7 +371,7 @@ class core_completion_external extends external_api {
      * @param int $courseid ID of the Course
      * @param int $userid ID of the User
      * @return array of course completion status and warnings
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      * @throws powereduc_exception
      */
     public static function get_course_completion_status($courseid, $userid) {
@@ -461,7 +461,7 @@ class core_completion_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function get_course_completion_status_returns() {
         return new external_single_structure(
@@ -499,7 +499,7 @@ class core_completion_external extends external_api {
      * Describes the parameters for mark_course_self_completed.
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function mark_course_self_completed_parameters() {
         return new external_function_parameters (
@@ -514,7 +514,7 @@ class core_completion_external extends external_api {
      *
      * @param  int $courseid    Course id
      * @return array            Result and possible warnings
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      * @throws powereduc_exception
      */
     public static function mark_course_self_completed($courseid) {
@@ -563,7 +563,7 @@ class core_completion_external extends external_api {
      * Describes the mark_course_self_completed return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function mark_course_self_completed_returns() {
 

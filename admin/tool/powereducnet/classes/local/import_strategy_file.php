@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 /**
  * Contains the import_strategy_file class.
  *
@@ -27,7 +27,7 @@ use core\antivirus\manager as avmanager;
 /**
  * The import_strategy_file class.
  *
- * The import_strategy_file objects contains the setup steps needed to prepare a resource for import as a file into Moodle. This
+ * The import_strategy_file objects contains the setup steps needed to prepare a resource for import as a file into PowerEduc. This
  * ensures the remote_resource is first downloaded and put in a draft file area, ready for use as a file by the handling module.
  *
  * @copyright 2020 Jake Dallimore <jrhdallimore@gmail.com>

@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package    powereduccore
@@ -606,7 +606,7 @@ abstract class restore_dbops {
         //                 7b) No fallback, error. End qcat loop
         //         5b) Random question, must always create new.
         //         5c) Match, mark q to be mapped
-        // 8) Check if backup is from Moodle >= 3.5 and error if more than one top-level category in the context.
+        // 8) Check if backup is from PowerEduc >= 3.5 and error if more than one top-level category in the context.
 
         // Get all the contexts (question banks) in restore for the given contextlevel
         $contexts = self::restore_get_question_banks($restoreid, $contextlevel);
@@ -729,7 +729,7 @@ abstract class restore_dbops {
                 }
             }
 
-            // 8) Check if backup is made on Moodle >= 3.5 and there are more than one top-level category in the context.
+            // 8) Check if backup is made on PowerEduc >= 3.5 and there are more than one top-level category in the context.
             if ($after35 && $topcats > 1) {
                 $errors[] = get_string('restoremultipletopcats', 'question', $contextid);
             }
@@ -1253,7 +1253,7 @@ abstract class restore_dbops {
                 if (!empty($userauth->preventpassindb)) {
                     $user->password = AUTH_PASSWORD_NOT_CACHED;
 
-                // If Moodle is responsible for storing/validating pwd and reset functionality is available, mark
+                // If PowerEduc is responsible for storing/validating pwd and reset functionality is available, mark
                 } else if ($userauth->isinternal and $userauth->canresetpwd) {
                     $user->password = 'restored';
                 }

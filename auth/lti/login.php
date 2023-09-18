@@ -1,20 +1,20 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Page allowing a platform user, identified by their {iss, sub} tuple, to be bound to a new or existing Moodle account.
+ * Page allowing a platform user, identified by their {iss, sub} tuple, to be bound to a new or existing PowerEduc account.
  *
  * This is an LTI Advantage specific login feature.
  *
@@ -24,7 +24,7 @@
  * An account with auth type 'lti' is created for the user. This account is bound to the launch credentials.
  * Or
  * b) Use an existing account
- * The standard Moodle auth flow is leveraged to get an existing user account. This account is then bound to the launch
+ * The standard PowerEduc auth flow is leveraged to get an existing user account. This account is then bound to the launch
  * credentials.
  *
  * @package    auth_lti

@@ -1,7 +1,7 @@
 @core @core_course
 Feature: Restricting access to course lists
   In order to provide more targeted content
-  As a Moodle Administrator
+  As a PowerEduc Administrator
   I need to be able to give/revoke capabilities to view list of courses
 
   Background:

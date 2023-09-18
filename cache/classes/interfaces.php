@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Cache API interfaces
  *
- * This file is part of Moodle's cache API, affectionately called MUC.
+ * This file is part of PowerEduc's cache API, affectionately called MUC.
  * It contains the components that are requried in order to use caching.
  *
  * @package    core
@@ -395,7 +395,7 @@ interface cache_is_key_aware {
  * Cache stores can choose to implement this interface.
  * In order for a store to be usable as a session cache it must implement this interface.
  *
- * @since Moodle 2.4.4
+ * @since PowerEduc 2.4.4
  */
 interface cache_is_searchable {
     /**
@@ -445,7 +445,7 @@ interface cache_is_configurable {
 /**
  * Cache Data Source.
  *
- * The cache data source interface can be implemented by any class within Moodle.
+ * The cache data source interface can be implemented by any class within PowerEduc.
  * If implemented then the class can be reference in a cache definition and will be used to load information that cannot be
  * retrieved from the cache. As part of its retrieval that information will also be loaded into the cache.
  *

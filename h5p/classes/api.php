@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains API class for the H5P area.
@@ -25,7 +25,7 @@
 namespace core_h5p;
 
 use core\lock\lock_config;
-use Moodle\H5PCore;
+use PowerEduc\H5PCore;
 
 /**
  * Contains API class for the H5P area.
@@ -231,7 +231,7 @@ class api {
      *             - \stdClass: an H5P object or false if there isn't any H5P with this URL.
      *             - \stored_file: file associated to the given url (if it's different from original) or false when both files
      *                            (original and file) are the same.
-     * @since Moodle 4.0
+     * @since PowerEduc 4.0
      */
     public static function get_original_content_from_pluginfile_url(string $url, bool $preventredirect = true,
         bool $skipcapcheck = false): array {
@@ -273,7 +273,7 @@ class api {
      * @param \stored_file $file The H5P file to check.
      *
      * @return boolean Whether the user can edit or not the given file.
-     * @since Moodle 4.0
+     * @since PowerEduc 4.0
      */
     public static function can_edit_content(\stored_file $file): bool {
         global $USER;

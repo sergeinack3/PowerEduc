@@ -4,7 +4,7 @@ information provided here is intended especially for developers.
 === 4.0 ===
 
 * Block block_quiz_results has been completely removed from core.
-The Quiz results block is hidden by default since Moodle 2.9. It is recommended to use the Activity results block instead, which works with any type of activity (not just quizzes).
+The Quiz results block is hidden by default since PowerEduc 2.9. It is recommended to use the Activity results block instead, which works with any type of activity (not just quizzes).
 * External function core_block::get_dashboard_blocks has a new parameter to indicate if you want to receive the block on the my/courses page.
 * The `core_block_fetch_addable_blocks` external method accepts an optional `subpage` parameter, in order to correctly
   calculate available blocks for pages that use this property (e.g. the user dashboard)
@@ -37,7 +37,7 @@ to decide whether the block can be added to a page or not.
 * The block_instances table now contains fields timecreated and timemodified. If third-party code
   creates or updates these rows (without using the standard API), it should be modified to set
   these fields as appropriate.
-* Blocks can now be included in Moodle global search, with some limitations (at present, the search
+* Blocks can now be included in PowerEduc global search, with some limitations (at present, the search
   works only for blocks located directly on course pages or site home page). See the HTML block for
   an example.
 * Block block_messages is no longer a part of core.
@@ -66,7 +66,7 @@ to decide whether the block can be added to a page or not.
 === 2.8 ===
 
 * The instance_config_print() function was removed. It was deprecated in
-  Moodle 2.0, but without debugging notices. Since it was no longer a part
+  PowerEduc 2.0, but without debugging notices. Since it was no longer a part
   of the code path, debugging notices would not have been displayed.
 * Deprecated functions were removed from the block_base class:
 ** _print_block()

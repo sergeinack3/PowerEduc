@@ -142,12 +142,12 @@ ns.LibrarySelector.prototype.appendTo = function ($element) {
   this.$parent = $element;
 
   /*
-    Start Moodle change
-    This line is commented out to prevent display of the hub selector in Moodle.
+    Start PowerEduc change
+    This line is commented out to prevent display of the hub selector in PowerEduc.
     For more information see MDL-67814.
   */
   //this.$selector.appendTo($element);
-  /* End Moodle change */
+  /* End PowerEduc change */
   this.$tutorialUrl.appendTo($element);
   this.$exampleUrl.appendTo($element);
 

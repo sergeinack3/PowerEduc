@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle Course Rollover Plugin
+// This file is part of PowerEduc Course Rollover Plugin
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package     local_powerschool
@@ -33,13 +33,13 @@ require_login();
 $context = context_system::instance();
 // require_capability('local/powerschool:managepages', $context);
 
-// $PAGE->set_url(new moodle_url('/local/powerschool/periode.php'));
+// $PAGE->set_url(new powereduc_url('/local/powerschool/periode.php'));
 $PAGE->set_context(\context_system::instance());
 $PAGE->set_title('Enregistrer un periode');
 $PAGE->set_heading('Listes des differents apprenants et leur Moyennes');
 
 
-// $PAGE->navbar->add('Administration du Site',  new moodle_url('/local/powerschool/index.php'));
+// $PAGE->navbar->add('Administration du Site',  new powereduc_url('/local/powerschool/index.php'));
 // $PAGE->navbar->add(get_string('periode', 'local_powerschool'), $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
@@ -185,9 +185,9 @@ $moyennespe=round($moyennespe/$mm->coutet,2);
 $templatecontext = (object)[
     'etudiant' => array_values($inscription),
     'moyennegene' => $moyennespe,
-    'reglagesedit' => new moodle_url('/local/powerschool/reglagesedit.php'),
-    'reglagessupp'=> new moodle_url('/local/powerschool/reglages.php'),
-    'filiere' => new moodle_url('/local/powerschool/filiere.php'),
+    'reglagesedit' => new powereduc_url('/local/powerschool/reglagesedit.php'),
+    'reglagessupp'=> new powereduc_url('/local/powerschool/reglages.php'),
+    'filiere' => new powereduc_url('/local/powerschool/filiere.php'),
     'powereduc_file_name' => $powereduc_file_name,
 
 ];

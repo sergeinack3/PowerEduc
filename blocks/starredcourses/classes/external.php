@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 /**
  * Starred courses block external API
  *
@@ -42,7 +42,7 @@ class block_starredcourses_external extends core_course_external {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.6
+     * @since PowerEduc 3.6
      */
     public static function get_starred_courses_parameters() {
         return new external_function_parameters([
@@ -108,7 +108,7 @@ class block_starredcourses_external extends core_course_external {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.6
+     * @since PowerEduc 3.6
      */
     public static function get_starred_courses_returns() {
         return new external_multiple_structure(course_summary_exporter::get_read_structure());

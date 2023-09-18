@@ -35,7 +35,7 @@ Make sure you add these characters `---` before and after your metadata. You can
 
 ## Run the component library Grunt task.
 
-In your terminal run the command `npm install` and then `grunt componentlibrary` in your Moodle root folder. This will install all required resources and compile the componentlibrary pages. If you do not have npm installed on your system please visit [npmjs.com](https://www.npmjs.com/get-npm) to learn how to get a working setup.
+In your terminal run the command `npm install` and then `grunt componentlibrary` in your PowerEduc root folder. This will install all required resources and compile the componentlibrary pages. If you do not have npm installed on your system please visit [npmjs.com](https://www.npmjs.com/get-npm) to learn how to get a working setup.
 
 
 The output should be similar to this:

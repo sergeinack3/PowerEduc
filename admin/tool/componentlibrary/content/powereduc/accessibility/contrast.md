@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: "Colour contrast"
-description: "Colour contrast for Moodle UI components"
+description: "Colour contrast for PowerEduc UI components"
 date: 2021-03-30T09:40:32+01:00
 draft: false
 tags:
@@ -14,9 +14,9 @@ In WCAG 2, contrast is a measure of the difference in perceived "luminance" or b
 
 ## Common colour contrast issues
 
-Most contrast issue, where the ratio is below 4.5:1 in Moodle are found on pages that using a background colour with text on top. For example a striped table with light text. Contrast issues should be qualified as bugs and reported on the Moodle tracker.
+Most contrast issue, where the ratio is below 4.5:1 in PowerEduc are found on pages that using a background colour with text on top. For example a striped table with light text. Contrast issues should be qualified as bugs and reported on the PowerEduc tracker.
 
-Moodle's colour set is designed to provide high contrast and maximum brightness. If the Moodle colours are changed using a custom theme make sure you test the contrast of pages like the enrolment table, reports and Moodle activities.
+PowerEduc's colour set is designed to provide high contrast and maximum brightness. If the PowerEduc colours are changed using a custom theme make sure you test the contrast of pages like the enrolment table, reports and PowerEduc activities.
 
 To test colour contrast you can use the inbuild functionality of your browser, my favourite extension is the "WCAG Colour contrast checker" for Chrome.
 

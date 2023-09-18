@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Cache dummy store.
@@ -20,7 +20,7 @@
  * This dummy store is used when a load has no other stores that it can make use of.
  * This shouldn't happen in normal operation... I think.
  *
- * This file is part of Moodle's cache API, affectionately called MUC.
+ * This file is part of PowerEduc's cache API, affectionately called MUC.
  * It contains the components that are requried in order to use caching.
  *
  * @package    core
@@ -244,7 +244,7 @@ class cachestore_dummy extends cache_store {
      *
      * This method may be called before the store has been initialised.
      *
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public function instance_deleted() {
         $this->purge();

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Responsible for handling AJAX requests related to H5P.
@@ -25,8 +25,8 @@
 use core_h5p\factory;
 use core_h5p\framework;
 use core_h5p\local\library\autoloader;
-use Moodle\H5PCore;
-use Moodle\H5PEditorEndpoints;
+use PowerEduc\H5PCore;
+use PowerEduc\H5PEditorEndpoints;
 
 define('AJAX_SCRIPT', true);
 
@@ -57,7 +57,7 @@ switch ($action) {
         $major = optional_param('majorVersion', 0, PARAM_INT);
         $minor = optional_param('minorVersion', 0, PARAM_INT);
 
-        // Normalise Moodle language using underscore, as opposed to H5P which uses dash.
+        // Normalise PowerEduc language using underscore, as opposed to H5P which uses dash.
         $language = optional_param('default-language', null, PARAM_RAW);
         $language = clean_param(str_replace('-', '_', $language), PARAM_LANG);
 

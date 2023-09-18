@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Access Date filter.
@@ -85,11 +85,11 @@ class accessdate extends base {
     /**
      * Add the form elements for the filter to the supplied form.
      *
-     * @param \MoodleQuickForm $mform The form to add filter settings to.
+     * @param \PowerEducQuickForm $mform The form to add filter settings to.
      *
      * @throws \coding_exception
      */
-    public static function add_filter_to_form(\MoodleQuickForm &$mform) {
+    public static function add_filter_to_form(\PowerEducQuickForm &$mform) {
 
         $filtername = static::get_filter_name();
         $key = "filter_{$filtername}";
@@ -206,7 +206,7 @@ class accessdate extends base {
                     $filterbasedate = (int) $USER->timecreated;
                     break;
             }
-            // If the base date has no value because a user hasn't accessed Moodle yet, default to account creation.
+            // If the base date has no value because a user hasn't accessed PowerEduc yet, default to account creation.
             if (empty($filterbasedate)) {
                 $filterbasedate = (int) $USER->timecreated;
             }

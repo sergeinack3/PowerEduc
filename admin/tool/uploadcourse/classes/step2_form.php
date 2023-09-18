@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Bulk course upload step 2.
@@ -241,7 +241,7 @@ class tool_uploadcourse_step2_form extends tool_uploadcourse_base_form {
 
         // Check if course end date form field should be enabled by default.
         // If a default date is provided to the form element, it is magically enabled by default in the
-        // MoodleQuickForm_date_time_selector class, otherwise it's disabled by default.
+        // PowerEducQuickForm_date_time_selector class, otherwise it's disabled by default.
         if (get_config('powereduccourse', 'courseenddateenabled')) {
             $enddate = $format->get_default_course_enddate($mform, array('startdate' => 'defaults[startdate]'));
             $mform->setDefault('defaults[enddate]', $enddate);

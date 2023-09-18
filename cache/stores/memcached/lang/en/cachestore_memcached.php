@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * The library file for the memcached cache store.
@@ -98,4 +98,4 @@ $string['useserialiser_help'] = 'Specifies the serializer to use for serializing
 The valid serializers are Memcached::SERIALIZER_PHP or Memcached::SERIALIZER_IGBINARY.
 The latter is supported only when memcached is configured with --enable-memcached-igbinary option and the igbinary extension is loaded.';
 $string['upgrade200recommended'] = 'We recommend you upgrade your Memcached PHP extension to version 2.0.0 or greater.
-The version of the Memcached PHP extension you are currently using does not provide the functionality Moodle uses to ensure a sandboxed cache. Until you upgrade we recommend you do not configure any other applications to use the same Memcached servers as Moodle is configured to use.';
+The version of the Memcached PHP extension you are currently using does not provide the functionality PowerEduc uses to ensure a sandboxed cache. Until you upgrade we recommend you do not configure any other applications to use the same Memcached servers as PowerEduc is configured to use.';

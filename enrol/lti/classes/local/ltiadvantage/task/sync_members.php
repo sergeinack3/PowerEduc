@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace enrol_lti\local\ltiadvantage\task;
 
@@ -326,7 +326,7 @@ class sync_members extends scheduled_task {
     /**
      * Creates an lti user object from a member entry.
      *
-     * @param stdClass $user the Moodle user record representing this member.
+     * @param stdClass $user the PowerEduc user record representing this member.
      * @param stdClass $resource the locally published resource record, used for setting user defaults.
      * @param resource_link $resourcelink the resource_link instance.
      * @param array $member the member information from the NRPS service call.

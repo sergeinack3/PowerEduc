@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'tool_xmldb', language 'en', branch 'POWEREDUC_22_STABLE'
@@ -34,37 +34,37 @@ $string['confirmdeleteindex'] = 'Are you absolutely sure that you want to delete
 $string['confirmdeletekey'] = 'Are you absolutely sure that you want to delete the key:';
 $string['confirmdeletetable'] = 'Are you absolutely sure that you want to delete the table:';
 $string['confirmdeletexmlfile'] = 'Are you absolutely sure that you want to delete the file:';
-$string['confirmcheckbigints'] = 'This functionality will search for <a href="https://tracker.powereduc.org/browse/MDL-11038">potential wrong integer fields</a> in your Moodle server, generating (but not executing!) automatically the needed SQL statements to have all the integers in your DB properly defined.
+$string['confirmcheckbigints'] = 'This functionality will search for <a href="https://tracker.powereduc.org/browse/MDL-11038">potential wrong integer fields</a> in your PowerEduc server, generating (but not executing!) automatically the needed SQL statements to have all the integers in your DB properly defined.
 
 Once generated you can copy such statements and execute them safely with your favourite SQL interface (don\'t forget to backup your data before doing that).
 
-It\'s highly recommended to be running the latest (+ version) available of your Moodle release before executing the search of wrong integers.
+It\'s highly recommended to be running the latest (+ version) available of your PowerEduc release before executing the search of wrong integers.
 
 This functionality doesn\'t perform any action against the DB (just reads from it), so can be safely executed at any moment.';
-$string['confirmcheckdefaults'] = 'This functionality will search for inconsistent default values in your Moodle server, generating (but not executing!) the needed SQL statements to have all the default values properly defined.
+$string['confirmcheckdefaults'] = 'This functionality will search for inconsistent default values in your PowerEduc server, generating (but not executing!) the needed SQL statements to have all the default values properly defined.
 
 Once generated you can copy such statements and execute them safely with your favourite SQL interface (don\'t forget to backup your data before doing that).
 
-It\'s highly recommended to be running the latest (+ version) available of your Moodle release before executing the search of inconsistent default values.
+It\'s highly recommended to be running the latest (+ version) available of your PowerEduc release before executing the search of inconsistent default values.
 
 This functionality doesn\'t perform any action against the DB (just reads from it), so can be safely executed at any moment.';
-$string['confirmcheckforeignkeys'] = 'This functionality will search for potential violations of the foreign keys defined in the install.xml definitions. (Moodle does not currently generate actual foreign key constraints in the database, which is why invalid data may be present.)
+$string['confirmcheckforeignkeys'] = 'This functionality will search for potential violations of the foreign keys defined in the install.xml definitions. (PowerEduc does not currently generate actual foreign key constraints in the database, which is why invalid data may be present.)
 
-It\'s highly recommended to be running the latest (+ version) available of your Moodle release before executing the search for potential violations of the foreign keys.
+It\'s highly recommended to be running the latest (+ version) available of your PowerEduc release before executing the search for potential violations of the foreign keys.
 
 This functionality doesn\'t perform any action against the DB (just reads from it), so can be safely executed at any moment.';
-$string['confirmcheckindexes'] = 'This functionality will search for potential missing indexes in your Moodle server, generating (but not executing!) automatically the needed SQL statements to keep everything updated.
+$string['confirmcheckindexes'] = 'This functionality will search for potential missing indexes in your PowerEduc server, generating (but not executing!) automatically the needed SQL statements to keep everything updated.
 
 Once generated you can copy such statements and execute them safely with your favourite SQL interface (don\'t forget to backup your data before doing that).
 
-It\'s highly recommended to be running the latest (+ version) available of your Moodle release before executing the search of missing indexes.
+It\'s highly recommended to be running the latest (+ version) available of your PowerEduc release before executing the search of missing indexes.
 
 This functionality doesn\'t perform any action against the DB (just reads from it), so can be safely executed at any moment.';
-$string['confirmcheckoraclesemantics'] = 'This functionality will search for <a href="https://tracker.powereduc.org/browse/MDL-29322">Oracle varchar2 columns using BYTE semantics</a> in your Moodle server, generating (but not executing!) automatically the needed SQL statements to have all the columns converted to use CHAR semantics instead (better for cross-db compatibility and increased contents max. length).
+$string['confirmcheckoraclesemantics'] = 'This functionality will search for <a href="https://tracker.powereduc.org/browse/MDL-29322">Oracle varchar2 columns using BYTE semantics</a> in your PowerEduc server, generating (but not executing!) automatically the needed SQL statements to have all the columns converted to use CHAR semantics instead (better for cross-db compatibility and increased contents max. length).
 
 Once generated you can copy such statements and execute them safely with your favourite SQL interface (don\'t forget to backup your data before doing that).
 
-It\'s highly recommended to be running the latest (+ version) available of your Moodle release before executing the search of BYTE semantics.
+It\'s highly recommended to be running the latest (+ version) available of your PowerEduc release before executing the search of BYTE semantics.
 
 This functionality doesn\'t perform any action against the DB (just reads from it), so can be safely executed at any moment.';
 $string['confirmrevertchanges'] = 'Are you absolutely sure that you want to revert changes performed over:';

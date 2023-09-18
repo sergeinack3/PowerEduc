@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace enrol_lti\local\ltiadvantage\entity;
 
@@ -81,7 +81,7 @@ class user {
      * Private constructor.
      *
      * @param int $resourceid the id of the published resource to which this user belongs.
-     * @param int $userid the id of the Moodle user to which this LTI user relates.
+     * @param int $userid the id of the PowerEduc user to which this LTI user relates.
      * @param int $deploymentid the local id of the deployment instance to which this user belongs.
      * @param string $sourceid the id of the user in the platform site.
      * @param string $lang the user's language code.
@@ -127,7 +127,7 @@ class user {
      *
      * @param int $resourcelinkid the local id of the resource link instance to link to the user.
      * @param int $resourceid the id of the published resource to which this user belongs.
-     * @param int $userid the id of the Moodle user to which this LTI user relates.
+     * @param int $userid the id of the PowerEduc user to which this LTI user relates.
      * @param int $deploymentid the local id of the deployment instance to which this user belongs.
      * @param string $sourceid the id of the user in the platform site.
      * @param string $lang the user's language code.
@@ -151,7 +151,7 @@ class user {
      * Factory method for creating a user.
      *
      * @param int $resourceid the id of the published resource to which this user belongs.
-     * @param int $userid the id of the Moodle user to which this LTI user relates.
+     * @param int $userid the id of the PowerEduc user to which this LTI user relates.
      * @param int $deploymentid the local id of the deployment instance to which this user belongs.
      * @param string $sourceid the id of the user in the platform site.
      * @param string $lang the user's language code.

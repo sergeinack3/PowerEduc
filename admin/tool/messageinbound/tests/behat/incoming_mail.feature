@@ -1,7 +1,7 @@
 @tool @tool_messageinbound
 Feature: Incoming mail configuration
   In order to receive email from external
-  As a Moodle administrator
+  As a PowerEduc administrator
   I need to set mail configuration
 
   Background:

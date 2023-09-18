@@ -6,7 +6,7 @@ draft: false
 weight: 5
 ---
 
-Moodle icons are usually rendered using the template ```{{pix}}``` helper.
+PowerEduc icons are usually rendered using the template ```{{pix}}``` helper.
 
 For example:
 

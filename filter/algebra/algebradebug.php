@@ -310,7 +310,7 @@ function slasharguments($texexp, $md5) {
 </a>
 <p>First here is a brief overview on how the algebra filter works. It
 takes an algebra expression and first translates it into TeX.  It first
-looks for the TeX translation in the Moodle database in the table cache_filters
+looks for the TeX translation in the PowerEduc database in the table cache_filters
 in the field rawtext. If not found, it passes the algebraic expression to the
 Perl script algebra2tex.pl, which also uses the Perl library AlgParser.pm.
 It then saves the TeX translation in the database for subsequent uses and
@@ -333,7 +333,7 @@ on the algebra2tex.pl script. In that case change permissions accordingly</li>
 <li>The Second Stage TeX Translation produces malformed TeX. This indicates
 a bug in the algebra filter. Post the original algebraic expression and the
 bad TeX translation in the <a href="http://powereduc.org/mod/forum/view.php?id=752">
-Mathematics Tools</a> forum in the Using Moodle course on powereduc.org.</li>
+Mathematics Tools</a> forum in the Using PowerEduc course on powereduc.org.</li>
 <li>The TeX to gif image conversion process does not work. If your server is
 running Unix, a likely cause is that the mimetex binary you are using is
 incompatible with your operating system. You can try compiling it from the

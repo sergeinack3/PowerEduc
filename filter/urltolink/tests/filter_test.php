@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Unit test for the filter_urltolink
@@ -175,7 +175,7 @@ class filter_test extends \basic_testcase {
             'h3 (www.styles.com/h3) < h1 (www.styles.com/h1)' => 'h3 (<a href="http://www.styles.com/h3" class="_blanktarget">www.styles.com/h3</a>) < h1 (<a href="http://www.styles.com/h1" class="_blanktarget">www.styles.com/h1</a>)',
             '<p>text www.powereduc.org&lt;/p> text' => '<p>text <a href="http://www.powereduc.org" class="_blanktarget">www.powereduc.org</a>&lt;/p> text',
             // Some more urls.
-            '<link rel="search" type="application/opensearchdescription+xml" href="/osd.jsp" title="Peer review - Moodle Tracker"/>' => '<link rel="search" type="application/opensearchdescription+xml" href="/osd.jsp" title="Peer review - Moodle Tracker"/>',
+            '<link rel="search" type="application/opensearchdescription+xml" href="/osd.jsp" title="Peer review - PowerEduc Tracker"/>' => '<link rel="search" type="application/opensearchdescription+xml" href="/osd.jsp" title="Peer review - PowerEduc Tracker"/>',
             '<a href="https://docs.powereduc.org/dev/Main_Page"></a><span>www.google.com</span><span class="placeholder"></span>' => '<a href="https://docs.powereduc.org/dev/Main_Page"></a><span><a href="http://www.google.com" class="_blanktarget">www.google.com</a></span><span class="placeholder"></span>',
             'http://nolandforzombies.com <a href="zombiesFTW.com">Zombies FTW</a> http://aliens.org' => '<a href="http://nolandforzombies.com" class="_blanktarget">http://nolandforzombies.com</a> <a href="zombiesFTW.com">Zombies FTW</a> <a href="http://aliens.org" class="_blanktarget">http://aliens.org</a>',
             // Test 'nolink' class.

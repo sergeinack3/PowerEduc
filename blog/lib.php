@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Core global functions for Blog.
@@ -156,7 +156,7 @@ function blog_remove_associations_for_module($modcontextid) {
 
 /**
  * Given a record in the {blog_external} table, checks the blog's URL
- * for new entries not yet copied into Moodle.
+ * for new entries not yet copied into PowerEduc.
  * Also attempts to identify and remove deleted blog entries
  *
  * @param object $externalblog
@@ -1185,7 +1185,7 @@ function blog_get_tagged_posts($tag, $exclusivemode = false, $fromctx = 0, $ctx 
  * @param  int $entryid  blog entry id (can be null)
  * @param  int $userid   blog author id (can be null)
  * @return array with the calculated course and id
- * @since  Moodle 3.6
+ * @since  PowerEduc 3.6
  */
 function blog_validate_access($courseid, $modid, $groupid, $entryid, $userid) {
     global $CFG, $DB, $USER, $COURSE;

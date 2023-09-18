@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -36,7 +36,7 @@ require_once("$CFG->libdir/filelib.php");
  * @category   external
  * @copyright  2011 Jerome Mouneyrac
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.2
+ * @since PowerEduc 2.2
  */
 class core_files_external extends external_api {
 
@@ -44,7 +44,7 @@ class core_files_external extends external_api {
      * Returns description of get_files parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function get_files_parameters() {
         return new external_function_parameters(
@@ -76,8 +76,8 @@ class core_files_external extends external_api {
      * @param string $contextlevel The context level for the file location.
      * @param int $instanceid The instance id for where the file is located.
      * @return array
-     * @since Moodle 2.9 Returns additional fields (timecreated, filesize, author, license)
-     * @since Moodle 2.2
+     * @since PowerEduc 2.9 Returns additional fields (timecreated, filesize, author, license)
+     * @since PowerEduc 2.2
      */
     public static function get_files($contextid, $component, $filearea, $itemid, $filepath, $filename, $modified = null,
                                      $contextlevel = null, $instanceid = null) {
@@ -193,8 +193,8 @@ class core_files_external extends external_api {
      * Returns description of get_files returns
      *
      * @return external_single_structure
-     * @since Moodle 2.9 Returns additional fields for files (timecreated, filesize, author, license)
-     * @since Moodle 2.2
+     * @since PowerEduc 2.9 Returns additional fields for files (timecreated, filesize, author, license)
+     * @since PowerEduc 2.2
      */
     public static function get_files_returns() {
         return new external_single_structure(
@@ -238,7 +238,7 @@ class core_files_external extends external_api {
      * Returns description of upload parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function upload_parameters() {
         return new external_function_parameters(
@@ -271,7 +271,7 @@ class core_files_external extends external_api {
      * @param string $contextlevel Context level (block, course, coursecat, system, user or module)
      * @param int    $instanceid   Instance id of the item associated with the context level
      * @return array
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function upload($contextid, $component, $filearea, $itemid, $filepath, $filename, $filecontent, $contextlevel, $instanceid) {
         global $USER, $CFG;
@@ -371,7 +371,7 @@ class core_files_external extends external_api {
      * Returns description of upload returns
      *
      * @return external_single_structure
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function upload_returns() {
         return new external_single_structure(

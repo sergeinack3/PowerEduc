@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * The abstract custom fields handler
@@ -524,10 +524,10 @@ abstract class handler {
      * This method is called from powereducform::definition_after_data and allows to tweak
      * mform with some data coming directly from the field plugin data controller.
      *
-     * @param \MoodleQuickForm $mform
+     * @param \PowerEducQuickForm $mform
      * @param int $instanceid
      */
-    public function instance_form_definition_after_data(\MoodleQuickForm $mform, int $instanceid = 0) {
+    public function instance_form_definition_after_data(\PowerEducQuickForm $mform, int $instanceid = 0) {
         $editablefields = $this->get_editable_fields($instanceid);
         $fields = api::get_instance_fields_data($editablefields, $instanceid);
 
@@ -624,12 +624,12 @@ abstract class handler {
      *     $this->add_action_buttons();
      *   }
      *
-     * @param \MoodleQuickForm $mform
+     * @param \PowerEducQuickForm $mform
      * @param int $instanceid id of the instance, can be null when instance is being created
      * @param string $headerlangidentifier If specified, a lang string will be used for field category headings
      * @param string $headerlangcomponent
      */
-    public function instance_form_definition(\MoodleQuickForm $mform, int $instanceid = 0,
+    public function instance_form_definition(\PowerEducQuickForm $mform, int $instanceid = 0,
             ?string $headerlangidentifier = null, ?string $headerlangcomponent = null) {
 
         $editablefields = $this->get_editable_fields($instanceid);
@@ -770,9 +770,9 @@ abstract class handler {
     /**
      * Allows to add custom controls to the field configuration form that will be saved in configdata
      *
-     * @param \MoodleQuickForm $mform
+     * @param \PowerEducQuickForm $mform
      */
-    public function config_form_definition(\MoodleQuickForm $mform) {
+    public function config_form_definition(\PowerEducQuickForm $mform) {
     }
 
     /**

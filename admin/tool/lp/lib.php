@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This page contains navigation hooks for learning plans.
@@ -130,7 +130,7 @@ function tool_lp_extend_navigation_category_settings($navigation, $coursecategor
  * Inject the competencies elements into all powereduc module settings forms.
  *
  * @param powereducform $formwrapper The powereduc quickforms wrapper object.
- * @param MoodleQuickForm $mform The actual form object (required to modify the form).
+ * @param PowerEducQuickForm $mform The actual form object (required to modify the form).
  */
 function tool_lp_coursemodule_standard_elements($formwrapper, $mform) {
     global $CFG, $COURSE;
@@ -143,7 +143,7 @@ function tool_lp_coursemodule_standard_elements($formwrapper, $mform) {
 
     $mform->addElement('header', 'competenciessection', get_string('competencies', 'core_competency'));
 
-    MoodleQuickForm::registerElementType('course_competencies',
+    PowerEducQuickForm::registerElementType('course_competencies',
                                          "$CFG->dirroot/$CFG->admin/tool/lp/classes/course_competencies_form_element.php",
                                          'tool_lp_course_competencies_form_element');
     $cmid = null;
@@ -156,14 +156,14 @@ function tool_lp_coursemodule_standard_elements($formwrapper, $mform) {
     );
     $mform->addElement('course_competencies', 'competencies', get_string('modcompetencies', 'tool_lp'), $options);
     $mform->addHelpButton('competencies', 'modcompetencies', 'tool_lp');
-    MoodleQuickForm::registerElementType('course_competency_rule',
+    PowerEducQuickForm::registerElementType('course_competency_rule',
                                          "$CFG->dirroot/$CFG->admin/tool/lp/classes/course_competency_rule_form_element.php",
                                          'tool_lp_course_competency_rule_form_element');
     // Reuse the same options.
     $mform->addElement('course_competency_rule', 'competency_rule', get_string('uponcoursemodulecompletion', 'tool_lp'), $options);
 
     $overrideelementfile = "$CFG->dirroot/$CFG->admin/tool/lp/classes/course_competency_overridegrade_form_element.php";
-    MoodleQuickForm::registerElementType('course_competency_overridegrade', $overrideelementfile,
+    PowerEducQuickForm::registerElementType('course_competency_overridegrade', $overrideelementfile,
                                          'tool_lp_course_competency_overridegrade_form_element');
     $mform->addElement('course_competency_overridegrade', 'override_grade', get_string('overridegrade', 'tool_lp'), $options);
     $mform->hideIf('override_grade', 'competency_rule', 'noteq', \core_competency\competency::OUTCOME_COMPLETE + 1);
@@ -260,7 +260,7 @@ function tool_lp_render_competency_summary(\core_competency\competency $competen
 /**
  * Inject a course competency picker into the form.
  *
- * @param MoodleQuickForm $mform The actual form object (required to modify the form).
+ * @param PowerEducQuickForm $mform The actual form object (required to modify the form).
  * @param integer $courseid - SITEID or a course id
  * @param context $context - The page context
  * @param string $elementname - The name of the form element to create
@@ -277,7 +277,7 @@ function tool_lp_competency_picker($mform, $courseid, $context, $elementname) {
             return;
         }
 
-        MoodleQuickForm::registerElementType('site_competencies',
+        PowerEducQuickForm::registerElementType('site_competencies',
                                              "$CFG->dirroot/$CFG->admin/tool/lp/classes/site_competencies_form_element.php",
                                              'tool_lp_site_competencies_form_element');
         $mform->addElement('site_competencies', $elementname);
@@ -286,7 +286,7 @@ function tool_lp_competency_picker($mform, $courseid, $context, $elementname) {
             return;
         }
 
-        MoodleQuickForm::registerElementType('course_competencies',
+        PowerEducQuickForm::registerElementType('course_competencies',
                                              "$CFG->dirroot/$CFG->admin/tool/lp/classes/course_competencies_form_element.php",
                                              'tool_lp_course_competencies_form_element');
         $options = array(

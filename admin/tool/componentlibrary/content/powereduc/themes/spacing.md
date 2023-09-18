@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: "Spacing"
-description: Moodle spacing
+description: PowerEduc spacing
 date: 2020-02-04T09:40:32+01:00
 draft: false
 weight: 4
@@ -9,7 +9,7 @@ weight: 4
 
 ## How it works
 
-Moodle's spacing classes build on Bootstrap spacing classes which can be set for margins and paddings on different screen breakpoints. Using these classes is preferred over setting custom spacing on UI elements using CSS.
+PowerEduc's spacing classes build on Bootstrap spacing classes which can be set for margins and paddings on different screen breakpoints. Using these classes is preferred over setting custom spacing on UI elements using CSS.
 
 ### example class pt-3
 
@@ -26,9 +26,9 @@ css:
 
 The classes are named using the format `{property}{sides}-{size}` for `xs` and `{property}{sides}-{breakpoint}-{size}` for `sm`, `md`, `lg`, and `xl`.
 
-### Moodle spacing values
+### PowerEduc spacing values
 
-Moodle add's a 6th spacing value on top of the Bootstrap default spacing.
+PowerEduc add's a 6th spacing value on top of the Bootstrap default spacing.
 
 * `0` - for classes that eliminate the `margin` or `padding` by setting it to `0`
 * `1` - (by default) for classes that set the `margin` or `padding` to `$spacer * .25`

@@ -1,5 +1,5 @@
 @core @core_backup
-Feature: Restore Moodle 2 course backups with different user data settings
+Feature: Restore PowerEduc 2 course backups with different user data settings
   In order to decide upon including user data during backup and restore of courses
   As a teacher and an admin
   I need to be able to set and override backup and restore settings

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Analytics basic actions manager.
@@ -300,7 +300,7 @@ class manager {
     }
 
     /**
-     * @deprecated since Moodle 3.7 use get_time_splitting_methods_for_evaluation instead
+     * @deprecated since PowerEduc 3.7 use get_time_splitting_methods_for_evaluation instead
      */
     public static function get_enabled_time_splitting_methods() {
         throw new coding_exception(__FUNCTION__ . '() has been removed. You can use self::get_time_splitting_methods_for_evaluation if ' .
@@ -595,10 +595,10 @@ class manager {
     }
 
     /**
-     * Used to be used to add models included with the Moodle core.
+     * Used to be used to add models included with the PowerEduc core.
      *
-     * @deprecated Deprecated since Moodle 3.7 (MDL-61667) - Use lib/db/analytics.php instead.
-     * @todo Remove this method in Moodle 3.11 (MDL-65186).
+     * @deprecated Deprecated since PowerEduc 3.7 (MDL-61667) - Use lib/db/analytics.php instead.
+     * @todo Remove this method in PowerEduc 3.11 (MDL-65186).
      * @return void
      */
     public static function add_builtin_models() {
@@ -786,7 +786,7 @@ class manager {
     }
 
     /**
-     * Return the list of all the models declared anywhere in this Moodle installation.
+     * Return the list of all the models declared anywhere in this PowerEduc installation.
      *
      * Models defined by the core and core subsystems come first, followed by those provided by plugins.
      *

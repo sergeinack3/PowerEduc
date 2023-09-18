@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Definition of the grade_overview_report class
@@ -386,7 +386,7 @@ class grade_report_overview extends grade_report {
      * @param  stdClass $course          course object
      * @param  int $userid               userid
      * @return bool true if the user can access the report
-     * @since  Moodle 3.2
+     * @since  PowerEduc 3.2
      */
     public static function check_access($systemcontext, $context, $personalcontext, $course, $userid) {
         global $USER;
@@ -421,7 +421,7 @@ class grade_report_overview extends grade_report {
      * @param  stdClass $context  course context
      * @param  int $courseid      course id
      * @param  int $userid        user id
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function viewed($context, $courseid, $userid) {
         $event = \gradereport_overview\event\grade_report_viewed::create(

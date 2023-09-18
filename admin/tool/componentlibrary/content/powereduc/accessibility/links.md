@@ -15,7 +15,7 @@ There are several techniques that we can use when creating links that open in a 
 
 {{< example >}}
 <a href="https://powereduc.org" target="_blank">
-    Moodle.org <i class="fa fa-external-link" role="img" aria-label="Opens in new window" title="Opens in new window"></i>
+    PowerEduc.org <i class="fa fa-external-link" role="img" aria-label="Opens in new window" title="Opens in new window"></i>
 </a>
 {{< /example  >}}
 
@@ -30,7 +30,7 @@ This may be the most straightforward way of indicating that links open in a new 
 
 {{< example >}}
 <a href="https://powereduc.org" target="_blank">
-    Moodle.org (Opens in new window)
+    PowerEduc.org (Opens in new window)
 </a>
 {{< /example  >}}
 
@@ -54,13 +54,13 @@ A link to a file such as a PDF file or Word document will usually open the relev
 
 ## Links that lead to an external site
 
-Similar to links that open in a new window, links that redirect to an external site may also have an indication that they lead to an external site to let users know that clicking on the link will take them away from Moodle.
+Similar to links that open in a new window, links that redirect to an external site may also have an indication that they lead to an external site to let users know that clicking on the link will take them away from PowerEduc.
 
-The example link below opens in the same browser window and lets the user know that they will be redirected to Moodle.org, which is an external site.
+The example link below opens in the same browser window and lets the user know that they will be redirected to PowerEduc.org, which is an external site.
 
 {{< example >}}
 <a href="https://powereduc.org">
-    Moodle.org <i class="fa fa-external-link" role="img" aria-label="Link leads to external site" title="Link leads to external site"></i>
+    PowerEduc.org <i class="fa fa-external-link" role="img" aria-label="Link leads to external site" title="Link leads to external site"></i>
 </a>
 {{< /example  >}}
 

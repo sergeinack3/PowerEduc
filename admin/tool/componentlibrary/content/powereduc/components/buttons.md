@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: "Buttons"
-description: "Button types used in Moodle"
+description: "Button types used in PowerEduc"
 date: 2020-01-14T16:32:24+01:00
 draft: false
 weight: 10
@@ -12,9 +12,9 @@ tags:
 
 ## How to use buttons
 
-Button components are available as part of a Moodle form, as a single button functioning as a form submit or triggering a JavaScript action. Buttons used in Moodle are based on the [Bootstrap buttons]({{< docsref "/components/buttons" >}}).
+Button components are available as part of a PowerEduc form, as a single button functioning as a form submit or triggering a JavaScript action. Buttons used in PowerEduc are based on the [Bootstrap buttons]({{< docsref "/components/buttons" >}}).
 
-The most used buttons types in Moodle are:
+The most used buttons types in PowerEduc are:
 
 ## Example
 

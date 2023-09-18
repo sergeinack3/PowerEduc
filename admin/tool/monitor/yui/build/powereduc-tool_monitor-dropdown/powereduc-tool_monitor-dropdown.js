@@ -9,7 +9,7 @@ YUI.add('powereduc-tool_monitor-dropdown', function (Y, NAME) {
 /**
  * A module to manage dependent selects on the edit page.
  *
- * @since Moodle 2.8
+ * @since PowerEduc 2.8
  * @class powereduc-tool_monitor.dropdown
  * @extends Base
  * @constructor

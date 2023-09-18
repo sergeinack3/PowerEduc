@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Moodle Component Library
+ * PowerEduc Component Library
  *
  * A sample page with dynamic tabs.
  *
@@ -38,8 +38,8 @@ $PAGE->set_url(new powereduc_url('/admin/tool/componentlibrary/examples/dynamict
 $PAGE->set_context(context_system::instance());
 $PAGE->set_pagelayout('embedded');
 
-$PAGE->set_heading('Moodle dynamic tabs');
-$PAGE->set_title('Moodle dynamic tabs');
+$PAGE->set_heading('PowerEduc dynamic tabs');
+$PAGE->set_title('PowerEduc dynamic tabs');
 
 echo $OUTPUT->header();
 

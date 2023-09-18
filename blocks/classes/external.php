@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Blocks external API
@@ -21,7 +21,7 @@
  * @category   external
  * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.3
+ * @since      PowerEduc 3.3
  */
 
 defined('POWEREDUC_INTERNAL') || die;
@@ -36,7 +36,7 @@ require_once("$CFG->dirroot/my/lib.php");
  * @category   external
  * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.3
+ * @since      PowerEduc 3.3
  */
 class core_block_external extends external_api {
 
@@ -45,7 +45,7 @@ class core_block_external extends external_api {
      * Returns a block structure.
      *
      * @return external_single_structure a block single structure.
-     * @since  Moodle 3.6
+     * @since  PowerEduc 3.6
      */
     private static function get_block_structure() {
         return new external_single_structure(
@@ -88,7 +88,7 @@ class core_block_external extends external_api {
      * @param bool $includeinvisible Whether to include not visible blocks or not
      * @param bool $returncontents Whether to return the block contents
      * @return array Block information
-     * @since  Moodle 3.6
+     * @since  PowerEduc 3.6
      */
     private static function get_all_current_page_blocks($includeinvisible = false, $returncontents = false) {
         global $PAGE, $OUTPUT;
@@ -145,7 +145,7 @@ class core_block_external extends external_api {
      * Returns description of get_course_blocks parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_course_blocks_parameters() {
         return new external_function_parameters(
@@ -163,7 +163,7 @@ class core_block_external extends external_api {
      * @param bool $returncontents Whether to return the block contents
      * @return array Blocks list and possible warnings
      * @throws powereduc_exception
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_course_blocks($courseid, $returncontents = false) {
         global $PAGE;
@@ -199,7 +199,7 @@ class core_block_external extends external_api {
      * Returns description of get_course_blocks result values.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_course_blocks_returns() {
 
@@ -215,7 +215,7 @@ class core_block_external extends external_api {
      * Returns description of get_dashboard_blocks parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.6
+     * @since PowerEduc 3.6
      */
     public static function get_dashboard_blocks_parameters() {
         return new external_function_parameters(
@@ -235,7 +235,7 @@ class core_block_external extends external_api {
      * @param string $mypage The page to get blocks of within my
      * @return array Blocks list and possible warnings
      * @throws powereduc_exception
-     * @since Moodle 3.6
+     * @since PowerEduc 3.6
      */
     public static function get_dashboard_blocks($userid = 0, $returncontents = false, $mypage = MY_PAGE_DEFAULT) {
         global $CFG, $USER, $PAGE;
@@ -320,7 +320,7 @@ class core_block_external extends external_api {
      * Returns description of get_dashboard_blocks result values.
      *
      * @return external_single_structure
-     * @since Moodle 3.6
+     * @since PowerEduc 3.6
      */
     public static function get_dashboard_blocks_returns() {
 

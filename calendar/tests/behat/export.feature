@@ -1,6 +1,6 @@
 @core @core_calendar
 Feature: Export calendar events
-  In order to be able to use my calendar events outside of Moodle
+  In order to be able to use my calendar events outside of PowerEduc
   As a user
   I need to export calendar events in iCalendar format
 

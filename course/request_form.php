@@ -4,7 +4,7 @@
 //                                                                       //
 // NOTICE OF COPYRIGHT                                                   //
 //                                                                       //
-// Moodle - Modular Object-Oriented Dynamic Learning Environment         //
+// PowerEduc - Modular Object-Oriented Dynamic Learning Environment         //
 //          http://powereduc.org                                            //
 //                                                                       //
 // Copyright (C) 1999 onwards Martin Dougiamas  http://dougiamas.com     //
@@ -32,7 +32,7 @@
  */
 
 if (!defined('POWEREDUC_INTERNAL')) {
-    die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
+    die('Direct access to this script is forbidden.');    ///  It must be included from a PowerEduc page
 }
 
 require_once($CFG->libdir.'/formslib.php');

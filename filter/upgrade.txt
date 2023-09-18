@@ -35,7 +35,7 @@ repository, so it can still be installed as a third-party plugin.
   want to make the disablefilters value in your code configurable.
 
 * Methods filter_manager::text_filtering_hash and powereduc_text_filter::hash have been
-  deprecated. There were use by the old Moodle filtered text caching system
+  deprecated. There were use by the old PowerEduc filtered text caching system
   that was removed several releases ago.
 
 === 2.7 ===
@@ -68,5 +68,5 @@ repository, so it can still be installed as a third-party plugin.
   old filter should be updated to use the new powereduc_text_filter,
   and any filter bundled under mod/xxxx directories be moved to
   /filter/xxxx (MDL-29995). They will stop working completely in
-  Moodle 2.3 (MDL-29996). See the glossary or data filters for
+  PowerEduc 2.3 (MDL-29996). See the glossary or data filters for
   examples of legacy module filters and locations already updated.

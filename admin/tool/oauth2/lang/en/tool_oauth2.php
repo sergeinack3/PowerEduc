@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'tool_oauth2', language 'en'
@@ -24,7 +24,7 @@
 
 $string['acceptrisk'] = 'I understand that disabling email verification can be a security issue.';
 $string['acceptrisk_help'] = 'Disabling email verification can potentially allow a user to authenticate as another user.';
-$string['authconfirm'] = 'This action will grant permanent API access to Moodle for the authenticated account. This is intended to be used as a system account for managing files owned by Moodle.';
+$string['authconfirm'] = 'This action will grant permanent API access to PowerEduc for the authenticated account. This is intended to be used as a system account for managing files owned by PowerEduc.';
 $string['authconnected'] = 'The system account is now connected for offline access';
 $string['authnotconnected'] = 'The system account was not connected for offline access';
 $string['clever_service'] = 'Clever';
@@ -87,7 +87,7 @@ $string['issuername_help'] = 'Name of the identity issuer. May be displayed on l
 $string['issuername'] = 'Name';
 $string['issuershowonloginpage_help'] = 'If the OAuth 2 authentication plugin is enabled, this login issuer will be listed on the login page to allow users to log in with accounts from this issuer.';
 $string['issuershowonloginpage'] = 'Show on login page';
-$string['issuerrequireconfirmation_help'] = 'Require that all users verify their email address before they can log in with OAuth. This applies to newly created accounts as part of the login process, or when an existing Moodle account is connected to an OAuth login via matching email addresses.';
+$string['issuerrequireconfirmation_help'] = 'Require that all users verify their email address before they can log in with OAuth. This applies to newly created accounts as part of the login process, or when an existing PowerEduc account is connected to an OAuth login via matching email addresses.';
 $string['issuerrequireconfirmation'] = 'Require email verification';
 $string['issuers'] = 'Issuers';
 $string['issuersservicesallow'] = 'Allow services';
@@ -119,13 +119,13 @@ $string['usebasicauth_help'] = 'Utilise the HTTP Basic authentication scheme whe
 $string['userfieldexternalfield'] = 'External field name';
 $string['userfieldexternalfield_error'] = 'This field cannot contain HTML.';
 $string['userfieldexternalfield_help'] = 'Name of the field provided by the external OAuth system.';
-$string['userfieldinternalfield_help'] = 'Name of the Moodle user field that should be mapped from the external field.';
+$string['userfieldinternalfield_help'] = 'Name of the PowerEduc user field that should be mapped from the external field.';
 $string['userfieldinternalfield'] = 'Internal field name';
 $string['userfieldmappingdeleted'] = 'User field mapping deleted';
 $string['userfieldmappingsforissuer'] = 'User field mappings for issuer: {$a}';
 $string['privacy:metadata'] = 'The OAuth 2 services plugin does not store any personal data.';
 
-// Deprecated since Moodle 3.11.
+// Deprecated since PowerEduc 3.11.
 $string['createnewfacebookissuer'] = 'Create new Facebook service';
 $string['createnewgoogleissuer'] = 'Create new Google service';
 $string['createnewissuer'] = 'Create new custom service';

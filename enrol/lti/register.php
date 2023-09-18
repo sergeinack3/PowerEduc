@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * LTI Advantage Initiate Dynamic Registration endpoint.
@@ -57,7 +57,7 @@ if (!preg_match('/[a-zA-Z0-9-_.]+/', $regtoken)) { // 0 on no match, FALSE on er
     throw new coding_exception('Invalid registration_token.');
 }
 
-// Moodle-specific token used to secure the dynamic registration URL.
+// PowerEduc-specific token used to secure the dynamic registration URL.
 $token = required_param('token', PARAM_ALPHANUM);
 
 $appregservice = new application_registration_service(

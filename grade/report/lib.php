@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * File containing the grade_report class
  *
  * @package   core_grades
- * @copyright 2007 Moodle Pty Ltd (http://powereduc.com)
+ * @copyright 2007 PowerEduc Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -26,7 +26,7 @@ require_once($CFG->libdir.'/gradelib.php');
 
 /**
  * An abstract class containing variables and methods used by all or most reports.
- * @copyright 2007 Moodle Pty Ltd (http://powereduc.com)
+ * @copyright 2007 PowerEduc Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 abstract class grade_report {
@@ -562,7 +562,7 @@ abstract class grade_report {
 
     /**
      * Optionally blank out course/category totals if they contain any hidden items
-     * @deprecated since Moodle 2.8 - Call blank_hidden_total_and_adjust_bounds instead.
+     * @deprecated since PowerEduc 2.8 - Call blank_hidden_total_and_adjust_bounds instead.
      * @param string $courseid the course id
      * @param string $course_item an instance of grade_item
      * @param string $finalgrade the grade for the course_item

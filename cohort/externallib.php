@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * External cohort API
@@ -33,7 +33,7 @@ class core_cohort_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function create_cohorts_parameters() {
         return new external_function_parameters(
@@ -55,7 +55,7 @@ class core_cohort_external extends external_api {
                             'descriptionformat' => new external_format_value('description', VALUE_DEFAULT),
                             'visible' => new external_value(PARAM_BOOL, 'cohort visible', VALUE_OPTIONAL, true),
                             'theme' => new external_value(PARAM_THEME,
-                                'the cohort theme. The allowcohortthemes setting must be enabled on Moodle',
+                                'the cohort theme. The allowcohortthemes setting must be enabled on PowerEduc',
                                 VALUE_OPTIONAL
                             ),
                         )
@@ -70,7 +70,7 @@ class core_cohort_external extends external_api {
      *
      * @param array $cohorts An array of cohorts to create.
      * @return array An array of arrays
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function create_cohorts($cohorts) {
         global $CFG, $DB;
@@ -140,7 +140,7 @@ class core_cohort_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function create_cohorts_returns() {
         return new external_multiple_structure(
@@ -162,7 +162,7 @@ class core_cohort_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function delete_cohorts_parameters() {
         return new external_function_parameters(
@@ -177,7 +177,7 @@ class core_cohort_external extends external_api {
      *
      * @param array $cohortids
      * @return null
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function delete_cohorts($cohortids) {
         global $CFG, $DB;
@@ -210,7 +210,7 @@ class core_cohort_external extends external_api {
      * Returns description of method result value
      *
      * @return null
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function delete_cohorts_returns() {
         return null;
@@ -220,7 +220,7 @@ class core_cohort_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_cohorts_parameters() {
         return new external_function_parameters(
@@ -236,7 +236,7 @@ class core_cohort_external extends external_api {
      *
      * @param array $cohortids array of cohort ids
      * @return array of cohort objects (id, courseid, name)
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_cohorts($cohortids = array()) {
         global $DB, $CFG;
@@ -280,7 +280,7 @@ class core_cohort_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_cohorts_returns() {
         return new external_multiple_structure(
@@ -439,7 +439,7 @@ class core_cohort_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function update_cohorts_parameters() {
         return new external_function_parameters(
@@ -462,7 +462,7 @@ class core_cohort_external extends external_api {
                             'descriptionformat' => new external_format_value('description', VALUE_DEFAULT),
                             'visible' => new external_value(PARAM_BOOL, 'cohort visible', VALUE_OPTIONAL),
                             'theme' => new external_value(PARAM_THEME,
-                                'the cohort theme. The allowcohortthemes setting must be enabled on Moodle',
+                                'the cohort theme. The allowcohortthemes setting must be enabled on PowerEduc',
                                 VALUE_OPTIONAL
                             ),
                         )
@@ -477,7 +477,7 @@ class core_cohort_external extends external_api {
      *
      * @param array $cohorts
      * @return null
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function update_cohorts($cohorts) {
         global $CFG, $DB;
@@ -549,7 +549,7 @@ class core_cohort_external extends external_api {
      * Returns description of method result value
      *
      * @return null
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function update_cohorts_returns() {
         return null;
@@ -559,7 +559,7 @@ class core_cohort_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function add_cohort_members_parameters() {
         return new external_function_parameters (
@@ -592,7 +592,7 @@ class core_cohort_external extends external_api {
      * Add cohort members
      *
      * @param array $members of arrays with keys userid, cohortid
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function add_cohort_members($members) {
         global $CFG, $DB;
@@ -678,7 +678,7 @@ class core_cohort_external extends external_api {
      * Returns description of method result value
      *
      * @return null
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function add_cohort_members_returns() {
         return new external_single_structure(
@@ -692,7 +692,7 @@ class core_cohort_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function delete_cohort_members_parameters() {
         return new external_function_parameters(
@@ -713,7 +713,7 @@ class core_cohort_external extends external_api {
      * Delete cohort members
      *
      * @param array $members of arrays with keys userid, cohortid
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function delete_cohort_members($members) {
         global $CFG, $DB;
@@ -751,7 +751,7 @@ class core_cohort_external extends external_api {
      * Returns description of method result value
      *
      * @return null
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function delete_cohort_members_returns() {
         return null;
@@ -761,7 +761,7 @@ class core_cohort_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_cohort_members_parameters() {
         return new external_function_parameters(
@@ -776,7 +776,7 @@ class core_cohort_external extends external_api {
      *
      * @param array $cohortids array of cohort ids
      * @return array with cohort id keys containing arrays of user ids
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_cohort_members($cohortids) {
         global $DB;
@@ -809,7 +809,7 @@ class core_cohort_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_cohort_members_returns() {
         return new external_multiple_structure(

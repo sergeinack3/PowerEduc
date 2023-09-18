@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains backup and restore output renderers
@@ -967,8 +967,8 @@ class core_backup_renderer extends plugin_renderer_base {
      * Get markup to render table for all of a users async
      * in progress restores.
      *
-     * @param int $userid The Moodle user id.
-     * @param \context $context The Moodle context for these restores.
+     * @param int $userid The PowerEduc user id.
+     * @param \context $context The PowerEduc context for these restores.
      * @return string $html The table HTML.
      */
     public function restore_progress_viewer ($userid, $context) {
@@ -1002,7 +1002,7 @@ class core_backup_renderer extends plugin_renderer_base {
     /**
      * Get markup to render table for all of a users course copies.
      *
-     * @param int $userid The Moodle user id.
+     * @param int $userid The PowerEduc user id.
      * @param int $courseid The id of the course to get the backups for.
      * @return string $html The table HTML.
      */
@@ -1049,7 +1049,7 @@ class core_backup_renderer extends plugin_renderer_base {
  *
  * @copyright 2010 Dongsheng Cai
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since     Moodle 2.0
+ * @since     PowerEduc 2.0
  */
 class backup_files_viewer implements renderable {
 

@@ -1,16 +1,16 @@
 ---
 layout: docs
 title: "Layout"
-description: "Moodle page layouts for themes"
+description: "PowerEduc page layouts for themes"
 date: 2019-12-10T13:53:41+01:00
 draft: false
 ---
 
 ## High level templates
 
-Theme layouts are the highest level templates found in Moodle. They construct the Moodle Page users see when interacting with Moodle.
+Theme layouts are the highest level templates found in PowerEduc. They construct the PowerEduc Page users see when interacting with PowerEduc.
 
-Layout files define the location of page elements like the primary and secondary navigation, the main content, Moodle blocks and the footer.
+Layout files define the location of page elements like the primary and secondary navigation, the main content, PowerEduc blocks and the footer.
 
 Theme layouts are defined in a themes config.php and themes can serve different layout files depending on the page type, example layouts are
 

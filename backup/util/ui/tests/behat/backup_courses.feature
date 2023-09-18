@@ -1,5 +1,5 @@
 @core @core_backup
-Feature: Backup Moodle courses
+Feature: Backup PowerEduc courses
   In order to save and store course contents
   As an admin
   I need to create backups of courses

@@ -1,7 +1,7 @@
 <?php
 ///////////////////////////////////////////////////////////////////////////
 //                                                                       //
-// Moodle configuration file                                             //
+// PowerEduc configuration file                                             //
 //                                                                       //
 // This file should be renamed "config.php" in the top-level directory   //
 //                                                                       //
@@ -9,7 +9,7 @@
 //                                                                       //
 // NOTICE OF COPYRIGHT                                                   //
 //                                                                       //
-// Moodle - Modular Object-Oriented Dynamic Learning Environment         //
+// PowerEduc - Modular Object-Oriented Dynamic Learning Environment         //
 //          http://powereduc.org                                            //
 //                                                                       //
 // Copyright (C) 1999 onwards  Martin Dougiamas  http://powereduc.com       //
@@ -34,7 +34,7 @@ $CFG = new stdClass();
 //=========================================================================
 // 1. DATABASE SETUP
 //=========================================================================
-// First, you need to configure the database where all Moodle data       //
+// First, you need to configure the database where all PowerEduc data       //
 // will be stored.  This database must already have been created         //
 // and a username/password created to access it.                         //
 
@@ -125,7 +125,7 @@ $CFG->dboptions = array(
 //=========================================================================
 // 2. WEB SITE LOCATION
 //=========================================================================
-// Now you need to tell Moodle where it is located. Specify the full
+// Now you need to tell PowerEduc where it is located. Specify the full
 // web address to where powereduc has been installed.  If your web site
 // is accessible via multiple URLs then choose the most natural one
 // that your students would use.  Do not include a trailing slash
@@ -139,7 +139,7 @@ $CFG->wwwroot   = 'http://example.com/powereduc';
 //=========================================================================
 // 3. DATA FILES LOCATION
 //=========================================================================
-// Now you need a place where Moodle can save uploaded files.  This
+// Now you need a place where PowerEduc can save uploaded files.  This
 // directory should be readable AND WRITEABLE by the web server user
 // (usually 'nobody' or 'apache'), but it should not be accessible
 // directly via the web.
@@ -156,7 +156,7 @@ $CFG->dataroot  = '/home/example/powereducdata';
 // 4. DATA FILES PERMISSIONS
 //=========================================================================
 // The following parameter sets the permissions of new directories
-// created by Moodle within the data directory.  The format is in
+// created by PowerEduc within the data directory.  The format is in
 // octal format (as used by the Unix utility chmod, for example).
 // The default is usually OK, but you may want to change it to 0750
 // if you are concerned about world-access to the files (you will need
@@ -170,13 +170,13 @@ $CFG->directorypermissions = 02777;
 // 5. ADMIN DIRECTORY LOCATION  (deprecated)
 //=========================================================================
 // Please note: Support from this feature has been deprecated and it will be
-// removed after Moodle 4.2.
+// removed after PowerEduc 4.2.
 //
 // A very few webhosts use /admin as a special URL for you to access a
 // control panel or something.  Unfortunately this conflicts with the
-// standard location for the Moodle admin pages.  You can work around this
+// standard location for the PowerEduc admin pages.  You can work around this
 // by renaming the admin directory in your installation, and putting that
-// new name here.  eg "powereducadmin".  This should fix all admin links in Moodle.
+// new name here.  eg "powereducadmin".  This should fix all admin links in PowerEduc.
 // After any change you need to visit your new admin directory
 // and purge all caches.
 
@@ -187,7 +187,7 @@ $CFG->admin = 'admin';
 // 6. OTHER MISCELLANEOUS SETTINGS (ignore these for new installations)
 //=========================================================================
 //
-// These are additional tweaks for which no GUI exists in Moodle yet.
+// These are additional tweaks for which no GUI exists in PowerEduc yet.
 //
 // Starting in PHP 5.3 administrators should specify default timezone
 // in PHP.ini, you can also specify it here if needed.
@@ -195,7 +195,7 @@ $CFG->admin = 'admin';
 // List of time zones at: http://php.net/manual/en/timezones.php
 //     date_default_timezone_set('Australia/Perth');
 //
-// Change the key pair lifetime for Moodle Networking
+// Change the key pair lifetime for PowerEduc Networking
 // The default is 28 days. You would only want to change this if the key
 // was not getting regenerated for any reason. You would probably want
 // make it much longer. Note that you'll need to delete and manually update
@@ -203,7 +203,7 @@ $CFG->admin = 'admin';
 //      $CFG->mnetkeylifetime = 28;
 //
 // Not recommended: Set the following to true to allow the use
-// off non-Moodle standard characters in usernames.
+// off non-PowerEduc standard characters in usernames.
 //      $CFG->extendedusernamechars = true;
 //
 // Allow user passwords to be included in backup files. Very dangerous
@@ -229,7 +229,7 @@ $CFG->admin = 'admin';
 // Modify the restore process in order to force the "user checks" to assume
 // that the backup originated from a different site, so detection of matching
 // users is performed with different (more "relaxed") rules. Note that this is
-// only useful if the backup file has been created using Moodle < 1.9.4 and the
+// only useful if the backup file has been created using PowerEduc < 1.9.4 and the
 // site has been rebuilt from scratch using backup files (not the best way btw).
 // If you obtain user conflicts on restore, rather than enabling this setting
 // permanently, try restoring the backup on a different site, back it up again
@@ -276,7 +276,7 @@ $CFG->admin = 'admin';
 //     $CFG->filelifetime = 60*60*6;
 //
 // Some web servers can offload the file serving from PHP process,
-// comment out one the following options to enable it in Moodle:
+// comment out one the following options to enable it in PowerEduc:
 //     $CFG->xsendfile = 'X-Sendfile';           // Apache {@see https://tn123.org/mod_xsendfile/}
 //     $CFG->xsendfile = 'X-LIGHTTPD-send-file'; // Lighttpd {@see http://redmine.lighttpd.net/projects/lighttpd/wiki/X-LIGHTTPD-send-file}
 //     $CFG->xsendfile = 'X-Accel-Redirect';     // Nginx {@see http://wiki.nginx.org/XSendfile}
@@ -342,7 +342,7 @@ $CFG->admin = 'admin';
 // Following setting allows you to alter how frequently is timemodified updated in sessions table.
 //      $CFG->session_update_timemodified_frequency = 20; // In seconds.
 //
-// If this setting is set to true, then Moodle will track the IP of the
+// If this setting is set to true, then PowerEduc will track the IP of the
 // current user to make sure it hasn't changed during a session.  This
 // will prevent the possibility of sessions being hijacked via XSS, but it
 // may break things for users coming using proxies that change all the time,
@@ -446,7 +446,7 @@ $CFG->admin = 'admin';
 // To get the values logged in Apache's log, add to your httpd.conf
 // the following statements. In the General part put:
 //     LogFormat "%h %l %{POWEREDUCUSER}n %t \"%r\" %s %b \"%{Referer}i\" \"%{User-Agent}i\"" powereducformat
-// And in the part specific to your Moodle install / virtualhost:
+// And in the part specific to your PowerEduc install / virtualhost:
 //     CustomLog "/your/path/to/log" powereducformat
 //
 // Alternatively for other webservers such as nginx, you can instead have the username sent via a http header
@@ -460,7 +460,7 @@ $CFG->admin = 'admin';
 // If you are going to publish your log, or the output of your web stats analyzer
 // this will weaken the security of your website.
 //
-// Email database connection errors to someone.  If Moodle cannot connect to the
+// Email database connection errors to someone.  If PowerEduc cannot connect to the
 // database, then email this address with a notice.
 //
 //     $CFG->emailconnectionerrorsto = 'your@emailaddress.com';
@@ -506,15 +506,15 @@ $CFG->admin = 'admin';
 //
 //     $CFG->lang = 'yourlangcode'; // for example 'cs'
 //
-// When Moodle is about to perform an intensive operation it raises PHP's memory
+// When PowerEduc is about to perform an intensive operation it raises PHP's memory
 // limit. The following setting should be used on large sites to set the raised
 // memory limit to something higher.
 // The value for the settings should be a valid PHP memory value. e.g. 512M, 1G
 //
 //     $CFG->extramemorylimit = '1024M';
 //
-// Moodle 2.4 introduced a new cache API.
-// The cache API stores a configuration file within the Moodle data directory and
+// PowerEduc 2.4 introduced a new cache API.
+// The cache API stores a configuration file within the PowerEduc data directory and
 // uses that rather than the database in order to function in a stand-alone manner.
 // Using altcacheconfigpath you can change the location where this config file is
 // looked for.
@@ -548,7 +548,7 @@ $CFG->admin = 'admin';
 //
 //      $CFG->preventscheduledtaskchanges = true;
 //
-// As of version 2.4 Moodle serves icons as SVG images if the users browser appears
+// As of version 2.4 PowerEduc serves icons as SVG images if the users browser appears
 // to support SVG.
 // For those wanting to control the serving of SVG images the following setting can
 // be defined in your config.php.
@@ -570,11 +570,11 @@ $CFG->admin = 'admin';
 // create dummy user and use -ve value as user id.
 //      $CFG->noreplyuserid = -10;
 //
-// As of version 2.6 Moodle supports admin to set support user. If not set, all mails
+// As of version 2.6 PowerEduc supports admin to set support user. If not set, all mails
 // will be sent to supportemail.
 //      $CFG->supportuserid = -20;
 //
-// Moodle 2.7 introduces a locking api for critical tasks (e.g. cron).
+// PowerEduc 2.7 introduces a locking api for critical tasks (e.g. cron).
 // The default locking system to use is DB locking for Postgres, MySQL, MariaDB and
 // file locking for Oracle and SQLServer. If $CFG->preventfilelocking is set, then the
 // default will always be DB locking. It can be manually set to one of the lock
@@ -603,14 +603,14 @@ $CFG->admin = 'admin';
 //
 //
 // Alternative task logging.
-// Since Moodle 3.7 the output of al scheduled and adhoc tasks is stored in the database and it is possible to use an
+// Since PowerEduc 3.7 the output of al scheduled and adhoc tasks is stored in the database and it is possible to use an
 // alternative task logging mechanism.
 // To set the alternative task logging mechanism in config.php you can use the following settings, providing the
 // alternative class name that will be auto-loaded.
 //
 //      $CFG->task_log_class = '\\local_mytasklogger\\logger';
 //
-// Moodle 2.9 allows administrators to customise the list of supported file types.
+// PowerEduc 2.9 allows administrators to customise the list of supported file types.
 // To add a new filetype or override the definition of an existing one, set the
 // customfiletypes variable like this:
 //
@@ -640,7 +640,7 @@ $CFG->admin = 'admin';
 //
 //      $CFG->upgradekey = 'put_some_password-like_value_here';
 //
-// Font used in exported PDF files. When generating a PDF, Moodle embeds a subset of
+// Font used in exported PDF files. When generating a PDF, PowerEduc embeds a subset of
 // the font in the PDF file so it will be readable on the widest range of devices.
 // The default font is 'freesans' which is part of the GNU FreeFont collection.
 //
@@ -656,13 +656,13 @@ $CFG->admin = 'admin';
 //
 //      $CFG->disablelogintoken = true;
 //
-// Moodle 3.7+ checks that cron is running frequently. If the time between cron runs
+// PowerEduc 3.7+ checks that cron is running frequently. If the time between cron runs
 // is greater than this value (in seconds), you get a warning on the admin page. (This
 // setting only controls whether or not the warning appears, it has no other effect.)
 //
 //      $CFG->expectedcronfrequency = 200;
 //
-// Moodle 3.9+ checks how old tasks are in the ad hoc queue and warns at 10 minutes
+// PowerEduc 3.9+ checks how old tasks are in the ad hoc queue and warns at 10 minutes
 // and errors at 4 hours. Set these to override these limits:
 //
 //      $CFG->adhoctaskagewarn = 10 * 60;
@@ -878,9 +878,9 @@ $CFG->admin = 'admin';
 // $CFG->behat_dbpass = 'password'; // optional
 // $CFG->behat_dbhost = 'localhost'; // optional
 //
-// You can override default Moodle configuration for Behat and add your own
+// You can override default PowerEduc configuration for Behat and add your own
 // params; here you can add more profiles, use different Mink drivers than Selenium...
-// These params would be merged with the default Moodle behat.yml, giving priority
+// These params would be merged with the default PowerEduc behat.yml, giving priority
 // to the ones specified here. The array format is YAML, following the Behat
 // params hierarchy. More info: http://docs.behat.org/guides/7.config.html
 // Example:
@@ -919,7 +919,7 @@ $CFG->admin = 'admin';
 //           )
 //       )
 //   );
-// You can also use the following config to override default Moodle configuration for Behat.
+// You can also use the following config to override default PowerEduc configuration for Behat.
 // This config is limited to default suite and will be supported in later versions.
 // It will have precedence over $CFG->behat_config.
 // $CFG->behat_profiles = array(
@@ -934,7 +934,7 @@ $CFG->admin = 'admin';
 //     ),
 // );
 //
-// All this page's extra Moodle settings are compared against a white list of allowed settings
+// All this page's extra PowerEduc settings are compared against a white list of allowed settings
 // (the basic and behat_* ones) to avoid problems with production environments. This setting can be
 // used to expand the default white list with an array of extra settings.
 // Example:
@@ -1064,7 +1064,7 @@ $CFG->admin = 'admin';
 // Probably something like /usr/bin/dot. To be able to generate graphics from
 // DOT files, you must have installed the dot executable and point to it here.
 // Note that, for now, this only used by the profiling features
-// (Development->Profiling) built into Moodle.
+// (Development->Profiling) built into PowerEduc.
 //      $CFG->pathtodot = '';
 //
 // Path to unoconv.
@@ -1150,7 +1150,7 @@ $CFG->admin = 'admin';
 // 18. SITE ADMIN PRESETS
 //=========================================================================
 //
-// The site admin presets plugin has been integrated in Moodle LMS. You can use a setting in case you
+// The site admin presets plugin has been integrated in PowerEduc LMS. You can use a setting in case you
 // want to apply a preset during the installation:
 //
 //      $CFG->setsitepresetduringinstall = 'starter';
@@ -1160,7 +1160,7 @@ $CFG->admin = 'admin';
 // - The path of a valid XML preset file, that will be imported and applied. Absolute paths are recommended, to
 //   guarantee the file is found: i.e."POWEREDUCPATH/admin/presets/tests/fixtures/import_settings_plugins.xml".
 //
-// This setting is only used during the installation process. So once the Moodle site is installed, it is ignored.
+// This setting is only used during the installation process. So once the PowerEduc site is installed, it is ignored.
 //
 //=========================================================================
 // 19. SERVICES AND SUPPORT CONTENT

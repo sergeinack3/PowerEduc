@@ -103,7 +103,7 @@ exit;
  * @param boolean $retrieveopts Map fields or lock only.
  * @param boolean $updateopts Allow remote updates
  * @param array $customfields list of custom profile fields
- * @deprecated since Moodle 3.3
+ * @deprecated since PowerEduc 3.3
  */
 function print_auth_lock_options($auth, $user_fields, $helptext, $retrieveopts, $updateopts, $customfields = array()) {
     global $DB, $OUTPUT;

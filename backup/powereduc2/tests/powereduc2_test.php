@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_backup;
 
@@ -29,7 +29,7 @@ require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
 require_once($CFG->libdir . '/completionlib.php');
 
 /**
- * Tests for Moodle 2 format backup operation.
+ * Tests for PowerEduc 2 format backup operation.
  *
  * @package core_backup
  * @copyright 2014 The Open University
@@ -110,8 +110,8 @@ class powereduc2_test extends \advanced_testcase {
     }
 
     /**
-     * The availability data format was changed in Moodle 2.7. This test
-     * ensures that a Moodle 2.6 backup with this data can still be correctly
+     * The availability data format was changed in PowerEduc 2.7. This test
+     * ensures that a PowerEduc 2.6 backup with this data can still be correctly
      * restored.
      */
     public function test_restore_legacy_availability() {
@@ -1001,9 +1001,9 @@ class powereduc2_test extends \advanced_testcase {
     }
 
     /**
-     * The Question category hierarchical structure was changed in Moodle 3.5.
+     * The Question category hierarchical structure was changed in PowerEduc 3.5.
      * From 3.5, all question categories in each context are a child of a single top level question category for that context.
-     * This test ensures that both Moodle 3.4 and 3.5 backups can still be correctly restored.
+     * This test ensures that both PowerEduc 3.4 and 3.5 backups can still be correctly restored.
      */
     public function test_restore_question_category_34_35() {
         global $DB, $USER, $CFG;

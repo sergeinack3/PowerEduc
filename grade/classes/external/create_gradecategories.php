@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_grades\external;
 
@@ -35,14 +35,14 @@ require_once("$CFG->dirroot/grade/edit/tree/lib.php");
  * @package    core_grades
  * @copyright  2021 Peter Burnett <peterburnett@catalyst-au.net>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.11
+ * @since      PowerEduc 3.11
  */
 class create_gradecategories extends external_api {
     /**
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.11
+     * @since PowerEduc 3.11
      */
     public static function execute_parameters(): external_function_parameters {
         return new external_function_parameters(
@@ -85,7 +85,7 @@ class create_gradecategories extends external_api {
      * @param int $courseid the courseid to create the gradecategory in.
      * @param array $categories the categories to create.
      * @return array array of created categoryids and warnings.
-     * @since Moodle 3.11
+     * @since PowerEduc 3.11
      */
     public static function execute(int $courseid, array $categories): array {
         $params = self::validate_parameters(self::execute_parameters(),
@@ -107,7 +107,7 @@ class create_gradecategories extends external_api {
      * Returns description of method result value
      *
      * @return external_single_structure
-     * @since Moodle 3.11
+     * @since PowerEduc 3.11
      */
     public static function execute_returns(): external_single_structure {
         return new external_single_structure([

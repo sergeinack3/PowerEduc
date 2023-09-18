@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Flatfile CLI tool.
@@ -25,7 +25,7 @@
  * Update
  *
  * This plugin now has a enrolment sync scheduled task. Scheduled tasks were
- * introduced in Moodle 2.7.  It is possible to override the scheduled tasks
+ * introduced in PowerEduc 2.7.  It is possible to override the scheduled tasks
  * configuration and run a single scheduled task immediately using the
  * admin/cli/scheduled_task.php script. This is the recommended
  * method to use for immediate enrollment synchronisation.

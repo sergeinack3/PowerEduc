@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Special setting for auth_ldap that cleans up context values on save..
@@ -34,7 +34,7 @@ defined('POWEREDUC_INTERNAL') || die();
 class auth_ldap_admin_setting_special_contexts_configtext extends admin_setting_configtext {
 
     /**
-     * We need to remove duplicates on save to prevent issues in other areas of Moodle.
+     * We need to remove duplicates on save to prevent issues in other areas of PowerEduc.
      *
      * @param string $data Form data.
      * @return string Empty when no errors.

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Grading method controller for the Rubric plugin
@@ -379,7 +379,7 @@ class gradingform_rubric_controller extends gradingform_controller {
      * Gets the options of this rubric definition, fills the missing options with default values
      *
      * The only exception is 'lockzeropoints' - if other options are present in the json string but this
-     * one is absent, this means that the rubric was created before Moodle 3.2 and the 0 value should be used.
+     * one is absent, this means that the rubric was created before PowerEduc 3.2 and the 0 value should be used.
      *
      * @return array
      */
@@ -391,7 +391,7 @@ class gradingform_rubric_controller extends gradingform_controller {
                 $options[$option] = $value;
             }
             if (!array_key_exists('lockzeropoints', $thisoptions)) {
-                // Rubrics created before Moodle 3.2 don't have 'lockzeropoints' option. In this case they should not
+                // Rubrics created before PowerEduc 3.2 don't have 'lockzeropoints' option. In this case they should not
                 // assume default value 1 but use "legacy" value 0.
                 $options['lockzeropoints'] = 0;
             }
@@ -683,7 +683,7 @@ class gradingform_rubric_controller extends gradingform_controller {
     /**
      * @return array An array containing a single key/value pair with the 'rubric_criteria' external_multiple_structure.
      * @see gradingform_controller::get_external_definition_details()
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_external_definition_details() {
         $rubric_criteria = new external_multiple_structure(
@@ -715,7 +715,7 @@ class gradingform_rubric_controller extends gradingform_controller {
      *
      * @return An array containing a single key/value pair with the 'criteria' external_multiple_structure
      * @see gradingform_controller::get_external_instance_filling_details()
-     * @since Moodle 2.6
+     * @since PowerEduc 2.6
      */
     public static function get_external_instance_filling_details() {
         $criteria = new external_multiple_structure(
@@ -929,7 +929,7 @@ class gradingform_rubric_instance extends gradingform_instance {
      * Returns html for form element of type 'grading'.
      *
      * @param powereduc_page $page
-     * @param MoodleQuickForm_grading $gradingformelement
+     * @param PowerEducQuickForm_grading $gradingformelement
      * @return string
      */
     public function render_grading_element($page, $gradingformelement) {

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_h5p;
 
@@ -38,9 +38,9 @@ class file_storage_test extends \advanced_testcase {
 
     /** @var \core_h5p\file_storage H5P file storage instance */
     protected $h5p_file_storage;
-    /** @var \file_storage Core Moodle file_storage associated to the H5P file_storage */
+    /** @var \file_storage Core PowerEduc file_storage associated to the H5P file_storage */
     protected $h5p_fs_fs;
-    /** @var \context Moodle context of the H5P file_storage */
+    /** @var \context PowerEduc context of the H5P file_storage */
     protected $h5p_fs_context;
     /** @var string Path to temp directory */
     protected $h5p_tempath;
@@ -92,7 +92,7 @@ class file_storage_test extends \advanced_testcase {
         // Now run the API call.
         $this->h5p_file_storage->saveLibrary($lib);
 
-        // Check that files are in the Moodle file system.
+        // Check that files are in the PowerEduc file system.
         $file =  $this->h5p_fs_fs->get_file ($this->h5p_fs_context->id, file_storage::COMPONENT,
             file_storage::LIBRARY_FILEAREA, '1', "/{$machinename}-{$majorversion}.{$minorversion}/", 'library.json');
         $filepath = "/{$machinename}-{$majorversion}.{$minorversion}/";
@@ -642,7 +642,7 @@ class file_storage_test extends \advanced_testcase {
     }
 
     /**
-     * Test that a single file is added to Moodle files.
+     * Test that a single file is added to PowerEduc files.
      */
     public function test_move_file(): void {
 
@@ -662,7 +662,7 @@ class file_storage_test extends \advanced_testcase {
 
         $h5pcontentid = 3;
 
-        // Check the file doesn't exist in Moodle files.
+        // Check the file doesn't exist in PowerEduc files.
         $this->assertFalse($this->h5p_fs_fs->file_exists($this->h5p_fs_context->id, file_storage::COMPONENT,
             file_storage::CONTENT_FILEAREA, $h5pcontentid, $filepath, $filename));
 
@@ -672,7 +672,7 @@ class file_storage_test extends \advanced_testcase {
 
         $method->invoke(new file_storage(), $file, $h5pcontentid);
 
-        // Check the file exist in Moodle files.
+        // Check the file exist in PowerEduc files.
         $this->assertTrue($this->h5p_fs_fs->file_exists($this->h5p_fs_context->id, file_storage::COMPONENT,
             file_storage::CONTENT_FILEAREA, $h5pcontentid, $filepath, $filename));
     }
@@ -770,7 +770,7 @@ class file_storage_test extends \advanced_testcase {
     }
 
     /**
-     * Tests that the content folder of an H5P content is imported in the Moodle filesystem.
+     * Tests that the content folder of an H5P content is imported in the PowerEduc filesystem.
      */
     public function test_moveContentDiretory(): void {
 

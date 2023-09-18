@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Library of useful functions
@@ -478,7 +478,7 @@ function get_category_or_system_context($categoryid) {
  * Print the buttons relating to course requests.
  *
  * @param context $context current page context.
- * @deprecated since Moodle 4.0
+ * @deprecated since PowerEduc 4.0
  * @todo Final deprecation MDL-73976
  */
 function print_course_request_buttons($context) {
@@ -833,7 +833,7 @@ function set_coursemodule_name($id, $name) {
  * @param int $cmid the course module id
  * @param bool $async whether or not to try to delete the module using an adhoc task. Async also depends on a plugin hook.
  * @throws powereduc_exception
- * @since Moodle 2.5
+ * @since PowerEduc 2.5
  */
 function course_delete_module($cmid, $async = false) {
     // Check the 'course_module_background_deletion_recommended' hook first.
@@ -1124,7 +1124,7 @@ function delete_mod_from_section($modid, $sectionid) {
  * @param  stdClass $instance Module object. Either the $instance or the $cm must be supplied.
  * @param  stdClass $cm Course module object. Either the $instance or the $cm must be supplied.
  * @return bool Returns true if calendar events are updated.
- * @since  Moodle 3.3.4
+ * @since  PowerEduc 3.3.4
  */
 function course_module_update_calendar_events($modulename, $instance = null, $cm = null) {
     global $DB;
@@ -1151,7 +1151,7 @@ function course_module_update_calendar_events($modulename, $instance = null, $cm
  * @param  string  $modulename Module type to update.
  * @param  integer $courseid   Course id to update events. 0 for the whole site.
  * @return bool Returns True if the update was successful.
- * @since  Moodle 3.3.4
+ * @since  PowerEduc 3.3.4
  */
 function course_module_bulk_update_calendar_events($modulename, $courseid = 0) {
     global $DB;
@@ -1180,7 +1180,7 @@ function course_module_bulk_update_calendar_events($modulename, $courseid = 0) {
  *
  * @param  stdClass $instance Module instance object.
  * @param  stdClass $cm Course Module object.
- * @since  Moodle 3.3.4
+ * @since  PowerEduc 3.3.4
  */
 function course_module_calendar_event_update_process($instance, $cm) {
     // We need to call *_refresh_events() first because some modules delete 'old' events at the end of the code which
@@ -2041,7 +2041,7 @@ function course_format_uses_sections($format) {
  * Returns the information about the ajax support in the given source format
  *
  * The returned object's property (boolean)capable indicates that
- * the course format supports Moodle course ajax features.
+ * the course format supports PowerEduc course ajax features.
  *
  * @param string $format
  * @return stdClass
@@ -2609,7 +2609,7 @@ function average_number_of_courses_modules() {
  *
  * @copyright 2009 Sam Hemelryk
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  *
  * @property-read int $id
  * @property-read string $fullname
@@ -3367,7 +3367,7 @@ function mod_duplicate_activity($course, $cm, $sr = null) {
  *
  * @param object $course course object.
  * @param object $cm course module object to be duplicated.
- * @since Moodle 2.8
+ * @since PowerEduc 2.8
  *
  * @throws Exception
  * @throws coding_exception
@@ -3648,7 +3648,7 @@ function course_change_sortorder_after_course($courseorid, $moveaftercourseid) {
  *
  * @param stdClass  $context course context object
  * @param int $sectionnumber section number
- * @since Moodle 2.9
+ * @since PowerEduc 2.9
  */
 function course_view($context, $sectionnumber = 0) {
 
@@ -3886,7 +3886,7 @@ function course_get_tagged_course_modules($tag, $exclusivemode = false, $fromcon
  * @param  stdClass $context context object (it can be a course context or the system context for frontpage settings)
  * @param  stdClass $course  the course where the settings are being rendered
  * @return stdClass          the navigation options in a course and their availability status
- * @since  Moodle 3.2
+ * @since  PowerEduc 3.2
  */
 function course_get_user_navigation_options($context, $course = null) {
     global $CFG, $USER;
@@ -3996,7 +3996,7 @@ function course_get_user_navigation_options($context, $course = null) {
  * @param  stdClass $course  course object (for frontpage it should be a clone of $SITE)
  * @param  stdClass $context context object (course context)
  * @return stdClass          the administration options in a course and their availability status
- * @since  Moodle 3.2
+ * @since  PowerEduc 3.2
  */
 function course_get_user_administration_options($course, $context) {
     global $CFG;
@@ -4068,7 +4068,7 @@ function course_validate_dates($coursedata) {
  * @param  array $tocheck    instances to check for updates
  * @param  array $filter check only for updates in these areas
  * @return array list of warnings and instances with updates information
- * @since  Moodle 3.2
+ * @since  PowerEduc 3.2
  */
 function course_check_updates($course, $tocheck, $filter = array()) {
     global $CFG, $DB;
@@ -4542,7 +4542,7 @@ function course_filter_courses_by_customfield(
  * @param  array $fileareas   additional file ares to check
  * @param  array $filter      if we need to filter and return only selected updates
  * @return stdClass object with the different updates
- * @since  Moodle 3.2
+ * @since  PowerEduc 3.2
  */
 function course_check_module_updates_since($cm, $from, $fileareas = array(), $filter = array()) {
     global $DB, $CFG, $USER;

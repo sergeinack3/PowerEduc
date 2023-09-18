@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the parent class for powereduc blocks, block_base.
@@ -38,7 +38,7 @@ define('BLOCK_TYPE_TEXT',    2);
 define('BLOCK_TYPE_TREE',    3);
 
 /**
- * Class for describing a powereduc block, all Moodle blocks derive from this class
+ * Class for describing a powereduc block, all PowerEduc blocks derive from this class
  *
  * @author Jon Papaioannou
  * @package core_block
@@ -212,7 +212,7 @@ class block_base {
      * {@link hide_header()}, {@link (get_edit_controls)}, etc.
      *
      * @return block_contents a representation of the block, for rendering.
-     * @since Moodle 2.0.
+     * @since PowerEduc 2.0.
      */
     public function get_content_for_output($output) {
         global $CFG;
@@ -282,7 +282,7 @@ class block_base {
      *
      * @param  core_renderer $output the rendered used for output
      * @return stdClass      object containing the block title, central content, footer and linked files (if any).
-     * @since  Moodle 3.6
+     * @since  PowerEduc 3.6
      */
     public function get_content_for_external($output) {
         $bc = new stdClass;
@@ -312,7 +312,7 @@ class block_base {
      * In some cases the configs will need formatting or be returned only if the current user has some capabilities enabled.
      *
      * @return stdClass the configs for both the block instance and plugin (as object with name -> value)
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public function get_config_for_external() {
         return (object) [
@@ -331,7 +331,7 @@ class block_base {
      *
      * @param $output The core_renderer to use when generating the output.
      * @return string the HTML that should appearn in the body of the block.
-     * @since Moodle 2.0.
+     * @since PowerEduc 2.0.
      */
     protected function formatted_contents($output) {
         $this->get_content();
@@ -392,7 +392,7 @@ class block_base {
      * Default behavior: save all variables as $CFG properties
      * You don't need to override this if you 're satisfied with the above
      *
-     * @deprecated since Moodle 2.9 MDL-49385 - Please use Admin Settings functionality to save block configuration.
+     * @deprecated since PowerEduc 2.9 MDL-49385 - Please use Admin Settings functionality to save block configuration.
      */
     function config_save($data) {
         throw new coding_exception('config_save() can not be used any more, use Admin Settings functionality to save block configuration.');
@@ -572,7 +572,7 @@ class block_base {
             return true;
         }
 
-        // The blocks in My Moodle are a special case.  We want them to inherit from the user context.
+        // The blocks in My PowerEduc are a special case.  We want them to inherit from the user context.
         if (!empty($USER->id)
             && $this->instance->parentcontextid == $this->page->context->id   // Block belongs to this page
             && $this->page->context->contextlevel == CONTEXT_USER             // Page belongs to a user
@@ -607,7 +607,7 @@ class block_base {
                 && has_capability('powereduc/user:manageownblocks', $page->context);
         }
 
-        // The blocks in My Moodle are a special case and use a different capability.
+        // The blocks in My PowerEduc are a special case and use a different capability.
         $mypagetypes = my_page_type_list($page->pagetype); // Get list of possible my page types.
 
         if (array_key_exists($page->pagetype, $mypagetypes)) { // Ensure we are on a page with a my page type.

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Library of functions specific to course/modedit.php and course API functions.
@@ -729,7 +729,7 @@ function include_modulelib($modulename) {
  * @param  stdClass $cm     course module object
  * @param  stdClass $course course object
  * @return array required data for updating a module
- * @since  Moodle 3.2
+ * @since  PowerEduc 3.2
  */
 function get_moduleinfo_data($cm, $course) {
     global $CFG;
@@ -835,7 +835,7 @@ function get_moduleinfo_data($cm, $course) {
  * @param  string $modulename  module name
  * @param  int $section section number
  * @return array module information about other required data
- * @since  Moodle 3.2
+ * @since  PowerEduc 3.2
  */
 function prepare_new_moduleinfo_data($course, $modulename, $section) {
     global $CFG;

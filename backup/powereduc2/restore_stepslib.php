@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Defines various restore steps that will be used by common tasks in restore
@@ -124,7 +124,7 @@ class restore_gradebook_structure_step extends restore_structure_step {
         $backupbuild = 0;
         preg_match('/(\d{8})/', $this->get_task()->get_info()->powereduc_release, $matches);
         if (!empty($matches[1])) {
-            $backupbuild = (int) $matches[1]; // The date of Moodle build at the time of the backup.
+            $backupbuild = (int) $matches[1]; // The date of PowerEduc build at the time of the backup.
         }
 
         // On older versions the freeze value has to be converted.
@@ -1657,7 +1657,7 @@ class restore_section_structure_step extends restore_structure_step {
         }
 
         // Commented out. We never modify course->numsections as far as that is used
-        // by a lot of people to "hide" sections on purpose (so this remains as used to be in Moodle 1.x)
+        // by a lot of people to "hide" sections on purpose (so this remains as used to be in PowerEduc 1.x)
         // Note: We keep the code here, to know about and because of the possibility of making this
         // optional based on some setting/attribute in the future
         // If needed, adjust course->numsections
@@ -1670,7 +1670,7 @@ class restore_section_structure_step extends restore_structure_step {
 
     /**
      * Process the legacy availability table record. This table does not exist
-     * in Moodle 2.7+ but we still support restore.
+     * in PowerEduc 2.7+ but we still support restore.
      *
      * @param stdClass $data Record data
      */
@@ -1686,7 +1686,7 @@ class restore_section_structure_step extends restore_structure_step {
 
     /**
      * Process the legacy availability fields table record. This table does not
-     * exist in Moodle 2.7+ but we still support restore.
+     * exist in PowerEduc 2.7+ but we still support restore.
      *
      * @param stdClass $data Record data
      */
@@ -4557,7 +4557,7 @@ class restore_module_structure_step extends restore_structure_step {
 
     /**
      * Process the legacy availability table record. This table does not exist
-     * in Moodle 2.7+ but we still support restore.
+     * in PowerEduc 2.7+ but we still support restore.
      *
      * @param stdClass $data Record data
      */
@@ -4572,7 +4572,7 @@ class restore_module_structure_step extends restore_structure_step {
 
     /**
      * Process the legacy availability fields table record. This table does not
-     * exist in Moodle 2.7+ but we still support restore.
+     * exist in PowerEduc 2.7+ but we still support restore.
      *
      * @param stdClass $data Record data
      */
@@ -6125,7 +6125,7 @@ abstract class restore_questions_activity_structure_step extends restore_activit
 
     /**
      * Attach below $element (usually attempts) the needed restore_path_elements
-     * to restore question attempt data from Moodle 2.0.
+     * to restore question attempt data from PowerEduc 2.0.
      *
      * When using this method, the parent element ($element) must be defined with
      * $grouped = true. Then, in that elements process method, you must call

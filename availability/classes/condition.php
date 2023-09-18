@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Base class for a single availability condition.
@@ -116,7 +116,7 @@ abstract class condition extends tree_node {
      *
      * @param int $cmid Course-module id
      * @return string Placeholder text
-     * @since Moodle 4.0
+     * @since PowerEduc 4.0
      */
     public static function description_cm_name(int $cmid): string {
         return '<AVAILABILITY_CMNAME_' . $cmid . '/>';
@@ -130,7 +130,7 @@ abstract class condition extends tree_node {
      *
      * @param string $str Text to be processed with format_string
      * @return string Placeholder text
-     * @since Moodle 4.0
+     * @since PowerEduc 4.0
      */
     public static function description_format_string(string $str): string {
         return '<AVAILABILITY_FORMAT_STRING>' . htmlspecialchars($str, ENT_NOQUOTES) .
@@ -145,11 +145,11 @@ abstract class condition extends tree_node {
      * the condition class.
      *
      * Gets placeholder text which will be decoded by info::format_info later when we can safely
-     * call most Moodle functions.
+     * call most PowerEduc functions.
      *
      * @param string[] $params Array of arbitrary parameters
      * @return string Placeholder text
-     * @since Moodle 4.0
+     * @since PowerEduc 4.0
      */
     public function description_callback(array $params): string {
         $out = '<AVAILABILITY_CALLBACK type="' . $this->get_type() . '">';
@@ -250,7 +250,7 @@ abstract class condition extends tree_node {
      *
      * Default implementation returns false.
      *
-     * @param \stdClass $course Moodle course object
+     * @param \stdClass $course PowerEduc course object
      * @param int $cmid ID of activity whose completion value is considered
      * @return boolean True if the availability of something else may rely on it
      */

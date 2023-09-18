@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * H5P factory class.
@@ -28,10 +28,10 @@ namespace core_h5p;
 defined('POWEREDUC_INTERNAL') || die();
 
 use core_h5p\local\library\autoloader;
-use Moodle\H5PContentValidator as content_validator;
-use Moodle\H5peditor;
-use Moodle\H5PStorage as storage;
-use Moodle\H5PValidator as validator;
+use PowerEduc\H5PContentValidator as content_validator;
+use PowerEduc\H5peditor;
+use PowerEduc\H5PStorage as storage;
+use PowerEduc\H5PValidator as validator;
 
 /**
  * H5P factory class.
@@ -46,28 +46,28 @@ class factory {
     /** @var \core_h5p\local\library\autoloader The autoloader */
     protected $autoloader;
 
-    /** @var \core_h5p\core The Moodle H5PCore implementation */
+    /** @var \core_h5p\core The PowerEduc H5PCore implementation */
     protected $core;
 
-    /** @var \core_h5p\framework The Moodle H5PFramework implementation */
+    /** @var \core_h5p\framework The PowerEduc H5PFramework implementation */
     protected $framework;
 
-    /** @var \core_h5p\file_storage The Moodle H5PStorage implementation */
+    /** @var \core_h5p\file_storage The PowerEduc H5PStorage implementation */
     protected $storage;
 
-    /** @var validator The Moodle H5PValidator implementation */
+    /** @var validator The PowerEduc H5PValidator implementation */
     protected $validator;
 
-    /** @var content_validator The Moodle H5PContentValidator implementation */
+    /** @var content_validator The PowerEduc H5PContentValidator implementation */
     protected $content_validator;
 
-    /** @var editor_framework The Moodle H5peditorStorage implementation */
+    /** @var editor_framework The PowerEduc H5peditorStorage implementation */
     protected $editorframework;
 
     /** @var H5peditor */
     protected $editor;
 
-    /** @var editor_ajax The Moodle H5PEditorAjaxInterface implementation */
+    /** @var editor_ajax The PowerEduc H5PEditorAjaxInterface implementation */
     protected $editorajaxinterface;
 
     /**
@@ -124,7 +124,7 @@ class factory {
     /**
      * Returns an instance of the H5PStorage class.
      *
-     * @return \Moodle\H5PStorage
+     * @return \PowerEduc\H5PStorage
      */
     public function get_storage(): storage {
         if (null === $this->storage) {
@@ -137,7 +137,7 @@ class factory {
     /**
      * Returns an instance of the H5PValidator class.
      *
-     * @return \Moodle\H5PValidator
+     * @return \PowerEduc\H5PValidator
      */
     public function get_validator(): validator {
         if (null === $this->validator) {
@@ -150,7 +150,7 @@ class factory {
     /**
      * Returns an instance of the H5PContentValidator class.
      *
-     * @return Moodle\H5PContentValidator
+     * @return PowerEduc\H5PContentValidator
      */
     public function get_content_validator(): content_validator {
         if (null === $this->content_validator) {

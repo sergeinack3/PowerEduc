@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Cache definition class
  *
- * This file is part of Moodle's cache API, affectionately called MUC.
+ * This file is part of PowerEduc's cache API, affectionately called MUC.
  * It contains the components that are requried in order to use caching.
  *
  * @package    core
@@ -216,7 +216,7 @@ class cache_definition {
 
     /**
      * Gets set to true if this definition requires searchable stores.
-     * @since Moodle 2.4.4
+     * @since PowerEduc 2.4.4
      * @var bool
      */
     protected $requiresearchable = false;
@@ -766,7 +766,7 @@ class cache_definition {
 
     /**
      * Returns true if this definition allows local storage to be used for caching.
-     * @since Moodle 3.1.0
+     * @since PowerEduc 3.1.0
      * @return bool
      */
     public function can_use_localstore() {
@@ -775,7 +775,7 @@ class cache_definition {
 
     /**
      * Returns true if this definition requires a searchable cache.
-     * @since Moodle 2.4.4
+     * @since PowerEduc 2.4.4
      * @return bool
      */
     public function require_searchable() {

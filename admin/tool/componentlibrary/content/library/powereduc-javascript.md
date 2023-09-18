@@ -1,6 +1,6 @@
 ---
 layout: docs
-title: "Moodle JavaScript"
+title: "PowerEduc JavaScript"
 date: 2020-01-14T13:38:37+01:00
 group: powereduc-components
 draft: false

@@ -49,7 +49,7 @@ Ciao, Eloy Lafuente (stronk7)
 2006-07-11 - Initial commit
 
 This directory contains the XMLDB classes to be used
-under Moodle > 1.7 to store all the DB info in a
+under PowerEduc > 1.7 to store all the DB info in a
 neutral form (classes dir). Also it contains one simple
 interface to edit all those structures.
 
@@ -66,7 +66,7 @@ provides an easy way to retroffit and to generate any table from
 MySQL to the new XMLDB format.
 
 Once the XMLDB format was approved, we'll be able to build all the
-"generators" needed in order to use it to create Moodle DB structures
+"generators" needed in order to use it to create PowerEduc DB structures
 for each RDBMS flavour.
 
 Once the interface was finished (2-3 days from now) related documentation

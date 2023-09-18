@@ -196,7 +196,7 @@ $events = calendar_get_legacy_events($timestart, $timeend, $users, $groups, arra
 
 $ical = new iCalendar;
 $ical->add_property('method', 'PUBLISH');
-$ical->add_property('prodid', '-//Moodle Pty Ltd//NONSGML Moodle Version ' . $CFG->version . '//EN');
+$ical->add_property('prodid', '-//PowerEduc Pty Ltd//NONSGML PowerEduc Version ' . $CFG->version . '//EN');
 foreach($events as $event) {
     if (!empty($event->modulename)) {
         $instances = get_fast_modinfo($event->courseid, $userid)->get_instances_of($event->modulename);
@@ -235,7 +235,7 @@ foreach($events as $event) {
         $ev->add_property('dtend', Bennu::timestamp_to_datetime($event->timestart + $event->timeduration));
     } else if ($event->timeduration == 0) {
         // When no duration is present, the event is instantaneous event, ex - Due date of a module.
-        // Moodle doesn't support all day events yet. See MDL-56227.
+        // PowerEduc doesn't support all day events yet. See MDL-56227.
         $ev->add_property('dtstart', Bennu::timestamp_to_datetime($event->timestart));
         $ev->add_property('dtend', Bennu::timestamp_to_datetime($event->timestart));
     } else {

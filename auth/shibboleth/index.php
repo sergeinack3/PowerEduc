@@ -44,7 +44,7 @@
         // The password is never actually used, but needs to be passed to the functions 'user_login' and
         // 'authenticate_user_login'. Shibboleth returns true for the function 'prevent_local_password', which is
         // used when setting the password in 'update_internal_user_password'. When 'prevent_local_password'
-        // returns true, the password is set to 'not cached' (AUTH_PASSWORD_NOT_CACHED) in the Moodle DB. However,
+        // returns true, the password is set to 'not cached' (AUTH_PASSWORD_NOT_CACHED) in the PowerEduc DB. However,
         // rather than setting the password to a hard-coded value, we will generate one each time, in case there are
         // changes to the Shibboleth plugin and it is actually used.
         $frm->password = generate_password(8);
@@ -87,7 +87,7 @@
         }
 
         else {
-            // The Shibboleth user couldn't be mapped to a valid Moodle user
+            // The Shibboleth user couldn't be mapped to a valid PowerEduc user
             throw new \powereduc_exception('shib_invalid_account_error', 'auth_shibboleth');
         }
     }

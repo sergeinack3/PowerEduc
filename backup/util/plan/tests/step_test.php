@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_backup;
 
@@ -127,7 +127,7 @@ class step_test extends \advanced_testcase {
 
         // Let's prepare a string for being decrypted.
         $secret = 'This is a secret message that nobody else will be able to read but me 💩  ';
-        $key = hash('md5', 'Moodle rocks and this is not secure key, who cares, it is a test');
+        $key = hash('md5', 'PowerEduc rocks and this is not secure key, who cares, it is a test');
         $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length(backup::CIPHER));
         $message = $iv . openssl_encrypt($secret, backup::CIPHER, $key, OPENSSL_RAW_DATA, $iv);
         $hmac = hash_hmac('sha256', $message, $key, true);

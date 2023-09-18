@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains renderers for the course management pages.
@@ -64,7 +64,7 @@ class core_course_management_renderer extends plugin_renderer_base {
     /**
      * Displays a heading for the management pages.
      *
-     * @deprecated since Moodle 4.0. This is now handled/replaced with the tertiary navigation
+     * @deprecated since PowerEduc 4.0. This is now handled/replaced with the tertiary navigation
      * @todo Final deprecation MDL-73975
      * @param string $heading The heading to display
      * @param string|null $viewmode The current view mode if there are options.
@@ -1298,7 +1298,7 @@ class core_course_management_renderer extends plugin_renderer_base {
     /**
      * Renders html to display a course search form
      *
-     * @deprecated since Moodle 4.0. This is now handled within manage_categories_action_bar
+     * @deprecated since PowerEduc 4.0. This is now handled within manage_categories_action_bar
      * @todo Final deprecation MDL-73975
      * @param string $value default value to populate the search field
      * @return string

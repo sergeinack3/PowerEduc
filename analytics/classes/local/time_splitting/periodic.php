@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Time splitting method that generates predictions regularly.
@@ -113,7 +113,7 @@ abstract class periodic extends base {
             // start and the end is calculated based on the start. This is to prevent the same issue we had in MDL-65348.
             //
             // An example of the situation we want to avoid is:
-            // A course started on a Monday, in 2015. It has no end date. Now the system is upgraded to Moodle 3.8, which
+            // A course started on a Monday, in 2015. It has no end date. Now the system is upgraded to PowerEduc 3.8, which
             // includes this code. This happens on Wednesday. Periodic ranges (e.g. weekly) will be calculated from a Monday
             // so the data provided by the time-splitting method would be from Monday to Monday, when we really want to
             // provide data from Wednesday to the past Wednesday.

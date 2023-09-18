@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'enrol_ldap', language 'en'.
@@ -25,7 +25,7 @@
 
 $string['assignrole']  = "Assigning role '{\$a->role_shortname}' to user '{\$a->user_username}' into course '{\$a->course_shortname}' (id {\$a->course_id})";
 $string['assignrolefailed'] = "Failed to assign role '{\$a->role_shortname}' to user '{\$a->user_username}' into course '{\$a->course_shortname}' (id {\$a->course_id})\n";
-$string['autocreate'] = '<p>Courses can be created automatically if there are enrolments to a course that doesn\'t yet exist in Moodle</p><p>If you are using automatic course creation, it is recommended that you remove the following capabilities: powereduc/course:changeidnumber, powereduc/course:changeshortname, powereduc/course:changefullname and powereduc/course:changesummary, from the relevant roles to prevent modifications of the four course fields specified above (ID number, shortname, fullname and summary).</p>';
+$string['autocreate'] = '<p>Courses can be created automatically if there are enrolments to a course that doesn\'t yet exist in PowerEduc</p><p>If you are using automatic course creation, it is recommended that you remove the following capabilities: powereduc/course:changeidnumber, powereduc/course:changeshortname, powereduc/course:changefullname and powereduc/course:changesummary, from the relevant roles to prevent modifications of the four course fields specified above (ID number, shortname, fullname and summary).</p>';
 $string['autocreate_key'] = 'Auto create';
 $string['autocreation_settings'] = 'Automatic course creation settings';
 $string['autoupdate_settings'] = 'Automatic course update settings';

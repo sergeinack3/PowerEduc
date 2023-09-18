@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace enrol_lti\local\ltiadvantage\repository;
 use core_availability\info_module;
@@ -56,7 +56,7 @@ class published_resource_repository {
      * Given a list of published resources, return a list of those which are available to the provided user.
      *
      * @param array $resources the array of records representing published resources.
-     * @param int $userid the Moodle user id to check.
+     * @param int $userid the PowerEduc user id to check.
      * @return array an array of stdClasses containing data about resources which are available to the current user.
      */
     private function get_available_resources_from_records(array $resources, int $userid): array {

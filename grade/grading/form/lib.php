@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Common classes used by gradingform plugintypes are defined here
@@ -737,7 +737,7 @@ abstract class gradingform_controller {
      *    $gradingform_guide_controller->get_external_definition_details()
      * @return array An array of one or more key/value pairs containing the external_multiple_structure/s
      * corresponding to the definition returned by $controller->get_definition()
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_external_definition_details() {
         return null;
@@ -755,7 +755,7 @@ abstract class gradingform_controller {
      *
      * @return array An array of one or more key/value pairs containing the external_multiple_structure/s
      * corresponding to the definition returned by $gradingform_<method>_instance->get_<method>_filling()
-     * @since Moodle 2.6
+     * @since PowerEduc 2.6
      */
     public static function get_external_instance_filling_details() {
         return null;
@@ -782,7 +782,7 @@ abstract class gradingform_controller {
  *
  * The reference to an instance of this class is passed to an advanced grading form element
  * included in the grading form, so this class must implement functions for rendering
- * and validation of this form element. See {@link MoodleQuickForm_grading}
+ * and validation of this form element. See {@link PowerEducQuickForm_grading}
  *
  * @package    core_grading
  * @copyright  2011 Marina Glancy
@@ -1050,10 +1050,10 @@ abstract class gradingform_instance {
      *
      * Also client-side JS validation may be implemented here
      *
-     * @see MoodleQuickForm_grading in lib/form/grading.php
+     * @see PowerEducQuickForm_grading in lib/form/grading.php
      *
      * @param powereduc_page $page
-     * @param MoodleQuickForm_grading $gradingformelement
+     * @param PowerEducQuickForm_grading $gradingformelement
      * @return string
      */
     abstract function render_grading_element($page, $gradingformelement);

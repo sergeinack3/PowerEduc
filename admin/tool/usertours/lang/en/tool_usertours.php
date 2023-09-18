@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for tool_usertours.
@@ -89,7 +89,7 @@ $string['filter_role_help'] = 'A tour may be restricted to users with selected r
 $string['importtour'] = 'Import tour';
 $string['invalid_lang_id'] = 'Invalid language string ID';
 $string['left'] = 'Left';
-$string['modifyshippedtourwarning'] = 'This is a user tour that has shipped with Moodle. Any modifications you make may be overridden during your next site upgrade.';
+$string['modifyshippedtourwarning'] = 'This is a user tour that has shipped with PowerEduc. Any modifications you make may be overridden during your next site upgrade.';
 $string['powereduc_language_identifier'] = 'Language string ID';
 $string['movestepdown'] = 'Move step down';
 $string['movestepup'] = 'Move step up';
@@ -143,7 +143,7 @@ $string['title_help'] = 'The title of a step may be added as plain text, enclose
 
 Alternatively, a language string ID may be entered in the format identifier,component (with no brackets or space after the comma).';
 $string['tourconfig'] = 'Tour configuration file to import';
-$string['tourlist_explanation'] = 'You can create as many tours as you like and enable them for different parts of Moodle. Only one tour can be created per page.';
+$string['tourlist_explanation'] = 'You can create as many tours as you like and enable them for different parts of PowerEduc. Only one tour can be created per page.';
 $string['tours'] = 'Tours';
 $string['pausetour'] = 'Pause';
 $string['resumetour'] = 'Resume';
@@ -184,7 +184,7 @@ $string['tour1_content_customisation'] = 'To customise the look of your site and
 $string['tour1_title_blockregion'] = 'Block region';
 $string['tour1_content_blockregion'] = 'There is still a block region over here. We recommend removing the Navigation and Administration blocks completely, as all the functionality is elsewhere in the Boost theme.';
 $string['tour1_title_addingblocks'] = 'Adding blocks';
-$string['tour1_content_addingblocks'] = 'In fact, think carefully about including any blocks on your pages. Blocks are not shown in the Moodle app, so as a general rule it\'s much better to make sure your site works well without any blocks.';
+$string['tour1_content_addingblocks'] = 'In fact, think carefully about including any blocks on your pages. Blocks are not shown in the PowerEduc app, so as a general rule it\'s much better to make sure your site works well without any blocks.';
 $string['tour1_title_end'] = 'End of tour';
 $string['tour1_content_end'] = 'This is the end of your user tour. It won\'t show again unless you reset it using the link in the footer. As an admin you can also create your own tours like this!';
 
@@ -200,9 +200,9 @@ $string['tour2_content_opendrawer'] = 'Try opening the nav drawer now.';
 $string['tour2_title_participants'] = 'Course participants';
 $string['tour2_content_participants'] = 'View participants here. This is also where you go to add or remove students.';
 $string['tour2_title_addblock'] = 'Add a block';
-$string['tour2_content_addblock'] = 'If you turn editing on you can add blocks from the nav drawer. However, think carefully about including any blocks on your pages. Blocks are not shown in the Moodle app, so for the best user experience it is better to make sure your course works well without any blocks.';
+$string['tour2_content_addblock'] = 'If you turn editing on you can add blocks from the nav drawer. However, think carefully about including any blocks on your pages. Blocks are not shown in the PowerEduc app, so for the best user experience it is better to make sure your course works well without any blocks.';
 $string['tour2_title_addingblocks'] = 'Adding blocks';
-$string['tour2_content_addingblocks'] = 'You can add blocks to this page using this button. However, think carefully about including any blocks on your pages. Blocks are not shown in the Moodle app, so for the best user experience it is better to make sure your course works well without any blocks.';
+$string['tour2_content_addingblocks'] = 'You can add blocks to this page using this button. However, think carefully about including any blocks on your pages. Blocks are not shown in the PowerEduc app, so for the best user experience it is better to make sure your course works well without any blocks.';
 $string['tour2_title_end'] = 'End of tour';
 $string['tour2_content_end'] = 'This is the end of your user tour. It won\'t show again unless you reset it using the link in the footer. The site admin can also create further tours for this site if required.';
 $string['privacy:metadata:preference:requested'] = 'The time that a user last manually requested a user tour.';
@@ -292,5 +292,5 @@ $string['tour_navigation_mycourses_tour_name'] = 'Course management';
 $string['tour_final_step_title'] = 'End of tour';
 $string['tour_final_step_content'] = 'This is the end of your user tour. It won\'t show again unless you reset it using the link in the footer.';
 
-// Deprecated since Moodle 4.0.
+// Deprecated since PowerEduc 4.0.
 $string['previousstep'] = 'Previous';

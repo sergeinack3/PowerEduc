@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Base class for library handlers.
@@ -136,13 +136,13 @@ abstract class handler {
         $value = null;
         $h5pversion = static::get_h5p_version();
         $component = 'h5plib_v' . $h5pversion;
-        // Composed code languages, such as 'Spanish, Mexican' are different in H5P and Moodle:
+        // Composed code languages, such as 'Spanish, Mexican' are different in H5P and PowerEduc:
         // - In H5P, they use '-' to separate language from the country. For instance: es-mx.
-        // - However, in Moodle, they have '_' instead of '-'. For instance: es_mx.
+        // - However, in PowerEduc, they have '_' instead of '-'. For instance: es_mx.
         $language = str_replace('-', '_', $language);
         if (get_string_manager()->string_exists($identifier, $component)) {
             $defaultpowereduclang = 'en';
-            // In Moodle, all the English strings always will exist because they have to be declared in order to let users
+            // In PowerEduc, all the English strings always will exist because they have to be declared in order to let users
             // to translate them. That's why, this method will only replace existing key if the value is different from
             // the English version and the current language is not English.
             $string = new \lang_string($identifier, $component);
@@ -161,20 +161,20 @@ abstract class handler {
      */
     protected static function get_class_list(): array {
         return [
-            'Moodle\H5PCore' => 'h5p.classes.php',
-            'Moodle\H5PFrameworkInterface' => 'h5p.classes.php',
-            'Moodle\H5PContentValidator' => 'h5p.classes.php',
-            'Moodle\H5PValidator' => 'h5p.classes.php',
-            'Moodle\H5PStorage' => 'h5p.classes.php',
-            'Moodle\H5PDevelopment' => 'h5p-development.class.php',
-            'Moodle\H5PFileStorage' => 'h5p-file-storage.interface.php',
-            'Moodle\H5PDefaultStorage' => 'h5p-default-storage.class.php',
-            'Moodle\H5PMetadata' => 'h5p-metadata.class.php',
-            'Moodle\H5peditor' => 'h5peditor.class.php',
-            'Moodle\H5peditorStorage' => 'h5peditor-storage.interface.php',
-            'Moodle\H5PEditorAjaxInterface' => 'h5peditor-ajax.interface.php',
-            'Moodle\H5PEditorAjax' => 'h5peditor-ajax.class.php',
-            'Moodle\H5peditorFile' => 'h5peditor-file.class.php',
+            'PowerEduc\H5PCore' => 'h5p.classes.php',
+            'PowerEduc\H5PFrameworkInterface' => 'h5p.classes.php',
+            'PowerEduc\H5PContentValidator' => 'h5p.classes.php',
+            'PowerEduc\H5PValidator' => 'h5p.classes.php',
+            'PowerEduc\H5PStorage' => 'h5p.classes.php',
+            'PowerEduc\H5PDevelopment' => 'h5p-development.class.php',
+            'PowerEduc\H5PFileStorage' => 'h5p-file-storage.interface.php',
+            'PowerEduc\H5PDefaultStorage' => 'h5p-default-storage.class.php',
+            'PowerEduc\H5PMetadata' => 'h5p-metadata.class.php',
+            'PowerEduc\H5peditor' => 'h5peditor.class.php',
+            'PowerEduc\H5peditorStorage' => 'h5peditor-storage.interface.php',
+            'PowerEduc\H5PEditorAjaxInterface' => 'h5peditor-ajax.interface.php',
+            'PowerEduc\H5PEditorAjax' => 'h5peditor-ajax.class.php',
+            'PowerEduc\H5peditorFile' => 'h5peditor-file.class.php',
         ];
     }
 }

@@ -3,7 +3,7 @@
 /**
  * Spam Cleaner
  *
- * Helps an admin to clean up spam in Moodle
+ * Helps an admin to clean up spam in PowerEduc
  *
  * @author Dongsheng Cai
  * @author Martin Dougiamas

@@ -9,11 +9,11 @@ weight: 30
 
 ## How it works
 
-The EXAMPLE is used to [...] . It can be found in Moodle on pages where [...]
+The EXAMPLE is used to [...] . It can be found in PowerEduc on pages where [...]
 
 ## Example
 
-Show what the example looks like in Moodle, if your component includes and JavaScript backend please describe how it is initiated.
+Show what the example looks like in PowerEduc, if your component includes and JavaScript backend please describe how it is initiated.
 
 {{< example >}}
 
@@ -36,8 +36,8 @@ require(['jquery'], function($) {
 ## Example explained
 
 How can you use this example?
-Are there any example pages in Moodle?
-What are the different options you have for different contexts (places in Moodle)?
+Are there any example pages in PowerEduc?
+What are the different options you have for different contexts (places in PowerEduc)?
 What colours can be used?
 Can it be called from PHP and JavaScript
 

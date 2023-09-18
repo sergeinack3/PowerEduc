@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'auth_ldap', language 'en'.
@@ -33,17 +33,17 @@ $string['auth_ldap_bind_pw_key'] = 'Password';
 $string['auth_ldap_bind_settings'] = 'Bind settings';
 $string['auth_ldap_contexts'] = 'List of contexts where users are located. Separate different contexts with \';\'. For example: \'ou=users,o=org; ou=others,o=org\'';
 $string['auth_ldap_contexts_key'] = 'Contexts';
-$string['auth_ldap_create_context'] = 'If you enable user creation with email confirmation, specify the context where users are created. This context should be different from other users to prevent security issues. You don\'t need to add this context to ldap_context-variable, Moodle will search for users from this context automatically.<br /><b>Note!</b> You have to modify the method user_create() in file auth/ldap/auth.php to make user creation work';
+$string['auth_ldap_create_context'] = 'If you enable user creation with email confirmation, specify the context where users are created. This context should be different from other users to prevent security issues. You don\'t need to add this context to ldap_context-variable, PowerEduc will search for users from this context automatically.<br /><b>Note!</b> You have to modify the method user_create() in file auth/ldap/auth.php to make user creation work';
 $string['auth_ldap_create_context_key'] = 'Context for new users';
 $string['auth_ldap_create_error'] = 'Error creating user in LDAP.';
-$string['auth_ldapdescription'] = 'This method provides authentication against an external LDAP server. If the given username and password are valid, Moodle creates a new user entry in its database. This plugin can read user attributes from LDAP and prefill wanted fields in Moodle. For following logins only the username and password are checked.';
+$string['auth_ldapdescription'] = 'This method provides authentication against an external LDAP server. If the given username and password are valid, PowerEduc creates a new user entry in its database. This plugin can read user attributes from LDAP and prefill wanted fields in PowerEduc. For following logins only the username and password are checked.';
 $string['auth_ldap_expiration_desc'] = 'Select \'{$a->no}\' to disable expired password checking or \'{$a->ldapserver}\' to read the password expiry time directly from the LDAP server.';
 $string['auth_ldap_expiration_key'] = 'Expiry';
 $string['auth_ldap_expiration_warning_desc'] = 'Number of days before password expiry warning is issued.';
 $string['auth_ldap_expiration_warning_key'] = 'Expiry warning';
 $string['auth_ldap_expireattr_desc'] = 'Optional: Overrides the LDAP attribute that stores password expiry time.';
 $string['auth_ldap_expireattr_key'] = 'Expiry attribute';
-$string['auth_ldapextrafields'] = 'These fields are optional.  You can choose to pre-fill some Moodle user fields with information from the <b>LDAP fields</b> that you specify here. <p>If you leave these fields blank, then nothing will be transferred from LDAP and Moodle defaults will be used instead.</p><p>In either case, the user will be able to edit all of these fields after they log in.</p>';
+$string['auth_ldapextrafields'] = 'These fields are optional.  You can choose to pre-fill some PowerEduc user fields with information from the <b>LDAP fields</b> that you specify here. <p>If you leave these fields blank, then nothing will be transferred from LDAP and PowerEduc defaults will be used instead.</p><p>In either case, the user will be able to edit all of these fields after they log in.</p>';
 $string['auth_ldap_graceattr_desc'] = 'Optional: Overrides grace login attribute';
 $string['auth_ldap_gracelogin_key'] = 'Grace login attribute';
 $string['auth_ldap_gracelogins_desc'] = 'Enable LDAP grace login support. After password has expired, user can log in until grace login count is 0. Enabling this setting displays grace login message if password has expired.';
@@ -72,7 +72,7 @@ $string['auth_ldap_opt_deref_key'] = 'Dereference aliases';
 $string['auth_ldap_passtype'] = 'Specify the format of new or changed passwords in LDAP server.';
 $string['auth_ldap_passtype_key'] = 'Password format';
 $string['auth_ldap_passwdexpire_settings'] = 'LDAP password expiry settings';
-$string['auth_ldap_preventpassindb'] = 'Select yes to prevent passwords from being stored in Moodle\'s DB.';
+$string['auth_ldap_preventpassindb'] = 'Select yes to prevent passwords from being stored in PowerEduc\'s DB.';
 $string['auth_ldap_preventpassindb_key'] = 'Prevent password caching';
 $string['auth_ldap_rolecontext'] = '{$a->localname} context';
 $string['auth_ldap_rolecontext_help'] = 'LDAP context used to select for <i>{$a->localname}</i> mapping. Separate multiple groups with \';\'. Usually something like "cn={$a->shortname},ou=first-ou-with-role-groups,o=myorg; cn={$a->shortname},ou=second-ou-with-role-groups,o=myorg".';
@@ -80,7 +80,7 @@ $string['auth_ldap_search_sub'] = 'Search users from subcontexts.';
 $string['auth_ldap_search_sub_key'] = 'Search subcontexts';
 $string['auth_ldap_server_settings'] = 'LDAP server settings';
 $string['auth_ldap_unsupportedusertype'] = 'auth: ldap user_create() does not support selected usertype: {$a}';
-$string['auth_ldap_update_userinfo'] = 'Update user information (firstname, lastname, address..) from LDAP to Moodle.  Specify "Data mapping" settings as you need.';
+$string['auth_ldap_update_userinfo'] = 'Update user information (firstname, lastname, address..) from LDAP to PowerEduc.  Specify "Data mapping" settings as you need.';
 $string['auth_ldap_user_attribute'] = 'Optional: Overrides the attribute used to name/search users. Usually \'cn\'.';
 $string['auth_ldap_user_attribute_key'] = 'User attribute';
 $string['auth_ldap_suspended_attribute'] = 'Optional: When provided this attribute will be used to enable/suspend the locally created user account.';
@@ -133,7 +133,7 @@ $string['ntlmsso_attempting'] = 'Attempting Single Sign On via NTLM...';
 $string['ntlmsso_failed'] = 'Auto-login failed, try the normal login page...';
 $string['ntlmsso_isdisabled'] = 'NTLM SSO is disabled.';
 $string['ntlmsso_unknowntype'] = 'Unknown ntlmsso type!';
-$string['pagedresultsnotsupp'] = 'LDAP paged results not supported (either your PHP version lacks support, you have configured Moodle to use LDAP protocol version 2 or Moodle cannot contact your LDAP server to see if paged support is available.)';
+$string['pagedresultsnotsupp'] = 'LDAP paged results not supported (either your PHP version lacks support, you have configured PowerEduc to use LDAP protocol version 2 or PowerEduc cannot contact your LDAP server to see if paged support is available.)';
 $string['pagesize'] = 'Make sure this value is smaller than your LDAP server result set size limit (the maximum number of entries that can be returned in a single query)';
 $string['pagesize_key'] = 'Page size';
 $string['pluginname'] = 'LDAP server';

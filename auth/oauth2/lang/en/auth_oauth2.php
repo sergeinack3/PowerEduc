@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'auth_oauth2', language 'en'.
@@ -112,7 +112,7 @@ $string['privacy:metadata:auth_oauth2:confirmtoken'] = 'The confirmation token.'
 $string['privacy:metadata:auth_oauth2:confirmtokenexpires'] = 'The timestamp when the confirmation token expires.';
 $string['privacy:metadata:auth_oauth2:email'] = 'The external email that maps to this account.';
 $string['privacy:metadata:auth_oauth2:issuerid'] = 'The ID of the OAuth 2 issuer for this OAuth 2 login';
-$string['privacy:metadata:auth_oauth2:tableexplanation'] = 'OAuth 2 accounts linked to a user\'s Moodle account.';
+$string['privacy:metadata:auth_oauth2:tableexplanation'] = 'OAuth 2 accounts linked to a user\'s PowerEduc account.';
 $string['privacy:metadata:auth_oauth2:timecreated'] = 'The timestamp when the user account was linked to the OAuth 2 login.';
 $string['privacy:metadata:auth_oauth2:timemodified'] = 'The timestamp when this record was modified.';
 $string['privacy:metadata:auth_oauth2:userid'] = 'The ID of the user account which the OAuth 2 login is linked to.';

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * The mform for creating a calendar event. Based on the old event form.
@@ -42,7 +42,7 @@ class create extends \powereducform {
     /**
      * Build the editor options using the given context.
      *
-     * @param \context $context A Moodle context
+     * @param \context $context A PowerEduc context
      * @return array
      */
     public static function build_editor_options(\context $context) {
@@ -174,7 +174,7 @@ class create extends \powereducform {
      * Add the list of hidden elements that should appear in this form each
      * time. These elements will never be visible to the user.
      *
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      */
     protected function add_default_hidden_elements($mform) {
         global $USER;
@@ -205,7 +205,7 @@ class create extends \powereducform {
      * Add the various elements to express the duration options available
      * for an event.
      *
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      */
     protected function add_event_duration_elements($mform) {
         $group = [];
@@ -234,7 +234,7 @@ class create extends \powereducform {
     /**
      * Add the repeat elements for the form when creating a new event.
      *
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      */
     protected function add_event_repeat_elements($mform) {
         $mform->addElement('checkbox', 'repeat', get_string('repeatevent', 'calendar'), null);

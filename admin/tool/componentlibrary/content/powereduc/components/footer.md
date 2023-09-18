@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: "Footer"
-description: Moodle footer HTML and required code injected in the page footer
+description: PowerEduc footer HTML and required code injected in the page footer
 date: 2020-03-02T16:32:24+01:00
 draft: false
 weight: 40
@@ -10,14 +10,14 @@ tags:
 - needs review
 ---
 
-## How are footers implemented in Moodle?
+## How are footers implemented in PowerEduc?
 
-The page footer is shown at the bottom of every page in Moodle, typically a Moodle footer contains links to:
+The page footer is shown at the bottom of every page in PowerEduc, typically a PowerEduc footer contains links to:
 
-* A link to the Moodle docs for the current page
+* A link to the PowerEduc docs for the current page
 * resetting user tours
 * user login information
-* a link to the Moodle homepage
+* a link to the PowerEduc homepage
 
 When the setting ```perfdebug``` is turned on (Site Administration > Development > Debugging) additional performance info is shown in the page footer.
 
@@ -34,7 +34,7 @@ The page footer is required to inject the page JavaScript, show the reset user t
 {{< example >}}
 <footer id="page-footer" class="py-3 bg-dark text-light">
     <div class="container">
-        <p class="helplink"><a href="#">Moodle docs for this page</a></p>
+        <p class="helplink"><a href="#">PowerEduc docs for this page</a></p>
         You are logged in as <a href="#">Test User</a> (<a href="#">logout</a>)
         <a href="#">Home</a>
         <div class="tool_usertours-resettourcontainer"></div>

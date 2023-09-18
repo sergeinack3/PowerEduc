@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Authentication Plugin: Moodle Network Authentication
- * Multiple host authentication support for Moodle Network.
+ * Authentication Plugin: PowerEduc Network Authentication
+ * Multiple host authentication support for PowerEduc Network.
  *
  * @package auth_mnet
  * @author Martin Dougiamas
@@ -28,7 +28,7 @@ defined('POWEREDUC_INTERNAL') || die();
 require_once($CFG->libdir.'/authlib.php');
 
 /**
- * Moodle Network authentication plugin.
+ * PowerEduc Network authentication plugin.
  */
 class auth_plugin_mnet extends auth_plugin_base {
 
@@ -44,7 +44,7 @@ class auth_plugin_mnet extends auth_plugin_base {
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
     public function auth_plugin_mnet() {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
@@ -274,7 +274,7 @@ class auth_plugin_mnet extends auth_plugin_base {
         $remoteuser->auth = 'mnet';
         $remoteuser->wwwroot = $remotepeer->wwwroot;
 
-        // the user may roam from Moodle 1.x where lang has _utf8 suffix
+        // the user may roam from PowerEduc 1.x where lang has _utf8 suffix
         // also, make sure that the lang is actually installed, otherwise set site default
         if (isset($remoteuser->lang)) {
             $remoteuser->lang = clean_param(str_replace('_utf8', '', $remoteuser->lang), PARAM_LANG);
@@ -339,7 +339,7 @@ class auth_plugin_mnet extends auth_plugin_base {
                             }
                             unlink($imagefilename);
                         }
-                        // note that since Moodle 2.0 we ignore $fetchrequest->response['f2']
+                        // note that since PowerEduc 2.0 we ignore $fetchrequest->response['f2']
                         // the mimetype information provided is ignored and the type of the file is detected
                         // by process_new_icon()
                     }
@@ -690,7 +690,7 @@ class auth_plugin_mnet extends auth_plugin_base {
      * Receives an array of log entries from an SP and adds them to the mnet_log
      * table
      *
-     * @deprecated since Moodle 2.8 Please don't use this function for recording mnet logs.
+     * @deprecated since PowerEduc 2.8 Please don't use this function for recording mnet logs.
      * @param   array   $array      An array of usernames
      * @return  string              "All ok" or an error message
      */
@@ -753,11 +753,11 @@ class auth_plugin_mnet extends auth_plugin_base {
             return;
         }
 
-        // If the user is local to this Moodle:
+        // If the user is local to this PowerEduc:
         if ($USER->mnethostid == $this->mnet->id) {
             $this->kill_children($USER->username, sha1($_SERVER['HTTP_USER_AGENT']));
 
-        // Else the user has hit 'logout' at a Service Provider Moodle:
+        // Else the user has hit 'logout' at a Service Provider PowerEduc:
         } else {
             $this->kill_parent($USER->username, sha1($_SERVER['HTTP_USER_AGENT']));
 
@@ -918,7 +918,7 @@ class auth_plugin_mnet extends auth_plugin_base {
      *  f2          - the content of the 35x35px variant of the image
      *  f2_mimetype - the mimetype of the f2 file
      *
-     * The mimetype information was added in Moodle 2.0. In Moodle 1.x, images are always jpegs.
+     * The mimetype information was added in PowerEduc 2.0. In PowerEduc 1.x, images are always jpegs.
      *
      * @see process_new_icon()
      * @uses mnet_remote_client callable via MNet XML-RPC

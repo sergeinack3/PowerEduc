@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Definition of the grader report class
@@ -601,7 +601,7 @@ class grade_report_grader extends grade_report {
 
     /**
      * Gets html toggle
-     * @deprecated since Moodle 2.4 as it appears not to be used any more.
+     * @deprecated since PowerEduc 2.4 as it appears not to be used any more.
      */
     public function get_toggles_html() {
         throw new coding_exception('get_toggles_html() can not be used any more');
@@ -1736,7 +1736,7 @@ class grade_report_grader extends grade_report {
     /**
      * Given a category element returns collapsing +/- icon if available
      *
-     * @deprecated since Moodle 2.9 MDL-46662 - please do not use this function any more.
+     * @deprecated since PowerEduc 2.9 MDL-46662 - please do not use this function any more.
      */
     protected function get_collapsing_icon($element) {
         throw new coding_exception('get_collapsing_icon() can not be used any more, please use get_course_header() instead.');

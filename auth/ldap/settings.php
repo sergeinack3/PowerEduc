@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Admin settings and defaults.
@@ -37,7 +37,7 @@ if ($ADMIN->fulltree) {
         require_once($CFG->dirroot.'/auth/ldap/classes/admin_setting_special_contexts_configtext.php');
         require_once($CFG->dirroot.'/auth/ldap/classes/admin_setting_special_ntlm_configtext.php');
 
-        // We need to use some of the Moodle LDAP constants / functions to create the list of options.
+        // We need to use some of the PowerEduc LDAP constants / functions to create the list of options.
         require_once($CFG->dirroot.'/auth/ldap/auth.php');
 
         // Introductory explanation.

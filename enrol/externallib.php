@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -38,7 +38,7 @@ require_once("$CFG->libdir/externallib.php");
  * @category   external
  * @copyright  2011 Jerome Mouneyrac
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.2
+ * @since PowerEduc 2.2
  */
 class core_enrol_external extends external_api {
 
@@ -46,7 +46,7 @@ class core_enrol_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.4
+     * @since PowerEduc 2.4
      */
     public static function get_enrolled_users_with_capability_parameters() {
         return new external_function_parameters(
@@ -54,7 +54,7 @@ class core_enrol_external extends external_api {
                 'coursecapabilities' => new external_multiple_structure(
                     new external_single_structure(
                         array (
-                            'courseid' => new external_value(PARAM_INT, 'Course ID number in the Moodle course table'),
+                            'courseid' => new external_value(PARAM_INT, 'Course ID number in the PowerEduc course table'),
                             'capabilities' => new external_multiple_structure(
                                 new external_value(PARAM_CAPABILITY, 'Capability name, such as mod/forum:viewdiscussion')),
                         )
@@ -82,7 +82,7 @@ class core_enrol_external extends external_api {
      *
      * @param array $coursecapabilities array of course ids and associated capability names {courseid, {capabilities}}
      * @return array An array of arrays describing users for each associated courseid and capability
-     * @since  Moodle 2.4
+     * @since  PowerEduc 2.4
      */
     public static function get_enrolled_users_with_capability($coursecapabilities, $options) {
         global $CFG, $DB;
@@ -192,12 +192,12 @@ class core_enrol_external extends external_api {
      * Returns description of method result value
      *
      * @return external_multiple_structure
-     * @since Moodle 2.4
+     * @since PowerEduc 2.4
      */
     public static function get_enrolled_users_with_capability_returns() {
         return  new external_multiple_structure( new external_single_structure (
                 array (
-                    'courseid' => new external_value(PARAM_INT, 'Course ID number in the Moodle course table'),
+                    'courseid' => new external_value(PARAM_INT, 'Course ID number in the PowerEduc course table'),
                     'capability' => new external_value(PARAM_CAPABILITY, 'Capability name'),
                     'users' => new external_multiple_structure(
                         new external_single_structure(
@@ -901,7 +901,7 @@ class core_enrol_external extends external_api {
             new external_single_structure(
                 [
                     'id'    => new external_value(PARAM_INT, 'ID of the user'),
-                    'username'    => new external_value(PARAM_RAW, 'Username policy is defined in Moodle security config', VALUE_OPTIONAL),
+                    'username'    => new external_value(PARAM_RAW, 'Username policy is defined in PowerEduc security config', VALUE_OPTIONAL),
                     'firstname'   => new external_value(PARAM_NOTAGS, 'The first name(s) of the user', VALUE_OPTIONAL),
                     'lastname'    => new external_value(PARAM_NOTAGS, 'The family name of the user', VALUE_OPTIONAL),
                     'fullname'    => new external_value(PARAM_NOTAGS, 'The fullname of the user'),
@@ -1190,7 +1190,7 @@ class core_enrol_external extends external_api {
  * @category   external
  * @copyright  2011 Jerome Mouneyrac
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.2
+ * @since PowerEduc 2.2
  */
 class core_role_external extends external_api {
 

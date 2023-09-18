@@ -26,7 +26,7 @@ Feature: A teacher checks the grade history report in a course
       | student2 | C1     | student        |
     And the following "activities" exist:
       | activity | course | section | name                         | intro                                         |
-      | assign   | C1     | 1       | The greatest assignment ever | Write a behat test for Moodle - it's amazing  |
+      | assign   | C1     | 1       | The greatest assignment ever | Write a behat test for PowerEduc - it's amazing  |
       | assign   | C1     | 1       | Rewarding assignment         | After writing your behat test go grab a beer! |
     Given the following config values are set as admin:
       | showuseridentity | email,profile_field_food |

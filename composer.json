@@ -1,7 +1,7 @@
 {
     "name": "powereduc/powereduc",
     "license": "GPL-3.0-or-later",
-    "description": "Moodle - the world's open source learning platform",
+    "description": "PowerEduc - the world's open source learning platform",
     "type": "project",
     "homepage": "https://powereduc.org",
     "require-dev": {
@@ -16,7 +16,7 @@
     },
     "autoload-dev": {
         "psr-0": {
-            "Moodle\\BehatExtension": "lib/behat/extension/"
+            "PowerEduc\\BehatExtension": "lib/behat/extension/"
         }
     },
     "minimum-stability": "dev",
@@ -43,13 +43,13 @@
         "ext-fileinfo": "*"
     },
     "suggest": {
-        "ext-mysqli": "Needed when Moodle uses MySQL or MariaDB database.",
-        "ext-pgsql": "Needed when Moodle uses PostgreSQL database.",
-        "ext-sqlsrv": "Needed when Moodle uses MS SQL Server database.",
-        "ext-oci8": "Needed when Moodle uses Oracle database.",
-        "ext-tokenizer": "Enabling Tokenizer PHP extension is recommended, it improves Moodle Networking functionality.",
+        "ext-mysqli": "Needed when PowerEduc uses MySQL or MariaDB database.",
+        "ext-pgsql": "Needed when PowerEduc uses PostgreSQL database.",
+        "ext-sqlsrv": "Needed when PowerEduc uses MS SQL Server database.",
+        "ext-oci8": "Needed when PowerEduc uses Oracle database.",
+        "ext-tokenizer": "Enabling Tokenizer PHP extension is recommended, it improves PowerEduc Networking functionality.",
         "ext-soap": "Enabling SOAP PHP extension is useful for web services and some plugins.",
-        "ext-sodium": "Enabling Sodium PHP extension is recommended, it is used by Moodle encryption API.",
-        "ext-exif": "Enabling Exif PHP extension is recommended, it is used by Moodle to parse image meta data."
+        "ext-sodium": "Enabling Sodium PHP extension is recommended, it is used by PowerEduc encryption API.",
+        "ext-exif": "Enabling Exif PHP extension is recommended, it is used by PowerEduc to parse image meta data."
     }
 }

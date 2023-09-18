@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Web services relating to fetching of a rubric for the grading panel.
@@ -55,7 +55,7 @@ class fetch extends external_api {
      * Describes the parameters for fetching the grading panel for a simple grade.
      *
      * @return external_function_parameters
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public static function execute_parameters(): external_function_parameters {
         return new external_function_parameters ([
@@ -90,7 +90,7 @@ class fetch extends external_api {
      * @param string $itemname
      * @param int $gradeduserid
      * @return array
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public static function execute(string $component, int $contextid, string $itemname, int $gradeduserid): array {
         global $CFG, $USER;
@@ -266,7 +266,7 @@ class fetch extends external_api {
      * Describes the data returned from the external function.
      *
      * @return external_single_structure
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public static function execute_returns(): external_single_structure {
         return new external_single_structure([

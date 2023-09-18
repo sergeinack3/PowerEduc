@@ -65,7 +65,7 @@ information provided here is intended especially for developers.
   when the update_event_start_day function is used in the local api.
 
 === 3.3 ===
-* calendar_event_hook() has been removed. Developers should be using the Moodle events system to achieve this behaviour,
+* calendar_event_hook() has been removed. Developers should be using the PowerEduc events system to achieve this behaviour,
   rather than using a hacky calendar specific implementation.
 * calendar_wday_name() is deprecated and no longer used in core.
 * calendar_get_block_upcoming() is deprecated, please use block_calendar_upcoming::get_upcoming_content() instead.

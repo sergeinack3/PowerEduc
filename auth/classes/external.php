@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Auth external API
@@ -21,7 +21,7 @@
  * @category   external
  * @copyright  2016 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.2
+ * @since      PowerEduc 3.2
  */
 
 defined('POWEREDUC_INTERNAL') || die;
@@ -36,7 +36,7 @@ require_once($CFG->libdir . '/authlib.php');
  * @category   external
  * @copyright  2016 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.2
+ * @since      PowerEduc 3.2
  */
 class core_auth_external extends external_api {
 
@@ -44,7 +44,7 @@ class core_auth_external extends external_api {
      * Describes the parameters for confirm_user.
      *
      * @return external_function_parameters
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function confirm_user_parameters() {
         return new external_function_parameters(
@@ -61,7 +61,7 @@ class core_auth_external extends external_api {
      * @param  string $username user name
      * @param  string $secret   confirmation secret (random string) used for validating the confirm request
      * @return array warnings and success status (true if the user was confirmed, false if he was already confirmed)
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      * @throws powereduc_exception
      */
     public static function confirm_user($username, $secret) {
@@ -110,7 +110,7 @@ class core_auth_external extends external_api {
      * Describes the confirm_user return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function confirm_user_returns() {
 
@@ -126,7 +126,7 @@ class core_auth_external extends external_api {
      * Describes the parameters for request_password_reset.
      *
      * @return external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function request_password_reset_parameters() {
         return new external_function_parameters(
@@ -143,7 +143,7 @@ class core_auth_external extends external_api {
      * @param  string $username user name
      * @param  string $email    user email
      * @return array warnings and success status (including notices and errors while processing)
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      * @throws powereduc_exception
      */
     public static function request_password_reset($username = '', $email = '') {
@@ -195,7 +195,7 @@ class core_auth_external extends external_api {
      * Describes the request_password_reset return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function request_password_reset_returns() {
 
@@ -220,7 +220,7 @@ class core_auth_external extends external_api {
      * Describes the parameters for the digital minor check.
      *
      * @return external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function is_minor_parameters() {
         return new external_function_parameters(
@@ -237,7 +237,7 @@ class core_auth_external extends external_api {
      * @param  int $age User age
      * @param  string $country Country of residence
      * @return array status (true if the user is a minor, false otherwise)
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      * @throws powereduc_exception
      */
     public static function is_minor($age, $country) {
@@ -277,7 +277,7 @@ class core_auth_external extends external_api {
      * Describes the is_minor return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function is_minor_returns() {
         return new external_single_structure(
@@ -292,7 +292,7 @@ class core_auth_external extends external_api {
      * Describes the parameters for is_age_digital_consent_verification_enabled.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function is_age_digital_consent_verification_enabled_parameters() {
         return new external_function_parameters(array());
@@ -302,7 +302,7 @@ class core_auth_external extends external_api {
      * Checks if age digital consent verification is enabled.
      *
      * @return array status (true if digital consent verification is enabled, false otherwise.)
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @throws powereduc_exception
      */
     public static function is_age_digital_consent_verification_enabled() {
@@ -326,7 +326,7 @@ class core_auth_external extends external_api {
      * Describes the is_age_digital_consent_verification_enabled return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function is_age_digital_consent_verification_enabled_returns() {
         return new external_single_structure(
@@ -341,7 +341,7 @@ class core_auth_external extends external_api {
      * Describes the parameters for resend_confirmation_email.
      *
      * @return external_function_parameters
-     * @since Moodle 3.6
+     * @since PowerEduc 3.6
      */
     public static function resend_confirmation_email_parameters() {
         return new external_function_parameters(
@@ -361,7 +361,7 @@ class core_auth_external extends external_api {
      * @param  string $password plain text password
      * @param  string $redirect redirect the user to this site url after confirmation
      * @return array warnings and success status
-     * @since Moodle 3.6
+     * @since PowerEduc 3.6
      * @throws powereduc_exception
      */
     public static function resend_confirmation_email($username, $password, $redirect = '') {
@@ -416,7 +416,7 @@ class core_auth_external extends external_api {
      * Describes the resend_confirmation_email return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.6
+     * @since PowerEduc 3.6
      */
     public static function resend_confirmation_email_returns() {
 

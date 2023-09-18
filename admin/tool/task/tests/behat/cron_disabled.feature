@@ -1,7 +1,7 @@
 @tool @tool_task
 Feature: See warning message if cron is disabled
   In order to manage scheduled tasks
-  As a Moodle Administrator
+  As a PowerEduc Administrator
   I need to be able to view a warning message if cron is disabled
 
   Background:

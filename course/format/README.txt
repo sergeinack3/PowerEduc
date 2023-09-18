@@ -58,7 +58,7 @@ $string['nameyourformat']='section'; // Name of a section within your format
 Optional files (database access)
 --------------------------------
 
-If these files exist, Moodle will use them to set up database tables when you
+If these files exist, PowerEduc will use them to set up database tables when you
 visit the admin page.
 
 * yourformat/db/install.xml
@@ -82,7 +82,7 @@ visit the admin page.
 
   <?php
   $plugin->version  = 2006120100; // Plugin version (update when tables change)
-  $plugin->requires = 2006092801; // Required Moodle version
+  $plugin->requires = 2006092801; // Required PowerEduc version
   ?>
 
 
@@ -113,7 +113,7 @@ the course. You can't back up the course format data independently.
 Optional file (capabilities)
 ----------------------------
 
-If this file exists, Moodle refreshes your format's capabilities
+If this file exists, PowerEduc refreshes your format's capabilities
 (checks that they are all included in the database) whenever you increase
 the version in yourformat/version.php.
 
@@ -141,7 +141,7 @@ Optional file (styles)
 
 * yourformat/styles.php
 
-  If this file exists it will be included in the CSS Moodle generates.
+  If this file exists it will be included in the CSS PowerEduc generates.
 
 
 Optional files (outputs)

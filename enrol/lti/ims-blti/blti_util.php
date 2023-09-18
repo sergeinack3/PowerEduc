@@ -187,7 +187,7 @@ function postLaunchHTML($newparms, $endpoint, $debug=false, $iframeattr=false) {
     return $r;
 }
 
-/* This is a bit of homage to Moodle's pattern of internationalisation */
+/* This is a bit of homage to PowerEduc's pattern of internationalisation */
 function get_stringIMS($key,$bundle) {
     return $key;
 }

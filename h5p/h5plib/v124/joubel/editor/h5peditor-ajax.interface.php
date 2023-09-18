@@ -1,6 +1,6 @@
 <?php
 
-namespace Moodle;
+namespace PowerEduc;
 
 /**
  * Handles Ajax functionality that must be implemented separately for each of the

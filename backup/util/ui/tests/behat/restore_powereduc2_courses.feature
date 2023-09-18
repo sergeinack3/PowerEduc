@@ -1,8 +1,8 @@
 @core @core_backup
-Feature: Restore Moodle 2 course backups
+Feature: Restore PowerEduc 2 course backups
   In order to continue using my stored course contents
   As a teacher and an admin
-  I need to restore them inside other Moodle courses or in new courses
+  I need to restore them inside other PowerEduc courses or in new courses
 
   Background:
     Given the following "courses" exist:

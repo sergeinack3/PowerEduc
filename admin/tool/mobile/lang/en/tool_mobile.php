@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'tool_mobile', language 'en'
@@ -27,13 +27,13 @@ $string['androidappid'] = 'Android app\'s unique identifier';
 $string['androidappid_desc'] = 'This setting may be left as default unless you have a custom Android app.';
 $string['apppolicy'] = 'App policy URL';
 $string['apppolicy_help'] = 'The URL of a policy for app users which is listed on the About page in the app. If the field is left empty, the site policy URL will be used instead.';
-$string['apprequired'] = 'This functionality is only available when accessed via the Moodle mobile or desktop app.';
+$string['apprequired'] = 'This functionality is only available when accessed via the PowerEduc mobile or desktop app.';
 $string['autologinkeygenerationlockout'] = 'Auto-login key generation is blocked. You need to wait {$a} minutes between requests.';
 $string['autologinmintimebetweenreq'] = 'Minimum time between auto-login requests';
 $string['autologinmintimebetweenreq_desc'] = 'The minimum time between auto-login requests from the mobile app. If app users are frequently asked to enter their credentials when viewing content embedded from the site, then set a lower value.';
 $string['autologinnotallowedtoadmins'] = 'Auto-login is not allowed for site admins.';
 $string['cachedef_plugininfo'] = 'This stores the list of plugins with mobile addons';
-$string['cachedef_subscriptiondata'] = 'This stores the Moodle app subscription information.';
+$string['cachedef_subscriptiondata'] = 'This stores the PowerEduc app subscription information.';
 $string['clickheretolaunchtheapp'] = 'Click here if the app does not open automatically.';
 $string['configmobilecssurl'] = 'A CSS file to customise your mobile app interface.';
 $string['customlangstrings'] = 'Custom language strings';
@@ -94,25 +94,25 @@ $string['minimumversion_key'] = 'Minimum app version required';
 $string['mobileapp'] = 'Mobile app';
 $string['mobileappenabled'] = 'This site has mobile app access enabled.<br /><a href="{$a}">Download the mobile app</a>.';
 $string['mobileappearance'] = 'Mobile appearance';
-$string['mobileappsubscription'] = 'Moodle app subscription';
+$string['mobileappsubscription'] = 'PowerEduc app subscription';
 $string['mobileauthentication'] = 'Mobile authentication';
 $string['mobilecssurl'] = 'CSS';
 $string['mobilefeatures'] = 'Mobile features';
 $string['mobilenotificationsdisabledwarning'] = 'Mobile notifications are not enabled. They should be enabled in Notification settings.';
 $string['mobilesettings'] = 'Mobile settings';
-$string['powereducappsportalfeatureswarning'] = 'Please note that some features may be restricted depending on your Moodle app subscription. For details, visit the <a href="{$a}" target="_blank">Moodle Apps Portal</a>.';
+$string['powereducappsportalfeatureswarning'] = 'Please note that some features may be restricted depending on your PowerEduc app subscription. For details, visit the <a href="{$a}" target="_blank">PowerEduc Apps Portal</a>.';
 $string['notifications'] = 'Notifications';
 $string['notificationsactivedevices'] = 'Active devices';
 $string['notificationsignorednotifications'] = 'Notifications not sent';
-$string['notificationslimitreached'] = 'The monthly active user devices limit has been exceeded. Notifications for some users will not be sent. It is recommended that you upgrade your app plan in the <a href="{$a}" target="_blank">Moodle Apps Portal</a>.';
-$string['notificationsmissingwarning'] = 'Moodle app notification statistics could not be retrieved. This is most likely because mobile notifications are not yet enabled on the site. You can enable them in Site Administration / Messaging / Mobile.';
+$string['notificationslimitreached'] = 'The monthly active user devices limit has been exceeded. Notifications for some users will not be sent. It is recommended that you upgrade your app plan in the <a href="{$a}" target="_blank">PowerEduc Apps Portal</a>.';
+$string['notificationsmissingwarning'] = 'PowerEduc app notification statistics could not be retrieved. This is most likely because mobile notifications are not yet enabled on the site. You can enable them in Site Administration / Messaging / Mobile.';
 $string['notificationsnewdevices'] = 'New devices';
-$string['notificationsseemore'] = 'Note: Moodle app usage statistics are not calculated in real time. To access more detailed statistics, including data from previous months, please log in to the <a href="{$a}" target="_blank">Moodle Apps Portal</a>.';
+$string['notificationsseemore'] = 'Note: PowerEduc app usage statistics are not calculated in real time. To access more detailed statistics, including data from previous months, please log in to the <a href="{$a}" target="_blank">PowerEduc Apps Portal</a>.';
 $string['notificationssentnotifications'] = 'Notifications sent';
 $string['notificationscurrentactivedevices'] = 'Devices receiving notifications this month';
 $string['oauth2identityproviders'] = 'OAuth 2 identity providers';
 $string['offlineuse'] = 'Offline use';
-$string['pluginname'] = 'Moodle app tools';
+$string['pluginname'] = 'PowerEduc app tools';
 $string['pluginnotenabledorconfigured'] = 'Plugin not enabled or configured.';
 $string['qrcodedisabled'] = 'Access via QR code disabled';
 $string['qrcodeformobileappaccess'] = 'QR code for mobile app access';
@@ -136,13 +136,13 @@ $string['setuplink_desc'] = 'URL of page with options to download the mobile app
 $string['smartappbanners'] = 'App Banners';
 $string['subscription'] = 'Subscription';
 $string['subscriptioncreated'] = 'Start date';
-$string['subscriptionerrorrequest'] = 'There was an unexpected error when trying to retrieve your Moodle app subscription information.';
+$string['subscriptionerrorrequest'] = 'There was an unexpected error when trying to retrieve your PowerEduc app subscription information.';
 $string['subscriptionexpiration'] = 'Expiry date';
-$string['subscriptionfeaturenotapplied'] = 'This feature is configured on your site but it is not included in your Moodle app plan. Thus, the setting will have no effect.';
+$string['subscriptionfeaturenotapplied'] = 'This feature is configured on your site but it is not included in your PowerEduc app plan. Thus, the setting will have no effect.';
 $string['subscriptionfeatures'] = 'Subscription features';
 $string['subscriptionlimitsurpassed'] = 'Subscription limit exceeded';
-$string['subscriptionregister'] = 'For details of the various app plans, and to access Moodle app usage statistics, please visit the <a href="{$a}" target="_blank">Moodle Apps Portal</a>.';
-$string['subscriptionsseemore'] = 'Note: The information displayed is not updated in real time. You may need to log out and log in again to see updates. For information on upgrading your app plan, please log in to the <a href="{$a}" target="_blank">Moodle Apps Portal</a>.';
+$string['subscriptionregister'] = 'For details of the various app plans, and to access PowerEduc app usage statistics, please visit the <a href="{$a}" target="_blank">PowerEduc Apps Portal</a>.';
+$string['subscriptionsseemore'] = 'Note: The information displayed is not updated in real time. You may need to log out and log in again to see updates. For information on upgrading your app plan, please log in to the <a href="{$a}" target="_blank">PowerEduc Apps Portal</a>.';
 $string['typeoflogin'] = 'Type of login';
 $string['typeoflogin_desc'] = 'If the site uses a SSO authentication method, then select via a browser window or via an embedded browser. An embedded browser provides a better user experience, though it doesn\'t work with all SSO plugins.';
 $string['getpowereduconyourmobile'] = 'Get the mobile app';
@@ -152,8 +152,8 @@ $string['responsivemainmenuitems'] = 'Responsive menu items';
 $string['switchaccount'] = 'Switch account';
 $string['viewqrcode'] = 'View QR code';
 
-// Deprecated since Moodle 3.10.
+// Deprecated since PowerEduc 3.10.
 $string['mobileappconnected'] = 'Mobile app connected';
 
-// Deprecated since Moodle 3.11.
+// Deprecated since PowerEduc 3.11.
 $string['openusingembeddedbrowser'] = 'Open using embedded browser';

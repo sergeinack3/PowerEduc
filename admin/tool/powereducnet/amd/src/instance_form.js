@@ -1,24 +1,24 @@
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Our basic form manager for when a user either enters
  * their profile url or just wants to browse.
  *
  * This file is a mishmash of JS functions we need for both the standalone (M3.7, M3.8)
- * plugin & Moodle 3.9 functions. The 3.9 Functions have a base understanding that certain
+ * plugin & PowerEduc 3.9 functions. The 3.9 Functions have a base understanding that certain
  * things exist i.e. directory structures for templates. When this feature goes 3.9+ only
  * The goal is that we can quickly gut all AMD modules into bare JS files and use ES6 guidelines.
  * Till then this will have to do.
@@ -84,19 +84,19 @@ define(['tool_powereducnet/validator',
     };
 
     /**
-     * Given a user wishes to see the MoodleNet profile url form transition them there.
+     * Given a user wishes to see the PowerEducNet profile url form transition them there.
      *
      * @method chooserNavigateToMnet
-     * @param {HTMLElement} showMoodleNet The chooser's area for ment
+     * @param {HTMLElement} showPowerEducNet The chooser's area for ment
      * @param {Object} footerData Our footer object to render out
      * @param {jQuery} carousel Our carousel instance to manage
      * @param {jQuery} modal Our modal instance to manage
      */
-    var chooserNavigateToMnet = function(showMoodleNet, footerData, carousel, modal) {
-        showMoodleNet.innerHTML = '';
+    var chooserNavigateToMnet = function(showPowerEducNet, footerData, carousel, modal) {
+        showPowerEducNet.innerHTML = '';
 
         // Add a spinner.
-        var spinnerPromise = LoadingIcon.addIconToContainer(showMoodleNet);
+        var spinnerPromise = LoadingIcon.addIconToContainer(showPowerEducNet);
 
         // Used later...
         var transitionPromiseResolver = null;
@@ -108,12 +108,12 @@ define(['tool_powereducnet/validator',
             spinnerPromise,
             transitionPromise
         ).then(function() {
-                Templates.replaceNodeContents(showMoodleNet, footerData.customcarouseltemplate, '');
+                Templates.replaceNodeContents(showPowerEducNet, footerData.customcarouseltemplate, '');
                 return;
         }).catch(Notification.exception);
 
         // We apply our handlers in here to minimise plugin dependency in the Chooser.
-        registerListenerEvents(showMoodleNet);
+        registerListenerEvents(showPowerEducNet);
 
         // Move to the next slide, and resolve the transition promise when it's done.
         carousel.one('slid.bs.carousel', function() {
@@ -126,7 +126,7 @@ define(['tool_powereducnet/validator',
     };
 
     /**
-     * Given a user no longer wishes to see the MoodleNet profile url form transition them from there.
+     * Given a user no longer wishes to see the PowerEducNet profile url form transition them from there.
      *
      * @method chooserNavigateFromMnet
      * @param {jQuery} carousel Our carousel instance to manage
@@ -147,12 +147,12 @@ define(['tool_powereducnet/validator',
          * @param {Object} modal The chooser modal.
          */
     var footerClickListener = function(e, footerData, modal) {
-        if (e.target.matches(Selectors.action.showMoodleNet) || e.target.closest(Selectors.action.showMoodleNet)) {
+        if (e.target.matches(Selectors.action.showPowerEducNet) || e.target.closest(Selectors.action.showPowerEducNet)) {
             e.preventDefault();
             const carousel = $(modal.getBody()[0].querySelector(Selectors.region.carousel));
-            const showMoodleNet = carousel.find(Selectors.region.powereducNet)[0];
+            const showPowerEducNet = carousel.find(Selectors.region.powereducNet)[0];
 
-            chooserNavigateToMnet(showMoodleNet, footerData, carousel, modal);
+            chooserNavigateToMnet(showPowerEducNet, footerData, carousel, modal);
         }
         // From the help screen go back to the module overview.
         if (e.target.matches(Selectors.action.closeOption)) {

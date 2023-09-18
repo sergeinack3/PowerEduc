@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains event class for displaying a calendar event.
@@ -372,8 +372,8 @@ class calendar_event_exporter extends event_exporter_base {
      * Get the correct minimum midnight day limit based on the event start time
      * and the module's minimum timestamp limit.
      *
-     * @deprecated since Moodle 3.6. Please use get_timestamp_min_limit().
-     * @todo final deprecation. To be removed in Moodle 3.10
+     * @deprecated since PowerEduc 3.6. Please use get_timestamp_min_limit().
+     * @todo final deprecation. To be removed in PowerEduc 3.10
      * @param DateTimeInterface $starttime The event start time
      * @param array $min The module's minimum limit for the event
      * @return array Returns an array with mindaytimestamp and mindayerror keys.
@@ -388,8 +388,8 @@ class calendar_event_exporter extends event_exporter_base {
      * Get the correct maximum midnight day limit based on the event start time
      * and the module's maximum timestamp limit.
      *
-     * @deprecated since Moodle 3.6. Please use get_timestamp_max_limit().
-     * @todo final deprecation. To be removed in Moodle 3.10
+     * @deprecated since PowerEduc 3.6. Please use get_timestamp_max_limit().
+     * @todo final deprecation. To be removed in PowerEduc 3.10
      * @param DateTimeInterface $starttime The event start time
      * @param array $max The module's maximum limit for the event
      * @return array Returns an array with maxdaytimestamp and maxdayerror keys.

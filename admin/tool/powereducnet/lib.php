@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This page lists public api for tool_powereducnet plugin.
@@ -27,7 +27,7 @@ defined('POWEREDUC_INTERNAL') || die;
 use \core_course\local\entity\activity_chooser_footer;
 
 /**
- * The default endpoint to MoodleNet.
+ * The default endpoint to PowerEducNet.
  */
 define('POWEREDUCNET_DEFAULT_ENDPOINT', "lms/powereduc/search");
 
@@ -55,7 +55,7 @@ function generate_mnet_endpoint(string $profileurl, int $course, int $section = 
 }
 
 /**
- * Hooking function to build up the initial Activity Chooser footer information for MoodleNet
+ * Hooking function to build up the initial Activity Chooser footer information for PowerEducNet
  *
  * @param int $courseid The course the user is currently in and wants to add resources to
  * @param int $sectionid The section the user is currently in and wants to add resources to
@@ -69,7 +69,7 @@ function tool_powereducnet_custom_chooser_footer(int $courseid, int $sectionid):
     $enabled = get_config('tool_powereducnet', 'enablepowereducnet');
 
     $advanced = false;
-    // We are in the MoodleNet lib. It is safe assume we have our own functions here.
+    // We are in the PowerEducNet lib. It is safe assume we have our own functions here.
     $mnetprofile = \tool_powereducnet\profile_manager::get_powereducnet_user_profile($USER->id);
     if ($mnetprofile !== null) {
         $advanced = $mnetprofile->get_domain() ?? false;
@@ -86,7 +86,7 @@ function tool_powereducnet_custom_chooser_footer(int $courseid, int $sectionid):
         'advanced' => $advanced,
         'courseID' => $courseid,
         'sectionID' => $sectionid,
-        'img' => $OUTPUT->image_url('MoodleNet', 'tool_powereducnet')->out(false),
+        'img' => $OUTPUT->image_url('PowerEducNet', 'tool_powereducnet')->out(false),
     ]);
 
     $renderedcarousel = $OUTPUT->render_from_template('tool_powereducnet/chooser_powereducnet', (object)[
@@ -94,7 +94,7 @@ function tool_powereducnet_custom_chooser_footer(int $courseid, int $sectionid):
         'generic' => $defaultlink,
         'courseID' => $courseid,
         'sectionID' => $sectionid,
-        'img' => $OUTPUT->image_url('MoodleNet', 'tool_powereducnet')->out(false),
+        'img' => $OUTPUT->image_url('PowerEducNet', 'tool_powereducnet')->out(false),
     ]);
     return new activity_chooser_footer(
         'tool_powereducnet/instance_form',

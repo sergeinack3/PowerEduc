@@ -152,7 +152,7 @@ Y.extend(DRAGRESOURCE, M.core.dragdrop, {
         }
 
         // Variables needed to update the course state.
-        var cmid = Number(Y.Moodle.core_course.util.cm.getId(dragnode));
+        var cmid = Number(Y.PowerEduc.core_course.util.cm.getId(dragnode));
         var beforeid = null;
 
         // Prepare request parameters
@@ -161,10 +161,10 @@ Y.extend(DRAGRESOURCE, M.core.dragdrop, {
         params['class'] = 'resource';
         params.field = 'move';
         params.id = cmid;
-        params.sectionId = Y.Moodle.core_course.util.section.getId(dropnode.ancestor(M.course.format.get_section_wrapper(Y), true));
+        params.sectionId = Y.PowerEduc.core_course.util.section.getId(dropnode.ancestor(M.course.format.get_section_wrapper(Y), true));
 
         if (dragnode.next()) {
-            beforeid = Number(Y.Moodle.core_course.util.cm.getId(dragnode.next()));
+            beforeid = Number(Y.PowerEduc.core_course.util.cm.getId(dragnode.next()));
             params.beforeId = beforeid;
         }
 

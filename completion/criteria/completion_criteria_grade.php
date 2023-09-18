@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Course completion critieria - completion on achieving course grade
@@ -57,7 +57,7 @@ class completion_criteria_grade extends completion_criteria {
     /**
      * Add appropriate form elements to the critieria form
      *
-     * @param powereduc_form $mform Moodle forms object
+     * @param powereduc_form $mform PowerEduc forms object
      * @param stdClass $data containing default values to be set in the form
      */
     public function config_form_display(&$mform, $data = null) {
@@ -65,7 +65,7 @@ class completion_criteria_grade extends completion_criteria {
         $mform->addElement('text', 'criteria_grade_value', get_string('graderequired', 'completion'));
         $mform->disabledIf('criteria_grade_value', 'criteria_grade');
         $mform->setType('criteria_grade_value', PARAM_RAW); // Uses unformat_float.
-        // Grades are stored in Moodle with 5 decimal points, make sure we do not accidentally round them
+        // Grades are stored in PowerEduc with 5 decimal points, make sure we do not accidentally round them
         // when setting the form value.
         $mform->setDefault('criteria_grade_value', format_float($data, 5));
 

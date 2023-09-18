@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: "Text"
-description: "Moodle text utility classes"
+description: "PowerEduc text utility classes"
 date: 2019-12-10T13:53:41+01:00
 draft: false
 ---

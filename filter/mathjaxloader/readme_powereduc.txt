@@ -1,11 +1,11 @@
-Description of MathJAX library integration in Moodle
+Description of MathJAX library integration in PowerEduc
 ====================================================
 
 * Default MathJax version: 2.7.9
 * License: Apache 2.0
 * Source: https://www.mathjax.org/
 
-This library is not shipped with Moodle, but this filter is provided, which can be used to
+This library is not shipped with PowerEduc, but this filter is provided, which can be used to
 correctly load MathJax into a page from the CDN. Alternatively you can download the entire
 library and install it locally, then use this filter to load that local version.
 

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Flickr tag block.
@@ -158,7 +158,7 @@ class block_tag_flickr extends block_base {
 
     function fetch_request($request){
         $c =  new curl(array('cache' => true, 'module_cache'=> 'tag_flickr'));
-        // Set custom user agent as Flickr blocks our "MoodleBot" agent string.
+        // Set custom user agent as Flickr blocks our "PowerEducBot" agent string.
         $c->setopt([
             'CURLOPT_USERAGENT' => flickr_client::user_agent(),
         ]);
@@ -198,7 +198,7 @@ class block_tag_flickr extends block_base {
      * Return the plugin config settings for external functions.
      *
      * @return stdClass the configs for both the block instance and plugin
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public function get_config_for_external() {
         // Return all settings for all users since it is safe (no private keys, etc..).

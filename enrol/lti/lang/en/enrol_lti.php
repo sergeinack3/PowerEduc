@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * LTI enrolment plugin version information
@@ -100,7 +100,7 @@ $string['membersyncmode_help'] = 'Whether remote users should be enrolled and/or
 $string['membersyncmodeenrolandunenrol'] = 'Enrol new and unenrol missing users';
 $string['membersyncmodeenrolnew'] = 'Enrol new users';
 $string['membersyncmodeunenrolmissing'] = 'Unenrol missing users';
-$string['powereduc'] = 'Moodle';
+$string['powereduc'] = 'PowerEduc';
 $string['nodeployments'] = 'No tool deployments found';
 $string['nopublishedcontent'] = 'No resources or activities are published yet';
 $string['notoolsprovided'] = 'No tools provided';
@@ -121,7 +121,7 @@ $string['platformdetailsinfo'] = 'Once the tool has been set up in the platform,
 <li>For manual registrations, this information must be manually copied from the platform.</li>
 </ul>';
 $string['pluginname'] = 'Publish as LTI tool';
-$string['pluginname_desc'] = 'The \'Publish as LTI tool\' plugin, together with the LTI authentication plugin, allows remote users to access selected courses and activities. In other words, Moodle functions as an LTI tool provider.';
+$string['pluginname_desc'] = 'The \'Publish as LTI tool\' plugin, together with the LTI authentication plugin, allows remote users to access selected courses and activities. In other words, PowerEduc functions as an LTI tool provider.';
 $string['privacy:metadata:enrol_lti_users'] = 'The list of users enrolled via an LTI provider';
 $string['privacy:metadata:enrol_lti_users:userid'] = 'The ID of the user';
 $string['privacy:metadata:enrol_lti_users:lastgrade'] = 'The last grade the user was recorded of having';

@@ -1,6 +1,6 @@
 <?php
 
-namespace Moodle;
+namespace PowerEduc;
 
 /**
  * The base class for H5P events. Extend to track H5P events in your system.

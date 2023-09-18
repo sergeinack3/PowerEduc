@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Authentication Plugin: Shibboleth Authentication
@@ -46,7 +46,7 @@ class auth_plugin_shibboleth extends auth_plugin_base {
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
     public function auth_plugin_shibboleth() {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
@@ -132,7 +132,7 @@ class auth_plugin_shibboleth extends auth_plugin_base {
             }
         }
 
-         // Provide an API to modify the information to fit the Moodle internal
+         // Provide an API to modify the information to fit the PowerEduc internal
         // data representation
         if (
               $this->config->convert_data
@@ -140,7 +140,7 @@ class auth_plugin_shibboleth extends auth_plugin_base {
               && is_readable($this->config->convert_data)
             ) {
 
-            // Include a custom file outside the Moodle dir to
+            // Include a custom file outside the PowerEduc dir to
             // modify the variable $powereducattributes
             include($this->config->convert_data);
         }
@@ -149,7 +149,7 @@ class auth_plugin_shibboleth extends auth_plugin_base {
     }
 
     /**
-     * Returns array containg attribute mappings between Moodle and Shibboleth.
+     * Returns array containg attribute mappings between PowerEduc and Shibboleth.
      *
      * @return array
      */
@@ -338,7 +338,7 @@ class auth_plugin_shibboleth extends auth_plugin_base {
     }
 
     /**
-     * Generate array of IdPs from Moodle Shibboleth settings
+     * Generate array of IdPs from PowerEduc Shibboleth settings
      *
      * @param string Text containing tuble/triple of IdP entityId, name and (optionally) session initiator
      * @return array Identifier of IdPs and their name/session initiator

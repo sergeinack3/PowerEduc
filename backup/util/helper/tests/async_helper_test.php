@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_backup;
 
@@ -45,7 +45,7 @@ class async_helper_test extends \advanced_testcase {
         $this->setAdminUser();
 
         set_config('backup_async_message_users', '1', 'backup');
-        set_config('backup_async_message_subject', 'Moodle {operation} completed sucessfully', 'backup');
+        set_config('backup_async_message_subject', 'PowerEduc {operation} completed sucessfully', 'backup');
         set_config('backup_async_message',
                 'Dear {user_firstname} {user_lastname}, <br/> Your {operation} (ID: {backupid}) has completed successfully!',
                 'backup');
@@ -78,7 +78,7 @@ class async_helper_test extends \advanced_testcase {
 
         $this->assertSame($USER->email, $email->from);
         $this->assertSame($user2->email, $email->to);
-        $this->assertSame('Moodle backup completed sucessfully', $email->subject);
+        $this->assertSame('PowerEduc backup completed sucessfully', $email->subject);
         $this->assertNotEmpty($email->header);
         $this->assertNotEmpty($email->body);
         $this->assertMatchesRegularExpression("/$backupid/", $email->body);

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This is the external API for blogs.
@@ -53,7 +53,7 @@ class external extends external_api {
      *
      * @param  array  $rawwsfilters array containing the filters in WS format
      * @return array  context, filters to apply and the calculated courseid and user
-     * @since  Moodle 3.6
+     * @since  PowerEduc 3.6
      */
     protected static function validate_access_and_filters($rawwsfilters) {
         global $CFG;
@@ -118,7 +118,7 @@ class external extends external_api {
      * Returns description of get_entries() parameters.
      *
      * @return external_function_parameters
-     * @since  Moodle 3.6
+     * @since  PowerEduc 3.6
      */
     public static function get_entries_parameters() {
         return new external_function_parameters(
@@ -155,7 +155,7 @@ class external extends external_api {
      * @param int $page the blog page to return
      * @param int $perpage the number of posts to return per page
      * @return array with the blog entries and warnings
-     * @since  Moodle 3.6
+     * @since  PowerEduc 3.6
      */
     public static function get_entries($filters = array(), $page = 0, $perpage = 10) {
         global $PAGE;
@@ -196,7 +196,7 @@ class external extends external_api {
      * Returns description of get_entries() result value.
      *
      * @return external_description
-     * @since  Moodle 3.6
+     * @since  PowerEduc 3.6
      */
     public static function get_entries_returns() {
         return new external_single_structure(
@@ -214,7 +214,7 @@ class external extends external_api {
      * Returns description of view_entries() parameters.
      *
      * @return external_function_parameters
-     * @since  Moodle 3.6
+     * @since  PowerEduc 3.6
      */
     public static function view_entries_parameters() {
         return new external_function_parameters(
@@ -247,7 +247,7 @@ class external extends external_api {
      *
      * @param array $filters the parameters used in the filter of get_entries
      * @return array with status result and warnings
-     * @since  Moodle 3.6
+     * @since  PowerEduc 3.6
      */
     public static function view_entries($filters = array()) {
 
@@ -278,7 +278,7 @@ class external extends external_api {
      * Returns description of view_entries() result value.
      *
      * @return external_description
-     * @since  Moodle 3.6
+     * @since  PowerEduc 3.6
      */
     public static function view_entries_returns() {
         return new external_single_structure(

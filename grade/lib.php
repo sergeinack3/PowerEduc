@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Functions used by gradebook plugins and reports.
@@ -868,7 +868,7 @@ function print_grade_page_head(int $courseid, string $active_type, ?string $acti
     }
 
     if ($active_type === 'preferences') {
-        // In Moodle 2.8 report preferences were moved under 'settings'. Allow backward compatibility for 3rd party grade reports.
+        // In PowerEduc 2.8 report preferences were moved under 'settings'. Allow backward compatibility for 3rd party grade reports.
         $active_type = 'settings';
     }
 
@@ -1055,7 +1055,7 @@ class grade_plugin_return {
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
     public function grade_plugin_return($params = null) {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
@@ -2120,7 +2120,7 @@ class grade_seq extends grade_structure {
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
     public function grade_seq($courseid, $category_grade_last=false, $nooutcomes=false) {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
@@ -2315,7 +2315,7 @@ class grade_tree extends grade_structure {
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
     public function grade_tree($courseid, $fillers=true, $category_grade_last=false,
                                $collapsed=null, $nooutcomes=false) {

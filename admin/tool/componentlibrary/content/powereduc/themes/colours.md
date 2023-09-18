@@ -6,9 +6,9 @@ draft: false
 weight: 1
 ---
 
-## The Moodle colour scheme:
+## The PowerEduc colour scheme:
 
-Moodle colours are slighty different from standard Bootstrap colours. Custom powereduc colours are usually defined in a theme preset. For example `theme/boost/scss/preset/default.scss`
+PowerEduc colours are slighty different from standard Bootstrap colours. Custom powereduc colours are usually defined in a theme preset. For example `theme/boost/scss/preset/default.scss`
 
 {{< example show_markup=false >}}
 <div class="card-deck">
@@ -44,7 +44,7 @@ Moodle colours are slighty different from standard Bootstrap colours. Custom pow
 </div>
 {{< /example >}}
 
-These colours are used throughout Moodle in text, buttons
+These colours are used throughout PowerEduc in text, buttons
 
 {{< example show_markup=false >}}
 <p>

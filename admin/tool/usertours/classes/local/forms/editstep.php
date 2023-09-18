@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Form for editing steps.
@@ -45,7 +45,7 @@ class editstep extends \powereducform {
     protected $step;
 
     /**
-     * @var int Display the step's content by using Moodle language string.
+     * @var int Display the step's content by using PowerEduc language string.
      */
     private const CONTENTTYPE_LANGSTRING = 0;
 
@@ -160,7 +160,7 @@ class editstep extends \powereducform {
             }
         }
 
-        // Validate manually entered text content. Validation logic derived from \MoodleQuickForm_Rule_Required::validate()
+        // Validate manually entered text content. Validation logic derived from \PowerEducQuickForm_Rule_Required::validate()
         // without the checking of the "strictformsrequired" admin setting.
         if ($data['contenttype'] == static::CONTENTTYPE_MANUAL) {
             $value = $data['content']['text'] ?? '';

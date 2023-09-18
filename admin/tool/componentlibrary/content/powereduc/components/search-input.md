@@ -6,13 +6,13 @@ date: 2020-08-26T16:32:24+01:00
 draft: false
 weight: 60
 tags:
-- Introduced in Moodle 3.10
+- Introduced in PowerEduc 3.10
 - MDL-69454
 ---
 
 ## How it works
 
-Single searches allow the user the quickly search a collection of data. A search is input in the search field and the results are shown immediately (using JS) or after the search has been posted to Moodle.
+Single searches allow the user the quickly search a collection of data. A search is input in the search field and the results are shown immediately (using JS) or after the search has been posted to PowerEduc.
 
 Searches are used in the page navbar, blocks, module pages, settings, the contentbank etc.
 

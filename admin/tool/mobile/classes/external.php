@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This is the external API for this tool.
@@ -54,17 +54,17 @@ class external extends external_api {
      * Returns description of get_plugins_supporting_mobile() parameters.
      *
      * @return external_function_parameters
-     * @since  Moodle 3.1
+     * @since  PowerEduc 3.1
      */
     public static function get_plugins_supporting_mobile_parameters() {
         return new external_function_parameters(array());
     }
 
     /**
-     * Returns a list of Moodle plugins supporting the mobile app.
+     * Returns a list of PowerEduc plugins supporting the mobile app.
      *
      * @return array an array of warnings and objects containing the plugin information
-     * @since  Moodle 3.1
+     * @since  PowerEduc 3.1
      */
     public static function get_plugins_supporting_mobile() {
         return array(
@@ -77,7 +77,7 @@ class external extends external_api {
      * Returns description of get_plugins_supporting_mobile() result value.
      *
      * @return external_description
-     * @since  Moodle 3.1
+     * @since  PowerEduc 3.1
      */
     public static function get_plugins_supporting_mobile_returns() {
         return new external_single_structure(
@@ -110,7 +110,7 @@ class external extends external_api {
      * Returns description of get_public_config() parameters.
      *
      * @return external_function_parameters
-     * @since  Moodle 3.2
+     * @since  PowerEduc 3.2
      */
     public static function get_public_config_parameters() {
         return new external_function_parameters(array());
@@ -120,7 +120,7 @@ class external extends external_api {
      * Returns a list of the site public settings, those not requiring authentication.
      *
      * @return array with the settings and warnings
-     * @since  Moodle 3.2
+     * @since  PowerEduc 3.2
      */
     public static function get_public_config() {
         $result = api::get_public_config();
@@ -132,7 +132,7 @@ class external extends external_api {
      * Returns description of get_public_config() result value.
      *
      * @return external_description
-     * @since  Moodle 3.2
+     * @since  PowerEduc 3.2
      */
     public static function get_public_config_returns() {
         return new external_single_structure(
@@ -200,7 +200,7 @@ class external extends external_api {
      * Returns description of get_config() parameters.
      *
      * @return external_function_parameters
-     * @since  Moodle 3.2
+     * @since  PowerEduc 3.2
      */
     public static function get_config_parameters() {
         return new external_function_parameters(
@@ -215,7 +215,7 @@ class external extends external_api {
      *
      * @param string $section settings section name
      * @return array with the settings and warnings
-     * @since  Moodle 3.2
+     * @since  PowerEduc 3.2
      */
     public static function get_config($section = '') {
 
@@ -238,7 +238,7 @@ class external extends external_api {
      * Returns description of get_config() result value.
      *
      * @return external_description
-     * @since  Moodle 3.2
+     * @since  PowerEduc 3.2
      */
     public static function get_config_returns() {
         return new external_single_structure(
@@ -261,7 +261,7 @@ class external extends external_api {
      * Returns description of get_autologin_key() parameters.
      *
      * @return external_function_parameters
-     * @since  Moodle 3.2
+     * @since  PowerEduc 3.2
      */
     public static function get_autologin_key_parameters() {
         return new external_function_parameters (
@@ -274,11 +274,11 @@ class external extends external_api {
     /**
      * Creates an auto-login key for the current user. Is created only in https sites and is restricted by time and ip address.
      *
-     * Please note that it only works if the request comes from the Moodle mobile or desktop app.
+     * Please note that it only works if the request comes from the PowerEduc mobile or desktop app.
      *
      * @param string $privatetoken the user private token for validating the request
      * @return array with the settings and warnings
-     * @since  Moodle 3.2
+     * @since  PowerEduc 3.2
      */
     public static function get_autologin_key($privatetoken) {
         global $CFG, $DB, $USER;
@@ -298,7 +298,7 @@ class external extends external_api {
             }
         }
 
-        // Only requests from the Moodle mobile or desktop app. This enhances security to avoid any type of XSS attack.
+        // Only requests from the PowerEduc mobile or desktop app. This enhances security to avoid any type of XSS attack.
         // This code goes intentionally here and not inside the check_autologin_prerequisites() function because it
         // is used by other PHP scripts that can be opened in any browser.
         if (!\core_useragent::is_powereduc_app()) {
@@ -347,7 +347,7 @@ class external extends external_api {
      * Returns description of get_autologin_key() result value.
      *
      * @return external_description
-     * @since  Moodle 3.2
+     * @since  PowerEduc 3.2
      */
     public static function get_autologin_key_returns() {
         return new external_single_structure(
@@ -363,7 +363,7 @@ class external extends external_api {
      * Returns description of get_content() parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.5
+     * @since PowerEduc 3.5
      */
     public static function get_content_parameters() {
         return new external_function_parameters(
@@ -393,7 +393,7 @@ class external extends external_api {
      * @param string $method function method name in class \$component\output\mobile.
      * @param array $args optional arguments for the method.
      * @return array HTML, JavaScript and other required data and information to create a view in the app.
-     * @since Moodle 3.5
+     * @since PowerEduc 3.5
      * @throws coding_exception
      */
     public static function get_content($component, $method, $args = array()) {
@@ -446,7 +446,7 @@ class external extends external_api {
      * Returns description of get_content() result value
      *
      * @return array
-     * @since Moodle 3.5
+     * @since PowerEduc 3.5
      */
     public static function get_content_returns() {
         return new external_single_structure(
@@ -491,7 +491,7 @@ class external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function call_external_functions_parameters() {
         return new external_function_parameters([
@@ -513,7 +513,7 @@ class external extends external_api {
      *
      * @param array $requests List of requests.
      * @return array Responses.
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function call_external_functions($requests) {
         global $SESSION;
@@ -588,7 +588,7 @@ class external extends external_api {
      * Returns description of method result value
      *
      * @return external_single_structure
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function call_external_functions_returns() {
         return new external_function_parameters([
@@ -606,7 +606,7 @@ class external extends external_api {
      * Returns description of get_tokens_for_qr_login() parameters.
      *
      * @return external_function_parameters
-     * @since  Moodle 3.9
+     * @since  PowerEduc 3.9
      */
     public static function get_tokens_for_qr_login_parameters() {
         return new external_function_parameters (
@@ -623,7 +623,7 @@ class external extends external_api {
      * @param string $qrloginkey the user key generated and embedded into the QR code for validating the request
      * @param int $userid the user the key belongs to
      * @return array with the tokens and warnings
-     * @since  Moodle 3.9
+     * @since  PowerEduc 3.9
      */
     public static function get_tokens_for_qr_login($qrloginkey, $userid) {
         global $PAGE, $DB;
@@ -640,7 +640,7 @@ class external extends external_api {
             throw new powereduc_exception('qrcodedisabled', 'tool_mobile');
         }
 
-        // Only requests from the Moodle mobile or desktop app. This enhances security to avoid any type of XSS attack.
+        // Only requests from the PowerEduc mobile or desktop app. This enhances security to avoid any type of XSS attack.
         // This code goes intentionally here and not inside the check_autologin_prerequisites() function because it
         // is used by other PHP scripts that can be opened in any browser.
         if (!\core_useragent::is_powereduc_app()) {
@@ -688,7 +688,7 @@ class external extends external_api {
      * Returns description of get_tokens_for_qr_login() result value.
      *
      * @return external_description
-     * @since  Moodle 3.9
+     * @since  PowerEduc 3.9
      */
     public static function get_tokens_for_qr_login_returns() {
         return new external_single_structure(
@@ -704,7 +704,7 @@ class external extends external_api {
      * Returns description of validate_subscription_key() parameters.
      *
      * @return external_function_parameters
-     * @since  Moodle 3.9
+     * @since  PowerEduc 3.9
      */
     public static function validate_subscription_key_parameters() {
         return new external_function_parameters(
@@ -719,7 +719,7 @@ class external extends external_api {
      *
      * @param string $key subscriptiion temporary key
      * @return array with the settings and warnings
-     * @since  Moodle 3.9
+     * @since  PowerEduc 3.9
      */
     public static function validate_subscription_key(string $key): array {
         global $CFG, $PAGE;
@@ -748,7 +748,7 @@ class external extends external_api {
      * Returns description of validate_subscription_key() result value.
      *
      * @return external_description
-     * @since  Moodle 3.9
+     * @since  PowerEduc 3.9
      */
     public static function validate_subscription_key_returns() {
         return new external_single_structure(

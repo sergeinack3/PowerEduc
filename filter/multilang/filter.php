@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package    filter_multilang
@@ -40,7 +40,7 @@ defined('POWEREDUC_INTERNAL') || die();
 
 
 /**
- * Implementation of the Moodle filter API for the Multi-lang filter.
+ * Implementation of the PowerEduc filter API for the Multi-lang filter.
  *
  * @copyright  Gaetan Frenoy <gaetan@frenoy.net>
  * @copyright  2004 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
@@ -113,7 +113,7 @@ class filter_multilang extends powereduc_text_filter {
      *
      * Also handle parent == 'en' in a way that works better for us.
      *
-     * @param string $lang a Moodle language code, e.g. 'fr'.
+     * @param string $lang a PowerEduc language code, e.g. 'fr'.
      * @return string the parent language.
      */
     protected function get_parent_lang(string $lang): string {

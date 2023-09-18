@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Guest enrolment method external API
@@ -21,7 +21,7 @@
  * @category   external
  * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.1
+ * @since      PowerEduc 3.1
  */
 
 defined('POWEREDUC_INTERNAL') || die;
@@ -36,7 +36,7 @@ require_once($CFG->libdir . '/enrollib.php');
  * @category   external
  * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.1
+ * @since      PowerEduc 3.1
  */
 class enrol_guest_external extends external_api {
 
@@ -44,7 +44,7 @@ class enrol_guest_external extends external_api {
      * Returns description of get_instance_info() parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_instance_info_parameters() {
         return new external_function_parameters(
@@ -57,7 +57,7 @@ class enrol_guest_external extends external_api {
      *
      * @param int $instanceid instance id of guest enrolment plugin.
      * @return array warnings and instance information.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_instance_info($instanceid) {
         global $DB;
@@ -95,7 +95,7 @@ class enrol_guest_external extends external_api {
      * Returns description of get_instance_info() result value.
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_instance_info_returns() {
         return new external_single_structure(

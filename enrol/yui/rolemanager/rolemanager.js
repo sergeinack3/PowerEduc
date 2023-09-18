@@ -1,8 +1,8 @@
 YUI.add('powereduc-enrol-rolemanager', function(Y) {
 
-    var MOD_NAME                    = 'Moodle role manager',
-        MOD_USER                    = 'Moodle role user',
-        MOD_PANEL                   = 'Moodle role assignment panel',
+    var MOD_NAME                    = 'PowerEduc role manager',
+        MOD_USER                    = 'PowerEduc role user',
+        MOD_PANEL                   = 'PowerEduc role assignment panel',
         USERIDS                     = 'userIds',
         COURSEID                    = 'courseId',
         USERID                      = 'userId',

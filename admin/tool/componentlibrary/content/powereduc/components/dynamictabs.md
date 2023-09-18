@@ -97,4 +97,4 @@ using `get_data` method (for example to check permissions in `is_available`).
 
 ## Example
 
-<iframe src="../../../../examples/dynamictabs.php" style="overflow:hidden;height:400px;width:100%;border:0" title="Moodle dynamic tabs"></iframe>
+<iframe src="../../../../examples/dynamictabs.php" style="overflow:hidden;height:400px;width:100%;border:0" title="PowerEduc dynamic tabs"></iframe>

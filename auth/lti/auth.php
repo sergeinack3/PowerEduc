@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 use auth_lti\local\ltiadvantage\entity\user_migration_claim;
 
@@ -32,7 +32,7 @@ class auth_plugin_lti extends \auth_plugin_base {
 
     /**
      * @var int constant representing the automatic account provisioning mode.
-     * On first launch, for a previously unbound user, this mode dictates that a new Moodle account will be created automatically
+     * On first launch, for a previously unbound user, this mode dictates that a new PowerEduc account will be created automatically
      * for the user and bound to their platform credentials {iss, sub}.
      */
     public const PROVISIONING_MODE_AUTO_ONLY = 1;
@@ -72,7 +72,7 @@ class auth_plugin_lti extends \auth_plugin_base {
     /**
      * Authenticate the user based on the unique {iss, sub} tuple present in the OIDC JWT.
      *
-     * This method ensures a Moodle user account has been found or is created, that the user is linked to the relevant
+     * This method ensures a PowerEduc user account has been found or is created, that the user is linked to the relevant
      * LTI Advantage credentials (iss, sub) and that the user account is logged in.
      *
      * Launch code can therefore rely on this method to get a session before doing things like calling require_login().
@@ -159,7 +159,7 @@ class auth_plugin_lti extends \auth_plugin_base {
     }
 
     /**
-     * Get a Moodle user account for the LTI user based on the user details returned by a NRPS 2 membership call.
+     * Get a PowerEduc user account for the LTI user based on the user details returned by a NRPS 2 membership call.
      *
      * This method expects a single member structure, in array format, as defined here:
      * See: https://www.imsglobal.org/spec/lti-nrps/v2p0#membership-container-media-type.
@@ -171,7 +171,7 @@ class auth_plugin_lti extends \auth_plugin_base {
      * @param array $member the member data, in array format.
      * @param string $iss the issuer to which the member relates.
      * @param string $legacyconsumerkey optional consumer key mapped to the deployment to facilitate user migration.
-     * @return stdClass a Moodle user record.
+     * @return stdClass a PowerEduc user record.
      */
     public function find_or_create_user_from_membership(array $member, string $iss,
             string $legacyconsumerkey = ''): stdClass {
@@ -205,7 +205,7 @@ class auth_plugin_lti extends \auth_plugin_base {
     }
 
     /**
-     * Get a Moodle user account for the LTI user corresponding to the user defined in a link launch.
+     * Get a PowerEduc user account for the LTI user corresponding to the user defined in a link launch.
      *
      * This method supports migration of user accounts used in legacy launches, provided the legacy consumer secrets corresponding
      * to the legacy consumer are provided. If calling code wishes migration to be role-specific, it should check roles accordingly
@@ -214,7 +214,7 @@ class auth_plugin_lti extends \auth_plugin_base {
      * @param array $launchdata all data in the decoded JWT including iss and sub.
      * @param bool $syncpicture whether to sync the user's picture with the picture sent in the launch.
      * @param array $legacyconsumersecrets all secrets found for the legacy consumer, facilitating user migration.
-     * @return stdClass the Moodle user who is mapped to the platform user identified in the JWT data.
+     * @return stdClass the PowerEduc user who is mapped to the platform user identified in the JWT data.
      */
     public function find_or_create_user_from_launch(array $launchdata, bool $syncpicture = false,
             array $legacyconsumersecrets = []): stdClass {
@@ -259,7 +259,7 @@ class auth_plugin_lti extends \auth_plugin_base {
      *
      * @param string $iss the issuer URL identifying the platform to which to user belongs.
      * @param string $sub the sub string identifying the user on the platform.
-     * @param int $userid the id of the Moodle user account to bind.
+     * @param int $userid the id of the PowerEduc user account to bind.
      */
     public function create_user_binding(string $iss, string $sub, int $userid): void {
         global $DB;
@@ -283,11 +283,11 @@ class auth_plugin_lti extends \auth_plugin_base {
     }
 
     /**
-     * Gets the id of the linked Moodle user account for an LTI user, or null if not found.
+     * Gets the id of the linked PowerEduc user account for an LTI user, or null if not found.
      *
      * @param string $issuer the issuer to which the user belongs.
      * @param string $sub the sub string identifying the user on the issuer.
-     * @return int|null the id of the corresponding Moodle user record, or null if not found.
+     * @return int|null the id of the corresponding PowerEduc user record, or null if not found.
      */
     public function get_user_binding(string $issuer, string $sub): ?int {
         global $DB;
@@ -322,7 +322,7 @@ class auth_plugin_lti extends \auth_plugin_base {
      *
      * @param array $userdata the user data coming from either a launch or membership service call.
      * @param string $iss the issuer to which the user belongs.
-     * @return stdClass a complete Moodle user record.
+     * @return stdClass a complete PowerEduc user record.
      */
     protected function create_new_account(array $userdata, string $iss): stdClass {
 
@@ -358,7 +358,7 @@ class auth_plugin_lti extends \auth_plugin_base {
     /**
      * Update the personal fields of the user account, based on data present in either a launch of member sync call.
      *
-     * @param stdClass $user the Moodle user account to update.
+     * @param stdClass $user the PowerEduc user account to update.
      * @param array $userdata the user data coming from either a launch or membership service call.
      * @param string $iss the issuer to which the user belongs.
      */

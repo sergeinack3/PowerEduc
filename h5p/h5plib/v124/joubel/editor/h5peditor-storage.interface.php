@@ -1,6 +1,6 @@
 <?php
 
-namespace Moodle;
+namespace PowerEduc;
 
 /**
  * A defined interface for the editor to communicate with the database of the

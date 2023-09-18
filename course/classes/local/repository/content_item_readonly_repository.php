@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains class content_item_repository, for fetching content_items.
@@ -50,7 +50,7 @@ class content_item_readonly_repository implements content_item_readonly_reposito
         $sm = get_string_manager();
         if ($sm->string_exists('modulename_help', $modname)) {
             $help = get_string('modulename_help', $modname);
-            if ($sm->string_exists('modulename_link', $modname)) { // Link to further info in Moodle docs.
+            if ($sm->string_exists('modulename_link', $modname)) { // Link to further info in PowerEduc docs.
                 $link = get_string('modulename_link', $modname);
                 $linktext = get_string('morehelp');
                 $arialabel = get_string('morehelpaboutmodule', '', get_string('modulename', $modname));

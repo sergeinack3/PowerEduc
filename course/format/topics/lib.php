@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains main class for Topics course format.
  *
- * @since     Moodle 2.0
+ * @since     PowerEduc 2.0
  * @package   format_topics
  * @copyright 2009 Sam Hemelryk
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -153,7 +153,7 @@ class format_topics extends core_courseformat\base {
      * Returns the information about the ajax support in the given source format.
      *
      * The returned object's property (boolean)capable indicates that
-     * the course format supports Moodle course ajax features.
+     * the course format supports PowerEduc course ajax features.
      *
      * @return stdClass
      */
@@ -298,7 +298,7 @@ class format_topics extends core_courseformat\base {
      *
      * This function is called from {@link course_edit_form::definition_after_data()}.
      *
-     * @param MoodleQuickForm $mform form the elements are added to.
+     * @param PowerEducQuickForm $mform form the elements are added to.
      * @param bool $forsection 'true' if this is a section edit form, 'false' if this is course edit form.
      * @return array array of references to the added form elements.
      */
@@ -449,7 +449,7 @@ class format_topics extends core_courseformat\base {
      * Return the plugin configs for external functions.
      *
      * @return array the list of configuration settings
-     * @since Moodle 3.5
+     * @since PowerEduc 3.5
      */
     public function get_config_for_external() {
         // Return everything (nothing to hide).

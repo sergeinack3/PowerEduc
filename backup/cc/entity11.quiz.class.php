@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 /**
  * @package   powereduccore
  * @subpackage backup-imscc
@@ -366,7 +366,7 @@ class cc11_quiz extends entities11 {
                     $question_title = $this->update_sources($question_title, $root_path);
                     $question_title = !empty($question_title) ? str_replace("%24", "\$", $this->include_titles($question_title)) : '';
 
-                    // This attribute is not IMSCC spec, but it is included in Moodle 2.x export of IMS1.1
+                    // This attribute is not IMSCC spec, but it is included in PowerEduc 2.x export of IMS1.1
                     $questionname = $xpath->query('@title', $question_item);
                     $questionname = !empty($questionname->item(0)->nodeValue) ? $questionname->item(0)->nodeValue : '';
 
@@ -809,7 +809,7 @@ class cc11_quiz extends entities11 {
             }
         }
 
-        // This method (get_score) is only used by T/F & M/C questions in CC, therefore it's either 0 or 1 in Moodle.
+        // This method (get_score) is only used by T/F & M/C questions in CC, therefore it's either 0 or 1 in PowerEduc.
         $score = empty($score) ? "0.0000000" : '1.0000000';
 
         return $score;

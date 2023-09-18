@@ -1,28 +1,28 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_h5p;
 
-use Moodle\H5PFrameworkInterface;
-use Moodle\H5PCore;
+use PowerEduc\H5PFrameworkInterface;
+use PowerEduc\H5PCore;
 
 // phpcs:disable powereduc.NamingConventions.ValidFunctionName.LowercaseMethod
 
 /**
- * Moodle's implementation of the H5P framework interface.
+ * PowerEduc's implementation of the H5P framework interface.
  *
  * @package    core_h5p
  * @copyright  2019 Mihail Geshoski <mihail@powereduc.com>
@@ -44,7 +44,7 @@ class framework implements H5PFrameworkInterface {
      * Implements getPlatformInfo.
      *
      * @return array An associative array containing:
-     *               - name: The name of the platform, for instance "Moodle"
+     *               - name: The name of the platform, for instance "PowerEduc"
      *               - version: The version of the platform, for instance "3.8"
      *               - h5pVersion: The version of the H5P component
      */
@@ -52,7 +52,7 @@ class framework implements H5PFrameworkInterface {
         global $CFG;
 
         return array(
-            'name' => 'Moodle',
+            'name' => 'PowerEduc',
             'version' => $CFG->version,
             'h5pVersion' => $CFG->version,
         );
@@ -1373,7 +1373,7 @@ class framework implements H5PFrameworkInterface {
      * Implements getOption.
      *
      * To avoid updating the cache libraries when using the Hub selector,
-     * {@see \Moodle\H5PEditorAjax::isContentTypeCacheUpdated}, the setting content_type_cache_updated_at
+     * {@see \PowerEduc\H5PEditorAjax::isContentTypeCacheUpdated}, the setting content_type_cache_updated_at
      * always return the current time.
      *
      * @param string $name Identifier for the setting
@@ -1385,7 +1385,7 @@ class framework implements H5PFrameworkInterface {
             // For now, the download and the embed displayoptions are disabled by default, so only will be rendered when
             // defined in the displayoptions DB field.
             // This check should be removed if they are added as new H5P settings, to let admins to define the default value.
-            return \Moodle\H5PDisplayOptionBehaviour::CONTROLLED_BY_AUTHOR_DEFAULT_OFF;
+            return \PowerEduc\H5PDisplayOptionBehaviour::CONTROLLED_BY_AUTHOR_DEFAULT_OFF;
         }
 
         // To avoid update the libraries cache using the Hub selector.
@@ -1704,7 +1704,7 @@ class framework implements H5PFrameworkInterface {
             );
         }
 
-        // Get current language in Moodle.
+        // Get current language in PowerEduc.
         $language = get_html_lang_attribute_value(strtolower(\current_language()));
 
         // Try to map.

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * The main interface for recycle bin methods.
@@ -110,7 +110,7 @@ class category_bin extends base_bin {
 
         // As far as recycle bin is using MODE_AUTOMATED, it observes the backup_auto_storage
         // settings (storing backups @ real location and potentially not including files).
-        // For recycle bin we want to ensure that backup files are always stored in Moodle file
+        // For recycle bin we want to ensure that backup files are always stored in PowerEduc file
         // area and always contain the users' files. In order to achieve that, we hack the
         // setting here via $CFG->forced_plugin_settings, so it won't interfere other operations.
         // See MDL-65218 and MDL-35773 for more information.

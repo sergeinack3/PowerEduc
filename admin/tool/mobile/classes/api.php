@@ -1,26 +1,26 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Class for Moodle Mobile tools.
+ * Class for PowerEduc Mobile tools.
  *
  * @package    tool_mobile
  * @copyright  2016 Juan Leyva
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.1
+ * @since      PowerEduc 3.1
  */
 namespace tool_mobile;
 
@@ -39,7 +39,7 @@ use stdClass;
  *
  * @copyright  2016 Juan Leyva
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.1
+ * @since      PowerEduc 3.1
  */
 class api {
 
@@ -51,7 +51,7 @@ class api {
     const LOGIN_VIA_EMBEDDED_BROWSER = 3;
     /** @var int seconds an auto-login key will expire. */
     const LOGIN_KEY_TTL = 60;
-    /** @var string URL of the Moodle Apps Portal */
+    /** @var string URL of the PowerEduc Apps Portal */
     const POWEREDUC_APPS_PORTAL_URL = 'https://apps.powereduc.com';
     /** @var int default value in seconds a QR login key will expire. */
     const LOGIN_QR_KEY_TTL = 600;
@@ -67,7 +67,7 @@ class api {
     const DEFAULT_IOS_APP_ID = '633359593';
 
     /**
-     * Returns a list of Moodle plugins supporting the mobile app.
+     * Returns a list of PowerEduc plugins supporting the mobile app.
      *
      * @return array an array of objects containing the plugin information
      */
@@ -367,7 +367,7 @@ class api {
      * Check if all the required conditions are met to allow the auto-login process continue.
      *
      * @param  int $userid  current user id
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      * @throws powereduc_exception
      */
     public static function check_autologin_prerequisites($userid) {
@@ -388,10 +388,10 @@ class api {
 
     /**
      * Creates an auto-login key for the current user, this key is restricted by time and ip address.
-     * This key is used for automatically login the user in the site when the Moodle app opens the site in a mobile browser.
+     * This key is used for automatically login the user in the site when the PowerEduc app opens the site in a mobile browser.
      *
      * @return string the key
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_autologin_key() {
         global $USER;
@@ -406,11 +406,11 @@ class api {
 
     /**
      * Creates a QR login key for the current user, this key is restricted by time and ip address.
-     * This key is used for automatically login the user in the site when the user scans a QR code in the Moodle app.
+     * This key is used for automatically login the user in the site when the user scans a QR code in the PowerEduc app.
      *
      * @param  stdClass $mobilesettings  mobile app plugin settings
      * @return string the key
-     * @since Moodle 3.9
+     * @since PowerEduc 3.9
      */
     public static function get_qrlogin_key(stdClass $mobilesettings) {
         global $USER;
@@ -428,7 +428,7 @@ class api {
      * Get a list of the Mobile app features.
      *
      * @return array array with the features grouped by theirs ubication in the app.
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_features_list() {
         global $CFG;
@@ -615,7 +615,7 @@ class api {
      * This function check the current site for potential configuration issues that may prevent the mobile app to work.
      *
      * @return array list of potential issues
-     * @since  Moodle 3.4
+     * @since  PowerEduc 3.4
      */
     public static function get_potential_config_issues() {
         global $CFG;
@@ -733,7 +733,7 @@ class api {
     }
 
     /**
-     * Gets Moodle app plan subscription information for the current site as it is returned by the Apps Portal.
+     * Gets PowerEduc app plan subscription information for the current site as it is returned by the Apps Portal.
      *
      * @return array Subscription information
      */
@@ -750,7 +750,7 @@ class api {
         $mobilesettings = get_config('tool_mobile');
 
         // To validate that the requests come from this site we need to send some private information that only is known by the
-        // Moodle Apps portal or the Sites registration database.
+        // PowerEduc Apps portal or the Sites registration database.
         $credentials = [];
 
         if (!empty($CFG->airnotifieraccesskey)) {
@@ -782,7 +782,7 @@ class api {
             ]
         ];
 
-        // Ask the Moodle Apps Portal for the subscription information.
+        // Ask the PowerEduc Apps Portal for the subscription information.
         $curl = new curl();
         $curl->setopt(array('CURLOPT_TIMEOUT' => 10, 'CURLOPT_CONNECTTIMEOUT' => 10));
 
@@ -793,18 +793,18 @@ class api {
         $info = $curl->get_info();
         if ($curlerrno = $curl->get_errno()) {
             // CURL connection error.
-            debugging("Unexpected response from the Moodle Apps Portal server, CURL error number: $curlerrno");
+            debugging("Unexpected response from the PowerEduc Apps Portal server, CURL error number: $curlerrno");
             return null;
         } else if ($info['http_code'] != 200) {
             // Unexpected error from server.
-            debugging('Unexpected response from the Moodle Apps Portal server, HTTP code:' . $info['httpcode']);
+            debugging('Unexpected response from the PowerEduc Apps Portal server, HTTP code:' . $info['httpcode']);
             return null;
         } else if (!empty($wsresponse[0]['error'])) {
-            // Unexpected error from Moodle Apps Portal.
-            debugging('Unexpected response from the Moodle Apps Portal server:' . json_encode($wsresponse[0]));
+            // Unexpected error from PowerEduc Apps Portal.
+            debugging('Unexpected response from the PowerEduc Apps Portal server:' . json_encode($wsresponse[0]));
             return null;
         } else if (empty($wsresponse[0]['data'])) {
-            debugging('Unexpected response from the Moodle Apps Portal server:' . json_encode($wsresponse));
+            debugging('Unexpected response from the PowerEduc Apps Portal server:' . json_encode($wsresponse));
             return null;
         }
 

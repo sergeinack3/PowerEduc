@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This filter provides automatic linking to
  * glossary entries, aliases and categories when
- * found inside every Moodle text.
+ * found inside every PowerEduc text.
  *
  * @package    filter
  * @subpackage glossary
@@ -99,7 +99,7 @@ class filter_glossary extends powereduc_text_filter {
 
         // We sort longest first, so that when we replace the terms,
         // the longest ones are replaced first. This does the right thing
-        // when you have two terms like 'Moodle' and 'Moodle 3.5'. You want the longest match.
+        // when you have two terms like 'PowerEduc' and 'PowerEduc 3.5'. You want the longest match.
         usort($conceptlist, [$this, 'sort_entries_by_length']);
 
         $conceptlist = filter_prepare_phrases_for_filtering($conceptlist);
@@ -149,7 +149,7 @@ class filter_glossary extends powereduc_text_filter {
         }
 
         // This flag is optionally set by resource_pluginfile()
-        // if processing an embedded file use target to prevent getting nested Moodles.
+        // if processing an embedded file use target to prevent getting nested PowerEducs.
         if (!empty($CFG->embeddedsoforcelinktarget)) {
             $attributes['target'] = '_top';
         }

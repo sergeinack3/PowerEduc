@@ -4,7 +4,7 @@
 //                                                                         //
 // NOTICE OF COPYRIGHT                                                     //
 //                                                                         //
-// Moodle - Calendar extension                                             //
+// PowerEduc - Calendar extension                                             //
 //                                                                         //
 // Copyright (C) 2003-2004  Greek School Network            www.sch.gr     //
 //                                                                         //
@@ -39,7 +39,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 /**
- * This file is part of the User section Moodle
+ * This file is part of the User section PowerEduc
  *
  * @copyright 2003-2004 Jon Papaioannou (pj@powereduc.org)
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v2 or later

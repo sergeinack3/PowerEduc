@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the cache factory class.
  *
- * This file is part of Moodle's cache API, affectionately called MUC.
+ * This file is part of PowerEduc's cache API, affectionately called MUC.
  * It contains the components that are requried in order to use caching.
  *
  * @package    core
@@ -338,7 +338,7 @@ class cache_factory {
 
     /**
      * Returns the cache instances that have been used within this request.
-     * @since Moodle 2.6
+     * @since PowerEduc 2.6
      * @return array
      */
     public function get_caches_in_use() {

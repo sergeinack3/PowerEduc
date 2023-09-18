@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Cache loaders
  *
- * This file is part of Moodle's cache API, affectionately called MUC.
+ * This file is part of PowerEduc's cache API, affectionately called MUC.
  * It contains the components that are required in order to use caching.
  *
  * @package    core
@@ -511,7 +511,7 @@ class cache implements cache_loader {
                 $validversion = self::check_version($result, $requiredversion);
             } catch (\coding_exception $e) {
                 // In certain circumstances this could happen before users are taken to the upgrade
-                // screen when upgrading from an earlier Moodle version that didn't use a versioned
+                // screen when upgrading from an earlier PowerEduc version that didn't use a versioned
                 // cache for this item, so redirect instead of showing error if that's the case.
                 redirect_if_major_upgrade_required();
 
@@ -1247,7 +1247,7 @@ class cache implements cache_loader {
     /**
      * Returns the loader associated with this instance.
      *
-     * @since Moodle 2.4.4
+     * @since PowerEduc 2.4.4
      * @return cache|false
      */
     protected function get_loader() {
@@ -1257,7 +1257,7 @@ class cache implements cache_loader {
     /**
      * Returns the data source associated with this cache.
      *
-     * @since Moodle 2.4.4
+     * @since PowerEduc 2.4.4
      * @return cache_data_source|false
      */
     protected function get_datasource() {

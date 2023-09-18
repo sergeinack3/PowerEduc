@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * External comment API
@@ -21,7 +21,7 @@
  * @category   external
  * @copyright  Costantino Cito <ccito@cvaconsulting.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 2.9
+ * @since      PowerEduc 2.9
  */
 
 defined('POWEREDUC_INTERNAL') || die();
@@ -36,14 +36,14 @@ require_once("$CFG->dirroot/comment/lib.php");
  * @category   external
  * @copyright  Costantino Cito <ccito@cvaconsulting.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 2.9
+ * @since      PowerEduc 2.9
  */
 class core_comment_external extends external_api {
     /**
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function get_comments_parameters() {
 
@@ -71,7 +71,7 @@ class core_comment_external extends external_api {
      * @param int $page page number
      * @param string $sortdirection sort direction
      * @return array of comments and warnings
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function get_comments($contextlevel, $instanceid, $component, $itemid, $area = '', $page = 0,
             $sortdirection = 'DESC') {
@@ -141,7 +141,7 @@ class core_comment_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function get_comments_returns() {
         return new external_single_structure(
@@ -184,7 +184,7 @@ class core_comment_external extends external_api {
      * Returns description of method parameters for the add_comments method.
      *
      * @return external_function_parameters
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public static function add_comments_parameters() {
         return new external_function_parameters(
@@ -211,7 +211,7 @@ class core_comment_external extends external_api {
      * @param array $comments the array of comments to create.
      * @return array the array containing those comments created.
      * @throws comment_exception
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public static function add_comments($comments) {
         global $CFG, $SITE;
@@ -265,7 +265,7 @@ class core_comment_external extends external_api {
      * Returns description of method result value for the add_comments method.
      *
      * @return external_description
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public static function add_comments_returns() {
         return new external_multiple_structure(
@@ -277,7 +277,7 @@ class core_comment_external extends external_api {
      * Returns description of method parameters for the delete_comments() method.
      *
      * @return external_function_parameters
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public static function delete_comments_parameters() {
         return new external_function_parameters(
@@ -295,7 +295,7 @@ class core_comment_external extends external_api {
      * @param array $comments array of comment ids to be deleted
      * @return array
      * @throws comment_exception
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public static function delete_comments(array $comments) {
         global $CFG, $DB, $USER, $SITE;
@@ -357,7 +357,7 @@ class core_comment_external extends external_api {
      * Returns description of method result value for the delete_comments() method.
      *
      * @return external_description
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public static function delete_comments_returns() {
         return new external_warnings();

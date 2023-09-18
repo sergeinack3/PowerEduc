@@ -1,4 +1,4 @@
-Description of mimeTeX v 1.77 import into Moodle
+Description of mimeTeX v 1.77 import into PowerEduc
 
 Compiling mimeTeX:
 

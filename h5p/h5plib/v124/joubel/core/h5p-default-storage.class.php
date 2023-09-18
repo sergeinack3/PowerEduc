@@ -1,6 +1,6 @@
 <?php
 
-namespace Moodle;
+namespace PowerEduc;
 
 /**
  * File info?

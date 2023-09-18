@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -22,7 +22,7 @@
  * @category   external
  * @copyright  2012 Ankit Agarwal
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.5
+ * @since PowerEduc 2.5
  */
 
 defined('POWEREDUC_INTERNAL') || die;
@@ -47,7 +47,7 @@ use \core_calendar\external\events_related_objects_cache;
  * @category   external
  * @copyright  2012 Ankit Agarwal
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.5
+ * @since PowerEduc 2.5
  */
 class core_calendar_external extends external_api {
 
@@ -56,7 +56,7 @@ class core_calendar_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function delete_calendar_events_parameters() {
         return new external_function_parameters(
@@ -77,7 +77,7 @@ class core_calendar_external extends external_api {
      *
      * @param array $eventids A list of event ids with repeat flag to delete
      * @return null
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function delete_calendar_events($events) {
         global $DB;
@@ -108,7 +108,7 @@ class core_calendar_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function  delete_calendar_events_returns() {
         return null;
@@ -118,7 +118,7 @@ class core_calendar_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_calendar_events_parameters() {
         return new external_function_parameters(
@@ -170,7 +170,7 @@ class core_calendar_external extends external_api {
      * @param array $events A list of events
      * @param array $options various options
      * @return array Array of event details
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_calendar_events($events = array(), $options = array()) {
         global $SITE, $DB, $USER;
@@ -359,7 +359,7 @@ class core_calendar_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function  get_calendar_events_returns() {
         return new external_single_structure(array(
@@ -395,7 +395,7 @@ class core_calendar_external extends external_api {
     /**
      * Returns description of method parameters.
      *
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @return external_function_parameters
      */
     public static function get_calendar_action_events_by_timesort_parameters() {
@@ -416,7 +416,7 @@ class core_calendar_external extends external_api {
     /**
      * Get calendar action events based on the timesort value.
      *
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @param null|int $timesortfrom Events after this time (inclusive)
      * @param null|int $timesortto Events before this time (inclusive)
      * @param null|int $aftereventid Get events with ids greater than this one
@@ -479,7 +479,7 @@ class core_calendar_external extends external_api {
     /**
      * Returns description of method result value.
      *
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @return external_description
      */
     public static function get_calendar_action_events_by_timesort_returns() {
@@ -507,7 +507,7 @@ class core_calendar_external extends external_api {
     /**
      * Get calendar action events for the given course.
      *
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @param int $courseid Only events in this course
      * @param null|int $timesortfrom Events after this time (inclusive)
      * @param null|int $timesortto Events before this time (inclusive)
@@ -595,7 +595,7 @@ class core_calendar_external extends external_api {
     /**
      * Get calendar action events for a given list of courses.
      *
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      * @param array $courseids Only include events for these courses
      * @param null|int $timesortfrom Events after this time (inclusive)
      * @param null|int $timesortto Events before this time (inclusive)
@@ -665,7 +665,7 @@ class core_calendar_external extends external_api {
      * Returns description of method parameters.
      *
      * @return external_function_parameters.
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function create_calendar_events_parameters() {
         // Userid is always current user, so no need to get it from client.
@@ -697,7 +697,7 @@ class core_calendar_external extends external_api {
      *
      * @param array $events A list of events to create.
      * @return array array of events created.
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      * @throws powereduc_exception if user doesnt have the permission to create events.
      */
     public static function create_calendar_events($events) {
@@ -754,7 +754,7 @@ class core_calendar_external extends external_api {
      * Returns description of method result value.
      *
      * @return external_description.
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function  create_calendar_events_returns() {
             return new external_single_structure(
@@ -1281,7 +1281,7 @@ class core_calendar_external extends external_api {
      * Returns description of method parameters.
      *
      * @return external_function_parameters.
-     * @since  Moodle 3.7
+     * @since  PowerEduc 3.7
      */
     public static function get_calendar_access_information_parameters() {
         return new external_function_parameters(
@@ -1297,7 +1297,7 @@ class core_calendar_external extends external_api {
      * @param int $courseid Course to check, empty for site.
      * @return array The access information
      * @throws powereduc_exception
-     * @since  Moodle 3.7
+     * @since  PowerEduc 3.7
      */
     public static function get_calendar_access_information($courseid = 0) {
 
@@ -1323,7 +1323,7 @@ class core_calendar_external extends external_api {
      * Returns description of method result value.
      *
      * @return external_description.
-     * @since  Moodle 3.7
+     * @since  PowerEduc 3.7
      */
     public static function  get_calendar_access_information_returns() {
 
@@ -1341,7 +1341,7 @@ class core_calendar_external extends external_api {
      * Returns description of method parameters.
      *
      * @return external_function_parameters.
-     * @since  Moodle 3.7
+     * @since  PowerEduc 3.7
      */
     public static function get_allowed_event_types_parameters() {
         return new external_function_parameters(
@@ -1357,7 +1357,7 @@ class core_calendar_external extends external_api {
      * @param int $courseid Course to check, empty for site.
      * @return array The types allowed
      * @throws powereduc_exception
-     * @since  Moodle 3.7
+     * @since  PowerEduc 3.7
      */
     public static function get_allowed_event_types($courseid = 0) {
 
@@ -1383,7 +1383,7 @@ class core_calendar_external extends external_api {
      * Returns description of method result value.
      *
      * @return external_description.
-     * @since  Moodle 3.7
+     * @since  PowerEduc 3.7
      */
     public static function  get_allowed_event_types_returns() {
 

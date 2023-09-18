@@ -12,7 +12,7 @@ YUI.add('powereduc-course-categoryexpander', function (Y, NAME) {
  * The course category expander.
  *
  * @constructor
- * @class Y.Moodle.course.categoryexpander
+ * @class Y.PowerEduc.course.categoryexpander
  */
 
 var CSS = {
@@ -40,7 +40,7 @@ var CSS = {
         COURSECATEGORYTREE: '.course_category_tree',
         PARENTWITHCHILDREN: '.category'
     },
-    NS = Y.namespace('Moodle.course.categoryexpander'),
+    NS = Y.namespace('PowerEduc.course.categoryexpander'),
     TYPE_CATEGORY = 0,
     TYPE_COURSE = 1,
     URL = M.cfg.wwwroot + '/course/category.ajax.php';

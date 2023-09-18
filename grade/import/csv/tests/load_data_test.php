@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace gradeimport_csv;
 
@@ -35,18 +35,18 @@ class load_data_test extends \grade_base_testcase {
 
     /** @var string $oktext Text to be imported. This data should have no issues being imported. */
     protected $oktext = '"First name",Surname,"ID number",Institution,Department,"Email address","Assignment: Assignment for grape group", "Feedback: Assignment for grape group","Assignment: Second new grade item","Course total"
-Anne,Able,,"Moodle HQ","Rock on!",student7@example.com,56.00,"We welcome feedback",,56.00
-Bobby,Bunce,,"Moodle HQ","Rock on!",student5@example.com,75.00,,45.0,75.00';
+Anne,Able,,"PowerEduc HQ","Rock on!",student7@example.com,56.00,"We welcome feedback",,56.00
+Bobby,Bunce,,"PowerEduc HQ","Rock on!",student5@example.com,75.00,,45.0,75.00';
 
     /** @var string $badtext Text to be imported. This data has an extra column and should not succeed in being imported. */
     protected $badtext = '"First name",Surname,"ID number",Institution,Department,"Email address","Assignment: Assignment for grape group","Course total"
-Anne,Able,,"Moodle HQ","Rock on!",student7@example.com,56.00,56.00,78.00
-Bobby,Bunce,,"Moodle HQ","Rock on!",student5@example.com,75.00,75.00';
+Anne,Able,,"PowerEduc HQ","Rock on!",student7@example.com,56.00,56.00,78.00
+Bobby,Bunce,,"PowerEduc HQ","Rock on!",student5@example.com,75.00,75.00';
 
     /** @var string $csvtext CSV data to be imported with Last download from this course column. */
     protected $csvtext = '"First name",Surname,"ID number",Institution,Department,"Email address","Assignment: Assignment for grape group", "Feedback: Assignment for grape group","Course total","Last downloaded from this course"
-Anne,Able,,"Moodle HQ","Rock on!",student7@example.com,56.00,"We welcome feedback",56.00,{exportdate}
-Bobby,Bunce,,"Moodle HQ","Rock on!",student5@example.com,75.00,,75.00,{exportdate}';
+Anne,Able,,"PowerEduc HQ","Rock on!",student7@example.com,56.00,"We welcome feedback",56.00,{exportdate}
+Bobby,Bunce,,"PowerEduc HQ","Rock on!",student5@example.com,75.00,,75.00,{exportdate}';
 
     /** @var int $iid Import ID. */
     protected $iid;
@@ -97,7 +97,7 @@ Bobby,Bunce,,"Moodle HQ","Rock on!",student5@example.com,75.00,,75.00,{exportdat
                 'Anne',
                 'Able',
                 '',
-                'Moodle HQ',
+                'PowerEduc HQ',
                 'Rock on!',
                 'student7@example.com',
                 56.00,
@@ -109,7 +109,7 @@ Bobby,Bunce,,"Moodle HQ","Rock on!",student5@example.com,75.00,,75.00,{exportdat
                 'Bobby',
                 'Bunce',
                 '',
-                'Moodle HQ',
+                'PowerEduc HQ',
                 'Rock on!',
                 'student5@example.com',
                 75.00,

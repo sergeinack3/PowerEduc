@@ -41,7 +41,7 @@ H5P.getXAPIStatements = function (contentId, statement) {
     }
     return statements;
 };
-H5P.getMoodleComponent = function () {
+H5P.getPowerEducComponent = function () {
     if (H5PIntegration.powereducComponent) {
         return H5PIntegration.powereducComponent;
     }

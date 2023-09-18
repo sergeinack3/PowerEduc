@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Authentication Plugin: CAS Authentication
@@ -50,7 +50,7 @@ class auth_plugin_cas extends auth_plugin_ldap {
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
     public function auth_plugin_cas() {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
@@ -202,7 +202,7 @@ class auth_plugin_cas extends auth_plugin_ldap {
             $connected = true;
         }
 
-        // If Moodle is configured to use a proxy, phpCAS needs some curl options set.
+        // If PowerEduc is configured to use a proxy, phpCAS needs some curl options set.
         if (!empty($CFG->proxyhost) && !is_proxybypass(phpCAS::getServerLoginURL())) {
             phpCAS::setExtraCurlOption(CURLOPT_PROXY, $CFG->proxyhost);
             if (!empty($CFG->proxyport)) {

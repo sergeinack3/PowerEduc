@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This is the external API for the filter component.
@@ -48,7 +48,7 @@ class external extends external_api {
      * Returns description of get_available_in_context() parameters.
      *
      * @return external_function_parameters
-     * @since  Moodle 3.4
+     * @since  PowerEduc 3.4
      */
     public static function get_available_in_context_parameters() {
         return new external_function_parameters (
@@ -71,7 +71,7 @@ class external extends external_api {
      *
      * @param array $contexts the list of contexts to check
      * @return array with the filters information and warnings
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_available_in_context($contexts) {
         $params = self::validate_parameters(self::get_available_in_context_parameters(), array('contexts' => $contexts));
@@ -108,7 +108,7 @@ class external extends external_api {
      * Returns description of get_available_in_context() result value.
      *
      * @return external_single_structure
-     * @since  Moodle 3.4
+     * @since  PowerEduc 3.4
      */
     public static function get_available_in_context_returns() {
         return new external_single_structure(

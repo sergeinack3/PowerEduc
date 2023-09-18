@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 declare(strict_types=1);
 
@@ -24,7 +24,7 @@ use core_course_category;
 use stdClass;
 use core_reportbuilder\local\audiences\base;
 use core_reportbuilder\local\helpers\database;
-use MoodleQuickForm;
+use PowerEducQuickForm;
 
 /**
  * The backend class for Cohort member audience type
@@ -38,9 +38,9 @@ class cohortmember extends base {
     /**
      * Adds audience's elements to the given mform
      *
-     * @param MoodleQuickForm $mform The form to add elements to
+     * @param PowerEducQuickForm $mform The form to add elements to
      */
-    public function get_config_form(MoodleQuickForm $mform): void {
+    public function get_config_form(PowerEducQuickForm $mform): void {
         $cohorts = self::get_cohorts();
         $mform->addElement('autocomplete', 'cohorts', get_string('selectfromcohort', 'cohort'),
             $cohorts, ['multiple' => true]);

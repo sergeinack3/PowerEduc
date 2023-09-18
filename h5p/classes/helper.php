@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains helper class for the H5P area.
@@ -41,7 +41,7 @@ class helper {
      * Store an H5P file.
      *
      * @param factory $factory The \core_h5p\factory object
-     * @param stored_file $file Moodle file instance
+     * @param stored_file $file PowerEduc file instance
      * @param stdClass $config Button options config
      * @param bool $onlyupdatelibs Whether new libraries can be installed or only the existing ones can be updated
      * @param bool $skipcontent Should the content be skipped (so only the libraries will be saved)?

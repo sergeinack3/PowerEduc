@@ -29,7 +29,7 @@ Feature: The search forums block allows users to search for forum posts on cours
   Scenario: Use the search forum block in a course without any forum posts
     Given I log in as "student1"
     And I am on "Course 1" course homepage
-    When I set the field "Search" to "Moodle"
+    When I set the field "Search" to "PowerEduc"
     And I press "Search"
     Then I should see "No posts"
 

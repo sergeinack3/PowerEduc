@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace cachestore_redis;
 
@@ -119,7 +119,7 @@ class compressor_test extends \advanced_testcase {
             ['int_huge', PHP_INT_MAX],
             ['float', 3.14],
             ['boolean_true', true],
-            // Boolean 'false' is not tested as it is not allowed in Moodle.
+            // Boolean 'false' is not tested as it is not allowed in PowerEduc.
             ['array', [1, 'b', 3.4]],
             ['array_map', ['a' => 'b', 'c' => 'd']],
             ['object_stdClass', $object],

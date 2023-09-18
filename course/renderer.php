@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Renderer for use with the course section and all the goodness that falls
@@ -200,7 +200,7 @@ class core_course_renderer extends plugin_renderer_base {
     /**
      * Renders HTML for displaying the sequence of course module editing buttons
      *
-     * @deprecated since Moodle 4.0 MDL-72656 - please do not use this function any more.
+     * @deprecated since PowerEduc 4.0 MDL-72656 - please do not use this function any more.
      *
      * @see course_get_cm_edit_actions()
      *
@@ -295,7 +295,7 @@ class core_course_renderer extends plugin_renderer_base {
     /**
      * Render the deprecated nonajax activity chooser.
      *
-     * @deprecated since Moodle 3.11
+     * @deprecated since PowerEduc 3.11
      *
      * @todo MDL-71331 deprecate this function
      * @param stdClass $course the course object
@@ -411,8 +411,8 @@ class core_course_renderer extends plugin_renderer_base {
      * If completion is manual, returns a form (with an icon inside) that allows user to
      * toggle completion
      *
-     * @deprecated since Moodle 3.11
-     * @todo MDL-71183 Final deprecation in Moodle 4.3.
+     * @deprecated since PowerEduc 3.11
+     * @todo MDL-71183 Final deprecation in PowerEduc 4.3.
      * @see \core_renderer::activity_information
      *
      * @param stdClass $course course object
@@ -548,7 +548,7 @@ class core_course_renderer extends plugin_renderer_base {
      * Checks if course module has any conditions that may make it unavailable for
      * all or some of the students
      *
-     * @deprecated since Moodle 4.0 MDL-72656 - please do not use this function any more.
+     * @deprecated since PowerEduc 4.0 MDL-72656 - please do not use this function any more.
      *
      * @param cm_info $mod
      * @return bool
@@ -578,7 +578,7 @@ class core_course_renderer extends plugin_renderer_base {
      * Note, that for course modules that never have separate pages (i.e. labels)
      * this function return an empty string
      *
-     * @deprecated since Moodle 4.0 MDL-72656 - please do not use this function any more.
+     * @deprecated since PowerEduc 4.0 MDL-72656 - please do not use this function any more.
      *
      * @param cm_info $mod
      * @param array $displayoptions
@@ -617,7 +617,7 @@ class core_course_renderer extends plugin_renderer_base {
     /**
      * Returns the CSS classes for the activity name/content
      *
-     * @deprecated since Moodle 4.0 MDL-72656 - please do not use this function any more.
+     * @deprecated since PowerEduc 4.0 MDL-72656 - please do not use this function any more.
      *
      * For items which are hidden, unavailable or stealth but should be displayed
      * to current user ($mod->is_visible_on_course_page()), we show those as dimmed.
@@ -657,7 +657,7 @@ class core_course_renderer extends plugin_renderer_base {
      * Note, that for course modules that never have separate pages (i.e. labels)
      * this function return an empty string
      *
-     * @deprecated since Moodle 4.0 MDL-72656 - please do not use this function any more.
+     * @deprecated since PowerEduc 4.0 MDL-72656 - please do not use this function any more.
      *
      * @param cm_info $mod
      * @param array $displayoptions
@@ -719,7 +719,7 @@ class core_course_renderer extends plugin_renderer_base {
     /**
      * Renders html to display the module content on the course page (i.e. text of the labels)
      *
-     * @deprecated since Moodle 4.0 MDL-72656 - please do not use this function any more.
+     * @deprecated since PowerEduc 4.0 MDL-72656 - please do not use this function any more.
      *
      * @param cm_info $mod
      * @param array $displayoptions
@@ -758,7 +758,7 @@ class core_course_renderer extends plugin_renderer_base {
     /**
      * Displays availability info for a course section or course module
      *
-     * @deprecated since Moodle 4.0 MDL-72656 - please do not use this function any more.
+     * @deprecated since PowerEduc 4.0 MDL-72656 - please do not use this function any more.
      * @param string $text
      * @param string $additionalclasses
      * @return string
@@ -794,7 +794,7 @@ class core_course_renderer extends plugin_renderer_base {
      * Renders HTML to show course module availability information (for someone who isn't allowed
      * to see the activity itself, or for staff)
      *
-     * @deprecated since Moodle 4.0 MDL-72656 - please do not use this function any more.
+     * @deprecated since PowerEduc 4.0 MDL-72656 - please do not use this function any more.
      * @param cm_info $mod
      * @param array $displayoptions
      * @return string
@@ -1470,7 +1470,7 @@ class core_course_renderer extends plugin_renderer_base {
 
         // We must only load this module once.
         $this->page->requires->yui_module('powereduc-course-categoryexpander',
-                'Y.Moodle.course.categoryexpander.init');
+                'Y.PowerEduc.course.categoryexpander.init');
     }
 
     /**

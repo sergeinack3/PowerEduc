@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Logger tests (all).
@@ -145,7 +145,7 @@ class logger_test extends \basic_testcase {
         // Not much really to test, just instantiate and execute, should return true
         $lo = new error_log_logger(backup::LOG_ERROR);
         $this->assertTrue($lo instanceof error_log_logger);
-        $message = 'This log exists because you have run Moodle unit tests: Ignore it';
+        $message = 'This log exists because you have run PowerEduc unit tests: Ignore it';
         $result = $lo->process($message, backup::LOG_ERROR);
         $this->assertTrue($result);
     }

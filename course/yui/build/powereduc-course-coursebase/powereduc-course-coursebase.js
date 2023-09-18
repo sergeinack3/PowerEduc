@@ -2,7 +2,7 @@ YUI.add('powereduc-course-coursebase', function (Y, NAME) {
 
 /**
  * The coursebase class to provide shared functionality to Modules within
- * Moodle.
+ * PowerEduc.
  *
  * @module powereduc-course-coursebase
  */
@@ -14,7 +14,7 @@ var COURSEBASE = function() {
 
 /**
  * The coursebase class to provide shared functionality to Modules within
- * Moodle.
+ * PowerEduc.
  *
  * @class M.course.coursebase
  * @constructor
