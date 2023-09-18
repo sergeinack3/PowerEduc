@@ -20,10 +20,10 @@ $sql1="SELECT * FROM {listenote} li,{affecterprof} af,{coursspecialite} co,{cour
 
 $sql="SELECT * FROM {listenote} li,{affecterprof} af,{coursspecialite} co,{course} scou,{courssemestre} cse WHERE af.id=li.idaffecterprof AND cse.id=af.idcourssemestre AND cse.idcoursspecialite=co.id
                    AND co.idcourses=scou.id
-                   AND li.idetudiant='".$_GET["idetu"]."'";
+                   AND li.idetudiant='".$_GET["idetu"]."' AND cse.idsemestre='".$_GET["idse"]."'";
 $sqlcredit="SELECT SUM(credit) as credi FROM {listenote} li,{affecterprof} af,{coursspecialite} co,{course} scou,{courssemestre} cse WHERE af.id=li.idaffecterprof AND cse.id=af.idcourssemestre AND cse.idcoursspecialite=co.id
                    AND co.idcourses=scou.id
-                   AND li.idetudiant='".$_GET["idetu"]."'";
+                   AND li.idetudiant='".$_GET["idetu"]."' AND cse.idsemestre='".$_GET["idse"]."'";
 
   $dte_naisql="SELECT date_naissance,datedebut,datefin FROM {inscription} i,{anneescolaire} a WHERE i.idanneescolaire=a.id AND i.idetudiant='".$_GET["idetu"]."'";
   $datees=$DB->get_records_sql($dte_naisql);
@@ -52,7 +52,7 @@ foreach ($datees as $key => $date) {
     # code...
 }
 
-// var_dump($value1->logocampus,$infor);die;
+// var_dump($value1->logocampus,$infor,$_GET["idetu"]);die;
 
 // Définissez le contenu HTML à convertir en PDF
 $html = '

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="local/powerschool/db" VERSION="20230630" COMMENT="XMLDB file for PowerEduc local/powerschool"
+<XMLDB PATH="local/powerschool/db" VERSION="20230630" COMMENT="XMLDB file for Moodle local/powerschool"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -231,6 +231,7 @@
         <FIELD NAME="timecreated" TYPE="int" LENGTH="20" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="timemodified" TYPE="int" LENGTH="20" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="idsalle" TYPE="int" LENGTH="20" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="quit" TYPE="int" LENGTH="20" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
@@ -389,6 +390,7 @@
         <FIELD NAME="note1" TYPE="float" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="note2" TYPE="float" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="note3" TYPE="float" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="retirersalle" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

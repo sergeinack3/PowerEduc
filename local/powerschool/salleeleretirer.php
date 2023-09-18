@@ -45,6 +45,7 @@ $PAGE->navbar->add(get_string('sallelere', 'local_powerschool'), $managementurl)
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 
 // $mform=new note();
+$powereduc_file_name = $CFG->wwwroot;
 
 
 
@@ -78,6 +79,8 @@ $templatecontext = (object)[
     'root'=>$CFG->wwwroot,
     'salleele' => new powereduc_url('/local/powerschool/salleele.php'),
     'salleeleretirer' => new powereduc_url('/local/powerschool/salleeleretirer.php'),
+    'powereduc_file_name' => $powereduc_file_name,
+    
 
  ];
 

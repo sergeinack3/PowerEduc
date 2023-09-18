@@ -48,6 +48,7 @@ $PAGE->navbar->add(get_string('absenceetu', 'local_powerschool'), $managementurl
 
 
 // $inscription =$tab = array();
+$powereduc_file_name = $CFG->wwwroot;
 
 //cours
 
@@ -128,6 +129,7 @@ $templatecontext = (object)[
     'idca'=>$_GET["idca"],
     // 'salleele' => new powereduc_url('/local/powerschool/salleele.php'),
     'salleeleretirer' => new powereduc_url('/local/powerschool/absenceetu.php'),
+    'powereduc_file_name' => $powereduc_file_name,
 
  ];
 

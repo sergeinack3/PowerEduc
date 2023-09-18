@@ -1,18 +1,18 @@
 {{!
-    This file is part of PowerEduc - http://powereduc.org/
+    This file is part of Moodle - http://moodle.org/
 
-    PowerEduc is free software: you can redistribute it and/or modify
+    Moodle is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    PowerEduc is distributed in the hope that it will be useful,
+    Moodle is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
     @template local_powerschool/index
@@ -108,7 +108,7 @@
                             <td>{{numerosalle}} </td>
                             <td>
                                <!-- <input type="button" class="btn btn-primary" value="modifier" onclick="location.href='{{affecterprofedit}}?id={{idaffe}}&idca={{idca}}'">-->
-                                <input type="button" class="btn btn-danger local_annee_delete_button" value="supprimer" onclick="location.href='{{affecterprofsupp}}?id={{idaffe}}'">
+                                <input type="button" class="btn btn-danger local_annee_delete_button" value="supprimer" onclick="location.href='{{affecterprofsupp}}?id={{idaffe}}&idca={{idca}}&idcou={{idcouu}}&iduser={{iduser}}'">
                             </td>
                         </tr>
                     </tbody>
@@ -118,7 +118,7 @@
         </div>
           <input type="hidden" value="{{root}}" class="roote"/>
         <hr>
-    <script src="{{wwwroot}}/powereduc1/local/powerschool/js/jquery.js"></script>
-    <script src="{{wwwroot}}/powereduc1/local/powerschool/js/affecterprofe.js"></script>
+    <script src="{{powereduc_file_name}}/local/powerschool/js/jquery.js"></script>
+    <script src="{{powereduc_file_name}}/local/powerschool/js/affecterprofe.js"></script>
     </body>
   </html>
