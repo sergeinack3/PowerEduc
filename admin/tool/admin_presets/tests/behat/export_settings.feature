@@ -11,7 +11,7 @@ Feature: I can add a new preset with current settings
     And I set the field "Name" to "Starter"
     And I set the field "Description" to "Non-core starter preset"
     When I click on "Create preset" "button"
-    Then I should see "Moodle with all of the most popular features" in the "Starter" "table_row"
+    Then I should see "PowerEduc with all of the most popular features" in the "Starter" "table_row"
     And I should see "Starter" in the "Non-core starter preset" "table_row"
 
   Scenario: Export current settings

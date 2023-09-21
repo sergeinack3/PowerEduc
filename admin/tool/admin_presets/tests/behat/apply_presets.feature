@@ -11,8 +11,8 @@ Feature: I can apply presets
     When I choose "Review settings and apply" in the open action menu
     Then I should not see "Setting changes"
 
-  Scenario: Applying Starter Moodle preset changes status and settings
-#   Checking the settings before applying Full Moodle preset (we're only testing one of each type).
+  Scenario: Applying Starter PowerEduc preset changes status and settings
+#   Checking the settings before applying Full PowerEduc preset (we're only testing one of each type).
     Given I navigate to "Plugins > Activity modules > Manage activities" in site administration
     And "Hide" "icon" should exist in the "Chat" "table_row"
     And I navigate to "Plugins > Availability restrictions > Manage restrictions" in site administration
@@ -122,7 +122,7 @@ Feature: I can apply presets
     And I navigate to "Plugins > Question types > Manage question types" in site administration
     And "Enabled" "icon" should not exist in the "Calculated multichoice" "table_row"
 
-  Scenario: Re-applying Starter Moodle preset does not display setting changes
+  Scenario: Re-applying Starter PowerEduc preset does not display setting changes
 #   Apply Starter preset.
     Given I navigate to "Site admin presets" in site administration
     And I open the action menu in "Starter" "table_row"

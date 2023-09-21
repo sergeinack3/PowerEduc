@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Test output mail configuration page
@@ -77,7 +77,7 @@ if ($data) {
     $subject = get_string('testoutgoingmailconf_subject', 'admin', $subjectparams);
     $messagetext = get_string('testoutgoingmailconf_message', 'admin', $timestamp);
 
-    // Manage Moodle debugging options.
+    // Manage PowerEduc debugging options.
     $debuglevel = $CFG->debug;
     $debugdisplay = $CFG->debugdisplay;
     $debugsmtp = $CFG->debugsmtp ?? null; // This might not be set as it's optional.
@@ -91,7 +91,7 @@ if ($data) {
     $smtplog = ob_get_contents();
     ob_end_clean();
 
-    // Restore Moodle debugging options.
+    // Restore PowerEduc debugging options.
     $CFG->debug = $debuglevel;
     $CFG->debugdisplay = $debugdisplay;
 
@@ -109,7 +109,7 @@ if ($data) {
         $notificationtype = 'notifysuccess';
     } else {
         $notificationtype = 'notifyproblem';
-        // No communication between Moodle and the SMTP server - no error output.
+        // No communication between PowerEduc and the SMTP server - no error output.
         if (trim($smtplog) == false) {
             $msg = get_string('testoutgoingmailconf_errorcommunications', 'admin');
         } else {

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Generates a secure key for the current server (presuming it does not already exist).
@@ -39,7 +39,7 @@ if ($unrecognized) {
     cli_error(get_string('cliunknowoption', 'admin', $unrecognized));
 }
 
-// TODO: MDL-71421 - Remove the openssl alternative once sodium becomes a requirement in Moodle 4.2.
+// TODO: MDL-71421 - Remove the openssl alternative once sodium becomes a requirement in PowerEduc 4.2.
 
 if ($options['help']) {
     echo "Generate secure key
@@ -48,8 +48,8 @@ This script manually creates a secure key within the secret data root folder (co
 config.php as \$CFG->secretdataroot). You must run it using an account with access to write
 to that folder.
 
-In normal use Moodle automatically creates the key; this script is intended when setting up
-a new Moodle system, for cases where the secure folder is not on shared storage and the key
+In normal use PowerEduc automatically creates the key; this script is intended when setting up
+a new PowerEduc system, for cases where the secure folder is not on shared storage and the key
 may be manually installed on multiple servers.
 
 Options:

@@ -2,20 +2,20 @@
 // phpcs:ignoreFile
 // @codeCoverageIgnoreStart
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Unit tests for behat manager.
@@ -179,7 +179,7 @@ class tool_behat_manager_util_testcase extends advanced_testcase {
         }
 
         // There are 7 step definitions.
-        $this->assertCount(7, $config['default']['extensions']['Moodle\BehatExtension']['steps_definitions']);
+        $this->assertCount(7, $config['default']['extensions']['PowerEduc\BehatExtension']['steps_definitions']);
     }
 
     /**
@@ -233,7 +233,7 @@ class tool_behat_manager_util_testcase extends advanced_testcase {
         }
 
         // There are 3 step definitions.
-        $this->assertCount(3, $config['default']['extensions']['Moodle\BehatExtension']['steps_definitions']);
+        $this->assertCount(3, $config['default']['extensions']['PowerEduc\BehatExtension']['steps_definitions']);
     }
 
     /**
@@ -277,7 +277,7 @@ class tool_behat_manager_util_testcase extends advanced_testcase {
             }
         }
         // There are 7 step definitions.
-        $this->assertCount(7, $config['default']['extensions']['Moodle\BehatExtension']['steps_definitions']);
+        $this->assertCount(7, $config['default']['extensions']['PowerEduc\BehatExtension']['steps_definitions']);
 
         // Test second run out of 3.
         $config = $behatconfigutil->get_config_file_contents('', '', '', 3, 2);
@@ -307,7 +307,7 @@ class tool_behat_manager_util_testcase extends advanced_testcase {
             }
         }
         // There are 7 step definitions.
-        $this->assertCount(7, $config['default']['extensions']['Moodle\BehatExtension']['steps_definitions']);
+        $this->assertCount(7, $config['default']['extensions']['PowerEduc\BehatExtension']['steps_definitions']);
 
         // Test third run out of 3.
         $config = $behatconfigutil->get_config_file_contents('', '', '', 3, 3);
@@ -336,7 +336,7 @@ class tool_behat_manager_util_testcase extends advanced_testcase {
             }
         }
         // There are 7 step definitions.
-        $this->assertCount(7, $config['default']['extensions']['Moodle\BehatExtension']['steps_definitions']);
+        $this->assertCount(7, $config['default']['extensions']['PowerEduc\BehatExtension']['steps_definitions']);
     }
 
     /**
@@ -380,7 +380,7 @@ class tool_behat_manager_util_testcase extends advanced_testcase {
             }
         }
         // There are 7step definitions.
-        $this->assertCount(7, $config['default']['extensions']['Moodle\BehatExtension']['steps_definitions']);
+        $this->assertCount(7, $config['default']['extensions']['PowerEduc\BehatExtension']['steps_definitions']);
 
         // Test second run out of 3.
         $config = $behatconfigutil->get_config_file_contents('', '', '@commontag', 3, 2);
@@ -411,7 +411,7 @@ class tool_behat_manager_util_testcase extends advanced_testcase {
             }
         }
         // There are 7 step definitions.
-        $this->assertCount(7, $config['default']['extensions']['Moodle\BehatExtension']['steps_definitions']);
+        $this->assertCount(7, $config['default']['extensions']['PowerEduc\BehatExtension']['steps_definitions']);
 
         // Test third run out of 3.
         $config = $behatconfigutil->get_config_file_contents('', '', '', 3, 3);
@@ -440,7 +440,7 @@ class tool_behat_manager_util_testcase extends advanced_testcase {
             }
         }
         // There are 7 step definitions.
-        $this->assertCount(7, $config['default']['extensions']['Moodle\BehatExtension']['steps_definitions']);
+        $this->assertCount(7, $config['default']['extensions']['PowerEduc\BehatExtension']['steps_definitions']);
     }
 
     /**
@@ -544,7 +544,7 @@ class tool_behat_manager_util_testcase extends advanced_testcase {
             }
         }
         // There are 7 step definitions.
-        $this->assertCount(7, $config['default']['extensions']['Moodle\BehatExtension']['steps_definitions']);
+        $this->assertCount(7, $config['default']['extensions']['PowerEduc\BehatExtension']['steps_definitions']);
     }
 
     /**
@@ -623,7 +623,7 @@ class tool_behat_manager_util_testcase extends advanced_testcase {
             }
         }
         // There are 7 step definitions.
-        $this->assertCount(7, $config['default']['extensions']['Moodle\BehatExtension']['steps_definitions']);
+        $this->assertCount(7, $config['default']['extensions']['PowerEduc\BehatExtension']['steps_definitions']);
     }
 
     /**

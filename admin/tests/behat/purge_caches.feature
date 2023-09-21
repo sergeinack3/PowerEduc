@@ -1,7 +1,7 @@
 @core @core_admin
 Feature: Purge caches
   In order to see changes to cached data
-  As a Moodle administrator
+  As a PowerEduc administrator
   I want manually purge different data and file caches
 
   Background:

@@ -5,7 +5,7 @@
    * logfile instead of sending them out. Use it as a sendmail
    * "stand-in" when testing mailouts.
    *
-   * It is not Moodle specific - use it anywhere by setting the php
+   * It is not PowerEduc specific - use it anywhere by setting the php
    * "sendmail_path" setting to this file with a logfile parameter.
    *
    * - Set in php.ini (not settable in config.php):

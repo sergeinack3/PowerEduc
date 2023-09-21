@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This is the external API for this tool.
@@ -152,7 +152,7 @@ class external extends external_api {
             'competencyframeworks' => new external_multiple_structure(
                 competency_framework_exporter::get_read_structure()
             ),
-            'pluginbaseurl' => new external_value(PARAM_LOCALURL, 'Url to the tool_lp plugin folder on this Moodle site'),
+            'pluginbaseurl' => new external_value(PARAM_LOCALURL, 'Url to the tool_lp plugin folder on this PowerEduc site'),
             'navigation' => new external_multiple_structure(
                 new external_value(PARAM_RAW, 'HTML for a navigation item that should be on this page')
             ),
@@ -481,7 +481,7 @@ class external extends external_api {
             'templates' => new external_multiple_structure(
                 template_exporter::get_read_structure()
             ),
-            'pluginbaseurl' => new external_value(PARAM_LOCALURL, 'Url to the tool_lp plugin folder on this Moodle site'),
+            'pluginbaseurl' => new external_value(PARAM_LOCALURL, 'Url to the tool_lp plugin folder on this PowerEduc site'),
             'navigation' => new external_multiple_structure(
                 new external_value(PARAM_RAW, 'HTML for a navigation item that should be on this page')
             ),
@@ -669,7 +669,7 @@ class external extends external_api {
             'plans' => new external_multiple_structure(
                 plan_exporter::get_read_structure()
             ),
-            'pluginbaseurl' => new external_value(PARAM_LOCALURL, 'Url to the tool_lp plugin folder on this Moodle site'),
+            'pluginbaseurl' => new external_value(PARAM_LOCALURL, 'Url to the tool_lp plugin folder on this PowerEduc site'),
             'navigation' => new external_multiple_structure(
                 new external_value(PARAM_RAW, 'HTML for a navigation item that should be on this page')
             ),
@@ -717,7 +717,7 @@ class external extends external_api {
         return new external_single_structure(array (
             'canmanage' => new external_value(PARAM_BOOL, 'Can the current user manage the user\'s evidence'),
             'userid' => new external_value(PARAM_INT, 'The user ID'),
-            'pluginbaseurl' => new external_value(PARAM_LOCALURL, 'Url to the tool_lp plugin folder on this Moodle site'),
+            'pluginbaseurl' => new external_value(PARAM_LOCALURL, 'Url to the tool_lp plugin folder on this PowerEduc site'),
             'evidence' => new external_multiple_structure(user_evidence_summary_exporter::get_read_structure()),
             'navigation' => new external_multiple_structure(
                 new external_value(PARAM_RAW, 'HTML for a navigation item that should be on this page')
@@ -763,7 +763,7 @@ class external extends external_api {
     public static function data_for_user_evidence_page_returns() {
         return new external_single_structure(array(
             'userevidence' => user_evidence_summary_exporter::get_read_structure(),
-            'pluginbaseurl' => new external_value(PARAM_LOCALURL, 'Url to the tool_lp plugin folder on this Moodle site')
+            'pluginbaseurl' => new external_value(PARAM_LOCALURL, 'Url to the tool_lp plugin folder on this PowerEduc site')
         ));
     }
 

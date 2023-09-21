@@ -1,17 +1,17 @@
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 /* jshint node: true, browser: false */
 /* eslint-env node */
 
@@ -150,7 +150,7 @@ module.exports = grunt => {
                             // so that if it's used then only the exported value is returned
                             // by the generated AMD module.
                             //
-                            // It also adds the Moodle plugin name to the AMD module definition
+                            // It also adds the PowerEduc plugin name to the AMD module definition
                             // so that it can be imported as expected in other modules.
                             path.resolve('.grunt/babel-plugin-add-module-to-define.js'),
                             '@babel/plugin-syntax-dynamic-import',

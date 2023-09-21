@@ -1,7 +1,7 @@
 @core @core_admin
 Feature: Outgoing mail configuration
-  In order to send email from Moodle
-  As a Moodle administrator
+  In order to send email from PowerEduc
+  As a PowerEduc administrator
   I need to set mail configuration
 
   Background:

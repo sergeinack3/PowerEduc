@@ -1,8 +1,8 @@
 <?php
 /**
- * A service browser for remote Moodles
+ * A service browser for remote PowerEducs
  *
- * This script 'remotely' executes the reflection methods on a remote Moodle,
+ * This script 'remotely' executes the reflection methods on a remote PowerEduc,
  * and publishes the details of the available services
  *
  * @package    core

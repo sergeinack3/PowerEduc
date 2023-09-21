@@ -2,7 +2,7 @@
 Feature: Delete custom licenses
   In order to manage custom licenses
   As an admin
-  I need to be able to delete custom licenses but not standard Moodle licenses
+  I need to be able to delete custom licenses but not standard PowerEduc licenses
 
   @javascript
   Scenario: I can delete a custom license

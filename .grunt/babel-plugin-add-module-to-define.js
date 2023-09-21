@@ -1,24 +1,24 @@
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This is a babel plugin to add the Moodle module names to the AMD modules
+ * This is a babel plugin to add the PowerEduc module names to the AMD modules
  * as part of the transpiling process.
  *
  * In addition it will also add a return statement for the default export if the
- * module is using default exports. This is a highly specific Moodle thing because
+ * module is using default exports. This is a highly specific PowerEduc thing because
  * we're transpiling to AMD and none of the existing Babel 7 plugins work correctly.
  *
  * This will fix the issue where an ES6 module using "export default Foo" will be
@@ -43,13 +43,13 @@ module.exports = ({template, types}) => {
 
     /**
      * Search the list of components that match the given file name
-     * and return the Moodle component for that file, if found.
+     * and return the PowerEduc component for that file, if found.
      *
      * Throw an exception if no matching component is found.
      *
      * @throws {Error}
      * @param {string} searchFileName The file name to look for.
-     * @return {string} Moodle component
+     * @return {string} PowerEduc component
      */
     function getModuleNameFromFileName(searchFileName) {
         searchFileName = fs.realpathSync(searchFileName);
@@ -112,7 +112,7 @@ module.exports = ({template, types}) => {
                                 // We only want to modify the first instance of define that we find.
                                 this.seenDefine = true;
 
-                                // Get the Moodle component for the file being processed.
+                                // Get the PowerEduc component for the file being processed.
                                 var moduleName = getModuleNameFromFileName(this.file.opts.filename);
 
                                 // The function signature of `define()` is:
@@ -130,7 +130,7 @@ module.exports = ({template, types}) => {
                                 // Add the module name as the first argument to the define function.
                                 path.node.arguments.unshift(types.stringLiteral(moduleName));
                                 // Add a space after the define function in the built file so that previous versions
-                                // of Moodle will not try to add the module name to the file when it's being served
+                                // of PowerEduc will not try to add the module name to the file when it's being served
                                 // by PHP. This forces the regex in PHP to not match for this file.
                                 path.node.callee.name = 'define ';
                             }

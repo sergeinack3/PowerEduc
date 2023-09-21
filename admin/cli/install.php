@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This script creates config.php file and prepares database.
@@ -43,7 +43,7 @@ if (function_exists('opcache_reset')) {
 }
 
 $help =
-"Command line Moodle installer, creates config.php and initializes database.
+"Command line PowerEduc installer, creates config.php and initializes database.
 Please note you must execute this script with the same uid as apache
 or use chmod/chown after installation.
 
@@ -54,7 +54,7 @@ Options:
                       Default is 2777. You may want to change it to 2770
                       or 2750 or 750. See chmod man page for details.
 --lang=CODE           Installation and default site language.
---wwwroot=URL         Web address for the Moodle site,
+--wwwroot=URL         Web address for the PowerEduc site,
                       required in non-interactive mode.
 --dataroot=DIR        Location of the powereduc data folder,
                       must not be web accessible. Default is powereducdata
@@ -138,7 +138,7 @@ date_default_timezone_set(@date_default_timezone_get());
 // we need a lot of memory
 @ini_set('memory_limit', '128M');
 
-/** Used by library scripts to check they are being called by Moodle */
+/** Used by library scripts to check they are being called by PowerEduc */
 define('POWEREDUC_INTERNAL', true);
 
 // Disables all caching.
@@ -782,7 +782,7 @@ if (!$skipdatabase) {
         if (!$options['agree-license']) {
             cli_separator();
             cli_heading(get_string('copyrightnotice'));
-            echo "Moodle  - Modular Object-Oriented Dynamic Learning Environment\n";
+            echo "PowerEduc  - Modular Object-Oriented Dynamic Learning Environment\n";
             echo get_string('gpl3')."\n\n";
             echo get_string('doyouagree')."\n";
             $prompt = get_string('cliyesnoprompt', 'admin');

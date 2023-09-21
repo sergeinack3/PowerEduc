@@ -15,7 +15,7 @@ $ADMIN->add('root', new admin_externalpage('registrationpowereducorg', new lang_
  // hidden upgrade script
 $ADMIN->add('root', new admin_externalpage('upgradesettings', new lang_string('upgradesettings', 'admin'), "$CFG->wwwroot/$CFG->admin/upgradesettings.php", 'powereduc/site:config', true));
 
-// Adding Moodle Services information page.
+// Adding PowerEduc Services information page.
 $powereducservices = new admin_settingpage('powereducservices', new lang_string('powereducservices',
     'admin'));
 $ADMIN->add('root', $powereducservices);

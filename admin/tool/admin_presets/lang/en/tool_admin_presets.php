@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Admin tool presets plugin to load some settings.
@@ -71,7 +71,7 @@ $string['oldvalue'] = 'Old value';
 $string['pluginname'] = 'Site admin presets';
 $string['presetapplicationslisttable'] = 'Site admin preset applications table';
 $string['presetslisttable'] = 'Site admin presets table';
-$string['presetpowereducrelease'] = 'Moodle release';
+$string['presetpowereducrelease'] = 'PowerEduc release';
 $string['presetname'] = 'Preset name';
 $string['privacy:metadata'] = 'The Site admin presets tool does not store any personal data.';
 $string['renamepreset'] = 'Name (optional)';
@@ -86,7 +86,7 @@ $string['settingname'] = 'Setting name';
 $string['settingsapplied'] = 'Setting changes';
 $string['settingsappliednotification'] = 'Review the following setting changes which have been applied.
 <br/>If you change your mind, you can undo the setting changes via \'Show version history\' in the preset actions menu.';
-$string['settingsnotapplicable'] = 'Settings not applicable to this Moodle version';
+$string['settingsnotapplicable'] = 'Settings not applicable to this PowerEduc version';
 $string['settingsnotapplied'] = 'Unchanged settings';
 $string['settingstobeapplied'] = 'Setting changes';
 $string['showhistory'] = 'Show version history';

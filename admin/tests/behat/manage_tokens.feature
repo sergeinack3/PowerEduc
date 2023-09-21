@@ -20,13 +20,13 @@ Feature: Manage external services tokens
     And I navigate to "Server > Web services > Manage tokens" in site administration
     And I press "Create token"
     And I set the field "User" to "Firstname1 Lastname1"
-    And I set the field "Service" to "Moodle mobile web service"
+    And I set the field "Service" to "PowerEduc mobile web service"
     And I set the field "IP restriction" to "127.0.0.1"
     When I press "Save changes"
-    Then I should see "Moodle mobile web service" in the "Firstname1 Lastname1" "table_row"
+    Then I should see "PowerEduc mobile web service" in the "Firstname1 Lastname1" "table_row"
     And I should see "127.0.0.1" in the "Firstname1 Lastname1" "table_row"
     And I click on "Delete" "link" in the "Firstname1 Lastname1" "table_row"
-    And I should see "Do you really want to delete this web service token for Firstname1 Lastname1 on the service Moodle mobile web service?"
+    And I should see "Do you really want to delete this web service token for Firstname1 Lastname1 on the service PowerEduc mobile web service?"
     And I press "Delete"
     And "Firstname1 Lastname1" "table_row" should not exist
 
@@ -50,7 +50,7 @@ Feature: Manage external services tokens
     # All created tokens are shown by default.
     And "Firstname1 Lastname1" "table_row" should not exist
     And I should see "Site information" in the "Firstname2 Lastname2" "table_row"
-    And I should see "Moodle mobile web service" in the "Firstname3 Lastname3" "table_row"
+    And I should see "PowerEduc mobile web service" in the "Firstname3 Lastname3" "table_row"
     And I should see "Site information" in the "Firstname4 Lastname4" "table_row"
 
     # Filter tokens by user (note we can select the user by the identity field here).
@@ -64,7 +64,7 @@ Feature: Manage external services tokens
     # Reset the filter.
     And I press "Show all tokens"
     And I should see "Site information" in the "Firstname2 Lastname2" "table_row"
-    And I should see "Moodle mobile web service" in the "Firstname3 Lastname3" "table_row"
+    And I should see "PowerEduc mobile web service" in the "Firstname3 Lastname3" "table_row"
     And I should see "Site information" in the "Firstname4 Lastname4" "table_row"
 
     # Filter tokens by service.

@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Provides tool_installaddon_installer class.
@@ -137,7 +137,7 @@ class tool_installaddon_installer {
      * Hook method to handle the remote request to install an add-on
      *
      * This is used as a callback when the admin picks a plugin version in the
-     * Moodle Plugins directory and is redirected back to their site to install
+     * PowerEduc Plugins directory and is redirected back to their site to install
      * it.
      *
      * This hook is called early from admin/tool/installaddon/index.php page so that
@@ -271,7 +271,7 @@ class tool_installaddon_installer {
     }
 
     /**
-     * Decode the request from the Moodle Plugins directory
+     * Decode the request from the PowerEduc Plugins directory
      *
      * @param string $request submitted via 'installaddonrequest' HTTP parameter
      * @return stdClass|bool false on error, object otherwise

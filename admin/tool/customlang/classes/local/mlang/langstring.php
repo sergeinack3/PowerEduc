@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Language string based on David Mudrak langstring from local_amos.
@@ -81,13 +81,13 @@ class langstring {
      * Given a string text, returns it being formatted properly for storing in AMOS repository.
      *
      * Note: This method is taken directly from local_amos as it is highly tested and robust.
-     * The Moodle 1.x part is keep on puspose to make it easier the copy paste from both codes.
+     * The PowerEduc 1.x part is keep on puspose to make it easier the copy paste from both codes.
      * This could change in the future when AMOS stop suporting the 1.x langstrings.
      *
      * We need to know for what branch the string should be prepared due to internal changes in
      * format required by get_string()
-     * - for get_string() in Moodle 1.6 - 1.9 use $format == 1
-     * - for get_string() in Moodle 2.0 and higher use $format == 2
+     * - for get_string() in PowerEduc 1.6 - 1.9 use $format == 1
+     * - for get_string() in PowerEduc 2.0 and higher use $format == 2
      *
      * Typical usages of this methods:
      *  $t = langstring::fix_syntax($t);          // sanity new translations of 2.x strings

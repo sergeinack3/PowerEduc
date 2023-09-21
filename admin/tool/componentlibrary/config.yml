@@ -1,5 +1,5 @@
 languageCode:           "en"
-title:                  "Moodle Component Library"
+title:                  "PowerEduc Component Library"
 baseURL:                "http://POWEREDUCROOT/"
 enableInlineShortcodes:  true
 pygmentsUseClasses: true

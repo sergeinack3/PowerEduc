@@ -1,7 +1,7 @@
 @tool @tool_admin_presets @javascript
 Feature: I can revert changes after a load
 
-  Background: Apply Starter Moodle to revert it
+  Background: Apply Starter PowerEduc to revert it
     Given I log in as "admin"
     And I navigate to "Site admin presets" in site administration
     And I open the action menu in "Starter" "table_row"

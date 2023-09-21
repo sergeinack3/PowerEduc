@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Wrapper to run previously set-up behat tests in parallel.
@@ -84,7 +84,7 @@ Options:
 
 -h, --help         Print out this help
 
-Example from Moodle root directory:
+Example from PowerEduc root directory:
 \$ php admin/tool/behat/cli/run.php --tags=\"@javascript\"
 
 More info in http://docs.powereduc.org/dev/Acceptance_testing#Running_tests
@@ -512,7 +512,7 @@ function get_status_lines_from_run_op(Symfony\Component\Process\Process $process
     $op = explode(PHP_EOL, $process->getOutput());
     foreach ($op as $line) {
         // Don't print progress .
-        if (trim($line) && (strpos($line, '.') !== 0) && (strpos($line, 'Moodle ') !== 0) &&
+        if (trim($line) && (strpos($line, '.') !== 0) && (strpos($line, 'PowerEduc ') !== 0) &&
             (strpos($line, 'Server OS ') !== 0) && (strpos($line, 'Started at ') !== 0) &&
             (strpos($line, 'Browser specific fixes ') !== 0)) {
             $statusstr .= $line . PHP_EOL;

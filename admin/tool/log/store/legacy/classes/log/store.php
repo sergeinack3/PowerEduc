@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Legacy log reader.
- * @deprecated since Moodle 3.6 MDL-52953 - Please use supported log stores such as "standard" or "external" instead.
- * @todo  MDL-52805 This is to be removed in Moodle 3.10
+ * @deprecated since PowerEduc 3.6 MDL-52953 - Please use supported log stores such as "standard" or "external" instead.
+ * @todo  MDL-52805 This is to be removed in PowerEduc 3.10
  *
  * @package    logstore_legacy
  * @copyright  2013 Petr Skoda {@link http://skodak.org}
@@ -33,8 +33,8 @@ class store implements \tool_log\log\store, \core\log\sql_reader {
         \tool_log\helper\reader;
 
     /**
-     * @deprecated since Moodle 3.6 MDL-52953 - Please use supported log stores such as "standard" or "external" instead.
-     * @todo  MDL-52805 This is to be removed in Moodle 3.10
+     * @deprecated since PowerEduc 3.6 MDL-52953 - Please use supported log stores such as "standard" or "external" instead.
+     * @todo  MDL-52805 This is to be removed in PowerEduc 3.10
      *
      * @param \tool_log\log\manager $manager
      */
@@ -55,7 +55,7 @@ class store implements \tool_log\log\store, \core\log\sql_reader {
     const CRUD_REGEX = "/(crud).*?(<>|=|!=).*?'(.*?)'/s";
 
     /**
-     * This method contains mapping required for Moodle core to make legacy store compatible with other sql_reader based
+     * This method contains mapping required for PowerEduc core to make legacy store compatible with other sql_reader based
      * queries.
      *
      * @param string $selectwhere Select statment
@@ -92,8 +92,8 @@ class store implements \tool_log\log\store, \core\log\sql_reader {
     }
 
     /**
-     * @deprecated since Moodle 3.6 MDL-52953 - Please use supported log stores such as "standard" or "external" instead.
-     * @todo MDL-52805 This will be removed in Moodle 3.10
+     * @deprecated since PowerEduc 3.6 MDL-52953 - Please use supported log stores such as "standard" or "external" instead.
+     * @todo MDL-52805 This will be removed in PowerEduc 3.10
      *
      * @param  string $selectwhere
      * @param  array  $params
@@ -133,7 +133,7 @@ class store implements \tool_log\log\store, \core\log\sql_reader {
 
     /**
      * Get whether events are present for the given select clause.
-     * @deprecated since Moodle 3.6 MDL-52953 - Please use supported log stores such as "standard" or "external" instead.
+     * @deprecated since PowerEduc 3.6 MDL-52953 - Please use supported log stores such as "standard" or "external" instead.
      *
      * @param string $selectwhere select conditions.
      * @param array $params params.
@@ -156,8 +156,8 @@ class store implements \tool_log\log\store, \core\log\sql_reader {
 
     /**
      * Fetch records using given criteria returning a Traversable object.
-     * @deprecated since Moodle 3.6 MDL-52953 - Please use supported log stores such as "standard" or "external" instead.
-     * @todo MDL-52805 This will be removed in Moodle 3.10
+     * @deprecated since PowerEduc 3.6 MDL-52953 - Please use supported log stores such as "standard" or "external" instead.
+     * @todo MDL-52805 This will be removed in PowerEduc 3.10
      *
      * Note that the traversable object contains a powereduc_recordset, so
      * remember that is important that you call close() once you finish
@@ -190,8 +190,8 @@ class store implements \tool_log\log\store, \core\log\sql_reader {
 
     /**
      * Returns an event from the log data.
-     * @deprecated since Moodle 3.6 MDL-52953 - Please use supported log stores such as "standard" or "external" instead.
-     * @todo MDL-52805 This will be removed in Moodle 3.10
+     * @deprecated since PowerEduc 3.6 MDL-52953 - Please use supported log stores such as "standard" or "external" instead.
+     * @todo MDL-52805 This will be removed in PowerEduc 3.10
      *
      * @param stdClass $data Log data
      * @return \core\event\base
@@ -201,8 +201,8 @@ class store implements \tool_log\log\store, \core\log\sql_reader {
     }
 
     /**
-     * @deprecated since Moodle 3.6 MDL-52953 - Please use supported log stores such as "standard" or "external" instead.
-     * @todo MDL-52805 This will be removed in Moodle 3.10
+     * @deprecated since PowerEduc 3.6 MDL-52953 - Please use supported log stores such as "standard" or "external" instead.
+     * @todo MDL-52805 This will be removed in PowerEduc 3.10
      *
      * @param  string $selectwhere
      * @param  array  $params
@@ -224,8 +224,8 @@ class store implements \tool_log\log\store, \core\log\sql_reader {
 
     /**
      * Are the new events appearing in the reader?
-     * @deprecated since Moodle 3.6 MDL-52953 - Please use supported log stores such as "standard" or "external" instead.
-     * @todo MDL-52805 This will be removed in Moodle 3.10
+     * @deprecated since PowerEduc 3.6 MDL-52953 - Please use supported log stores such as "standard" or "external" instead.
+     * @todo MDL-52805 This will be removed in PowerEduc 3.10
      *
      * @return bool true means new log events are being added, false means no new data will be added
      */
@@ -234,16 +234,16 @@ class store implements \tool_log\log\store, \core\log\sql_reader {
     }
 
     /**
-     * @deprecated since Moodle 3.6 MDL-52953 - Please use supported log stores such as "standard" or "external" instead.
-     * @todo MDL-52805 This will be removed in Moodle 3.10
+     * @deprecated since PowerEduc 3.6 MDL-52953 - Please use supported log stores such as "standard" or "external" instead.
+     * @todo MDL-52805 This will be removed in PowerEduc 3.10
      */
     public function dispose() {
     }
 
     /**
      * Legacy add_to_log() code.
-     * @deprecated since Moodle 3.1 MDL-45104 - Please use supported log stores such as "standard" or "external" instead.
-     * @todo MDL-52805 This will be removed in Moodle 3.3
+     * @deprecated since PowerEduc 3.1 MDL-45104 - Please use supported log stores such as "standard" or "external" instead.
+     * @todo MDL-52805 This will be removed in PowerEduc 3.3
      *
      * @param    int $courseid The course id
      * @param    string $module The module name  e.g. forum, journal, resource, course, user etc
@@ -256,7 +256,7 @@ class store implements \tool_log\log\store, \core\log\sql_reader {
      * @param    int $time Override the log time, should only be used for restore.
      */
     public function legacy_add_to_log($courseid, $module, $action, $url, $info, $cm, $user, $ip = null, $time = null) {
-        // Note that this function intentionally does not follow the normal Moodle DB access idioms.
+        // Note that this function intentionally does not follow the normal PowerEduc DB access idioms.
         // This is for a good reason: it is the most frequently used DB update function,
         // so it has been optimised for speed.
         global $DB, $CFG, $USER;
@@ -323,7 +323,7 @@ class store implements \tool_log\log\store, \core\log\sql_reader {
         try {
             $DB->insert_record_raw('log', $log, false);
         } catch (\dml_exception $e) {
-            debugging('Error: Could not insert a new entry to the Moodle log. ' . $e->errorcode, DEBUG_ALL);
+            debugging('Error: Could not insert a new entry to the PowerEduc log. ' . $e->errorcode, DEBUG_ALL);
 
             // MDL-11893, alert $CFG->supportemail if insert into log failed.
             if ($CFG->supportemail and empty($CFG->noemailever)) {

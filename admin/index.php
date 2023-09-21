@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Main administration script.
@@ -36,26 +36,26 @@ powereduc_require_minimum_php_version();
 // make sure iconv is available and actually works
 if (!function_exists('iconv')) {
     // this should not happen, this must be very borked install
-    echo 'Moodle requires the iconv PHP extension. Please install or enable the iconv extension.';
+    echo 'PowerEduc requires the iconv PHP extension. Please install or enable the iconv extension.';
     die();
 }
 
 // Make sure php5-json is available.
 if (!function_exists('json_encode') || !function_exists('json_decode')) {
     // This also shouldn't happen.
-    echo 'Moodle requires the json PHP extension. Please install or enable the json extension.';
+    echo 'PowerEduc requires the json PHP extension. Please install or enable the json extension.';
     die();
 }
 
 // Make sure xml extension is available.
 if (!extension_loaded('xml')) {
-    echo 'Moodle requires the xml PHP extension. Please install or enable the xml extension.';
+    echo 'PowerEduc requires the xml PHP extension. Please install or enable the xml extension.';
     die();
 }
 
 // Make sure mbstring extension is available.
 if (!extension_loaded('mbstring')) {
-    echo 'Moodle requires the mbstring PHP extension. Please install or enable the mbstring extension.';
+    echo 'PowerEduc requires the mbstring PHP extension. Please install or enable the mbstring extension.';
     die();
 }
 
@@ -224,7 +224,7 @@ if (!core_tables_exist()) {
         $strlicense = get_string('license');
 
         $PAGE->navbar->add($strlicense);
-        $PAGE->set_title($strinstallation.' - Moodle '.$CFG->target_release);
+        $PAGE->set_title($strinstallation.' - PowerEduc '.$CFG->target_release);
         $PAGE->set_heading($strinstallation);
         $PAGE->set_cacheable(false);
 
@@ -239,7 +239,7 @@ if (!core_tables_exist()) {
 
         $PAGE->navbar->add($strcurrentrelease);
         $PAGE->set_title($strinstallation);
-        $PAGE->set_heading($strinstallation . ' - Moodle ' . $CFG->target_release);
+        $PAGE->set_heading($strinstallation . ' - PowerEduc ' . $CFG->target_release);
         $PAGE->set_cacheable(false);
 
         $output = $PAGE->get_renderer('core', 'admin');
@@ -252,7 +252,7 @@ if (!core_tables_exist()) {
     if (!core_plugin_manager::instance()->all_plugins_ok($version, $failed, $CFG->branch)) {
         $PAGE->navbar->add(get_string('pluginscheck', 'admin'));
         $PAGE->set_title($strinstallation);
-        $PAGE->set_heading($strinstallation . ' - Moodle ' . $CFG->target_release);
+        $PAGE->set_heading($strinstallation . ' - PowerEduc ' . $CFG->target_release);
 
         $output = $PAGE->get_renderer('core', 'admin');
         $url = new powereduc_url($PAGE->url, array('agreelicense' => 1, 'confirmrelease' => 1, 'lang' => $CFG->lang));
@@ -267,7 +267,7 @@ if (!core_tables_exist()) {
     upgrade_init_javascript();
 
     $PAGE->navbar->add($strdatabasesetup);
-    $PAGE->set_title($strinstallation.' - Moodle '.$CFG->target_release);
+    $PAGE->set_title($strinstallation.' - PowerEduc '.$CFG->target_release);
     $PAGE->set_heading($strinstallation);
     $PAGE->set_cacheable(false);
 
@@ -285,7 +285,7 @@ if (!core_tables_exist()) {
 }
 
 
-// Check version of Moodle code on disk compared with database
+// Check version of PowerEduc code on disk compared with database
 // and upgrade if possible.
 
 if (!$cache) {
@@ -866,7 +866,7 @@ $croninfrequent = !$cronoverdue && ($lastcroninterval > ($expectedfrequency + MI
 $dbproblems = $DB->diagnose();
 $maintenancemode = !empty($CFG->maintenance_enabled);
 
-// Available updates for Moodle core.
+// Available updates for PowerEduc core.
 $updateschecker = \core\update\checker::instance();
 $availableupdates = array();
 $availableupdatesfetch = null;
@@ -897,7 +897,7 @@ if ($updateschecker->enabled()) {
 }
 
 $buggyiconvnomb = (!function_exists('mb_convert_encoding') and @iconv('UTF-8', 'UTF-8//IGNORE', '100'.chr(130).'€') !== '100€');
-//check if the site is registered on Moodle.org
+//check if the site is registered on PowerEduc.org
 $registered = \core\hub\registration::is_registered();
 // Check if there are any cache warnings.
 $cachewarnings = cache_helper::warnings();

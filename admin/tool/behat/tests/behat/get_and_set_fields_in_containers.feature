@@ -1,6 +1,6 @@
 @tool_behat
 Feature: Behat steps for interacting with form work
-  In order to test my Moodle code
+  In order to test my PowerEduc code
   As a developer
   I need the Behat steps for form elements to work reliably
 

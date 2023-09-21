@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Mlang PHP based on David Mudrak phpparser for local_amos.
@@ -28,9 +28,9 @@ use coding_exception;
 use powereduc_exception;
 
 /**
- * Parser of Moodle strings defined as associative array.
+ * Parser of PowerEduc strings defined as associative array.
  *
- * Moodle core just includes this file format directly as normal PHP code. However
+ * PowerEduc core just includes this file format directly as normal PHP code. However
  * for security reasons, we must not do this for files uploaded by anonymous users.
  * This parser reconstructs the associative $string array without actually including
  * the file.
@@ -66,7 +66,7 @@ class phpparser {
     }
 
     /**
-     * Parses the given data in Moodle PHP string format
+     * Parses the given data in PowerEduc PHP string format
      *
      * Note: This method is adapted from local_amos as it is highly tested and robust.
      * The priority is keeping it similar to the original one to make it easier to mantain.

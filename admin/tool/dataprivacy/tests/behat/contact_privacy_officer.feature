@@ -2,7 +2,7 @@
 Feature: Contact the privacy officer
   As a user
   In order to reach out to the site's privacy officer
-  I need to be able to contact the site's privacy officer in Moodle
+  I need to be able to contact the site's privacy officer in PowerEduc
 
   Background:
     Given the following "users" exist:

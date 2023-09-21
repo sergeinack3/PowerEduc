@@ -1,5 +1,5 @@
 @tool @tool_customlang
-Feature: Within a powereduc instance, an administrator should be able to modify langstrings for the entire Moodle installation.
+Feature: Within a powereduc instance, an administrator should be able to modify langstrings for the entire PowerEduc installation.
   In order to change langstrings in the adminsettings of the instance,
   As an admin
   I need to be able to access and change values in the the language customisation of the language pack.

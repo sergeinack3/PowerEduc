@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'tool_dataprivacy'
@@ -288,7 +288,7 @@ When checking the active enrolment in a course, if the course has no end date th
 
 If the course has no end date, and this setting is enabled, then the user cannot be deleted.';
 $string['requiresattention'] = 'Requires attention.';
-$string['requiresattentionexplanation'] = 'This plugin does not implement the Moodle privacy API. If this plugin stores any personal data it will not be able to be exported or deleted through Moodle\'s privacy system.';
+$string['requiresattentionexplanation'] = 'This plugin does not implement the PowerEduc privacy API. If this plugin stores any personal data it will not be able to be exported or deleted through PowerEduc\'s privacy system.';
 $string['resubmitrequestasnew'] = 'Resubmit as new request';
 $string['resubmitrequest'] = 'Resubmit {$a->type} request for {$a->username}';
 $string['resubmittedrequest'] = 'The existing {$a->type} request for {$a->username} was cancelled and resubmitted';

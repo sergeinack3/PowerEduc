@@ -18,4 +18,4 @@ Feature: Use the search areas admin screen
     And I should not see "Search area disabled" in the "Book - resource information" "table_row"
 
   # Note: Other scenarios are not currently easy to implement in Behat because there is no mock
-  # search engine - we could add testing once Moodle has an internal database search engine.
+  # search engine - we could add testing once PowerEduc has an internal database search engine.

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Adhoc task that processes an approved data request and prepares/deletes the user's data.
@@ -174,14 +174,14 @@ class process_data_request_task extends adhoc_task {
             case api::DATAREQUEST_TYPE_EXPORT:
                 // Check if the user is allowed to download their own export. (This is for
                 // institutions which centrally co-ordinate subject access request across many
-                // systems, not just one Moodle instance, so we don't want every instance emailing
+                // systems, not just one PowerEduc instance, so we don't want every instance emailing
                 // the user.)
                 if (!api::can_download_data_request_for_user($request->userid, $request->requestedby, $request->userid)) {
                     $notifyuser = false;
                 }
 
                 $typetext = get_string('requesttypeexport', 'tool_dataprivacy');
-                // We want to notify the user in Moodle about the processing results.
+                // We want to notify the user in PowerEduc about the processing results.
                 $message->notification = 1;
                 $datarequestsurl = new powereduc_url('/admin/tool/dataprivacy/mydatarequests.php');
                 $message->contexturl = $datarequestsurl;
@@ -197,7 +197,7 @@ class process_data_request_task extends adhoc_task {
                 break;
             case api::DATAREQUEST_TYPE_DELETE:
                 $typetext = get_string('requesttypedelete', 'tool_dataprivacy');
-                // No point notifying a deleted user in Moodle.
+                // No point notifying a deleted user in PowerEduc.
                 $message->notification = 0;
                 // Message to the recipient.
                 $messagetextdata['message'] = get_string('resultdeleted', 'tool_dataprivacy',

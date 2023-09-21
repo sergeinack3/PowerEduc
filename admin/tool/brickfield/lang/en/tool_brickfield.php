@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://powereduc.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Plugin strings are defined here.
@@ -109,7 +109,7 @@ $string['perpage'] = 'Items to show per page';
 $string['privacy:metadata'] = 'The Accessibility checks report plugin does not store any personal data.';
 $string['processanalysisrequests'] = 'Process content analysis requests';
 $string['registernow'] = 'Please register now.';
-$string['registrationinfo'] = '<p>This registration process allows you to use the Brickfield accessibility toolkit starter version for your registered Moodle site.</p><p>This usage is subject to the <a href="{$a}" target="_blank">Brickfield Education Labs terms and conditions (opens in new window)</a> and which you agree to, by using this product.</p>';
+$string['registrationinfo'] = '<p>This registration process allows you to use the Brickfield accessibility toolkit starter version for your registered PowerEduc site.</p><p>This usage is subject to the <a href="{$a}" target="_blank">Brickfield Education Labs terms and conditions (opens in new window)</a> and which you agree to, by using this product.</p>';
 $string['remaining'] = ' ({$a} errors remaining)';
 $string['response:0'] = 'This URL doesn\'t point anywhere';
 $string['response:404'] = 'This URL page was not found';
@@ -221,7 +221,7 @@ $string['numfiles'] = 'Number of files ({$a})';
 $string['numusers'] = 'Number of users ({$a})';
 $string['percheckerrors'] = 'Number of specific tests and errors per check per course.';
 $string['registration'] = 'Registration form';
-$string['release'] = 'Moodle release ({$a})';
+$string['release'] = 'PowerEduc release ({$a})';
 $string['secretkey'] = 'API key';
 $string['secretkey_help'] = 'This code is received by email after registration.';
 $string['sendfollowinginfo'] = '<p>The following information will be periodically sent to contribute to overall statistics only. It will not be made public on any central listing.</p> {$a}';
@@ -253,7 +253,7 @@ $string['pdf:filename'] = 'Brickfield_Summaryreport_CourseID-{$a}';
 
 // Advanced page.
 $string['bannercontentone'] = 'The Enterprise Accessibility Toolkit has a full set of features to help your organisation improve accessibility of your courses. <a href="{$a}">Contact Brickfield Education Labs</a> to book a free demo of the advanced features.';
-$string['bannercontenttwo'] = 'Build an effective and inclusive teaching and learning platform by finding content that does not meet the guidelines, fixing the issues and future-proofing your Moodle course content with accessible files, editor and enhanced features.';
+$string['bannercontenttwo'] = 'Build an effective and inclusive teaching and learning platform by finding content that does not meet the guidelines, fixing the issues and future-proofing your PowerEduc course content with accessible files, editor and enhanced features.';
 $string['bannerheadingone'] = 'Upgrade to the Enterprise Accessibility Toolkit';
 $string['contactus'] = 'Contact us';
 $string['buttonone'] = 'Get a free demo';

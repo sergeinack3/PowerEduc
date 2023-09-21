@@ -1,6 +1,6 @@
 @tool @tool_filetypes
 Feature: Add customised file types
-  In order to support a file mime type which doesn't exist in Moodle
+  In order to support a file mime type which doesn't exist in PowerEduc
   As an administrator
   I need to add a new customised file type
 
@@ -89,7 +89,7 @@ Feature: Add customised file types
     And I navigate to "Server > File types" in site administration
     When I click on "Delete 7z" "link"
     And I press "Yes"
-    And I follow "Restore 7z to Moodle defaults"
+    And I follow "Restore 7z to PowerEduc defaults"
     And I press "Yes"
     Then I should not see "Deleted" in the "7z" "table_row"
 
@@ -100,7 +100,7 @@ Feature: Add customised file types
     And I set the following fields to these values:
       | Type groups | document |
     And I press "Save changes"
-    And I follow "Restore 7z to Moodle defaults"
+    And I follow "Restore 7z to PowerEduc defaults"
     And I press "Yes"
     Then "//*[contains(text(), 'archive')]" "xpath_element" should exist in the "7z" "table_row"
 

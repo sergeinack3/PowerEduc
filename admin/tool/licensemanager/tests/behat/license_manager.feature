@@ -4,7 +4,7 @@ Feature: Licence manager
   As an admin
   I need to be able to view and alter licence preferences in the licence manager.
 
-  Scenario: I should be able to see the default Moodle licences.
+  Scenario: I should be able to see the default PowerEduc licences.
     Given I log in as "admin"
     When I navigate to "Licence > Licence manager" in site administration
     Then I should see "Licence not specified" in the "unknown" "table_row"
